@@ -1,0 +1,97 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bottom-bar-table {
+    width: 100%;
+    td {
+        width: 33.3%;
+    }
+}
+
+.enclosure-temperature {
+    text-align: center;
+}
+
+.current-state {
+    text-align: right;
+}
+
+.progress-ring {
+    padding: 1.5vw 3vw 0 1.7vw;
+    width: 8.5vw;
+    height: 8.5vw;
+    float: left;
+}
+
+.progress-percentage {
+    margin-top: -6vw;
+    margin-left: 1.9vw;
+    font-size: 3vw;
+}
+
+.no-job {
+    width: 100%;
+    font-size: 2vw;
+    height: 14vw;
+    padding-top: 6vw;
+    text-align: center;
+}
+
+.job-filename {
+    font-size: 2vw;
+    padding-top: 1.5vw;
+    display: inline-block;
+}
+
+.job-filament {
+    font-size: 1.3vw;
+}
+
+.job-time {
+    display: inline-block;
+    padding-top: 1vw;
+}
+
+.job-time-left {
+    font-size: 2.5vw;
+}
+
+.printer-state-table {
+    width: 100%;
+    padding-top: 2.3vw;
+}
+
+.printer-value img {
+    width: 4vw;
+    float: left;
+    padding-top: 1vw;
+}
+
+.unit {
+    font-size: 60%;
+}
+
+.printer-actual-value {
+    font-size: 3vw;
+    display: block;
+}
+
+.printer-set-value {
+    display: block;
+    text-align: right;
+}
+
+.container-printer-value {
+    width: 11vw;
+}

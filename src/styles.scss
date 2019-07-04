@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Montserrat', sans-serif;
+    color: #f5f6fa;
+    font-size: 1.6vw;
+}
+
+app-root {
+    width: 480px;
+    height: 320px;
+    display: block;
+    background-color: #353b48;
+    padding: .7vw .9vw;
+    overflow: hidden;
+}

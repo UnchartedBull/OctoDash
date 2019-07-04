@@ -1,20 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div *ngIf="config" class="container">
+  <div class="job-info" *ngIf="job != null">
+    <div class="progress-ring">
+      <round-progress [current]="60" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true" [color]="'#44bd32'"></round-progress>
+      <div class="progress-percentage">65<span style="font-size: 40%">%</span></div>
+    </div>
+    <span class="job-filename">{{ job.filename }}</span> <br />
+    <span class="job-filament">{{ job.filamentAmount }}g Filament</span> <br />
+    <span class="job-time"><span class="job-time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left of {{ job.timeTotal.value }}{{ job.timeTotal.unit }}</span>
+  </div>
+  <div class="no-job" *ngIf="job == null">
+    No Job Running ...
+  </div>
+  <div class="printer-state">
+    <table class="printer-state-table">
+      <tr>
+        <td class="printer-value">
+          <div class="container-printer-value">
+            <img src="assets/nozzle.svg">
+            <span class="printer-actual-value">190<span class="unit">°C</span></span>
+            <span class="printer-set-value">/190<span class="unit">°C</span></span>
+          </div>
+        </td>
+        <td class="printer-value" style="text-align: center;">
+          <div class="container-printer-value">
+            <img src="assets/hot_bed.svg">
+            <span class="printer-actual-value">56<span class="unit">°C</span></span>
+            <span class="printer-set-value">/55<span class="unit">°C</span></span>
+          </div>
+        </td>
+        <td class="printer-value" style="text-align: right">
+          <div class="container-printer-value">
+            <img src="assets/fan.svg">
+            <span class="printer-actual-value">80<span class="unit">%</span></span>
+            <span class="printer-set-value">/80<span class="unit">%</span></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="bottom-bar">
+    <table class="bottom-bar-table">
+      <tr>
+        <td class="printer-name"> {{ config.printer.name }} </td>
+        <td class="enclosure-temperature"> {{ enclosureTemperature }}°C</td>
+        <td class="current-state"> {{ currentState.status }}({{ currentState.duration.value }}{{ currentState.duration.unit }}) </td>
+      </tr>
+    </table>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
