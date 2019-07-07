@@ -7,9 +7,9 @@
 
 .bottom-bar {
     position: absolute;
-    bottom: 0;
+    bottom: 3vw;
     left: 0;
-    right: 0;
+    right: 1.6vw;
 }
 
 .bottom-bar-table {
@@ -28,16 +28,18 @@
 }
 
 .progress-ring {
-    padding: 1.5vw 3vw 0 1.7vw;
-    width: 8.5vw;
-    height: 8.5vw;
+    padding: 4.5vw 5vw 0 4.5vw;
+    width: 22vw;
+    height: 22vw;
     float: left;
 }
 
 .progress-percentage {
-    margin-top: -6vw;
-    margin-left: 1.9vw;
-    font-size: 3vw;
+    margin-top: -16.2vw;
+    margin-left: 4.3vw;
+    font-size: 8.5vw;
+    text-align: center;
+    width: 14vw;
 }
 
 .no-job {
@@ -49,33 +51,40 @@
 }
 
 .job-filename {
-    font-size: 2vw;
-    padding-top: 1.5vw;
+    font-size: 6vw;
+    padding-top: 4.5vw;
     display: inline-block;
 }
 
 .job-filament {
-    font-size: 1.3vw;
+    font-size: 3vw;
+    margin-top: -4vw;
 }
 
 .job-time {
     display: inline-block;
-    padding-top: 1vw;
+    padding-top: 2vw;
 }
 
 .job-time-left {
-    font-size: 2.5vw;
+    font-size: 6vw;
+    font-weight: 600;
 }
 
 .printer-state-table {
     width: 100%;
-    padding-top: 2.3vw;
+    padding-top: 5vw;
+}
+
+.printer-value {
+    text-align: right;
 }
 
 .printer-value img {
-    width: 4vw;
+    width: 10vw;
     float: left;
     padding-top: 1vw;
+    padding-right: 2vw;
 }
 
 .unit {
@@ -83,7 +92,8 @@
 }
 
 .printer-actual-value {
-    font-size: 3vw;
+    font-size: 6vw;
+    font-weight: 600;
     display: block;
 }
 
@@ -92,6 +102,25 @@
     text-align: right;
 }
 
-.container-printer-value {
-    width: 11vw;
+.printer-value-1 {
+    width: 27vw;
+    padding-left: 2vw;
+    padding-right: 8.5vw;
+}
+
+.printer-value-2 {
+    width: 25vw;
+    padding-right: 7.5vw;
+    & img {
+        width: 9.2vw;
+        height: 9.2vw;
+    }
+}
+
+.printer-value-3  {
+    padding-right: 3vw;
+    & img {
+        width: 11.5vw;
+        height: 11.5vw;
+    }
 }

@@ -1,8 +1,8 @@
 <div *ngIf="config" class="container">
   <div class="job-info" *ngIf="job != null">
     <div class="progress-ring">
-      <round-progress [current]="60" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true" [color]="'#44bd32'"></round-progress>
-      <div class="progress-percentage">65<span style="font-size: 40%">%</span></div>
+      <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true" [color]="'#44bd32'"></round-progress>
+      <div class="progress-percentage">{{ job.progress }}<span style="font-size: 40%">%</span></div>
     </div>
     <span class="job-filename">{{ job.filename }}</span> <br />
     <span class="job-filament">{{ job.filamentAmount }}g Filament</span> <br />
@@ -14,21 +14,21 @@
   <div class="printer-state">
     <table class="printer-state-table">
       <tr>
-        <td class="printer-value">
+        <td class="printer-value printer-value-1">
           <div class="container-printer-value">
             <img src="assets/nozzle.svg">
             <span class="printer-actual-value">190<span class="unit">°C</span></span>
             <span class="printer-set-value">/190<span class="unit">°C</span></span>
           </div>
         </td>
-        <td class="printer-value" style="text-align: center;">
+        <td class="printer-value printer-value-2">
           <div class="container-printer-value">
             <img src="assets/hot_bed.svg">
             <span class="printer-actual-value">56<span class="unit">°C</span></span>
             <span class="printer-set-value">/55<span class="unit">°C</span></span>
           </div>
         </td>
-        <td class="printer-value" style="text-align: right">
+        <td class="printer-value printer-value-3">
           <div class="container-printer-value">
             <img src="assets/fan.svg">
             <span class="printer-actual-value">80<span class="unit">%</span></span>

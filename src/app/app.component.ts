@@ -20,7 +20,7 @@ export class AppComponent {
   };
   job: Job = {
     filename: "Benchy.gcode",
-    progress: 60,
+    progress: 99,
     filamentAmount: 5.8,
     timeLeft: {
       value: "0:45",

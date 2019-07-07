@@ -1,14 +1,17 @@
 * {
     font-family: 'Montserrat', sans-serif;
     color: #f5f6fa;
-    font-size: 1.6vw;
+    font-size: 4.3vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 app-root {
-    width: 480px;
-    height: 320px;
     display: block;
     background-color: #353b48;
     padding: .7vw .9vw;
     overflow: hidden;
+    height: 320px;
+    width: 480px;
 }
