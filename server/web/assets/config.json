@@ -1,0 +1,10 @@
+{
+    "port": 8080,
+    "octoprint": {
+        "url": "localhost:8080",
+        "accessToken": "abc"
+    },
+    "printer": {
+        "name": "Ender-3 Pro"
+    }
+}
