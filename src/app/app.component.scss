@@ -8,15 +8,8 @@
 .bottom-bar {
     position: absolute;
     bottom: 3vw;
-    left: 0;
-    right: 1.6vw;
-}
-
-.bottom-bar-table {
-    width: 100%;
-    td {
-        width: 33.3%;
-    }
+    left: 2vw;
+    width: calc(100% - 5.6vw);
 }
 
 .enclosure-temperature {
@@ -35,7 +28,7 @@
 }
 
 .progress-percentage {
-    margin-top: -16.2vw;
+    margin-top: -16vw;
     margin-left: 4.3vw;
     font-size: 8.5vw;
     text-align: center;
@@ -44,9 +37,9 @@
 
 .no-job {
     width: 100%;
-    font-size: 2vw;
+    font-size: 6vw;
     height: 14vw;
-    padding-top: 6vw;
+    margin-top: 13vw;
     text-align: center;
 }
 
@@ -58,12 +51,13 @@
 
 .job-filament {
     font-size: 3vw;
-    margin-top: -4vw;
+    margin-top: -0.8vw;
+    display: block;
 }
 
 .job-time {
     display: inline-block;
-    padding-top: 2vw;
+    margin-top: -1vw;
 }
 
 .job-time-left {
@@ -71,9 +65,10 @@
     font-weight: 600;
 }
 
-.printer-state-table {
+.printer-state {
     width: 100%;
-    padding-top: 5vw;
+    margin-top: 4vw;
+    display: block;
 }
 
 .printer-value {
@@ -95,6 +90,10 @@
     font-size: 6vw;
     font-weight: 600;
     display: block;
+}
+
+.no-set-value {
+    line-height: 12vw;
 }
 
 .printer-set-value {
@@ -123,4 +122,30 @@
         width: 11.5vw;
         height: 11.5vw;
     }
+}
+
+.print-head-position {
+    width: 75%;
+    margin-left: 12.5%;
+    margin-top: 4vw;
+    text-align: center
+}
+
+.axis-identifier {
+    font-size: 140%;
+    vertical-align: -.4vw;
+    margin-right: 3vw;
+    padding: 1vw;
+}
+
+.axis-x {
+    color: #c23616;
+}
+
+.axis-y {
+    color: #44bd32;
+}
+
+.axis-z {
+    color: #0097e6;
 }
