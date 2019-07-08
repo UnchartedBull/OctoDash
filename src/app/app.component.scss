@@ -10,6 +10,9 @@
     bottom: 3vw;
     left: 2vw;
     width: calc(100% - 5.6vw);
+    td {
+        width: 33.3%;
+    }
 }
 
 .enclosure-temperature {
@@ -38,7 +41,7 @@
 .no-job {
     width: 100%;
     font-size: 6vw;
-    height: 14vw;
+    height: 16vw;
     margin-top: 13vw;
     text-align: center;
 }
@@ -69,10 +72,13 @@
     width: 100%;
     margin-top: 4vw;
     display: block;
+    table-layout: fixed;
+    overflow: visible;
 }
 
 .printer-value {
     text-align: right;
+    height: 12.2vw;
 }
 
 .printer-value img {
@@ -89,12 +95,19 @@
 .printer-actual-value {
     font-size: 6vw;
     font-weight: 600;
-    display: block;
+    display: inline-block;
 }
 
 .no-set-value {
-    line-height: 12vw;
+    overflow: visible;
+    & span {
+        margin-bottom: -2.8vw
+    }
+    & img {
+        margin-top: -2.8vw;
+    }
 }
+
 
 .printer-set-value {
     display: block;
@@ -124,28 +137,15 @@
     }
 }
 
-.print-head-position {
-    width: 75%;
-    margin-left: 12.5%;
+.layer-indication {
+    width: 100%;
+    display: block;
     margin-top: 4vw;
-    text-align: center
+    text-align: center;
+    font-size: 4vw;
 }
 
-.axis-identifier {
-    font-size: 140%;
-    vertical-align: -.4vw;
-    margin-right: 3vw;
-    padding: 1vw;
-}
-
-.axis-x {
-    color: #c23616;
-}
-
-.axis-y {
-    color: #44bd32;
-}
-
-.axis-z {
-    color: #0097e6;
+.current-layer {
+    font-size: 6vw;
+    font-weight: 600;
 }

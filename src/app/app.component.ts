@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
 import { Config } from './app.config';
+import { timer, from } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-root',
@@ -10,50 +12,31 @@ import { Config } from './app.config';
 
 export class AppComponent {
   config: Config;
-  enclosureTemperature: number = 22.3;
-  currentState: CurrentState = {
-    status: "printing",
-    duration: {
-      value: "1:14",
-      unit: "h"
-    }
-  };
-  job: Job = {
-    filename: "Benchy.gcode",
-    progress: 55,
-    filamentAmount: 5.8,
-    timeLeft: {
-      value: "0:45",
-      unit: "h"
-    },
-    timeTotal: {
-      value: "1:59",
-      unit: "h"
-    }
-  };
-  // job = null;
-  printHead: PrintHead = {
-    x: 154,
-    y: 201,
-    z: 25.4
-  }
+  job: Job
   printerState: PrinterState = {
+    state: "no connection",
     nozzle: {
-      current: 190,
-      set: 190
+      current: 0,
+      set: 0
     },
     heatbed: {
-      current: 56,
-      set: 55
+      current: 0,
+      set: 0
     },
-    fan: {
-      current: 80,
-      set: 80
-    }
+    // TODO
+    fan: 0
+  }
+  // TODO
+  enclosureTemperature: number = 22.3;
+  layerProgress: LayerProgress = {
+    current: 0,
+    total: 0
   }
 
   constructor(private _service: AppService) {
     this._service.getConfig().subscribe((config: Config) => this.config = config);
+    this._service.getJobInformation().subscribe((job: Job) => this.job = job);
+    this._service.getPrinterState().subscribe((printerState: PrinterState) => this.printerState = printerState)
   }
 }
 
@@ -62,32 +45,27 @@ interface Duration {
   unit: string;
 }
 
-interface CurrentState {
-  status: string;
-  duration: Duration;
-}
-
 interface Job {
   filename: string;
   progress: number;
   filamentAmount: number;
   timeLeft: Duration;
-  timeTotal: Duration;
+  timePrinted: Duration;
 }
 
-interface PrintHead {
-  x: number;
-  y: number;
-  z: number;
+interface LayerProgress {
+  current: number;
+  total: number;
 }
 
 interface PrinterState {
+  state: string,
   nozzle: PrinterValue;
   heatbed: PrinterValue;
-  fan: PrinterValue;
+  fan: number;
 }
 
 interface PrinterValue {
   current: number;
-  set?: number;
+  set: number;
 }

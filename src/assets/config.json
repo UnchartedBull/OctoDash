@@ -1,10 +1,9 @@
 {
-    "port": 8080,
     "octoprint": {
-        "url": "localhost:8080",
-        "accessToken": "abc"
+        "url": "http://localhost:5000/api/",
+        "accessToken": "INSERT API KEY HERE"
     },
     "printer": {
-        "name": "Ender-3 Pro"
+        "name": "INSERT NAME HERE"
     }
 }

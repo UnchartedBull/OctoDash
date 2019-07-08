@@ -6,48 +6,35 @@
     </div>
     <span class="job-filename">{{ job.filename }}</span> <br />
     <span class="job-filament">{{ job.filamentAmount }}g Filament</span> <br />
-    <span class="job-time"><span class="job-time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left of {{ job.timeTotal.value }}{{ job.timeTotal.unit }}</span>
+    <span class="job-time"><span class="job-time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left, elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
   </div>
   <div class="no-job" *ngIf="job == null">
     No Job Running ...
   </div>
-  <table class="printer-state">
+  <table class="printer-state" *ngIf="printerState">
     <tr>
-      <td class="printer-value printer-value-1">
-        <div class="container-printer-value">
-          <img src="assets/nozzle.svg">
-          <span class="printer-actual-value" [ngClass]="{'no-set-value': !printerState.nozzle.set}">{{ printerState.nozzle.current }}<span class="unit">°C</span></span>
-          <span class="printer-set-value" *ngIf="printerState.nozzle.set">/{{ printerState.nozzle.set }}<span class="unit">°C</span></span>
-        </div>
+      <td class="printer-value printer-value-1" [ngClass]="{'no-set-value': printerState.nozzle.set === 0}">
+        <img src="assets/nozzle.svg">
+        <span class="printer-actual-value">{{ printerState.nozzle.current }}<span class="unit">°C</span></span>
+        <span class="printer-set-value" *ngIf="printerState.nozzle.set">/{{ printerState.nozzle.set }}<span class="unit">°C</span></span>
       </td>
-      <td class="printer-value printer-value-2">
-        <div class="container-printer-value">
-          <img src="assets/hot_bed.svg">
-          <span class="printer-actual-value" [ngClass]="{'no-set-value': !printerState.nozzle.set}">{{ printerState.heatbed.current }}<span class="unit">°C</span></span>
-          <span class="printer-set-value" *ngIf="printerState.heatbed.set">/{{ printerState.heatbed.set }}<span class="unit">°C</span></span>
-        </div>
+      <td class="printer-value printer-value-2" [ngClass]="{'no-set-value': printerState.heatbed.set === 0}">
+        <img src="assets/hot_bed.svg">
+        <span class="printer-actual-value">{{ printerState.heatbed.current }}<span class="unit">°C</span></span>
+        <span class="printer-set-value" *ngIf="printerState.heatbed.set">/{{ printerState.heatbed.set }}<span class="unit">°C</span></span>
       </td>
-      <td class="printer-value printer-value-3">
-        <div class="container-printer-value">
-          <img src="assets/fan.svg" style="margin-top: -0.8vw;">
-          <span class="printer-actual-value" [ngClass]="{'no-set-value': !printerState.nozzle.set}">{{ printerState.fan.current }}<span class="unit">%</span></span>
-          <span class="printer-set-value" *ngIf="printerState.fan.set">/{{ printerState.fan.set }}<span class="unit">%</span></span>
-        </div>
+      <td class="printer-value printer-value-3 no-set-value">
+        <img src="assets/fan.svg">
+        <span class="printer-actual-value">{{ printerState.fan }}<span class="unit">%</span></span>
       </td>
     </tr>
   </table>
-  <table class="print-head-position">
-    <tr>
-      <td><span class="axis-identifier axis-x">X</span>{{ printHead.x }}</td>
-      <td><span class="axis-identifier axis-y">Y</span>{{  printHead.y }}</td>
-      <td><span class="axis-identifier axis-z">Z</span>{{ printHead.z }}</td>
-    </tr>
-  </table>
+<span class="layer-indication">Layer <span class="current-layer">{{ layerProgress.current }}</span> of {{ layerProgress.total }}</span>
   <table class="bottom-bar">
     <tr>
       <td class="printer-name"> {{ config.printer.name }} </td>
       <td class="enclosure-temperature"> {{ enclosureTemperature }}°C</td>
-      <td class="current-state"> {{ currentState.status }}({{ currentState.duration.value }}{{ currentState.duration.unit }}) </td>
+      <td class="current-state"> {{ printerState.state }} </td>
     </tr>
   </table>
 </div>

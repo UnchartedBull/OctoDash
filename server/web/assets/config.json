@@ -1,8 +1,7 @@
 {
-    "port": 8080,
     "octoprint": {
-        "url": "localhost:8080",
-        "accessToken": "abc"
+        "url": "http://192.168.50.150:5000/api/",
+        "accessToken": "306ED9E094EB4CDA9BB8B719450A5646"
     },
     "printer": {
         "name": "Ender-3 Pro"

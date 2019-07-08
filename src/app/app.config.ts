@@ -1,5 +1,4 @@
 export interface Config {
-    port: number;
     octoprint: Octoprint;
     printer: Printer;
 }
