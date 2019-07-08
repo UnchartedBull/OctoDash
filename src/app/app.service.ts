@@ -28,7 +28,7 @@ export class AppService {
           }
           this.http.get(this.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
             let job = null;
-            if (data["state"] !== "Printing") {
+            if (data["state"] == "Printing") {
               job = {
                 filename: data["job"]["file"]["display"].replace(".gcode", ""),
                 progress: Math.round((data["progress"]["filepos"] / data["job"]["file"]["size"]) * 100),
@@ -70,7 +70,7 @@ export class AppService {
                 current:  Math.round(data["temperature"]["bed"]["actual"]),
                 set:  Math.round(data["temperature"]["bed"]["target"])
               },
-              fan: 100
+              fan: 0
             }
             observer.next(printerState)
           })
