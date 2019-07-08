@@ -19,7 +19,7 @@ export class AppService {
 
   public getJobInformation(): Observable<Object> {
     return Observable.create((observer: Observer<any>) => {
-      timer(1000, 10000000).subscribe(_ => {
+      timer(1000, 1500).subscribe(_ => {
         if (this.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
@@ -27,9 +27,8 @@ export class AppService {
             })
           }
           this.http.get(this.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
-            console.log(data)
             let job = null;
-            if (data["state"] == "Printing") {
+            if (data["state"] !== "Printing") {
               job = {
                 filename: data["job"]["file"]["display"].replace(".gcode", ""),
                 progress: Math.round((data["progress"]["filepos"] / data["job"]["file"]["size"]) * 100),
@@ -53,7 +52,7 @@ export class AppService {
 
   public getPrinterState(): Observable<Object> {
     return Observable.create((observer: Observer<any>) => {
-      timer(500, 10000000).subscribe(_ => {
+      timer(500, 1500).subscribe(_ => {
         if (this.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
