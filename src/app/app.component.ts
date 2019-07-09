@@ -24,7 +24,7 @@ export class AppComponent {
       set: 0
     },
     // TODO
-    fan: 0
+    fan: 100
   }
   // TODO
   enclosureTemperature: number = 22.3;

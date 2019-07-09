@@ -70,7 +70,7 @@ export class AppService {
                 current:  Math.round(data["temperature"]["bed"]["actual"]),
                 set:  Math.round(data["temperature"]["bed"]["target"])
               },
-              fan: 0
+              fan: 100
             }
             observer.next(printerState)
           })

@@ -7,6 +7,13 @@
     overflow: hidden;
 }
 
+// Specific for the Raspberry Pi with SPI Display (at least in my case, there is always the 6px margin)
+body {
+    display: block;
+    margin-left: -6px;
+    margin-top: -6px;
+}
+
 app-root {
     display: block;
     background-color: #353b48;
