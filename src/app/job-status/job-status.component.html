@@ -1,4 +1,4 @@
-<div class="job-info" *ngIf="job != null">
+<div class="job-info" *ngIf="job">
     <div class="job-info__progress-ring">
         <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
             [color]="'#44bd32'"></round-progress>
@@ -10,6 +10,6 @@
             class="job-info__time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,
         elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
 </div>
-<div class="job-info__no-job" *ngIf="job == null">
+<div class="job-info__no-job" *ngIf="!job">
     No Job Running ...
 </div>

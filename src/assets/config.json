@@ -2,7 +2,7 @@
     "octoprint": {
         "url": "http://localhost:5000/api/",
         "accessToken": "INSERT API KEY HERE",
-        "apiInterval": 1500
+        "apiInterval": 15000
     },
     "printer": {
         "name": "NAME HERE"

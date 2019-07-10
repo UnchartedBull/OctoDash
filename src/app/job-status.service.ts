@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, timer } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class JobStatusService {
             })
           }
           this._http.get(this._configService.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
-            let job = null;
+            let job = {};
             if (data["state"] == "Printing") {
               job = {
                 filename: data["job"]["file"]["display"].replace(".gcode", ""),
@@ -83,7 +82,6 @@ export interface Job {
   timeLeft: Duration;
   timePrinted: Duration;
 }
-
 
 export interface LayerProgress {
   current: number;
