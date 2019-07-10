@@ -4,7 +4,11 @@ OctoprintDash is a small, but beautiful monitoring UI for Octoprint. It doesn't 
 
 ## Screenshots
 
-tbd.
+![job_running](https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png)
+Job Running
+
+![no_job_running](https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job.png)
+No Job Running
 
 ## Installation
 
