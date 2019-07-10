@@ -1,0 +1,112 @@
+.printer-status {
+    width: 100%;
+    margin-top: 4vw;
+    display: block;
+    table-layout: fixed;
+    overflow: visible;
+}
+
+.printer-status__value {
+    text-align: right;
+    height: 12.2vw;
+
+    &-1 {
+        width: 27vw;
+        padding-left: 2vw;
+        padding-right: 8.5vw;
+    }
+
+    &-2 {
+        width: 25vw;
+        padding-right: 7.5vw;
+
+        & img {
+            width: 9.2vw;
+            height: 9.2vw;
+        }
+    }
+
+    &-3 {
+        padding-right: 3vw;
+
+        & img {
+            width: 11.5vw;
+            height: 11.5vw;
+        }
+    }
+}
+
+.printer-status__value img {
+    width: 10vw;
+    float: left;
+    padding-top: 1vw;
+    padding-right: 2vw;
+}
+
+.printer-status__unit {
+    font-size: 60%;
+}
+
+.printer-status__actual-value {
+    font-size: 6vw;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.printer-status__set-value {
+    display: block;
+    text-align: right;
+}
+
+.printer-status__no-set-value {
+    overflow: visible;
+
+    & span {
+        margin-bottom: -2.8vw
+    }
+
+    & img {
+        margin-top: -2.8vw;
+    }
+}
+
+
+// .printer-value-1 {
+//     width: 27vw;
+//     padding-left: 2vw;
+//     padding-right: 8.5vw;
+// }
+
+// .printer-value-2 {
+//     width: 25vw;
+//     padding-right: 7.5vw;
+
+//     & img {
+//         width: 9.2vw;
+//         height: 9.2vw;
+//     }
+// }
+
+// .printer-value-3 {
+//     padding-right: 3vw;
+
+//     & img {
+//         width: 11.5vw;
+//         height: 11.5vw;
+//     }
+// }
+
+/*** Layer Indication ***/
+
+.layer-indication {
+    width: 100%;
+    display: block;
+    margin-top: 2vw;
+    text-align: center;
+    font-size: 4vw;
+}
+
+.layer-indication__current-layer {
+    font-size: 6vw;
+    font-weight: 600;
+}

@@ -1,32 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Observer, timer } from 'rxjs';
-import { Config } from './app.config';
+import { Config, ConfigService } from './config/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  private config: Config;
 
-  constructor(private http: HttpClient) {
-    this.getConfig().subscribe((config: Config) => this.config = config);
+  constructor(private _http: HttpClient, private _configService: ConfigService) {
   }
 
   public getConfig(): Observable<Object> {
-    return this.http.get("assets/config.json")
+    return this._http.get("assets/config.json")
   }
 
   public getJobInformation(): Observable<Object> {
     return Observable.create((observer: Observer<any>) => {
       timer(1000, 1500).subscribe(_ => {
-        if (this.config) {
+        if (this._configService.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
-              'x-api-key': this.config.octoprint.accessToken
+              'x-api-key': this._configService.config.octoprint.accessToken
             })
           }
-          this.http.get(this.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
+          this._http.get(this._configService.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
             let job = null;
             if (data["state"] == "Printing") {
               job = {
@@ -50,36 +48,52 @@ export class AppService {
     })
   }
 
-  public getPrinterState(): Observable<Object> {
+  public getPrinterStatus(): Observable<Object> {
     return Observable.create((observer: Observer<any>) => {
       timer(500, 1500).subscribe(_ => {
-        if (this.config) {
+        if (this._configService.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
-              'x-api-key': this.config.octoprint.accessToken
+              'x-api-key': this._configService.config.octoprint.accessToken
             })
           }
-          this.http.get(this.config.octoprint.url + "printer", httpHeaders).subscribe((data: JSON) => {
-            let printerState = {
-              state: data["state"]["text"].toLowerCase(),
-              nozzle: {
-                current: Math.round(data["temperature"]["tool0"]["actual"]),
-                set:  Math.round(data["temperature"]["tool0"]["target"])
-              },
-              heatbed: {
-                current:  Math.round(data["temperature"]["bed"]["actual"]),
-                set:  Math.round(data["temperature"]["bed"]["target"])
-              },
-              fan: 100
-            }
-            observer.next(printerState)
-          })
+          this._http.get(this._configService.config.octoprint.url + "printer", httpHeaders).subscribe(
+            (data: JSON) => {
+              let printerState = {
+                status: data["state"]["text"].toLowerCase(),
+                nozzle: {
+                  current: Math.round(data["temperature"]["tool0"]["actual"]),
+                  set: Math.round(data["temperature"]["tool0"]["target"])
+                },
+                heatbed: {
+                  current: Math.round(data["temperature"]["bed"]["actual"]),
+                  set: Math.round(data["temperature"]["bed"]["target"])
+                },
+                fan: 100
+              }
+              observer.next(printerState)
+            }, (error: HttpErrorResponse) => {
+              console.log(error)
+              let printerState = {
+                status: `error (${error.status})`,
+                nozzle: {
+                  current: 0,
+                  set: 0
+                },
+                heatbed: {
+                  current: 0,
+                  set: 0
+                },
+                fan: 0
+              }
+              observer.next(printerState)
+            })
         }
+      })
     })
-  })
-}
+  }
 
-  private timeConvert(input: number): string {
+  public timeConvert(input: number): string {
     let hours = (input / 60 / 60);
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;

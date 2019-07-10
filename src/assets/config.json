@@ -4,6 +4,6 @@
         "accessToken": "INSERT API KEY HERE"
     },
     "printer": {
-        "name": "INSERT NAME HERE"
+        "name": "NAME HERE"
     }
 }

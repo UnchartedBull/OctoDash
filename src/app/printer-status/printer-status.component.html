@@ -1,0 +1,28 @@
+<table class="printer-status">
+    <tr>
+        <td class="printer-status__value printer-status__value-1"
+            [ngClass]="{'printer-status__no-set-value': printerStatus.nozzle.set === 0}">
+            <img src="assets/nozzle.svg">
+            <span class="printer-status__actual-value">{{ printerStatus.nozzle.current }}<span
+                    class="printer-status__unit">°C</span></span>
+            <span class="printer-status__set-value"
+                *ngIf="printerStatus.nozzle.set">/{{ printerStatus.nozzle.set }}<span class="unit">°C</span></span>
+        </td>
+        <td class="printer-status__value printer-status__value-2"
+            [ngClass]="{'printer-status__no-set-value': printerStatus.heatbed.set === 0}">
+            <img src="assets/hot_bed.svg">
+            <span class="printer-status__actual-value">{{ printerStatus.heatbed.current }}<span
+                    class="printer-status__unit">°C</span></span>
+            <span class="printer-status__set-value"
+                *ngIf="printerStatus.heatbed.set">/{{ printerStatus.heatbed.set }}<span class="unit">°C</span></span>
+        </td>
+        <td class="printer-status__value printer-status__value-3 printer-status__no-set-value">
+            <img src="assets/fan.svg">
+            <span class="printer-status__actual-value">{{ printerStatus.fan }}<span
+                    class="printer-status__unit">%</span></span>
+        </td>
+    </tr>
+</table>
+<span class="layer-indication">
+    Layer <span class="layer-indication__current-layer">{{ layerProgress.current }}</span> of {{ layerProgress.total }}
+</span>

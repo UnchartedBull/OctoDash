@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
-import { Config } from './app.config';
+import { Config, ConfigService } from './config/config.service';
 import { timer, from } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -12,31 +12,10 @@ import { map } from 'rxjs/operators'
 
 export class AppComponent {
   config: Config;
-  job: Job
-  printerState: PrinterState = {
-    state: "no connection",
-    nozzle: {
-      current: 0,
-      set: 0
-    },
-    heatbed: {
-      current: 0,
-      set: 0
-    },
-    // TODO
-    fan: 100
-  }
-  // TODO
-  enclosureTemperature: number = 22.3;
-  layerProgress: LayerProgress = {
-    current: 0,
-    total: 0
-  }
+  job: Job  // TODO
 
-  constructor(private _service: AppService) {
-    this._service.getConfig().subscribe((config: Config) => this.config = config);
+  constructor(private _service: AppService, private _configService: ConfigService) {
     this._service.getJobInformation().subscribe((job: Job) => this.job = job);
-    this._service.getPrinterState().subscribe((printerState: PrinterState) => this.printerState = printerState)
   }
 }
 
@@ -53,19 +32,3 @@ interface Job {
   timePrinted: Duration;
 }
 
-interface LayerProgress {
-  current: number;
-  total: number;
-}
-
-interface PrinterState {
-  state: string,
-  nozzle: PrinterValue;
-  heatbed: PrinterValue;
-  fan: number;
-}
-
-interface PrinterValue {
-  current: number;
-  set: number;
-}

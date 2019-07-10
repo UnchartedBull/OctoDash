@@ -1,0 +1,37 @@
+.bottom-bar {
+    position: absolute;
+    bottom: 4.5vh;
+    left: 2vw;
+    width: calc(100% - 5.6vw);
+
+    td {
+        width: 33.3%;
+    }
+}
+
+.bottom-bar__enclosure-temperature {
+    text-align: center;
+}
+
+.bottom-bar__current-status {
+    text-align: right;
+}
+
+.bottom-bar__error {
+    color: #c23616;
+    animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+    20% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+}
