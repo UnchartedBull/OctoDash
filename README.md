@@ -1,27 +1,31 @@
-# OctoPrintDash
+# OctoprintDash
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
+OctoprintDash is a small, but beautiful monitoring UI for Octoprint. It doesn't support touchscreen input (yet).
 
-## Development server
+## Screenshots
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+tbd.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Building the App
 
-## Build
+- Clone the repository - `git clone https://github.com/TimonGaebelein/OctoprintDash && cd OctoprintDash`
+- Install all the dependencies - `npm install`
+- Adjust `src/assets/config.json` accordingly to your installation
+- Build the app - `ng build --prod`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Using the App
 
-## Running unit tests
+After the step before, you will have a simple http website located at `dist`. You can serve the website via any webserver, or, if you don't have a server installed, use the supplied node server, located at `server`. If you'd like to use the node server the steps are the following.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Move the website - `mv dist/OctoprintDash/* server/web/`
+- Copy the server folder over to the raspberry
+- Install npm dependencies for server on the raspberry - `cd server && npm install`
+- Open chromium in kiosk mode - `chromium-browser --kiosk --app=http://localhost:8080`
 
-## Running end-to-end tests
+## Bugs and more
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+If you find a bug, please open an issue, so I can have a look at it. Please also add the steps to reproduce and the .gcode file. Thank you!
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+One more thing: If you're Octoprint is running on a Raspberry Pi 1 you may want to opt out of this, because it just does not have enough power.
