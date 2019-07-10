@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer } from 'rxjs';
 import { ConfigService } from './config/config.service';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,25 +20,28 @@ export class JobStatusService {
               'x-api-key': this._configService.config.octoprint.accessToken
             })
           }
-          this._http.get(this._configService.config.octoprint.url + "job", httpHeaders).subscribe((data: JSON) => {
-            let job = {};
-            if (data["state"] == "Printing") {
-              job = {
-                filename: data["job"]["file"]["display"].replace(".gcode", ""),
-                progress: Math.round((data["progress"]["filepos"] / data["job"]["file"]["size"]) * 100),
-                filamentAmount: data["job"]["filament"]["tool0"]["volume"],
-                timeLeft: {
-                  value: this.timeConvert(data["progress"]["printTimeLeft"]),
-                  unit: "h"
-                },
-                timePrinted: {
-                  value: this.timeConvert(data["progress"]["printTime"]),
-                  unit: "h"
-                },
+          this._http.get(this._configService.config.octoprint.url + "job", httpHeaders).subscribe(
+            (data: JSON) => {
+              let job: Job = null;
+              if (data["state"] == "Printing") {
+                job = {
+                  filename: data["job"]["file"]["display"].replace(".gcode", ""),
+                  progress: Math.round((data["progress"]["filepos"] / data["job"]["file"]["size"]) * 100),
+                  filamentAmount: data["job"]["filament"]["tool0"]["volume"],
+                  timeLeft: {
+                    value: this.timeConvert(data["progress"]["printTimeLeft"]),
+                    unit: "h"
+                  },
+                  timePrinted: {
+                    value: this.timeConvert(data["progress"]["printTime"]),
+                    unit: "h"
+                  },
+                }
               }
-            }
-            observer.next(job);
-          })
+              observer.next(job);
+            }, ((error: HttpErrorResponse) => {
+              observer.next(null);
+            }))
         }
       })
     })

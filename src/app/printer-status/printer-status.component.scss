@@ -1,6 +1,6 @@
 .printer-status {
     width: 100%;
-    margin-top: 4vw;
+    margin-top: 10.4vh;
     display: block;
     table-layout: fixed;
     overflow: visible;
@@ -8,12 +8,12 @@
 
 .printer-status__value {
     text-align: right;
-    height: 12.2vw;
+    height: 16.5vh;
 
     & img {
         width: 10vw;
         float: left;
-        padding-top: 1vw;
+        padding-top: 1.7vh;
         padding-right: 2vw;
     }
 
@@ -37,6 +37,7 @@
         width: 27.2vw;
 
         & img {
+            padding-top: 1vh;
             width: 11.5vw;
         }
     }
@@ -61,10 +62,10 @@
     overflow: visible;
 
     & span {
-        margin-bottom: -2.8vw
+        margin-bottom: -4vh
     }
 
     & img {
-        margin-top: -2.8vw;
+        margin-top: -4vh;
     }
 }

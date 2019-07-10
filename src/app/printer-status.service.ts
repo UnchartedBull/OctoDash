@@ -22,7 +22,7 @@ export class PrinterStatusService {
           }
           this._http.get(this._configService.config.octoprint.url + "printer", httpHeaders).subscribe(
             (data: JSON) => {
-              const printerStatus = {
+              const printerStatus: PrinterStatus = {
                 status: data["state"]["text"].toLowerCase(),
                 nozzle: {
                   current: Math.round(data["temperature"]["tool0"]["actual"]),
@@ -36,7 +36,7 @@ export class PrinterStatusService {
               }
               observer.next(printerStatus)
             }, (error: HttpErrorResponse) => {
-              const printerStatus = {
+              const printerStatus: PrinterStatus = {
                 status: `error (${error.status})`,
                 nozzle: {
                   current: 0,
