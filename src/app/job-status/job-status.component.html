@@ -1,1 +1,15 @@
-<p>job-status works!</p>
+<div class="job-info" *ngIf="job != null">
+    <div class="job-info__progress-ring">
+        <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
+            [color]="'#44bd32'"></round-progress>
+        <div class="job-info__progress-percentage">{{ job.progress }}<span style="font-size: 40%">%</span></div>
+    </div>
+    <span class="job-info__filename">{{ job.filename }}</span> <br />
+    <span class="job-info__filament">{{ job.filamentAmount }}g Filament</span> <br />
+    <span class="job-info__time"><span
+            class="job-info__time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,
+        elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
+</div>
+<div class="job-info__no-job" *ngIf="job == null">
+    No Job Running ...
+</div>

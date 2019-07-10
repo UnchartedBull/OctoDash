@@ -20,6 +20,7 @@ export interface Config {
 interface Octoprint {
   url: string;
   accessToken: string;
+  apiInterval: number;
 }
 
 interface Printer {

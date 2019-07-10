@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
+import { PrinterStatusService, PrinterStatus } from '../printer-status.service';
 
 @Component({
   selector: 'app-printer-status',
@@ -8,47 +8,25 @@ import { AppService } from '../app.service';
 })
 export class PrinterStatusComponent implements OnInit {
 
-  printerStatus: PrinterStatus = {
-    status: "no connection",
-    nozzle: {
-      current: 0,
-      set: 0
-    },
-    heatbed: {
-      current: 0,
-      set: 0
-    },
-    // TODO
-    fan: 0
+  printerStatus: PrinterStatus;
+  // printerStatus: PrinterStatus = {
+  //   status: "no connection",
+  //   nozzle: {
+  //     current: 0,
+  //     set: 0
+  //   },
+  //   heatbed: {
+  //     current: 0,
+  //     set: 0
+  //   },
+  //   // TODO
+  //   fan: 0
+  // }
+
+  constructor(private _printerStatusService: PrinterStatusService) {
+    this._printerStatusService.getPrinterStatusObservable().subscribe((printerStatus: PrinterStatus) => this.printerStatus = printerStatus)
   }
 
-  // TODO
-  layerProgress: LayerProgress = {
-    current: 0,
-    total: 0
-  }
+  ngOnInit() { }
 
-  constructor(private _service: AppService) { }
-
-  ngOnInit() {
-    this._service.getPrinterStatus().subscribe((printerStatus: PrinterStatus) => this.printerStatus = printerStatus)
-  }
-
-}
-
-export interface PrinterStatus {
-  status: string,
-  nozzle: PrinterValue;
-  heatbed: PrinterValue;
-  fan: number;
-}
-
-interface PrinterValue {
-  current: number;
-  set: number;
-}
-
-interface LayerProgress {
-  current: number;
-  total: number;
 }

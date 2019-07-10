@@ -11,24 +11,7 @@ import { map } from 'rxjs/operators'
 })
 
 export class AppComponent {
-  config: Config;
-  job: Job  // TODO
-
-  constructor(private _service: AppService, private _configService: ConfigService) {
-    this._service.getJobInformation().subscribe((job: Job) => this.job = job);
+  constructor(private _configService: ConfigService) {
   }
-}
-
-interface Duration {
-  value: string;
-  unit: string;
-}
-
-interface Job {
-  filename: string;
-  progress: number;
-  filamentAmount: number;
-  timeLeft: Duration;
-  timePrinted: Duration;
 }
 

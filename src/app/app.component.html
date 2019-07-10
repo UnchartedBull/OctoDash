@@ -1,18 +1,6 @@
 <div *ngIf="_configService.config" class="container">
-  <div class="job-info" *ngIf="job != null">
-    <div class="progress-ring">
-      <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
-        [color]="'#44bd32'"></round-progress>
-      <div class="progress-percentage">{{ job.progress }}<span style="font-size: 40%">%</span></div>
-    </div>
-    <span class="job-filename">{{ job.filename }}</span> <br />
-    <span class="job-filament">{{ job.filamentAmount }}g Filament</span> <br />
-    <span class="job-time"><span class="job-time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,
-      elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
-  </div>
-  <div class="no-job" *ngIf="job == null">
-    No Job Running ...
-  </div>
+  <app-job-status></app-job-status>
   <app-printer-status></app-printer-status>
+  <app-layer-progress></app-layer-progress>
   <app-bottom-bar></app-bottom-bar>
 </div>

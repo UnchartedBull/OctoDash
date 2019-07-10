@@ -1,4 +1,4 @@
-<table class="printer-status">
+<table class="printer-status" *ngIf="printerStatus">
     <tr>
         <td class="printer-status__value printer-status__value-1"
             [ngClass]="{'printer-status__no-set-value': printerStatus.nozzle.set === 0}">
@@ -23,6 +23,3 @@
         </td>
     </tr>
 </table>
-<span class="layer-indication">
-    Layer <span class="layer-indication__current-layer">{{ layerProgress.current }}</span> of {{ layerProgress.total }}
-</span>

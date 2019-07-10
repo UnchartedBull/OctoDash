@@ -1,0 +1,44 @@
+.job-info__no-job {
+    width: 100%;
+    font-size: 6vw;
+    height: 23vh;
+    margin-top: 19vh;
+    text-align: center;
+}
+
+.job-info__progress-ring {
+    padding: 4.5vw 5vw 0 4.5vw;
+    width: 22vw;
+    float: left;
+}
+
+.job-info__progress-percentage {
+    margin-top: -16vw;
+    margin-left: 4.3vw;
+    font-size: 8.5vw;
+    text-align: center;
+    width: 14vw;
+}
+
+.job-info__filename {
+    font-size: 6vw;
+    padding-top: 4.5vw;
+    display: inline-block;
+    width: 65vw;
+}
+
+.job-info__filament {
+    font-size: 3vw;
+    margin-top: -0.8vw;
+    display: block;
+}
+
+.job-info__time {
+    display: inline-block;
+    margin-top: -1vw;
+}
+
+.job-info__time-left {
+    font-size: 6vw;
+    font-weight: 600;
+}
