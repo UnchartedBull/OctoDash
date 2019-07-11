@@ -1,0 +1,71 @@
+.printer-status {
+    width: 100%;
+    margin-top: 10.4vh;
+    display: block;
+    table-layout: fixed;
+    overflow: visible;
+}
+
+.printer-status__value {
+    text-align: right;
+    height: 16.5vh;
+
+    & img {
+        width: 10vw;
+        float: left;
+        padding-top: 1.7vh;
+        padding-right: 2vw;
+    }
+
+    &-1 {
+        width: 27vw;
+        padding-left: 1vw;
+        padding-right: 8.5vw;
+    }
+
+    &-2 {
+        width: 25vw;
+        padding-right: 7.5vw;
+
+        & img {
+            width: 9.2vw;
+        }
+    }
+
+    &-3 {
+        padding-right: 3vw;
+        width: 27.2vw;
+
+        & img {
+            padding-top: 1vh;
+            width: 11.5vw;
+        }
+    }
+}
+
+.printer-status__unit {
+    font-size: 60%;
+}
+
+.printer-status__actual-value {
+    font-size: 6vw;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.printer-status__set-value {
+    display: block;
+    text-align: right;
+}
+
+.printer-status__no-set-value {
+    overflow: visible;
+
+    & span {
+        margin-bottom: -4vh
+    }
+
+    & img {
+        margin-top: -4vh;
+    }
+}
