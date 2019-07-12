@@ -22,7 +22,7 @@ export class PrinterStatusService {
           }
           this._http.get(this._configService.config.octoprint.url + "printer", httpHeaders).subscribe(
             (data: JSON) => {
-              const printerStatus: PrinterStatus = {
+              const printerStatus: PrinterStatusAPI = {
                 status: data["state"]["text"].toLowerCase(),
                 nozzle: {
                   current: Math.round(data["temperature"]["tool0"]["actual"]),
@@ -31,12 +31,11 @@ export class PrinterStatusService {
                 heatbed: {
                   current: Math.round(data["temperature"]["bed"]["actual"]),
                   set: Math.round(data["temperature"]["bed"]["target"])
-                },
-                fan: 100
+                }
               }
               observer.next(printerStatus)
             }, (error: HttpErrorResponse) => {
-              const printerStatus: PrinterStatus = {
+              const printerStatus: PrinterStatusAPI = {
                 status: `error (${error.status})`,
                 nozzle: {
                   current: 0,
@@ -45,8 +44,7 @@ export class PrinterStatusService {
                 heatbed: {
                   current: 0,
                   set: 0
-                },
-                fan: 0
+                }
               }
               observer.next(printerStatus)
             })
@@ -60,15 +58,13 @@ export class PrinterStatusService {
   }
 }
 
-
-export interface PrinterStatus {
-  status: string,
+export interface PrinterStatusAPI {
+  status: string;
   nozzle: PrinterValue;
   heatbed: PrinterValue;
-  fan: number;
 }
 
-interface PrinterValue {
+export interface PrinterValue {
   current: number;
   set: number;
 }

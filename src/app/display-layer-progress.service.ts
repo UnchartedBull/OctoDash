@@ -42,9 +42,7 @@ export class DisplayLayerProgressService {
 
 }
 
-
-
-export interface LayerProgress {
+export interface DisplayLayerProgressAPI {
   current: number;
   total: number;
   fanSpeed: number;
