@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators'
 })
 
 export class AppComponent {
-  constructor(private _configService: ConfigService) {
+  constructor(public configService: ConfigService) {
   }
 }
 
