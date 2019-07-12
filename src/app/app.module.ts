@@ -10,6 +10,8 @@ import { JobStatusComponent } from './job-status/job-status.component';
 import { AppService } from './app.service';
 import { ConfigService } from './config.service';
 import { LayerProgressComponent } from './layer-progress/layer-progress.component';
+import { InvalidConfigComponent } from './invalid-config/invalid-config.component';
+import { NoConfigComponent } from './no-config/no-config.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { LayerProgressComponent } from './layer-progress/layer-progress.componen
     BottomBarComponent,
     PrinterStatusComponent,
     JobStatusComponent,
-    LayerProgressComponent
+    LayerProgressComponent,
+    InvalidConfigComponent,
+    NoConfigComponent
   ],
   imports: [
     BrowserModule,

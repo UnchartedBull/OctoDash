@@ -1,6 +1,6 @@
 <table class="bottom-bar">
   <tr>
-    <td class="bottom-bar__printer-name" style="-webkit-app-region: drag"> {{ printer.name }} </td>
+    <td class="bottom-bar__printer-name"> {{ printer.name }} </td>
     <td class="bottom-bar__enclosure-temperature"> {{ enclosureTemperature }}°C</td>
     <td class="bottom-bar__current-status" [ngClass]="{'bottom-bar__error': printer.status.includes('error')}">
       {{ printer.status }} </td>

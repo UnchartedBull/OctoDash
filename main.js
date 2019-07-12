@@ -4,7 +4,6 @@ const {
 } = require("electron");
 const url = require('url')
 const path = require('path')
-const ipcMain = require('electron').ipcMain
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
@@ -14,9 +13,6 @@ const big = args.some(val => val === '--big-screen')
 let window;
 
 function createWindow() {
-
-    setupIPC();
-
     if (!big) {
         window = new BrowserWindow({
             width: dev ? 1000 : 1000,
@@ -60,12 +56,6 @@ function createWindow() {
     });
 }
 
-function setupIPC() {
-    ipcMain.on("config", (event, arg) => {
-        console.log("Received config request");
-        event.returnValue = "test123";
-    })
-}
 
 app.on('ready', createWindow)
 

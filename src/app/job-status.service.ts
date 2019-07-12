@@ -40,7 +40,7 @@ export class JobStatusService {
               }
               observer.next(job);
             }, (error: HttpErrorResponse) => {
-              console.log('Can\'t retrieve jobs! ' + error.message);
+              console.error('Can\'t retrieve jobs! ' + error.message);
             });
         }
       });
