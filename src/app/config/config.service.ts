@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,14 @@ export class ConfigService {
   public config: Config;
 
   constructor(private _http: HttpClient) {
-    this._http.get("assets/config.json").subscribe((config: Config) => this.config = config)
+    this._http.get(environment.config).subscribe((config: Config) => this.config = config)
   }
 }
 
 export interface Config {
   octoprint: Octoprint;
   printer: Printer;
+  filament: Filament;
 }
 
 interface Octoprint {
@@ -25,4 +27,9 @@ interface Octoprint {
 
 interface Printer {
   name: string;
+}
+
+interface Filament {
+  thickness: number;
+  density: number;
 }

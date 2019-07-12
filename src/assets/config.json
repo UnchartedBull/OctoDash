@@ -6,5 +6,9 @@
     },
     "printer": {
         "name": "NAME HERE"
+    },
+    "filament": {
+        "thickness": 0,
+        "density": 0
     }
 }

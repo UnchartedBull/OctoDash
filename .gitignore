@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 .vscode
+
+**/config.testing.json

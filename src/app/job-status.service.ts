@@ -27,7 +27,7 @@ export class JobStatusService {
                 job = {
                   filename: data["job"]["file"]["display"].replace(".gcode", ""),
                   progress: Math.round((data["progress"]["filepos"] / data["job"]["file"]["size"]) * 100),
-                  filamentAmount: data["job"]["filament"]["tool0"]["volume"],
+                  filamentAmount: this.filamentLengthToAmount(data["job"]["filament"]["tool0"]["length"]),
                   timeLeft: {
                     value: this.timeConvert(data["progress"]["printTimeLeft"]),
                     unit: "h"
@@ -64,12 +64,16 @@ export class JobStatusService {
     return this.layerProgress
   }
 
-  public timeConvert(input: number): string {
+  private timeConvert(input: number): string {
     let hours = (input / 60 / 60);
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
     return rhours + ":" + ("0" + rminutes).slice(-2)
+  }
+
+  private filamentLengthToAmount(filamentLength: number): number {
+    return Math.round((Math.PI * (this._configService.config.filament.thickness / 2) * filamentLength) * this._configService.config.filament.density / 100) / 10
   }
 }
 
