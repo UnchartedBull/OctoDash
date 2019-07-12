@@ -8,7 +8,7 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { JobStatusComponent } from './job-status/job-status.component';
 import { AppService } from './app.service';
-import { ConfigService } from './config/config.service';
+import { ConfigService } from './config.service';
 import { LayerProgressComponent } from './layer-progress/layer-progress.component';
 
 @NgModule({

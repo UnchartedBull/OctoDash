@@ -8,14 +8,14 @@ import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display
 })
 export class LayerProgressComponent implements OnInit {
 
-  layerProgress: LayerProgress
+  layerProgress: LayerProgress;
 
-  constructor(private _displayLayerProgressService: DisplayLayerProgressService) {
+  constructor(private displayLayerProgressService: DisplayLayerProgressService) {
     this.layerProgress = {
       current: 0,
       total: 0
-    }
-    this._displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+    };
+    this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
       this.layerProgress.current = layerProgress.current;
       this.layerProgress.total = layerProgress.total;
     });

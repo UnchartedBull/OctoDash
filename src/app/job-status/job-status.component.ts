@@ -10,9 +10,9 @@ import { JobStatusService, Job } from '../job-status.service';
 export class JobStatusComponent implements OnInit {
   job: Job;
 
-  constructor(private _jobStatusService: JobStatusService) { }
+  constructor(private jobStatusService: JobStatusService) { }
 
   ngOnInit() {
-    this._jobStatusService.getObservable().subscribe((job: Job) => this.job = job);
+    this.jobStatusService.getObservable().subscribe((job: Job) => this.job = job);
   }
 }

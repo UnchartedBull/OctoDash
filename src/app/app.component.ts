@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from './app.service';
-import { Config, ConfigService } from './config/config.service';
-import { timer, from } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { ConfigService } from './config.service';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +11,3 @@ export class AppComponent {
   constructor(public configService: ConfigService) {
   }
 }
-

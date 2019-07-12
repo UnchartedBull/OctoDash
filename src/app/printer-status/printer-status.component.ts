@@ -9,9 +9,9 @@ import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display
 })
 export class PrinterStatusComponent implements OnInit {
 
-  printerStatus: PrinterStatus
+  printerStatus: PrinterStatus;
 
-  constructor(private _printerStatusService: PrinterStatusService, private _displayLayerProgressService: DisplayLayerProgressService) {
+  constructor(private printerStatusService: PrinterStatusService, private displayLayerProgressService: DisplayLayerProgressService) {
     this.printerStatus = {
       nozzle: {
         current: 0,
@@ -23,14 +23,14 @@ export class PrinterStatusComponent implements OnInit {
       },
       fan: 0
     };
-    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+    this.printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
       this.printerStatus.nozzle = printerStatus.nozzle;
       this.printerStatus.heatbed = printerStatus.heatbed;
-    })
+    });
 
-    this._displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
-      this.printerStatus.fan = layerProgress.fanSpeed
-    })
+    this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+      this.printerStatus.fan = layerProgress.fanSpeed;
+    });
   }
 
   ngOnInit() { }

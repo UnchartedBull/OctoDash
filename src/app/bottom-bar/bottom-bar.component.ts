@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../config.service';
 import { PrinterStatusService, PrinterStatusAPI } from '../printer-status.service';
 
 @Component({
@@ -13,16 +13,16 @@ export class BottomBarComponent implements OnInit {
   enclosureTemperature: number;
 
 
-  constructor(private _printerStatusService: PrinterStatusService, private _configService: ConfigService) {
-    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => this.printer.status = printerStatus.status)
+  constructor(private printerStatusService: PrinterStatusService, private configService: ConfigService) {
+    this.printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => this.printer.status = printerStatus.status);
   }
 
   ngOnInit() {
-    this.enclosureTemperature = 22.5; //TODO
+    this.enclosureTemperature = 22.5; // TODO
     this.printer = {
-      name: this._configService.config.printer.name,
-      status: "connecting ..."
-    }
+      name: this.configService.config.printer.name,
+      status: 'connecting ...'
+    };
   }
 }
 
