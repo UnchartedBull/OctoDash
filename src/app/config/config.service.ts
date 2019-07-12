@@ -16,6 +16,7 @@ export class ConfigService {
 export interface Config {
   octoprint: Octoprint;
   printer: Printer;
+  filament: Filament;
 }
 
 interface Octoprint {
@@ -26,4 +27,9 @@ interface Octoprint {
 
 interface Printer {
   name: string;
+}
+
+interface Filament {
+  thickness: number;
+  density: number;
 }
