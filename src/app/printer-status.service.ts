@@ -55,7 +55,7 @@ export class PrinterStatusService {
     }).pipe(share())
   }
 
-  getPrinterStatusObservable(): Observable<Object> {
+  getObservable(): Observable<Object> {
     return this.observable
   }
 }

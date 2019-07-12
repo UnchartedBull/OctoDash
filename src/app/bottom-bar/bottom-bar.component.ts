@@ -14,7 +14,7 @@ export class BottomBarComponent implements OnInit {
 
 
   constructor(private _printerStatusService: PrinterStatusService, private _configService: ConfigService) {
-    this._printerStatusService.getPrinterStatusObservable().subscribe((printerStatus: PrinterStatus) => this.printer.status = printerStatus.status)
+    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatus) => this.printer.status = printerStatus.status)
   }
 
   ngOnInit() {

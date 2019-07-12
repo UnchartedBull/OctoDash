@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrinterStatusService, PrinterStatus } from '../printer-status.service';
+import { DisplayLayerProgressService } from '../display-layer-progress.service';
 
 @Component({
   selector: 'app-printer-status',
@@ -10,8 +11,8 @@ export class PrinterStatusComponent implements OnInit {
 
   printerStatus: PrinterStatus;
 
-  constructor(private _printerStatusService: PrinterStatusService) {
-    this._printerStatusService.getPrinterStatusObservable().subscribe((printerStatus: PrinterStatus) => this.printerStatus = printerStatus)
+  constructor(private _printerStatusService: PrinterStatusService, private _displayLayerProgressService: DisplayLayerProgressService) {
+    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatus) => this.printerStatus = printerStatus)
   }
 
   ngOnInit() { }
