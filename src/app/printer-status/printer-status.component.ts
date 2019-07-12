@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrinterStatusService, PrinterStatus } from '../printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from '../printer-status.service';
+import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
 
 @Component({
   selector: 'app-printer-status',
@@ -8,12 +9,36 @@ import { PrinterStatusService, PrinterStatus } from '../printer-status.service';
 })
 export class PrinterStatusComponent implements OnInit {
 
-  printerStatus: PrinterStatus;
+  printerStatus: PrinterStatus
 
-  constructor(private _printerStatusService: PrinterStatusService) {
-    this._printerStatusService.getPrinterStatusObservable().subscribe((printerStatus: PrinterStatus) => this.printerStatus = printerStatus)
+  constructor(private _printerStatusService: PrinterStatusService, private _displayLayerProgressService: DisplayLayerProgressService) {
+    this.printerStatus = {
+      nozzle: {
+        current: 0,
+        set: 0
+      },
+      heatbed: {
+        current: 0,
+        set: 0
+      },
+      fan: 0
+    };
+    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+      this.printerStatus.nozzle = printerStatus.nozzle;
+      this.printerStatus.heatbed = printerStatus.heatbed;
+    })
+
+    this._displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+      this.printerStatus.fan = layerProgress.fanSpeed
+    })
   }
 
   ngOnInit() { }
 
+}
+
+export interface PrinterStatus {
+  nozzle: PrinterValue;
+  heatbed: PrinterValue;
+  fan: number;
 }

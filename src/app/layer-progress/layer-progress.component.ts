@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayerProgress, JobStatusService } from '../job-status.service';
+import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
 
 @Component({
   selector: 'app-layer-progress',
@@ -10,11 +10,23 @@ export class LayerProgressComponent implements OnInit {
 
   layerProgress: LayerProgress
 
-  constructor(private _jobStatusService: JobStatusService) {
-    this._jobStatusService.getLayerProgressObservable().subscribe((layerProgress: LayerProgress) => this.layerProgress = layerProgress);
+  constructor(private _displayLayerProgressService: DisplayLayerProgressService) {
+    this.layerProgress = {
+      current: 0,
+      total: 0
+    }
+    this._displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+      this.layerProgress.current = layerProgress.current;
+      this.layerProgress.total = layerProgress.total;
+    });
   }
 
   ngOnInit() {
   }
 
+}
+
+export interface LayerProgress {
+  current: number;
+  total: number;
 }

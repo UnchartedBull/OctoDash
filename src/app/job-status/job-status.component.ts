@@ -13,6 +13,6 @@ export class JobStatusComponent implements OnInit {
   constructor(private _jobStatusService: JobStatusService) { }
 
   ngOnInit() {
-    this._jobStatusService.getJobInformationObservable().subscribe((job: Job) => this.job = job);
+    this._jobStatusService.getObservable().subscribe((job: Job) => this.job = job);
   }
 }

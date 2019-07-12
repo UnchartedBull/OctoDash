@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, timer } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobStatusService {
 
-  jobInformation: Observable<Object>
-  layerProgress: Observable<Object>
+  observable: Observable<Object>
 
   constructor(private _configService: ConfigService, private _http: HttpClient) {
-    this.jobInformation = Observable.create((observer: Observer<any>) => {
+    this.observable = Observable.create((observer: Observer<any>) => {
       timer(1000, this._configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this._configService.config) {
           const httpHeaders = {
@@ -39,29 +39,16 @@ export class JobStatusService {
                 }
               }
               observer.next(job);
-            }, ((error: HttpErrorResponse) => {
-              observer.next(null);
-            }))
+            }, (error: HttpErrorResponse) => {
+              console.log("Can't retrieve jobs! " + error.message)
+            })
         }
       })
-    })
-
-    this.layerProgress = Observable.create((observer: Observer<any>) => {
-      // TODO
-      let layerProgress = {
-        current: 0,
-        total: 0
-      }
-      observer.next(layerProgress)
-    })
+    }).pipe(share())
   }
 
-  public getJobInformationObservable(): Observable<Object> {
-    return this.jobInformation
-  }
-
-  public getLayerProgressObservable(): Observable<Object> {
-    return this.layerProgress
+  public getObservable(): Observable<Object> {
+    return this.observable
   }
 
   private timeConvert(input: number): string {
@@ -88,9 +75,4 @@ export interface Job {
   filamentAmount: number;
   timeLeft: Duration;
   timePrinted: Duration;
-}
-
-export interface LayerProgress {
-  current: number;
-  total: number;
 }

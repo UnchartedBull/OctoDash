@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config/config.service';
-import { PrinterStatusService, PrinterStatus } from '../printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI } from '../printer-status.service';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -14,7 +14,7 @@ export class BottomBarComponent implements OnInit {
 
 
   constructor(private _printerStatusService: PrinterStatusService, private _configService: ConfigService) {
-    this._printerStatusService.getPrinterStatusObservable().subscribe((printerStatus: PrinterStatus) => this.printer.status = printerStatus.status)
+    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => this.printer.status = printerStatus.status)
   }
 
   ngOnInit() {
