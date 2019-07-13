@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-invalid-config',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invalid-config.component.scss']
 })
 export class InvalidConfigComponent implements OnInit {
+  errors: string[];
 
-  constructor() { }
+  constructor(private configService: ConfigService) {
+
+  }
 
   ngOnInit() {
+    this.errors = this.configService.getJSONError();
   }
 
 }

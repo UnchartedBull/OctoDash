@@ -20,23 +20,39 @@ export class ConfigService {
   public valid: boolean;
 
   constructor(private http: HttpClient) {
+    const ajv = new Ajv({ allErrors: true });
+    this.validator = ajv.compile(schema);
     if (window && window.process && window.process.type) {
-      const ajv = new Ajv({ allErrors: true });
-      this.validator = ajv.compile(schema);
       const Store = window.require('electron-store');
       this.store = new Store();
-      // this.store.set('config', 'abc');
+      this.store.set('config', { 'type': 'abv' });
       // this.store.delete('config');
       this.config = this.store.get('config');
       this.valid = this.validate();
     } else {
       console.warn('Detected non-electron environment. Fallback to assets/config.json. Any changes are non-persistent!');
-      this.http.get(environment.config).subscribe((config: Config) => this.config = config);
+      this.http.get(environment.config).subscribe((config: Config) => {
+        this.config = config
+        this.valid = this.validate();
+      });
     }
   }
 
-  private validate(): boolean {
+  public validate(): boolean {
     return this.validator(this.config) ? true : false;
+  }
+
+  public getJSONError(): string[] {
+    console.log(this.validator.errors);
+    const errors = [];
+    this.validator.errors.forEach(error => {
+      if (error.keyword === 'type') {
+        errors.push(`${error.dataPath} ${error.message}`);
+      } else {
+        errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
+      }
+    });
+    return errors;
   }
 }
 
