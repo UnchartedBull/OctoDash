@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from '../printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from './printer-status.service';
 import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
 
 @Component({

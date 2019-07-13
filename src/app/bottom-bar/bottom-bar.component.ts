@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../config.service';
-import { PrinterStatusService, PrinterStatusAPI } from '../printer-status.service';
+import { ConfigService } from '../config/config.service';
+import { PrinterStatusService, PrinterStatusAPI } from '../printer-status/printer-status.service';
 
 @Component({
   selector: 'app-bottom-bar',

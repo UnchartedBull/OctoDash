@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobStatusService, Job } from '../job-status.service';
+import { JobStatusService, Job } from './job-status.service';
 
 @Component({
   selector: 'app-job-status',

@@ -1,0 +1,15 @@
+<div class="no-config">
+    <div *ngIf="page === 1">
+        <div class="no-config__1-welcome">Hey there!</div>
+        <div class="no-config__1-welcome-text">It looks like this is the first time starting OctoDash! <br>
+            I'll help you setting up your config. If you encounter any issues please create an issue in
+            GitHub. <br> <br>
+            Thanks for choosing OctoDash :)</div>
+        <div class="no-config__1-button_wrapper">
+            <button class="no-config__1-button" (click)="page = 2" (keyup.enter)="page = 2">let's start</button>
+        </div>
+    </div>
+    <div *ngIf="page === 2">
+        Page 2
+    </div>
+</div>

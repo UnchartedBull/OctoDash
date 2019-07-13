@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./no-config.component.scss']
 })
 export class NoConfigComponent implements OnInit {
+  page = 1;
 
   constructor() { }
 

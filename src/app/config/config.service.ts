@@ -1,6 +1,6 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import * as Ajv from 'ajv';
 
 declare global {
@@ -25,14 +25,14 @@ export class ConfigService {
     if (window && window.process && window.process.type) {
       const Store = window.require('electron-store');
       this.store = new Store();
-      this.store.set('config', { 'type': 'abv' });
+      // this.store.set('config', { 'type': 'abv' });
       // this.store.delete('config');
       this.config = this.store.get('config');
       this.valid = this.validate();
     } else {
       console.warn('Detected non-electron environment. Fallback to assets/config.json. Any changes are non-persistent!');
       this.http.get(environment.config).subscribe((config: Config) => {
-        this.config = config
+        this.config = config;
         this.valid = this.validate();
       });
     }

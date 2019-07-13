@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ConfigService } from './config.service';
+import { ConfigService } from '../config/config.service';
 import { Observable, Observer, timer } from 'rxjs';
 import { share } from 'rxjs/operators';
 

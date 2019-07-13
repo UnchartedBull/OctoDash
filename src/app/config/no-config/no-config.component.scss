@@ -1,0 +1,38 @@
+.no-config__1-welcome {
+    display: block;
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+}
+
+.no-config__1-welcome-text {
+    display: block;
+    text-align: center;
+    margin-left: 2vh;
+    margin-right: 3vh;
+    font-size: 3.6vw;
+}
+
+.no-config__1-button_wrapper {
+    width: 100%;
+    text-align: center;
+    height: 32vh;
+}
+
+.no-config__1-button {
+    background: #44bd32;
+    padding: 2vw 4vh;
+    border: none;
+    border-radius: 2vh;
+    margin-top: 12vh;
+
+    &:focus {
+        box-shadow: 0 0 2vw 0 rgba(68, 189, 50, 1);
+        outline: 0;
+    }
+
+    &:hover {
+        box-shadow: 0 0 2vw 0 rgba(68, 189, 50, 1);
+    }
+}

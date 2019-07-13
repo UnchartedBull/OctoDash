@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { ConfigService } from './config.service';
+import { ConfigService } from './config/config.service';
 import { share } from 'rxjs/operators';
 
 @Injectable({
