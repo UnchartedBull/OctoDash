@@ -1,17 +1,106 @@
+.no-config__progress {
+    width: 100%;
+
+    & td {
+        width: 33.3%;
+    }
+}
+
+.no-config__back {
+    padding: 4vh 2vw;
+}
+
+.no-config__next {
+    padding: 4vh 2vw;
+    text-align: right;
+}
+
+.no-config__back-icon {
+    width: 6vw;
+    vertical-align: -5vh;
+    margin-right: 1.4vw;
+}
+
+.no-config__next-icon {
+    width: 6vw;
+    vertical-align: -5vh;
+    margin-left: 1.4vw;
+    margin-right: 1vw;
+}
+
+.no-config__text {
+    display: block;
+    text-align: center;
+    margin-left: 2vh;
+    margin-right: 3vh;
+    font-size: 3.6vw;
+}
+
+.no-config__progress-td {
+    text-align: center;
+}
+
+.no-config__progress-bar-wrapper {
+    background-color: #718093;
+    height: 4vh;
+    width: 20vw;
+    display: inline-block;
+    border-radius: 2vh;
+}
+
+.no-config__progress-bar {
+    height: 4vh;
+    border-radius: 2vh;
+    background-color: #44bd32;
+    width: 0vw;
+}
+
+.no-config__input {
+    background: transparent;
+    margin-top: 9vh;
+    padding: 1.5vw 3vh;
+    border: 2px solid #dcdde1;
+    border-radius: 2.5vw;
+    width: 55vw;
+
+    &:focus {
+        outline: 0;
+        border: 2px solid #44bd32;
+    }
+}
+
+.no-config__input-small {
+    width: 10vw;
+    text-align: right;
+
+    &-suffix {
+        font-size: 3vw;
+        padding-left: 1vw;
+    }
+}
+
+.no-config__input-label {
+    padding-right: 3vw;
+
+    &-small {
+        padding-right: 2vw;
+    }
+}
+
+.no-config__form {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
 .no-config__1-welcome {
     display: block;
     text-align: center;
     font-size: 6vw;
     margin-top: 6vh;
     margin-bottom: 6vh;
-}
-
-.no-config__1-welcome-text {
-    display: block;
-    text-align: center;
-    margin-left: 2vh;
-    margin-right: 3vh;
-    font-size: 3.6vw;
+    font-weight: 600;
 }
 
 .no-config__1-button_wrapper {
@@ -35,4 +124,14 @@
     &:hover {
         box-shadow: 0 0 2vw 0 rgba(68, 189, 50, 1);
     }
+}
+
+
+.no-config__2-filament-divider {
+    display: block;
+    text-align: left;
+    margin-left: 4.3vw;
+    margin-top: 7vh;
+    margin-bottom: -7vh;
+    font-weight: 600;
 }
