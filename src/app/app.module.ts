@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RoundProgressModule, ROUND_PROGRESS_DEFAULTS } from 'angular-svg-round-progressbar';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
@@ -26,7 +27,8 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RoundProgressModule
+    RoundProgressModule,
+    FormsModule
   ],
   providers: [AppService, ConfigService],
   bootstrap: [AppComponent]

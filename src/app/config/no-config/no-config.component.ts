@@ -9,6 +9,10 @@ export class NoConfigComponent implements OnInit {
   page = 1;
   totalPages = 3;
 
+  printerName = '';
+  filamentDiameter = 1.75;
+  filamentDensity = 1.25;
+
   constructor() { }
 
   ngOnInit() {

@@ -31,15 +31,18 @@
         </span>
         <form class="no-config__form">
             <label for="printerName" class="no-config__input-label">Printer Name:</label>
-            <input type="text" id="printerName" class="no-config__input" maxlength="13">
+            <input type="text" id="printerName" class="no-config__input" maxlength="13" [(ngModel)]="printerName"
+                name="printerName" required>
 
             <span class="no-config__2-filament-divider">Filament</span>
             <label for="filamentDiameter" class="no-config__input-label-small">Diameter:</label>
-            <input type="number" id="filamentDiameter" class="no-config__input no-config__input-small" maxlength="13">
+            <input type="number" id="filamentDiameter" class="no-config__input no-config__input-small"
+                [(ngModel)]="filamentDiameter" name="filamentDiameter" step="0.01" min="0" required>
             <span class="no-config__input-small-suffix" style="padding-right: 3vw;">mm</span>
 
             <label for="filamentDensity" class="no-config__input-label-small">Density:</label>
-            <input type="number" id="filamentDensity" class="no-config__input no-config__input-small" maxlength="13">
+            <input type="number" id="filamentDensity" class="no-config__input no-config__input-small"
+                [(ngModel)]="filamentDensity" name="filamentDensity" step="0.001" min="0" required>
             <span class="no-config__input-small-suffix">g/cm³</span>
         </form>
     </div>
