@@ -1,6 +1,6 @@
 # OctoDash
 
-OctoDash is a small, but beautiful dashboard for Octoprint.
+OctoDash is a simple, but beautiful dashboard for Octoprint.
 
 ## Installation
 
@@ -24,13 +24,10 @@ This option does not allow you to change your config via the UI and the styling 
 
 
 ## Screenshots
-
-<img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="48.5%" alt-text="Job Running"/>
-
-<img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job.png" width="48.5%" style="float: right" alt-text="No Job Running">
-
-<span>Job Running</span>
-<span style="float: right">No Job Running</span>
+<p float="left">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-         text="Job Running"/>
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job.png" width="49.5%"           alt-text="No Job Running">
+</p>
 
 ## Troubleshooting
 
