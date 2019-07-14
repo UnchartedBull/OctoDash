@@ -15,27 +15,19 @@ let window;
 //FIXME automatic width and height in prod use
 
 function createWindow() {
-    if (!big) {
-        window = new BrowserWindow({
-            width: dev ? 1000 : 1000,
-            height: dev ? 342 : 320,
-            frame: dev ? true : false,
-            fullscreen: dev ? false : true,
-            webPreferences: {
-                nodeIntegration: true
-            }
-        })
-    } else {
-        window = new BrowserWindow({
-            width: dev ? 1400 : 800,
-            height: dev ? 502 : 480,
-            frame: dev ? true : false,
-            fullscreen: dev ? false : true,
-            webPreferences: {
-                nodeIntegration: true
-            }
-        })
-    }
+    const {
+        screen
+    } = require('electron')
+    const mainScreen = screen.getPrimaryDisplay();
+    window = new BrowserWindow({
+        width: dev ? big ? 1000 : 1400 : mainScreen.size.width,
+        height: dev ? big ? 342 : 502 : mainScreen.size.height,
+        frame: dev ? true : false,
+        fullscreen: dev ? false : true,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
 
     if (dev) {
         require('electron-reload')(__dirname, {
