@@ -25,8 +25,6 @@ export class ConfigService {
     if (window && window.process && window.process.type) {
       const Store = window.require('electron-store');
       this.store = new Store();
-      // this.store.set('config', { 'type': 'abv' });
-      // this.store.delete('config');
       this.config = this.store.get('config');
       this.valid = this.validate();
     } else {
@@ -66,11 +64,7 @@ export class ConfigService {
       this.store.set('config', config);
       const configStored = this.store.get('config');
       if (this.validateGiven(configStored)) {
-        if (configStored === config) {
-          return null;
-        } else {
-          return ('Error while saving config!');
-        }
+        return null;
       } else {
         return ('Saved config is invalid!');
       }

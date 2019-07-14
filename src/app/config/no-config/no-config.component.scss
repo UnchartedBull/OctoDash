@@ -147,15 +147,6 @@
     border: none;
     border-radius: 2vh;
     margin-top: 12vh;
-
-    &:focus {
-        box-shadow: 0 0 2vw 0 rgba(68, 189, 50, 1);
-        outline: 0;
-    }
-
-    &:hover {
-        box-shadow: 0 0 2vw 0 rgba(68, 189, 50, 1);
-    }
 }
 
 
@@ -171,7 +162,7 @@
 .no-config__4-check-wrapper {
     width: 100%;
     text-align: center;
-    padding-top: 10vh;
+    padding-top: 8vh;
 }
 
 .no-config__4-check {
@@ -190,4 +181,12 @@
     font-family: 'Cousine', monospace;
     display: block;
     margin-bottom: 4vh;
+}
+
+.no-config__4-finish {
+    background-color: #44bd32;
+    display: inline-block;
+    padding: 1.4vh 2vw;
+    border-radius: 1vw;
+    box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
 }

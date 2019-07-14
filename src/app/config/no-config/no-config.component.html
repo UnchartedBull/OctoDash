@@ -79,14 +79,14 @@
         <div class="no-config__4-check-wrapper">
             <span class="no-config__4-check">
                 <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="configValid" />
-                <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="!configValid" />
+                <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="configValid == false" />
                 Config Validation
             </span>
             <span class="no-config__4-errors" *ngFor="let error of configErrors">{{ error }}</span>
             <div *ngIf="configValid">
                 <span class="no-config__4-check">
                     <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection" />
-                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="!octoprintConnection" />
+                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection == false" />
                     Octoprint Connection
                 </span>
                 <span class="no-config__4-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
@@ -99,6 +99,9 @@
                 </span>
                 <span class="no-config__4-errors" *ngIf="configSaved">{{ configSaved }}</span>
             </div>
+            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__4-finish"
+                (click)="finishWizard()">done
+            </span>
         </div>
     </div>
 </div>

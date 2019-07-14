@@ -8,7 +8,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
   styleUrls: ['./no-config.component.scss']
 })
 export class NoConfigComponent implements OnInit {
-  page = 3;
+  page = 0;
   totalPages = 4;
 
   printerName = '';
@@ -51,6 +51,8 @@ export class NoConfigComponent implements OnInit {
   }
 
   createConfig() {
+    this.configErrors = [];
+    this.octoprintConnectionError = null;
     this.config = {
       octoprint: {
         url: this.octoprintURL + '/api/',
@@ -81,7 +83,10 @@ export class NoConfigComponent implements OnInit {
 
   saveConfig() {
     this.configSaved = this.configService.saveConfig(this.config);
-    console.log(this.configSaved)
+  }
+
+  finishWizard() {
+    this.configService.updateConfig();
   }
 
   increasePage() {
