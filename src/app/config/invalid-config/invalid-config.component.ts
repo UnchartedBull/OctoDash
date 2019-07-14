@@ -14,7 +14,7 @@ export class InvalidConfigComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.errors = this.configService.getJSONError();
+    this.errors = this.configService.getErrors();
   }
 
 }

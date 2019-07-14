@@ -42,8 +42,11 @@ export class ConfigService {
     return this.validator(this.config) ? true : false;
   }
 
-  public getJSONError(): string[] {
-    console.log(this.validator.errors);
+  public validateGiven(config: Config): boolean {
+    return this.validator(config) ? true : false;
+  }
+
+  public getErrors(): string[] {
     const errors = [];
     this.validator.errors.forEach(error => {
       if (error.keyword === 'type') {
@@ -54,12 +57,41 @@ export class ConfigService {
     });
     return errors;
   }
+
+  public saveConfig(config?: Config): string {
+    if (!config) {
+      config = this.config;
+    }
+    if (window && window.process && window.process.type) {
+      this.store.set('config', config);
+      const configStored = this.store.get('config');
+      if (this.validateGiven(configStored)) {
+        if (configStored === config) {
+          return null;
+        } else {
+          return ('Error while saving config!');
+        }
+      } else {
+        return ('Saved config is invalid!');
+      }
+    } else {
+      return ('Browser version doesn\'t support saving!');
+    }
+  }
+
+  public updateConfig() {
+    if (window && window.process && window.process.type) {
+      this.config = this.store.get('config');
+      this.valid = this.validate();
+    }
+  }
 }
 
 export interface Config {
   octoprint: Octoprint;
   printer: Printer;
   filament: Filament;
+  touchscreen: boolean;
 }
 
 interface Octoprint {

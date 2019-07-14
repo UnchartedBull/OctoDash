@@ -167,3 +167,27 @@
     margin-bottom: -7vh;
     font-weight: 600;
 }
+
+.no-config__4-check-wrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 10vh;
+}
+
+.no-config__4-check {
+    display: block;
+    margin-bottom: 5vh;
+}
+
+.no-config__4-check-icon {
+    width: 5vw;
+    vertical-align: -2.2vw;
+    margin-right: 2vw;
+}
+
+.no-config__4-errors {
+    font-size: 3.6vw;
+    font-family: 'Cousine', monospace;
+    display: block;
+    margin-bottom: 4vh;
+}

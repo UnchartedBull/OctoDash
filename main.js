@@ -12,6 +12,8 @@ const big = args.some(val => val === '--big-screen')
 
 let window;
 
+//FIXME automatic width and height in prod use
+
 function createWindow() {
     if (!big) {
         window = new BrowserWindow({
