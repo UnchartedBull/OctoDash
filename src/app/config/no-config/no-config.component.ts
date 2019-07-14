@@ -6,27 +6,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./no-config.component.scss']
 })
 export class NoConfigComponent implements OnInit {
-  page = 1;
-  totalPages = 3;
+  page = 4;
+  totalPages = 4;
 
   printerName = '';
   filamentDiameter = 1.75;
   filamentDensity = 1.25;
+  octoprintURL = 'http://localhost:5000';
+  accessToken = '';
+  touchscreen = true;
 
   constructor() { }
 
   ngOnInit() {
-    this.changeProgress()
+    this.changeProgress();
   }
 
   increasePage() {
     this.page += 1;
-    this.changeProgress()
+    this.changeProgress();
   }
 
   decreasePage() {
     this.page -= 1;
-    this.changeProgress()
+    this.changeProgress();
   }
 
   changeProgress() {

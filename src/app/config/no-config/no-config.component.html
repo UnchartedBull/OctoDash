@@ -46,4 +46,38 @@
             <span class="no-config__input-small-suffix">g/cm³</span>
         </form>
     </div>
+    <div *ngIf="page === 2">
+        <span class="no-config__text">
+            Now I need to know something about your OctoPrint setup, so I can talk to your printer.
+        </span>
+        <form class="no-config__form">
+            <label for="octoprintURL" class="no-config__input-label">Octoprint URL:</label>
+            <input type="text" id="octoprintURL" class="no-config__input" [(ngModel)]="octoprintURL" name="octoprintURL"
+                required style="width: 52.5vw">
+
+            <label for="accessToken" class="no-config__input-label">Access Token:</label>
+            <input type="text" id="accessToken" class="no-config__input" [(ngModel)]="accessToken" name="accessToken"
+                required>
+        </form>
+    </div>
+    <div *ngIf="page === 3">
+        <span class="no-config__text">
+            And finally some information on how OctoDash should be setup.
+        </span>
+        <form class="no-config__form">
+            <div class="no-config__checkbox-container" (click)="touchscreen = !touchscreen">
+                <span class="no-config__checkmark">
+                    <span class="no-config__checkbox-checked" *ngIf="touchscreen"></span>
+                </span> Touchscreen
+            </div>
+        </form>
+    </div>
+    <div *ngIf="page === 4">
+        <span class="no-config__text">
+            Great! I'll check everything.
+        </span>
+        <span class="no-config__4-check">
+            Config is valid
+        </span>
+    </div>
 </div>

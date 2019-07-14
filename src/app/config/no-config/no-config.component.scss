@@ -53,6 +53,7 @@
     border-radius: 2vh;
     background-color: #44bd32;
     width: 0vw;
+    transition: width .7s ease-in-out;
 }
 
 .no-config__input {
@@ -85,6 +86,37 @@
     &-small {
         padding-right: 2vw;
     }
+}
+
+.no-config__checkbox-container {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    padding-left: 6vw;
+    height: 4.5vw;
+    margin-top: 8vh;
+    cursor: pointer;
+}
+
+.no-config__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4vw;
+    width: 4vw;
+    background-color: transparent;
+    border: 2px solid #dcdde1;
+    border-radius: 1vw;
+}
+
+.no-config__checkbox-checked {
+    background-color: #2196F3;
+    width: 2.4vw;
+    height: 2.4vw;
+    display: block;
+    margin-left: .8vw;
+    margin-top: .8vw;
+    border-radius: .7vw;
 }
 
 .no-config__form {
