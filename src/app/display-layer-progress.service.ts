@@ -26,11 +26,12 @@ export class DisplayLayerProgressService {
           }
           this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'plugin/DisplayLayerProgress', httpHeaders).subscribe(
             (data: JSON) => {
-              observer.next({
-                current: data['layer']['current'] === '-' ? 0 : data['layer']['current'],
-                total: data['layer']['total'] === '-' ? 0 : data['layer']['total'],
-                fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed']
-              })
+              let fanSpeed =
+                observer.next({
+                  current: data['layer']['current'] === '-' ? 0 : data['layer']['current'],
+                  total: data['layer']['total'] === '-' ? 0 : data['layer']['total'],
+                  fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed'] === 'Off' ? 0 : data['fanSpeed']
+                })
             }, (error: HttpErrorResponse) => {
               console.error('Can\'t retrieve layer progress! ' + error.message);
             });

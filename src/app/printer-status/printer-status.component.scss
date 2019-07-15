@@ -1,14 +1,20 @@
 .printer-status {
     width: 100%;
-    margin-top: 10.4vh;
+    margin-top: 3vh;
+    height: 23vh;
     display: block;
     table-layout: fixed;
     overflow: visible;
+
+    & tr {
+        vertical-align: middle;
+    }
 }
 
 .printer-status__value {
     text-align: right;
-    height: 16.5vh;
+    height: 23vh;
+    vertical-align: middle;
 
     & img {
         width: 10vw;
@@ -28,7 +34,7 @@
         padding-right: 7.5vw;
 
         & img {
-            width: 9.2vw;
+            width: 9.6vw;
         }
     }
 
@@ -38,7 +44,7 @@
 
         & img {
             padding-top: 1vh;
-            width: 11.5vw;
+            width: 10vw;
         }
     }
 }
