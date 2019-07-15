@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, timer } from 'rxjs';
+import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { ConfigService } from './config/config.service';
 import { share } from 'rxjs/operators';
@@ -9,18 +9,22 @@ import { share } from 'rxjs/operators';
 })
 export class DisplayLayerProgressService {
 
+  httpRequest: Subscription;
   observable: Observable<DisplayLayerProgressAPI>;
 
   constructor(private configService: ConfigService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(750, this.configService.config.octoprint.apiInterval).subscribe(_ => {
+      timer(1000, this.configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this.configService.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
               'x-api-key': this.configService.config.octoprint.accessToken
             })
           };
-          this.http.get(this.configService.config.octoprint.url + 'plugin/DisplayLayerProgress', httpHeaders).subscribe(
+          if (this.httpRequest) {
+            this.httpRequest.unsubscribe();
+          }
+          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'plugin/DisplayLayerProgress', httpHeaders).subscribe(
             (data: JSON) => {
               observer.next({
                 current: data['layer']['current'] === '-' ? 0 : data['layer']['current'],
@@ -28,7 +32,7 @@ export class DisplayLayerProgressService {
                 fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed']
               })
             }, (error: HttpErrorResponse) => {
-              console.error('Can\'t retrieve layerProgress! ' + error.message);
+              console.error('Can\'t retrieve layer progress! ' + error.message);
             });
         }
       });

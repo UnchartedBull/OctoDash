@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer, timer } from 'rxjs';
+import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { share } from 'rxjs/operators';
@@ -9,18 +9,22 @@ import { share } from 'rxjs/operators';
 })
 export class JobStatusService {
 
+  httpRequest: Subscription;
   observable: Observable<Job>;
 
   constructor(private configService: ConfigService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(1000, this.configService.config.octoprint.apiInterval).subscribe(_ => {
+      timer(750, this.configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this.configService.config) {
           const httpHeaders = {
             headers: new HttpHeaders({
               'x-api-key': this.configService.config.octoprint.accessToken
             })
           };
-          this.http.get(this.configService.config.octoprint.url + 'job', httpHeaders).subscribe(
+          if (this.httpRequest) {
+            this.httpRequest.unsubscribe();
+          }
+          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'job', httpHeaders).subscribe(
             (data: JSON) => {
               let job: Job = null;
               if (data['state'] === 'Printing') {

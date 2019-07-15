@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from '../config/config.service';
-import { Observable, Observer, timer } from 'rxjs';
+import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { share } from 'rxjs/operators';
 })
 export class PrinterStatusService {
 
+  httpRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
   constructor(private http: HttpClient, private configService: ConfigService) {
@@ -20,7 +21,10 @@ export class PrinterStatusService {
               'x-api-key': this.configService.config.octoprint.accessToken
             })
           };
-          this.http.get(this.configService.config.octoprint.url + 'printer', httpHeaders).subscribe(
+          if (this.httpRequest) {
+            this.httpRequest.unsubscribe();
+          }
+          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'printer', httpHeaders).subscribe(
             (data: JSON) => {
               const printerStatus: PrinterStatusAPI = {
                 status: data['state']['text'].toLowerCase(),
