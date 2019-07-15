@@ -1,6 +1,14 @@
 <div *ngIf="configService.config" class="container">
-  <app-job-status></app-job-status>
-  <app-printer-status></app-printer-status>
-  <app-layer-progress></app-layer-progress>
-  <app-bottom-bar></app-bottom-bar>
+  <div *ngIf="configService.valid">
+    <app-job-status></app-job-status>
+    <app-printer-status></app-printer-status>
+    <app-layer-progress></app-layer-progress>
+    <app-bottom-bar></app-bottom-bar>
+  </div>
+  <div *ngIf="!configService.valid">
+    <app-invalid-config></app-invalid-config>
+  </div>
+</div>
+<div *ngIf="!configService.config">
+  <app-no-config></app-no-config>
 </div>

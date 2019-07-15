@@ -1,0 +1,36 @@
+.invalid-config__top-icon {
+    width: 16vw;
+    display: block;
+    margin-left: calc(50% - 8vw);
+    margin-top: -4vh;
+    margin-bottom: -8vh;
+}
+
+.invalid-config__header {
+    display: block;
+    text-align: center;
+    font-size: 6vw;
+}
+
+.invalid-config__sub-header {
+    text-align: center;
+    font-size: 3vw;
+    display: block;
+}
+
+.invalid-config__error-list {
+    margin-left: 2vw;
+    font-size: 3.6vw;
+    margin-top: 5vh;
+    list-style-type: disc;
+    font-family: 'Cousine', monospace;
+
+    & li {
+        margin-top: 2vh;
+
+        &::before {
+            content: "-";
+            margin-right: 2vw;
+        }
+    }
+}

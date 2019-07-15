@@ -1,0 +1,107 @@
+<div class="no-config">
+    <table class="no-config__progress">
+        <tr>
+            <td class="no-config__back" (click)="decreasePage()" *ngIf="page !== 0">
+                <img src="assets/back.svg" class="no-config__back-icon" />back
+            </td>
+            <td class="no-config__back" *ngIf="page === 0"></td>
+            <td class="no-config__progress-td">
+                <div class="no-config__progress-bar-wrapper">
+                    <div class="no-config__progress-bar" id="progressBar"></div>
+                </div>
+            </td>
+            <td class="no-config__next" (click)="increasePage()" *ngIf="page !== totalPages">
+                next<img src="assets/next.svg" class="no-config__next-icon" />
+            </td>
+            <td class="no-config__next" *ngIf="page === totalPages"></td>
+        </tr>
+    </table>
+    <div *ngIf="page === 0">
+        <span class="no-config__1-welcome">Hey there!</span>
+        <span class="no-config__text">
+            It looks like this is the first time starting OctoDash! <br>
+            I'll help you setting up your config. If you encounter any issues please create an issue in
+            GitHub. <br> <br>
+            Thanks for choosing OctoDash :)
+        </span>
+    </div>
+    <div *ngIf="page === 1">
+        <span class="no-config__text">
+            First, tell me some facts about your printer and filament so I can personalize OctoDash.
+        </span>
+        <form class="no-config__form">
+            <label for="printerName" class="no-config__input-label">Printer Name:</label>
+            <input type="text" id="printerName" class="no-config__input" maxlength="13" [(ngModel)]="printerName"
+                name="printerName" required>
+
+            <span class="no-config__2-filament-divider">Filament</span>
+            <label for="filamentDiameter" class="no-config__input-label-small">Diameter:</label>
+            <input type="number" id="filamentDiameter" class="no-config__input no-config__input-small"
+                [(ngModel)]="filamentDiameter" name="filamentDiameter" step="0.01" min="0" required>
+            <span class="no-config__input-small-suffix" style="padding-right: 3vw;">mm</span>
+
+            <label for="filamentDensity" class="no-config__input-label-small">Density:</label>
+            <input type="number" id="filamentDensity" class="no-config__input no-config__input-small"
+                [(ngModel)]="filamentDensity" name="filamentDensity" step="0.001" min="0" required>
+            <span class="no-config__input-small-suffix">g/cm³</span>
+        </form>
+    </div>
+    <div *ngIf="page === 2">
+        <span class="no-config__text">
+            Now I need to know something about your OctoPrint setup, so I can talk to your printer.
+        </span>
+        <form class="no-config__form">
+            <label for="octoprintURL" class="no-config__input-label">Octoprint URL:</label>
+            <input type="text" id="octoprintURL" class="no-config__input" [(ngModel)]="octoprintURL" name="octoprintURL"
+                required style="width: 52.5vw">
+
+            <label for="accessToken" class="no-config__input-label">Access Token:</label>
+            <input type="text" id="accessToken" class="no-config__input" [(ngModel)]="accessToken" name="accessToken"
+                required>
+        </form>
+    </div>
+    <div *ngIf="page === 3">
+        <span class="no-config__text">
+            And finally some information on how OctoDash should be setup.
+        </span>
+        <form class="no-config__form">
+            <div class="no-config__checkbox-container" (click)="touchscreen = !touchscreen">
+                <span class="no-config__checkmark">
+                    <span class="no-config__checkbox-checked" *ngIf="touchscreen"></span>
+                </span> Touchscreen
+            </div>
+        </form>
+    </div>
+    <div *ngIf="page === 4">
+        <span class="no-config__text">
+            Great! I'll check everything.
+        </span>
+        <div class="no-config__4-check-wrapper">
+            <span class="no-config__4-check">
+                <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="configValid" />
+                <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="configValid == false" />
+                Config Validation
+            </span>
+            <span class="no-config__4-errors" *ngFor="let error of configErrors">{{ error }}</span>
+            <div *ngIf="configValid">
+                <span class="no-config__4-check">
+                    <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection" />
+                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection == false" />
+                    Octoprint Connection
+                </span>
+                <span class="no-config__4-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
+            </div>
+            <div *ngIf="configValid && octoprintConnection">
+                <span class="no-config__4-check">
+                    <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="!configSaved" />
+                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="configSaved" />
+                    Saving Config
+                </span>
+                <span class="no-config__4-errors" *ngIf="configSaved">{{ configSaved }}</span>
+            </div>
+            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__4-finish"
+                (click)="finishWizard()">done
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,60 +1,61 @@
 const {
-  app,
-  BrowserWindow
+    app,
+    BrowserWindow
 } = require("electron");
+const url = require('url')
+const path = require('path')
 
 const args = process.argv.slice(1);
-const serve = args.some(val => val === '--serve');
+const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big-screen')
 
 let window;
 
 function createWindow() {
+    const {
+        screen
+    } = require('electron')
+    const mainScreen = screen.getPrimaryDisplay();
+    window = new BrowserWindow({
+        width: dev ? big ? 1000 : 1400 : mainScreen.size.width,
+        height: dev ? big ? 342 : 502 : mainScreen.size.height,
+        frame: dev ? true : false,
+        fullscreen: dev ? false : true,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
 
-    if(!big) {
-        window = new BrowserWindow({
-          width: serve ? 1000 : 480,
-          height: 320,
-          frame: false,
-          fullscreen: false
-        })
+    if (dev) {
+        require('electron-reload')(__dirname, {
+            electron: require(`${__dirname}/node_modules/electron`)
+        });
+        window.loadURL('http://localhost:4200');
     } else {
-        window = new BrowserWindow({
-            width: serve ? 1400 : 800,
-            height: 480,
-            frame: false,
-            fullscreen: false
-          })
+        window.loadURL(url.format({
+            pathname: path.join(__dirname, 'dist/index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
     }
 
-  if (serve) {
-    require('electron-reload')(__dirname, {
-      electron: require(`${__dirname}/node_modules/electron`)
+    if (dev) window.webContents.openDevTools();
+
+    window.on('closed', () => {
+        window = null;
     });
-    window.loadURL('http://localhost:4200');
-  } else {
-    window.loadFile('index.html')
-  }
-
-  if (serve) window.webContents.openDevTools();
-//   window.webContents.openDevTools();
-
-  window.on('closed', () => {
-    window = null;
-  });
-
 }
 
 app.on('ready', createWindow)
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+    if (process.platform !== "darwin") {
+        app.quit();
+    }
 });
 
 app.on("activate", () => {
-  if (window === null) {
-    createWindow();
-  }
+    if (window === null) {
+        createWindow();
+    }
 });

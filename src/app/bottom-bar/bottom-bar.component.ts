@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
-import { PrinterStatusService, PrinterStatusAPI } from '../printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI } from '../printer-status/printer-status.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss']
 })
-export class BottomBarComponent implements OnInit {
+export class BottomBarComponent implements OnInit, OnDestroy {
 
-  printer: Printer;
-  enclosureTemperature: number;
+  private subscriptions: Subscription = new Subscription();
+  public printer: Printer;
+  public enclosureTemperature: number;
 
 
-  constructor(private _printerStatusService: PrinterStatusService, private _configService: ConfigService) {
-    this._printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => this.printer.status = printerStatus.status)
+  constructor(private printerStatusService: PrinterStatusService, private configService: ConfigService) {
+    this.enclosureTemperature = 22.5; // TODO
+    this.printer = {
+      name: this.configService.config.printer.name,
+      status: 'connecting ...'
+    };
   }
 
   ngOnInit() {
-    this.enclosureTemperature = 22.5; //TODO
-    this.printer = {
-      name: this._configService.config.printer.name,
-      status: "connecting ..."
-    }
+    this.subscriptions.add(this.printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+      this.printer.status = printerStatus.status;
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
 

@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-layer-progress',
   templateUrl: './layer-progress.component.html',
   styleUrls: ['./layer-progress.component.scss']
 })
-export class LayerProgressComponent implements OnInit {
+export class LayerProgressComponent implements OnInit, OnDestroy {
 
-  layerProgress: LayerProgress
+  private subscriptions: Subscription = new Subscription();
+  public layerProgress: LayerProgress;
 
-  constructor(private _displayLayerProgressService: DisplayLayerProgressService) {
+  constructor(private displayLayerProgressService: DisplayLayerProgressService) {
     this.layerProgress = {
       current: 0,
       total: 0
-    }
-    this._displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
-      this.layerProgress.current = layerProgress.current;
-      this.layerProgress.total = layerProgress.total;
-    });
+    };
   }
 
   ngOnInit() {
+    this.subscriptions.add(this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+      this.layerProgress.current = layerProgress.current;
+      this.layerProgress.total = layerProgress.total;
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
 }
