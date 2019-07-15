@@ -4,13 +4,50 @@ OctoDash is a simple, but beautiful dashboard for Octoprint.
 
 ## Installation
 
+You need to install the DisplayLayerProgress Plugin by OllisGit to enable the full functionality of OctoDash. The API is currently not in the final plugin, so please install the plugin with the following link: https://github.com/UnchartedBull/OctoPrint-DisplayLayerProgress/archive/master.zip.
+
 ### Electron (recommended)
 
-- Download the latest release for your architecture (for Raspberry Pi use armv7l), start the app and OctoDash will help you set up a config.
-
+- Download the latest release for your architecture (for Raspberry Pi use armv7l)
+`insert download command here`
+- Install the app
+`sudo dpkg -i name`
+- If you get an error while installing install all missing dependencies and reinstall OctoDash.
+`sudo apt install -f && sudo dpkg -i name`
 
 #### Start on boot
-tbd.
+This is a superminimal install to just display OctoDash on Raspbian LITE. Good thing is, that it keeps the load and the Pi quite low and improves start-up time. If you use another window manager adjust your  files according to the Documentation.
+
+- Enable pi Console Autologin via
+`sudo raspi-config`
+- Install xorg + ratpoison
+`sudo apt install xserver-xorg --no-install-recommends ratpoison x11-xserver-utils xinit`
+- Create the .xinitrc file
+`nano ~/.xinitrc`
+- Add the following contents:
+```
+    #!/bin/sh
+
+    xset s off
+    xset s noblank
+    xset -dpms
+
+    ratpoison&
+    octodash
+```
+- make the file executable
+`sudo chmod +x .xinitrc`
+- make xinit autostart on boot `nano ~/.bashrc`
+- add the following at the very bottom:
+```
+if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
+    xinit -- -nocursor
+fi
+```
+- reboot
+
+
+If you get the `Cannot open virtual console 2 (Permission denied)` error run `sudo chmod ug+s /usr/lib/xorg/Xorg` and reboot.
 
 #### Creating config manually
 If you don't want to use the Config Wizard you can also create the config manually. Just copy `sample.config.json` and adjust it according to your setup. Copy the file to `~/.config/octodash/config.json` (for Raspbian). For other OS please refer to the [Electron Docs](https://electronjs.org/docs/api/app#appgetpathname).

@@ -1,0 +1,17 @@
+{
+    "config": {
+        "octoprint": {
+            "url": "http://localhost:5000/api/",
+            "accessToken": "INSERT API KEY HERE",
+            "apiInterval": 1500
+        },
+        "printer": {
+            "name": "NAME HERE"
+        },
+        "filament": {
+            "thickness": 0,
+            "density": 0
+        },
+        "touchscreen": true
+    }
+}
