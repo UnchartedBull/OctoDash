@@ -9,10 +9,7 @@ const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big-screen')
 
-
 let window;
-
-//FIXME automatic width and height in prod use
 
 function createWindow() {
     const {
@@ -42,14 +39,12 @@ function createWindow() {
         }));
     }
 
-    // if (dev) window.webContents.openDevTools();
-    window.webContents.openDevTools();
+    if (dev) window.webContents.openDevTools();
 
     window.on('closed', () => {
         window = null;
     });
 }
-
 
 app.on('ready', createWindow)
 
