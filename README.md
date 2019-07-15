@@ -6,9 +6,14 @@ OctoDash is a simple, but beautiful dashboard for Octoprint.
 
 ### Electron (recommended)
 
-- Download the latest release, start the app and OctoDash will help you setup a config.
+- Download the latest release for your architecture (for Raspberry Pi use armv7l), start the app and OctoDash will help you set up a config.
 
-If you want to start Electron automatically have a look at the wiki (not done yet)
+
+#### Start on boot
+tbd.
+
+#### Creating config manually
+If you don't want to use the Config Wizard you can also create the config manually. Just copy `sample.config.json` and adjust it according to your setup. Copy the file to `~/.config/octodash/config.json` (for Raspbian). For other OS please refer to the [Electron Docs](https://electronjs.org/docs/api/app#appgetpathname).
 
 
 ### Website
@@ -19,9 +24,15 @@ This option does not allow you to change your config via the UI and the styling 
 - Install all the dependencies - `npm install`
 - Adjust `src/assets/config.json` accordingly to your installation
 - Build the app - `ng build --prod`
-- The final website is located at `/dist`, which can be served by any webserver and viewed by any webbrowser, that does support angular. A chromium based webbrowser is recommended
+- The final website is located at `/dist`, which can be served by any web server and viewed by any web browser, that does support angular. A chromium-based web browser is recommended
 
+## Supported Devices
 
+It is recommended to use a 5" or 7" display with a resolution of 800x480 px. You shouldn't choose a screen smaller than 3.5" and with a lower resolution than 480x320 px.
+
+The prebuilt electron app supports Raspberry Pi 2 and higher. The Raspberry Pi 1 is not supported and never will be supported. If you use a Pi 1 please use the Website Version or build the app yourself.
+
+All other SoCs that are using an armv7, or arm64 compatible, processer are supported as well.
 
 ## Screenshots
 <p float="left">
@@ -37,14 +48,14 @@ If you encounter an issue, while using OctoDash please have a look at the wiki T
 
 If you find a bug, please open an issue, so I can have a look at it. Please also add the steps to reproduce and the .gcode file. Thank you!
 
-One more thing: If you're Octoprint is running on a Raspberry Pi 1 you may want to opt out of this, because it just does not have enough power.
+One more thing: If you're Octoprint is running on a Raspberry Pi 1 you may want to opt out of this because it just does not have enough power.
 
 ## Contributing
 
-If you can think of something nice to add or want to change some of the messy code feel free to create a Pull Request. I'll haev a look at it and will merge it into master if everything checks out!
+If you can think of something nice to add or want to change some of the messy code feel free to create a Pull Request. I'll have a look at it and will merge it into master if everything checks out!
 Any help is greatly appreciated!
 
-If you can think of a great feature, but don't feel yet ready to code something open an issue. I'll have a look at it and maybe implement it, if I have the time. It is preferred if you directly create a Pull Request for your new feature. If you need some help, I can point you in the correct direction.
+If you can think of a great feature, but don't feel yet ready to code something open an issue. I'll have a look at it and maybe implement it if I have the time. It is preferred if you directly create a Pull Request for your new feature. If you need some help, I can point you in the correct direction.
 
 ## License
 
@@ -55,4 +66,4 @@ The Credits for the icons can be (temporarily) found at icons.txt. They'll get m
 
 ## Special Thanks
 
-Special Thanks to [/u/Slateclean](https://www.reddit.com/user/Slateclean) for supplying me with touchscreens so I can further develop the project. Without you this wouldn't be happening!
+Special Thanks to [/u/Slateclean](https://www.reddit.com/user/Slateclean) for supplying me with touchscreens so I can further develop the project. Without you, this wouldn't be happening!

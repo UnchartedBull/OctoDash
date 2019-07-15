@@ -1,3 +1,6 @@
+"bed plate, heated, Plate, Bed icon" from shareicon.net
+"filament, spool, Reel icon" from shareicon.net
+"Extruder, nozzle, head icon" from shareicon.net
 "Invalid Code" by Arthur Shlain from thenounproject.com
 "back" by Dwiky Setiawan from thenounproject.com
 "next" by Dwiky Setiawan from thenounproject.com
