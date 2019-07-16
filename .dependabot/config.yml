@@ -1,0 +1,11 @@
+version: 1
+
+update_configs:
+- automerged_updates:
+  - match:
+      update_type: all
+      dependency_type: all
+  directory: "/"
+  package_manager: javascript
+  update_schedule: live
+  default_labels: ["dependencies"]
