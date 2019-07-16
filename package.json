@@ -47,7 +47,7 @@
         "start": "npm-run-all -p ng:serve electron:serve",
         "start:big": "npm-run-all -p ng:serve electron:serve:big",
         "build": "npm run ng:build && electron .",
-        "test": "ng test",
+        "test": "",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "electron": "electron .",
