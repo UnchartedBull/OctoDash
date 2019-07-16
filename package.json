@@ -39,24 +39,6 @@
                 ]
             }],
             "category": "Utility"
-        },
-        "mac": {
-            "target": [{
-                "target": "dmg",
-                "arch": [
-                    "x64"
-                ]
-            }],
-            "category": "public.app-category.utilities"
-        },
-        "win": {
-            "target": [{
-                "target": "portable",
-                "arch": [
-                    "x64",
-                    "ia32"
-                ]
-            }]
         }
     },
     "scripts": {
@@ -70,7 +52,7 @@
         "electron": "electron .",
         "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
         "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
-        "pack": "npm run ng:build && electron-builder build -lmw",
+        "pack": "npm run ng:build && electron-builder build -l",
         "ng:serve": "ng serve",
         "ng:build": "ng build --prod"
     },
