@@ -1,11 +1,19 @@
 #!/bin/sh
 
 make_version() {
-  # git checkout -- .
-  # git status
+  git checkout -- .
+  git status
   COMMIT=$(git log -1 --pretty=%B)
-  echo $COMMIT
-  # npm version patch -m "bump version to %s [skip ci]"
+  VERSION_BUMP="patch"
+  if [[ $COMMIT == *"version:major"* ]]; then
+    VERSION_BUMP="major"
+  fi
+    if [[ $COMMIT == *"version:minor"* ]]; then
+    VERSION_BUMP="minor"
+  fi
+  echo "commit message: "$COMMIT
+  echo "will execute npm version "$VERSION_BUMP
+  npm version $VERSION_BUMP -m "bump version to %s [skip ci]"
 }
 
 upload_files() {
@@ -14,4 +22,4 @@ upload_files() {
 }
 
 make_version
-# upload_files
+upload_files
