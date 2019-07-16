@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ConfigService } from '../config/config.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
+import { OctoprintPrinterStatusAPI } from '../octoprintAPI/printerStatusAPI';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +26,16 @@ export class PrinterStatusService {
             this.httpRequest.unsubscribe();
           }
           this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'printer', httpHeaders).subscribe(
-            (data: JSON) => {
+            (data: OctoprintPrinterStatusAPI) => {
               const printerStatus: PrinterStatusAPI = {
-                status: data['state']['text'].toLowerCase(),
+                status: data.state.text.toLowerCase(),
                 nozzle: {
-                  current: Math.round(data['temperature']['tool0']['actual']),
-                  set: Math.round(data['temperature']['tool0']['target'])
+                  current: Math.round(data.temperature.tool0.actual),
+                  set: Math.round(data.temperature.tool0.target)
                 },
                 heatbed: {
-                  current: Math.round(data['temperature']['bed']['actual']),
-                  set: Math.round(data['temperature']['bed']['target'])
+                  current: Math.round(data.temperature.bed.actual),
+                  set: Math.round(data.temperature.bed.target)
                 }
               };
               observer.next(printerStatus);
