@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { ConfigService } from './config/config.service';
+import { ConfigService } from '../config/config.service';
 import { share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DisplayLayerProgressService {
+export class LayerProgressService {
 
   httpRequest: Subscription;
   observable: Observable<DisplayLayerProgressAPI>;
@@ -30,7 +30,7 @@ export class DisplayLayerProgressService {
                 observer.next({
                   current: data['layer']['current'] === '-' ? 0 : data['layer']['current'],
                   total: data['layer']['total'] === '-' ? 0 : data['layer']['total'],
-                  fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed'] === 'Off' ? 0 : data['fanSpeed']
+                  fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed'] === 'Off' ? 0 : data['fanSpeed'].replace('%', '')
                 })
             }, (error: HttpErrorResponse) => {
               console.error('Can\'t retrieve layer progress! ' + error.message);

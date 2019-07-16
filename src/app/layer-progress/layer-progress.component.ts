@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
+import { LayerProgressService, DisplayLayerProgressAPI } from './layer-progress.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ export class LayerProgressComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public layerProgress: LayerProgress;
 
-  constructor(private displayLayerProgressService: DisplayLayerProgressService) {
+  constructor(private displayLayerProgressService: LayerProgressService) {
     this.layerProgress = {
       current: 0,
       total: 0
