@@ -23,13 +23,13 @@ jobs:
     - stage: lint
       script: ng lint
     - stage: build
-      if: branch != master
+      if: env(TRAVIS_PULL_REQUEST) = "true"
       script: npm run ng:build
     - stage: build
-      if: branch = master
+      if: env(TRAVIS_PULL_REQUEST) = "false" && branch = master
       script: npm run pack
     - stage: deploy
-      if: branch = master
+      if: env(TRAVIS_PULL_REQUEST) = "true" && branch = master
       deploy:
         provider: releases
         api_key: $GITHUB_TOKEN
