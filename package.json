@@ -1,7 +1,7 @@
 {
     "name": "octodash",
     "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "Apache 2.0",
     "author": {
         "name": "Timon Gaebelein",
@@ -31,13 +31,15 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
-                "target": "deb",
-                "arch": [
-                    "armv7l",
-                    "arm64"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "deb",
+                    "arch": [
+                        "armv7l",
+                        "arm64"
+                    ]
+                }
+            ],
             "category": "Utility"
         }
     },
