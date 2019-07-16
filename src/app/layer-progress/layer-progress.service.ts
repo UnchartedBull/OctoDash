@@ -3,6 +3,7 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { ConfigService } from '../config/config.service';
 import { share } from 'rxjs/operators';
+import { OctoprintLayerProgressAPI } from '../octoprintAPI/layerProgressAPI';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +26,12 @@ export class LayerProgressService {
             this.httpRequest.unsubscribe();
           }
           this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'plugin/DisplayLayerProgress', httpHeaders).subscribe(
-            (data: JSON) => {
-              let fanSpeed =
-                observer.next({
-                  current: data['layer']['current'] === '-' ? 0 : data['layer']['current'],
-                  total: data['layer']['total'] === '-' ? 0 : data['layer']['total'],
-                  fanSpeed: data['fanSpeed'] === '-' ? 0 : data['fanSpeed'] === 'Off' ? 0 : data['fanSpeed'].replace('%', '')
-                })
+            (data: OctoprintLayerProgressAPI) => {
+              observer.next({
+                current: data.layer.current === '-' ? 0 : data.layer.current,
+                total: data.layer.total === '-' ? 0 : data.layer.total,
+                fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
+              });
             }, (error: HttpErrorResponse) => {
               console.error('Can\'t retrieve layer progress! ' + error.message);
             });
