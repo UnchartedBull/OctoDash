@@ -14,8 +14,8 @@ make_version() {
   echo "commit message: "$COMMIT
   echo "will execute npm version "$VERSION_BUMP
   npm version $VERSION_BUMP -m "bump version to %s [skip ci]"
-  ls $TRAVIS_BUILD_DIR
-  ls $TRAVIS_BUILD_DIR/package
+  ls
+  ls package
   mv $TRAVIS_BUILD_DIR/package/*armv7l.deb $TRAVIS_BUILD_DIR/OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_armv7l.deb
   mv $TRAVIS_BUILD_DIR/package/*arm64.deb $TRAVIS_BUILD_DIR/OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_arm64.deb
 }
