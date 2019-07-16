@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from './printer-status.service';
-import { DisplayLayerProgressService, DisplayLayerProgressAPI } from '../display-layer-progress.service';
+import { LayerProgressService, DisplayLayerProgressAPI } from '../layer-progress/layer-progress.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
 
-  constructor(private printerStatusService: PrinterStatusService, private displayLayerProgressService: DisplayLayerProgressService) {
+  constructor(private printerStatusService: PrinterStatusService, private displayLayerProgressService: LayerProgressService) {
     this.printerStatus = {
       nozzle: {
         current: 0,
