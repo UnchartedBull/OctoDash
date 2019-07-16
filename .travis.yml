@@ -11,6 +11,8 @@ before_deploy:
   - git config --global push.default matching
   - git config credential.helper "store --file=.git/credentials"
   - echo "https://${GITHUB_API_KEY}:@github.com" > .git/credentials
+  - ls $TRAVIS_BUILD_DIR
+  - ls $TRAVIS_BUILD_DIR/package
   - mv $TRAVIS_BUILD_DIR/package/*armv7l.deb $TRAVIS_BUILD_DIR/OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_armv7l.deb
   - mv $TRAVIS_BUILD_DIR/package/*arm64.deb $TRAVIS_BUILD_DIR/OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_arm64.deb
 
