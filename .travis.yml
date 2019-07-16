@@ -5,6 +5,12 @@ language: node_js
 node_js:
   - "10"
 
+before_deploy:
+  - git config --global user.email "timon.gaebelein@icloud.com"
+  - git config --global user.name "UnchartedBull"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+
 cache:
   directories:
     - ./node_modules
@@ -17,8 +23,21 @@ jobs:
     - stage: lint
       script: ng lint
     - stage: build
-      if: branch = master
-      script: npm run pack
-    - stage: build
       if: branch != master
       script: npm run ng:build
+    - stage: build
+      if: branch = master
+      script: npm run pack
+    - stage: deploy
+      if: branch = master
+      deploy:
+        provider: releases
+        api_key: $GITHUB_TOKEN
+        skip_cleanup: true
+        draft: true
+        file_glob: true
+        file:
+          - "**/package/*_arm64.deb"
+          - "**/package/*_arm7vl.deb"
+          - "**/package/*.dmg"
+          - "**/package/*.exe"
