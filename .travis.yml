@@ -8,8 +8,9 @@ node_js:
 before_deploy:
   - git config --global user.email "timon.gaebelein@icloud.com"
   - git config --global user.name "UnchartedBull"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
+  - git config --global push.default matching
+  - git config credential.helper "store --file=.git/credentials"
+  - echo "https://${GITHUB_API_KEY}:@github.com" > .git/credentials
 
 cache:
   directories:
@@ -21,15 +22,26 @@ install:
 jobs:
   include:
     - stage: lint
+      name: "Linting Angular Application ..."
       script: ng lint
     - stage: build
       if: type = pull_request
+      name: "Building Angular Application ..."
       script: npm run ng:build
     - stage: build
       if: type = push
+      name: "Packaging Electron App ..."
       script: npm run pack
     - stage: deploy
       if: type = push
+      name: "Deploying the GitHub Releases ..."
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: .travis/bump_version.sh
+        on:
+          branch: master
+          tags: false
       deploy:
         provider: releases
         api_key: $GITHUB_TOKEN
