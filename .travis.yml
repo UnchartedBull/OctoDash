@@ -9,14 +9,16 @@ cache:
   directories:
     - ./node_modules
 
+install:
+  - npm install
+
 jobs:
   include:
-    - stage: install
-      script: npm install
     - stage: lint
       script: ng lint
     - stage: build
+      if: branch = master
+      script: npm run pack
+    - stage: build
+      if: branch != master
       script: npm run ng:build
-    -
-      script: npm run pack:no-build
-
