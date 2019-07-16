@@ -31,11 +31,11 @@ jobs:
       name: "Building Angular Application ..."
       script: npm run ng:build
     - stage: build
-      if: type = push
+      if: type = push AND branch = master
       name: "Packaging Electron App ..."
       script: npm run pack
     - stage: deploy
-      if: type = push
+      if: type = push AND branch = master
       name: "Deploying the GitHub Releases ..."
       deploy:
         provider: script
