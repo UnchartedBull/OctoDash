@@ -1,0 +1,22 @@
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - "10"
+
+cache:
+  directories:
+    - ./node_modules
+
+jobs:
+  include:
+    - stage: install
+      script: npm install
+    - stage: lint
+      script: ng lint
+    - stage: build
+      script: npm run ng:build
+    -
+      script: npm run pack:no-build
+
