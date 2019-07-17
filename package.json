@@ -80,7 +80,7 @@
         "@angular/compiler-cli": "^8.1.1",
         "@angular/language-service": "~8.0.0",
         "@types/ajv": "^1.0.0",
-        "@types/node": "~8.9.4",
+        "@types/node": "~12.6.6",
         "codelyzer": "^5.0.0",
         "electron": "^5.0.6",
         "electron-builder": "^21.0.15",
