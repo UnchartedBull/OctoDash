@@ -5,9 +5,6 @@ language: node_js
 node_js:
   - "10"
 
-before_deploy:
-  - export TRAVIS_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-
 cache:
   directories:
     - ./node_modules
@@ -33,26 +30,35 @@ jobs:
       if: type = push AND branch = master
       name: "Deploying GitHub Releases ..."
       script:
-        - git config --global user.email "timon.gaebelein@icloud.com"
-        - git config --global user.name "UnchartedBull"
-        - git config --global push.default current
-        - touch .git/credentials
-        - echo "https://UnchartedBull:${GITHUB_TOKEN}@github.com" > .git/credentials
-        - git config credential.helper "store --file=.git/credentials"
-        - git checkout -- .
-        - COMMIT=$(git log -1 --pretty=%B)
-        - VERSION_BUMP="patch"
-        - if [ $COMMIT == *"version:major"* ]; then VERSION_BUMP="major"; fi;
-        - if [ $COMMIT == *"version:minor"* ]; then VERSION_BUMP="minor"; fi;
-        - echo "received commit message - "$COMMIT,
-        - echo "bumping version ("$VERSION_BUMP")"
-        - npm version $VERSION_BUMP -m "bump version to %s [skip ci]"
-        - git push origin HEAD:$TRAVIS_BRANCH
-        - git push --tags
-        - npm run pack
-        - mv package/*armv7l.deb OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_armv7l.deb
-        - mv package/*arm64.deb OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_arm64.deb
-        - export TRAVIS_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+        - |
+          git config --global user.email "timon.gaebelein@icloud.com"
+          git config --global user.name "UnchartedBull"
+          git config --global push.default current
+          touch .git/credentials
+          echo "https://UnchartedBull:${GITHUB_TOKEN}@github.com" > .git/credentials
+          git config credential.helper "store --file=.git/credentials"
+          git checkout -- .
+        - gem install github_changelog_generator
+        - |
+          COMMIT=$(git log -1 --pretty=%B)
+          VERSION_BUMP="patch"
+        - |
+          if [ $COMMIT == *"[version major]"* ]; then VERSION_BUMP="major"; fi;
+          if [ $COMMIT == *"[version minor]"* ]; then VERSION_BUMP="minor"; fi;
+        - |
+          if [ $COMMIT == *"[release]"* ]; then
+            echo "received commit message - "$COMMIT
+            echo "bumping version ("$VERSION_BUMP")"
+            npm version $VERSION_BUMP -m "[skip ci] bump package version to v%s"
+            github_changelog_generator -t $GITHUB_TOKEN
+            git add -A CHANGELOG.md
+            git commit --amend --no-edit
+            git push origin HEAD:$TRAVIS_BRANCH
+            npm run pack
+            mv package/*armv7l.deb OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_armv7l.deb
+            mv package/*arm64.deb OctoDash_$(git describe --tags $(git rev-list --tags --max-count=1))_arm64.deb
+            export TRAVIS_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          fi;
       deploy:
         provider: releases
         api_key: $GITHUB_TOKEN
