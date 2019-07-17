@@ -9,5 +9,3 @@ update_configs:
   package_manager: javascript
   update_schedule: daily
   default_labels: ["dependencies"]
-  commit_message:
-    prefix: "[skip ci] "
