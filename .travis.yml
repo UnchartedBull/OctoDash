@@ -15,20 +15,20 @@ install:
 jobs:
   include:
     - stage: lint
-      if: type = pull_request OR type = push AND branch = master
-      name: "Linting Angular Application ..."
+      if: branch = master
+      name: "Linting Application ..."
       script: ng lint
     - stage: build
       if: type = push AND branch != master
-      name: "Building Angular Application ..."
+      name: "Building Application ..."
       script: npm run ng:build
     - stage: build
       if: type = push AND branch = master
-      name: "Building Electron Application ..."
+      name: "Building Application ..."
       script: npm run pack
     - stage: deploy
       if: type = push AND branch = master
-      name: "Deploying GitHub Releases ..."
+      name: "Deploying..."
       script:
         - |
           git config --global user.email "timon.gaebelein@icloud.com"
