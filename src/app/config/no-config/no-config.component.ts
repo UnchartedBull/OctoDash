@@ -11,21 +11,46 @@ export class NoConfigComponent implements OnInit {
   page = 0;
   totalPages = 4;
 
-  printerName = '';
-  filamentDiameter = 1.75;
-  filamentDensity = 1.25;
-  octoprintURL = 'http://localhost:5000';
-  accessToken = '';
-  touchscreen = true;
-
+  configUpdate: boolean;
   config: Config;
   configErrors: string[];
   configValid: boolean;
   configSaved: string;
+
   octoprintConnection: boolean;
   octoprintConnectionError: string;
 
-  constructor(private configService: ConfigService, private http: HttpClient) { }
+  constructor(private configService: ConfigService, private http: HttpClient) {
+    this.configUpdate = this.configService.update;
+    if (this.configUpdate) {
+      this.config = configService.getRemoteConfig();
+      this.config.octodash = {
+        touchscreen: this.config.touchscreen,
+        temperatureSensor: null
+      };
+      delete this.config.touchscreen;
+      console.log(this.config);
+    } else {
+      this.config = {
+        octoprint: {
+          url: 'http://localhost:5000',
+          accessToken: '',
+          apiInterval: 1500
+        },
+        printer: {
+          name: ''
+        },
+        filament: {
+          thickness: 1.75,
+          density: 1.25
+        },
+        octodash: {
+          touchscreen: true,
+          temperatureSensor: null
+        }
+      };
+    }
+  }
 
   ngOnInit() {
     this.changeProgress();
@@ -53,25 +78,7 @@ export class NoConfigComponent implements OnInit {
   createConfig() {
     this.configErrors = [];
     this.octoprintConnectionError = null;
-    this.config = {
-      octoprint: {
-        url: this.octoprintURL + '/api/',
-        accessToken: this.accessToken,
-        apiInterval: 1500
-      },
-      printer: {
-        name: this.printerName
-      },
-      filament: {
-        density: this.filamentDensity,
-        thickness: this.filamentDiameter
-      },
-      octodash: {
-        touchscreen: this.touchscreen,
-        // FIXME
-        temperatureSensor: false
-      }
-    };
+    this.config.octoprint.url = this.config.octoprint.url + '/api/';
     this.validateConfig();
     return true;
   }

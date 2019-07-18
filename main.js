@@ -56,7 +56,6 @@ function createWindow() {
 }
 
 function queryTemperatureSensor() {
-    console.log("Sending Temperature")
     window.webContents.send("temperatureReading", {
         temperature: 21.4,
         humidity: 54.0

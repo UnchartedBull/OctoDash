@@ -18,6 +18,7 @@ export class ConfigService {
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
   public valid: boolean;
+  public update = false;
 
   constructor(private http: HttpClient) {
     const ajv = new Ajv({ allErrors: true });
@@ -34,6 +35,10 @@ export class ConfigService {
         this.valid = this.validate();
       });
     }
+  }
+
+  public getRemoteConfig(): Config {
+    return this.store.get('config');
   }
 
   public validate(): boolean {
@@ -86,6 +91,8 @@ export interface Config {
   printer: Printer;
   filament: Filament;
   octodash: OctoDash;
+  // DEPRECATED, will be removed with the next config change
+  touchscreen?: boolean;
 }
 
 interface OctoDash {
@@ -94,8 +101,8 @@ interface OctoDash {
 }
 
 interface TemperatureSensor {
-  type: string;
-  gpio: string;
+  type: number;
+  gpio: number;
 }
 
 interface Octoprint {
@@ -115,13 +122,15 @@ interface Filament {
 
 const schema = {
   definitions: {},
+  $schema: 'http://json-schema.org/draft-07/schema#',
   $id: 'http://example.com/root.json',
   type: 'object',
   title: 'The Root Schema',
   required: [
     'octoprint',
     'printer',
-    'filament'
+    'filament',
+    'octodash'
   ],
   properties: {
     octoprint: {
@@ -138,18 +147,18 @@ const schema = {
           $id: '#/properties/octoprint/properties/url',
           type: 'string',
           title: 'The Url Schema',
-          default: 'http://localhost:5000/api/'
+          pattern: '^(.*)$'
         },
         accessToken: {
           $id: '#/properties/octoprint/properties/accessToken',
           type: 'string',
-          title: 'The Accesstoken Schema'
+          title: 'The Accesstoken Schema',
+          pattern: '^(.*)$'
         },
         apiInterval: {
           $id: '#/properties/octoprint/properties/apiInterval',
           type: 'integer',
-          title: 'The Apiinterval Schema',
-          default: 2000
+          title: 'The Apiinterval Schema'
         }
       }
     },
@@ -164,7 +173,8 @@ const schema = {
         name: {
           $id: '#/properties/printer/properties/name',
           type: 'string',
-          title: 'The Name Schema'
+          title: 'The Name Schema',
+          pattern: '^(.*)$'
         }
       }
     },
@@ -186,6 +196,43 @@ const schema = {
           $id: '#/properties/filament/properties/density',
           type: 'number',
           title: 'The Density Schema'
+        }
+      }
+    },
+    octodash: {
+      $id: '#/properties/octodash',
+      type: 'object',
+      title: 'The Octodash Schema',
+      required: [
+        'touchscreen',
+        'temperatureSensor'
+      ],
+      properties: {
+        touchscreen: {
+          $id: '#/properties/octodash/properties/touchscreen',
+          type: 'boolean',
+          title: 'The Touchscreen Schema'
+        },
+        temperatureSensor: {
+          $id: '#/properties/octodash/properties/temperatureSensor',
+          type: ['object', 'null'],
+          title: 'The Temperaturesensor Schema',
+          required: [
+            'type',
+            'gpio'
+          ],
+          properties: {
+            type: {
+              $id: '#/properties/octodash/properties/temperatureSensor/properties/type',
+              type: 'integer',
+              title: 'The Type Schema'
+            },
+            gpio: {
+              $id: '#/properties/octodash/properties/temperatureSensor/properties/gpio',
+              type: 'integer',
+              title: 'The Gpio Schema'
+            }
+          }
         }
       }
     }
