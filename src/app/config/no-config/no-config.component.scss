@@ -159,6 +159,40 @@
     font-weight: 600;
 }
 
+.no-config__gpio {
+    margin-top: 4vh;
+}
+
+.no-config__3-temperature {
+    display: block;
+
+    & label {
+        margin-left: 4vw;
+    }
+
+    & select {
+        background-color: transparent;
+        width: 28vw;
+        padding: 2.3vh 1.5vw;
+        border: 2px solid #dcdde1;
+        border-radius: 4vh;
+        margin-left: 2vw;
+        margin-top: 4vh;
+    }
+
+    .no-config__select-wrapper {
+        position: relative;
+
+        &::before {
+            content: "\25BF";
+            position: absolute;
+            right: 2vw;
+            top: 0;
+            pointer-events: none;
+        }
+    }
+}
+
 .no-config__4-check-wrapper {
     width: 100%;
     text-align: center;

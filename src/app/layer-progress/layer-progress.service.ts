@@ -3,7 +3,7 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { ConfigService } from '../config/config.service';
 import { share } from 'rxjs/operators';
-import { OctoprintLayerProgressAPI } from '../octoprintAPI/layerProgressAPI';
+import { OctoprintLayerProgressAPI } from '../octoprint-api/layerProgressAPI';
 
 @Injectable({
   providedIn: 'root'

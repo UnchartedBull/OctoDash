@@ -12,6 +12,12 @@
             "thickness": 0,
             "density": 0
         },
-        "touchscreen": true
+        "octodash": {
+            "touchscreen": true,
+            "temperatureSensor": {
+                "type": 22,
+                "gpio": 0
+            }
+        }
     }
 }

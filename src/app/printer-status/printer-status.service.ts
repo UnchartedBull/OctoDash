@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { ConfigService } from '../config/config.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { OctoprintPrinterStatusAPI } from '../octoprintAPI/printerStatusAPI';
+import { OctoprintPrinterStatusAPI } from '../octoprint-api/printerStatusAPI';
 
 @Injectable({
   providedIn: 'root'

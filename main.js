@@ -4,14 +4,23 @@ const {
 } = require("electron");
 const url = require('url')
 const path = require('path')
+const sensor = require('node-dht-sensor')
+const Store = require('electron-store');
+const store = new Store();
+
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big-screen')
 
 let window;
+let config;
 
 function createWindow() {
+    config = store.get("config");
+    store.onDidChange("config", (newValue, _) => {
+        config = newValue
+    })
     const {
         screen
     } = require('electron')
@@ -25,6 +34,8 @@ function createWindow() {
             nodeIntegration: true
         }
     })
+
+    config = store.get("config")
 
     if (dev) {
         require('electron-reload')(__dirname, {
@@ -41,9 +52,41 @@ function createWindow() {
 
     if (dev) window.webContents.openDevTools();
 
+    if (config && config.octodash && config.octodash.temperatureSensor !== null) {
+        queryTemperatureSensor();
+    }
+
     window.on('closed', () => {
         window = null;
     });
+}
+
+function queryTemperatureSensor() {
+    if (process.platform !== "linux") {
+        sensor.initialize({
+            test: {
+                fake: {
+                    temperature: 23.4,
+                    humidity: 54.0
+                }
+            }
+        })
+    }
+    sensor.read(config.octodash.temperatureSensor.type, config.octodash.temperatureSensor.gpio, (err, temperature, humidity) => {
+        if (!err) {
+            window.webContents.send("temperatureReading", {
+                temperature: temperature.toFixed(1),
+                humidity: humidity.toFixed(1)
+            });
+        } else {
+            window.webContents.send("temperatureReading", {
+                temperature: 0.0,
+                humidity: 0.0
+            });
+            console.log(err);
+        }
+        setTimeout(queryTemperatureSensor, config.octoprint.apiInterval)
+    })
 }
 
 app.on('ready', createWindow)

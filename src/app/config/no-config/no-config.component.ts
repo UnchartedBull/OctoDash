@@ -11,21 +11,53 @@ export class NoConfigComponent implements OnInit {
   page = 0;
   totalPages = 4;
 
-  printerName = '';
-  filamentDiameter = 1.75;
-  filamentDensity = 1.25;
-  octoprintURL = 'http://localhost:5000';
-  accessToken = '';
-  touchscreen = true;
-
+  configUpdate: boolean;
   config: Config;
   configErrors: string[];
   configValid: boolean;
   configSaved: string;
+
   octoprintConnection: boolean;
   octoprintConnectionError: string;
 
-  constructor(private configService: ConfigService, private http: HttpClient) { }
+  constructor(private configService: ConfigService, private http: HttpClient) {
+    this.configUpdate = this.configService.update;
+    if (this.configUpdate) {
+      this.config = configService.getRemoteConfig();
+      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+      // Insert automated fix from here
+      this.config.octodash = {
+        touchscreen: this.config.touchscreen,
+        temperatureSensor: {
+          type: 0,
+          gpio: null
+        }
+      };
+      delete this.config.touchscreen;
+    } else {
+      this.config = {
+        octoprint: {
+          url: 'http://localhost:5000',
+          accessToken: '',
+          apiInterval: 1500
+        },
+        printer: {
+          name: ''
+        },
+        filament: {
+          thickness: 1.75,
+          density: 1.25
+        },
+        octodash: {
+          touchscreen: true,
+          temperatureSensor: {
+            type: 0,
+            gpio: 0
+          }
+        }
+      };
+    }
+  }
 
   ngOnInit() {
     this.changeProgress();
@@ -53,21 +85,10 @@ export class NoConfigComponent implements OnInit {
   createConfig() {
     this.configErrors = [];
     this.octoprintConnectionError = null;
-    this.config = {
-      octoprint: {
-        url: this.octoprintURL + '/api/',
-        accessToken: this.accessToken,
-        apiInterval: 1500
-      },
-      printer: {
-        name: this.printerName
-      },
-      filament: {
-        density: this.filamentDensity,
-        thickness: this.filamentDiameter
-      },
-      touchscreen: this.touchscreen
-    };
+    this.config.octoprint.url = this.config.octoprint.url + '/api/';
+    if (this.config.octodash.temperatureSensor.type === 0) {
+      this.config.octodash.temperatureSensor = null;
+    }
     this.validateConfig();
     return true;
   }
@@ -98,6 +119,13 @@ export class NoConfigComponent implements OnInit {
   }
 
   decreasePage() {
+    if (this.page === 4) {
+      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+      this.config.octodash.temperatureSensor = {
+        type: 0,
+        gpio: 0
+      };
+    }
     this.page -= 1;
     this.changeProgress();
   }
@@ -105,5 +133,4 @@ export class NoConfigComponent implements OnInit {
   changeProgress() {
     document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
   }
-
 }

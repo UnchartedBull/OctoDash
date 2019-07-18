@@ -3,7 +3,7 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { share } from 'rxjs/operators';
-import { OctoprintJobAPI } from '../octoprintAPI/jobAPI';
+import { OctoprintJobAPI } from '../octoprint-api/jobAPI';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,6 @@ export class JobStatusService {
           this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'job', httpHeaders).subscribe(
             (data: OctoprintJobAPI) => {
               let job: Job = null;
-              console.log(data);
               if (data.state === 'Printing') {
                 job = {
                   filename: data.job.file.display.replace('.gcode', ''),
