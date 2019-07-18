@@ -1,7 +1,7 @@
 # OctoDash
 
 ![build status](https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master)  
-OctoDash is a simple, but beautiful dashboard for Octoprint. Please read the instructions carefully!
+OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@ You need to install the DisplayLayerProgress Plugin by OllisGit to enable the fu
 *Note: This tutorial is for the Raspberry Pi only (2 and higher). If you have running OctoPrint on something different please adjust the links*
 
 - Download the latest release *Check for newer version (Releases)*  
-`wget -O curl https://github.com/UnchartedBull/OctoDash/releases/download/v1.0.0/octodash_1.0.0_armv7l.deb octodash.deb   `
+`wget -O https://github.com/UnchartedBull/OctoDash/releases/download/v1.0.0/octodash_1.0.0_armv7l.deb octodash.deb   `
 - Install the app  
 `sudo dpkg -i octodash.deb`
 - If you get an error while installing you may need to install the missing dependencies.  
