@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { PrinterStatusService, PrinterStatusAPI } from '../printer-status/printer-status.service';
 import { Subscription } from 'rxjs';
-import { IpcRenderer, IpcMessageEvent } from 'electron';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -14,8 +13,7 @@ export class BottomBarComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printer: Printer;
   public enclosureTemperature: number;
-  private ipc: IpcRenderer | undefined;
-
+  private ipc: any;
 
   constructor(private printerStatusService: PrinterStatusService, private configService: ConfigService) {
     if (window.require && configService.config.octodash.temperatureSensor !== null) {
