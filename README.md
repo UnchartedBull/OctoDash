@@ -1,28 +1,51 @@
 # OctoDash
 
-OctoDash is a simple, but beautiful dashboard for Octoprint.
+![build status](https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master)  
+OctoDash is a simple, but beautiful dashboard for Octoprint. Please read the instructions carefully!
+
+## Table of Contents
+
+- [OctoDash](#OctoDash)
+  - [Table of Contents](#Table-of-Contents)
+  - [Installation](#Installation)
+    - [Electron App (recommended)](#Electron-App-recommended)
+      - [Creating Config manually](#Creating-Config-manually)
+      - [Start on boot](#Start-on-boot)
+    - [Website](#Website)
+  - [Supported Devices](#Supported-Devices)
+  - [Screenshots](#Screenshots)
+  - [Troubleshooting](#Troubleshooting)
+  - [Bugs and more](#Bugs-and-more)
+  - [Contributing](#Contributing)
+  - [License](#License)
+  - [Special Thanks](#Special-Thanks)
 
 ## Installation
 
 You need to install the DisplayLayerProgress Plugin by OllisGit to enable the full functionality of OctoDash. The API is currently not in the final plugin, so please install the plugin with the following link: https://github.com/UnchartedBull/OctoPrint-DisplayLayerProgress/archive/master.zip.
 
-### Electron (recommended)
+### Electron App (recommended)
 
-- Download the latest release for your architecture (for Raspberry Pi use armv7l)
-`insert download command here`
-- Install the app
-`sudo dpkg -i name`
-- If you get an error while installing install all missing dependencies and reinstall OctoDash.
-`sudo apt install -f && sudo dpkg -i name`
+*Note: This tutorial is for the Raspberry Pi only (2 and higher). If you have running OctoPrint on something different please adjust the links*
+
+- Download the latest release *Check for newer version (Releases)*  
+`wget -O curl https://github.com/UnchartedBull/OctoDash/releases/download/v1.0.0/octodash_1.0.0_armv7l.deb octodash.deb   `
+- Install the app  
+`sudo dpkg -i octodash.deb`
+- If you get an error while installing you may need to install the missing dependencies.  
+`sudo apt install -f && sudo dpkg -i octodash.deb`
+
+#### Creating Config manually
+If you don't want to use the Config Wizard you can also create the config manually. Just copy `sample.config.json` and adjust it according to your setup. Copy the file to `~/.config/octodash/config.json` (for Raspbian). For other OS please refer to the [Electron Docs](https://electronjs.org/docs/api/app#appgetpathname).
 
 #### Start on boot
 This is a superminimal install to just display OctoDash on Raspbian LITE. Good thing is, that it keeps the load and the Pi quite low and improves start-up time. If you use another window manager adjust your  files according to the Documentation.
 
-- Enable pi Console Autologin via
+- Enable pi Console Autologin via  
 `sudo raspi-config`
-- Install xorg + ratpoison
+- Install xorg + ratpoison  
 `sudo apt install xserver-xorg --no-install-recommends ratpoison x11-xserver-utils xinit`
-- Create the .xinitrc file
+- Create the .xinitrc file  
 `nano ~/.xinitrc`
 - Add the following contents:
 ```
@@ -35,9 +58,10 @@ This is a superminimal install to just display OctoDash on Raspbian LITE. Good t
     ratpoison&
     octodash
 ```
-- make the file executable
+- make the file executable  
 `sudo chmod +x .xinitrc`
-- make xinit autostart on boot `nano ~/.bashrc`
+- make xinit autostart on boot  
+- `nano ~/.bashrc`
 - add the following at the very bottom:
 ```
 if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
@@ -49,15 +73,12 @@ fi
 
 If you get the `Cannot open virtual console 2 (Permission denied)` error run `sudo chmod ug+s /usr/lib/xorg/Xorg` and reboot.
 
-#### Creating config manually
-If you don't want to use the Config Wizard you can also create the config manually. Just copy `sample.config.json` and adjust it according to your setup. Copy the file to `~/.config/octodash/config.json` (for Raspbian). For other OS please refer to the [Electron Docs](https://electronjs.org/docs/api/app#appgetpathname).
-
 
 ### Website
 
 This option does not allow you to change your config via the UI and the styling may be a little off for you, due to your browser engine. It may improve performance slightly if you use a very lightweight browser.
 
-- Clone the repository - `git clone https://github.com/TimonGaebelein/OctoprintDash && cd OctoprintDash`
+- Clone the repository - `git clone https://github.com/UnchartedBull/OctoDash && cd OctoDash`
 - Install all the dependencies - `npm install`
 - Adjust `src/assets/config.json` accordingly to your installation
 - Build the app - `ng build --prod`
