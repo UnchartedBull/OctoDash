@@ -17,6 +17,10 @@ let window;
 let config;
 
 function createWindow() {
+    config = store.get("config");
+    store.onDidChange("config", (newValue, _) => {
+        config = newValue
+    })
     const {
         screen
     } = require('electron')
@@ -48,7 +52,9 @@ function createWindow() {
 
     if (dev) window.webContents.openDevTools();
 
-    queryTemperatureSensor();
+    if (config && config.octodash && config.octodash.temperatureSensor !== null) {
+        queryTemperatureSensor();
+    }
 
     window.on('closed', () => {
         window = null;
@@ -66,7 +72,7 @@ function queryTemperatureSensor() {
             }
         })
     }
-    sensor.read(22, 26, (err, temperature, humidity) => {
+    sensor.read(config.octodash.temperatureSensor.type, config.octodash.temperatureSensor.gpio, (err, temperature, humidity) => {
         if (!err) {
             window.webContents.send("temperatureReading", {
                 temperature: temperature.toFixed(1),
@@ -79,7 +85,7 @@ function queryTemperatureSensor() {
             });
             console.log(err);
         }
-        setTimeout(queryTemperatureSensor, 1500)
+        setTimeout(queryTemperatureSensor, config.octoprint.apiInterval)
     })
 }
 
