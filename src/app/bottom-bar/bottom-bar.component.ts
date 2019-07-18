@@ -18,7 +18,7 @@ export class BottomBarComponent implements OnInit, OnDestroy {
 
 
   constructor(private printerStatusService: PrinterStatusService, private configService: ConfigService) {
-    if (window.require) {
+    if (window.require && configService.config.octodash.temperatureSensor !== null) {
       try {
         this.ipc = window.require('electron').ipcRenderer;
         this.ipc.on('temperatureReading', ({ }, temperatureReading: TemperatureReading) => {

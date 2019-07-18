@@ -14,7 +14,10 @@
         },
         "octodash": {
             "touchscreen": true,
-            "temperatureSensor": null
+            "temperatureSensor": {
+                "type": 22,
+                "gpio": 0
+            }
         }
     }
 }

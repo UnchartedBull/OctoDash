@@ -56,23 +56,31 @@ function createWindow() {
 }
 
 function queryTemperatureSensor() {
-    window.webContents.send("temperatureReading", {
-        temperature: 21.4,
-        humidity: 54.0
-    });
-    setTimeout(queryTemperatureSensor, 1500)
-
-    // sensor.read(22, 26, (err, temperature, humidity) => {
-    //     if (!err) {
-    //         console.log("no-err");
-    //         ipcMain.emit("temperatureReading", "tastasttsta");
-    //     } else {
-    //         window.webContents.send("temperatureReading", {
-    //             msg: "Hello There"
-    //         });
-    //         console.log(err);
-    //     }
-    // })
+    if (process.platform !== "linux") {
+        sensor.initialize({
+            test: {
+                fake: {
+                    temperature: 23.4,
+                    humidity: 54.0
+                }
+            }
+        })
+    }
+    sensor.read(22, 26, (err, temperature, humidity) => {
+        if (!err) {
+            window.webContents.send("temperatureReading", {
+                temperature: temperature.toFixed(1),
+                humidity: humidity.toFixed(1)
+            });
+        } else {
+            window.webContents.send("temperatureReading", {
+                temperature: 0.0,
+                humidity: 0.0
+            });
+            console.log(err);
+        }
+        setTimeout(queryTemperatureSensor, 1500)
+    })
 }
 
 app.on('ready', createWindow)
