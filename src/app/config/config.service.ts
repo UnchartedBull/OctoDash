@@ -85,7 +85,17 @@ export interface Config {
   octoprint: Octoprint;
   printer: Printer;
   filament: Filament;
+  octodash: OctoDash;
+}
+
+interface OctoDash {
   touchscreen: boolean;
+  temperatureSensor: TemperatureSensor | false;
+}
+
+interface TemperatureSensor {
+  type: string;
+  gpio: string;
 }
 
 interface Octoprint {

@@ -32,13 +32,15 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
-                "target": "deb",
-                "arch": [
-                    "armv7l",
-                    "arm64"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "deb",
+                    "arch": [
+                        "armv7l",
+                        "arm64"
+                    ]
+                }
+            ],
             "category": "Utility"
         }
     },
@@ -70,6 +72,7 @@
         "ajv": "^6.10.2",
         "angular-svg-round-progressbar": "^3.0.1",
         "electron-store": "^4.0.0",
+        "node-dht-sensor": "^0.3.0",
         "rxjs": "~6.5.2",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"

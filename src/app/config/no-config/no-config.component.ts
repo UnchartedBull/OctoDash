@@ -66,7 +66,11 @@ export class NoConfigComponent implements OnInit {
         density: this.filamentDensity,
         thickness: this.filamentDiameter
       },
-      touchscreen: this.touchscreen
+      octodash: {
+        touchscreen: this.touchscreen,
+        // FIXME
+        temperatureSensor: false
+      }
     };
     this.validateConfig();
     return true;
