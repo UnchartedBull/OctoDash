@@ -28,7 +28,6 @@ export class JobStatusService {
           this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'job', httpHeaders).subscribe(
             (data: OctoprintJobAPI) => {
               let job: Job = null;
-              console.log(data);
               if (data.state === 'Printing') {
                 job = {
                   filename: data.job.file.display.replace('.gcode', ''),

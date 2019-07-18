@@ -97,7 +97,7 @@ export interface Config {
 
 interface OctoDash {
   touchscreen: boolean;
-  temperatureSensor: TemperatureSensor | false;
+  temperatureSensor: TemperatureSensor | null;
 }
 
 interface TemperatureSensor {

@@ -24,12 +24,16 @@ export class NoConfigComponent implements OnInit {
     this.configUpdate = this.configService.update;
     if (this.configUpdate) {
       this.config = configService.getRemoteConfig();
+      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+      // Insert automated fix from here
       this.config.octodash = {
         touchscreen: this.config.touchscreen,
-        temperatureSensor: null
+        temperatureSensor: {
+          type: 0,
+          gpio: null
+        }
       };
       delete this.config.touchscreen;
-      console.log(this.config);
     } else {
       this.config = {
         octoprint: {
@@ -46,7 +50,10 @@ export class NoConfigComponent implements OnInit {
         },
         octodash: {
           touchscreen: true,
-          temperatureSensor: null
+          temperatureSensor: {
+            type: 0,
+            gpio: 0
+          }
         }
       };
     }
@@ -79,6 +86,9 @@ export class NoConfigComponent implements OnInit {
     this.configErrors = [];
     this.octoprintConnectionError = null;
     this.config.octoprint.url = this.config.octoprint.url + '/api/';
+    if (this.config.octodash.temperatureSensor.type === 0) {
+      this.config.octodash.temperatureSensor = null;
+    }
     this.validateConfig();
     return true;
   }
@@ -109,6 +119,13 @@ export class NoConfigComponent implements OnInit {
   }
 
   decreasePage() {
+    if (this.page === 4) {
+      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+      this.config.octodash.temperatureSensor = {
+        type: 0,
+        gpio: 0
+      };
+    }
     this.page -= 1;
     this.changeProgress();
   }
@@ -116,5 +133,4 @@ export class NoConfigComponent implements OnInit {
   changeProgress() {
     document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
   }
-
 }
