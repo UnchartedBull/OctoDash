@@ -1,0 +1,33 @@
+.print-control__container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity .7s ease-in-out;
+}
+
+.print-control__hide {
+    opacity: 0;
+}
+
+.print-control__action {
+    width: 22vw;
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    font-size: 5vw;
+    padding: 8vw 4vw;
+    z-index: 15;
+
+    &:first-of-type {
+        margin-left: 5vw;
+    }
+
+    &:last-of-type {
+        margin-right: 5vw;
+    }
+}

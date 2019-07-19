@@ -13,6 +13,7 @@ import { ConfigService } from './config/config.service';
 import { LayerProgressComponent } from './layer-progress/layer-progress.component';
 import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
 import { NoConfigComponent } from './config/no-config/no-config.component';
+import { PrintControlComponent } from './print-control/print-control.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
     JobStatusComponent,
     LayerProgressComponent,
     InvalidConfigComponent,
-    NoConfigComponent
+    NoConfigComponent,
+    PrintControlComponent
   ],
   imports: [
     BrowserModule,

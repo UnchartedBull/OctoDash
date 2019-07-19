@@ -1,0 +1,15 @@
+<div class="print-control__container" (click)="showControls = !showControls"
+    [ngClass]="{'print-control__hide': !showControls}">
+    <div class="print-control__action" (click)="cancel($event)">
+        <img src="assets/cancel.svg">
+        cancel
+    </div>
+    <div class="print-control__action" (click)="pause($event)">
+        <img src="assets/pause.svg">
+        pause
+    </div>
+    <div class="print-control__action" (click)="adjust($event)">
+        <img src="assets/adjust.svg">
+        adjust
+    </div>
+</div>

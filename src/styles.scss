@@ -10,9 +10,10 @@
 // Specific for the Raspberry Pi with SPI Display (at least in my case, there is always the 6px margin)
 html,
 body,
-app-root {
+.app-root {
     width: 100%;
     height: 100%;
+    padding: 0;
 }
 
 body {
