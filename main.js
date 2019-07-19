@@ -85,7 +85,7 @@ function queryTemperatureSensor() {
             });
             console.log(err);
         }
-        setTimeout(queryTemperatureSensor, config.octoprint.apiInterval)
+        setTimeout(queryTemperatureSensor, 10000)
     })
 }
 
