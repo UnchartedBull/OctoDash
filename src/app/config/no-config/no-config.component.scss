@@ -1,43 +1,9 @@
-.no-config__progress {
-    width: 100%;
-
-    & td {
-        width: 33.3%;
-    }
-}
-
-.no-config__back {
-    padding: 4vh 2vw;
-}
-
-.no-config__next {
-    padding: 4vh 2vw;
-    text-align: right;
-}
-
-.no-config__back-icon {
-    width: 6vw;
-    vertical-align: -5vh;
-    margin-right: 1.4vw;
-}
-
-.no-config__next-icon {
-    width: 6vw;
-    vertical-align: -5vh;
-    margin-left: 1.4vw;
-    margin-right: 1vw;
-}
-
 .no-config__text {
     display: block;
     text-align: center;
     margin-left: 2vh;
     margin-right: 3vh;
     font-size: 3.6vw;
-}
-
-.no-config__progress-td {
-    text-align: center;
 }
 
 .no-config__progress-bar-wrapper {
