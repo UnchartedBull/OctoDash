@@ -16,26 +16,22 @@ export class LayerProgressService {
 
   constructor(private configService: ConfigService, private errorService: ErrorService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(1000, this.configService.config.octoprint.apiInterval).subscribe(_ => {
-        if (this.configService.config) {
-          const httpHeaders = {
-            headers: new HttpHeaders({
-              'x-api-key': this.configService.config.octoprint.accessToken
-            })
-          };
+      timer(1000, this.configService.getAPIInterval()).subscribe(_ => {
+        if (this.configService.valid) {
           if (this.httpRequest) {
             this.httpRequest.unsubscribe();
           }
-          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'plugin/DisplayLayerProgress', httpHeaders).subscribe(
-            (data: OctoprintLayerProgressAPI) => {
-              observer.next({
-                current: data.layer.current === '-' ? 0 : data.layer.current,
-                total: data.layer.total === '-' ? 0 : data.layer.total,
-                fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
+          this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress'),
+            this.configService.getHTTPHeaders()).subscribe(
+              (data: OctoprintLayerProgressAPI) => {
+                observer.next({
+                  current: data.layer.current === '-' ? 0 : data.layer.current,
+                  total: data.layer.total === '-' ? 0 : data.layer.total,
+                  fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
+                });
+              }, (error: HttpErrorResponse) => {
+                this.errorService.setError('Can\'t retrieve layer progress!', error.message);
               });
-            }, (error: HttpErrorResponse) => {
-              this.errorService.setError('Can\'t retrieve layer progress!', error.message);
-            });
         }
       });
     }).pipe(share());

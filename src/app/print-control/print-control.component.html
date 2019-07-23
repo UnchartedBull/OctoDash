@@ -1,6 +1,7 @@
-<div class="print-control__container" (click)="toggleControls()" [ngClass]="{'print-control__hide': !showControls}">
-    <div *ngIf="view === controlView.MAIN">
-        <table class="top-bar">
+<div class="print-control__container" (click)="showControlOverlay($event)"
+    [ngClass]="{'print-control__hide': !showControls}">
+    <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
+        <table class="top-bar" (click)="hideControlOverlay($event)">
             <tr>
                 <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
             </tr>
@@ -18,16 +19,30 @@
             adjust
         </div>
     </div>
-    <div *ngIf="view === controlView.CANCEL">
-        <img src="assets/cancel.svg" class="print-control__cancel__icon">
+    <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
+        <img src="assets/cancel.svg" class="print-control__center_icon">
         <span class="print-control__cancel__confirm">
-            Cancel Print?
+            cancel print?
         </span>
         <div style="text-align: center">
-            <span class="print-control__cancel__action" (click)="cancelPrint()">Yes</span>
-            <span class="print-control__cancel__action" (click)="backToControlScreen($event)">No</span>
+            <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
+            <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
         </div>
     </div>
-    <div *ngIf="view === controlView.PAUSE"></div>
+    <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
+        <table class="top-bar" (click)="backToControlScreen($event)">
+            <tr>
+                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            </tr>
+        </table>
+        <img src="assets/pause.svg" class="print-control__center_icon print-control__pause__icon">
+        <span class="print-control__cancel__confirm">
+            print paused
+        </span>
+        <div class="print-control__pause__resume" (click)="resume($event)">
+            <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
+            resume
+        </div>
+    </div>
     <div *ngIf="view === controlView.ADJUST"></div>
 </div>

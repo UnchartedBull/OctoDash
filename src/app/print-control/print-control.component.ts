@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JobService } from '../job.service';
 
 @Component({
   selector: 'app-print-control',
@@ -8,47 +9,58 @@ import { Component, OnInit } from '@angular/core';
 export class PrintControlComponent implements OnInit {
 
   // FIXME: Change before release
-  public showControls = false;
+  public showControls = true;
   public controlView = ControlView;
-  public view = ControlView.MAIN;
+  public view = ControlView.PAUSE;
 
-  constructor() { }
+  constructor(private jobService: JobService) { }
 
   ngOnInit() {
   }
 
-  cancel(event) {
+  public cancel(event) {
     this.stopPropagation(event);
     this.view = ControlView.CANCEL;
   }
 
-  pause(event) {
+  public pause(event) {
+    this.stopPropagation(event);
+    this.jobService.pauseJob();
+    this.view = ControlView.PAUSE;
+  }
+
+  public adjust(event) {
     this.stopPropagation(event);
   }
 
-  adjust(event) {
-    this.stopPropagation(event);
-  }
-
-  stopPropagation(event) {
+  public stopPropagation(event) {
     if (this.showControls) {
       event.stopPropagation();
     }
   }
 
-  toggleControls() {
-    if (!this.showControls) {
-      this.view = ControlView.MAIN;
-    }
-    this.showControls = !this.showControls;
+  public showControlOverlay(event?) {
+    this.stopPropagation(event);
+    this.view = ControlView.MAIN;
+    this.showControls = true;
   }
 
-  cancelPrint() {
-    // TODO
-    console.log("Cancelling print");
+  public hideControlOverlay(event) {
+    this.stopPropagation(event);
+    this.showControls = false;
   }
 
-  backToControlScreen(event) {
+  public cancelPrint(event) {
+    this.jobService.cancelJob();
+    this.hideControlOverlay(event);
+  }
+
+  public resume(event) {
+    this.jobService.resumeJob();
+    this.hideControlOverlay(event);
+  }
+
+  public backToControlScreen(event) {
     this.view = ControlView.MAIN;
     this.stopPropagation(event);
   }

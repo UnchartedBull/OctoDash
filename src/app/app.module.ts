@@ -16,6 +16,7 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { ErrorComponent } from './error/error.component';
 import { ErrorService } from './error/error.service';
+import { PrinterService } from './printer.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { ErrorService } from './error/error.service';
     RoundProgressModule,
     FormsModule
   ],
-  providers: [AppService, ConfigService, ErrorService],
+  providers: [AppService, ConfigService, ErrorService, PrinterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

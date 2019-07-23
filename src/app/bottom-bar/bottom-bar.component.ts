@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
-import { PrinterStatusService, PrinterStatusAPI } from '../printer.service';
+import { PrinterService, PrinterStatusAPI } from '../printer.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class BottomBarComponent implements OnInit, OnDestroy {
   public enclosureTemperature: number;
   private ipc: any;
 
-  constructor(private printerStatusService: PrinterStatusService, private configService: ConfigService) {
+  constructor(private printerService: PrinterService, private configService: ConfigService) {
     if (window.require && configService.config.octodash.temperatureSensor !== null) {
       try {
         this.ipc = window.require('electron').ipcRenderer;
@@ -35,7 +35,7 @@ export class BottomBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+    this.subscriptions.add(this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
       this.printer.status = printerStatus.status;
     }));
   }

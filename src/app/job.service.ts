@@ -3,30 +3,26 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { share } from 'rxjs/operators';
-import { OctoprintJobAPI } from './octoprint-api/jobAPI';
+import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
 import { ErrorService } from './error/error.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JobStatusService {
+export class JobService {
 
-  httpRequest: Subscription;
+  httpGETRequest: Subscription;
+  httpPOSTRequest: Subscription;
   observable: Observable<Job>;
 
   constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(750, this.configService.config.octoprint.apiInterval).subscribe(_ => {
-        if (this.configService.config) {
-          const httpHeaders = {
-            headers: new HttpHeaders({
-              'x-api-key': this.configService.config.octoprint.accessToken
-            })
-          };
-          if (this.httpRequest) {
-            this.httpRequest.unsubscribe();
+      timer(750, this.configService.getAPIInterval()).subscribe(_ => {
+        if (this.configService.valid) {
+          if (this.httpGETRequest) {
+            this.httpGETRequest.unsubscribe();
           }
-          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'job', httpHeaders).subscribe(
+          this.httpGETRequest = this.http.get(this.configService.getURL('job'), this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintJobAPI) => {
               let job: Job = null;
               if (data.state === 'Printing') {
@@ -55,6 +51,62 @@ export class JobStatusService {
 
   public getObservable(): Observable<Job> {
     return this.observable;
+  }
+
+  public cancelJob(): void {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const cancelPayload: JobCommand = {
+      command: 'cancel'
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), cancelPayload, this.configService.getHTTPHeaders()).subscribe(
+      () => null, (error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          this.errorService.setError('Can\'t cancel Job!', 'There is no running job, that could be cancelled (409)');
+        } else {
+          this.errorService.setError('Can\'t cancel Job!', error.message);
+        }
+      }
+    );
+  }
+
+  public pauseJob(): void {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const pausePayload: JobCommand = {
+      command: 'pause',
+      action: 'pause'
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders()).subscribe(
+      () => null, (error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          this.errorService.setError('Can\'t pause Job!', 'There is no running job, that could be paused (409)');
+        } else {
+          this.errorService.setError('Can\'t pause Job!', error.message);
+        }
+      }
+    );
+  }
+
+  public resumeJob(): void {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const pausePayload: JobCommand = {
+      command: 'pause',
+      action: 'resume'
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders()).subscribe(
+      () => null, (error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          this.errorService.setError('Can\'t resume Job!', 'There is no paused job, that could be resumed (409)');
+        } else {
+          this.errorService.setError('Can\'t resume Job!', error.message);
+        }
+      }
+    );
   }
 
   private timeConvert(input: number): string {

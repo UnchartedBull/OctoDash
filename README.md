@@ -3,7 +3,8 @@
 ![build status](https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master)
 ![issues](https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg)
 ![version](https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg)
-![downloads](https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen)  
+![downloads](https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen)
+<!-- [![Beerpay](https://beerpay.io/UnchartedBull/OctoDash/badge.svg?style=flat)](https://beerpay.io/UnchartedBull/OctoDash)  -->
 OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!
 
 ## Table of Contents

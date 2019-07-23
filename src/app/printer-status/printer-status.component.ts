@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from '../printer.service';
+import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
 import { LayerProgressService, DisplayLayerProgressAPI } from '../layer-progress/layer-progress.service';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
 
-  constructor(private printerStatusService: PrinterStatusService, private displayLayerProgressService: LayerProgressService) {
+  constructor(private printerService: PrinterService, private displayLayerProgressService: LayerProgressService) {
     this.printerStatus = {
       nozzle: {
         current: 0,
@@ -28,7 +28,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.printerStatusService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+    this.subscriptions.add(this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
       this.printerStatus.nozzle = printerStatus.nozzle;
       this.printerStatus.heatbed = printerStatus.heatbed;
     }));

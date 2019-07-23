@@ -9,24 +9,19 @@ import { ErrorService } from './error/error.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PrinterStatusService {
+export class PrinterService {
 
-  httpRequest: Subscription;
+  httpGETRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
   constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(500, this.configService.config.octoprint.apiInterval).subscribe(_ => {
-        if (this.configService.config) {
-          const httpHeaders = {
-            headers: new HttpHeaders({
-              'x-api-key': this.configService.config.octoprint.accessToken
-            })
-          };
-          if (this.httpRequest) {
-            this.httpRequest.unsubscribe();
+      timer(500, this.configService.getAPIInterval()).subscribe(_ => {
+        if (this.configService.valid) {
+          if (this.httpGETRequest) {
+            this.httpGETRequest.unsubscribe();
           }
-          this.httpRequest = this.http.get(this.configService.config.octoprint.url + 'printer', httpHeaders).subscribe(
+          this.httpGETRequest = this.http.get(this.configService.getURL('printer'), this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintPrinterStatusAPI) => {
               const printerStatus: PrinterStatusAPI = {
                 status: data.state.text.toLowerCase(),
@@ -53,7 +48,7 @@ export class PrinterStatusService {
                 }
               };
               observer.next(printerStatus);
-              this.errorService.setError('Can\'t retrieve printer status!', error.message)
+              this.errorService.setError('Can\'t retrieve printer status!', error.message);
             });
         }
       });
