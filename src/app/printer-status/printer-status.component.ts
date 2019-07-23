@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from './printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI, PrinterValue } from '../printer.service';
 import { LayerProgressService, DisplayLayerProgressAPI } from '../layer-progress/layer-progress.service';
 import { Subscription } from 'rxjs';
 

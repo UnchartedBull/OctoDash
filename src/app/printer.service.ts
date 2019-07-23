@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from './config/config.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { OctoprintPrinterStatusAPI } from '../octoprint-api/printerStatusAPI';
+import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
+import { ErrorService } from './error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class PrinterStatusService {
   httpRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(500, this.configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this.configService.config) {
@@ -52,6 +53,7 @@ export class PrinterStatusService {
                 }
               };
               observer.next(printerStatus);
+              this.errorService.setError('Can\'t retrieve printer status!', error.message)
             });
         }
       });

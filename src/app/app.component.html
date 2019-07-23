@@ -7,6 +7,7 @@
             <app-bottom-bar></app-bottom-bar>
         </div>
         <div *ngIf="configService.config.octodash.touchscreen">
+            <app-error></app-error>
             <!-- <div *ngIf="printing"> -->
             <app-print-control></app-print-control>
             <app-job-status></app-job-status>

@@ -4,6 +4,7 @@ import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http
 import { ConfigService } from '../config/config.service';
 import { share } from 'rxjs/operators';
 import { OctoprintLayerProgressAPI } from '../octoprint-api/layerProgressAPI';
+import { ErrorService } from '../error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class LayerProgressService {
   httpRequest: Subscription;
   observable: Observable<DisplayLayerProgressAPI>;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {
+  constructor(private configService: ConfigService, private errorService: ErrorService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(1000, this.configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this.configService.config) {
@@ -33,7 +34,7 @@ export class LayerProgressService {
                 fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
               });
             }, (error: HttpErrorResponse) => {
-              console.error('Can\'t retrieve layer progress! ' + error.message);
+              this.errorService.setError('Can\'t retrieve layer progress!', error.message);
             });
         }
       });

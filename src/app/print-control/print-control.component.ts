@@ -44,6 +44,7 @@ export class PrintControlComponent implements OnInit {
   }
 
   cancelPrint() {
+    // TODO
     console.log("Cancelling print");
   }
 

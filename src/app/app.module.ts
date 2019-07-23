@@ -14,6 +14,8 @@ import { LayerProgressComponent } from './layer-progress/layer-progress.componen
 import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
 import { NoConfigComponent } from './config/no-config/no-config.component';
 import { PrintControlComponent } from './print-control/print-control.component';
+import { ErrorComponent } from './error/error.component';
+import { ErrorService } from './error/error.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { PrintControlComponent } from './print-control/print-control.component';
     LayerProgressComponent,
     InvalidConfigComponent,
     NoConfigComponent,
-    PrintControlComponent
+    PrintControlComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { PrintControlComponent } from './print-control/print-control.component';
     RoundProgressModule,
     FormsModule
   ],
-  providers: [AppService, ConfigService],
+  providers: [AppService, ConfigService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

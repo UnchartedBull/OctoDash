@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
-import { PrinterStatusService, PrinterStatusAPI } from '../printer-status/printer-status.service';
+import { PrinterStatusService, PrinterStatusAPI } from '../printer.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,0 +1,39 @@
+.error {
+    display: block;
+    position: fixed;
+    width: 80vw;
+    background-color: #5a6675;
+    border-radius: 1.3vw;
+    left: 10vw;
+    top: -75vh;
+    transition: top .7s ease-in-out;
+    z-index: 1;
+    box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.75);
+
+    &__show {
+        top: 5vh;
+        z-index: 100;
+    }
+}
+
+.error__heading {
+    display: block;
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: 600;
+    margin-top: 4vh;
+}
+
+.error__text {
+    font-size: 2.7vw;
+    padding: 5vh 3vw 1vh 3vw;
+    display: block;
+}
+
+.error__close {
+    font-size: 2vw;
+    display: block;
+    text-align: center;
+    padding-bottom: 2vh;
+    opacity: .4;
+}

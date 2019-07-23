@@ -4,6 +4,7 @@ import { ConfigService } from './config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { share } from 'rxjs/operators';
 import { OctoprintJobAPI } from './octoprint-api/jobAPI';
+import { ErrorService } from './error/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class JobStatusService {
   httpRequest: Subscription;
   observable: Observable<Job>;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {
+  constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(750, this.configService.config.octoprint.apiInterval).subscribe(_ => {
         if (this.configService.config) {
@@ -45,7 +46,7 @@ export class JobStatusService {
               }
               observer.next(job);
             }, (error: HttpErrorResponse) => {
-              console.error('Can\'t retrieve jobs! ' + error.message);
+              this.errorService.setError('Can\'t retrieve jobs!', error.message);
             });
         }
       });
