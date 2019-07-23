@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class PrintControlComponent implements OnInit {
 
   // FIXME: Change before release
-  public showControls = true;
+  public showControls = false;
+  public controlView = ControlView;
+  public view = ControlView.MAIN;
 
   constructor() { }
 
@@ -17,6 +19,7 @@ export class PrintControlComponent implements OnInit {
 
   cancel(event) {
     this.stopPropagation(event);
+    this.view = ControlView.CANCEL;
   }
 
   pause(event) {
@@ -33,4 +36,28 @@ export class PrintControlComponent implements OnInit {
     }
   }
 
+  toggleControls() {
+    if (!this.showControls) {
+      this.view = ControlView.MAIN;
+    }
+    this.showControls = !this.showControls;
+  }
+
+  cancelPrint() {
+    console.log("Cancelling print");
+  }
+
+  backToControlScreen(event) {
+    this.view = ControlView.MAIN;
+    this.stopPropagation(event);
+  }
+
+}
+
+
+enum ControlView {
+  MAIN,
+  CANCEL,
+  PAUSE,
+  ADJUST
 }

@@ -31,3 +31,26 @@
         margin-right: 5vw;
     }
 }
+
+.print-control__cancel__icon {
+    width: 28vw;
+    display: block;
+    text-align: center;
+    margin-top: 4vh;
+    margin-left: calc(50% - 14vw)
+}
+
+.print-control__cancel__confirm {
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 3vh;
+}
+
+.print-control__cancel__action {
+    display: inline-block;
+    padding: 6vh 5vw;
+    margin: 5vh 8vw;
+    font-weight: 600;
+}

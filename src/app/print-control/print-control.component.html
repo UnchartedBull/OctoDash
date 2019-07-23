@@ -1,20 +1,33 @@
-<div class="print-control__container" (click)="showControls = !showControls"
-    [ngClass]="{'print-control__hide': !showControls}">
-    <table class="top-bar">
-        <tr>
-            <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
-        </tr>
-    </table>
-    <div class="print-control__action" (click)="cancel($event)">
-        <img src="assets/cancel.svg">
-        cancel
+<div class="print-control__container" (click)="toggleControls()" [ngClass]="{'print-control__hide': !showControls}">
+    <div *ngIf="view === controlView.MAIN">
+        <table class="top-bar" (click)="toggleControls()">
+            <tr>
+                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            </tr>
+        </table>
+        <div class="print-control__action" (click)="cancel($event)">
+            <img src="assets/cancel.svg">
+            cancel
+        </div>
+        <div class="print-control__action" (click)="pause($event)">
+            <img src="assets/pause.svg">
+            pause
+        </div>
+        <div class="print-control__action" (click)="adjust($event)">
+            <img src="assets/adjust.svg">
+            adjust
+        </div>
     </div>
-    <div class="print-control__action" (click)="pause($event)">
-        <img src="assets/pause.svg">
-        pause
+    <div *ngIf="view === controlView.CANCEL">
+        <img src="assets/cancel.svg" class="print-control__cancel__icon">
+        <span class="print-control__cancel__confirm">
+            Cancel Print?
+        </span>
+        <div style="text-align: center">
+            <span class="print-control__cancel__action" (click)="cancelPrint()">Yes</span>
+            <span class="print-control__cancel__action" (click)="backToControlScreen($event)">No</span>
+        </div>
     </div>
-    <div class="print-control__action" (click)="adjust($event)">
-        <img src="assets/adjust.svg">
-        adjust
-    </div>
+    <div *ngIf="view === controlView.PAUSE"></div>
+    <div *ngIf="view === controlView.ADJUST"></div>
 </div>

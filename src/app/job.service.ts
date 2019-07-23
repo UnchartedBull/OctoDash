@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from './config/config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { share } from 'rxjs/operators';
-import { OctoprintJobAPI } from '../octoprint-api/jobAPI';
+import { OctoprintJobAPI } from './octoprint-api/jobAPI';
 
 @Injectable({
   providedIn: 'root'

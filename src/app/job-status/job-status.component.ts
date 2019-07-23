@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { JobStatusService, Job } from './job-status.service';
+import { JobStatusService, Job } from '../job.service';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ConfigService } from './config/config.service';
-import { JobStatusService, Job } from './job-status/job-status.service';
+import { JobStatusService, Job } from './job.service';
 import { Subscription } from 'rxjs';
 
 @Component({
