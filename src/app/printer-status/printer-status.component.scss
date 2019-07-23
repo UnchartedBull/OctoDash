@@ -9,69 +9,69 @@
     & tr {
         vertical-align: middle;
     }
-}
 
-.printer-status__value {
-    text-align: right;
-    height: 23vh;
-    vertical-align: middle;
-
-    & img {
-        width: 10vw;
-        float: left;
-        padding-top: 1.7vh;
-        padding-right: 2vw;
-    }
-
-    &-1 {
-        width: 29vw;
-        padding-left: 1vw;
-        padding-right: 8.5vw;
-    }
-
-    &-2 {
-        width: 25vw;
-        padding-right: 7.5vw;
+    &__value {
+        text-align: right;
+        height: 23vh;
+        vertical-align: middle;
 
         & img {
-            width: 9.6vw;
-        }
-    }
-
-    &-3 {
-        padding-right: 3vw;
-        width: 27.2vw;
-
-        & img {
-            padding-top: 1vh;
             width: 10vw;
+            float: left;
+            padding-top: 1.7vh;
+            padding-right: 2vw;
+        }
+
+        &-1 {
+            width: 29vw;
+            padding-left: 1vw;
+            padding-right: 8.5vw;
+        }
+
+        &-2 {
+            width: 25vw;
+            padding-right: 7.5vw;
+
+            & img {
+                width: 9.6vw;
+            }
+        }
+
+        &-3 {
+            padding-right: 3vw;
+            width: 27.2vw;
+
+            & img {
+                padding-top: 1vh;
+                width: 10vw;
+            }
         }
     }
-}
 
-.printer-status__unit {
-    font-size: 60%;
-}
-
-.printer-status__actual-value {
-    font-size: 6vw;
-    font-weight: 600;
-    display: inline-block;
-}
-
-.printer-status__set-value {
-    display: block;
-    text-align: right;
-}
-
-.printer-status__no-set-value {
-    overflow: visible;
-
-    & span {
-        margin-bottom: -4vh
+    &__unit {
+        font-size: 60%;
     }
 
-    & img {
-        margin-top: -4vh;
+    &__actual-value {
+        font-size: 6vw;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    &__set-value {
+        display: block;
+        text-align: right;
+    }
+
+    &__no-set-value {
+        overflow: visible;
+
+        & span {
+            margin-bottom: -4vh
+        }
+
+        & img {
+            margin-top: -4vh;
+        }
     }
 }

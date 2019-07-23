@@ -54,6 +54,7 @@
         "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
         "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
         "pack": "npm run ng:build && electron-builder build -l",
+        "pack:mac": "npm run ng:build && electron-builder build -m",
         "ng:serve": "ng serve",
         "ng:build": "ng build --prod"
     },

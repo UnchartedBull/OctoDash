@@ -7,7 +7,7 @@
     overflow: hidden;
 }
 
-// Specific for the Raspberry Pi with SPI Display (at least in my case, there is always the 6px margin)
+
 html,
 body,
 .app-root {
@@ -36,31 +36,32 @@ app-root {
     & td {
         width: 33.3%;
     }
-}
 
-.top-bar__back {
-    padding: 4vh 2vw 2vh 2vw;
-}
+    &__back {
+        padding: 4vh 2vw 2vh 2vw;
+        font-weight: 600;
+    }
 
-.top-bar__next {
-    padding: 4vh 2vw 2vh 2vw;
-    text-align: right;
-}
+    &__next {
+        padding: 4vh 2vw 2vh 2vw;
+        text-align: right;
+    }
 
-.top-bar__back-icon {
-    width: 6vw;
-    vertical-align: -5vh;
-    margin-right: 1.4vw;
-    display: inline-block;
-}
+    &__back-icon {
+        width: 6vw;
+        vertical-align: -5vh;
+        margin-right: 1.4vw;
+        display: inline-block;
+    }
 
-.top-bar__next-icon {
-    width: 6vw;
-    vertical-align: -5vh;
-    margin-left: 1.4vw;
-    margin-right: 1vw;
-}
+    &__next-icon {
+        width: 6vw;
+        vertical-align: -5vh;
+        margin-left: 1.4vw;
+        margin-right: 1vw;
+    }
 
-.top-bar__center {
-    text-align: center;
+    &__center {
+        text-align: center;
+    }
 }

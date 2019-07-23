@@ -33,7 +33,16 @@
         }
     }
 
-    &__center_icon {
+    &__confirm {
+        font-weight: 600;
+        display: block;
+        text-align: center;
+        font-size: 6vw;
+        margin-top: 3vh;
+    }
+
+
+    &__center-icon {
         width: 22vw;
         display: block;
         text-align: center;
@@ -43,14 +52,6 @@
     }
 
     &__cancel {
-        &__confirm {
-            font-weight: 600;
-            display: block;
-            text-align: center;
-            font-size: 6vw;
-            margin-top: 3vh;
-        }
-
         &__action {
             display: inline-block;
             padding: 6vh 5vw;

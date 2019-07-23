@@ -8,10 +8,9 @@ import { JobService } from '../job.service';
 })
 export class PrintControlComponent implements OnInit {
 
-  // FIXME: Change before release
   public showControls = false;
   public controlView = ControlView;
-  public view = ControlView.PAUSE;
+  public view = ControlView.MAIN;
 
   constructor(private jobService: JobService) { }
 
@@ -19,18 +18,25 @@ export class PrintControlComponent implements OnInit {
   }
 
   public cancel(event) {
-    this.stopPropagation(event);
-    this.view = ControlView.CANCEL;
+    if (this.showControls) {
+      this.stopPropagation(event);
+      this.view = ControlView.CANCEL;
+    }
   }
 
   public pause(event) {
-    this.stopPropagation(event);
-    this.jobService.pauseJob();
-    this.view = ControlView.PAUSE;
+    if (this.showControls) {
+      this.stopPropagation(event);
+      this.jobService.pauseJob();
+      this.view = ControlView.PAUSE;
+    }
   }
 
   public adjust(event) {
-    this.stopPropagation(event);
+    if (this.showControls) {
+
+      this.stopPropagation(event);
+    }
   }
 
   public stopPropagation(event) {
@@ -51,13 +57,17 @@ export class PrintControlComponent implements OnInit {
   }
 
   public cancelPrint(event) {
-    this.jobService.cancelJob();
-    this.hideControlOverlay(event);
+    if (this.showControls && this.view === ControlView.CANCEL) {
+      this.jobService.cancelJob();
+      this.hideControlOverlay(event);
+    }
   }
 
   public resume(event) {
-    this.jobService.resumeJob();
-    this.hideControlOverlay(event);
+    if (this.showControls && this.view === ControlView.PAUSE) {
+      this.jobService.resumeJob();
+      this.hideControlOverlay(event);
+    }
   }
 
   public backToControlScreen(event) {
