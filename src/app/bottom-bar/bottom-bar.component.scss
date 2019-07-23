@@ -7,20 +7,28 @@
     td {
         width: 33.3%;
     }
+
+    &__enclosure-temperature {
+        text-align: center;
+
+        &-icon {
+            width: 2.5vw;
+            display: inline-block;
+            margin-bottom: -.8vh;
+            margin-right: 1vw;
+        }
+    }
+
+    &__current-status {
+        text-align: right;
+    }
+
+    &__error {
+        color: #c23616;
+        animation: blinker 2s linear infinite;
+    }
 }
 
-.bottom-bar__enclosure-temperature {
-    text-align: center;
-}
-
-.bottom-bar__current-status {
-    text-align: right;
-}
-
-.bottom-bar__error {
-    color: #c23616;
-    animation: blinker 2s linear infinite;
-}
 
 @keyframes blinker {
     20% {

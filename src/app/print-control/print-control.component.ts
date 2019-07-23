@@ -9,7 +9,7 @@ import { JobService } from '../job.service';
 export class PrintControlComponent implements OnInit {
 
   // FIXME: Change before release
-  public showControls = true;
+  public showControls = false;
   public controlView = ControlView;
   public view = ControlView.PAUSE;
 

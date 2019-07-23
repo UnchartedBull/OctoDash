@@ -98,7 +98,8 @@ All other SoCs that are using an armv7, or arm64 compatible, processer are suppo
 ## Screenshots
 <p float="left">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-         text="Job Running"/>
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job.png" width="49.5%"           alt-text="No Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job_no_touchscreen.png" width="49.5%"           alt-text="No Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%"           alt-text="Print Controls">
 </p>
 
 ## Troubleshooting
