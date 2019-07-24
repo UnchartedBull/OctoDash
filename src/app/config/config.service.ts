@@ -1,5 +1,5 @@
-import { Injectable, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import Ajv from 'ajv';
 
@@ -14,9 +14,10 @@ declare global {
   providedIn: 'root'
 })
 export class ConfigService {
-  public config: Config;
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
+  private httpHeaders: object;
+  public config: Config;
   public valid: boolean;
   public update = false;
 
@@ -26,14 +27,24 @@ export class ConfigService {
     if (window && window.process && window.process.type) {
       const Store = window.require('electron-store');
       this.store = new Store();
-      this.config = this.store.get('config');
-      this.valid = this.validate();
+      this.initialize(this.store.get('config'));
     } else {
       console.warn('Detected non-electron environment. Fallback to assets/config.json. Any changes are non-persistent!');
       this.http.get(environment.config).subscribe((config: Config) => {
-        this.config = config;
-        this.valid = this.validate();
+        this.initialize(config);
       });
+    }
+  }
+
+  private initialize(config: Config) {
+    this.config = config;
+    this.valid = this.validate();
+    if (this.valid) {
+      this.httpHeaders = {
+        headers: new HttpHeaders({
+          'x-api-key': this.config.octoprint.accessToken
+        })
+      };
     }
   }
 
@@ -80,9 +91,20 @@ export class ConfigService {
 
   public updateConfig() {
     if (window && window.process && window.process.type) {
-      this.config = this.store.get('config');
-      this.valid = this.validate();
+      this.initialize(this.store.get('config'));
     }
+  }
+
+  public getHTTPHeaders(): object {
+    return this.httpHeaders;
+  }
+
+  public getURL(path: string) {
+    return this.config.octoprint.url + path;
+  }
+
+  public getAPIInterval() {
+    return this.config.octoprint.apiInterval;
   }
 }
 

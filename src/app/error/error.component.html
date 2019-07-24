@@ -1,0 +1,5 @@
+<div class="error" [ngClass]="{'error__show': show}" (click)="hideError()">
+    <span class="error__heading"> {{ error.heading }} </span>
+    <span class="error__text"> {{ error.text }} </span>
+    <span class="error__close">Tap this card to close it ...</span>
+</div>

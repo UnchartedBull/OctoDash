@@ -13,6 +13,10 @@ import { ConfigService } from './config/config.service';
 import { LayerProgressComponent } from './layer-progress/layer-progress.component';
 import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
 import { NoConfigComponent } from './config/no-config/no-config.component';
+import { PrintControlComponent } from './print-control/print-control.component';
+import { ErrorComponent } from './error/error.component';
+import { ErrorService } from './error/error.service';
+import { PrinterService } from './printer.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
     JobStatusComponent,
     LayerProgressComponent,
     InvalidConfigComponent,
-    NoConfigComponent
+    NoConfigComponent,
+    PrintControlComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,7 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
     RoundProgressModule,
     FormsModule
   ],
-  providers: [AppService, ConfigService],
+  providers: [AppService, ConfigService, ErrorService, PrinterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -38,3 +38,8 @@ interface OctoprintProgress {
     printTime: number;
     printTimeLeft: number;
 }
+
+export interface JobCommand {
+    command: string;
+    action?: string;
+}

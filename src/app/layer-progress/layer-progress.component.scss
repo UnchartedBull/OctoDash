@@ -4,9 +4,9 @@
     margin-top: 1vh;
     text-align: center;
     font-size: 4vw;
-}
 
-.layer-indication__current-layer {
-    font-size: 6vw;
-    font-weight: 600;
+    &__current-layer {
+        font-size: 6vw;
+        font-weight: 600;
+    }
 }

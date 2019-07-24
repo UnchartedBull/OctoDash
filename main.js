@@ -11,7 +11,7 @@ const store = new Store();
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
-const big = args.some(val => val === '--big-screen')
+const big = args.some(val => val === '--big')
 
 let window;
 let config;
@@ -26,7 +26,7 @@ function createWindow() {
     } = require('electron')
     const mainScreen = screen.getPrimaryDisplay();
     window = new BrowserWindow({
-        width: dev ? big ? 1000 : 1400 : mainScreen.size.width,
+        width: dev ? big ? 1080 : 1400 : mainScreen.size.width,
         height: dev ? big ? 342 : 502 : mainScreen.size.height,
         frame: dev ? true : false,
         fullscreen: dev ? false : true,
