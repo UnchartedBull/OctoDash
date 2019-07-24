@@ -1,8 +1,34 @@
 # Change Log
 
-## [Unreleased](https://github.com/UnchartedBull/OctoDash/tree/HEAD)
+## [v1.1.0](https://github.com/UnchartedBull/OctoDash/tree/v1.1.0) (2019-07-24)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.0.1...v1.1.0)
 
-[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.0.0...HEAD)
+**Implemented enhancements:**
+
+- Implement Pause Job [\#12](https://github.com/UnchartedBull/OctoDash/issues/12)
+- Implement Cancel Job [\#11](https://github.com/UnchartedBull/OctoDash/issues/11)
+- Implement Print Controls [\#10](https://github.com/UnchartedBull/OctoDash/issues/10)
+- Switch between Touchscreen and Non-Touchscreen Version [\#9](https://github.com/UnchartedBull/OctoDash/issues/9)
+
+**Closed issues:**
+
+- Structure README.md [\#28](https://github.com/UnchartedBull/OctoDash/issues/28)
+- Include Dependabot [\#27](https://github.com/UnchartedBull/OctoDash/issues/27)
+- Help [\#25](https://github.com/UnchartedBull/OctoDash/issues/25)
+
+**Merged pull requests:**
+
+- Print controls [\#56](https://github.com/UnchartedBull/OctoDash/pull/56) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump lodash from 4.17.14 to 4.17.15 [\#54](https://github.com/UnchartedBull/OctoDash/pull/54) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.801.1 to 0.801.2 [\#53](https://github.com/UnchartedBull/OctoDash/pull/53) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.6.6 to 12.6.8 [\#52](https://github.com/UnchartedBull/OctoDash/pull/52) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.1.1 to 8.1.2 [\#51](https://github.com/UnchartedBull/OctoDash/pull/51) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/compiler-cli from 8.1.1 to 8.1.2 [\#50](https://github.com/UnchartedBull/OctoDash/pull/50) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.1.1 to 8.1.2 [\#49](https://github.com/UnchartedBull/OctoDash/pull/49) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron-builder from 21.0.15 to 21.1.1 [\#48](https://github.com/UnchartedBull/OctoDash/pull/48) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [v1.0.1](https://github.com/UnchartedBull/OctoDash/tree/v1.0.1) (2019-07-18)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.0.0...v1.0.1)
 
 **Implemented enhancements:**
 

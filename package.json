@@ -32,21 +32,19 @@
             "output": "package"
         },
         "linux": {
-            "target": [
-                {
-                    "target": "deb",
-                    "arch": [
-                        "armv7l",
-                        "arm64"
-                    ]
-                }
-            ],
+            "target": [{
+                "target": "deb",
+                "arch": [
+                    "armv7l",
+                    "arm64"
+                ]
+            }],
             "category": "Utility"
         }
     },
     "scripts": {
         "ng": "ng",
-        "start": "npm-run-all -p ng:serve electron:serve",
+        "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
         "start:big": "npm-run-all -p ng:serve electron:serve:big",
         "build": "npm run ng:build && electron .",
         "test": "",
@@ -56,6 +54,7 @@
         "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
         "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
         "pack": "npm run ng:build && electron-builder build -l",
+        "pack:mac": "npm run ng:build && electron-builder build -m",
         "ng:serve": "ng serve",
         "ng:build": "ng build --prod"
     },

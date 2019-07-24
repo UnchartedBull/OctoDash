@@ -1,24 +1,29 @@
 # OctoDash
 
-![build status](https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master)  
+![build status](https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master)
+![issues](https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg)
+![version](https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg)
+![downloads](https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen)
+<!-- [![Beerpay](https://beerpay.io/UnchartedBull/OctoDash/badge.svg?style=flat)](https://beerpay.io/UnchartedBull/OctoDash)  -->
 OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!
 
 ## Table of Contents
 
-- [OctoDash](#OctoDash)
-  - [Table of Contents](#Table-of-Contents)
-  - [Installation](#Installation)
-    - [Electron App (recommended)](#Electron-App-recommended)
-      - [Creating Config manually](#Creating-Config-manually)
-      - [Start on boot](#Start-on-boot)
-    - [Website](#Website)
-  - [Supported Devices](#Supported-Devices)
-  - [Screenshots](#Screenshots)
-  - [Troubleshooting](#Troubleshooting)
-  - [Bugs and more](#Bugs-and-more)
-  - [Contributing](#Contributing)
-  - [License](#License)
-  - [Special Thanks](#Special-Thanks)
+- [OctoDash](#octodash)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Electron App (recommended)](#electron-app-recommended)
+      - [Creating Config manually](#creating-config-manually)
+      - [Start on boot](#start-on-boot)
+    - [Website (deprecated)](#website-deprecated)
+  - [Update](#update)
+  - [Supported Devices](#supported-devices)
+  - [Screenshots](#screenshots)
+  - [Troubleshooting](#troubleshooting)
+  - [Bugs and more](#bugs-and-more)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Special Thanks](#special-thanks)
 
 ## Installation
 
@@ -29,7 +34,7 @@ You need to install the DisplayLayerProgress Plugin by OllisGit to enable the fu
 *Note: This tutorial is for the Raspberry Pi only (2 and higher). If you have running OctoPrint on something different please adjust the links*
 
 - Download the latest release *Check for newer version (Releases)*  
-`wget -O https://github.com/UnchartedBull/OctoDash/releases/download/v1.0.0/octodash_1.0.0_armv7l.deb octodash.deb   `
+`wget -O https://github.com/UnchartedBull/OctoDash/releases/download/v1.0.1/octodash_1.0.1_armv7l.deb octodash.deb   `
 - Install the app  
 `sudo dpkg -i octodash.deb`
 - If you get an error while installing you may need to install the missing dependencies.  
@@ -73,16 +78,14 @@ fi
 
 If you get the `Cannot open virtual console 2 (Permission denied)` error run `sudo chmod ug+s /usr/lib/xorg/Xorg` and reboot.
 
+### Website (deprecated)
 
-### Website
+The OctoDash Website Support was dropped in v1.1.0. It is still possible, you need to figure out some things yourself, though. The app will automatically detect a normal Browser Environment and will try to load `assets/config.json`.  
+The Project can be build using the Angular CLI and can be served via any WebServer.
 
-This option does not allow you to change your config via the UI and the styling may be a little off for you, due to your browser engine. It may improve performance slightly if you use a very lightweight browser.
-
-- Clone the repository - `git clone https://github.com/UnchartedBull/OctoDash && cd OctoDash`
-- Install all the dependencies - `npm install`
-- Adjust `src/assets/config.json` accordingly to your installation
-- Build the app - `ng build --prod`
-- The final website is located at `/dist`, which can be served by any web server and viewed by any web browser, that does support angular. A chromium-based web browser is recommended
+## Update
+To update OctoDash to the latest version just follow the Installation instruction. The package manager will update the app, if there is an older version installed.  
+Your config will not be touched during this process!
 
 ## Supported Devices
 
@@ -95,7 +98,8 @@ All other SoCs that are using an armv7, or arm64 compatible, processer are suppo
 ## Screenshots
 <p float="left">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-         text="Job Running"/>
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job.png" width="49.5%"           alt-text="No Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job_no_touchscreen.png" width="49.5%"           alt-text="No Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%"           alt-text="Print Controls">
 </p>
 
 ## Troubleshooting

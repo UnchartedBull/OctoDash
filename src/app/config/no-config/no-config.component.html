@@ -1,19 +1,19 @@
 <div class="no-config">
-    <table class="no-config__progress">
+    <table class="top-bar">
         <tr>
-            <td class="no-config__back" (click)="decreasePage()" *ngIf="page !== 0">
-                <img src="assets/back.svg" class="no-config__back-icon" />back
+            <td class="top-bar__back" (click)="decreasePage()" *ngIf="page !== 0">
+                <img src="assets/back.svg" class="top-bar__back-icon" />back
             </td>
-            <td class="no-config__back" *ngIf="page === 0"></td>
-            <td class="no-config__progress-td">
+            <td class="top-bar__back" *ngIf="page === 0"></td>
+            <td class="top-bar__center">
                 <div class="no-config__progress-bar-wrapper">
                     <div class="no-config__progress-bar" id="progressBar"></div>
                 </div>
             </td>
-            <td class="no-config__next" (click)="increasePage()" *ngIf="page !== totalPages">
-                next<img src="assets/next.svg" class="no-config__next-icon" />
+            <td class="top-bar__next" (click)="increasePage()" *ngIf="page !== totalPages">
+                next<img src="assets/next.svg" class="top-bar__next-icon" />
             </td>
-            <td class="no-config__next" *ngIf="page === totalPages"></td>
+            <td class="top-bar__next" *ngIf="page === totalPages"></td>
         </tr>
     </table>
     <div *ngIf="page === 0">
@@ -91,8 +91,8 @@
                 <span *ngIf="config.octodash.temperatureSensor.type !== 0">
                     <label for="filamentDensity" class="no-config__input-label-small">GPIO:</label>
                     <input type="number" id="filamentDensity"
-                        class="no-config__gpio no-config__input no-config__input-small" name="filamentDensity" step="1"
-                        min="0" [(ngModel)]="config.octodash.temperatureSensor.gpio" required>
+                        class="no-config__3-gpio no-config__input no-config__input-small" name="filamentDensity"
+                        step="1" min="0" [(ngModel)]="config.octodash.temperatureSensor.gpio" required>
                 </span>
             </div>
         </form>

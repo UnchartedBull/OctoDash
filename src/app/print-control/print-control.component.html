@@ -1,0 +1,61 @@
+<div class="print-control__container" (click)="showControlOverlay($event)"
+    [ngClass]="{'print-control__hide': !showControls}">
+    <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
+        <table class="top-bar" (click)="hideControlOverlay($event)">
+            <tr>
+                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            </tr>
+        </table>
+        <div class="print-control__action" (click)="cancel($event)">
+            <img src="assets/cancel.svg">
+            cancel
+        </div>
+        <div class="print-control__action" (click)="pause($event)">
+            <img src="assets/pause.svg">
+            pause
+        </div>
+        <div class="print-control__action" (click)="adjust($event)">
+            <img src="assets/adjust.svg">
+            adjust
+        </div>
+    </div>
+    <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
+        <img src="assets/cancel.svg" class="print-control__center-icon">
+        <span class="print-control__confirm">
+            cancel print?
+        </span>
+        <div style="text-align: center">
+            <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
+            <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
+        </div>
+    </div>
+    <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
+        <table class="top-bar" (click)="backToControlScreen($event)">
+            <tr>
+                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            </tr>
+        </table>
+        <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon">
+        <span class="print-control__confirm">
+            print paused
+        </span>
+        <div class="print-control__pause__resume" (click)="resume($event)">
+            <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
+            resume
+        </div>
+    </div>
+    <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
+        <table class="top-bar" (click)="backToControlScreen($event)">
+            <tr>
+                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            </tr>
+        </table>
+        <img src="assets/adjust.svg" class="print-control__center-icon print-control__pause__icon">
+        <span class="print-control__confirm">
+            :(
+        </span>
+        <span style="font-size: 3vw; margin: 4vh 3vw; text-align: center; display: block">
+            This feature has not been implemented yet. If you really, really want it before anything else - go to GitHub
+            and like issue #55.</span>
+    </div>
+</div>

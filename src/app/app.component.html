@@ -1,9 +1,21 @@
 <div *ngIf="configService.config" class="container">
     <div *ngIf="configService.valid">
-        <app-job-status></app-job-status>
-        <app-printer-status></app-printer-status>
-        <app-layer-progress></app-layer-progress>
-        <app-bottom-bar></app-bottom-bar>
+        <div *ngIf="!configService.config.octodash.touchscreen">
+            <app-job-status></app-job-status>
+            <app-printer-status></app-printer-status>
+            <app-layer-progress></app-layer-progress>
+            <app-bottom-bar></app-bottom-bar>
+        </div>
+        <div *ngIf="configService.config.octodash.touchscreen">
+            <app-error></app-error>
+            <!-- <div *ngIf="printing"> -->
+            <app-print-control></app-print-control>
+            <app-job-status></app-job-status>
+            <app-printer-status></app-printer-status>
+            <app-layer-progress></app-layer-progress>
+            <app-bottom-bar></app-bottom-bar>
+            <!-- </div> -->
+        </div>
     </div>
     <div *ngIf="!configService.valid">
         <app-invalid-config></app-invalid-config>
