@@ -1,8 +1,7 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import Ajv from 'ajv';
-import { stringify } from '@angular/compiler/src/util';
 
 declare global {
   interface Window {
@@ -40,11 +39,13 @@ export class ConfigService {
   private initialize(config: Config) {
     this.config = config;
     this.valid = this.validate();
-    this.httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken
-      })
-    };
+    if (this.valid) {
+      this.httpHeaders = {
+        headers: new HttpHeaders({
+          'x-api-key': this.config.octoprint.accessToken
+        })
+      };
+    }
   }
 
   public getRemoteConfig(): Config {
