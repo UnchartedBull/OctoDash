@@ -34,7 +34,7 @@ You need to install the DisplayLayerProgress Plugin by OllisGit to enable the fu
 *Note: This tutorial is for the Raspberry Pi only (2 and higher). If you have running OctoPrint on something different please adjust the links*
 
 - Download the latest release *Check for newer version (Releases)*  
-`wget -O https://github.com/UnchartedBull/OctoDash/releases/download/v1.1.0/octodash_1.1.0_armv7l.deb octodash.deb   `
+`wget -O octodash.deb https://github.com/UnchartedBull/OctoDash/releases/download/v1.1.0/octodash_1.1.0_armv7l.deb`
 - Install the app  
 `sudo dpkg -i octodash.deb`
 - If you get an error while installing you may need to install the missing dependencies.  
