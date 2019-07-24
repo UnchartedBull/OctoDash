@@ -28,6 +28,7 @@
     "build": {
         "appId": "octodash",
         "productName": "OctoDash",
+        "npmRebuild": false,
         "directories": {
             "output": "package"
         },
