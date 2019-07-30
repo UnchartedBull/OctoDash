@@ -17,6 +17,7 @@ import { PrintControlComponent } from './print-control/print-control.component';
 import { ErrorComponent } from './error/error.component';
 import { ErrorService } from './error/error.service';
 import { PrinterService } from './printer.service';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PrinterService } from './printer.service';
     InvalidConfigComponent,
     NoConfigComponent,
     PrintControlComponent,
-    ErrorComponent
+    ErrorComponent,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -34,7 +34,7 @@ export class PrintControlComponent implements OnInit {
 
   public adjust(event) {
     if (this.showControls) {
-
+      this.view = ControlView.ADJUST;
       this.stopPropagation(event);
     }
   }

@@ -13,14 +13,16 @@
     border-right: 1vw solid #5a6675;
 
     &__show {
-        top: 5vh;
+        // FIXME
+        // top: 5vh;
+        top: -155vh;
     }
 
     &__heading {
         display: block;
         text-align: center;
         font-size: 3.5vw;
-        font-weight: 600;
+        font-weight: 500;
         margin-top: 4vh;
     }
 
