@@ -19,6 +19,15 @@ import { ErrorService } from './error/error.service';
 import { PrinterService } from './printer.service';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { ControlComponent } from './control/control.component';
+import { AppRoutingModule } from './app.routing.module';
+import { MainScreenComponent } from './main-screen/main-screen.component';
+import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,15 +39,24 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
     NoConfigComponent,
     PrintControlComponent,
     ErrorComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    ControlComponent,
+    MainScreenComponent,
+    MainScreenNoTouchComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
     RoundProgressModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [AppService, ConfigService, ErrorService, PrinterService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    library.add(fas);
+  }
+}

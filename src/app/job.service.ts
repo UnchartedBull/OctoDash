@@ -18,7 +18,7 @@ export class JobService {
   constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(750, this.configService.getAPIInterval()).subscribe(_ => {
-        if (this.configService.valid) {
+        if (this.configService.isValid()) {
           if (this.httpGETRequest) {
             this.httpGETRequest.unsubscribe();
           }

@@ -17,7 +17,7 @@ export class PrinterService {
   constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
-        if (this.configService.valid) {
+        if (this.configService.isValid()) {
           if (this.httpGETRequest) {
             this.httpGETRequest.unsubscribe();
           }

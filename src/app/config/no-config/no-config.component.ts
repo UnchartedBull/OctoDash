@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Config, ConfigService } from '../config.service';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-no-config',
@@ -20,8 +21,8 @@ export class NoConfigComponent implements OnInit {
   octoprintConnection: boolean;
   octoprintConnectionError: string;
 
-  constructor(private configService: ConfigService, private http: HttpClient) {
-    this.configUpdate = this.configService.update;
+  constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
+    this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
       this.config = configService.getRemoteConfig();
       this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
@@ -108,6 +109,7 @@ export class NoConfigComponent implements OnInit {
 
   finishWizard() {
     this.configService.updateConfig();
+    this.router.navigate(['/main-screen']);
   }
 
   increasePage() {

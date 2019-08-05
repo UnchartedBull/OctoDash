@@ -5,6 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
 
-  constructor() { }
+  private updateError: string[];
+
+  constructor() {
+    this.updateError = ['. should have required property \'octodash\'']
+  }
+
+  public getUpdateError(): string[] {
+    console.log(this.updateError)
+    return this.updateError;
+  }
+
+  // If the errors can be automatically fixed return true here
+  public autoFixError(): boolean {
+    return false;
+  }
 
 }

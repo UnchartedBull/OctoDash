@@ -16,10 +16,13 @@ declare global {
 export class ConfigService {
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
-  private httpHeaders: object;
+
   public config: Config;
-  public valid: boolean;
-  public update = false;
+  private valid: boolean;
+  private update = false;
+  private initialized = false;
+
+  private httpHeaders: object;
 
   constructor(private http: HttpClient) {
     const ajv = new Ajv({ allErrors: true });
@@ -46,6 +49,7 @@ export class ConfigService {
         })
       };
     }
+    this.initialized = true;
   }
 
   public getRemoteConfig(): Config {
@@ -91,8 +95,13 @@ export class ConfigService {
 
   public updateConfig() {
     if (window && window.process && window.process.type) {
+      this.update = false;
       this.initialize(this.store.get('config'));
     }
+  }
+
+  public setUpdate(): void {
+    this.update = true;
   }
 
   public getHTTPHeaders(): object {
@@ -106,6 +115,23 @@ export class ConfigService {
   public getAPIInterval() {
     return this.config.octoprint.apiInterval;
   }
+
+  public isInitialized(): boolean {
+    return this.initialized;
+  }
+
+  public isValid(): boolean {
+    return this.valid;
+  }
+
+  public isUpdate(): boolean {
+    return this.update;
+  }
+
+  public isTouchscreen(): boolean {
+    return this.config.octodash.touchscreen;
+  }
+
 }
 
 export interface Config {

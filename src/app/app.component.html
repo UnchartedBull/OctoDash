@@ -1,4 +1,4 @@
-<div *ngIf="configService.config" class="container">
+<!-- <div *ngIf="configService.config" class="container">
     <div *ngIf="configService.valid">
         <div *ngIf="!configService.config.octodash.touchscreen">
             <app-job-status></app-job-status>
@@ -28,4 +28,9 @@
 </div>
 <div *ngIf="!configService.config">
     <app-no-config></app-no-config>
+</div> -->
+
+<app-error></app-error>
+<div class="container">
+    <router-outlet></router-outlet>
 </div>
