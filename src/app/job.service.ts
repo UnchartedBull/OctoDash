@@ -18,33 +18,32 @@ export class JobService {
   constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(750, this.configService.getAPIInterval()).subscribe(_ => {
-        if (this.configService.isValid()) {
-          if (this.httpGETRequest) {
-            this.httpGETRequest.unsubscribe();
-          }
-          this.httpGETRequest = this.http.get(this.configService.getURL('job'), this.configService.getHTTPHeaders()).subscribe(
-            (data: OctoprintJobAPI) => {
-              let job: Job = null;
-              if (data.state === 'Printing') {
-                job = {
-                  filename: data.job.file.display.replace('.gcode', ''),
-                  progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                  filamentAmount: this.filamentLengthToAmount(data.job.filament.tool0.length),
-                  timeLeft: {
-                    value: this.timeConvert(data.progress.printTimeLeft),
-                    unit: 'h'
-                  },
-                  timePrinted: {
-                    value: this.timeConvert(data.progress.printTime),
-                    unit: 'h'
-                  },
-                };
-              }
-              observer.next(job);
-            }, (error: HttpErrorResponse) => {
-              this.errorService.setError('Can\'t retrieve jobs!', error.message);
-            });
+        if (this.httpGETRequest) {
+          this.httpGETRequest.unsubscribe();
         }
+        this.httpGETRequest = this.http.get(this.configService.getURL('job'), this.configService.getHTTPHeaders()).subscribe(
+          (data: OctoprintJobAPI) => {
+            let job: Job = null;
+            if (data.state === 'Printing') {
+              job = {
+                filename: data.job.file.display.replace('.gcode', ''),
+                progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
+                filamentAmount: this.filamentLengthToAmount(data.job.filament.tool0.length),
+                timeLeft: {
+                  value: this.timeConvert(data.progress.printTimeLeft),
+                  unit: 'h'
+                },
+                timePrinted: {
+                  value: this.timeConvert(data.progress.printTime),
+                  unit: 'h'
+                },
+              };
+            }
+            observer.next(job);
+          }, (error: HttpErrorResponse) => {
+            this.errorService.setError('Can\'t retrieve jobs!', error.message);
+          });
+
       });
     }).pipe(share());
   }
@@ -111,14 +110,14 @@ export class JobService {
 
   private timeConvert(input: number): string {
     const hours = (input / 60 / 60);
-    let rhours = Math.floor(hours);
-    const minutes = (hours - rhours) * 60;
-    let rminutes = Math.round(minutes);
-    if (rminutes === 60) {
-      rminutes = 0;
-      rhours += 1;
+    let roundedHours = Math.floor(hours);
+    const minutes = (hours - roundedHours) * 60;
+    let roundedMinutes = Math.round(minutes);
+    if (roundedMinutes === 60) {
+      roundedMinutes = 0;
+      roundedHours += 1;
     }
-    return rhours + ':' + ('0' + rminutes).slice(-2);
+    return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
   }
 
   private filamentLengthToAmount(filamentLength: number): number {

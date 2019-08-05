@@ -26,6 +26,8 @@ import { ControlComponent } from './control/control.component';
 import { AppRoutingModule } from './app.routing.module';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
+import { FilamentComponent } from './filament/filament.component';
+import { FilesComponent } from './files/files.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-n
     MainMenuComponent,
     ControlComponent,
     MainScreenComponent,
-    MainScreenNoTouchComponent
+    MainScreenNoTouchComponent,
+    FilamentComponent,
+    FilesComponent
   ],
   imports: [
     BrowserModule,

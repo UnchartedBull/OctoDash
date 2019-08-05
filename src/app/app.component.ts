@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   constructor(private configService: ConfigService, private service: AppService, private router: Router) {
     this.initialize();
@@ -44,12 +44,5 @@ export class AppComponent implements OnInit {
     } else {
       setTimeout(this.initialize, 200);
     }
-  }
-
-  ngOnInit() {
-    // // FIXME: Adds second subscription
-    // if (this.configService.valid && this.configService.config.octodash.touchscreen) {
-    //   this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => this.printing = job !== null));
-    // }
   }
 }

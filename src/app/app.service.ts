@@ -8,11 +8,10 @@ export class AppService {
   private updateError: string[];
 
   constructor() {
-    this.updateError = ['. should have required property \'octodash\'']
+    this.updateError = ['. should have required property \'octodash\''];
   }
 
   public getUpdateError(): string[] {
-    console.log(this.updateError)
     return this.updateError;
   }
 

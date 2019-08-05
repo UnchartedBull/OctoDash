@@ -7,6 +7,8 @@ import { InvalidConfigComponent } from './config/invalid-config/invalid-config.c
 import { NoConfigComponent } from './config/no-config/no-config.component';
 import { AppComponent } from './app.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
+import { FilamentComponent } from './filament/filament.component';
+import { FilesComponent } from './files/files.component';
 
 
 const routes: Routes = [
@@ -23,13 +25,21 @@ const routes: Routes = [
     component: ControlComponent
   },
   {
+    path: 'filament',
+    component: FilamentComponent
+  },
+  {
+    path: 'files',
+    component: FilesComponent
+  },
+  {
     path: 'invalid-config',
     component: InvalidConfigComponent
   },
   {
     path: 'no-config',
     component: NoConfigComponent
-  }
+  },
 ];
 
 
