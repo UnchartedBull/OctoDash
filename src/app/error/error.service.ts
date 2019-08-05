@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ErrorService {
   constructor() {
     this.observable = new Observable((observer: Observer<Error>) => {
       this.observer = observer;
-    }).pipe(share());
+    }).pipe(shareReplay(1));
   }
 
   setError(heading: string, text: string) {

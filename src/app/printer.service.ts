@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from './config/config.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
 import { ErrorService } from './error/error.service';
 
@@ -15,8 +15,8 @@ export class PrinterService {
   observable: Observable<PrinterStatusAPI>;
 
   constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
-    console.log("CREATED")
     this.observable = new Observable((observer: Observer<any>) => {
+      console.log("created");
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
@@ -51,7 +51,7 @@ export class PrinterService {
             this.errorService.setError('Can\'t retrieve printer status!', error.message);
           });
       });
-    }).pipe(share());
+    }).pipe(shareReplay(1));
   }
 
   getObservable(): Observable<PrinterStatusAPI> {

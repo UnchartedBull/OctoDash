@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
-import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { ConfigService } from '../config/config.service';
-import { share } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 import { OctoprintLayerProgressAPI } from '../octoprint-api/layerProgressAPI';
 import { ErrorService } from '../error/error.service';
 
@@ -33,7 +33,7 @@ export class LayerProgressService {
             });
 
       });
-    }).pipe(share());
+    }).pipe(shareReplay(1));
   }
 
 

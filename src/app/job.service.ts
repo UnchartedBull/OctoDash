@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
-import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { share } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { shareReplay } from 'rxjs/operators';
 import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
 import { ErrorService } from './error/error.service';
 
@@ -45,7 +45,7 @@ export class JobService {
           });
 
       });
-    }).pipe(share());
+    }).pipe(shareReplay(1));
   }
 
   public getObservable(): Observable<Job> {
