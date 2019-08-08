@@ -12,11 +12,11 @@ import { ErrorService } from './error/error.service';
 export class PrinterService {
 
   httpGETRequest: Subscription;
+  httpPOSTRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
   constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
     this.observable = new Observable((observer: Observer<any>) => {
-      console.log("created");
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
@@ -57,6 +57,37 @@ export class PrinterService {
   getObservable(): Observable<PrinterStatusAPI> {
     return this.observable;
   }
+
+  jog(x: number, y: number, z: number) {
+    const jogPayload: JogCommand = {
+      command: 'jog',
+      x,
+      y,
+      z,
+      speed: 150
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.errorService.setError('Can\'t move Printhead!', error.message);
+        }
+      );
+  }
+
+  executeGCode(gCode: string) {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const gCodePayload: GCodeCommand = {
+      commands: gCode.split('; ')
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.errorService.setError('Can\'t send GCode!', error.message);
+        }
+      );
+  }
 }
 
 export interface PrinterStatusAPI {
@@ -68,4 +99,16 @@ export interface PrinterStatusAPI {
 export interface PrinterValue {
   current: number;
   set: number;
+}
+
+interface JogCommand {
+  command: string;
+  x: number;
+  y: number;
+  z: number;
+  speed: number;
+}
+
+interface GCodeCommand {
+  commands: string[];
 }

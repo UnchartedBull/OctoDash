@@ -2,21 +2,20 @@
     margin-top: 5vh;
     display: block;
 
+    &__heading {
+        display: block;
+        margin-top: 4vh;
+        font-size: 3vw;
+        opacity: .5;
+        font-weight: 400;
+    }
+
     &__XY {
         display: block;
         width: 45vw;
         height: 60vh;
         text-align: center;
         float: left;
-        margin-top: 3.5vh;
-
-        &-heading {
-            display: block;
-            margin-top: 4vh;
-            font-size: 3vw;
-            opacity: .5;
-            font-weight: 400;
-        }
 
         &-wrapper {
             position: relative;
@@ -24,7 +23,6 @@
             height: 50vh;
             margin-left: 5vw;
             font-size: 20vh;
-            color: green;
         }
     }
 
@@ -34,15 +32,6 @@
         height: 60vh;
         text-align: center;
         float: left;
-        margin-top: 3.5vh;
-
-        &-heading {
-            display: block;
-            margin-top: 4vh;
-            font-size: 3vw;
-            opacity: .5;
-            font-weight: 400;
-        }
 
         &-wrapper {
             position: relative;
@@ -50,7 +39,6 @@
             height: 50vh;
             margin-left: 5vw;
             font-size: 20vh;
-            color: green;
         }
     }
 
@@ -91,8 +79,48 @@
         }
     }
 
+
+    &__distance {
+        width: 50vw;
+        margin-left: 12vw;
+        margin-top: 4.5vh;
+        display: inline-block;
+        border-collapse: separate;
+
+        &-field {
+            font-size: 2.8vw;
+            width: 10vw;
+            text-align: center;
+            border: .25vw solid #f5f6fa;
+            border-right: .175vw solid #f5f6fa;
+            border-left: .175vw solid #f5f6fa;
+            padding: 1vh .7vw;
+            opacity: .5;
+            background-color: transparent;
+            transition: all .3s ease-in-out;
+            transition-property: opacity, background;
+
+            &-active {
+                opacity: .9;
+                background-color: rgba(245, 246, 250, .2);
+
+            }
+        }
+
+        &-field:first-child {
+            border-top-left-radius: 1vw;
+            border-bottom-left-radius: 1vw;
+            border-left: .25vw solid #f5f6fa;
+        }
+
+        &-field:last-child {
+            border-top-right-radius: 1vw;
+            border-bottom-right-radius: 1vw;
+            border-right: .25vw solid #f5f6fa;
+        }
+    }
+
     &__custom {
-        // background-color: red;
         height: 75vh;
         width: 30vw;
         display: block;
@@ -112,6 +140,7 @@
             &-icon {
                 font-size: 5.5vw;
                 vertical-align: -3vw;
+
             }
         }
     }
