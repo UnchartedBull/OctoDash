@@ -26,8 +26,8 @@ function createWindow() {
     } = require('electron')
     const mainScreen = screen.getPrimaryDisplay();
     window = new BrowserWindow({
-        width: dev ? big ? 1080 : 1400 : mainScreen.size.width,
-        height: dev ? big ? 342 : 502 : mainScreen.size.height,
+        width: dev ? big ? 1400 : 1080 : mainScreen.size.width,
+        height: dev ? big ? 502 : 342 : mainScreen.size.height,
         frame: dev ? true : false,
         fullscreen: dev ? false : true,
         webPreferences: {

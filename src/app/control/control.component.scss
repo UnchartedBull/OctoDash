@@ -1,0 +1,118 @@
+.control {
+    margin-top: 5vh;
+    display: block;
+
+    &__XY {
+        display: block;
+        width: 45vw;
+        height: 60vh;
+        text-align: center;
+        float: left;
+        margin-top: 3.5vh;
+
+        &-heading {
+            display: block;
+            margin-top: 4vh;
+            font-size: 3vw;
+            opacity: .5;
+            font-weight: 400;
+        }
+
+        &-wrapper {
+            position: relative;
+            width: 35vw;
+            height: 50vh;
+            margin-left: 5vw;
+            font-size: 20vh;
+            color: green;
+        }
+    }
+
+    &__Z {
+        display: block;
+        width: 19vw;
+        height: 60vh;
+        text-align: center;
+        float: left;
+        margin-top: 3.5vh;
+
+        &-heading {
+            display: block;
+            margin-top: 4vh;
+            font-size: 3vw;
+            opacity: .5;
+            font-weight: 400;
+        }
+
+        &-wrapper {
+            position: relative;
+            width: 15vw;
+            height: 50vh;
+            margin-left: 5vw;
+            font-size: 20vh;
+            color: green;
+        }
+    }
+
+    &__icon {
+        font-size: 15vw;
+        position: absolute;
+        padding: 0 1.7vw;
+        opacity: .9;
+
+        &-1 {
+            top: -9vh;
+            left: 11.3vw;
+        }
+
+        &-2 {
+            top: 9.5vh;
+            left: .5vw;
+        }
+
+        &-3 {
+            top: 9.5vh;
+            right: .3vh;
+        }
+
+        &-4 {
+            bottom: -8.5vh;
+            left: 11.3vw;
+        }
+
+        &-5 {
+            top: -9vh;
+            left: -1.8vw;
+        }
+
+        &-6 {
+            bottom: -8.5vh;
+            left: -1.8vw;
+        }
+    }
+
+    &__custom {
+        // background-color: red;
+        height: 75vh;
+        width: 30vw;
+        display: block;
+        float: right;
+
+        &-action {
+            display: block;
+            float: left;
+            width: 10vw;
+            height: 10vw;
+            border: .8vw solid #f5f6fa;
+            border-radius: 1.5vw;
+            text-align: center;
+            opacity: .9;
+            margin: 0 1.4vw 3vh 1.4vw;
+
+            &-icon {
+                font-size: 5.5vw;
+                vertical-align: -3vw;
+            }
+        }
+    }
+}

@@ -1,1 +1,50 @@
-<p>control works!</p>
+<table class="top-bar">
+    <tr>
+        <td class="top-bar__back" routerLink="/main-screen">
+            <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center">
+            <img src="assets/control.svg" class="top-bar__center-icon">
+        </td>
+        <td class="top-bar__next"></td>
+    </tr>
+</table>
+
+<div class="control">
+    <div class="control__XY">
+        <div class="control__XY-wrapper">
+            <fa-icon [icon]="['fas', 'angle-up']" class="control__icon control__icon-1"></fa-icon>
+            <fa-icon [icon]="['fas', 'angle-left']" class="control__icon control__icon-2"></fa-icon>
+            <fa-icon [icon]="['fas', 'angle-right']" class="control__icon control__icon-3"></fa-icon>
+            <fa-icon [icon]="['fas', 'angle-down']" class="control__icon control__icon-4"></fa-icon>
+        </div>
+        <span class="control__XY-heading">X / Y</span>
+    </div>
+    <div class="control__Z">
+        <div class="control__Z-wrapper">
+            <fa-icon [icon]="['fas', 'angle-up']" class="control__icon control__icon-5"></fa-icon>
+            <fa-icon [icon]="['fas', 'angle-down']" class="control__icon control__icon-6"></fa-icon>
+        </div>
+        <span class="control__XY-heading">Z</span>
+    </div>
+    <div class="control__custom">
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'home']" class="control__custom-action-icon"></fa-icon>
+        </div>
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'ruler-vertical']" class="control__custom-action-icon"></fa-icon>
+        </div>
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'fire-alt']" class="control__custom-action-icon"></fa-icon>
+        </div>
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'snowflake']" class="control__custom-action-icon"></fa-icon>
+        </div>
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'power-off']" class="control__custom-action-icon"></fa-icon>
+        </div>
+        <div class="control__custom-action">
+            <fa-icon [icon]="['fas', 'skull']" class="control__custom-action-icon"></fa-icon>
+        </div>
+    </div>
+</div>

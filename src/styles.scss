@@ -40,28 +40,33 @@ app-root {
     &__back {
         padding: 4vh 2vw 2vh 2vw;
         font-weight: 500;
+
+        &-icon {
+            width: 6vw;
+            vertical-align: -5vh;
+            margin-right: 1.4vw;
+            display: inline-block;
+        }
     }
 
     &__next {
         padding: 4vh 2vw 2vh 2vw;
         text-align: right;
-    }
 
-    &__back-icon {
-        width: 6vw;
-        vertical-align: -5vh;
-        margin-right: 1.4vw;
-        display: inline-block;
-    }
-
-    &__next-icon {
-        width: 6vw;
-        vertical-align: -5vh;
-        margin-left: 1.4vw;
-        margin-right: 1vw;
+        &-icon {
+            width: 6vw;
+            vertical-align: -5vh;
+            margin-left: 1.4vw;
+            margin-right: 1vw;
+        }
     }
 
     &__center {
         text-align: center;
+
+        &-icon {
+            width: 7vw;
+            margin-bottom: -3vh;
+        }
     }
 }
