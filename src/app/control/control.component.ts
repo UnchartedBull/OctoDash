@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PrinterService } from '../printer.service';
+import { ConfigService } from '../config/config.service';
 
 @Component({
   selector: 'app-control',
@@ -8,40 +9,12 @@ import { PrinterService } from '../printer.service';
 })
 export class ControlComponent {
   jogDistance = 10;
-  customControls = [
-    {
-      icon: 'home',
-      command: 'G28',
-      color: '#dcdde1'
-    },
-    {
-      icon: 'ruler-vertical',
-      command: 'G29',
-      color: '#44bd32'
-    },
-    {
-      icon: 'fire-alt',
-      command: 'M140 S50; M104 S185',
-      color: '#e1b12c'
-    },
-    {
-      icon: 'snowflake',
-      command: 'M140 S0; M104 S0',
-      color: '#0097e6'
-    },
-    {
-      icon: 'redo-alt',
-      command: '[!RELOAD]',
-      color: '#7f8fa6'
-    },
-    {
-      icon: 'skull',
-      command: '[!KILL]',
-      color: '#e84118'
-    }
-  ];
+  customActions = [];
+  showHelp = false;
 
-  constructor(private printerService: PrinterService) { }
+  constructor(private printerService: PrinterService, private configService: ConfigService) {
+    this.customActions = configService.getCustomActions();
+  }
 
   setDistance(distance: number) {
     this.jogDistance = distance;

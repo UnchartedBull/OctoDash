@@ -26,15 +26,6 @@ export class NoConfigComponent implements OnInit {
     if (this.configUpdate) {
       this.config = configService.getRemoteConfig();
       this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
-      // Insert automated fix from here
-      this.config.octodash = {
-        touchscreen: this.config.touchscreen,
-        temperatureSensor: {
-          type: 0,
-          gpio: null
-        }
-      };
-      delete this.config.touchscreen;
     } else {
       this.config = {
         octoprint: {
@@ -54,7 +45,39 @@ export class NoConfigComponent implements OnInit {
           temperatureSensor: {
             type: 0,
             gpio: 0
-          }
+          },
+          customActions: [
+            {
+              icon: 'home',
+              command: 'G28',
+              color: '#dcdde1'
+            },
+            {
+              icon: 'ruler-vertical',
+              command: 'G29',
+              color: '#44bd32'
+            },
+            {
+              icon: 'fire-alt',
+              command: 'M140 S50; M104 S185',
+              color: '#e1b12c'
+            },
+            {
+              icon: 'snowflake',
+              command: 'M140 S0; M104 S0',
+              color: '#0097e6'
+            },
+            {
+              icon: 'redo-alt',
+              command: '[!RELOAD]',
+              color: '#7f8fa6'
+            },
+            {
+              icon: 'skull',
+              command: '[!KILL]',
+              color: '#e84118'
+            }
+          ]
         }
       };
     }

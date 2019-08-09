@@ -116,6 +116,10 @@ export class ConfigService {
     return this.config.octoprint.apiInterval;
   }
 
+  public getCustomActions() {
+    return this.config.octodash.customActions;
+  }
+
   public isInitialized(): boolean {
     return this.initialized;
   }
@@ -139,13 +143,18 @@ export interface Config {
   printer: Printer;
   filament: Filament;
   octodash: OctoDash;
-  // DEPRECATED, will be removed with the next config change
-  touchscreen?: boolean;
 }
 
 interface OctoDash {
   touchscreen: boolean;
   temperatureSensor: TemperatureSensor | null;
+  customActions: CustomAction[];
+}
+
+interface CustomAction {
+  icon: string;
+  command: string;
+  color: string;
 }
 
 interface TemperatureSensor {
@@ -253,7 +262,8 @@ const schema = {
       title: 'The Octodash Schema',
       required: [
         'touchscreen',
-        'temperatureSensor'
+        'temperatureSensor',
+        'customActions'
       ],
       properties: {
         touchscreen: {
@@ -264,21 +274,40 @@ const schema = {
         temperatureSensor: {
           $id: '#/properties/octodash/properties/temperatureSensor',
           type: ['object', 'null'],
-          title: 'The Temperaturesensor Schema',
-          required: [
-            'type',
-            'gpio'
-          ],
-          properties: {
-            type: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/type',
-              type: 'integer',
-              title: 'The Type Schema'
-            },
-            gpio: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/gpio',
-              type: 'integer',
-              title: 'The Gpio Schema'
+          title: 'The Temperaturesensor Schema'
+        },
+        customActions: {
+          $id: '#/properties/octodash/properties/customActions',
+          type: 'array',
+          title: 'The Customactions Schema',
+          items: {
+            $id: '#/properties/octodash/properties/customActions/items',
+            type: 'object',
+            title: 'The Items Schema',
+            required: [
+              'icon',
+              'command',
+              'color'
+            ],
+            properties: {
+              icon: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/icon',
+                type: 'string',
+                title: 'The Icon Schema',
+                pattern: '^(.*)$'
+              },
+              command: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/command',
+                type: 'string',
+                title: 'The Command Schema',
+                pattern: '^(.*)$'
+              },
+              color: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/color',
+                type: 'string',
+                title: 'The Color Schema',
+                pattern: '^(.*)$'
+              }
             }
           }
         }

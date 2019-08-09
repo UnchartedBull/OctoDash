@@ -33,13 +33,15 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
-                "target": "deb",
-                "arch": [
-                    "armv7l",
-                    "arm64"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "deb",
+                    "arch": [
+                        "armv7l",
+                        "arm64"
+                    ]
+                }
+            ],
             "category": "Utility"
         }
     },
