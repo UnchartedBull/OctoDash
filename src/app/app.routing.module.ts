@@ -13,8 +13,7 @@ import { FilesComponent } from './files/files.component';
 const routes: Routes = [
   {
     path: 'main-screen',
-    // component: MainScreenComponent
-    component: ControlComponent
+    component: MainScreenComponent
   },
   {
     path: 'main-screen-no-touch',

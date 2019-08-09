@@ -54,11 +54,11 @@ export class PrinterService {
     }).pipe(shareReplay(1));
   }
 
-  getObservable(): Observable<PrinterStatusAPI> {
+  public getObservable(): Observable<PrinterStatusAPI> {
     return this.observable;
   }
 
-  jog(x: number, y: number, z: number) {
+  public jog(x: number, y: number, z: number) {
     const jogPayload: JogCommand = {
       command: 'jog',
       x,
@@ -74,7 +74,7 @@ export class PrinterService {
       );
   }
 
-  executeGCode(gCode: string) {
+  public executeGCode(gCode: string) {
     if (this.httpPOSTRequest) {
       this.httpPOSTRequest.unsubscribe();
     }

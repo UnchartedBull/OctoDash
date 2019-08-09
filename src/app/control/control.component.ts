@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PrinterService } from '../printer.service';
 import { ConfigService } from '../config/config.service';
+import { OctoprintService } from '../octoprint.service';
 
 @Component({
   selector: 'app-control',
@@ -12,8 +13,8 @@ export class ControlComponent {
   customActions = [];
   showHelp = false;
 
-  constructor(private printerService: PrinterService, private configService: ConfigService) {
-    this.customActions = configService.getCustomActions();
+  constructor(private printerService: PrinterService, private octoprintService: OctoprintService, private configService: ConfigService) {
+    this.customActions = this.configService.getCustomActions();
   }
 
   setDistance(distance: number) {
@@ -46,7 +47,7 @@ export class ControlComponent {
 
   // [!DISCONNECT]
   disconnectPrinter() {
-    // http://docs.octoprint.org/en/master/api/connection.html
+    this.octoprintService.disconnectPrinter();
   }
 
   // [!STOPDASHBOARD]
@@ -56,23 +57,22 @@ export class ControlComponent {
 
   // [!RELOAD]
   reloadOctoPrint() {
-    // action: restart
-    // http://docs.octoprint.org/en/master/api/system.html
+    this.octoprintService.sendSystemCommand('restart');
   }
 
   // [!REBOOT]
   rebootPi() {
-    // action: reboot
+    this.octoprintService.sendSystemCommand('reboot');
   }
 
   // [!SHUTDOWN]
   shutdownPi() {
-    // action: shutdown
+    this.octoprintService.sendSystemCommand('shutdown');
   }
 
   // [!KILL]
   kill() {
-    this.stopOctoDash();
-    setTimeout(this.shutdownPi, 500);
+    this.shutdownPi();
+    setTimeout(this.stopOctoDash, 500);
   }
 }
