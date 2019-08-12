@@ -29,7 +29,6 @@ function createWindow() {
         width: dev ? big ? 1400 : 1080 : mainScreen.size.width,
         height: dev ? big ? 502 : 342 : mainScreen.size.height,
         frame: dev ? true : false,
-        fullscreen: dev ? false : true,
         webPreferences: {
             nodeIntegration: true
         }
@@ -50,7 +49,11 @@ function createWindow() {
         }));
     }
 
-    if (dev) window.webContents.openDevTools();
+    if (!dev) {
+        window.setFullScreen(true)
+    } else {
+        window.webContents.openDevTools();
+    }
 
     if (config && config.octodash && config.octodash.temperatureSensor !== null) {
         queryTemperatureSensor();
