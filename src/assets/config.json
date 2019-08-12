@@ -5,7 +5,9 @@
         "apiInterval": 15000
     },
     "printer": {
-        "name": "NAME HERE"
+        "name": "NAME HERE",
+        "xySpeed": 100,
+        "zSpeed": 100
     },
     "filament": {
         "thickness": 0,

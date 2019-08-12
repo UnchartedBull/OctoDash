@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, OnDestroy } from '@angular/core';
-import { PrinterStatusComponent } from '../printer-status/printer-status.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JobService, Job } from '../job.service';
 

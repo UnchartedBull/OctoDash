@@ -64,8 +64,9 @@ export class PrinterService {
       x,
       y,
       z,
-      speed: 150
+      speed: z !== 0 ? this.configService.getZSpeed() * 60 : this.configService.getXYSpeed() * 60
     };
+    console.log(jogPayload);
     this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
       .subscribe(
         () => null, (error: HttpErrorResponse) => {

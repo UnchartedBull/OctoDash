@@ -1,35 +1,3 @@
-<!-- <div *ngIf="configService.config" class="container">
-    <div *ngIf="configService.valid">
-        <div *ngIf="!configService.config.octodash.touchscreen">
-            <app-job-status></app-job-status>
-            <app-printer-status></app-printer-status>
-            <app-layer-progress></app-layer-progress>
-            <app-bottom-bar></app-bottom-bar>
-        </div>
-        <div *ngIf="configService.config.octodash.touchscreen">
-            <app-error></app-error>
-            <div *ngIf="printing">
-                <app-print-control></app-print-control>
-                <app-job-status></app-job-status>
-                <app-printer-status></app-printer-status>
-                <app-layer-progress></app-layer-progress>
-                <app-bottom-bar></app-bottom-bar>
-            </div>
-            <div *ngIf="!printing">
-                <app-main-menu></app-main-menu>
-                <app-printer-status></app-printer-status>
-                <app-bottom-bar></app-bottom-bar>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="!configService.valid">
-        <app-invalid-config></app-invalid-config>
-    </div>
-</div>
-<div *ngIf="!configService.config">
-    <app-no-config></app-no-config>
-</div> -->
-
 <app-error></app-error>
 <div class="container">
     <router-outlet></router-outlet>

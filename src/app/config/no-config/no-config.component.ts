@@ -34,7 +34,9 @@ export class NoConfigComponent implements OnInit {
           apiInterval: 1500
         },
         printer: {
-          name: ''
+          name: '',
+          xySpeed: 150,
+          zSpeed: 5
         },
         filament: {
           thickness: 1.75,

@@ -1,9 +1,8 @@
 import _ from 'lodash';
 import { AppService } from './app.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { ConfigService } from './config/config.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +41,7 @@ export class AppComponent {
         this.router.navigate(['/no-config']);
       }
     } else {
-      setTimeout(this.initialize, 200);
+      setTimeout(this.initialize.bind(this), 1000);
     }
   }
 }

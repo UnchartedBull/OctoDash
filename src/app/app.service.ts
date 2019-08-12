@@ -9,7 +9,10 @@ export class AppService {
   private updateError: string[];
 
   constructor(private configService: ConfigService) {
-    this.updateError = ['.octodash should have required property \'customActions\''];
+    this.updateError = [
+      '.printer should have required property \'xySpeed\'',
+      '.printer should have required property \'zSpeed\'',
+      '.octodash should have required property \'customActions\''];
   }
 
   public getUpdateError(): string[] {
@@ -51,6 +54,8 @@ export class AppService {
         color: '#e84118'
       }
     ];
+    config.printer.xySpeed = 150;
+    config.printer.zSpeed = 5;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return true;

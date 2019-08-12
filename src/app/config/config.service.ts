@@ -120,6 +120,14 @@ export class ConfigService {
     return this.config.octodash.customActions;
   }
 
+  public getXYSpeed() {
+    return this.config.printer.xySpeed;
+  }
+
+  public getZSpeed() {
+    return this.config.printer.zSpeed;
+  }
+
   public isInitialized(): boolean {
     return this.initialized;
   }
@@ -170,6 +178,8 @@ interface Octoprint {
 
 interface Printer {
   name: string;
+  xySpeed: number;
+  zSpeed: number;
 }
 
 interface Filament {
@@ -182,7 +192,6 @@ const schema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   $id: 'http://example.com/root.json',
   type: 'object',
-  title: 'The Root Schema',
   required: [
     'octoprint',
     'printer',
@@ -193,7 +202,6 @@ const schema = {
     octoprint: {
       $id: '#/properties/octoprint',
       type: 'object',
-      title: 'The Octoprint Schema',
       required: [
         'url',
         'accessToken',
@@ -203,42 +211,46 @@ const schema = {
         url: {
           $id: '#/properties/octoprint/properties/url',
           type: 'string',
-          title: 'The Url Schema',
           pattern: '^(.*)$'
         },
         accessToken: {
           $id: '#/properties/octoprint/properties/accessToken',
           type: 'string',
-          title: 'The Accesstoken Schema',
           pattern: '^(.*)$'
         },
         apiInterval: {
           $id: '#/properties/octoprint/properties/apiInterval',
-          type: 'integer',
-          title: 'The Apiinterval Schema'
+          type: 'integer'
         }
       }
     },
     printer: {
       $id: '#/properties/printer',
       type: 'object',
-      title: 'The Printer Schema',
       required: [
-        'name'
+        'name',
+        'xySpeed',
+        'zSpeed'
       ],
       properties: {
         name: {
           $id: '#/properties/printer/properties/name',
           type: 'string',
-          title: 'The Name Schema',
           pattern: '^(.*)$'
+        },
+        xySpeed: {
+          $id: '#/properties/printer/properties/xySpeed',
+          type: 'integer'
+        },
+        zSpeed: {
+          $id: '#/properties/printer/properties/zSpeed',
+          type: 'integer'
         }
       }
     },
     filament: {
       $id: '#/properties/filament',
       type: 'object',
-      title: 'The Filament Schema',
       required: [
         'thickness',
         'density'
@@ -246,20 +258,17 @@ const schema = {
       properties: {
         thickness: {
           $id: '#/properties/filament/properties/thickness',
-          type: 'number',
-          title: 'The Thickness Schema'
+          type: 'number'
         },
         density: {
           $id: '#/properties/filament/properties/density',
-          type: 'number',
-          title: 'The Density Schema'
+          type: 'number'
         }
       }
     },
     octodash: {
       $id: '#/properties/octodash',
       type: 'object',
-      title: 'The Octodash Schema',
       required: [
         'touchscreen',
         'temperatureSensor',
@@ -268,22 +277,18 @@ const schema = {
       properties: {
         touchscreen: {
           $id: '#/properties/octodash/properties/touchscreen',
-          type: 'boolean',
-          title: 'The Touchscreen Schema'
+          type: 'boolean'
         },
         temperatureSensor: {
           $id: '#/properties/octodash/properties/temperatureSensor',
-          type: ['object', 'null'],
-          title: 'The Temperaturesensor Schema'
+          type: ['object', 'null']
         },
         customActions: {
           $id: '#/properties/octodash/properties/customActions',
           type: 'array',
-          title: 'The Customactions Schema',
           items: {
             $id: '#/properties/octodash/properties/customActions/items',
             type: 'object',
-            title: 'The Items Schema',
             required: [
               'icon',
               'command',
@@ -293,19 +298,16 @@ const schema = {
               icon: {
                 $id: '#/properties/octodash/properties/customActions/items/properties/icon',
                 type: 'string',
-                title: 'The Icon Schema',
                 pattern: '^(.*)$'
               },
               command: {
                 $id: '#/properties/octodash/properties/customActions/items/properties/command',
                 type: 'string',
-                title: 'The Command Schema',
                 pattern: '^(.*)$'
               },
               color: {
                 $id: '#/properties/octodash/properties/customActions/items/properties/color',
                 type: 'string',
-                title: 'The Color Schema',
                 pattern: '^(.*)$'
               }
             }
