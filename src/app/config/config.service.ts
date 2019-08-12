@@ -16,10 +16,13 @@ declare global {
 export class ConfigService {
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
-  private httpHeaders: object;
+
   public config: Config;
-  public valid: boolean;
-  public update = false;
+  private valid: boolean;
+  private update = false;
+  private initialized = false;
+
+  private httpHeaders: object;
 
   constructor(private http: HttpClient) {
     const ajv = new Ajv({ allErrors: true });
@@ -46,6 +49,7 @@ export class ConfigService {
         })
       };
     }
+    this.initialized = true;
   }
 
   public getRemoteConfig(): Config {
@@ -91,8 +95,13 @@ export class ConfigService {
 
   public updateConfig() {
     if (window && window.process && window.process.type) {
+      this.update = false;
       this.initialize(this.store.get('config'));
     }
+  }
+
+  public setUpdate(): void {
+    this.update = true;
   }
 
   public getHTTPHeaders(): object {
@@ -106,6 +115,35 @@ export class ConfigService {
   public getAPIInterval() {
     return this.config.octoprint.apiInterval;
   }
+
+  public getCustomActions() {
+    return this.config.octodash.customActions;
+  }
+
+  public getXYSpeed() {
+    return this.config.printer.xySpeed;
+  }
+
+  public getZSpeed() {
+    return this.config.printer.zSpeed;
+  }
+
+  public isInitialized(): boolean {
+    return this.initialized;
+  }
+
+  public isValid(): boolean {
+    return this.valid;
+  }
+
+  public isUpdate(): boolean {
+    return this.update;
+  }
+
+  public isTouchscreen(): boolean {
+    return this.config.octodash.touchscreen;
+  }
+
 }
 
 export interface Config {
@@ -113,13 +151,18 @@ export interface Config {
   printer: Printer;
   filament: Filament;
   octodash: OctoDash;
-  // DEPRECATED, will be removed with the next config change
-  touchscreen?: boolean;
 }
 
 interface OctoDash {
   touchscreen: boolean;
   temperatureSensor: TemperatureSensor | null;
+  customActions: CustomAction[];
+}
+
+interface CustomAction {
+  icon: string;
+  command: string;
+  color: string;
 }
 
 interface TemperatureSensor {
@@ -135,6 +178,8 @@ interface Octoprint {
 
 interface Printer {
   name: string;
+  xySpeed: number;
+  zSpeed: number;
 }
 
 interface Filament {
@@ -147,7 +192,6 @@ const schema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   $id: 'http://example.com/root.json',
   type: 'object',
-  title: 'The Root Schema',
   required: [
     'octoprint',
     'printer',
@@ -158,7 +202,6 @@ const schema = {
     octoprint: {
       $id: '#/properties/octoprint',
       type: 'object',
-      title: 'The Octoprint Schema',
       required: [
         'url',
         'accessToken',
@@ -168,42 +211,46 @@ const schema = {
         url: {
           $id: '#/properties/octoprint/properties/url',
           type: 'string',
-          title: 'The Url Schema',
           pattern: '^(.*)$'
         },
         accessToken: {
           $id: '#/properties/octoprint/properties/accessToken',
           type: 'string',
-          title: 'The Accesstoken Schema',
           pattern: '^(.*)$'
         },
         apiInterval: {
           $id: '#/properties/octoprint/properties/apiInterval',
-          type: 'integer',
-          title: 'The Apiinterval Schema'
+          type: 'integer'
         }
       }
     },
     printer: {
       $id: '#/properties/printer',
       type: 'object',
-      title: 'The Printer Schema',
       required: [
-        'name'
+        'name',
+        'xySpeed',
+        'zSpeed'
       ],
       properties: {
         name: {
           $id: '#/properties/printer/properties/name',
           type: 'string',
-          title: 'The Name Schema',
           pattern: '^(.*)$'
+        },
+        xySpeed: {
+          $id: '#/properties/printer/properties/xySpeed',
+          type: 'integer'
+        },
+        zSpeed: {
+          $id: '#/properties/printer/properties/zSpeed',
+          type: 'integer'
         }
       }
     },
     filament: {
       $id: '#/properties/filament',
       type: 'object',
-      title: 'The Filament Schema',
       required: [
         'thickness',
         'density'
@@ -211,48 +258,58 @@ const schema = {
       properties: {
         thickness: {
           $id: '#/properties/filament/properties/thickness',
-          type: 'number',
-          title: 'The Thickness Schema'
+          type: 'number'
         },
         density: {
           $id: '#/properties/filament/properties/density',
-          type: 'number',
-          title: 'The Density Schema'
+          type: 'number'
         }
       }
     },
     octodash: {
       $id: '#/properties/octodash',
       type: 'object',
-      title: 'The Octodash Schema',
       required: [
         'touchscreen',
-        'temperatureSensor'
+        'temperatureSensor',
+        'customActions'
       ],
       properties: {
         touchscreen: {
           $id: '#/properties/octodash/properties/touchscreen',
-          type: 'boolean',
-          title: 'The Touchscreen Schema'
+          type: 'boolean'
         },
         temperatureSensor: {
           $id: '#/properties/octodash/properties/temperatureSensor',
-          type: ['object', 'null'],
-          title: 'The Temperaturesensor Schema',
-          required: [
-            'type',
-            'gpio'
-          ],
-          properties: {
-            type: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/type',
-              type: 'integer',
-              title: 'The Type Schema'
-            },
-            gpio: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/gpio',
-              type: 'integer',
-              title: 'The Gpio Schema'
+          type: ['object', 'null']
+        },
+        customActions: {
+          $id: '#/properties/octodash/properties/customActions',
+          type: 'array',
+          items: {
+            $id: '#/properties/octodash/properties/customActions/items',
+            type: 'object',
+            required: [
+              'icon',
+              'command',
+              'color'
+            ],
+            properties: {
+              icon: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/icon',
+                type: 'string',
+                pattern: '^(.*)$'
+              },
+              command: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/command',
+                type: 'string',
+                pattern: '^(.*)$'
+              },
+              color: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/color',
+                type: 'string',
+                pattern: '^(.*)$'
+              }
             }
           }
         }

@@ -5,11 +5,47 @@
         "apiInterval": 15000
     },
     "printer": {
-        "name": "NAME HERE"
+        "name": "NAME HERE",
+        "xySpeed": 100,
+        "zSpeed": 100
     },
     "filament": {
         "thickness": 0,
         "density": 0
     },
-    "touchscreen": true
+    "octodash": {
+        "touchscreen": true,
+        "temperatureSensor": null,
+        "customActions": [{
+                "icon": "home",
+                "command": "G28",
+                "color": "#dcdde1"
+            },
+            {
+                "icon": "ruler-vertical",
+                "command": "G29",
+                "color": "#44bd32"
+            },
+            {
+                "icon": "fire-alt",
+                "command": "M140 S50; M104 S185",
+                "color": "#e1b12c"
+            },
+            {
+                "icon": "snowflake",
+                "command": "M140 S0; M104 S0",
+                "color": "#0097e6"
+            },
+            {
+                "icon": "redo-alt",
+                "command": "[!RELOAD]",
+                "color": "#7f8fa6"
+            },
+            {
+                "icon": "skull",
+                "command": "[!KILL]",
+                "color": "#e84118"
+            }
+        ]
+    }
 }

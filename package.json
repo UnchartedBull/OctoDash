@@ -33,13 +33,15 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
-                "target": "deb",
-                "arch": [
-                    "armv7l",
-                    "arm64"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "deb",
+                    "arch": [
+                        "armv7l",
+                        "arm64"
+                    ]
+                }
+            ],
             "category": "Utility"
         }
     },
@@ -69,6 +71,9 @@
         "@angular/platform-browser": "~8.0.0",
         "@angular/platform-browser-dynamic": "~8.0.0",
         "@angular/router": "~8.0.0",
+        "@fortawesome/angular-fontawesome": "^0.4.0",
+        "@fortawesome/fontawesome-svg-core": "^1.2.21",
+        "@fortawesome/free-solid-svg-icons": "^5.10.1",
         "ajv": "^6.10.2",
         "angular-svg-round-progressbar": "^3.0.1",
         "electron-store": "^4.0.0",

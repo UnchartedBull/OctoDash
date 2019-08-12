@@ -26,10 +26,9 @@ function createWindow() {
     } = require('electron')
     const mainScreen = screen.getPrimaryDisplay();
     window = new BrowserWindow({
-        width: dev ? big ? 1080 : 1400 : mainScreen.size.width,
-        height: dev ? big ? 342 : 502 : mainScreen.size.height,
+        width: dev ? big ? 1400 : 1080 : mainScreen.size.width,
+        height: dev ? big ? 502 : 342 : mainScreen.size.height,
         frame: dev ? true : false,
-        fullscreen: dev ? false : true,
         webPreferences: {
             nodeIntegration: true
         }
@@ -50,7 +49,11 @@ function createWindow() {
         }));
     }
 
-    if (dev) window.webContents.openDevTools();
+    if (!dev) {
+        window.setFullScreen(true)
+    } else {
+        window.webContents.openDevTools();
+    }
 
     if (config && config.octodash && config.octodash.temperatureSensor !== null) {
         queryTemperatureSensor();
@@ -92,9 +95,7 @@ function queryTemperatureSensor() {
 app.on('ready', createWindow)
 
 app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-        app.quit();
-    }
+    app.quit()
 });
 
 app.on("activate", () => {
