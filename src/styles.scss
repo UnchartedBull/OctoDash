@@ -111,3 +111,22 @@ app-root {
     }
 
 }
+
+.splash-screen {
+
+    &__icon {
+        height: 40vh;
+        margin-top: 20vh;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    &__credits {
+        display: block;
+        font-size: 1.8vw;
+        text-align: center;
+        opacity: .8;
+        margin-top: 10vh;
+    }
+}
