@@ -29,9 +29,11 @@ function createWindow() {
         width: dev ? big ? 1400 : 1080 : mainScreen.size.width,
         height: dev ? big ? 502 : 342 : mainScreen.size.height,
         frame: dev ? true : false,
+        backgroundColor: '#353b48',
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        icon: path.join(__dirname, 'src/assets/icon.png')
     })
 
     config = store.get("config")

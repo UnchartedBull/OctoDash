@@ -57,13 +57,17 @@
             Now I need to know something about your OctoPrint setup, so I can talk to your printer.
         </span>
         <form class="no-config__form">
-            <label for="octoprintURL" class="no-config__input-label">Octoprint URL:</label>
-            <input type="text" id="octoprintURL" class="no-config__input" [(ngModel)]="this.config.octoprint.url"
-                name="octoprintURL" required style="width: 52.5vw">
-
-            <label for="accessToken" class="no-config__input-label">Access Token:</label>
+            <label for="octoprintURLName" class="no-config__input-label">URL:</label>
+            <span class="no-config__input-prefix">http://</span>
+            <input type="text" id="octoprintURLName" class="no-config__input" [(ngModel)]="this.urlName"
+                name="octoprintURLName" required style="width: 42.5vw">
+            :
+            <input type="text" id="octoprintURLPort" class="no-config__input" [(ngModel)]="this.urlPort"
+                name="octoprintURLPort" required style="width: 14vw">
+            <br>
+            <label for="accessToken" class="no-config__input-label">API Key:</label>
             <input type="text" id="accessToken" class="no-config__input" [(ngModel)]="this.config.octoprint.accessToken"
-                name="accessToken" required>
+                name="accessToken" style="width: 67vw" required>
         </form>
     </div>
     <div *ngIf="page === 3">

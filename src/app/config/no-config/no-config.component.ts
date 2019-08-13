@@ -12,6 +12,9 @@ export class NoConfigComponent implements OnInit {
   page = 0;
   totalPages = 4;
 
+  urlName: string;
+  urlPort: number;
+
   configUpdate: boolean;
   config: Config;
   configErrors: string[];
@@ -83,6 +86,8 @@ export class NoConfigComponent implements OnInit {
         }
       };
     }
+    this.urlName = this.config.octoprint.url.split(':')[1].replace('//', '');
+    this.urlPort = parseInt(this.config.octoprint.url.split(':')[2], 10);
   }
 
   ngOnInit() {
@@ -96,7 +101,7 @@ export class NoConfigComponent implements OnInit {
       })
     };
     this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
-      (data: JSON) => {
+      () => {
         this.octoprintConnection = true;
         this.saveConfig();
       },
@@ -111,7 +116,7 @@ export class NoConfigComponent implements OnInit {
   createConfig() {
     this.configErrors = [];
     this.octoprintConnectionError = null;
-    this.config.octoprint.url = this.config.octoprint.url + '/api/';
+    this.config.octoprint.url = `http://${this.urlName}:${this.urlPort}/api/`;
     if (this.config.octodash.temperatureSensor.type === 0) {
       this.config.octodash.temperatureSensor = null;
     }
