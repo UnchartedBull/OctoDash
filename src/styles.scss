@@ -90,6 +90,16 @@ app-root {
         background-color: #353b48;
         padding: 3.5vh 2vw;
     }
+}
+
+.help {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 1000;
 
     &__close {
         display: block;
@@ -129,4 +139,10 @@ app-root {
         opacity: .8;
         margin-top: 10vh;
     }
+
+    &__text {
+        text-align: justify;
+        font-size: 3vw;
+    }
+
 }
