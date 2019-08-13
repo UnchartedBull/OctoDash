@@ -12,12 +12,7 @@ OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the ins
 - [OctoDash](#octodash)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
-    - [Electron App (recommended)](#electron-app-recommended)
-      - [Creating Config manually](#creating-config-manually)
-      - [Start on boot](#start-on-boot)
-    - [Website (deprecated)](#website-deprecated)
   - [Update](#update)
-  - [Supported Devices](#supported-devices)
   - [Screenshots](#screenshots)
   - [Troubleshooting](#troubleshooting)
   - [Bugs and more](#bugs-and-more)
@@ -27,85 +22,33 @@ OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the ins
 
 ## Installation
 
-You need to install the DisplayLayerProgress Plugin by OllisGit to enable the full functionality of OctoDash. The API is currently not in the final plugin, so please install the plugin with the following link: https://github.com/UnchartedBull/OctoPrint-DisplayLayerProgress/archive/master.zip.
-
-### Electron App (recommended)
-
-*Note: This tutorial is for the Raspberry Pi only (2 and higher). If you have running OctoPrint on something different please adjust the links*
-
-- Download the latest release *Check for newer version (Releases)*  
-`wget -O octodash.deb https://github.com/UnchartedBull/OctoDash/releases/download/v1.1.0/octodash_1.1.0_armv7l.deb`
-- Install the app  
-`sudo dpkg -i octodash.deb`
-- If you get an error while installing you may need to install the missing dependencies.  
-`sudo apt install -f && sudo dpkg -i octodash.deb`
-
-#### Creating Config manually
-If you don't want to use the Config Wizard you can also create the config manually. Just copy `sample.config.json` and adjust it according to your setup. Copy the file to `~/.config/octodash/config.json` (for Raspbian). For other OS please refer to the [Electron Docs](https://electronjs.org/docs/api/app#appgetpathname).
-
-#### Start on boot
-This is a superminimal install to just display OctoDash on Raspbian LITE. Good thing is, that it keeps the load and the Pi quite low and improves start-up time. If you use another window manager adjust your  files according to the Documentation.
-
-- Enable pi Console Autologin via  
-`sudo raspi-config`
-- Install xorg + ratpoison  
-`sudo apt install xserver-xorg --no-install-recommends ratpoison x11-xserver-utils xinit`
-- Create the .xinitrc file  
-`nano ~/.xinitrc`
-- Add the following contents:
 ```
-    #!/bin/sh
-
-    xset s off
-    xset s noblank
-    xset -dpms
-
-    ratpoison&
-    octodash
+wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh | bash -s -- --ptg
 ```
-- make the file executable  
-`sudo chmod +x .xinitrc`
-- make xinit autostart on boot  
-- `nano ~/.bashrc`
-- add the following at the very bottom:
-```
-if [ -z "$SSH_CLIENT" ] || [ -z "$SSH_TTY" ]; then
-    xinit -- -nocursor
-fi
-```
-- reboot
 
-
-If you get the `Cannot open virtual console 2 (Permission denied)` error run `sudo chmod ug+s /usr/lib/xorg/Xorg` and reboot.
-
-### Website (deprecated)
-
-The OctoDash Website Support was dropped in v1.1.0. It is still possible, you need to figure out some things yourself, though. The app will automatically detect a normal Browser Environment and will try to load `assets/config.json`.  
-The Project can be build using the Angular CLI and can be served via any WebServer.
+For more options and information hava a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation)
 
 ## Update
-To update OctoDash to the latest version just follow the Installation instruction. The package manager will update the app, if there is an older version installed.  
-Your config will not be touched during this process!
+```
+wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/update.sh | bash
+```
 
-## Supported Devices
+For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Update)
 
-It is recommended to use a 5" or 7" display with a resolution of 800x480 px. You shouldn't choose a screen smaller than 3.5" and with a lower resolution than 480x320 px.
-
-The prebuilt electron app supports Raspberry Pi 2 and higher. The Raspberry Pi 1 is not supported and never will be supported. If you use a Pi 1 please use the Website Version or build the app yourself.
-
-All other SoCs that are using an armv7, or arm64 compatible, processer are supported as well.
 
 ## Screenshots
 <p float="left">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-         text="Job Running"/>
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/no_job_no_touchscreen.png" width="49.5%"           alt-text="No Job Running">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%"           alt-text="Print Controls">
-        <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/paused.png" width="49.5%"           alt-text="Print Controls">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/main-screen.png" width="49.5%" alt-text="Main Screen"/>
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-text="Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/control.png" width="49.5%" alt-text="Printer Controls">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%" alt-text="In Print Controls">
 </p>
+
+More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/master/screenshots).
 
 ## Troubleshooting
 
-If you encounter an issue, while using OctoDash please have a look at the wiki Troubleshooting Guide first (not done yet)! If your issue is not covered please open an issue!
+If you encounter an issue, while using OctoDash please have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first! If your issue is not covered please open an issue!
 
 ## Bugs and more
 
