@@ -20,12 +20,12 @@ export class LayerProgressService {
         if (this.httpRequest) {
           this.httpRequest.unsubscribe();
         }
-        this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress'),
+        this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress/values'),
           this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintLayerProgressAPI) => {
               observer.next({
-                current: data.layer.current === '-' ? 0 : data.layer.current,
-                total: data.layer.total === '-' ? 0 : data.layer.total,
+                current: data.layer.current === '-' ? 0 : data.layer.current + 1,
+                total: data.layer.total === '-' ? 0 : data.layer.total + 1,
                 fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
               });
             }, (error: HttpErrorResponse) => {
