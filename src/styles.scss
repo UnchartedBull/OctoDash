@@ -52,6 +52,7 @@ app-root {
     &__next {
         padding: 4vh 2vw 2vh 2vw;
         text-align: right;
+        font-weight: 500;
 
         &-icon {
             width: 6vw;
@@ -145,4 +146,23 @@ app-root {
         font-size: 3vw;
     }
 
+}
+
+::-webkit-scrollbar {
+    width: 3vw;
+    box-shadow: none;
+    outline: none;
+
+    &-track {
+        background: #353b48;
+        box-shadow: none;
+        outline: none;
+    }
+
+    &-thumb {
+        background: #5d626c;
+        border-radius: .85vw;
+        box-shadow: none;
+        outline: none;
+    }
 }

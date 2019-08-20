@@ -13,7 +13,9 @@
     border-right: 1vw solid #5a6675;
 
     &__show {
-        top: 5vh;
+        // FIXME
+        top: -205vh;
+        // top: 5vh;
     }
 
     &__heading {

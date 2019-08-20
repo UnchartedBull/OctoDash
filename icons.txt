@@ -9,10 +9,11 @@
 "Sliders" by Danny Lelieveld from thenounproject.com
 "Close" by Danny Lelieveld from thenounproject.com
 "Pause" by Danny Lelieveld from thenounproject.com
-"Play" by Danny Lelieveld from the Noun Project
-"Thermometer" by Andrejs Kirma from the Noun Project
-"3d printer filament" by Cono Studio Milano from the Noun Project
-"Folder" by romzicon from the Noun Project
-"joystick" by ProSymbols from the Noun Project
-"Settings" by Karan from the Noun Project
-"help" by Rainbow Designs from the Noun Project
+"Play" by Danny Lelieveld from thenounproject.com
+"Thermometer" by Andrejs Kirma from thenounproject.com
+"3d printer filament" by Cono Studio Milano from thenounproject.com
+"Folder" by romzicon from thenounproject.com
+"joystick" by ProSymbols from thenounproject.com
+"Settings" by Karan from thenounproject.com
+"help" by Rainbow Designs from thenounproject.com
+"Refresh" by Nawicon from the Noun Project
