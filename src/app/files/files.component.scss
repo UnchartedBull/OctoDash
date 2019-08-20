@@ -12,13 +12,13 @@
 }
 
 .files {
+    display: block;
     width: 95vw;
     height: 84.5vh;
     margin-left: 2.5vw;
     margin-top: -2.5vh;
     overflow: auto;
     position: relative;
-
 
     &::before {
         content: '';
@@ -39,8 +39,6 @@
         height: 11vh;
         line-height: 11vh;
         margin-bottom: 2vh;
-        display: inline-flex;
-        padding: 0 2vw;
 
         &:first-of-type {
             margin-top: 3.5vh;
@@ -52,37 +50,38 @@
     }
 
     &__name {
-        font-size: 3.5vw;
+        font-size: 3.2vw;
+        height: 11vh;
         font-weight: 500;
         overflow: hidden;
-        position: relative;
-
-        &::before {
-            content: '';
-            height: 11vw;
-            position: absolute;
-            right: 0;
-            top: 0;
-            pointer-events: none;
-            background: linear-gradient(to right, transparent 89%, #718093);
-        }
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
     }
 
     &__icon {
         height: 8vh;
-        margin: 0 1vw 0 0;
-        margin-top: 1.8vh;
+        margin: 1.7vh 1vw 0 1vw;
+        display: block;
+        float: left;
     }
 
-    &__unit {
-        font-weight: 400;
-        font-size: 2.2vw;
-        padding-left: .5vw;
-        padding-right: 1.5vw;
+    &__info {
+        float: right;
+        padding-left: .7vw;
+        line-height: 6vw;
+
+        &-unit {
+            font-weight: 400;
+            font-size: 2.2vw;
+            padding-left: .5vw;
+            padding-right: 1.5vw;
+        }
+
+        &-value {
+            font-size: 3.2vw;
+            font-weight: 500;
+        }
     }
 
-    &__value {
-        font-size: 3.2vw;
-        font-weight: 500;
-    }
 }
