@@ -73,7 +73,7 @@
 
         &-unit {
             font-weight: 400;
-            font-size: 2.2vw;
+            font-size: 2vw;
             padding-left: .5vw;
             padding-right: 1.5vw;
         }
@@ -83,5 +83,115 @@
             font-weight: 500;
         }
     }
+}
 
+.file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 5;
+
+    &__close {
+        position: absolute;
+        right: 1.5vw;
+        top: 2vh;
+        width: 4vw;
+    }
+
+    &__wrapper {
+        position: fixed;
+        left: 25vw;
+        top: 8vh;
+        width: 50vw;
+        height: 80vh;
+        background-color: #353b48;
+        z-index: 10;
+        border-radius: 2vw;
+        padding: 2vh 1.5vw;
+        box-shadow: 8px 4px 18px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    &__name {
+        display: block;
+        font-size: 3.5vw;
+        margin-bottom: 1vh;
+        font-weight: 500;
+    }
+
+    &__directory {
+        display: block;
+        font-size: 2.4vw;
+        margin-bottom: 0.5vh;
+    }
+
+    &__creation-date {
+        display: block;
+        font-size: 2.4vw;
+    }
+
+    &__render {
+        height: 30vh;
+        margin: 3.5vh auto 2.5vh auto;
+        display: block;
+    }
+
+    &__details {
+        width: 90%;
+        margin-left: 5%;
+
+        & td {
+            width: 33.3%;
+            text-align: center;
+            font-size: 4vw;
+            font-weight: 500;
+
+            &:first-of-type {
+                text-align: left;
+            }
+
+            &:last-of-type {
+                text-align: right;
+            }
+        }
+
+        &-name {
+            font-size: 2.3vw;
+        }
+    }
+
+    &__actions {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 1vh;
+
+        & td {
+            width: 33.3%;
+            text-align: center;
+
+            &:first-of-type {
+                text-align: left;
+
+                & img {
+                    height: 10vh;
+                    margin-bottom: 4vh;
+                }
+            }
+
+            &:last-of-type {
+                text-align: right;
+
+                & img {
+                    height: 10vh;
+                    margin-bottom: 4.5vh;
+                }
+            }
+        }
+
+        & img {
+            height: 17vh;
+        }
+    }
 }

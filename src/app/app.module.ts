@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RoundProgressModule, ROUND_PROGRESS_DEFAULTS } from 'angular-svg-round-progressbar';
@@ -30,6 +30,14 @@ import { JobService } from './job.service';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
 
+import * as Hammer from 'hammerjs';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = {
+    press: { pointers: 1, time: 501, threshold: 15 },
+    swipe: { pointers: 1, direction: Hammer.DIRECTION_LEFT, threshold: 20, velocity: 0.4 }
+  } as any;
+}
 
 @NgModule({
   declarations: [
@@ -57,7 +65,17 @@ import { FilesComponent } from './files/files.component';
     FormsModule,
     FontAwesomeModule
   ],
-  providers: [AppService, ConfigService, ErrorService, PrinterService, JobService],
+  providers: [
+    AppService,
+    ConfigService,
+    ErrorService,
+    PrinterService,
+    JobService,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
