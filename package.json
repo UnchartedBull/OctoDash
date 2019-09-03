@@ -79,7 +79,7 @@
         "electron-store": "^4.0.0",
         "lodash": "^4.17.15",
         "node-dht-sensor": "^0.3.0",
-        "rxjs": "~6.5.2",
+        "rxjs": "~6.5.3",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"
     },
