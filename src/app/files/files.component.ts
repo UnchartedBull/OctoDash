@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HammerGestureConfig } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { FilesService, Folder } from '../files.service';
 
 @Component({
   selector: 'app-files',
@@ -9,7 +9,12 @@ import { HammerGestureConfig } from '@angular/platform-browser';
 
 export class FilesComponent {
 
-  constructor() {
+  currentFolder: string;
+  folderContent: Array<File | Folder>;
+
+  constructor(private filesService: FilesService) {
+    this.currentFolder = '/';
+    this.openFolder(this.currentFolder);
   }
 
   openDetails(file: string) {
@@ -18,5 +23,6 @@ export class FilesComponent {
 
   openFolder(foldername: string) {
     console.log(`opening ${foldername}`);
+    this.filesService.getFolder(foldername).then((data) => this.folderContent = data).catch((reason: string) => null);
   }
 }

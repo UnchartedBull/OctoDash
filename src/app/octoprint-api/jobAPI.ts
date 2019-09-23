@@ -21,7 +21,7 @@ interface OctoprintFile {
     date: number;
 }
 
-interface OctoprintFilament {
+export interface OctoprintFilament {
     tool0: OctoprintFilamentValues;
     tool1: OctoprintFilamentValues;
     [key: string]: any;
