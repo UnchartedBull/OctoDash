@@ -20,7 +20,7 @@ export class LayerProgressService {
         if (this.httpRequest) {
           this.httpRequest.unsubscribe();
         }
-        this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress/values'),
+        this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress/values').replace('/api', ''),
           this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintLayerProgressAPI) => {
               observer.next({
