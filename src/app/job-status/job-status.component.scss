@@ -33,6 +33,10 @@
         padding-top: 6.5vh;
         display: inline-block;
         width: 65vw;
+        text-overflow: ellipsis;
+        height: 12vh;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     &__filament {
