@@ -17,10 +17,6 @@
         (click)="openFolder(currentFolder.split('folder')[0]+'/'+folder)">{{ folder }}</span>
 </div>
 <div class="files">
-    <ngx-spinner>
-        <p class="la-pacman-text"> loading ... </p>
-    </ngx-spinner>
-
     <div *ngIf="!files" class="files__error">
         can't load files ...
     </div>
@@ -54,9 +50,9 @@
             </span>
         </div>
     </div>
-    <div class="file">
+    <div class="file" id="fileDetailView">
         <div class="file__wrapper">
-            <img src="assets/error.svg" class="file__close">
+            <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
             <span class="file__name">benchy</span>
             <span class="file__directory">benchmarks/benchy.gcode</span>
             <span class="file__creation-date">01.07.2019, 18:00</span>

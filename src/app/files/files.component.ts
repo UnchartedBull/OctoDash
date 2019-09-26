@@ -21,17 +21,22 @@ export class FilesComponent {
 
   openDetails(file: string) {
     console.log(file);
+    const fileDOMElement = document.getElementById('fileDetailView');
+    fileDOMElement.style.display = 'block';
+    setTimeout(() => {
+      fileDOMElement.style.opacity = '1';
+    }, 50);
   }
 
   openFolder(foldername: string) {
     // TODO
-    // this.spinner.show(undefined, {
-    //   bdColor: '#353b48',
-    //   color: '#f5f6fa',
-    //   size: 'medium',
-    //   type: 'pacman',
-    //   fullScreen: false
-    // });
+    this.spinner.show(undefined, {
+      bdColor: '#353b48',
+      color: '#f5f6fa',
+      size: 'medium',
+      type: 'pacman',
+      fullScreen: false
+    });
     this.folderContent = null;
     this.filesService.getFolder(foldername).then(
       (data) => {
@@ -41,7 +46,11 @@ export class FilesComponent {
       }).catch((reason: string) => this.spinner.hide());
   }
 
-  getBreadcrumbs() {
-    return this.currentFolder.split('/');
+  closeDetails() {
+    const fileDOMElement = document.getElementById('fileDetailView');
+    fileDOMElement.style.opacity = '0';
+    setTimeout(() => {
+      fileDOMElement.style.display = 'none';
+    }, 500);
   }
 }

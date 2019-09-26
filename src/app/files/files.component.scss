@@ -119,7 +119,9 @@
 }
 
 .file {
-    position: absolute;
+    opacity: 0;
+    transition: opacity ease-in-out .5s;
+    position: fixed;
     display: none;
     top: 0;
     left: 0;
