@@ -11,25 +11,57 @@
     }
 }
 
+.breadcrumbs {
+    display: block;
+    margin-left: 3vw;
+    margin-top: -4.5vh;
+
+    &__item {
+        font-size: 2.2vw;
+
+        &::before {
+            content: '/';
+            padding: 0 .9vw;
+        }
+
+        &:first-of-type {
+            &::before {
+                content: ''
+            }
+        }
+
+        &-home {
+            font-size: 2.4vw;
+            margin-right: -1vw;
+        }
+    }
+}
+
+
 .files {
     display: block;
     width: 95vw;
-    height: 84.5vh;
+    height: 81.5vh;
     margin-left: 2.5vw;
-    margin-top: -2.5vh;
+    margin-top: 0.5vh;
     overflow: auto;
     position: relative;
 
     &::before {
         content: '';
         width: 91vw;
-        height: 84.5vh;
+        height: 79.2vh;
         position: fixed;
         left: 2vw;
-        top: 15.5vh;
+        top: 21.8vh;
         z-index: 2;
         pointer-events: none;
         background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+    }
+
+    &__error {
+        text-align: center;
+        margin-top: 20vh;
     }
 
     &__object {

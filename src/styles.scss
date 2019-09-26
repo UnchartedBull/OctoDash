@@ -166,3 +166,15 @@ app-root {
         outline: none;
     }
 }
+
+.la-pacman {
+    overflow: visible;
+    margin-left: -4vw !important;
+    margin-top: -8vh !important;
+
+    &-text {
+        color: #f5f6fa;
+        font-size: 3vw;
+        font-weight: 500;
+    }
+}

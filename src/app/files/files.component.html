@@ -11,7 +11,26 @@
         </td>
     </tr>
 </table>
+<div class="breadcrumbs">
+    <fa-icon [icon]="['fas', 'home']" (click)="openFolder('/')" class="breadcrumbs__item-home"></fa-icon>
+    <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')"
+        (click)="openFolder(currentFolder.split('folder')[0]+'/'+folder)">{{ folder }}</span>
+</div>
 <div class="files">
+    <ngx-spinner>
+        <p class="la-pacman-text"> loading ... </p>
+    </ngx-spinner>
+
+    <div *ngIf="!files" class="files__error">
+        can't load files ...
+    </div>
+
+    <div *ngIf="files && currentFolder !== '/'" class="files__object">
+        <div (click)="openFolder('/')">
+            <img src="assets/folder.svg" class="files__icon" />
+            <span class="files__name">..</span>
+        </div>
+    </div>
     <div *ngFor="let content of folderContent" class="files__object">
         <div *ngIf="content.type === 'folder'" (click)="openFolder(content.path)">
             <img src="assets/folder.svg" class="files__icon" />
@@ -35,45 +54,27 @@
             </span>
         </div>
     </div>
-    <div class="files__object" (press)="openDetails('benchy')">
-        <img src="assets/object.svg" class="files__icon" />
-        <div class="files__info">
-            <span class="files__info-value">4.2<span class="files__info-unit">mb</span></span>
-            <span class="files__info-value">8<span class="files__info-unit">g</span></span>
-            <span class="files__info-value">1:42<span class="files__info-unit">h</span></span>
+    <div class="file">
+        <div class="file__wrapper">
+            <img src="assets/error.svg" class="file__close">
+            <span class="file__name">benchy</span>
+            <span class="file__directory">benchmarks/benchy.gcode</span>
+            <span class="file__creation-date">01.07.2019, 18:00</span>
+            <img src="assets/object.svg" class="file__render" />
+            <table class="file__details">
+                <tr>
+                    <td>0.8<span class="file__details-name">mb</span></td>
+                    <td>1:36<span class="file__details-name">h</span></td>
+                    <td>4.2<span class="file__details-name">g</span></td>
+                </tr>
+            </table>
+            <table class="file__actions">
+                <tr>
+                    <td><img src="assets/upload.svg" class="file__actions-icon" /></td>
+                    <td><img src="assets/print.svg" class="file__actions-icon" /></td>
+                    <td><img src="assets/delete.svg" class="file__actions-icon" /></td>
+                </tr>
+            </table>
         </div>
-        <span class="files__name">benchy</span>
-    </div>
-    <div class="files__object">
-        <img src="assets/object.svg" class="files__icon" />
-        <div class="files__info">
-            <span class="files__info-value">4.2<span class="files__info-unit">mb</span></span>
-            <span class="files__info-value">8<span class="files__info-unit">g</span></span>
-            <span class="files__info-value">1:42<span class="files__info-unit">h</span></span>
-        </div>
-        <span class="files__name">benchybenchybenchybenchybenchybenchybenchybenchybenchybenchybenchybenchy</span>
-    </div>
-</div>
-<div class="file">
-    <div class="file__wrapper">
-        <img src="assets/error.svg" class="file__close">
-        <span class="file__name">benchy</span>
-        <span class="file__directory">benchmarks/benchy.gcode</span>
-        <span class="file__creation-date">01.07.2019, 18:00</span>
-        <img src="assets/object.svg" class="file__render" />
-        <table class="file__details">
-            <tr>
-                <td>0.8<span class="file__details-name">mb</span></td>
-                <td>1:36<span class="file__details-name">h</span></td>
-                <td>4.2<span class="file__details-name">g</span></td>
-            </tr>
-        </table>
-        <table class="file__actions">
-            <tr>
-                <td><img src="assets/upload.svg" class="file__actions-icon" /></td>
-                <td><img src="assets/print.svg" class="file__actions-icon" /></td>
-                <td><img src="assets/delete.svg" class="file__actions-icon" /></td>
-            </tr>
-        </table>
     </div>
 </div>

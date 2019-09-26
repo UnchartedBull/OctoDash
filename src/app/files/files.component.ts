@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { FilesService, Folder } from '../files.service';
 
 @Component({
@@ -12,8 +13,9 @@ export class FilesComponent {
   currentFolder: string;
   folderContent: Array<File | Folder>;
 
-  constructor(private filesService: FilesService) {
+  constructor(private filesService: FilesService, private spinner: NgxSpinnerService) {
     this.currentFolder = '/';
+    this.currentFolder = '/kingkong/src/abc';
     this.openFolder(this.currentFolder);
   }
 
@@ -22,7 +24,24 @@ export class FilesComponent {
   }
 
   openFolder(foldername: string) {
-    console.log(`opening ${foldername}`);
-    this.filesService.getFolder(foldername).then((data) => this.folderContent = data).catch((reason: string) => null);
+    // TODO
+    // this.spinner.show(undefined, {
+    //   bdColor: '#353b48',
+    //   color: '#f5f6fa',
+    //   size: 'medium',
+    //   type: 'pacman',
+    //   fullScreen: false
+    // });
+    this.folderContent = null;
+    this.filesService.getFolder(foldername).then(
+      (data) => {
+        this.spinner.hide();
+        this.folderContent = data;
+        this.currentFolder = foldername;
+      }).catch((reason: string) => this.spinner.hide());
+  }
+
+  getBreadcrumbs() {
+    return this.currentFolder.split('/');
   }
 }
