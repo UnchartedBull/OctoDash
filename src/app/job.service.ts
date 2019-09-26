@@ -28,13 +28,13 @@ export class JobService {
               job = {
                 filename: data.job.file.display.replace('.gcode', ''),
                 progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                filamentAmount: this.filamentLengthToAmount(data.job.filament.tool0.length),
+                filamentAmount: this.convertFilamentLengthToAmount(data.job.filament.tool0.length),
                 timeLeft: {
-                  value: this.timeConvert(data.progress.printTimeLeft),
+                  value: this.convertSecondsToHours(data.progress.printTimeLeft),
                   unit: 'h'
                 },
                 timePrinted: {
-                  value: this.timeConvert(data.progress.printTime),
+                  value: this.convertSecondsToHours(data.progress.printTime),
                   unit: 'h'
                 },
               };
@@ -108,7 +108,7 @@ export class JobService {
     );
   }
 
-  private timeConvert(input: number): string {
+  public convertSecondsToHours(input: number): string {
     const hours = (input / 60 / 60);
     let roundedHours = Math.floor(hours);
     const minutes = (hours - roundedHours) * 60;
@@ -120,7 +120,7 @@ export class JobService {
     return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
   }
 
-  private filamentLengthToAmount(filamentLength: number): number {
+  public convertFilamentLengthToAmount(filamentLength: number): number {
     return Math.round((Math.PI * (this.configService.config.filament.thickness / 2) * filamentLength)
       * this.configService.config.filament.density / 100) / 10;
   }

@@ -19,20 +19,26 @@
     &__item {
         font-size: 2.2vw;
 
+        & span {
+            font-size: 2.2vw;
+        }
+
         &::before {
             content: '/';
             padding: 0 .9vw;
+            pointer-events: none;
         }
 
         &:first-of-type {
             &::before {
-                content: ''
+                content: '';
+                display: none;
             }
         }
 
         &-home {
             font-size: 2.4vw;
-            margin-right: -1vw;
+            padding-right: .4vw;
         }
     }
 }
@@ -41,10 +47,10 @@
 .files {
     display: block;
     width: 95vw;
-    height: 81.5vh;
+    height: 76.5vh;
     margin-left: 2.5vw;
     margin-top: 0.5vh;
-    overflow: auto;
+    overflow-y: scroll;
     position: relative;
 
     &::before {
@@ -77,7 +83,7 @@
         }
 
         &:last-of-type {
-            margin-bottom: 4.5vh;
+            margin-bottom: 5.5vh;
         }
     }
 

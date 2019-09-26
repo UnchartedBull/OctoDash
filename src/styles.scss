@@ -154,9 +154,22 @@ app-root {
     outline: none;
 
     &-track {
-        background: #353b48;
+        background: transparent;
+        border-radius: .85vw;
         box-shadow: none;
         outline: none;
+
+        &-piece {
+            &:end {
+                background: transparent;
+                margin-bottom: 5vh;
+            }
+
+            &:start {
+                background: transparent;
+                margin-top: 5vh;
+            }
+        }
     }
 
     &-thumb {

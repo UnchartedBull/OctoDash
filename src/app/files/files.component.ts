@@ -15,7 +15,6 @@ export class FilesComponent {
 
   constructor(private filesService: FilesService, private spinner: NgxSpinnerService) {
     this.currentFolder = '/';
-    this.currentFolder = '/kingkong/src/abc';
     this.openFolder(this.currentFolder);
   }
 
@@ -29,7 +28,6 @@ export class FilesComponent {
   }
 
   openFolder(foldername: string) {
-    // TODO
     this.spinner.show(undefined, {
       bdColor: '#353b48',
       color: '#f5f6fa',
@@ -40,10 +38,10 @@ export class FilesComponent {
     this.folderContent = null;
     this.filesService.getFolder(foldername).then(
       (data) => {
-        this.spinner.hide();
         this.folderContent = data;
         this.currentFolder = foldername;
-      }).catch((reason: string) => this.spinner.hide());
+        this.spinner.hide();
+      });
   }
 
   closeDetails() {

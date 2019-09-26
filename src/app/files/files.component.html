@@ -6,23 +6,30 @@
         <td class="top-bar__center">
             <img src="assets/folder.svg" class="top-bar__center-icon">
         </td>
-        <td class="top-bar__next" (click)="showHelp = true">
+        <td class="top-bar__next" (click)="openFolder(currentFolder)">
             refresh<img src="assets/refresh.svg" class="top-bar__next-icon">
         </td>
     </tr>
 </table>
 <div class="breadcrumbs">
     <fa-icon [icon]="['fas', 'home']" (click)="openFolder('/')" class="breadcrumbs__item-home"></fa-icon>
-    <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')"
-        (click)="openFolder(currentFolder.split('folder')[0]+'/'+folder)">{{ folder }}</span>
+    <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')">
+        <span (click)="openFolder(currentFolder.split(folder)[0] + folder)">
+            {{ folder }}
+        </span>
+    </span>
 </div>
 <div class="files">
-    <div *ngIf="!files" class="files__error">
+    <ngx-spinner>
+        <p class="la-pacman-text"> loading ... </p>
+    </ngx-spinner>
+
+    <div *ngIf="!folderContent" class="files__error">
         can't load files ...
     </div>
 
-    <div *ngIf="files && currentFolder !== '/'" class="files__object">
-        <div (click)="openFolder('/')">
+    <div *ngIf="folderContent && currentFolder !== '/' && currentFolder !== ''" class="files__object">
+        <div (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))">
             <img src="assets/folder.svg" class="files__icon" />
             <span class="files__name">..</span>
         </div>

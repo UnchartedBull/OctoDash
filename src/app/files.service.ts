@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error/error.service';
 import { Subscription } from 'rxjs';
 import { OctoprintFolderAPI, OctoprintFilesAPI, OctoprintFolderContentAPI } from './octoprint-api/filesAPI';
+import { JobService } from './job.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ export class FilesService {
 
   httpGETRequest: Subscription;
 
-  constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) { }
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private jobService: JobService) { }
 
   public getFolder(foldername: string = '/'): Promise<Array<File | Folder>> {
     return new Promise((resolve, reject): void => {
@@ -25,36 +30,32 @@ export class FilesService {
           (data: OctoprintFolderAPI & OctoprintFolderContentAPI) => {
             if ('children' in data) {
               data.files = data.children;
+              delete data.children;
             }
             const out: Array<File | Folder> = [];
-            console.log(data);
             data.files.forEach((fileOrFolder) => {
-              if ('children' in fileOrFolder) {
+              if (fileOrFolder.type === 'folder') {
                 out.push({
                   type: 'folder',
                   path: '/' + fileOrFolder.path,
-                  name: fileOrFolder.display,
-                  files: fileOrFolder.children.length,
+                  name: fileOrFolder.name,
+                  // TODO: Think of a way to retrieve number of children
+                  files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                 } as Folder);
-              } else if ('gcodeAnalysis' in fileOrFolder && 'progress' in fileOrFolder.gcodeAnalysis) {
+              } else {
                 out.push({
                   type: 'file',
                   path: '/' + fileOrFolder.path,
-                  name: fileOrFolder.display,
-                  size: fileOrFolder.size,
-                  printTime: fileOrFolder.gcodeAnalysis.estimatedPrintTime,
-                  filamentWeight: fileOrFolder.gcodeAnalysis.filament.tool0.length,
+                  name: fileOrFolder.name,
+                  size: this.convertByteToMegabyte(fileOrFolder.size),
+                  printTime: this.jobService.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
+                  filamentWeight: this.jobService.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
                   date: new Date(fileOrFolder.date)
                 } as File);
-              } else {
-                this.errorService.setError('Found weird thing in files.',
-                  `The thing ${fileOrFolder.name} is neither a file nor a folder, omitting it for now.`);
               }
             });
             data = null;
             out.sort((a, b) => a.type === b.type ? a.name > b.name ? 1 : -1 : a.type === 'folder' ? -1 : 1);
-
-            console.log(out);
 
             resolve(out);
           },
@@ -75,6 +76,10 @@ export class FilesService {
     });
   }
 
+  private convertByteToMegabyte(byte: number): string {
+    return (byte / 1000000).toFixed(1);
+  }
+
   public getFile(filename: string): File {
     return null;
   }
@@ -91,8 +96,8 @@ export interface File {
   type: string;
   path: string;
   name: string;
-  size?: number;
-  printTime?: number;
+  size?: string;
+  printTime?: string;
   filamentWeight?: number;
   date?: Date;
 }
