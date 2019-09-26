@@ -60,14 +60,11 @@ One more thing: If you're Octoprint is running on a Raspberry Pi 1 you may want 
 
 ## Contributing
 
-If you can think of something nice to add or want to change some of the messy code feel free to create a Pull Request. I'll have a look at it and will merge it into master if everything checks out!
-Any help is greatly appreciated!
-
-If you can think of a great feature, but don't feel yet ready to code something open an issue. I'll have a look at it and maybe implement it if I have the time. It is preferred if you directly create a Pull Request for your new feature. If you need some help, I can point you in the correct direction.
+See [CONTRIBUTING.md](https://github.com/UnchartedBull/OctoDash/blob/master/CONTRIBUTING.md).
 
 ## License
 
-The project is licensed under the Apache 2.0 License.
+The project is licensed under the Apache 2.0 License. [More Information](https://github.com/UnchartedBull/OctoDash/blob/master/LICENSE.md).
 
 The Credits for the icons can be (temporarily) found at icons.txt. They'll get moved into the product soon.
 
