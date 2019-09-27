@@ -29,6 +29,7 @@ import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-n
 import { JobService } from './job.service';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
+import { URLSafePipe } from './url.pipe';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { FilesComponent } from './files/files.component';
     MainScreenComponent,
     MainScreenNoTouchComponent,
     FilamentComponent,
-    FilesComponent
+    FilesComponent,
+    URLSafePipe
   ],
   imports: [
     BrowserModule,
