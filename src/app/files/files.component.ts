@@ -20,6 +20,9 @@ export class FilesComponent {
 
   openDetails(file: string) {
     console.log(file);
+    this.filesService.getFile(file).then((data) => {
+      console.log(data);
+    })
     const fileDOMElement = document.getElementById('fileDetailView');
     fileDOMElement.style.display = 'block';
     setTimeout(() => {

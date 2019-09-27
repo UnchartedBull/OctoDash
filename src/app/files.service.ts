@@ -32,10 +32,10 @@ export class FilesService {
               data.files = data.children;
               delete data.children;
             }
-            const out: Array<File | Folder> = [];
+            const folder: Array<File | Folder> = [];
             data.files.forEach((fileOrFolder) => {
               if (fileOrFolder.type === 'folder') {
-                out.push({
+                folder.push({
                   type: 'folder',
                   path: '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
@@ -43,21 +43,20 @@ export class FilesService {
                   files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                 } as Folder);
               } else {
-                out.push({
+                folder.push({
                   type: 'file',
                   path: '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
                   size: this.convertByteToMegabyte(fileOrFolder.size),
                   printTime: this.jobService.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
                   filamentWeight: this.jobService.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
-                  date: new Date(fileOrFolder.date)
                 } as File);
               }
             });
             data = null;
-            out.sort((a, b) => a.type === b.type ? a.name > b.name ? 1 : -1 : a.type === 'folder' ? -1 : 1);
+            folder.sort((a, b) => a.type === b.type ? a.name > b.name ? 1 : -1 : a.type === 'folder' ? -1 : 1);
 
-            resolve(out);
+            resolve(folder);
           },
           (error: HttpErrorResponse) => {
             if (error.status === 404) {
@@ -65,11 +64,11 @@ export class FilesService {
               if (foldername !== '/') {
                 this.getFolder(foldername.substring(0, foldername.lastIndexOf('/')));
               } else {
-                reject('not found');
+                reject();
               }
             } else {
               this.errorService.setError('Can\'t retrieve folder!', error.message);
-              reject('unknown error');
+              reject();
             }
           }
         );
@@ -80,8 +79,40 @@ export class FilesService {
     return (byte / 1000000).toFixed(1);
   }
 
-  public getFile(filename: string): File {
-    return null;
+  public getFile(filename: string): Promise<File> {
+
+    return new Promise((reject, resolve): void => {
+      if (this.httpGETRequest) {
+        this.httpGETRequest.unsubscribe();
+      }
+      this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + filename),
+        this.configService.getHTTPHeaders()).subscribe(
+          (data: OctoprintFilesAPI) => {
+            console.log(data);
+            const file = {
+              type: 'file',
+              path: '/' + data.path,
+              name: data.name,
+              size: this.convertByteToMegabyte(data.size),
+              printTime: this.jobService.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
+              filamentWeight: this.jobService.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
+              date: new Date(data.date)
+            } as File;
+            console.log(file);
+            resolve(file);
+          },
+          (error: HttpErrorResponse) => {
+            if (error.status === 404) {
+              this.errorService.setError('Can\'t find specified file!', error.message);
+              reject();
+            } else {
+              this.errorService.setError('Can\'t retrieve folder!', error.message);
+              reject();
+            }
+          }
+        );
+
+    });
   }
 }
 
