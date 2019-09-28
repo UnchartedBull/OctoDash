@@ -1,3 +1,10 @@
+<div class="i-frame" id="iFrame">
+    loading website ...
+    <iframe class="i-frame__content" [src]="iFrameURL | url" onload="this.style.opacity=1;">That shouldn't happen
+        ...</iframe>
+    <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()">
+</div>
+
 <table class="top-bar">
     <tr>
         <td class="top-bar__back" routerLink="/main-screen">
