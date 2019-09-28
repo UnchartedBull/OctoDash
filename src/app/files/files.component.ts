@@ -12,6 +12,7 @@ export class FilesComponent {
 
   currentFolder: string;
   folderContent: Array<File | Folder>;
+  fileDetail: File;
 
   constructor(private filesService: FilesService, private spinner: NgxSpinnerService) {
     this.currentFolder = '/';
@@ -19,10 +20,10 @@ export class FilesComponent {
   }
 
   openDetails(file: string) {
-    console.log(file);
     this.filesService.getFile(file).then((data) => {
       console.log(data);
-    })
+      this.fileDetail = data;
+    });
     const fileDOMElement = document.getElementById('fileDetailView');
     fileDOMElement.style.display = 'block';
     setTimeout(() => {
@@ -52,6 +53,7 @@ export class FilesComponent {
     fileDOMElement.style.opacity = '0';
     setTimeout(() => {
       fileDOMElement.style.display = 'none';
+      this.fileDetail = null;
     }, 500);
   }
 }

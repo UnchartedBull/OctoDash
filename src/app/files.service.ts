@@ -79,9 +79,13 @@ export class FilesService {
     return (byte / 1000000).toFixed(1);
   }
 
-  public getFile(filename: string): Promise<File> {
+  private convertDateToString(date: Date): string {
+    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
+  }
 
-    return new Promise((reject, resolve): void => {
+  public getFile(filename: string): Promise<any> {
+
+    return new Promise((resolve, reject): void => {
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
       }
@@ -96,9 +100,8 @@ export class FilesService {
               size: this.convertByteToMegabyte(data.size),
               printTime: this.jobService.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
               filamentWeight: this.jobService.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
-              date: new Date(data.date)
+              date: this.convertDateToString(new Date(data.date * 1000))
             } as File;
-            console.log(file);
             resolve(file);
           },
           (error: HttpErrorResponse) => {
@@ -111,7 +114,6 @@ export class FilesService {
             }
           }
         );
-
     });
   }
 }
@@ -130,5 +132,5 @@ export interface File {
   size?: string;
   printTime?: string;
   filamentWeight?: number;
-  date?: Date;
+  date?: string;
 }

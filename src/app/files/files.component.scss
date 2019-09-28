@@ -156,17 +156,28 @@
         box-shadow: 8px 4px 18px 0px rgba(0, 0, 0, 0.75);
     }
 
+    &__loading {
+        text-align: center;
+        padding-top: 30vh;
+        height: 50vh;
+    }
+
     &__name {
         display: block;
         font-size: 3.5vw;
         margin-bottom: 1vh;
         font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 45.5vw;
     }
 
     &__directory {
         display: block;
         font-size: 2.4vw;
         margin-bottom: 0.5vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     &__creation-date {
