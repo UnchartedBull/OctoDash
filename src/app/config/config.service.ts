@@ -45,7 +45,10 @@ export class ConfigService {
     if (this.valid) {
       this.httpHeaders = {
         headers: new HttpHeaders({
-          'x-api-key': this.config.octoprint.accessToken
+          'x-api-key': this.config.octoprint.accessToken,
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+          Expires: '0'
         })
       };
     }

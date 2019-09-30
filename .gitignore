@@ -49,3 +49,5 @@ Thumbs.db
 .vscode
 
 **/config.testing.json
+
+node-dht-sensor

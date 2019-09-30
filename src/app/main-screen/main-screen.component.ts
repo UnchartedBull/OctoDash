@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JobService, Job } from '../job.service';
+import { AppService } from '../app.service';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-main-screen',
@@ -14,14 +16,22 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
 
-  constructor(private jobService: JobService) {
+  constructor(private jobService: JobService, private service: AppService) {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => this.printing = job !== null));
+    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => {
+      if (job !== null) {
+        this.printing = job.status === 'Printing';
+      }
+    }));
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  public isFileLoaded(): boolean {
+    return this.service.getLoadedFile();
   }
 }

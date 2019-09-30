@@ -24,8 +24,8 @@ export class LayerProgressService {
           this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintLayerProgressAPI) => {
               observer.next({
-                current: data.layer.current === '-' ? 0 : data.layer.current + 1,
-                total: data.layer.total === '-' ? 0 : data.layer.total + 1,
+                current: data.layer.current === '-' ? 0 : Number(data.layer.current) + 1,
+                total: data.layer.total === '-' ? 0 : Number(data.layer.total) + 1,
                 fanSpeed: data.fanSpeed === '-' ? 0 : data.fanSpeed === 'Off' ? 0 : data.fanSpeed.replace('%', '')
               });
             }, (error: HttpErrorResponse) => {

@@ -52,6 +52,7 @@ app-root {
     &__next {
         padding: 4vh 2vw 2vh 2vw;
         text-align: right;
+        font-weight: 500;
 
         &-icon {
             width: 6vw;
@@ -145,4 +146,48 @@ app-root {
         font-size: 3vw;
     }
 
+}
+
+::-webkit-scrollbar {
+    width: 3vw;
+    box-shadow: none;
+    outline: none;
+
+    &-track {
+        background: transparent;
+        border-radius: .85vw;
+        box-shadow: none;
+        outline: none;
+
+        &-piece {
+            &:end {
+                background: transparent;
+                margin-bottom: 5vh;
+            }
+
+            &:start {
+                background: transparent;
+                margin-top: 5vh;
+            }
+        }
+    }
+
+    &-thumb {
+        background: rgba(127, 143, 166, .8);
+        border-radius: .85vw;
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+.la-pacman {
+    overflow: visible;
+    margin-left: -4vw !important;
+    margin-top: -8vh !important;
+
+    &-text {
+        color: #f5f6fa;
+        font-size: 3vw;
+        font-weight: 500;
+    }
 }

@@ -33,13 +33,15 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
-                "target": "deb",
-                "arch": [
-                    "armv7l",
-                    "arm64"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "deb",
+                    "arch": [
+                        "armv7l",
+                        "arm64"
+                    ]
+                }
+            ],
             "category": "Utility"
         }
     },
@@ -70,12 +72,14 @@
         "@angular/platform-browser-dynamic": "~8.2.2",
         "@angular/router": "~8.2.8",
         "@fortawesome/angular-fontawesome": "^0.5.0",
-        "@fortawesome/fontawesome-svg-core": "^1.2.24",
-        "@fortawesome/free-solid-svg-icons": "^5.11.1",
+        "@fortawesome/fontawesome-svg-core": "^1.2.25",
+        "@fortawesome/free-solid-svg-icons": "^5.11.2",
         "ajv": "^6.10.2",
         "angular-svg-round-progressbar": "^3.0.1",
         "electron-store": "^5.0.0",
+        "hammerjs": "^2.0.8",
         "lodash": "^4.17.15",
+        "ngx-spinner": "^8.0.3",
         "node-dht-sensor": "^0.4.0",
         "rxjs": "~6.5.3",
         "tslib": "^1.9.0",

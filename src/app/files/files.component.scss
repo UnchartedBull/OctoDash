@@ -1,1 +1,250 @@
+.top-bar {
 
+    &__next-icon {
+        width: 6.5vw;
+        vertical-align: -3.2vh;
+    }
+
+    &__center-icon {
+        width: 10vw;
+        margin-bottom: -6.5vh;
+    }
+}
+
+.breadcrumbs {
+    display: block;
+    margin-left: 3vw;
+    margin-top: -4.5vh;
+
+    &__item {
+        font-size: 2.2vw;
+
+        & span {
+            font-size: 2.2vw;
+        }
+
+        &::before {
+            content: '/';
+            padding: 0 .9vw;
+            pointer-events: none;
+        }
+
+        &:first-of-type {
+            &::before {
+                content: '';
+                display: none;
+            }
+        }
+
+        &-home {
+            font-size: 2.4vw;
+            padding-right: .4vw;
+        }
+    }
+}
+
+
+.files {
+    display: block;
+    width: 95vw;
+    height: 76.5vh;
+    margin-left: 2.5vw;
+    margin-top: 0.5vh;
+    overflow-y: scroll;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 91vw;
+        height: 79.2vh;
+        position: fixed;
+        left: 2vw;
+        top: 21.8vh;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+    }
+
+    &__error {
+        text-align: center;
+        margin-top: 20vh;
+    }
+
+    &__object {
+        width: 90vw;
+        background-color: #718093;
+        border-radius: 1vw;
+        height: 11vh;
+        line-height: 11vh;
+        margin-bottom: 2vh;
+
+        &:first-of-type {
+            margin-top: 3.5vh;
+        }
+
+        &:last-of-type {
+            margin-bottom: 5.5vh;
+        }
+    }
+
+    &__name {
+        font-size: 3.2vw;
+        height: 11vh;
+        font-weight: 500;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        white-space: nowrap;
+    }
+
+    &__icon {
+        height: 8vh;
+        margin: 1.7vh 1vw 0 1vw;
+        display: block;
+        float: left;
+    }
+
+    &__info {
+        float: right;
+        padding-left: .7vw;
+        line-height: 6vw;
+
+        &-unit {
+            font-weight: 400;
+            font-size: 2vw;
+            padding-left: .5vw;
+            padding-right: 1.5vw;
+        }
+
+        &-value {
+            font-size: 3.2vw;
+            font-weight: 500;
+        }
+    }
+}
+
+.file {
+    opacity: 0;
+    transition: opacity ease-in-out .5s;
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 5;
+
+    &__close {
+        position: absolute;
+        right: 1.5vw;
+        top: 2vh;
+        width: 4vw;
+    }
+
+    &__wrapper {
+        position: fixed;
+        left: 25vw;
+        top: 8vh;
+        width: 50vw;
+        height: 80vh;
+        background-color: #353b48;
+        z-index: 10;
+        border-radius: 2vw;
+        padding: 2vh 1.5vw;
+        box-shadow: 8px 4px 18px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    &__loading {
+        text-align: center;
+        padding-top: 30vh;
+        height: 50vh;
+    }
+
+    &__name {
+        display: block;
+        font-size: 3.5vw;
+        margin-bottom: 1vh;
+        font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 45.5vw;
+    }
+
+    &__directory {
+        display: block;
+        font-size: 2.4vw;
+        margin-bottom: 0.5vh;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__creation-date {
+        display: block;
+        font-size: 2.4vw;
+    }
+
+    &__render {
+        height: 30vh;
+        margin: 3.5vh auto 2.5vh auto;
+        display: block;
+    }
+
+    &__details {
+        width: 90%;
+        margin-left: 5%;
+
+        & td {
+            width: 33.3%;
+            text-align: center;
+            font-size: 4vw;
+            font-weight: 500;
+
+            &:first-of-type {
+                text-align: left;
+            }
+
+            &:last-of-type {
+                text-align: right;
+            }
+        }
+
+        &-name {
+            font-size: 2.3vw;
+        }
+    }
+
+    &__actions {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 1vh;
+
+        & td {
+            width: 33.3%;
+            text-align: center;
+
+            &:first-of-type {
+                text-align: left;
+
+                & img {
+                    height: 10vh;
+                    margin-bottom: 4vh;
+                }
+            }
+
+            &:last-of-type {
+                text-align: right;
+
+                & img {
+                    height: 10vh;
+                    margin-bottom: 4.5vh;
+                }
+            }
+        }
+
+        & img {
+            height: 17vh;
+        }
+    }
+}
