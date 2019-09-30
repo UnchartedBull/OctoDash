@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, SecurityContext } from '@angular/core';
 import { PrinterService } from '../printer.service';
 import { ConfigService } from '../config/config.service';
 import { OctoprintService } from '../octoprint.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-control',
@@ -12,8 +13,13 @@ export class ControlComponent {
   jogDistance = 10;
   customActions = [];
   showHelp = false;
+  iFrameURL: SafeResourceUrl = 'about:blank';
 
-  constructor(private printerService: PrinterService, private octoprintService: OctoprintService, private configService: ConfigService) {
+  constructor(
+    private printerService: PrinterService,
+    private octoprintService: OctoprintService,
+    private configService: ConfigService,
+    private domSanitizer: DomSanitizer) {
     this.customActions = this.configService.getCustomActions();
   }
 
@@ -39,7 +45,11 @@ export class ControlComponent {
       case '[!SHUTDOWN]': this.shutdownPi(); break;
       case '[!KILL]': this.kill(); break;
       default: {
-        this.printerService.executeGCode(command);
+        if (command.includes('[!WEB]')) {
+          this.openIFrame(command.replace('[!WEB]', ''));
+        } else {
+          this.printerService.executeGCode(command);
+        }
         break;
       }
     }
@@ -74,5 +84,24 @@ export class ControlComponent {
   kill() {
     this.shutdownPi();
     setTimeout(this.stopOctoDash, 500);
+  }
+
+  // [!WEB]
+  openIFrame(url: string) {
+    this.iFrameURL = url;
+    const iFrameDOM = document.getElementById('iFrame');
+    iFrameDOM.style.display = 'block';
+    setTimeout(() => {
+      iFrameDOM.style.opacity = '1';
+    }, 50);
+  }
+
+  hideIFrame() {
+    const iFrameDOM = document.getElementById('iFrame');
+    iFrameDOM.style.opacity = '0';
+    setTimeout(() => {
+      iFrameDOM.style.display = 'none';
+      this.iFrameURL = 'about:blank';
+    }, 500);
   }
 }

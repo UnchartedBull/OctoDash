@@ -28,6 +28,8 @@ import { ErrorService } from './error/error.service';
 import { JobService } from './job.service';
 import { PrinterService } from './printer.service';
 
+import { URLSafePipe } from './url.pipe';
+
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -60,7 +62,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     MainScreenNoTouchComponent,
     FilamentComponent,
     FilesComponent,
-    SettingsComponent
+    SettingsComponent,
+    URLSafePipe
   ],
   imports: [
     BrowserModule,
