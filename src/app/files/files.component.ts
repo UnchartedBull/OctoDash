@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FilesService, Folder } from '../files.service';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
+import { JobService } from '../job.service';
 
 @Component({
   selector: 'app-files',
@@ -16,7 +17,12 @@ export class FilesComponent {
   folderContent: Array<File | Folder>;
   fileDetail: File;
 
-  constructor(private filesService: FilesService, private spinner: NgxSpinnerService, private service: AppService, private router: Router) {
+  constructor(
+    private filesService: FilesService,
+    private spinner: NgxSpinnerService,
+    private service: AppService,
+    private router: Router,
+    private jobService: JobService) {
     this.currentFolder = '/';
     this.openFolder(this.currentFolder);
   }
@@ -64,9 +70,21 @@ export class FilesComponent {
     }, 500);
   }
 
-  loadFile(filePath: string) {
+  public loadFile(filePath: string): void {
     this.filesService.loadFile(filePath);
     this.service.setLoadedFile(true);
+    this.jobService.deleteJobInformation();
     this.router.navigate(['/main-screen']);
+  }
+
+  public printFile(filePath: string): void {
+    this.filesService.printFile(filePath);
+    this.router.navigate(['/main-screen']);
+  }
+
+  public deleteFile(filePath: string): void {
+    this.filesService.deleteFile(filePath);
+    this.closeDetails();
+    this.openFolder(this.currentFolder);
   }
 }

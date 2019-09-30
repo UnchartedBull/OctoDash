@@ -35,4 +35,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public cancelLoadedFile(): void {
     this.service.setLoadedFile(false);
   }
+
+  public startJob(): void {
+    this.jobService.startJob();
+  }
 }

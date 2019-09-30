@@ -13,6 +13,7 @@ export class FilesService {
 
   httpGETRequest: Subscription;
   httpPOSTRequest: Subscription;
+  httpDELETERequest: Subscription;
 
   constructor(
     private configService: ConfigService,
@@ -48,7 +49,7 @@ export class FilesService {
                   type: 'file',
                   path: '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
-                  size: this.convertByteToMegabyte(fileOrFolder.size),
+                  size: this.service.convertByteToMegabyte(fileOrFolder.size),
                   printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
                   filamentWeight: this.service.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
                 } as File);
@@ -89,10 +90,10 @@ export class FilesService {
               type: 'file',
               path: '/' + data.path,
               name: data.name,
-              size: this.convertByteToMegabyte(data.size),
+              size: this.service.convertByteToMegabyte(data.size),
               printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
               filamentWeight: this.service.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
-              date: this.convertDateToString(new Date(data.date * 1000))
+              date: this.service.convertDateToString(new Date(data.date * 1000))
             } as File;
             resolve(file);
           },
@@ -119,20 +120,41 @@ export class FilesService {
     };
     this.httpPOSTRequest = this.http.post(this.configService.getURL('files/local' + filePath),
       loadFileBody, this.configService.getHTTPHeaders()).subscribe(
-        ({ }) => { },
+        () => null,
         (error: HttpErrorResponse) => {
           this.errorService.setError('Can\'t load the file!', error.message);
         }
       );
   }
 
-
-  private convertByteToMegabyte(byte: number): string {
-    return (byte / 1000000).toFixed(1);
+  public printFile(filePath: string) {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const printFileBody = {
+      command: 'select',
+      print: true
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('files/local' + filePath),
+      printFileBody, this.configService.getHTTPHeaders()).subscribe(
+        () => null,
+        (error: HttpErrorResponse) => {
+          this.errorService.setError('Can\'t start print!', error.message);
+        }
+      );
   }
 
-  private convertDateToString(date: Date): string {
-    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
+  public deleteFile(filePath: string) {
+    if (this.httpDELETERequest) {
+      this.httpDELETERequest.unsubscribe();
+    }
+    this.httpDELETERequest = this.http.delete(this.configService.getURL('files/local' + filePath),
+      this.configService.getHTTPHeaders()).subscribe(
+        () => null,
+        (error: HttpErrorResponse) => {
+          this.errorService.setError('Can\'t delete file!', error.message);
+        }
+      );
   }
 }
 

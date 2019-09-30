@@ -74,9 +74,15 @@
             </table>
             <table class="file__actions">
                 <tr>
-                    <td><img src="assets/upload.svg" class="file__actions-icon" /></td>
-                    <td><img src="assets/print.svg" class="file__actions-icon" /></td>
-                    <td><img src="assets/delete.svg" class="file__actions-icon" /></td>
+                    <td>
+                        <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
+                    </td>
+                    <td>
+                        <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
+                    </td>
+                    <td>
+                        <img src="assets/delete.svg" class="file__actions-icon" (click)="deleteFile(fileDetail.path)" />
+                    </td>
                 </tr>
             </table>
         </div>

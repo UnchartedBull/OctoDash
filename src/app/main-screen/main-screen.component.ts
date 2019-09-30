@@ -20,7 +20,11 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => this.printing = job.status === 'Printing'));
+    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => {
+      if (job !== null) {
+        this.printing = job.status === 'Printing';
+      }
+    }));
   }
 
   ngOnDestroy() {

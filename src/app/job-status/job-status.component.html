@@ -15,18 +15,16 @@
     <span class="job-info__filename">{{ job.filename }}</span> <br />
     <table class="job-info__actions">
         <tr>
-            <td class="job-info__actions-item-column">
-                <img src="assets/discard.svg" class="job-info__actions-item job-info__actions-item-1"
-                    (click)="cancelLoadedFile()" /> <br />
+            <td class="job-info__actions-item-column" (click)="cancelLoadedFile()">
+                <img src="assets/discard.svg" class="job-info__actions-item job-info__actions-item-1" /> <br />
                 discard
             </td>
-            <td class="job-info__actions-item-column">
-                <img src="assets/heat.svg" class="job-info__actions-item job-info__actions-item-2"
-                    (click)="preheat()" /> <br />
+            <td class="job-info__actions-item-column" (click)="preheat()">
+                <img src="assets/heat.svg" class="job-info__actions-item job-info__actions-item-2" /> <br />
                 preheat
 
             </td>
-            <td class="job-info__actions-item-column">
+            <td class="job-info__actions-item-column" (click)="startJob()">
                 <img src="assets/print.svg" class="job-info__actions-item job-info__actions-item-3" /> <br>
                 print
             </td>
