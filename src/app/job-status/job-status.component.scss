@@ -54,4 +54,44 @@
             font-weight: 500;
         }
     }
+
+    &__file-loaded>.job-info__filename {
+        width: 77vw;
+    }
+
+    &__preview {
+        width: 15vw;
+        margin-top: 9vh;
+        margin-left: 3vw;
+        margin-right: 3vw;
+        margin-bottom: 8vh;
+        float: left;
+    }
+
+    &__actions {
+        float: right;
+        margin-top: 0vh;
+        overflow: visible;
+        width: 63vw;
+        margin-right: 11vw;
+        margin-bottom: 4vh;
+
+        &-item {
+            width: 7vw;
+            padding: 0 2vw;
+
+
+            &-column {
+                font-size: 3vw;
+                text-align: center;
+                width: 33.3%;
+                font-weight: 500;
+            }
+
+            &-3 {
+                width: 8.7vw;
+                margin-bottom: -1.6vh;
+            }
+        }
+    }
 }

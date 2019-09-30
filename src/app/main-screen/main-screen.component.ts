@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { JobService, Job } from '../job.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -14,7 +15,7 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
 
-  constructor(private jobService: JobService) {
+  constructor(private jobService: JobService, private service: AppService) {
   }
 
   ngOnInit() {
@@ -23,5 +24,9 @@ export class MainScreenComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  public isFileLoaded(): boolean {
+    return this.service.getLoadedFile();
   }
 }

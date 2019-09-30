@@ -44,7 +44,7 @@
                 {{ content.name }}
             </span>
         </div>
-        <div *ngIf="content.type === 'file'" (press)="openDetails(content.path)">
+        <div *ngIf="content.type === 'file'" (press)="openDetails(content.path)" (click)="openDetails(content.path)">
             <img src="assets/object.svg" class="files__icon" />
             <div class="files__info">
                 <span class="files__info-value">{{ content.size }}<span class="files__info-unit">mb</span></span>

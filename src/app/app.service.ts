@@ -7,6 +7,7 @@ import { ConfigService } from './config/config.service';
 export class AppService {
 
   private updateError: string[];
+  private loadedFile = false;
 
   constructor(private configService: ConfigService) {
     this.updateError = [
@@ -17,6 +18,14 @@ export class AppService {
 
   public getUpdateError(): string[] {
     return this.updateError;
+  }
+
+  public setLoadedFile(value: boolean): void {
+    this.loadedFile = value;
+  }
+
+  public getLoadedFile(): boolean {
+    return this.loadedFile;
   }
 
   // If the errors can be automatically fixed return true here
