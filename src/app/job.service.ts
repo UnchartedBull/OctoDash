@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { shareReplay } from 'rxjs/operators';
 import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
 import { ErrorService } from './error/error.service';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class JobService {
   httpPOSTRequest: Subscription;
   observable: Observable<Job>;
 
-  constructor(private configService: ConfigService, private http: HttpClient, private errorService: ErrorService) {
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private errorService: ErrorService,
+    private service: AppService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(750, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
@@ -28,13 +33,13 @@ export class JobService {
               status: data.state,
               filename: data.job.file.display.replace('.gcode', ''),
               progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-              filamentAmount: this.convertFilamentLengthToAmount(data.job.filament.tool0.length),
+              filamentAmount: this.service.convertFilamentLengthToAmount(data.job.filament.tool0.length),
               timeLeft: {
-                value: this.convertSecondsToHours(data.progress.printTimeLeft),
+                value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
                 unit: 'h'
               },
               timePrinted: {
-                value: this.convertSecondsToHours(data.progress.printTime),
+                value: this.service.convertSecondsToHours(data.progress.printTime),
                 unit: 'h'
               },
             };
@@ -105,23 +110,6 @@ export class JobService {
         }
       }
     );
-  }
-
-  public convertSecondsToHours(input: number): string {
-    const hours = (input / 60 / 60);
-    let roundedHours = Math.floor(hours);
-    const minutes = (hours - roundedHours) * 60;
-    let roundedMinutes = Math.round(minutes);
-    if (roundedMinutes === 60) {
-      roundedMinutes = 0;
-      roundedHours += 1;
-    }
-    return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
-  }
-
-  public convertFilamentLengthToAmount(filamentLength: number): number {
-    return Math.round((Math.PI * (this.configService.config.filament.thickness / 2) * filamentLength)
-      * this.configService.config.filament.density / 100) / 10;
   }
 }
 

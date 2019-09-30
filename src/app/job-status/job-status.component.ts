@@ -7,8 +7,7 @@ import { ErrorService } from '../error/error.service';
 @Component({
   selector: 'app-job-status',
   templateUrl: './job-status.component.html',
-  styleUrls: ['./job-status.component.scss'],
-  providers: [JobService]
+  styleUrls: ['./job-status.component.scss']
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
 

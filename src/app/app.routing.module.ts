@@ -8,6 +8,7 @@ import { NoConfigComponent } from './config/no-config/no-config.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
     path: 'no-config',
     component: NoConfigComponent
   },
+  {
+    path: 'settings',
+    component: SettingsComponent
+  }
 ];
 
 

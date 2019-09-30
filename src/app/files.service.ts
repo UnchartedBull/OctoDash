@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from './error/error.service';
 import { Subscription } from 'rxjs';
 import { OctoprintFolderAPI, OctoprintFilesAPI, OctoprintFolderContentAPI } from './octoprint-api/filesAPI';
-import { JobService } from './job.service';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class FilesService {
     private configService: ConfigService,
     private http: HttpClient,
     private errorService: ErrorService,
-    private jobService: JobService) { }
+    private service: AppService) { }
 
   public getFolder(folderPath: string = '/'): Promise<Array<File | Folder>> {
     return new Promise((resolve, reject): void => {
@@ -49,8 +49,8 @@ export class FilesService {
                   path: '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
                   size: this.convertByteToMegabyte(fileOrFolder.size),
-                  printTime: this.jobService.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
-                  filamentWeight: this.jobService.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
+                  printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
+                  filamentWeight: this.service.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
                 } as File);
               }
             });
@@ -90,8 +90,8 @@ export class FilesService {
               path: '/' + data.path,
               name: data.name,
               size: this.convertByteToMegabyte(data.size),
-              printTime: this.jobService.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-              filamentWeight: this.jobService.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
+              printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
+              filamentWeight: this.service.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
               date: this.convertDateToString(new Date(data.date * 1000))
             } as File;
             resolve(file);
