@@ -1,5 +1,5 @@
 <div *ngIf="printing || isFileLoaded()">
-    <app-print-control></app-print-control>
+    <app-print-control *ngIf="printing"></app-print-control>
     <app-job-status></app-job-status>
     <app-printer-status></app-printer-status>
     <app-layer-progress></app-layer-progress>

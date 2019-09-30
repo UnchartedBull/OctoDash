@@ -64,8 +64,8 @@ export class FilesComponent {
     }, 500);
   }
 
-  loadFile() {
-    // TODO: Octoprint Load File
+  loadFile(filePath: string) {
+    this.filesService.loadFile(filePath);
     this.service.setLoadedFile(true);
     this.router.navigate(['/main-screen']);
   }

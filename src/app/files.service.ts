@@ -12,6 +12,7 @@ import { JobService } from './job.service';
 export class FilesService {
 
   httpGETRequest: Subscription;
+  httpPOSTRequest: Subscription;
 
   constructor(
     private configService: ConfigService,
@@ -19,13 +20,13 @@ export class FilesService {
     private errorService: ErrorService,
     private jobService: JobService) { }
 
-  public getFolder(foldername: string = '/'): Promise<Array<File | Folder>> {
+  public getFolder(folderPath: string = '/'): Promise<Array<File | Folder>> {
     return new Promise((resolve, reject): void => {
-      foldername = foldername === '/' ? '' : foldername;
+      folderPath = folderPath === '/' ? '' : folderPath;
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
       }
-      this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + foldername),
+      this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + folderPath),
         this.configService.getHTTPHeaders()).subscribe(
           (data: OctoprintFolderAPI & OctoprintFolderContentAPI) => {
             if ('children' in data) {
@@ -61,8 +62,8 @@ export class FilesService {
           (error: HttpErrorResponse) => {
             if (error.status === 404) {
               this.errorService.setError('Can\'t find specified folder!', error.message);
-              if (foldername !== '/') {
-                this.getFolder(foldername.substring(0, foldername.lastIndexOf('/')));
+              if (folderPath !== '/') {
+                this.getFolder(folderPath.substring(0, folderPath.lastIndexOf('/')));
               } else {
                 reject();
               }
@@ -75,24 +76,15 @@ export class FilesService {
     });
   }
 
-  private convertByteToMegabyte(byte: number): string {
-    return (byte / 1000000).toFixed(1);
-  }
-
-  private convertDateToString(date: Date): string {
-    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
-  }
-
-  public getFile(filename: string): Promise<any> {
+  public getFile(filePath: string): Promise<any> {
 
     return new Promise((resolve, reject): void => {
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
       }
-      this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + filename),
+      this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + filePath),
         this.configService.getHTTPHeaders()).subscribe(
           (data: OctoprintFilesAPI) => {
-            console.log(data);
             const file = {
               type: 'file',
               path: '/' + data.path,
@@ -115,6 +107,32 @@ export class FilesService {
           }
         );
     });
+  }
+
+  public loadFile(filePath: string) {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const loadFileBody = {
+      command: 'select',
+      print: false
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('files/local' + filePath),
+      loadFileBody, this.configService.getHTTPHeaders()).subscribe(
+        ({ }) => { },
+        (error: HttpErrorResponse) => {
+          this.errorService.setError('Can\'t load the file!', error.message);
+        }
+      );
+  }
+
+
+  private convertByteToMegabyte(byte: number): string {
+    return (byte / 1000000).toFixed(1);
+  }
+
+  private convertDateToString(date: Date): string {
+    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
   }
 }
 

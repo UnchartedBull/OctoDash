@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -24,21 +24,20 @@ export class JobService {
         this.httpGETRequest = this.http.get(this.configService.getURL('job'), this.configService.getHTTPHeaders()).subscribe(
           (data: OctoprintJobAPI) => {
             let job: Job = null;
-            if (data.state === 'Printing') {
-              job = {
-                filename: data.job.file.display.replace('.gcode', ''),
-                progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                filamentAmount: this.convertFilamentLengthToAmount(data.job.filament.tool0.length),
-                timeLeft: {
-                  value: this.convertSecondsToHours(data.progress.printTimeLeft),
-                  unit: 'h'
-                },
-                timePrinted: {
-                  value: this.convertSecondsToHours(data.progress.printTime),
-                  unit: 'h'
-                },
-              };
-            }
+            job = {
+              status: data.state,
+              filename: data.job.file.display.replace('.gcode', ''),
+              progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
+              filamentAmount: this.convertFilamentLengthToAmount(data.job.filament.tool0.length),
+              timeLeft: {
+                value: this.convertSecondsToHours(data.progress.printTimeLeft),
+                unit: 'h'
+              },
+              timePrinted: {
+                value: this.convertSecondsToHours(data.progress.printTime),
+                unit: 'h'
+              },
+            };
             observer.next(job);
           }, (error: HttpErrorResponse) => {
             this.errorService.setError('Can\'t retrieve jobs!', error.message);
@@ -132,6 +131,7 @@ interface Duration {
 }
 
 export interface Job {
+  status: string;
   filename: string;
   progress: number;
   filamentAmount: number;
