@@ -6,21 +6,21 @@
     <img src="https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg">
     <img src="https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen">
     <br>
-    <b>OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!</b>
+    <b>OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!</b><br />
+    OctoDash is a User Interface for OctoPrint, it utilizes the OctoPrint API but tries to use modern design principles in order to fully enable the power of your Raspberry Pi attached to your 3D Printer. OctoDash works best with a Touchscreen and will support almost all functions that OctoPrint offers just in a nicer format. Give it a try!
 </p>
 
 ## Table of Contents
 
-- [OctoDash](#octodash)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Update](#update)
-  - [Screenshots](#screenshots)
-  - [Troubleshooting](#troubleshooting)
-  - [Bugs and more](#bugs-and-more)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Special Thanks](#special-thanks)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Update](#update)
+- [Screenshots](#screenshots)
+- [Troubleshooting](#troubleshooting)
+- [Bugs and more](#bugs-and-more)
+- [Contributing](#contributing)
+- [License](#license)
+- [Special Thanks](#special-thanks)
 
 ## Installation
 
@@ -43,7 +43,9 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/main-screen.png" width="49.5%" alt-text="Main Screen"/>
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-text="Job Running">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/control.png" width="49.5%" alt-text="Printer Controls">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%" alt-text="In Print Controls">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%" alt-text="In Print">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/files_view.png" width="49.5%" alt-text="List Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/file_details.png" width="49.5%" alt-text="Details about Files">
 </p>
 
 More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/master/screenshots).
