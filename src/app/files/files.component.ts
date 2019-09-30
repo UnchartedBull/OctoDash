@@ -21,8 +21,9 @@ export class FilesComponent {
 
   openDetails(file: string) {
     this.filesService.getFile(file).then((data) => {
-      console.log(data);
       this.fileDetail = data;
+    }).catch((err) => {
+      this.fileDetail = { name: 'error' } as File;
     });
     const fileDOMElement = document.getElementById('fileDetailView');
     fileDOMElement.style.display = 'block';
@@ -43,6 +44,10 @@ export class FilesComponent {
     this.filesService.getFolder(foldername).then(
       (data) => {
         this.folderContent = data;
+        this.currentFolder = foldername;
+        this.spinner.hide();
+      }).catch((err) => {
+        this.folderContent = null;
         this.currentFolder = foldername;
         this.spinner.hide();
       });

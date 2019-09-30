@@ -59,7 +59,7 @@
     </div>
 
     <div class="file" id="fileDetailView">
-        <div class="file__wrapper" *ngIf="fileDetail">
+        <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'">
             <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
             <span class="file__name">{{ fileDetail.name }}</span>
             <span class="file__directory">{{ fileDetail.path }}</span>
@@ -82,7 +82,11 @@
         </div>
         <div class="file__wrapper file__loading" *ngIf="!fileDetail">
             <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
-            Loading details ...
+            loading details ...
+        </div>
+        <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
+            <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
+            can't load file.
         </div>
     </div>
 </div>
