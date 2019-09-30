@@ -1,5 +1,97 @@
 # Change Log
 
+## [v1.3.0](https://github.com/UnchartedBull/OctoDash/tree/v1.3.0) (2019-09-30)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.2.0...v1.3.0)
+
+**Implemented enhancements:**
+
+- Octoprint Plugin [\#95](https://github.com/UnchartedBull/OctoDash/issues/95)
+- Integrate DisplayLayerProgess API [\#93](https://github.com/UnchartedBull/OctoDash/issues/93)
+- File Actions [\#18](https://github.com/UnchartedBull/OctoDash/issues/18)
+- Detailed File View [\#17](https://github.com/UnchartedBull/OctoDash/issues/17)
+- File API [\#16](https://github.com/UnchartedBull/OctoDash/issues/16)
+- File browser [\#15](https://github.com/UnchartedBull/OctoDash/issues/15)
+
+**Fixed bugs:**
+
+- Long Filenames don't get cut correctly [\#150](https://github.com/UnchartedBull/OctoDash/issues/150)
+- Temperature Sensor not working reliably [\#87](https://github.com/UnchartedBull/OctoDash/issues/87)
+
+**Closed issues:**
+
+- Integrate iFrame to be triggered by Custom Actions [\#162](https://github.com/UnchartedBull/OctoDash/issues/162)
+- Screen resolution  [\#145](https://github.com/UnchartedBull/OctoDash/issues/145)
+
+**Merged pull requests:**
+
+- Files View [\#165](https://github.com/UnchartedBull/OctoDash/pull/165) ([UnchartedBull](https://github.com/UnchartedBull))
+- Open iFrame from Custom Actions [\#163](https://github.com/UnchartedBull/OctoDash/pull/163) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @types/lodash from 4.14.140 to 4.14.141 [\#161](https://github.com/UnchartedBull/OctoDash/pull/161) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.139 to 4.14.140 [\#160](https://github.com/UnchartedBull/OctoDash/pull/160) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump codelyzer from 5.1.1 to 5.1.2 [\#159](https://github.com/UnchartedBull/OctoDash/pull/159) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Merge layer progress into files [\#158](https://github.com/UnchartedBull/OctoDash/pull/158) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @types/node from 12.7.7 to 12.7.8 [\#157](https://github.com/UnchartedBull/OctoDash/pull/157) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.5 to 8.3.6 [\#156](https://github.com/UnchartedBull/OctoDash/pull/156) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.5 to 0.803.6 [\#155](https://github.com/UnchartedBull/OctoDash/pull/155) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.7 to 8.2.8 [\#154](https://github.com/UnchartedBull/OctoDash/pull/154) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.7 to 8.2.8 [\#153](https://github.com/UnchartedBull/OctoDash/pull/153) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.5 to 12.7.7 [\#152](https://github.com/UnchartedBull/OctoDash/pull/152) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.138 to 4.14.139 [\#147](https://github.com/UnchartedBull/OctoDash/pull/147) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump node-dht-sensor from 0.3.0 to 0.4.0 [\#146](https://github.com/UnchartedBull/OctoDash/pull/146) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump codelyzer from 5.1.0 to 5.1.1 [\#144](https://github.com/UnchartedBull/OctoDash/pull/144) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.9 to 6.0.10 [\#143](https://github.com/UnchartedBull/OctoDash/pull/143) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/free-solid-svg-icons from 5.11.0 to 5.11.1 [\#142](https://github.com/UnchartedBull/OctoDash/pull/142) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/fontawesome-svg-core from 1.2.23 to 1.2.24 [\#141](https://github.com/UnchartedBull/OctoDash/pull/141) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.4 to 0.803.5 [\#140](https://github.com/UnchartedBull/OctoDash/pull/140) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.4 to 8.3.5 [\#139](https://github.com/UnchartedBull/OctoDash/pull/139) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.6 to 8.2.7 [\#138](https://github.com/UnchartedBull/OctoDash/pull/138) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.6 to 8.2.7 [\#137](https://github.com/UnchartedBull/OctoDash/pull/137) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/fontawesome-svg-core from 1.2.22 to 1.2.23 [\#136](https://github.com/UnchartedBull/OctoDash/pull/136) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/free-solid-svg-icons from 5.10.2 to 5.11.0 [\#135](https://github.com/UnchartedBull/OctoDash/pull/135) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump ts-node from 8.4.0 to 8.4.1 [\#134](https://github.com/UnchartedBull/OctoDash/pull/134) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump ts-node from 8.3.0 to 8.4.0 [\#133](https://github.com/UnchartedBull/OctoDash/pull/133) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.8 to 6.0.9 [\#132](https://github.com/UnchartedBull/OctoDash/pull/132) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.5 to 8.2.6 [\#131](https://github.com/UnchartedBull/OctoDash/pull/131) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.5 to 8.2.6 [\#130](https://github.com/UnchartedBull/OctoDash/pull/130) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.3 to 0.803.4 [\#129](https://github.com/UnchartedBull/OctoDash/pull/129) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.3 to 8.3.4 [\#128](https://github.com/UnchartedBull/OctoDash/pull/128) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.4 to 12.7.5 [\#127](https://github.com/UnchartedBull/OctoDash/pull/127) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump tslint from 5.19.0 to 5.20.0 [\#126](https://github.com/UnchartedBull/OctoDash/pull/126) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.7 to 6.0.8 [\#125](https://github.com/UnchartedBull/OctoDash/pull/125) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron-store from 4.0.0 to 5.0.0 [\#124](https://github.com/UnchartedBull/OctoDash/pull/124) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.4 to 8.2.5 [\#123](https://github.com/UnchartedBull/OctoDash/pull/123) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.4 to 8.2.5 [\#122](https://github.com/UnchartedBull/OctoDash/pull/122) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.2 to 0.803.3 [\#121](https://github.com/UnchartedBull/OctoDash/pull/121) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.2 to 8.3.3 [\#120](https://github.com/UnchartedBull/OctoDash/pull/120) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump rxjs from 6.5.2 to 6.5.3 [\#119](https://github.com/UnchartedBull/OctoDash/pull/119) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.3 to 12.7.4 [\#118](https://github.com/UnchartedBull/OctoDash/pull/118) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.6 to 6.0.7 [\#116](https://github.com/UnchartedBull/OctoDash/pull/116) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.5 to 6.0.6 [\#115](https://github.com/UnchartedBull/OctoDash/pull/115) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.2 to 12.7.3 [\#114](https://github.com/UnchartedBull/OctoDash/pull/114) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.1 to 0.803.2 [\#113](https://github.com/UnchartedBull/OctoDash/pull/113) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.1 to 8.3.2 [\#112](https://github.com/UnchartedBull/OctoDash/pull/112) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.3 to 8.2.4 [\#111](https://github.com/UnchartedBull/OctoDash/pull/111) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.3 to 8.2.4 [\#110](https://github.com/UnchartedBull/OctoDash/pull/110) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.0 to 8.3.1 [\#109](https://github.com/UnchartedBull/OctoDash/pull/109) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.0 to 0.803.1 [\#108](https://github.com/UnchartedBull/OctoDash/pull/108) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.4 to 6.0.5 [\#107](https://github.com/UnchartedBull/OctoDash/pull/107) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.137 to 4.14.138 [\#106](https://github.com/UnchartedBull/OctoDash/pull/106) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.3 to 6.0.4 [\#105](https://github.com/UnchartedBull/OctoDash/pull/105) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/fontawesome-svg-core from 1.2.21 to 1.2.22 [\#104](https://github.com/UnchartedBull/OctoDash/pull/104) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @fortawesome/free-solid-svg-icons from 5.10.1 to 5.10.2 [\#103](https://github.com/UnchartedBull/OctoDash/pull/103) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.802.2 to 0.803.0 [\#102](https://github.com/UnchartedBull/OctoDash/pull/102) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.2.2 to 8.3.0 [\#101](https://github.com/UnchartedBull/OctoDash/pull/101) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.2 to 8.2.3 [\#100](https://github.com/UnchartedBull/OctoDash/pull/100) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.2 to 8.2.3 [\#99](https://github.com/UnchartedBull/OctoDash/pull/99) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump tslint from 5.18.0 to 5.19.0 [\#98](https://github.com/UnchartedBull/OctoDash/pull/98) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Display layer progress [\#97](https://github.com/UnchartedBull/OctoDash/pull/97) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump electron from 6.0.2 to 6.0.3 [\#96](https://github.com/UnchartedBull/OctoDash/pull/96) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.136 to 4.14.137 [\#94](https://github.com/UnchartedBull/OctoDash/pull/94) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.2.1 to 8.2.2 [\#92](https://github.com/UnchartedBull/OctoDash/pull/92) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.1 to 12.7.2 [\#91](https://github.com/UnchartedBull/OctoDash/pull/91) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.802.1 to 0.802.2 [\#90](https://github.com/UnchartedBull/OctoDash/pull/90) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump typescript from 3.4.5 to 3.5.3 [\#89](https://github.com/UnchartedBull/OctoDash/pull/89) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v1.2.0](https://github.com/UnchartedBull/OctoDash/tree/v1.2.0) (2019-08-13)
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.1.0...v1.2.0)
 
@@ -104,7 +196,6 @@
 - Integrate Travis [\#33](https://github.com/UnchartedBull/OctoDash/pull/33) ([UnchartedBull](https://github.com/UnchartedBull))
 - Introduce interfaces for Octorprint API [\#32](https://github.com/UnchartedBull/OctoDash/pull/32) ([UnchartedBull](https://github.com/UnchartedBull))
 - Fix double percentage character [\#30](https://github.com/UnchartedBull/OctoDash/pull/30) ([UnchartedBull](https://github.com/UnchartedBull))
-- Fix/filament amount [\#21](https://github.com/UnchartedBull/OctoDash/pull/21) ([UnchartedBull](https://github.com/UnchartedBull))
 
 ## [v1.0.0](https://github.com/UnchartedBull/OctoDash/tree/v1.0.0) (2019-07-15)
 **Implemented enhancements:**
@@ -121,6 +212,7 @@
 
 - Electron [\#24](https://github.com/UnchartedBull/OctoDash/pull/24) ([UnchartedBull](https://github.com/UnchartedBull))
 - Display layer progress api [\#22](https://github.com/UnchartedBull/OctoDash/pull/22) ([UnchartedBull](https://github.com/UnchartedBull))
+- Fix/filament amount [\#21](https://github.com/UnchartedBull/OctoDash/pull/21) ([UnchartedBull](https://github.com/UnchartedBull))
 - Bump lodash from 4.17.11 to 4.17.14 [\#19](https://github.com/UnchartedBull/OctoDash/pull/19) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Refactor [\#6](https://github.com/UnchartedBull/OctoDash/pull/6) ([UnchartedBull](https://github.com/UnchartedBull))
 - Create LICENSE.md [\#1](https://github.com/UnchartedBull/OctoDash/pull/1) ([UnchartedBull](https://github.com/UnchartedBull))
