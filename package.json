@@ -92,7 +92,7 @@
         "@angular/language-service": "~8.2.8",
         "@types/ajv": "^1.0.0",
         "@types/lodash": "^4.14.141",
-        "@types/node": "~12.7.8",
+        "@types/node": "~12.7.9",
         "codelyzer": "^5.1.2",
         "electron": "^6.0.10",
         "electron-builder": "^21.2.0",
