@@ -1,4 +1,4 @@
-.error {
+.notification {
     display: block;
     position: fixed;
     width: 80vw;
@@ -9,7 +9,6 @@
     transition: top .7s ease-in-out;
     box-shadow: 0px 4px 10px -3px rgba(0, 0, 0, 0.75);
     z-index: 100;
-    border-left: 1vw solid #c23616;
     border-right: 1vw solid #5a6675;
 
     &__show {
@@ -37,5 +36,15 @@
         text-align: center;
         padding-bottom: 2vh;
         opacity: .4;
+    }
+
+    &__border {
+        &-error {
+            border-left: 1vw solid #c23616;
+        }
+
+        &-update {
+            border-left: 1vw solid #44bd32;
+        }
     }
 }

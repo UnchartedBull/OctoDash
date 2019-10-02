@@ -4,7 +4,7 @@ import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { shareReplay } from 'rxjs/operators';
 import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
-import { ErrorService } from './error/error.service';
+import { NotificationService } from './notification/notification.service';
 import { AppService } from './app.service';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class JobService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    private errorService: ErrorService,
+    private notificationService: NotificationService,
     private service: AppService) {
     this.observable = new Observable((observer: Observer<any>) => {
       this.observer = observer;
@@ -49,7 +49,7 @@ export class JobService {
             }
             observer.next(job);
           }, (error: HttpErrorResponse) => {
-            this.errorService.setError('Can\'t retrieve jobs!', error.message);
+            this.notificationService.setError('Can\'t retrieve jobs!', error.message);
           });
 
       });
@@ -74,9 +74,9 @@ export class JobService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), cancelPayload, this.configService.getHTTPHeaders()).subscribe(
       () => null, (error: HttpErrorResponse) => {
         if (error.status === 409) {
-          this.errorService.setError('Can\'t cancel Job!', 'There is no running job, that could be cancelled (409)');
+          this.notificationService.setError('Can\'t cancel Job!', 'There is no running job, that could be cancelled (409)');
         } else {
-          this.errorService.setError('Can\'t cancel Job!', error.message);
+          this.notificationService.setError('Can\'t cancel Job!', error.message);
         }
       }
     );
@@ -93,9 +93,9 @@ export class JobService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders()).subscribe(
       () => null, (error: HttpErrorResponse) => {
         if (error.status === 409) {
-          this.errorService.setError('Can\'t pause Job!', 'There is no running job, that could be paused (409)');
+          this.notificationService.setError('Can\'t pause Job!', 'There is no running job, that could be paused (409)');
         } else {
-          this.errorService.setError('Can\'t pause Job!', error.message);
+          this.notificationService.setError('Can\'t pause Job!', error.message);
         }
       }
     );
@@ -112,9 +112,9 @@ export class JobService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders()).subscribe(
       () => null, (error: HttpErrorResponse) => {
         if (error.status === 409) {
-          this.errorService.setError('Can\'t resume Job!', 'There is no paused job, that could be resumed (409)');
+          this.notificationService.setError('Can\'t resume Job!', 'There is no paused job, that could be resumed (409)');
         } else {
-          this.errorService.setError('Can\'t resume Job!', error.message);
+          this.notificationService.setError('Can\'t resume Job!', error.message);
         }
       }
     );
@@ -130,9 +130,9 @@ export class JobService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders()).subscribe(
       () => null, (error: HttpErrorResponse) => {
         if (error.status === 409) {
-          this.errorService.setError('Can\'t start Job!', 'There is already a job running (409)');
+          this.notificationService.setError('Can\'t start Job!', 'There is already a job running (409)');
         } else {
-          this.errorService.setError('Can\'t start Job!', error.message);
+          this.notificationService.setError('Can\'t start Job!', error.message);
         }
       }
     );

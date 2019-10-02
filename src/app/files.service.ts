@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ErrorService } from './error/error.service';
+import { NotificationService } from './notification/notification.service';
 import { Subscription } from 'rxjs';
 import { OctoprintFolderAPI, OctoprintFilesAPI, OctoprintFolderContentAPI } from './octoprint-api/filesAPI';
 import { AppService } from './app.service';
@@ -18,7 +18,7 @@ export class FilesService {
   constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    private errorService: ErrorService,
+    private notificationService: NotificationService,
     private service: AppService) { }
 
   public getFolder(folderPath: string = '/'): Promise<Array<File | Folder>> {
@@ -62,14 +62,14 @@ export class FilesService {
           },
           (error: HttpErrorResponse) => {
             if (error.status === 404) {
-              this.errorService.setError('Can\'t find specified folder!', error.message);
+              this.notificationService.setError('Can\'t find specified folder!', error.message);
               if (folderPath !== '/') {
                 this.getFolder(folderPath.substring(0, folderPath.lastIndexOf('/')));
               } else {
                 reject();
               }
             } else {
-              this.errorService.setError('Can\'t retrieve folder!', error.message);
+              this.notificationService.setError('Can\'t retrieve folder!', error.message);
               reject();
             }
           }
@@ -99,10 +99,10 @@ export class FilesService {
           },
           (error: HttpErrorResponse) => {
             if (error.status === 404) {
-              this.errorService.setError('Can\'t find specified file!', error.message);
+              this.notificationService.setError('Can\'t find specified file!', error.message);
               reject();
             } else {
-              this.errorService.setError('Can\'t retrieve folder!', error.message);
+              this.notificationService.setError('Can\'t retrieve folder!', error.message);
               reject();
             }
           }
@@ -122,7 +122,7 @@ export class FilesService {
       loadFileBody, this.configService.getHTTPHeaders()).subscribe(
         () => null,
         (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t load the file!', error.message);
+          this.notificationService.setError('Can\'t load the file!', error.message);
         }
       );
   }
@@ -139,7 +139,7 @@ export class FilesService {
       printFileBody, this.configService.getHTTPHeaders()).subscribe(
         () => null,
         (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t start print!', error.message);
+          this.notificationService.setError('Can\'t start print!', error.message);
         }
       );
   }
@@ -152,7 +152,7 @@ export class FilesService {
       this.configService.getHTTPHeaders()).subscribe(
         () => null,
         (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t delete file!', error.message);
+          this.notificationService.setError('Can\'t delete file!', error.message);
         }
       );
   }

@@ -4,7 +4,7 @@ import { ConfigService } from './config/config.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
-import { ErrorService } from './error/error.service';
+import { NotificationService } from './notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class PrinterService {
   httpPOSTRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
-  constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) {
+  constructor(private http: HttpClient, private configService: ConfigService, private notificationService: NotificationService) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
@@ -48,7 +48,7 @@ export class PrinterService {
               }
             };
             observer.next(printerStatus);
-            this.errorService.setError('Can\'t retrieve printer status!', error.message);
+            this.notificationService.setError('Can\'t retrieve printer status!', error.message);
           });
       });
     }).pipe(shareReplay(1));
@@ -69,7 +69,7 @@ export class PrinterService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
       .subscribe(
         () => null, (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t move Printhead!', error.message);
+          this.notificationService.setError('Can\'t move Printhead!', error.message);
         }
       );
   }
@@ -84,7 +84,7 @@ export class PrinterService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
       .subscribe(
         () => null, (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t send GCode!', error.message);
+          this.notificationService.setError('Can\'t send GCode!', error.message);
         }
       );
   }

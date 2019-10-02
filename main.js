@@ -60,10 +60,16 @@ function createWindow() {
     if (config && config.octodash && config.octodash.temperatureSensor !== null) {
         queryTemperatureSensor();
     }
-
+    setTimeout(sendVersionInfo, 42 * 1000);
     window.on('closed', () => {
         window = null;
     });
+}
+
+function sendVersionInfo() {
+    window.webContents.send("versionInformation", {
+        version: process.env.npm_package_version
+    })
 }
 
 function queryTemperatureSensor() {
