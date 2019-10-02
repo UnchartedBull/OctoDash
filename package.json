@@ -89,7 +89,7 @@
         "@angular-devkit/build-angular": "^0.803.6",
         "@angular/cli": "~8.3.7",
         "@angular/compiler-cli": "^8.2.2",
-        "@angular/language-service": "~8.2.8",
+        "@angular/language-service": "~8.2.9",
         "@types/ajv": "^1.0.0",
         "@types/lodash": "^4.14.141",
         "@types/node": "~12.7.9",
