@@ -24,6 +24,8 @@
 
 ## Installation
 
+***Note: This script will install additional OctoPrint Plugins by default. If you want to know which visit the Wiki!***
+
 ```
 wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh | bash -s -- --ptg
 ```
