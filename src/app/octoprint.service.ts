@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from './config/config.service';
-import { ErrorService } from './error/error.service';
+import { NotificationService } from './notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { ErrorService } from './error/error.service';
 export class OctoprintService {
   httpPOSTRequest: Subscription;
 
-  constructor(private http: HttpClient, private configService: ConfigService, private errorService: ErrorService) { }
+  constructor(private http: HttpClient, private configService: ConfigService, private notificationService: NotificationService) { }
 
 
   public disconnectPrinter() {
@@ -23,7 +23,7 @@ export class OctoprintService {
     this.httpPOSTRequest = this.http.post(this.configService.getURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
       .subscribe(
         () => null, (error: HttpErrorResponse) => {
-          this.errorService.setError('Can\'t disconnect from Printer!', error.message);
+          this.notificationService.setError('Can\'t disconnect from Printer!', error.message);
         }
       );
   }
@@ -36,7 +36,7 @@ export class OctoprintService {
       null, this.configService.getHTTPHeaders())
       .subscribe(
         () => null, (error: HttpErrorResponse) => {
-          this.errorService.setError(`Can't execute ${command} command!`, error.message);
+          this.notificationService.setError(`Can't execute ${command} command!`, error.message);
         }
       );
   }

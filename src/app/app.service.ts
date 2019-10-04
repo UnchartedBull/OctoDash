@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config/config.service';
+import { NotificationService } from './notification/notification.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,39 @@ export class AppService {
 
   private updateError: string[];
   private loadedFile = false;
+  private ipc: any;
+  private version: string;
 
-  constructor(private configService: ConfigService) {
+  constructor(private configService: ConfigService, private notificationService: NotificationService, private http: HttpClient) {
+    if (window.require && configService.config.octodash.temperatureSensor !== null) {
+      try {
+        this.ipc = window.require('electron').ipcRenderer;
+        this.ipc.on('versionInformation', ({ }, versionInformation: VersionInformation) => {
+          this.version = versionInformation.version;
+          this.checkUpdate();
+        });
+      } catch (e) {
+        this.notificationService.setError('Can\'t retrieve version information', 'Please open an issue for GitHub as this shouldn\'t happen.');
+      }
+    }
+
     this.updateError = [
       '.printer should have required property \'xySpeed\'',
       '.printer should have required property \'zSpeed\'',
       '.octodash should have required property \'customActions\''];
+  }
+
+  private checkUpdate(): void {
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
+      (data: GitHubRealeaseInformation) => {
+        if (this.version !== data.name.replace('v', '')) {
+          this.notificationService.setUpdate('It\'s time for an update',
+            `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`);
+        }
+      },
+      () => null
+    );
+    setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
   }
 
   public getUpdateError(): string[] {
@@ -95,4 +124,13 @@ export class AppService {
     return true;
   }
 
+}
+
+interface VersionInformation {
+  version: string;
+}
+
+interface GitHubRealeaseInformation {
+  name: string;
+  [key: string]: any;
 }

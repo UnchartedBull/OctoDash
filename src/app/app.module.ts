@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ControlComponent } from './control/control.component';
-import { ErrorComponent } from './error/error.component';
+import { NotificationComponent } from './notification/notification.component';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
 import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
@@ -24,7 +24,7 @@ import { PrinterStatusComponent } from './printer-status/printer-status.componen
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
-import { ErrorService } from './error/error.service';
+import { NotificationService } from './notification/notification.service';
 import { JobService } from './job.service';
 import { PrinterService } from './printer.service';
 
@@ -55,7 +55,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     InvalidConfigComponent,
     NoConfigComponent,
     PrintControlComponent,
-    ErrorComponent,
+    NotificationComponent,
     MainMenuComponent,
     ControlComponent,
     MainScreenComponent,
@@ -77,7 +77,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   providers: [
     AppService,
     ConfigService,
-    ErrorService,
+    NotificationService,
     PrinterService,
     JobService,
     {

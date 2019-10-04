@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { JobService, Job } from '../job.service';
 import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
-import { ErrorService } from '../error/error.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-job-status',
@@ -14,7 +14,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public job: Job;
 
-  constructor(private jobService: JobService, private service: AppService, private errorService: ErrorService) { }
+  constructor(private jobService: JobService, private service: AppService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => this.job = job));
@@ -29,7 +29,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public preheat(): void {
-    this.errorService.setError('Operation not yet supported', 'sorry about that one ... will come in the future!');
+    this.notificationService.setError('Operation not yet supported', 'sorry about that one ... will come in the future!');
   }
 
   public cancelLoadedFile(): void {
