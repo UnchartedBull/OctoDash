@@ -30,7 +30,7 @@
 wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh | bash -s -- --ptg
 ```
 
-For more options and information hava a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation)
+For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
 
 ## Update
 ```
