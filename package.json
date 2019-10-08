@@ -28,18 +28,20 @@
     "build": {
         "appId": "octodash",
         "productName": "OctoDash",
-        "npmRebuild": false,
         "directories": {
             "output": "package"
         },
         "linux": {
-            "target": [
-                {
+            "target": [{
                     "target": "deb",
                     "arch": [
                         "armv7l",
-                        "arm64"
+                        "arm64",
+                        "x64"
                     ]
+                },
+                {
+                    "target": "apk"
                 }
             ],
             "category": "Utility"
