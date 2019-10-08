@@ -38,5 +38,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
 
   public startJob(): void {
     this.jobService.startJob();
+    setTimeout(() => {
+      this.service.setLoadedFile(false);
+    }, 5000);
   }
 }
