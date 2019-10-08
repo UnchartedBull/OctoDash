@@ -17,7 +17,7 @@ export class NotificationService {
   }
 
   setError(heading: string, text: string) {
-    // this.observer.next({ heading, text, type: 'error' });
+    this.observer.next({ heading, text, type: 'error' });
   }
 
   setUpdate(heading: string, text: string) {
