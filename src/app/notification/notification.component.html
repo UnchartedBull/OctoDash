@@ -1,5 +1,5 @@
-<div class="notification" [ngClass]="['notification__border-' + notification.type, show ? 'notification__show' : '']">
-
+<div class="notification" [ngClass]="['notification__border-' + notification.type, show ? 'notification__show' : '']"
+    (click)="hideNotification()">
     <span class="notification__heading"> {{ notification.heading }} </span>
     <span class="notification__text"> {{ notification.text }} </span>
     <span class="notification__close">Tap this card to close it ...</span>
