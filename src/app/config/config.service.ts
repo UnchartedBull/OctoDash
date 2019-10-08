@@ -147,6 +147,9 @@ export class ConfigService {
     return this.config.octodash.touchscreen;
   }
 
+  public getAmbientTemperatureSensorName(): string {
+    return this.config.octodash.temperatureSensor.ambient;
+  }
 }
 
 export interface Config {
