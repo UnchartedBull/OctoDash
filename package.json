@@ -28,18 +28,20 @@
     "build": {
         "appId": "octodash",
         "productName": "OctoDash",
-        "npmRebuild": false,
         "directories": {
             "output": "package"
         },
         "linux": {
-            "target": [
-                {
+            "target": [{
                     "target": "deb",
                     "arch": [
                         "armv7l",
-                        "arm64"
+                        "arm64",
+                        "x64"
                     ]
+                },
+                {
+                    "target": "apk"
                 }
             ],
             "category": "Utility"
@@ -80,7 +82,6 @@
         "hammerjs": "^2.0.8",
         "lodash": "^4.17.15",
         "ngx-spinner": "^8.0.3",
-        "node-dht-sensor": "^0.4.0",
         "rxjs": "~6.5.3",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"

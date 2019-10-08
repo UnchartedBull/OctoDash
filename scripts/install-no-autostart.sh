@@ -5,6 +5,7 @@ dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2
 
 echo "Installing OctoPrint Plugins"
 ~/OctoPrint/venv/bin/pip install -q "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
+~/OctoPrint/venv/bin/pip install -q "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
 ~/OctoPrint/venv/bin/pip install -q "https://github.com/marian42/octoprint-preheat/archive/master.zip"
 if [[ $* == *--ptg* ]]
 then

@@ -2,39 +2,31 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 import { Subscription } from 'rxjs';
+import { EnclosureService } from '../enclosure.service';
 
 @Component({
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss']
 })
-export class BottomBarComponent implements OnInit, OnDestroy {
+export class BottomBarComponent implements OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
   public printer: Printer;
-  public enclosureTemperature: number;
-  private ipc: any;
+  public enclosureTemperature: TemperatureReading;
 
-  constructor(private printerService: PrinterService, private configService: ConfigService) {
-    if (window.require && configService.config.octodash.temperatureSensor !== null) {
-      try {
-        this.ipc = window.require('electron').ipcRenderer;
-        this.ipc.on('temperatureReading', ({ }, temperatureReading: TemperatureReading) => {
-          this.enclosureTemperature = temperatureReading.temperature;
-        });
-      } catch (e) {
-        console.error(e);
-      }
+  constructor(private printerService: PrinterService, private configService: ConfigService, private enclosureService: EnclosureService) {
+    if (this.configService.getAmbientTemperatureSensorName() !== null) {
+      this.subscriptions.add(this.enclosureService.getObservable().subscribe((temperatureReading: TemperatureReading) => {
+        this.enclosureTemperature = temperatureReading;
+      }));
     } else {
-      this.enclosureTemperature = 0.0;
+      this.enclosureTemperature = null;
     }
     this.printer = {
       name: this.configService.config.printer.name,
       status: 'connecting ...'
     };
-  }
-
-  ngOnInit() {
     this.subscriptions.add(this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
       this.printer.status = printerStatus.status;
     }));
@@ -50,7 +42,7 @@ interface Printer {
   status: string;
 }
 
-interface TemperatureReading {
+export interface TemperatureReading {
   temperature: number;
   humidity: number;
 }

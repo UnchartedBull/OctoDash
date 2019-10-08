@@ -147,6 +147,9 @@ export class ConfigService {
     return this.config.octodash.touchscreen;
   }
 
+  public getAmbientTemperatureSensorName(): string {
+    return this.config.octodash.temperatureSensor.ambient;
+  }
 }
 
 export interface Config {
@@ -169,8 +172,12 @@ interface CustomAction {
 }
 
 interface TemperatureSensor {
-  type: number;
-  gpio: number;
+  ambient: string | null;
+  filament1: string | null;
+  filament2: string | null;
+  // deprecate in next version
+  type?: number;
+  gpio?: number;
 }
 
 interface Octoprint {
@@ -284,7 +291,29 @@ const schema = {
         },
         temperatureSensor: {
           $id: '#/properties/octodash/properties/temperatureSensor',
-          type: ['object', 'null']
+          type: 'object',
+          required: [
+            'ambient',
+            'filament1',
+            'filament2'
+          ],
+          properties: {
+            ambient: {
+              $id: '#/properties/octodash/properties/temperatureSensor/properties/ambient',
+              type: ['string', 'null'],
+              pattern: '^(.*)$'
+            },
+            filament1: {
+              $id: '#/properties/octodash/properties/temperatureSensor/properties/filament1',
+              type: ['string', 'null'],
+              pattern: '^(.*)$'
+            },
+            filament2: {
+              $id: '#/properties/octodash/properties/temperatureSensor/properties/filament2',
+              type: ['string', 'null'],
+              pattern: '^(.*)$'
+            },
+          }
         },
         customActions: {
           $id: '#/properties/octodash/properties/customActions',

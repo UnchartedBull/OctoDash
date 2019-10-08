@@ -82,22 +82,13 @@
                 </span> Touchscreen
             </div>
             <div class="no-config__3-temperature">
-                <span *ngIf="config.octodash.temperatureSensor.type !== 0">Sensor:</span>
-                <span *ngIf="config.octodash.temperatureSensor.type === 0">Temperature Sensor:</span>
-                <span class="no-config__select-wrapper">
-                    <select [(ngModel)]="config.octodash.temperatureSensor.type" name="temperatureSensorType">
-                        <option [ngValue]="0">None</option>
-                        <option [ngValue]="11">DHT11</option>
-                        <option [ngValue]="22">DHT22</option>
-                        <option [ngValue]="22">AM2302</option>
-                    </select>
-                </span>
-                <span *ngIf="config.octodash.temperatureSensor.type !== 0">
-                    <label for="filamentDensity" class="no-config__input-label-small">GPIO:</label>
-                    <input type="number" id="filamentDensity"
-                        class="no-config__3-gpio no-config__input no-config__input-small" name="filamentDensity"
-                        step="1" min="0" [(ngModel)]="config.octodash.temperatureSensor.gpio" required>
-                </span>
+                <label for="ambientTemperatureSensor" class="no-config__input-label-small">Sensor Name:</label>
+                <input type="string" id="ambientTemperatureSensor" class="no-config__input"
+                    [(ngModel)]="config.octodash.temperatureSensor.ambient" name="ambientTemperatureSensor" required>
+                <div class="no-config__3-temperature-explanation">
+                    Please enter the name of your temperature sensor as configured in the Enclosure Plugin. Leave empty
+                    if you aren't using a temperature sensor.
+                </div>
             </div>
         </form>
     </div>
