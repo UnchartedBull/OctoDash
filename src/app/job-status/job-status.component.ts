@@ -37,7 +37,6 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public startJob(): void {
-    // FIXME
-    // this.jobService.startJob();
+    this.jobService.startJob();
   }
 }

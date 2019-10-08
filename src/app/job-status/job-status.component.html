@@ -1,5 +1,4 @@
-<!-- //FIXME -->
-<div class="job-info" *ngIf="job && job.status === 'Printings'">
+<div class="job-info" *ngIf="job && job.status === 'Printing'">
     <div class="job-info__progress-ring">
         <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
             [color]="'#44bd32'"></round-progress>
@@ -11,28 +10,29 @@
             class="job-info__time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,
         elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
 </div>
-<!-- // FIXME -->
-<!-- <div class="job-info__file-loaded" *ngIf="job && job.status !== 'Printing' && isFileLoaded()"> -->
-<div class="job-info__file-loaded" *ngIf="job && job.status !== 'Printings' && true">
+<div class="job-info__file-loaded" *ngIf="job && job.status !== 'Printing' && isFileLoaded()"
+    (swipe)="cancelLoadedFile()">
     <img src="assets/object.svg" class="job-info__preview" />
     <span class="job-info__filename">{{ job.filename }}</span> <br />
-    <img src="assets/heat.svg" class="job-info__actions-item job-info__actions-item-heat" /> <br />
-    <img src="assets/print.svg" class="job-info__actions-item job-info__actions-item-print" /> <br />
+    <img src="assets/heat.svg" class="job-info__actions-item job-info__actions-item-heat" (click)="preheat()" /> <br />
+    <img src="assets/print.svg" class="job-info__actions-item job-info__actions-item-print" (click)="startJob()" />
+    <br />
     <div class="job-info__print-details">
         <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
-        <span class="job-info__print-details-value">
-            2:40h
-        </span>
+        <span
+            class="job-info__print-details-value">{{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}</span>
         <span class="job-info__print-details-finish-state">
-            - will finish ~21:40
+            - will finish ~{{ job.estimatedEndTime }}
         </span>
         <br />
         <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
         <span class="job-info__print-details-value">
-            222g
+            {{ job.filamentAmount }}g
         </span>
         <span class="job-info__print-details-finish-state">
-            - 1250g filament left after print
+            <!-- TODO Once Filament Manager is up and working-->
+            <!-- - 1250g filament left after print -->
+            filament will be used
         </span>
     </div>
 </div>

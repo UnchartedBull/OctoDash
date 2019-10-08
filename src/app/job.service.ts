@@ -45,6 +45,11 @@ export class JobService {
                   value: this.service.convertSecondsToHours(data.progress.printTime),
                   unit: 'h'
                 },
+                estimatedPrintTime: {
+                  value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
+                  unit: 'h'
+                },
+                estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
               };
             }
             observer.next(job);
@@ -137,6 +142,12 @@ export class JobService {
       }
     );
   }
+
+  private calculateEndTime(duration: number): string {
+    const date = new Date();
+    date.setSeconds(date.getSeconds() + duration);
+    return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+  }
 }
 
 interface Duration {
@@ -151,4 +162,6 @@ export interface Job {
   filamentAmount: number;
   timeLeft: Duration;
   timePrinted: Duration;
+  estimatedPrintTime: Duration;
+  estimatedEndTime: string;
 }
