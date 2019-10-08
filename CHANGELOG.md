@@ -1,5 +1,41 @@
 # Change Log
 
+## [v1.3.1](https://github.com/UnchartedBull/OctoDash/tree/v1.3.1) (2019-10-08)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.3.0...v1.3.1)
+
+**Implemented enhancements:**
+
+- Redesign Loaded File Screen [\#185](https://github.com/UnchartedBull/OctoDash/issues/185)
+- Use OctoPrint-Enclosure Plugin [\#182](https://github.com/UnchartedBull/OctoDash/issues/182)
+- Notification if new version is available [\#166](https://github.com/UnchartedBull/OctoDash/issues/166)
+- Integrate Preheat into OctoDash [\#151](https://github.com/UnchartedBull/OctoDash/issues/151)
+
+**Fixed bugs:**
+
+- Clear Loaded File after starting print [\#184](https://github.com/UnchartedBull/OctoDash/issues/184)
+
+**Closed issues:**
+
+- unable to open octodash via VNC [\#180](https://github.com/UnchartedBull/OctoDash/issues/180)
+
+**Merged pull requests:**
+
+- Fix/remove node dht sensor [\#188](https://github.com/UnchartedBull/OctoDash/pull/188) ([UnchartedBull](https://github.com/UnchartedBull))
+- New Design for Loaded files [\#187](https://github.com/UnchartedBull/OctoDash/pull/187) ([UnchartedBull](https://github.com/UnchartedBull))
+- Clear loaded File after printing started [\#186](https://github.com/UnchartedBull/OctoDash/pull/186) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @types/lodash from 4.14.141 to 4.14.142 [\#181](https://github.com/UnchartedBull/OctoDash/pull/181) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.7 to 8.3.8 [\#179](https://github.com/UnchartedBull/OctoDash/pull/179) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.7 to 0.803.8 [\#178](https://github.com/UnchartedBull/OctoDash/pull/178) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.10 to 12.7.11 [\#177](https://github.com/UnchartedBull/OctoDash/pull/177) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.9 to 12.7.10 [\#176](https://github.com/UnchartedBull/OctoDash/pull/176) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.8 to 8.2.9 [\#175](https://github.com/UnchartedBull/OctoDash/pull/175) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.6 to 0.803.7 [\#174](https://github.com/UnchartedBull/OctoDash/pull/174) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.8 to 8.2.9 [\#173](https://github.com/UnchartedBull/OctoDash/pull/173) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.6 to 8.3.7 [\#172](https://github.com/UnchartedBull/OctoDash/pull/172) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- update notification [\#171](https://github.com/UnchartedBull/OctoDash/pull/171) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @types/node from 12.7.8 to 12.7.9 [\#169](https://github.com/UnchartedBull/OctoDash/pull/169) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.10 to 6.0.11 [\#168](https://github.com/UnchartedBull/OctoDash/pull/168) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v1.3.0](https://github.com/UnchartedBull/OctoDash/tree/v1.3.0) (2019-09-30)
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.2.0...v1.3.0)
 
