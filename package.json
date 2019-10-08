@@ -32,7 +32,8 @@
             "output": "package"
         },
         "linux": {
-            "target": [{
+            "target": [
+                {
                     "target": "deb",
                     "arch": [
                         "armv7l",
