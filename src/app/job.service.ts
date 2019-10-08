@@ -143,6 +143,21 @@ export class JobService {
     );
   }
 
+  public preheat(): void {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const preheatPayload: JobCommand = {
+      command: 'preheat'
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('plugin/preheat'), preheatPayload, this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.notificationService.setError('Can\'t preheat printer!', error.message);
+        }
+      );
+  }
+
   private calculateEndTime(duration: number): string {
     const date = new Date();
     date.setSeconds(date.getSeconds() + duration);
