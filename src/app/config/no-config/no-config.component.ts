@@ -117,7 +117,6 @@ export class NoConfigComponent implements OnInit {
   createConfig() {
     this.configErrors = [];
     this.octoprintConnectionError = null;
-    console.log(this.config);
     this.config.octoprint.url = `http://${this.urlName}:${this.urlPort}/api/`;
     if (this.config.octodash.temperatureSensor.ambient === '') {
       this.config.octodash.temperatureSensor.ambient = null;
@@ -128,7 +127,6 @@ export class NoConfigComponent implements OnInit {
     if (this.config.octodash.temperatureSensor.filament2 === '') {
       this.config.octodash.temperatureSensor.filament2 = null;
     }
-    console.log(this.config);
     this.validateConfig();
     return true;
   }
