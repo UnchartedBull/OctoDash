@@ -12,21 +12,17 @@ export class BottomBarComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
   public printer: Printer;
-  public enclosureTemperature: number;
+  public enclosureTemperature: TemperatureReading;
   private ipc: any;
 
   constructor(private printerService: PrinterService, private configService: ConfigService) {
-    if (window.require && configService.config.octodash.temperatureSensor !== null) {
-      try {
-        this.ipc = window.require('electron').ipcRenderer;
-        this.ipc.on('temperatureReading', ({ }, temperatureReading: TemperatureReading) => {
-          this.enclosureTemperature = temperatureReading.temperature;
-        });
-      } catch (e) {
-        console.error(e);
-      }
+    if (true) {
+      this.enclosureTemperature = {
+        temperature: 21.8,
+        humidity: 1
+      };
     } else {
-      this.enclosureTemperature = 0.0;
+      this.enclosureTemperature = null;
     }
     this.printer = {
       name: this.configService.config.printer.name,

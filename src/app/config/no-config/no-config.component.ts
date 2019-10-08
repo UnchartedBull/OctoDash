@@ -28,7 +28,7 @@ export class NoConfigComponent implements OnInit {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
       this.config = configService.getRemoteConfig();
-      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+      this.revertConfigForUserInput();
     } else {
       this.config = {
         octoprint: {
@@ -48,8 +48,9 @@ export class NoConfigComponent implements OnInit {
         octodash: {
           touchscreen: true,
           temperatureSensor: {
-            type: 0,
-            gpio: 0
+            ambient: '',
+            filament1: '',
+            filament2: ''
           },
           customActions: [
             {
@@ -116,10 +117,18 @@ export class NoConfigComponent implements OnInit {
   createConfig() {
     this.configErrors = [];
     this.octoprintConnectionError = null;
+    console.log(this.config);
     this.config.octoprint.url = `http://${this.urlName}:${this.urlPort}/api/`;
-    if (this.config.octodash.temperatureSensor.type === 0) {
-      this.config.octodash.temperatureSensor = null;
+    if (this.config.octodash.temperatureSensor.ambient === '') {
+      this.config.octodash.temperatureSensor.ambient = null;
     }
+    if (this.config.octodash.temperatureSensor.filament1 === '') {
+      this.config.octodash.temperatureSensor.filament1 = null;
+    }
+    if (this.config.octodash.temperatureSensor.filament2 === '') {
+      this.config.octodash.temperatureSensor.filament2 = null;
+    }
+    console.log(this.config);
     this.validateConfig();
     return true;
   }
@@ -152,14 +161,23 @@ export class NoConfigComponent implements OnInit {
 
   decreasePage() {
     if (this.page === 4) {
-      this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
-      this.config.octodash.temperatureSensor = {
-        type: 0,
-        gpio: 0
-      };
+      this.revertConfigForUserInput();
     }
     this.page -= 1;
     this.changeProgress();
+  }
+
+  private revertConfigForUserInput() {
+    this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
+    if (this.config.octodash.temperatureSensor.ambient === null) {
+      this.config.octodash.temperatureSensor.ambient = '';
+    }
+    if (this.config.octodash.temperatureSensor.filament1 === null) {
+      this.config.octodash.temperatureSensor.filament1 = '';
+    }
+    if (this.config.octodash.temperatureSensor.filament2 === null) {
+      this.config.octodash.temperatureSensor.filament2 = '';
+    }
   }
 
   changeProgress() {

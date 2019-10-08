@@ -123,38 +123,11 @@
     }
 
     &__3 {
-        &-gpio {
+        &-temperature-explanation {
+            font-size: 3vw;
+            font-style: italic;
+            opacity: .7;
             margin-top: 4vh;
-        }
-
-        &-temperature {
-            display: block;
-
-            & label {
-                margin-left: 4vw;
-            }
-
-            & select {
-                background-color: transparent;
-                width: 28vw;
-                padding: 2.3vh 1.5vw;
-                border: 2px solid #dcdde1;
-                border-radius: 4vh;
-                margin-left: 2vw;
-                margin-top: 4vh;
-            }
-
-            &__select-wrapper {
-                position: relative;
-
-                &::before {
-                    content: "\25BF";
-                    position: absolute;
-                    right: 2vw;
-                    top: 0;
-                    pointer-events: none;
-                }
-            }
         }
     }
 

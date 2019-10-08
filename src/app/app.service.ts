@@ -14,7 +14,7 @@ export class AppService {
   private version: string;
 
   constructor(private configService: ConfigService, private notificationService: NotificationService, private http: HttpClient) {
-    if (window.require && configService.config.octodash.temperatureSensor !== null) {
+    if (window.require) {
       try {
         this.ipc = window.require('electron').ipcRenderer;
         this.ipc.on('versionInformation', ({ }, versionInformation: VersionInformation) => {
@@ -27,9 +27,10 @@ export class AppService {
     }
 
     this.updateError = [
-      '.printer should have required property \'xySpeed\'',
-      '.printer should have required property \'zSpeed\'',
-      '.octodash should have required property \'customActions\''];
+      '.octodash.temperatureSensor should have required property \'ambient\'',
+      '.octodash.temperatureSensor should have required property \'filament1\'',
+      '.octodash.temperatureSensor should have required property \'filament2\'',
+    ];
   }
 
   private checkUpdate(): void {
@@ -85,43 +86,14 @@ export class AppService {
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.config;
-    config.octodash.customActions = [
-      {
-        icon: 'home',
-        command: 'G28',
-        color: '#dcdde1'
-      },
-      {
-        icon: 'ruler-vertical',
-        command: 'G29',
-        color: '#44bd32'
-      },
-      {
-        icon: 'fire-alt',
-        command: 'M140 S50; M104 S185',
-        color: '#e1b12c'
-      },
-      {
-        icon: 'snowflake',
-        command: 'M140 S0; M104 S0',
-        color: '#0097e6'
-      },
-      {
-        icon: 'redo-alt',
-        command: '[!RELOAD]',
-        color: '#7f8fa6'
-      },
-      {
-        icon: 'skull',
-        command: '[!KILL]',
-        color: '#e84118'
-      }
-    ];
-    config.printer.xySpeed = 150;
-    config.printer.zSpeed = 5;
+    delete config.octodash.temperatureSensor.gpio;
+    delete config.octodash.temperatureSensor.type;
+    config.octodash.temperatureSensor.ambient = null;
+    config.octodash.temperatureSensor.filament1 = null;
+    config.octodash.temperatureSensor.filament2 = null;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
-    return true;
+    return false;
   }
 
 }
