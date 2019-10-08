@@ -29,7 +29,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public preheat(): void {
-    this.notificationService.setError('Operation not yet supported', 'sorry about that one ... will come in the future!');
+    this.jobService.preheat();
   }
 
   public cancelLoadedFile(): void {
