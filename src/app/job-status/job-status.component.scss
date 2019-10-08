@@ -56,7 +56,7 @@
     }
 
     &__file-loaded>.job-info__filename {
-        width: 77vw;
+        font-size: 5vw;
     }
 
     &__preview {
@@ -69,29 +69,39 @@
     }
 
     &__actions {
-        float: right;
-        margin-top: 0vh;
-        overflow: visible;
-        width: 63vw;
-        margin-right: 11vw;
-        margin-bottom: 2vh;
-
         &-item {
-            width: 7vw;
-            padding: 0 2vw;
+            float: right;
 
-
-            &-column {
-                font-size: 3vw;
-                text-align: center;
-                width: 33.3%;
-                font-weight: 500;
+            &-heat {
+                width: 5.5vw;
+                margin: -13vh 7vw 0 0;
             }
 
-            &-3 {
-                width: 8.7vw;
-                margin-bottom: -1.6vh;
+            &-print {
+                width: 11vw;
+                margin: -7vh 5vw 0 0;
             }
+        }
+    }
+
+    &__print-details {
+        width: 63vw;
+        margin-top: -17vh;
+        margin-bottom: 2.8vh;
+
+        &-icon {
+            padding-right: 2vw;
+            font-size: 3vw;
+            vertical-align: .8vh;
+        }
+
+        &-value {
+            padding-bottom: 3vh;
+            display: inline-flex;
+        }
+
+        &-finish-state {
+            font-size: 2.6vw;
         }
     }
 }
