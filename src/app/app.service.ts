@@ -37,8 +37,8 @@ export class AppService {
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
       (data: GitHubRealeaseInformation) => {
         if (this.version !== data.name.replace('v', '')) {
-          this.notificationService.setUpdate('It\'s time for an update',
-            `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`);
+          // this.notificationService.setUpdate('It\'s time for an update',
+          //   `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`);
         }
       },
       () => null
@@ -86,11 +86,15 @@ export class AppService {
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.config;
-    delete config.octodash.temperatureSensor.gpio;
-    delete config.octodash.temperatureSensor.type;
-    config.octodash.temperatureSensor.ambient = null;
-    config.octodash.temperatureSensor.filament1 = null;
-    config.octodash.temperatureSensor.filament2 = null;
+    if (config.octodash.temperatureSensor !== null) {
+      delete config.octodash.temperatureSensor.gpio;
+      delete config.octodash.temperatureSensor.type;
+    }
+    config.octodash.temperatureSensor = {
+      ambient: null,
+      filament1: null,
+      filament2: null
+    };
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return false;

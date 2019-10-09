@@ -26,7 +26,8 @@ export class AppComponent {
             this.router.navigate(['/main-screen-no-touch']);
           }
         } else {
-          if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
+          // WARNING: remove later
+          if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError()) || _.isEqual(this.configService.getErrors(), ['.octodash.temperatureSensor should be object'])) {
             if (this.service.autoFixError()) {
               this.initialize();
             } else {

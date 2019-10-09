@@ -26,7 +26,6 @@ export class EnclosureService {
         this.httpGETRequest = this.http.get(this.configService.getURL('settings'), this.configService.getHTTPHeaders()).subscribe(
           (data: OctoprintSettingsAPI) => {
             const enclosureInputs = data.plugins.enclosure.rpi_inputs;
-            console.log(enclosureInputs);
             const ambientTemperatureSensorName = this.configService.getAmbientTemperatureSensorName();
             enclosureInputs.forEach((enclosureInput) => {
               if (enclosureInput.label === ambientTemperatureSensorName) {
