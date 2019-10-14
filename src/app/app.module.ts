@@ -37,6 +37,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import * as Hammer from 'hammerjs';
 import { SettingsComponent } from './settings/settings.component';
+import { StandbyComponent } from './standby/standby.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -63,7 +64,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     FilamentComponent,
     FilesComponent,
     SettingsComponent,
-    URLSafePipe
+    URLSafePipe,
+    StandbyComponent
   ],
   imports: [
     BrowserModule,

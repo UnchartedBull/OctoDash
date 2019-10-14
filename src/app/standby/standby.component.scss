@@ -1,0 +1,44 @@
+.standby {
+    &__icon {
+        height: 45vh;
+        display: block;
+        margin: 11vh auto;
+    }
+
+    &__text {
+        &-big {
+            display: block;
+            text-align: center;
+            margin-bottom: 5vh;
+            font-size: 4vw;
+        }
+
+        &-small {
+            display: block;
+            text-align: center;
+            margin-bottom: 5vh;
+            font-size: 2vw;
+        }
+    }
+
+    &__error {
+        position: fixed;
+        top: 20vh;
+        left: 20vw;
+        right: 20vw;
+        text-align: center;
+        background-color: black;
+        opacity: .92;
+        border-radius: 2vw;
+        padding: 5vh 3vw;
+        font-size: 3vw;
+        z-index: 100;
+
+        &-close {
+            font-size: 2vw;
+            opacity: .8;
+            display: block;
+            margin-top: 4vh;
+        }
+    }
+}

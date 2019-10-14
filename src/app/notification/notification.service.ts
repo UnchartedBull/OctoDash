@@ -16,8 +16,8 @@ export class NotificationService {
     }).pipe(shareReplay(1));
   }
 
-  setError(heading: string, text: string) {
-    this.observer.next({ heading, text, type: 'error' });
+  setError(heading: string, text: string, printerStatusError = false) {
+    this.observer.next({ heading, text, type: 'error', printerStatusError });
   }
 
   setUpdate(heading: string, text: string) {
@@ -33,4 +33,5 @@ export interface Message {
   heading: string;
   text: string;
   type: string;
+  printerStatusError?: boolean;
 }
