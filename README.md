@@ -2,6 +2,7 @@
     <img width="200" height="200" src="https://github.com/UnchartedBull/OctoDash/raw/master/build/icon.png">
     <br>
     <img src="https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master">
+    <img src="https://www.codefactor.io/repository/github/unchartedbull/octodash/badge">
     <img src="https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg">
     <img src="https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg">
     <img src="https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen">
@@ -32,6 +33,10 @@ wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.s
 ```
 
 For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
+
+No Screen? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Installation#setup-without-keyboard). 
+
+Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
 ## Update
 ```
