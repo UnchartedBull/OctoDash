@@ -9,7 +9,7 @@ elif [ -d "/home/pi/oprint" ]; then
     DIRECTORY="/home/pi/oprint"
 else
     echo "Neither /home/pi/OctoPrint/venv nor /home/pi/oprint can be found. Please specify OctoPrints full virtualenv path manually (no trailing slash):"
-    read DIRECTORY
+    read -r DIRECTORY
 fi;
 
 "$DIRECTORY"/bin/pip install -q "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
