@@ -13,11 +13,10 @@ const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big')
 
 let window;
-let config;
 
 function createWindow() {
     config = store.get("config");
-    store.onDidChange("config", (newValue, _) => {
+    store.onDidChange("config", (newValue) => {
         config = newValue
     })
     const {

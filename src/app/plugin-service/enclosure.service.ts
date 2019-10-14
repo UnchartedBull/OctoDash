@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ConfigService } from './config/config.service';
-import { NotificationService } from './notification/notification.service';
+import { ConfigService } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
-import { OctoprintSettingsAPI } from './octoprint-api/settingsAPI';
-import { PrinterStatusAPI } from './printer.service';
+import { OctoprintSettingsAPI } from '../octoprint-api/settingsAPI';
+import { PrinterStatusAPI } from '../printer.service';
 import { shareReplay } from 'rxjs/operators';
-import { TemperatureReading } from './bottom-bar/bottom-bar.component';
+import { TemperatureReading } from '../bottom-bar/bottom-bar.component';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 import { Subscription } from 'rxjs';
-import { EnclosureService } from '../enclosure.service';
+import { EnclosureService } from '../plugin-service/enclosure.service';
 
 @Component({
   selector: 'app-bottom-bar',
