@@ -3,6 +3,7 @@ import { PrinterService } from '../printer.service';
 import { ConfigService } from '../config/config.service';
 import { OctoprintService } from '../octoprint.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { PsuControlService } from '../plugin-service/psu-control.service';
 
 @Component({
   selector: 'app-control',
@@ -19,7 +20,7 @@ export class ControlComponent {
     private printerService: PrinterService,
     private octoprintService: OctoprintService,
     private configService: ConfigService,
-    private domSanitizer: DomSanitizer) {
+    private psuControlService: PsuControlService) {
     this.customActions = this.configService.getCustomActions();
   }
 
@@ -44,6 +45,9 @@ export class ControlComponent {
       case '[!REBOOT]': this.rebootPi(); break;
       case '[!SHUTDOWN]': this.shutdownPi(); break;
       case '[!KILL]': this.kill(); break;
+      case '[!POWEROFF]': this.psuControlService.changePSUState(false); break;
+      case '[!POWERON]': this.psuControlService.changePSUState(true); break;
+      case '[!POWERTOGGLE]': this.psuControlService.togglePSU(); break;
       default: {
         if (command.includes('[!WEB]')) {
           this.openIFrame(command.replace('[!WEB]', ''));
