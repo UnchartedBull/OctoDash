@@ -6,7 +6,10 @@ const url = require('url')
 const path = require('path')
 const Store = require('electron-store');
 const store = new Store();
-
+const exec = require('child_process').exec;
+const {
+    ipcMain
+} = require('electron')
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
@@ -56,9 +59,20 @@ function createWindow() {
     }
 
     setTimeout(sendVersionInfo, 42 * 1000);
+    activateSleepListener();
     window.on('closed', () => {
         window = null;
     });
+}
+
+function activateSleepListener() {
+    ipcMain.on("screenSleep", () => {
+        exec('xset dpms force standby')
+    })
+
+    ipcMain.on("screenWakeup", () => {
+        exec('xset -dpms')
+    })
 }
 
 function sendVersionInfo() {

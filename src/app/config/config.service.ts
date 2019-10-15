@@ -150,6 +150,10 @@ export class ConfigService {
   public getAmbientTemperatureSensorName(): string {
     return this.config.octodash.temperatureSensor.ambient;
   }
+
+  public getAutomaticScreenSleep(): boolean {
+    return this.config.octodash.turnScreenOffSleep;
+  }
 }
 
 export interface Config {
@@ -163,6 +167,7 @@ interface OctoDash {
   touchscreen: boolean;
   temperatureSensor: TemperatureSensor | null;
   customActions: CustomAction[];
+  turnScreenOffSleep: boolean;
 }
 
 interface CustomAction {
@@ -175,9 +180,6 @@ interface TemperatureSensor {
   ambient: string | null;
   filament1: string | null;
   filament2: string | null;
-  // deprecate in next version
-  type?: number;
-  gpio?: number;
 }
 
 interface Octoprint {
@@ -282,7 +284,8 @@ const schema = {
       required: [
         'touchscreen',
         'temperatureSensor',
-        'customActions'
+        'customActions',
+        'turnScreenOffSleep'
       ],
       properties: {
         touchscreen: {
@@ -344,7 +347,11 @@ const schema = {
               }
             }
           }
-        }
+        },
+        turnScreenOffSleep: {
+          $id: '#/properties/octodash/properties/turnScreenOffSleep',
+          type: 'boolean'
+        },
       }
     }
   }

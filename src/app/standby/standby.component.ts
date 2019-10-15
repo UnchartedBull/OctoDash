@@ -3,6 +3,7 @@ import { ConfigService } from '../config/config.service';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-standby',
@@ -15,9 +16,12 @@ export class StandbyComponent implements OnInit {
   error = '';
   httpPOSTRequest: Subscription;
 
-  constructor(private configService: ConfigService, private http: HttpClient, private router: Router) { }
+  constructor(private configService: ConfigService, private http: HttpClient, private router: Router, private service: AppService) { }
 
   ngOnInit() {
+    if (this.configService.getAutomaticScreenSleep()) {
+      setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
+    }
   }
 
   reconnect() {
@@ -34,6 +38,9 @@ export class StandbyComponent implements OnInit {
         () => {
           setTimeout(() => {
             this.connecting = false;
+            if (this.configService.getAutomaticScreenSleep()) {
+              this.service.turnDisplayOn();
+            }
             this.router.navigate(['/main-screen']);
           }, 4000);
         },
