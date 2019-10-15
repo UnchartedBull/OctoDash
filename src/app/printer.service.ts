@@ -38,7 +38,7 @@ export class PrinterService {
             observer.next(printerStatus);
           }, (error: HttpErrorResponse) => {
             if (error.status === 409) {
-              this.notificationService.setError(null, null, true);
+              this.notificationService.setError('Can\'t retrieve printer status!', error.message, true);
             } else {
               const printerStatus: PrinterStatusAPI = {
                 status: `error (${error.status})`,
@@ -99,8 +99,7 @@ export class PrinterService {
       this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintConnectionAPI) => {
-            // TODO: check for disconnected
-            resolve(data.current.state !== 'Operational');
+            resolve(data.current.state === 'Closed');
           },
           (error: HttpErrorResponse) => {
             this.notificationService.setError('Can\'t retrieve connection state!', error.message);

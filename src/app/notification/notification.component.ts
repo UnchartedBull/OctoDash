@@ -35,6 +35,9 @@ export class NotificationComponent implements OnDestroy {
           this.hideNotification();
           console.clear();
           this.router.navigate(['/standby']);
+        } else {
+          this.notification = message;
+          this.show = true;
         }
       });
     } else {

@@ -15,8 +15,8 @@ import { StandbyComponent } from './standby/standby.component';
 const routes: Routes = [
   {
     path: 'main-screen',
-    // component: MainScreenComponent
-    component: StandbyComponent
+    component: MainScreenComponent
+    // component: StandbyComponent
   },
   {
     path: 'main-screen-no-touch',
