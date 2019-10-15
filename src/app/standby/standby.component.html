@@ -1,0 +1,14 @@
+<div (click)="reconnect()">
+    <img src="assets/sleeping.svg" class="standby__icon">
+    <span class="standby__text-big">Shhh! OctoDash is sleeping.</span>
+    <span class="standby__text-small">Press on the screen to wake me up again.</span>
+</div>
+
+<div class="standby__error" *ngIf="error !== ''" (click)="error = ''">
+    {{ error }}
+    <span class="standby__error-close">tap this card to close it ...</span>
+</div>
+
+<div class="standby__error" *ngIf="connecting">
+    connecting ...
+</div>

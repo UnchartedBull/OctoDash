@@ -5,6 +5,7 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
 import { NotificationService } from './notification/notification.service';
+import { OctoprintConnectionAPI } from './octoprint-api/connectionAPI';
 
 @Injectable({
   providedIn: 'root'
@@ -36,19 +37,23 @@ export class PrinterService {
             };
             observer.next(printerStatus);
           }, (error: HttpErrorResponse) => {
-            const printerStatus: PrinterStatusAPI = {
-              status: `error (${error.status})`,
-              nozzle: {
-                current: 0,
-                set: 0
-              },
-              heatbed: {
-                current: 0,
-                set: 0
-              }
-            };
-            observer.next(printerStatus);
-            this.notificationService.setError('Can\'t retrieve printer status!', error.message);
+            if (error.status === 409) {
+              this.notificationService.setError('Can\'t retrieve printer status!', error.message, true);
+            } else {
+              const printerStatus: PrinterStatusAPI = {
+                status: `error (${error.status})`,
+                nozzle: {
+                  current: 0,
+                  set: 0
+                },
+                heatbed: {
+                  current: 0,
+                  set: 0
+                }
+              };
+              observer.next(printerStatus);
+              this.notificationService.setError('Can\'t retrieve printer status!', error.message);
+            }
           });
       });
     }).pipe(shareReplay(1));
@@ -87,6 +92,21 @@ export class PrinterService {
           this.notificationService.setError('Can\'t send GCode!', error.message);
         }
       );
+  }
+
+  public isPrinterOffline(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
+        .subscribe(
+          (data: OctoprintConnectionAPI) => {
+            resolve(data.current.state === 'Closed');
+          },
+          (error: HttpErrorResponse) => {
+            this.notificationService.setError('Can\'t retrieve connection state!', error.message);
+            resolve(false);
+          }
+        );
+    });
   }
 }
 

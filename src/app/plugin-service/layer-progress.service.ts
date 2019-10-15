@@ -11,16 +11,16 @@ import { NotificationService } from '../notification/notification.service';
 })
 export class LayerProgressService {
 
-  httpRequest: Subscription;
+  httpGETRequest: Subscription;
   observable: Observable<DisplayLayerProgressAPI>;
 
   constructor(private configService: ConfigService, private notificationService: NotificationService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
       timer(1000, this.configService.getAPIInterval()).subscribe(_ => {
-        if (this.httpRequest) {
-          this.httpRequest.unsubscribe();
+        if (this.httpGETRequest) {
+          this.httpGETRequest.unsubscribe();
         }
-        this.httpRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress/values').replace('/api', ''),
+        this.httpGETRequest = this.http.get(this.configService.getURL('plugin/DisplayLayerProgress/values').replace('/api', ''),
           this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintLayerProgressAPI) => {
               observer.next({

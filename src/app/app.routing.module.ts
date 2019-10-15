@@ -9,13 +9,14 @@ import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-n
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
 import { SettingsComponent } from './settings/settings.component';
+import { StandbyComponent } from './standby/standby.component';
 
 
 const routes: Routes = [
   {
     path: 'main-screen',
     component: MainScreenComponent
-    // component: FilesComponent
+    // component: StandbyComponent
   },
   {
     path: 'main-screen-no-touch',
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: 'standby',
+    component: StandbyComponent
   }
 ];
 

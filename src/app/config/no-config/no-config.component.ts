@@ -83,7 +83,8 @@ export class NoConfigComponent implements OnInit {
               command: '[!KILL]',
               color: '#e84118'
             }
-          ]
+          ],
+          turnScreenOffSleep: false
         }
       };
     }

@@ -27,9 +27,7 @@ export class AppService {
     }
 
     this.updateError = [
-      '.octodash.temperatureSensor should have required property \'ambient\'',
-      '.octodash.temperatureSensor should have required property \'filament1\'',
-      '.octodash.temperatureSensor should have required property \'filament2\'',
+      '.octodash should have required property \'turnScreenOffSleep\''
     ];
   }
 
@@ -44,6 +42,18 @@ export class AppService {
       () => null
     );
     setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
+  }
+
+  public turnDisplayOff(): void {
+    if (this.ipc) {
+      this.ipc.send('screenSleep', '');
+    }
+  }
+
+  public turnDisplayOn(): void {
+    if (this.ipc) {
+      this.ipc.send('screenWakeup', '');
+    }
   }
 
   public getUpdateError(): string[] {
@@ -86,18 +96,10 @@ export class AppService {
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.config;
-    if (config.octodash.temperatureSensor !== null) {
-      delete config.octodash.temperatureSensor.gpio;
-      delete config.octodash.temperatureSensor.type;
-    }
-    config.octodash.temperatureSensor = {
-      ambient: null,
-      filament1: null,
-      filament2: null
-    };
+    config.octodash.turnScreenOffSleep = false;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
-    return false;
+    return true;
   }
 
 }
