@@ -59,13 +59,13 @@ function createWindow() {
     }
 
     setTimeout(sendVersionInfo, 42 * 1000);
-    activateSleepListener();
+    activateScreenSleepListener();
     window.on('closed', () => {
         window = null;
     });
 }
 
-function activateSleepListener() {
+function activateScreenSleepListener() {
     ipcMain.on("screenSleep", () => {
         exec('xset dpms force standby')
     })
@@ -77,7 +77,7 @@ function activateSleepListener() {
 
 function sendVersionInfo() {
     window.webContents.send("versionInformation", {
-        version: process.env.npm_package_version
+        version: app.getVersion()
     })
 }
 

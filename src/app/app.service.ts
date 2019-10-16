@@ -35,8 +35,8 @@ export class AppService {
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
       (data: GitHubRealeaseInformation) => {
         if (this.version !== data.name.replace('v', '')) {
-          // this.notificationService.setUpdate('It\'s time for an update',
-          //   `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`);
+          this.notificationService.setUpdate('It\'s time for an update',
+            `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`);
         }
       },
       () => null
