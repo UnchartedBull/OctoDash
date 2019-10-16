@@ -17,7 +17,7 @@ export class PrinterService {
   observable: Observable<PrinterStatusAPI>;
 
   constructor(private http: HttpClient, private configService: ConfigService, private notificationService: NotificationService) {
-    this.observable = new Observable((observer: Observer<any>) => {
+    this.observable = new Observable((observer: Observer<PrinterStatusAPI>) => {
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
@@ -94,6 +94,66 @@ export class PrinterService {
       );
   }
 
+  public setTemperatureHotend(temperature: number) {
+    const temperatureHotendCommand: TemperatureHotendCommand = {
+      command: 'target',
+      targets: {
+        tool0: temperature
+      }
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/tool'), temperatureHotendCommand,
+      this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.notificationService.setError('Can\'t set Hotend Temperature!', error.message);
+        }
+      );
+  }
+
+  public setTemperatureHeatbed(temperature: number) {
+    const temperatureHeatbedCommand: TemperatureHeatbedCommand = {
+      command: 'target',
+      target: temperature
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/bed'), temperatureHeatbedCommand,
+      this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.notificationService.setError('Can\'t set Heatbed Temperature!', error.message);
+        }
+      );
+  }
+
+  public setFeedrate(feedrate: number) {
+    if (feedrate === 100) { return; }
+    const feedrateCommand: FeedrateCommand = {
+      command: 'feedrate',
+      factor: feedrate
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/printhead'), feedrateCommand,
+      this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.notificationService.setError('Can\'t set Feedrate!', error.message);
+        }
+      );
+  }
+
+  public setFlowrate(flowrate: number) {
+    if (flowrate === 100) { return; }
+    const flowrateCommand: FeedrateCommand = {
+      command: 'flowrate',
+      factor: flowrate
+    };
+    this.httpPOSTRequest = this.http.post(this.configService.getURL('printer/tool'), flowrateCommand,
+      this.configService.getHTTPHeaders())
+      .subscribe(
+        () => null, (error: HttpErrorResponse) => {
+          this.notificationService.setError('Can\'t set Flowrate!', error.message);
+        }
+      );
+  }
+
   public isPrinterOffline(): Promise<boolean> {
     return new Promise((resolve) => {
       this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
@@ -131,4 +191,22 @@ interface JogCommand {
 
 interface GCodeCommand {
   commands: string[];
+}
+
+interface FeedrateCommand {
+  command: string;
+  factor: number;
+}
+
+interface TemperatureHotendCommand {
+  command: string;
+  targets: {
+    tool0: number;
+    tool1?: number;
+  };
+}
+
+interface TemperatureHeatbedCommand {
+  command: string;
+  target: number;
 }
