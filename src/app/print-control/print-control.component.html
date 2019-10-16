@@ -50,12 +50,55 @@
                 <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
             </tr>
         </table>
-        <img src="assets/adjust.svg" class="print-control__center-icon print-control__pause__icon">
-        <span class="print-control__confirm">
-            :(
-        </span>
-        <span style="font-size: 3vw; margin: 4vh 3vw; text-align: center; display: block">
-            This feature has not been implemented yet. If you really, really want it before anything else - go to GitHub
-            and like issue #55.</span>
+        <img src="assets/adjust.svg" class="print-control__center-icon-small">
+        <table class="print-control__adjust__wrapper">
+            <tr>
+                <td class="print-control__adjust__change-parameter">
+                    <div class="print-control__adjust__controller">
+                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHotend(1)">+
+                        </div>
+                        <div class="print-control__adjust__controller-value">
+                            {{ temperatureHotend }}<span class="print-control__adjust__controller-value-unit">°C</span>
+                        </div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHotend(-1)">-
+                        </div>
+                    </div>
+                    <span class="print-control__adjust__name">Hotend</span>
+                </td>
+                <td class="print-control__adjust__change-parameter">
+                    <div class="print-control__adjust__controller">
+                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHeatbed(1)">+
+                        </div>
+                        <div class="print-control__adjust__controller-value">
+                            {{ temperatureHeatbed }}<span class="print-control__adjust__controller-value-unit">°C</span>
+                        </div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHeatbed(-1)">-
+                        </div>
+                    </div>
+                    <span class="print-control__adjust__name">Heatbed</span>
+                </td>
+                <td class="print-control__adjust__change-parameter">
+                    <div class="print-control__adjust__controller">
+                        <div class="print-control__adjust__controller-increase" (click)="changeFeedrate(1)">+</div>
+                        <div class="print-control__adjust__controller-value">
+                            {{ feedrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+                        </div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeFeedrate(-1)">-</div>
+                    </div>
+                    <span class="print-control__adjust__name">Feedrate</span>
+                </td>
+                <td class="print-control__adjust__change-parameter">
+                    <div class="print-control__adjust__controller">
+                        <div class="print-control__adjust__controller-increase" (click)="changeFlowrate(1)">+</div>
+                        <div class="print-control__adjust__controller-value">
+                            {{ flowrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+                        </div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeFlowrate(-1)">-</div>
+                    </div>
+                    <span class="print-control__adjust__name">Flowrate</span>
+                </td>
+            </tr>
+        </table>
+        <div class="print-control__adjust__save" (click)="setAdjustParameters()">save</div>
     </div>
 </div>
