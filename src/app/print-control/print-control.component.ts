@@ -8,9 +8,10 @@ import { JobService } from '../job.service';
 })
 export class PrintControlComponent implements OnInit {
 
-  public showControls = false;
+  // FIXME
+  public showControls = true;
   public controlView = ControlView;
-  public view = ControlView.MAIN;
+  public view = ControlView.ADJUST;
 
   constructor(private jobService: JobService) { }
 
