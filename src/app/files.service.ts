@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -5,6 +6,7 @@ import { NotificationService } from './notification/notification.service';
 import { Subscription } from 'rxjs';
 import { OctoprintFolderAPI, OctoprintFilesAPI, OctoprintFolderContentAPI } from './octoprint-api/filesAPI';
 import { AppService } from './app.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,15 +46,26 @@ export class FilesService {
                   // TODO: Think of a way to retrieve number of children
                   files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                 } as Folder);
-              } else {
+              } else if (fileOrFolder.typePath.includes('gcode') && fileOrFolder.origin === 'local') {
+                if (!fileOrFolder.gcodeAnalysis) {
+                  this.notificationService.setError('Corrupted file found!', `File ${fileOrFolder.name} does not include GCodeAnalysis. Ignoring it for now ...`);
+                  return;
+                }
+                let filamentLength = 0;
+                _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool) => {
+                  filamentLength += tool.length;
+                });
+
                 folder.push({
                   type: 'file',
                   path: '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
                   size: this.service.convertByteToMegabyte(fileOrFolder.size),
                   printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
-                  filamentWeight: this.service.convertFilamentLengthToAmount(fileOrFolder.gcodeAnalysis.filament.tool0.length),
+                  filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
                 } as File);
+              } else if (fileOrFolder.typePath.includes('gcode') && fileOrFolder.origin === 'sdcard') {
+                // TODO
               }
             });
             data = null;
@@ -86,13 +99,17 @@ export class FilesService {
       this.httpGETRequest = this.http.get(this.configService.getURL('files/local' + filePath),
         this.configService.getHTTPHeaders()).subscribe(
           (data: OctoprintFilesAPI) => {
+            let filamentLength = 0;
+            _.forEach(data.gcodeAnalysis.filament, (tool) => {
+              filamentLength += tool.length;
+            });
             const file = {
               type: 'file',
               path: '/' + data.path,
               name: data.name,
               size: this.service.convertByteToMegabyte(data.size),
               printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-              filamentWeight: this.service.convertFilamentLengthToAmount(data.gcodeAnalysis.filament.tool0.length),
+              filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
               date: this.service.convertDateToString(new Date(data.date * 1000))
             } as File;
             resolve(file);

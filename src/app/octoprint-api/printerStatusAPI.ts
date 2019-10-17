@@ -5,8 +5,12 @@ export interface OctoprintPrinterStatusAPI {
 }
 
 interface OctoprintTemperature {
-    tool0: OctoprintTemperatureData;
-    tool1: OctoprintTemperatureData;
+    tool0?: OctoprintTemperatureData;
+    tool1?: OctoprintTemperatureData;
+    tool2?: OctoprintTemperatureData;
+    tool3?: OctoprintTemperatureData;
+    tool4?: OctoprintTemperatureData;
+    tool5?: OctoprintTemperatureData;
     bed: OctoprintTemperatureData;
     [key: string]: any;
 }

@@ -35,7 +35,7 @@ export interface OctoprintFolderContentAPI {
 interface OctoprintGCodeAnalysis {
     analysisFirstFilamentPrintTime: number;
     analysisLastFilamentPrintTime: number;
-    analysisPending: number;
+    analysisPending: boolean;
     analysisPrintTime: number;
     compensatedPrintTime: number;
     dimensions: {
