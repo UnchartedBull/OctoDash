@@ -51,6 +51,7 @@
     margin-left: 2.5vw;
     margin-top: 0.5vh;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     position: relative;
 
     &::before {

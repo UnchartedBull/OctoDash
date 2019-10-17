@@ -46,6 +46,26 @@ export class MyHammerConfig extends HammerGestureConfig {
   } as any;
 }
 
+export class HammerConfig extends HammerGestureConfig {
+  overrides = {
+    pan: {
+      direction: 6
+    },
+    pinch: {
+      enable: false
+    },
+    rotate: {
+      enable: false
+    },
+    press: {
+      pointers: 1, time: 501, threshold: 15
+    },
+    swipe: {
+      pointers: 1, direction: Hammer.DIRECTION_LEFT, threshold: 20, velocity: 0.4
+    }
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,11 +104,12 @@ export class MyHammerConfig extends HammerGestureConfig {
     JobService,
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
+      useClass: HammerConfig
     }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
