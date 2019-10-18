@@ -57,42 +57,44 @@
             </span>
         </div>
     </div>
+    <div class="scroll__thumb-inactive" *ngIf="folderContent"></div>
+</div>
 
-    <div class="file" id="fileDetailView">
-        <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'">
-            <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
-            <span class="file__name">{{ fileDetail.name }}</span>
-            <span class="file__directory">{{ fileDetail.path }}</span>
-            <span class="file__creation-date">{{ fileDetail.date }}</span>
-            <img src="assets/object.svg" class="file__render" />
-            <table class="file__details">
-                <tr>
-                    <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
-                    <td>{{ fileDetail.printTime }}<span class="file__details-name">h</span></td>
-                    <td>{{ fileDetail.filamentWeight }}<span class="file__details-name">g</span></td>
-                </tr>
-            </table>
-            <table class="file__actions">
-                <tr>
-                    <td>
-                        <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
-                    </td>
-                    <td>
-                        <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
-                    </td>
-                    <td>
-                        <img src="assets/delete.svg" class="file__actions-icon" (click)="deleteFile(fileDetail.path)" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="file__wrapper file__loading" *ngIf="!fileDetail">
-            <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
-            loading details ...
-        </div>
-        <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
-            <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
-            can't load file.
-        </div>
+
+<div class="file" id="fileDetailView">
+    <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'">
+        <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
+        <span class="file__name">{{ fileDetail.name }}</span>
+        <span class="file__directory">{{ fileDetail.path }}</span>
+        <span class="file__creation-date">{{ fileDetail.date }}</span>
+        <img src="assets/object.svg" class="file__render" />
+        <table class="file__details">
+            <tr>
+                <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
+                <td>{{ fileDetail.printTime }}<span class="file__details-name">h</span></td>
+                <td>{{ fileDetail.filamentWeight }}<span class="file__details-name">g</span></td>
+            </tr>
+        </table>
+        <table class="file__actions">
+            <tr>
+                <td>
+                    <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
+                </td>
+                <td>
+                    <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
+                </td>
+                <td>
+                    <img src="assets/delete.svg" class="file__actions-icon" (click)="deleteFile(fileDetail.path)" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="file__wrapper file__loading" *ngIf="!fileDetail">
+        <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
+        loading details ...
+    </div>
+    <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
+        <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
+        can't load file.
     </div>
 </div>

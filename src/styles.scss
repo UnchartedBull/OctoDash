@@ -174,6 +174,19 @@ app-root {
     }
 }
 
+.scroll__thumb-inactive {
+    display: block;
+    background-color: rgba(127, 143, 166, .3);
+    width: 3vw;
+    height: 66.4vh;
+    position: fixed;
+    right: 2.5vw;
+    top: 28vh;
+    border-radius: .89vw;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .la-pacman {
     overflow: visible;
     margin-left: -4vw !important;

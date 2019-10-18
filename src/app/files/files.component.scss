@@ -51,7 +51,9 @@
     margin-left: 2.5vw;
     margin-top: 0.5vh;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     position: relative;
+    z-index: 1;
 
     &::before {
         content: '';

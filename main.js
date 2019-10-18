@@ -15,6 +15,8 @@ const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big')
 
+app.commandLine.appendSwitch('touch-events', 'enabled');
+
 let window;
 
 function createWindow() {
@@ -22,6 +24,7 @@ function createWindow() {
     store.onDidChange("config", (newValue) => {
         config = newValue
     })
+
     const {
         screen
     } = require('electron')
@@ -37,29 +40,24 @@ function createWindow() {
         icon: path.join(__dirname, 'src/assets/icon.png')
     })
 
-    config = store.get("config")
-
     if (dev) {
         require('electron-reload')(__dirname, {
             electron: require(`${__dirname}/node_modules/electron`)
         });
         window.loadURL('http://localhost:4200');
+        window.webContents.openDevTools();
     } else {
         window.loadURL(url.format({
             pathname: path.join(__dirname, 'dist/index.html'),
             protocol: 'file:',
             slashes: true
         }));
-    }
-
-    if (!dev) {
         window.setFullScreen(true)
-    } else {
-        window.webContents.openDevTools();
     }
 
     setTimeout(sendVersionInfo, 42 * 1000);
     activateScreenSleepListener();
+
     window.on('closed', () => {
         window = null;
     });
