@@ -225,21 +225,36 @@
             width: 33.3%;
             text-align: center;
 
+            & span {
+                position: absolute;
+                margin-left: -5vw;
+            }
+
             &:first-of-type {
                 text-align: left;
 
+                & span {
+                    margin-top: 4vh;
+                    position: absolute;
+                    margin-left: 0;
+                }
+
                 & img {
                     height: 10vh;
-                    margin-bottom: 4vh;
                 }
             }
 
             &:last-of-type {
                 text-align: right;
 
+                & span {
+                    margin-top: 4.5vh;
+                    position: absolute;
+                    margin-left: -5vw;
+                }
+
                 & img {
                     height: 10vh;
-                    margin-bottom: 4.5vh;
                 }
             }
         }

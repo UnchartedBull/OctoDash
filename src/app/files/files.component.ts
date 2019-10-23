@@ -41,24 +41,26 @@ export class FilesComponent {
   }
 
   public openFolder(folderPath: string): void {
-    this.spinner.show(undefined, {
-      bdColor: '#353b48',
-      color: '#f5f6fa',
-      size: 'medium',
-      type: 'pacman',
-      fullScreen: false
-    });
-    this.folderContent = null;
-    this.filesService.getFolder(folderPath).then(
-      (data) => {
-        this.folderContent = data;
-        this.currentFolder = folderPath;
-        this.spinner.hide();
-      }).catch((err) => {
-        this.folderContent = null;
-        this.currentFolder = folderPath;
-        this.spinner.hide();
+    setTimeout(() => {
+      this.spinner.show(undefined, {
+        bdColor: '#353b48',
+        color: '#f5f6fa',
+        size: 'medium',
+        type: 'pacman',
+        fullScreen: false
       });
+      this.folderContent = null;
+      this.filesService.getFolder(folderPath).then(
+        (data) => {
+          this.folderContent = data;
+          this.currentFolder = folderPath;
+          this.spinner.hide();
+        }).catch((err) => {
+          this.folderContent = null;
+          this.currentFolder = folderPath;
+          this.spinner.hide();
+        });
+    }, 300);
   }
 
   public closeDetails(): void {
@@ -71,20 +73,26 @@ export class FilesComponent {
   }
 
   public loadFile(filePath: string): void {
-    this.filesService.loadFile(filePath);
-    this.service.setLoadedFile(true);
-    this.jobService.deleteJobInformation();
-    this.router.navigate(['/main-screen']);
+    setTimeout(() => {
+      this.filesService.loadFile(filePath);
+      this.service.setLoadedFile(true);
+      this.jobService.deleteJobInformation();
+      this.router.navigate(['/main-screen']);
+    }, 300);
   }
 
   public printFile(filePath: string): void {
-    this.filesService.printFile(filePath);
-    this.router.navigate(['/main-screen']);
+    setTimeout(() => {
+      this.filesService.printFile(filePath);
+      this.router.navigate(['/main-screen']);
+    }, 300);
   }
 
   public deleteFile(filePath: string): void {
-    this.filesService.deleteFile(filePath);
-    this.closeDetails();
-    this.openFolder(this.currentFolder);
+    setTimeout(() => {
+      this.filesService.deleteFile(filePath);
+      this.closeDetails();
+      this.openFolder(this.currentFolder);
+    }, 300);
   }
 }

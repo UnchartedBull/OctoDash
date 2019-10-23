@@ -70,16 +70,22 @@
 
     &__actions {
         &-item {
-            float: right;
-
             &-heat {
-                width: 5.5vw;
+                float: right;
                 margin: -13vh 7vw 0 0;
+
+                &-icon {
+                    width: 5.5vw;
+                }
             }
 
             &-print {
-                width: 11vw;
+                float: right;
                 margin: -7vh 5vw 0 0;
+
+                &-icon {
+                    width: 11vw;
+                }
             }
         }
     }
