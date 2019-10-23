@@ -37,6 +37,7 @@
 .control {
     margin-top: 5vh;
     display: block;
+    overflow: visible;
 
     &__heading {
         display: block;
@@ -52,6 +53,7 @@
         height: 60vh;
         text-align: center;
         float: left;
+        overflow: visible;
 
         &-wrapper {
             position: relative;
@@ -59,6 +61,7 @@
             height: 50vh;
             margin-left: 5vw;
             font-size: 20vh;
+            overflow: visible;
         }
     }
 
@@ -68,6 +71,7 @@
         height: 60vh;
         text-align: center;
         float: left;
+        overflow: visible;
 
         &-wrapper {
             position: relative;
@@ -75,6 +79,7 @@
             height: 50vh;
             margin-left: 5vw;
             font-size: 20vh;
+            overflow: visible;
         }
     }
 
