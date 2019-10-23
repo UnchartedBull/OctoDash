@@ -29,8 +29,8 @@
                             },
                             {
                                 "glob": "*",
-                                "input": "src/assets/icon/",
-                                "output": "/assets/icon/"
+                                "input": "src/assets/icon/icon-main-title.svg",
+                                "output": "/assets/icon/icon-main-title.svg"
                             },
                             {
                                 "glob": "favicon.ico",
