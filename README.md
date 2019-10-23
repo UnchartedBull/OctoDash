@@ -1,6 +1,6 @@
 <p align="center">
-    <img width="200" height="200" src="https://github.com/UnchartedBull/OctoDash/raw/master/build/icon.png">
-    <br>
+    <img width="300" height="300" src="./src/assets/icon/icon-main-dark-title.svg">
+    <br><br>
     <img src="https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master">
     <img src="https://www.codefactor.io/repository/github/unchartedbull/octodash/badge">
     <img src="https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg">
