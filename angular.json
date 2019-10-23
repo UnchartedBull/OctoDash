@@ -28,6 +28,11 @@
                                 "output": "/assets/"
                             },
                             {
+                                "glob": "*",
+                                "input": "src/assets/icon/",
+                                "output": "/assets/icon/"
+                            },
+                            {
                                 "glob": "favicon.ico",
                                 "input": "src/",
                                 "output": "/"
@@ -87,7 +92,8 @@
                         "karmaConfig": "karma.conf.js",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            "src/assets/icon/icon-main-title.svg"
                         ],
                         "styles": [
                             "src/styles.scss"
