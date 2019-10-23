@@ -1,5 +1,80 @@
 # Change Log
 
+## [v1.3.2](https://github.com/UnchartedBull/OctoDash/tree/v1.3.2) (2019-10-23)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.3.1...v1.3.2)
+
+**Implemented enhancements:**
+
+- Improved touch callout suggestion [\#212](https://github.com/UnchartedBull/OctoDash/issues/212)
+- Enable scroll on files // UI increase scroll bar contrast [\#208](https://github.com/UnchartedBull/OctoDash/issues/208)
+- Improve offline response & Connect to Printer [\#202](https://github.com/UnchartedBull/OctoDash/issues/202)
+- Control PSU from OctoDash [\#201](https://github.com/UnchartedBull/OctoDash/issues/201)
+- Turn off screen when idle [\#200](https://github.com/UnchartedBull/OctoDash/issues/200)
+- Make arm64 compatible [\#167](https://github.com/UnchartedBull/OctoDash/issues/167)
+- Adjust printer parameters during print. [\#55](https://github.com/UnchartedBull/OctoDash/issues/55)
+
+**Fixed bugs:**
+
+- cant retriever printer status [\#239](https://github.com/UnchartedBull/OctoDash/issues/239)
+- Fan speed is not updated [\#236](https://github.com/UnchartedBull/OctoDash/issues/236)
+- Bed Termperature not rendered correctly - possibly when temp is 100C or above [\#235](https://github.com/UnchartedBull/OctoDash/issues/235)
+- Arrows Control get cut [\#224](https://github.com/UnchartedBull/OctoDash/issues/224)
+- 409 CONFLICT error with OctoDash [\#218](https://github.com/UnchartedBull/OctoDash/issues/218)
+- Version Update not working correctly [\#211](https://github.com/UnchartedBull/OctoDash/issues/211)
+- OctoDash dont read/show files [\#210](https://github.com/UnchartedBull/OctoDash/issues/210)
+- Enable scroll on files // UI increase scroll bar contrast [\#208](https://github.com/UnchartedBull/OctoDash/issues/208)
+- Bug: Tap and hold  shows text selection [\#203](https://github.com/UnchartedBull/OctoDash/issues/203)
+- Installation error related to virtual environment [\#197](https://github.com/UnchartedBull/OctoDash/issues/197)
+
+**Closed issues:**
+
+- setting up my configs without keyboard ? [\#207](https://github.com/UnchartedBull/OctoDash/issues/207)
+- Multiple Cameras [\#204](https://github.com/UnchartedBull/OctoDash/issues/204)
+- compatibility problem with waveshare 3.5ich ips  lcd [\#199](https://github.com/UnchartedBull/OctoDash/issues/199)
+- Errors on launch - possible missing dependencies? [\#198](https://github.com/UnchartedBull/OctoDash/issues/198)
+- Uninstall [\#191](https://github.com/UnchartedBull/OctoDash/issues/191)
+- Design an App Icon [\#85](https://github.com/UnchartedBull/OctoDash/issues/85)
+
+**Merged pull requests:**
+
+- Feature/touch callout [\#249](https://github.com/UnchartedBull/OctoDash/pull/249) ([UnchartedBull](https://github.com/UnchartedBull))
+- \[ImgBot\] Optimize images [\#248](https://github.com/UnchartedBull/OctoDash/pull/248) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Bump @angular-devkit/build-angular from 0.803.12 to 0.803.13 [\#247](https://github.com/UnchartedBull/OctoDash/pull/247) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.12 to 8.3.13 [\#246](https://github.com/UnchartedBull/OctoDash/pull/246) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.11.3 to 12.11.5 [\#245](https://github.com/UnchartedBull/OctoDash/pull/245) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.11.2 to 12.11.3 [\#243](https://github.com/UnchartedBull/OctoDash/pull/243) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add svg icons [\#242](https://github.com/UnchartedBull/OctoDash/pull/242) ([hessius](https://github.com/hessius))
+- Bump codelyzer from 5.1.2 to 5.2.0 [\#241](https://github.com/UnchartedBull/OctoDash/pull/241) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.12 to 7.0.0 [\#240](https://github.com/UnchartedBull/OctoDash/pull/240) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.11.1 to 12.11.2 [\#238](https://github.com/UnchartedBull/OctoDash/pull/238) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix Layout getting funky, if bed temperature is over a 100 degree [\#237](https://github.com/UnchartedBull/OctoDash/pull/237) ([UnchartedBull](https://github.com/UnchartedBull))
+- \[ImgBot\] Optimize images [\#234](https://github.com/UnchartedBull/OctoDash/pull/234) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Scrolling working on files again [\#233](https://github.com/UnchartedBull/OctoDash/pull/233) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @angular-devkit/build-angular from 0.803.10 to 0.803.12 [\#232](https://github.com/UnchartedBull/OctoDash/pull/232) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.10 to 8.3.12 [\#231](https://github.com/UnchartedBull/OctoDash/pull/231) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fixed multi material issue [\#230](https://github.com/UnchartedBull/OctoDash/pull/230) ([UnchartedBull](https://github.com/UnchartedBull))
+- \[ImgBot\] Optimize images [\#228](https://github.com/UnchartedBull/OctoDash/pull/228) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Fix layout issue, update main screen font [\#227](https://github.com/UnchartedBull/OctoDash/pull/227) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @angular/cli from 8.3.9 to 8.3.10 [\#223](https://github.com/UnchartedBull/OctoDash/pull/223) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular-devkit/build-angular from 0.803.9 to 0.803.10 [\#222](https://github.com/UnchartedBull/OctoDash/pull/222) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- \[ImgBot\] Optimize images [\#221](https://github.com/UnchartedBull/OctoDash/pull/221) ([imgbot[bot]](https://github.com/apps/imgbot))
+- feature/adjust parameters during print [\#220](https://github.com/UnchartedBull/OctoDash/pull/220) ([UnchartedBull](https://github.com/UnchartedBull))
+- Version Update Notification now working again [\#219](https://github.com/UnchartedBull/OctoDash/pull/219) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @types/node from 12.7.12 to 12.11.1 [\#217](https://github.com/UnchartedBull/OctoDash/pull/217) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.10 to 8.2.11 [\#216](https://github.com/UnchartedBull/OctoDash/pull/216) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.10 to 8.2.11 [\#215](https://github.com/UnchartedBull/OctoDash/pull/215) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Enable standby mode [\#213](https://github.com/UnchartedBull/OctoDash/pull/213) ([UnchartedBull](https://github.com/UnchartedBull))
+- Move services and CodeFactor improvements [\#209](https://github.com/UnchartedBull/OctoDash/pull/209) ([UnchartedBull](https://github.com/UnchartedBull))
+- Apply fixes from CodeFactor [\#206](https://github.com/UnchartedBull/OctoDash/pull/206) ([UnchartedBull](https://github.com/UnchartedBull))
+- \[ImgBot\] Optimize images [\#205](https://github.com/UnchartedBull/OctoDash/pull/205) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Bump @angular-devkit/build-angular from 0.803.8 to 0.803.9 [\#196](https://github.com/UnchartedBull/OctoDash/pull/196) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 8.3.8 to 8.3.9 [\#195](https://github.com/UnchartedBull/OctoDash/pull/195) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/router from 8.2.9 to 8.2.10 [\#194](https://github.com/UnchartedBull/OctoDash/pull/194) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 8.2.9 to 8.2.10 [\#193](https://github.com/UnchartedBull/OctoDash/pull/193) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.142 to 4.14.144 [\#192](https://github.com/UnchartedBull/OctoDash/pull/192) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 6.0.11 to 6.0.12 [\#190](https://github.com/UnchartedBull/OctoDash/pull/190) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.7.11 to 12.7.12 [\#189](https://github.com/UnchartedBull/OctoDash/pull/189) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v1.3.1](https://github.com/UnchartedBull/OctoDash/tree/v1.3.1) (2019-10-08)
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v1.3.0...v1.3.1)
 
