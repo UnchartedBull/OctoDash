@@ -81,7 +81,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "ajv": "^6.10.2",
     "angular-svg-round-progressbar": "^3.0.1",
-    "electron-store": "^5.0.0",
+    "electron-store": "^5.1.0",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
     "ngx-spinner": "^8.0.3",
