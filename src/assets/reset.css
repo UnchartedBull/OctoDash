@@ -149,6 +149,11 @@ select {
     outline: none;
 }
 
-*:focus {
+div:focus,
+a:focus,
+span:focus,
+td:focus,
+p:focus,
+img:focus {
     outline: 0;
 }
