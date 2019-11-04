@@ -23,6 +23,7 @@ export class FilesComponent {
     private service: AppService,
     private router: Router,
     private jobService: JobService) {
+    this.showLoader();
     this.currentFolder = '/';
     this.openFolder(this.currentFolder);
   }
@@ -42,13 +43,7 @@ export class FilesComponent {
 
   public openFolder(folderPath: string): void {
     setTimeout(() => {
-      this.spinner.show(undefined, {
-        bdColor: '#353b48',
-        color: '#f5f6fa',
-        size: 'medium',
-        type: 'pacman',
-        fullScreen: false
-      });
+      this.showLoader();
       this.folderContent = null;
       this.filesService.getFolder(folderPath).then(
         (data) => {
@@ -94,5 +89,15 @@ export class FilesComponent {
       this.closeDetails();
       this.openFolder(this.currentFolder);
     }, 300);
+  }
+
+  private showLoader(): void {
+    this.spinner.show(undefined, {
+      bdColor: '#353b48',
+      color: '#f5f6fa',
+      size: 'medium',
+      type: 'pacman',
+      fullScreen: false
+    });
   }
 }
