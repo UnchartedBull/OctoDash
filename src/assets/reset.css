@@ -148,3 +148,7 @@ select {
     border: none;
     outline: none;
 }
+
+*:focus {
+    outline: 0;
+}
