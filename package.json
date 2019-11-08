@@ -95,7 +95,7 @@
     "@angular/compiler-cli": "^8.2.2",
     "@angular/language-service": "~8.2.13",
     "@types/ajv": "^1.0.0",
-    "@types/lodash": "^4.14.145",
+    "@types/lodash": "^4.14.146",
     "@types/node": "~12.12.6",
     "codelyzer": "^5.2.0",
     "electron": "^7.1.1",
