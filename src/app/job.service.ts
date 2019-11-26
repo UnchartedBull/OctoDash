@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, publish } from 'rxjs/operators';
 import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
 import { NotificationService } from './notification/notification.service';
 import { AppService } from './app.service';
@@ -16,6 +16,7 @@ export class JobService {
   httpPOSTRequest: Subscription;
   observable: Observable<Job>;
   private observer: Observer<any>;
+  private printing = false;
 
   constructor(
     private configService: ConfigService,
@@ -32,6 +33,7 @@ export class JobService {
           (data: OctoprintJobAPI) => {
             let job: Job = null;
             if (data.job && data.job.file.name) {
+              this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling'].includes(data.state);
               job = {
                 status: data.state,
                 filename: data.job.file.display.replace('.gcode', ''),
@@ -54,11 +56,14 @@ export class JobService {
             }
             observer.next(job);
           }, (error: HttpErrorResponse) => {
+            this.printing = false;
             this.notificationService.setError('Can\'t retrieve jobs!', error.message);
           });
 
       });
     }).pipe(shareReplay(1));
+    // TODO: not ideal, the observable needs to be hot though, so OctoDash can switch between Menu and Printing Screens ...
+    this.observable.subscribe();
   }
 
   public deleteJobInformation(): void {
@@ -67,6 +72,10 @@ export class JobService {
 
   public getObservable(): Observable<Job> {
     return this.observable;
+  }
+
+  public isPrinting(): boolean {
+    return this.printing;
   }
 
   public cancelJob(): void {
