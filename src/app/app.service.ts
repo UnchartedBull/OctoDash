@@ -27,8 +27,17 @@ export class AppService {
     }
 
     this.updateError = [
-      '.octodash should have required property \'turnScreenOffSleep\''
+      '.octodash.temperatureSensor.ambient should be number,null'
     ];
+  }
+
+  // If the errors can be automatically fixed return true here
+  public autoFixError(): boolean {
+    const config = this.configService.config;
+    config.octodash.temperatureSensor.ambient = 1;
+    this.configService.saveConfig(config);
+    this.configService.updateConfig();
+    return false;
   }
 
   private checkUpdate(): void {
@@ -91,15 +100,6 @@ export class AppService {
   public convertFilamentLengthToAmount(filamentLength: number): number {
     return Math.round((Math.PI * (this.configService.config.filament.thickness / 2) * filamentLength)
       * this.configService.config.filament.density / 100) / 10;
-  }
-
-  // If the errors can be automatically fixed return true here
-  public autoFixError(): boolean {
-    const config = this.configService.config;
-    config.octodash.turnScreenOffSleep = false;
-    this.configService.saveConfig(config);
-    this.configService.updateConfig();
-    return true;
   }
 
 }
