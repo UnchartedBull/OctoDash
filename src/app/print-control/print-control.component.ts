@@ -118,11 +118,12 @@ export class PrintControlComponent implements OnInit {
     if (this.flowrate > 125) { this.flowrate = 125; }
   }
 
-  public setAdjustParameters() {
+  public setAdjustParameters(event) {
     this.printerService.setTemperatureHotend(this.temperatureHotend);
     this.printerService.setTemperatureHeatbed(this.temperatureHeatbed);
     this.printerService.setFeedrate(this.feedrate);
     this.printerService.setFlowrate(this.flowrate);
+    this.hideControlOverlay(event);
   }
 
 }

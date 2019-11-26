@@ -55,50 +55,60 @@
             <tr>
                 <td class="print-control__adjust__change-parameter">
                     <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHotend(1)">+
+                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHotend(1)"
+                            matRipple [matRippleUnbounded]="false">+
                         </div>
                         <div class="print-control__adjust__controller-value">
                             {{ temperatureHotend }}<span class="print-control__adjust__controller-value-unit">°C</span>
                         </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHotend(-1)">-
+                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHotend(-1)"
+                            matRipple [matRippleUnbounded]="false">-
                         </div>
                     </div>
                     <span class="print-control__adjust__name">Hotend</span>
                 </td>
                 <td class="print-control__adjust__change-parameter">
                     <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHeatbed(1)">+
+                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHeatbed(1)"
+                            matRipple [matRippleUnbounded]="false">+
                         </div>
                         <div class="print-control__adjust__controller-value">
                             {{ temperatureHeatbed }}<span class="print-control__adjust__controller-value-unit">°C</span>
                         </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHeatbed(-1)">-
+                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHeatbed(-1)"
+                            matRipple [matRippleUnbounded]="false">-
                         </div>
                     </div>
                     <span class="print-control__adjust__name">Heatbed</span>
                 </td>
                 <td class="print-control__adjust__change-parameter">
                     <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeFeedrate(1)">+</div>
+                        <div class="print-control__adjust__controller-increase" (click)="changeFeedrate(1)" matRipple
+                            [matRippleUnbounded]="false">+</div>
                         <div class="print-control__adjust__controller-value">
                             {{ feedrate }}<span class="print-control__adjust__controller-value-unit">%</span>
                         </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeFeedrate(-1)">-</div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeFeedrate(-1)" matRipple
+                            [matRippleUnbounded]="false">-</div>
                     </div>
                     <span class="print-control__adjust__name">Feedrate</span>
                 </td>
                 <td class="print-control__adjust__change-parameter">
                     <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeFlowrate(1)">+</div>
+                        <div class="print-control__adjust__controller-increase" (click)="changeFlowrate(1)" matRipple
+                            [matRippleUnbounded]="false">+</div>
                         <div class="print-control__adjust__controller-value">
                             {{ flowrate }}<span class="print-control__adjust__controller-value-unit">%</span>
                         </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeFlowrate(-1)">-</div>
+                        <div class="print-control__adjust__controller-decrease" (click)="changeFlowrate(-1)" matRipple
+                            [matRippleUnbounded]="false">-</div>
                     </div>
                     <span class="print-control__adjust__name">Flowrate</span>
                 </td>
             </tr>
         </table>
-        <div class="print-control__adjust__save" (click)="setAdjustParameters()">save</div>
+        <div class="print-control__adjust__save" (click)="setAdjustParameters($event)" matRipple
+            [matRippleUnbounded]="false">
+            save</div>
     </div>
 </div>
