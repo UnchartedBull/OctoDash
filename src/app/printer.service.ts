@@ -31,8 +31,8 @@ export class PrinterService {
                 set: Math.round(data.temperature.tool0.target)
               },
               heatbed: {
-                current: Math.round(data.temperature.bed.actual),
-                set: Math.round(data.temperature.bed.target)
+                current: data.temperature.bed ? Math.round(data.temperature.bed.actual) : 0,
+                set: data.temperature.bed ? Math.round(data.temperature.bed.target) : 0
               }
             };
             observer.next(printerStatus);
