@@ -14,7 +14,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public job: Job;
 
-  constructor(private jobService: JobService, private service: AppService, private notificationService: NotificationService) { }
+  constructor(private jobService: JobService, private service: AppService) { }
 
   ngOnInit() {
     this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => this.job = job));
@@ -41,5 +41,9 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.service.setLoadedFile(false);
     }, 5000);
+  }
+
+  public isPrinting(): boolean {
+    return this.jobService.isPrinting();
   }
 }

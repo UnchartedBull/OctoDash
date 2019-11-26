@@ -10,25 +10,16 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   styleUrls: ['./main-screen.component.scss']
 })
 
-export class MainScreenComponent implements OnInit, OnDestroy {
+export class MainScreenComponent {
 
   public printing = false;
-  private subscriptions: Subscription = new Subscription();
 
 
   constructor(private jobService: JobService, private service: AppService) {
   }
 
-  ngOnInit() {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => {
-      if (job !== null) {
-        this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling'].includes(job.status);
-      }
-    }));
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+  public isPrinting() {
+    return this.jobService.isPrinting();
   }
 
   public isFileLoaded(): boolean {

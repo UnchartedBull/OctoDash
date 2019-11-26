@@ -82,11 +82,11 @@
                 </span> Touchscreen
             </div>
             <div class="no-config__3-temperature">
-                <label for="ambientTemperatureSensor" class="no-config__input-label-small">Sensor Name:</label>
-                <input type="string" id="ambientTemperatureSensor" class="no-config__input"
+                <label for="ambientTemperatureSensor" class="no-config__input-label-small">Sensor ID:</label>
+                <input type="number" id="ambientTemperatureSensor" class="no-config__input no-config__input-small"
                     [(ngModel)]="config.octodash.temperatureSensor.ambient" name="ambientTemperatureSensor" required>
                 <div class="no-config__3-temperature-explanation">
-                    Please enter the name of your temperature sensor as configured in the Enclosure Plugin. Leave empty
+                    Please enter the ID of your temperature sensor as configured in the Enclosure Plugin. Leave empty
                     if you aren't using a temperature sensor.
                 </div>
             </div>

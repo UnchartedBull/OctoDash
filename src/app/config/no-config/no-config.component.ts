@@ -48,9 +48,9 @@ export class NoConfigComponent implements OnInit {
         octodash: {
           touchscreen: true,
           temperatureSensor: {
-            ambient: '',
-            filament1: '',
-            filament2: ''
+            ambient: null,
+            filament1: null,
+            filament2: null
           },
           customActions: [
             {
@@ -119,15 +119,6 @@ export class NoConfigComponent implements OnInit {
     this.configErrors = [];
     this.octoprintConnectionError = null;
     this.config.octoprint.url = `http://${this.urlName}:${this.urlPort}/api/`;
-    if (this.config.octodash.temperatureSensor.ambient === '') {
-      this.config.octodash.temperatureSensor.ambient = null;
-    }
-    if (this.config.octodash.temperatureSensor.filament1 === '') {
-      this.config.octodash.temperatureSensor.filament1 = null;
-    }
-    if (this.config.octodash.temperatureSensor.filament2 === '') {
-      this.config.octodash.temperatureSensor.filament2 = null;
-    }
     this.validateConfig();
     return true;
   }
@@ -168,15 +159,6 @@ export class NoConfigComponent implements OnInit {
 
   private revertConfigForUserInput() {
     this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
-    if (this.config.octodash.temperatureSensor.ambient === null) {
-      this.config.octodash.temperatureSensor.ambient = '';
-    }
-    if (this.config.octodash.temperatureSensor.filament1 === null) {
-      this.config.octodash.temperatureSensor.filament1 = '';
-    }
-    if (this.config.octodash.temperatureSensor.filament2 === null) {
-      this.config.octodash.temperatureSensor.filament2 = '';
-    }
   }
 
   changeProgress() {
