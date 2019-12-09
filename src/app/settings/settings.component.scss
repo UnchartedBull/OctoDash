@@ -1,0 +1,40 @@
+.settings {
+
+    &-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .8);
+        z-index: 20;
+    }
+
+    &-container {
+        position: absolute;
+        top: 10vh;
+        left: 20vw;
+        height: 80vh;
+        width: 60vw;
+        background-color: #353b48;
+        border-radius: 2vw;
+    }
+
+    &__heading {
+        padding: 3vh 2vw;
+        display: block;
+        font-weight: 500;
+        font-size: 4vw;
+    }
+
+    &__list {
+        display: block;
+        padding: 2vh 4vw;
+
+        & li {
+            font-size: 3vw;
+            padding: 2vh 0;
+        }
+    }
+
+}

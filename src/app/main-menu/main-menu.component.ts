@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
+  public settings = true;
+
+  public showSettings() {
+    this.settings = true;
+  }
+
   constructor() { }
 
   ngOnInit() {
