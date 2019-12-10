@@ -1,5 +1,4 @@
 .settings {
-
     &-wrapper {
         position: absolute;
         top: 0;
@@ -11,6 +10,7 @@
     }
 
     &-container {
+        animation: fadein .8s;
         position: absolute;
         top: 10vh;
         left: 20vw;
@@ -18,6 +18,10 @@
         width: 60vw;
         background-color: #353b48;
         border-radius: 2vw;
+
+        &-fadeout {
+            animation: fadeout .8s;
+        }
     }
 
     &__heading {
@@ -27,9 +31,22 @@
         font-size: 4vw;
     }
 
+    &__close {
+        position: absolute;
+        right: 1.5vw;
+        top: 2vh;
+        width: 4vw;
+    }
+
     &__list {
         display: block;
         padding: 2vh 4vw;
+
+        & fa-icon {
+            font-size: 3vw;
+            margin-left: .5vw;
+            opacity: .7;
+        }
 
         & li {
             font-size: 3vw;
@@ -37,4 +54,39 @@
         }
     }
 
+    &__made {
+        font-size: 2.3vw;
+        display: block;
+        opacity: .6;
+        text-align: center;
+        margin-top: 4vh;
+
+        &-heart {
+            font-size: 2vw;
+            vertical-align: -0.7vh;
+            display: inline-block;
+            color: #e84118;
+        }
+    }
+
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }

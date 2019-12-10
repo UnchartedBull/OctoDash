@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  @Output() closeFunction = new EventEmitter<string>();
+
+  public fadeOutAnimation = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  hideSettings() {
+    this.fadeOutAnimation = true;
+    this.closeFunction.emit();
+    setTimeout(() => {
+      this.fadeOutAnimation = false;
+    }, 800)
   }
 
 }

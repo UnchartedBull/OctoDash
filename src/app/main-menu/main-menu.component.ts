@@ -7,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  public settings = true;
+  public settings = false;
 
   public showSettings() {
     this.settings = true;
+  }
+
+  public hideSettings() {
+    setTimeout(() => {
+      this.settings = false;
+    }, 600);
   }
 
   constructor() { }

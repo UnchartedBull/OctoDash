@@ -1,11 +1,28 @@
-<div class="settings-wrapper">
-    <div class="settings-container">
-        <span class="settings__heading">settings</span>
-        <ul class="settings__list">
-            <li>General</li>
-            <li>OctoDash</li>
-            <li>Plugins</li>
-            <li>Credits</li>
-        </ul>
+<div class="settings">
+    <div class="settings-wrapper">
+        <div class="settings-container" [ngClass]="{'settings-container-fadeout': fadeOutAnimation}">
+            <img src="assets/error.svg" class="settings__close" (click)="hideSettings()">
+            <span class="settings__heading">settings</span>
+            <ul class="settings__list">
+                <li>
+                    General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </li>
+                <li>
+                    OctoDash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </li>
+                <li>
+                    Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </li>
+                <li>
+                    Custom Actions <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </li>
+                <li>
+                    Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </li>
+            </ul>
+            <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
+                </fa-icon> by
+                /u/UnchartedBull</span>
+        </div>
     </div>
 </div>
