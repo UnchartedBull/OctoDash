@@ -3,26 +3,33 @@
         <div class="settings-container" [ngClass]="{'settings-container-fadeout': fadeOutAnimation}">
             <img src="assets/error.svg" class="settings__close" (click)="hideSettings()">
             <span class="settings__heading">settings</span>
-            <ul class="settings__list">
-                <li>
-                    General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </li>
-                <li>
-                    OctoDash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </li>
-                <li>
-                    Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </li>
-                <li>
-                    Custom Actions <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </li>
-                <li>
-                    Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </li>
-            </ul>
-            <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
-                </fa-icon> by
-                /u/UnchartedBull</span>
+            <div class="settings__content" #settingsMain>
+                <ul class="settings__list">
+                    <li (click)="changePage(1, 0, 'forward')">
+                        General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(2, 0, 'forward')">
+                        OctoDash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(3, 0, 'forward')">
+                        Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(4, 0, 'forward')">
+                        Custom Actions <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(5, 0, 'forward')">
+                        Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                </ul>
+                <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
+                    </fa-icon> by
+                    /u/UnchartedBull</span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsGeneral>GENERAL</div>
+            <div class="settings__content settings__content-inactive" #settingsOctoDash>OctoDASH</div>
+            <div class="settings__content settings__content-inactive" #settingsPlugins>PLUGINS</div>
+            <div class="settings__content settings__content-inactive" #settingsCustomActions>ACTIONS</div>
+            <div class="settings__content settings__content-inactive" #settingsCredits>CREDITS</div>
         </div>
     </div>
 </div>

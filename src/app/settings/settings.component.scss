@@ -39,8 +39,6 @@
     }
 
     &__list {
-        display: block;
-        padding: 2vh 4vw;
 
         & fa-icon {
             font-size: 3vw;
@@ -69,6 +67,33 @@
         }
     }
 
+    &__content {
+        position: absolute;
+        left: 0;
+        width: 52vw;
+        display: block;
+        padding: 2vh 4vw;
+
+        &-slideout-forward {
+            animation: slideout-forward .8s ease-out;
+        }
+
+        &-slidein-forward {
+            animation: slidein-forward .8s ease-out
+        }
+
+        &-slideout-backward {
+            animation: slideout-backward .8s ease-out
+        }
+
+        &-slidein-backward {
+            animation: slidein-backward .8s ease-out
+        }
+
+        &-inactive {
+            left: 100vw;
+        }
+    }
 }
 
 @keyframes fadein {
@@ -88,5 +113,45 @@
 
     to {
         opacity: 0;
+    }
+}
+
+@keyframes slideout-forward {
+    from {
+        left: 0vw;
+    }
+
+    to {
+        left: -52vw;
+    }
+}
+
+@keyframes slidein-forward {
+    from {
+        left: 52vw;
+    }
+
+    to {
+        left: 0vw;
+    }
+}
+
+@keyframes slidein-backward {
+    from {
+        left: -52vw;
+    }
+
+    to {
+        left: 0vw;
+    }
+}
+
+@keyframes slideout-backward {
+    from {
+        left: 0vw;
+    }
+
+    to {
+        left: 52vw;
     }
 }
