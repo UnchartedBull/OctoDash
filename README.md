@@ -22,7 +22,6 @@
 - [Bugs and more](#bugs-and-more)
 - [Contributing](#contributing)
 - [License](#license)
-- [Special Thanks](#special-thanks)
 
 ## Installation
 
@@ -82,10 +81,3 @@ See [CONTRIBUTING.md](https://github.com/UnchartedBull/OctoDash/blob/master/CONT
 ## License
 
 The project is licensed under the Apache 2.0 License. [More Information](https://github.com/UnchartedBull/OctoDash/blob/master/LICENSE.md).
-
-The Credits for the icons can be (temporarily) found at icons.txt. They'll get moved into the product soon.
-
-
-## Special Thanks
-
-Special Thanks to [/u/Slateclean](https://www.reddit.com/user/Slateclean) for supplying me with touchscreens so I can further develop the project. Without you, this wouldn't be happening!
