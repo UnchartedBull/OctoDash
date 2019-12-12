@@ -2,8 +2,8 @@
     <div class="settings-wrapper">
         <div class="settings-container" [ngClass]="{'settings-container-fadeout': fadeOutAnimation}">
             <img src="assets/error.svg" class="settings__close" (click)="hideSettings()">
-            <span class="settings__heading">settings</span>
             <div class="settings__content" #settingsMain>
+                <span class="settings__heading">settings</span>
                 <ul class="settings__list">
                     <li (click)="changePage(1, 0, 'forward')">
                         General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
@@ -15,21 +15,80 @@
                         Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
                     </li>
                     <li (click)="changePage(4, 0, 'forward')">
-                        Custom Actions <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                    </li>
-                    <li (click)="changePage(5, 0, 'forward')">
                         Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
                     </li>
                 </ul>
+                <span class="settings__save">save</span>
                 <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
                     </fa-icon> by
                     /u/UnchartedBull</span>
             </div>
-            <div class="settings__content settings__content-inactive" #settingsGeneral>GENERAL</div>
-            <div class="settings__content settings__content-inactive" #settingsOctoDash>OctoDASH</div>
-            <div class="settings__content settings__content-inactive" #settingsPlugins>PLUGINS</div>
-            <div class="settings__content settings__content-inactive" #settingsCustomActions>ACTIONS</div>
-            <div class="settings__content settings__content-inactive" #settingsCredits>CREDITS</div>
+            <div class="settings__content settings__content-inactive" #settingsGeneral>
+                <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>general
+                </span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsOctoDash>
+                <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>octodash
+                </span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsPlugins>
+                <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>plugins
+                </span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsCredits>
+                <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>credits
+                </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">License</span>
+                    <p class="settings__text">
+                        Licensed under the Apache 2.0 License. <br>
+                        http://www.apache.org/licenses/LICENSE-2.0 <br> <br>
+                        Unless required by applicable law or agreed to in writing, software distributed under the
+                        License is
+                        distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                        implied. See the License for the specific language governing permissions and limitations under
+                        the
+                        License.
+                    </p>
+                    <span class="settings__heading-2">Icons</span>
+                    <ul class="settings__text">
+                        <li>"bed plate, heated, Plate, Bed icon" from shareicon.net</li>
+                        <li>"filament, spool, Reel icon" from shareicon.net</li>
+                        <li>"Extruder, nozzle, head icon" from shareicon.net</li>
+                        <li>"Invalid Code" by Arthur Shlain from thenounproject.com</li>
+                        <li>"back" by Dwiky Setiawan from thenounproject.com</li>
+                        <li>"next" by Dwiky Setiawan from thenounproject.com</li>
+                        <li>"checkmark" by Muhammad Faizal Rahman Hakim from thenounproject.com</li>
+                        <li>"delete" by Muhammad Faizal Rahman Hakim from thenounproject.com</li>
+                        <li>"Sliders" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Close" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Pause" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Play" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Thermometer" by Andrejs Kirma from thenounproject.com</li>
+                        <li>"3d printer filament" by Cono Studio Milano from thenounproject.com</li>
+                        <li>"Folder" by romzicon from thenounproject.com</li>
+                        <li>"joystick" by ProSymbols from thenounproject.com</li>
+                        <li>"Settings" by Karan from thenounproject.com</li>
+                        <li>"help" by Rainbow Designs from thenounproject.com</li>
+                        <li>"Refresh" by Nawicon from thenounproject.com</li>
+                        <li>"Upload" by Nikita Tcherednikov from thenounproject.com</li>
+                        <li>"print" by Delta from thenounproject.com</li>
+                        <li>"Delete" by Daily icons from thenounproject.com</li>
+                        <li>"discard" by Alice Design from thenounproject.com</li>
+                        <li>"Heat" by Adrien Coquet from thenounproject.com</li>
+                        <li>"sleeping" by AomAm from thenounproject.com</li>
+                        <li>"cubes" by artworkbean from thenounproject.com</li>
+                    </ul>
+                    <span class="settings__heading-2">Special Thanks</span>
+                    <p class="settings__text">
+                        Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
+                    </p>
+                    <img src="assets/made-in-berlin.png" class="settings__made-in-berlin">
+                </div>
+            </div>
         </div>
     </div>
-</div>

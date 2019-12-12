@@ -12,7 +12,6 @@ export class SettingsComponent implements OnInit {
   @ViewChild('settingsGeneral', { static: false }) settingsGeneral: ElementRef;
   @ViewChild('settingsOctoDash', { static: false }) settingsOctoDash: ElementRef;
   @ViewChild('settingsPlugins', { static: false }) settingsPlugins: ElementRef;
-  @ViewChild('settingsCustomActions', { static: false }) settingsCustomActions: ElementRef;
   @ViewChild('settingsCredits', { static: false }) settingsCredits: ElementRef;
 
   public fadeOutAnimation = false;
@@ -28,7 +27,6 @@ export class SettingsComponent implements OnInit {
         this.settingsGeneral.nativeElement,
         this.settingsOctoDash.nativeElement,
         this.settingsPlugins.nativeElement,
-        this.settingsCustomActions.nativeElement,
         this.settingsCredits.nativeElement];
     }, 400);
   }
@@ -50,9 +48,7 @@ export class SettingsComponent implements OnInit {
       this.pages[current].classList.add('settings__content-inactive');
       this.pages[current].classList.remove('settings__content-slideout-' + direction);
       this.pages[page].classList.remove('settings__content-slidein-' + direction);
-    }, 800);
-
-    // this.settingsMain.nativeElement.classList.add('settings__content-slideout');
+    }, 750);
   }
 
 }

@@ -25,10 +25,33 @@
     }
 
     &__heading {
-        padding: 3vh 2vw;
+        padding: 3vh 0;
         display: block;
         font-weight: 500;
         font-size: 4vw;
+
+        &-2 {
+            display: block;
+            font-size: 3.5vw;
+            font-weight: 500;
+            margin-bottom: 1.2vh;
+            margin-top: 3vh;
+        }
+
+        &-back {
+            font-size: 3vw;
+            margin-right: 1vw;
+        }
+    }
+
+    &__text {
+        font-size: 2vw;
+        text-align: justify;
+
+        & li {
+            font-size: 1.2vw;
+            line-height: 1.7;
+        }
     }
 
     &__close {
@@ -67,12 +90,24 @@
         }
     }
 
+    &__save {
+        display: block;
+        text-align: center;
+        margin: 3vh 0 4vh;
+    }
+
+    &__scroll {
+        height: 63vh;
+        overflow: scroll;
+        padding-right: 2vw;
+    }
+
     &__content {
         position: absolute;
         left: 0;
-        width: 52vw;
+        width: 54vw;
         display: block;
-        padding: 2vh 4vw;
+        padding: 2vh 2vw 2vh 4vw;
 
         &-slideout-forward {
             animation: slideout-forward .8s ease-out;
@@ -93,6 +128,12 @@
         &-inactive {
             left: 100vw;
         }
+    }
+
+    &__made-in-berlin {
+        display: block;
+        margin: 5vh auto 0;
+        width: 20vw;
     }
 }
 
@@ -122,13 +163,13 @@
     }
 
     to {
-        left: -52vw;
+        left: -60vw;
     }
 }
 
 @keyframes slidein-forward {
     from {
-        left: 52vw;
+        left: 60vw;
     }
 
     to {
@@ -138,7 +179,7 @@
 
 @keyframes slidein-backward {
     from {
-        left: -52vw;
+        left: -60vw;
     }
 
     to {
@@ -152,6 +193,6 @@
     }
 
     to {
-        left: 52vw;
+        left: 60vw;
     }
 }
