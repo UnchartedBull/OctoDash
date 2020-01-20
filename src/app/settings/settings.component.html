@@ -27,6 +27,22 @@
                 <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
                     <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>general
                 </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">OctoPrint Connection</span>
+                    <form class="settings__form">
+                        <label for="octoprintURLName" class="settings__input-label">Octoprint URL</label>
+                        <span class="settings__input-prefix">http://</span>
+                        <input type="text" id="octoprintURLName" class="settings__input" name="octoprintURLName"
+                            required style="width: 23.2vw">
+                        <span class="settings__input-divider">:</span>
+                        <input type="text" id="octoprintURLPort" class="settings__input" name="octoprintURLPort"
+                            required style="width: 8vw">
+                        <br>
+                        <label for="accessToken" class="settings__input-label">API Key</label>
+                        <input type="text" id="accessToken" class="settings__input" name="accessToken"
+                            style="width: 45vw" required>
+                    </form>
+                </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsOctoDash>
                 <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
