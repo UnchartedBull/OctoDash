@@ -18,7 +18,7 @@ export class AppComponent {
 
   initialize() {
     if (this.configService && this.configService.isInitialized()) {
-      if (this.configService.config) {
+      if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
           if (this.configService.isTouchscreen()) {
             this.router.navigate(['/main-screen']);

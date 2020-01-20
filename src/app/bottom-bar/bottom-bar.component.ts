@@ -24,7 +24,7 @@ export class BottomBarComponent implements OnDestroy {
       this.enclosureTemperature = null;
     }
     this.printer = {
-      name: this.configService.config.printer.name,
+      name: this.configService.getPrinterName(),
       status: 'connecting ...'
     };
     this.subscriptions.add(this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
@@ -32,7 +32,7 @@ export class BottomBarComponent implements OnDestroy {
     }));
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { ConfigService, Config } from '../config/config.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,12 +16,15 @@ export class SettingsComponent implements OnInit {
   @ViewChild('settingsCredits', { static: false }) settingsCredits: ElementRef;
 
   public fadeOutAnimation = false;
+  public config: Config;
   private pages = [];
 
-  constructor() {
+  public constructor(private configService: ConfigService) {
+    this.config = configService.getCurrentConfig();
+    this.config = this.configService.revertConfigForInput(this.config);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     setTimeout(() => {
       this.pages = [
         this.settingsMain.nativeElement,
@@ -31,7 +35,7 @@ export class SettingsComponent implements OnInit {
     }, 400);
   }
 
-  hideSettings() {
+  public hideSettings(): void {
     this.fadeOutAnimation = true;
     this.closeFunction.emit();
     setTimeout(() => {
@@ -39,7 +43,7 @@ export class SettingsComponent implements OnInit {
     }, 800);
   }
 
-  changePage(page: number, current: number, direction: 'forward' | 'backward') {
+  public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
     this.pages[current].classList.add('settings__content-slideout-' + direction);
     this.pages[page].classList.remove('settings__content-inactive');
     this.pages[page].classList.add('settings__content-slidein-' + direction);

@@ -33,7 +33,7 @@ export class AppService {
 
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
-    const config = this.configService.config;
+    const config = this.configService.getCurrentConfig();
     config.octodash.temperatureSensor.ambient = 1;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
@@ -98,8 +98,8 @@ export class AppService {
   }
 
   public convertFilamentLengthToAmount(filamentLength: number): number {
-    return Math.round((Math.PI * (this.configService.config.filament.thickness / 2) * filamentLength)
-      * this.configService.config.filament.density / 100) / 10;
+    return Math.round((Math.PI * (this.configService.getFilamentThickness() / 2) * filamentLength)
+      * this.configService.getFilamentThickness() / 100) / 10;
   }
 
 }
