@@ -42,6 +42,47 @@
                         <input type="text" id="accessToken" class="settings__input" name="accessToken"
                             style="width: 45vw" required>
                     </form>
+                    <span class="settings__heading-2">Printer</span>
+                    <form class="settings__form">
+                        <label for="printerName" class="settings__input-label">Name</label>
+                        <input type="text" id="printerName" class="settings__input" name="printerName"
+                            style="width: 45vw" required>
+                        <table>
+                            <tr>
+                                <td style="width: 26vw; display: block">
+                                    <label for="xySpeed" class="settings__input-label">XY-Speed
+                                        <span>(mm/s)</span></label>
+                                    <input type="text" id="xySpeed" class="settings__input" name="xySpeed"
+                                        style="width: 19vw" required>
+                                </td>
+                                <td>
+                                    <label for="zSpeed" class="settings__input-label">Z-Speed
+                                        <span>(mm/s)</span></label>
+                                    <input type="text" id="zSpeed" class="settings__input" name="zSpeed"
+                                        style="width: 19vw" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <span class="settings__heading-2">Filament</span>
+                    <form class="settings__form">
+                        <table>
+                            <tr>
+                                <td style="width: 26vw; display: block">
+                                    <label for="filament-density" class="settings__input-label">Density
+                                        <span>(g/cm³)</span></label>
+                                    <input type="text" id="filament-density" class="settings__input"
+                                        name="filament-density" style="width: 19vw" required>
+                                </td>
+                                <td>
+                                    <label for="filament-thickness" class="settings__input-label">Thickness
+                                        <span>(mm)</span></label>
+                                    <input type="text" id="filament-thickness" class="settings__input"
+                                        name="filament-thickness" style="width: 19vw" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsOctoDash>

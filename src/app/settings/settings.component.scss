@@ -62,6 +62,7 @@
         border-radius: 1.7vw;
         width: 55vw;
         font-size: 2vw;
+        margin-bottom: 2vh;
 
         &:focus {
             outline: 0;
@@ -81,10 +82,10 @@
         &-label {
             display: block;
             font-size: 1.8vw;
-            margin-top: 2.5vh;
 
-            &:first-of-type {
-                margin-top: 1vh;
+            & span {
+                font-size: inherit;
+                opacity: .5;
             }
         }
 
