@@ -18,7 +18,7 @@
                         Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
                     </li>
                 </ul>
-                <span class="settings__save">save</span>
+                <span class="settings__save" (click)="updateConfig()">save</span>
                 <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
                     </fa-icon> by
                     /u/UnchartedBull</span>
@@ -33,33 +33,33 @@
                         <label for="octoprintURLName" class="settings__input-label">Octoprint URL</label>
                         <span class="settings__input-prefix">http://</span>
                         <input type="text" id="octoprintURLName" class="settings__input" name="octoprintURLName"
-                            required style="width: 23.2vw">
+                            style="width: 23.2vw" [(ngModel)]="this.config.octoprint.urlSplit.url" required>
                         <span class="settings__input-divider">:</span>
                         <input type="text" id="octoprintURLPort" class="settings__input" name="octoprintURLPort"
-                            required style="width: 8vw">
+                            style="width: 8vw" [(ngModel)]="this.config.octoprint.urlSplit.port" required>
                         <br>
                         <label for="accessToken" class="settings__input-label">API Key</label>
                         <input type="text" id="accessToken" class="settings__input" name="accessToken"
-                            style="width: 45vw" required>
+                            style="width: 44.94vw" [(ngModel)]="this.config.octoprint.accessToken" required>
                     </form>
                     <span class="settings__heading-2">Printer</span>
                     <form class="settings__form">
                         <label for="printerName" class="settings__input-label">Name</label>
                         <input type="text" id="printerName" class="settings__input" name="printerName"
-                            style="width: 45vw" required>
+                            style="width: 44.94vw" [(ngModel)]="config.printer.name" required>
                         <table>
                             <tr>
-                                <td style="width: 26vw; display: block">
+                                <td style="width: 25.6vw; display: block">
                                     <label for="xySpeed" class="settings__input-label">XY-Speed
                                         <span>(mm/s)</span></label>
                                     <input type="text" id="xySpeed" class="settings__input" name="xySpeed"
-                                        style="width: 19vw" required>
+                                        style="width: 19vw" [(ngModel)]="config.printer.xySpeed" required>
                                 </td>
                                 <td>
                                     <label for="zSpeed" class="settings__input-label">Z-Speed
                                         <span>(mm/s)</span></label>
                                     <input type="text" id="zSpeed" class="settings__input" name="zSpeed"
-                                        style="width: 19vw" required>
+                                        style="width: 19vw" [(ngModel)]="config.printer.zSpeed" required>
                                 </td>
                             </tr>
                         </table>
@@ -68,21 +68,24 @@
                     <form class="settings__form">
                         <table>
                             <tr>
-                                <td style="width: 26vw; display: block">
-                                    <label for="filament-density" class="settings__input-label">Density
-                                        <span>(g/cm³)</span></label>
-                                    <input type="text" id="filament-density" class="settings__input"
-                                        name="filament-density" style="width: 19vw" required>
-                                </td>
-                                <td>
+                                <td style="width: 25.6vw; display: block">
                                     <label for="filament-thickness" class="settings__input-label">Thickness
                                         <span>(mm)</span></label>
                                     <input type="text" id="filament-thickness" class="settings__input"
-                                        name="filament-thickness" style="width: 19vw" required>
+                                        name="filament-thickness" style="width: 19vw"
+                                        [(ngModel)]="config.filament.thickness" required>
+                                </td>
+                                <td>
+                                    <label for="filament-density" class="settings__input-label">Density
+                                        <span>(g/cm³)</span></label>
+                                    <input type="text" id="filament-density" class="settings__input"
+                                        name="filament-density" style="width: 19vw"
+                                        [(ngModel)]="config.filament.density" required>
                                 </td>
                             </tr>
                         </table>
                     </form>
+                    <br>
                 </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsOctoDash>

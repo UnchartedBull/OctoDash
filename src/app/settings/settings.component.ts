@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ConfigService, Config } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,7 @@ export class SettingsComponent implements OnInit {
   public config: Config;
   private pages = [];
 
-  public constructor(private configService: ConfigService) {
+  public constructor(private configService: ConfigService, private notificationService: NotificationService) {
     this.config = configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
   }
@@ -55,4 +56,14 @@ export class SettingsComponent implements OnInit {
     }, 750);
   }
 
+  public updateConfig(): void {
+    this.config = this.configService.createConfigFromInput(this.config);
+    if (!this.configService.validateGiven(this.config)) {
+      this.notificationService.setError('Config is invalid!', this.configService.getErrors().toString());
+    }
+    this.configService.saveConfig(this.config);
+    this.hideSettings();
+    this.configService.updateConfig();
+    window.location.reload();
+  }
 }
