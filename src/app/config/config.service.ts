@@ -108,10 +108,9 @@ export class ConfigService {
   }
 
   public revertConfigForInput(config: Config) {
-    config.octoprint.url = config.octoprint.url.replace('/api/', '');
     config.octoprint.urlSplit = {
       url: config.octoprint.url.split(':')[1].replace('//', ''),
-      port: parseInt(config.octoprint.url.split(':')[2], 10)
+      port: parseInt(config.octoprint.url.split(':')[2].replace('/api/', ''), 10)
     };
     return config;
   }
