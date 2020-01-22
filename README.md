@@ -34,7 +34,7 @@ wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.s
 
 For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
 
-No Screen? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Installation#setup-without-keyboard). 
+No KeyBoard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Installation#setup-without-keyboard). 
 
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
