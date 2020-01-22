@@ -13,7 +13,7 @@ export class InvalidConfigComponent implements OnInit {
   constructor(private configService: ConfigService) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.errors = this.configService.getErrors();
   }
 }

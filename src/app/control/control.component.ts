@@ -11,10 +11,10 @@ import { PsuControlService } from '../plugin-service/psu-control.service';
   styleUrls: ['./control.component.scss']
 })
 export class ControlComponent {
-  jogDistance = 10;
-  customActions = [];
-  showHelp = false;
-  iFrameURL: SafeResourceUrl = 'about:blank';
+  public jogDistance = 10;
+  public customActions = [];
+  public showHelp = false;
+  public iFrameURL: SafeResourceUrl = 'about:blank';
 
   constructor(
     private printerService: PrinterService,
@@ -24,11 +24,11 @@ export class ControlComponent {
     this.customActions = this.configService.getCustomActions();
   }
 
-  setDistance(distance: number) {
+  public setDistance(distance: number): void {
     this.jogDistance = distance;
   }
 
-  moveAxis(axis: string, direction: '+' | '-') {
+  public moveAxis(axis: string, direction: '+' | '-'): void {
     const distance = Number(direction + this.jogDistance);
     this.printerService.jog(
       axis === 'x' ? distance : 0,
@@ -37,7 +37,7 @@ export class ControlComponent {
     );
   }
 
-  executeGCode(command: string) {
+  public executeGCode(command: string): void {
     switch (command) {
       case '[!DISCONNECT]': this.disconnectPrinter(); break;
       case '[!STOPDASHBOARD]': this.stopOctoDash(); break;
@@ -60,38 +60,38 @@ export class ControlComponent {
   }
 
   // [!DISCONNECT]
-  disconnectPrinter() {
+  public disconnectPrinter(): void {
     this.octoprintService.disconnectPrinter();
   }
 
   // [!STOPDASHBOARD]
-  stopOctoDash() {
+  public stopOctoDash(): void {
     window.close();
   }
 
   // [!RELOAD]
-  reloadOctoPrint() {
+  public reloadOctoPrint(): void {
     this.octoprintService.sendSystemCommand('restart');
   }
 
   // [!REBOOT]
-  rebootPi() {
+  public rebootPi(): void {
     this.octoprintService.sendSystemCommand('reboot');
   }
 
   // [!SHUTDOWN]
-  shutdownPi() {
+  public shutdownPi(): void {
     this.octoprintService.sendSystemCommand('shutdown');
   }
 
   // [!KILL]
-  kill() {
+  public kill(): void {
     this.shutdownPi();
     setTimeout(this.stopOctoDash, 500);
   }
 
   // [!WEB]
-  openIFrame(url: string) {
+  public openIFrame(url: string): void {
     this.iFrameURL = url;
     const iFrameDOM = document.getElementById('iFrame');
     iFrameDOM.style.display = 'block';
@@ -100,7 +100,7 @@ export class ControlComponent {
     }, 50);
   }
 
-  hideIFrame() {
+  public hideIFrame(): void {
     const iFrameDOM = document.getElementById('iFrame');
     iFrameDOM.style.opacity = '0';
     setTimeout(() => {

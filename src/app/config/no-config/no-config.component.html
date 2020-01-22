@@ -59,11 +59,11 @@
         <form class="no-config__form">
             <label for="octoprintURLName" class="no-config__input-label">URL:</label>
             <span class="no-config__input-prefix">http://</span>
-            <input type="text" id="octoprintURLName" class="no-config__input" [(ngModel)]="this.urlName"
-                name="octoprintURLName" required style="width: 42.5vw">
+            <input type="text" id="octoprintURLName" class="no-config__input"
+                [(ngModel)]="this.config.octoprint.urlSplit.url" name="octoprintURLName" required style="width: 42.5vw">
             :
-            <input type="text" id="octoprintURLPort" class="no-config__input" [(ngModel)]="this.urlPort"
-                name="octoprintURLPort" required style="width: 14vw">
+            <input type="text" id="octoprintURLPort" class="no-config__input"
+                [(ngModel)]="this.config.octoprint.urlSplit.port" name="octoprintURLPort" required style="width: 14vw">
             <br>
             <label for="accessToken" class="no-config__input-label">API Key:</label>
             <input type="text" id="accessToken" class="no-config__input" [(ngModel)]="this.config.octoprint.accessToken"
