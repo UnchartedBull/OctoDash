@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./no-config.component.scss']
 })
 export class NoConfigComponent implements OnInit {
-  private page = 0;
-  private totalPages = 4;
+  public page = 0;
+  public totalPages = 4;
 
   private configUpdate: boolean;
   public config: Config;

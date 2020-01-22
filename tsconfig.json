@@ -16,7 +16,6 @@
         ],
         "types": [],
         "lib": ["es2018", "dom"],
-        "esModuleInterop": true,
-        "member-access": true
+        "esModuleInterop": true
     }
 }
