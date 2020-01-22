@@ -6,6 +6,7 @@ import { shareReplay } from 'rxjs/operators';
 import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
 import { NotificationService } from './notification/notification.service';
 import { OctoprintConnectionAPI } from './octoprint-api/connectionAPI';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class PrinterService {
   httpPOSTRequest: Subscription;
   observable: Observable<PrinterStatusAPI>;
 
-  constructor(private http: HttpClient, private configService: ConfigService, private notificationService: NotificationService) {
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+    private notificationService: NotificationService,
+    private router: Router) {
     this.observable = new Observable((observer: Observer<PrinterStatusAPI>) => {
       timer(500, this.configService.getAPIInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
@@ -38,7 +43,14 @@ export class PrinterService {
             observer.next(printerStatus);
           }, (error: HttpErrorResponse) => {
             if (error.status === 409) {
-              this.notificationService.setError('Can\'t retrieve printer status!', error.message, true);
+              this.isPrinterOffline().then((printerOffline) => {
+                if (printerOffline) {
+                  this.router.navigate(['/standby']);
+                  this.notificationService.disableNotifications();
+                } else {
+                  this.notificationService.setError('Can\'t retrieve printer status!', error.message);
+                }
+              });
             } else {
               const printerStatus: PrinterStatusAPI = {
                 status: `error (${error.status})`,

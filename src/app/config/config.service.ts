@@ -181,6 +181,11 @@ export class ConfigService {
     return this.config.octodash.turnScreenOffSleep;
   }
 
+  public isPSUControlEnabled(): boolean {
+    // TODO: implement in next config change
+    return false;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

@@ -1,8 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NotificationService, Message } from './notification.service';
-import { PrinterService } from '../printer.service';
-import { Router } from '@angular/router';
+import { NotificationService, Notification } from './notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -13,41 +11,27 @@ export class NotificationComponent implements OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
 
-  public notification: Message = {
+  public notification: Notification = {
     heading: '',
     text: '',
     type: ''
   };
   public show = false;
 
-  public constructor(private notificationService: NotificationService, private printerService: PrinterService, private router: Router) {
-    this.subscriptions.add(this.notificationService.getObservable().subscribe((message: Message) => this.setMessage(message)));
+  public constructor(private notificationService: NotificationService) {
+    this.subscriptions.add(this.notificationService.getObservable().subscribe((message: Notification) => this.setNotification(message)));
   }
 
   public hideNotification() {
     this.show = false;
   }
 
-  public setMessage(message: Message) {
-    if (message.printerStatusError) {
-      this.printerService.isPrinterOffline().then((printerOffline) => {
-        if (printerOffline) {
-          this.hideNotification();
-          console.clear();
-          this.router.navigate(['/standby']);
-        } else {
-          this.notification = message;
-          this.show = true;
-        }
-      });
-    } else {
-      this.notification = message;
-      this.show = true;
-    }
+  public setNotification(notification: Notification) {
+    this.notification = notification;
+    this.show = true;
   }
 
   public ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
-
 }
