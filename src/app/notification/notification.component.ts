@@ -34,5 +34,4 @@ export class NotificationComponent implements OnDestroy {
   public ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
-
 }
