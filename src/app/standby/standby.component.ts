@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config/config.service';
-import { Subscription } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { NotificationService } from '../notification/notification.service';
 import { OctoprintConnectionAPI } from '../octoprint-api/connectionAPI';
+import { PsuControlService } from '../plugin-service/psu-control.service';
 
 @Component({
   selector: 'app-standby',
@@ -22,7 +22,8 @@ export class StandbyComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private service: AppService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private psuControlService: PsuControlService) { }
 
   ngOnInit() {
     if (this.configService.getAutomaticScreenSleep()) {
@@ -32,6 +33,9 @@ export class StandbyComponent implements OnInit {
 
   reconnect() {
     this.connecting = true;
+    if (this.configService.isPSUControlEnabled()) {
+      this.psuControlService.changePSUState(true);
+    }
     this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
       .subscribe(
         (data: OctoprintConnectionAPI) => {

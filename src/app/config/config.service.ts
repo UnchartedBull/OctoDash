@@ -154,6 +154,11 @@ export class ConfigService {
   public getAutomaticScreenSleep(): boolean {
     return this.config.octodash.turnScreenOffSleep;
   }
+
+  public isPSUControlEnabled(): boolean {
+    // TODO: implement in next config change
+    return false;
+  }
 }
 
 export interface Config {
