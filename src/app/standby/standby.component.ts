@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config/config.service';
 import { Subscription } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-standby',
@@ -16,7 +17,12 @@ export class StandbyComponent implements OnInit {
   error = '';
   httpPOSTRequest: Subscription;
 
-  constructor(private configService: ConfigService, private http: HttpClient, private router: Router, private service: AppService) { }
+  constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private router: Router,
+    private service: AppService,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     if (this.configService.getAutomaticScreenSleep()) {
@@ -41,8 +47,9 @@ export class StandbyComponent implements OnInit {
             if (this.configService.getAutomaticScreenSleep()) {
               this.service.turnDisplayOn();
             }
+            this.notificationService.enableNotifications();
             this.router.navigate(['/main-screen']);
-          }, 4000);
+          }, 2000);
         },
         () => {
           this.connecting = false;
