@@ -1,8 +1,8 @@
 {
     "octoprint": {
-        "url": "http://localhost:5000/api/",
         "accessToken": "INSERT API KEY HERE",
-        "apiInterval": 15000
+        "apiInterval": 15000,
+        "url": "http://localhost:5000/api/"
     },
     "printer": {
         "name": "NAME HERE",
@@ -10,12 +10,10 @@
         "zSpeed": 5
     },
     "filament": {
-        "thickness": 0,
-        "density": 0
+        "density": 0,
+        "thickness": 0
     },
     "octodash": {
-        "touchscreen": true,
-        "temperatureSensor": null,
         "customActions": [{
                 "icon": "home",
                 "command": "G28",
@@ -46,6 +44,13 @@
                 "command": "[!KILL]",
                 "color": "#e84118"
             }
-        ]
+        ],
+        "temperatureSensor": {
+            "ambient": null,
+            "filament1": null,
+            "filament2": null
+        },
+        "touchscreen": true,
+        "turnScreenOffSleep": "false"
     }
 }
