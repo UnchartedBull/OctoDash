@@ -187,7 +187,7 @@ export class ConfigService {
     return this.config.octodash.turnScreenOffSleep;
   }
 
-  public isPSUControlEnabled(): boolean {
+  public turnOnPSUWhenExitingSleep(): boolean {
     // TODO: implement in next config change
     return false;
   }
