@@ -17,7 +17,7 @@ export class ConfigService {
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
 
-  public config: Config;
+  private config: Config;
   private valid: boolean;
   private update = false;
   private initialized = false;
@@ -39,7 +39,7 @@ export class ConfigService {
     }
   }
 
-  private initialize(config: Config) {
+  private initialize(config: Config): void {
     this.config = config;
     this.valid = this.validate();
     if (this.valid) {
@@ -57,6 +57,10 @@ export class ConfigService {
 
   public getRemoteConfig(): Config {
     return this.store.get('config');
+  }
+
+  public getCurrentConfig(): Config {
+    return this.config;
   }
 
   public validate(): boolean {
@@ -103,6 +107,24 @@ export class ConfigService {
     }
   }
 
+  public revertConfigForInput(config: Config) {
+    config.octoprint.urlSplit = {
+      url: config.octoprint.url.split(':')[1].replace('//', ''),
+      port: parseInt(config.octoprint.url.split(':')[2].replace('/api/', ''), 10)
+    };
+    return config;
+  }
+
+  public createConfigFromInput(config: Config) {
+    config.octoprint.url = `http://${config.octoprint.urlSplit.url}:${config.octoprint.urlSplit.port}/api/`;
+    delete config.octoprint.urlSplit;
+    return config;
+  }
+
+  public isLoaded(): boolean {
+    return this.config ? true : false;
+  }
+
   public setUpdate(): void {
     this.update = true;
   }
@@ -115,19 +137,23 @@ export class ConfigService {
     return this.config.octoprint.url + path;
   }
 
-  public getAPIInterval() {
+  public getAPIInterval(): number {
     return this.config.octoprint.apiInterval;
   }
 
-  public getCustomActions() {
+  public getPrinterName(): string {
+    return this.config.printer.name;
+  }
+
+  public getCustomActions(): Array<CustomAction> {
     return this.config.octodash.customActions;
   }
 
-  public getXYSpeed() {
+  public getXYSpeed(): number {
     return this.config.printer.xySpeed;
   }
 
-  public getZSpeed() {
+  public getZSpeed(): number {
     return this.config.printer.zSpeed;
   }
 
@@ -153,6 +179,19 @@ export class ConfigService {
 
   public getAutomaticScreenSleep(): boolean {
     return this.config.octodash.turnScreenOffSleep;
+  }
+
+  public isPSUControlEnabled(): boolean {
+    // TODO: implement in next config change
+    return false;
+  }
+
+  public getFilamentThickness(): number {
+    return this.config.filament.thickness;
+  }
+
+  public getFilamentDensity(): number {
+    return this.config.filament.density;
   }
 }
 
@@ -186,6 +225,10 @@ interface Octoprint {
   url: string;
   accessToken: string;
   apiInterval: number;
+  urlSplit?: {
+    url: string;
+    port: number;
+  };
 }
 
 interface Printer {

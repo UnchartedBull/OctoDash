@@ -9,30 +9,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./no-config.component.scss']
 })
 export class NoConfigComponent implements OnInit {
-  page = 0;
-  totalPages = 4;
+  public page = 0;
+  public totalPages = 4;
 
-  urlName: string;
-  urlPort: number;
+  private configUpdate: boolean;
+  public config: Config;
+  public configErrors: string[];
+  public configValid: boolean;
+  public configSaved: string;
 
-  configUpdate: boolean;
-  config: Config;
-  configErrors: string[];
-  configValid: boolean;
-  configSaved: string;
+  public octoprintConnection: boolean;
+  public octoprintConnectionError: string;
 
-  octoprintConnection: boolean;
-  octoprintConnectionError: string;
-
-  constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
+  public constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
-      this.config = configService.getRemoteConfig();
-      this.revertConfigForUserInput();
+      this.config = configService.getCurrentConfig();
     } else {
       this.config = {
         octoprint: {
-          url: 'http://localhost:5000',
+          url: 'http://localhost:5000/api/',
           accessToken: '',
           apiInterval: 1500
         },
@@ -88,15 +84,14 @@ export class NoConfigComponent implements OnInit {
         }
       };
     }
-    this.urlName = this.config.octoprint.url.split(':')[1].replace('//', '');
-    this.urlPort = parseInt(this.config.octoprint.url.split(':')[2], 10);
+    this.config = this.configService.revertConfigForInput(this.config);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.changeProgress();
   }
 
-  testOctoprintAPI() {
+  public testOctoprintAPI(): boolean {
     const httpHeaders = {
       headers: new HttpHeaders({
         'x-api-key': this.config.octoprint.accessToken
@@ -115,15 +110,15 @@ export class NoConfigComponent implements OnInit {
     return true;
   }
 
-  createConfig() {
+  public createConfig(): boolean {
     this.configErrors = [];
     this.octoprintConnectionError = null;
-    this.config.octoprint.url = `http://${this.urlName}:${this.urlPort}/api/`;
+    this.config = this.configService.createConfigFromInput(this.config);
     this.validateConfig();
     return true;
   }
 
-  validateConfig() {
+  public validateConfig(): void {
     this.configValid = this.configService.validateGiven(this.config);
     if (!this.configValid) {
       this.configErrors = this.configService.getErrors();
@@ -132,16 +127,16 @@ export class NoConfigComponent implements OnInit {
     }
   }
 
-  saveConfig() {
+  public saveConfig(): void {
     this.configSaved = this.configService.saveConfig(this.config);
   }
 
-  finishWizard() {
+  public finishWizard(): void {
     this.configService.updateConfig();
     this.router.navigate(['/main-screen']);
   }
 
-  increasePage() {
+  public increasePage(): void {
     this.page += 1;
     if (this.page === 4) {
       this.createConfig();
@@ -149,19 +144,15 @@ export class NoConfigComponent implements OnInit {
     this.changeProgress();
   }
 
-  decreasePage() {
+  public decreasePage(): void {
     if (this.page === 4) {
-      this.revertConfigForUserInput();
+      this.config = this.configService.revertConfigForInput(this.config);
     }
     this.page -= 1;
     this.changeProgress();
   }
 
-  private revertConfigForUserInput() {
-    this.config.octoprint.url = this.config.octoprint.url.replace('/api/', '');
-  }
-
-  changeProgress() {
+  public changeProgress(): void {
     document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
   }
 }

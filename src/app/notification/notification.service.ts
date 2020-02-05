@@ -7,17 +7,30 @@ import { shareReplay } from 'rxjs/operators';
 })
 export class NotificationService {
 
-  private observable: Observable<Message>;
-  private observer: Observer<Message>;
+  private observable: Observable<Notification>;
+  private observer: Observer<Notification>;
+  private hideNotifications = false;
 
   constructor() {
-    this.observable = new Observable((observer: Observer<Message>) => {
+    this.observable = new Observable((observer: Observer<Notification>) => {
       this.observer = observer;
     }).pipe(shareReplay(1));
   }
 
-  setError(heading: string, text: string, printerStatusError = false) {
-    this.observer.next({ heading, text, type: 'error', printerStatusError });
+  enableNotifications() {
+    console.clear();
+    this.hideNotifications = false;
+  }
+
+  disableNotifications() {
+    console.clear();
+    this.hideNotifications = true;
+  }
+
+  setError(heading: string, text: string) {
+    if (!this.hideNotifications) {
+      this.observer.next({ heading, text, type: 'error' });
+    }
   }
 
   setUpdate(heading: string, text: string) {
@@ -29,9 +42,8 @@ export class NotificationService {
   }
 }
 
-export interface Message {
+export interface Notification {
   heading: string;
   text: string;
   type: string;
-  printerStatusError?: boolean;
 }

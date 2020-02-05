@@ -62,7 +62,6 @@ export class JobService {
 
       });
     }).pipe(shareReplay(1));
-    // TODO: not ideal, the observable needs to be hot though, so OctoDash can switch between Menu and Printing Screens ...
     this.observable.subscribe();
   }
 

@@ -1,5 +1,154 @@
-<span style="display: block; text-align: center; font-size: 8vw; margin-top: 15vh">:(</span>
-<span style="display: block; text-align: center; font-size: 3vw; margin-top: 10vh;">
-    This feature has not been implemented yet.
-    If you want to change your settings please have a look at the wiki.</span>
-<div routerLink="/main-screen" style="display: block; text-align: center; font-size: 8vw; margin-top: 15vh">back</div>
+<div class="settings">
+    <div class="settings-wrapper">
+        <div class="settings-container" [ngClass]="{'settings-container-fadeout': fadeOutAnimation}">
+            <img src="assets/error.svg" class="settings__close" (click)="hideSettings()">
+            <div class="settings__content" #settingsMain>
+                <span class="settings__heading">settings</span>
+                <ul class="settings__list">
+                    <li (click)="changePage(1, 0, 'forward')">
+                        General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(2, 0, 'forward')">
+                        OctoDash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(3, 0, 'forward')">
+                        Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                    <li (click)="changePage(4, 0, 'forward')">
+                        Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                    </li>
+                </ul>
+                <span class="settings__save" (click)="updateConfig()">save</span>
+                <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
+                    </fa-icon> by
+                    /u/UnchartedBull</span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsGeneral>
+                <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>general
+                </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">OctoPrint Connection</span>
+                    <form class="settings__form">
+                        <label for="octoprintURLName" class="settings__input-label">Octoprint URL</label>
+                        <span class="settings__input-prefix">http://</span>
+                        <input type="text" id="octoprintURLName" class="settings__input" name="octoprintURLName"
+                            style="width: 23.2vw" [(ngModel)]="this.config.octoprint.urlSplit.url" required>
+                        <span class="settings__input-divider">:</span>
+                        <input type="text" id="octoprintURLPort" class="settings__input" name="octoprintURLPort"
+                            style="width: 8vw" [(ngModel)]="this.config.octoprint.urlSplit.port" required>
+                        <br>
+                        <label for="accessToken" class="settings__input-label">API Key</label>
+                        <input type="text" id="accessToken" class="settings__input" name="accessToken"
+                            style="width: 44.94vw" [(ngModel)]="this.config.octoprint.accessToken" required>
+                    </form>
+                    <span class="settings__heading-2">Printer</span>
+                    <form class="settings__form">
+                        <label for="printerName" class="settings__input-label">Name</label>
+                        <input type="text" id="printerName" class="settings__input" name="printerName"
+                            style="width: 44.94vw" [(ngModel)]="config.printer.name" required>
+                        <table>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="xySpeed" class="settings__input-label">XY-Speed
+                                        <span>(mm/s)</span></label>
+                                    <input type="text" id="xySpeed" class="settings__input" name="xySpeed"
+                                        style="width: 19vw" [(ngModel)]="config.printer.xySpeed" required>
+                                </td>
+                                <td>
+                                    <label for="zSpeed" class="settings__input-label">Z-Speed
+                                        <span>(mm/s)</span></label>
+                                    <input type="text" id="zSpeed" class="settings__input" name="zSpeed"
+                                        style="width: 19vw" [(ngModel)]="config.printer.zSpeed" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <span class="settings__heading-2">Filament</span>
+                    <form class="settings__form">
+                        <table>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-thickness" class="settings__input-label">Thickness
+                                        <span>(mm)</span></label>
+                                    <input type="text" id="filament-thickness" class="settings__input"
+                                        name="filament-thickness" style="width: 19vw"
+                                        [(ngModel)]="config.filament.thickness" required>
+                                </td>
+                                <td>
+                                    <label for="filament-density" class="settings__input-label">Density
+                                        <span>(g/cm³)</span></label>
+                                    <input type="text" id="filament-density" class="settings__input"
+                                        name="filament-density" style="width: 19vw"
+                                        [(ngModel)]="config.filament.density" required>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                </div>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsOctoDash>
+                <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>octodash
+                </span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsPlugins>
+                <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>plugins
+                </span>
+            </div>
+            <div class="settings__content settings__content-inactive" #settingsCredits>
+                <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>credits
+                </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">License</span>
+                    <p class="settings__text">
+                        Licensed under the Apache 2.0 License. <br>
+                        http://www.apache.org/licenses/LICENSE-2.0 <br> <br>
+                        Unless required by applicable law or agreed to in writing, software distributed under the
+                        License is
+                        distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                        implied. See the License for the specific language governing permissions and limitations under
+                        the
+                        License.
+                    </p>
+                    <span class="settings__heading-2">Icons</span>
+                    <ul class="settings__text">
+                        <li>"bed plate, heated, Plate, Bed icon" from shareicon.net</li>
+                        <li>"filament, spool, Reel icon" from shareicon.net</li>
+                        <li>"Extruder, nozzle, head icon" from shareicon.net</li>
+                        <li>"Invalid Code" by Arthur Shlain from thenounproject.com</li>
+                        <li>"back" by Dwiky Setiawan from thenounproject.com</li>
+                        <li>"next" by Dwiky Setiawan from thenounproject.com</li>
+                        <li>"checkmark" by Muhammad Faizal Rahman Hakim from thenounproject.com</li>
+                        <li>"delete" by Muhammad Faizal Rahman Hakim from thenounproject.com</li>
+                        <li>"Sliders" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Close" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Pause" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Play" by Danny Lelieveld from thenounproject.com</li>
+                        <li>"Thermometer" by Andrejs Kirma from thenounproject.com</li>
+                        <li>"3d printer filament" by Cono Studio Milano from thenounproject.com</li>
+                        <li>"Folder" by romzicon from thenounproject.com</li>
+                        <li>"joystick" by ProSymbols from thenounproject.com</li>
+                        <li>"Settings" by Karan from thenounproject.com</li>
+                        <li>"help" by Rainbow Designs from thenounproject.com</li>
+                        <li>"Refresh" by Nawicon from thenounproject.com</li>
+                        <li>"Upload" by Nikita Tcherednikov from thenounproject.com</li>
+                        <li>"print" by Delta from thenounproject.com</li>
+                        <li>"Delete" by Daily icons from thenounproject.com</li>
+                        <li>"discard" by Alice Design from thenounproject.com</li>
+                        <li>"Heat" by Adrien Coquet from thenounproject.com</li>
+                        <li>"sleeping" by AomAm from thenounproject.com</li>
+                        <li>"cubes" by artworkbean from thenounproject.com</li>
+                    </ul>
+                    <span class="settings__heading-2">Special Thanks</span>
+                    <p class="settings__text">
+                        Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
+                    </p>
+                    <img src="assets/made-in-berlin.png" class="settings__made-in-berlin">
+                </div>
+            </div>
+        </div>
+    </div>

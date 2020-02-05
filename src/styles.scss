@@ -10,7 +10,7 @@ $OctoPrintDash-warn: mat-palette($mat-red);
 $OctoPrintDash-theme: mat-dark-theme($OctoPrintDash-primary, $OctoPrintDash-accent, $OctoPrintDash-warn);
 @include angular-material-theme($OctoPrintDash-theme);
 
-*:not(path) {
+*:not(path):not(svg) {
     font-family: 'Montserrat', sans-serif;
     color: #f5f6fa;
     font-size: 4.3vw;

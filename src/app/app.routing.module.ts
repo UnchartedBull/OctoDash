@@ -16,7 +16,6 @@ const routes: Routes = [
   {
     path: 'main-screen',
     component: MainScreenComponent
-    // component: StandbyComponent
   },
   {
     path: 'main-screen-no-touch',
