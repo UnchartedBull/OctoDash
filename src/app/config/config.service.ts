@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import Ajv from 'ajv';
+import _ from 'lodash';
 
 declare global {
   interface Window {
@@ -60,7 +61,11 @@ export class ConfigService {
   }
 
   public getCurrentConfig(): Config {
-    return this.config;
+    return (_.cloneDeep(this.config));
+  }
+
+  public isEqualToCurrentConfig(changedConfig: Config): boolean {
+    return _.isEqual(this.config, changedConfig);
   }
 
   public validate(): boolean {
@@ -116,9 +121,10 @@ export class ConfigService {
   }
 
   public createConfigFromInput(config: Config) {
-    config.octoprint.url = `http://${config.octoprint.urlSplit.url}:${config.octoprint.urlSplit.port}/api/`;
-    delete config.octoprint.urlSplit;
-    return config;
+    const configOut = _.cloneDeep(config);
+    configOut.octoprint.url = `http://${configOut.octoprint.urlSplit.url}:${configOut.octoprint.urlSplit.port}/api/`;
+    delete configOut.octoprint.urlSplit;
+    return configOut;
   }
 
   public isLoaded(): boolean {

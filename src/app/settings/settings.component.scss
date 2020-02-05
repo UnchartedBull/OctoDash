@@ -160,19 +160,19 @@
         padding: 2vh 2vw 2vh 4vw;
 
         &-slideout-forward {
-            animation: slideout-forward .8s ease-out;
+            animation: slideout-forward .5s ease-out;
         }
 
         &-slidein-forward {
-            animation: slidein-forward .8s ease-out
+            animation: slidein-forward .5s ease-out
         }
 
         &-slideout-backward {
-            animation: slideout-backward .8s ease-out
+            animation: slideout-backward .5s ease-out
         }
 
         &-slidein-backward {
-            animation: slidein-backward .8s ease-out
+            animation: slidein-backward .5s ease-out
         }
 
         &-inactive {

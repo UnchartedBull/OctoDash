@@ -18,10 +18,11 @@ export class SettingsComponent implements OnInit {
 
   public fadeOutAnimation = false;
   public config: Config;
+  private overwriteNoSave = false;
   private pages = [];
 
   public constructor(private configService: ConfigService, private notificationService: NotificationService) {
-    this.config = configService.getCurrentConfig();
+    this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
   }
 
@@ -37,11 +38,16 @@ export class SettingsComponent implements OnInit {
   }
 
   public hideSettings(): void {
-    this.fadeOutAnimation = true;
-    this.closeFunction.emit();
-    setTimeout(() => {
-      this.fadeOutAnimation = false;
-    }, 800);
+    if (this.configService.isEqualToCurrentConfig(this.configService.createConfigFromInput(this.config)) || this.overwriteNoSave) {
+      this.fadeOutAnimation = true;
+      this.closeFunction.emit();
+      setTimeout(() => {
+        this.fadeOutAnimation = false;
+      }, 800);
+    } else {
+      this.notificationService.setWarning('Configuration not saved!', 'You haven\'t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!');
+      this.overwriteNoSave = true;
+    }
   }
 
   public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
@@ -53,7 +59,7 @@ export class SettingsComponent implements OnInit {
       this.pages[current].classList.add('settings__content-inactive');
       this.pages[current].classList.remove('settings__content-slideout-' + direction);
       this.pages[page].classList.remove('settings__content-slidein-' + direction);
-    }, 750);
+    }, 470);
   }
 
   public updateConfig(): void {
