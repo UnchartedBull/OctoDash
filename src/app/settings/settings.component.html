@@ -83,6 +83,22 @@
                                         [(ngModel)]="config.filament.density" required>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-feed-length" class="settings__input-label">Bowden Length
+                                        <span>(mm)</span></label>
+                                    <input type="text" id="filament-feed-length" class="settings__input"
+                                        name="filament-feed-length" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedLength" required>
+                                </td>
+                                <td>
+                                    <label for="filament-feed-speed" class="settings__input-label">Feed Speed
+                                        <span>(mm/sec)</span></label>
+                                    <input type="text" id="filament-feed-speed" class="settings__input"
+                                        name="filament-feed-speed" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedSpeed" required>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                     <br>
