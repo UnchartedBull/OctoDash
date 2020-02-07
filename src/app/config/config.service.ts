@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import Ajv from 'ajv';
 import _ from 'lodash';
+import { DisplayLayerProgressAPI } from '../plugin-service/layer-progress.service';
 
 declare global {
   interface Window {
@@ -143,8 +144,8 @@ export class ConfigService {
     return this.config.octoprint.url + path;
   }
 
-  public getAPIInterval(): number {
-    return this.config.octoprint.apiInterval;
+  public getAPIPollingInterval(): number {
+    return this.config.octodash.pollingInterval;
   }
 
   public getPrinterName(): string {
@@ -180,16 +181,15 @@ export class ConfigService {
   }
 
   public getAmbientTemperatureSensorName(): number {
-    return this.config.octodash.temperatureSensor.ambient;
+    return this.config.plugins.enclosure.ambientSensorID;
   }
 
   public getAutomaticScreenSleep(): boolean {
-    return this.config.octodash.turnScreenOffSleep;
+    return this.config.octodash.turnScreenOffWhileSleeping;
   }
 
   public turnOnPSUWhenExitingSleep(): boolean {
-    // TODO: implement in next config change
-    return false;
+    return this.config.octodash.turnOnPSUWhenExitingSleep;
   }
 
   public getFilamentThickness(): number {
@@ -205,32 +205,13 @@ export interface Config {
   octoprint: Octoprint;
   printer: Printer;
   filament: Filament;
+  plugins: Plugins;
   octodash: OctoDash;
-}
-
-interface OctoDash {
-  touchscreen: boolean;
-  temperatureSensor: TemperatureSensor | null;
-  customActions: CustomAction[];
-  turnScreenOffSleep: boolean;
-}
-
-interface CustomAction {
-  icon: string;
-  command: string;
-  color: string;
-}
-
-interface TemperatureSensor {
-  ambient: number | null;
-  filament1: number | null;
-  filament2: number | null;
 }
 
 interface Octoprint {
   url: string;
   accessToken: string;
-  apiInterval: number;
   urlSplit?: {
     url: string;
     port: number;
@@ -246,6 +227,43 @@ interface Printer {
 interface Filament {
   thickness: number;
   density: number;
+  feedLength: number;
+  feedSpeed: number;
+}
+
+interface Plugins {
+  displayLayerProgress: Plugin;
+  enclosure: EnclosurePlugin;
+  filamentManager: Plugin;
+  preheatButton: Plugin;
+  printTimeGenius: Plugin;
+}
+
+interface Plugin {
+  enabled: boolean;
+}
+
+interface EnclosurePlugin extends Plugin {
+  ambientSensorID: number | null;
+  filament1SensorID: number | null;
+  filament2SensorID: number | null;
+}
+
+interface OctoDash {
+  customActions: CustomAction[];
+  defaultFileSorting: string;
+  pollingInterval: number;
+  touchscreen: boolean;
+  turnScreenOffWhileSleeping: boolean;
+  turnOnPSUWhenExitingSleep: boolean;
+}
+
+interface CustomAction {
+  icon: string;
+  command: string;
+  color: string;
+  confirm: boolean;
+  exit: boolean;
 }
 
 const schema = {
@@ -257,6 +275,7 @@ const schema = {
     'octoprint',
     'printer',
     'filament',
+    'plugins',
     'octodash'
   ],
   properties: {
@@ -264,24 +283,19 @@ const schema = {
       $id: '#/properties/octoprint',
       type: 'object',
       required: [
-        'url',
         'accessToken',
-        'apiInterval'
+        'url'
       ],
       properties: {
-        url: {
-          $id: '#/properties/octoprint/properties/url',
-          type: 'string',
-          pattern: '^(.*)$'
-        },
         accessToken: {
           $id: '#/properties/octoprint/properties/accessToken',
           type: 'string',
           pattern: '^(.*)$'
         },
-        apiInterval: {
-          $id: '#/properties/octoprint/properties/apiInterval',
-          type: 'integer'
+        url: {
+          $id: '#/properties/octoprint/properties/url',
+          type: 'string',
+          pattern: '^(.*)$'
         }
       }
     },
@@ -313,17 +327,123 @@ const schema = {
       $id: '#/properties/filament',
       type: 'object',
       required: [
+        'density',
         'thickness',
-        'density'
+        'feedLength',
+        'feedSpeed'
       ],
       properties: {
-        thickness: {
-          $id: '#/properties/filament/properties/thickness',
-          type: 'number'
-        },
         density: {
           $id: '#/properties/filament/properties/density',
-          type: 'number'
+          type: 'integer'
+        },
+        thickness: {
+          $id: '#/properties/filament/properties/thickness',
+          type: 'integer'
+        },
+        feedLength: {
+          $id: '#/properties/filament/properties/feedLength',
+          type: 'integer'
+        },
+        feedSpeed: {
+          $id: '#/properties/filament/properties/feedSpeed',
+          type: 'integer'
+        }
+      }
+    },
+    plugins: {
+      $id: '#/properties/plugins',
+      type: 'object',
+      required: [
+        'displayLayerProgress',
+        'enclosure',
+        'filamentManager',
+        'preheatButton',
+        'printTimeGenius'
+      ],
+      properties: {
+        displayLayerProgress: {
+          $id: '#/properties/plugins/properties/displayLayerProgress',
+          type: 'object',
+          required: [
+            'enabled'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/displayLayerProgress/properties/enabled',
+              type: 'boolean'
+            }
+          }
+        },
+        enclosure: {
+          $id: '#/properties/plugins/properties/enclosure',
+          type: 'object',
+          required: [
+            'enabled',
+            'ambientSensorID',
+            'filament1SensorID',
+            'filament2SensorID'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/enclosure/properties/enabled',
+              type: 'boolean'
+            },
+            ambientSensorID: {
+              $id: '#/properties/plugins/properties/enclosure/properties/ambientSensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$'
+            },
+            filament1SensorID: {
+              $id: '#/properties/plugins/properties/enclosure/properties/filament1SensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$'
+            },
+            filament2SensorID: {
+              $id: '#/properties/plugins/properties/enclosure/properties/filament2SensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$'
+            }
+          }
+        },
+        filamentManager: {
+          $id: '#/properties/plugins/properties/filamentManager',
+          type: 'object',
+          required: [
+            'enabled'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/filamentManager/properties/enabled',
+              type: 'boolean'
+            }
+          }
+        },
+        preheatButton: {
+          $id: '#/properties/plugins/properties/preheatButton',
+          type: 'object',
+          required: [
+            'enabled'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/preheatButton/properties/enabled',
+              type: 'boolean'
+            }
+          }
+        },
+        printTimeGenius: {
+          $id: '#/properties/plugins/properties/printTimeGenius',
+          type: 'object',
+          required: [
+            'enabled'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              type: 'boolean'
+            }
+          }
         }
       }
     },
@@ -331,42 +451,14 @@ const schema = {
       $id: '#/properties/octodash',
       type: 'object',
       required: [
-        'touchscreen',
-        'temperatureSensor',
         'customActions',
-        'turnScreenOffSleep'
+        'defaultFileSorting',
+        'pollingInterval',
+        'touchscreen',
+        'turnScreenOffWhileSleeping',
+        'turnOnPSUWhenExitingSleep'
       ],
       properties: {
-        touchscreen: {
-          $id: '#/properties/octodash/properties/touchscreen',
-          type: 'boolean'
-        },
-        temperatureSensor: {
-          $id: '#/properties/octodash/properties/temperatureSensor',
-          type: 'object',
-          required: [
-            'ambient',
-            'filament1',
-            'filament2'
-          ],
-          properties: {
-            ambient: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/ambient',
-              type: ['number', 'null'],
-              pattern: '^(.*)$'
-            },
-            filament1: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/filament1',
-              type: ['number', 'null'],
-              pattern: '^(.*)$'
-            },
-            filament2: {
-              $id: '#/properties/octodash/properties/temperatureSensor/properties/filament2',
-              type: ['number', 'null'],
-              pattern: '^(.*)$'
-            },
-          }
-        },
         customActions: {
           $id: '#/properties/octodash/properties/customActions',
           type: 'array',
@@ -376,7 +468,9 @@ const schema = {
             required: [
               'icon',
               'command',
-              'color'
+              'color',
+              'confirm',
+              'exit'
             ],
             properties: {
               icon: {
@@ -393,14 +487,39 @@ const schema = {
                 $id: '#/properties/octodash/properties/customActions/items/properties/color',
                 type: 'string',
                 pattern: '^(.*)$'
+              },
+              confirm: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/confirm',
+                type: 'boolean'
+              },
+              exit: {
+                $id: '#/properties/octodash/properties/customActions/items/properties/exit',
+                type: 'boolean'
               }
             }
           }
         },
-        turnScreenOffSleep: {
-          $id: '#/properties/octodash/properties/turnScreenOffSleep',
+        defaultFileSorting: {
+          $id: '#/properties/octodash/properties/defaultFileSorting',
+          type: 'string',
+          pattern: '^(.*)$'
+        },
+        pollingInterval: {
+          $id: '#/properties/octodash/properties/pollingInterval',
+          type: 'integer'
+        },
+        touchscreen: {
+          $id: '#/properties/octodash/properties/touchscreen',
           type: 'boolean'
         },
+        turnScreenOffWhileSleeping: {
+          $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
+          type: 'boolean'
+        },
+        turnOnPSUWhenExitingSleep: {
+          $id: '#/properties/octodash/properties/turnOnPSUWhenExitingSleep',
+          type: 'boolean'
+        }
       }
     }
   }
