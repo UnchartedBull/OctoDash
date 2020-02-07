@@ -32,6 +32,10 @@
         },
         "printTimeGenius": {
             "enabled": true
+        },
+        "psuControl": {
+            "enabled": true,
+            "turnOnPSUWhenExitingSleep": false
         }
     },
     "octodash": {
@@ -81,7 +85,6 @@
         "defaultFileSorting": "Name-ASC",
         "pollingInterval": 2000,
         "touchscreen": true,
-        "turnScreenOffWhileSleeping": false,
-        "turnOnPSUWhenExitingSleep": false
+        "turnScreenOffWhileSleeping": false
     }
 }

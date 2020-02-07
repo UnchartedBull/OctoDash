@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NoConfigComponent implements OnInit {
   public page = 0;
-  public totalPages = 4;
+  public totalPages = 5;
 
   private configUpdate: boolean;
   public config: Config;
@@ -30,7 +30,6 @@ export class NoConfigComponent implements OnInit {
         octoprint: {
           url: 'http://localhost:5000/api/',
           accessToken: '',
-          apiInterval: 1500
         },
         printer: {
           name: '',
@@ -39,48 +38,83 @@ export class NoConfigComponent implements OnInit {
         },
         filament: {
           thickness: 1.75,
-          density: 1.25
+          density: 1.25,
+          feedLength: 470,
+          feedSpeed: 100,
+        },
+        plugins: {
+          displayLayerProgress: {
+            enabled: true
+          },
+          enclosure: {
+            enabled: false,
+            ambientSensorID: null,
+            filament1SensorID: null,
+            filament2SensorID: null
+          },
+          filamentManager: {
+            enabled: true
+          },
+          preheatButton: {
+            enabled: true
+          },
+          printTimeGenius: {
+            enabled: true
+          },
+          psuControl: {
+            enabled: false,
+            turnOnPSUWhenExitingSleep: false
+          }
         },
         octodash: {
-          touchscreen: true,
-          temperatureSensor: {
-            ambient: null,
-            filament1: null,
-            filament2: null
-          },
           customActions: [
             {
               icon: 'home',
               command: 'G28',
-              color: '#dcdde1'
+              color: '#dcdde1',
+              confirm: false,
+              exit: true
             },
             {
               icon: 'ruler-vertical',
               command: 'G29',
-              color: '#44bd32'
+              color: '#44bd32',
+              confirm: false,
+              exit: true
             },
             {
               icon: 'fire-alt',
               command: 'M140 S50; M104 S185',
-              color: '#e1b12c'
+              color: '#e1b12c',
+              confirm: false,
+              exit: true
             },
             {
               icon: 'snowflake',
               command: 'M140 S0; M104 S0',
-              color: '#0097e6'
+              color: '#0097e6',
+              confirm: false,
+              exit: true
             },
             {
               icon: 'redo-alt',
               command: '[!RELOAD]',
-              color: '#7f8fa6'
+              color: '#7f8fa6',
+              confirm: true,
+              exit: false
             },
             {
               icon: 'skull',
               command: '[!KILL]',
-              color: '#e84118'
+              color: '#e84118',
+              confirm: true,
+              exit: false
             }
           ],
-          turnScreenOffSleep: false
+          defaultFileSorting: 'Name-ASC',
+          pollingInterval: 2000,
+          touchscreen: true,
+          turnScreenOffWhileSleeping: false
         }
       };
     }
@@ -138,7 +172,7 @@ export class NoConfigComponent implements OnInit {
 
   public increasePage(): void {
     this.page += 1;
-    if (this.page === 4) {
+    if (this.page === this.totalPages) {
       this.createConfig();
     }
     this.changeProgress();

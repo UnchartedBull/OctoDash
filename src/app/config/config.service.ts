@@ -189,7 +189,7 @@ export class ConfigService {
   }
 
   public turnOnPSUWhenExitingSleep(): boolean {
-    return this.config.octodash.turnOnPSUWhenExitingSleep;
+    return this.config.plugins.psuControl.turnOnPSUWhenExitingSleep;
   }
 
   public getFilamentThickness(): number {
@@ -237,6 +237,7 @@ interface Plugins {
   filamentManager: Plugin;
   preheatButton: Plugin;
   printTimeGenius: Plugin;
+  psuControl: PSUControlPlugin;
 }
 
 interface Plugin {
@@ -249,13 +250,16 @@ interface EnclosurePlugin extends Plugin {
   filament2SensorID: number | null;
 }
 
+interface PSUControlPlugin extends Plugin {
+  turnOnPSUWhenExitingSleep: boolean;
+}
+
 interface OctoDash {
   customActions: CustomAction[];
   defaultFileSorting: string;
   pollingInterval: number;
   touchscreen: boolean;
   turnScreenOffWhileSleeping: boolean;
-  turnOnPSUWhenExitingSleep: boolean;
 }
 
 interface CustomAction {
@@ -335,11 +339,11 @@ const schema = {
       properties: {
         density: {
           $id: '#/properties/filament/properties/density',
-          type: 'integer'
+          type: 'number'
         },
         thickness: {
           $id: '#/properties/filament/properties/thickness',
-          type: 'integer'
+          type: 'number'
         },
         feedLength: {
           $id: '#/properties/filament/properties/feedLength',
@@ -359,7 +363,8 @@ const schema = {
         'enclosure',
         'filamentManager',
         'preheatButton',
-        'printTimeGenius'
+        'printTimeGenius',
+        'psuControl'
       ],
       properties: {
         displayLayerProgress: {
@@ -444,6 +449,24 @@ const schema = {
               type: 'boolean'
             }
           }
+        },
+        psuControl: {
+          $id: '#/properties/plugins/properties/psuControl',
+          type: 'object',
+          required: [
+            'enabled',
+            'turnOnPSUWhenExitingSleep'
+          ],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              type: 'boolean'
+            },
+            turnOnPSUWhenExitingSleep: {
+              $id: '#/properties/octodash/properties/turnOnPSUWhenExitingSleep',
+              type: 'boolean'
+            }
+          }
         }
       }
     },
@@ -455,8 +478,7 @@ const schema = {
         'defaultFileSorting',
         'pollingInterval',
         'touchscreen',
-        'turnScreenOffWhileSleeping',
-        'turnOnPSUWhenExitingSleep'
+        'turnScreenOffWhileSleeping'
       ],
       properties: {
         customActions: {
@@ -514,10 +536,6 @@ const schema = {
         },
         turnScreenOffWhileSleeping: {
           $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
-          type: 'boolean'
-        },
-        turnOnPSUWhenExitingSleep: {
-          $id: '#/properties/octodash/properties/turnOnPSUWhenExitingSleep',
           type: 'boolean'
         }
       }
