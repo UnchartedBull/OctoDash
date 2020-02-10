@@ -24,6 +24,14 @@
         }
     }
 
+    &__version {
+        font-size: 1.5vw;
+        display: block;
+        text-align: center;
+        margin-top: 1.5vh;
+        opacity: .3;
+    }
+
     &__heading {
         padding: 3vh 0;
         display: block;
@@ -190,7 +198,7 @@
     &__save {
         display: block;
         text-align: center;
-        margin: 3vh 0 4vh;
+        margin: 2.5vh 0 4vh;
     }
 
     &__scroll {

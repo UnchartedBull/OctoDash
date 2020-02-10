@@ -52,6 +52,10 @@ export class AppService {
     setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
   }
 
+  public getVersion(): string {
+    return this.version;
+  }
+
   public turnDisplayOff(): void {
     if (this.ipc) {
       this.ipc.send('screenSleep', '');

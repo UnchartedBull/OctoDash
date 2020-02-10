@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ConfigService, Config } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,12 +20,21 @@ export class SettingsComponent implements OnInit {
   public fadeOutAnimation = false;
   public config: Config;
   public customActionsPosition = ['Top Left', 'Top Right', 'Middle Left', 'Middle Right', 'Bottom Left', 'Bottom Right'];
+  public version: string;
   private overwriteNoSave = false;
   private pages = [];
 
-  public constructor(private configService: ConfigService, private notificationService: NotificationService) {
+  public constructor(private configService: ConfigService, private notificationService: NotificationService, private service: AppService) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
+    this.getVersion();
+  }
+
+  private getVersion() {
+    this.version = this.service.getVersion();
+    if (this.version === undefined) {
+      setTimeout(this.getVersion.bind(this), 3500);
+    }
   }
 
   public ngOnInit(): void {
