@@ -256,7 +256,7 @@ interface PSUControlPlugin extends Plugin {
 
 interface OctoDash {
   customActions: CustomAction[];
-  defaultFileSorting: string;
+  fileSorting: FileSorting;
   pollingInterval: number;
   touchscreen: boolean;
   turnScreenOffWhileSleeping: boolean;
@@ -268,6 +268,11 @@ interface CustomAction {
   color: string;
   confirm: boolean;
   exit: boolean;
+}
+
+interface FileSorting {
+  attribute: string;
+  order: string;
 }
 
 const schema = {
@@ -475,7 +480,7 @@ const schema = {
       type: 'object',
       required: [
         'customActions',
-        'defaultFileSorting',
+        'fileSorting',
         'pollingInterval',
         'touchscreen',
         'turnScreenOffWhileSleeping'
@@ -521,10 +526,25 @@ const schema = {
             }
           }
         },
-        defaultFileSorting: {
-          $id: '#/properties/octodash/properties/defaultFileSorting',
-          type: 'string',
-          pattern: '^(.*)$'
+        fileSorting: {
+          $id: '#/properties/octodash/properties/fileSorting',
+          type: 'object',
+          required: [
+            'attribute',
+            'order'
+          ],
+          properties: {
+            attribute: {
+              $id: '#/properties/octodash/properties/fileSorting/properties/attribute',
+              type: 'string',
+              pattern: '^(name|date|size)$'
+            },
+            order: {
+              $id: '#/properties/octodash/properties/fileSorting/properties/order',
+              type: 'string',
+              pattern: '^(asc|dsc)$'
+            }
+          }
         },
         pollingInterval: {
           $id: '#/properties/octodash/properties/pollingInterval',

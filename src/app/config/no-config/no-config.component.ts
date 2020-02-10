@@ -111,7 +111,10 @@ export class NoConfigComponent implements OnInit {
               exit: false
             }
           ],
-          defaultFileSorting: 'Name-ASC',
+          fileSorting: {
+            attribute: 'name',
+            order: 'asc'
+          },
           pollingInterval: 2000,
           touchscreen: true,
           turnScreenOffWhileSleeping: false

@@ -11,7 +11,7 @@
     "filament": {
         "density": 0,
         "thickness": 0,
-        "feedLength": 100,
+        "feedLength": 470,
         "feedSpeed": 100
     },
     "plugins": {
@@ -82,7 +82,10 @@
                 "exit": false
             }
         ],
-        "defaultFileSorting": "Name-ASC",
+        "fileSorting": {
+            "attribute": "name",
+            "order": "asc"
+        },
         "pollingInterval": 2000,
         "touchscreen": true,
         "turnScreenOffWhileSleeping": false
