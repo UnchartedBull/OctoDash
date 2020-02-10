@@ -1,93 +1,95 @@
 {
-    "octoprint": {
-        "accessToken": "INSERT API KEY HERE",
-        "url": "http://localhost:5000/api/"
-    },
-    "printer": {
-        "name": "NAME HERE",
-        "xySpeed": 100,
-        "zSpeed": 5
-    },
-    "filament": {
-        "density": 0,
-        "thickness": 0,
-        "feedLength": 470,
-        "feedSpeed": 100
-    },
-    "plugins": {
-        "displayLayerProgress": {
-            "enabled": true
+    "config": {
+        "octoprint": {
+            "accessToken": "INSERT API KEY HERE",
+            "url": "http://localhost:5000/api/"
         },
-        "enclosure": {
-            "enabled": true,
-            "ambientSensorID": null,
-            "filament1SensorID": null,
-            "filament2SensorID": null
+        "printer": {
+            "name": "NAME HERE",
+            "xySpeed": 100,
+            "zSpeed": 5
         },
-        "filamentManager": {
-            "enabled": true
+        "filament": {
+            "density": 0,
+            "thickness": 0,
+            "feedLength": 470,
+            "feedSpeed": 100
         },
-        "preheatButton": {
-            "enabled": true
-        },
-        "printTimeGenius": {
-            "enabled": true
-        },
-        "psuControl": {
-            "enabled": true,
-            "turnOnPSUWhenExitingSleep": false
-        }
-    },
-    "octodash": {
-        "customActions": [{
-                "icon": "home",
-                "command": "G28",
-                "color": "#dcdde1",
-                "confirm": false,
-                "exit": false
+        "plugins": {
+            "displayLayerProgress": {
+                "enabled": true
             },
-            {
-                "icon": "ruler-vertical",
-                "command": "G29",
-                "color": "#44bd32",
-                "confirm": false,
-                "exit": false
+            "enclosure": {
+                "enabled": true,
+                "ambientSensorID": null,
+                "filament1SensorID": null,
+                "filament2SensorID": null
             },
-            {
-                "icon": "fire-alt",
-                "command": "M140 S50; M104 S185",
-                "color": "#e1b12c",
-                "confirm": false,
-                "exit": true
+            "filamentManager": {
+                "enabled": true
             },
-            {
-                "icon": "snowflake",
-                "command": "M140 S0; M104 S0",
-                "color": "#0097e6",
-                "confirm": false,
-                "exit": true
+            "preheatButton": {
+                "enabled": true
             },
-            {
-                "icon": "redo-alt",
-                "command": "[!RELOAD]",
-                "color": "#7f8fa6",
-                "confirm": true,
-                "exit": false
+            "printTimeGenius": {
+                "enabled": true
             },
-            {
-                "icon": "skull",
-                "command": "[!KILL]",
-                "color": "#e84118",
-                "confirm": true,
-                "exit": false
+            "psuControl": {
+                "enabled": true,
+                "turnOnPSUWhenExitingSleep": false
             }
-        ],
-        "fileSorting": {
-            "attribute": "name",
-            "order": "asc"
         },
-        "pollingInterval": 2000,
-        "touchscreen": true,
-        "turnScreenOffWhileSleeping": false
+        "octodash": {
+            "customActions": [{
+                    "icon": "home",
+                    "command": "G28",
+                    "color": "#dcdde1",
+                    "confirm": false,
+                    "exit": false
+                },
+                {
+                    "icon": "ruler-vertical",
+                    "command": "G29",
+                    "color": "#44bd32",
+                    "confirm": false,
+                    "exit": false
+                },
+                {
+                    "icon": "fire-alt",
+                    "command": "M140 S50; M104 S185",
+                    "color": "#e1b12c",
+                    "confirm": false,
+                    "exit": true
+                },
+                {
+                    "icon": "snowflake",
+                    "command": "M140 S0; M104 S0",
+                    "color": "#0097e6",
+                    "confirm": false,
+                    "exit": true
+                },
+                {
+                    "icon": "redo-alt",
+                    "command": "[!RELOAD]",
+                    "color": "#7f8fa6",
+                    "confirm": true,
+                    "exit": false
+                },
+                {
+                    "icon": "skull",
+                    "command": "[!KILL]",
+                    "color": "#e84118",
+                    "confirm": true,
+                    "exit": false
+                }
+            ],
+            "fileSorting": {
+                "attribute": "name",
+                "order": "asc"
+            },
+            "pollingInterval": 2000,
+            "touchscreen": true,
+            "turnScreenOffWhileSleeping": false
+        }
     }
 }
