@@ -63,11 +63,12 @@ export class SettingsComponent implements OnInit {
   }
 
   public updateConfig(): void {
-    this.config = this.configService.createConfigFromInput(this.config);
-    if (!this.configService.validateGiven(this.config)) {
+    const config = this.configService.createConfigFromInput(this.config);
+    if (!this.configService.validateGiven(config)) {
       this.notificationService.setError('Config is invalid!', this.configService.getErrors().toString());
     }
-    this.configService.saveConfig(this.config);
+    this.configService.saveConfig(config);
+    this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
     window.location.reload();

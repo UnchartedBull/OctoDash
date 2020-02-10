@@ -61,7 +61,7 @@
         }
     }
 
-    &__checkmark {
+    &__checkbox {
         position: absolute;
         top: 0;
         left: 0;
@@ -70,9 +70,7 @@
         background-color: transparent;
         border: 2px solid #dcdde1;
         border-radius: 1vw;
-    }
 
-    &__checkbox {
         &-container {
             display: inline-block;
             position: relative;

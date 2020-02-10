@@ -77,7 +77,7 @@
         <form class="no-config__form">
             <div class="no-config__checkbox-container"
                 (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.octodash.touchscreen"></span>
                 </span> Use Touchscreen
             </div> <br>
@@ -98,38 +98,38 @@
         </span>
         <div style="text-align: center;">
             <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked no-config__checkbox-checked-disabled"
                         *ngIf="config.plugins.displayLayerProgress.enabled"></span>
                 </span> Display Layer Progress&nbsp;&nbsp;
             </div>
             <div class="no-config__checkbox-container"
                 (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
                 </span> Enclosure
             </div>
             <div class="no-config__checkbox-container"
                 (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
                 </span> Filament Manager&nbsp;&nbsp;
             </div>
             <div class="no-config__checkbox-container"
                 (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
-                <span class="no-config__checkmark ">
+                <span class="no-config__checkbox ">
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
                 </span> Preheat Button
             </div>
             <div class="no-config__checkbox-container"
                 (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
                 </span> Print Time Genius&nbsp;&nbsp;
             </div>
             <div class="no-config__checkbox-container"
                 (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
                 </span> PSU Control
             </div>

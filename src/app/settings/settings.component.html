@@ -108,6 +108,72 @@
                 <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
                     <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>octodash
                 </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">General</span>
+                    <label for="api-polling-interval" class="settings__input-label">Value Refresh Interval
+                        <span>(ms)</span></label>
+                    <input type="number" id="api-polling-interval" class="settings__input" name="api-polling-interval"
+                        style="width: 44.94vw" [(ngModel)]="config.octodash.pollingInterval" required>
+                    <div class="settings__checkbox-container"
+                        (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.octodash.touchscreen"></span>
+                        </span> <span class="settings__checkbox-descriptor">Use Touchscreen</span>
+                    </div> <br>
+                    <div class="settings__checkbox-container"
+                        (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
+                        </span> <span class="settings__checkbox-descriptor">Turn Screen Off While Sleeping</span>
+                    </div> <br>
+                    <span class="settings__heading-2">Files</span>
+                    <table class="settings__files">
+                        <tr>
+                            <td>
+                                <span style="font-size: 2.9vw">Sort By</span> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'name'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'name'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Name</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'date'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'date'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Date</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'size'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'size'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Size</span>
+                                </div> <br>
+                            </td>
+                            <td>
+                                <span style="font-size: 2.9vw">Order</span> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.order = 'asc'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.order === 'asc'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Ascending</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.order = 'dsc'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.order === 'dsc'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Descending</span>
+                                </div> <br>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsPlugins>
                 <span class="settings__heading" (click)="changePage(0, 3, 'backward')">

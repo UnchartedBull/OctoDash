@@ -101,6 +101,47 @@
         }
     }
 
+    &__checkbox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3vw;
+        width: 3vw;
+        background-color: transparent;
+        border: 2px solid #dcdde1;
+        border-radius: 1vw;
+
+        &-container {
+            display: inline-block;
+            position: relative;
+            user-select: none;
+            padding-left: 5vw;
+            height: 4.5vw;
+            margin-top: 1.4vh;
+            cursor: pointer;
+            overflow: visible;
+        }
+
+        &-checked {
+            background-color: #2196F3;
+            width: 1.8vw;
+            height: 1.8vw;
+            display: block;
+            margin-left: .6vw;
+            margin-top: .6vw;
+            border-radius: .4vw;
+
+            &-disabled {
+                background-color: rgba(255, 255, 255, .5)
+            }
+        }
+
+        &-descriptor {
+            font-size: 2.5vw;
+            vertical-align: 2vh;
+        }
+    }
+
     &__close {
         position: absolute;
         right: 1.5vw;
@@ -184,6 +225,14 @@
         display: block;
         margin: 5vh auto 0;
         width: 20vw;
+    }
+
+    &__files {
+        width: 100%;
+
+        & td {
+            width: 50%;
+        }
     }
 }
 
