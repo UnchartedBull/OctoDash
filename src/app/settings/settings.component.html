@@ -125,13 +125,13 @@
                         <span class="settings__checkbox">
                             <span class="settings__checkbox-checked"
                                 *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
-                        </span> <span class="settings__checkbox-descriptor">Turn Screen Off While Sleeping</span>
+                        </span> <span class="settings__checkbox-descriptor">Turn screen off while sleeping</span>
                     </div> <br>
                     <span class="settings__heading-2">Files</span>
                     <table class="settings__files">
                         <tr>
                             <td>
-                                <span style="font-size: 2.9vw">Sort By</span> <br>
+                                <span style="font-size: 2.9vw">sort by</span> <br>
                                 <div class="settings__checkbox-container"
                                     (click)="config.octodash.fileSorting.attribute = 'name'">
                                     <span class="settings__checkbox">
@@ -155,7 +155,7 @@
                                 </div> <br>
                             </td>
                             <td>
-                                <span style="font-size: 2.9vw">Order</span> <br>
+                                <span style="font-size: 2.9vw">order</span> <br>
                                 <div class="settings__checkbox-container"
                                     (click)="config.octodash.fileSorting.order = 'asc'">
                                     <span class="settings__checkbox">
@@ -227,6 +227,66 @@
                 <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
                     <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>plugins
                 </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">Display Layer Progress</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.displayLayerProgress.enabled = true">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked settings__checkbox-checked-disabled"
+                                *ngIf="config.plugins.displayLayerProgress.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Enclosure</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <label for="enclosure-ambient-id" class="settings__input-label">Ambient Sensor
+                        <span>(ID)</span></label>
+                    <input type="number" id="enclosure-ambient-id" class="settings__input" name="enclosure-ambient-id"
+                        style="width: 44.94vw" [(ngModel)]="config.plugins.enclosure.ambientSensorID" required>
+
+                    <span class="settings__heading-2">Filament Manager</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.filamentManager.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Preheat Button</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+                        <span class="settings__checkbox ">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.preheatButton.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Print Time Genius</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.printTimeGenius.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">PSU Control</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.psuControl.turnOnPSUWhenExitingSleep = !config.plugins.psuControl.turnOnPSUWhenExitingSleep">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"></span>
+                        </span> <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
+                    </div>
+                </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsCredits>
                 <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
