@@ -38,6 +38,14 @@
             margin-top: 3vh;
         }
 
+        &-3 {
+            display: block;
+            font-size: 2.5vw;
+            font-weight: 500;
+            margin-bottom: 1.2vh;
+            margin-top: 2vh;
+        }
+
         &-back {
             font-size: 3vw;
             margin-right: 1vw;
@@ -232,6 +240,14 @@
 
         & td {
             width: 50%;
+        }
+    }
+
+    &__custom-action {
+        &-icon {
+            font-size: 3.5vw;
+            vertical-align: -8.5vh;
+            padding-left: 4vw;
         }
     }
 }

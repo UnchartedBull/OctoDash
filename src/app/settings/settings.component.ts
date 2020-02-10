@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
 
   public fadeOutAnimation = false;
   public config: Config;
+  public customActionsPosition = ['Top Left', 'Top Right', 'Middle Left', 'Middle Right', 'Bottom Left', 'Bottom Right'];
   private overwriteNoSave = false;
   private pages = [];
 
