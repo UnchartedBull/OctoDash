@@ -25,7 +25,7 @@ export class JobService {
     private service: AppService) {
     this.observable = new Observable((observer: Observer<any>) => {
       this.observer = observer;
-      timer(750, this.configService.getAPIInterval()).subscribe(_ => {
+      timer(750, this.configService.getAPIPollingInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
         }

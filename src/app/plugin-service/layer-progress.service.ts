@@ -16,7 +16,7 @@ export class LayerProgressService {
 
   constructor(private configService: ConfigService, private notificationService: NotificationService, private http: HttpClient) {
     this.observable = new Observable((observer: Observer<any>) => {
-      timer(1000, this.configService.getAPIInterval()).subscribe(_ => {
+      timer(1000, this.configService.getAPIPollingInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
         }

@@ -34,7 +34,6 @@ export class AppService {
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.getCurrentConfig();
-    config.octodash.temperatureSensor.ambient = 1;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return false;
@@ -51,6 +50,10 @@ export class AppService {
       () => null
     );
     setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
+  }
+
+  public getVersion(): string {
+    return this.version;
   }
 
   public turnDisplayOff(): void {

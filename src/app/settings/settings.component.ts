@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ConfigService, Config } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-settings',
@@ -18,11 +19,22 @@ export class SettingsComponent implements OnInit {
 
   public fadeOutAnimation = false;
   public config: Config;
+  public customActionsPosition = ['Top Left', 'Top Right', 'Middle Left', 'Middle Right', 'Bottom Left', 'Bottom Right'];
+  public version: string;
+  private overwriteNoSave = false;
   private pages = [];
 
-  public constructor(private configService: ConfigService, private notificationService: NotificationService) {
-    this.config = configService.getCurrentConfig();
+  public constructor(private configService: ConfigService, private notificationService: NotificationService, private service: AppService) {
+    this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
+    this.getVersion();
+  }
+
+  private getVersion() {
+    this.version = this.service.getVersion();
+    if (this.version === undefined) {
+      setTimeout(this.getVersion.bind(this), 3500);
+    }
   }
 
   public ngOnInit(): void {
@@ -37,11 +49,16 @@ export class SettingsComponent implements OnInit {
   }
 
   public hideSettings(): void {
-    this.fadeOutAnimation = true;
-    this.closeFunction.emit();
-    setTimeout(() => {
-      this.fadeOutAnimation = false;
-    }, 800);
+    if (this.configService.isEqualToCurrentConfig(this.configService.createConfigFromInput(this.config)) || this.overwriteNoSave) {
+      this.fadeOutAnimation = true;
+      this.closeFunction.emit();
+      setTimeout(() => {
+        this.fadeOutAnimation = false;
+      }, 800);
+    } else {
+      this.notificationService.setWarning('Configuration not saved!', 'You haven\'t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!');
+      this.overwriteNoSave = true;
+    }
   }
 
   public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
@@ -53,15 +70,16 @@ export class SettingsComponent implements OnInit {
       this.pages[current].classList.add('settings__content-inactive');
       this.pages[current].classList.remove('settings__content-slideout-' + direction);
       this.pages[page].classList.remove('settings__content-slidein-' + direction);
-    }, 750);
+    }, 470);
   }
 
   public updateConfig(): void {
-    this.config = this.configService.createConfigFromInput(this.config);
-    if (!this.configService.validateGiven(this.config)) {
+    const config = this.configService.createConfigFromInput(this.config);
+    if (!this.configService.validateGiven(config)) {
       this.notificationService.setError('Config is invalid!', this.configService.getErrors().toString());
     }
-    this.configService.saveConfig(this.config);
+    this.configService.saveConfig(config);
+    this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
     window.location.reload();

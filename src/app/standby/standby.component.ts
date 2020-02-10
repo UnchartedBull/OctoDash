@@ -33,7 +33,7 @@ export class StandbyComponent implements OnInit {
 
   reconnect() {
     this.connecting = true;
-    if (this.configService.isPSUControlEnabled()) {
+    if (this.configService.turnOnPSUWhenExitingSleep()) {
       this.psuControlService.changePSUState(true);
     }
     this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())

@@ -33,6 +33,12 @@ export class NotificationService {
     }
   }
 
+  setWarning(heading: string, text: string) {
+    if (!this.hideNotifications) {
+      this.observer.next({ heading, text, type: 'warn' });
+    }
+  }
+
   setUpdate(heading: string, text: string) {
     this.observer.next({ heading, text, type: 'update' });
   }

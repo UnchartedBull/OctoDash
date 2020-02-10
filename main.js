@@ -55,7 +55,7 @@ function createWindow() {
         window.setFullScreen(true)
     }
 
-    setTimeout(sendVersionInfo, 42 * 1000);
+    setTimeout(sendVersionInfo, 30 * 1000);
     activateScreenSleepListener();
 
     window.on('closed', () => {

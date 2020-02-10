@@ -24,6 +24,14 @@
         }
     }
 
+    &__version {
+        font-size: 1.5vw;
+        display: block;
+        text-align: center;
+        margin-top: 1.5vh;
+        opacity: .3;
+    }
+
     &__heading {
         padding: 3vh 0;
         display: block;
@@ -36,6 +44,14 @@
             font-weight: 500;
             margin-bottom: 1.2vh;
             margin-top: 3vh;
+        }
+
+        &-3 {
+            display: block;
+            font-size: 2.5vw;
+            font-weight: 500;
+            margin-bottom: 1.2vh;
+            margin-top: 2vh;
         }
 
         &-back {
@@ -101,6 +117,47 @@
         }
     }
 
+    &__checkbox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3vw;
+        width: 3vw;
+        background-color: transparent;
+        border: 2px solid #dcdde1;
+        border-radius: 1vw;
+
+        &-container {
+            display: inline-block;
+            position: relative;
+            user-select: none;
+            padding-left: 5vw;
+            height: 4.5vw;
+            margin-top: 1.4vh;
+            cursor: pointer;
+            overflow: visible;
+        }
+
+        &-checked {
+            background-color: #2196F3;
+            width: 1.8vw;
+            height: 1.8vw;
+            display: block;
+            margin-left: .6vw;
+            margin-top: .6vw;
+            border-radius: .4vw;
+
+            &-disabled {
+                background-color: rgba(255, 255, 255, .5)
+            }
+        }
+
+        &-descriptor {
+            font-size: 2.5vw;
+            vertical-align: 2vh;
+        }
+    }
+
     &__close {
         position: absolute;
         right: 1.5vw;
@@ -141,7 +198,7 @@
     &__save {
         display: block;
         text-align: center;
-        margin: 3vh 0 4vh;
+        margin: 2.5vh 0 4vh;
     }
 
     &__scroll {
@@ -160,19 +217,19 @@
         padding: 2vh 2vw 2vh 4vw;
 
         &-slideout-forward {
-            animation: slideout-forward .8s ease-out;
+            animation: slideout-forward .5s ease-out;
         }
 
         &-slidein-forward {
-            animation: slidein-forward .8s ease-out
+            animation: slidein-forward .5s ease-out
         }
 
         &-slideout-backward {
-            animation: slideout-backward .8s ease-out
+            animation: slideout-backward .5s ease-out
         }
 
         &-slidein-backward {
-            animation: slidein-backward .8s ease-out
+            animation: slidein-backward .5s ease-out
         }
 
         &-inactive {
@@ -184,6 +241,22 @@
         display: block;
         margin: 5vh auto 0;
         width: 20vw;
+    }
+
+    &__files {
+        width: 100%;
+
+        & td {
+            width: 50%;
+        }
+    }
+
+    &__custom-action {
+        &-icon {
+            font-size: 3.5vw;
+            vertical-align: -8.5vh;
+            padding-left: 4vw;
+        }
     }
 }
 
