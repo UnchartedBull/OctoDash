@@ -11,7 +11,6 @@ import { AppService } from './app.service';
   providedIn: 'root'
 })
 export class JobService {
-
   httpGETRequest: Subscription;
   httpPOSTRequest: Subscription;
   observable: Observable<Job>;
@@ -34,25 +33,29 @@ export class JobService {
             let job: Job = null;
             if (data.job && data.job.file.name) {
               this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling'].includes(data.state);
-              job = {
-                status: data.state,
-                filename: data.job.file.display.replace('.gcode', ''),
-                progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                filamentAmount: this.service.convertFilamentLengthToAmount(data.job.filament.tool0.length),
-                timeLeft: {
-                  value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
-                  unit: 'h'
-                },
-                timePrinted: {
-                  value: this.service.convertSecondsToHours(data.progress.printTime),
-                  unit: 'h'
-                },
-                estimatedPrintTime: {
-                  value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
-                  unit: 'h'
-                },
-                estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
-              };
+              try {
+                job = {
+                  status: data.state,
+                  filename: data.job.file.display.replace('.gcode', ''),
+                  progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
+                  filamentAmount: this.service.convertFilamentLengthToAmount(data.job.filament.tool0.length),
+                  timeLeft: {
+                    value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
+                    unit: 'h'
+                  },
+                  timePrinted: {
+                    value: this.service.convertSecondsToHours(data.progress.printTime),
+                    unit: 'h'
+                  },
+                  estimatedPrintTime: {
+                    value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
+                    unit: 'h'
+                  },
+                  estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
+                };
+              } catch (error) {
+                this.notificationService.setError('Can\'t retrieve Job Status', error);
+              }
             }
             observer.next(job);
           }, (error: HttpErrorResponse) => {
