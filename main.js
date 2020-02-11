@@ -69,7 +69,9 @@ function activateScreenSleepListener() {
     })
 
     ipcMain.on("screenWakeup", () => {
+        exec('xset s off')
         exec('xset -dpms')
+        exec('xset s noblank')
     })
 }
 
