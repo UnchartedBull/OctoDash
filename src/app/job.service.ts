@@ -3,7 +3,7 @@ import { Observable, Observer, timer, Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { shareReplay, publish } from 'rxjs/operators';
-import { OctoprintJobAPI, JobCommand } from './octoprint-api/jobAPI';
+import { OctoprintJobAPI, JobCommand, OctoprintFilament } from './octoprint-api/jobAPI';
 import { NotificationService } from './notification/notification.service';
 import { AppService } from './app.service';
 
@@ -38,7 +38,7 @@ export class JobService {
                   status: data.state,
                   filename: data.job.file.display.replace('.gcode', ''),
                   progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                  filamentAmount: this.service.convertFilamentLengthToAmount(data.job.filament.tool0.length),
+                  filamentAmount: this.service.convertFilamentLengthToAmount(this.getTotalAmountOfFilament(data.job.filament)),
                   timeLeft: {
                     value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
                     unit: 'h'
@@ -66,6 +66,19 @@ export class JobService {
       });
     }).pipe(shareReplay(1));
     this.observable.subscribe();
+  }
+
+  private getTotalAmountOfFilament(filamentAmount: OctoprintFilament): number {
+    let filamentLength = 0;
+    // for (const property in filamentAmount) {
+    //   if (filamentAmount.hasOwnProperty(property) && filamentAmount[property].hasOwnProperty('length')) {
+    //     filamentLength += filamentAmount[property].length;
+    //   }
+    // }
+    for (const filament of filamentAmount.entries) {
+      filamentLength += filament.length;
+    }
+    return filamentLength;
   }
 
   public deleteJobInformation(): void {
