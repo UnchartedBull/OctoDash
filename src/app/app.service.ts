@@ -102,9 +102,8 @@ export class AppService {
 
   public convertFilamentLengthToAmount(filamentLength: number): number {
     return Math.round((Math.PI * (this.configService.getFilamentThickness() / 2) * filamentLength)
-      * this.configService.getFilamentThickness() / 100) / 10;
+      * this.configService.getFilamentDensity() / 100) / 10;
   }
-
 }
 
 interface VersionInformation {

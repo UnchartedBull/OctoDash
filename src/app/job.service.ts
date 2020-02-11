@@ -70,13 +70,10 @@ export class JobService {
 
   private getTotalAmountOfFilament(filamentAmount: OctoprintFilament): number {
     let filamentLength = 0;
-    // for (const property in filamentAmount) {
-    //   if (filamentAmount.hasOwnProperty(property) && filamentAmount[property].hasOwnProperty('length')) {
-    //     filamentLength += filamentAmount[property].length;
-    //   }
-    // }
-    for (const filament of filamentAmount.entries) {
-      filamentLength += filament.length;
+    for (const property in filamentAmount) {
+      if (filamentAmount.hasOwnProperty(property) && filamentAmount[property].hasOwnProperty('length')) {
+        filamentLength += filamentAmount[property].length;
+      }
     }
     return filamentLength;
   }
