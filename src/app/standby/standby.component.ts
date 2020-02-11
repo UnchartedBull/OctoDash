@@ -36,29 +36,17 @@ export class StandbyComponent implements OnInit {
     this.connecting = true;
     if (this.configService.turnOnPSUWhenExitingSleep()) {
       this.psuControlService.changePSUState(true);
-      setTimeout(this.connectToPrinter.bind(this), 5000);
+      setTimeout(this.checkConnection.bind(this), 5000);
     } else {
-      this.connectToPrinter();
+      this.checkConnection();
     }
   }
 
   private connectToPrinter() {
-    this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
+    this.http.post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
       .subscribe(
-        (data: OctoprintConnectionAPI) => {
-          if (data.current.state === 'Closed') {
-            this.http.post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
-              .subscribe(
-                () => { setTimeout(this.checkConnection.bind(this), 1500); },
-                () => { this.setConnectionError(); });
-          } else {
-            this.disableStandby();
-          }
-        },
-        (error: HttpErrorResponse) => {
-          this.connecting = false;
-          this.error = 'There is something really wrong, OctoDash can\'t get a response from OctoPrint. Please check your setup!';
-        });
+        () => { setTimeout(this.checkConnection.bind(this), 1500); },
+        () => { this.setConnectionError(); });
   }
 
   private checkConnection() {
@@ -76,6 +64,10 @@ export class StandbyComponent implements OnInit {
           } else {
             this.disableStandby();
           }
+        },
+        (error: HttpErrorResponse) => {
+          this.connecting = false;
+          this.error = 'There is something really wrong, OctoDash can\'t get a response from OctoPrint. Please check your setup!';
         });
   }
 
