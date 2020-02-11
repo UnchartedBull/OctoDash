@@ -45,7 +45,7 @@ export class StandbyComponent implements OnInit {
   private connectToPrinter() {
     this.http.post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
       .subscribe(
-        () => { setTimeout(this.checkConnection.bind(this), 1500); },
+        () => { setTimeout(this.checkConnection.bind(this), 3000); },
         () => { this.setConnectionError(); });
   }
 
@@ -59,7 +59,7 @@ export class StandbyComponent implements OnInit {
               this.setConnectionError();
             } else {
               this.connectionRetries--;
-              setTimeout(this.connectToPrinter.bind(this), 2000);
+              setTimeout(this.connectToPrinter.bind(this), 500);
             }
           } else {
             this.disableStandby();
