@@ -14,8 +14,9 @@ import { PsuControlService } from '../plugin-service/psu-control.service';
 })
 export class StandbyComponent implements OnInit {
 
-  connecting = false;
-  error = '';
+  public connecting = false;
+  public error = '';
+  private connectionRetries = 3;
 
   constructor(
     private configService: ConfigService,
@@ -31,25 +32,35 @@ export class StandbyComponent implements OnInit {
     }
   }
 
-  reconnect() {
+  public reconnect() {
     this.connecting = true;
     if (this.configService.turnOnPSUWhenExitingSleep()) {
       this.psuControlService.changePSUState(true);
+      setTimeout(this.checkConnection.bind(this), 5000);
+    } else {
+      this.checkConnection();
     }
+  }
+
+  private connectToPrinter() {
+    this.http.post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
+      .subscribe(
+        () => { setTimeout(this.checkConnection.bind(this), 3000); },
+        () => { this.setConnectionError(); });
+  }
+
+  private checkConnection() {
     this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
       .subscribe(
         (data: OctoprintConnectionAPI) => {
-          if (data.current.state === 'Closed') {
-            this.http.post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
-              .subscribe(
-                () => {
-                  this.disableStandby();
-                },
-                () => {
-                  this.connecting = false;
-                  this.error =
-                    'OctoPrint can\'t connect to your printer. Please make sure that the connection works, then come back and try again.';
-                });
+          if (data.current.state !== 'Operational') {
+            if (this.connectionRetries === 0) {
+              this.connectionRetries = 3;
+              this.setConnectionError();
+            } else {
+              this.connectionRetries--;
+              setTimeout(this.connectToPrinter.bind(this), 500);
+            }
           } else {
             this.disableStandby();
           }
@@ -58,13 +69,15 @@ export class StandbyComponent implements OnInit {
           this.connecting = false;
           this.error = 'There is something really wrong, OctoDash can\'t get a response from OctoPrint. Please check your setup!';
         });
-    const connectPayload: ConnectCommand = {
-      command: 'connect',
-      save: false
-    };
   }
 
-  disableStandby() {
+  private setConnectionError() {
+    this.connecting = false;
+    this.error =
+      'OctoPrint can\'t connect to your printer. Please make sure that the connection works, then come back and try again.';
+  }
+
+  private disableStandby() {
     setTimeout(() => {
       this.connecting = false;
       if (this.configService.getAutomaticScreenSleep()) {
@@ -72,9 +85,14 @@ export class StandbyComponent implements OnInit {
       }
       this.notificationService.enableNotifications();
       this.router.navigate(['/main-screen']);
-    }, 2000);
+    }, 1000);
   }
 }
+
+const connectPayload: ConnectCommand = {
+  command: 'connect',
+  save: false
+};
 
 interface ConnectCommand {
   command: string;

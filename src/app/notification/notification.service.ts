@@ -18,12 +18,12 @@ export class NotificationService {
   }
 
   enableNotifications() {
-    console.clear();
+    // console.clear();
     this.hideNotifications = false;
   }
 
   disableNotifications() {
-    console.clear();
+    // console.clear();
     this.hideNotifications = true;
   }
 

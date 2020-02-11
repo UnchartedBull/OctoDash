@@ -171,7 +171,7 @@ export class PrinterService {
       this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintConnectionAPI) => {
-            resolve(data.current.state === 'Closed');
+            resolve(data.current.state === 'Closed' || data.current.state.includes('Error:'));
           },
           (error: HttpErrorResponse) => {
             this.notificationService.setError('Can\'t retrieve connection state!', error.message);
