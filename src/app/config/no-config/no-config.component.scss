@@ -61,7 +61,7 @@
         }
     }
 
-    &__checkmark {
+    &__checkbox {
         position: absolute;
         top: 0;
         left: 0;
@@ -70,9 +70,7 @@
         background-color: transparent;
         border: 2px solid #dcdde1;
         border-radius: 1vw;
-    }
 
-    &__checkbox {
         &-container {
             display: inline-block;
             position: relative;
@@ -81,6 +79,7 @@
             height: 4.5vw;
             margin-top: 8vh;
             cursor: pointer;
+            overflow: visible;
         }
 
         &-checked {
@@ -88,9 +87,13 @@
             width: 2.4vw;
             height: 2.4vw;
             display: block;
-            margin-left: .8vw;
-            margin-top: .8vw;
+            margin-left: .75vw;
+            margin-top: .75vw;
             border-radius: .7vw;
+
+            &-disabled {
+                background-color: rgba(255, 255, 255, .5)
+            }
         }
     }
 
@@ -123,15 +126,16 @@
     }
 
     &__3 {
-        &-temperature-explanation {
+        &-explanation {
             font-size: 3vw;
             font-style: italic;
             opacity: .7;
             margin-top: 4vh;
+            padding: 2vh 4vw;
         }
     }
 
-    &__4 {
+    &__5 {
         &-check-wrapper {
             width: 100%;
             text-align: center;

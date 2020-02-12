@@ -3,7 +3,7 @@
         <td class="bottom-bar__printer-name"> {{ printer.name }} </td>
         <td class="bottom-bar__enclosure-temperature" *ngIf="enclosureTemperature">
             <img src="assets/thermometer.svg" class="bottom-bar__enclosure-temperature-icon" />
-            {{ enclosureTemperature.temperature }}°C
+            {{ enclosureTemperature.temperature }}{{ enclosureTemperature.unit }}
         </td>
         <td class="bottom-bar__current-status" [ngClass]="{'bottom-bar__error': printer.status.includes('error')}">
             {{ printer.status }} </td>

@@ -46,7 +46,7 @@
                 {{ content.name }}
             </span>
         </div>
-        <div *ngIf="content.type === 'file'" (press)="openDetails(content.path)" (click)="loadFile(content.path)"
+        <div *ngIf="content.type === 'file'" (click)="openDetails(content.path)" (press)="loadFile(content.path)"
             matRipple [matRippleUnbounded]="false">
             <img src="assets/object.svg" class="files__icon" />
             <div class="files__info">

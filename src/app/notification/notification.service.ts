@@ -18,18 +18,24 @@ export class NotificationService {
   }
 
   enableNotifications() {
-    console.clear();
+    // console.clear();
     this.hideNotifications = false;
   }
 
   disableNotifications() {
-    console.clear();
+    // console.clear();
     this.hideNotifications = true;
   }
 
   setError(heading: string, text: string) {
     if (!this.hideNotifications) {
       this.observer.next({ heading, text, type: 'error' });
+    }
+  }
+
+  setWarning(heading: string, text: string) {
+    if (!this.hideNotifications) {
+      this.observer.next({ heading, text, type: 'warn' });
     }
   }
 

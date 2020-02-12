@@ -22,6 +22,7 @@
                 <span class="settings__made">Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart">
                     </fa-icon> by
                     /u/UnchartedBull</span>
+                <span class="settings__version">OctoDash v{{ version }}</span>
             </div>
             <div class="settings__content settings__content-inactive" #settingsGeneral>
                 <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
@@ -83,6 +84,22 @@
                                         [(ngModel)]="config.filament.density" required>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-feed-length" class="settings__input-label">Bowden Length
+                                        <span>(mm)</span></label>
+                                    <input type="text" id="filament-feed-length" class="settings__input"
+                                        name="filament-feed-length" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedLength" required>
+                                </td>
+                                <td>
+                                    <label for="filament-feed-speed" class="settings__input-label">Feed Speed
+                                        <span>(mm/sec)</span></label>
+                                    <input type="text" id="filament-feed-speed" class="settings__input"
+                                        name="filament-feed-speed" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedSpeed" required>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                     <br>
@@ -92,11 +109,185 @@
                 <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
                     <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>octodash
                 </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">General</span>
+                    <label for="api-polling-interval" class="settings__input-label">Value Refresh Interval
+                        <span>(ms)</span></label>
+                    <input type="number" id="api-polling-interval" class="settings__input" name="api-polling-interval"
+                        style="width: 44.94vw" [(ngModel)]="config.octodash.pollingInterval" required>
+                    <div class="settings__checkbox-container"
+                        (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.octodash.touchscreen"></span>
+                        </span> <span class="settings__checkbox-descriptor">Use Touchscreen</span>
+                    </div> <br>
+                    <div class="settings__checkbox-container"
+                        (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
+                        </span> <span class="settings__checkbox-descriptor">Turn screen off while sleeping</span>
+                    </div> <br>
+                    <span class="settings__heading-2">Files</span>
+                    <table class="settings__files">
+                        <tr>
+                            <td>
+                                <span style="font-size: 2.9vw">sort by</span> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'name'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'name'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Name</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'date'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'date'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Date</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.attribute = 'size'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.attribute === 'size'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Size</span>
+                                </div> <br>
+                            </td>
+                            <td>
+                                <span style="font-size: 2.9vw">order</span> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.order = 'asc'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.order === 'asc'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Ascending</span>
+                                </div> <br>
+                                <div class="settings__checkbox-container"
+                                    (click)="config.octodash.fileSorting.order = 'dsc'">
+                                    <span class="settings__checkbox">
+                                        <span class="settings__checkbox-checked"
+                                            *ngIf="config.octodash.fileSorting.order === 'dsc'"></span>
+                                    </span> <span class="settings__checkbox-descriptor">Descending</span>
+                                </div> <br>
+                            </td>
+                        </tr>
+                    </table>
+                    <span class="settings__heading-2">Custom Actions</span>
+                    <div *ngFor="let number of [0,1,2,3,4,5]">
+                        <span class="settings__heading-3">{{ customActionsPosition[number] }}</span>
+                        <label for="action-command" class="settings__input-label">GCode / Action</label>
+                        <input type="string" id="action-command" class="settings__input" name="action-command"
+                            style="width: 44.94vw; margin-bottom: -2vh;"
+                            [(ngModel)]="config.octodash.customActions[number].command" required>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="action-icon" class="settings__input-label">Icon</label>
+                                    <input type="text" id="action-icon" class="settings__input" name="action-icon"
+                                        style="width: 14vw" [(ngModel)]="config.octodash.customActions[number].icon"
+                                        required>
+                                </td>
+                                <td style="padding-left: 3vw">
+                                    <label for="action-color" class="settings__input-label">Color</label>
+                                    <input type="text" id="action-color" class="settings__input" name="action-color"
+                                        style="width: 14vw" [(ngModel)]="config.octodash.customActions[number].color"
+                                        required>
+                                </td>
+                                <td>
+                                    <fa-icon [icon]="['fas', config.octodash.customActions[number].icon]"
+                                        class="settings__custom-action-icon"
+                                        [styles]="{color: config.octodash.customActions[number].color}"></fa-icon>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="settings__checkbox-container"
+                                        (click)="config.octodash.customActions[number].confirm = !config.octodash.customActions[number].confirm">
+                                        <span class="settings__checkbox">
+                                            <span class="settings__checkbox-checked"
+                                                *ngIf="config.octodash.customActions[number].confirm"></span>
+                                        </span> <span class="settings__checkbox-descriptor">Confirm</span>
+                                    </div>
+                                <td style="padding-left: 3vw;" colspan="2">
+                                    <div class="settings__checkbox-container"
+                                        (click)="config.octodash.customActions[number].exit = !config.octodash.customActions[number].exit">
+                                        <span class="settings__checkbox">
+                                            <span class="settings__checkbox-checked"
+                                                *ngIf="config.octodash.customActions[number].exit"></span>
+                                        </span> <span class="settings__checkbox-descriptor">Return to Home</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> <br>
+                </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsPlugins>
                 <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
                     <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>plugins
                 </span>
+                <div class="settings__scroll">
+                    <span class="settings__heading-2">Display Layer Progress</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.displayLayerProgress.enabled = true">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked settings__checkbox-checked-disabled"
+                                *ngIf="config.plugins.displayLayerProgress.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Enclosure</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <label for="enclosure-ambient-id" class="settings__input-label">Ambient Sensor
+                        <span>(ID)</span></label>
+                    <input type="number" id="enclosure-ambient-id" class="settings__input" name="enclosure-ambient-id"
+                        style="width: 44.94vw" [(ngModel)]="config.plugins.enclosure.ambientSensorID" required>
+
+                    <span class="settings__heading-2">Filament Manager</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.filamentManager.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Preheat Button</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+                        <span class="settings__checkbox ">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.preheatButton.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">Print Time Genius</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.printTimeGenius.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <span class="settings__heading-2">PSU Control</span>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
+                        </span> <span class="settings__checkbox-descriptor">enabled</span>
+                    </div>
+                    <div class="settings__checkbox-container"
+                        (click)="config.plugins.psuControl.turnOnPSUWhenExitingSleep = !config.plugins.psuControl.turnOnPSUWhenExitingSleep">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"></span>
+                        </span> <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
+                    </div>
+                </div>
             </div>
             <div class="settings__content settings__content-inactive" #settingsCredits>
                 <span class="settings__heading" (click)="changePage(0, 4, 'backward')">

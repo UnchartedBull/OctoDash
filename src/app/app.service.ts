@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config/config.service';
+import { ConfigService, Config } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
 import { HttpClient } from '@angular/common/http';
+import { ConfigOld } from './config/config.old';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +27,106 @@ export class AppService {
       }
     }
 
-    this.updateError = [
-      '.octodash.temperatureSensor.ambient should be number,null'
-    ];
+    this.updateError = ['.filament should have required property \'feedLength\'', '.filament should have required property \'feedSpeed\'', '. should have required property \'plugins\'', '.octodash.customActions[0] should have required property \'confirm\'', '.octodash.customActions[0] should have required property \'exit\'', '.octodash.customActions[1] should have required property \'confirm\'', '.octodash.customActions[1] should have required property \'exit\'', '.octodash.customActions[2] should have required property \'confirm\'', '.octodash.customActions[2] should have required property \'exit\'', '.octodash.customActions[3] should have required property \'confirm\'', '.octodash.customActions[3] should have required property \'exit\'', '.octodash.customActions[4] should have required property \'confirm\'', '.octodash.customActions[4] should have required property \'exit\'', '.octodash.customActions[5] should have required property \'confirm\'', '.octodash.customActions[5] should have required property \'exit\'', '.octodash should have required property \'fileSorting\'', '.octodash should have required property \'pollingInterval\'', '.octodash should have required property \'turnScreenOffWhileSleeping\''];
   }
 
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
-    const config = this.configService.getCurrentConfig();
-    config.octodash.temperatureSensor.ambient = 1;
+    // TODO: remove ConfigOld after release
+    const configOld = (Object.assign({}, this.configService.getCurrentConfig()) as object) as ConfigOld;
+    const config: Config = {
+      octoprint: {
+        accessToken: configOld.octoprint.accessToken,
+        url: configOld.octoprint.url
+      },
+      printer: {
+        name: configOld.printer.name,
+        xySpeed: configOld.printer.xySpeed,
+        zSpeed: configOld.printer.zSpeed
+      },
+      filament: {
+        density: configOld.filament.density,
+        thickness: configOld.filament.thickness,
+        feedLength: 470,
+        feedSpeed: 100
+      },
+      plugins: {
+        displayLayerProgress: {
+          enabled: true
+        },
+        enclosure: {
+          enabled: true,
+          ambientSensorID: configOld.octodash.temperatureSensor.ambient,
+          filament1SensorID: null,
+          filament2SensorID: null
+        },
+        filamentManager: {
+          enabled: true
+        },
+        preheatButton: {
+          enabled: true
+        },
+        printTimeGenius: {
+          enabled: true
+        },
+        psuControl: {
+          enabled: false,
+          turnOnPSUWhenExitingSleep: false
+        }
+      },
+      octodash: {
+        customActions: [{
+          icon: 'home',
+          command: 'G28',
+          color: '#dcdde1',
+          confirm: false,
+          exit: false
+        },
+        {
+          icon: 'ruler-vertical',
+          command: 'G29',
+          color: '#44bd32',
+          confirm: false,
+          exit: false
+        },
+        {
+          icon: 'fire-alt',
+          command: 'M140 S50; M104 S185',
+          color: '#e1b12c',
+          confirm: false,
+          exit: true
+        },
+        {
+          icon: 'snowflake',
+          command: 'M140 S0; M104 S0',
+          color: '#0097e6',
+          confirm: false,
+          exit: true
+        },
+        {
+          icon: 'redo-alt',
+          command: '[!RELOAD]',
+          color: '#7f8fa6',
+          confirm: true,
+          exit: false
+        },
+        {
+          icon: 'skull',
+          command: '[!KILL]',
+          color: '#e84118',
+          confirm: true,
+          exit: false
+        }
+        ],
+        fileSorting: {
+          attribute: 'name',
+          order: 'asc'
+        },
+        pollingInterval: configOld.octoprint.apiInterval,
+        touchscreen: configOld.octodash.touchscreen,
+        turnScreenOffWhileSleeping: configOld.octodash.turnScreenOffSleep
+      }
+    };
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return false;
@@ -51,6 +143,10 @@ export class AppService {
       () => null
     );
     setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
+  }
+
+  public getVersion(): string {
+    return this.version;
   }
 
   public turnDisplayOff(): void {
@@ -99,9 +195,8 @@ export class AppService {
 
   public convertFilamentLengthToAmount(filamentLength: number): number {
     return Math.round((Math.PI * (this.configService.getFilamentThickness() / 2) * filamentLength)
-      * this.configService.getFilamentThickness() / 100) / 10;
+      * this.configService.getFilamentDensity() / 100) / 10;
   }
-
 }
 
 interface VersionInformation {

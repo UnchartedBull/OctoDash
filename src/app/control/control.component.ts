@@ -2,8 +2,9 @@ import { Component, SecurityContext } from '@angular/core';
 import { PrinterService } from '../printer.service';
 import { ConfigService } from '../config/config.service';
 import { OctoprintService } from '../octoprint.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { PsuControlService } from '../plugin-service/psu-control.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-control',
@@ -15,12 +16,14 @@ export class ControlComponent {
   public customActions = [];
   public showHelp = false;
   public iFrameURL: SafeResourceUrl = 'about:blank';
+  public actionToConfirm: ActionToConfirm;
 
   constructor(
     private printerService: PrinterService,
     private octoprintService: OctoprintService,
     private configService: ConfigService,
-    private psuControlService: PsuControlService) {
+    private psuControlService: PsuControlService,
+    private router: Router) {
     this.customActions = this.configService.getCustomActions();
   }
 
@@ -37,7 +40,33 @@ export class ControlComponent {
     );
   }
 
-  public executeGCode(command: string): void {
+  public doAction(command: string, exit: boolean, confirm: boolean) {
+    console.log(command, exit, confirm);
+    if (confirm) {
+      this.actionToConfirm = {
+        command,
+        exit
+      };
+    } else {
+      this.executeGCode(command);
+      if (exit) {
+        this.router.navigate(['/main-screen']);
+      }
+    }
+  }
+
+  public doActionConfirm() {
+    this.executeGCode(this.actionToConfirm.command);
+    if (this.actionToConfirm.exit) {
+      this.router.navigate(['/main-screen']);
+    }
+  }
+
+  public doActionNoConfirm() {
+    this.actionToConfirm = null;
+  }
+
+  private executeGCode(command: string): void {
     switch (command) {
       case '[!DISCONNECT]': this.disconnectPrinter(); break;
       case '[!STOPDASHBOARD]': this.stopOctoDash(); break;
@@ -108,4 +137,9 @@ export class ControlComponent {
       this.iFrameURL = 'about:blank';
     }, 500);
   }
+}
+
+interface ActionToConfirm {
+  command: string;
+  exit: boolean;
 }

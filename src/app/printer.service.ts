@@ -23,7 +23,7 @@ export class PrinterService {
     private notificationService: NotificationService,
     private router: Router) {
     this.observable = new Observable((observer: Observer<PrinterStatusAPI>) => {
-      timer(500, this.configService.getAPIInterval()).subscribe(_ => {
+      timer(500, this.configService.getAPIPollingInterval()).subscribe(_ => {
         if (this.httpGETRequest) {
           this.httpGETRequest.unsubscribe();
         }
@@ -171,7 +171,7 @@ export class PrinterService {
       this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintConnectionAPI) => {
-            resolve(data.current.state === 'Closed');
+            resolve(data.current.state === 'Closed' || data.current.state.includes('Error:'));
           },
           (error: HttpErrorResponse) => {
             this.notificationService.setError('Can\'t retrieve connection state!', error.message);

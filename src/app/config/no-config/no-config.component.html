@@ -72,54 +72,100 @@
     </div>
     <div *ngIf="page === 3">
         <span class="no-config__text">
-            And finally some information on how OctoDash should be setup.
+            And now personalize me to your liking.
         </span>
         <form class="no-config__form">
             <div class="no-config__checkbox-container"
                 (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
-                <span class="no-config__checkmark">
+                <span class="no-config__checkbox">
                     <span class="no-config__checkbox-checked" *ngIf="config.octodash.touchscreen"></span>
-                </span> Touchscreen
+                </span> Use Touchscreen
+            </div> <br>
+            <label for="octodashPolling" class="no-config__input-label">Value Refresh Interval:</label>
+            <input type="number" id="octodashPolling" class="no-config__input"
+                [(ngModel)]="this.config.octodash.pollingInterval" name="octodashPolling" required style="width: 11vw">
+            ms
+            <div class="no-config__3-explanation">
+                If you're unsure about what values to use, just use the default. You can change all values (and even
+                more stuff, like defining custom actions) later in the settings menu.
             </div>
-            <div class="no-config__3-temperature">
-                <label for="ambientTemperatureSensor" class="no-config__input-label-small">Sensor ID:</label>
-                <input type="number" id="ambientTemperatureSensor" class="no-config__input no-config__input-small"
-                    [(ngModel)]="config.octodash.temperatureSensor.ambient" name="ambientTemperatureSensor" required>
-                <div class="no-config__3-temperature-explanation">
-                    Please enter the ID of your temperature sensor as configured in the Enclosure Plugin. Leave empty
-                    if you aren't using a temperature sensor.
-                </div>
-            </div>
+
         </form>
     </div>
     <div *ngIf="page === 4">
         <span class="no-config__text">
+            What plugins are you running?
+        </span>
+        <div style="text-align: center;">
+            <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
+                <span class="no-config__checkbox">
+                    <span class="no-config__checkbox-checked no-config__checkbox-checked-disabled"
+                        *ngIf="config.plugins.displayLayerProgress.enabled"></span>
+                </span> Display Layer Progress&nbsp;&nbsp;
+            </div>
+            <div class="no-config__checkbox-container"
+                (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
+                <span class="no-config__checkbox">
+                    <span class="no-config__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
+                </span> Enclosure
+            </div>
+            <div class="no-config__checkbox-container"
+                (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+                <span class="no-config__checkbox">
+                    <span class="no-config__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
+                </span> Filament Manager&nbsp;&nbsp;
+            </div>
+            <div class="no-config__checkbox-container"
+                (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+                <span class="no-config__checkbox ">
+                    <span class="no-config__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
+                </span> Preheat Button
+            </div>
+            <div class="no-config__checkbox-container"
+                (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
+                <span class="no-config__checkbox">
+                    <span class="no-config__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
+                </span> Print Time Genius&nbsp;&nbsp;
+            </div>
+            <div class="no-config__checkbox-container"
+                (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+                <span class="no-config__checkbox">
+                    <span class="no-config__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
+                </span> PSU Control
+            </div>
+            <div class="no-config__3-explanation">
+                Enclosure and PSU Control Plugin can be configured further in the settings!
+            </div>
+        </div>
+    </div>
+    <div *ngIf="page === 5">
+        <span class="no-config__text">
             Great! I'll check everything.
         </span>
-        <div class="no-config__4-check-wrapper">
-            <span class="no-config__4-check">
-                <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="configValid" />
-                <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="configValid == false" />
+        <div class="no-config__5-check-wrapper">
+            <span class="no-config__5-check">
+                <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="configValid" />
+                <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="configValid == false" />
                 Config Validation
             </span>
-            <span class="no-config__4-errors" *ngFor="let error of configErrors">{{ error }}</span>
+            <span class="no-config__5-errors" *ngFor="let error of configErrors">{{ error }}</span>
             <div *ngIf="configValid">
-                <span class="no-config__4-check">
-                    <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection" />
-                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="octoprintConnection == false" />
+                <span class="no-config__5-check">
+                    <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="octoprintConnection" />
+                    <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="octoprintConnection == false" />
                     Octoprint Connection
                 </span>
-                <span class="no-config__4-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
+                <span class="no-config__5-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
             </div>
             <div *ngIf="configValid && octoprintConnection">
-                <span class="no-config__4-check">
-                    <img src="assets/checkmark.svg" class="no-config__4-check-icon" *ngIf="!configSaved" />
-                    <img src="assets/error.svg" class="no-config__4-check-icon" *ngIf="configSaved" />
+                <span class="no-config__5-check">
+                    <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="!configSaved" />
+                    <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="configSaved" />
                     Saving Config
                 </span>
-                <span class="no-config__4-errors" *ngIf="configSaved">{{ configSaved }}</span>
+                <span class="no-config__5-errors" *ngIf="configSaved">{{ configSaved }}</span>
             </div>
-            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__4-finish"
+            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__5-finish"
                 (click)="finishWizard()">done
             </span>
         </div>

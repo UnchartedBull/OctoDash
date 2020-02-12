@@ -64,8 +64,6 @@ export class FilesService {
                   printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
                   filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
                 } as File);
-              } else if (fileOrFolder.typePath.includes('gcode') && fileOrFolder.origin === 'sdcard') {
-                // TODO
               }
             });
             data = null;

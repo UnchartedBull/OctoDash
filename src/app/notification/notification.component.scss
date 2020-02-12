@@ -12,8 +12,7 @@
     border-right: 1vw solid #5a6675;
 
     &__show {
-        // FIXME
-        // top: 5vh;
+        top: 5vh;
     }
 
     &__heading {
@@ -42,6 +41,10 @@
     &__border {
         &-error {
             border-left: 1vw solid #c23616;
+        }
+
+        &-warn {
+            border-left: 1vw solid #fbc531;
         }
 
         &-update {

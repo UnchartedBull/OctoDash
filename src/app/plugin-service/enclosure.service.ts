@@ -25,7 +25,8 @@ export class EnclosureService {
             (data: EnclosurePluginAPI) => {
               observer.next({
                 temperature: data.temp_sensor_temp,
-                humidity: data.temp_sensor_humidity
+                humidity: data.temp_sensor_humidity,
+                unit: data.use_fahrenheit ? '°F' : '°C'
               } as TemperatureReading);
             }, (error: HttpErrorResponse) => {
               this.notificationService.setError('Can\'t retrieve enclosure temperature!', error.message);

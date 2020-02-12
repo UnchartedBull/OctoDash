@@ -24,6 +24,7 @@ export class FilesComponent {
     private router: Router,
     private jobService: JobService) {
     this.showLoader();
+    this.folderContent = [];
     this.currentFolder = '/';
     this.openFolder(this.currentFolder);
   }
@@ -44,7 +45,7 @@ export class FilesComponent {
   public openFolder(folderPath: string): void {
     setTimeout(() => {
       this.showLoader();
-      this.folderContent = null;
+      this.folderContent = [];
       this.filesService.getFolder(folderPath).then(
         (data) => {
           this.folderContent = data;
