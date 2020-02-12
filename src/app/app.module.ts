@@ -39,13 +39,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import * as Hammer from 'hammerjs';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = {
-    press: { pointers: 1, time: 501, threshold: 15 },
-    swipe: { pointers: 1, direction: Hammer.DIRECTION_LEFT, threshold: 20, velocity: 0.4 }
-  } as any;
-}
-
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
   overrides = {

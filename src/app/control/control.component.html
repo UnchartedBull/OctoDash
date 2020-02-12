@@ -60,7 +60,8 @@
     </div>
     <div class="control__custom">
         <div class="control__custom-action" *ngFor="let customAction of customActions"
-            [style.border-color]="customAction.color" (click)="executeGCode(customAction.command)" matRipple
+            [style.border-color]="customAction.color"
+            (click)="doAction(customAction.command, customAction.exit, customAction.confirm)" matRipple
             [matRippleUnbounded]="false">
             <fa-icon [icon]="['fas', customAction.icon]" class="control__custom-action-icon"
                 [styles]="{color: customAction.color}">
@@ -86,4 +87,14 @@
                 100</td>
         </tr>
     </table>
+</div>
+
+<div class="confirm__wrapper" *ngIf="actionToConfirm">
+    <div class="confirm">
+        <h1>Are you sure?</h1>
+        <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
+        <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
+        <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()">
+        <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()">
+    </div>
 </div>
