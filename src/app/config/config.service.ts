@@ -118,6 +118,9 @@ export class ConfigService {
       url: config.octoprint.url.split(':')[1].replace('//', ''),
       port: parseInt(config.octoprint.url.split(':')[2].replace('/api/', ''), 10)
     };
+    if (isNaN(config.octoprint.urlSplit.port)) {
+      config.octoprint.urlSplit.port = null;
+    }
     return config;
   }
 
