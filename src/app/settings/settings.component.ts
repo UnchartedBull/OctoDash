@@ -10,11 +10,11 @@ import { NotificationService } from '../notification/notification.service';
 export class SettingsComponent implements OnInit {
 
   @Output() closeFunction = new EventEmitter<string>();
-  @ViewChild('settingsMain', { static: false }) settingsMain: ElementRef;
-  @ViewChild('settingsGeneral', { static: false }) settingsGeneral: ElementRef;
-  @ViewChild('settingsOctoDash', { static: false }) settingsOctoDash: ElementRef;
-  @ViewChild('settingsPlugins', { static: false }) settingsPlugins: ElementRef;
-  @ViewChild('settingsCredits', { static: false }) settingsCredits: ElementRef;
+  @ViewChild('settingsMain') settingsMain: ElementRef;
+  @ViewChild('settingsGeneral') settingsGeneral: ElementRef;
+  @ViewChild('settingsOctoDash') settingsOctoDash: ElementRef;
+  @ViewChild('settingsPlugins') settingsPlugins: ElementRef;
+  @ViewChild('settingsCredits') settingsCredits: ElementRef;
 
   public fadeOutAnimation = false;
   public config: Config;

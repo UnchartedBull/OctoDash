@@ -2,7 +2,7 @@ import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angu
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { MatRippleModule } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
@@ -39,14 +39,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import * as Hammer from 'hammerjs';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
-
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = {
-    press: { pointers: 1, time: 501, threshold: 15 },
-    swipe: { pointers: 1, direction: Hammer.DIRECTION_LEFT, threshold: 20, velocity: 0.4 }
-  } as any;
-}
-
+@Injectable()
 export class HammerConfig extends HammerGestureConfig {
   overrides = {
     pan: {
