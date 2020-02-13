@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class StandbyComponent implements OnInit {
     public error = '';
     private connectionRetries = 3;
 
-    constructor(
+    public constructor(
         private configService: ConfigService,
         private http: HttpClient,
         private router: Router,
@@ -27,13 +27,13 @@ export class StandbyComponent implements OnInit {
         private psuControlService: PsuControlService,
     ) {}
 
-    ngOnInit() {
+    public ngOnInit(): void {
         if (this.configService.getAutomaticScreenSleep()) {
             setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
         }
     }
 
-    public reconnect() {
+    public reconnect(): void {
         this.connecting = true;
         if (this.configService.turnOnPSUWhenExitingSleep()) {
             this.psuControlService.changePSUState(true);
@@ -43,22 +43,22 @@ export class StandbyComponent implements OnInit {
         }
     }
 
-    private connectToPrinter() {
+    private connectToPrinter(): void {
         this.http
             .post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
             .subscribe(
-                () => {
+                (): void => {
                     setTimeout(this.checkConnection.bind(this), 3000);
                 },
-                () => {
+                (): void => {
                     this.setConnectionError();
                 },
             );
     }
 
-    private checkConnection() {
+    private checkConnection(): void {
         this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
-            (data: OctoprintConnectionAPI) => {
+            (data: OctoprintConnectionAPI): void => {
                 if (data.current.state !== 'Operational') {
                     if (this.connectionRetries === 0) {
                         this.connectionRetries = 3;
@@ -71,7 +71,7 @@ export class StandbyComponent implements OnInit {
                     this.disableStandby();
                 }
             },
-            (error: HttpErrorResponse) => {
+            (): void => {
                 this.connecting = false;
                 this.error =
                     "There is something really wrong, OctoDash can't get a response from OctoPrint. Please check your setup!";
@@ -79,14 +79,14 @@ export class StandbyComponent implements OnInit {
         );
     }
 
-    private setConnectionError() {
+    private setConnectionError(): void {
         this.connecting = false;
         this.error =
             "OctoPrint can't connect to your printer. Please make sure that the connection works, then come back and try again.";
     }
 
-    private disableStandby() {
-        setTimeout(() => {
+    private disableStandby(): void {
+        setTimeout((): void => {
             this.connecting = false;
             if (this.configService.getAutomaticScreenSleep()) {
                 this.service.turnDisplayOn();

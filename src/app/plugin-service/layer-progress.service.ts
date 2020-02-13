@@ -11,16 +11,16 @@ import { OctoprintLayerProgressAPI } from '../octoprint-api/layerProgressAPI';
     providedIn: 'root',
 })
 export class LayerProgressService {
-    httpGETRequest: Subscription;
-    observable: Observable<DisplayLayerProgressAPI>;
+    private httpGETRequest: Subscription;
+    private observable: Observable<DisplayLayerProgressAPI>;
 
-    constructor(
+    public constructor(
         private configService: ConfigService,
         private notificationService: NotificationService,
         private http: HttpClient,
     ) {
-        this.observable = new Observable((observer: Observer<any>) => {
-            timer(1000, this.configService.getAPIPollingInterval()).subscribe(_ => {
+        this.observable = new Observable((observer: Observer<DisplayLayerProgressAPI>): void => {
+            timer(1000, this.configService.getAPIPollingInterval()).subscribe((): void => {
                 if (this.httpGETRequest) {
                     this.httpGETRequest.unsubscribe();
                 }
@@ -30,7 +30,7 @@ export class LayerProgressService {
                         this.configService.getHTTPHeaders(),
                     )
                     .subscribe(
-                        (data: OctoprintLayerProgressAPI) => {
+                        (data: OctoprintLayerProgressAPI): void => {
                             observer.next({
                                 current: data.layer.current === '-' ? 0 : Number(data.layer.current) + 1,
                                 total: data.layer.total === '-' ? 0 : Number(data.layer.total) + 1,
@@ -42,7 +42,7 @@ export class LayerProgressService {
                                         : data.fanSpeed.replace('%', ''),
                             });
                         },
-                        (error: HttpErrorResponse) => {
+                        (error: HttpErrorResponse): void => {
                             this.notificationService.setError("Can't retrieve layer progress!", error.message);
                         },
                     );
@@ -58,5 +58,5 @@ export class LayerProgressService {
 export interface DisplayLayerProgressAPI {
     current: number;
     total: number;
-    fanSpeed: number;
+    fanSpeed: number | string;
 }

@@ -14,7 +14,10 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     public printerStatus: PrinterStatus;
     public status: string;
 
-    constructor(private printerService: PrinterService, private displayLayerProgressService: LayerProgressService) {
+    public constructor(
+        private printerService: PrinterService,
+        private displayLayerProgressService: LayerProgressService,
+    ) {
         this.printerStatus = {
             nozzle: {
                 current: 0,
@@ -29,9 +32,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         this.status = 'connecting';
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.subscriptions.add(
-            this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+            this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
                 this.printerStatus.nozzle = printerStatus.nozzle;
                 this.printerStatus.heatbed = printerStatus.heatbed;
                 this.status = printerStatus.status;
@@ -39,13 +42,15 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         );
 
         this.subscriptions.add(
-            this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
-                this.printerStatus.fan = layerProgress.fanSpeed;
-            }),
+            this.displayLayerProgressService
+                .getObservable()
+                .subscribe((layerProgress: DisplayLayerProgressAPI): void => {
+                    this.printerStatus.fan = layerProgress.fanSpeed;
+                }),
         );
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 }
@@ -53,5 +58,5 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 export interface PrinterStatus {
     nozzle: PrinterValue;
     heatbed: PrinterValue;
-    fan: number;
+    fan: number | string;
 }

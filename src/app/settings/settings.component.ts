@@ -10,12 +10,12 @@ import { NotificationService } from '../notification/notification.service';
     styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-    @Output() closeFunction = new EventEmitter<string>();
-    @ViewChild('settingsMain') settingsMain: ElementRef;
-    @ViewChild('settingsGeneral') settingsGeneral: ElementRef;
-    @ViewChild('settingsOctoDash') settingsOctoDash: ElementRef;
-    @ViewChild('settingsPlugins') settingsPlugins: ElementRef;
-    @ViewChild('settingsCredits') settingsCredits: ElementRef;
+    @Output() private closeFunction = new EventEmitter<string>();
+    @ViewChild('settingsMain') private settingsMain: ElementRef;
+    @ViewChild('settingsGeneral') private settingsGeneral: ElementRef;
+    @ViewChild('settingsOctoDash') private settingsOctoDash: ElementRef;
+    @ViewChild('settingsPlugins') private settingsPlugins: ElementRef;
+    @ViewChild('settingsCredits') private settingsCredits: ElementRef;
 
     public fadeOutAnimation = false;
     public config: Config;
@@ -30,6 +30,7 @@ export class SettingsComponent implements OnInit {
     public version: string;
     private overwriteNoSave = false;
     private pages = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private ipc: any;
 
     public constructor(
@@ -52,7 +53,7 @@ export class SettingsComponent implements OnInit {
         }
     }
 
-    private getVersion() {
+    private getVersion(): void {
         this.version = this.service.getVersion();
         if (this.version === undefined) {
             setTimeout(this.getVersion.bind(this), 3500);
@@ -60,7 +61,7 @@ export class SettingsComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        setTimeout(() => {
+        setTimeout((): void => {
             this.pages = [
                 this.settingsMain.nativeElement,
                 this.settingsGeneral.nativeElement,
@@ -78,7 +79,7 @@ export class SettingsComponent implements OnInit {
         ) {
             this.fadeOutAnimation = true;
             this.closeFunction.emit();
-            setTimeout(() => {
+            setTimeout((): void => {
                 this.fadeOutAnimation = false;
             }, 800);
         } else {
@@ -95,7 +96,7 @@ export class SettingsComponent implements OnInit {
         this.pages[page].classList.remove('settings__content-inactive');
         this.pages[page].classList.add('settings__content-slidein-' + direction);
 
-        setTimeout(() => {
+        setTimeout((): void => {
             this.pages[current].classList.add('settings__content-inactive');
             this.pages[current].classList.remove('settings__content-slideout-' + direction);
             this.pages[page].classList.remove('settings__content-slidein-' + direction);

@@ -11,16 +11,16 @@ import { NotificationService } from '../notification/notification.service';
     providedIn: 'root',
 })
 export class EnclosureService {
-    httpGETRequest: Subscription;
-    observable: Observable<TemperatureReading>;
+    private httpGETRequest: Subscription;
+    private observable: Observable<TemperatureReading>;
 
-    constructor(
+    public constructor(
         private http: HttpClient,
         private configService: ConfigService,
         private notificationService: NotificationService,
     ) {
-        this.observable = new Observable((observer: Observer<TemperatureReading>) => {
-            timer(850, 30000).subscribe(_ => {
+        this.observable = new Observable((observer: Observer<TemperatureReading>): void => {
+            timer(850, 30000).subscribe((): void => {
                 if (this.httpGETRequest) {
                     this.httpGETRequest.unsubscribe();
                 }
@@ -32,14 +32,14 @@ export class EnclosureService {
                         this.configService.getHTTPHeaders(),
                     )
                     .subscribe(
-                        (data: EnclosurePluginAPI) => {
-                            observer.next({
+                        (data: EnclosurePluginAPI): void => {
+                            observer.next(({
                                 temperature: data.temp_sensor_temp,
                                 humidity: data.temp_sensor_humidity,
                                 unit: data.use_fahrenheit ? '°F' : '°C',
-                            } as TemperatureReading);
+                            } as unknown) as TemperatureReading);
                         },
-                        (error: HttpErrorResponse) => {
+                        (error: HttpErrorResponse): void => {
                             this.notificationService.setError("Can't retrieve enclosure temperature!", error.message);
                         },
                     );
@@ -53,7 +53,8 @@ export class EnclosureService {
 }
 
 interface EnclosurePluginAPI {
-    controlled_io: any;
+    /* eslint-disable camelcase */
+    controlled_io: string;
     temp_sensor_address: string;
     temp_sensor_navbar: boolean;
     temp_sensor_temp: number;

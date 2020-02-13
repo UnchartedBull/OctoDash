@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { JobService } from '../job.service';
@@ -9,7 +9,7 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
     templateUrl: './print-control.component.html',
     styleUrls: ['./print-control.component.scss'],
 })
-export class PrintControlComponent implements OnInit {
+export class PrintControlComponent {
     public showControls = false;
     public controlView = ControlView;
     public view = ControlView.MAIN;
@@ -19,18 +19,16 @@ export class PrintControlComponent implements OnInit {
     public feedrate;
     public flowrate;
 
-    constructor(private jobService: JobService, private printerService: PrinterService) {}
+    public constructor(private jobService: JobService, private printerService: PrinterService) {}
 
-    ngOnInit() {}
-
-    public cancel(event) {
+    public cancel(event): void {
         if (this.showControls) {
             this.stopPropagation(event);
             this.view = ControlView.CANCEL;
         }
     }
 
-    public pause(event) {
+    public pause(event): void {
         if (this.showControls) {
             this.stopPropagation(event);
             this.jobService.pauseJob();
@@ -38,51 +36,51 @@ export class PrintControlComponent implements OnInit {
         }
     }
 
-    public adjust(event) {
+    public adjust(event): void {
         if (this.showControls) {
             this.view = ControlView.ADJUST;
             this.stopPropagation(event);
         }
     }
 
-    public stopPropagation(event) {
+    public stopPropagation(event): void {
         if (this.showControls) {
             event.stopPropagation();
         }
     }
 
-    public showControlOverlay(event?) {
+    public showControlOverlay(event?): void {
         this.stopPropagation(event);
         this.loadData();
         this.view = ControlView.MAIN;
         this.showControls = true;
     }
 
-    public hideControlOverlay(event) {
+    public hideControlOverlay(event): void {
         this.stopPropagation(event);
         this.showControls = false;
     }
 
-    public cancelPrint(event) {
+    public cancelPrint(event): void {
         if (this.showControls && this.view === ControlView.CANCEL) {
             this.jobService.cancelJob();
             this.hideControlOverlay(event);
         }
     }
 
-    public resume(event) {
+    public resume(event): void {
         if (this.showControls && this.view === ControlView.PAUSE) {
             this.jobService.resumeJob();
             this.hideControlOverlay(event);
         }
     }
 
-    public backToControlScreen(event) {
+    public backToControlScreen(event): void {
         this.view = ControlView.MAIN;
         this.stopPropagation(event);
     }
 
-    private loadData() {
+    private loadData(): void {
         this.temperatureHotend = '?';
         this.temperatureHeatbed = '?';
         this.flowrate = 100;
@@ -90,13 +88,13 @@ export class PrintControlComponent implements OnInit {
         this.printerService
             .getObservable()
             .pipe(take(1))
-            .subscribe((printerStatus: PrinterStatusAPI) => {
+            .subscribe((printerStatus: PrinterStatusAPI): void => {
                 this.temperatureHotend = printerStatus.nozzle.set;
                 this.temperatureHeatbed = printerStatus.heatbed.set;
             });
     }
 
-    public changeTemperatureHotend(value: number) {
+    public changeTemperatureHotend(value: number): void {
         this.temperatureHotend += value;
         if (this.temperatureHotend < 0) {
             this.temperatureHotend = 0;
@@ -106,7 +104,7 @@ export class PrintControlComponent implements OnInit {
         }
     }
 
-    public changeTemperatureHeatbed(value: number) {
+    public changeTemperatureHeatbed(value: number): void {
         this.temperatureHeatbed += value;
         if (this.temperatureHeatbed < 0) {
             this.temperatureHeatbed = 0;
@@ -116,7 +114,7 @@ export class PrintControlComponent implements OnInit {
         }
     }
 
-    public changeFeedrate(value: number) {
+    public changeFeedrate(value: number): void {
         this.feedrate += value;
         if (this.feedrate < 50) {
             this.feedrate = 50;
@@ -126,7 +124,7 @@ export class PrintControlComponent implements OnInit {
         }
     }
 
-    public changeFlowrate(value: number) {
+    public changeFlowrate(value: number): void {
         this.flowrate += value;
         if (this.flowrate < 75) {
             this.flowrate = 75;
@@ -136,7 +134,7 @@ export class PrintControlComponent implements OnInit {
         }
     }
 
-    public setAdjustParameters(event) {
+    public setAdjustParameters(event): void {
         this.printerService.setTemperatureHotend(this.temperatureHotend);
         this.printerService.setTemperatureHeatbed(this.temperatureHeatbed);
         this.printerService.setFeedrate(this.feedrate);
