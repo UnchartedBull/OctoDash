@@ -131,7 +131,11 @@ export class ConfigService {
 
     public createConfigFromInput(config: Config): Config {
         const configOut = _.cloneDeep(config);
-        configOut.octoprint.url = `http://${configOut.octoprint.urlSplit.url}:${configOut.octoprint.urlSplit.port}/api/`;
+        if (config.octoprint.urlSplit.port !== null || !isNaN(config.octoprint.urlSplit.port)) {
+            configOut.octoprint.url = `http://${config.octoprint.urlSplit.url}:${config.octoprint.urlSplit.port}/api/`;
+        } else {
+            configOut.octoprint.url = `http://${config.octoprint.urlSplit.url}/api/`;
+        }
         delete configOut.octoprint.urlSplit;
         return configOut;
     }
