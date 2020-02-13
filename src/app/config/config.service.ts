@@ -4,11 +4,12 @@ import Ajv from 'ajv';
 import _ from 'lodash';
 
 import { environment } from '../../environments/environment';
-import { DisplayLayerProgressAPI } from '../plugin-service/layer-progress.service';
 
 declare global {
     interface Window {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         require: any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         process: any;
     }
 }
@@ -17,6 +18,7 @@ declare global {
     providedIn: 'root',
 })
 export class ConfigService {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private store: any | undefined;
     private validator: Ajv.ValidateFunction;
 
@@ -27,7 +29,7 @@ export class ConfigService {
 
     private httpHeaders: object;
 
-    constructor(private http: HttpClient) {
+    public constructor(private http: HttpClient) {
         const ajv = new Ajv({ allErrors: true });
         this.validator = ajv.compile(schema);
         if (window && window.process && window.process.type) {
@@ -38,7 +40,7 @@ export class ConfigService {
             console.warn(
                 'Detected non-electron environment. Fallback to assets/config.json. Any changes are non-persistent!',
             );
-            this.http.get(environment.config).subscribe((config: Config) => {
+            this.http.get(environment.config).subscribe((config: Config): void => {
                 this.initialize(config);
             });
         }
@@ -82,7 +84,7 @@ export class ConfigService {
 
     public getErrors(): string[] {
         const errors = [];
-        this.validator.errors.forEach(error => {
+        this.validator.errors.forEach((error): void => {
             if (error.keyword === 'type') {
                 errors.push(`${error.dataPath} ${error.message}`);
             } else {
@@ -109,14 +111,14 @@ export class ConfigService {
         }
     }
 
-    public updateConfig() {
+    public updateConfig(): void {
         if (window && window.process && window.process.type) {
             this.update = false;
             this.initialize(this.store.get('config'));
         }
     }
 
-    public revertConfigForInput(config: Config) {
+    public revertConfigForInput(config: Config): Config {
         config.octoprint.urlSplit = {
             url: config.octoprint.url.split(':')[1].replace('//', ''),
             port: parseInt(config.octoprint.url.split(':')[2].replace('/api/', ''), 10),
@@ -127,7 +129,7 @@ export class ConfigService {
         return config;
     }
 
-    public createConfigFromInput(config: Config) {
+    public createConfigFromInput(config: Config): Config {
         const configOut = _.cloneDeep(config);
         configOut.octoprint.url = `http://${configOut.octoprint.urlSplit.url}:${configOut.octoprint.urlSplit.port}/api/`;
         delete configOut.octoprint.urlSplit;
@@ -146,7 +148,7 @@ export class ConfigService {
         return this.httpHeaders;
     }
 
-    public getURL(path: string) {
+    public getURL(path: string): string {
         return this.config.octoprint.url + path;
     }
 

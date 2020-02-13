@@ -1,9 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { Component } from '@angular/core';
 
 import { AppService } from '../app.service';
-import { Job, JobService } from '../job.service';
+import { JobService } from '../job.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -13,9 +11,9 @@ import { Job, JobService } from '../job.service';
 export class MainScreenComponent {
     public printing = false;
 
-    constructor(private jobService: JobService, private service: AppService) {}
+    public constructor(private jobService: JobService, private service: AppService) {}
 
-    public isPrinting() {
+    public isPrinting(): boolean {
         return this.jobService.isPrinting();
     }
 

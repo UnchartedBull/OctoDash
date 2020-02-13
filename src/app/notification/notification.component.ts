@@ -22,20 +22,20 @@ export class NotificationComponent implements OnDestroy {
         this.subscriptions.add(
             this.notificationService
                 .getObservable()
-                .subscribe((message: Notification) => this.setNotification(message)),
+                .subscribe((message: Notification): void => this.setNotification(message)),
         );
     }
 
-    public hideNotification() {
+    public hideNotification(): void {
         this.show = false;
     }
 
-    public setNotification(notification: Notification) {
+    public setNotification(notification: Notification): void {
         this.notification = notification;
         this.show = true;
     }
 
-    public ngOnDestroy() {
+    public ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 }

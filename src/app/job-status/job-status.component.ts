@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 
 import { AppService } from '../app.service';
 import { Job, JobService } from '../job.service';
-import { NotificationService } from '../notification/notification.service';
 
 @Component({
     selector: 'app-job-status',
@@ -14,13 +13,13 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription = new Subscription();
     public job: Job;
 
-    constructor(private jobService: JobService, private service: AppService) {}
+    public constructor(private jobService: JobService, private service: AppService) {}
 
-    ngOnInit() {
-        this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job) => (this.job = job)));
+    public ngOnInit(): void {
+        this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 
@@ -38,7 +37,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
 
     public startJob(): void {
         this.jobService.startJob();
-        setTimeout(() => {
+        setTimeout((): void => {
             this.service.setLoadedFile(false);
         }, 5000);
     }

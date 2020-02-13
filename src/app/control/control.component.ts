@@ -1,4 +1,4 @@
-import { Component, SecurityContext } from '@angular/core';
+import { Component } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -19,7 +19,7 @@ export class ControlComponent {
     public iFrameURL: SafeResourceUrl = 'about:blank';
     public actionToConfirm: ActionToConfirm;
 
-    constructor(
+    public constructor(
         private printerService: PrinterService,
         private octoprintService: OctoprintService,
         private configService: ConfigService,
@@ -38,7 +38,7 @@ export class ControlComponent {
         this.printerService.jog(axis === 'x' ? distance : 0, axis === 'y' ? distance : 0, axis === 'z' ? distance : 0);
     }
 
-    public doAction(command: string, exit: boolean, confirm: boolean) {
+    public doAction(command: string, exit: boolean, confirm: boolean): void {
         console.log(command, exit, confirm);
         if (confirm) {
             this.actionToConfirm = {
@@ -53,14 +53,14 @@ export class ControlComponent {
         }
     }
 
-    public doActionConfirm() {
+    public doActionConfirm(): void {
         this.executeGCode(this.actionToConfirm.command);
         if (this.actionToConfirm.exit) {
             this.router.navigate(['/main-screen']);
         }
     }
 
-    public doActionNoConfirm() {
+    public doActionNoConfirm(): void {
         this.actionToConfirm = null;
     }
 
@@ -140,7 +140,7 @@ export class ControlComponent {
         this.iFrameURL = url;
         const iFrameDOM = document.getElementById('iFrame');
         iFrameDOM.style.display = 'block';
-        setTimeout(() => {
+        setTimeout((): void => {
             iFrameDOM.style.opacity = '1';
         }, 50);
     }
@@ -148,7 +148,7 @@ export class ControlComponent {
     public hideIFrame(): void {
         const iFrameDOM = document.getElementById('iFrame');
         iFrameDOM.style.opacity = '0';
-        setTimeout(() => {
+        setTimeout((): void => {
             iFrameDOM.style.display = 'none';
             this.iFrameURL = 'about:blank';
         }, 500);

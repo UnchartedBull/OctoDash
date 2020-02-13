@@ -35,28 +35,28 @@ export class FilesComponent {
             .then((data): void => {
                 this.fileDetail = data;
             })
-            .catch((err): void => {
+            .catch(({}): void => {
                 this.fileDetail = ({ name: 'error' } as unknown) as File;
             });
         const fileDOMElement = document.getElementById('fileDetailView');
         fileDOMElement.style.display = 'block';
-        setTimeout(() => {
+        setTimeout((): void => {
             fileDOMElement.style.opacity = '1';
         }, 50);
     }
 
     public openFolder(folderPath: string): void {
-        setTimeout(() => {
+        setTimeout((): void => {
             this.showLoader();
             this.folderContent = [];
             this.filesService
                 .getFolder(folderPath)
-                .then(data => {
+                .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
                     this.spinner.hide();
                 })
-                .catch(err => {
+                .catch(({}): void => {
                     this.folderContent = null;
                     this.currentFolder = folderPath;
                     this.spinner.hide();
@@ -67,14 +67,14 @@ export class FilesComponent {
     public closeDetails(): void {
         const fileDOMElement = document.getElementById('fileDetailView');
         fileDOMElement.style.opacity = '0';
-        setTimeout(() => {
+        setTimeout((): void => {
             fileDOMElement.style.display = 'none';
             this.fileDetail = null;
         }, 500);
     }
 
     public loadFile(filePath: string): void {
-        setTimeout(() => {
+        setTimeout((): void => {
             this.filesService.loadFile(filePath);
             this.service.setLoadedFile(true);
             this.jobService.deleteJobInformation();
@@ -83,14 +83,14 @@ export class FilesComponent {
     }
 
     public printFile(filePath: string): void {
-        setTimeout(() => {
+        setTimeout((): void => {
             this.filesService.printFile(filePath);
             this.router.navigate(['/main-screen']);
         }, 300);
     }
 
     public deleteFile(filePath: string): void {
-        setTimeout(() => {
+        setTimeout((): void => {
             this.filesService.deleteFile(filePath);
             this.closeDetails();
             this.openFolder(this.currentFolder);

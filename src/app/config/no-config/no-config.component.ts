@@ -136,11 +136,11 @@ export class NoConfigComponent implements OnInit {
             }),
         };
         this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
-            () => {
+            (): void => {
                 this.octoprintConnection = true;
                 this.saveConfig();
             },
-            (error: HttpErrorResponse) => {
+            (error: HttpErrorResponse): void => {
                 this.octoprintConnection = false;
                 this.octoprintConnectionError = error.message;
             },

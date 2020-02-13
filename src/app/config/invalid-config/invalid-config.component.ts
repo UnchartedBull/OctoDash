@@ -8,8 +8,9 @@ import { ConfigService } from '../config.service';
     styleUrls: ['./invalid-config.component.scss'],
 })
 export class InvalidConfigComponent implements OnInit {
-    errors: string[];
-    constructor(private configService: ConfigService) {}
+    public errors: string[];
+
+    public constructor(private configService: ConfigService) {}
 
     public ngOnInit(): void {
         this.errors = this.configService.getErrors();

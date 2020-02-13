@@ -10,39 +10,39 @@ export class NotificationService {
     private observer: Observer<Notification>;
     private hideNotifications = false;
 
-    constructor() {
-        this.observable = new Observable((observer: Observer<Notification>) => {
+    public constructor() {
+        this.observable = new Observable((observer: Observer<Notification>): void => {
             this.observer = observer;
         }).pipe(shareReplay(1));
     }
 
-    enableNotifications() {
+    public enableNotifications(): void {
         // console.clear();
         this.hideNotifications = false;
     }
 
-    disableNotifications() {
+    public disableNotifications(): void {
         // console.clear();
         this.hideNotifications = true;
     }
 
-    setError(heading: string, text: string) {
+    public setError(heading: string, text: string): void {
         if (!this.hideNotifications) {
             this.observer.next({ heading, text, type: 'error' });
         }
     }
 
-    setWarning(heading: string, text: string) {
+    public setWarning(heading: string, text: string): void {
         if (!this.hideNotifications) {
             this.observer.next({ heading, text, type: 'warn' });
         }
     }
 
-    setUpdate(heading: string, text: string) {
+    public setUpdate(heading: string, text: string): void {
         this.observer.next({ heading, text, type: 'update' });
     }
 
-    getObservable() {
+    public getObservable(): Observable<Notification> {
         return this.observable;
     }
 }

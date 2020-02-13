@@ -12,23 +12,25 @@ export class LayerProgressComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription = new Subscription();
     public layerProgress: LayerProgress;
 
-    constructor(private displayLayerProgressService: LayerProgressService) {
+    public constructor(private displayLayerProgressService: LayerProgressService) {
         this.layerProgress = {
             current: 0,
             total: 0,
         };
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.subscriptions.add(
-            this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
-                this.layerProgress.current = layerProgress.current;
-                this.layerProgress.total = layerProgress.total;
-            }),
+            this.displayLayerProgressService
+                .getObservable()
+                .subscribe((layerProgress: DisplayLayerProgressAPI): void => {
+                    this.layerProgress.current = layerProgress.current;
+                    this.layerProgress.total = layerProgress.total;
+                }),
         );
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy(): void {
         this.subscriptions.unsubscribe();
     }
 }

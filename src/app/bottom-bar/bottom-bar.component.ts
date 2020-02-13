@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
@@ -15,14 +15,14 @@ export class BottomBarComponent implements OnDestroy {
     public printer: Printer;
     public enclosureTemperature: TemperatureReading;
 
-    constructor(
+    public constructor(
         private printerService: PrinterService,
         private configService: ConfigService,
         private enclosureService: EnclosureService,
     ) {
         if (this.configService.getAmbientTemperatureSensorName() !== null) {
             this.subscriptions.add(
-                this.enclosureService.getObservable().subscribe((temperatureReading: TemperatureReading) => {
+                this.enclosureService.getObservable().subscribe((temperatureReading: TemperatureReading): void => {
                     this.enclosureTemperature = temperatureReading;
                 }),
             );
@@ -34,7 +34,7 @@ export class BottomBarComponent implements OnDestroy {
             status: 'connecting ...',
         };
         this.subscriptions.add(
-            this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI) => {
+            this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
                 this.printer.status = printerStatus.status;
             }),
         );
