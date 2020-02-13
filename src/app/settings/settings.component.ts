@@ -23,11 +23,19 @@ export class SettingsComponent implements OnInit {
   public version: string;
   private overwriteNoSave = false;
   private pages = [];
+  private ipc: any;
 
   public constructor(private configService: ConfigService, private notificationService: NotificationService, private service: AppService) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
     this.getVersion();
+    if (window.require) {
+      try {
+        this.ipc = window.require('electron').ipcRenderer;
+      } catch (e) {
+        this.notificationService.setError('Can\'t connect to backend', 'Please open an issue for GitHub as this shouldn\'t happen.');
+      }
+    }
   }
 
   private getVersion() {
@@ -82,6 +90,6 @@ export class SettingsComponent implements OnInit {
     this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
-    window.location.reload();
+    this.ipc.send('reload', '');
   }
 }

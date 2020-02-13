@@ -53,13 +53,13 @@
                                 <td style="width: 25.6vw; display: block">
                                     <label for="xySpeed" class="settings__input-label">XY-Speed
                                         <span>(mm/s)</span></label>
-                                    <input type="text" id="xySpeed" class="settings__input" name="xySpeed"
+                                    <input type="number" id="xySpeed" class="settings__input" name="xySpeed"
                                         style="width: 19vw" [(ngModel)]="config.printer.xySpeed" required>
                                 </td>
                                 <td>
                                     <label for="zSpeed" class="settings__input-label">Z-Speed
                                         <span>(mm/s)</span></label>
-                                    <input type="text" id="zSpeed" class="settings__input" name="zSpeed"
+                                    <input type="number" id="zSpeed" class="settings__input" name="zSpeed"
                                         style="width: 19vw" [(ngModel)]="config.printer.zSpeed" required>
                                 </td>
                             </tr>
@@ -72,14 +72,14 @@
                                 <td style="width: 25.6vw; display: block">
                                     <label for="filament-thickness" class="settings__input-label">Thickness
                                         <span>(mm)</span></label>
-                                    <input type="text" id="filament-thickness" class="settings__input"
+                                    <input type="number" id="filament-thickness" class="settings__input"
                                         name="filament-thickness" style="width: 19vw"
                                         [(ngModel)]="config.filament.thickness" required>
                                 </td>
                                 <td>
                                     <label for="filament-density" class="settings__input-label">Density
                                         <span>(g/cm³)</span></label>
-                                    <input type="text" id="filament-density" class="settings__input"
+                                    <input type="number" id="filament-density" class="settings__input"
                                         name="filament-density" style="width: 19vw"
                                         [(ngModel)]="config.filament.density" required>
                                 </td>
@@ -88,14 +88,14 @@
                                 <td style="width: 25.6vw; display: block">
                                     <label for="filament-feed-length" class="settings__input-label">Bowden Length
                                         <span>(mm)</span></label>
-                                    <input type="text" id="filament-feed-length" class="settings__input"
+                                    <input type="number" id="filament-feed-length" class="settings__input"
                                         name="filament-feed-length" style="width: 19vw"
                                         [(ngModel)]="config.filament.feedLength" required>
                                 </td>
                                 <td>
                                     <label for="filament-feed-speed" class="settings__input-label">Feed Speed
                                         <span>(mm/sec)</span></label>
-                                    <input type="text" id="filament-feed-speed" class="settings__input"
+                                    <input type="number" id="filament-feed-speed" class="settings__input"
                                         name="filament-feed-speed" style="width: 19vw"
                                         [(ngModel)]="config.filament.feedSpeed" required>
                                 </td>

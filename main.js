@@ -57,6 +57,7 @@ function createWindow() {
 
     setTimeout(sendVersionInfo, 30 * 1000);
     activateScreenSleepListener();
+    activateReloadListener();
 
     window.on('closed', () => {
         window = null;
@@ -70,6 +71,12 @@ function activateScreenSleepListener() {
 
     ipcMain.on("screenWakeup", () => {
         exec('xset -dpms')
+    })
+}
+
+function activateReloadListener() {
+    ipcMain.on("reload", () => {
+        window.reload()
     })
 }
 
