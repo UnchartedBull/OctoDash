@@ -1,28 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { JobService, Job } from '../job.service';
-import { AppService } from '../app.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
+import { AppService } from '../app.service';
+import { Job, JobService } from '../job.service';
+
 @Component({
-  selector: 'app-main-screen',
-  templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.scss']
+    selector: 'app-main-screen',
+    templateUrl: './main-screen.component.html',
+    styleUrls: ['./main-screen.component.scss'],
 })
-
 export class MainScreenComponent {
+    public printing = false;
 
-  public printing = false;
+    constructor(private jobService: JobService, private service: AppService) {}
 
+    public isPrinting() {
+        return this.jobService.isPrinting();
+    }
 
-  constructor(private jobService: JobService, private service: AppService) {
-  }
-
-  public isPrinting() {
-    return this.jobService.isPrinting();
-  }
-
-  public isFileLoaded(): boolean {
-    return this.service.getLoadedFile();
-  }
+    public isFileLoaded(): boolean {
+        return this.service.getLoadedFile();
+    }
 }

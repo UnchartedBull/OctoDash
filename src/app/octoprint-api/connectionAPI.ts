@@ -11,9 +11,9 @@ interface OctoprintConnectionCurrentAPI {
 }
 
 interface OctoprintConnectionOptionsAPI {
-    ports: Array<string>;
-    baudrates: Array<number>;
-    printerProfiles: Array<object>;
+    ports: string[];
+    baudrates: number[];
+    printerProfiles: object[];
     portPreference: string;
     baudratePreference: string;
     printerProfilePreference: string;

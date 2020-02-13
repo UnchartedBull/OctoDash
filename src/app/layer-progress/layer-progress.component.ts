@@ -1,38 +1,39 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LayerProgressService, DisplayLayerProgressAPI } from '../plugin-service/layer-progress.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
+
 @Component({
-  selector: 'app-layer-progress',
-  templateUrl: './layer-progress.component.html',
-  styleUrls: ['./layer-progress.component.scss']
+    selector: 'app-layer-progress',
+    templateUrl: './layer-progress.component.html',
+    styleUrls: ['./layer-progress.component.scss'],
 })
 export class LayerProgressComponent implements OnInit, OnDestroy {
+    private subscriptions: Subscription = new Subscription();
+    public layerProgress: LayerProgress;
 
-  private subscriptions: Subscription = new Subscription();
-  public layerProgress: LayerProgress;
+    constructor(private displayLayerProgressService: LayerProgressService) {
+        this.layerProgress = {
+            current: 0,
+            total: 0,
+        };
+    }
 
-  constructor(private displayLayerProgressService: LayerProgressService) {
-    this.layerProgress = {
-      current: 0,
-      total: 0
-    };
-  }
+    ngOnInit() {
+        this.subscriptions.add(
+            this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
+                this.layerProgress.current = layerProgress.current;
+                this.layerProgress.total = layerProgress.total;
+            }),
+        );
+    }
 
-  ngOnInit() {
-    this.subscriptions.add(this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI) => {
-      this.layerProgress.current = layerProgress.current;
-      this.layerProgress.total = layerProgress.total;
-    }));
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
 }
 
 export interface LayerProgress {
-  current: number;
-  total: number;
+    current: number;
+    total: number;
 }
