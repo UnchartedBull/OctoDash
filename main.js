@@ -1,58 +1,56 @@
-const {
-    app,
-    BrowserWindow
-} = require("electron");
-const url = require('url')
-const path = require('path')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { app, BrowserWindow } = require('electron');
+const url = require('url');
+const path = require('path');
 const Store = require('electron-store');
+
 const store = new Store();
 const exec = require('child_process').exec;
-const {
-    ipcMain
-} = require('electron')
+const { ipcMain } = require('electron');
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
-const big = args.some(val => val === '--big')
+const big = args.some(val => val === '--big');
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 let window;
 
 function createWindow() {
-    config = store.get("config");
-    store.onDidChange("config", (newValue) => {
-        config = newValue
-    })
+    config = store.get('config');
+    store.onDidChange('config', newValue => {
+        config = newValue;
+    });
 
-    const {
-        screen
-    } = require('electron')
+    const { screen } = require('electron');
     const mainScreen = screen.getPrimaryDisplay();
     window = new BrowserWindow({
-        width: dev ? big ? 1400 : 1080 : mainScreen.size.width,
-        height: dev ? big ? 502 : 342 : mainScreen.size.height,
+        width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
+        height: dev ? (big ? 502 : 342) : mainScreen.size.height,
         frame: dev ? true : false,
         backgroundColor: '#353b48',
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            webSecurity: false,
         },
-        icon: path.join(__dirname, 'src/assets/icon.png')
-    })
+        icon: path.join(__dirname, 'src/assets/icon.png'),
+    });
 
     if (dev) {
         require('electron-reload')(__dirname, {
-            electron: require(`${__dirname}/node_modules/electron`)
+            electron: require(`${__dirname}/node_modules/electron`),
         });
         window.loadURL('http://localhost:4200');
         window.webContents.openDevTools();
     } else {
-        window.loadURL(url.format({
-            pathname: path.join(__dirname, 'dist/index.html'),
-            protocol: 'file:',
-            slashes: true
-        }));
-        window.setFullScreen(true)
+        window.loadURL(
+            url.format({
+                pathname: path.join(__dirname, 'dist/index.html'),
+                protocol: 'file:',
+                slashes: true,
+            }),
+        );
+        window.setFullScreen(true);
     }
 
     setTimeout(sendVersionInfo, 30 * 1000);
@@ -65,34 +63,40 @@ function createWindow() {
 }
 
 function activateScreenSleepListener() {
-    ipcMain.on("screenSleep", () => {
-        exec('xset dpms force standby')
-    })
+    ipcMain.on('screenSleep', () => {
+        exec('xset dpms force standby');
+    });
 
-    ipcMain.on("screenWakeup", () => {
-        exec('xset -dpms')
-    })
+    ipcMain.on('screenWakeup', () => {
+        exec('xset -dpms');
+    });
 }
 
 function activateReloadListener() {
-    ipcMain.on("reload", () => {
-        window.reload()
-    })
+    ipcMain.on('reload', () => {
+        window.loadURL(
+            url.format({
+                pathname: path.join(__dirname, 'dist/index.html'),
+                protocol: 'file:',
+                slashes: true,
+            }),
+        );
+    });
 }
 
 function sendVersionInfo() {
-    window.webContents.send("versionInformation", {
-        version: app.getVersion()
-    })
+    window.webContents.send('versionInformation', {
+        version: app.getVersion(),
+    });
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
-app.on("window-all-closed", () => {
-    app.quit()
+app.on('window-all-closed', () => {
+    app.quit();
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
     if (window === null) {
         createWindow();
     }
