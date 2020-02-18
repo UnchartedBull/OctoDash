@@ -17,7 +17,7 @@ jobs:
     - stage: lint
       if: branch = master
       name: "Linting Application ..."
-      script: ng lint
+      script: npm run lint
     - stage: build
       if: type = push AND branch != master OR type = pull_request
       name: "Building Application ..."
