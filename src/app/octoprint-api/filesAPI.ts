@@ -10,7 +10,7 @@ export interface OctoprintFilesAPI {
     prints: OctoprintPrints;
     refs: OctoprintRefs;
     size: number;
-    statistics?: any;
+    statistics?: object;
     type: string;
     typePath: [string];
 }

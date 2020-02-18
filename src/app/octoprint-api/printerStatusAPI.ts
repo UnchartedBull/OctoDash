@@ -12,7 +12,7 @@ interface OctoprintTemperature {
     tool4?: OctoprintTemperatureData;
     tool5?: OctoprintTemperatureData;
     bed?: OctoprintTemperatureData;
-    [key: string]: any;
+    [key: string]: OctoprintTemperatureData;
 }
 
 interface OctoprintTemperatureData {

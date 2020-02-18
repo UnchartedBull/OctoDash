@@ -1,27 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-main-menu',
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.scss']
+    selector: 'app-main-menu',
+    templateUrl: './main-menu.component.html',
+    styleUrls: ['./main-menu.component.scss'],
 })
-export class MainMenuComponent implements OnInit {
+export class MainMenuComponent {
+    public settings = false;
 
-  public settings = false;
+    public constructor() {}
 
-  public showSettings() {
-    this.settings = true;
-  }
+    public showSettings(): void {
+        this.settings = true;
+    }
 
-  public hideSettings() {
-    setTimeout(() => {
-      this.settings = false;
-    }, 600);
-  }
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    public hideSettings(): void {
+        setTimeout((): void => {
+            this.settings = false;
+        }, 600);
+    }
 }

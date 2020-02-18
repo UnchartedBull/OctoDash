@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-filament',
-  templateUrl: './filament.component.html',
-  styleUrls: ['./filament.component.scss']
+    selector: 'app-filament',
+    templateUrl: './filament.component.html',
+    styleUrls: ['./filament.component.scss'],
 })
-export class FilamentComponent implements OnInit {
-
-  constructor() { }
-
-  public ngOnInit(): void {
-  }
+export class FilamentComponent {
+    public constructor() {}
 }

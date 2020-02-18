@@ -11,3 +11,9 @@ trim_trailing_whitespace = true
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[{*.ts,*.js,*.json}]
+indent_size = 4
+
+[package.json]
+indent_size = 2
