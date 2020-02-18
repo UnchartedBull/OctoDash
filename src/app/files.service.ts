@@ -73,9 +73,6 @@ export class FilesService {
                             }
                         });
                         data = null;
-                        folder.sort((a, b): number =>
-                            a.type === b.type ? (a.name > b.name ? 1 : -1) : a.type === 'folder' ? -1 : 1,
-                        );
 
                         resolve(folder);
                     },

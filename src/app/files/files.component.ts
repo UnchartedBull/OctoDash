@@ -64,6 +64,40 @@ export class FilesComponent {
         }, 300);
     }
 
+    public sortFolder(by: 'name' | 'date' | 'size', order: 'asc' | 'dsc'): void {
+        switch (by) {
+            case 'name': {
+                this.folderContent.sort((a, b): number =>
+                    a.type === b.type ? (a.name > b.name ? 1 : -1) : a.type === 'folder' ? -1 : 1,
+                );
+            }
+            case 'date': {
+                this.sortFolder('name', order);
+                this.folderContent.sort((a, b): number => {
+                    if (a.type === b.type && (a as File).type) {
+                        const aFile = (a as unknown) as File;
+                        const bFile = (b as unknown) as File;
+                        return aFile.date > bFile.date ? 1 : -1;
+                    } else {
+                        return 1;
+                    }
+                });
+            }
+            case 'size': {
+                this.sortFolder('name', order);
+                this.folderContent.sort((a, b): number => {
+                    if (a.type === b.type && (a as File).type) {
+                        const aFile = (a as unknown) as File;
+                        const bFile = (b as unknown) as File;
+                        return aFile.size > bFile.size ? 1 : -1;
+                    } else {
+                        return 1;
+                    }
+                });
+            }
+        }
+    }
+
     public closeDetails(): void {
         const fileDOMElement = document.getElementById('fileDetailView');
         fileDOMElement.style.opacity = '0';
