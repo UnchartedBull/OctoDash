@@ -64,8 +64,7 @@ export class FilesComponent {
                     this.sortFolder(this.sortingAttribute, this.sortingOrder);
                     this.spinner.hide();
                 })
-                .catch((err): void => {
-                    console.error(err);
+                .catch((): void => {
                     this.folderContent = null;
                     this.currentFolder = folderPath;
                     this.spinner.hide();

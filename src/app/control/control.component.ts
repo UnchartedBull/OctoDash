@@ -39,7 +39,6 @@ export class ControlComponent {
     }
 
     public doAction(command: string, exit: boolean, confirm: boolean): void {
-        console.log(command, exit, confirm);
         if (confirm) {
             this.actionToConfirm = {
                 command,
@@ -57,6 +56,8 @@ export class ControlComponent {
         this.executeGCode(this.actionToConfirm.command);
         if (this.actionToConfirm.exit) {
             this.router.navigate(['/main-screen']);
+        } else {
+            this.actionToConfirm = null;
         }
     }
 
