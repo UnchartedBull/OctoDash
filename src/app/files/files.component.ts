@@ -54,9 +54,11 @@ export class FilesComponent {
                 .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
+                    this.sortFolder('name', 'dsc');
                     this.spinner.hide();
                 })
-                .catch(({}): void => {
+                .catch((err): void => {
+                    console.error(err);
                     this.folderContent = null;
                     this.currentFolder = folderPath;
                     this.spinner.hide();
@@ -68,8 +70,17 @@ export class FilesComponent {
         switch (by) {
             case 'name': {
                 this.folderContent.sort((a, b): number =>
-                    a.type === b.type ? (a.name > b.name ? 1 : -1) : a.type === 'folder' ? -1 : 1,
+                    a.type === b.type
+                        ? (order === 'asc'
+                            ? a.name > b.name
+                            : a.name < b.name)
+                            ? 1
+                            : -1
+                        : a.type === 'folder'
+                        ? -1
+                        : 1,
                 );
+                break;
             }
             case 'date': {
                 this.sortFolder('name', order);
@@ -82,6 +93,7 @@ export class FilesComponent {
                         return 1;
                     }
                 });
+                break;
             }
             case 'size': {
                 this.sortFolder('name', order);
@@ -94,6 +106,7 @@ export class FilesComponent {
                         return 1;
                     }
                 });
+                break;
             }
         }
     }
