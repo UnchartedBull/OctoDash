@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AppService } from '../app.service';
+import { ConfigService } from '../config/config.service';
 import { File, FilesService, Folder } from '../files.service';
 import { JobService } from '../job.service';
 
@@ -22,6 +23,7 @@ export class FilesComponent {
         private service: AppService,
         private router: Router,
         private jobService: JobService,
+        private configService: ConfigService,
     ) {
         this.showLoader();
         this.folderContent = [];
@@ -54,7 +56,10 @@ export class FilesComponent {
                 .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
-                    this.sortFolder('size', 'asc');
+                    this.sortFolder(
+                        this.configService.getDefaultSortingAttribute(),
+                        this.configService.getDefaultSortingOrder(),
+                    );
                     this.spinner.hide();
                 })
                 .catch((err): void => {
