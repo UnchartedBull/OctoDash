@@ -16,6 +16,9 @@ export class FilesComponent {
     public currentFolder: string;
     public folderContent: (File | Folder)[];
     public fileDetail: File;
+    public sortingAttribute: 'name' | 'date' | 'size';
+    public sortingOrder: 'asc' | 'dsc';
+    public showSorting: boolean = false;
 
     public constructor(
         private filesService: FilesService,
@@ -28,6 +31,8 @@ export class FilesComponent {
         this.showLoader();
         this.folderContent = [];
         this.currentFolder = '/';
+        this.sortingAttribute = this.configService.getDefaultSortingAttribute();
+        this.sortingOrder = this.configService.getDefaultSortingOrder();
         this.openFolder(this.currentFolder);
     }
 
@@ -56,10 +61,7 @@ export class FilesComponent {
                 .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
-                    this.sortFolder(
-                        this.configService.getDefaultSortingAttribute(),
-                        this.configService.getDefaultSortingOrder(),
-                    );
+                    this.sortFolder(this.sortingAttribute, this.sortingOrder);
                     this.spinner.hide();
                 })
                 .catch((err): void => {
@@ -71,7 +73,7 @@ export class FilesComponent {
         }, 300);
     }
 
-    public sortFolder(by: 'name' | 'date' | 'size', order: 'asc' | 'dsc'): void {
+    public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
         switch (by) {
             case 'name': {
                 this.folderContent.sort((a, b): number =>
@@ -122,6 +124,24 @@ export class FilesComponent {
         setTimeout((): void => {
             fileDOMElement.style.display = 'none';
             this.fileDetail = null;
+        }, 500);
+    }
+
+    public openSorting(): void {
+        this.showSorting = true;
+        setTimeout((): void => {
+            const sortingDOMElement = document.getElementById('sortingView');
+            sortingDOMElement.style.opacity = '1';
+        }, 50);
+    }
+
+    public closeSorting(): void {
+        const sortingDOMElement = document.getElementById('sortingView');
+        sortingDOMElement.style.opacity = '0';
+        this.sortFolder(this.sortingAttribute, this.sortingOrder);
+        setTimeout((): void => {
+            sortingDOMElement.style.display = 'none';
+            this.showSorting = false;
         }, 500);
     }
 
