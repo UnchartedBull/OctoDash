@@ -54,7 +54,7 @@ export class FilesComponent {
                 .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
-                    this.sortFolder('name', 'dsc');
+                    this.sortFolder('size', 'asc');
                     this.spinner.hide();
                 })
                 .catch((err): void => {
@@ -85,12 +85,12 @@ export class FilesComponent {
             case 'date': {
                 this.sortFolder('name', order);
                 this.folderContent.sort((a, b): number => {
-                    if (a.type === b.type && (a as File).type) {
+                    if (a.type === b.type && a.type === 'file') {
                         const aFile = (a as unknown) as File;
                         const bFile = (b as unknown) as File;
-                        return aFile.date > bFile.date ? 1 : -1;
+                        return (order === 'asc' ? aFile.date > bFile.date : aFile.date < bFile.date) ? 1 : -1;
                     } else {
-                        return 1;
+                        return a.type === 'folder' ? -1 : 1;
                     }
                 });
                 break;
@@ -101,7 +101,7 @@ export class FilesComponent {
                     if (a.type === b.type && (a as File).type) {
                         const aFile = (a as unknown) as File;
                         const bFile = (b as unknown) as File;
-                        return aFile.size > bFile.size ? 1 : -1;
+                        return (order === 'asc' ? aFile.size > bFile.size : aFile.size < bFile.size) ? 1 : -1;
                     } else {
                         return 1;
                     }
