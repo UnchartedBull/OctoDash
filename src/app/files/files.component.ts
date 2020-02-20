@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AppService } from '../app.service';
+import { ConfigService } from '../config/config.service';
 import { File, FilesService, Folder } from '../files.service';
 import { JobService } from '../job.service';
 
@@ -15,6 +16,9 @@ export class FilesComponent {
     public currentFolder: string;
     public folderContent: (File | Folder)[];
     public fileDetail: File;
+    public sortingAttribute: 'name' | 'date' | 'size';
+    public sortingOrder: 'asc' | 'dsc';
+    public showSorting: boolean = false;
 
     public constructor(
         private filesService: FilesService,
@@ -22,10 +26,13 @@ export class FilesComponent {
         private service: AppService,
         private router: Router,
         private jobService: JobService,
+        private configService: ConfigService,
     ) {
         this.showLoader();
         this.folderContent = [];
         this.currentFolder = '/';
+        this.sortingAttribute = this.configService.getDefaultSortingAttribute();
+        this.sortingOrder = this.configService.getDefaultSortingOrder();
         this.openFolder(this.currentFolder);
     }
 
@@ -54,14 +61,61 @@ export class FilesComponent {
                 .then((data): void => {
                     this.folderContent = data;
                     this.currentFolder = folderPath;
+                    this.sortFolder(this.sortingAttribute, this.sortingOrder);
                     this.spinner.hide();
                 })
-                .catch(({}): void => {
+                .catch((err): void => {
+                    console.error(err);
                     this.folderContent = null;
                     this.currentFolder = folderPath;
                     this.spinner.hide();
                 });
         }, 300);
+    }
+
+    public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
+        switch (by) {
+            case 'name': {
+                this.folderContent.sort((a, b): number =>
+                    a.type === b.type
+                        ? (order === 'asc'
+                            ? a.name > b.name
+                            : a.name < b.name)
+                            ? 1
+                            : -1
+                        : a.type === 'folder'
+                        ? -1
+                        : 1,
+                );
+                break;
+            }
+            case 'date': {
+                this.sortFolder('name', order);
+                this.folderContent.sort((a, b): number => {
+                    if (a.type === b.type && a.type === 'file') {
+                        const aFile = (a as unknown) as File;
+                        const bFile = (b as unknown) as File;
+                        return (order === 'asc' ? aFile.date > bFile.date : aFile.date < bFile.date) ? 1 : -1;
+                    } else {
+                        return a.type === 'folder' ? -1 : 1;
+                    }
+                });
+                break;
+            }
+            case 'size': {
+                this.sortFolder('name', order);
+                this.folderContent.sort((a, b): number => {
+                    if (a.type === b.type && (a as File).type) {
+                        const aFile = (a as unknown) as File;
+                        const bFile = (b as unknown) as File;
+                        return (order === 'asc' ? aFile.size > bFile.size : aFile.size < bFile.size) ? 1 : -1;
+                    } else {
+                        return 1;
+                    }
+                });
+                break;
+            }
+        }
     }
 
     public closeDetails(): void {
@@ -70,6 +124,24 @@ export class FilesComponent {
         setTimeout((): void => {
             fileDOMElement.style.display = 'none';
             this.fileDetail = null;
+        }, 500);
+    }
+
+    public openSorting(): void {
+        this.showSorting = true;
+        setTimeout((): void => {
+            const sortingDOMElement = document.getElementById('sortingView');
+            sortingDOMElement.style.opacity = '1';
+        }, 50);
+    }
+
+    public closeSorting(): void {
+        const sortingDOMElement = document.getElementById('sortingView');
+        sortingDOMElement.style.opacity = '0';
+        this.sortFolder(this.sortingAttribute, this.sortingOrder);
+        setTimeout((): void => {
+            sortingDOMElement.style.display = 'none';
+            this.showSorting = false;
         }, 500);
     }
 

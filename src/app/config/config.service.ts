@@ -211,6 +211,14 @@ export class ConfigService {
     public getFilamentDensity(): number {
         return this.config.filament.density;
     }
+
+    public getDefaultSortingAttribute(): 'name' | 'date' | 'size' {
+        return this.config.octodash.fileSorting.attribute;
+    }
+
+    public getDefaultSortingOrder(): 'asc' | 'dsc' {
+        return this.config.octodash.fileSorting.order;
+    }
 }
 
 export interface Config {
@@ -283,8 +291,8 @@ interface CustomAction {
 }
 
 interface FileSorting {
-    attribute: string;
-    order: string;
+    attribute: 'name' | 'date' | 'size';
+    order: 'asc' | 'dsc';
 }
 
 const schema = {

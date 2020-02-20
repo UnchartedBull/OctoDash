@@ -6,8 +6,8 @@
         <td class="top-bar__center">
             <img src="assets/folder.svg" class="top-bar__center-icon">
         </td>
-        <td class="top-bar__next" (click)="openFolder(currentFolder)" matRipple [matRippleUnbounded]="false">
-            refresh<img src="assets/refresh.svg" class="top-bar__next-icon">
+        <td class="top-bar__next" (click)="openSorting()" matRipple [matRippleUnbounded]="false">
+            sort<img src="assets/sort.svg" class="top-bar__next-icon">
         </td>
     </tr>
 </table>
@@ -105,5 +105,57 @@
     <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
         <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
         can't load file.
+    </div>
+</div>
+
+<div class="sorting" id="sortingView" *ngIf="showSorting">
+    <div class="sorting-wrapper">
+        <img src="assets/error.svg" class="sorting-close" (click)="closeSorting()">
+        <span class="sorting-heading">sort files</span>
+        <table class="sorting-selection">
+            <tr>
+                <td>
+                    <span style="font-size: 2.9vw">sort by</span> <br>
+                    <div class="sorting__checkbox-container"
+                        (click)="sortingAttribute = 'name'">
+                        <span class="sorting__checkbox">
+                            <span class="sorting__checkbox-checked"
+                                *ngIf="sortingAttribute === 'name'"></span>
+                        </span> <span class="sorting__checkbox-descriptor">Name</span>
+                    </div> <br>
+                    <div class="sorting__checkbox-container"
+                        (click)="sortingAttribute = 'date'">
+                        <span class="sorting__checkbox">
+                            <span class="sorting__checkbox-checked"
+                                *ngIf="sortingAttribute === 'date'"></span>
+                        </span> <span class="sorting__checkbox-descriptor">Date</span>
+                    </div> <br>
+                    <div class="sorting__checkbox-container"
+                        (click)="sortingAttribute = 'size'">
+                        <span class="sorting__checkbox">
+                            <span class="sorting__checkbox-checked"
+                                *ngIf="sortingAttribute === 'size'"></span>
+                        </span> <span class="sorting__checkbox-descriptor">Size</span>
+                    </div> <br>
+                </td>
+                <td>
+                    <span style="font-size: 2.9vw">order</span> <br>
+                    <div class="sorting__checkbox-container"
+                        (click)="sortingOrder = 'asc'">
+                        <span class="sorting__checkbox">
+                            <span class="sorting__checkbox-checked"
+                                *ngIf="sortingOrder === 'asc'"></span>
+                        </span> <span class="sorting__checkbox-descriptor">Ascending</span>
+                    </div> <br>
+                    <div class="sorting__checkbox-container"
+                        (click)="sortingOrder = 'dsc'">
+                        <span class="sorting__checkbox">
+                            <span class="sorting__checkbox-checked"
+                                *ngIf="sortingOrder === 'dsc'"></span>
+                        </span> <span class="sorting__checkbox-descriptor">Descending</span>
+                    </div> <br>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>

@@ -64,6 +64,7 @@ export class FilesService {
                                     type: 'file',
                                     path: '/' + fileOrFolder.path,
                                     name: fileOrFolder.name,
+                                    date: fileOrFolder.date,
                                     size: this.service.convertByteToMegabyte(fileOrFolder.size),
                                     printTime: this.service.convertSecondsToHours(
                                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
@@ -73,9 +74,6 @@ export class FilesService {
                             }
                         });
                         data = null;
-                        folder.sort((a, b): number =>
-                            a.type === b.type ? (a.name > b.name ? 1 : -1) : a.type === 'folder' ? -1 : 1,
-                        );
 
                         resolve(folder);
                     },
