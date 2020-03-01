@@ -115,6 +115,7 @@ export class FilesService {
                             printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
                             filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
                             date: this.service.convertDateToString(new Date(data.date * 1000)),
+                            thumbnail: this.configService.getURL('').replace('/api/','/plugin/UltimakerFormatPackage/thumbnail/') + data.path.replace('.ufp.gcode', '.png'),
                         } as unknown) as File;
                         resolve(file);
                     },
@@ -205,4 +206,5 @@ export interface File {
     printTime?: string;
     filamentWeight?: number;
     date?: string;
+    thumbnail?: string;
 }
