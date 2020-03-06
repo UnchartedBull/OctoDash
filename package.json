@@ -93,7 +93,7 @@
     "@angular/language-service": "~9.0.5",
     "@types/ajv": "^1.0.0",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^13.7.7",
+    "@types/node": "^13.9.0",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "codelyzer": "^5.1.2",
