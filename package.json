@@ -81,7 +81,7 @@
     "electron-store": "^5.1.1",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
-    "ngx-spinner": "^9.0.0",
+    "ngx-spinner": "^9.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.11.1",
     "zone.js": "~0.10.2"
