@@ -46,8 +46,8 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 
 ## Tips and Tricks
 
-- Long press (~ 1s) on a file to get a more detailed view
-- If you loaded a file and don't want to unload it, just swipe left at the top portion of the screen
+- OctoDash supports .ufp package preview images (v1.4.1 and up)
+- If you loaded a file and want to unload it, just swipe left at the top portion of the screen
 - You can press multiple arrows directly after another in the control view. All actions will be executed one after another, even if the prior didn't finish before pressing the button
 - The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
 
@@ -71,8 +71,6 @@ If you encounter an issue, while using OctoDash please have a look at the [wiki]
 ## Bugs and more
 
 If you find a bug, please open an issue, so I can have a look at it. Please also add the steps to reproduce and the .gcode file. Thank you!
-
-One more thing: If you're Octoprint is running on a Raspberry Pi 1 you may want to opt-out of this because it just does not have enough power.
 
 ## Contributing
 
