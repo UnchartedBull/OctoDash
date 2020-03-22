@@ -20,7 +20,7 @@ export class EnclosureService {
         private notificationService: NotificationService,
     ) {
         this.observable = new Observable((observer: Observer<TemperatureReading>): void => {
-            timer(850, 30000).subscribe((): void => {
+            timer(2500, 30000).subscribe((): void => {
                 if (this.httpGETRequest) {
                     this.httpGETRequest.unsubscribe();
                 }
