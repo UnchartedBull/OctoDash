@@ -5,12 +5,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: rgba(0, 0, 0, 0.8);
         z-index: 20;
     }
 
     &-container {
-        animation: fadein .8s;
+        animation: fadein 0.8s;
         position: absolute;
         top: 10vh;
         left: 20vw;
@@ -20,7 +20,7 @@
         border-radius: 2vw;
 
         &-fadeout {
-            animation: fadeout .8s;
+            animation: fadeout 0.8s;
         }
     }
 
@@ -29,7 +29,7 @@
         display: block;
         text-align: center;
         margin-top: 1.5vh;
-        opacity: .3;
+        opacity: 0.3;
     }
 
     &__heading {
@@ -101,13 +101,13 @@
 
             & span {
                 font-size: inherit;
-                opacity: .5;
+                opacity: 0.5;
             }
         }
 
         &-prefix {
             font-size: 2vw;
-            opacity: .7;
+            opacity: 0.7;
             padding-right: 1vw;
         }
 
@@ -139,16 +139,16 @@
         }
 
         &-checked {
-            background-color: #2196F3;
+            background-color: #2196f3;
             width: 1.8vw;
             height: 1.8vw;
             display: block;
-            margin-left: .6vw;
-            margin-top: .6vw;
-            border-radius: .4vw;
+            margin-left: 0.6vw;
+            margin-top: 0.6vw;
+            border-radius: 0.4vw;
 
             &-disabled {
-                background-color: rgba(255, 255, 255, .5)
+                background-color: rgba(255, 255, 255, 0.5);
             }
         }
 
@@ -167,11 +167,10 @@
     }
 
     &__list {
-
         & fa-icon {
             font-size: 3vw;
-            margin-left: .5vw;
-            opacity: .7;
+            margin-left: 0.5vw;
+            opacity: 0.7;
         }
 
         & li {
@@ -183,7 +182,7 @@
     &__made {
         font-size: 2.3vw;
         display: block;
-        opacity: .6;
+        opacity: 0.6;
         text-align: center;
         margin-top: 4vh;
 
@@ -217,19 +216,19 @@
         padding: 2vh 2vw 2vh 4vw;
 
         &-slideout-forward {
-            animation: slideout-forward .5s ease-out;
+            animation: slideout-forward 0.5s ease-out;
         }
 
         &-slidein-forward {
-            animation: slidein-forward .5s ease-out
+            animation: slidein-forward 0.5s ease-out;
         }
 
         &-slideout-backward {
-            animation: slideout-backward .5s ease-out
+            animation: slideout-backward 0.5s ease-out;
         }
 
         &-slidein-backward {
-            animation: slidein-backward .5s ease-out
+            animation: slidein-backward 0.5s ease-out;
         }
 
         &-inactive {
@@ -282,7 +281,7 @@
 
 @keyframes slideout-forward {
     from {
-        left: 0vw;
+        left: 0;
     }
 
     to {
@@ -296,7 +295,7 @@
     }
 
     to {
-        left: 0vw;
+        left: 0;
     }
 }
 
@@ -306,13 +305,13 @@
     }
 
     to {
-        left: 0vw;
+        left: 0;
     }
 }
 
 @keyframes slideout-backward {
     from {
-        left: 0vw;
+        left: 0;
     }
 
     to {
