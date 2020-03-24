@@ -17,6 +17,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     public view = QuickControlView.NONE;
     public newHotendTarget = 200;
     public newHeatbedTarget = 60;
+    public newFanTarget = 100;
 
     public constructor(
         private printerService: PrinterService,
@@ -66,6 +67,10 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         this.view = QuickControlView.HEATBED;
     }
 
+    public showQuickControlFan(): void {
+        this.view = QuickControlView.FAN;
+    }
+
     public hideQuickControl(): void {
         this.view = QuickControlView.NONE;
     }
@@ -90,6 +95,16 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         }
     }
 
+    public changeSpeedFan(value: number): void {
+        this.newFanTarget += value;
+        if (this.newFanTarget < 0) {
+            this.newFanTarget = 0;
+        }
+        if (this.newFanTarget > 100) {
+            this.newFanTarget = 100;
+        }
+    }
+
     public setTemperatureHotend(): void {
         this.printerService.setTemperatureHotend(this.newHotendTarget);
         this.view = QuickControlView.NONE;
@@ -97,6 +112,11 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
     public setTemperatureHeatbed(): void {
         this.printerService.setTemperatureHeatbed(this.newHeatbedTarget);
+        this.view = QuickControlView.NONE;
+    }
+
+    public setSpeedFan(): void {
+        this.printerService.executeGCode("M106 S" + Math.round(this.newFanTarget / 100 * 255));
         this.view = QuickControlView.NONE;
     }
 }
@@ -111,4 +131,5 @@ enum QuickControlView {
     NONE,
     HOTEND,
     HEATBED,
+    FAN,
 }
