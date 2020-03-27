@@ -75,3 +75,88 @@
         }
     }
 }
+
+.quickControl {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .85);
+    z-index: 1000;
+
+    &__center-icon {
+        width: 22vw;
+        display: block;
+        text-align: center;
+        margin-top: 8vh;
+        margin-bottom: 7vh;
+        margin-left: calc(50% - 11vw);
+
+        &-small {
+            display: block;
+            width: 7.5vw;
+            margin: -9vw auto 0;
+        }
+    }
+
+    &__close {
+        display: block;
+        width: 6vw;
+        position: absolute;
+        right: 2vw;
+        top: 3vh;
+    }
+
+    &__controller {
+        width: 35vw;
+        margin: 0 auto;
+        border: solid .6vw;
+        border-radius: 3vw;
+        margin-top: 5vh;
+
+        &-row {
+            display: flex;
+        }
+
+        &-value {
+            padding: 3vh 6vw;
+            font-size: 8vw;
+            font-weight: 500;
+            text-align: center;
+
+            &-unit {
+                text-align: center;
+                font-size: 4vw;
+                font-weight: 400;
+            }
+        }
+
+        &-increase {
+            padding: 3vh 6vw;
+            font-weight: 500;
+            //font-size: 4vw;
+            flex: 1;
+        }
+
+        &-decrease {
+            padding: 3vh 6vw;
+            font-weight: 500;
+            //font-size: 4vw;
+            flex: 1;
+        }
+
+        &-set {
+            height: 10vw;
+            border-top: solid .6vw;
+            flex: 1;
+            align-items: center;
+            display: flex;
+
+            &-span {
+                text-align: center;
+                flex: 1;
+            }
+        }
+    }
+}
