@@ -7,7 +7,12 @@
         "printer": {
             "name": "NAME HERE",
             "xySpeed": 100,
-            "zSpeed": 5
+            "zSpeed": 5,
+            "defaultTemperatureFanSpeed": {
+                "hotend": 200,
+                "heatbed": 60,
+                "fan": 100
+            }
         },
         "filament": {
             "density": 0,

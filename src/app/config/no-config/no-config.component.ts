@@ -36,6 +36,11 @@ export class NoConfigComponent implements OnInit {
                     name: '',
                     xySpeed: 150,
                     zSpeed: 5,
+                    defaultTemperatureFanSpeed: {
+                        hotend: 200,
+                        heatbed: 60,
+                        fan: 100,
+                    },
                 },
                 filament: {
                     thickness: 1.75,
