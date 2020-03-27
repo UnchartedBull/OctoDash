@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { ConfigService } from '../config/config.service';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
 import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
 
@@ -15,13 +16,14 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     public status: string;
     public QuickControlView = QuickControlView;
     public view = QuickControlView.NONE;
-    public hotendTarget = 200;
-    public heatbedTarget = 60;
-    public fanTarget = 100;
+    public hotendTarget: number;
+    public heatbedTarget: number;
+    public fanTarget: number;
 
     public constructor(
         private printerService: PrinterService,
         private displayLayerProgressService: LayerProgressService,
+        private configService: ConfigService,
     ) {
         this.printerStatus = {
             nozzle: {
@@ -35,6 +37,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
             fan: 0,
         };
         this.status = 'connecting';
+        this.hotendTarget = this.configService.getDefaultHotendTemperature();
+        this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
+        this.fanTarget = this.configService.getDefaultFanSpeed();
     }
 
     public ngOnInit(): void {
