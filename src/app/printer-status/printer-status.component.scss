@@ -67,7 +67,7 @@
         overflow: visible;
 
         & span {
-            margin-bottom: -4vh
+            margin-bottom: -4vh;
         }
 
         & img {
@@ -82,8 +82,8 @@
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .85);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 10;
 
     &__center-icon {
         width: 22vw;
@@ -111,7 +111,7 @@
     &__controller {
         width: 35vw;
         margin: 0 auto;
-        border: solid .6vw;
+        border: solid 0.6vw;
         border-radius: 3vw;
         margin-top: 5vh;
 
@@ -148,7 +148,7 @@
 
         &-set {
             height: 10vw;
-            border-top: solid .6vw;
+            border-top: solid 0.6vw;
             flex: 1;
             align-items: center;
             display: flex;

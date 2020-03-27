@@ -2,8 +2,7 @@
     <tr>
         <td class="printer-status__value printer-status__value-1"
             [ngClass]="{'printer-status__no-set-value': printerStatus.nozzle.set === 0}"
-            (click)="showQuickControlHotend()"
-            matRipple [matRippleUnbounded]="false">
+            (click)="showQuickControlHotend()" matRipple [matRippleUnbounded]="false">
             <img src="assets/nozzle.svg">
             <span class="printer-status__actual-value">{{ printerStatus.nozzle.current }}<span
                     class="printer-status__unit">°C</span></span>
@@ -12,8 +11,7 @@
         </td>
         <td class="printer-status__value printer-status__value-2"
             [ngClass]="{'printer-status__no-set-value': printerStatus.heatbed.set === 0}"
-            (click)="showQuickControlHeatbed()"
-            matRipple [matRippleUnbounded]="false">
+            (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
             <img src="assets/heat-bed.svg">
             <span class="printer-status__actual-value">{{ printerStatus.heatbed.current }}<span
                     class="printer-status__unit">°C</span></span>
@@ -21,8 +19,7 @@
                 *ngIf="printerStatus.heatbed.set">/{{ printerStatus.heatbed.set }}<span class="unit">°C</span></span>
         </td>
         <td class="printer-status__value printer-status__value-3 printer-status__no-set-value"
-            (click)="showQuickControlFan()"
-            matRipple [matRippleUnbounded]="false">
+            (click)="showQuickControlFan()" matRipple [matRippleUnbounded]="false">
             <img src="assets/fan.svg">
             <span class="printer-status__actual-value">{{ printerStatus.fan }}<span
                     class="printer-status__unit">%</span></span>
@@ -33,89 +30,46 @@
     <table class="top-bar" (click)="hideQuickControl()">
         <tr>
             <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+            <td class="top-bar__center">
+
+            </td>
         </tr>
     </table>
-    <img src="assets/nozzle.svg" class="quickControl__center-icon-small" *ngIf="view === QuickControlView.HOTEND">
-    <img src="assets/heat-bed.svg" class="quickControl__center-icon-small" *ngIf="view === QuickControlView.HEATBED">
-    <img src="assets/fan.svg" class="quickControl__center-icon-small" *ngIf="view === QuickControlView.FAN">
-    <div class="quickControl__controller" *ngIf="view === QuickControlView.HOTEND">
+    <img [src]="'assets/' + (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')"
+        class="quickControl__center-icon-small">
+    <div class="quickControl__controller">
         <div class="quickControl__controller-row">
-            <div class="quickControl__controller-increase" (click)="changeTemperatureHotend(1)"
-                matRipple [matRippleUnbounded]="false">+1
+            <div class="quickControl__controller-increase" (click)="quickControlChangeValue(1)" matRipple
+                [matRippleUnbounded]="false">+1
             </div>
-            <div class="quickControl__controller-increase" (click)="changeTemperatureHotend(10)"
-                matRipple [matRippleUnbounded]="false">+10
+            <div class="quickControl__controller-increase" (click)="quickControlChangeValue(10)" matRipple
+                [matRippleUnbounded]="false">+10
             </div>
         </div>
-            <div class="quickControl__controller-value" colspan="2">
-                {{ this.newHotendTarget }}<span class="quickControl__controller-value-unit">°C</span>
-            </div>
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-decrease" (click)="changeTemperatureHotend(-1)"
-                matRipple [matRippleUnbounded]="false">-1
-            </div>
-            <div class="quickControl__controller-decrease" (click)="changeTemperatureHotend(-10)"
-                matRipple [matRippleUnbounded]="false">-10
-            </div>
+        <div class="quickControl__controller-value" colspan="2" *ngIf="view === QuickControlView.HOTEND">
+            {{ this.hotendTarget }}
+            <span class="quickControl__controller-value-unit">°C</span>
+        </div>
+        <div class="quickControl__controller-value" colspan="2" *ngIf="view === QuickControlView.HEATBED">
+            {{ this.heatbedTarget }}
+            <span class="quickControl__controller-value-unit">°C</span>
+        </div>
+        <div class="quickControl__controller-value" colspan="2" *ngIf="view === QuickControlView.FAN">
+            {{ this.fanTarget }}
+            <span class="quickControl__controller-value-unit">%</span>
         </div>
         <div class="quickControl__controller-row">
-            <div class="quickControl__controller-set" colspan="2" (click)="setTemperatureHotend()"
-                matRipple [matRippleUnbounded]="false">
-                    <span class="quickControl__controller-set-span">Set</span>
+            <div class="quickControl__controller-decrease" (click)="quickControlChangeValue(-1)" matRipple
+                [matRippleUnbounded]="false">-1
             </div>
-        </div>
-    </div>
-    <div class="quickControl__controller" *ngIf="view === QuickControlView.HEATBED">
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-increase" (click)="changeTemperatureHeatbed(1)"
-                matRipple [matRippleUnbounded]="false">+1
-            </div>
-            <div class="quickControl__controller-increase" (click)="changeTemperatureHeatbed(10)"
-                matRipple [matRippleUnbounded]="false">+10
-            </div>
-        </div>
-            <div class="quickControl__controller-value" colspan="2">
-                {{ this.newHeatbedTarget }}<span class="quickControl__controller-value-unit">°C</span>
-            </div>
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-decrease" (click)="changeTemperatureHeatbed(-1)"
-                matRipple [matRippleUnbounded]="false">-1
-            </div>
-            <div class="quickControl__controller-decrease" (click)="changeTemperatureHeatbed(-10)"
-                matRipple [matRippleUnbounded]="false">-10
+            <div class="quickControl__controller-decrease" (click)="quickControlChangeValue(-10)" matRipple
+                [matRippleUnbounded]="false">-10
             </div>
         </div>
         <div class="quickControl__controller-row">
-            <div class="quickControl__controller-set" colspan="2" (click)="setTemperatureHeatbed()"
-                matRipple [matRippleUnbounded]="false">
-                    <span class="quickControl__controller-set-span">Set</span>
-            </div>
-        </div>
-    </div>
-    <div class="quickControl__controller" *ngIf="view === QuickControlView.FAN">
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-increase" (click)="changeSpeedFan(1)"
-                matRipple [matRippleUnbounded]="false">+1
-            </div>
-            <div class="quickControl__controller-increase" (click)="changeSpeedFan(10)"
-                matRipple [matRippleUnbounded]="false">+10
-            </div>
-        </div>
-            <div class="quickControl__controller-value" colspan="2">
-                {{ this.newFanTarget }}<span class="quickControl__controller-value-unit">%</span>
-            </div>
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-decrease" (click)="changeSpeedFan(-1)"
-                matRipple [matRippleUnbounded]="false">-1
-            </div>
-            <div class="quickControl__controller-decrease" (click)="changeSpeedFan(-10)"
-                matRipple [matRippleUnbounded]="false">-10
-            </div>
-        </div>
-        <div class="quickControl__controller-row">
-            <div class="quickControl__controller-set" colspan="2" (click)="setSpeedFan()"
-                matRipple [matRippleUnbounded]="false">
-                    <span class="quickControl__controller-set-span">Set</span>
+            <div class="quickControl__controller-set" colspan="2" (click)="quickControlSetValue()" matRipple
+                [matRippleUnbounded]="false">
+                <span class="quickControl__controller-set-span">Set</span>
             </div>
         </div>
     </div>

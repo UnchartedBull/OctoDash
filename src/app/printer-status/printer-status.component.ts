@@ -15,9 +15,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     public status: string;
     public QuickControlView = QuickControlView;
     public view = QuickControlView.NONE;
-    public newHotendTarget = 200;
-    public newHeatbedTarget = 60;
-    public newFanTarget = 100;
+    public hotendTarget = 200;
+    public heatbedTarget = 60;
+    public fanTarget = 100;
 
     public constructor(
         private printerService: PrinterService,
@@ -75,48 +75,76 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         this.view = QuickControlView.NONE;
     }
 
-    public changeTemperatureHotend(value: number): void {
-        this.newHotendTarget += value;
-        if (this.newHotendTarget < 0) {
-            this.newHotendTarget = 0;
-        }
-        if (this.newHotendTarget > 999) {
-            this.newHotendTarget = 999;
-        }
-    }
-
-    public changeTemperatureHeatbed(value: number): void {
-        this.newHeatbedTarget += value;
-        if (this.newHeatbedTarget < 0) {
-            this.newHeatbedTarget = 0;
-        }
-        if (this.newHeatbedTarget > 999) {
-            this.newHeatbedTarget = 999;
+    public quickControlChangeValue(value: number): void {
+        switch (this.view) {
+            case QuickControlView.HOTEND:
+                this.changeTemperatureHotend(value);
+                break;
+            case QuickControlView.HEATBED:
+                this.changeTemperatureHeatbed(value);
+                break;
+            case QuickControlView.FAN:
+                this.changeSpeedFan(value);
+                break;
         }
     }
 
-    public changeSpeedFan(value: number): void {
-        this.newFanTarget += value;
-        if (this.newFanTarget < 0) {
-            this.newFanTarget = 0;
-        }
-        if (this.newFanTarget > 100) {
-            this.newFanTarget = 100;
+    public quickControlSetValue(): void {
+        switch (this.view) {
+            case QuickControlView.HOTEND:
+                this.setTemperatureHotend();
+                break;
+            case QuickControlView.HEATBED:
+                this.setTemperatureHeatbed();
+                break;
+            case QuickControlView.FAN:
+                this.setFanSpeed();
+                break;
         }
     }
 
-    public setTemperatureHotend(): void {
-        this.printerService.setTemperatureHotend(this.newHotendTarget);
+    private changeTemperatureHotend(value: number): void {
+        this.hotendTarget += value;
+        if (this.hotendTarget < 0) {
+            this.hotendTarget = 0;
+        }
+        if (this.hotendTarget > 999) {
+            this.hotendTarget = 999;
+        }
+    }
+
+    private changeTemperatureHeatbed(value: number): void {
+        this.heatbedTarget += value;
+        if (this.heatbedTarget < 0) {
+            this.heatbedTarget = 0;
+        }
+        if (this.heatbedTarget > 999) {
+            this.heatbedTarget = 999;
+        }
+    }
+
+    private changeSpeedFan(value: number): void {
+        this.fanTarget += value;
+        if (this.fanTarget < 0) {
+            this.fanTarget = 0;
+        }
+        if (this.fanTarget > 100) {
+            this.fanTarget = 100;
+        }
+    }
+
+    private setTemperatureHotend(): void {
+        this.printerService.setTemperatureHotend(this.hotendTarget);
         this.view = QuickControlView.NONE;
     }
 
-    public setTemperatureHeatbed(): void {
-        this.printerService.setTemperatureHeatbed(this.newHeatbedTarget);
+    private setTemperatureHeatbed(): void {
+        this.printerService.setTemperatureHeatbed(this.heatbedTarget);
         this.view = QuickControlView.NONE;
     }
 
-    public setSpeedFan(): void {
-        this.printerService.executeGCode("M106 S" + Math.round(this.newFanTarget / 100 * 255));
+    private setFanSpeed(): void {
+        this.printerService.setFanSpeed(this.fanTarget);
         this.view = QuickControlView.NONE;
     }
 }
