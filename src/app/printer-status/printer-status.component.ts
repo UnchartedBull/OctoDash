@@ -61,18 +61,32 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
     public showQuickControlHotend(): void {
         this.view = QuickControlView.HOTEND;
+        this.showQuickControl();
     }
 
     public showQuickControlHeatbed(): void {
         this.view = QuickControlView.HEATBED;
+        this.showQuickControl();
     }
 
     public showQuickControlFan(): void {
         this.view = QuickControlView.FAN;
+        this.showQuickControl();
+    }
+
+    private showQuickControl(): void {
+        setTimeout((): void => {
+            const controlViewDOM = document.getElementById('quickControl');
+            controlViewDOM.style.opacity = '1';
+        }, 50);
     }
 
     public hideQuickControl(): void {
-        this.view = QuickControlView.NONE;
+        const controlViewDOM = document.getElementById('quickControl');
+        controlViewDOM.style.opacity = '0';
+        setTimeout((): void => {
+            this.view = QuickControlView.NONE;
+        }, 500);
     }
 
     public quickControlChangeValue(value: number): void {
@@ -135,17 +149,17 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
     private setTemperatureHotend(): void {
         this.printerService.setTemperatureHotend(this.hotendTarget);
-        this.view = QuickControlView.NONE;
+        this.hideQuickControl();
     }
 
     private setTemperatureHeatbed(): void {
         this.printerService.setTemperatureHeatbed(this.heatbedTarget);
-        this.view = QuickControlView.NONE;
+        this.hideQuickControl();
     }
 
     private setFanSpeed(): void {
         this.printerService.setFanSpeed(this.fanTarget);
-        this.view = QuickControlView.NONE;
+        this.hideQuickControl();
     }
 }
 

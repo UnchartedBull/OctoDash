@@ -76,7 +76,7 @@
     }
 }
 
-.quickControl {
+.quick-control {
     position: fixed;
     left: 0;
     top: 0;
@@ -84,6 +84,8 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.85);
     z-index: 10;
+    opacity: 0;
+    transition: opacity ease-in-out 0.5s;
 
     &__center-icon {
         width: 22vw;
