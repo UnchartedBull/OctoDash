@@ -1,6 +1,6 @@
 .bottom-bar {
     position: absolute;
-    bottom: 4.5vh;
+    bottom: 2.5vh;
     left: 2vw;
     width: calc(100% - 5.6vw);
 
@@ -14,7 +14,7 @@
         &-icon {
             width: 2.5vw;
             display: inline-block;
-            margin-bottom: -.8vh;
+            margin-bottom: -0.8vh;
             margin-right: 1vw;
         }
     }
@@ -28,7 +28,6 @@
         animation: blinker 2s linear infinite;
     }
 }
-
 
 @keyframes blinker {
     20% {

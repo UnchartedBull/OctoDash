@@ -63,6 +63,34 @@
                                         style="width: 19vw" [(ngModel)]="config.printer.zSpeed" required>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2" class="settings__sub-heading">Default Temperatures & Fan Speed</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="defaultHotendTemperature" class="settings__input-label">Hotend
+                                        <span>(°C)</span></label>
+                                    <input type="number" id="defaultHotendTemperature" class="settings__input"
+                                        name="defaultHotendTemperature" style="width: 19vw"
+                                        [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend" required>
+                                </td>
+                                <td>
+                                    <label for="defaultHeatbedTemperature" class="settings__input-label">Heatbed
+                                        <span>(°C)</span></label>
+                                    <input type="number" id="defaultHeatbedTemperature" class="settings__input"
+                                        name="defaultHeatbedTemperature" style="width: 19vw"
+                                        [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="defaultFanSpeed" class="settings__input-label">Fan Speed
+                                        <span>(%)</span></label>
+                                    <input type="number" id="defaultFanSpeed" class="settings__input"
+                                        name="defaultFanSpeed" style="width: 19vw"
+                                        [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan" required>
+                                </td>
+                            </tr>
                         </table>
                     </form>
                     <span class="settings__heading-2">Filament</span>

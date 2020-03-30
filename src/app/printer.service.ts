@@ -194,6 +194,10 @@ export class PrinterService {
             );
     }
 
+    public setFanSpeed(percentage: number): void {
+        this.executeGCode('M106 S' + Math.round((percentage / 100) * 255));
+    }
+
     public isPrinterOffline(): Promise<boolean> {
         return new Promise((resolve): void => {
             this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(

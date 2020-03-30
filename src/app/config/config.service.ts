@@ -91,6 +91,7 @@ export class ConfigService {
                 errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
             }
         });
+        console.error(errors);
         return errors;
     }
 
@@ -219,6 +220,18 @@ export class ConfigService {
     public getDefaultSortingOrder(): 'asc' | 'dsc' {
         return this.config.octodash.fileSorting.order;
     }
+
+    public getDefaultHotendTemperature(): number {
+        return this.config.printer.defaultTemperatureFanSpeed.hotend;
+    }
+
+    public getDefaultHeatbedTemperature(): number {
+        return this.config.printer.defaultTemperatureFanSpeed.heatbed;
+    }
+
+    public getDefaultFanSpeed(): number {
+        return this.config.printer.defaultTemperatureFanSpeed.fan;
+    }
 }
 
 export interface Config {
@@ -242,6 +255,13 @@ interface Printer {
     name: string;
     xySpeed: number;
     zSpeed: number;
+    defaultTemperatureFanSpeed: DefaultTemperatureFanSpeed;
+}
+
+interface DefaultTemperatureFanSpeed {
+    hotend: number;
+    heatbed: number;
+    fan: number;
 }
 
 interface Filament {
@@ -322,7 +342,7 @@ const schema = {
         printer: {
             $id: '#/properties/printer',
             type: 'object',
-            required: ['name', 'xySpeed', 'zSpeed'],
+            required: ['name', 'xySpeed', 'zSpeed', 'defaultTemperatureFanSpeed'],
             properties: {
                 name: {
                     $id: '#/properties/printer/properties/name',
@@ -336,6 +356,25 @@ const schema = {
                 zSpeed: {
                     $id: '#/properties/printer/properties/zSpeed',
                     type: 'integer',
+                },
+                defaultTemperatureFanSpeed: {
+                    $id: '#/properties/printer/properties/defaultTemperatureFanSpeed',
+                    type: 'object',
+                    required: ['hotend', 'heatbed', 'fan'],
+                    properties: {
+                        hotend: {
+                            $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/hotend',
+                            type: 'integer',
+                        },
+                        heatbed: {
+                            $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/heatbed',
+                            type: 'integer',
+                        },
+                        fan: {
+                            $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/fan',
+                            type: 'integer',
+                        },
+                    },
                 },
             },
         },
