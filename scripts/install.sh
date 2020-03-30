@@ -12,11 +12,11 @@ else
     read -r DIRECTORY
 fi;
 
-"$DIRECTORY"/bin/pip install -q "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
-"$DIRECTORY"/bin/pip install -q "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
-"$DIRECTORY"/bin/pip install -q "https://github.com/marian42/octoprint-preheat/archive/master.zip"
+"$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
+"$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
+"$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
 if [[ $* == *--ptg* ]]; then
-    "$DIRECTORY"/bin/pip install -q "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
+    "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
 fi
 
 echo "Installing Dependencies"
