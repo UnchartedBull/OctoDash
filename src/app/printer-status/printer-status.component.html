@@ -31,8 +31,11 @@
         <tr>
             <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" matRipple
                     [matRippleUnbounded]="false" />back</td>
-            <img [src]="'assets/' + (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')"
-                class="quick-control__center-icon-small">
+            <td class="top-bar__center">
+                <img [src]="'assets/' + (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')"
+                    class="top-bar__center-icon">
+            </td>
+            <td class="top-bar__back"></td>
         </tr>
     </table>
     <div class="quick-control__controller">

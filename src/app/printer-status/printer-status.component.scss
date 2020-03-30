@@ -87,35 +87,12 @@
     opacity: 0;
     transition: opacity ease-in-out 0.5s;
 
-    &__center-icon {
-        width: 22vw;
-        display: block;
-        text-align: center;
-        margin-top: 8vh;
-        margin-bottom: 7vh;
-        margin-left: calc(50% - 11vw);
-
-        &-small {
-            display: block;
-            width: 7.5vw;
-            margin: -9vw auto 0;
-        }
-    }
-
-    &__close {
-        display: block;
-        width: 6vw;
-        position: absolute;
-        right: 2vw;
-        top: 3vh;
-    }
-
     &__controller {
         width: 35vw;
         margin: 0 auto;
         border: solid 0.6vw;
         border-radius: 3vw;
-        margin-top: 5vh;
+        margin-top: 1.5vh;
 
         &-row {
             display: flex;
@@ -137,14 +114,12 @@
         &-increase {
             padding: 3vh 6vw;
             font-weight: 500;
-            //font-size: 4vw;
             flex: 1;
         }
 
         &-decrease {
             padding: 3vh 6vw;
             font-weight: 500;
-            //font-size: 4vw;
             flex: 1;
         }
 
