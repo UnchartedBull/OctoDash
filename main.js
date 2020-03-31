@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { app, BrowserWindow } = require('electron');
+const {
+    app,
+    BrowserWindow
+} = require('electron');
 const url = require('url');
 const path = require('path');
 const Store = require('electron-store');
 
 const store = new Store();
 const exec = require('child_process').exec;
-const { ipcMain } = require('electron');
+const {
+    ipcMain
+} = require('electron');
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
@@ -22,7 +27,9 @@ function createWindow() {
         config = newValue;
     });
 
-    const { screen } = require('electron');
+    const {
+        screen
+    } = require('electron');
     const mainScreen = screen.getPrimaryDisplay();
     window = new BrowserWindow({
         width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
@@ -67,7 +74,9 @@ function activateScreenSleepListener() {
     });
 
     ipcMain.on('screenWakeup', () => {
+        exec('xset s off');
         exec('xset -dpms');
+        exec('xset s noblank');
     });
 }
 
