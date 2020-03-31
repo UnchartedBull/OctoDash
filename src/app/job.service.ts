@@ -62,6 +62,8 @@ export class JobService {
                                 } catch (error) {
                                     this.notificationService.setError("Can't retrieve Job Status", error);
                                 }
+                            } else {
+                                this.printing = false;
                             }
                             observer.next(job);
                         },
