@@ -49,7 +49,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
         );
     }
 
-    public cancelLoadedFile(): void {
+    public discardLoadedFile(): void {
         this.service.setLoadedFile(false);
     }
 

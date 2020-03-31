@@ -91,7 +91,6 @@ export class AppService {
 
     public getLoadedFile(): boolean {
         return this.loadedFile;
-        return true;
     }
 
     public convertByteToMegabyte(byte: number): string {

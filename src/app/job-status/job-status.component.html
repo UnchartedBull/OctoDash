@@ -11,7 +11,10 @@
         elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
 </div>
 <div class="job-info__file-loaded" *ngIf="job && !isPrinting() && isFileLoaded()" (swipe)="cancelLoadedFile()">
-    <img src="{{job.thumbnail ? job.thumbnail : 'assets/object.svg'}}" class="job-info__preview" />
+    <div class="job-info__preview">
+        <img src="{{job.thumbnail ? job.thumbnail : 'assets/object.svg'}}" class="job-info__preview-image" />
+        <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
+    </div>
     <span class="job-info__filename">{{ job.filename }}</span> <br />
     <span (click)="preheat()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
         class="job-info__actions-item-heat" *ngIf="isPreheatEnabled()">
