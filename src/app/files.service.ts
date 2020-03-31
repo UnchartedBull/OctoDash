@@ -136,6 +136,30 @@ export class FilesService {
         });
     }
 
+    public getThumbnail(filePath: string): Promise<string | undefined> {
+        return new Promise((resolve, reject): void => {
+            if (this.httpGETRequest) {
+                this.httpGETRequest.unsubscribe();
+            }
+            this.httpGETRequest = this.http
+                .get(this.configService.getURL('files/local/' + filePath), this.configService.getHTTPHeaders())
+                .subscribe(
+                    (data: OctoprintFilesAPI): void => {
+                        let thumbnail = data.path.endsWith('.ufp.gcode')
+                            ? this.configService
+                                  .getURL('plugin/UltimakerFormatPackage/thumbnail/')
+                                  .replace('/api/', '/') + data.path.replace('.ufp.gcode', '.png')
+                            : undefined;
+                        resolve(thumbnail);
+                    },
+                    (error: HttpErrorResponse): void => {
+                        this.notificationService.setError("Can't load thumbnail!", error.message);
+                        reject();
+                    },
+                );
+        });
+    }
+
     public loadFile(filePath: string): void {
         if (this.httpPOSTRequest) {
             this.httpPOSTRequest.unsubscribe();

@@ -1,13 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Injectable, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
-import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
-import * as Hammer from 'hammerjs';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
@@ -34,32 +33,6 @@ import { PrinterService } from './printer.service';
 import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { URLSafePipe } from './url.pipe';
-
-@Injectable()
-export class HammerConfig extends HammerGestureConfig {
-    public overrides = {
-        pan: {
-            direction: 6,
-        },
-        pinch: {
-            enable: false,
-        },
-        rotate: {
-            enable: false,
-        },
-        press: {
-            pointers: 1,
-            time: 501,
-            threshold: 15,
-        },
-        swipe: {
-            pointers: 1,
-            direction: Hammer.DIRECTION_LEFT,
-            threshold: 20,
-            velocity: 0.4,
-        },
-    };
-}
 
 @NgModule({
     declarations: [
@@ -93,17 +66,7 @@ export class HammerConfig extends HammerGestureConfig {
         BrowserAnimationsModule,
         MatRippleModule,
     ],
-    providers: [
-        AppService,
-        ConfigService,
-        NotificationService,
-        PrinterService,
-        JobService,
-        {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: HammerConfig,
-        },
-    ],
+    providers: [AppService, ConfigService, NotificationService, PrinterService, JobService],
     bootstrap: [AppComponent],
 })
 export class AppModule {
