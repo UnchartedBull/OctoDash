@@ -77,9 +77,7 @@ export class FilesComponent {
             case 'name': {
                 this.folderContent.sort((a, b): number =>
                     a.type === b.type
-                        ? (order === 'asc'
-                            ? a.name > b.name
-                            : a.name < b.name)
+                        ? (order === 'asc' ? a.name > b.name : a.name < b.name)
                             ? 1
                             : -1
                         : a.type === 'folder'

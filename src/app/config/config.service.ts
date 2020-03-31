@@ -232,6 +232,10 @@ export class ConfigService {
     public getDefaultFanSpeed(): number {
         return this.config.printer.defaultTemperatureFanSpeed.fan;
     }
+
+    public isPreheatPluginEnabled(): boolean {
+        return this.config.plugins.preheatButton.enabled;
+    }
 }
 
 export interface Config {

@@ -5,6 +5,7 @@ import { shareReplay } from 'rxjs/operators';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
+import { FilesService } from './files.service';
 import { NotificationService } from './notification/notification.service';
 import { JobCommand, OctoprintFilament, OctoprintJobAPI } from './octoprint-api/jobAPI';
 
@@ -23,6 +24,7 @@ export class JobService {
         private http: HttpClient,
         private notificationService: NotificationService,
         private service: AppService,
+        private fileService: FilesService,
     ) {
         this.observable = new Observable((observer: Observer<Job>): void => {
             this.observer = observer;
@@ -33,14 +35,15 @@ export class JobService {
                 this.httpGETRequest = this.http
                     .get(this.configService.getURL('job'), this.configService.getHTTPHeaders())
                     .subscribe(
-                        (data: OctoprintJobAPI): void => {
+                        async (data: OctoprintJobAPI): Promise<void> => {
                             let job: Job = null;
                             if (data.job && data.job.file.name) {
                                 this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling'].includes(data.state);
                                 try {
                                     job = {
                                         status: data.state,
-                                        filename: data.job.file.display.replace('.gcode', ''),
+                                        filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
+                                        thumbnail: await this.fileService.getThumbnail(data.job.file.path),
                                         progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
                                         filamentAmount: this.service.convertFilamentLengthToAmount(
                                             this.getTotalAmountOfFilament(data.job.filament),
@@ -226,6 +229,7 @@ interface Duration {
 export interface Job {
     status: string;
     filename: string;
+    thumbnail: string | undefined;
     progress: number;
     filamentAmount: number;
     timeLeft: Duration;

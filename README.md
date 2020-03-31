@@ -13,19 +13,19 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Installation](#installation)
-- [Update](#update)
-- [Tips and Tricks](#tips-and-tricks)
-- [Screenshots](#screenshots)
-- [Troubleshooting](#troubleshooting)
-- [Bugs and more](#bugs-and-more)
-- [Contributing](#contributing)
-- [License](#license)
+-   [Table of Contents](#table-of-contents)
+-   [Installation](#installation)
+-   [Update](#update)
+-   [Tips and Tricks](#tips-and-tricks)
+-   [Screenshots](#screenshots)
+-   [Troubleshooting](#troubleshooting)
+-   [Bugs and more](#bugs-and-more)
+-   [Contributing](#contributing)
+-   [License](#license)
 
 ## Installation
 
-***Note: This script will install additional OctoPrint Plugins by default. If you want to know which visit the Wiki!***
+**_Note: This script will install additional OctoPrint Plugins by default. If you want to know which visit the Wiki!_**
 
 ```
 wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh | bash -s -- --ptg
@@ -33,11 +33,12 @@ wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.s
 
 For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
 
-No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Installation#setup-without-keyboard). 
+No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Installation#setup-without-keyboard).
 
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
 ## Update
+
 ```
 wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/update.sh | bash
 ```
@@ -46,13 +47,13 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 
 ## Tips and Tricks
 
-- OctoDash supports .ufp package preview images (v1.4.1 and up)
-- If you loaded a file and want to unload it, just swipe left at the top portion of the screen
-- You can press multiple arrows directly after another in the control view. All actions will be executed one after another, even if the prior didn't finish before pressing the button
-- The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
-
+-   OctoDash supports .ufp package preview images (v1.4.1 and up)
+-   You can press multiple arrows directly after another in the control view. All actions will be executed one after another, even if the prior didn't finish before pressing the button
+-   The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
+-   You can adjust the temperatures in the home screen, by pressing on their icons
 
 ## Screenshots
+
 <p float="left">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/main-screen.png" width="49.5%" alt-text="Main Screen"/>
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-text="Job Running">
@@ -60,6 +61,8 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%" alt-text="In Print">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/files_view.png" width="49.5%" alt-text="List Files">
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/file_details.png" width="49.5%" alt-text="Details about Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/file_loaded.png" width="49.5%" alt-text="Loaded Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/settings.png" width="49.5%" alt-text="Settings">
 </p>
 
 More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/master/screenshots).

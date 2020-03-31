@@ -27,7 +27,6 @@
         }
     }
 
-
     &__filename {
         font-size: 6vw;
         padding-top: 6.5vh;
@@ -55,17 +54,29 @@
         }
     }
 
-    &__file-loaded>.job-info__filename {
+    &__file-loaded > .job-info__filename {
         font-size: 5vw;
     }
 
     &__preview {
-        width: 15vw;
-        margin-top: 9vh;
-        margin-left: 3vw;
-        margin-right: 3vw;
-        margin-bottom: 8vh;
+        width: 21vw;
         float: left;
+
+        &-image {
+            width: 15vw;
+            margin: 4vh 3vw 0;
+        }
+
+        &-discard {
+            display: block;
+            font-size: 2vw;
+            background-color: rgba(194, 54, 22, 0.85);
+            width: 10vw;
+            text-align: center;
+            padding: 1.8vh 0;
+            border-radius: 0.8vw;
+            margin: 2vh auto;
+        }
     }
 
     &__actions {
@@ -73,6 +84,10 @@
             &-heat {
                 float: right;
                 margin: -13vh 7vw 0 0;
+
+                &-disabled {
+                    opacity: 0.4;
+                }
 
                 &-icon {
                     width: 5.5vw;
@@ -98,7 +113,7 @@
         &-icon {
             padding-right: 2vw;
             font-size: 3vw;
-            vertical-align: .8vh;
+            vertical-align: 0.8vh;
         }
 
         &-value {
