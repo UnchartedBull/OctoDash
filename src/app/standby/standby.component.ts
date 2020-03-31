@@ -59,7 +59,7 @@ export class StandbyComponent implements OnInit {
     private checkConnection(): void {
         this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintConnectionAPI): void => {
-                if (data.current.state !== 'Operational') {
+                if (data.current.state === 'Closed') {
                     if (this.connectionRetries === 0) {
                         this.connectionRetries = 3;
                         this.setConnectionError();
@@ -67,6 +67,9 @@ export class StandbyComponent implements OnInit {
                         this.connectionRetries--;
                         setTimeout(this.connectToPrinter.bind(this), 500);
                     }
+                } else if (data.current.state === 'Error') {
+                    this.connectionRetries = 3;
+                    this.setConnectionError();
                 } else {
                     this.disableStandby();
                 }
