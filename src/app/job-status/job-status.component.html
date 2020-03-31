@@ -14,7 +14,11 @@
     <img src="{{job.thumbnail ? job.thumbnail : 'assets/object.svg'}}" class="job-info__preview" />
     <span class="job-info__filename">{{ job.filename }}</span> <br />
     <span (click)="preheat()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-        class="job-info__actions-item-heat">
+        class="job-info__actions-item-heat" *ngIf="isPreheatEnabled()">
+        <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
+    </span>
+    <span (click)="preheatDisabled()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
+        class="job-info__actions-item-heat job-info__actions-item-heat-disabled" *ngIf="!isPreheatEnabled()">
         <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
     </span> <br />
     <span (click)="startJob()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"

@@ -43,7 +43,7 @@ body {
 app-root {
     display: block;
     background-color: #353b48;
-    padding: .9vh .9vw;
+    padding: 0.9vh 0.9vw;
     overflow: hidden;
 }
 
@@ -96,7 +96,7 @@ app-root {
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .85);
+    background-color: rgba(0, 0, 0, 0.85);
     z-index: 1000;
 
     &__card {
@@ -128,7 +128,6 @@ app-root {
         text-align: justify;
         font-size: 3vw;
     }
-
 }
 
 .splash-screen {
@@ -144,7 +143,7 @@ app-root {
         display: block;
         font-size: 1.8vw;
         text-align: center;
-        opacity: .8;
+        opacity: 0.8;
         margin-top: 6vh;
     }
 
@@ -161,26 +160,26 @@ app-root {
 
     &-track {
         background: transparent;
-        border-radius: .85vw;
+        border-radius: 0.85vw;
         box-shadow: none;
         outline: none;
 
         &-piece {
             &:end {
                 background: transparent;
-                margin-bottom: 5vh;
+                margin-bottom: 6vh;
             }
 
             &:start {
                 background: transparent;
-                margin-top: 5vh;
+                margin-top: 4vh;
             }
         }
     }
 
     &-thumb {
-        background: rgba(127, 143, 166, .8);
-        border-radius: .85vw;
+        background: rgba(127, 143, 166, 0.8);
+        border-radius: 0.85vw;
         box-shadow: none;
         outline: none;
     }
@@ -188,13 +187,13 @@ app-root {
 
 .scroll__thumb-inactive {
     display: block;
-    background-color: rgba(127, 143, 166, .3);
+    background-color: rgba(127, 143, 166, 0.3);
     width: 3vw;
     height: 66.4vh;
     position: fixed;
     right: 2.5vw;
     top: 28vh;
-    border-radius: .89vw;
+    border-radius: 0.89vw;
     z-index: 0;
     pointer-events: none;
 }

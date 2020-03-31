@@ -27,7 +27,6 @@
         }
     }
 
-
     &__filename {
         font-size: 6vw;
         padding-top: 6.5vh;
@@ -55,7 +54,7 @@
         }
     }
 
-    &__file-loaded>.job-info__filename {
+    &__file-loaded > .job-info__filename {
         font-size: 5vw;
     }
 
@@ -73,6 +72,10 @@
             &-heat {
                 float: right;
                 margin: -13vh 7vw 0 0;
+
+                &-disabled {
+                    opacity: 0.4;
+                }
 
                 &-icon {
                     width: 5.5vw;
@@ -98,7 +101,7 @@
         &-icon {
             padding-right: 2vw;
             font-size: 3vw;
-            vertical-align: .8vh;
+            vertical-align: 0.8vh;
         }
 
         &-value {

@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AppService } from '../app.service';
+import { ConfigService } from '../config/config.service';
 import { Job, JobService } from '../job.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
     selector: 'app-job-status',
@@ -13,7 +15,12 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription = new Subscription();
     public job: Job;
 
-    public constructor(private jobService: JobService, private service: AppService) {}
+    public constructor(
+        private jobService: JobService,
+        private service: AppService,
+        private notificationService: NotificationService,
+        private configService: ConfigService,
+    ) {}
 
     public ngOnInit(): void {
         this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
@@ -27,8 +34,19 @@ export class JobStatusComponent implements OnInit, OnDestroy {
         return this.service.getLoadedFile();
     }
 
+    public isPreheatEnabled(): boolean {
+        return this.configService.isPreheatPluginEnabled();
+    }
+
     public preheat(): void {
         this.jobService.preheat();
+    }
+
+    public preheatDisabled(): void {
+        this.notificationService.setWarning(
+            'Preheat Plugin is not enabled!',
+            'Please make sure to install and enable the Preheat Plugin to use this functionality.',
+        );
     }
 
     public cancelLoadedFile(): void {
