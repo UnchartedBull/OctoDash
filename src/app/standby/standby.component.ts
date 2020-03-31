@@ -29,9 +29,7 @@ export class StandbyComponent implements OnInit {
 
     public ngOnInit(): void {
         if (this.configService.getAutomaticScreenSleep()) {
-            // FIXME
-            // setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
-            setTimeout(this.service.turnDisplayOff.bind(this.service), 5000);
+            setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
         }
     }
 
