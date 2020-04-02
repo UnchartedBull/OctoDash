@@ -1,3 +1,3 @@
-<span class="layer-indication" *ngIf="layerProgress">
+<span class="layer-indication" *ngIf="layerProgress && !(layerProgress.current === 0 && layerProgress.total === 0)">
     Layer <span class="layer-indication__current-layer">{{ layerProgress.current }}</span> of {{ layerProgress.total }}
 </span>
