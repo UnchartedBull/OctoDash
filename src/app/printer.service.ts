@@ -58,9 +58,19 @@ export class PrinterService {
                                         );
                                     }
                                 });
-                            } else if (error.status === 0) {
-                                this.router.navigate(['/standby']);
-                                this.notificationService.disableNotifications();
+                            } else if (error.status === 0 && this.notificationService.getBootGrace()) {
+                                const printerStatus: PrinterStatusAPI = {
+                                    status: `connecting ...`,
+                                    nozzle: {
+                                        current: 0,
+                                        set: 0,
+                                    },
+                                    heatbed: {
+                                        current: 0,
+                                        set: 0,
+                                    },
+                                };
+                                observer.next(printerStatus);
                             } else {
                                 const printerStatus: PrinterStatusAPI = {
                                     status: `error (${error.status})`,

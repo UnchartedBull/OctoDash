@@ -9,10 +9,14 @@ export class NotificationService {
     private observable: Observable<Notification>;
     private observer: Observer<Notification>;
     private hideNotifications = false;
+    private bootGrace = true;
 
     public constructor() {
         this.observable = new Observable((observer: Observer<Notification>): void => {
             this.observer = observer;
+            setTimeout((): void => {
+                this.bootGrace = false;
+            }, 30000);
         }).pipe(shareReplay(1));
     }
 
@@ -27,7 +31,7 @@ export class NotificationService {
     }
 
     public setError(heading: string, text: string): void {
-        if (!this.hideNotifications) {
+        if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
             this.observer.next({ heading, text, type: 'error' });
         }
     }
@@ -44,6 +48,10 @@ export class NotificationService {
 
     public getObservable(): Observable<Notification> {
         return this.observable;
+    }
+
+    public getBootGrace(): boolean {
+        return this.bootGrace;
     }
 }
 
