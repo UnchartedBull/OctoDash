@@ -25,6 +25,17 @@
             text-align: center;
             width: 14vw;
         }
+
+        &-preview {
+            width: 27vw;
+            height: 27vw;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            background-size: 22vw;
+            position: absolute;
+            right: 5vw;
+            opacity: 0.5;
+        }
     }
 
     &__filename {
