@@ -38,18 +38,18 @@ export class JobService {
                         async (data: OctoprintJobAPI): Promise<void> => {
                             let job: Job = null;
                             if (data.job && data.job.file.name) {
-                                this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling'].includes(data.state);
+                                this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(data.state);
                                 try {
                                     job = {
                                         status: data.state,
                                         filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
-                                        thumbnail: await this.fileService.getThumbnail(data.job.file.path),
+                                        thumbnail: (data.job.file.origin == 'sdcard') ? undefined : await this.fileService.getThumbnail(data.job.file.path),
                                         progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                                        filamentAmount: this.service.convertFilamentLengthToAmount(
+                                        filamentAmount: (data.job.filament === null) ? null : this.service.convertFilamentLengthToAmount(
                                             this.getTotalAmountOfFilament(data.job.filament),
                                         ),
                                         timeLeft: {
-                                            value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
+                                            value: (data.progress.printTimeLeft === null) ? null : this.service.convertSecondsToHours(data.progress.printTimeLeft),
                                             unit: 'h',
                                         },
                                         timePrinted: {
