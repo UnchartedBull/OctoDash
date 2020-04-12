@@ -30,7 +30,7 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local' + folderPath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + folderPath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFolderAPI & OctoprintFolderContentAPI): void => {
                         if ('children' in data) {
@@ -42,34 +42,32 @@ export class FilesService {
                             if (fileOrFolder.type === 'folder') {
                                 folder.push(({
                                     type: 'folder',
-                                    path: '/' + fileOrFolder.path,
+                                    path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                                     name: fileOrFolder.name,
                                     // TODO: Think of a way to retrieve number of children
                                     files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                                 } as unknown) as Folder);
-                            } else if (fileOrFolder.typePath.includes('gcode') && fileOrFolder.origin === 'local') {
-                                if (!fileOrFolder.gcodeAnalysis) {
-                                    this.notificationService.setError(
-                                        'Corrupted file found!',
-                                        `File ${fileOrFolder.name} does not include GCodeAnalysis. Ignoring it for now ...`,
+                            } else if (fileOrFolder.typePath.includes('gcode')) {
+                                if (fileOrFolder.gcodeAnalysis) {
+                                    var filamentLength = 0;
+                                    _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
+                                        filamentLength += tool.length;
+                                    });
+                                    var estimatedPrintTime = this.service.convertSecondsToHours(
+                                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                                     );
-                                    return;
                                 }
-                                let filamentLength = 0;
-                                _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
-                                    filamentLength += tool.length;
-                                });
 
                                 folder.push(({
                                     type: 'file',
-                                    path: '/' + fileOrFolder.path,
+                                    path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                                     name: fileOrFolder.name,
                                     date: fileOrFolder.date,
                                     size: this.service.convertByteToMegabyte(fileOrFolder.size),
-                                    printTime: this.service.convertSecondsToHours(
-                                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
-                                    ),
-                                    filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                                    ... (fileOrFolder.gcodeAnalysis) ? {
+                                        printTime: estimatedPrintTime,
+                                        filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                                    } : {},
                                 } as unknown) as File);
                             }
                         });
@@ -100,21 +98,25 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local' + filePath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
-                        let filamentLength = 0;
-                        _.forEach(data.gcodeAnalysis.filament, (tool): void => {
-                            filamentLength += tool.length;
-                        });
+                        if (data.gcodeAnalysis) {
+                            var filamentLength = 0;
+                            _.forEach(data.gcodeAnalysis.filament, (tool): void => {
+                                filamentLength += tool.length;
+                            });
+                        }
                         const file = ({
                             type: 'file',
                             path: '/' + data.path,
                             name: data.name,
                             size: this.service.convertByteToMegabyte(data.size),
-                            printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-                            filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
-                            date: this.service.convertDateToString(new Date(data.date * 1000)),
+                            ... (data.gcodeAnalysis) ? {
+                                date: this.service.convertDateToString(new Date(data.date * 1000)),
+                                printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
+                                filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                            } : {},
                             thumbnail: data.path.endsWith('.ufp.gcode')
                                 ? this.configService
                                       .getURL('plugin/UltimakerFormatPackage/thumbnail/')

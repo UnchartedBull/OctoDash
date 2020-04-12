@@ -51,9 +51,9 @@
             <img src="assets/object.svg" class="files__icon" />
             <div class="files__info">
                 <span class="files__info-value">{{ content.size }}<span class="files__info-unit">mb</span></span>
-                <span class="files__info-value">{{ content.filamentWeight }}<span
+                <span class="files__info-value" *ngIf="content.hasOwnProperty('filamentWeight')">{{ content.filamentWeight }}<span
                         class="files__info-unit">g</span></span>
-                <span class="files__info-value">{{ content.printTime }}<span class="files__info-unit">h</span></span>
+                <span class="files__info-value" *ngIf="content.hasOwnProperty('printTime')">{{ content.printTime }}<span class="files__info-unit">h</span></span>
             </div>
             <span class="files__name">
                 {{ content.name }}
@@ -69,13 +69,13 @@
         <img src="assets/error.svg" class="file__close" (click)="closeDetails()">
         <span class="file__name">{{ fileDetail.name }}</span>
         <span class="file__directory">{{ fileDetail.path }}</span>
-        <span class="file__creation-date">{{ fileDetail.date }}</span>
+        <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
         <img src="{{fileDetail.thumbnail ? fileDetail.thumbnail : 'assets/object.svg'}}" class="file__render"/>
         <table class="file__details">
             <tr>
                 <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
-                <td>{{ fileDetail.printTime }}<span class="file__details-name">h</span></td>
-                <td>{{ fileDetail.filamentWeight }}<span class="file__details-name">g</span></td>
+                <td *ngIf="fileDetail.hasOwnProperty('printTime')">{{ fileDetail.printTime }}<span class="file__details-name">h</span></td>
+                <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">{{ fileDetail.filamentWeight }}<span class="file__details-name">g</span></td>
             </tr>
         </table>
         <table class="file__actions">

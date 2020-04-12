@@ -202,11 +202,11 @@
             font-size: 4vw;
             font-weight: 500;
 
-            &:first-of-type {
+            &:first-of-type:not(:only-of-type) {
                 text-align: left;
             }
 
-            &:last-of-type {
+            &:last-of-type:not(:only-of-type) {
                 text-align: right;
             }
         }
