@@ -5,8 +5,8 @@
         <div class="job-info__progress-percentage">{{ job.progress }}<span style="font-size: 40%">%</span></div>
     </div>
     <span class="job-info__filename">{{ job.filename }}</span> <br />
-    <span class="job-info__filament" *ngIf="job.filamentAmount !== null">{{ job.filamentAmount }}g Filament</span> <br />
-    <span class="job-info__time"><span *ngIf="job.timeLeft.value !== null"><span
+    <span class="job-info__filament" *ngIf="job.hasOwnProperty('filamentAmount')">{{ job.filamentAmount }}g Filament</span> <br />
+    <span class="job-info__time"><span *ngIf="job.hasOwnProperty('timeLeft')"><span
             class="job-info__time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,</span>
         elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
 </div>
@@ -30,19 +30,24 @@
     </span>
     <br />
     <div class="job-info__print-details">
-        <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
-        <span
-            class="job-info__print-details-value">{{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}</span>
-        <span class="job-info__print-details-finish-state">
-            - will finish ~{{ job.estimatedEndTime }}
+        <span *ngIf="job.hasOwnProperty('estimatedPrintTime') && job.hasOwnProperty('estimatedEndTime')">
+            <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
+            <span class="job-info__print-details-value">
+                {{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}
+            </span>
+            <span class="job-info__print-details-finish-state">
+                - will finish ~{{ job.estimatedEndTime }}
+            </span>
+            <br />
         </span>
-        <br />
-        <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
-        <span class="job-info__print-details-value">
-            {{ job.filamentAmount }}g
-        </span>
-        <span class="job-info__print-details-finish-state">
-            filament will be used
+        <span *ngIf="job.hasOwnProperty('filamentAmount')">
+            <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
+            <span class="job-info__print-details-value">
+                {{ job.filamentAmount }}g
+            </span>
+            <span class="job-info__print-details-finish-state">
+                filament will be used
+            </span>
         </span>
     </div>
 </div>

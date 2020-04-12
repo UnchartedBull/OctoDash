@@ -109,7 +109,7 @@ export class FilesService {
                         }
                         const file = ({
                             type: 'file',
-                            path: '/' + data.path,
+                            path: '/' + data.origin + '/' + data.path,
                             name: data.name,
                             size: this.service.convertByteToMegabyte(data.size),
                             ... (data.gcodeAnalysis) ? {
@@ -144,7 +144,7 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local/' + filePath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
                         let thumbnail = data.path.endsWith('.ufp.gcode')
@@ -172,7 +172,7 @@ export class FilesService {
         };
         this.httpPOSTRequest = this.http
             .post(
-                this.configService.getURL('files/local' + filePath),
+                this.configService.getURL('files' + filePath),
                 loadFileBody,
                 this.configService.getHTTPHeaders(),
             )
@@ -194,7 +194,7 @@ export class FilesService {
         };
         this.httpPOSTRequest = this.http
             .post(
-                this.configService.getURL('files/local' + filePath),
+                this.configService.getURL('files' + filePath),
                 printFileBody,
                 this.configService.getHTTPHeaders(),
             )
@@ -211,7 +211,7 @@ export class FilesService {
             this.httpDELETERequest.unsubscribe();
         }
         this.httpDELETERequest = this.http
-            .delete(this.configService.getURL('files/local' + filePath), this.configService.getHTTPHeaders())
+            .delete(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
             .subscribe(
                 (): void => null,
                 (error: HttpErrorResponse): void => {
