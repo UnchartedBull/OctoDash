@@ -12,7 +12,7 @@
     </tr>
 </table>
 <div class="breadcrumbs">
-    <fa-icon [icon]="['fas', 'home']" (click)="openFolder('/')" class="breadcrumbs__item-home"></fa-icon>
+    <fa-icon [icon]="['fas', 'home']" (click)="openFolder(homeFolder)" class="breadcrumbs__item-home"></fa-icon>
     <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')">
         <span (click)="openFolder(currentFolder.split(folder)[0] + folder)">
             {{ folder }}
@@ -28,7 +28,7 @@
         can't load files ...
     </div>
 
-    <div *ngIf="folderContent && currentFolder !== '/' && currentFolder !== ''" class="files__object">
+    <div *ngIf="folderContent && currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
         <div (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))" matRipple
             [matRippleUnbounded]="false">
             <img src="assets/folder.svg" class="files__icon" />

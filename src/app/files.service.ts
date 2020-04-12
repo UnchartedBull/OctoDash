@@ -38,8 +38,18 @@ export class FilesService {
                             delete data.children;
                         }
                         const folder: (File | Folder)[] = [];
+                        let localCount = 0;
+                        let sdcardCount = 0;
                         data.files.forEach((fileOrFolder): void => {
                             if (fileOrFolder.type === 'folder') {
+                                if (folderPath === '') {
+                                    if (fileOrFolder.origin == 'local') {
+                                        localCount += fileOrFolder.children.length;
+                                    } else {
+                                        sdcardCount += fileOrFolder.children.length;
+                                    }
+                                }
+
                                 folder.push(({
                                     type: 'folder',
                                     path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
@@ -58,6 +68,14 @@ export class FilesService {
                                     );
                                 }
 
+                                if (folderPath === '') {
+                                    if (fileOrFolder.origin == 'local') {
+                                        localCount += 1;
+                                    } else {
+                                        sdcardCount += 1;
+                                    }
+                                }
+
                                 folder.push(({
                                     type: 'file',
                                     path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
@@ -72,6 +90,24 @@ export class FilesService {
                             }
                         });
                         data = null;
+                        
+                        if (folderPath === '') {
+                            if (localCount > 0 && sdcardCount > 0) {
+                                folder.length = 0;
+                                folder.push(({
+                                    type: 'folder',
+                                    path: '/local',
+                                    name: 'local',
+                                    files: localCount,
+                                } as unknown) as Folder);
+                                folder.push(({
+                                    type: 'folder',
+                                    path: '/sdcard',
+                                    name: 'sdcard',
+                                    files: sdcardCount,
+                                } as unknown) as Folder);
+                            }
+                        }
 
                         resolve(folder);
                     },
