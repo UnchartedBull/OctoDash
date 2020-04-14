@@ -1,0 +1,45 @@
+.filament {
+    padding: 2vh 2vw 0;
+
+    &-heading {
+        display: block;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    &-filaments {
+        margin-top: 4vh;
+        width: 96vw;
+
+        td {
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+            line-height: 1.5rem;
+        }
+
+        &__type {
+            width: 15vw;
+
+            &-box {
+                font-size: 0.65rem;
+                border: 2px solid sienna;
+                width: auto;
+                padding: 1.5vh 1.5vw;
+                border-radius: 0.3rem;
+            }
+        }
+
+        &__name {
+            width: 65vw;
+        }
+
+        &__weight-left {
+            width: 15vw;
+            text-align: right;
+            vertical-align: -0.15rem;
+        }
+    }
+}

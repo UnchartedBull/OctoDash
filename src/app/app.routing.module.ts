@@ -15,7 +15,8 @@ import { StandbyComponent } from './standby/standby.component';
 const routes: Routes = [
     {
         path: 'main-screen',
-        component: MainScreenComponent,
+        // FIXME
+        component: FilamentComponent,
     },
     {
         path: 'main-screen-no-touch',

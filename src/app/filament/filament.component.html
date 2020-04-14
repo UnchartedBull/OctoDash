@@ -11,21 +11,34 @@
         </td>
     </tr>
 </table>
-<div *ngIf="page === 0">
-    page 0
-</div>
-<div *ngIf="page === 1">
-    page 1
-</div>
-<div *ngIf="page === 2">
-    page 2
-</div>
-<div *ngIf="page === 3">
-    page 3
-</div>
-<div *ngIf="page === 4">
-    page 4
-</div>
-<div *ngIf="page === 5">
-    page 5
+<div class="filament">
+    <div *ngIf="page === 0">
+        <span class="filament-heading">select your new filament</span>
+        <table class="filament-filaments">
+            <tr>
+                <td class="filament-filaments__type">
+                    <span class="filament-filaments__type-box">PLA</span>
+                </td>
+                <td class="filament-filaments__name">
+                    KDEssentials - Role #1
+                </td>
+                <td class="filament-filaments__weight-left">492<span style="font-size: 60%">g left</span></td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="page === 1">
+        page 1
+    </div>
+    <div *ngIf="page === 2">
+        page 2
+    </div>
+    <div *ngIf="page === 3">
+        page 3
+    </div>
+    <div *ngIf="page === 4">
+        page 4
+    </div>
+    <div *ngIf="page === 5">
+        page 5
+    </div>
 </div>
