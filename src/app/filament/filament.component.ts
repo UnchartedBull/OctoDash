@@ -20,6 +20,7 @@ export class FilamentComponent implements OnInit {
 
     public hotendTarget: number;
     public automaticStartSeconds: number;
+    public isHeating: boolean;
 
     public constructor(
         private router: Router,
@@ -34,7 +35,7 @@ export class FilamentComponent implements OnInit {
             this.setPage(1);
         }
         this.hotendTarget = this.configService.getDefaultHotendTemperature();
-        this.automaticStartSeconds = 5;
+        this.automaticStartSeconds = 6;
     }
 
     public increasePage(): void {
@@ -61,6 +62,8 @@ export class FilamentComponent implements OnInit {
         if (page === 0) {
             this.spool = null;
             this.getSpools();
+        } else if (page === 1) {
+            this.heatingAutoStart();
         }
         this.page = page;
         if (this.page > 0) {
@@ -98,5 +101,21 @@ export class FilamentComponent implements OnInit {
 
     public changeHotendTarget(value: number): void {
         this.hotendTarget = this.hotendTarget + value;
+        this.automaticStartSeconds = 5;
+    }
+
+    private heatingAutoStart(): void {
+        this.automaticStartSeconds--;
+        console.log(this.automaticStartSeconds);
+        if (this.automaticStartSeconds === 0) {
+            this.startHeating();
+        } else {
+            setTimeout(this.heatingAutoStart.bind(this), 1000);
+        }
+    }
+
+    public startHeating(): void {
+        console.log('START HEATING');
+        this.isHeating = true;
     }
 }

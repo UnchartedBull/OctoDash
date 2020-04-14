@@ -143,15 +143,34 @@
             }
         }
 
-        &__start-heating {
-            margin: 5vh auto;
-            display: block;
-            background-color: #44bd32;
-            width: 2.5rem;
-            padding: 1vh 2vw;
-            border-radius: 1vw;
-            font-size: 0.8rem;
-            box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+        &__start {
+            &-wrapper {
+                text-align: center;
+                margin-top: 4.5vh;
+
+                > span {
+                    font-size: 50%;
+                    vertical-align: 20%;
+                    display: inline-block;
+                    margin-left: -1vw;
+                    margin-right: 1vw;
+                    vertical-align: 1.2vw;
+                    opacity: 0.6;
+
+                    > span {
+                        font-size: 120%;
+                    }
+                }
+            }
+
+            &-heating {
+                display: inline-block;
+                background-color: #44bd32;
+                padding: 1vh 2vw;
+                border-radius: 1vw;
+                font-size: 0.8rem;
+                box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+            }
         }
     }
 }
