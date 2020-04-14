@@ -30,7 +30,7 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local' + folderPath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + folderPath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFolderAPI & OctoprintFolderContentAPI): void => {
                         if ('children' in data) {
@@ -38,42 +38,76 @@ export class FilesService {
                             delete data.children;
                         }
                         const folder: (File | Folder)[] = [];
+                        let localCount = 0;
+                        let sdcardCount = 0;
                         data.files.forEach((fileOrFolder): void => {
                             if (fileOrFolder.type === 'folder') {
+                                if (folderPath === '') {
+                                    if (fileOrFolder.origin == 'local') {
+                                        localCount += fileOrFolder.children.length;
+                                    } else {
+                                        sdcardCount += fileOrFolder.children.length;
+                                    }
+                                }
+
                                 folder.push(({
                                     type: 'folder',
-                                    path: '/' + fileOrFolder.path,
+                                    path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                                     name: fileOrFolder.name,
                                     // TODO: Think of a way to retrieve number of children
                                     files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                                 } as unknown) as Folder);
-                            } else if (fileOrFolder.typePath.includes('gcode') && fileOrFolder.origin === 'local') {
-                                if (!fileOrFolder.gcodeAnalysis) {
-                                    this.notificationService.setError(
-                                        'Corrupted file found!',
-                                        `File ${fileOrFolder.name} does not include GCodeAnalysis. Ignoring it for now ...`,
-                                    );
-                                    return;
-                                }
+                            } else if (fileOrFolder.typePath.includes('gcode')) {
                                 let filamentLength = 0;
-                                _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
-                                    filamentLength += tool.length;
-                                });
+                                if (fileOrFolder.gcodeAnalysis) {
+                                    _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
+                                        filamentLength += tool.length;
+                                    });
+                                    var estimatedPrintTime = this.service.convertSecondsToHours(
+                                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                                    );
+                                }
+
+                                if (folderPath === '') {
+                                    if (fileOrFolder.origin == 'local') {
+                                        localCount += 1;
+                                    } else {
+                                        sdcardCount += 1;
+                                    }
+                                }
 
                                 folder.push(({
                                     type: 'file',
-                                    path: '/' + fileOrFolder.path,
+                                    path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                                     name: fileOrFolder.name,
                                     date: fileOrFolder.date,
                                     size: this.service.convertByteToMegabyte(fileOrFolder.size),
-                                    printTime: this.service.convertSecondsToHours(
-                                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
-                                    ),
-                                    filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                                    ... (fileOrFolder.gcodeAnalysis) ? {
+                                        printTime: estimatedPrintTime,
+                                        filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                                    } : {},
                                 } as unknown) as File);
                             }
                         });
                         data = null;
+                        
+                        if (folderPath === '') {
+                            if (localCount > 0 && sdcardCount > 0) {
+                                folder.length = 0;
+                                folder.push(({
+                                    type: 'folder',
+                                    path: '/local',
+                                    name: 'local',
+                                    files: localCount,
+                                } as unknown) as Folder);
+                                folder.push(({
+                                    type: 'folder',
+                                    path: '/sdcard',
+                                    name: 'sdcard',
+                                    files: sdcardCount,
+                                } as unknown) as Folder);
+                            }
+                        }
 
                         resolve(folder);
                     },
@@ -100,21 +134,25 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local' + filePath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
                         let filamentLength = 0;
-                        _.forEach(data.gcodeAnalysis.filament, (tool): void => {
-                            filamentLength += tool.length;
-                        });
+                        if (data.gcodeAnalysis) {
+                            _.forEach(data.gcodeAnalysis.filament, (tool): void => {
+                                filamentLength += tool.length;
+                            });
+                        }
                         const file = ({
                             type: 'file',
-                            path: '/' + data.path,
+                            path: '/' + data.origin + '/' + data.path,
                             name: data.name,
                             size: this.service.convertByteToMegabyte(data.size),
-                            printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-                            filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
-                            date: this.service.convertDateToString(new Date(data.date * 1000)),
+                            ... (data.gcodeAnalysis) ? {
+                                date: this.service.convertDateToString(new Date(data.date * 1000)),
+                                printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
+                                filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                            } : {},
                             thumbnail: data.path.endsWith('.ufp.gcode')
                                 ? this.configService
                                       .getURL('plugin/UltimakerFormatPackage/thumbnail/')
@@ -142,7 +180,7 @@ export class FilesService {
                 this.httpGETRequest.unsubscribe();
             }
             this.httpGETRequest = this.http
-                .get(this.configService.getURL('files/local/' + filePath), this.configService.getHTTPHeaders())
+                .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
                         let thumbnail = data.path.endsWith('.ufp.gcode')
@@ -170,7 +208,7 @@ export class FilesService {
         };
         this.httpPOSTRequest = this.http
             .post(
-                this.configService.getURL('files/local' + filePath),
+                this.configService.getURL('files' + filePath),
                 loadFileBody,
                 this.configService.getHTTPHeaders(),
             )
@@ -192,7 +230,7 @@ export class FilesService {
         };
         this.httpPOSTRequest = this.http
             .post(
-                this.configService.getURL('files/local' + filePath),
+                this.configService.getURL('files' + filePath),
                 printFileBody,
                 this.configService.getHTTPHeaders(),
             )
@@ -209,7 +247,7 @@ export class FilesService {
             this.httpDELETERequest.unsubscribe();
         }
         this.httpDELETERequest = this.http
-            .delete(this.configService.getURL('files/local' + filePath), this.configService.getHTTPHeaders())
+            .delete(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
             .subscribe(
                 (): void => null,
                 (error: HttpErrorResponse): void => {

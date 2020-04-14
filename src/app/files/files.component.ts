@@ -19,6 +19,7 @@ export class FilesComponent {
     public sortingAttribute: 'name' | 'date' | 'size';
     public sortingOrder: 'asc' | 'dsc';
     public showSorting: boolean = false;
+    public homeFolder: string = '/';
 
     public constructor(
         private filesService: FilesService,
@@ -60,7 +61,12 @@ export class FilesComponent {
                 .getFolder(folderPath)
                 .then((data): void => {
                     this.folderContent = data;
-                    this.currentFolder = folderPath;
+                    if (folderPath === '/' && !(data[0].name === 'local' && data[1].name == 'sdcard')) {
+                        this.currentFolder = data[0].path.startsWith('/local') ? '/local' : '/sdcard';
+                        this.homeFolder = this.currentFolder;
+                    } else {
+                        this.currentFolder = folderPath;
+                    }
                     this.sortFolder(this.sortingAttribute, this.sortingOrder);
                     this.spinner.hide();
                 })

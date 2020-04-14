@@ -3,9 +3,10 @@ import { OctoprintFilament } from './jobAPI';
 export interface OctoprintFilesAPI {
     date: number;
     display: string;
-    gcodeAnalysis: OctoprintGCodeAnalysis;
+    gcodeAnalysis?: OctoprintGCodeAnalysis;
     hash: string;
     name: string;
+    origin: string;
     path: string;
     prints: OctoprintPrints;
     refs: OctoprintRefs;

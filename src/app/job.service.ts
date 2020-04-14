@@ -50,33 +50,30 @@ export class JobService {
                                     job = {
                                         status: data.state,
                                         filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
-                                        thumbnail:
-                                            data.job.file.origin == 'sdcard'
-                                                ? undefined
-                                                : await this.fileService.getThumbnail(data.job.file.path),
+                                        thumbnail: await this.fileService.getThumbnail('/' + data.job.file.origin + '/' + data.job.file.path),
                                         progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                                        filamentAmount:
-                                            data.job.filament === null
-                                                ? null
-                                                : this.service.convertFilamentLengthToAmount(
-                                                      this.getTotalAmountOfFilament(data.job.filament),
-                                                  ),
-                                        timeLeft: {
-                                            value:
-                                                data.progress.printTimeLeft === null
-                                                    ? null
-                                                    : this.service.convertSecondsToHours(data.progress.printTimeLeft),
-                                            unit: 'h',
-                                        },
+                                        ... (data.job.filament !== null) ? {
+                                            filamentAmount: this.service.convertFilamentLengthToAmount(
+                                                this.getTotalAmountOfFilament(data.job.filament),
+                                            ),
+                                        } : {},
+                                        ... (data.progress.printTimeLeft !== null) ? {
+                                            timeLeft: {
+                                                value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
+                                                unit: 'h',
+                                            },
+                                        } : {},
                                         timePrinted: {
                                             value: this.service.convertSecondsToHours(data.progress.printTime),
                                             unit: 'h',
                                         },
-                                        estimatedPrintTime: {
-                                            value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
-                                            unit: 'h',
-                                        },
-                                        estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
+                                        ... (data.job.estimatedPrintTime !== null) ? {
+                                            estimatedPrintTime: {
+                                                value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
+                                                unit: 'h',
+                                            },
+                                            estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
+                                        } : {},
                                     };
                                 } catch (error) {
                                     this.notificationService.setError("Can't retrieve Job Status", error);
@@ -255,9 +252,9 @@ export interface Job {
     filename: string;
     thumbnail: string | undefined;
     progress: number;
-    filamentAmount: number;
-    timeLeft: Duration;
+    filamentAmount?: number;
+    timeLeft?: Duration;
     timePrinted: Duration;
-    estimatedPrintTime: Duration;
-    estimatedEndTime: string;
+    estimatedPrintTime?: Duration;
+    estimatedEndTime?: string;
 }
