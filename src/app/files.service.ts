@@ -58,8 +58,8 @@ export class FilesService {
                                     files: fileOrFolder.children ? fileOrFolder.children.length : '-',
                                 } as unknown) as Folder);
                             } else if (fileOrFolder.typePath.includes('gcode')) {
+                                let filamentLength = 0;
                                 if (fileOrFolder.gcodeAnalysis) {
-                                    var filamentLength = 0;
                                     _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
                                         filamentLength += tool.length;
                                     });
@@ -137,8 +137,8 @@ export class FilesService {
                 .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
+                        let filamentLength = 0;
                         if (data.gcodeAnalysis) {
-                            var filamentLength = 0;
                             _.forEach(data.gcodeAnalysis.filament, (tool): void => {
                                 filamentLength += tool.length;
                             });
