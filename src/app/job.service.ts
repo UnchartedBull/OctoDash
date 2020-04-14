@@ -50,30 +50,42 @@ export class JobService {
                                     job = {
                                         status: data.state,
                                         filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
-                                        thumbnail: await this.fileService.getThumbnail('/' + data.job.file.origin + '/' + data.job.file.path),
+                                        thumbnail: await this.fileService.getThumbnail(
+                                            '/' + data.job.file.origin + '/' + data.job.file.path,
+                                        ),
                                         progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
-                                        ... (data.job.filament !== null) ? {
-                                            filamentAmount: this.service.convertFilamentLengthToAmount(
-                                                this.getTotalAmountOfFilament(data.job.filament),
-                                            ),
-                                        } : {},
-                                        ... (data.progress.printTimeLeft !== null) ? {
-                                            timeLeft: {
-                                                value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
-                                                unit: 'h',
-                                            },
-                                        } : {},
+                                        ...(data.job.filament !== null
+                                            ? {
+                                                  filamentAmount: this.service.convertFilamentLengthToAmount(
+                                                      this.getTotalAmountOfFilament(data.job.filament),
+                                                  ),
+                                              }
+                                            : {}),
+                                        ...(data.progress.printTimeLeft !== null
+                                            ? {
+                                                  timeLeft: {
+                                                      value: this.service.convertSecondsToHours(
+                                                          data.progress.printTimeLeft,
+                                                      ),
+                                                      unit: 'h',
+                                                  },
+                                              }
+                                            : {}),
                                         timePrinted: {
                                             value: this.service.convertSecondsToHours(data.progress.printTime),
                                             unit: 'h',
                                         },
-                                        ... (data.job.estimatedPrintTime !== null) ? {
-                                            estimatedPrintTime: {
-                                                value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
-                                                unit: 'h',
-                                            },
-                                            estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
-                                        } : {},
+                                        ...(data.job.estimatedPrintTime !== null
+                                            ? {
+                                                  estimatedPrintTime: {
+                                                      value: this.service.convertSecondsToHours(
+                                                          data.job.estimatedPrintTime,
+                                                      ),
+                                                      unit: 'h',
+                                                  },
+                                                  estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
+                                              }
+                                            : {}),
                                     };
                                 } catch (error) {
                                     this.notificationService.setError("Can't retrieve Job Status", error);

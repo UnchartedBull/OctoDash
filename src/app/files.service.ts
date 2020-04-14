@@ -39,14 +39,14 @@ export class FilesService {
                         }
                         const folder: (File | Folder)[] = [];
                         let localCount = 0;
-                        let sdcardCount = 0;
+                        let sdCardCount = 0;
                         data.files.forEach((fileOrFolder): void => {
                             if (fileOrFolder.type === 'folder') {
                                 if (folderPath === '') {
                                     if (fileOrFolder.origin == 'local') {
                                         localCount += fileOrFolder.children.length;
                                     } else {
-                                        sdcardCount += fileOrFolder.children.length;
+                                        sdCardCount += fileOrFolder.children.length;
                                     }
                                 }
 
@@ -72,7 +72,7 @@ export class FilesService {
                                     if (fileOrFolder.origin == 'local') {
                                         localCount += 1;
                                     } else {
-                                        sdcardCount += 1;
+                                        sdCardCount += 1;
                                     }
                                 }
 
@@ -82,17 +82,21 @@ export class FilesService {
                                     name: fileOrFolder.name,
                                     date: fileOrFolder.date,
                                     size: this.service.convertByteToMegabyte(fileOrFolder.size),
-                                    ... (fileOrFolder.gcodeAnalysis) ? {
-                                        printTime: estimatedPrintTime,
-                                        filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
-                                    } : {},
+                                    ...(fileOrFolder.gcodeAnalysis
+                                        ? {
+                                              printTime: estimatedPrintTime,
+                                              filamentWeight: this.service.convertFilamentLengthToAmount(
+                                                  filamentLength,
+                                              ),
+                                          }
+                                        : {}),
                                 } as unknown) as File);
                             }
                         });
                         data = null;
-                        
+
                         if (folderPath === '') {
-                            if (localCount > 0 && sdcardCount > 0) {
+                            if (localCount > 0 && sdCardCount > 0) {
                                 folder.length = 0;
                                 folder.push(({
                                     type: 'folder',
@@ -104,7 +108,7 @@ export class FilesService {
                                     type: 'folder',
                                     path: '/sdcard',
                                     name: 'sdcard',
-                                    files: sdcardCount,
+                                    files: sdCardCount,
                                 } as unknown) as Folder);
                             }
                         }
@@ -148,11 +152,15 @@ export class FilesService {
                             path: '/' + data.origin + '/' + data.path,
                             name: data.name,
                             size: this.service.convertByteToMegabyte(data.size),
-                            ... (data.gcodeAnalysis) ? {
-                                date: this.service.convertDateToString(new Date(data.date * 1000)),
-                                printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-                                filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
-                            } : {},
+                            ...(data.gcodeAnalysis
+                                ? {
+                                      date: this.service.convertDateToString(new Date(data.date * 1000)),
+                                      printTime: this.service.convertSecondsToHours(
+                                          data.gcodeAnalysis.estimatedPrintTime,
+                                      ),
+                                      filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                                  }
+                                : {}),
                             thumbnail: data.path.endsWith('.ufp.gcode')
                                 ? this.configService
                                       .getURL('plugin/UltimakerFormatPackage/thumbnail/')
@@ -207,11 +215,7 @@ export class FilesService {
             print: false,
         };
         this.httpPOSTRequest = this.http
-            .post(
-                this.configService.getURL('files' + filePath),
-                loadFileBody,
-                this.configService.getHTTPHeaders(),
-            )
+            .post(this.configService.getURL('files' + filePath), loadFileBody, this.configService.getHTTPHeaders())
             .subscribe(
                 (): void => null,
                 (error: HttpErrorResponse): void => {
@@ -229,11 +233,7 @@ export class FilesService {
             print: true,
         };
         this.httpPOSTRequest = this.http
-            .post(
-                this.configService.getURL('files' + filePath),
-                printFileBody,
-                this.configService.getHTTPHeaders(),
-            )
+            .post(this.configService.getURL('files' + filePath), printFileBody, this.configService.getHTTPHeaders())
             .subscribe(
                 (): void => null,
                 (error: HttpErrorResponse): void => {
