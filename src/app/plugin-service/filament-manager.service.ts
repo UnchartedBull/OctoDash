@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
 
+const colorRegexp = /\((.*)\)$/g;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -28,7 +30,19 @@ export class FilamentManagerService {
                     this.configService.getHTTPHeaders(),
                 )
                 .subscribe(
-                    (spools: FilamentSpoolList): void => resolve(spools),
+                    (spools: FilamentSpoolList): void => {
+                        spools.spools.forEach((spool): void => {
+                            let match = colorRegexp.exec(spool.name);
+                            if (match) {
+                                spool.color = match[1];
+                                spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], '')}`;
+                            } else {
+                                spool.color = '#f5f6fa';
+                                spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
+                            }
+                        });
+                        resolve(spools);
+                    },
                     (error: HttpErrorResponse): void => {
                         this.notificationService.setError("Can't load filament spools!", error.message);
                         reject();
@@ -47,6 +61,8 @@ interface FilamentSpool {
     cost: number;
     id: number;
     name: string;
+    displayName?: string;
+    color?: string;
     profile: FilamentProfile;
     temp_offset: number;
     used: number;

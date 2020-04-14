@@ -11,7 +11,8 @@ import { FilamentManagerService, FilamentSpoolList } from '../plugin-service/fil
 })
 export class FilamentComponent implements OnInit {
     public page: number;
-    public spools: FilamentSpoolList;
+    public filamentSpools: FilamentSpoolList;
+    public isLoadingSpools = true;
 
     public constructor(
         private router: Router,
@@ -47,18 +48,30 @@ export class FilamentComponent implements OnInit {
         }
     }
 
-    public setPage(page: number): void {
+    private setPage(page: number): void {
         if (page === 0) {
-            this.filamentManagerService
-                .getSpoolList()
-                .then((spools: FilamentSpoolList): void => {
-                    console.log(spools);
-                    this.spools = spools;
-                })
-                .catch((): void => {
-                    this.spools = null;
-                });
+            this.getSpools();
         }
         this.page = page;
+    }
+
+    private getSpools(): void {
+        this.isLoadingSpools = true;
+        this.filamentManagerService
+            .getSpoolList()
+            .then((spools: FilamentSpoolList): void => {
+                console.log(spools);
+                this.filamentSpools = spools;
+            })
+            .catch((): void => {
+                this.filamentSpools = null;
+            })
+            .finally((): void => {
+                this.isLoadingSpools = false;
+            });
+    }
+
+    public getSpoolWeightLeft(weight: number, used: number): number {
+        return Math.floor(weight - used);
     }
 }
