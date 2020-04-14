@@ -67,9 +67,14 @@ export class StandbyComponent implements OnInit {
                         this.connectionRetries--;
                         setTimeout(this.connectToPrinter.bind(this), 500);
                     }
-                } else if (data.current.state === 'Error') {
-                    this.connectionRetries = 3;
-                    this.setConnectionError();
+                } else if (data.current.state.includes('Error')) {
+                    if (this.connectionRetries <= 1) {
+                        this.connectionRetries = 3;
+                        this.setConnectionError();
+                    } else {
+                        this.connectionRetries--;
+                        setTimeout(this.connectToPrinter.bind(this), 500);
+                    }
                 } else {
                     this.disableStandby();
                 }
