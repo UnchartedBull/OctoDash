@@ -40,6 +40,7 @@ export class FilamentManagerService {
                                 spool.color = '#f5f6fa';
                                 spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
                             }
+                            colorRegexp.lastIndex = 0;
                         });
                         resolve(spools);
                     },
@@ -56,7 +57,7 @@ export interface FilamentSpoolList {
     spools: FilamentSpool[];
 }
 
-interface FilamentSpool {
+export interface FilamentSpool {
     /* eslint-disable camelcase */
     cost: number;
     id: number;

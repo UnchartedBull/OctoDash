@@ -4,7 +4,10 @@
             <img src="assets/back.svg" class="top-bar__back-icon" />back
         </td>
         <td class="top-bar__center">
-            <img src="assets/filament.svg" class="top-bar__center-icon">
+            <img src="assets/filament.svg" class="top-bar__center-icon" *ngIf="page === 0">
+            <div class="filament__progress-bar-wrapper" *ngIf="page > 0">
+                <div class="filament__progress-bar" id="progressBar"></div>
+            </div>
         </td>
         <td class="top-bar__next" (click)="increasePage()" matRipple [matRippleUnbounded]="false">
             skip<img src="assets/next.svg" class="top-bar__next-icon">
@@ -15,7 +18,7 @@
     <div *ngIf="page === 0">
         <span class="filament-heading">select your new filament</span>
         <table class="filament-filaments" *ngIf="filamentSpools && !isLoadingSpools">
-            <tr *ngFor="let spool of filamentSpools.spools">
+            <tr *ngFor="let spool of filamentSpools.spools" (click)="setSpool(spool)">
                 <td class="filament-filaments__type">
                     <span class="filament-filaments__type-box"
                         [ngStyle]="{'border-color': spool.color}">{{ spool.profile.material }}</span>
@@ -36,7 +39,31 @@
         <div class="scroll__thumb-inactive" *ngIf="filamentSpools"></div>
     </div>
     <div *ngIf="page === 1">
-        page 1
+        <span class="filament-heading">heating the nozzle</span>
+        <div class="filament-nozzle__controller">
+            <div class="filament-nozzle__controller-row">
+                <div class="filament-nozzle__controller-control" (click)="quickControlChangeValue(1)" matRipple
+                    [matRippleUnbounded]="false">+1
+                </div>
+                <div class="filament-nozzle__controller-control" (click)="quickControlChangeValue(10)" matRipple
+                    [matRippleUnbounded]="false">+10
+                </div>
+            </div>
+            <div class="filament-nozzle__controller-value" colspan="2">
+                {{ hotendTarget }}
+                <span class="filament-nozzle__controller-value-unit">°C</span>
+            </div>
+            <div class="filament-nozzle__controller-row">
+                <div class="filament-nozzle__controller-control" (click)="quickControlChangeValue(-1)" matRipple
+                    [matRippleUnbounded]="false">-1
+                </div>
+                <div class="filament-nozzle__controller-control" (click)="quickControlChangeValue(-10)" matRipple
+                    [matRippleUnbounded]="false">-10
+                </div>
+            </div>
+        </div>
+        <a class="filament-nozzle__start-heating">start <span id="nozzle-heating-auto"
+                style="font-size: 50%">5s</span></a>
     </div>
     <div *ngIf="page === 2">
         page 2
