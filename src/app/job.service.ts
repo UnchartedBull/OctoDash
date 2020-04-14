@@ -18,6 +18,7 @@ export class JobService {
     private observable: Observable<Job>;
     private observer: Observer<Job>;
     private printing = false;
+    private previewWhilePrinting = false;
 
     public constructor(
         private configService: ConfigService,
@@ -38,7 +39,13 @@ export class JobService {
                         async (data: OctoprintJobAPI): Promise<void> => {
                             let job: Job = null;
                             if (data.job && data.job.file.name) {
-                                this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(data.state);
+                                this.printing = [
+                                    'Printing',
+                                    'Pausing',
+                                    'Paused',
+                                    'Cancelling',
+                                    'Printing from SD',
+                                ].includes(data.state);
                                 try {
                                     job = {
                                         status: data.state,
@@ -106,6 +113,14 @@ export class JobService {
 
     public isPrinting(): boolean {
         return this.printing;
+    }
+
+    public togglePreviewWhilePrinting(): void {
+        this.previewWhilePrinting = !this.previewWhilePrinting;
+    }
+
+    public showPreviewWhilePrinting(): boolean {
+        return this.previewWhilePrinting;
     }
 
     public cancelJob(): void {

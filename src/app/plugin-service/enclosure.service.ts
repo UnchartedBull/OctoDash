@@ -13,6 +13,7 @@ import { NotificationService } from '../notification/notification.service';
 export class EnclosureService {
     private httpGETRequest: Subscription;
     private observable: Observable<TemperatureReading>;
+    private initialRequest = true;
 
     public constructor(
         private http: HttpClient,
@@ -20,7 +21,7 @@ export class EnclosureService {
         private notificationService: NotificationService,
     ) {
         this.observable = new Observable((observer: Observer<TemperatureReading>): void => {
-            timer(2500, 30000).subscribe((): void => {
+            timer(2500, 15000).subscribe((): void => {
                 if (this.httpGETRequest) {
                     this.httpGETRequest.unsubscribe();
                 }
@@ -33,6 +34,7 @@ export class EnclosureService {
                     )
                     .subscribe(
                         (data: EnclosurePluginAPI): void => {
+                            this.initialRequest = false;
                             observer.next(({
                                 temperature: data.temp_sensor_temp,
                                 humidity: data.temp_sensor_humidity,
@@ -40,7 +42,14 @@ export class EnclosureService {
                             } as unknown) as TemperatureReading);
                         },
                         (error: HttpErrorResponse): void => {
-                            this.notificationService.setError("Can't retrieve enclosure temperature!", error.message);
+                            if (this.initialRequest && error.status === 500) {
+                                this.initialRequest = false;
+                            } else {
+                                this.notificationService.setError(
+                                    "Can't retrieve enclosure temperature!",
+                                    error.message,
+                                );
+                            }
                         },
                     );
             });
