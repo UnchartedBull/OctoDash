@@ -236,6 +236,10 @@ export class ConfigService {
     public isPreheatPluginEnabled(): boolean {
         return this.config.plugins.preheatButton.enabled;
     }
+
+    public isFilamentManagerEnabled(): boolean {
+        return this.config.plugins.filamentManager.enabled;
+    }
 }
 
 export interface Config {

@@ -1,5 +1,31 @@
-<span style="display: block; text-align: center; font-size: 8vw; margin-top: 15vh">:(</span>
-<span style="display: block; text-align: center; font-size: 3vw; margin-top: 10vh;">
-    This feature has not been implemented yet.
-    If you really, really want it before anything else - go to GitHub and like issue #14.</span>
-<div routerLink="/main-screen" style="display: block; text-align: center; font-size: 8vw; margin-top: 15vh">back</div>
+<table class="top-bar">
+    <tr>
+        <td class="top-bar__back" (click)="decreasePage()" matRipple [matRippleUnbounded]="false">
+            <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center">
+            <img src="assets/filament.svg" class="top-bar__center-icon">
+        </td>
+        <td class="top-bar__next" (click)="increasePage()" matRipple [matRippleUnbounded]="false">
+            skip<img src="assets/next.svg" class="top-bar__next-icon">
+        </td>
+    </tr>
+</table>
+<div *ngIf="page === 0">
+    page 0
+</div>
+<div *ngIf="page === 1">
+    page 1
+</div>
+<div *ngIf="page === 2">
+    page 2
+</div>
+<div *ngIf="page === 3">
+    page 3
+</div>
+<div *ngIf="page === 4">
+    page 4
+</div>
+<div *ngIf="page === 5">
+    page 5
+</div>
