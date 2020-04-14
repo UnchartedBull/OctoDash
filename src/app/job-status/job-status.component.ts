@@ -63,4 +63,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     public isPrinting(): boolean {
         return this.jobService.isPrinting();
     }
+
+    public showPreview(): boolean {
+        return this.jobService.showPreviewWhilePrinting();
+    }
 }
