@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { ConfigService } from '../config/config.service';
 import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from '../plugin-service/filament-manager.service';
+import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
     selector: 'app-filament',
@@ -10,7 +11,7 @@ import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from '../plu
     styleUrls: ['./filament.component.scss'],
 })
 export class FilamentComponent implements OnInit {
-    private spool: FilamentSpool;
+    private selectedSpool: FilamentSpool;
     private totalPages = 5;
 
     public page: number;
@@ -19,13 +20,15 @@ export class FilamentComponent implements OnInit {
     public isLoadingSpools = true;
 
     public hotendTarget: number;
-    public automaticStartSeconds: number;
+    public hotendTemperature: number;
+    public automaticHeatingStartSeconds: number;
     public isHeating: boolean;
 
     public constructor(
         private router: Router,
         private configService: ConfigService,
         private filamentManagerService: FilamentManagerService,
+        private printerService: PrinterService,
     ) {}
 
     public ngOnInit(): void {
@@ -35,7 +38,10 @@ export class FilamentComponent implements OnInit {
             this.setPage(1);
         }
         this.hotendTarget = this.configService.getDefaultHotendTemperature();
-        this.automaticStartSeconds = 6;
+        this.automaticHeatingStartSeconds = 6;
+        this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
+            this.hotendTemperature = printerStatus.nozzle.current;
+        });
     }
 
     public increasePage(): void {
@@ -60,10 +66,12 @@ export class FilamentComponent implements OnInit {
 
     private setPage(page: number): void {
         if (page === 0) {
-            this.spool = null;
+            this.selectedSpool = null;
             this.getSpools();
         } else if (page === 1) {
-            this.heatingAutoStart();
+            this.isHeating = false;
+            this.automaticHeatingStartSeconds = 6;
+            this.automaticHeatingStartTimer();
         }
         this.page = page;
         if (this.page > 0) {
@@ -72,6 +80,8 @@ export class FilamentComponent implements OnInit {
             }, 200);
         }
     }
+
+    // PAGE 1
 
     private getSpools(): void {
         this.isLoadingSpools = true;
@@ -93,29 +103,43 @@ export class FilamentComponent implements OnInit {
     }
 
     public setSpool(spool: FilamentSpool): void {
-        this.spool = spool;
+        this.selectedSpool = spool;
         this.hotendTarget = this.hotendTarget + spool.temp_offset;
-        console.log(this.hotendTarget);
         this.setPage(1);
     }
 
+    // PAGE 2
+
     public changeHotendTarget(value: number): void {
         this.hotendTarget = this.hotendTarget + value;
-        this.automaticStartSeconds = 5;
-    }
-
-    private heatingAutoStart(): void {
-        this.automaticStartSeconds--;
-        console.log(this.automaticStartSeconds);
-        if (this.automaticStartSeconds === 0) {
-            this.startHeating();
+        if (this.hotendTarget < 0) {
+            this.hotendTarget = 0;
+        }
+        if (this.hotendTarget > 999) {
+            this.hotendTarget = 999;
+        }
+        if (!this.isHeating) {
+            this.automaticHeatingStartSeconds = 5;
         } else {
-            setTimeout(this.heatingAutoStart.bind(this), 1000);
+            this.setNozzleTemperature();
         }
     }
 
-    public startHeating(): void {
+    private automaticHeatingStartTimer(): void {
+        this.automaticHeatingStartSeconds--;
+        if (this.automaticHeatingStartSeconds === 0) {
+            this.setNozzleTemperature();
+        } else {
+            setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
+        }
+    }
+
+    public setNozzleTemperature(): void {
         console.log('START HEATING');
         this.isHeating = true;
+    }
+
+    public getAbsoluteValue(number: number): number {
+        return Math.abs(number);
     }
 }

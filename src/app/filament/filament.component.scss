@@ -105,10 +105,60 @@
         margin-top: 20vh;
     }
 
-    &-nozzle {
+    &-heating {
+        &__center {
+            text-align: center;
+        }
+
+        &__information {
+            display: inline-block;
+            width: 27vw;
+            font-size: 0.65rem;
+            text-align: left;
+            margin-left: 7vw;
+            line-height: 1rem;
+            overflow: visible;
+            vertical-align: top;
+            margin-top: 8vh;
+            margin-right: -5vw;
+
+            &-color {
+                width: 5vw;
+                height: 5vw;
+                border-radius: 100%;
+                margin: 0 auto;
+                box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.75);
+                margin-bottom: 3vh;
+            }
+
+            &-name {
+                text-align: center;
+                font-size: 0.8rem;
+                opacity: 0.7;
+                display: block;
+            }
+
+            &-offset {
+                &-wrapper {
+                    text-align: center;
+                    margin-top: 6vh;
+                    line-height: 2rem;
+                }
+
+                &-indicator {
+                    opacity: 0.7;
+                    vertical-align: 0.5rem;
+                }
+
+                &-value {
+                    font-size: 2.5rem;
+                }
+            }
+        }
+
         &__controller {
+            display: inline-block;
             width: 35vw;
-            margin: 0 auto;
             border: solid 0.4vw;
             border-radius: 2vw;
             margin-top: 6vh;
@@ -129,6 +179,16 @@
                     text-align: center;
                     font-size: 4vw;
                     font-weight: 400;
+                }
+            }
+
+            &-current {
+                display: block;
+                margin-top: 1vh;
+                font-size: 4vw;
+
+                > span {
+                    font-size: 2.8vw;
                 }
             }
 
