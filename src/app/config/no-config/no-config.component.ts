@@ -36,6 +36,8 @@ export class NoConfigComponent implements OnInit {
                     name: '',
                     xySpeed: 150,
                     zSpeed: 5,
+                    extruderFastSpeed: 30,
+                    extruderSlowSpeed: 10,
                     defaultTemperatureFanSpeed: {
                         hotend: 200,
                         heatbed: 60,

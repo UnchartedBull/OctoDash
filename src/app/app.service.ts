@@ -34,17 +34,17 @@ export class AppService {
             }
         }
 
-        this.updateError = [".printer should have required property 'defaultTemperatureFanSpeed'"];
+        this.updateError = [
+            ".printer should have required property 'extruderFastSpeed'",
+            ".printer should have required property 'extruderSlowSpeed'",
+        ];
     }
 
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
-        config.printer.defaultTemperatureFanSpeed = {
-            hotend: 200,
-            heatbed: 60,
-            fan: 100,
-        };
+        config.printer.extruderFastSpeed = 30;
+        config.printer.extruderSlowSpeed = 10;
         this.configService.saveConfig(config);
         this.configService.updateConfig();
         return true;

@@ -263,6 +263,8 @@ interface Printer {
     name: string;
     xySpeed: number;
     zSpeed: number;
+    extruderFastSpeed: number;
+    extruderSlowSpeed: number;
     defaultTemperatureFanSpeed: DefaultTemperatureFanSpeed;
 }
 
@@ -350,7 +352,14 @@ const schema = {
         printer: {
             $id: '#/properties/printer',
             type: 'object',
-            required: ['name', 'xySpeed', 'zSpeed', 'defaultTemperatureFanSpeed'],
+            required: [
+                'name',
+                'xySpeed',
+                'zSpeed',
+                'extruderFastSpeed',
+                'extruderSlowSpeed',
+                'defaultTemperatureFanSpeed',
+            ],
             properties: {
                 name: {
                     $id: '#/properties/printer/properties/name',
@@ -363,6 +372,14 @@ const schema = {
                 },
                 zSpeed: {
                     $id: '#/properties/printer/properties/zSpeed',
+                    type: 'integer',
+                },
+                extruderFastSpeed: {
+                    $id: '#/properties/printer/properties/extruderFastSpeed',
+                    type: 'integer',
+                },
+                extruderSlowSpeed: {
+                    $id: '#/properties/printer/properties/extruderSlowSpeed',
                     type: 'integer',
                 },
                 defaultTemperatureFanSpeed: {
