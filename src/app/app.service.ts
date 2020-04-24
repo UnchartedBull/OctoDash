@@ -35,19 +35,20 @@ export class AppService {
         }
 
         this.updateError = [
-            ".printer should have required property 'extruderFastSpeed'",
-            ".printer should have required property 'extruderSlowSpeed'",
+            ".filament should have required property 'feedSpeedSlow'",
+            ".filament should hsave required property 'purgeDistance'",
         ];
     }
 
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
-        config.printer.extruderFastSpeed = 30;
-        config.printer.extruderSlowSpeed = 10;
-        this.configService.saveConfig(config);
-        this.configService.updateConfig();
-        return true;
+        config.filament.feedSpeed = 30;
+        config.filament.feedSpeedSlow = 10;
+        config.filament.purgeDistance = 30;
+        // this.configService.saveConfig(config);
+        // this.configService.updateConfig();
+        return false;
     }
 
     private checkUpdate(): void {

@@ -263,8 +263,6 @@ interface Printer {
     name: string;
     xySpeed: number;
     zSpeed: number;
-    extruderFastSpeed: number;
-    extruderSlowSpeed: number;
     defaultTemperatureFanSpeed: DefaultTemperatureFanSpeed;
 }
 
@@ -279,6 +277,8 @@ interface Filament {
     density: number;
     feedLength: number;
     feedSpeed: number;
+    feedSpeedSlow: number;
+    purgeDistance: number;
 }
 
 interface Plugins {
@@ -352,14 +352,7 @@ const schema = {
         printer: {
             $id: '#/properties/printer',
             type: 'object',
-            required: [
-                'name',
-                'xySpeed',
-                'zSpeed',
-                'extruderFastSpeed',
-                'extruderSlowSpeed',
-                'defaultTemperatureFanSpeed',
-            ],
+            required: ['name', 'xySpeed', 'zSpeed', 'defaultTemperatureFanSpeed'],
             properties: {
                 name: {
                     $id: '#/properties/printer/properties/name',
@@ -372,14 +365,6 @@ const schema = {
                 },
                 zSpeed: {
                     $id: '#/properties/printer/properties/zSpeed',
-                    type: 'integer',
-                },
-                extruderFastSpeed: {
-                    $id: '#/properties/printer/properties/extruderFastSpeed',
-                    type: 'integer',
-                },
-                extruderSlowSpeed: {
-                    $id: '#/properties/printer/properties/extruderSlowSpeed',
                     type: 'integer',
                 },
                 defaultTemperatureFanSpeed: {
@@ -406,7 +391,7 @@ const schema = {
         filament: {
             $id: '#/properties/filament',
             type: 'object',
-            required: ['density', 'thickness', 'feedLength', 'feedSpeed'],
+            required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance'],
             properties: {
                 density: {
                     $id: '#/properties/filament/properties/density',
@@ -422,6 +407,14 @@ const schema = {
                 },
                 feedSpeed: {
                     $id: '#/properties/filament/properties/feedSpeed',
+                    type: 'integer',
+                },
+                feedSpeedSlow: {
+                    $id: '#/properties/filament/properties/feedSpeedSlow',
+                    type: 'integer',
+                },
+                purgeDistance: {
+                    $id: '#/properties/filament/properties/purgeDistance',
                     type: 'integer',
                 },
             },

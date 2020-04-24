@@ -11,7 +11,7 @@ import { Config, ConfigService } from '../config.service';
 })
 export class NoConfigComponent implements OnInit {
     public page = 0;
-    public totalPages = 5;
+    public totalPages = 6;
 
     private configUpdate: boolean;
     public config: Config;
@@ -24,6 +24,7 @@ export class NoConfigComponent implements OnInit {
 
     public constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
         this.configUpdate = this.configService.isUpdate();
+        console.log(this.configUpdate);
         if (this.configUpdate) {
             this.config = configService.getCurrentConfig();
         } else {
@@ -36,8 +37,6 @@ export class NoConfigComponent implements OnInit {
                     name: '',
                     xySpeed: 150,
                     zSpeed: 5,
-                    extruderFastSpeed: 30,
-                    extruderSlowSpeed: 10,
                     defaultTemperatureFanSpeed: {
                         hotend: 200,
                         heatbed: 60,
@@ -48,7 +47,9 @@ export class NoConfigComponent implements OnInit {
                     thickness: 1.75,
                     density: 1.25,
                     feedLength: 470,
-                    feedSpeed: 100,
+                    feedSpeed: 30,
+                    feedSpeedSlow: 10,
+                    purgeDistance: 30,
                 },
                 plugins: {
                     displayLayerProgress: {
@@ -142,7 +143,7 @@ export class NoConfigComponent implements OnInit {
                 'x-api-key': this.config.octoprint.accessToken,
             }),
         };
-        this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
+        this.http.get(this.config.octoprint.url + 'connection', httpHeaders).subscribe(
             (): void => {
                 this.octoprintConnection = true;
                 this.saveConfig();
@@ -159,6 +160,7 @@ export class NoConfigComponent implements OnInit {
         this.configErrors = [];
         this.octoprintConnectionError = null;
         this.config = this.configService.createConfigFromInput(this.config);
+        this.config.filament.feedSpeedSlow = Math.round(this.config.filament.feedSpeed * 0.33);
         this.validateConfig();
         return true;
     }
@@ -190,7 +192,7 @@ export class NoConfigComponent implements OnInit {
     }
 
     public decreasePage(): void {
-        if (this.page === 4) {
+        if (this.page === 5) {
             this.config = this.configService.revertConfigForInput(this.config);
         }
         this.page -= 1;
