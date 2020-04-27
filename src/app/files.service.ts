@@ -163,7 +163,7 @@ export class FilesService {
                                 : {}),
                             thumbnail: data.thumbnail
                                 ? this.configService
-                                      .getURL('' + data.thumbnail + '')
+                                      .getURL(data.thumbnail)
                                       .replace('/api/', '/')
                                 : 'assets/object.svg',
                         } as unknown) as File;
