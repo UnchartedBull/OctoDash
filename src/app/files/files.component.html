@@ -70,7 +70,7 @@
         <span class="file__name">{{ fileDetail.name }}</span>
         <span class="file__directory">{{ fileDetail.path }}</span>
         <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
-        <img src="{{fileDetail.thumbnail ? fileDetail.thumbnail : 'assets/object.svg'}}" class="file__render"/>
+        <img [src]="fileDetail.thumbnail" class="file__render"/>
         <table class="file__details">
             <tr>
                 <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
