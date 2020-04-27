@@ -193,7 +193,7 @@ export class FilesService {
                     (data: OctoprintFilesAPI): void => {
                         let thumbnail = data.thumbnail
                             ? this.configService
-                                  .getURL('' + data.thumbnail + '')
+                                  .getURL(data.thumbnail)
                                   .replace('/api/', '/')
                             : 'assets/object.svg';
                         resolve(thumbnail);
