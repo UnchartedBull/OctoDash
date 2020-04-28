@@ -14204,3 +14204,7 @@ h4 {
 .nav-item>a {
     line-height: 250%;
 }
+
+.nav-pills>li {
+    width: 100%;
+}
