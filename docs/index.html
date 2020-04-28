@@ -187,8 +187,6 @@
                 <div class="row no-gutters justify-content-center">
                     <div class="col-md-12">
                         <div id="screenshots" class="carousel slide" data-ride="carousel">
-
-                            <!-- Indicators -->
                             <ul class="carousel-indicators">
                                 <li data-target="#screenshots" data-slide-to="0" class="active"></li>
                                 <li data-target="#screenshots" data-slide-to="1"></li>
@@ -198,8 +196,6 @@
                                 <li data-target="#screenshots" data-slide-to="5"></li>
                                 <li data-target="#screenshots" data-slide-to="6"></li>
                             </ul>
-
-                            <!-- The slideshow -->
                             <div class="carousel-inner">
                                 <div class="carousel-item active img"
                                     style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/main-screen.png); height: 750px;">
@@ -223,8 +219,6 @@
                                     style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png); height: 750px;">
                                 </div>
                             </div>
-
-                            <!-- Left and right controls -->
                             <a class="carousel-control-prev" href="#screenshots" data-slide="prev">
                                 <span class="ion-ios-arrow-round-back"></span>
                             </a>
@@ -232,6 +226,84 @@
                                 <span class="ion-ios-arrow-round-forward"></span>
                             </a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 heading-title">
+                        <h1>Supported Plugins</h1>
+                        <h4>Display Layer Progress</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <span class="badge badge-pill badge-warning p-1 px-3">required</span> <br>
+                        <p style="clear: both">Display Layer Progress is currently used to display the the Layer
+                            Progress in the Printing
+                            Screen. This plugin can't be disabled currently, there are plans to make this optional as
+                            well in the future though.</p>
+                        <h4>Preheat Button</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br>
+                        <p style="clear: both">Adds a preheat button to the loaded file screen, which can be used to
+                            preheat the hotend and heatbed to the print temperatures.</p>
+                        <h4>Filament Manager</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br>
+                        <p style="clear: both">Allows OctoDash to directly change the filament, if the filament is
+                            changed. This will also add an additional screen to the Filament Change Screen to choose the
+                            new filament. </p>
+                        <p class="text-muted" style="margin-top: -1vh">Tip: Put the color of the filament (HEX) in
+                            brackets at
+                            the very end of the
+                            filament name to make your list more colorful!</p>
+                        <h4>Enclosure</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br>
+                        <p style="clear: both">Adds support for a temperature display at the bottom of the main screen.
+                            The temperature sensor to use can be setup in the settings menu.</p>
+                        <h4>PSU Control</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br>
+                        <p style="clear: both">This enables OctoDash to control the Power Supply of your printer. This
+                            plugin also adds some additional Custom Actions to turn off the printers power supply.
+                            Turning on the PSU, while exiting from sleep is also supported.</p>
+                        <h4>Print Time Genius</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <p style="clear: both">Greatly improves print time predictions. If Print Time Genius is
+                            installed OctoDash will display PTG's predictions.</p>
+                        <h4>Ultimaker Format Package</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <p style="clear: both">Adds thumbnail images for .ufp files in the detailed file view, in the
+                            loaded file screen, and while a file is printing. To view the preview while printing just
+                            tap on the progress percentage. Tap again to return to the percentage.</p>
+                        <h4>PrusaSlicer Thumbnails</h4>
+                        <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+                        <p style="clear: both">Adds thumbnail images for objects, that have been sliced with
+                            PrusaSlicer, in the detailed file view, in the
+                            loaded file screen, and while a file is printing. To view the preview while printing just
+                            tap on the progress percentage. Tap again to return to the percentage. Also works for
+                            Ultimaker Format Package.</p>
+                        <h4>Exclude Region</h4>
+                        <span class="badge badge-pill badge-info p-1 px-3">planned</span>
+                        <p style="clear: both">Adds the option to exclude some regions from being printed further, if
+                            they failed for example. This can help salvage parts of the print.</p>
+                        <h4>Cancel Object</h4>
+                        <span class="badge badge-pill badge-danger p-1 px-3">not supported</span>
+                        <p style="clear: both">Exclude region seems to work for a broader group of users, thus Exclude
+                            Region will be used over Cancel Objects</p>
+                        <br>
+                        <p>Want to see more plugins here? Please open an issue on GitHub, ideally together with a PR to
+                            implement the plugin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 heading-title">
+                        <h1>Tips and Tricks</h1>
                     </div>
                 </div>
             </div>
@@ -251,7 +323,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
-                        <h1>Changelog</h1>
+                        <h1>Bugs</h1>
+                    </div>
+                    <div class="col-md-12 heading-title">
+                        <h1>Contributing</h1>
                     </div>
                 </div>
             </div>
@@ -261,10 +336,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
-                        <h1>Bugs</h1>
-                    </div>
-                    <div class="col-md-12 heading-title">
-                        <h1>Contributing</h1>
+                        <h1>Changelog</h1>
                     </div>
                 </div>
             </div>
@@ -458,7 +530,7 @@
                         <span class="badge badge-pill badge-primary p-2 px-3">Primary</span>
                         <span class="badge badge-pill badge-info p-2 px-3">Info</span>
                         <span class="badge badge-pill badge-success p-2 px-3">Success</span>
-                        <span class="badge badge-pill badge-warning p-2 px-3">Warning</span>
+
                         <span class="badge badge-pill badge-danger p-2 px-3">Danger</span>
                         <span class="badge badge-pill badge-rose p-2 px-3">Rose</span>
                     </div>

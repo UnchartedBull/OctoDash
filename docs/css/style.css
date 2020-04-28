@@ -14195,3 +14195,8 @@ h5 {
     /* background: linear-gradient(180deg, #252932, #252932 90.6%, transparent 90.6%, transparent); */
     background-color: #252932;
 }
+
+h4 {
+    float: left;
+    margin-right: 15px;
+}
