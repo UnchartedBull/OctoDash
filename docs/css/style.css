@@ -14200,3 +14200,7 @@ h4 {
     float: left;
     margin-right: 15px;
 }
+
+.nav-item>a {
+    line-height: 250%;
+}
