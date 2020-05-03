@@ -16,6 +16,7 @@ export class FilamentComponent implements OnInit {
     private totalPages = 5;
 
     public page: number;
+    private timeout: number;
 
     public filamentSpools: FilamentSpoolList;
     public isLoadingSpools = true;
@@ -68,6 +69,7 @@ export class FilamentComponent implements OnInit {
     }
 
     private setPage(page: number): void {
+        clearTimeout(this.timeout);
         if (page === 0) {
             this.selectedSpool = null;
             this.getSpools();
@@ -129,6 +131,10 @@ export class FilamentComponent implements OnInit {
         }
     }
 
+    public getFeedSpeed(): number {
+        return this.configService.getFeedSpeed();
+    }
+
     public setSpool(spool: FilamentSpool): void {
         this.selectedSpool = spool;
         this.hotendTarget = this.hotendTarget + spool.temp_offset;
@@ -139,9 +145,13 @@ export class FilamentComponent implements OnInit {
         setTimeout((): void => {
             const unloadingProgressBar = document.getElementById('filamentUnloadBar');
             unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
-            unloadingProgressBar.style.transition = 'width 2.7s ease-in-out';
+            const unloadTime = this.configService.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
+            unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
             setTimeout((): void => {
                 unloadingProgressBar.style.width = '0vw';
+                this.timeout = setTimeout((): void => {
+                    this.setPage(3);
+                }, unloadTime * 1000 + 500);
             }, 200);
         }, 5);
     }

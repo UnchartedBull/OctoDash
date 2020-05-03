@@ -88,7 +88,7 @@
         <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">
             <div class="filament__progress-bar" id="filamentUnloadBar"></div>
         </div>
-        <span class="filament-move__speed">115 mm/s</span>
+        <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
         <div class="filament-move__wrapper">
             <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false">stop</a>
         </div>

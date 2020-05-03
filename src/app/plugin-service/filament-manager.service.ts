@@ -75,6 +75,7 @@ export class FilamentManagerService {
                                 selections.selections[0].spool.color = '#f5f6fa';
                                 selections.selections[0].spool.displayName = `${selections.selections[0].spool.profile.vendor} - ${selections.selections[0].spool.name}`;
                             }
+                            colorRegexp.lastIndex = 0;
                             resolve(selections.selections[0].spool);
                         }
                         resolve(null);
