@@ -71,7 +71,7 @@
                 <span class="filament-heating__information-name">{{ selectedSpool.profile.vendor }}</span>
                 <div class="filament-heating__information-offset-wrapper">
                     <span class="filament-heating__information-offset-value">
-                        {{ selectedSpool.temp_offset > 0 ? '+' : '-' }}{{ getAbsoluteValue(selectedSpool.temp_offset) }}
+                        {{ getSpoolTemperatureOffset() }}
                     </span>
                     <span class="filament-heating__information-offset-indicator">°C</span>
                 </div>
@@ -84,7 +84,14 @@
         </div>
     </div>
     <div *ngIf="page === 2">
-        page 2
+        <span class="filament-heading">unloading filament</span>
+        <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">
+            <div class="filament__progress-bar" id="filamentUnloadBar"></div>
+        </div>
+        <span class="filament-move__speed">115 mm/s</span>
+        <div class="filament-move__wrapper">
+            <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false">stop</a>
+        </div>
     </div>
     <div *ngIf="page === 3">
         page 3

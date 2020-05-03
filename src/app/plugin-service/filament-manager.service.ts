@@ -51,10 +51,56 @@ export class FilamentManagerService {
                 );
         });
     }
+
+    public getCurrentSpool(): Promise<FilamentSpool> {
+        return new Promise((resolve, reject): void => {
+            if (this.httpRequest) {
+                this.httpRequest.unsubscribe();
+            }
+            this.httpRequest = this.http
+                .get(
+                    this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
+                    this.configService.getHTTPHeaders(),
+                )
+                .subscribe(
+                    (selections: FilamentSelections): void => {
+                        if (selections.selections.length > 0) {
+                            let match = colorRegexp.exec(selections.selections[0].spool.name);
+                            if (match) {
+                                selections.selections[0].spool.color = match[1];
+                                selections.selections[0].spool.displayName = `${
+                                    selections.selections[0].spool.profile.vendor
+                                } - ${selections.selections[0].spool.name.replace(match[0], '')}`;
+                            } else {
+                                selections.selections[0].spool.color = '#f5f6fa';
+                                selections.selections[0].spool.displayName = `${selections.selections[0].spool.profile.vendor} - ${selections.selections[0].spool.name}`;
+                            }
+                            resolve(selections.selections[0].spool);
+                        }
+                        resolve(null);
+                    },
+                    (error: HttpErrorResponse): void => {
+                        this.notificationService.setError("Can't load filament spools!", error.message);
+                        reject();
+                    },
+                );
+        });
+    }
 }
 
 export interface FilamentSpoolList {
     spools: FilamentSpool[];
+}
+
+export interface FilamentSelections {
+    selections: FilamentSelection[];
+}
+
+interface FilamentSelection {
+    // eslint-disable-next-line camelcase
+    client_id: string;
+    spool: FilamentSpool;
+    tool: number;
 }
 
 export interface FilamentSpool {

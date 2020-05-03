@@ -12,6 +12,7 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
 })
 export class FilamentComponent implements OnInit {
     private selectedSpool: FilamentSpool;
+    private currentSpool: FilamentSpool;
     private totalPages = 5;
 
     public page: number;
@@ -52,6 +53,8 @@ export class FilamentComponent implements OnInit {
         }
     }
 
+    // PAGINATION
+
     public decreasePage(): void {
         if (this.page === 0) {
             this.router.navigate(['/main-screen']);
@@ -72,6 +75,8 @@ export class FilamentComponent implements OnInit {
             this.isHeating = false;
             this.automaticHeatingStartSeconds = 6;
             this.automaticHeatingStartTimer();
+        } else if (page === 2) {
+            this.unloadSpool();
         }
         this.page = page;
         if (this.page > 0) {
@@ -81,7 +86,7 @@ export class FilamentComponent implements OnInit {
         }
     }
 
-    // PAGE 1
+    // FILAMENT MANAGEMENT
 
     private getSpools(): void {
         this.isLoadingSpools = true;
@@ -94,12 +99,34 @@ export class FilamentComponent implements OnInit {
                 this.filamentSpools = null;
             })
             .finally((): void => {
-                this.isLoadingSpools = false;
+                this.filamentManagerService
+                    .getCurrentSpool()
+                    .then((spool: FilamentSpool): void => {
+                        this.currentSpool = spool;
+                    })
+                    .catch((): void => {
+                        this.currentSpool = null;
+                    })
+                    .finally((): void => {
+                        this.isLoadingSpools = false;
+                    });
             });
     }
 
     public getSpoolWeightLeft(weight: number, used: number): number {
         return Math.floor(weight - used);
+    }
+
+    public getSpoolTemperatureOffset(): string {
+        return `${this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.floor(this.selectedSpool.temp_offset)}`;
+    }
+
+    public getCurrentSpoolColor(): string {
+        if (this.currentSpool) {
+            return this.currentSpool.color;
+        } else {
+            return '#44bd32';
+        }
     }
 
     public setSpool(spool: FilamentSpool): void {
@@ -108,7 +135,18 @@ export class FilamentComponent implements OnInit {
         this.setPage(1);
     }
 
-    // PAGE 2
+    private unloadSpool(): void {
+        setTimeout((): void => {
+            const unloadingProgressBar = document.getElementById('filamentUnloadBar');
+            unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
+            unloadingProgressBar.style.transition = 'width 2.7s ease-in-out';
+            setTimeout((): void => {
+                unloadingProgressBar.style.width = '0vw';
+            }, 200);
+        }, 5);
+    }
+
+    // NOZZLE HEATING
 
     public changeHotendTarget(value: number): void {
         this.hotendTarget = this.hotendTarget + value;
@@ -135,11 +173,9 @@ export class FilamentComponent implements OnInit {
     }
 
     public setNozzleTemperature(): void {
-        console.log('START HEATING');
-        this.isHeating = true;
-    }
-
-    public getAbsoluteValue(number: number): number {
-        return Math.abs(number);
+        if (this.page === 1) {
+            console.log('START HEATING');
+            this.isHeating = true;
+        }
     }
 }

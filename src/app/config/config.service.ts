@@ -240,6 +240,22 @@ export class ConfigService {
     public isFilamentManagerEnabled(): boolean {
         return this.config.plugins.filamentManager.enabled;
     }
+
+    public getFeedLength(): number {
+        return this.config.filament.feedLength;
+    }
+
+    public getFeedSpeed(): number {
+        return this.config.filament.feedSpeed;
+    }
+
+    public getFeedSpeedSlow(): number {
+        return this.config.filament.feedSpeedSlow;
+    }
+
+    public getPurgeDistance(): number {
+        return this.config.filament.purgeDistance;
+    }
 }
 
 export interface Config {
