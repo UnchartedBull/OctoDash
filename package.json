@@ -108,6 +108,6 @@
     "prettier": "^2.0.5",
     "ts-node": "~8.10.1",
     "typescript": "~3.7.5",
-    "wait-on": "^4.0.2"
+    "wait-on": "^5.0.0"
   }
 }
