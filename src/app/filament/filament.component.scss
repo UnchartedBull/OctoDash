@@ -20,6 +20,8 @@
                 margin: 14vh auto 3vh;
                 display: block;
                 height: 7vh;
+                background-color: transparent;
+                border: 3px solid #f5f6fa;
 
                 > div {
                     height: 7vh;
@@ -140,8 +142,8 @@
                 height: 5vw;
                 border-radius: 100%;
                 margin: 0 auto;
-                box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.75);
                 margin-bottom: 3vh;
+                border: 3px solid #f5f6fa;
             }
 
             &-name {
@@ -270,6 +272,14 @@
             border-radius: 8px;
             opacity: 0.75;
         }
+    }
+
+    &__done {
+        display: inline-block;
+        background-color: #44bd32;
+        padding: 2vh 2vw;
+        border-radius: 8px;
+        opacity: 0.85;
     }
 }
 

@@ -94,7 +94,19 @@
         </div>
     </div>
     <div *ngIf="page === 3">
-        page 3
+        <span class="filament-heading">load new filament</span>
+        <span class="filament-move__speed">Only put a little filament in, I'll pull in the rest.</span>
+        <div *ngIf="selectedSpool" style="margin-top: 15vh">
+            <div class="filament-heating__information-color" [ngStyle]="{'background-color': selectedSpool.color}">
+            </div>
+            <span class="filament-heating__information-name">{{ selectedSpool.displayName }}</span>
+        </div>
+        <div *ngIf="!selectedSpool" style="margin-top: 15vh">
+            <span class="filament-heating__information-name">I'll wait for you.</span>
+        </div>
+        <div class="filament-move__wrapper">
+            <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage()">done</a>
+        </div>
     </div>
     <div *ngIf="page === 4">
         page 4

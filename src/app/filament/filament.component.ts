@@ -36,6 +36,7 @@ export class FilamentComponent implements OnInit {
     public ngOnInit(): void {
         if (this.configService.isFilamentManagerEnabled()) {
             this.setPage(0);
+            // this.setPage(4);
         } else {
             this.setPage(1);
         }
@@ -120,7 +121,7 @@ export class FilamentComponent implements OnInit {
     }
 
     public getSpoolTemperatureOffset(): string {
-        return `${this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.floor(this.selectedSpool.temp_offset)}`;
+        return `${this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.abs(this.selectedSpool.temp_offset)}`;
     }
 
     public getCurrentSpoolColor(): string {
