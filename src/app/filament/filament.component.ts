@@ -17,6 +17,7 @@ export class FilamentComponent implements OnInit {
 
     public page: number;
     private timeout: number;
+    private timeout2: number;
 
     public filamentSpools: FilamentSpoolList;
     public isLoadingSpools = true;
@@ -25,6 +26,8 @@ export class FilamentComponent implements OnInit {
     public hotendTemperature: number;
     public automaticHeatingStartSeconds: number;
     public isHeating: boolean;
+
+    private feedSpeedSlow = false;
 
     public constructor(
         private router: Router,
@@ -35,8 +38,8 @@ export class FilamentComponent implements OnInit {
 
     public ngOnInit(): void {
         if (this.configService.isFilamentManagerEnabled()) {
-            this.setPage(0);
-            // this.setPage(4);
+            // this.setPage(0);
+            this.setPage(4);
         } else {
             this.setPage(1);
         }
@@ -71,6 +74,10 @@ export class FilamentComponent implements OnInit {
 
     private setPage(page: number): void {
         clearTimeout(this.timeout);
+        clearTimeout(this.timeout2);
+        if (this.page === 4) {
+            this.feedSpeedSlow = false;
+        }
         if (page === 0) {
             this.selectedSpool = null;
             this.getSpools();
@@ -80,6 +87,8 @@ export class FilamentComponent implements OnInit {
             this.automaticHeatingStartTimer();
         } else if (page === 2) {
             this.unloadSpool();
+        } else if (page === 4) {
+            this.loadSpool();
         }
         this.page = page;
         if (this.page > 0) {
@@ -121,7 +130,9 @@ export class FilamentComponent implements OnInit {
     }
 
     public getSpoolTemperatureOffset(): string {
-        return `${this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.abs(this.selectedSpool.temp_offset)}`;
+        return `${
+            this.selectedSpool.temp_offset === 0 ? '±' : this.selectedSpool.temp_offset > 0 ? '+' : '-'
+        }${Math.abs(this.selectedSpool.temp_offset)}`;
     }
 
     public getCurrentSpoolColor(): string {
@@ -132,8 +143,20 @@ export class FilamentComponent implements OnInit {
         }
     }
 
+    public getSelectedSpoolColor(): string {
+        if (this.selectedSpool) {
+            return this.selectedSpool.color;
+        } else {
+            return '#44bd32';
+        }
+    }
+
     public getFeedSpeed(): number {
-        return this.configService.getFeedSpeed();
+        if (this.feedSpeedSlow) {
+            return this.configService.getFeedSpeedSlow();
+        } else {
+            return this.configService.getFeedSpeed();
+        }
     }
 
     public setSpool(spool: FilamentSpool): void {
@@ -153,6 +176,28 @@ export class FilamentComponent implements OnInit {
                 this.timeout = setTimeout((): void => {
                     this.setPage(3);
                 }, unloadTime * 1000 + 500);
+            }, 200);
+        }, 5);
+    }
+
+    private loadSpool(): void {
+        setTimeout((): void => {
+            const loadingProgressBar = document.getElementById('filamentLoadBar');
+            loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
+
+            const loadTimeFast = (this.configService.getFeedLength() * 0.85) / this.configService.getFeedSpeed();
+            const loadTimeSlow = (this.configService.getFeedLength() * 0.15) / this.configService.getFeedSpeedSlow();
+            const loadTime = loadTimeFast + loadTimeSlow + 0.5;
+
+            loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
+            setTimeout((): void => {
+                loadingProgressBar.style.width = '50vw';
+                this.timeout = setTimeout((): void => {
+                    this.feedSpeedSlow = true;
+                    this.timeout2 = setTimeout((): void => {
+                        this.setPage(5);
+                    }, loadTimeSlow * 1000 + 200);
+                }, loadTimeFast * 1000 + 300);
             }, 200);
         }, 5);
     }
