@@ -39,7 +39,7 @@ export class FilamentComponent implements OnInit {
     public ngOnInit(): void {
         if (this.configService.isFilamentManagerEnabled()) {
             // this.setPage(0);
-            this.setPage(4);
+            this.setPage(5);
         } else {
             this.setPage(1);
         }
@@ -230,7 +230,6 @@ export class FilamentComponent implements OnInit {
 
     public setNozzleTemperature(): void {
         if (this.page === 1) {
-            console.log('START HEATING');
             this.isHeating = true;
         }
     }
