@@ -92,6 +92,7 @@ export class FilamentComponent implements OnInit {
             this.loadSpool();
         } else if (page === 5) {
             this.purgeAmount = this.configService.getPurgeDistance();
+            this.purgeFilament(this.purgeAmount);
         }
         this.page = page;
         if (this.page > 0) {
@@ -169,6 +170,7 @@ export class FilamentComponent implements OnInit {
     }
 
     private unloadSpool(): void {
+        console.log('TODO: unloading spool FAST');
         setTimeout((): void => {
             const unloadingProgressBar = document.getElementById('filamentUnloadBar');
             unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
@@ -180,10 +182,11 @@ export class FilamentComponent implements OnInit {
                     this.setPage(3);
                 }, unloadTime * 1000 + 500);
             }, 200);
-        }, 5);
+        }, 0);
     }
 
     private loadSpool(): void {
+        console.log('TODO: loading spool FAST');
         setTimeout((): void => {
             const loadingProgressBar = document.getElementById('filamentLoadBar');
             loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
@@ -196,13 +199,35 @@ export class FilamentComponent implements OnInit {
             setTimeout((): void => {
                 loadingProgressBar.style.width = '50vw';
                 this.timeout = setTimeout((): void => {
+                    console.log('TODO: loading spool SLOW');
                     this.feedSpeedSlow = true;
                     this.timeout2 = setTimeout((): void => {
                         this.setPage(5);
-                    }, loadTimeSlow * 1000 + 200);
-                }, loadTimeFast * 1000 + 300);
+                    }, loadTimeSlow * 1000 + 400);
+                }, loadTimeFast * 1000 + 200);
             }, 200);
-        }, 5);
+        }, 0);
+    }
+
+    public stopExtruderMovement(): void {
+        console.log('TODO: stop e movement (M410)');
+        clearTimeout(this.timeout);
+        clearTimeout(this.timeout2);
+
+        let bar: HTMLElement;
+        const wrapper = (document.getElementsByClassName(
+            'filament__progress-bar-wrapper-wide',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        )[0] as any) as HTMLElement;
+
+        if (document.getElementById('filamentLoadBar')) {
+            bar = document.getElementById('filamentLoadBar');
+        } else {
+            bar = document.getElementById('filamentUnloadBar');
+        }
+
+        bar.style.width = Math.floor(bar.getBoundingClientRect().width) + 'px';
+        wrapper.style.borderColor = '#c23616';
     }
 
     // NOZZLE HEATING
@@ -227,17 +252,39 @@ export class FilamentComponent implements OnInit {
         if (this.automaticHeatingStartSeconds === 0) {
             this.setNozzleTemperature();
         } else {
-            setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
+            this.timeout = setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
         }
     }
 
     public setNozzleTemperature(): void {
         if (this.page === 1) {
             this.isHeating = true;
+            console.log('TODO: setting Hotend Target');
+            // this.printerService.setTemperatureHotend(this.hotendTarget);
+            if (this.timeout) {
+                clearTimeout(this.timeout);
+            }
+            if (this.timeout2) {
+                clearTimeout(this.timeout2);
+            }
+            this.timeout2 = setTimeout(this.checkTemperature.bind(this), 1500);
         }
     }
 
-    public increasePurgeAmount(mm: number): void {
-        this.purgeAmount += mm;
+    private checkTemperature(): void {
+        if (this.hotendTemperature >= this.hotendTarget) {
+            this.increasePage();
+        } else {
+            this.timeout2 = setTimeout(this.checkTemperature.bind(this), 1500);
+        }
+    }
+
+    public increasePurgeAmount(length: number): void {
+        this.purgeAmount += length;
+        this.purgeFilament(length);
+    }
+
+    public purgeFilament(length: number): void {
+        console.log('TODO: Purging ' + length + 'mm filament');
     }
 }

@@ -90,7 +90,8 @@
         </div>
         <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
         <div class="filament-move__wrapper">
-            <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false">stop</a>
+            <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false"
+                (click)="stopExtruderMovement()">stop</a>
         </div>
     </div>
     <div *ngIf="page === 3">
@@ -115,7 +116,8 @@
         </div>
         <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
         <div class="filament-move__wrapper">
-            <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false">stop</a>
+            <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false"
+                click="stopExtruderMovement()">stop</a>
         </div>
     </div>
     <div *ngIf="page === 5">
