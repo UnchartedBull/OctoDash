@@ -16,6 +16,7 @@ const routes: Routes = [
     {
         path: 'main-screen',
         // FIXME
+        // component: MainScreenComponent,
         component: FilamentComponent,
     },
     {

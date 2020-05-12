@@ -29,6 +29,8 @@ export class FilamentComponent implements OnInit {
 
     private feedSpeedSlow = false;
 
+    public purgeAmount: number;
+
     public constructor(
         private router: Router,
         private configService: ConfigService,
@@ -38,8 +40,7 @@ export class FilamentComponent implements OnInit {
 
     public ngOnInit(): void {
         if (this.configService.isFilamentManagerEnabled()) {
-            // this.setPage(0);
-            this.setPage(5);
+            this.setPage(0);
         } else {
             this.setPage(1);
         }
@@ -89,6 +90,8 @@ export class FilamentComponent implements OnInit {
             this.unloadSpool();
         } else if (page === 4) {
             this.loadSpool();
+        } else if (page === 5) {
+            this.purgeAmount = this.configService.getPurgeDistance();
         }
         this.page = page;
         if (this.page > 0) {
@@ -232,5 +235,9 @@ export class FilamentComponent implements OnInit {
         if (this.page === 1) {
             this.isHeating = true;
         }
+    }
+
+    public increasePurgeAmount(mm: number): void {
+        this.purgeAmount += mm;
     }
 }

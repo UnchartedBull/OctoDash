@@ -120,10 +120,11 @@
     </div>
     <div *ngIf="page === 5">
         <span class="filament-heading">purging filament</span>
-        <div class="filament-purge__amount">100mm</div>
+        <div class="filament-purge__amount">{{ purgeAmount }}mm</div>
         <div class="filament-move__wrapper">
-            <a class="filament-purge__more" matRipple [matRippleUnbounded]="false">+10mm</a>
-            <a class="filament-purge__done" matRipple [matRippleUnbounded]="false">done</a>
+            <a class="filament-purge__more" matRipple [matRippleUnbounded]="false"
+                (click)="increasePurgeAmount(10)">+10mm</a>
+            <a class="filament-purge__done" matRipple [matRippleUnbounded]="false" (click)="increasePage()">done</a>
         </div>
     </div>
 </div>
