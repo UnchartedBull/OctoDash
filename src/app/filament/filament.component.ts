@@ -170,7 +170,7 @@ export class FilamentComponent implements OnInit {
     }
 
     private unloadSpool(): void {
-        console.log('TODO: unloading spool FAST');
+        this.printerService.extrude(this.configService.getFeedLength() * -1, this.configService.getFeedSpeed());
         setTimeout((): void => {
             const unloadingProgressBar = document.getElementById('filamentUnloadBar');
             unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
@@ -186,20 +186,22 @@ export class FilamentComponent implements OnInit {
     }
 
     private loadSpool(): void {
-        console.log('TODO: loading spool FAST');
+        const loadTimeFast = (this.configService.getFeedLength() * 0.85) / this.configService.getFeedSpeed();
+        const loadTimeSlow = (this.configService.getFeedLength() * 0.15) / this.configService.getFeedSpeedSlow();
+        const loadTime = loadTimeFast + loadTimeSlow + 0.5;
+        this.printerService.extrude(this.configService.getFeedLength() * 0.85, this.configService.getFeedSpeed());
         setTimeout((): void => {
             const loadingProgressBar = document.getElementById('filamentLoadBar');
             loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
-
-            const loadTimeFast = (this.configService.getFeedLength() * 0.85) / this.configService.getFeedSpeed();
-            const loadTimeSlow = (this.configService.getFeedLength() * 0.15) / this.configService.getFeedSpeedSlow();
-            const loadTime = loadTimeFast + loadTimeSlow + 0.5;
 
             loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
             setTimeout((): void => {
                 loadingProgressBar.style.width = '50vw';
                 this.timeout = setTimeout((): void => {
-                    console.log('TODO: loading spool SLOW');
+                    this.printerService.extrude(
+                        this.configService.getFeedLength() * 0.15,
+                        this.configService.getFeedSpeedSlow(),
+                    );
                     this.feedSpeedSlow = true;
                     this.timeout2 = setTimeout((): void => {
                         this.setPage(5);
@@ -209,8 +211,16 @@ export class FilamentComponent implements OnInit {
         }, 0);
     }
 
+    public setSpoolSelection(): void {
+        if (this.selectedSpool) {
+            this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage);
+        } else {
+            this.increasePage();
+        }
+    }
+
     public stopExtruderMovement(): void {
-        console.log('TODO: stop e movement (M410)');
+        this.printerService.stopMotors();
         clearTimeout(this.timeout);
         clearTimeout(this.timeout2);
 
@@ -259,8 +269,7 @@ export class FilamentComponent implements OnInit {
     public setNozzleTemperature(): void {
         if (this.page === 1) {
             this.isHeating = true;
-            console.log('TODO: setting Hotend Target');
-            // this.printerService.setTemperatureHotend(this.hotendTarget);
+            this.printerService.setTemperatureHotend(this.hotendTarget);
             if (this.timeout) {
                 clearTimeout(this.timeout);
             }
@@ -285,6 +294,6 @@ export class FilamentComponent implements OnInit {
     }
 
     public purgeFilament(length: number): void {
-        console.log('TODO: Purging ' + length + 'mm filament');
+        this.printerService.extrude(length, this.configService.getFeedSpeedSlow());
     }
 }

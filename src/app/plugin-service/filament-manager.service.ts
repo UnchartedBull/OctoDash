@@ -11,7 +11,8 @@ const colorRegexp = /\((.*)\)$/g;
     providedIn: 'root',
 })
 export class FilamentManagerService {
-    private httpRequest: Subscription;
+    private httpGETRequest: Subscription;
+    private httpPOSTRequest: Subscription;
 
     public constructor(
         private configService: ConfigService,
@@ -21,10 +22,10 @@ export class FilamentManagerService {
 
     public getSpoolList(): Promise<FilamentSpoolList> {
         return new Promise((resolve, reject): void => {
-            if (this.httpRequest) {
-                this.httpRequest.unsubscribe();
+            if (this.httpGETRequest) {
+                this.httpGETRequest.unsubscribe();
             }
-            this.httpRequest = this.http
+            this.httpGETRequest = this.http
                 .get(
                     this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
                     this.configService.getHTTPHeaders(),
@@ -54,10 +55,10 @@ export class FilamentManagerService {
 
     public getCurrentSpool(): Promise<FilamentSpool> {
         return new Promise((resolve, reject): void => {
-            if (this.httpRequest) {
-                this.httpRequest.unsubscribe();
+            if (this.httpGETRequest) {
+                this.httpGETRequest.unsubscribe();
             }
-            this.httpRequest = this.http
+            this.httpGETRequest = this.http
                 .get(
                     this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
                     this.configService.getHTTPHeaders(),
@@ -82,6 +83,33 @@ export class FilamentManagerService {
                     },
                     (error: HttpErrorResponse): void => {
                         this.notificationService.setError("Can't load filament spools!", error.message);
+                        reject();
+                    },
+                );
+        });
+    }
+
+    public setCurrentSpool(spool: FilamentSpool): Promise<void> {
+        return new Promise((resolve, reject): void => {
+            this.httpPOSTRequest = this.http
+                .patch(
+                    this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
+                    this.configService.getHTTPHeaders(),
+                )
+                .subscribe(
+                    (selection: FilamentSelection): void => {
+                        if (selection.spool.id === spool.id) {
+                            resolve();
+                        } else {
+                            this.notificationService.setError(
+                                `Spool IDs didn't match`,
+                                `Can't change spool. Please change spool manually in the OctoPrint UI.`,
+                            );
+                            reject();
+                        }
+                    },
+                    (error: HttpErrorResponse): void => {
+                        this.notificationService.setError("Can't set new spool!", error.message);
                         reject();
                     },
                 );
