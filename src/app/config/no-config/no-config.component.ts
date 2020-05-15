@@ -48,7 +48,7 @@ export class NoConfigComponent implements OnInit {
                     density: 1.25,
                     feedLength: 0,
                     feedSpeed: 30,
-                    feedSpeedSlow: 5,
+                    feedSpeedSlow: 3,
                     purgeDistance: 30,
                 },
                 plugins: {
@@ -160,7 +160,6 @@ export class NoConfigComponent implements OnInit {
         this.configErrors = [];
         this.octoprintConnectionError = null;
         this.config = this.configService.createConfigFromInput(this.config);
-        this.config.filament.feedSpeedSlow = Math.round(this.config.filament.feedSpeed * 0.33);
         this.validateConfig();
         return true;
     }
