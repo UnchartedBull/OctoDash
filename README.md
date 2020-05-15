@@ -47,9 +47,10 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 
 ## Tips and Tricks
 
--   OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v2.0.0 and up)
--   OctoDash supports .ufp package preview images (v1.4.1 and up)
--   You can also view the previews during print, if you press on the percentage inside the progress ring (v2.0.0 and up)
+-   OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v1.5.0 and up)
+-   OctoDash supports .ufp package and PrusaSlicer preview images (v1.5.0 and up)
+-   You can let OctoDash push out and pull in the filament during a filament change, if you setup your feed length correctly. (v1.5.0 and up)
+-   You can also view the previews during print, if you press on the percentage inside the progress ring (v1.5.0 and up)
 -   You can press multiple arrows directly after another in the control view. All actions will be executed one after another, even if the prior didn't finish before pressing the button
 -   The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
 -   You can adjust the temperatures in the home screen, by pressing on their icons (v1.4.1 and up)
