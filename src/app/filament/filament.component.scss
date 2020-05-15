@@ -1,5 +1,5 @@
 .filament {
-    padding: 2vh 2vw 0 2vw;
+    padding: 2vh 2vw 0;
 
     &__progress-bar {
         height: 4vh;
@@ -76,7 +76,7 @@
         tr {
             background-color: #718093;
             border-radius: 1vw;
-            padding: 0vw 1vw;
+            padding: 0 1vw;
             display: block;
             margin-bottom: 2vh;
             height: 10.5vh;
@@ -226,7 +226,6 @@
 
                 > span {
                     font-size: 50%;
-                    vertical-align: 20%;
                     display: inline-block;
                     margin-left: -1vw;
                     margin-right: 1vw;
