@@ -128,8 +128,6 @@ export class PrinterService {
             toBeExtruded = amount;
         }
 
-        console.log(toBeExtruded * multiplier);
-
         while (toBeExtruded > 0) {
             if (toBeExtruded >= 100) {
                 toBeExtruded -= 100;

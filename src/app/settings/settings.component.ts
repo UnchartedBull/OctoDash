@@ -1,3 +1,5 @@
+//TODO: include feedLength and stuff
+
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import { AppService } from '../app.service';

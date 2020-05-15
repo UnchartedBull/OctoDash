@@ -53,7 +53,14 @@ export class FilamentComponent implements OnInit {
 
     public increasePage(): void {
         if (this.page < this.totalPages) {
-            this.setPage(this.page + 1);
+            if (
+                (this.page === 1 && this.configService.getFeedLength() === 0) ||
+                (this.page === 3 && this.configService.getFeedLength() === 0)
+            ) {
+                this.setPage(this.page + 2);
+            } else {
+                this.setPage(this.page + 1);
+            }
         } else if (this.page === this.totalPages) {
             this.router.navigate(['/main-screen']);
         }
@@ -166,7 +173,7 @@ export class FilamentComponent implements OnInit {
     public setSpool(spool: FilamentSpool): void {
         this.selectedSpool = spool;
         this.hotendTarget = this.hotendTarget + spool.temp_offset;
-        this.setPage(1);
+        this.increasePage();
     }
 
     private unloadSpool(): void {
@@ -179,7 +186,7 @@ export class FilamentComponent implements OnInit {
             setTimeout((): void => {
                 unloadingProgressBar.style.width = '0vw';
                 this.timeout = setTimeout((): void => {
-                    this.setPage(3);
+                    this.increasePage();
                 }, unloadTime * 1000 + 500);
             }, 200);
         }, 0);
@@ -204,7 +211,7 @@ export class FilamentComponent implements OnInit {
                     );
                     this.feedSpeedSlow = true;
                     this.timeout2 = setTimeout((): void => {
-                        this.setPage(5);
+                        this.increasePage();
                     }, loadTimeSlow * 1000 + 400);
                 }, loadTimeFast * 1000 + 200);
             }, 200);
@@ -213,7 +220,7 @@ export class FilamentComponent implements OnInit {
 
     public setSpoolSelection(): void {
         if (this.selectedSpool) {
-            this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage);
+            this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage.bind(this));
         } else {
             this.increasePage();
         }

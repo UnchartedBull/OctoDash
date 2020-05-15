@@ -19,7 +19,7 @@
             "thickness": 0,
             "feedLength": 470,
             "feedSpeed": 30,
-            "feedSpeedSlow": 10,
+            "feedSpeedSlow": 5,
             "purgeDistance": 30
         },
         "plugins": {

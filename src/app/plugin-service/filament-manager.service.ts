@@ -91,14 +91,21 @@ export class FilamentManagerService {
 
     public setCurrentSpool(spool: FilamentSpool): Promise<void> {
         return new Promise((resolve, reject): void => {
+            let setSpoolBody: FilamentSelectionPatch = {
+                selection: {
+                    tool: 0,
+                    spool: spool,
+                },
+            };
             this.httpPOSTRequest = this.http
                 .patch(
-                    this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
+                    this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
+                    setSpoolBody,
                     this.configService.getHTTPHeaders(),
                 )
                 .subscribe(
-                    (selection: FilamentSelection): void => {
-                        if (selection.spool.id === spool.id) {
+                    (selection: FilamentSelectionConfirm): void => {
+                        if (selection.selection.spool.id === spool.id) {
                             resolve();
                         } else {
                             this.notificationService.setError(
@@ -123,6 +130,17 @@ export interface FilamentSpoolList {
 
 export interface FilamentSelections {
     selections: FilamentSelection[];
+}
+
+interface FilamentSelectionPatch {
+    selection: {
+        tool: number;
+        spool: FilamentSpool;
+    };
+}
+
+interface FilamentSelectionConfirm {
+    selection: FilamentSelection;
 }
 
 interface FilamentSelection {

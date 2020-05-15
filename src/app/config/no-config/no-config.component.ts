@@ -46,9 +46,9 @@ export class NoConfigComponent implements OnInit {
                 filament: {
                     thickness: 1.75,
                     density: 1.25,
-                    feedLength: 470,
+                    feedLength: 0,
                     feedSpeed: 30,
-                    feedSpeedSlow: 10,
+                    feedSpeedSlow: 5,
                     purgeDistance: 30,
                 },
                 plugins: {

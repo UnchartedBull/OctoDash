@@ -43,17 +43,18 @@ export class AppService {
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
+        config.filament.feedLength = 0;
         config.filament.feedSpeed = 30;
-        config.filament.feedSpeedSlow = 10;
+        config.filament.feedSpeedSlow = 5;
         config.filament.purgeDistance = 30;
-        // this.configService.saveConfig(config);
-        // this.configService.updateConfig();
+        this.configService.saveConfig(config);
+        this.configService.updateConfig();
         return false;
     }
 
     private checkUpdate(): void {
         this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-            (data: GitHubRealeaseInformation): void => {
+            (data: GitHubReleaseInformation): void => {
                 if (this.version !== data.name.replace('v', '')) {
                     this.notificationService.setUpdate(
                         "It's time for an update",
@@ -133,7 +134,7 @@ interface VersionInformation {
     version: string;
 }
 
-interface GitHubRealeaseInformation {
+interface GitHubReleaseInformation {
     name: string;
     [key: string]: string;
 }
