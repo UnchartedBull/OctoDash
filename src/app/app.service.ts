@@ -36,7 +36,7 @@ export class AppService {
 
         this.updateError = [
             ".filament should have required property 'feedSpeedSlow'",
-            ".filament should hsave required property 'purgeDistance'",
+            ".filament should have required property 'purgeDistance'",
         ];
     }
 
