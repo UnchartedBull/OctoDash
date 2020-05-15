@@ -19,7 +19,12 @@ export class PrintControlComponent {
     public feedrate: number;
     public flowrate: number;
 
-    public constructor(private jobService: JobService, private printerService: PrinterService) {}
+    public constructor(private jobService: JobService, private printerService: PrinterService) {
+        this.temperatureHotend = 0;
+        this.temperatureHeatbed = 0;
+        this.flowrate = 100;
+        this.feedrate = 100;
+    }
 
     public isClickOnPreview(event: MouseEvent): boolean {
         const previewSwitchMin = window.innerWidth * 0.08;
@@ -99,10 +104,6 @@ export class PrintControlComponent {
     }
 
     private loadData(): void {
-        this.temperatureHotend = 0;
-        this.temperatureHeatbed = 0;
-        this.flowrate = 100;
-        this.feedrate = 100;
         this.printerService
             .getObservable()
             .pipe(take(1))
