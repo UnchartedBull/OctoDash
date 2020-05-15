@@ -119,6 +119,29 @@ export class PrinterService {
     }
 
     public extrude(amount: number, speed: number): void {
+        let multiplier = 1;
+        let toBeExtruded: number;
+        if (amount < 0) {
+            multiplier = -1;
+            toBeExtruded = amount * -1;
+        } else {
+            toBeExtruded = amount;
+        }
+
+        console.log(toBeExtruded * multiplier);
+
+        while (toBeExtruded > 0) {
+            if (toBeExtruded >= 100) {
+                toBeExtruded -= 100;
+                this.moveExtruder(100 * multiplier, speed);
+            } else {
+                this.moveExtruder(toBeExtruded * multiplier, speed);
+                toBeExtruded = 0;
+            }
+        }
+    }
+
+    private moveExtruder(amount: number, speed: number): void {
         const extrudePayload: ExtrudeCommand = {
             command: 'extrude',
             amount,
