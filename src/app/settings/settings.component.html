@@ -114,7 +114,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 25.6vw; display: block">
-                                    <label for="filament-feed-length" class="settings__input-label">Bowden Length
+                                    <label for="filament-feed-length" class="settings__input-label">Feed Length
                                         <span>(mm)</span></label>
                                     <input type="number" id="filament-feed-length" class="settings__input"
                                         name="filament-feed-length" style="width: 19vw"
@@ -122,13 +122,25 @@
                                 </td>
                                 <td>
                                     <label for="filament-feed-speed" class="settings__input-label">Feed Speed
-                                        <span>(mm/sec)</span></label>
+                                        <span>(mm/s)</span></label>
                                     <input type="number" id="filament-feed-speed" class="settings__input"
                                         name="filament-feed-speed" style="width: 19vw"
                                         [(ngModel)]="config.filament.feedSpeed" required>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-feed-speed-slow" class="settings__input-label">Feed Speed Slow
+                                        <span>(mm/s)</span></label>
+                                    <input type="number" id="filament-feed-speed-slow" class="settings__input"
+                                        name="filament-feed-speed-slow" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedSpeedSlow" required>
+                                </td>
+                            </tr>
                         </table>
+                        <div class="filament-feed-speed-info">Please set these values carefully, as they possibly
+                            can destroy parts of your printer, just don't set your Feed Speed to high and your Feed
+                            Length to long.</div>
                     </form>
                     <br>
                 </div>

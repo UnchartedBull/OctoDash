@@ -161,11 +161,11 @@ export class FilesService {
                                       filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
                                   }
                                 : {}),
-                            thumbnail: data.path.endsWith('.ufp.gcode')
+                            thumbnail: data.thumbnail
                                 ? this.configService
-                                      .getURL('plugin/UltimakerFormatPackage/thumbnail/')
-                                      .replace('/api/', '/') + data.path.replace('.ufp.gcode', '.png')
-                                : undefined,
+                                      .getURL(data.thumbnail)
+                                      .replace('/api/', '/')
+                                : 'assets/object.svg',
                         } as unknown) as File;
                         resolve(file);
                     },
@@ -191,11 +191,11 @@ export class FilesService {
                 .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
                 .subscribe(
                     (data: OctoprintFilesAPI): void => {
-                        let thumbnail = data.path.endsWith('.ufp.gcode')
+                        let thumbnail = data.thumbnail
                             ? this.configService
-                                  .getURL('plugin/UltimakerFormatPackage/thumbnail/')
-                                  .replace('/api/', '/') + data.path.replace('.ufp.gcode', '.png')
-                            : undefined;
+                                  .getURL(data.thumbnail)
+                                  .replace('/api/', '/')
+                            : 'assets/object.svg';
                         resolve(thumbnail);
                     },
                     (error: HttpErrorResponse): void => {

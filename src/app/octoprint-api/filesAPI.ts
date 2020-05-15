@@ -14,6 +14,7 @@ export interface OctoprintFilesAPI {
     statistics?: object;
     type: string;
     typePath: [string];
+    thumbnail?: string;
 }
 
 export interface OctoprintFolderAPI {

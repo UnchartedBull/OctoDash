@@ -1,11 +1,11 @@
 {
     "config": {
         "octoprint": {
-            "accessToken": "INSERT API KEY HERE",
+            "accessToken": "",
             "url": "http://localhost:5000/api/"
         },
         "printer": {
-            "name": "NAME HERE",
+            "name": "",
             "xySpeed": 100,
             "zSpeed": 5,
             "defaultTemperatureFanSpeed": {
@@ -18,7 +18,9 @@
             "density": 0,
             "thickness": 0,
             "feedLength": 470,
-            "feedSpeed": 100
+            "feedSpeed": 30,
+            "feedSpeedSlow": 3,
+            "purgeDistance": 30
         },
         "plugins": {
             "displayLayerProgress": {

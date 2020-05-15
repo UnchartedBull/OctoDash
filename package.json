@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "license": "Apache 2.0",
   "homepage": "https://github.com/UnchartedBull/OctoDash",
   "author": {
@@ -82,23 +82,23 @@
     "lodash": "^4.17.15",
     "ngx-spinner": "^9.0.2",
     "rxjs": "~6.5.5",
-    "tslib": "^1.11.1",
+    "tslib": "^1.13.0",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.3",
-    "@angular/cli": "~9.1.3",
+    "@angular-devkit/build-angular": "~0.901.6",
+    "@angular/cli": "~9.1.6",
     "@angular/compiler-cli": "^9.0.7",
-    "@angular/language-service": "~9.1.3",
+    "@angular/language-service": "~9.1.7",
     "@types/ajv": "^1.0.0",
-    "@types/lodash": "^4.14.150",
-    "@types/node": "^13.13.4",
+    "@types/lodash": "^4.14.151",
+    "@types/node": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "codelyzer": "^5.2.2",
-    "electron-builder": "^22.5.1",
+    "electron-builder": "^22.6.0",
     "electron-reload": "^1.5.0",
-    "electron": "^8.2.3",
+    "electron": "^8.3.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.3",
@@ -106,8 +106,8 @@
     "eslint": "^5.16.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
-    "ts-node": "~8.9.1",
+    "ts-node": "~8.10.1",
     "typescript": "~3.7.5",
-    "wait-on": "^4.0.2"
+    "wait-on": "^5.0.0"
   }
 }

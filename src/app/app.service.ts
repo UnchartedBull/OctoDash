@@ -34,25 +34,27 @@ export class AppService {
             }
         }
 
-        this.updateError = [".printer should have required property 'defaultTemperatureFanSpeed'"];
+        this.updateError = [
+            ".filament should have required property 'feedSpeedSlow'",
+            ".filament should have required property 'purgeDistance'",
+        ];
     }
 
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
-        config.printer.defaultTemperatureFanSpeed = {
-            hotend: 200,
-            heatbed: 60,
-            fan: 100,
-        };
+        config.filament.feedLength = 0;
+        config.filament.feedSpeed = 30;
+        config.filament.feedSpeedSlow = 5;
+        config.filament.purgeDistance = 30;
         this.configService.saveConfig(config);
         this.configService.updateConfig();
-        return true;
+        return false;
     }
 
     private checkUpdate(): void {
         this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-            (data: GitHubRealeaseInformation): void => {
+            (data: GitHubReleaseInformation): void => {
                 if (this.version !== data.name.replace('v', '')) {
                     this.notificationService.setUpdate(
                         "It's time for an update",
@@ -132,7 +134,7 @@ interface VersionInformation {
     version: string;
 }
 
-interface GitHubRealeaseInformation {
+interface GitHubReleaseInformation {
     name: string;
     [key: string]: string;
 }

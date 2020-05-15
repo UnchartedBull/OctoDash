@@ -265,6 +265,13 @@
     }
 }
 
+.filament-feed-speed-info {
+    font-size: 1.7vw;
+    text-align: justify;
+    opacity: 0.7;
+    font-style: italic;
+}
+
 @keyframes fadein {
     from {
         opacity: 0;

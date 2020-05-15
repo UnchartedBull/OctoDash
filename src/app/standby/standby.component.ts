@@ -48,7 +48,7 @@ export class StandbyComponent implements OnInit {
             .post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
             .subscribe(
                 (): void => {
-                    setTimeout(this.checkConnection.bind(this), 3000);
+                    setTimeout(this.checkConnection.bind(this), 5000);
                 },
                 (): void => {
                     this.setConnectionError();
@@ -60,16 +60,29 @@ export class StandbyComponent implements OnInit {
         this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
             (data: OctoprintConnectionAPI): void => {
                 if (data.current.state === 'Closed') {
-                    if (this.connectionRetries === 0) {
+                    if (this.connectionRetries <= 0) {
                         this.connectionRetries = 3;
                         this.setConnectionError();
                     } else {
                         this.connectionRetries--;
                         setTimeout(this.connectToPrinter.bind(this), 500);
                     }
-                } else if (data.current.state === 'Error') {
-                    this.connectionRetries = 3;
-                    this.setConnectionError();
+                } else if (data.current.state.includes('Error')) {
+                    if (this.connectionRetries <= 1) {
+                        this.connectionRetries = 3;
+                        this.setConnectionError();
+                    } else {
+                        this.connectionRetries--;
+                        setTimeout(this.connectToPrinter.bind(this), 500);
+                    }
+                } else if (data.current.state === 'Connecting') {
+                    if (this.connectionRetries < 0) {
+                        this.connectionRetries = 3;
+                        this.setConnectionError();
+                    } else {
+                        this.connectionRetries--;
+                        setTimeout(this.checkConnection.bind(this), 5000);
+                    }
                 } else {
                     this.disableStandby();
                 }
