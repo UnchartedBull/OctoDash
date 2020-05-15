@@ -96,6 +96,10 @@ export class PrinterService {
         return this.observable;
     }
 
+    public stopMotors(): void {
+        this.executeGCode('M410');
+    }
+
     public jog(x: number, y: number, z: number): void {
         const jogPayload: JogCommand = {
             command: 'jog',
@@ -110,6 +114,43 @@ export class PrinterService {
                 (): void => null,
                 (error: HttpErrorResponse): void => {
                     this.notificationService.setError("Can't move Printhead!", error.message);
+                },
+            );
+    }
+
+    public extrude(amount: number, speed: number): void {
+        let multiplier = 1;
+        let toBeExtruded: number;
+        if (amount < 0) {
+            multiplier = -1;
+            toBeExtruded = amount * -1;
+        } else {
+            toBeExtruded = amount;
+        }
+
+        while (toBeExtruded > 0) {
+            if (toBeExtruded >= 100) {
+                toBeExtruded -= 100;
+                this.moveExtruder(100 * multiplier, speed);
+            } else {
+                this.moveExtruder(toBeExtruded * multiplier, speed);
+                toBeExtruded = 0;
+            }
+        }
+    }
+
+    private moveExtruder(amount: number, speed: number): void {
+        const extrudePayload: ExtrudeCommand = {
+            command: 'extrude',
+            amount,
+            speed: speed * 60,
+        };
+        this.httpPOSTRequest = this.http
+            .post(this.configService.getURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
+            .subscribe(
+                (): void => null,
+                (error: HttpErrorResponse): void => {
+                    this.notificationService.setError("Can't extrude Filament!", error.message);
                 },
             );
     }
@@ -238,10 +279,16 @@ export interface PrinterValue {
 }
 
 interface JogCommand {
-    command: string;
+    command: 'jog';
     x: number;
     y: number;
     z: number;
+    speed: number;
+}
+
+interface ExtrudeCommand {
+    command: 'extrude';
+    amount: number;
     speed: number;
 }
 

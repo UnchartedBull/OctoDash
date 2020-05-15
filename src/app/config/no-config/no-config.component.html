@@ -19,40 +19,55 @@
     <div *ngIf="page === 0">
         <span class="no-config__1-welcome">Hey there!</span>
         <span class="no-config__text" *ngIf="!configUpdate">
-            It looks like this is the first time starting OctoDash! <br>
-            I'll help you setting up your config. If you encounter any issues please create an issue in
-            GitHub. <br> <br>
-            Thanks for choosing OctoDash :)
+            It looks like this is the first start of OctoDash. <br>
+            I'll help you set up your config and get you started. <br>
+            If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. <br> <br>
+            Thanks for choosing OctoDash <fa-icon [icon]="['fas', 'smile']"></fa-icon>
         </span>
         <span class="no-config__text" *ngIf="configUpdate">
             Sorry for bothering you again ... <br>
             We've released an update, so awesome, we needed to change the config. Please review your new config! <br>
             <br>
-            Thanks for choosing OctoDash :)
+            Thanks for choosing OctoDash <fa-icon [icon]="['fas', 'smile']"></fa-icon>
         </span>
     </div>
     <div *ngIf="page === 1">
         <span class="no-config__text">
-            First, tell me some facts about your printer and filament so I can personalize OctoDash.
+            First, tell me some facts about your printer so I can personalize OctoDash for you.
         </span>
         <form class="no-config__form">
             <label for="printerName" class="no-config__input-label">Printer Name:</label>
-            <input type="text" id="printerName" class="no-config__input" maxlength="13"
+            <input type="text" id="printerName" class="no-config__input no-config__2-input" maxlength="13"
                 [(ngModel)]="config.printer.name" name="printerName" required>
-
-            <span class="no-config__2-filament-divider">Filament</span>
-            <label for="filamentDiameter" class="no-config__input-label-small">Diameter:</label>
-            <input type="number" id="filamentDiameter" class="no-config__input no-config__input-small"
-                [(ngModel)]="config.filament.thickness" name="filamentDiameter" step="0.01" min="0" required>
-            <span class="no-config__input-small-suffix" style="padding-right: 3vw;">mm</span>
-
-            <label for="filamentDensity" class="no-config__input-label-small">Density:</label>
-            <input type="number" id="filamentDensity" class="no-config__input no-config__input-small"
-                [(ngModel)]="config.filament.density" name="filamentDensity" step="0.001" min="0" required>
-            <span class="no-config__input-small-suffix">g/cm³</span>
         </form>
+        <div class="no-config-explanation" style="margin-top: 7vh">
+            If you're unsure about any values during setup, just stick with the defaults. You can change all values (and
+            even more stuff) in the settings menu anytime. There is also a description of each attribute available in
+            the GitHub Wiki.
+        </div>
+
     </div>
     <div *ngIf="page === 2">
+        <span class="no-config__text">
+            I also need some information about your extruder.
+        </span>
+        <form class="no-config__form no-config__2-form">
+            <label for="feedLength" class="no-config__input-label">Feed Length:</label>
+            <input type="number" id="feedLength" class="no-config__input no-config__2-input"
+                [(ngModel)]="config.filament.feedLength" name="feedLength" step="1" min="0" style="width:48vw" required>
+            <span class="no-config__input-small-suffix" style="padding-right: 3vw;">mm</span>
+            <br>
+            <label for="feedSpeed" class="no-config__input-label-small">Feed Speed:</label>
+            <input type="number" id="feedSpeed" class="no-config__input no-config__2-input"
+                [(ngModel)]="config.filament.feedSpeed" name="feedSpeed" step="0.5" min="0" style="width:48vw" required>
+            <span class="no-config__input-small-suffix">mm/s</span>
+            <div class="no-config-explanation" style="padding: 2vh 4vw 2vh 0;margin-right: 4vw;">
+                These values will be used during the Filament Change Process. Be sure to have your Feed Length (length
+                between Extruder and Hotend) and Feed Speed configured correctly.
+            </div>
+        </form>
+    </div>
+    <div *ngIf="page === 3">
         <span class="no-config__text">
             Now I need to know something about your OctoPrint setup, so I can talk to your printer.
         </span>
@@ -70,7 +85,7 @@
                 name="accessToken" style="width: 67vw" required>
         </form>
     </div>
-    <div *ngIf="page === 3">
+    <div *ngIf="page === 4">
         <span class="no-config__text">
             And now personalize me to your liking.
         </span>
@@ -85,14 +100,13 @@
             <input type="number" id="octodashPolling" class="no-config__input"
                 [(ngModel)]="this.config.octodash.pollingInterval" name="octodashPolling" required style="width: 11vw">
             ms
-            <div class="no-config__3-explanation">
-                If you're unsure about what values to use, just use the default. You can change all values (and even
-                more stuff, like defining custom actions) later in the settings menu.
+            <div class="no-config-explanation" style="margin-top: 7vh">
+                Don't set your Value Refresh Interval too low (und 1000ms) as this may effect the performance of the
+                Raspberry Pi.
             </div>
-
         </form>
     </div>
-    <div *ngIf="page === 4">
+    <div *ngIf="page === 5">
         <span class="no-config__text">
             What plugins are you running?
         </span>
@@ -133,39 +147,39 @@
                     <span class="no-config__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
                 </span> PSU Control
             </div>
-            <div class="no-config__3-explanation">
-                Enclosure and PSU Control Plugin can be configured further in the settings!
+            <div class="no-config-explanation">
+                Enclosure and PSU Control Plugin can be configured further in the settings.
             </div>
         </div>
     </div>
-    <div *ngIf="page === 5">
+    <div *ngIf="page === 6">
         <span class="no-config__text">
             Great! I'll check everything.
         </span>
-        <div class="no-config__5-check-wrapper">
-            <span class="no-config__5-check">
-                <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="configValid" />
-                <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="configValid == false" />
+        <div class="no-config__6-check-wrapper">
+            <span class="no-config__6-check">
+                <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="configValid" />
+                <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="configValid == false" />
                 Config Validation
             </span>
-            <span class="no-config__5-errors" *ngFor="let error of configErrors">{{ error }}</span>
+            <span class="no-config__6-errors" *ngFor="let error of configErrors">{{ error }}</span>
             <div *ngIf="configValid">
-                <span class="no-config__5-check">
-                    <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="octoprintConnection" />
-                    <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="octoprintConnection == false" />
+                <span class="no-config__6-check">
+                    <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection" />
+                    <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection == false" />
                     Octoprint Connection
                 </span>
-                <span class="no-config__5-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
+                <span class="no-config__6-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
             </div>
             <div *ngIf="configValid && octoprintConnection">
-                <span class="no-config__5-check">
-                    <img src="assets/checkmark.svg" class="no-config__5-check-icon" *ngIf="!configSaved" />
-                    <img src="assets/error.svg" class="no-config__5-check-icon" *ngIf="configSaved" />
+                <span class="no-config__6-check">
+                    <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="!configSaved" />
+                    <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="configSaved" />
                     Saving Config
                 </span>
-                <span class="no-config__5-errors" *ngIf="configSaved">{{ configSaved }}</span>
+                <span class="no-config__6-errors" *ngIf="configSaved">{{ configSaved }}</span>
             </div>
-            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__5-finish"
+            <span *ngIf="configValid && octoprintConnection && !configSaved" class="no-config__6-finish"
                 (click)="finishWizard()">done
             </span>
         </div>

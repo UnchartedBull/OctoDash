@@ -236,6 +236,26 @@ export class ConfigService {
     public isPreheatPluginEnabled(): boolean {
         return this.config.plugins.preheatButton.enabled;
     }
+
+    public isFilamentManagerEnabled(): boolean {
+        return this.config.plugins.filamentManager.enabled;
+    }
+
+    public getFeedLength(): number {
+        return this.config.filament.feedLength;
+    }
+
+    public getFeedSpeed(): number {
+        return this.config.filament.feedSpeed;
+    }
+
+    public getFeedSpeedSlow(): number {
+        return this.config.filament.feedSpeedSlow;
+    }
+
+    public getPurgeDistance(): number {
+        return this.config.filament.purgeDistance;
+    }
 }
 
 export interface Config {
@@ -273,6 +293,8 @@ interface Filament {
     density: number;
     feedLength: number;
     feedSpeed: number;
+    feedSpeedSlow: number;
+    purgeDistance: number;
 }
 
 interface Plugins {
@@ -385,7 +407,7 @@ const schema = {
         filament: {
             $id: '#/properties/filament',
             type: 'object',
-            required: ['density', 'thickness', 'feedLength', 'feedSpeed'],
+            required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance'],
             properties: {
                 density: {
                     $id: '#/properties/filament/properties/density',
@@ -401,6 +423,14 @@ const schema = {
                 },
                 feedSpeed: {
                     $id: '#/properties/filament/properties/feedSpeed',
+                    type: 'integer',
+                },
+                feedSpeedSlow: {
+                    $id: '#/properties/filament/properties/feedSpeedSlow',
+                    type: 'integer',
+                },
+                purgeDistance: {
+                    $id: '#/properties/filament/properties/purgeDistance',
                     type: 'integer',
                 },
             },
