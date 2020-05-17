@@ -49,6 +49,7 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 
 -   OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v1.5.0 and up)
 -   OctoDash supports .ufp package and PrusaSlicer preview images (v1.5.0 and up)
+    - To get the best results, you should use a square aspect ration, like `256x256`
 -   You can let OctoDash push out and pull in the filament during a filament change, if you setup your feed length correctly. (v1.5.0 and up)
 -   You can also view the previews during print, if you press on the percentage inside the progress ring (v1.5.0 and up)
 -   You can press multiple arrows directly after another in the control view. All actions will be executed one after another, even if the prior didn't finish before pressing the button
