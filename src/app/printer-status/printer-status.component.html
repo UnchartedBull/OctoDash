@@ -47,15 +47,18 @@
                 [matRippleUnbounded]="false">+10
             </div>
         </div>
-        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.HOTEND">
+        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.HOTEND"
+            (click)="quickControlChangeValue(-1000)" matRipple [matRippleUnbounded]="false">
             {{ this.hotendTarget }}
             <span class="quick-control__controller-value-unit">°C</span>
         </div>
-        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.HEATBED">
+        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.HEATBED"
+            (click)="quickControlChangeValue(-1000)" matRipple [matRippleUnbounded]="false">
             {{ this.heatbedTarget }}
             <span class="quick-control__controller-value-unit">°C</span>
         </div>
-        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.FAN">
+        <div class="quick-control__controller-value" colspan="2" *ngIf="view === QuickControlView.FAN"
+            (click)="quickControlChangeValue(-1000)" matRipple [matRippleUnbounded]="false">
             {{ this.fanTarget }}
             <span class="quick-control__controller-value-unit">%</span>
         </div>
