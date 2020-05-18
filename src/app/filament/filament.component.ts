@@ -45,7 +45,6 @@ export class FilamentComponent implements OnInit {
             this.setPage(1);
         }
         this.hotendTarget = this.configService.getDefaultHotendTemperature();
-        this.automaticHeatingStartSeconds = 6;
         this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
             this.hotendTemperature = printerStatus.nozzle.current;
         });
@@ -53,14 +52,7 @@ export class FilamentComponent implements OnInit {
 
     public increasePage(): void {
         if (this.page < this.totalPages) {
-            if (
-                (this.page === 1 && this.configService.getFeedLength() === 0) ||
-                (this.page === 3 && this.configService.getFeedLength() === 0)
-            ) {
-                this.setPage(this.page + 2);
-            } else {
-                this.setPage(this.page + 1);
-            }
+            this.setPage(this.page + 1);
         } else if (this.page === this.totalPages) {
             this.router.navigate(['/main-screen']);
         }
@@ -73,6 +65,8 @@ export class FilamentComponent implements OnInit {
             this.router.navigate(['/main-screen']);
         } else if (this.page === 1 && this.configService.isFilamentManagerEnabled()) {
             this.setPage(0);
+        } else if (this.page === 1) {
+            this.router.navigate(['/main-screen']);
         } else if (this.page === 2 || this.page === 3) {
             this.setPage(1);
         } else if (this.page === 4 || this.page === 5) {
@@ -94,13 +88,27 @@ export class FilamentComponent implements OnInit {
             this.automaticHeatingStartSeconds = 6;
             this.automaticHeatingStartTimer();
         } else if (page === 2) {
-            this.unloadSpool();
+            if (this.getFeedLength() === 0) {
+                this.setPage(3);
+                return;
+            } else {
+                this.unloadSpool();
+            }
         } else if (page === 3) {
-            this.disableExtruderStepper();
+            if (this.configService.useM600()) {
+                this.initiateM600FilamentChange();
+            } else {
+                this.disableExtruderStepper();
+            }
         } else if (page === 4) {
-            this.loadSpool();
+            if (this.getFeedLength() === 0) {
+                this.setPage(5);
+                return;
+            } else {
+                this.loadSpool();
+            }
         } else if (page === 5) {
-            this.purgeAmount = this.configService.getPurgeDistance();
+            this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();
             this.purgeFilament(this.purgeAmount);
         }
         this.page = page;
@@ -164,6 +172,10 @@ export class FilamentComponent implements OnInit {
         }
     }
 
+    private getFeedLength(): number {
+        return this.configService.useM600() ? 0 : this.configService.getFeedLength();
+    }
+
     public getFeedSpeed(): number {
         if (this.feedSpeedSlow) {
             return this.configService.getFeedSpeedSlow();
@@ -179,11 +191,11 @@ export class FilamentComponent implements OnInit {
     }
 
     private unloadSpool(): void {
-        this.printerService.extrude(this.configService.getFeedLength() * -1, this.configService.getFeedSpeed());
+        this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
         setTimeout((): void => {
             const unloadingProgressBar = document.getElementById('filamentUnloadBar');
             unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
-            const unloadTime = this.configService.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
+            const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
             unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
             setTimeout((): void => {
                 unloadingProgressBar.style.width = '0vw';
@@ -195,10 +207,10 @@ export class FilamentComponent implements OnInit {
     }
 
     private loadSpool(): void {
-        const loadTimeFast = (this.configService.getFeedLength() * 0.8) / this.configService.getFeedSpeed();
-        const loadTimeSlow = (this.configService.getFeedLength() * 0.1) / this.configService.getFeedSpeedSlow();
+        const loadTimeFast = (this.getFeedLength() * 0.8) / this.configService.getFeedSpeed();
+        const loadTimeSlow = (this.getFeedLength() * 0.1) / this.configService.getFeedSpeedSlow();
         const loadTime = loadTimeFast + loadTimeSlow + 0.5;
-        this.printerService.extrude(this.configService.getFeedLength() * 0.75, this.configService.getFeedSpeed());
+        this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
         setTimeout((): void => {
             const loadingProgressBar = document.getElementById('filamentLoadBar');
             loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
@@ -207,10 +219,7 @@ export class FilamentComponent implements OnInit {
             setTimeout((): void => {
                 loadingProgressBar.style.width = '50vw';
                 this.timeout = setTimeout((): void => {
-                    this.printerService.extrude(
-                        this.configService.getFeedLength() * 0.17,
-                        this.configService.getFeedSpeedSlow(),
-                    );
+                    this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
                     this.feedSpeedSlow = true;
                     this.timeout2 = setTimeout((): void => {
                         this.increasePage();
@@ -252,6 +261,10 @@ export class FilamentComponent implements OnInit {
 
     private disableExtruderStepper(): void {
         this.printerService.executeGCode('M18 E ');
+    }
+
+    private initiateM600FilamentChange(): void {
+        this.printerService.executeGCode('M600');
     }
 
     // NOZZLE HEATING

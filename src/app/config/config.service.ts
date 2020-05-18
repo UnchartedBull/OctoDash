@@ -256,6 +256,10 @@ export class ConfigService {
     public getPurgeDistance(): number {
         return this.config.filament.purgeDistance;
     }
+
+    public useM600(): boolean {
+        return this.config.filament.useM600;
+    }
 }
 
 export interface Config {
