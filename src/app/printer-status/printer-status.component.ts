@@ -124,30 +124,33 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
     private changeTemperatureHotend(value: number): void {
         this.hotendTarget += value;
-        if (this.hotendTarget < 0) {
+        if (this.hotendTarget < -999) {
+            this.hotendTarget = this.configService.getDefaultHotendTemperature();
+        } else if (this.hotendTarget < 0) {
             this.hotendTarget = 0;
-        }
-        if (this.hotendTarget > 999) {
+        } else if (this.hotendTarget > 999) {
             this.hotendTarget = 999;
         }
     }
 
     private changeTemperatureHeatbed(value: number): void {
         this.heatbedTarget += value;
-        if (this.heatbedTarget < 0) {
+        if (this.heatbedTarget < -999) {
+            this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
+        } else if (this.heatbedTarget < 0) {
             this.heatbedTarget = 0;
-        }
-        if (this.heatbedTarget > 999) {
+        } else if (this.heatbedTarget > 999) {
             this.heatbedTarget = 999;
         }
     }
 
     private changeSpeedFan(value: number): void {
         this.fanTarget += value;
-        if (this.fanTarget < 0) {
+        if (this.fanTarget < -999) {
+            this.fanTarget = this.configService.getDefaultFanSpeed();
+        } else if (this.fanTarget < 0) {
             this.fanTarget = 0;
-        }
-        if (this.fanTarget > 100) {
+        } else if (this.fanTarget > 100) {
             this.fanTarget = 100;
         }
     }
