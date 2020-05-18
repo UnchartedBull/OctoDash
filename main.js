@@ -60,8 +60,8 @@ function createWindow() {
         window.setFullScreen(true);
     }
 
-    setTimeout(sendVersionInfo, 30 * 1000);
-    activeCustomStyleListener();
+    // setTimeout(sendVersionInfo, 30 * 1000);
+    activateAppInfoListener();
     activateScreenSleepListener();
     activateReloadListener();
 
@@ -94,25 +94,30 @@ function activateReloadListener() {
     });
 }
 
-function activeCustomStyleListener() {
-    ipcMain.on('customStyles', () => {
-        fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
-            if (err) {
-                if (err.code === 'ENOENT') {
-                    fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err) => {
-                        if (err) {
-                            window.webContents.send('customCSSError', err)
-                        } else {
-                            window.webContents.send('customCSS', '')
-                        }
-                    })
-                } else {
-                    window.webContents.send('customCSSError', err)
-                }
+function activateAppInfoListener() {
+    ipcMain.on('appInfo', () => {
+        sendCustomStyles();
+        sendVersionInfo();
+    })
+}
+
+function sendCustomStyles() {
+    fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
+        if (err) {
+            if (err.code === 'ENOENT') {
+                fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err) => {
+                    if (err) {
+                        window.webContents.send('customStylesError', err)
+                    } else {
+                        window.webContents.send('customStyles', '')
+                    }
+                })
             } else {
-                window.webContents.send('customCSS', data)
+                window.webContents.send('customStylesError', err)
             }
-        })
+        } else {
+            window.webContents.send('customStyles', data)
+        }
     })
 }
 

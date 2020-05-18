@@ -13,6 +13,7 @@ export class AppService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private ipc: any;
     private version: string;
+    private latestVersion: string;
 
     public constructor(
         private configService: ConfigService,
@@ -22,10 +23,11 @@ export class AppService {
         if (window.require) {
             try {
                 this.ipc = window.require('electron').ipcRenderer;
-                this.ipc.on('versionInformation', ({}, versionInformation: VersionInformation): void => {
-                    this.version = versionInformation.version;
-                    this.checkUpdate();
-                });
+                this.enableVersionListener();
+                this.enableCustomCSSListener();
+                setTimeout(() => {
+                    this.ipc.send('appInfo');
+                }, 0);
             } catch (e) {
                 this.notificationService.setError(
                     "Can't retrieve version information",
@@ -33,27 +35,31 @@ export class AppService {
                 );
             }
         }
-
-        setTimeout(() => {
-            this.ipc.on('customCSS', ({}, customCSS: string): void => {
-                console.log(customCSS);
-                let css = document.createElement('style');
-                css.type = 'text/css';
-                css.appendChild(document.createTextNode(customCSS));
-                document.head.append(css);
-            });
-
-            this.ipc.on('customCSSError', ({}, customCSSError: string): void => {
-                this.notificationService.setError("Can't get custom styles!", customCSSError);
-            });
-
-            this.ipc.send('customStyles');
-        }, 0);
-
         this.updateError = [
             ".filament should have required property 'feedSpeedSlow'",
             ".filament should have required property 'purgeDistance'",
         ];
+    }
+
+    private enableVersionListener(): void {
+        this.ipc.on('versionInformation', ({}, versionInformation: VersionInformation): void => {
+            this.version = versionInformation.version;
+            this.checkUpdate();
+        });
+    }
+
+    private enableCustomCSSListener(): void {
+        this.ipc.on('customStyles', ({}, customCSS: string): void => {
+            console.log(customCSS);
+            let css = document.createElement('style');
+            css.type = 'text/css';
+            css.appendChild(document.createTextNode(customCSS));
+            document.head.append(css);
+        });
+
+        this.ipc.on('customStylesError', ({}, customCSSError: string): void => {
+            this.notificationService.setError("Can't get custom styles!", customCSSError);
+        });
     }
 
     // If the errors can be automatically fixed return true here
@@ -77,6 +83,8 @@ export class AppService {
                         `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`,
                     );
                 }
+                this.latestVersion = data.name.replace('v', '');
+                console.log(this.version, this.latestVersion);
             },
             (): void => null,
         );
