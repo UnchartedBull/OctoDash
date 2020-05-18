@@ -1,5 +1,6 @@
 .settings {
     &-wrapper {
+        animation: fadein 0.8s;
         position: absolute;
         top: 0;
         left: 0;
@@ -7,10 +8,13 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.8);
         z-index: 20;
+
+        &-fadeout {
+            animation: fadeout 0.8s;
+        }
     }
 
     &-container {
-        animation: fadein 0.8s;
         position: absolute;
         top: 10vh;
         left: 20vw;
@@ -18,10 +22,6 @@
         width: 60vw;
         background-color: #353b48;
         border-radius: 2vw;
-
-        &-fadeout {
-            animation: fadeout 0.8s;
-        }
     }
 
     &__version {
@@ -86,6 +86,10 @@
         font-size: 2vw;
         margin-bottom: 2vh;
 
+        &:disabled {
+            opacity: 0.5;
+        }
+
         &:focus {
             outline: 0;
             border: 2px solid #44bd32;
@@ -142,6 +146,10 @@
             margin-top: 1.4vh;
             cursor: pointer;
             overflow: visible;
+
+            &-disabled {
+                opacity: 0.5;
+            }
         }
 
         &-checked {

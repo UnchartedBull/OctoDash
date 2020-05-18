@@ -35,22 +35,17 @@ export class AppService {
                 );
             }
         }
-        this.updateError = [
-            ".filament should have required property 'feedSpeedSlow'",
-            ".filament should have required property 'purgeDistance'",
-        ];
+          
+        this.updateError = [".filament should have required property 'useM600'"];
     }
 
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
-        config.filament.feedLength = 0;
-        config.filament.feedSpeed = 30;
-        config.filament.feedSpeedSlow = 5;
-        config.filament.purgeDistance = 30;
+        config.filament.useM600 = false;
         this.configService.saveConfig(config);
         this.configService.updateConfig();
-        return false;
+        return true;
     }
 
     private enableVersionListener(): void {

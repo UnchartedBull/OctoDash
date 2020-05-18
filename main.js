@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {
     app,
-    BrowserWindow
+    BrowserWindow,
+    ipcMain,
+    session
 } = require('electron');
 const url = require('url');
 const path = require('path');
@@ -10,15 +12,13 @@ const Store = require('electron-store');
 
 const store = new Store();
 const exec = require('child_process').exec;
-const {
-    ipcMain
-} = require('electron');
 
 const args = process.argv.slice(1);
 const dev = args.some(val => val === '--serve');
 const big = args.some(val => val === '--big');
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
+app.allowRendererProcessReuse = true;
 
 let window;
 
@@ -29,9 +29,23 @@ function createWindow() {
     });
 
     const {
-        screen
+        screen,
+        session
     } = require('electron');
+
+    if (!dev) {
+        session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+            callback({
+                responseHeaders: {
+                    ...details.responseHeaders,
+                    'Content-Security-Policy': ['script-src \'self\'']
+                }
+            })
+        })
+    }
+
     const mainScreen = screen.getPrimaryDisplay();
+
     window = new BrowserWindow({
         width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
         height: dev ? (big ? 502 : 342) : mainScreen.size.height,

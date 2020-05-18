@@ -50,6 +50,7 @@ export class NoConfigComponent implements OnInit {
                     feedSpeed: 30,
                     feedSpeedSlow: 3,
                     purgeDistance: 30,
+                    useM600: false,
                 },
                 plugins: {
                     displayLayerProgress: {

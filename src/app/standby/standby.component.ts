@@ -102,14 +102,14 @@ export class StandbyComponent implements OnInit {
     }
 
     private disableStandby(): void {
+        if (this.configService.getAutomaticScreenSleep()) {
+            this.service.turnDisplayOn();
+        }
         setTimeout((): void => {
             this.connecting = false;
-            if (this.configService.getAutomaticScreenSleep()) {
-                this.service.turnDisplayOn();
-            }
             this.notificationService.enableNotifications();
             this.router.navigate(['/main-screen']);
-        }, 1000);
+        }, 1300);
     }
 }
 

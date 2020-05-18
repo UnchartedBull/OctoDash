@@ -1,6 +1,6 @@
 <div class="settings">
-    <div class="settings-wrapper">
-        <div class="settings-container" [ngClass]="{'settings-container-fadeout': fadeOutAnimation}">
+    <div class="settings-wrapper" [ngClass]="{'settings-wrapper-fadeout': fadeOutAnimation}">
+        <div class="settings-container">
             <img src="assets/error.svg" class="settings__close" (click)="hideSettings()">
             <div class="settings__content" #settingsMain>
                 <span class="settings__heading">settings</span>
@@ -97,6 +97,54 @@
                     <form class="settings__form">
                         <table>
                             <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <div class="settings__checkbox-container"
+                                        (click)="config.filament.useM600 = !config.filament.useM600">
+                                        <span class="settings__checkbox">
+                                            <span class="settings__checkbox-checked"
+                                                *ngIf="config.filament.useM600"></span>
+                                        </span> <span class="settings__checkbox-descriptor">Use M600 to change
+                                            Filament</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-feed-length" class="settings__input-label">Feed Length
+                                        <span>(mm)</span></label>
+                                    <input type="number" id="filament-feed-length" class="settings__input"
+                                        name="filament-feed-length" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedLength" required
+                                        [disabled]="config.filament.useM600">
+                                </td>
+                                <td style="width: 25.6vw">
+                                    <label for="filament-purge-distance" class="settings__input-label">Purge Distance
+                                        <span>(mm)</span></label>
+                                    <input type="number" id="filament-purge-distance" class="settings__input"
+                                        name="filament-purge-distance" style="width: 19vw"
+                                        [(ngModel)]="config.filament.purgeDistance" required
+                                        [disabled]="config.filament.useM600">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25.6vw; display: block">
+                                    <label for="filament-feed-speed" class="settings__input-label">Feed Speed
+                                        <span>(mm/s)</span></label>
+                                    <input type="number" id="filament-feed-speed" class="settings__input"
+                                        name="filament-feed-speed" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedSpeed" required
+                                        [disabled]="config.filament.useM600">
+                                </td>
+                                <td>
+                                    <label for="filament-feed-speed-slow" class="settings__input-label">Feed Speed Slow
+                                        <span>(mm/s)</span></label>
+                                    <input type="number" id="filament-feed-speed-slow" class="settings__input"
+                                        name="filament-feed-speed-slow" style="width: 19vw"
+                                        [(ngModel)]="config.filament.feedSpeedSlow" required
+                                        [disabled]="config.filament.useM600">
+                                </td>
+                            </tr>
+                            <tr>
                                 <td style="width: 25.6vw; display: block">
                                     <label for="filament-thickness" class="settings__input-label">Thickness
                                         <span>(mm)</span></label>
@@ -110,31 +158,6 @@
                                     <input type="number" id="filament-density" class="settings__input"
                                         name="filament-density" style="width: 19vw"
                                         [(ngModel)]="config.filament.density" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 25.6vw; display: block">
-                                    <label for="filament-feed-length" class="settings__input-label">Feed Length
-                                        <span>(mm)</span></label>
-                                    <input type="number" id="filament-feed-length" class="settings__input"
-                                        name="filament-feed-length" style="width: 19vw"
-                                        [(ngModel)]="config.filament.feedLength" required>
-                                </td>
-                                <td>
-                                    <label for="filament-feed-speed" class="settings__input-label">Feed Speed
-                                        <span>(mm/s)</span></label>
-                                    <input type="number" id="filament-feed-speed" class="settings__input"
-                                        name="filament-feed-speed" style="width: 19vw"
-                                        [(ngModel)]="config.filament.feedSpeed" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 25.6vw; display: block">
-                                    <label for="filament-feed-speed-slow" class="settings__input-label">Feed Speed Slow
-                                        <span>(mm/s)</span></label>
-                                    <input type="number" id="filament-feed-speed-slow" class="settings__input"
-                                        name="filament-feed-speed-slow" style="width: 19vw"
-                                        [(ngModel)]="config.filament.feedSpeedSlow" required>
                                 </td>
                             </tr>
                         </table>
@@ -287,7 +310,8 @@
                     <label for="enclosure-ambient-id" class="settings__input-label">Ambient Sensor
                         <span>(ID)</span></label>
                     <input type="number" id="enclosure-ambient-id" class="settings__input" name="enclosure-ambient-id"
-                        style="width: 44.94vw" [(ngModel)]="config.plugins.enclosure.ambientSensorID" required>
+                        style="width: 44.94vw" [(ngModel)]="config.plugins.enclosure.ambientSensorID" required
+                        [disabled]="!config.plugins.enclosure.enabled">
 
                     <span class="settings__heading-2">Filament Manager</span>
                     <div class="settings__checkbox-container"
@@ -321,9 +345,11 @@
                         </span> <span class="settings__checkbox-descriptor">enabled</span>
                     </div>
                     <div class="settings__checkbox-container"
+                        [ngClass]="{'settings__checkbox-container-disabled': !config.plugins.psuControl.enabled}"
                         (click)="config.plugins.psuControl.turnOnPSUWhenExitingSleep = !config.plugins.psuControl.turnOnPSUWhenExitingSleep">
                         <span class="settings__checkbox">
                             <span class="settings__checkbox-checked"
+                                [ngClass]="{'settings__checkbox-checked-disabled': !config.plugins.psuControl.enabled}"
                                 *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"></span>
                         </span> <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
                     </div>
