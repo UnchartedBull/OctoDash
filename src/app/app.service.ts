@@ -34,6 +34,22 @@ export class AppService {
             }
         }
 
+        setTimeout(() => {
+            this.ipc.on('customCSS', ({}, customCSS: string): void => {
+                console.log(customCSS);
+                let css = document.createElement('style');
+                css.type = 'text/css';
+                css.appendChild(document.createTextNode(customCSS));
+                document.head.append(css);
+            });
+
+            this.ipc.on('customCSSError', ({}, customCSSError: string): void => {
+                this.notificationService.setError("Can't get custom styles!", customCSSError);
+            });
+
+            this.ipc.send('customStyles');
+        }, 0);
+
         this.updateError = [
             ".filament should have required property 'feedSpeedSlow'",
             ".filament should have required property 'purgeDistance'",

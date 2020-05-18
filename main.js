@@ -95,26 +95,24 @@ function activateReloadListener() {
 }
 
 function activeCustomStyleListener() {
-    fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
-        if (err) {
-            if (err.code === 'ENOENT') {
-                fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err, data) => {
-                    if (err) {
-                        // TODO return
-                        console.error(err);
-                    } else {
-                        // TODO return
-                        console.log(data)
-                    }
-                })
+    ipcMain.on('customStyles', () => {
+        fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
+            if (err) {
+                if (err.code === 'ENOENT') {
+                    fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err) => {
+                        if (err) {
+                            window.webContents.send('customCSSError', err)
+                        } else {
+                            window.webContents.send('customCSS', '')
+                        }
+                    })
+                } else {
+                    window.webContents.send('customCSSError', err)
+                }
             } else {
-                // TODO return
-                console.error(err);
+                window.webContents.send('customCSS', data)
             }
-        } else {
-            // TODO return
-            console.log(data);
-        }
+        })
     })
 }
 
