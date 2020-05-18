@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from '../app.service';
@@ -17,6 +17,7 @@ export class StandbyComponent implements OnInit {
     public connecting = false;
     public error = '';
     private connectionRetries = 3;
+    private displaySleepTimeout: number;
 
     public constructor(
         private configService: ConfigService,
@@ -29,7 +30,7 @@ export class StandbyComponent implements OnInit {
 
     public ngOnInit(): void {
         if (this.configService.getAutomaticScreenSleep()) {
-            setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
+            this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
         }
     }
 
@@ -103,13 +104,16 @@ export class StandbyComponent implements OnInit {
 
     private disableStandby(): void {
         if (this.configService.getAutomaticScreenSleep()) {
+            if (this.displaySleepTimeout) {
+                clearTimeout(this.displaySleepTimeout);
+            }
             this.service.turnDisplayOn();
         }
         setTimeout((): void => {
             this.connecting = false;
             this.notificationService.enableNotifications();
             this.router.navigate(['/main-screen']);
-        }, 1300);
+        }, 1000);
     }
 }
 
