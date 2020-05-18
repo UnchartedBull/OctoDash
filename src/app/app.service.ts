@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
@@ -13,6 +13,7 @@ export class AppService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private ipc: any;
     private version: string;
+    private latestVersion: string;
 
     public constructor(
         private configService: ConfigService,
@@ -22,10 +23,11 @@ export class AppService {
         if (window.require) {
             try {
                 this.ipc = window.require('electron').ipcRenderer;
-                this.ipc.on('versionInformation', ({}, versionInformation: VersionInformation): void => {
-                    this.version = versionInformation.version;
-                    this.checkUpdate();
-                });
+                this.enableVersionListener();
+                this.enableCustomCSSListener();
+                setTimeout(() => {
+                    this.ipc.send('appInfo');
+                }, 0);
             } catch (e) {
                 this.notificationService.setError(
                     "Can't retrieve version information",
@@ -33,7 +35,6 @@ export class AppService {
                 );
             }
         }
-
         this.updateError = [
             ".filament should have required property 'feedSpeedSlow'",
             ".filament should have required property 'purgeDistance'",
@@ -52,6 +53,27 @@ export class AppService {
         return false;
     }
 
+    private enableVersionListener(): void {
+        this.ipc.on('versionInformation', ({}, versionInformation: VersionInformation): void => {
+            this.version = versionInformation.version;
+            this.checkUpdate();
+        });
+    }
+
+    private enableCustomCSSListener(): void {
+        this.ipc.on('customStyles', ({}, customCSS: string): void => {
+            console.log(customCSS);
+            let css = document.createElement('style');
+            css.type = 'text/css';
+            css.appendChild(document.createTextNode(customCSS));
+            document.head.append(css);
+        });
+
+        this.ipc.on('customStylesError', ({}, customCSSError: string): void => {
+            this.notificationService.setError("Can't get custom styles!", customCSSError);
+        });
+    }
+
     private checkUpdate(): void {
         this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
             (data: GitHubReleaseInformation): void => {
@@ -61,6 +83,7 @@ export class AppService {
                         `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`,
                     );
                 }
+                this.latestVersion = data.name.replace('v', '');
             },
             (): void => null,
         );
@@ -69,6 +92,10 @@ export class AppService {
 
     public getVersion(): string {
         return this.version;
+    }
+
+    public getLatestVersion(): string {
+        return this.latestVersion;
     }
 
     public turnDisplayOff(): void {

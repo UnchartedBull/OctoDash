@@ -5,6 +5,7 @@ const {
 } = require('electron');
 const url = require('url');
 const path = require('path');
+const fs = require('fs');
 const Store = require('electron-store');
 
 const store = new Store();
@@ -59,7 +60,8 @@ function createWindow() {
         window.setFullScreen(true);
     }
 
-    setTimeout(sendVersionInfo, 30 * 1000);
+    // setTimeout(sendVersionInfo, 30 * 1000);
+    activateAppInfoListener();
     activateScreenSleepListener();
     activateReloadListener();
 
@@ -90,6 +92,33 @@ function activateReloadListener() {
             }),
         );
     });
+}
+
+function activateAppInfoListener() {
+    ipcMain.on('appInfo', () => {
+        sendCustomStyles();
+        sendVersionInfo();
+    })
+}
+
+function sendCustomStyles() {
+    fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
+        if (err) {
+            if (err.code === 'ENOENT') {
+                fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err) => {
+                    if (err) {
+                        window.webContents.send('customStylesError', err)
+                    } else {
+                        window.webContents.send('customStyles', '')
+                    }
+                })
+            } else {
+                window.webContents.send('customStylesError', err)
+            }
+        } else {
+            window.webContents.send('customStyles', data)
+        }
+    })
 }
 
 function sendVersionInfo() {
