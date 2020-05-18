@@ -128,9 +128,6 @@
                                 installation guide
                             </a> available in the GitHub Wiki.
                         </p>
-                        <p>
-                            To automatically install and setup OctoDash just run on your Raspberry Pi:
-                        </p>
                         <div class="install-script">
                             wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/install.sh | bash
                         </div>
@@ -169,7 +166,7 @@
                                 style="font-family: 'Cousine', monospace; font-size: 90%;">octodash</span>
                             package and removing the octodash line from your <span
                                 style="font-family: 'Cousine', monospace; font-size: 90%;">~/.xinitrc</span>
-                            file. To automatically remove OctoDash just run the removal script:<br>
+                            file.<br>
                         </p>
                         <div class="install-script">
                             wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/remove.sh | bash
@@ -241,6 +238,45 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
+                        <h1>Tips and Tricks</h1>
+                        <ul style="font-size: 119%;">
+                            <li>OctoDash supports printing from your Raspberry and from the printers SD card, if
+                                configured in OctoPrint </li>
+                            <li>OctoDash can push out and pull in the filament during a filament change, if you setup
+                                your feed length correctly</li>
+                            <ul>
+                                <li>You can also use your printers filament change progress, just enable this in the
+                                    settings (the printer needs to support M600)</li>
+                            </ul>
+                            <li>If you're using FilamentManager add the color (in HEX format) to the end of the name,
+                                like "Vendor black (#000000)", this color will then be shown in the filament selection
+                                menu</li>
+                            <li>You can adjust the look of OctoDash by adjusting the
+                                ~/.config/octodash/custom-styles.css file and adding your own CSS rules</li>
+                            <li>OctoDash supports .ufp package preview images and PrusaSlicer thumbnails</li>
+                            <ul>
+                                <li>To get the best results, you should use a square aspect ration, like 256x256</li>
+                            </ul>
+                            <li>You can also view the previews during print, if you press on the percentage inside the
+                                progress ring</li>
+                            <li>You can press multiple arrows directly after another in the control view. All actions
+                                will be executed one after another, even if the prior didn't finish before pressing the
+                                button</li>
+                            <li>The six actions on the right in the control view can be customized. They can either send
+                                GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so
+                                you can view your camera for example</li>
+                            <li>You can adjust the temperatures and fan speed in the home screen by pressing on their
+                                icons, if you want to set them to zero, just tap the value once</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ftco-section pb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 heading-title">
                         <h1>Supported Plugins</h1>
                         <h4>Display Layer Progress</h4>
                         <span class="badge badge-pill badge-success p-1 px-3">supported</span>
@@ -300,33 +336,6 @@
                         <br>
                         <p>Want to see more plugins here? Please open an issue on GitHub, ideally together with a PR to
                             implement the plugin.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="ftco-section pb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 heading-title">
-                        <h1>Tips and Tricks</h1>
-                        <ul>
-                            <li>OctoDash supports printing from your Raspberry and from the printers SD card, if
-                                configured in OctoPrint </li>
-                            <li>OctoDash supports .ufp package preview images and PrusaSlicer thumbnails</li>
-                            <li>You can also view the previews during print, if you press on the percentage inside the
-                                progress ring</li>
-                            <li>You can press multiple arrows directly after another in the control view. All actions
-                                will be executed one after another, even if the prior didn't finish before pressing the
-                                button</li>
-                            <li>The six actions on the right in the control view can be customized. They can either send
-                                GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so
-                                you can view your camera for example</li>
-                            <li>You can adjust the temperatures in the home screen, by pressing on their icons</li>
-                            <li>If you're using FilamentManager add the color (in HEX format) to the end of the name,
-                                like "Vendor black (#000000)", this color will then be shown in the filament selection
-                                menu.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -532,14 +541,34 @@
                     </div>
                     <div class="col-md-12 heading-title">
                         <h1>Contributing</h1>
-                        <p>If you can think of something nice to add or want to change some of the messy code feel free
-                            to create a Pull Request. I'll have a look at it and will merge it into master if everything
-                            checks out! Any help is greatly appreciated!</p>
+                        <p>If you can think of something nice to add or want to change / extend some of the
+                            functionality, feel free
+                            to create a Pull Request or an Issue. Please make sure to follow the code style (.prettierrc
+                            is included in the GitHub) and not break any of the existing functionality. Any help is
+                            greatly appreciated!</p>
 
-                        <p>If you can think of a great feature, but don't feel yet ready to code something - open an
-                            issue. I'll have a look at it, although it is preferred if you directly create a Pull
-                            Request for your new feature. If you need some help, I can point you in the correct
-                            direction.</p>
+                        <p>To setup a local environment you need to do the following steps:</p>
+                        <ul style="font-size: 119%;">
+                            <li>Fork the repository to your GitHub account, so you can push your changes</li>
+                            <li>Clone the repository (make sure to replace the link):
+                                <span style="font-family: 'Cousine', monospace;">git
+                                    clone https://github.com/UnchartedBull/OctoDash.git</span></li>
+                            <li>Install dependencies:
+                                <span style="font-family: 'Cousine', monospace;">npm install</span></li>
+                            <li>Start the Live Server:
+                                <span style="font-family: 'Cousine', monospace;">npm run start </span> (480x320)
+                                or
+                                <span style="font-family: 'Cousine', monospace;"> npm run start:big </span> (800x480)
+                                <p class="text-muted" style="margin: -1vh 0 -0.5vh; font-size: 100%;">The Live Server
+                                    will
+                                    automatically updated, once you save your
+                                    changes.</p>
+                            </li>
+                            <li>
+                                If you want to package OctoDash, so you can install it on your Raspberry Pi:
+                                <span style="font-family: 'Cousine', monospace;"> npm run pack </span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
