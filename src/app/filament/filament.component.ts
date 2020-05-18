@@ -207,8 +207,8 @@ export class FilamentComponent implements OnInit {
     }
 
     private loadSpool(): void {
-        const loadTimeFast = (this.getFeedLength() * 0.8) / this.configService.getFeedSpeed();
-        const loadTimeSlow = (this.getFeedLength() * 0.1) / this.configService.getFeedSpeedSlow();
+        const loadTimeFast = (this.getFeedLength() * 0.75) / this.configService.getFeedSpeed();
+        const loadTimeSlow = (this.getFeedLength() * 0.17) / this.configService.getFeedSpeedSlow();
         const loadTime = loadTimeFast + loadTimeSlow + 0.5;
         this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
         setTimeout((): void => {
