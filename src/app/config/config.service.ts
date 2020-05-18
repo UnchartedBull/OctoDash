@@ -295,6 +295,7 @@ interface Filament {
     feedSpeed: number;
     feedSpeedSlow: number;
     purgeDistance: number;
+    useM600: boolean;
 }
 
 interface Plugins {
@@ -407,7 +408,7 @@ const schema = {
         filament: {
             $id: '#/properties/filament',
             type: 'object',
-            required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance'],
+            required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance', 'useM600'],
             properties: {
                 density: {
                     $id: '#/properties/filament/properties/density',
@@ -432,6 +433,10 @@ const schema = {
                 purgeDistance: {
                     $id: '#/properties/filament/properties/purgeDistance',
                     type: 'integer',
+                },
+                useM600: {
+                    $id: '#/properties/filament/properties/useM600',
+                    type: 'boolean',
                 },
             },
         },
