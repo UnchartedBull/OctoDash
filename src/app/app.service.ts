@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
@@ -41,6 +41,18 @@ export class AppService {
         ];
     }
 
+    // If the errors can be automatically fixed return true here
+    public autoFixError(): boolean {
+        let config = this.configService.getCurrentConfig();
+        config.filament.feedLength = 0;
+        config.filament.feedSpeed = 30;
+        config.filament.feedSpeedSlow = 5;
+        config.filament.purgeDistance = 30;
+        this.configService.saveConfig(config);
+        this.configService.updateConfig();
+        return false;
+    }
+
     private enableVersionListener(): void {
         this.ipc.on('versionInformation', ({}, versionInformation: VersionInformation): void => {
             this.version = versionInformation.version;
@@ -62,18 +74,6 @@ export class AppService {
         });
     }
 
-    // If the errors can be automatically fixed return true here
-    public autoFixError(): boolean {
-        let config = this.configService.getCurrentConfig();
-        config.filament.feedLength = 0;
-        config.filament.feedSpeed = 30;
-        config.filament.feedSpeedSlow = 5;
-        config.filament.purgeDistance = 30;
-        this.configService.saveConfig(config);
-        this.configService.updateConfig();
-        return false;
-    }
-
     private checkUpdate(): void {
         this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
             (data: GitHubReleaseInformation): void => {
@@ -84,7 +84,6 @@ export class AppService {
                     );
                 }
                 this.latestVersion = data.name.replace('v', '');
-                console.log(this.version, this.latestVersion);
             },
             (): void => null,
         );
@@ -93,6 +92,10 @@ export class AppService {
 
     public getVersion(): string {
         return this.version;
+    }
+
+    public getLatestVersion(): string {
+        return this.latestVersion;
     }
 
     public turnDisplayOff(): void {
