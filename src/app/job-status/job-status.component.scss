@@ -33,6 +33,11 @@
             display: block;
         }
     }
+    
+    & [hidden] {
+        display: none;
+    }
+
 
     &__filename {
         font-size: 6vw;
