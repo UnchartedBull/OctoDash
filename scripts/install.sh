@@ -1,7 +1,29 @@
 #!/bin/bash
 
 ################## INQUIRER.SH ##################
+# https://github.com/kahkhang/Inquirer.sh
 
+# The MIT License (MIT)
+
+# Copyright (c) 2017
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 # store the current set options
 OLD_SET=$-
@@ -696,42 +718,46 @@ if [[ " ${selected_plugins[@]} " =~ "PrusaSlicer Thumbnails" ]]; then
     "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip"
 fi;
 
-# echo "Installing OctoPrint Plugins (this might take a while) ...""
-# "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
-# "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
-# "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
-# if [[ $* == *--ptg* ]]; then
-#     "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
-# fi
+echo "Installing OctoDash ..."
+cd ~
+wget -O octodash.deb $releaseURL -q --show-progress
 
-# echo "Installing OctoDash ..."
-# cd ~
-# wget -O octodash.deb $releaseURL -q --show-progress
+sudo dpkg -i octodash.deb
 
-# sudo dpkg -i octodash.deb
+rm octodash.deb
 
-# rm octodash.deb
+yes_no=( 'yes' 'no' )
 
-# echo "Setting up Autostart ..."
-# cat <<EOF > ~/.xinitrc
-# #!/bin/sh
+list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
 
-# xset s off
-# xset s noblank
-# xset -dpms
+echo $auto_start
+if [ $auto_start == 'yes' ]; then
+    echo "Setting up Autostart ..."
+    cat <<EOF > ~/.xinitrc
+#!/bin/sh
 
-# ratpoison&
-# octodash
-# EOF
+xset s off
+xset s noblank
+xset -dpms
 
-# cat <<EOF >> ~/.bashrc
-# if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
-#     xinit -- -nocursor
-# fi
-# EOF
+ratpoison&
+octodash
+EOF
 
-# echo "Setting Permissions ..."
-# sudo chmod +x ~/.xinitrc
-# sudo chmod ug+s /usr/lib/xorg/Xorg
+    cat <<EOF >> ~/.bashrc
+if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
+    xinit -- -nocursor
+fi
+EOF
 
-# echo "Done. OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled (instructions in the wiki)."
+    echo "Setting Permissions ..."
+    sudo chmod +x ~/.xinitrc
+    sudo chmod ug+s /usr/lib/xorg/Xorg
+
+    echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
+fi
+
+list_input "Should I reboot your Pi?" yes_no reboot
+if [ $reboot == 'yes' ]; then
+    sudo reboot
+fi
