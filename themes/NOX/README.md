@@ -1,4 +1,4 @@
-# NOX theme
+# NOX theme V0.1
 
 1. Printing Screen:
 
