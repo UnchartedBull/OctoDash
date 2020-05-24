@@ -73,7 +73,7 @@
 /**************************************** GLOBAL ****************************************/
 
 [hidden]{
-	display:block!important; 
+	display:block!important;
 }
 *:not(path):not(svg) {
     font-family: 'Product Sans', sans-serif;
@@ -232,6 +232,11 @@ ngx-spinner .overlay{
     top:0;
     left:0;
     font-size: 4vw!important;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 4vh!important;
+    width: 100vw!important;
+    text-overflow: ellipsis;
 }
 
 /**************************************** PRINTER STATUS ****************************************/
@@ -266,15 +271,6 @@ ngx-spinner .overlay{
 .job-info__preview-discard {
     font-size: 2.5vw!important;
     width: 30vw!important;
-}
-
-.job-info__filename {
-    font-size: 6vw;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 4vh!important;
-    width: 100vw!important;
-    text-overflow: ellipsis;
 }
 
 .job-info__print-details {
@@ -416,7 +412,7 @@ app-job-status ~ app-layer-progress .layer-indication::before{
     visibility: visible!important;
     background-size: 6vw 6vh;
     display: inline-block;
-    width: 6vw; 
+    width: 6vw;
     height: 6vh;
     content:"";
     margin-right: 2vw;
@@ -515,7 +511,7 @@ round-progress svg circle{
 }
 
 .print-control__cancel__action:last-child{
-    background-color: rgb(31, 153, 0)!important;;
+    background-color: rgb(31, 153, 0)!important;
     text-align: center;
     padding: 2vh 7vw!important;
     margin: 9vh 6vw!important;
@@ -597,6 +593,7 @@ round-progress svg circle{
 
 .settings__input-label {
     font-size: 2.5vw!important;
+    padding-top: 4vh!important;
 }
 
 #action-icon, #action-color{
@@ -605,10 +602,6 @@ round-progress svg circle{
 
 .settings__checkbox-descriptor{
     padding-right: 3vw;
-}
-.settings__input-label{
-    /* margin-top: 2vh!important; */
-    padding-top: 4vh!important;
 }
 
 .settings__list li{
