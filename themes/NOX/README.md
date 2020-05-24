@@ -1,5 +1,12 @@
 # NOX theme V0.1
 
+I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher (at least 50%):
+```
+thumbnails = 16x16,330x186
+```
+
+
+### Screenshots:
 1. Printing Screen:
 
     ![Printing screen](screenshots/screenshot_printing.png)
