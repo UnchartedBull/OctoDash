@@ -107,10 +107,6 @@ app-root {
     top: 26.5vh;
 }
 
-*{
-    transition: opacity ease-in-out .2s!important;
-}
-
 /**************************************** BOTTOM BAR ****************************************/
 
 app-job-status ~ app-bottom-bar .bottom-bar{
@@ -142,28 +138,46 @@ ngx-spinner .overlay{
     background: rgba(255, 255, 255, 0)!important;
     backdrop-filter: blur(5px);
 }
+
 .files__object{
     background-color: #222222!important;
     width: 92vw!important;
 }
+
 .files__name {
     font-weight: normal!important;
     font-size: 3.1vw!important;
 }
+
 .files::before {
     display:none!important;
 }
+
 .files__info {
     float: right;
     padding-left: .7vw;
     line-height: 6vw;
 }
+
 .files__info-value:first-of-type, .files__info-value:nth-of-type(2){
     display:none!important; /* hide size and filament use */
 }
+
 .sorting {
     backdrop-filter: blur(8px);
     background-color: rgba(0, 0, 0, .7)!important;
+    transition: opacity ease-in-out .2s!important;
+}
+
+.sorting-wrapper{
+    background: transparent!important;
+}
+
+.sorting-close {
+    position: fixed!important;
+    right: 3.5vw!important;
+    top: 5.5vh!important;
+    width: 5vw!important;
 }
 
 /**************************************** FILE ****************************************/
@@ -177,6 +191,7 @@ ngx-spinner .overlay{
     bottom:0!important;
     width:auto!important;
     height:auto!important;
+    transition: opacity ease-in-out .2s!important;
 }
 
 .file__wrapper{
@@ -244,6 +259,7 @@ ngx-spinner .overlay{
 .quick-control {
     backdrop-filter: blur(8px);
     background-color: rgba(0, 0, 0, .7)!important;
+    transition: opacity ease-in-out .2s!important;
 }
 .quick-control__controller {
     border: solid 0.2vw!important;
@@ -492,6 +508,7 @@ round-progress svg circle{
 .print-control__container {
     backdrop-filter: blur(8px);
     background-color: rgba(0, 0, 0, .7)!important;
+    transition: opacity ease-in-out .2s!important;
 }
 .print-control__adjust__controller {
     border: solid 0.2vw!important;
