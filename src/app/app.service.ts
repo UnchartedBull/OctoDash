@@ -35,14 +35,14 @@ export class AppService {
                 );
             }
         }
-          
-        this.updateError = [".filament should have required property 'useM600'"];
+
+        this.updateError = [".octodash should have required property 'preferPreviewWhilePrinting'"];
     }
 
     // If the errors can be automatically fixed return true here
     public autoFixError(): boolean {
         let config = this.configService.getCurrentConfig();
-        config.filament.useM600 = false;
+        config.octodash.preferPreviewWhilePrinting = false;
         this.configService.saveConfig(config);
         this.configService.updateConfig();
         return true;
