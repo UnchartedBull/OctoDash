@@ -5,6 +5,11 @@ I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher (a
 thumbnails = 16x16,330x186
 ```
 
+You also need to activate this setting in OctoDash:
+
+**Settings > OctoDash > Preview by default while printing**
+
+
 
 ### Screenshots:
 1. Printing Screen:
