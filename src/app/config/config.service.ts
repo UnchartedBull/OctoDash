@@ -260,6 +260,10 @@ export class ConfigService {
     public useM600(): boolean {
         return this.config.filament.useM600;
     }
+
+    public showThumbnailByDefault(): boolean {
+        return this.config.octodash.preferPreviewWhilePrinting;
+    }
 }
 
 export interface Config {
