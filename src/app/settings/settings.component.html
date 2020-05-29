@@ -191,6 +191,13 @@
                                 *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
                         </span> <span class="settings__checkbox-descriptor">Turn screen off while sleeping</span>
                     </div> <br>
+                    <div class="settings__checkbox-container"
+                        (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
+                        <span class="settings__checkbox">
+                            <span class="settings__checkbox-checked"
+                                *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
+                        </span> <span class="settings__checkbox-descriptor">Preview by default while printing</span>
+                    </div> <br>
                     <span class="settings__heading-2">Files</span>
                     <table class="settings__files">
                         <tr>

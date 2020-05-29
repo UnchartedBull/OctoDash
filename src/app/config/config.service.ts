@@ -260,6 +260,10 @@ export class ConfigService {
     public useM600(): boolean {
         return this.config.filament.useM600;
     }
+
+    public showThumbnailByDefault(): boolean {
+        return this.config.octodash.preferPreviewWhilePrinting;
+    }
 }
 
 export interface Config {
@@ -331,6 +335,7 @@ interface OctoDash {
     pollingInterval: number;
     touchscreen: boolean;
     turnScreenOffWhileSleeping: boolean;
+    preferPreviewWhilePrinting: boolean;
 }
 
 interface CustomAction {
@@ -536,7 +541,7 @@ const schema = {
                             type: 'boolean',
                         },
                         turnOnPSUWhenExitingSleep: {
-                            $id: '#/properties/octodash/properties/turnOnPSUWhenExitingSleep',
+                            $id: '#/properties/plugins/properties/turnOnPSUWhenExitingSleep',
                             type: 'boolean',
                         },
                     },
@@ -546,7 +551,14 @@ const schema = {
         octodash: {
             $id: '#/properties/octodash',
             type: 'object',
-            required: ['customActions', 'fileSorting', 'pollingInterval', 'touchscreen', 'turnScreenOffWhileSleeping'],
+            required: [
+                'customActions',
+                'fileSorting',
+                'pollingInterval',
+                'touchscreen',
+                'turnScreenOffWhileSleeping',
+                'preferPreviewWhilePrinting',
+            ],
             properties: {
                 customActions: {
                     $id: '#/properties/octodash/properties/customActions',
@@ -609,6 +621,10 @@ const schema = {
                 },
                 turnScreenOffWhileSleeping: {
                     $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
+                    type: 'boolean',
+                },
+                preferPreviewWhilePrinting: {
+                    $id: '#/properties/octodash/properties/preferPreviewWhilePrinting',
                     type: 'boolean',
                 },
             },

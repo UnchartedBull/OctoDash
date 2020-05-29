@@ -27,6 +27,7 @@ export class JobService {
         private service: AppService,
         private fileService: FilesService,
     ) {
+        this.previewWhilePrinting = this.configService.showThumbnailByDefault();
         this.observable = new Observable((observer: Observer<Job>): void => {
             this.observer = observer;
             timer(750, this.configService.getAPIPollingInterval()).subscribe((): void => {

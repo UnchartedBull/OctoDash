@@ -128,6 +128,7 @@ export class NoConfigComponent implements OnInit {
                     pollingInterval: 2000,
                     touchscreen: true,
                     turnScreenOffWhileSleeping: false,
+                    preferPreviewWhilePrinting: false,
                 },
             };
         }
