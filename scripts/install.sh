@@ -757,7 +757,7 @@ EOF
     echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
 fi
 
-list_input "Should I reboot your Pi?" yes_no reboot
+list_input "Shall I reboot your Pi now?" yes_no reboot
 if [ $reboot == 'yes' ]; then
     sudo reboot
 fi
