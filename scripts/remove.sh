@@ -1,6 +1,8 @@
 echo "Removing OctoDash ..."
 sudo dpkg -P octodash
 
+rm -rf ~/.config/octodash/
+
 sed -i '/xset s off/d' ~/.xinitrc
 sed -i '/xset s noblank/d' ~/.xinitrc
 sed -i '/xset -dpms/d' ~/.xinitrc
