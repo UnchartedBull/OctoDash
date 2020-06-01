@@ -1,4 +1,6 @@
 echo "Removing OctoDash ..."
+killall octodash
+
 sudo dpkg -P octodash
 
 rm -rf ~/.config/octodash/
