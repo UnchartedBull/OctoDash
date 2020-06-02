@@ -25,10 +25,8 @@
 
 ## Installation
 
-**_Note: This script will install additional OctoPrint Plugins by default. If you want to know which visit the Wiki!_**
-
 ```
-wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh | bash -s -- --ptg
+bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh)
 ```
 
 For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
@@ -38,6 +36,8 @@ No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Install
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
 ## Update
+
+_deprecated, from v2.0 onwards OctoDash can be updated from within the app_
 
 ```
 wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/update.sh | bash
@@ -50,7 +50,7 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 -   OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v1.5.0 and up)
 -   You can let OctoDash push out and pull in the filament during a filament change, if you setup your feed length correctly (v1.5.0 and up)
     -   You can also use your printers filament change progress, just enable this in the settings (the printer needs to support M600)
-- If you're using FilamentManager add the color (in HEX format) to the end of the name, like "Vendor black (#000000)", this color will then be shown in the filament selection menu
+-   If you're using FilamentManager add the color (in HEX format) to the end of the name, like "Vendor black (#000000)", this color will then be shown in the filament selection menu
 -   You can adjust the look of OctoDash by adjusting the `~/.config/octodash/custom-styles.css` file and adding your own CSS rules (v2.0.0 and up)
 -   OctoDash supports .ufp package and PrusaSlicer preview images (v1.5.0 and up)
     -   To get the best results, you should use a square aspect ration, like `256x256`
