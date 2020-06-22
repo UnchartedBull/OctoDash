@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { AppService } from '../app.service';
-import { JobService } from '../job.service';
+import { AppService } from "../app.service";
+import { JobService } from "../job.service";
 
 @Component({
-    selector: 'app-main-screen',
-    templateUrl: './main-screen.component.html',
-    styleUrls: ['./main-screen.component.scss'],
+  selector: "app-main-screen",
+  templateUrl: "./main-screen.component.html",
+  styleUrls: ["./main-screen.component.scss"],
 })
 export class MainScreenComponent {
-    public printing = false;
+  public printing = false;
 
-    public constructor(private jobService: JobService, private service: AppService) {}
+  public constructor(private jobService: JobService, private service: AppService) {}
 
-    public isPrinting(): boolean {
-        return this.jobService.isPrinting();
-    }
+  public isPrinting(): boolean {
+    return this.jobService.isPrinting();
+  }
 
-    public isFileLoaded(): boolean {
-        return this.service.getLoadedFile();
-    }
+  public isFileLoaded(): boolean {
+    return this.service.getLoadedFile();
+  }
 }
