@@ -1,9 +1,9 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {
     app,
     BrowserWindow,
-    ipcMain,
-    session
+    ipcMain
 } = require('electron');
 const url = require('url');
 const path = require('path');
@@ -54,7 +54,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
         },
-        icon: path.join(__dirname, 'src/assets/icon.png'),
+        icon: path.join(__dirname, 'build/icon.png'),
     });
 
     if (dev) {

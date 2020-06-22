@@ -1,44 +1,44 @@
 .bottom-bar {
-    position: absolute;
-    bottom: 2.5vh;
-    left: 2vw;
-    width: calc(100% - 5.6vw);
+  position: absolute;
+  bottom: 2.5vh;
+  left: 2vw;
+  width: calc(100% - 5.6vw);
 
-    td {
-        width: 33.3%;
+  td {
+    width: 33.3%;
+  }
+
+  &__enclosure-temperature {
+    text-align: center;
+
+    &-icon {
+      width: 2.5vw;
+      display: inline-block;
+      margin-bottom: -0.8vh;
+      margin-right: 1vw;
     }
+  }
 
-    &__enclosure-temperature {
-        text-align: center;
+  &__current-status {
+    text-align: right;
+  }
 
-        &-icon {
-            width: 2.5vw;
-            display: inline-block;
-            margin-bottom: -0.8vh;
-            margin-right: 1vw;
-        }
-    }
-
-    &__current-status {
-        text-align: right;
-    }
-
-    &__error {
-        color: #c23616;
-        animation: blinker 2s linear infinite;
-    }
+  &__error {
+    color: #c23616;
+    animation: blinker 2s linear infinite;
+  }
 }
 
 @keyframes blinker {
-    20% {
-        opacity: 1;
-    }
+  20% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    80% {
-        opacity: 1;
-    }
+  80% {
+    opacity: 1;
+  }
 }
