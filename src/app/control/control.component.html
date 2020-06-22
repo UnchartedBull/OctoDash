@@ -1,6 +1,10 @@
 <div class="i-frame" id="iFrame">
   loading website ...
-  <iframe class="i-frame__content" [src]="iFrameURL | url" onload="this.style.opacity=1;"
+  <iframe
+    class="i-frame__content"
+    [src]="iFrameURL | url"
+    onload="this.style.opacity=1;"
+    sandbox="allow-forms, allow-modals, allow-popups, allow-same-origin, allow-scripts, allow-top-navigation-by-user-activation"
     >That shouldn't happen ...</iframe
   >
   <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
