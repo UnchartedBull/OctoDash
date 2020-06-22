@@ -1,62 +1,62 @@
-import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable, Observer } from "rxjs";
+import { shareReplay } from "rxjs/operators";
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: "root",
 })
 export class NotificationService {
-    private observable: Observable<Notification>;
-    private observer: Observer<Notification>;
-    private hideNotifications = false;
-    private bootGrace = true;
+  private observable: Observable<Notification>;
+  private observer: Observer<Notification>;
+  private hideNotifications = false;
+  private bootGrace = true;
 
-    public constructor() {
-        this.observable = new Observable((observer: Observer<Notification>): void => {
-            this.observer = observer;
-            setTimeout((): void => {
-                this.bootGrace = false;
-            }, 30000);
-        }).pipe(shareReplay(1));
-    }
+  public constructor() {
+    this.observable = new Observable((observer: Observer<Notification>): void => {
+      this.observer = observer;
+      setTimeout((): void => {
+        this.bootGrace = false;
+      }, 30000);
+    }).pipe(shareReplay(1));
+  }
 
-    public enableNotifications(): void {
-        console.clear();
-        this.hideNotifications = false;
-    }
+  public enableNotifications(): void {
+    console.clear();
+    this.hideNotifications = false;
+  }
 
-    public disableNotifications(): void {
-        console.clear();
-        this.hideNotifications = true;
-    }
+  public disableNotifications(): void {
+    console.clear();
+    this.hideNotifications = true;
+  }
 
-    public setError(heading: string, text: string): void {
-        if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
-            this.observer.next({ heading, text, type: 'error' });
-        }
+  public setError(heading: string, text: string): void {
+    if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith("0 Unknown Error"))) {
+      this.observer.next({ heading, text, type: "error" });
     }
+  }
 
-    public setWarning(heading: string, text: string): void {
-        if (!this.hideNotifications) {
-            this.observer.next({ heading, text, type: 'warn' });
-        }
+  public setWarning(heading: string, text: string): void {
+    if (!this.hideNotifications) {
+      this.observer.next({ heading, text, type: "warn" });
     }
+  }
 
-    public setUpdate(heading: string, text: string): void {
-        this.observer.next({ heading, text, type: 'update' });
-    }
+  public setUpdate(heading: string, text: string): void {
+    this.observer.next({ heading, text, type: "update" });
+  }
 
-    public getObservable(): Observable<Notification> {
-        return this.observable;
-    }
+  public getObservable(): Observable<Notification> {
+    return this.observable;
+  }
 
-    public getBootGrace(): boolean {
-        return this.bootGrace;
-    }
+  public getBootGrace(): boolean {
+    return this.bootGrace;
+  }
 }
 
 export interface Notification {
-    heading: string;
-    text: string;
-    type: string;
+  heading: string;
+  text: string;
+  type: string;
 }
