@@ -1,62 +1,89 @@
 <div class="job-info" *ngIf="job && isPrinting()">
-    <div class="job-info__progress-ring" (click)="showPreview = !showPreview">
-        <round-progress [current]="job.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
-            [color]="'#44bd32'"></round-progress>
-        <div class="job-info__progress-percentage" [hidden]="!job.thumbnail || showPreview()">{{ job.progress }}<span
-                style="font-size: 40%">%</span></div>
-        <img *ngIf="job.thumbnail && showPreview()" class="job-info__progress-preview" [src]="job.thumbnail" />
+  <div class="job-info__progress-ring" (click)="showPreview = !showPreview">
+    <round-progress
+      [current]="job.progress"
+      [max]="100"
+      [stroke]="25"
+      [rounded]="true"
+      [responsive]="true"
+      [color]="'#44bd32'"
+    ></round-progress>
+    <div class="job-info__progress-percentage" [hidden]="!job.thumbnail || showPreview()">
+      {{ job.progress }}<span style="font-size: 40%;">%</span>
     </div>
-    <span class="job-info__filename">{{ job.filename }}</span> <br />
-    <span class="job-info__filament" *ngIf="job.hasOwnProperty('filamentAmount')">{{ job.filamentAmount }}g
-        Filament</span> <br />
-    <span class="job-info__time"><span *ngIf="job.hasOwnProperty('timeLeft')"><span
-                class="job-info__time-left">{{ job.timeLeft.value }}</span>{{ job.timeLeft.unit }} left,</span>
-        elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span>
+    <img *ngIf="job.thumbnail && showPreview()" class="job-info__progress-preview" [src]="job.thumbnail" />
+  </div>
+  <span class="job-info__filename">{{ job.filename }}</span> <br />
+  <span class="job-info__filament" *ngIf="job.hasOwnProperty('filamentAmount')"
+    >{{ job.filamentAmount }}g Filament</span
+  >
+  <br />
+  <span class="job-info__time"
+    ><span *ngIf="job.hasOwnProperty('timeLeft')"
+      ><span class="job-info__time-left">{{ job.timeLeft.value }}</span
+      >{{ job.timeLeft.unit }} left,</span
+    >
+    elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}</span
+  >
 </div>
 <div class="job-info__file-loaded" *ngIf="job && !isPrinting() && isFileLoaded()" (swipe)="cancelLoadedFile()">
-    <div class="job-info__preview">
-        <img src="{{job.thumbnail ? job.thumbnail : 'assets/object.svg'}}" class="job-info__preview-image" />
-        <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
-    </div>
-    <span class="job-info__filename">{{ job.filename }}</span> <br />
-    <span (click)="preheat()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-        class="job-info__actions-item-heat" *ngIf="isPreheatEnabled()">
-        <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
+  <div class="job-info__preview">
+    <img src="{{ job.thumbnail ? job.thumbnail : 'assets/object.svg' }}" class="job-info__preview-image" />
+    <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
+  </div>
+  <span class="job-info__filename">{{ job.filename }}</span> <br />
+  <span
+    (click)="preheat()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"
+    class="job-info__actions-item-heat"
+    *ngIf="isPreheatEnabled()"
+  >
+    <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
+  </span>
+  <span
+    (click)="preheatDisabled()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"
+    class="job-info__actions-item-heat job-info__actions-item-heat-disabled"
+    *ngIf="!isPreheatEnabled()"
+  >
+    <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
+  </span>
+  <br />
+  <span
+    (click)="startJob()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"
+    class="job-info__actions-item-print"
+  >
+    <img src="assets/print.svg" class="job-info__actions-item-print-icon" />
+  </span>
+  <br />
+  <div class="job-info__print-details">
+    <span *ngIf="job.hasOwnProperty('estimatedPrintTime') && job.hasOwnProperty('estimatedEndTime')">
+      <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
+      <span class="job-info__print-details-value">
+        {{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}
+      </span>
+      <span class="job-info__print-details-finish-state"> - will finish ~{{ job.estimatedEndTime }} </span>
+      <br />
     </span>
-    <span (click)="preheatDisabled()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-        class="job-info__actions-item-heat job-info__actions-item-heat-disabled" *ngIf="!isPreheatEnabled()">
-        <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
-    </span> <br />
-    <span (click)="startJob()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-        class="job-info__actions-item-print">
-        <img src="assets/print.svg" class="job-info__actions-item-print-icon" />
+    <span *ngIf="job.hasOwnProperty('filamentAmount')">
+      <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
+      <span class="job-info__print-details-value"> {{ job.filamentAmount }}g </span>
+      <span class="job-info__print-details-finish-state">
+        filament will be used
+      </span>
     </span>
-    <br />
-    <div class="job-info__print-details">
-        <span *ngIf="job.hasOwnProperty('estimatedPrintTime') && job.hasOwnProperty('estimatedEndTime')">
-            <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
-            <span class="job-info__print-details-value">
-                {{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}
-            </span>
-            <span class="job-info__print-details-finish-state">
-                - will finish ~{{ job.estimatedEndTime }}
-            </span>
-            <br />
-        </span>
-        <span *ngIf="job.hasOwnProperty('filamentAmount')">
-            <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
-            <span class="job-info__print-details-value">
-                {{ job.filamentAmount }}g
-            </span>
-            <span class="job-info__print-details-finish-state">
-                filament will be used
-            </span>
-        </span>
-    </div>
+  </div>
 </div>
 <div class="job-info__no-job" *ngIf="!job && isFileLoaded()">
-    loading info ...
+  loading info ...
 </div>
 <div class="job-info__no-job" *ngIf="(!job && !isFileLoaded()) || (job && !isPrinting() && !isFileLoaded())">
-    no job running ...
+  no job running ...
 </div>

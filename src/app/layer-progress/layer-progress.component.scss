@@ -1,12 +1,12 @@
 .layer-indication {
-    width: 100%;
-    display: block;
-    margin-top: 1vh;
-    text-align: center;
-    font-size: 4vw;
+  width: 100%;
+  display: block;
+  margin-top: 1vh;
+  text-align: center;
+  font-size: 4vw;
 
-    &__current-layer {
-        font-size: 6vw;
-        font-weight: 500;
-    }
+  &__current-layer {
+    font-size: 6vw;
+    font-weight: 500;
+  }
 }

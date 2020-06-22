@@ -1,22 +1,23 @@
 <div class="main-menu">
-    <span class="main-menu__heading">OctoDash<span class="main-menu__heading"
-            style="color: #1ec02c; display: inline;">.</span></span>
-    <img src="assets/settings.svg" class="main-menu__settings-icon" (click)="showSettings()">
-    <table class="main-menu__options">
-        <tr>
-            <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-                <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
-                files
-            </td>
-            <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-                <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
-                filament
-            </td>
-            <td routerLink="/control" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-                <img src="assets/control.svg" class="main-menu__option-icon main-menu__option-icon__3" />
-                control
-            </td>
-        </tr>
-    </table>
+  <span class="main-menu__heading"
+    >OctoDash<span class="main-menu__heading" style="color: #1ec02c; display: inline;">.</span></span
+  >
+  <img src="assets/settings.svg" class="main-menu__settings-icon" (click)="showSettings()" />
+  <table class="main-menu__options">
+    <tr>
+      <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
+        files
+      </td>
+      <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
+        filament
+      </td>
+      <td routerLink="/control" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/control.svg" class="main-menu__option-icon main-menu__option-icon__3" />
+        control
+      </td>
+    </tr>
+  </table>
 </div>
 <app-settings *ngIf="settings" (closeFunction)="hideSettings($event)"></app-settings>

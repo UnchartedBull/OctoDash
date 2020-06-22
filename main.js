@@ -1,154 +1,148 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const {
-    app,
-    BrowserWindow,
-    ipcMain,
-    session
-} = require('electron');
-const url = require('url');
-const path = require('path');
-const fs = require('fs');
-const Store = require('electron-store');
+const { app, BrowserWindow, ipcMain } = require("electron");
+const url = require("url");
+const path = require("path");
+const fs = require("fs");
+const Store = require("electron-store");
 
 const store = new Store();
-const exec = require('child_process').exec;
+const exec = require("child_process").exec;
 
 const args = process.argv.slice(1);
-const dev = args.some(val => val === '--serve');
-const big = args.some(val => val === '--big');
+const dev = args.some((val) => val === "--serve");
+const big = args.some((val) => val === "--big");
 
-app.commandLine.appendSwitch('touch-events', 'enabled');
+app.commandLine.appendSwitch("touch-events", "enabled");
 app.allowRendererProcessReuse = true;
 
 let window;
 
 function createWindow() {
-    config = store.get('config');
-    store.onDidChange('config', newValue => {
-        config = newValue;
-    });
+  config = store.get("config");
+  store.onDidChange("config", (newValue) => {
+    config = newValue;
+  });
 
-    const {
-        screen,
-        session
-    } = require('electron');
+  const { screen, session } = require("electron");
 
-    if (!dev) {
-        session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-            callback({
-                responseHeaders: {
-                    ...details.responseHeaders,
-                    'Content-Security-Policy': ['script-src \'self\'']
-                }
-            })
-        })
-    }
-
-    const mainScreen = screen.getPrimaryDisplay();
-
-    window = new BrowserWindow({
-        width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
-        height: dev ? (big ? 502 : 342) : mainScreen.size.height,
-        frame: dev ? true : false,
-        backgroundColor: '#353b48',
-        webPreferences: {
-            nodeIntegration: true,
+  if (!dev) {
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          // TODO: re-enable
+          // "Content-Security-Policy": ["script-src 'self'"],
         },
-        icon: path.join(__dirname, 'src/assets/icon.png'),
+      });
     });
+  }
 
-    if (dev) {
-        require('electron-reload')(__dirname, {
-            electron: require(`${__dirname}/node_modules/electron`),
-        });
-        window.loadURL('http://localhost:4200');
-        window.webContents.openDevTools();
-    } else {
-        window.loadURL(
-            url.format({
-                pathname: path.join(__dirname, 'dist/index.html'),
-                protocol: 'file:',
-                slashes: true,
-            }),
-        );
-        window.setFullScreen(true);
-    }
+  const mainScreen = screen.getPrimaryDisplay();
 
-    // setTimeout(sendVersionInfo, 30 * 1000);
-    activateAppInfoListener();
-    activateScreenSleepListener();
-    activateReloadListener();
+  window = new BrowserWindow({
+    width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
+    height: dev ? (big ? 502 : 342) : mainScreen.size.height,
+    frame: dev ? true : false,
+    backgroundColor: "#353b48",
+    webPreferences: {
+      nodeIntegration: true,
+    },
+    icon: path.join(__dirname, "src", "assets", "icon", "icon.png"),
+  });
 
-    window.on('closed', () => {
-        window = null;
+  if (dev) {
+    require("electron-reload")(__dirname, {
+      electron: require(`${__dirname}/node_modules/electron`),
     });
+    window.loadURL("http://localhost:4200");
+    window.webContents.openDevTools();
+  } else {
+    window.loadURL(
+      url.format({
+        pathname: path.join(__dirname, "dist/index.html"),
+        protocol: "file:",
+        slashes: true,
+      })
+    );
+    window.setFullScreen(true);
+  }
+
+  // setTimeout(sendVersionInfo, 30 * 1000);
+  activateAppInfoListener();
+  activateScreenSleepListener();
+  activateReloadListener();
+
+  window.on("closed", () => {
+    window = null;
+  });
 }
 
 function activateScreenSleepListener() {
-    ipcMain.on('screenSleep', () => {
-        exec('xset dpms force standby');
-    });
+  ipcMain.on("screenSleep", () => {
+    exec("xset dpms force standby");
+  });
 
-    ipcMain.on('screenWakeup', () => {
-        exec('xset s off');
-        exec('xset -dpms');
-        exec('xset s noblank');
-    });
+  ipcMain.on("screenWakeup", () => {
+    exec("xset s off");
+    exec("xset -dpms");
+    exec("xset s noblank");
+  });
 }
 
 function activateReloadListener() {
-    ipcMain.on('reload', () => {
-        window.loadURL(
-            url.format({
-                pathname: path.join(__dirname, 'dist/index.html'),
-                protocol: 'file:',
-                slashes: true,
-            }),
-        );
-    });
+  ipcMain.on("reload", () => {
+    window.loadURL(
+      url.format({
+        pathname: path.join(__dirname, "dist/index.html"),
+        protocol: "file:",
+        slashes: true,
+      })
+    );
+  });
 }
 
 function activateAppInfoListener() {
-    ipcMain.on('appInfo', () => {
-        sendCustomStyles();
-        sendVersionInfo();
-    })
+  ipcMain.on("appInfo", () => {
+    sendCustomStyles();
+    sendVersionInfo();
+  });
 }
 
 function sendCustomStyles() {
-    fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
-        if (err) {
-            if (err.code === 'ENOENT') {
-                fs.writeFile(path.join(app.getPath('userData'), 'custom-styles.css'), '', (err) => {
-                    if (err) {
-                        window.webContents.send('customStylesError', err)
-                    } else {
-                        window.webContents.send('customStyles', '')
-                    }
-                })
-            } else {
-                window.webContents.send('customStylesError', err)
-            }
-        } else {
-            window.webContents.send('customStyles', data)
-        }
-    })
+  fs.readFile(path.join(app.getPath("userData"), "custom-styles.css"), "utf-8", (err, data) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        fs.writeFile(path.join(app.getPath("userData"), "custom-styles.css"), "", (err) => {
+          if (err) {
+            window.webContents.send("customStylesError", err);
+          } else {
+            window.webContents.send("customStyles", "");
+          }
+        });
+      } else {
+        window.webContents.send("customStylesError", err);
+      }
+    } else {
+      window.webContents.send("customStyles", data);
+    }
+  });
 }
 
 function sendVersionInfo() {
-    window.webContents.send('versionInformation', {
-        version: app.getVersion(),
-    });
+  window.webContents.send("versionInformation", {
+    version: app.getVersion(),
+  });
 }
 
-app.on('ready', createWindow);
+app.on("ready", createWindow);
 
-app.on('window-all-closed', () => {
-    app.quit();
+app.on("window-all-closed", () => {
+  app.quit();
 });
 
-app.on('activate', () => {
-    if (window === null) {
-        createWindow();
-    }
+app.on("activate", () => {
+  if (window === null) {
+    createWindow();
+  }
 });

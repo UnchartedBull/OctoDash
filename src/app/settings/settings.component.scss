@@ -1,341 +1,341 @@
 .settings {
-    &-wrapper {
-        animation: fadein 0.8s;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 20;
+  &-wrapper {
+    animation: fadein 0.8s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 20;
 
-        &-fadeout {
-            animation: fadeout 0.8s;
-        }
+    &-fadeout {
+      animation: fadeout 0.8s;
     }
+  }
+
+  &-container {
+    position: absolute;
+    top: 10vh;
+    left: 20vw;
+    height: 80vh;
+    width: 60vw;
+    background-color: #353b48;
+    border-radius: 2vw;
+  }
+
+  &__version {
+    font-size: 1.5vw;
+    display: block;
+    text-align: center;
+    margin-top: 1.5vh;
+    opacity: 0.3;
+  }
+
+  &__heading {
+    padding: 3vh 0;
+    display: block;
+    font-weight: 500;
+    font-size: 4vw;
+
+    &-2 {
+      display: block;
+      font-size: 3.5vw;
+      font-weight: 500;
+      margin-bottom: 1.2vh;
+      margin-top: 3vh;
+    }
+
+    &-3 {
+      display: block;
+      font-size: 2.5vw;
+      font-weight: 500;
+      margin-bottom: 1.2vh;
+      margin-top: 2vh;
+    }
+
+    &-back {
+      font-size: 3vw;
+      margin-right: 1vw;
+    }
+  }
+
+  &__sub-heading {
+    font-size: 2.3vw;
+    font-weight: 500;
+    padding: 2vh 0 1vh;
+  }
+
+  &__text {
+    font-size: 2vw;
+    text-align: justify;
+
+    & li {
+      font-size: 1.2vw;
+      line-height: 1.7;
+    }
+  }
+
+  &__input {
+    background: transparent;
+    margin-top: 1.5vh;
+    padding: 1.5vw 3vh;
+    border: 2px solid #dcdde1;
+    border-radius: 1.7vw;
+    width: 55vw;
+    font-size: 2vw;
+    margin-bottom: 2vh;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &:focus {
+      outline: 0;
+      border: 2px solid #44bd32;
+    }
+
+    &-small {
+      width: 10vw;
+      text-align: right;
+
+      &-suffix {
+        font-size: 3vw;
+        padding-left: 1vw;
+      }
+    }
+
+    &-label {
+      display: block;
+      font-size: 1.8vw;
+
+      & span {
+        font-size: inherit;
+        opacity: 0.5;
+      }
+    }
+
+    &-prefix {
+      font-size: 2vw;
+      opacity: 0.7;
+      padding-right: 1vw;
+    }
+
+    &-divider {
+      padding: 0 1vw;
+      font-size: 2.5vw;
+    }
+  }
+
+  &__checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3vw;
+    width: 3vw;
+    background-color: transparent;
+    border: 2px solid #dcdde1;
+    border-radius: 1vw;
 
     &-container {
-        position: absolute;
-        top: 10vh;
-        left: 20vw;
-        height: 80vh;
-        width: 60vw;
-        background-color: #353b48;
-        border-radius: 2vw;
+      display: inline-block;
+      position: relative;
+      user-select: none;
+      padding-left: 5vw;
+      height: 4.5vw;
+      margin-top: 1.4vh;
+      cursor: pointer;
+      overflow: visible;
+
+      &-disabled {
+        opacity: 0.5;
+      }
     }
 
-    &__version {
-        font-size: 1.5vw;
-        display: block;
-        text-align: center;
-        margin-top: 1.5vh;
-        opacity: 0.3;
+    &-checked {
+      background-color: #2196f3;
+      width: 1.8vw;
+      height: 1.8vw;
+      display: block;
+      margin-left: 0.6vw;
+      margin-top: 0.6vw;
+      border-radius: 0.4vw;
+
+      &-disabled {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
     }
 
-    &__heading {
-        padding: 3vh 0;
-        display: block;
-        font-weight: 500;
-        font-size: 4vw;
+    &-descriptor {
+      font-size: 2.5vw;
+      vertical-align: 2vh;
+    }
+  }
 
-        &-2 {
-            display: block;
-            font-size: 3.5vw;
-            font-weight: 500;
-            margin-bottom: 1.2vh;
-            margin-top: 3vh;
-        }
+  &__close {
+    position: absolute;
+    right: 1.5vw;
+    top: 2vh;
+    width: 4vw;
+    z-index: 10;
+  }
 
-        &-3 {
-            display: block;
-            font-size: 2.5vw;
-            font-weight: 500;
-            margin-bottom: 1.2vh;
-            margin-top: 2vh;
-        }
-
-        &-back {
-            font-size: 3vw;
-            margin-right: 1vw;
-        }
+  &__list {
+    & fa-icon {
+      font-size: 3vw;
+      margin-left: 0.5vw;
+      opacity: 0.7;
     }
 
-    &__sub-heading {
-        font-size: 2.3vw;
-        font-weight: 500;
-        padding: 2vh 0 1vh;
+    & li {
+      font-size: 3vw;
+      padding: 2vh 0;
+    }
+  }
+
+  &__made {
+    font-size: 2.3vw;
+    display: block;
+    opacity: 0.6;
+    text-align: center;
+    margin-top: 4vh;
+
+    &-heart {
+      font-size: 2vw;
+      vertical-align: -0.7vh;
+      display: inline-block;
+      color: #e84118;
+    }
+  }
+
+  &__save {
+    display: block;
+    text-align: center;
+    margin: 2.5vh 0 4vh;
+  }
+
+  &__scroll {
+    height: 63vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 2vw;
+    z-index: 1;
+  }
+
+  &__content {
+    position: absolute;
+    left: 0;
+    width: 54vw;
+    display: block;
+    padding: 2vh 2vw 2vh 4vw;
+
+    &-slideout-forward {
+      animation: slideout-forward 0.5s ease-out;
     }
 
-    &__text {
-        font-size: 2vw;
-        text-align: justify;
-
-        & li {
-            font-size: 1.2vw;
-            line-height: 1.7;
-        }
+    &-slidein-forward {
+      animation: slidein-forward 0.5s ease-out;
     }
 
-    &__input {
-        background: transparent;
-        margin-top: 1.5vh;
-        padding: 1.5vw 3vh;
-        border: 2px solid #dcdde1;
-        border-radius: 1.7vw;
-        width: 55vw;
-        font-size: 2vw;
-        margin-bottom: 2vh;
-
-        &:disabled {
-            opacity: 0.5;
-        }
-
-        &:focus {
-            outline: 0;
-            border: 2px solid #44bd32;
-        }
-
-        &-small {
-            width: 10vw;
-            text-align: right;
-
-            &-suffix {
-                font-size: 3vw;
-                padding-left: 1vw;
-            }
-        }
-
-        &-label {
-            display: block;
-            font-size: 1.8vw;
-
-            & span {
-                font-size: inherit;
-                opacity: 0.5;
-            }
-        }
-
-        &-prefix {
-            font-size: 2vw;
-            opacity: 0.7;
-            padding-right: 1vw;
-        }
-
-        &-divider {
-            padding: 0 1vw;
-            font-size: 2.5vw;
-        }
+    &-slideout-backward {
+      animation: slideout-backward 0.5s ease-out;
     }
 
-    &__checkbox {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 3vw;
-        width: 3vw;
-        background-color: transparent;
-        border: 2px solid #dcdde1;
-        border-radius: 1vw;
-
-        &-container {
-            display: inline-block;
-            position: relative;
-            user-select: none;
-            padding-left: 5vw;
-            height: 4.5vw;
-            margin-top: 1.4vh;
-            cursor: pointer;
-            overflow: visible;
-
-            &-disabled {
-                opacity: 0.5;
-            }
-        }
-
-        &-checked {
-            background-color: #2196f3;
-            width: 1.8vw;
-            height: 1.8vw;
-            display: block;
-            margin-left: 0.6vw;
-            margin-top: 0.6vw;
-            border-radius: 0.4vw;
-
-            &-disabled {
-                background-color: rgba(255, 255, 255, 0.5);
-            }
-        }
-
-        &-descriptor {
-            font-size: 2.5vw;
-            vertical-align: 2vh;
-        }
+    &-slidein-backward {
+      animation: slidein-backward 0.5s ease-out;
     }
 
-    &__close {
-        position: absolute;
-        right: 1.5vw;
-        top: 2vh;
-        width: 4vw;
-        z-index: 10;
+    &-inactive {
+      left: 100vw;
     }
+  }
 
-    &__list {
-        & fa-icon {
-            font-size: 3vw;
-            margin-left: 0.5vw;
-            opacity: 0.7;
-        }
+  &__made-in-berlin {
+    display: block;
+    margin: 5vh auto 0;
+    width: 20vw;
+  }
 
-        & li {
-            font-size: 3vw;
-            padding: 2vh 0;
-        }
+  &__files {
+    width: 100%;
+
+    & td {
+      width: 50%;
     }
+  }
 
-    &__made {
-        font-size: 2.3vw;
-        display: block;
-        opacity: 0.6;
-        text-align: center;
-        margin-top: 4vh;
-
-        &-heart {
-            font-size: 2vw;
-            vertical-align: -0.7vh;
-            display: inline-block;
-            color: #e84118;
-        }
+  &__custom-action {
+    &-icon {
+      font-size: 3.5vw;
+      vertical-align: -8.5vh;
+      padding-left: 4vw;
     }
-
-    &__save {
-        display: block;
-        text-align: center;
-        margin: 2.5vh 0 4vh;
-    }
-
-    &__scroll {
-        height: 63vh;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        padding-right: 2vw;
-        z-index: 1;
-    }
-
-    &__content {
-        position: absolute;
-        left: 0;
-        width: 54vw;
-        display: block;
-        padding: 2vh 2vw 2vh 4vw;
-
-        &-slideout-forward {
-            animation: slideout-forward 0.5s ease-out;
-        }
-
-        &-slidein-forward {
-            animation: slidein-forward 0.5s ease-out;
-        }
-
-        &-slideout-backward {
-            animation: slideout-backward 0.5s ease-out;
-        }
-
-        &-slidein-backward {
-            animation: slidein-backward 0.5s ease-out;
-        }
-
-        &-inactive {
-            left: 100vw;
-        }
-    }
-
-    &__made-in-berlin {
-        display: block;
-        margin: 5vh auto 0;
-        width: 20vw;
-    }
-
-    &__files {
-        width: 100%;
-
-        & td {
-            width: 50%;
-        }
-    }
-
-    &__custom-action {
-        &-icon {
-            font-size: 3.5vw;
-            vertical-align: -8.5vh;
-            padding-left: 4vw;
-        }
-    }
+  }
 }
 
 .filament-feed-speed-info {
-    font-size: 1.7vw;
-    text-align: justify;
-    opacity: 0.7;
-    font-style: italic;
+  font-size: 1.7vw;
+  text-align: justify;
+  opacity: 0.7;
+  font-style: italic;
 }
 
 @keyframes fadein {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeout {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes slideout-forward {
-    from {
-        left: 0;
-    }
+  from {
+    left: 0;
+  }
 
-    to {
-        left: -60vw;
-    }
+  to {
+    left: -60vw;
+  }
 }
 
 @keyframes slidein-forward {
-    from {
-        left: 60vw;
-    }
+  from {
+    left: 60vw;
+  }
 
-    to {
-        left: 0;
-    }
+  to {
+    left: 0;
+  }
 }
 
 @keyframes slidein-backward {
-    from {
-        left: -60vw;
-    }
+  from {
+    left: -60vw;
+  }
 
-    to {
-        left: 0;
-    }
+  to {
+    left: 0;
+  }
 }
 
 @keyframes slideout-backward {
-    from {
-        left: 0;
-    }
+  from {
+    left: 0;
+  }
 
-    to {
-        left: 60vw;
-    }
+  to {
+    left: 60vw;
+  }
 }

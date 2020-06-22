@@ -103,6 +103,7 @@
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
     "ts-node": "~8.10.2",
     "typescript": "^3.7.5",
     "wait-on": "^5.0.1"

@@ -1,100 +1,165 @@
 <div class="i-frame" id="iFrame">
-    loading website ...
-    <iframe class="i-frame__content" [src]="iFrameURL | url" onload="this.style.opacity=1;">That shouldn't happen
-        ...</iframe>
-    <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()">
+  loading website ...
+  <iframe class="i-frame__content" [src]="iFrameURL | url" onload="this.style.opacity=1;"
+    >That shouldn't happen ...</iframe
+  >
+  <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
 </div>
 
 <table class="top-bar">
-    <tr>
-        <td class="top-bar__back" routerLink="/main-screen">
-            <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-                <img src="assets/back.svg" class="top-bar__back-icon" />back
-            </span>
-        </td>
-        <td class="top-bar__center">
-            <img src="assets/control.svg" class="top-bar__center-icon">
-        </td>
-        <td class="top-bar__next" (click)="showHelp = true">
-            <span matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-                <img src="assets/help.svg" class="top-bar__next-icon">
-            </span>
-        </td>
-    </tr>
+  <tr>
+    <td class="top-bar__back" routerLink="/main-screen">
+      <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
+        <img src="assets/back.svg" class="top-bar__back-icon" />back
+      </span>
+    </td>
+    <td class="top-bar__center">
+      <img src="assets/control.svg" class="top-bar__center-icon" />
+    </td>
+    <td class="top-bar__next" (click)="showHelp = true">
+      <span matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/help.svg" class="top-bar__next-icon" />
+      </span>
+    </td>
+  </tr>
 </table>
 
 <div class="help" *ngIf="showHelp">
-    <div class="help__card">
-        <img src="assets/error.svg" class="help__close" (click)="showHelp = false">
-        <span class="help__heading">Control Screen</span>
-        <span class="help__text">You can adjust the printhead speed in the settings (default
-            150mm/s for XY - 5mm/s for Z). <br />
-            You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few
-            predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. <br />
-            Wiki page is called "CustomActions".</span>
-    </div>
+  <div class="help__card">
+    <img src="assets/error.svg" class="help__close" (click)="showHelp = false" />
+    <span class="help__heading">Control Screen</span>
+    <span class="help__text"
+      >You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z). <br />
+      You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few
+      predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. <br />
+      Wiki page is called "CustomActions".</span
+    >
+  </div>
 </div>
 
 <div class="control">
-    <div class="control__XY">
-        <div class="control__XY-wrapper">
-            <fa-icon [icon]="['fas', 'angle-up']" class="control__icon control__icon-1" (click)="moveAxis('y', '-')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-            <fa-icon [icon]="['fas', 'angle-left']" class="control__icon control__icon-2" (click)="moveAxis('x', '-')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-            <fa-icon [icon]="['fas', 'angle-right']" class="control__icon control__icon-3" (click)="moveAxis('x', '+')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-            <fa-icon [icon]="['fas', 'angle-down']" class="control__icon control__icon-4" (click)="moveAxis('y', '+')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-        </div>
-        <span class="control__heading">X / Y</span>
+  <div class="control__XY">
+    <div class="control__XY-wrapper">
+      <fa-icon
+        [icon]="['fas', 'angle-up']"
+        class="control__icon control__icon-1"
+        (click)="moveAxis('y', '-')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
+      <fa-icon
+        [icon]="['fas', 'angle-left']"
+        class="control__icon control__icon-2"
+        (click)="moveAxis('x', '-')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
+      <fa-icon
+        [icon]="['fas', 'angle-right']"
+        class="control__icon control__icon-3"
+        (click)="moveAxis('x', '+')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
+      <fa-icon
+        [icon]="['fas', 'angle-down']"
+        class="control__icon control__icon-4"
+        (click)="moveAxis('y', '+')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
     </div>
-    <div class="control__Z">
-        <div class="control__Z-wrapper">
-            <fa-icon [icon]="['fas', 'angle-up']" class="control__icon control__icon-5" (click)="moveAxis('z', '+')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-            <fa-icon [icon]="['fas', 'angle-down']" class="control__icon control__icon-6" (click)="moveAxis('z', '-')"
-                matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"></fa-icon>
-        </div>
-        <span class="control__heading">Z</span>
+    <span class="control__heading">X / Y</span>
+  </div>
+  <div class="control__Z">
+    <div class="control__Z-wrapper">
+      <fa-icon
+        [icon]="['fas', 'angle-up']"
+        class="control__icon control__icon-5"
+        (click)="moveAxis('z', '+')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
+      <fa-icon
+        [icon]="['fas', 'angle-down']"
+        class="control__icon control__icon-6"
+        (click)="moveAxis('z', '-')"
+        matRipple
+        [matRippleUnbounded]="true"
+        [matRippleCentered]="true"
+      ></fa-icon>
     </div>
-    <div class="control__custom">
-        <div class="control__custom-action" *ngFor="let customAction of customActions"
-            [style.border-color]="customAction.color"
-            (click)="doAction(customAction.command, customAction.exit, customAction.confirm)" matRipple
-            [matRippleUnbounded]="false">
-            <fa-icon [icon]="['fas', customAction.icon]" class="control__custom-action-icon"
-                [styles]="{color: customAction.color}">
-            </fa-icon>
-        </div>
+    <span class="control__heading">Z</span>
+  </div>
+  <div class="control__custom">
+    <div
+      class="control__custom-action"
+      *ngFor="let customAction of customActions"
+      [style.border-color]="customAction.color"
+      (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
+      matRipple
+      [matRippleUnbounded]="false"
+    >
+      <fa-icon
+        [icon]="['fas', customAction.icon]"
+        class="control__custom-action-icon"
+        [styles]="{ color: customAction.color }"
+      >
+      </fa-icon>
     </div>
-    <table class=" control__distance">
-        <tr>
-            <td class="control__distance-field" [ngClass]="{'control__distance-field-active': jogDistance === 1}"
-                (click)="setDistance(1)">1
-            </td>
-            <td class="control__distance-field" [ngClass]="{'control__distance-field-active': jogDistance === 5}"
-                (click)="setDistance(5)">5
-            </td>
-            <td class="control__distance-field" [ngClass]="{'control__distance-field-active': jogDistance === 10}"
-                (click)="setDistance(10)">10
-            </td>
-            <td class="control__distance-field" [ngClass]="{'control__distance-field-active': jogDistance === 50}"
-                (click)="setDistance(50)">50
-            </td>
-            <td class="control__distance-field" [ngClass]="{'control__distance-field-active': jogDistance === 100}"
-                (click)="setDistance(100)">
-                100</td>
-        </tr>
-    </table>
+  </div>
+  <table class="control__distance">
+    <tr>
+      <td
+        class="control__distance-field"
+        [ngClass]="{ 'control__distance-field-active': jogDistance === 1 }"
+        (click)="setDistance(1)"
+      >
+        1
+      </td>
+      <td
+        class="control__distance-field"
+        [ngClass]="{ 'control__distance-field-active': jogDistance === 5 }"
+        (click)="setDistance(5)"
+      >
+        5
+      </td>
+      <td
+        class="control__distance-field"
+        [ngClass]="{ 'control__distance-field-active': jogDistance === 10 }"
+        (click)="setDistance(10)"
+      >
+        10
+      </td>
+      <td
+        class="control__distance-field"
+        [ngClass]="{ 'control__distance-field-active': jogDistance === 50 }"
+        (click)="setDistance(50)"
+      >
+        50
+      </td>
+      <td
+        class="control__distance-field"
+        [ngClass]="{ 'control__distance-field-active': jogDistance === 100 }"
+        (click)="setDistance(100)"
+      >
+        100
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div class="confirm__wrapper" *ngIf="actionToConfirm">
-    <div class="confirm">
-        <h1>Are you sure?</h1>
-        <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
-        <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
-        <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()">
-        <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()">
-    </div>
+  <div class="confirm">
+    <h1>Are you sure?</h1>
+    <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
+    <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
+    <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()" />
+    <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()" />
+  </div>
 </div>
