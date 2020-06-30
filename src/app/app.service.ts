@@ -35,14 +35,12 @@ export class AppService {
         );
       }
     }
-
-    this.updateError = [".octodash should have required property 'preferPreviewWhilePrinting'"];
+    this.updateError = [];
   }
 
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.getCurrentConfig();
-    config.octodash.preferPreviewWhilePrinting = false;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return true;

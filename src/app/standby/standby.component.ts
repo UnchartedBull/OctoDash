@@ -29,6 +29,7 @@ export class StandbyComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.notificationService.disableNotifications();
     if (this.configService.getAutomaticScreenSleep()) {
       this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
     }
