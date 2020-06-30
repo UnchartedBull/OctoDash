@@ -18,7 +18,7 @@
     position: absolute;
     top: 10vh;
     left: 20vw;
-    height: 80vh;
+    height: 81vh;
     width: 60vw;
     background-color: #353b48;
     border-radius: 2vw;
@@ -270,6 +270,13 @@
       vertical-align: -8.5vh;
       padding-left: 4vw;
     }
+  }
+
+  &__update-available {
+    font-size: 0.4rem;
+    display: block;
+    margin-top: -1vh;
+    margin-bottom: -2.5vh;
   }
 }
 

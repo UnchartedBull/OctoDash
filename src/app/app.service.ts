@@ -14,6 +14,7 @@ export class AppService {
   private ipc: any;
   private version: string;
   private latestVersion: string;
+  public updateAvailable = false;
 
   public constructor(
     private configService: ConfigService,
@@ -62,18 +63,16 @@ export class AppService {
     });
 
     this.ipc.on("customStylesError", (_, customCSSError: string): void => {
-      this.notificationService.setError("Can't get custom styles!", customCSSError);
+      this.notificationService.setError("Can't load custom styles!", customCSSError);
     });
   }
 
   private checkUpdate(): void {
     this.http.get("https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest").subscribe(
       (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace("v", "")) {
-          this.notificationService.setUpdate(
-            "It's time for an update",
-            `Version ${data.name} is available now, while you're on v${this.version}. Consider updating :)`
-          );
+        //FIXME
+        if (this.version !== data.name.replace("va", "")) {
+          this.updateAvailable = true;
         }
         this.latestVersion = data.name.replace("v", "");
       },

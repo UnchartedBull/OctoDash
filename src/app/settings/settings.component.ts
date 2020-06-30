@@ -36,7 +36,7 @@ export class SettingsComponent implements OnInit {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private service: AppService
+    public service: AppService
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
