@@ -20,7 +20,9 @@ export class NotificationComponent implements OnDestroy {
 
   public constructor(private notificationService: NotificationService) {
     this.subscriptions.add(
-      this.notificationService.getObservable().subscribe((message: Notification): void => this.setNotification(message))
+      this.notificationService
+        .getObservable()
+        .subscribe((notification: Notification | "close"): void => this.setNotification(notification))
     );
   }
 
@@ -28,9 +30,13 @@ export class NotificationComponent implements OnDestroy {
     this.show = false;
   }
 
-  public setNotification(notification: Notification): void {
-    this.notification = notification;
-    this.show = true;
+  private setNotification(notification: Notification | "close"): void {
+    if (notification === "close") {
+      this.hideNotification();
+    } else {
+      this.notification = notification;
+      this.show = true;
+    }
   }
 
   public ngOnDestroy(): void {

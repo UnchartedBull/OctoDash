@@ -6,13 +6,13 @@ import { shareReplay } from "rxjs/operators";
   providedIn: "root",
 })
 export class NotificationService {
-  private observable: Observable<Notification>;
-  private observer: Observer<Notification>;
+  private observable: Observable<Notification | "close">;
+  private observer: Observer<Notification | "close">;
   private hideNotifications = false;
   private bootGrace = true;
 
   public constructor() {
-    this.observable = new Observable((observer: Observer<Notification>): void => {
+    this.observable = new Observable((observer: Observer<Notification | "close">): void => {
       this.observer = observer;
       setTimeout((): void => {
         this.bootGrace = false;
@@ -23,11 +23,13 @@ export class NotificationService {
   public enableNotifications(): void {
     console.clear();
     this.hideNotifications = false;
+    this.observer.next("close");
   }
 
   public disableNotifications(): void {
     console.clear();
     this.hideNotifications = true;
+    this.observer.next("close");
   }
 
   public setError(heading: string, text: string): void {
@@ -46,7 +48,7 @@ export class NotificationService {
     this.observer.next({ heading, text, type: "update" });
   }
 
-  public getObservable(): Observable<Notification> {
+  public getObservable(): Observable<Notification | "close"> {
     return this.observable;
   }
 

@@ -50,7 +50,6 @@ export class PrinterService {
                 this.isPrinterOffline().then((printerOffline): void => {
                   if (printerOffline) {
                     this.router.navigate(["/standby"]);
-                    this.notificationService.disableNotifications();
                   } else {
                     this.notificationService.setError("Can't retrieve printer status!", error.message);
                   }
