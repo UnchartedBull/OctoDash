@@ -78,7 +78,7 @@ export class AppService {
       },
       (): void => null
     );
-    setTimeout(this.checkUpdate.bind(this), 21.6 * 1000000);
+    setTimeout(this.checkUpdate.bind(this), 3600000);
   }
 
   public getVersion(): string {
