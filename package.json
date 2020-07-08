@@ -79,7 +79,7 @@
     "ajv": "^6.12.3",
     "angular-svg-round-progressbar": "^3.0.1",
     "electron-store": "^5.2.0",
-    "lodash": "^4.17.18",
+    "lodash": "^4.17.19",
     "ngx-spinner": "^9.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^1.13.0",
