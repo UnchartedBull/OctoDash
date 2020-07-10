@@ -142,12 +142,11 @@ function sendVersionInfo() {
 }
 
 function downloadUpdate(updateInfo) {
-  exec("arch", (err, stdout, stderr) => {
-    if (err) {
-      console.log(err);
-    }
-    if (stderr) {
-      console.error(stderr);
+  exec("archs", (err, stdout, stderr) => {
+    if (err || stderr) {
+      window.webContents.send("updateError", {
+        error: err ? err : { message: stderr },
+      });
     }
     console.log(stdout);
     console.log(updateInfo);

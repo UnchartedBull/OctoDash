@@ -26,15 +26,22 @@ export class UpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.service.latestVersion || this.service.getLatestVersionAssetsURL()) {
+    if (!this.service.latestVersion || !this.service.getLatestVersionAssetsURL()) {
       this.notificationService.setWarning(
         "Can't initiate update!",
         "Some information is missing, please try again in an hour or update manually."
       );
       this.closeFunction.emit();
     } else {
+      this.setupListeners();
       this.update(this.service.getLatestVersionAssetsURL());
     }
+  }
+
+  private setupListeners(): void {
+    this.ipc.on("updateError", (_, updateError: UpdateError): void => {
+      this.notificationService.setError("Can't install update!", updateError.error.message);
+    });
   }
 
   private update(assetsURL: string): void {
@@ -42,4 +49,11 @@ export class UpdateComponent implements OnInit {
       assetsURL: assetsURL,
     });
   }
+}
+
+interface UpdateError {
+  error: {
+    message: string;
+    stack?: string;
+  };
 }
