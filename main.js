@@ -68,10 +68,10 @@ function createWindow() {
     window.setFullScreen(true);
   }
 
-  // setTimeout(sendVersionInfo, 30 * 1000);
   activateAppInfoListener();
   activateScreenSleepListener();
   activateReloadListener();
+  activateUpdateListener();
 
   window.on("closed", () => {
     window = null;
@@ -109,6 +109,12 @@ function activateAppInfoListener() {
   });
 }
 
+function activateUpdateListener() {
+  ipcMain.on("update", (_, updateInfo) => {
+    downloadUpdate(updateInfo);
+  });
+}
+
 function sendCustomStyles() {
   fs.readFile(path.join(app.getPath("userData"), "custom-styles.css"), "utf-8", (err, data) => {
     if (err) {
@@ -132,6 +138,19 @@ function sendCustomStyles() {
 function sendVersionInfo() {
   window.webContents.send("versionInformation", {
     version: app.getVersion(),
+  });
+}
+
+function downloadUpdate(updateInfo) {
+  exec("arch", (err, stdout, stderr) => {
+    if (err) {
+      console.log(err);
+    }
+    if (stderr) {
+      console.error(stderr);
+    }
+    console.log(stdout);
+    console.log(updateInfo);
   });
 }
 

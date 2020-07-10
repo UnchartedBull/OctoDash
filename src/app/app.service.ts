@@ -12,8 +12,9 @@ export class AppService {
   private loadedFile = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ipc: any;
-  private version: string;
-  private latestVersion: string;
+  public version: string;
+  public latestVersion: string;
+  private latestVersionAssetsURL: string;
   public updateAvailable = false;
 
   public constructor(
@@ -21,20 +22,18 @@ export class AppService {
     private notificationService: NotificationService,
     private http: HttpClient
   ) {
-    if (window.require) {
-      try {
-        this.ipc = window.require("electron").ipcRenderer;
-        this.enableVersionListener();
-        this.enableCustomCSSListener();
-        setTimeout(() => {
-          this.ipc.send("appInfo");
-        }, 0);
-      } catch (e) {
-        this.notificationService.setError(
-          "Can't retrieve version information",
-          "Please open an issue for GitHub as this shouldn't happen."
-        );
-      }
+    try {
+      this.ipc = window.require("electron").ipcRenderer;
+      this.enableVersionListener();
+      this.enableCustomCSSListener();
+      setTimeout(() => {
+        this.ipc.send("appInfo");
+      }, 0);
+    } catch (e) {
+      this.notificationService.setError(
+        "Can't connect to backend",
+        "Please restart your system. If the issue persists open an issue on GitHub."
+      );
     }
     this.updateError = [];
   }
@@ -75,6 +74,7 @@ export class AppService {
           this.updateAvailable = true;
         }
         this.latestVersion = data.name.replace("v", "");
+        this.latestVersionAssetsURL = data.assets_url;
       },
       (): void => null
     );
@@ -113,6 +113,10 @@ export class AppService {
     return this.loadedFile;
   }
 
+  public getLatestVersionAssetsURL(): string {
+    return this.latestVersionAssetsURL;
+  }
+
   public convertByteToMegabyte(byte: number): string {
     return (byte / 1000000).toFixed(1);
   }
@@ -135,16 +139,8 @@ export class AppService {
     return roundedHours + ":" + ("0" + roundedMinutes).slice(-2);
   }
 
-  public convertFilamentLengthToAmount(filamentLength: number): number {
-    return (
-      Math.round(
-        (Math.PI *
-          (this.configService.getFilamentThickness() / 2) *
-          filamentLength *
-          this.configService.getFilamentDensity()) /
-          100
-      ) / 10
-    );
+  public convertFilamentVolumeToWeight(filamentVolume: number): number {
+    return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
   }
 }
 
@@ -154,5 +150,7 @@ interface VersionInformation {
 
 interface GitHubReleaseInformation {
   name: string;
+  // eslint-disable-next-line camelcase
+  assets_url: string;
   [key: string]: string;
 }

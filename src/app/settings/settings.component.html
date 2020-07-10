@@ -547,11 +547,15 @@
         </span>
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
-          <span class="settings__about-version">v1.5.0</span>
+          <span class="settings__about-version">v{{ service.version }}</span>
           <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable">
             no update available
           </button>
-          <button class="settings__about-update settings__about-update-available" *ngIf="service.updateAvailable">
+          <button
+            class="settings__about-update settings__about-update-available"
+            *ngIf="service.updateAvailable"
+            (click)="showUpdate()"
+          >
             install v{{ service.latestVersion }}
           </button>
           <span class="settings__about-copyright">&#169; 2019-2020 UnchartedBull</span>
@@ -601,3 +605,4 @@
     </div>
   </div>
 </div>
+<app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>

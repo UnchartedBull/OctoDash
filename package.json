@@ -54,6 +54,7 @@
     "lint": "eslint ./src/ -c .eslintrc.js --ext .ts",
     "lint:fix": "eslint ./src/ -c .eslintrc.js --ext .ts --fix",
     "electron": "electron .",
+    "electron:dev": "electron . --serve --big",
     "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
     "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
     "pack": "npm run ng:build && electron-builder build -l",

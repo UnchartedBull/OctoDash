@@ -61,7 +61,7 @@ export class FilesService {
                 let filamentLength = 0;
                 if (fileOrFolder.gcodeAnalysis) {
                   _.forEach(fileOrFolder.gcodeAnalysis.filament, (tool): void => {
-                    filamentLength += tool.length;
+                    filamentLength += tool.volume;
                   });
                 }
 
@@ -82,7 +82,7 @@ export class FilesService {
                   ...(fileOrFolder.gcodeAnalysis
                     ? {
                         printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
-                        filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                        filamentWeight: this.service.convertFilamentVolumeToWeight(filamentLength),
                       }
                     : {}),
                 } as unknown) as File);
@@ -139,7 +139,7 @@ export class FilesService {
             let filamentLength = 0;
             if (data.gcodeAnalysis) {
               _.forEach(data.gcodeAnalysis.filament, (tool): void => {
-                filamentLength += tool.length;
+                filamentLength += tool.volume;
               });
             }
             const file = ({
@@ -151,7 +151,7 @@ export class FilesService {
                 ? {
                     date: this.service.convertDateToString(new Date(data.date * 1000)),
                     printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-                    filamentWeight: this.service.convertFilamentLengthToAmount(filamentLength),
+                    filamentWeight: this.service.convertFilamentVolumeToWeight(filamentLength),
                   }
                 : {}),
               thumbnail: data.thumbnail
