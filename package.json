@@ -75,7 +75,7 @@
     "@angular/router": "~9.0.1",
     "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "ajv": "^6.12.3",
     "angular-svg-round-progressbar": "^3.0.1",
     "electron-store": "^5.2.0",
