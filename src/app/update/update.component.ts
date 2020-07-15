@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from "@angular/core";
 
 import { AppService } from "../app.service";
 import { NotificationService } from "../notification/notification.service";
@@ -13,8 +13,22 @@ export class UpdateComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ipc: any;
+  public updateProgress: UpdateDownloadProgress = {
+    percentage: 0,
+    transferred: 0,
+    total: "--.-",
+    remaining: 0,
+    eta: "--:--",
+    runtime: "--:--",
+    delta: 0,
+    speed: "--.-",
+  };
 
-  constructor(public service: AppService, private notificationService: NotificationService) {
+  constructor(
+    public service: AppService,
+    private notificationService: NotificationService,
+    private changeDetector: ChangeDetectorRef
+  ) {
     try {
       this.ipc = window.require("electron").ipcRenderer;
     } catch (e) {
@@ -43,6 +57,11 @@ export class UpdateComponent implements OnInit {
       this.notificationService.setError("Can't install update!", updateError.error.message);
       this.closeFunction.emit();
     });
+
+    this.ipc.on("updateDownloadProgress", (_, updateDownloadProgress: UpdateDownloadProgress): void => {
+      this.updateProgress = updateDownloadProgress;
+      this.changeDetector.detectChanges();
+    });
   }
 
   private update(assetsURL: string): void {
@@ -57,4 +76,15 @@ interface UpdateError {
     message: string;
     stack?: string;
   };
+}
+
+interface UpdateDownloadProgress {
+  percentage: number;
+  transferred: number;
+  total: number | string;
+  remaining: number;
+  eta: string;
+  runtime: string;
+  delta: number;
+  speed: number | string;
 }

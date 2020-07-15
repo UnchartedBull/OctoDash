@@ -81,8 +81,9 @@
     "angular-svg-round-progressbar": "^3.0.1",
     "electron-store": "^5.2.0",
     "got": "^11.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "ngx-spinner": "^9.0.2",
+    "progress-stream": "^2.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3"

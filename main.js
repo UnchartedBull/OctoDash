@@ -6,6 +6,9 @@ const fs = require("fs");
 const got = require('got');
 const path = require("path");
 const url = require("url");
+const stream = require('stream');
+const {promisify} = require('util');
+const progress = require('progress-stream');
 
 const exec = require("child_process").exec;
 
@@ -144,6 +147,8 @@ function sendVersionInfo() {
 }
 
 function downloadUpdate(updateInfo) {
+  const downloadPath = "/tmp/octodash.deb";
+
   exec("arch", (err, stdout, stderr) => {
     if (err || stderr) {
       window.webContents.send("updateError", {
@@ -152,14 +157,59 @@ function downloadUpdate(updateInfo) {
     }
     got(updateInfo.assetsURL)
     .then((releaseFiles) => {
+      const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      let averageETA = [];
       let downloadURL;
+      let packageSize;
       for (let package of JSON.parse(releaseFiles.body)) {
         //FIXME
         // if (package.name.includes(stdout)) downloadURL = package.browser_download_url;
-        if (package.name.includes("armv7l")) downloadURL = package.browser_download_url;
+        if (package.name.includes("armv7l")) {
+          downloadURL = package.browser_download_url;
+          packageSize = package.size;
+        }
       }
       if (downloadURL) {
-        console.log(downloadURL)
+        const downloadPipeline = promisify(stream.pipeline);
+        let downloadProgress = progress({
+          length: packageSize,
+          time: 300,
+        });
+
+        downloadProgress.on('progress', (progress) => {
+          averageETA.push(progress.eta);
+          if (averageETA.length > 4) averageETA.shift();
+          window.webContents.send("updateDownloadProgress", {
+            percentage: progress.percentage,
+            transferred: (progress.transferred / 100000).toFixed(1),
+            total: (progress.length / 1000000).toFixed(1),
+            remaining: (progress.remaining / 100000).toFixed(1),
+            eta: new Date(averageETA.reduce(reducer) * 1000).toISOString().substr(14, 5),
+            runtime: new Date(progress.runtime * 1000).toISOString().substr(14, 5),
+            delta: (progress.delta / 100000).toFixed(1),
+            speed: (progress.speed / 1000000).toFixed(2),
+          })
+        })
+
+        try {
+          if (fs.existsSync(downloadPath)) fs.unlinkSync(downloadPath)
+        } catch {
+          // no need to handle this properly
+        }
+
+        downloadPipeline(
+          got.stream(downloadURL),
+          downloadProgress,
+          fs.createWriteStream(downloadPath)
+        ).catch((error) => {
+          window.webContents.send("updateError", {
+            error: {
+              message: `Can't download package! ${error.message}.`
+            }
+          })
+        }).then(() => {
+          console.log("DONE")
+        })
       } else {
         window.webContents.send("updateError", {
           error: {

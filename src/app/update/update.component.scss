@@ -18,9 +18,9 @@
     transition: width 0.7s ease-in-out;
     font-size: 0.5rem;
     text-align: right;
-    vertical-align: center;
     padding-top: 1.5vh;
-    padding-right: 1vw;
+    overflow: visible;
+    white-space: nowrap;
 
     &__wrapper {
       background-color: #718093;
