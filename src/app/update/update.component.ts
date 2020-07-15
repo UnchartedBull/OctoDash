@@ -41,6 +41,7 @@ export class UpdateComponent implements OnInit {
   private setupListeners(): void {
     this.ipc.on("updateError", (_, updateError: UpdateError): void => {
       this.notificationService.setError("Can't install update!", updateError.error.message);
+      this.closeFunction.emit();
     });
   }
 

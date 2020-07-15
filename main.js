@@ -1,17 +1,19 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { app, BrowserWindow, ipcMain } = require("electron");
-const url = require("url");
-const path = require("path");
+const electronStore = require("electron-store");
 const fs = require("fs");
-const Store = require("electron-store");
+const got = require('got');
+const path = require("path");
+const url = require("url");
 
-const store = new Store();
 const exec = require("child_process").exec;
 
+const store = new electronStore();
+
 const args = process.argv.slice(1);
-const dev = args.some((val) => val === "--serve");
 const big = args.some((val) => val === "--big");
+const dev = args.some((val) => val === "--serve");
 
 app.commandLine.appendSwitch("touch-events", "enabled");
 app.allowRendererProcessReuse = true;
@@ -142,14 +144,34 @@ function sendVersionInfo() {
 }
 
 function downloadUpdate(updateInfo) {
-  exec("archs", (err, stdout, stderr) => {
+  exec("arch", (err, stdout, stderr) => {
     if (err || stderr) {
       window.webContents.send("updateError", {
         error: err ? err : { message: stderr },
       });
     }
-    console.log(stdout);
-    console.log(updateInfo);
+    got(updateInfo.assetsURL)
+    .then((releaseFiles) => {
+      let downloadURL;
+      for (let package of JSON.parse(releaseFiles.body)) {
+        //FIXME
+        // if (package.name.includes(stdout)) downloadURL = package.browser_download_url;
+        if (package.name.includes("armv7l")) downloadURL = package.browser_download_url;
+      }
+      if (downloadURL) {
+        console.log(downloadURL)
+      } else {
+        window.webContents.send("updateError", {
+          error: {
+            message: `Can't find matching package for architecture ${stdout}.`
+          }
+        })
+      }
+    })
+    .catch((error) => {
+      error.message = `Can't load releases. ${error.message}`;
+      window.webContents.send("updateError", {error});
+    })
   });
 }
 
