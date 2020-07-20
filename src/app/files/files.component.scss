@@ -14,6 +14,9 @@
   display: block;
   margin-left: 3vw;
   margin-top: -4.5vh;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 94vw;
 
   &__item {
     font-size: 2.2vw;
@@ -56,10 +59,10 @@
   &::before {
     content: "";
     width: 91vw;
-    height: 79.2vh;
+    height: 77.8vh;
     position: fixed;
     left: 2vw;
-    top: 21.8vh;
+    top: 23.2vh;
     z-index: 2;
     pointer-events: none;
     background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
