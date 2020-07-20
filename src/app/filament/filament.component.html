@@ -63,11 +63,11 @@
           </div>
         </div>
         <div class="filament-heating__controller-value" colspan="2">
-          {{ hotendTarget }}
+          {{ isHeating ? hotendTemperature : hotendTarget }}
           <span class="filament-heating__controller-value-unit">°C</span>
-          <span class="filament-heating__controller-current" *ngIf="isHeating"
-            >/{{ hotendTemperature }} <span>°C</span></span
-          >
+          <span class="filament-heating__controller-current" *ngIf="isHeating">
+            /{{ hotendTarget }} <span>°C</span>
+          </span>
         </div>
         <div class="filament-heating__controller-row">
           <div
