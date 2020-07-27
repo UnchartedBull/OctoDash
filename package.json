@@ -97,7 +97,7 @@
     "@typescript-eslint/parser": "^3.7.1",
     "codelyzer": "^6.0.0",
     "electron": "^9.1.1",
-    "electron-builder": "^22.7.0",
+    "electron-builder": "^22.8.0",
     "electron-reload": "^1.5.0",
     "eslint": "7.5.0",
     "eslint-plugin-import": "^2.22.0",
