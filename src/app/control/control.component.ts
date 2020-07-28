@@ -1,5 +1,3 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-
 import { Component } from "@angular/core";
 import { SafeResourceUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
@@ -27,7 +25,6 @@ export class ControlComponent {
   public actionToConfirm: ActionToConfirm;
 
   public constructor(
-    private http: HttpClient,
     private printerService: PrinterService,
     private printerProfileService: PrinterProfileService,
     private octoprintService: OctoprintService,

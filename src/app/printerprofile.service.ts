@@ -14,27 +14,15 @@ import { OctoprintPrinterProfileAPI } from "./octoprint-api/printerProfileAPI";
   providedIn: "root",
 })
 export class PrinterProfileService {
-  private printerStatusService: PrinterService;
   private httpGETRequest: Subscription;
-  private observable: Observable<OctoprintPrinterProfileAPI>;
-  private observer: Observer<OctoprintPrinterProfileAPI>;
-
+  
   public constructor(
     private http: HttpClient,
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private printerService: PrinterService,
+    private printerStatusService: PrinterService,
     private router: Router
-  ) {
-    this.printerStatusService = printerService;
-    this.observable = new Observable((observer: Observer<OctoprintPrinterProfileAPI>): void => {
-      this.observer = observer;
-    }).pipe(shareReplay(1));
-  }
-
-  public getObservable(): Observable<OctoprintPrinterProfileAPI> {
-    return this.observable;
-  }
+  ) { }
 
   public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfileAPI> {
     return new Promise((resolve): void => {
@@ -46,7 +34,6 @@ export class PrinterProfileService {
         .subscribe(
           (data: OctoprintPrinterProfileAPI): void => {
             const printerProfile: OctoprintPrinterProfileAPI = data;
-            this.observer.next(printerProfile);
             resolve(printerProfile);
           },
           (error: HttpErrorResponse): void => {
@@ -70,10 +57,8 @@ export class PrinterProfileService {
               });
               resolve(printerProfile);
             } else if (error.status === 0 && this.notificationService.getBootGrace()) {
-              this.observer.next(printerProfile);
               resolve(printerProfile);
             } else {
-              this.observer.next(printerProfile);
               resolve(printerProfile);
               this.notificationService.setError("Can't retrieve printer status!", error.message);
             }
