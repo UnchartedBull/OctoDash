@@ -1,3 +1,5 @@
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+
 import { Component } from "@angular/core";
 import { SafeResourceUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
@@ -6,6 +8,9 @@ import { ConfigService } from "../config/config.service";
 import { OctoprintService } from "../octoprint.service";
 import { PsuControlService } from "../plugin-service/psu-control.service";
 import { PrinterService } from "../printer.service";
+import { PrinterProfileService } from "../printerprofile.service";
+
+import { OctoprintPrinterProfileAPI } from '../octoprint-api/printerProfileAPI';
 
 @Component({
   selector: "app-control",
@@ -13,6 +18,8 @@ import { PrinterService } from "../printer.service";
   styleUrls: ["./control.component.scss"],
 })
 export class ControlComponent {
+  public printerProfile: OctoprintPrinterProfileAPI;
+
   public jogDistance = 10;
   public customActions = [];
   public showHelp = false;
@@ -20,13 +27,31 @@ export class ControlComponent {
   public actionToConfirm: ActionToConfirm;
 
   public constructor(
+    private http: HttpClient,
     private printerService: PrinterService,
+    private printerProfileService: PrinterProfileService,
     private octoprintService: OctoprintService,
     private configService: ConfigService,
     private psuControlService: PsuControlService,
     private router: Router
-  ) {
+  ) {   
+    
+    this.printerProfile = {
+      name: "_default",
+      model: "unknown",
+      axes: {
+        x: { inverted: false },
+        y: { inverted: false },
+        z: { inverted: false }
+      }
+    };
+
     this.customActions = this.configService.getCustomActions();
+
+    this.printerProfileService.getDefaultPrinterProfile().then((profile) => {
+      this.printerProfile = profile;
+    });
+
   }
 
   public setDistance(distance: number): void {
@@ -34,7 +59,13 @@ export class ControlComponent {
   }
 
   public moveAxis(axis: string, direction: "+" | "-"): void {
+    if (this.printerProfile.axes[axis].inverted == true)
+    {
+      direction = (direction === "+" ? "-" : "+");
+    }
+
     const distance = Number(direction + this.jogDistance);
+
     this.printerService.jog(axis === "x" ? distance : 0, axis === "y" ? distance : 0, axis === "z" ? distance : 0);
   }
 
