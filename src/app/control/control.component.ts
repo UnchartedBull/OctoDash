@@ -31,8 +31,7 @@ export class ControlComponent {
     private configService: ConfigService,
     private psuControlService: PsuControlService,
     private router: Router
-  ) {   
-    
+  ) {
     this.printerProfile = {
       name: "_default",
       model: "unknown",
@@ -48,7 +47,6 @@ export class ControlComponent {
     this.printerProfileService.getDefaultPrinterProfile().then((profile) => {
       this.printerProfile = profile;
     });
-
   }
 
   public setDistance(distance: number): void {

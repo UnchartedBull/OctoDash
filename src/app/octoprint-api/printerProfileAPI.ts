@@ -1,8 +1,4 @@
 export interface OctoprintPrinterProfileAPI {
-
-}
-
-export interface OctoprintPrinterProfileAPI {
   name: string;
   model: string;
   axes: OctoprintPrinterAxis;

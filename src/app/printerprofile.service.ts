@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, Observer, Subscription, timer } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { Subscription } from "rxjs";
 
 import { ConfigService } from "./config/config.service";
 import { NotificationService } from "./notification/notification.service";
