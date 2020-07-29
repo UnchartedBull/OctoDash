@@ -14,7 +14,7 @@ import { OctoprintPrinterProfileAPI } from "./octoprint-api/printerProfileAPI";
 })
 export class PrinterProfileService {
   private httpGETRequest: Subscription;
-  
+
   public constructor(
     private http: HttpClient,
     private configService: ConfigService,
@@ -24,7 +24,7 @@ export class PrinterProfileService {
   ) { }
 
   public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfileAPI> {
-    return new Promise((resolve): void => {
+    return new Promise((resolve, reject): void => {
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
       }
@@ -35,16 +35,6 @@ export class PrinterProfileService {
             resolve(printerProfile);
           },
           (error: HttpErrorResponse): void => {
-            const printerProfile: OctoprintPrinterProfileAPI = {
-              name: "_default",
-              model: "unknown",
-              axes: {
-                x: { inverted: false },
-                y: { inverted: false },
-                z: { inverted: false }
-              }
-            };
-
             if (error.status === 409) {
               this.printerStatusService.isPrinterOffline().then((printerOffline): void => {
                 if (printerOffline) {
@@ -53,12 +43,12 @@ export class PrinterProfileService {
                   this.notificationService.setError("Can't retrieve printer profile!", error.message);
                 }
               });
-              resolve(printerProfile);
-            } else if (error.status === 0 && this.notificationService.getBootGrace()) {
-              resolve(printerProfile);
+              reject();
             } else {
-              resolve(printerProfile);
-              this.notificationService.setError("Can't retrieve printer status!", error.message);
+              reject();
+              if (error.status === 0 && this.notificationService.getBootGrace()) {
+                this.notificationService.setError("Can't retrieve printer status!", error.message);
+              }
             }
           }
         );
