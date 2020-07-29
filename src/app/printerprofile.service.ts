@@ -31,8 +31,7 @@ export class PrinterProfileService {
       this.httpGETRequest = this.http
         .get(this.configService.getURL("printerprofiles/_default"), this.configService.getHTTPHeaders())
         .subscribe(
-          (data: OctoprintPrinterProfileAPI): void => {
-            const printerProfile: OctoprintPrinterProfileAPI = data;
+          (printerProfile: OctoprintPrinterProfileAPI): void => {
             resolve(printerProfile);
           },
           (error: HttpErrorResponse): void => {
