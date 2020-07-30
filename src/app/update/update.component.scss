@@ -22,6 +22,12 @@
     overflow: visible;
     white-space: nowrap;
 
+    &-no-percentage {
+      width: 10vw;
+      transition: margin-left 2s ease-in-out;
+      margin-left: 0vw;
+    }
+
     &__wrapper {
       background-color: #718093;
       width: 50vw;
@@ -53,5 +59,44 @@
     display: block;
     text-align: center;
     margin-top: 10vh;
+  }
+
+  &-notice {
+    display: block;
+    text-align: center;
+    font-size: 0.5rem;
+    margin-top: 20vh;
+  }
+
+  &-restart {
+    display: block;
+    text-align: center;
+    font-size: 0.65rem;
+    margin-top: 10vh;
+    margin-bottom: 8vw;
+
+    &-button {
+      padding: 1.4vh 2vw;
+      border-radius: 1vw;
+      box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+      font-size: 0.7rem;
+      outline: 0;
+      border: 0;
+      margin: 7vh 2vw;
+
+      &__no {
+        background-color: #718093;
+        opacity: 0.8;
+      }
+
+      &__yes {
+        background-color: #44bd32;
+      }
+
+      &__wrapper {
+        display: block;
+        text-align: center;
+      }
+    }
   }
 }

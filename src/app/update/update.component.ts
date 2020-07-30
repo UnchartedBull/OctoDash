@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from "@ang
 
 import { AppService } from "../app.service";
 import { NotificationService } from "../notification/notification.service";
+import { OctoprintService } from "../octoprint.service";
 
 @Component({
   selector: "app-update",
@@ -13,6 +14,7 @@ export class UpdateComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ipc: any;
+  private installationAnimationInterval: number;
   public updateProgress: UpdateDownloadProgress = {
     percentage: 0,
     transferred: 0,
@@ -23,10 +25,12 @@ export class UpdateComponent implements OnInit {
     delta: 0,
     speed: "--.-",
   };
+  public page = 1;
 
   constructor(
     public service: AppService,
     private notificationService: NotificationService,
+    private octoprintService: OctoprintService,
     private changeDetector: ChangeDetectorRef
   ) {
     try {
@@ -45,7 +49,7 @@ export class UpdateComponent implements OnInit {
         "Can't initiate update!",
         "Some information is missing, please try again in an hour or update manually."
       );
-      this.closeFunction.emit();
+      this.closeUpdateWindow();
     } else {
       this.setupListeners();
       this.update(this.service.getLatestVersionAssetsURL());
@@ -55,19 +59,47 @@ export class UpdateComponent implements OnInit {
   private setupListeners(): void {
     this.ipc.on("updateError", (_, updateError: UpdateError): void => {
       this.notificationService.setError("Can't install update!", updateError.error.message);
-      this.closeFunction.emit();
+      this.closeUpdateWindow();
     });
 
     this.ipc.on("updateDownloadProgress", (_, updateDownloadProgress: UpdateDownloadProgress): void => {
       this.updateProgress = updateDownloadProgress;
       this.changeDetector.detectChanges();
     });
+
+    this.ipc.on("updateDownloadFinished", (): void => {
+      this.page = 2;
+      this.changeDetector.detectChanges();
+      setTimeout(() => {
+        const updateProgressBar = document.getElementById("installUpdateProgress");
+        updateProgressBar.style.marginLeft = "40vw";
+        this.installationAnimationInterval = setInterval(() => {
+          updateProgressBar.style.marginLeft = updateProgressBar.style.marginLeft === "0vw" ? "40vw" : "0vw";
+        }, 2000);
+      }, 250);
+    });
+
+    this.ipc.on("updateInstalled", (): void => {
+      this.page = 3;
+      this.changeDetector.detectChanges();
+      clearInterval(this.installationAnimationInterval);
+    });
+  }
+
+  private closeUpdateWindow(): void {
+    this.page = 1;
+    this.closeFunction.emit();
   }
 
   private update(assetsURL: string): void {
     this.ipc.send("update", {
       assetsURL: assetsURL,
     });
+  }
+
+  public reboot(): void {
+    console.log("reboot");
+    // this.octoprintService.sendSystemCommand("reboot");
   }
 }
 
