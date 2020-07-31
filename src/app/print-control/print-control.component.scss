@@ -125,17 +125,64 @@
     &__name {
       margin-top: 5vh;
       display: block;
-      font-size: 3.5vw;
+      font-size: 0.8rem;
     }
 
     &__save {
-      display: block;
+      display: inline-block;
       width: 15vw;
       text-align: center;
-      margin: auto;
       padding: 1.3vh 0;
       border: 0.6vw solid;
       border-radius: 2.5vw;
+    }
+
+    &-babystep {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-align: center;
+      margin: 2vw 10.2vw;
+
+      &-axis {
+        display: inline-block;
+        border: 3px solid;
+        font-size: 3vw;
+        width: 3.7vw;
+        padding: 0.1vw;
+        vertical-align: -1.2vw;
+        border-radius: 1vw;
+        margin-right: 1vw;
+      }
+
+      &__change {
+        display: block;
+        width: 33.3vw;
+        text-align: center;
+        float: left;
+
+        &-value {
+          display: block;
+          margin: 7.5vh auto 0;
+          padding: 4vh 1vw;
+          border: 4px solid;
+          width: 20vw;
+          border-radius: 2vw;
+
+          &__unit {
+            font-size: 0.5rem;
+          }
+        }
+
+        &-current {
+          padding-top: 23vh;
+          display: block;
+
+          &__value {
+            font-size: 1.5rem;
+            vertical-align: -0.2rem;
+          }
+        }
+      }
     }
   }
 }

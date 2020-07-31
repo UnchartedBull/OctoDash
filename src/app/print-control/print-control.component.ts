@@ -18,12 +18,14 @@ export class PrintControlComponent {
   public temperatureHeatbed: number;
   public feedrate: number;
   public flowrate: number;
+  private zOffset: number;
 
   public constructor(private jobService: JobService, private printerService: PrinterService) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
     this.flowrate = 100;
     this.feedrate = 100;
+    this.zOffset = 0;
   }
 
   public isClickOnPreview(event: MouseEvent): boolean {
@@ -56,6 +58,13 @@ export class PrintControlComponent {
   public adjust(event: MouseEvent): void {
     if (this.showControls) {
       this.view = ControlView.ADJUST;
+      this.stopPropagation(event);
+    }
+  }
+
+  public babystep(event: MouseEvent): void {
+    if (this.showControls) {
+      this.view = ControlView.BABYSTEP;
       this.stopPropagation(event);
     }
   }
@@ -170,6 +179,16 @@ export class PrintControlComponent {
       this.hideControlOverlay(event);
     }
   }
+
+  public getZOffset(): string {
+    return Math.abs(this.zOffset).toFixed(2);
+  }
+
+  public babystepZ(value: number): void {
+    // gotta love JS for that one.
+    this.zOffset = Math.round((this.zOffset + value) * 100) / 100;
+    this.printerService.executeGCode(`M290 Z${value}`);
+  }
 }
 
 enum ControlView {
@@ -177,4 +196,5 @@ enum ControlView {
   CANCEL,
   PAUSE,
   ADJUST,
+  BABYSTEP,
 }
