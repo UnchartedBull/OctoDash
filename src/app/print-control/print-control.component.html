@@ -154,6 +154,10 @@
         </td>
       </tr>
     </table>
+    <span class="print-control__adjust-babystep"
+      ><span class="print-control__adjust-babystep-axis">Z</span> {{ zOffset === 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+      {{ zOffset.toFixed(2) }}mm</span
+    >
     <div
       class="print-control__adjust__save"
       (click)="setAdjustParameters($event)"

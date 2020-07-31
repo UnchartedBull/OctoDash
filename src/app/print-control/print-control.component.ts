@@ -18,12 +18,14 @@ export class PrintControlComponent {
   public temperatureHeatbed: number;
   public feedrate: number;
   public flowrate: number;
+  public zOffset: number;
 
   public constructor(private jobService: JobService, private printerService: PrinterService) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
     this.flowrate = 100;
     this.feedrate = 100;
+    this.zOffset = 0;
   }
 
   public isClickOnPreview(event: MouseEvent): boolean {

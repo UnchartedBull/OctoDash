@@ -112,12 +112,12 @@
       }
 
       &-increase {
-        padding: 3vh 6vw;
+        padding: 1vh 6vw;
         font-weight: 500;
       }
 
       &-decrease {
-        padding: 3vh 6vw;
+        padding: 1vh 6vw;
         font-weight: 500;
       }
     }
@@ -125,7 +125,7 @@
     &__name {
       margin-top: 5vh;
       display: block;
-      font-size: 3.5vw;
+      font-size: 0.8rem;
     }
 
     &__save {
@@ -136,6 +136,25 @@
       padding: 1.3vh 0;
       border: 0.6vw solid;
       border-radius: 2.5vw;
+    }
+
+    &-babystep {
+      display: block;
+      font-size: 0.7rem;
+      margin-bottom: 3vh;
+      margin-top: -2vh;
+      text-align: center;
+
+      &-axis {
+        display: inline-block;
+        border: 3px solid;
+        font-size: 3vw;
+        width: 3.7vw;
+        padding: 0.1vw;
+        vertical-align: -1.2vw;
+        border-radius: 1vw;
+        margin-right: 1vw;
+      }
     }
   }
 }
