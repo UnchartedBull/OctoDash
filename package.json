@@ -81,7 +81,7 @@
     "electron-store": "^6.0.0",
     "lodash": "^4.17.19",
     "ngx-spinner": "^10.0.1",
-    "rxjs": "~6.6.0",
+    "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
