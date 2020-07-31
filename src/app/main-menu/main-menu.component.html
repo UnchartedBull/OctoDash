@@ -3,6 +3,7 @@
     >OctoDash<span class="main-menu__heading" style="color: #1ec02c; display: inline;">.</span></span
   >
   <img src="assets/settings.svg" class="main-menu__settings-icon" (click)="showSettings()" />
+  <div class="main-menu__update-notifier" *ngIf="service.updateAvailable"></div>
   <table class="main-menu__options">
     <tr>
       <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
@@ -20,4 +21,4 @@
     </tr>
   </table>
 </div>
-<app-settings *ngIf="settings" (closeFunction)="hideSettings($event)"></app-settings>
+<app-settings *ngIf="settings" (closeFunction)="hideSettings()"></app-settings>

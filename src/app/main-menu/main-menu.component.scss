@@ -51,4 +51,14 @@
       margin-bottom: 1.7vw;
     }
   }
+
+  &__update-notifier {
+    width: 2.2vw;
+    height: 2.2vw;
+    border-radius: 4vw;
+    background-color: #e84118;
+    position: absolute;
+    right: 1.9vw;
+    top: 13vh;
+  }
 }

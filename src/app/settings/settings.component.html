@@ -5,17 +5,23 @@
       <div class="settings__content" #settingsMain>
         <span class="settings__heading">settings</span>
         <ul class="settings__list">
-          <li (click)="changePage(1, 0, 'forward')">General <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
-          <li (click)="changePage(2, 0, 'forward')">OctoDash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
-          <li (click)="changePage(3, 0, 'forward')">Plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
-          <li (click)="changePage(4, 0, 'forward')">Credits <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
+          <li (click)="changePage(1, 0, 'forward')">general <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
+          <li (click)="changePage(2, 0, 'forward')">octodash <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
+          <li (click)="changePage(3, 0, 'forward')">plugins <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
+          <li (click)="changePage(4, 0, 'forward')">about <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon></li>
         </ul>
+        <span
+          class="settings__update-available"
+          (click)="changePage(4, 0, 'forward')"
+          [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
+          >update available!</span
+        >
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made"
-          >Made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"> </fa-icon> by
+          >made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"> </fa-icon> by
           /u/UnchartedBull</span
         >
-        <span class="settings__version">OctoDash v{{ version }}</span>
+        <!-- <span class="settings__version">OctoDash v{{ version }}</span> -->
       </div>
       <div class="settings__content settings__content-inactive" #settingsGeneral>
         <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
@@ -537,9 +543,22 @@
       </div>
       <div class="settings__content settings__content-inactive" #settingsCredits>
         <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
-          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>credits
+          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"> </fa-icon>about
         </span>
         <div class="settings__scroll">
+          <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
+          <span class="settings__about-version">v{{ service.version }}</span>
+          <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable">
+            no update available
+          </button>
+          <button
+            class="settings__about-update settings__about-update-available"
+            *ngIf="service.updateAvailable"
+            (click)="showUpdate()"
+          >
+            install v{{ service.latestVersion }}
+          </button>
+          <span class="settings__about-copyright">&#169; 2019-2020 UnchartedBull</span>
           <span class="settings__heading-2">License</span>
           <p class="settings__text">
             Licensed under the Apache 2.0 License. <br />
@@ -587,3 +606,4 @@
     </div>
   </div>
 </div>
+<app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>

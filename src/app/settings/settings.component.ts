@@ -10,7 +10,7 @@ import { NotificationService } from "../notification/notification.service";
   styleUrls: ["./settings.component.scss"],
 })
 export class SettingsComponent implements OnInit {
-  @Output() private closeFunction = new EventEmitter<string>();
+  @Output() closeFunction = new EventEmitter<void>();
   @ViewChild("settingsMain") private settingsMain: ElementRef;
   @ViewChild("settingsGeneral") private settingsGeneral: ElementRef;
   @ViewChild("settingsOctoDash") private settingsOctoDash: ElementRef;
@@ -27,36 +27,26 @@ export class SettingsComponent implements OnInit {
     "Bottom Left",
     "Bottom Right",
   ];
-  public version: string;
   private overwriteNoSave = false;
   private pages = [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ipc: any;
+  public update = false;
 
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private service: AppService
+    public service: AppService
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
-    this.getVersion();
-    if (window.require) {
-      try {
-        this.ipc = window.require("electron").ipcRenderer;
-      } catch (e) {
-        this.notificationService.setError(
-          "Can't connect to backend",
-          "Please open an issue for GitHub as this shouldn't happen."
-        );
-      }
-    }
-  }
-
-  private getVersion(): void {
-    this.version = this.service.getVersion();
-    if (this.version === undefined) {
-      setTimeout(this.getVersion.bind(this), 3500);
+    try {
+      this.ipc = window.require("electron").ipcRenderer;
+    } catch (e) {
+      this.notificationService.setError(
+        "Can't connect to backend",
+        "Please restart your system. If the issue persists open an issue on GitHub."
+      );
     }
   }
 
@@ -113,5 +103,13 @@ export class SettingsComponent implements OnInit {
     this.hideSettings();
     this.configService.updateConfig();
     this.ipc.send("reload", "");
+  }
+
+  public showUpdate(): void {
+    this.update = true;
+  }
+
+  public hideUpdate(): void {
+    this.update = false;
   }
 }

@@ -5,6 +5,15 @@ import _ from "lodash";
 import { AppService } from "./app.service";
 import { ConfigService } from "./config/config.service";
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    require: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    process: any;
+  }
+}
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",

@@ -18,7 +18,7 @@
     position: absolute;
     top: 10vh;
     left: 20vw;
-    height: 80vh;
+    height: 81vh;
     width: 60vw;
     background-color: #353b48;
     border-radius: 2vw;
@@ -269,6 +269,56 @@
       font-size: 3.5vw;
       vertical-align: -8.5vh;
       padding-left: 4vw;
+    }
+  }
+
+  &__update-available {
+    font-size: 0.4rem;
+    display: block;
+    margin-top: -1vh;
+    margin-bottom: -2.5vh;
+  }
+
+  &__about {
+    &-icon {
+      height: 35vh;
+      margin: auto;
+      display: block;
+    }
+
+    &-version {
+      display: block;
+      text-align: center;
+      font-size: 0.45em;
+      margin-top: 1.5vh;
+      opacity: 0.7;
+    }
+
+    &-update {
+      display: block;
+      padding: 1.4vh 2vw;
+      border-radius: 1vw;
+      box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+      font-size: 0.7rem;
+      outline: 0;
+      border: 0;
+      margin: 3vh auto;
+
+      &-not-available {
+        background-color: #718093;
+        opacity: 0.8;
+      }
+
+      &-available {
+        background-color: #44bd32;
+      }
+    }
+
+    &-copyright {
+      display: block;
+      text-align: center;
+      font-size: 0.4rem;
+      margin-top: 5vh;
     }
   }
 }

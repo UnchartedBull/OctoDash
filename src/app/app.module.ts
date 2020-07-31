@@ -32,6 +32,7 @@ import { PrinterStatusComponent } from "./printer-status/printer-status.componen
 import { PrinterService } from "./printer.service";
 import { SettingsComponent } from "./settings/settings.component";
 import { StandbyComponent } from "./standby/standby.component";
+import { UpdateComponent } from "./update/update.component";
 import { URLSafePipe } from "./url.pipe";
 
 @NgModule({
@@ -54,6 +55,7 @@ import { URLSafePipe } from "./url.pipe";
     SettingsComponent,
     URLSafePipe,
     StandbyComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

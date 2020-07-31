@@ -1,18 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import Ajv from "ajv";
 import _ from "lodash";
 
-import { environment } from "../../environments/environment";
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    require: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    process: any;
-  }
-}
+import { NotificationService } from "../notification/notification.service";
 
 @Injectable({
   providedIn: "root",
@@ -29,20 +20,18 @@ export class ConfigService {
 
   private httpHeaders: HttpHeader;
 
-  public constructor(private http: HttpClient) {
+  public constructor(private notificationService: NotificationService) {
     const ajv = new Ajv({ allErrors: true });
     this.validator = ajv.compile(schema);
-    if (window && window.process && window.process.type) {
+    try {
       const Store = window.require("electron-store");
       this.store = new Store();
       this.initialize(this.store.get("config"));
-    } else {
-      console.warn(
-        "Detected non-electron environment. Fallback to assets/config.json. Any changes are non-persistent!"
+    } catch (e) {
+      this.notificationService.setError(
+        "Can't read config file!",
+        "Please restart your system. If the issue persists open an issue on GitHub."
       );
-      this.http.get(environment.config).subscribe((config: Config): void => {
-        this.initialize(config);
-      });
     }
   }
 
