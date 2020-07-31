@@ -9,7 +9,6 @@ const url = require("url");
 const stream = require('stream');
 const {promisify} = require('util');
 const progress = require('progress-stream');
-const { windowsStore } = require("process");
 
 const exec = require("child_process").exec;
 
@@ -163,9 +162,7 @@ function downloadUpdate(updateInfo) {
       let downloadURL;
       let packageSize;
       for (let package of JSON.parse(releaseFiles.body)) {
-        //FIXME
-        // if (package.name.includes(stdout)) {
-        if (package.name.includes("armv7l")) {
+        if (package.name.includes(stdout.trim())) {
           downloadURL = package.browser_download_url;
           packageSize = package.size;
         }
@@ -198,9 +195,19 @@ function downloadUpdate(updateInfo) {
           // no need to handle this properly
         }
 
-        setTimeout(() => {
+        downloadPipeline(
+          got.stream(downloadURL),
+          downloadProgress,
+          fs.createWriteStream(downloadPath)
+        ).catch((error) => {
+          window.webContents.send("updateError", {
+            error: {
+              message: `Can't download package! ${error.message}.`
+            }
+          })
+        }).then(() => {
           window.webContents.send("updateDownloadFinished");
-          exec('~/Desktop/tmp.sh', (err, _, stderr) => {
+          exec('sudo ~/scripts/update-octodash', (err, _, stderr) => {
             if (err || stderr) {
               window.webContents.send("updateError", {
                 error: err ? err : { message: stderr },
@@ -209,22 +216,7 @@ function downloadUpdate(updateInfo) {
               window.webContents.send("updateInstalled");
             }
           })
-        }, 100)
-
-
-        // downloadPipeline(
-        //   got.stream(downloadURL),
-        //   downloadProgress,
-        //   fs.createWriteStream(downloadPath)
-        // ).catch((error) => {
-        //   window.webContents.send("updateError", {
-        //     error: {
-        //       message: `Can't download package! ${error.message}.`
-        //     }
-        //   })
-        // }).then(() => {
-        //   // TODO HERE
-        // })
+        })
       } else {
         window.webContents.send("updateError", {
           error: {

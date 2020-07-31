@@ -757,6 +757,25 @@ EOF
     echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
 fi
 
+list_input "Should I setup the update script? This will allow installing '~/tmp/octodash.deb' without sudo or root access. For more info visit the Update section of the wiki. " yes_no update
+if [ $update == 'yes' ]; then
+    mkdir -p ~/scripts
+    echo "Setting up update script ..."
+    cat <<EOF > ~/scripts/update-octodash
+#!/bin/bash
+
+dpkg -i /tmp/octodash.deb
+rm /tmp/octodash.deb
+EOF
+
+    sudo chmod +x ~/scripts/update-octodash
+
+    sudo bash -c 'cat >> /etc/sudoers.d/update-octodash' <<EOF
+pi ALL=NOPASSWD: /home/pi/scripts/update-octodash
+EOF
+fi
+
+
 list_input "Shall I reboot your Pi now?" yes_no reboot
 echo "OctoDash has been successfully installed! :)"
 if [ $reboot == 'yes' ]; then

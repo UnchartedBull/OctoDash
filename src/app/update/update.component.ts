@@ -75,19 +75,19 @@ export class UpdateComponent implements OnInit {
         updateProgressBar.style.marginLeft = "40vw";
         this.installationAnimationInterval = setInterval(() => {
           updateProgressBar.style.marginLeft = updateProgressBar.style.marginLeft === "0vw" ? "40vw" : "0vw";
-        }, 2000);
+        }, 2050);
       }, 250);
     });
 
     this.ipc.on("updateInstalled", (): void => {
       this.page = 3;
       this.changeDetector.detectChanges();
-      clearInterval(this.installationAnimationInterval);
     });
   }
 
   private closeUpdateWindow(): void {
     this.page = 1;
+    clearInterval(this.installationAnimationInterval);
     this.closeFunction.emit();
   }
 
@@ -98,8 +98,7 @@ export class UpdateComponent implements OnInit {
   }
 
   public reboot(): void {
-    console.log("reboot");
-    // this.octoprintService.sendSystemCommand("reboot");
+    this.octoprintService.sendSystemCommand("reboot");
   }
 }
 
