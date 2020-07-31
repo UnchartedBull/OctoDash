@@ -48,9 +48,13 @@
     </div>
   </div>
   <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
-    <table class="top-bar" (click)="backToControlScreen($event)">
+    <table class="top-bar">
       <tr>
-        <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+        <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
+          <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center"></td>
+        <td class="top-bar__next"></td>
       </tr>
     </table>
     <img src="assets/adjust.svg" class="print-control__center-icon-small" />
@@ -154,13 +158,75 @@
         </td>
       </tr>
     </table>
-    <div
-      class="print-control__adjust__save"
-      (click)="setAdjustParameters($event)"
-      matRipple
-      [matRippleUnbounded]="false"
-    >
-      save
+    <div>
+      <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)"
+        ><span class="print-control__adjust-babystep-axis">Z</span> {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+        {{ getZOffset() }}mm</span
+      >
+      <div
+        class="print-control__adjust__save"
+        (click)="setAdjustParameters($event)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        save
+      </div>
+    </div>
+  </div>
+  <div *ngIf="view === controlView.BABYSTEP" (click)="stopPropagation($event)">
+    <table class="top-bar">
+      <tr>
+        <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
+          <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center"></td>
+        <td class="top-bar__next"></td>
+      </tr>
+    </table>
+    <img src="assets/height.svg" class="print-control__center-icon-small" />
+    <span class="print-control__confirm">
+      Babystep Z
+    </span>
+    <div>
+      <div class="print-control__adjust-babystep__change">
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(0.02)"
+          >+ 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(0.01)"
+          >+ 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+      </div>
+      <div class="print-control__adjust-babystep__change">
+        <span class="print-control__adjust-babystep__change-current">
+          {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+          <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
+          mm
+        </span>
+      </div>
+      <div class="print-control__adjust-babystep__change">
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(-0.02)"
+          >- 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(-0.01)"
+          >- 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+      </div>
     </div>
   </div>
 </div>
