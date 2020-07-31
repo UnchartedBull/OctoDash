@@ -25,11 +25,10 @@
     &-no-percentage {
       width: 10vw;
       transition: margin-left 2s ease-in-out;
-      margin-left: 0vw;
+      margin-left: 0;
     }
 
     &__wrapper {
-      background-color: #718093;
       width: 50vw;
       margin: 14vh auto 3vh;
       display: block;
