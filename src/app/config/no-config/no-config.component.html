@@ -165,15 +165,6 @@
       What plugins are you running?
     </span>
     <div style="text-align: center;">
-      <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
-        <span class="no-config__checkbox">
-          <span
-            class="no-config__checkbox-checked no-config__checkbox-checked-disabled"
-            *ngIf="config.plugins.displayLayerProgress.enabled"
-          ></span>
-        </span>
-        Display Layer Progress&nbsp;&nbsp;
-      </div>
       <div
         class="no-config__checkbox-container"
         (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled"

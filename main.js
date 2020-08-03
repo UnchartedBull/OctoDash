@@ -8,7 +8,6 @@ const path = require("path");
 const url = require("url");
 const stream = require('stream');
 const {promisify} = require('util');
-const progress = require('progress-stream');
 
 const exec = require("child_process").exec;
 

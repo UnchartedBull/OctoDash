@@ -21,7 +21,6 @@ import { FilamentComponent } from "./filament/filament.component";
 import { FilesComponent } from "./files/files.component";
 import { JobStatusComponent } from "./job-status/job-status.component";
 import { JobService } from "./job.service";
-import { LayerProgressComponent } from "./layer-progress/layer-progress.component";
 import { MainMenuComponent } from "./main-menu/main-menu.component";
 import { MainScreenComponent } from "./main-screen/main-screen.component";
 import { MainScreenNoTouchComponent } from "./main-screen/no-touch/main-screen-no-touch.component";
@@ -41,7 +40,6 @@ import { URLSafePipe } from "./url.pipe";
     BottomBarComponent,
     PrinterStatusComponent,
     JobStatusComponent,
-    LayerProgressComponent,
     InvalidConfigComponent,
     NoConfigComponent,
     PrintControlComponent,

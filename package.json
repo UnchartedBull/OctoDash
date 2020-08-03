@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "license": "Apache 2.0",
   "homepage": "https://github.com/UnchartedBull/OctoDash",
   "author": {
@@ -49,7 +49,7 @@
     "ng": "ng",
     "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
     "start:big": "npm-run-all -p ng:serve electron:serve:big",
-    "build": "npm run ng:build && electron .",
+    "build": "npm run ng:build",
     "test": "",
     "lint": "eslint ./src/ -c .eslintrc.js --ext .ts",
     "lint:fix": "eslint ./src/ -c .eslintrc.js --ext .ts --fix",
