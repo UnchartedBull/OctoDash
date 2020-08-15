@@ -180,6 +180,25 @@ ngx-spinner .overlay{
     width: 5vw!important;
 }
 
+/************************************** FILAMENT **************************************/
+
+.filament tr{
+    background-color: #222222!important;
+    width: 90vw!important;
+}
+
+.filament-filaments {
+    width: 95.5vw!important;
+}
+
+.filament-filaments::before {
+    display:none!important;
+}
+
+.filament-filaments__name {
+    width: 62vw!important;
+}
+
 /**************************************** FILE ****************************************/
 
 .file{
