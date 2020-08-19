@@ -113,8 +113,9 @@ AOS.init({
     };
     contentWayPoint();
 
-    var goHere = function () {
+    var scrollDown = function () {
         $('.mouse-icon').on('click', function (event) {
+            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({
@@ -127,5 +128,74 @@ AOS.init({
             return false;
         });
     };
-    goHere();
+
+    var gotoInstallation = function () {
+        $('.goto-installation').on('click', function (event) {
+            console.log("HERE")
+            event.preventDefault();
+
+            $('html,body').animate({
+                    scrollTop: $('.installation-anchor').offset().top,
+                },
+                500,
+                'easeInOutExpo',
+            );
+
+            return false;
+        });
+    }
+
+    var gotoFAQ = function () {
+        $('.goto-faq').on('click', function (event) {
+            console.log("HERE")
+            event.preventDefault();
+
+            $('html,body').animate({
+                    scrollTop: $('.faq-anchor').offset().top,
+                },
+                500,
+                'easeInOutExpo',
+            );
+
+            return false;
+        });
+    }
+
+    var gotoScreenshots = function () {
+        $('.goto-screenshots').on('click', function (event) {
+            console.log("HERE")
+            event.preventDefault();
+
+            $('html,body').animate({
+                    scrollTop: $('.screenshots-anchor').offset().top,
+                },
+                500,
+                'easeInOutExpo',
+            );
+
+            return false;
+        });
+    }
+
+    var gotoFeatures = function () {
+        $('.goto-features').on('click', function (event) {
+            console.log("HERE")
+            event.preventDefault();
+
+            $('html,body').animate({
+                    scrollTop: $('.features-anchor').offset().top,
+                },
+                500,
+                'easeInOutExpo',
+            );
+
+            return false;
+        });
+    }
+
+    scrollDown();
+    gotoInstallation();
+    gotoFAQ();
+    gotoScreenshots();
+    gotoFeatures();
 })(jQuery);

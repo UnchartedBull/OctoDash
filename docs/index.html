@@ -28,17 +28,17 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link icon d-flex align-items-center">
+                            <a href="#" class="nav-link icon d-flex align-items-center goto-installation">
                                 Installation
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link icon d-flex align-items-center">
+                            <a href="#" class="nav-link icon d-flex align-items-center goto-faq">
                                 FAQ
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link icon d-flex align-items-center">
+                            <a href="#" class="nav-link icon d-flex align-items-center goto-screenshots">
                                 Screenshots
                             </a>
                         </li>
@@ -58,10 +58,15 @@
                     <div class="col-md-8 text-center">
                         <div class="text">
                             <img src="images/icon-main-title.svg" class="main-icon">
-                            <h4 class="mb-5">A simple, but beautiful dashboard for OctoPrint.</h4>
-                            <p><a href="#" class="btn btn-primary px-5 py-4 mb-2"><i
-                                        class="ion-ios-cloud-download mr-2"></i>Installation</a> <a href="#"
-                                    class="btn btn-dark px-5 py-4 mb-2"><i class="ion-ios-code mr-2"></i>Changelog</a>
+                            <h4 class="mb-5 subtitle">A simple, but beautiful dashboard for OctoPrint.</h4>
+                            <p>
+                                <a href="#" class="btn btn-primary px-5 py-4 mb-2 goto-installation main-button">
+                                    <i class="ion-ios-cloud-download mr-2"></i>Installation
+                                </a>
+                                <a href="#" class="btn btn-dark px-5 py-4 mb-2 goto-features main-button">
+                                    <i class="ion-ios-star
+                                    mr-2"></i>Features
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -97,7 +102,7 @@
                         </p>
                         <p>
                             As mentioned above, OctoDash is completely Open-Source and all the Source Code can be found
-                            in the GitHub. The whole project is licensed under the Apache 2.0 License, so go ahead and
+                            on GitHub. The whole project is licensed under the Apache 2.0 License, so go ahead and
                             create your own custom version! If you think you've done something really cool open up a PR
                             and it may get merged into master. But please, keep the LICENSE file and Copyright notices
                             unchanged, if you want to remove those contact me first please.
@@ -112,7 +117,7 @@
         </section>
 
 
-        <section class="ftco-section pb-0">
+        <section class="ftco-section pb-0 installation-anchor">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
@@ -129,24 +134,25 @@
                             </a> available in the GitHub Wiki.
                         </p>
                         <div class="install-script">
-                            wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/install.sh | bash
-                        </div>
-                        <p class="text-muted">The script will ask you some questions about your setup during the
-                            installation, please answer them carefully!</p>
+                            bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh)
+                                </div>
+                                <p class="text-muted">The script will ask you some questions about your setup during the
+                                    installation, please answer them carefully!</p>
 
-                        <p style="padding-top: 3%">If you encounter any issues during the installation or setup please
-                            check the
-                            <a href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">
-                                Troubleshooting Guide
-                            </a>
-                            before opening a
-                            <a
-                                href="https://github.com/UnchartedBull/OctoDash/issues/new?assignees=&labels=support&template=support.md&title=">
-                                new issue</a>.
-                        </p>
+                                <p style="padding-top: 3%">If you encounter any issues during the installation or setup
+                                    please
+                                    check the
+                                    <a href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">
+                                        Troubleshooting Guide
+                                    </a>
+                                    before opening a
+                                    <a
+                                        href="https://github.com/UnchartedBull/OctoDash/issues/new?assignees=&labels=support&template=support.md&title=">
+                                        new issue</a>.
+                                </p>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <section class="ftco-section pb-0">
@@ -176,7 +182,30 @@
             </div>
         </section>
 
-        <section class="ftco-section pb-0">
+
+        <section class="ftco-section pb-0 features-anchor">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 heading-title">
+                        <h1>Main Features</h1>
+                        <ul style="font-size: 119%;">
+                            <li>Monitor your prints with a beautiful, easy to read interface</li>
+                            <li>Browser your files and preview your objects directly from your Raspberry Pi</li>
+                            <li>Adjust temperatures, speed and even Z-Height (Babystepping) while printing</li>
+                            <li>Change filaments with an automated procedure (heating up, retracting, extruding,
+                                purging) even if your printer doesn't support M600. You can also keep track of your
+                                usage and apply temperature offsets to each roll with Filament Manager.</li>
+                            <li>Turn your printer on and off</li>
+                            <li>Move printer axis and execute GCode while the printer is idling</li>
+                            <li>View your camera feed directly from the display</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="ftco-section pb-0 screenshots-anchor">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
@@ -341,7 +370,7 @@
             </div>
         </section>
 
-        <section class="ftco-section pb-0">
+        <section class="ftco-section pb-0 faq-anchor">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 heading-title">
@@ -468,11 +497,13 @@
                                     data-parent="#accordion">
                                     <div class="card-body text-left">
                                         <p>Most likely not, but it can. OctoDash uses around 60MB of memory and only
-                                            very few CPU resources, so it shouldn't affect the print quality. There are
-                                            also no, known-to-me cases of OctoDash affecting Print Quality. If you
-                                            encounter Quality Loss after installing OctoDash, try removing it to see,
+                                            very few CPU resources, so it shouldn't affect the print quality plus there
+                                            are
+                                            also no, known-to-me cases of OctoDash affecting the quality of your prints.
+                                            If you
+                                            encounter quality loss after installing OctoDash, try removing it to see,
                                             whether this fixes the problem. If it does open a new issue, so I can have a
-                                            look at that, please.</p>
+                                            look at that.</p>
                                     </div>
                                 </div>
                             </div>
@@ -492,7 +523,7 @@
                                     data-parent="#accordion">
                                     <div class="card-body text-left">
                                         <p>The best way to support the project is just to grab an unassigned issue from
-                                            the backlog and start working on that. You can also donate money to the
+                                            the backlog and start working on that. You can also donate to the
                                             project via the GitHub Sponsor Button if you feel like it.</p>
                                     </div>
                                 </div>
@@ -529,10 +560,12 @@
                 <div class="row">
                     <div class="col-md-12 heading-title">
                         <h1>Bugs</h1>
-                        <p>If you find any bugs please report them in the GitHub. Please fill out all the requested
+                        <p>If you find any bugs please report them on GitHub, there is also a <a
+                                href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">Troubleshooting
+                                Guide</a> available, which might cover your issue. Please fill out all the requested
                             information in the <a href="https://github.com/UnchartedBull/OctoDash/issues/new/choose">new
                                 issue</a>, so someone can help you quickly. If possible please attach your config file
-                            (remove your token first) and the G-Code file.</p>
+                            (remove your token first) and the GCode file.</p>
                     </div>
                     <div class="col-md-12 heading-title">
                         <h1>Contributing</h1>
@@ -541,29 +574,10 @@
                             to create a Pull Request or an Issue. Please make sure to follow the code style (.prettierrc
                             is included in the GitHub) and not break any of the existing functionality. Any help is
                             greatly appreciated!</p>
+                        <p>Information on how to develop and build OctoDash can be found <a
+                                href="https://github.com/UnchartedBull/OctoDash">here</a>.</p>
 
-                        <p>To setup a local environment you need to do the following steps:</p>
-                        <ul style="font-size: 119%;">
-                            <li>Fork the repository to your GitHub account, so you can push your changes</li>
-                            <li>Clone the repository (make sure to replace the link):
-                                <span style="font-family: 'Cousine', monospace;">git
-                                    clone https://github.com/UnchartedBull/OctoDash.git</span></li>
-                            <li>Install dependencies:
-                                <span style="font-family: 'Cousine', monospace;">npm install</span></li>
-                            <li>Start the Live Server:
-                                <span style="font-family: 'Cousine', monospace;">npm run start </span> (480x320)
-                                or
-                                <span style="font-family: 'Cousine', monospace;"> npm run start:big </span> (800x480)
-                                <p class="text-muted" style="margin: -1vh 0 -0.5vh; font-size: 100%;">The Live Server
-                                    will
-                                    automatically updated, once you save your
-                                    changes.</p>
-                            </li>
-                            <li>
-                                If you want to package OctoDash, so you can install it on your Raspberry Pi:
-                                <span style="font-family: 'Cousine', monospace;"> npm run pack </span>
-                            </li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -582,7 +596,8 @@
             <div class="col-md-12 text-center">
                 <p class="mb-0">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>
+                    Copyright &copy;
+                    <script>
                         document.write(new Date().getFullYear());
 
                     </script> All rights reserved | This template is made with <i class="icon-heart"

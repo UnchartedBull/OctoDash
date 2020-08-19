@@ -1,74 +1,90 @@
 .main-icon {
-    width: 35%;
-    margin-bottom: 6%;
-    margin-top: 30%;
+  width: 35%;
+  margin-bottom: 6%;
+  margin-top: 30%;
 }
 
 .icon-github:before {
-    line-height: 190%;
+  line-height: 190%;
 }
 
 .main-section {
-    height: 95vh;
+  height: 95vh;
 }
 
 .navbar-brand {
-    font-family: 'Arvo', sans-serif;
-    font-weight: 600;
+  font-family: "Arvo", sans-serif;
+  font-weight: 600;
 }
 
 .btn {
-    font-size: 150%;
+  font-size: 150%;
 }
 
 .first-heading-title {
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
 .heading-title {
-    margin-top: 3%;
+  margin-top: 3%;
 }
 
 p {
-    font-size: 119%;
+  font-size: 119%;
 }
 
 h5 {
-    text-align: center;
-    font-size: 150%;
-    line-height: 300%;
+  text-align: center;
+  font-size: 150%;
+  line-height: 300%;
 }
 
 .install-script {
-    text-align: center;
-    font-size: 125%;
-    font-family: 'Cousine', monospace;
-    background-color: #252932;
-    padding: 2vh;
-    border-radius: 8px;
-    margin-bottom: 0.5vh;
-    display: block;
+  text-align: center;
+  font-size: 120%;
+  font-family: "Cousine", monospace;
+  background-color: #252932;
+  padding: 2vh;
+  border-radius: 8px;
+  margin-bottom: 0.5vh;
+  display: block;
+  white-space: nowrap;
+  width: auto;
+  overflow-y: scroll;
 }
 
 .carousel-item {
-    background-size: 50%;
-    margin-top: -3.5%;
-    margin-bottom: -1.5%;
+  background-size: contain;
+  margin-top: 1.5%;
+  margin-bottom: 3.5%;
 }
 
 .carousel-inner {
-    background-color: #252932;
+  background-color: #252932;
 }
 
 h4 {
-    float: left;
-    margin-right: 15px;
+  float: left;
+  margin-right: 15px;
 }
 
-.nav-item>a {
-    line-height: 250%;
+.nav-item > a {
+  line-height: 250%;
 }
 
-.nav-pills>li {
-    width: 100%;
+.nav-pills > li {
+  width: 100%;
+}
+
+.main-button {
+  padding-bottom: 1rem !important;
+}
+
+.subtitle {
+  width: 100%;
+}
+
+.myaccordion .btn {
+  text-transform: none;
+  text-align: left;
 }
