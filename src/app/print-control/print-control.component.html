@@ -1,114 +1,232 @@
-<div class="print-control__container" (click)="showControlOverlay($event)"
-    [ngClass]="{'print-control__hide': !showControls}">
-    <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
-        <table class="top-bar" (click)="hideControlOverlay($event)">
-            <tr>
-                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
-            </tr>
-        </table>
-        <div class="print-control__action" (click)="cancel($event)">
-            <img src="assets/cancel.svg">
-            cancel
-        </div>
-        <div class="print-control__action" (click)="pause($event)">
-            <img src="assets/pause.svg">
-            pause
-        </div>
-        <div class="print-control__action" (click)="adjust($event)">
-            <img src="assets/adjust.svg">
-            adjust
-        </div>
+<div
+  class="print-control__container"
+  (click)="showControlOverlay($event)"
+  [ngClass]="{ 'print-control__hide': !showControls }"
+>
+  <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
+    <table class="top-bar" (click)="hideControlOverlay($event)">
+      <tr>
+        <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+      </tr>
+    </table>
+    <div class="print-control__action" (click)="cancel($event)">
+      <img src="assets/cancel.svg" />
+      cancel
     </div>
-    <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
-        <img src="assets/cancel.svg" class="print-control__center-icon">
-        <span class="print-control__confirm">
-            cancel print?
+    <div class="print-control__action" (click)="pause($event)">
+      <img src="assets/pause.svg" />
+      pause
+    </div>
+    <div class="print-control__action" (click)="adjust($event)">
+      <img src="assets/adjust.svg" />
+      adjust
+    </div>
+  </div>
+  <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
+    <img src="assets/cancel.svg" class="print-control__center-icon" />
+    <span class="print-control__confirm">
+      cancel print?
+    </span>
+    <div style="text-align: center;">
+      <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
+      <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
+    </div>
+  </div>
+  <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
+    <table class="top-bar" (click)="backToControlScreen($event)">
+      <tr>
+        <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+      </tr>
+    </table>
+    <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
+    <span class="print-control__confirm">
+      print paused
+    </span>
+    <div class="print-control__pause__resume" (click)="resume($event)">
+      <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
+      resume
+    </div>
+  </div>
+  <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
+    <table class="top-bar">
+      <tr>
+        <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
+          <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center"></td>
+        <td class="top-bar__next"></td>
+      </tr>
+    </table>
+    <img src="assets/adjust.svg" class="print-control__center-icon-small" />
+    <table class="print-control__adjust__wrapper">
+      <tr>
+        <td class="print-control__adjust__change-parameter">
+          <div class="print-control__adjust__controller">
+            <div
+              class="print-control__adjust__controller-increase"
+              (click)="changeTemperatureHotend(1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              +
+            </div>
+            <div class="print-control__adjust__controller-value">
+              {{ temperatureHotend }}<span class="print-control__adjust__controller-value-unit">°C</span>
+            </div>
+            <div
+              class="print-control__adjust__controller-decrease"
+              (click)="changeTemperatureHotend(-1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              -
+            </div>
+          </div>
+          <span class="print-control__adjust__name">Hotend</span>
+        </td>
+        <td class="print-control__adjust__change-parameter">
+          <div class="print-control__adjust__controller">
+            <div
+              class="print-control__adjust__controller-increase"
+              (click)="changeTemperatureHeatbed(1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              +
+            </div>
+            <div class="print-control__adjust__controller-value">
+              {{ temperatureHeatbed }}<span class="print-control__adjust__controller-value-unit">°C</span>
+            </div>
+            <div
+              class="print-control__adjust__controller-decrease"
+              (click)="changeTemperatureHeatbed(-1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              -
+            </div>
+          </div>
+          <span class="print-control__adjust__name">Heatbed</span>
+        </td>
+        <td class="print-control__adjust__change-parameter">
+          <div class="print-control__adjust__controller">
+            <div
+              class="print-control__adjust__controller-increase"
+              (click)="changeFeedrate(1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              +
+            </div>
+            <div class="print-control__adjust__controller-value">
+              {{ feedrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+            </div>
+            <div
+              class="print-control__adjust__controller-decrease"
+              (click)="changeFeedrate(-1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              -
+            </div>
+          </div>
+          <span class="print-control__adjust__name">Feedrate</span>
+        </td>
+        <td class="print-control__adjust__change-parameter">
+          <div class="print-control__adjust__controller">
+            <div
+              class="print-control__adjust__controller-increase"
+              (click)="changeFlowrate(1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              +
+            </div>
+            <div class="print-control__adjust__controller-value">
+              {{ flowrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+            </div>
+            <div
+              class="print-control__adjust__controller-decrease"
+              (click)="changeFlowrate(-1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              -
+            </div>
+          </div>
+          <span class="print-control__adjust__name">Flowrate</span>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)"
+        ><span class="print-control__adjust-babystep-axis">Z</span> {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+        {{ getZOffset() }}mm</span
+      >
+      <div
+        class="print-control__adjust__save"
+        (click)="setAdjustParameters($event)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        save
+      </div>
+    </div>
+  </div>
+  <div *ngIf="view === controlView.BABYSTEP" (click)="stopPropagation($event)">
+    <table class="top-bar">
+      <tr>
+        <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
+          <img src="assets/back.svg" class="top-bar__back-icon" />back
+        </td>
+        <td class="top-bar__center"></td>
+        <td class="top-bar__next"></td>
+      </tr>
+    </table>
+    <img src="assets/height.svg" class="print-control__center-icon-small" />
+    <span class="print-control__confirm">
+      Babystep Z
+    </span>
+    <div>
+      <div class="print-control__adjust-babystep__change">
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(0.02)"
+          >+ 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(0.01)"
+          >+ 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+      </div>
+      <div class="print-control__adjust-babystep__change">
+        <span class="print-control__adjust-babystep__change-current">
+          {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+          <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
+          mm
         </span>
-        <div style="text-align: center">
-            <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
-            <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
-        </div>
+      </div>
+      <div class="print-control__adjust-babystep__change">
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(-0.02)"
+          >- 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+        <span
+          class="print-control__adjust-babystep__change-value"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="babystepZ(-0.01)"
+          >- 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
+        >
+      </div>
     </div>
-    <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
-        <table class="top-bar" (click)="backToControlScreen($event)">
-            <tr>
-                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
-            </tr>
-        </table>
-        <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon">
-        <span class="print-control__confirm">
-            print paused
-        </span>
-        <div class="print-control__pause__resume" (click)="resume($event)">
-            <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
-            resume
-        </div>
-    </div>
-    <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
-        <table class="top-bar" (click)="backToControlScreen($event)">
-            <tr>
-                <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
-            </tr>
-        </table>
-        <img src="assets/adjust.svg" class="print-control__center-icon-small">
-        <table class="print-control__adjust__wrapper">
-            <tr>
-                <td class="print-control__adjust__change-parameter">
-                    <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHotend(1)"
-                            matRipple [matRippleUnbounded]="false">+
-                        </div>
-                        <div class="print-control__adjust__controller-value">
-                            {{ temperatureHotend }}<span class="print-control__adjust__controller-value-unit">°C</span>
-                        </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHotend(-1)"
-                            matRipple [matRippleUnbounded]="false">-
-                        </div>
-                    </div>
-                    <span class="print-control__adjust__name">Hotend</span>
-                </td>
-                <td class="print-control__adjust__change-parameter">
-                    <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeTemperatureHeatbed(1)"
-                            matRipple [matRippleUnbounded]="false">+
-                        </div>
-                        <div class="print-control__adjust__controller-value">
-                            {{ temperatureHeatbed }}<span class="print-control__adjust__controller-value-unit">°C</span>
-                        </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeTemperatureHeatbed(-1)"
-                            matRipple [matRippleUnbounded]="false">-
-                        </div>
-                    </div>
-                    <span class="print-control__adjust__name">Heatbed</span>
-                </td>
-                <td class="print-control__adjust__change-parameter">
-                    <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeFeedrate(1)" matRipple
-                            [matRippleUnbounded]="false">+</div>
-                        <div class="print-control__adjust__controller-value">
-                            {{ feedrate }}<span class="print-control__adjust__controller-value-unit">%</span>
-                        </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeFeedrate(-1)" matRipple
-                            [matRippleUnbounded]="false">-</div>
-                    </div>
-                    <span class="print-control__adjust__name">Feedrate</span>
-                </td>
-                <td class="print-control__adjust__change-parameter">
-                    <div class="print-control__adjust__controller">
-                        <div class="print-control__adjust__controller-increase" (click)="changeFlowrate(1)" matRipple
-                            [matRippleUnbounded]="false">+</div>
-                        <div class="print-control__adjust__controller-value">
-                            {{ flowrate }}<span class="print-control__adjust__controller-value-unit">%</span>
-                        </div>
-                        <div class="print-control__adjust__controller-decrease" (click)="changeFlowrate(-1)" matRipple
-                            [matRippleUnbounded]="false">-</div>
-                    </div>
-                    <span class="print-control__adjust__name">Flowrate</span>
-                </td>
-            </tr>
-        </table>
-        <div class="print-control__adjust__save" (click)="setAdjustParameters($event)" matRipple
-            [matRippleUnbounded]="false">
-            save</div>
-    </div>
+  </div>
 </div>

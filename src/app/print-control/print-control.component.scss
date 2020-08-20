@@ -1,141 +1,188 @@
 .print-control {
-    &__container {
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 50;
-        opacity: 1;
-        transition: opacity 0.7s ease-in-out;
+  &__container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 50;
+    opacity: 1;
+    transition: opacity 0.7s ease-in-out;
+  }
+
+  &__hide {
+    opacity: 0;
+  }
+
+  &__action {
+    width: 22vw;
+    display: inline-block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 5vw;
+    padding: 8vh 4vw;
+    z-index: 51;
+
+    &:first-of-type {
+      margin-left: 5vw;
     }
 
-    &__hide {
-        opacity: 0;
+    &:last-of-type {
+      margin-right: 5vw;
     }
+  }
 
+  &__confirm {
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    font-size: 6vw;
+    margin-top: 3vh;
+  }
+
+  &__center-icon {
+    width: 22vw;
+    display: block;
+    text-align: center;
+    margin-top: 8vh;
+    margin-bottom: 7vh;
+    margin-left: calc(50% - 11vw);
+
+    &-small {
+      display: block;
+      width: 7.5vw;
+      margin: -9vw auto 0;
+    }
+  }
+
+  &__cancel {
     &__action {
-        width: 22vw;
-        display: inline-block;
-        text-align: center;
-        font-weight: 500;
+      display: inline-block;
+      padding: 6vh 5vw;
+      margin: 5vh 8vw;
+      font-weight: 500;
+    }
+  }
+
+  &__pause {
+    &__icon {
+      margin-top: -10vh;
+    }
+
+    &__resume {
+      display: block;
+      text-align: center;
+      margin-top: 3vh;
+      padding: 5vh 4vw;
+
+      &-icon {
+        width: 6vw;
+        vertical-align: -3vh;
+      }
+    }
+  }
+
+  &__adjust {
+    &__wrapper {
+      display: block;
+      width: 90vw;
+      margin: 6vh 5vw;
+    }
+
+    &__change-parameter {
+      width: 27vw;
+      text-align: center;
+    }
+
+    &__controller {
+      border: solid 0.6vw;
+      border-radius: 3vw;
+      width: 19.5vw;
+      margin-left: 0.9vw;
+
+      &-value {
         font-size: 5vw;
-        padding: 8vh 4vw;
-        z-index: 51;
-
-        &:first-of-type {
-            margin-left: 5vw;
-        }
-
-        &:last-of-type {
-            margin-right: 5vw;
-        }
-    }
-
-    &__confirm {
         font-weight: 500;
+
+        &-unit {
+          font-size: 2.5vw;
+          font-weight: 400;
+        }
+      }
+
+      &-increase {
+        padding: 3vh 6vw;
+        font-weight: 500;
+      }
+
+      &-decrease {
+        padding: 3vh 6vw;
+        font-weight: 500;
+      }
+    }
+
+    &__name {
+      margin-top: 5vh;
+      display: block;
+      font-size: 0.8rem;
+    }
+
+    &__save {
+      display: inline-block;
+      width: 15vw;
+      text-align: center;
+      padding: 1.3vh 0;
+      border: 0.6vw solid;
+      border-radius: 2.5vw;
+    }
+
+    &-babystep {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-align: center;
+      margin: 2vw 10.2vw;
+
+      &-axis {
+        display: inline-block;
+        border: 3px solid;
+        font-size: 3vw;
+        width: 3.7vw;
+        padding: 0.1vw;
+        vertical-align: -1.2vw;
+        border-radius: 1vw;
+        margin-right: 1vw;
+      }
+
+      &__change {
         display: block;
+        width: 33.3vw;
         text-align: center;
-        font-size: 6vw;
-        margin-top: 3vh;
+        float: left;
+
+        &-value {
+          display: block;
+          margin: 7.5vh auto 0;
+          padding: 4vh 1vw;
+          border: 4px solid;
+          width: 20vw;
+          border-radius: 2vw;
+
+          &__unit {
+            font-size: 0.5rem;
+          }
+        }
+
+        &-current {
+          padding-top: 23vh;
+          display: block;
+
+          &__value {
+            font-size: 1.5rem;
+            vertical-align: -0.2rem;
+          }
+        }
+      }
     }
-
-    &__center-icon {
-        width: 22vw;
-        display: block;
-        text-align: center;
-        margin-top: 8vh;
-        margin-bottom: 7vh;
-        margin-left: calc(50% - 11vw);
-
-        &-small {
-            display: block;
-            width: 7.5vw;
-            margin: -9vw auto 0;
-        }
-    }
-
-    &__cancel {
-        &__action {
-            display: inline-block;
-            padding: 6vh 5vw;
-            margin: 5vh 8vw;
-            font-weight: 500;
-        }
-    }
-
-    &__pause {
-        &__icon {
-            margin-top: -10vh;
-        }
-
-        &__resume {
-            display: block;
-            text-align: center;
-            margin-top: 3vh;
-            padding: 5vh 4vw;
-
-            &-icon {
-                width: 6vw;
-                vertical-align: -3vh;
-            }
-        }
-    }
-
-    &__adjust {
-        &__wrapper {
-            display: block;
-            width: 90vw;
-            margin: 6vh 5vw;
-        }
-
-        &__change-parameter {
-            width: 27vw;
-            text-align: center;
-        }
-
-        &__controller {
-            border: solid 0.6vw;
-            border-radius: 3vw;
-            width: 19.5vw;
-            margin-left: 0.9vw;
-
-            &-value {
-                font-size: 5vw;
-                font-weight: 500;
-
-                &-unit {
-                    font-size: 2.5vw;
-                    font-weight: 400;
-                }
-            }
-
-            &-increase {
-                padding: 3vh 6vw;
-                font-weight: 500;
-            }
-
-            &-decrease {
-                padding: 3vh 6vw;
-                font-weight: 500;
-            }
-        }
-
-        &__name {
-            margin-top: 5vh;
-            display: block;
-            font-size: 3.5vw;
-        }
-
-        &__save {
-            display: block;
-            width: 15vw;
-            text-align: center;
-            margin: auto;
-            padding: 1.3vh 0;
-            border: 0.6vw solid;
-            border-radius: 2.5vw;
-        }
-    }
+  }
 }

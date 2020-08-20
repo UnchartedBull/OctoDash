@@ -1,6 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 @include mat-core();
 
 // TODO: needed for ripple effect, need to check why
@@ -11,201 +11,205 @@ $OctoPrintDash-theme: mat-dark-theme($OctoPrintDash-primary, $OctoPrintDash-acce
 @include angular-material-theme($OctoPrintDash-theme);
 
 *:not(path):not(svg) {
-    font-family: 'Montserrat', sans-serif;
-    color: #f5f6fa;
-    font-size: 4.3vw;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  color: #f5f6fa;
+  font-size: 4.3vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 * {
-    -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 html,
 body,
 .app-root {
-    width: 100%;
-    height: 100%;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
 }
 
 body {
-    display: block;
-    margin-left: 0;
-    margin-top: 0;
+  display: block;
+  margin-left: 0;
+  margin-top: 0;
 }
 
 app-root {
-    display: block;
-    background-color: #353b48;
-    padding: 0.9vh 0.9vw;
-    overflow: hidden;
+  display: block;
+  background-color: #353b48;
+  padding: 0.9vh 0.9vw;
+  overflow: hidden;
 }
 
 .top-bar {
-    width: 100%;
-    height: 10vh;
+  width: 100%;
+  height: 10vh;
 
-    & td {
-        width: 33.3%;
+  & td {
+    width: 33.3%;
+  }
+
+  &__back {
+    padding: 4vh 2vw 2vh;
+    font-weight: 500;
+
+    &-icon {
+      width: 6vw;
+      vertical-align: -5vh;
+      margin-right: 1.4vw;
+      display: inline-block;
     }
+  }
 
-    &__back {
-        padding: 4vh 2vw 2vh;
-        font-weight: 500;
+  &__next {
+    padding: 4vh 2vw 2vh;
+    text-align: right;
+    font-weight: 500;
 
-        &-icon {
-            width: 6vw;
-            vertical-align: -5vh;
-            margin-right: 1.4vw;
-            display: inline-block;
-        }
+    &-icon {
+      width: 6vw;
+      vertical-align: -5vh;
+      margin-left: 1.4vw;
+      margin-right: 1vw;
     }
+  }
 
-    &__next {
-        padding: 4vh 2vw 2vh;
-        text-align: right;
-        font-weight: 500;
+  &__center {
+    text-align: center;
 
-        &-icon {
-            width: 6vw;
-            vertical-align: -5vh;
-            margin-left: 1.4vw;
-            margin-right: 1vw;
-        }
+    &-icon {
+      width: 7vw;
+      margin-bottom: -3vh;
     }
-
-    &__center {
-        text-align: center;
-
-        &-icon {
-            width: 7vw;
-            margin-bottom: -3vh;
-        }
-    }
+  }
 }
 
 .help {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+
+  &__card {
+    display: block;
     position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
+    left: 7vw;
+    right: 7vw;
+    bottom: 7vh;
+    top: 7vh;
+    background-color: #353b48;
+    padding: 3.5vh 2vw;
+  }
 
-    &__card {
-        display: block;
-        position: fixed;
-        left: 7vw;
-        right: 7vw;
-        bottom: 7vh;
-        top: 7vh;
-        background-color: #353b48;
-        padding: 3.5vh 2vw;
-    }
+  &__close {
+    display: block;
+    width: 6vw;
+    position: absolute;
+    right: 2vw;
+    top: 3vh;
+  }
 
-    &__close {
-        display: block;
-        width: 6vw;
-        position: absolute;
-        right: 2vw;
-        top: 3vh;
-    }
+  &__heading {
+    display: block;
+    padding-bottom: 2vh;
+    font-weight: 500;
+  }
 
-    &__heading {
-        display: block;
-        padding-bottom: 2vh;
-        font-weight: 500;
-    }
-
-    &__text {
-        text-align: justify;
-        font-size: 3vw;
-    }
+  &__text {
+    text-align: justify;
+    font-size: 3vw;
+  }
 }
 
 .splash-screen {
-    &__icon {
-        height: 50vh;
-        margin-top: 20vh;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
+  &__icon {
+    height: 50vh;
+    margin-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 
-    &__credits {
-        display: block;
-        font-size: 1.8vw;
-        text-align: center;
-        opacity: 0.8;
-        margin-top: 6vh;
-    }
+  &__credits {
+    display: block;
+    font-size: 1.8vw;
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 6vh;
+  }
 
-    &__text {
-        text-align: justify;
-        font-size: 3vw;
-    }
+  &__text {
+    text-align: justify;
+    font-size: 3vw;
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 3vw;
+  width: 3vw;
+  box-shadow: none;
+  outline: none;
+
+  &-track {
+    background: transparent;
+    border-radius: 0.85vw;
     box-shadow: none;
     outline: none;
 
-    &-track {
+    &-piece {
+      &:end {
         background: transparent;
-        border-radius: 0.85vw;
-        box-shadow: none;
-        outline: none;
+        margin-bottom: 6vh;
+      }
 
-        &-piece {
-            &:end {
-                background: transparent;
-                margin-bottom: 6vh;
-            }
-
-            &:start {
-                background: transparent;
-                margin-top: 4vh;
-            }
-        }
+      &:start {
+        background: transparent;
+        margin-top: 4vh;
+      }
     }
+  }
 
-    &-thumb {
-        background: rgba(127, 143, 166, 0.8);
-        border-radius: 0.85vw;
-        box-shadow: none;
-        outline: none;
-    }
+  &-thumb {
+    background: rgba(127, 143, 166, 0.8);
+    border-radius: 0.85vw;
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 .scroll__thumb-inactive {
-    display: block;
-    background-color: rgba(127, 143, 166, 0.3);
-    width: 3vw;
-    height: 66.4vh;
-    position: fixed;
-    right: 2.5vw;
-    top: 28vh;
-    border-radius: 0.89vw;
-    z-index: 0;
-    pointer-events: none;
+  display: block;
+  background-color: rgba(127, 143, 166, 0.3);
+  width: 3vw;
+  height: 66.4vh;
+  position: fixed;
+  right: 2.5vw;
+  top: 28vh;
+  border-radius: 0.89vw;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .la-pacman {
-    overflow: visible;
-    margin-left: -4vw !important;
-    margin-top: -8vh !important;
+  overflow: visible;
+  margin-left: -4vw !important;
+  margin-top: -8vh !important;
 
-    &-text {
-        color: #f5f6fa;
-        font-size: 3vw;
-        font-weight: 500;
-    }
+  &-text {
+    color: #f5f6fa;
+    font-size: 3vw;
+    font-weight: 500;
+  }
+}
+
+[hidden] {
+  display: none;
 }

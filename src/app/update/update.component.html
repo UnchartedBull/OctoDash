@@ -1,0 +1,31 @@
+<div class="update-container">
+  <div *ngIf="page === 1">
+    <span class="update-heading">downloading update ...</span>
+    <div class="update-progress-bar__wrapper">
+      <div
+        class="update-progress-bar"
+        [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
+        id="updateDownloadProgress"
+      >
+        {{ updateProgress.speed }} MB/s&nbsp;
+      </div>
+    </div>
+    <span class="update-size__total">{{ updateProgress.total }} MB</span>
+    <span class="update-time__remaining">{{ updateProgress.eta }} minutes left</span>
+  </div>
+  <div *ngIf="page === 2">
+    <span class="update-heading">installing update ...</span>
+    <div class="update-progress-bar__wrapper">
+      <div class="update-progress-bar update-progress-bar-no-percentage" id="installUpdateProgress"></div>
+    </div>
+    <span class="update-notice">this might take a while</span>
+  </div>
+  <div *ngIf="page === 3">
+    <span class="update-heading">v{{ service.version }} installed</span>
+    <span class="update-restart">would you like to reboot now to activate the latest version?</span>
+    <div class="update-restart-button__wrapper">
+      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()">no</button>
+      <button class="update-restart-button update-restart-button__yes" (click)="reboot()">yes</button>
+    </div>
+  </div>
+</div>

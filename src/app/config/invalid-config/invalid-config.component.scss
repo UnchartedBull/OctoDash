@@ -1,38 +1,38 @@
 .invalid-config {
-    &__top-icon {
-        width: 16vw;
-        display: block;
-        margin-left: calc(50% - 8vw);
-        margin-top: -4vh;
-        margin-bottom: -8vh;
+  &__top-icon {
+    width: 16vw;
+    display: block;
+    margin-left: calc(50% - 8vw);
+    margin-top: -4vh;
+    margin-bottom: -8vh;
+  }
+
+  &__header {
+    display: block;
+    text-align: center;
+    font-size: 6vw;
+  }
+
+  &__sub-header {
+    text-align: center;
+    font-size: 3vw;
+    display: block;
+  }
+
+  &__error-list {
+    margin-left: 2vw;
+    font-size: 3.6vw;
+    margin-top: 5vh;
+    list-style-type: disc;
+    font-family: "Cousine", monospace;
+
+    & li {
+      margin-top: 2vh;
+
+      &::before {
+        content: "-";
+        margin-right: 2vw;
+      }
     }
-
-    &__header {
-        display: block;
-        text-align: center;
-        font-size: 6vw;
-    }
-
-    &__sub-header {
-        text-align: center;
-        font-size: 3vw;
-        display: block;
-    }
-
-    &__error-list {
-        margin-left: 2vw;
-        font-size: 3.6vw;
-        margin-top: 5vh;
-        list-style-type: disc;
-        font-family: 'Cousine', monospace;
-
-        & li {
-            margin-top: 2vh;
-
-            &::before {
-                content: "-";
-                margin-right: 2vw;
-            }
-        }
-    }
+  }
 }

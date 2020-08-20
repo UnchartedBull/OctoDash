@@ -1,21 +1,21 @@
 export interface OctoprintConnectionAPI {
-    current: OctoprintConnectionCurrentAPI;
-    options: OctoprintConnectionOptionsAPI;
+  current: OctoprintConnectionCurrentAPI;
+  options: OctoprintConnectionOptionsAPI;
 }
 
 interface OctoprintConnectionCurrentAPI {
-    state: string;
-    port: string;
-    baudrate: number;
-    printerProfile: string;
+  state: string;
+  port: string;
+  baudrate: number;
+  printerProfile: string;
 }
 
 interface OctoprintConnectionOptionsAPI {
-    ports: string[];
-    baudrates: number[];
-    printerProfiles: object[];
-    portPreference: string;
-    baudratePreference: string;
-    printerProfilePreference: string;
-    autoconnect: boolean;
+  ports: string[];
+  baudrates: number[];
+  printerProfiles: Record<string, unknown>;
+  portPreference: string;
+  baudratePreference: string;
+  printerProfilePreference: string;
+  autoconnect: boolean;
 }
