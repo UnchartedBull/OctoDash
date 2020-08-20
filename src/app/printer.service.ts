@@ -280,6 +280,12 @@ interface ExtrudeCommand {
   speed: number;
 }
 
+interface ExtrudeCommand {
+    command: 'extrude';
+    amount: number;
+    speed: number;
+}
+
 interface GCodeCommand {
   commands: string[];
 }
