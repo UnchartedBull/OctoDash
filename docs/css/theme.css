@@ -6740,14 +6740,14 @@ a.close.disabled {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 1rem 1rem;
+    padding: 1rem;
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem
 }
 
 .modal-header .close {
-    padding: 1rem 1rem;
+    padding: 1rem;
     margin: -1rem -1rem -1rem auto
 }
 
@@ -7070,14 +7070,14 @@ a.close.disabled {
 .bs-popover-auto[x-placement^=bottom]>.arrow::before,
 .bs-popover-bottom>.arrow::before {
     top: 0;
-    border-width: 0 .5rem .5rem .5rem;
+    border-width: 0 .5rem .5rem;
     border-bottom-color: rgba(0, 0, 0, .25)
 }
 
 .bs-popover-auto[x-placement^=bottom]>.arrow::after,
 .bs-popover-bottom>.arrow::after {
     top: 1px;
-    border-width: 0 .5rem .5rem .5rem;
+    border-width: 0 .5rem .5rem;
     border-bottom-color: #fff
 }
 
