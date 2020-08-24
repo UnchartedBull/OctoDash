@@ -59,6 +59,9 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 - The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
 - You can adjust the temperatures and fan speed in the home screen by pressing on their icons, if you want to set them to zero, just tap the value once (v1.4.1 and up)
 
+## Demo
+If you want to see OctoDash in action, here is an awesome video from Nick on [YouTube](https://youtu.be/YI_c-DY6zU4)
+
 ## Screenshots
 
 <p float="left">
