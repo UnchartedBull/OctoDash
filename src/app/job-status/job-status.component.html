@@ -8,29 +8,30 @@
       [responsive]="true"
       [color]="'#44bd32'"
     ></round-progress>
+    <!-- prettier-ignore -->
     <div class="job-info__progress-percentage" [hidden]="!job.thumbnail || showPreview()">
-      {{ job.progress }}
-      <span style="font-size: 40%">%</span>
+      {{ job.progress }}<span style="font-size: 40%">%</span>
     </div>
-    <div class="job-info__progress-percentage" [hidden]="!job.thumbnail || showPreview()">
-      <img *ngIf="job.thumbnail && showPreview()" class="job-info__progress-preview" [src]="job.thumbnail" />
+    <div
+      class="job-info__progress-percentage job-info__progress-preview-container"
+      *ngIf="job.thumbnail && showPreview()"
+    >
+      <img class="job-info__progress-preview" [src]="job.thumbnail" />
     </div>
   </div>
   <span class="job-info__filename">{{ job.filename }}</span>
   <br />
-  <span class="job-info__filament" *ngIf="job.hasOwnProperty('filamentAmount')">
-    {{ job.filamentAmount }}g Filament
-  </span>
+  <span class="job-info__filament" *ngIf="hasProperty(job, 'filamentAmount')">{{ job.filamentAmount }}g Filament</span>
   <br />
   <span class="job-info__time">
-    <span *ngIf="job.hasOwnProperty('timeLeft')">
+    <span *ngIf="hasProperty(job, 'timeLeft')">
       <span class="job-info__time-left">{{ job.timeLeft.value }}</span>
       {{ job.timeLeft.unit }} left,
     </span>
     elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}
   </span>
 </div>
-<div class="job-info__file-loaded" *ngIf="job && !isPrinting() && isFileLoaded()" (swipe)="cancelLoadedFile()">
+<div class="job-info__file-loaded" *ngIf="job && !isPrinting() && isFileLoaded()">
   <div class="job-info__preview">
     <img src="{{ job.thumbnail ? job.thumbnail : 'assets/object.svg' }}" class="job-info__preview-image" />
     <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
@@ -69,7 +70,7 @@
   </span>
   <br />
   <div class="job-info__print-details">
-    <span *ngIf="job.hasOwnProperty('estimatedPrintTime') && job.hasOwnProperty('estimatedEndTime')">
+    <span *ngIf="hasProperty(job, 'estimatedPrintTime') && hasProperty(job, 'estimatedEndTime')">
       <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">
         {{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}
@@ -77,7 +78,7 @@
       <span class="job-info__print-details-finish-state">- will finish ~{{ job.estimatedEndTime }}</span>
       <br />
     </span>
-    <span *ngIf="job.hasOwnProperty('filamentAmount')">
+    <span *ngIf="hasProperty(job, 'filamentAmount')">
       <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">{{ job.filamentAmount }}g</span>
       <span class="job-info__print-details-finish-state">filament will be used</span>
