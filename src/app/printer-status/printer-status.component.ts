@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { ConfigService } from "../config/config.service";
-import { DisplayLayerProgressAPI, LayerProgressService } from "../plugin-service/layer-progress.service";
-import { PrinterService, PrinterStatusAPI, PrinterValue } from "../printer.service";
+import { ConfigService } from '../config/config.service';
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
+import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
 
 @Component({
-  selector: "app-printer-status",
-  templateUrl: "./printer-status.component.html",
-  styleUrls: ["./printer-status.component.scss"],
+  selector: 'app-printer-status',
+  templateUrl: './printer-status.component.html',
+  styleUrls: ['./printer-status.component.scss'],
 })
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -23,7 +23,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public constructor(
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {
     this.printerStatus = {
       nozzle: {
@@ -36,7 +36,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
       },
       fan: 0,
     };
-    this.status = "connecting";
+    this.status = 'connecting';
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
     this.fanTarget = this.configService.getDefaultFanSpeed();
@@ -48,13 +48,13 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         this.printerStatus.nozzle = printerStatus.nozzle;
         this.printerStatus.heatbed = printerStatus.heatbed;
         this.status = printerStatus.status;
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI): void => {
         this.printerStatus.fan = layerProgress.fanSpeed;
-      })
+      }),
     );
   }
 
@@ -79,14 +79,14 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   private showQuickControl(): void {
     setTimeout((): void => {
-      const controlViewDOM = document.getElementById("quickControl");
-      controlViewDOM.style.opacity = "1";
+      const controlViewDOM = document.getElementById('quickControl');
+      controlViewDOM.style.opacity = '1';
     }, 50);
   }
 
   public hideQuickControl(): void {
-    const controlViewDOM = document.getElementById("quickControl");
-    controlViewDOM.style.opacity = "0";
+    const controlViewDOM = document.getElementById('quickControl');
+    controlViewDOM.style.opacity = '0';
     setTimeout((): void => {
       this.view = QuickControlView.NONE;
     }, 500);

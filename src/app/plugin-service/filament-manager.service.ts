@@ -1,14 +1,14 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Subscription } from "rxjs";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { ConfigService } from "../config/config.service";
-import { NotificationService } from "../notification/notification.service";
+import { ConfigService } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
 
 const colorRegexp = /\((.*)\)$/g;
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class FilamentManagerService {
   private httpGETRequest: Subscription;
@@ -17,7 +17,7 @@ export class FilamentManagerService {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   public getSpoolList(): Promise<FilamentSpoolList> {
@@ -27,8 +27,8 @@ export class FilamentManagerService {
       }
       this.httpGETRequest = this.http
         .get(
-          this.configService.getURL("plugin/filamentmanager/spools").replace("/api", ""),
-          this.configService.getHTTPHeaders()
+          this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
+          this.configService.getHTTPHeaders(),
         )
         .subscribe(
           (spools: FilamentSpoolList): void => {
@@ -36,9 +36,9 @@ export class FilamentManagerService {
               const match = colorRegexp.exec(spool.name);
               if (match) {
                 spool.color = match[1];
-                spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], "")}`;
+                spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], '')}`;
               } else {
-                spool.color = "#f5f6fa";
+                spool.color = '#f5f6fa';
                 spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
               }
               colorRegexp.lastIndex = 0;
@@ -48,7 +48,7 @@ export class FilamentManagerService {
           (error: HttpErrorResponse): void => {
             this.notificationService.setError("Can't load filament spools!", error.message);
             reject();
-          }
+          },
         );
     });
   }
@@ -60,8 +60,8 @@ export class FilamentManagerService {
       }
       this.httpGETRequest = this.http
         .get(
-          this.configService.getURL("plugin/filamentmanager/selections").replace("/api", ""),
-          this.configService.getHTTPHeaders()
+          this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
+          this.configService.getHTTPHeaders(),
         )
         .subscribe(
           (selections: FilamentSelections): void => {
@@ -71,9 +71,9 @@ export class FilamentManagerService {
                 selections.selections[0].spool.color = match[1];
                 selections.selections[0].spool.displayName = `${
                   selections.selections[0].spool.profile.vendor
-                } - ${selections.selections[0].spool.name.replace(match[0], "")}`;
+                } - ${selections.selections[0].spool.name.replace(match[0], '')}`;
               } else {
-                selections.selections[0].spool.color = "#f5f6fa";
+                selections.selections[0].spool.color = '#f5f6fa';
                 selections.selections[0].spool.displayName = `${selections.selections[0].spool.profile.vendor} - ${selections.selections[0].spool.name}`;
               }
               colorRegexp.lastIndex = 0;
@@ -84,7 +84,7 @@ export class FilamentManagerService {
           (error: HttpErrorResponse): void => {
             this.notificationService.setError("Can't load filament spools!", error.message);
             reject();
-          }
+          },
         );
     });
   }
@@ -99,9 +99,9 @@ export class FilamentManagerService {
       };
       this.httpPOSTRequest = this.http
         .patch(
-          this.configService.getURL("plugin/filamentmanager/selections/0").replace("/api", ""),
+          this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
           setSpoolBody,
-          this.configService.getHTTPHeaders()
+          this.configService.getHTTPHeaders(),
         )
         .subscribe(
           (selection: FilamentSelectionConfirm): void => {
@@ -110,7 +110,7 @@ export class FilamentManagerService {
             } else {
               this.notificationService.setError(
                 `Spool IDs didn't match`,
-                `Can't change spool. Please change spool manually in the OctoPrint UI.`
+                `Can't change spool. Please change spool manually in the OctoPrint UI.`,
               );
               reject();
             }
@@ -118,7 +118,7 @@ export class FilamentManagerService {
           (error: HttpErrorResponse): void => {
             this.notificationService.setError("Can't set new spool!", error.message);
             reject();
-          }
+          },
         );
     });
   }

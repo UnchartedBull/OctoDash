@@ -1,4 +1,4 @@
-import { OctoprintFilament } from "./jobAPI";
+import { OctoprintFilament } from './jobAPI';
 
 export interface OctoprintFilesAPI {
   date: number;

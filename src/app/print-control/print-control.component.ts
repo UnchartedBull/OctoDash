@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { take } from "rxjs/operators";
+import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
 
-import { JobService } from "../job.service";
-import { PrinterService, PrinterStatusAPI } from "../printer.service";
+import { JobService } from '../job.service';
+import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
-  selector: "app-print-control",
-  templateUrl: "./print-control.component.html",
-  styleUrls: ["./print-control.component.scss"],
+  selector: 'app-print-control',
+  templateUrl: './print-control.component.html',
+  styleUrls: ['./print-control.component.scss'],
 })
 export class PrintControlComponent {
   public showControls = false;

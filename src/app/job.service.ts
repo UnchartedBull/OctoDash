@@ -1,16 +1,16 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, Observer, Subscription, timer } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, Observer, Subscription, timer } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
-import { AppService } from "./app.service";
-import { ConfigService } from "./config/config.service";
-import { FilesService } from "./files.service";
-import { NotificationService } from "./notification/notification.service";
-import { JobCommand, OctoprintFilament, OctoprintJobAPI } from "./octoprint-api/jobAPI";
+import { AppService } from './app.service';
+import { ConfigService } from './config/config.service';
+import { FilesService } from './files.service';
+import { NotificationService } from './notification/notification.service';
+import { JobCommand, OctoprintFilament, OctoprintJobAPI } from './octoprint-api/jobAPI';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class JobService {
   private httpGETRequest: Subscription;
@@ -25,7 +25,7 @@ export class JobService {
     private http: HttpClient,
     private notificationService: NotificationService,
     private service: AppService,
-    private fileService: FilesService
+    private fileService: FilesService,
   ) {
     this.previewWhilePrinting = this.configService.showThumbnailByDefault();
     this.observable = new Observable((observer: Observer<Job>): void => {
@@ -35,26 +35,26 @@ export class JobService {
           this.httpGETRequest.unsubscribe();
         }
         this.httpGETRequest = this.http
-          .get(this.configService.getURL("job"), this.configService.getHTTPHeaders())
+          .get(this.configService.getURL('job'), this.configService.getHTTPHeaders())
           .subscribe(
             async (data: OctoprintJobAPI): Promise<void> => {
               let job: Job = null;
               if (data.job && data.job.file.name) {
-                this.printing = ["Printing", "Pausing", "Paused", "Cancelling", "Printing from SD"].includes(
-                  data.state
+                this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(
+                  data.state,
                 );
                 try {
                   job = {
                     status: data.state,
-                    filename: data.job.file.display.replace(".gcode", "").replace(".ufp", ""),
+                    filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
                     thumbnail: await this.fileService.getThumbnail(
-                      "/" + data.job.file.origin + "/" + data.job.file.path
+                      '/' + data.job.file.origin + '/' + data.job.file.path,
                     ),
                     progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
                     ...(data.job.filament !== null
                       ? {
                           filamentAmount: this.service.convertFilamentVolumeToWeight(
-                            this.getTotalAmountOfFilament(data.job.filament)
+                            this.getTotalAmountOfFilament(data.job.filament),
                           ),
                         }
                       : {}),
@@ -62,19 +62,19 @@ export class JobService {
                       ? {
                           timeLeft: {
                             value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
-                            unit: "h",
+                            unit: 'h',
                           },
                         }
                       : {}),
                     timePrinted: {
                       value: this.service.convertSecondsToHours(data.progress.printTime),
-                      unit: "h",
+                      unit: 'h',
                     },
                     ...(data.job.estimatedPrintTime !== null
                       ? {
                           estimatedPrintTime: {
                             value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
-                            unit: "h",
+                            unit: 'h',
                           },
                           estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
                         }
@@ -91,7 +91,7 @@ export class JobService {
             (error: HttpErrorResponse): void => {
               this.printing = false;
               this.notificationService.setError("Can't retrieve jobs!", error.message);
-            }
+            },
           );
       });
     }).pipe(shareReplay(1));
@@ -103,7 +103,7 @@ export class JobService {
     for (const property in filamentAmount) {
       if (
         Object.prototype.hasOwnProperty.call(filamentAmount, property) &&
-        Object.prototype.hasOwnProperty.call(filamentAmount[property], "volume")
+        Object.prototype.hasOwnProperty.call(filamentAmount[property], 'volume')
       ) {
         filamentLength += filamentAmount[property].volume;
       }
@@ -136,22 +136,22 @@ export class JobService {
       this.httpPOSTRequest.unsubscribe();
     }
     const cancelPayload: JobCommand = {
-      command: "cancel",
+      command: 'cancel',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL("job"), cancelPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('job'), cancelPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
           if (error.status === 409) {
             this.notificationService.setError(
               "Can't cancel Job!",
-              "There is no running job, that could be cancelled (409)"
+              'There is no running job, that could be cancelled (409)',
             );
           } else {
             this.notificationService.setError("Can't cancel Job!", error.message);
           }
-        }
+        },
       );
   }
 
@@ -160,23 +160,23 @@ export class JobService {
       this.httpPOSTRequest.unsubscribe();
     }
     const pausePayload: JobCommand = {
-      command: "pause",
-      action: "pause",
+      command: 'pause',
+      action: 'pause',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL("job"), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
           if (error.status === 409) {
             this.notificationService.setError(
               "Can't pause Job!",
-              "There is no running job, that could be paused (409)"
+              'There is no running job, that could be paused (409)',
             );
           } else {
             this.notificationService.setError("Can't pause Job!", error.message);
           }
-        }
+        },
       );
   }
 
@@ -185,23 +185,23 @@ export class JobService {
       this.httpPOSTRequest.unsubscribe();
     }
     const pausePayload: JobCommand = {
-      command: "pause",
-      action: "resume",
+      command: 'pause',
+      action: 'resume',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL("job"), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
           if (error.status === 409) {
             this.notificationService.setError(
               "Can't resume Job!",
-              "There is no paused job, that could be resumed (409)"
+              'There is no paused job, that could be resumed (409)',
             );
           } else {
             this.notificationService.setError("Can't resume Job!", error.message);
           }
-        }
+        },
       );
   }
 
@@ -210,19 +210,19 @@ export class JobService {
       this.httpPOSTRequest.unsubscribe();
     }
     const pausePayload: JobCommand = {
-      command: "start",
+      command: 'start',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL("job"), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
           if (error.status === 409) {
-            this.notificationService.setError("Can't start Job!", "There is already a job running (409)");
+            this.notificationService.setError("Can't start Job!", 'There is already a job running (409)');
           } else {
             this.notificationService.setError("Can't start Job!", error.message);
           }
-        }
+        },
       );
   }
 
@@ -231,22 +231,22 @@ export class JobService {
       this.httpPOSTRequest.unsubscribe();
     }
     const preheatPayload: JobCommand = {
-      command: "preheat",
+      command: 'preheat',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL("plugin/preheat"), preheatPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('plugin/preheat'), preheatPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
           this.notificationService.setError("Can't preheat printer!", error.message);
-        }
+        },
       );
   }
 
   private calculateEndTime(duration: number): string {
     const date = new Date();
     date.setSeconds(date.getSeconds() + duration);
-    return `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`;
+    return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
   }
 }
 

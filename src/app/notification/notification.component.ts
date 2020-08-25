@@ -1,20 +1,20 @@
-import { Component, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { Notification, NotificationService } from "./notification.service";
+import { Notification, NotificationService } from './notification.service';
 
 @Component({
-  selector: "app-notification",
-  templateUrl: "./notification.component.html",
-  styleUrls: ["./notification.component.scss"],
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   public notification: Notification = {
-    heading: "",
-    text: "",
-    type: "",
+    heading: '',
+    text: '',
+    type: '',
   };
   public show = false;
 
@@ -22,7 +22,7 @@ export class NotificationComponent implements OnDestroy {
     this.subscriptions.add(
       this.notificationService
         .getObservable()
-        .subscribe((notification: Notification | "close"): void => this.setNotification(notification))
+        .subscribe((notification: Notification | 'close'): void => this.setNotification(notification)),
     );
   }
 
@@ -30,8 +30,8 @@ export class NotificationComponent implements OnDestroy {
     this.show = false;
   }
 
-  private setNotification(notification: Notification | "close"): void {
-    if (notification === "close") {
+  private setNotification(notification: Notification | 'close'): void {
+    if (notification === 'close') {
       this.hideNotification();
     } else {
       this.notification = notification;
