@@ -20,7 +20,7 @@ declare global {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public constructor(private configService: ConfigService, private service: AppService, private router: Router) {
+  public constructor(private service: AppService, private configService: ConfigService, private router: Router) {
     this.initialize();
   }
 

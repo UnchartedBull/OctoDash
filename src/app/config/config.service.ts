@@ -1,5 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import Ajv from 'ajv';
 import _ from 'lodash';
 
@@ -8,7 +8,7 @@ import { NotificationService } from '../notification/notification.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ConfigService {
+export class ConfigService implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private store: any | undefined;
   private validator: Ajv.ValidateFunction;
@@ -35,6 +35,8 @@ export class ConfigService {
       );
     }
   }
+
+  public ngOnInit() {}
 
   private initialize(config: Config): void {
     this.config = config;
