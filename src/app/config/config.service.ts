@@ -28,6 +28,8 @@ export class ConfigService {
       this.store = new Store();
       this.initialize(this.store.get('config'));
     } catch (e) {
+      console.log('HERE');
+      console.log(this.notificationService);
       this.notificationService.setError(
         "Can't read config file!",
         'Please restart your system. If the issue persists open an issue on GitHub.',

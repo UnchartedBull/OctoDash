@@ -1,7 +1,8 @@
 <table class="top-bar">
   <tr>
     <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
-      <img src="assets/back.svg" class="top-bar__back-icon" />back
+      <img src="assets/back.svg" class="top-bar__back-icon" />
+      back
     </td>
     <td class="top-bar__center">
       <img src="assets/folder.svg" class="top-bar__center-icon" />
@@ -13,7 +14,8 @@
       [matRippleUnbounded]="false"
       *ngIf="folderContent && folderContent.length > 0"
     >
-      sort<img src="assets/sort.svg" class="top-bar__next-icon" />
+      sort
+      <img src="assets/sort.svg" class="top-bar__next-icon" />
     </td>
     <td class="top-bar__next" *ngIf="!folderContent || folderContent.length === 0"></td>
   </tr>
@@ -31,9 +33,7 @@
     <p class="la-pacman-text">loading ...</p>
   </ngx-spinner>
 
-  <div *ngIf="!folderContent" class="files__error">
-    can't load files ...
-  </div>
+  <div *ngIf="!folderContent" class="files__error">can't load files ...</div>
 
   <div *ngIf="folderContent && currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
     <div
@@ -49,7 +49,10 @@
     <div *ngIf="content.type === 'folder'" (click)="openFolder(content.path)" matRipple [matRippleUnbounded]="false">
       <img src="assets/folder.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value">{{ content.files }}<span class="files__info-unit">files</span></span>
+        <span class="files__info-value">
+          {{ content.files }}
+          <span class="files__info-unit">files</span>
+        </span>
       </div>
       <span class="files__name">
         {{ content.name }}
@@ -64,13 +67,18 @@
     >
       <img src="assets/object.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value">{{ content.size }}<span class="files__info-unit">mb</span></span>
-        <span class="files__info-value" *ngIf="content.hasOwnProperty('filamentWeight')"
-          >{{ content.filamentWeight }}<span class="files__info-unit">g</span></span
-        >
-        <span class="files__info-value" *ngIf="content.hasOwnProperty('printTime')"
-          >{{ content.printTime }}<span class="files__info-unit">h</span></span
-        >
+        <span class="files__info-value">
+          {{ content.size }}
+          <span class="files__info-unit">mb</span>
+        </span>
+        <span class="files__info-value" *ngIf="content.hasOwnProperty('filamentWeight')">
+          {{ content.filamentWeight }}
+          <span class="files__info-unit">g</span>
+        </span>
+        <span class="files__info-value" *ngIf="content.hasOwnProperty('printTime')">
+          {{ content.printTime }}
+          <span class="files__info-unit">h</span>
+        </span>
       </div>
       <span class="files__name">
         {{ content.name }}
@@ -89,12 +97,17 @@
     <img [src]="fileDetail.thumbnail" class="file__render" />
     <table class="file__details">
       <tr>
-        <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
+        <td>
+          {{ fileDetail.size }}
+          <span class="file__details-name">mb</span>
+        </td>
         <td *ngIf="fileDetail.hasOwnProperty('printTime')">
-          {{ fileDetail.printTime }}<span class="file__details-name">h</span>
+          {{ fileDetail.printTime }}
+          <span class="file__details-name">h</span>
         </td>
         <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">
-          {{ fileDetail.filamentWeight }}<span class="file__details-name">g</span>
+          {{ fileDetail.filamentWeight }}
+          <span class="file__details-name">g</span>
         </td>
       </tr>
     </table>
@@ -135,7 +148,8 @@
     <table class="sorting-selection">
       <tr>
         <td>
-          <span style="font-size: 2.9vw;">sort by</span> <br />
+          <span style="font-size: 2.9vw">sort by</span>
+          <br />
           <div class="sorting__checkbox-container" (click)="sortingAttribute = 'name'">
             <span class="sorting__checkbox">
               <span class="sorting__checkbox-checked" *ngIf="sortingAttribute === 'name'"></span>
@@ -159,7 +173,8 @@
           <br />
         </td>
         <td>
-          <span style="font-size: 2.9vw;">order</span> <br />
+          <span style="font-size: 2.9vw">order</span>
+          <br />
           <div class="sorting__checkbox-container" (click)="sortingOrder = 'asc'">
             <span class="sorting__checkbox">
               <span class="sorting__checkbox-checked" *ngIf="sortingOrder === 'asc'"></span>

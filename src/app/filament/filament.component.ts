@@ -11,7 +11,7 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
   styleUrls: ['./filament.component.scss'],
 })
 export class FilamentComponent implements OnInit {
-  private selectedSpool: FilamentSpool;
+  public selectedSpool: FilamentSpool;
   private currentSpool: FilamentSpool;
   private totalPages = 5;
 

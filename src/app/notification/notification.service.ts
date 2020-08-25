@@ -34,18 +34,36 @@ export class NotificationService {
 
   public setError(heading: string, text: string): void {
     if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
-      this.observer.next({ heading, text, type: 'error' });
+      if (this.observer) {
+        this.observer.next({ heading, text, type: 'error' });
+      } else {
+        setTimeout(() => {
+          this.setError(heading, text);
+        }, 1000);
+      }
     }
   }
 
   public setWarning(heading: string, text: string): void {
     if (!this.hideNotifications) {
-      this.observer.next({ heading, text, type: 'warn' });
+      if (this.observer) {
+        this.observer.next({ heading, text, type: 'warn' });
+      } else {
+        setTimeout(() => {
+          this.setWarning(heading, text);
+        }, 1000);
+      }
     }
   }
 
   public setUpdate(heading: string, text: string): void {
-    this.observer.next({ heading, text, type: 'update' });
+    if (this.observer) {
+      this.observer.next({ heading, text, type: 'update' });
+    } else {
+      setTimeout(() => {
+        this.setUpdate(heading, text);
+      }, 1000);
+    }
   }
 
   public getObservable(): Observable<Notification | 'close'> {

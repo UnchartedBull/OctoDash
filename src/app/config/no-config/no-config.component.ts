@@ -13,7 +13,7 @@ export class NoConfigComponent implements OnInit {
   public page = 0;
   public totalPages = 6;
 
-  private configUpdate: boolean;
+  public configUpdate: boolean;
   public config: Config;
   public configErrors: string[];
   public configValid: boolean;

@@ -85,7 +85,7 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  private closeUpdateWindow(): void {
+  public closeUpdateWindow(): void {
     this.page = 1;
     clearInterval(this.installationAnimationInterval);
     this.closeFunction.emit();

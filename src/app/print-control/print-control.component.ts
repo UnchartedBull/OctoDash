@@ -18,7 +18,7 @@ export class PrintControlComponent {
   public temperatureHeatbed: number;
   public feedrate: number;
   public flowrate: number;
-  private zOffset: number;
+  public zOffset: number;
 
   public constructor(private jobService: JobService, private printerService: PrinterService) {
     this.temperatureHotend = 0;
