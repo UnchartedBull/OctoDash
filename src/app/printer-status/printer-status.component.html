@@ -8,9 +8,10 @@
       [matRippleUnbounded]="false"
     >
       <img src="assets/nozzle.svg" />
-      <span class="printer-status__actual-value"></span>
-      {{ printerStatus.nozzle.current }}
-      <span class="printer-status__unit">°C</span>
+      <span class="printer-status__actual-value">
+        {{ printerStatus.nozzle.current }}
+        <span class="printer-status__unit">°C</span>
+      </span>
       <span class="printer-status__set-value" *ngIf="printerStatus.nozzle.set">
         /{{ printerStatus.nozzle.set }}
         <span class="unit">°C</span>
