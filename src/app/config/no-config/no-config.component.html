@@ -2,7 +2,8 @@
   <table class="top-bar">
     <tr>
       <td class="top-bar__back" (click)="decreasePage()" *ngIf="page !== 0">
-        <img src="assets/back.svg" class="top-bar__back-icon" />back
+        <img src="assets/back.svg" class="top-bar__back-icon" />
+        back
       </td>
       <td class="top-bar__back" *ngIf="page === 0"></td>
       <td class="top-bar__center">
@@ -11,7 +12,8 @@
         </div>
       </td>
       <td class="top-bar__next" (click)="increasePage()" *ngIf="page !== totalPages">
-        next<img src="assets/next.svg" class="top-bar__next-icon" />
+        next
+        <img src="assets/next.svg" class="top-bar__next-icon" />
       </td>
       <td class="top-bar__next" *ngIf="page === totalPages"></td>
     </tr>
@@ -19,17 +21,24 @@
   <div *ngIf="page === 0">
     <span class="no-config__1-welcome">Hey there!</span>
     <span class="no-config__text" *ngIf="!configUpdate">
-      It looks like this is the first start of OctoDash. <br />
-      I'll help you set up your config and get you started. <br />
-      If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. <br />
+      It looks like this is the first start of OctoDash.
       <br />
-      Thanks for choosing OctoDash <fa-icon [icon]="['fas', 'smile']"></fa-icon>
+      I'll help you set up your config and get you started.
+      <br />
+      If you encounter any issues please check the troubleshooting guide in the GitHub Wiki.
+      <br />
+      <br />
+      Thanks for choosing OctoDash
+      <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
     <span class="no-config__text" *ngIf="configUpdate">
-      Sorry for bothering you again ... <br />
-      We've released an update, so awesome, we needed to change the config. Please review your new config! <br />
+      Sorry for bothering you again ...
       <br />
-      Thanks for choosing OctoDash <fa-icon [icon]="['fas', 'smile']"></fa-icon>
+      We've released an update, so awesome, we needed to change the config. Please review your new config!
+      <br />
+      <br />
+      Thanks for choosing OctoDash
+      <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
   </div>
   <div *ngIf="page === 1">
@@ -48,16 +57,14 @@
         required
       />
     </form>
-    <div class="no-config-explanation" style="margin-top: 7vh;">
+    <div class="no-config-explanation" style="margin-top: 7vh">
       If you're unsure about any values during setup, just stick with the defaults. You can change all values (and even
       more stuff) in the settings menu anytime. There is also a description of each attribute available in the GitHub
       Wiki.
     </div>
   </div>
   <div *ngIf="page === 2">
-    <span class="no-config__text">
-      I also need some information about your extruder.
-    </span>
+    <span class="no-config__text">I also need some information about your extruder.</span>
     <form class="no-config__form no-config__2-form">
       <label for="feedLength" class="no-config__input-label">Feed Length:</label>
       <input
@@ -68,10 +75,10 @@
         name="feedLength"
         step="1"
         min="0"
-        style="width: 48vw;"
+        style="width: 48vw"
         required
       />
-      <span class="no-config__input-small-suffix" style="padding-right: 3vw;">mm</span>
+      <span class="no-config__input-small-suffix" style="padding-right: 3vw">mm</span>
       <br />
       <label for="feedSpeed" class="no-config__input-label-small">Feed Speed:</label>
       <input
@@ -82,11 +89,11 @@
         name="feedSpeed"
         step="0.5"
         min="0"
-        style="width: 48vw;"
+        style="width: 48vw"
         required
       />
       <span class="no-config__input-small-suffix">mm/s</span>
-      <div class="no-config-explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw;">
+      <div class="no-config-explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw">
         These values will be used during the Filament Change Process. Be sure to have your Feed Length (length between
         Extruder and Hotend) and Feed Speed configured correctly.
       </div>
@@ -106,7 +113,7 @@
         [(ngModel)]="this.config.octoprint.urlSplit.url"
         name="octoprintURLName"
         required
-        style="width: 42.5vw;"
+        style="width: 42.5vw"
       />
       :
       <input
@@ -116,7 +123,7 @@
         [(ngModel)]="this.config.octoprint.urlSplit.port"
         name="octoprintURLPort"
         required
-        style="width: 14vw;"
+        style="width: 14vw"
       />
       <br />
       <label for="accessToken" class="no-config__input-label">API Key:</label>
@@ -126,15 +133,13 @@
         class="no-config__input"
         [(ngModel)]="this.config.octoprint.accessToken"
         name="accessToken"
-        style="width: 67vw;"
+        style="width: 67vw"
         required
       />
     </form>
   </div>
   <div *ngIf="page === 4">
-    <span class="no-config__text">
-      And now personalize me to your liking.
-    </span>
+    <span class="no-config__text">And now personalize me to your liking.</span>
     <form class="no-config__form">
       <div class="no-config__checkbox-container" (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
         <span class="no-config__checkbox">
@@ -151,20 +156,18 @@
         [(ngModel)]="this.config.octodash.pollingInterval"
         name="octodashPolling"
         required
-        style="width: 11vw;"
+        style="width: 11vw"
       />
       ms
-      <div class="no-config-explanation" style="margin-top: 7vh;">
+      <div class="no-config-explanation" style="margin-top: 7vh">
         Don't set your Value Refresh Interval too low (und 1000ms) as this may effect the performance of the Raspberry
         Pi.
       </div>
     </form>
   </div>
   <div *ngIf="page === 5">
-    <span class="no-config__text">
-      What plugins are you running?
-    </span>
-    <div style="text-align: center;">
+    <span class="no-config__text">What plugins are you running?</span>
+    <div style="text-align: center">
       <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
         <span class="no-config__checkbox">
           <span
@@ -225,9 +228,7 @@
     </div>
   </div>
   <div *ngIf="page === 6">
-    <span class="no-config__text">
-      Great! I'll check everything.
-    </span>
+    <span class="no-config__text">Great! I'll check everything.</span>
     <div class="no-config__6-check-wrapper">
       <span class="no-config__6-check">
         <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="configValid" />
@@ -255,7 +256,8 @@
         *ngIf="configValid && octoprintConnection && !configSaved"
         class="no-config__6-finish"
         (click)="finishWizard()"
-        >done
+      >
+        done
       </span>
     </div>
   </div>

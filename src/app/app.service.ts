@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { ConfigService } from "./config/config.service";
-import { NotificationService } from "./notification/notification.service";
+import { ConfigService } from './config/config.service';
+import { NotificationService } from './notification/notification.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AppService {
   private updateError: string[];
@@ -20,19 +20,19 @@ export class AppService {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     try {
-      this.ipc = window.require("electron").ipcRenderer;
+      this.ipc = window.require('electron').ipcRenderer;
       this.enableVersionListener();
       this.enableCustomCSSListener();
       setTimeout(() => {
-        this.ipc.send("appInfo");
+        this.ipc.send('appInfo');
       }, 0);
     } catch (e) {
       this.notificationService.setError(
         "Can't connect to backend",
-        "Please restart your system. If the issue persists open an issue on GitHub."
+        'Please restart your system. If the issue persists open an issue on GitHub.',
       );
     }
     this.updateError = [
@@ -52,35 +52,35 @@ export class AppService {
   }
 
   private enableVersionListener(): void {
-    this.ipc.on("versionInformation", (_, versionInformation: VersionInformation): void => {
+    this.ipc.on('versionInformation', (_, versionInformation: VersionInformation): void => {
       this.version = versionInformation.version;
       this.checkUpdate();
     });
   }
 
   private enableCustomCSSListener(): void {
-    this.ipc.on("customStyles", (_, customCSS: string): void => {
-      const css = document.createElement("style");
-      css.type = "text/css";
+    this.ipc.on('customStyles', (_, customCSS: string): void => {
+      const css = document.createElement('style');
+      css.type = 'text/css';
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });
 
-    this.ipc.on("customStylesError", (_, customCSSError: string): void => {
+    this.ipc.on('customStylesError', (_, customCSSError: string): void => {
       this.notificationService.setError("Can't load custom styles!", customCSSError);
     });
   }
 
   private checkUpdate(): void {
-    this.http.get("https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest").subscribe(
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
       (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace("v", "")) {
+        if (this.version !== data.name.replace('v', '')) {
           this.updateAvailable = true;
         }
-        this.latestVersion = data.name.replace("v", "");
+        this.latestVersion = data.name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;
       },
-      (): void => null
+      (): void => null,
     );
     setTimeout(this.checkUpdate.bind(this), 3600000);
   }
@@ -95,13 +95,13 @@ export class AppService {
 
   public turnDisplayOff(): void {
     if (this.ipc) {
-      this.ipc.send("screenSleep", "");
+      this.ipc.send('screenSleep', '');
     }
   }
 
   public turnDisplayOn(): void {
     if (this.ipc) {
-      this.ipc.send("screenWakeup", "");
+      this.ipc.send('screenWakeup', '');
     }
   }
 
@@ -126,9 +126,9 @@ export class AppService {
   }
 
   public convertDateToString(date: Date): string {
-    return `${("0" + date.getDate()).slice(-2)}.${("0" + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${(
-      "0" + date.getHours()
-    ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`;
+    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${(
+      '0' + date.getHours()
+    ).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
   }
 
   public convertSecondsToHours(input: number): string {
@@ -140,7 +140,7 @@ export class AppService {
       roundedMinutes = 0;
       roundedHours += 1;
     }
-    return roundedHours + ":" + ("0" + roundedMinutes).slice(-2);
+    return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
   }
 
   public convertFilamentVolumeToWeight(filamentVolume: number): number {

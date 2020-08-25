@@ -1,21 +1,21 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AppService } from "../app.service";
-import { ConfigService } from "../config/config.service";
-import { NotificationService } from "../notification/notification.service";
-import { OctoprintConnectionAPI } from "../octoprint-api/connectionAPI";
-import { PsuControlService } from "../plugin-service/psu-control.service";
+import { AppService } from '../app.service';
+import { ConfigService } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
+import { OctoprintConnectionAPI } from '../octoprint-api/connectionAPI';
+import { PsuControlService } from '../plugin-service/psu-control.service';
 
 @Component({
-  selector: "app-standby",
-  templateUrl: "./standby.component.html",
-  styleUrls: ["./standby.component.scss"],
+  selector: 'app-standby',
+  templateUrl: './standby.component.html',
+  styleUrls: ['./standby.component.scss'],
 })
 export class StandbyComponent implements OnInit {
   public connecting = false;
-  public error = "";
+  public error = '';
   private connectionRetries = 3;
   private displaySleepTimeout: number;
 
@@ -25,7 +25,7 @@ export class StandbyComponent implements OnInit {
     private router: Router,
     private service: AppService,
     private notificationService: NotificationService,
-    private psuControlService: PsuControlService
+    private psuControlService: PsuControlService,
   ) {}
 
   public ngOnInit(): void {
@@ -47,21 +47,21 @@ export class StandbyComponent implements OnInit {
 
   private connectToPrinter(): void {
     this.http
-      .post(this.configService.getURL("connection"), connectPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => {
           setTimeout(this.checkConnection.bind(this), 5000);
         },
         (): void => {
           this.setConnectionError();
-        }
+        },
       );
   }
 
   private checkConnection(): void {
-    this.http.get(this.configService.getURL("connection"), this.configService.getHTTPHeaders()).subscribe(
+    this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
       (data: OctoprintConnectionAPI): void => {
-        if (data.current.state === "Closed") {
+        if (data.current.state === 'Closed') {
           if (this.connectionRetries <= 0) {
             this.connectionRetries = 3;
             this.setConnectionError();
@@ -69,7 +69,7 @@ export class StandbyComponent implements OnInit {
             this.connectionRetries--;
             setTimeout(this.connectToPrinter.bind(this), 500);
           }
-        } else if (data.current.state.includes("Error")) {
+        } else if (data.current.state.includes('Error')) {
           if (this.connectionRetries <= 1) {
             this.connectionRetries = 3;
             this.setConnectionError();
@@ -77,7 +77,7 @@ export class StandbyComponent implements OnInit {
             this.connectionRetries--;
             setTimeout(this.connectToPrinter.bind(this), 500);
           }
-        } else if (data.current.state === "Connecting") {
+        } else if (data.current.state === 'Connecting') {
           if (this.connectionRetries < 0) {
             this.connectionRetries = 3;
             this.setConnectionError();
@@ -93,7 +93,7 @@ export class StandbyComponent implements OnInit {
         this.connecting = false;
         this.error =
           "There is something really wrong, OctoDash can't get a response from OctoPrint. Please check your setup!";
-      }
+      },
     );
   }
 
@@ -113,13 +113,13 @@ export class StandbyComponent implements OnInit {
     setTimeout((): void => {
       this.connecting = false;
       this.notificationService.enableNotifications();
-      this.router.navigate(["/main-screen"]);
+      this.router.navigate(['/main-screen']);
     }, 1000);
   }
 }
 
 const connectPayload: ConnectCommand = {
-  command: "connect",
+  command: 'connect',
   save: false,
 };
 

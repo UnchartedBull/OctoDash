@@ -27,10 +27,11 @@
     }
 
     &-preview {
-      margin-top: -30.3vh;
-      width: 12.5vw;
-      margin-left: 4.7vw;
-      display: block;
+      width: 13vw;
+
+      &-container {
+        margin-top: -17vw;
+      }
     }
   }
 

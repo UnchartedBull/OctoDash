@@ -26,14 +26,14 @@
     }
 
     &::before {
-      content: "/";
+      content: '/';
       padding: 0 0.9vw;
       pointer-events: none;
     }
 
     &:first-of-type {
       &::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -57,7 +57,7 @@
   z-index: 1;
 
   &::before {
-    content: "";
+    content: '';
     width: 91vw;
     height: 77vh;
     position: fixed;
@@ -65,12 +65,7 @@
     top: 23vh;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(
-      #353b48,
-      transparent 6%,
-      transparent 94%,
-      #353b48
-    );
+    background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
   }
 
   &__error {

@@ -1,15 +1,15 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { AppService } from "../app.service";
-import { ConfigService } from "../config/config.service";
-import { Job, JobService } from "../job.service";
-import { NotificationService } from "../notification/notification.service";
+import { AppService } from '../app.service';
+import { ConfigService } from '../config/config.service';
+import { Job, JobService } from '../job.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
-  selector: "app-job-status",
-  templateUrl: "./job-status.component.html",
-  styleUrls: ["./job-status.component.scss"],
+  selector: 'app-job-status',
+  templateUrl: './job-status.component.html',
+  styleUrls: ['./job-status.component.scss'],
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -19,7 +19,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     private jobService: JobService,
     private service: AppService,
     private notificationService: NotificationService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {}
 
   public ngOnInit(): void {
@@ -44,8 +44,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
 
   public preheatDisabled(): void {
     this.notificationService.setWarning(
-      "Preheat Plugin is not enabled!",
-      "Please make sure to install and enable the Preheat Plugin to use this functionality."
+      'Preheat Plugin is not enabled!',
+      'Please make sure to install and enable the Preheat Plugin to use this functionality.',
     );
   }
 
@@ -66,5 +66,9 @@ export class JobStatusComponent implements OnInit, OnDestroy {
 
   public showPreview(): boolean {
     return this.jobService.showPreviewWhilePrinting();
+  }
+
+  public hasProperty(object: Record<string, unknown>, name: string): boolean {
+    return Object.hasOwnProperty.bind(object)(name);
   }
 }

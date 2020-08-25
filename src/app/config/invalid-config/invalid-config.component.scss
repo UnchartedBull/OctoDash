@@ -24,13 +24,13 @@
     font-size: 3.6vw;
     margin-top: 5vh;
     list-style-type: disc;
-    font-family: "Cousine", monospace;
+    font-family: 'Cousine', monospace;
 
     & li {
       margin-top: 2vh;
 
       &::before {
-        content: "-";
+        content: '-';
         margin-right: 2vw;
       }
     }

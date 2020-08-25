@@ -1,16 +1,15 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { ConfigService } from "./config/config.service";
-import { NotificationService } from "./notification/notification.service";
-import { PrinterService } from "./printer.service";
-
-import { OctoprintPrinterProfileAPI } from "./octoprint-api/printerProfileAPI";
+import { ConfigService } from './config/config.service';
+import { NotificationService } from './notification/notification.service';
+import { OctoprintPrinterProfileAPI } from './octoprint-api/printerProfileAPI';
+import { PrinterService } from './printer.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class PrinterProfileService {
   private httpGETRequest: Subscription;
@@ -20,8 +19,8 @@ export class PrinterProfileService {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private printerStatusService: PrinterService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfileAPI> {
     return new Promise((resolve, reject): void => {
@@ -29,7 +28,7 @@ export class PrinterProfileService {
         this.httpGETRequest.unsubscribe();
       }
       this.httpGETRequest = this.http
-        .get(this.configService.getURL("printerprofiles/_default"), this.configService.getHTTPHeaders())
+        .get(this.configService.getURL('printerprofiles/_default'), this.configService.getHTTPHeaders())
         .subscribe(
           (printerProfile: OctoprintPrinterProfileAPI): void => {
             resolve(printerProfile);
@@ -38,7 +37,7 @@ export class PrinterProfileService {
             if (error.status === 409) {
               this.printerStatusService.isPrinterOffline().then((printerOffline): void => {
                 if (printerOffline) {
-                  this.router.navigate(["/standby"]);
+                  this.router.navigate(['/standby']);
                 } else {
                   this.notificationService.setError("Can't retrieve printer profile!", error.message);
                 }
@@ -50,9 +49,8 @@ export class PrinterProfileService {
                 this.notificationService.setError("Can't retrieve printer status!", error.message);
               }
             }
-          }
+          },
         );
     });
   }
-
 }

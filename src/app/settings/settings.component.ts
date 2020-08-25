@@ -1,31 +1,31 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
-import { AppService } from "../app.service";
-import { Config, ConfigService } from "../config/config.service";
-import { NotificationService } from "../notification/notification.service";
+import { AppService } from '../app.service';
+import { Config, ConfigService } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
-  selector: "app-settings",
-  templateUrl: "./settings.component.html",
-  styleUrls: ["./settings.component.scss"],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>();
-  @ViewChild("settingsMain") private settingsMain: ElementRef;
-  @ViewChild("settingsGeneral") private settingsGeneral: ElementRef;
-  @ViewChild("settingsOctoDash") private settingsOctoDash: ElementRef;
-  @ViewChild("settingsPlugins") private settingsPlugins: ElementRef;
-  @ViewChild("settingsCredits") private settingsCredits: ElementRef;
+  @ViewChild('settingsMain') private settingsMain: ElementRef;
+  @ViewChild('settingsGeneral') private settingsGeneral: ElementRef;
+  @ViewChild('settingsOctoDash') private settingsOctoDash: ElementRef;
+  @ViewChild('settingsPlugins') private settingsPlugins: ElementRef;
+  @ViewChild('settingsCredits') private settingsCredits: ElementRef;
 
   public fadeOutAnimation = false;
   public config: Config;
   public customActionsPosition = [
-    "Top Left",
-    "Top Right",
-    "Middle Left",
-    "Middle Right",
-    "Bottom Left",
-    "Bottom Right",
+    'Top Left',
+    'Top Right',
+    'Middle Left',
+    'Middle Right',
+    'Bottom Left',
+    'Bottom Right',
   ];
   private overwriteNoSave = false;
   private pages = [];
@@ -36,16 +36,16 @@ export class SettingsComponent implements OnInit {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    public service: AppService
+    public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
     try {
-      this.ipc = window.require("electron").ipcRenderer;
+      this.ipc = window.require('electron').ipcRenderer;
     } catch (e) {
       this.notificationService.setError(
         "Can't connect to backend",
-        "Please restart your system. If the issue persists open an issue on GitHub."
+        'Please restart your system. If the issue persists open an issue on GitHub.',
       );
     }
   }
@@ -74,35 +74,35 @@ export class SettingsComponent implements OnInit {
       }, 800);
     } else {
       this.notificationService.setWarning(
-        "Configuration not saved!",
-        "You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!"
+        'Configuration not saved!',
+        "You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!",
       );
       this.overwriteNoSave = true;
     }
   }
 
-  public changePage(page: number, current: number, direction: "forward" | "backward"): void {
-    this.pages[current].classList.add("settings__content-slideout-" + direction);
-    this.pages[page].classList.remove("settings__content-inactive");
-    this.pages[page].classList.add("settings__content-slidein-" + direction);
+  public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
+    this.pages[current].classList.add('settings__content-slideout-' + direction);
+    this.pages[page].classList.remove('settings__content-inactive');
+    this.pages[page].classList.add('settings__content-slidein-' + direction);
 
     setTimeout((): void => {
-      this.pages[current].classList.add("settings__content-inactive");
-      this.pages[current].classList.remove("settings__content-slideout-" + direction);
-      this.pages[page].classList.remove("settings__content-slidein-" + direction);
+      this.pages[current].classList.add('settings__content-inactive');
+      this.pages[current].classList.remove('settings__content-slideout-' + direction);
+      this.pages[page].classList.remove('settings__content-slidein-' + direction);
     }, 470);
   }
 
   public updateConfig(): void {
     const config = this.configService.createConfigFromInput(this.config);
     if (!this.configService.validateGiven(config)) {
-      this.notificationService.setError("Config is invalid!", this.configService.getErrors().toString());
+      this.notificationService.setError('Config is invalid!', this.configService.getErrors().toString());
     }
     this.configService.saveConfig(config);
     this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
-    this.ipc.send("reload", "");
+    this.ipc.send('reload', '');
   }
 
   public showUpdate(): void {
