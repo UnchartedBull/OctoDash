@@ -8,6 +8,7 @@ import { FaIconLibrary, FontAwesomeModule } from "@fortawesome/angular-fontaweso
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { RoundProgressModule } from "angular-svg-round-progressbar";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxElectronModule } from 'ngx-electron';
 
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing.module";
@@ -65,6 +66,7 @@ import { URLSafePipe } from "./url.pipe";
     FormsModule,
     FontAwesomeModule,
     NgxSpinnerModule,
+    NgxElectronModule,
     BrowserAnimationsModule,
     MatRippleModule,
   ],

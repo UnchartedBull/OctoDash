@@ -13,7 +13,7 @@ import { OctoprintFilesAPI, OctoprintFolderAPI, OctoprintFolderContentAPI } from
 })
 export class FilesService {
   private httpGETRequest: Subscription;
-  private httpGETRequestTimeout: number;
+  private httpGETRequestTimeout: NodeJS.Timer;
   private httpPOSTRequest: Subscription;
   private httpDELETERequest: Subscription;
 

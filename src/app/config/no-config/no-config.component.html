@@ -32,7 +32,7 @@
       Thanks for choosing OctoDash <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
   </div>
-  <div *ngIf="page === 1">
+  <div *ngIf="page === 3">
     <span class="no-config__text">
       First, tell me some facts about your printer so I can personalize OctoDash for you.
     </span>
@@ -54,7 +54,7 @@
       Wiki.
     </div>
   </div>
-  <div *ngIf="page === 2">
+  <div *ngIf="page === 4">
     <span class="no-config__text">
       I also need some information about your extruder.
     </span>
@@ -92,33 +92,54 @@
       </div>
     </form>
   </div>
-  <div *ngIf="page === 3">
+  <div *ngIf="page === 1">
     <span class="no-config__text">
       Now I need to know something about your OctoPrint setup, so I can talk to your printer.
     </span>
     <form class="no-config__form">
-      <label for="octoprintURLName" class="no-config__input-label">URL:</label>
-      <span class="no-config__input-prefix">http://</span>
-      <input
-        type="text"
-        id="octoprintURLName"
+      <label for="octoprintInstance" class="no-config__input-label">Instance:</label>
+      <select
+        id="octoprintInstance"
         class="no-config__input"
-        [(ngModel)]="this.config.octoprint.urlSplit.url"
-        name="octoprintURLName"
-        required
-        style="width: 42.5vw;"
-      />
-      :
-      <input
-        type="text"
-        id="octoprintURLPort"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.urlSplit.port"
-        name="octoprintURLPort"
-        required
-        style="width: 14vw;"
-      />
-      <br />
+        [(ngModel)]="opInstance"
+        name="octoprintInstance"
+        style="width: 67vw;"
+        size="3"
+        require
+      >
+        <option *ngFor="let node of objectvalues(octoprintNodes)" [ngValue]="node" [disabled]="node.disable">{{ node.display }}</option>
+      </select>
+    </form>
+  </div>
+  <div *ngIf="page === 2">
+    <span class="no-config__text">
+      Now I need to know something about your OctoPrint setup, so I can talk to your printer.
+    </span>
+    <form class="no-config__form">
+      <div *ngIf="manualEntry">
+        <label for="octoprintURLName" class="no-config__input-label">URL:</label>
+        <span class="no-config__input-prefix">http://</span>
+        <input
+          type="text"
+          id="octoprintURLName"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.url"
+          name="octoprintURLName"
+          required
+          style="width: 42.5vw;"
+        />
+        :
+        <input
+          type="text"
+          id="octoprintURLPort"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.port"
+          name="octoprintURLPort"
+          required
+          style="width: 14vw;"
+        />
+        <br />
+      </div>
       <label for="accessToken" class="no-config__input-label">API Key:</label>
       <input
         type="text"
@@ -130,8 +151,11 @@
         required
       />
     </form>
+    <span class="no-config__text">
+      {{ this.opApiMsg }}
+    </span>
   </div>
-  <div *ngIf="page === 4">
+  <div *ngIf="page === 5">
     <span class="no-config__text">
       And now personalize me to your liking.
     </span>
@@ -160,7 +184,7 @@
       </div>
     </form>
   </div>
-  <div *ngIf="page === 5">
+  <div *ngIf="page === 6">
     <span class="no-config__text">
       What plugins are you running?
     </span>
@@ -224,7 +248,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="page === 6">
+  <div *ngIf="page === 7">
     <span class="no-config__text">
       Great! I'll check everything.
     </span>

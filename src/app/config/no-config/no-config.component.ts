@@ -2,6 +2,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { ElectronService } from 'ngx-electron';
+
 import { Config, ConfigService } from "../config.service";
 
 @Component({
@@ -10,8 +12,8 @@ import { Config, ConfigService } from "../config.service";
   styleUrls: ["./no-config.component.scss"],
 })
 export class NoConfigComponent implements OnInit {
-  public page = 0;
-  public totalPages = 6;
+  public page: number = 0;
+  public totalPages: number = 7;
 
   private configUpdate: boolean;
   public config: Config;
@@ -19,10 +21,23 @@ export class NoConfigComponent implements OnInit {
   public configValid: boolean;
   public configSaved: string;
 
-  public octoprintConnection: boolean;
+  public objectvalues = Object.values;
+  public octoprintNodes: any = {
+    'other': {
+      'display': 'Other (> 1.4.0)',
+      'name': 'other',
+      'version': '1.4.0',
+      'url': 'other',
+      'disable': false
+    }
+  };
+  public opInstance: any = this.octoprintNodes['other'];
+  public opApiMsg: string = '';
+  public manualEntry: boolean = true;
+  public octoprintConnection: boolean = false;
   public octoprintConnectionError: string;
 
-  public constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
+  public constructor(private configService: ConfigService, private http: HttpClient, private router: Router, private _electronService: ElectronService) {
     this.configUpdate = this.configService.isUpdate();
     console.log(this.configUpdate);
     if (this.configUpdate) {
@@ -30,7 +45,7 @@ export class NoConfigComponent implements OnInit {
     } else {
       this.config = {
         octoprint: {
-          url: "http://localhost:5000/api/",
+          url: "http://localhost:80/api/",
           accessToken: "",
         },
         printer: {
@@ -137,25 +152,46 @@ export class NoConfigComponent implements OnInit {
 
   public ngOnInit(): void {
     this.changeProgress();
+
+    const mdns = this._electronService.remote.require('mdns');
+    const browser = mdns.createBrowser(mdns.tcp('octoprint'));
+    browser.on('serviceUp', service => {
+      var node = {
+        'display': service.name.match(/"([^"]+)"/)[1] + ' (' + service.txtRecord.version + ')',
+        'name': service.name.match(/"([^"]+)"/)[1],
+        'version': service.txtRecord.version,
+        'url': service.host.replace(/\.$/, '') + ":" + service.port + service.txtRecord.path.replace(/\/$/, '') + "/api/",
+        // Compare version to make sure it meets the requirement
+        'disable': false
+      };
+
+      this.octoprintNodes[service.host.replace(/\.$/, '').replace('.', '_')] = node;
+    });
+    browser.on('serviceDown', service => {
+      delete this.octoprintNodes[service.host.replace(/\.$/, '').replace('.', '_')];
+    });
+    browser.start();
   }
 
-  public testOctoprintAPI(): boolean {
+  public async testOctoprintAPI(): Promise<any> {
     const httpHeaders = {
       headers: new HttpHeaders({
         "x-api-key": this.config.octoprint.accessToken,
       }),
     };
-    this.http.get(this.config.octoprint.url + "connection", httpHeaders).subscribe(
-      (): void => {
-        this.octoprintConnection = true;
-        this.saveConfig();
-      },
-      (error: HttpErrorResponse): void => {
-        this.octoprintConnection = false;
-        this.octoprintConnectionError = error.message;
-      }
-    );
-    return true;
+    return new Promise((resolve, reject) => {
+      this.http.get(this.config.octoprint.url + "connection", httpHeaders).subscribe(
+        (): void => {
+          this.octoprintConnection = true;
+          resolve();
+        },
+        (error: HttpErrorResponse): void => {
+          this.octoprintConnection = false;
+          this.octoprintConnectionError = error.message;
+          reject();
+        }
+      );
+    });
   }
 
   public createConfig(): boolean {
@@ -166,12 +202,12 @@ export class NoConfigComponent implements OnInit {
     return true;
   }
 
-  public validateConfig(): void {
+  public async validateConfig(): Promise<any> {
     this.configValid = this.configService.validateGiven(this.config);
     if (!this.configValid) {
       this.configErrors = this.configService.getErrors();
     } else {
-      this.testOctoprintAPI();
+      this.saveConfig();
     }
   }
 
@@ -184,8 +220,33 @@ export class NoConfigComponent implements OnInit {
     this.router.navigate(["/main-screen"]);
   }
 
-  public increasePage(): void {
+  public async increasePage(): Promise<any> {
     this.page += 1;
+    if (this.page <= 2) {
+      if (JSON.stringify(this.opInstance) != JSON.stringify(this.octoprintNodes['other'])) {
+        this.config.octoprint.url = 'http://' + this.opInstance['url'];
+        this.manualEntry = false;
+      } else {
+        this.config.octoprint.url = 'http://localhost:80/api/';
+        this.manualEntry = true;
+      }
+    } else if (this.config.octoprint.accessToken == '' && this.page > 2) {
+      this.page = 2;
+    } else if (this.page > 2) {
+      if (this.octoprintConnection === false) {
+        await this.testOctoprintAPI().then(res => {
+          this.opApiMsg = '';
+          if (this.opInstance.name != 'other') {
+            this.config.printer.name = this.opInstance.name;
+          } else {
+            this.config.printer.name = '';
+          }
+        }, err => {
+          this.opApiMsg = 'API Error: ' + this.octoprintConnectionError;
+          this.page = 2;
+        });
+      }
+    }
     if (this.page === this.totalPages) {
       this.createConfig();
     }
@@ -193,7 +254,7 @@ export class NoConfigComponent implements OnInit {
   }
 
   public decreasePage(): void {
-    if (this.page === 5) {
+    if (this.page == this.totalPages - 1) {
       this.config = this.configService.revertConfigForInput(this.config);
     }
     this.page -= 1;

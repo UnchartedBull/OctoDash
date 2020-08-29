@@ -17,7 +17,7 @@ export class StandbyComponent implements OnInit {
   public connecting = false;
   public error = "";
   private connectionRetries = 3;
-  private displaySleepTimeout: number;
+  private displaySleepTimeout: NodeJS.Timer;
 
   public constructor(
     private configService: ConfigService,

@@ -16,8 +16,8 @@ export class FilamentComponent implements OnInit {
   private totalPages = 5;
 
   public page: number;
-  private timeout: number;
-  private timeout2: number;
+  private timeout: NodeJS.Timer;
+  private timeout2: NodeJS.Timer;
 
   public filamentSpools: FilamentSpoolList;
   public isLoadingSpools = true;
