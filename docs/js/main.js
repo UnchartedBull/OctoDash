@@ -115,7 +115,6 @@ AOS.init({
 
     var scrollDown = function () {
         $('.mouse-icon').on('click', function (event) {
-            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({
@@ -131,7 +130,6 @@ AOS.init({
 
     var gotoInstallation = function () {
         $('.goto-installation').on('click', function (event) {
-            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({
@@ -147,7 +145,6 @@ AOS.init({
 
     var gotoFAQ = function () {
         $('.goto-faq').on('click', function (event) {
-            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({
@@ -163,7 +160,6 @@ AOS.init({
 
     var gotoScreenshots = function () {
         $('.goto-screenshots').on('click', function (event) {
-            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({
@@ -179,7 +175,6 @@ AOS.init({
 
     var gotoFeatures = function () {
         $('.goto-features').on('click', function (event) {
-            console.log("HERE")
             event.preventDefault();
 
             $('html,body').animate({

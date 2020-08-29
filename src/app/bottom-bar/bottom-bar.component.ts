@@ -1,14 +1,14 @@
-import { Component, OnDestroy } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { ConfigService } from "../config/config.service";
-import { EnclosureService } from "../plugin-service/enclosure.service";
-import { PrinterService, PrinterStatusAPI } from "../printer.service";
+import { ConfigService } from '../config/config.service';
+import { EnclosureService } from '../plugin-service/enclosure.service';
+import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
-  selector: "app-bottom-bar",
-  templateUrl: "./bottom-bar.component.html",
-  styleUrls: ["./bottom-bar.component.scss"],
+  selector: 'app-bottom-bar',
+  templateUrl: './bottom-bar.component.html',
+  styleUrls: ['./bottom-bar.component.scss'],
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -18,25 +18,25 @@ export class BottomBarComponent implements OnDestroy {
   public constructor(
     private printerService: PrinterService,
     private configService: ConfigService,
-    private enclosureService: EnclosureService
+    private enclosureService: EnclosureService,
   ) {
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
       this.subscriptions.add(
         this.enclosureService.getObservable().subscribe((temperatureReading: TemperatureReading): void => {
           this.enclosureTemperature = temperatureReading;
-        })
+        }),
       );
     } else {
       this.enclosureTemperature = null;
     }
     this.printer = {
       name: this.configService.getPrinterName(),
-      status: "connecting ...",
+      status: 'connecting ...',
     };
     this.subscriptions.add(
       this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
         this.printer.status = printerStatus.status;
-      })
+      }),
     );
   }
 

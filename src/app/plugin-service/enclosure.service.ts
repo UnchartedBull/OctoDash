@@ -1,14 +1,14 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, Observer, Subscription, timer } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, Observer, Subscription, timer } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
-import { TemperatureReading } from "../bottom-bar/bottom-bar.component";
-import { ConfigService } from "../config/config.service";
-import { NotificationService } from "../notification/notification.service";
+import { TemperatureReading } from '../bottom-bar/bottom-bar.component';
+import { ConfigService } from '../config/config.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class EnclosureService {
   private httpGETRequest: Subscription;
@@ -18,7 +18,7 @@ export class EnclosureService {
   public constructor(
     private http: HttpClient,
     private configService: ConfigService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     this.observable = new Observable((observer: Observer<TemperatureReading>): void => {
       timer(2500, 15000).subscribe((): void => {
@@ -28,9 +28,9 @@ export class EnclosureService {
         this.httpGETRequest = this.http
           .get(
             this.configService
-              .getURL("plugin/enclosure/inputs/" + this.configService.getAmbientTemperatureSensorName())
-              .replace("/api", ""),
-            this.configService.getHTTPHeaders()
+              .getURL('plugin/enclosure/inputs/' + this.configService.getAmbientTemperatureSensorName())
+              .replace('/api', ''),
+            this.configService.getHTTPHeaders(),
           )
           .subscribe(
             (data: EnclosurePluginAPI): void => {
@@ -38,7 +38,7 @@ export class EnclosureService {
               observer.next(({
                 temperature: data.temp_sensor_temp,
                 humidity: data.temp_sensor_humidity,
-                unit: data.use_fahrenheit ? "°F" : "°C",
+                unit: data.use_fahrenheit ? '°F' : '°C',
               } as unknown) as TemperatureReading);
             },
             (error: HttpErrorResponse): void => {
@@ -47,7 +47,7 @@ export class EnclosureService {
               } else {
                 this.notificationService.setError("Can't retrieve enclosure temperature!", error.message);
               }
-            }
+            },
           );
       });
     }).pipe(shareReplay(1));

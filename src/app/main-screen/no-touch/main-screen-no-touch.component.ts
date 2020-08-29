@@ -1,8 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-main-screen-no-touch",
-  templateUrl: "./main-screen-no-touch.component.html",
-  styleUrls: ["./main-screen-no-touch.component.scss"],
+  selector: 'app-main-screen-no-touch',
+  templateUrl: './main-screen-no-touch.component.html',
 })
 export class MainScreenNoTouchComponent {}

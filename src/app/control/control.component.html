@@ -5,8 +5,9 @@
     [src]="iFrameURL | url"
     onload="this.style.opacity=1;"
     sandbox="allow-forms, allow-modals, allow-popups, allow-same-origin, allow-scripts, allow-top-navigation-by-user-activation"
-    >That shouldn't happen ...</iframe
   >
+    That shouldn't happen ...
+  </iframe>
   <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
 </div>
 
@@ -14,7 +15,8 @@
   <tr>
     <td class="top-bar__back" routerLink="/main-screen">
       <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-        <img src="assets/back.svg" class="top-bar__back-icon" />back
+        <img src="assets/back.svg" class="top-bar__back-icon" />
+        back
       </span>
     </td>
     <td class="top-bar__center">
@@ -32,12 +34,14 @@
   <div class="help__card">
     <img src="assets/error.svg" class="help__close" (click)="showHelp = false" />
     <span class="help__heading">Control Screen</span>
-    <span class="help__text"
-      >You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z). <br />
+    <span class="help__text">
+      You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z).
+      <br />
       You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few
-      predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. <br />
-      Wiki page is called "CustomActions".</span
-    >
+      predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information.
+      <br />
+      Wiki page is called "CustomActions".
+    </span>
   </div>
 </div>
 
@@ -113,8 +117,7 @@
         [icon]="['fas', customAction.icon]"
         class="control__custom-action-icon"
         [styles]="{ color: customAction.color }"
-      >
-      </fa-icon>
+      ></fa-icon>
     </div>
   </div>
   <table class="control__distance">

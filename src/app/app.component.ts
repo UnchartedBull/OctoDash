@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import _ from "lodash";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import _ from 'lodash';
 
-import { AppService } from "./app.service";
-import { ConfigService } from "./config/config.service";
+import { AppService } from './app.service';
+import { ConfigService } from './config/config.service';
 
 declare global {
   interface Window {
@@ -15,12 +15,12 @@ declare global {
 }
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public constructor(private configService: ConfigService, private service: AppService, private router: Router) {
+  public constructor(private service: AppService, private configService: ConfigService, private router: Router) {
     this.initialize();
   }
 
@@ -29,9 +29,9 @@ export class AppComponent {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
           if (this.configService.isTouchscreen()) {
-            this.router.navigate(["/main-screen"]);
+            this.router.navigate(['/main-screen']);
           } else {
-            this.router.navigate(["/main-screen-no-touch"]);
+            this.router.navigate(['/main-screen-no-touch']);
           }
         } else {
           if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
@@ -39,14 +39,14 @@ export class AppComponent {
               this.initialize();
             } else {
               this.configService.setUpdate();
-              this.router.navigate(["/no-config"]);
+              this.router.navigate(['/no-config']);
             }
           } else {
-            this.router.navigate(["/invalid-config"]);
+            this.router.navigate(['/invalid-config']);
           }
         }
       } else {
-        this.router.navigate(["/no-config"]);
+        this.router.navigate(['/no-config']);
       }
     } else {
       setTimeout(this.initialize.bind(this), 1000);

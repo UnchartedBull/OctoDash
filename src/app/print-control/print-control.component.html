@@ -6,7 +6,10 @@
   <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
     <table class="top-bar" (click)="hideControlOverlay($event)">
       <tr>
-        <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+        <td class="top-bar__back">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
+        </td>
       </tr>
     </table>
     <div class="print-control__action" (click)="cancel($event)">
@@ -24,10 +27,8 @@
   </div>
   <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
     <img src="assets/cancel.svg" class="print-control__center-icon" />
-    <span class="print-control__confirm">
-      cancel print?
-    </span>
-    <div style="text-align: center;">
+    <span class="print-control__confirm">cancel print?</span>
+    <div style="text-align: center">
       <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
       <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
     </div>
@@ -35,13 +36,14 @@
   <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
     <table class="top-bar" (click)="backToControlScreen($event)">
       <tr>
-        <td class="top-bar__back"><img src="assets/back.svg" class="top-bar__back-icon" />back</td>
+        <td class="top-bar__back">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
+        </td>
       </tr>
     </table>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
-    <span class="print-control__confirm">
-      print paused
-    </span>
+    <span class="print-control__confirm">print paused</span>
     <div class="print-control__pause__resume" (click)="resume($event)">
       <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
       resume
@@ -51,7 +53,8 @@
     <table class="top-bar">
       <tr>
         <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
-          <img src="assets/back.svg" class="top-bar__back-icon" />back
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
@@ -71,7 +74,8 @@
               +
             </div>
             <div class="print-control__adjust__controller-value">
-              {{ temperatureHotend }}<span class="print-control__adjust__controller-value-unit">°C</span>
+              {{ temperatureHotend }}
+              <span class="print-control__adjust__controller-value-unit">°C</span>
             </div>
             <div
               class="print-control__adjust__controller-decrease"
@@ -95,7 +99,8 @@
               +
             </div>
             <div class="print-control__adjust__controller-value">
-              {{ temperatureHeatbed }}<span class="print-control__adjust__controller-value-unit">°C</span>
+              {{ temperatureHeatbed }}
+              <span class="print-control__adjust__controller-value-unit">°C</span>
             </div>
             <div
               class="print-control__adjust__controller-decrease"
@@ -119,7 +124,8 @@
               +
             </div>
             <div class="print-control__adjust__controller-value">
-              {{ feedrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+              {{ feedrate }}
+              <span class="print-control__adjust__controller-value-unit">%</span>
             </div>
             <div
               class="print-control__adjust__controller-decrease"
@@ -143,7 +149,8 @@
               +
             </div>
             <div class="print-control__adjust__controller-value">
-              {{ flowrate }}<span class="print-control__adjust__controller-value-unit">%</span>
+              {{ flowrate }}
+              <span class="print-control__adjust__controller-value-unit">%</span>
             </div>
             <div
               class="print-control__adjust__controller-decrease"
@@ -159,10 +166,10 @@
       </tr>
     </table>
     <div>
-      <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)"
-        ><span class="print-control__adjust-babystep-axis">Z</span> {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
-        {{ getZOffset() }}mm</span
-      >
+      <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)">
+        <span class="print-control__adjust-babystep-axis">Z</span>
+        {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}mm
+      </span>
       <div
         class="print-control__adjust__save"
         (click)="setAdjustParameters($event)"
@@ -177,16 +184,15 @@
     <table class="top-bar">
       <tr>
         <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
-          <img src="assets/back.svg" class="top-bar__back-icon" />back
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
       </tr>
     </table>
     <img src="assets/height.svg" class="print-control__center-icon-small" />
-    <span class="print-control__confirm">
-      Babystep Z
-    </span>
+    <span class="print-control__confirm">Babystep Z</span>
     <div>
       <div class="print-control__adjust-babystep__change">
         <span
@@ -194,19 +200,23 @@
           matRipple
           [matRippleUnbounded]="false"
           (click)="babystepZ(0.02)"
-          >+ 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
         >
+          + 0.02
+          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+        </span>
         <span
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
           (click)="babystepZ(0.01)"
-          >+ 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
         >
+          + 0.01
+          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+        </span>
       </div>
       <div class="print-control__adjust-babystep__change">
         <span class="print-control__adjust-babystep__change-current">
-          {{ zOffset == 0 ? "±" : zOffset > 0 ? "+" : "-" }}
+          {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }}
           <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
           mm
         </span>
@@ -217,15 +227,19 @@
           matRipple
           [matRippleUnbounded]="false"
           (click)="babystepZ(-0.02)"
-          >- 0.02<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
         >
+          - 0.02
+          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+        </span>
         <span
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
           (click)="babystepZ(-0.01)"
-          >- 0.01<span class="print-control__adjust-babystep__change-value__unit">mm</span></span
         >
+          - 0.01
+          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+        </span>
       </div>
     </div>
   </div>

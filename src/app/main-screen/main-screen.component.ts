@@ -1,12 +1,11 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
-import { AppService } from "../app.service";
-import { JobService } from "../job.service";
+import { AppService } from '../app.service';
+import { JobService } from '../job.service';
 
 @Component({
-  selector: "app-main-screen",
-  templateUrl: "./main-screen.component.html",
-  styleUrls: ["./main-screen.component.scss"],
+  selector: 'app-main-screen',
+  templateUrl: './main-screen.component.html',
 })
 export class MainScreenComponent {
   public printing = false;

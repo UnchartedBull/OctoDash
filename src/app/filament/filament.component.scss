@@ -49,7 +49,7 @@
     padding-right: 1.5vw;
 
     &::before {
-      content: "";
+      content: '';
       width: 96vw;
       height: 68vh;
       position: fixed;
@@ -57,12 +57,7 @@
       top: 30.5vh;
       z-index: 2;
       pointer-events: none;
-      background: linear-gradient(
-        #353b48,
-        transparent 6%,
-        transparent 94%,
-        #353b48
-      );
+      background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
     }
 
     td {

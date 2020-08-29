@@ -1,21 +1,21 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ElectronService } from 'ngx-electron';
 
-import { Config, ConfigService } from "../config.service";
+import { Config, ConfigService } from '../config.service';
 
 @Component({
-  selector: "app-no-config",
-  templateUrl: "./no-config.component.html",
-  styleUrls: ["./no-config.component.scss"],
+  selector: 'app-no-config',
+  templateUrl: './no-config.component.html',
+  styleUrls: ['./no-config.component.scss'],
 })
 export class NoConfigComponent implements OnInit {
   public page: number = 0;
   public totalPages: number = 7;
 
-  private configUpdate: boolean;
+  public configUpdate: boolean;
   public config: Config;
   public configErrors: string[];
   public configValid: boolean;
@@ -45,11 +45,11 @@ export class NoConfigComponent implements OnInit {
     } else {
       this.config = {
         octoprint: {
-          url: "http://localhost:80/api/",
-          accessToken: "",
+          url: 'http://localhost:80/api/',
+          accessToken: '',
         },
         printer: {
-          name: "",
+          name: '',
           xySpeed: 150,
           zSpeed: 5,
           defaultTemperatureFanSpeed: {
@@ -94,51 +94,51 @@ export class NoConfigComponent implements OnInit {
         octodash: {
           customActions: [
             {
-              icon: "home",
-              command: "G28",
-              color: "#dcdde1",
+              icon: 'home',
+              command: 'G28',
+              color: '#dcdde1',
               confirm: false,
               exit: true,
             },
             {
-              icon: "ruler-vertical",
-              command: "G29",
-              color: "#44bd32",
+              icon: 'ruler-vertical',
+              command: 'G29',
+              color: '#44bd32',
               confirm: false,
               exit: true,
             },
             {
-              icon: "fire-alt",
-              command: "M140 S50; M104 S185",
-              color: "#e1b12c",
+              icon: 'fire-alt',
+              command: 'M140 S50; M104 S185',
+              color: '#e1b12c',
               confirm: false,
               exit: true,
             },
             {
-              icon: "snowflake",
-              command: "M140 S0; M104 S0",
-              color: "#0097e6",
+              icon: 'snowflake',
+              command: 'M140 S0; M104 S0',
+              color: '#0097e6',
               confirm: false,
               exit: true,
             },
             {
-              icon: "redo-alt",
-              command: "[!RELOAD]",
-              color: "#7f8fa6",
+              icon: 'redo-alt',
+              command: '[!RELOAD]',
+              color: '#7f8fa6',
               confirm: true,
               exit: false,
             },
             {
-              icon: "skull",
-              command: "[!KILL]",
-              color: "#e84118",
+              icon: 'skull',
+              command: '[!KILL]',
+              color: '#e84118',
               confirm: true,
               exit: false,
             },
           ],
           fileSorting: {
-            attribute: "name",
-            order: "asc",
+            attribute: 'name',
+            order: 'asc',
           },
           pollingInterval: 2000,
           touchscreen: true,
@@ -176,22 +176,20 @@ export class NoConfigComponent implements OnInit {
   public async testOctoprintAPI(): Promise<any> {
     const httpHeaders = {
       headers: new HttpHeaders({
-        "x-api-key": this.config.octoprint.accessToken,
+        'x-api-key': this.config.octoprint.accessToken,
       }),
     };
-    return new Promise((resolve, reject) => {
-      this.http.get(this.config.octoprint.url + "connection", httpHeaders).subscribe(
-        (): void => {
-          this.octoprintConnection = true;
-          resolve();
-        },
-        (error: HttpErrorResponse): void => {
-          this.octoprintConnection = false;
-          this.octoprintConnectionError = error.message;
-          reject();
-        }
-      );
-    });
+    this.http.get(this.config.octoprint.url + 'connection', httpHeaders).subscribe(
+      (): void => {
+        this.octoprintConnection = true;
+        this.saveConfig();
+      },
+      (error: HttpErrorResponse): void => {
+        this.octoprintConnection = false;
+        this.octoprintConnectionError = error.message;
+      },
+    );
+    return true;
   }
 
   public createConfig(): boolean {
@@ -217,7 +215,7 @@ export class NoConfigComponent implements OnInit {
 
   public finishWizard(): void {
     this.configService.updateConfig();
-    this.router.navigate(["/main-screen"]);
+    this.router.navigate(['/main-screen']);
   }
 
   public async increasePage(): Promise<any> {
@@ -262,6 +260,6 @@ export class NoConfigComponent implements OnInit {
   }
 
   public changeProgress(): void {
-    document.getElementById("progressBar").style.width = this.page * (20 / this.totalPages) + "vw";
+    document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
   }
 }

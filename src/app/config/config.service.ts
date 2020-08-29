@@ -1,12 +1,12 @@
-import { HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import Ajv from "ajv";
-import _ from "lodash";
+import { HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import Ajv from 'ajv';
+import _ from 'lodash';
 
-import { NotificationService } from "../notification/notification.service";
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ConfigService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,13 +24,14 @@ export class ConfigService {
     const ajv = new Ajv({ allErrors: true });
     this.validator = ajv.compile(schema);
     try {
-      const Store = window.require("electron-store");
+      const Store = window.require('electron-store');
       this.store = new Store();
-      this.initialize(this.store.get("config"));
+      this.initialize(this.store.get('config'));
     } catch (e) {
+      console.error(e);
       this.notificationService.setError(
         "Can't read config file!",
-        "Please restart your system. If the issue persists open an issue on GitHub."
+        'Please restart your system. If the issue persists open an issue on GitHub.',
       );
     }
   }
@@ -41,10 +42,10 @@ export class ConfigService {
     if (this.valid) {
       this.httpHeaders = {
         headers: new HttpHeaders({
-          "x-api-key": this.config.octoprint.accessToken,
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
-          Expires: "0",
+          'x-api-key': this.config.octoprint.accessToken,
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+          Expires: '0',
         }),
       };
     }
@@ -52,7 +53,7 @@ export class ConfigService {
   }
 
   public getRemoteConfig(): Config {
-    return this.store.get("config");
+    return this.store.get('config');
   }
 
   public getCurrentConfig(): Config {
@@ -74,10 +75,10 @@ export class ConfigService {
   public getErrors(): string[] {
     const errors = [];
     this.validator.errors.forEach((error): void => {
-      if (error.keyword === "type") {
+      if (error.keyword === 'type') {
         errors.push(`${error.dataPath} ${error.message}`);
       } else {
-        errors.push(`${error.dataPath === "" ? "." : error.dataPath} ${error.message}`);
+        errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
       }
     });
     console.error(errors);
@@ -89,29 +90,29 @@ export class ConfigService {
       config = this.config;
     }
     if (window && window.process && window.process.type) {
-      this.store.set("config", config);
-      const configStored = this.store.get("config");
+      this.store.set('config', config);
+      const configStored = this.store.get('config');
       if (this.validateGiven(configStored)) {
         return null;
       } else {
-        return "Saved config is invalid!";
+        return 'Saved config is invalid!';
       }
     } else {
-      return 'Browser version doesn\'t support saving!';
+      return "Browser version doesn't support saving!";
     }
   }
 
   public updateConfig(): void {
     if (window && window.process && window.process.type) {
       this.update = false;
-      this.initialize(this.store.get("config"));
+      this.initialize(this.store.get('config'));
     }
   }
 
   public revertConfigForInput(config: Config): Config {
     config.octoprint.urlSplit = {
-      url: config.octoprint.url.split(":")[1].replace("//", ""),
-      port: parseInt(config.octoprint.url.split(":")[2].replace("/api/", ""), 10),
+      url: config.octoprint.url.split(':')[1].replace('//', ''),
+      port: parseInt(config.octoprint.url.split(':')[2].replace('/api/', ''), 10),
     };
     if (isNaN(config.octoprint.urlSplit.port)) {
       config.octoprint.urlSplit.port = null;
@@ -202,11 +203,11 @@ export class ConfigService {
     return this.config.filament.density;
   }
 
-  public getDefaultSortingAttribute(): "name" | "date" | "size" {
+  public getDefaultSortingAttribute(): 'name' | 'date' | 'size' {
     return this.config.octodash.fileSorting.attribute;
   }
 
-  public getDefaultSortingOrder(): "asc" | "dsc" {
+  public getDefaultSortingOrder(): 'asc' | 'dsc' {
     return this.config.octodash.fileSorting.order;
   }
 
@@ -340,285 +341,285 @@ interface CustomAction {
 }
 
 interface FileSorting {
-  attribute: "name" | "date" | "size";
-  order: "asc" | "dsc";
+  attribute: 'name' | 'date' | 'size';
+  order: 'asc' | 'dsc';
 }
 
 const schema = {
   definitions: {},
-  $schema: "http://json-schema.org/draft-07/schema#",
-  $id: "http://example.com/root.json",
-  type: "object",
-  required: ["octoprint", "printer", "filament", "plugins", "octodash"],
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  $id: 'http://example.com/root.json',
+  type: 'object',
+  required: ['octoprint', 'printer', 'filament', 'plugins', 'octodash'],
   properties: {
     octoprint: {
-      $id: "#/properties/octoprint",
-      type: "object",
-      required: ["accessToken", "url"],
+      $id: '#/properties/octoprint',
+      type: 'object',
+      required: ['accessToken', 'url'],
       properties: {
         accessToken: {
-          $id: "#/properties/octoprint/properties/accessToken",
-          type: "string",
-          pattern: "^(.*)$",
+          $id: '#/properties/octoprint/properties/accessToken',
+          type: 'string',
+          pattern: '^(.*)$',
         },
         url: {
-          $id: "#/properties/octoprint/properties/url",
-          type: "string",
-          pattern: "^(.*)$",
+          $id: '#/properties/octoprint/properties/url',
+          type: 'string',
+          pattern: '^(.*)$',
         },
       },
     },
     printer: {
-      $id: "#/properties/printer",
-      type: "object",
-      required: ["name", "xySpeed", "zSpeed", "defaultTemperatureFanSpeed"],
+      $id: '#/properties/printer',
+      type: 'object',
+      required: ['name', 'xySpeed', 'zSpeed', 'defaultTemperatureFanSpeed'],
       properties: {
         name: {
-          $id: "#/properties/printer/properties/name",
-          type: "string",
-          pattern: "^(.*)$",
+          $id: '#/properties/printer/properties/name',
+          type: 'string',
+          pattern: '^(.*)$',
         },
         xySpeed: {
-          $id: "#/properties/printer/properties/xySpeed",
-          type: "integer",
+          $id: '#/properties/printer/properties/xySpeed',
+          type: 'integer',
         },
         zSpeed: {
-          $id: "#/properties/printer/properties/zSpeed",
-          type: "integer",
+          $id: '#/properties/printer/properties/zSpeed',
+          type: 'integer',
         },
         defaultTemperatureFanSpeed: {
-          $id: "#/properties/printer/properties/defaultTemperatureFanSpeed",
-          type: "object",
-          required: ["hotend", "heatbed", "fan"],
+          $id: '#/properties/printer/properties/defaultTemperatureFanSpeed',
+          type: 'object',
+          required: ['hotend', 'heatbed', 'fan'],
           properties: {
             hotend: {
-              $id: "#/properties/printer/properties/defaultTemperatureFanSpeed/hotend",
-              type: "integer",
+              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/hotend',
+              type: 'integer',
             },
             heatbed: {
-              $id: "#/properties/printer/properties/defaultTemperatureFanSpeed/heatbed",
-              type: "integer",
+              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/heatbed',
+              type: 'integer',
             },
             fan: {
-              $id: "#/properties/printer/properties/defaultTemperatureFanSpeed/fan",
-              type: "integer",
+              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/fan',
+              type: 'integer',
             },
           },
         },
       },
     },
     filament: {
-      $id: "#/properties/filament",
-      type: "object",
-      required: ["density", "thickness", "feedLength", "feedSpeed", "feedSpeedSlow", "purgeDistance", "useM600"],
+      $id: '#/properties/filament',
+      type: 'object',
+      required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance', 'useM600'],
       properties: {
         density: {
-          $id: "#/properties/filament/properties/density",
-          type: "number",
+          $id: '#/properties/filament/properties/density',
+          type: 'number',
         },
         thickness: {
-          $id: "#/properties/filament/properties/thickness",
-          type: "number",
+          $id: '#/properties/filament/properties/thickness',
+          type: 'number',
         },
         feedLength: {
-          $id: "#/properties/filament/properties/feedLength",
-          type: "integer",
+          $id: '#/properties/filament/properties/feedLength',
+          type: 'integer',
         },
         feedSpeed: {
-          $id: "#/properties/filament/properties/feedSpeed",
-          type: "integer",
+          $id: '#/properties/filament/properties/feedSpeed',
+          type: 'integer',
         },
         feedSpeedSlow: {
-          $id: "#/properties/filament/properties/feedSpeedSlow",
-          type: "integer",
+          $id: '#/properties/filament/properties/feedSpeedSlow',
+          type: 'integer',
         },
         purgeDistance: {
-          $id: "#/properties/filament/properties/purgeDistance",
-          type: "integer",
+          $id: '#/properties/filament/properties/purgeDistance',
+          type: 'integer',
         },
         useM600: {
-          $id: "#/properties/filament/properties/useM600",
-          type: "boolean",
+          $id: '#/properties/filament/properties/useM600',
+          type: 'boolean',
         },
       },
     },
     plugins: {
-      $id: "#/properties/plugins",
-      type: "object",
+      $id: '#/properties/plugins',
+      type: 'object',
       required: [
-        "displayLayerProgress",
-        "enclosure",
-        "filamentManager",
-        "preheatButton",
-        "printTimeGenius",
-        "psuControl",
+        'displayLayerProgress',
+        'enclosure',
+        'filamentManager',
+        'preheatButton',
+        'printTimeGenius',
+        'psuControl',
       ],
       properties: {
         displayLayerProgress: {
-          $id: "#/properties/plugins/properties/displayLayerProgress",
-          type: "object",
-          required: ["enabled"],
+          $id: '#/properties/plugins/properties/displayLayerProgress',
+          type: 'object',
+          required: ['enabled'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/displayLayerProgress/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/displayLayerProgress/properties/enabled',
+              type: 'boolean',
             },
           },
         },
         enclosure: {
-          $id: "#/properties/plugins/properties/enclosure",
-          type: "object",
-          required: ["enabled", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
+          $id: '#/properties/plugins/properties/enclosure',
+          type: 'object',
+          required: ['enabled', 'ambientSensorID', 'filament1SensorID', 'filament2SensorID'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/enclosure/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/enclosure/properties/enabled',
+              type: 'boolean',
             },
             ambientSensorID: {
-              $id: "#/properties/plugins/properties/enclosure/properties/ambientSensorID",
-              type: ["number", "null"],
-              pattern: "^(.*)$",
+              $id: '#/properties/plugins/properties/enclosure/properties/ambientSensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$',
             },
             filament1SensorID: {
-              $id: "#/properties/plugins/properties/enclosure/properties/filament1SensorID",
-              type: ["number", "null"],
-              pattern: "^(.*)$",
+              $id: '#/properties/plugins/properties/enclosure/properties/filament1SensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$',
             },
             filament2SensorID: {
-              $id: "#/properties/plugins/properties/enclosure/properties/filament2SensorID",
-              type: ["number", "null"],
-              pattern: "^(.*)$",
+              $id: '#/properties/plugins/properties/enclosure/properties/filament2SensorID',
+              type: ['number', 'null'],
+              pattern: '^(.*)$',
             },
           },
         },
         filamentManager: {
-          $id: "#/properties/plugins/properties/filamentManager",
-          type: "object",
-          required: ["enabled"],
+          $id: '#/properties/plugins/properties/filamentManager',
+          type: 'object',
+          required: ['enabled'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/filamentManager/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/filamentManager/properties/enabled',
+              type: 'boolean',
             },
           },
         },
         preheatButton: {
-          $id: "#/properties/plugins/properties/preheatButton",
-          type: "object",
-          required: ["enabled"],
+          $id: '#/properties/plugins/properties/preheatButton',
+          type: 'object',
+          required: ['enabled'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/preheatButton/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/preheatButton/properties/enabled',
+              type: 'boolean',
             },
           },
         },
         printTimeGenius: {
-          $id: "#/properties/plugins/properties/printTimeGenius",
-          type: "object",
-          required: ["enabled"],
+          $id: '#/properties/plugins/properties/printTimeGenius',
+          type: 'object',
+          required: ['enabled'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/printTimeGenius/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              type: 'boolean',
             },
           },
         },
         psuControl: {
-          $id: "#/properties/plugins/properties/psuControl",
-          type: "object",
-          required: ["enabled", "turnOnPSUWhenExitingSleep"],
+          $id: '#/properties/plugins/properties/psuControl',
+          type: 'object',
+          required: ['enabled', 'turnOnPSUWhenExitingSleep'],
           properties: {
             enabled: {
-              $id: "#/properties/plugins/properties/printTimeGenius/properties/enabled",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              type: 'boolean',
             },
             turnOnPSUWhenExitingSleep: {
-              $id: "#/properties/plugins/properties/turnOnPSUWhenExitingSleep",
-              type: "boolean",
+              $id: '#/properties/plugins/properties/turnOnPSUWhenExitingSleep',
+              type: 'boolean',
             },
           },
         },
       },
     },
     octodash: {
-      $id: "#/properties/octodash",
-      type: "object",
+      $id: '#/properties/octodash',
+      type: 'object',
       required: [
-        "customActions",
-        "fileSorting",
-        "pollingInterval",
-        "touchscreen",
-        "turnScreenOffWhileSleeping",
-        "preferPreviewWhilePrinting",
+        'customActions',
+        'fileSorting',
+        'pollingInterval',
+        'touchscreen',
+        'turnScreenOffWhileSleeping',
+        'preferPreviewWhilePrinting',
       ],
       properties: {
         customActions: {
-          $id: "#/properties/octodash/properties/customActions",
-          type: "array",
+          $id: '#/properties/octodash/properties/customActions',
+          type: 'array',
           items: {
-            $id: "#/properties/octodash/properties/customActions/items",
-            type: "object",
-            required: ["icon", "command", "color", "confirm", "exit"],
+            $id: '#/properties/octodash/properties/customActions/items',
+            type: 'object',
+            required: ['icon', 'command', 'color', 'confirm', 'exit'],
             properties: {
               icon: {
-                $id: "#/properties/octodash/properties/customActions/items/properties/icon",
-                type: "string",
-                pattern: "^(.*)$",
+                $id: '#/properties/octodash/properties/customActions/items/properties/icon',
+                type: 'string',
+                pattern: '^(.*)$',
               },
               command: {
-                $id: "#/properties/octodash/properties/customActions/items/properties/command",
-                type: "string",
-                pattern: "^(.*)$",
+                $id: '#/properties/octodash/properties/customActions/items/properties/command',
+                type: 'string',
+                pattern: '^(.*)$',
               },
               color: {
-                $id: "#/properties/octodash/properties/customActions/items/properties/color",
-                type: "string",
-                pattern: "^(.*)$",
+                $id: '#/properties/octodash/properties/customActions/items/properties/color',
+                type: 'string',
+                pattern: '^(.*)$',
               },
               confirm: {
-                $id: "#/properties/octodash/properties/customActions/items/properties/confirm",
-                type: "boolean",
+                $id: '#/properties/octodash/properties/customActions/items/properties/confirm',
+                type: 'boolean',
               },
               exit: {
-                $id: "#/properties/octodash/properties/customActions/items/properties/exit",
-                type: "boolean",
+                $id: '#/properties/octodash/properties/customActions/items/properties/exit',
+                type: 'boolean',
               },
             },
           },
         },
         fileSorting: {
-          $id: "#/properties/octodash/properties/fileSorting",
-          type: "object",
-          required: ["attribute", "order"],
+          $id: '#/properties/octodash/properties/fileSorting',
+          type: 'object',
+          required: ['attribute', 'order'],
           properties: {
             attribute: {
-              $id: "#/properties/octodash/properties/fileSorting/properties/attribute",
-              type: "string",
-              pattern: "^(name|date|size)$",
+              $id: '#/properties/octodash/properties/fileSorting/properties/attribute',
+              type: 'string',
+              pattern: '^(name|date|size)$',
             },
             order: {
-              $id: "#/properties/octodash/properties/fileSorting/properties/order",
-              type: "string",
-              pattern: "^(asc|dsc)$",
+              $id: '#/properties/octodash/properties/fileSorting/properties/order',
+              type: 'string',
+              pattern: '^(asc|dsc)$',
             },
           },
         },
         pollingInterval: {
-          $id: "#/properties/octodash/properties/pollingInterval",
-          type: "integer",
+          $id: '#/properties/octodash/properties/pollingInterval',
+          type: 'integer',
         },
         touchscreen: {
-          $id: "#/properties/octodash/properties/touchscreen",
-          type: "boolean",
+          $id: '#/properties/octodash/properties/touchscreen',
+          type: 'boolean',
         },
         turnScreenOffWhileSleeping: {
-          $id: "#/properties/octodash/properties/turnScreenOffWhileSleeping",
-          type: "boolean",
+          $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
+          type: 'boolean',
         },
         preferPreviewWhilePrinting: {
-          $id: "#/properties/octodash/properties/preferPreviewWhilePrinting",
-          type: "boolean",
+          $id: '#/properties/octodash/properties/preferPreviewWhilePrinting',
+          type: 'boolean',
         },
       },
     },

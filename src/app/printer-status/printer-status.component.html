@@ -8,12 +8,14 @@
       [matRippleUnbounded]="false"
     >
       <img src="assets/nozzle.svg" />
-      <span class="printer-status__actual-value"
-        >{{ printerStatus.nozzle.current }}<span class="printer-status__unit">°C</span></span
-      >
-      <span class="printer-status__set-value" *ngIf="printerStatus.nozzle.set"
-        >/{{ printerStatus.nozzle.set }}<span class="unit">°C</span></span
-      >
+      <span class="printer-status__actual-value">
+        {{ printerStatus.nozzle.current }}
+        <span class="printer-status__unit">°C</span>
+      </span>
+      <span class="printer-status__set-value" *ngIf="printerStatus.nozzle.set">
+        /{{ printerStatus.nozzle.set }}
+        <span class="unit">°C</span>
+      </span>
     </td>
     <td
       class="printer-status__value printer-status__value-2"
@@ -23,12 +25,14 @@
       [matRippleUnbounded]="false"
     >
       <img src="assets/heat-bed.svg" />
-      <span class="printer-status__actual-value"
-        >{{ printerStatus.heatbed.current }}<span class="printer-status__unit">°C</span></span
-      >
-      <span class="printer-status__set-value" *ngIf="printerStatus.heatbed.set"
-        >/{{ printerStatus.heatbed.set }}<span class="unit">°C</span></span
-      >
+      <span class="printer-status__actual-value">
+        {{ printerStatus.heatbed.current }}
+        <span class="printer-status__unit">°C</span>
+      </span>
+      <span class="printer-status__set-value" *ngIf="printerStatus.heatbed.set">
+        /{{ printerStatus.heatbed.set }}
+        <span class="unit">°C</span>
+      </span>
     </td>
     <td
       class="printer-status__value printer-status__value-3 printer-status__no-set-value"
@@ -37,9 +41,10 @@
       [matRippleUnbounded]="false"
     >
       <img src="assets/fan.svg" />
-      <span class="printer-status__actual-value"
-        >{{ printerStatus.fan }}<span class="printer-status__unit">%</span></span
-      >
+      <span class="printer-status__actual-value">
+        {{ printerStatus.fan }}
+        <span class="printer-status__unit">%</span>
+      </span>
     </td>
   </tr>
 </table>
@@ -47,7 +52,8 @@
   <table class="top-bar" (click)="hideQuickControl()">
     <tr>
       <td class="top-bar__back">
-        <img src="assets/back.svg" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />back
+        <img src="assets/back.svg" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
+        back
       </td>
       <td class="top-bar__center">
         <img

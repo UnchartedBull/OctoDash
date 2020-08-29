@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { ConfigService } from "../config/config.service";
-import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from "../plugin-service/filament-manager.service";
-import { PrinterService, PrinterStatusAPI } from "../printer.service";
+import { ConfigService } from '../config/config.service';
+import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from '../plugin-service/filament-manager.service';
+import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
-  selector: "app-filament",
-  templateUrl: "./filament.component.html",
-  styleUrls: ["./filament.component.scss"],
+  selector: 'app-filament',
+  templateUrl: './filament.component.html',
+  styleUrls: ['./filament.component.scss'],
 })
 export class FilamentComponent implements OnInit {
-  private selectedSpool: FilamentSpool;
+  public selectedSpool: FilamentSpool;
   private currentSpool: FilamentSpool;
   private totalPages = 5;
 
@@ -35,7 +35,7 @@ export class FilamentComponent implements OnInit {
     private router: Router,
     private configService: ConfigService,
     private filamentManagerService: FilamentManagerService,
-    private printerService: PrinterService
+    private printerService: PrinterService,
   ) {}
 
   public ngOnInit(): void {
@@ -54,7 +54,7 @@ export class FilamentComponent implements OnInit {
     if (this.page < this.totalPages) {
       this.setPage(this.page + 1);
     } else if (this.page === this.totalPages) {
-      this.router.navigate(["/main-screen"]);
+      this.router.navigate(['/main-screen']);
     }
   }
 
@@ -62,11 +62,11 @@ export class FilamentComponent implements OnInit {
 
   public decreasePage(): void {
     if (this.page === 0) {
-      this.router.navigate(["/main-screen"]);
+      this.router.navigate(['/main-screen']);
     } else if (this.page === 1 && this.configService.isFilamentManagerEnabled()) {
       this.setPage(0);
     } else if (this.page === 1) {
-      this.router.navigate(["/main-screen"]);
+      this.router.navigate(['/main-screen']);
     } else if (this.page === 2 || this.page === 3) {
       this.setPage(1);
     } else if (this.page === 4 || this.page === 5) {
@@ -114,7 +114,7 @@ export class FilamentComponent implements OnInit {
     this.page = page;
     if (this.page > 0) {
       setTimeout((): void => {
-        document.getElementById("progressBar").style.width = this.page * (20 / this.totalPages) + "vw";
+        document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
       }, 200);
     }
   }
@@ -151,8 +151,8 @@ export class FilamentComponent implements OnInit {
   }
 
   public getSpoolTemperatureOffset(): string {
-    return `${this.selectedSpool.temp_offset === 0 ? "±" : this.selectedSpool.temp_offset > 0 ? "+" : "-"}${Math.abs(
-      this.selectedSpool.temp_offset
+    return `${this.selectedSpool.temp_offset === 0 ? '±' : this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.abs(
+      this.selectedSpool.temp_offset,
     )}`;
   }
 
@@ -160,7 +160,7 @@ export class FilamentComponent implements OnInit {
     if (this.currentSpool) {
       return this.currentSpool.color;
     } else {
-      return "#44bd32";
+      return '#44bd32';
     }
   }
 
@@ -168,7 +168,7 @@ export class FilamentComponent implements OnInit {
     if (this.selectedSpool) {
       return this.selectedSpool.color;
     } else {
-      return "#44bd32";
+      return '#44bd32';
     }
   }
 
@@ -193,12 +193,12 @@ export class FilamentComponent implements OnInit {
   private unloadSpool(): void {
     this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
     setTimeout((): void => {
-      const unloadingProgressBar = document.getElementById("filamentUnloadBar");
+      const unloadingProgressBar = document.getElementById('filamentUnloadBar');
       unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
       const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
-      unloadingProgressBar.style.transition = "width " + unloadTime + "s ease-in";
+      unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
       setTimeout((): void => {
-        unloadingProgressBar.style.width = "0vw";
+        unloadingProgressBar.style.width = '0vw';
         this.timeout = setTimeout((): void => {
           this.increasePage();
         }, unloadTime * 1000 + 500);
@@ -212,12 +212,12 @@ export class FilamentComponent implements OnInit {
     const loadTime = loadTimeFast + loadTimeSlow + 0.5;
     this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
     setTimeout((): void => {
-      const loadingProgressBar = document.getElementById("filamentLoadBar");
+      const loadingProgressBar = document.getElementById('filamentLoadBar');
       loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
 
-      loadingProgressBar.style.transition = "width " + loadTime + "s ease-in";
+      loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
       setTimeout((): void => {
-        loadingProgressBar.style.width = "50vw";
+        loadingProgressBar.style.width = '50vw';
         this.timeout = setTimeout((): void => {
           this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
           this.feedSpeedSlow = true;
@@ -245,26 +245,26 @@ export class FilamentComponent implements OnInit {
 
     let bar: HTMLElement;
     const wrapper = (document.getElementsByClassName(
-      "filament__progress-bar-wrapper-wide"
+      'filament__progress-bar-wrapper-wide',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     )[0] as any) as HTMLElement;
 
-    if (document.getElementById("filamentLoadBar")) {
-      bar = document.getElementById("filamentLoadBar");
+    if (document.getElementById('filamentLoadBar')) {
+      bar = document.getElementById('filamentLoadBar');
     } else {
-      bar = document.getElementById("filamentUnloadBar");
+      bar = document.getElementById('filamentUnloadBar');
     }
 
-    bar.style.width = Math.floor(bar.getBoundingClientRect().width) + "px";
-    wrapper.style.borderColor = "#c23616";
+    bar.style.width = Math.floor(bar.getBoundingClientRect().width) + 'px';
+    wrapper.style.borderColor = '#c23616';
   }
 
   private disableExtruderStepper(): void {
-    this.printerService.executeGCode("M18 E ");
+    this.printerService.executeGCode('M18 E ');
   }
 
   private initiateM600FilamentChange(): void {
-    this.printerService.executeGCode("M600");
+    this.printerService.executeGCode('M600');
   }
 
   // NOZZLE HEATING
