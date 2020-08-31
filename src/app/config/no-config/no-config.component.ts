@@ -12,8 +12,8 @@ import { Config, ConfigService } from '../config.service';
   styleUrls: ['./no-config.component.scss'],
 })
 export class NoConfigComponent implements OnInit {
-  public page: number = 0;
-  public totalPages: number = 7;
+  public page = 0;
+  public totalPages = 7;
 
   public configUpdate: boolean;
   public config: Config;
@@ -31,9 +31,9 @@ export class NoConfigComponent implements OnInit {
       'disable': false
     }
   };
-  public opInstance: any = this.octoprintNodes['other'];
-  public opApiMsg: string = '';
   public manualEntry: boolean = true;
+  public octoprintInstance: any = this.octoprintNodes['other'];
+  public octoprintApiMsg: string = '';
   public octoprintConnection: boolean = false;
   public octoprintConnectionError: string;
 
@@ -221,8 +221,8 @@ export class NoConfigComponent implements OnInit {
   public async increasePage(): Promise<void> {
     this.page += 1;
     if (this.page <= 2) {
-      if (JSON.stringify(this.opInstance) != JSON.stringify(this.octoprintNodes['other'])) {
-        this.config.octoprint.url = 'http://' + this.opInstance['url'];
+      if (JSON.stringify(this.octoprintInstance) != JSON.stringify(this.octoprintNodes['other'])) {
+        this.config.octoprint.url = 'http://' + this.octoprintInstance['url'];
         this.manualEntry = false;
       } else {
         this.config.octoprint.url = 'http://localhost:80/api/';
@@ -233,14 +233,14 @@ export class NoConfigComponent implements OnInit {
     } else if (this.page > 2) {
       if (this.octoprintConnection === false) {
         await this.testOctoprintAPI().then(res => {
-          this.opApiMsg = '';
-          if (this.opInstance.name != 'other') {
-            this.config.printer.name = this.opInstance.name;
+          this.octoprintApiMsg = '';
+          if (this.octoprintInstance.name != 'other') {
+            this.config.printer.name = this.octoprintInstance.name;
           } else {
             this.config.printer.name = '';
           }
         }, err => {
-          this.opApiMsg = 'API Error: ' + this.octoprintConnectionError;
+          this.octoprintApiMsg = 'API Error: ' + this.octoprintConnectionError;
           this.page = 2;
         });
       }
