@@ -200,7 +200,7 @@ export class NoConfigComponent implements OnInit {
     return true;
   }
 
-  public async validateConfig(): Promise<any> {
+  public async validateConfig(): Promise<void> {
     this.configValid = this.configService.validateGiven(this.config);
     if (!this.configValid) {
       this.configErrors = this.configService.getErrors();
