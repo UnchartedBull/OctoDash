@@ -46,6 +46,7 @@
     }
   },
   "scripts": {
+    "postinstall": "node ./node_modules/.bin/electron-rebuild",
     "ng": "ng",
     "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
     "start:big": "npm-run-all -p ng:serve electron:serve:big",
