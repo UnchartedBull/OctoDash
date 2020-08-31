@@ -1,9 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { ElectronService } from 'ngx-electron';
 import compareVersions from 'compare-versions';
+import { ElectronService } from 'ngx-electron';
 
 import { Config, ConfigService } from '../config.service';
 
@@ -23,23 +22,28 @@ export class NoConfigComponent implements OnInit {
   public configSaved: string;
 
   public objectvalues = Object.values;
-  private octoprintMinVers: string = '1.3.5';
-  public octoprintNodes: any = {
-    'other': {
-      'display': 'Other (> ' + this.octoprintMinVers + ')',
-      'name': 'other',
-      'version': this.octoprintMinVers,
-      'url': 'other',
-      'disable': false
-    }
+  private octoprintMinVers = '1.3.5';
+  public octoprintNodes = {
+    other: {
+      display: 'Other (> ' + this.octoprintMinVers + ')',
+      name: 'other',
+      version: this.octoprintMinVers,
+      url: 'other',
+      disable: false,
+    },
   };
-  public manualEntry: boolean = true;
-  public octoprintInstance: any = this.octoprintNodes['other'];
-  public octoprintApiMsg: string = '';
-  public octoprintConnection: boolean = false;
+  public manualEntry = true;
+  public octoprintInstance = this.octoprintNodes['other'];
+  public octoprintApiMsg = '';
+  public octoprintConnection = false;
   public octoprintConnectionError: string;
 
-  public constructor(private configService: ConfigService, private http: HttpClient, private router: Router, private _electronService: ElectronService) {
+  public constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private router: Router,
+    private _electronService: ElectronService,
+  ) {
     this.configUpdate = this.configService.isUpdate();
     console.log(this.configUpdate);
     if (this.configUpdate) {
@@ -158,13 +162,13 @@ export class NoConfigComponent implements OnInit {
     const mdns = this._electronService.remote.require('mdns');
     const browser = mdns.createBrowser(mdns.tcp('octoprint'));
     browser.on('serviceUp', service => {
-      var node = {
-        'display': service.name.match(/"([^"]+)"/)[1] + ' (' + service.txtRecord.version + ')',
-        'name': service.name.match(/"([^"]+)"/)[1],
-        'version': service.txtRecord.version,
-        'url': service.host.replace(/\.$/, '') + ":" + service.port + service.txtRecord.path.replace(/\/$/, '') + "/api/",
+      const node = {
+        display: service.name.match(/"([^"]+)"/)[1] + ' (' + service.txtRecord.version + ')',
+        name: service.name.match(/"([^"]+)"/)[1],
+        version: service.txtRecord.version,
+        url: service.host.replace(/\.$/, '') + ':' + service.port + service.txtRecord.path.replace(/\/$/, '') + '/api/',
         // Compare version to make sure it meets the requirement
-        'disable': (compareVersions(this.octoprintMinVers, service.txtRecord.version) == -1 ? true : false)
+        disable: compareVersions(this.octoprintMinVers, service.txtRecord.version) == -1 ? true : false,
       };
 
       this.octoprintNodes[service.host.replace(/\.$/, '').replace('.', '_')] = node;
@@ -234,16 +238,18 @@ export class NoConfigComponent implements OnInit {
       this.page = 2;
     } else if (this.page > 2) {
       if (this.octoprintConnection === false) {
-        await this.testOctoprintAPI().then(res => {
-          this.octoprintApiMsg = '';
-          if (this.octoprintInstance.name != 'other') {
-            this.config.printer.name = this.octoprintInstance.name;
+        await this.testOctoprintAPI().then(() => {
+          if (this.octoprintConnection === true) {
+            this.octoprintApiMsg = '';
+            if (this.octoprintInstance.name != 'other') {
+              this.config.printer.name = this.octoprintInstance.name;
+            } else {
+              this.config.printer.name = '';
+            }
           } else {
-            this.config.printer.name = '';
+            this.octoprintApiMsg = 'API Error: ' + this.octoprintConnectionError;
+            this.page = 2;
           }
-        }, err => {
-          this.octoprintApiMsg = 'API Error: ' + this.octoprintConnectionError;
-          this.page = 2;
         });
       }
     }
