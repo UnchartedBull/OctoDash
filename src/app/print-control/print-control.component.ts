@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { JobService } from '../job.service';
+import { Job, JobService, JobStatus } from '../job.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
@@ -9,10 +10,13 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
   templateUrl: './print-control.component.html',
   styleUrls: ['./print-control.component.scss'],
 })
-export class PrintControlComponent {
+export class PrintControlComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription = new Subscription();
+
   public showControls = false;
   public controlView = ControlView;
   public view = ControlView.MAIN;
+  private showedPauseScreen = false;
 
   public temperatureHotend: number;
   public temperatureHeatbed: number;
@@ -26,6 +30,29 @@ export class PrintControlComponent {
     this.flowrate = 100;
     this.feedrate = 100;
     this.zOffset = 0;
+  }
+
+  public ngOnInit(): void {
+    this.subscriptions.add(
+      this.jobService.getObservable().subscribe((job: Job): void => {
+        if (job.status === JobStatus.Paused) {
+          if (!this.showedPauseScreen) {
+            this.view = ControlView.PAUSE;
+            this.showControls = true;
+            this.showedPauseScreen = true;
+          }
+        } else {
+          if (this.showedPauseScreen && this.showControls) {
+            this.showControls = false;
+          }
+          this.showedPauseScreen = false;
+        }
+      }),
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   public isClickOnPreview(event: MouseEvent): boolean {

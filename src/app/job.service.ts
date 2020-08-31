@@ -45,7 +45,7 @@ export class JobService {
                 );
                 try {
                   job = {
-                    status: data.state,
+                    status: JobStatus[data.state],
                     filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
                     thumbnail: await this.fileService.getThumbnail(
                       '/' + data.job.file.origin + '/' + data.job.file.path,
@@ -256,7 +256,7 @@ interface Duration {
 }
 
 export interface Job {
-  status: string;
+  status: JobStatus;
   filename: string;
   thumbnail: string | undefined;
   progress: number;
@@ -265,4 +265,17 @@ export interface Job {
   timePrinted: Duration;
   estimatedPrintTime?: Duration;
   estimatedEndTime?: string;
+}
+
+export enum JobStatus {
+  Operational,
+  Pausing,
+  Paused,
+  Printing,
+  Cancelling,
+  Error,
+  Closed,
+  Ready,
+  SdReady,
+  Loading,
 }
