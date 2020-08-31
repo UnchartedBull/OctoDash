@@ -8,7 +8,7 @@ const exec = require('child_process').exec;
 
 const sendCustomStyles = require('./styles');
 const { downloadUpdate, sendVersionInfo } = require('./update');
-const discoverNodes = require('./discover');
+const { discoverNodes, stopDiscovery } = require('./discover');
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenSleep', () => {
@@ -50,6 +50,10 @@ function activateUpdateListener(ipcMain, window) {
 function activateDiscoverListener(ipcMain, window) {
   ipcMain.on('discover', () => {
     discoverNodes(window);
+  });
+
+  ipcMain.on('stopDiscover', () => {
+    stopDiscovery();
   });
 }
 

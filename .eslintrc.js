@@ -8,7 +8,6 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'node',
   ],
   parserOptions: {
     ecmaVersion: 2020,

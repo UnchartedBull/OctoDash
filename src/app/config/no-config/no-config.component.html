@@ -1,21 +1,23 @@
 <div class="no-config">
   <table class="top-bar">
     <tr>
-      <td class="top-bar__back" (click)="decreasePage()" *ngIf="page !== 0">
-        <img src="assets/back.svg" class="top-bar__back-icon" />
-        back
+      <td class="top-bar__back" (click)="decreasePage()">
+        <div *ngIf="page !== 0">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
+        </div>
       </td>
-      <td class="top-bar__back" *ngIf="page === 0"></td>
       <td class="top-bar__center">
         <div class="no-config__progress-bar-wrapper">
           <div class="no-config__progress-bar" id="progressBar"></div>
         </div>
       </td>
-      <td class="top-bar__next" (click)="increasePage()" *ngIf="page !== totalPages">
-        next
-        <img src="assets/next.svg" class="top-bar__next-icon" />
+      <td class="top-bar__next" (click)="increasePage()">
+        <div *ngIf="page !== totalPages">
+          next
+          <img src="assets/next.svg" class="top-bar__next-icon" />
+        </div>
       </td>
-      <td class="top-bar__next" *ngIf="page === totalPages"></td>
     </tr>
   </table>
   <div *ngIf="page === 0">
@@ -40,6 +42,79 @@
       Thanks for choosing OctoDash
       <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
+  </div>
+  <div *ngIf="page === 1">
+    <span class="no-config__text">
+      First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
+    </span>
+    <!-- TODO -->
+
+    <div *ngIf="!enterURLManually">
+      <div class="no-config__discovered-instances__wrapper">
+        <span
+          *ngFor="let node of octoprintNodes"
+          class="no-config__discovered-instances__node"
+          (click)="setOctoprintInstance(node)"
+        >
+          <div class="no-config__discovered-instances__node-name">
+            {{ node.name }}
+            <br />
+            <span class="no-config__discovered-instances__node-details">
+              Version {{ node.version }}, URL: {{ node.url.replace('/api/', '') }}
+            </span>
+          </div>
+          <img src="assets/connect.svg" class="no-config__discovered-instances__node-connect-icon" />
+        </span>
+        <span class="no-config__discovered-instances__searching" *ngIf="!octoprintNodes">searching ...</span>
+      </div>
+      <div class="no-config__discovered-instances__manual" (click)="enterURLManually = true">enter manually</div>
+    </div>
+    <div *ngIf="enterURLManually">
+      <form class="no-config__form" style="margin-top: 5vh">
+        <span class="no-config__input-prefix">http://</span>
+        <input
+          type="text"
+          id="octoprintURLName"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.url"
+          name="octoprintURLName"
+          required
+          style="width: 42.5vw"
+        />
+        :
+        <input
+          type="text"
+          id="octoprintURLPort"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.port"
+          name="octoprintURLPort"
+          required
+          style="width: 14vw"
+        />
+        <p class="no-config__input-prefix" style="margin-top: 8vh">Port 5000 for OctoPrint, Port 80 for OctoPi</p>
+      </form>
+      <div class="no-config__discovered-instances__manual" (click)="enterURLManually = false" style="margin-top: 5.5vh">
+        search again
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="page === 2">
+    <span class="no-config__text">
+      Now I need to know something about your OctoPrint setup, so I can talk to your printer.
+    </span>
+    <form class="no-config__form">
+      <label for="accessToken" class="no-config__input-label">API Key:</label>
+      <input
+        type="text"
+        id="accessToken"
+        class="no-config__input"
+        [(ngModel)]="this.config.octoprint.accessToken"
+        name="accessToken"
+        style="width: 67vw"
+        required
+      />
+    </form>
   </div>
   <div *ngIf="page === 3">
     <span class="no-config__text">
@@ -99,69 +174,6 @@
       </div>
     </form>
   </div>
-  <div *ngIf="page === 1">
-    <span class="no-config__text">
-      Now I need to know something about your OctoPrint setup, so I can talk to your printer.
-    </span>
-    <form class="no-config__form">
-      <label for="octoprintInstance" class="no-config__input-label">Instance:</label>
-      <select
-        id="octoprintInstance"
-        class="no-config__input"
-        [(ngModel)]="octoprintInstance"
-        name="octoprintInstance"
-        style="width: 67vw;"
-        size="3"
-        require
-      >
-        <option *ngFor="let node of objectvalues(octoprintNodes)" [ngValue]="node" [disabled]="node.disable">{{ node.display }}</option>
-      </select>
-    </form>
-  </div>
-  <div *ngIf="page === 2">
-    <span class="no-config__text">
-      Now I need to know something about your OctoPrint setup, so I can talk to your printer.
-    </span>
-    <form class="no-config__form">
-      <div *ngIf="manualEntry">
-        <label for="octoprintURLName" class="no-config__input-label">URL:</label>
-        <span class="no-config__input-prefix">http://</span>
-        <input
-          type="text"
-          id="octoprintURLName"
-          class="no-config__input"
-          [(ngModel)]="this.config.octoprint.urlSplit.url"
-          name="octoprintURLName"
-          required
-          style="width: 42.5vw;"
-        />
-        :
-        <input
-          type="text"
-          id="octoprintURLPort"
-          class="no-config__input"
-          [(ngModel)]="this.config.octoprint.urlSplit.port"
-          name="octoprintURLPort"
-          required
-          style="width: 14vw;"
-        />
-        <p class="no-config__input-prefix">Port 5000 for OctoPrint, Port 80 for OctoPi</p>
-      </div>
-      <label for="accessToken" class="no-config__input-label">API Key:</label>
-      <input
-        type="text"
-        id="accessToken"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.accessToken"
-        name="accessToken"
-        style="width: 67vw"
-        required
-      />
-    </form>
-    <span class="no-config__text">
-      {{ this.octoprintApiMsg }}
-    </span>
-  </div>
   <div *ngIf="page === 5">
     <span class="no-config__text">And now personalize me to your liking.</span>
     <form class="no-config__form">
@@ -191,7 +203,7 @@
   </div>
   <div *ngIf="page === 6">
     <span class="no-config__text">What plugins are you running?</span>
-    <div style="text-align: center;">
+    <div style="text-align: center">
       <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
         <span class="no-config__checkbox">
           <span

@@ -14,7 +14,7 @@ function discoverNodes(window) {
       id: service.interfaceIndex,
       name: service.name,
       version: service.txtRecord.version,
-      url: `${service.host.replace(/\.$/, '')}:${service.port}${service.txtRecord.path}api/`,
+      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txtRecord.path}api/`,
       disable: compareVersions(minimumVersion, service.txtRecord.version) === -1,
     });
     sendNodes(window);
@@ -28,8 +28,12 @@ function discoverNodes(window) {
   browser.start();
 }
 
+function stopDiscovery() {
+  browser.stop();
+}
+
 function sendNodes(window) {
   window.webContents.send('discoveredNodes', nodes);
 }
 
-module.exports = discoverNodes;
+module.exports = { discoverNodes, stopDiscovery };
