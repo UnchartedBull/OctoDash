@@ -173,7 +173,7 @@ export class NoConfigComponent implements OnInit {
     browser.start();
   }
 
-  public async testOctoprintAPI(): Promise<any> {
+  public async testOctoprintAPI(): Promise<boolean> {
     const httpHeaders = {
       headers: new HttpHeaders({
         'x-api-key': this.config.octoprint.accessToken,
