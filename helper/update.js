@@ -1,3 +1,7 @@
+/* eslint-disable no-sync */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-commonjs */
+
 const fs = require('fs');
 const got = require('got');
 const stream = require('stream');
@@ -6,23 +10,22 @@ const progress = require('progress-stream');
 
 const exec = require('child_process').exec;
 
-
 function downloadUpdate(updateInfo, window) {
   const downloadPath = '/tmp/octodash.deb';
 
   exec('arch', (err, stdout, stderr) => {
     if (err || stderr) {
       window.webContents.send('updateError', {
-        error: err ? err : { message: stderr },
+        error: err || { message: stderr },
       });
     }
     got(updateInfo.assetsURL)
       .then(releaseFiles => {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        let averageETA = [];
+        const averageETA = [];
         let downloadURL;
         let packageSize;
-        for (let package of JSON.parse(releaseFiles.body)) {
+        for (const package of JSON.parse(releaseFiles.body)) {
           if (package.name.includes(stdout.trim())) {
             downloadURL = package.browser_download_url;
             packageSize = package.size;
@@ -30,7 +33,7 @@ function downloadUpdate(updateInfo, window) {
         }
         if (downloadURL) {
           const downloadPipeline = promisify(stream.pipeline);
-          let downloadProgress = progress({
+          const downloadProgress = progress({
             length: packageSize,
             time: 300,
           });
@@ -69,7 +72,7 @@ function downloadUpdate(updateInfo, window) {
               exec('sudo ~/scripts/update-octodash', (err, _, stderr) => {
                 if (err || stderr) {
                   window.webContents.send('updateError', {
-                    error: err ? err : { message: stderr },
+                    error: err || { message: stderr },
                   });
                 } else {
                   window.webContents.send('updateInstalled');

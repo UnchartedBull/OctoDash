@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-commonjs */
+
 const { app, BrowserWindow, ipcMain } = require('electron');
-const electronStore = require('electron-store');
 const path = require('path');
 const url = require('url');
-
-const store = new electronStore();
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
@@ -17,11 +17,6 @@ app.allowRendererProcessReuse = true;
 let window;
 
 function createWindow() {
-  config = store.get('config');
-  store.onDidChange('config', newValue => {
-    config = newValue;
-  });
-
   const { screen, session } = require('electron');
 
   if (!dev) {
@@ -41,7 +36,7 @@ function createWindow() {
   window = new BrowserWindow({
     width: dev ? (big ? 1400 : 1080) : mainScreen.size.width,
     height: dev ? (big ? 502 : 342) : mainScreen.size.height,
-    frame: dev ? true : false,
+    frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
       nodeIntegration: true,

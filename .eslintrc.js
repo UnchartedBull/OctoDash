@@ -8,7 +8,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'node'
+    'node',
   ],
   parserOptions: {
     ecmaVersion: 2020,
@@ -42,16 +42,11 @@ module.exports = {
           },
         ],
       },
-      env: {
-        node: false,
-        typescript: true,
-      },
     },
     {
       files: '**/*.js',
       env: {
         node: true,
-        typescript: false,
       },
     },
   ],
