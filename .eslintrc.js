@@ -8,6 +8,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'node'
   ],
   parserOptions: {
     ecmaVersion: 2020,
@@ -17,7 +18,7 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'import/no-unresolved': 'off',
-    camelcase: 'warn',
+    'camelcase': 'warn',
     'simple-import-sort/sort': 'warn',
     'sort-imports': 'off',
     'import/first': 'warn',
@@ -40,6 +41,17 @@ module.exports = {
             'newlines-between': 'always',
           },
         ],
+      },
+      env: {
+        node: false,
+        typescript: true,
+      },
+    },
+    {
+      files: '**/*.js',
+      env: {
+        node: true,
+        typescript: false,
       },
     },
   ],
