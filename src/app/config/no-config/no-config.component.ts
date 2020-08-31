@@ -47,7 +47,7 @@ export class NoConfigComponent implements OnInit {
     } else {
       this.config = {
         octoprint: {
-          url: 'http://localhost:80/api/',
+          url: 'http://localhost:5000/api/',
           accessToken: '',
         },
         printer: {
@@ -227,7 +227,7 @@ export class NoConfigComponent implements OnInit {
         this.config.octoprint.url = 'http://' + this.octoprintInstance['url'];
         this.manualEntry = false;
       } else {
-        this.config.octoprint.url = 'http://localhost:80/api/';
+        this.config.octoprint.url = 'http://localhost:5000/api/';
         this.manualEntry = true;
       }
     } else if (this.config.octoprint.accessToken == '' && this.page > 2) {
