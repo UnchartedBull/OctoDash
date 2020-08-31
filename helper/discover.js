@@ -9,6 +9,7 @@ let mdnsBrowser;
 let nodes = [];
 
 function discoverNodes(window) {
+  nodes = [];
   mdnsBrowser = mdns.createBrowser(mdns.tcp('octoprint'));
   mdnsBrowser.on('serviceUp', service => {
     nodes.push({

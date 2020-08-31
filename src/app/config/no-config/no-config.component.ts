@@ -61,13 +61,14 @@ export class NoConfigComponent implements OnInit {
   }
 
   public discoverOctoprintInstances(): void {
+    this.octoprintNodes = null;
     this.ipc.send('discover');
     setTimeout(() => {
       const searching = document.querySelector('.no-config__discovered-instances__searching');
       if (searching) {
         searching.innerHTML = 'no instances found.';
       }
-    }, 5000);
+    }, 10000);
   }
 
   public setOctoprintInstance(node: OctoprintNodes): void {
