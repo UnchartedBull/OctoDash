@@ -14,7 +14,7 @@ export class UpdateComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ipc: any;
-  private installationAnimationInterval: NodeJS.Timer;
+  private installationAnimationInterval: number;
   public updateProgress: UpdateDownloadProgress = {
     percentage: 0,
     transferred: 0,

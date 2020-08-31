@@ -85,7 +85,6 @@
     "got": "^11.5.2",
     "lodash": "^4.17.20",
     "mdns": "^2.5.1",
-    "ngx-electron": "^2.2.0",
     "ngx-spinner": "^10.0.1",
     "progress-stream": "^2.0.0",
     "rxjs": "~6.6.2",
