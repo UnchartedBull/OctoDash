@@ -4,12 +4,13 @@
 const mdns = require('mdns');
 const compareVersions = require('compare-versions');
 
-const browser = mdns.createBrowser(mdns.tcp('octoprint'));
 const minimumVersion = '1.3.5';
+let mdnsBrowser;
 let nodes = [];
 
 function discoverNodes(window) {
-  browser.on('serviceUp', service => {
+  mdnsBrowser = mdns.createBrowser(mdns.tcp('octoprint'));
+  mdnsBrowser.on('serviceUp', service => {
     nodes.push({
       id: service.interfaceIndex,
       name: service.name,
@@ -20,16 +21,16 @@ function discoverNodes(window) {
     sendNodes(window);
   });
 
-  browser.on('serviceDown', service => {
+  mdnsBrowser.on('serviceDown', service => {
     nodes = nodes.filter(node => node.id !== service.interfaceIndex);
     sendNodes(window);
   });
 
-  browser.start();
+  mdnsBrowser.start();
 }
 
 function stopDiscovery() {
-  browser.stop();
+  mdnsBrowser.stop();
 }
 
 function sendNodes(window) {
