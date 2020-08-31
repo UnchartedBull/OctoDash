@@ -80,6 +80,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "ajv": "^6.12.4",
     "angular-svg-round-progressbar": "^4.0.0",
+    "compare-versions": "^3.6.0",
     "electron-store": "^6.0.0",
     "got": "^11.5.2",
     "lodash": "^4.17.20",

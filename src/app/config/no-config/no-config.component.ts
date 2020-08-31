@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ElectronService } from 'ngx-electron';
+import compareVersions from 'compare-versions';
 
 import { Config, ConfigService } from '../config.service';
 
@@ -22,11 +23,12 @@ export class NoConfigComponent implements OnInit {
   public configSaved: string;
 
   public objectvalues = Object.values;
+  private octoprintMinVers: string = '1.3.5';
   public octoprintNodes: any = {
     'other': {
-      'display': 'Other (> 1.4.0)',
+      'display': 'Other (> ' + this.octoprintMinVers + ')',
       'name': 'other',
-      'version': '1.4.0',
+      'version': this.octoprintMinVers,
       'url': 'other',
       'disable': false
     }
@@ -162,7 +164,7 @@ export class NoConfigComponent implements OnInit {
         'version': service.txtRecord.version,
         'url': service.host.replace(/\.$/, '') + ":" + service.port + service.txtRecord.path.replace(/\/$/, '') + "/api/",
         // Compare version to make sure it meets the requirement
-        'disable': false
+        'disable': (compareVersions(this.octoprintMinVers, service.txtRecord.version) == -1 ? true : false)
       };
 
       this.octoprintNodes[service.host.replace(/\.$/, '').replace('.', '_')] = node;
