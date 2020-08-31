@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
 
@@ -33,6 +33,7 @@ export class NoConfigComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private notificationService: NotificationService,
+    private changeDetector: ChangeDetectorRef,
   ) {
     try {
       this.ipc = window.require('electron').ipcRenderer;
@@ -57,6 +58,7 @@ export class NoConfigComponent implements OnInit {
 
     this.ipc.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
       this.octoprintNodes = nodes;
+      this.changeDetector.detectChanges();
     });
   }
 
