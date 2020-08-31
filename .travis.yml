@@ -10,8 +10,8 @@ cache:
         - ./node_modules
 
 before_install:
-	- travis_retry sudo apt-get update
-	- travis_retry sudo apt-get install --no-install-recommends --no-upgrade -qq libavahi-compat-libdnssd-dev
+    - travis_retry sudo apt-get update
+    - travis_retry sudo apt-get install --no-install-recommends --no-upgrade -qq libavahi-compat-libdnssd-dev
 
 install:
     - npm install
