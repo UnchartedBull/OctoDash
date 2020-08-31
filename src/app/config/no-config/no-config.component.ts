@@ -218,7 +218,7 @@ export class NoConfigComponent implements OnInit {
     this.router.navigate(['/main-screen']);
   }
 
-  public async increasePage(): Promise<any> {
+  public async increasePage(): Promise<void> {
     this.page += 1;
     if (this.page <= 2) {
       if (JSON.stringify(this.opInstance) != JSON.stringify(this.octoprintNodes['other'])) {
