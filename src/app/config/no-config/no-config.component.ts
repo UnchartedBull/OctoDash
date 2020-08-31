@@ -148,6 +148,7 @@ export class NoConfigComponent implements OnInit {
 
   public changeProgress(): void {
     document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
+    this.changeDetector.detectChanges();
   }
 
   public getDefaultConfig(): Config {
