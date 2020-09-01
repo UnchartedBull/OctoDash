@@ -46,7 +46,6 @@
     }
   },
   "scripts": {
-    "postinstall": "node ./node_modules/.bin/electron-rebuild",
     "ng": "ng",
     "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
     "start:big": "npm-run-all -p ng:serve electron:serve:big",
@@ -104,7 +103,6 @@
     "codelyzer": "^6.0.0",
     "electron": "^10.1.0",
     "electron-builder": "^22.8.0",
-    "electron-rebuild": "^2.0.0",
     "electron-reload": "^1.5.0",
     "eslint": "7.8.0",
     "eslint-config-node": "^4.1.0",
