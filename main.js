@@ -41,6 +41,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true,
     },
     icon: path.join(__dirname, 'src', 'assets', 'icon', 'icon.png'),
   });

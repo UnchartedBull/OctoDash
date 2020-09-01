@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
+import { NotificationService } from './notification/notification.service';
+import { OctoprintScriptService } from './octoprint-script.service';
 
 declare global {
   interface Window {
@@ -19,15 +21,31 @@ declare global {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  public constructor(private service: AppService, private configService: ConfigService, private router: Router) {
+export class AppComponent implements OnInit {
+  public constructor(
+    private service: AppService,
+    private configService: ConfigService,
+    private octoprintScriptService: OctoprintScriptService,
+    private notificationService: NotificationService,
+    private router: Router,
+  ) {}
+
+  public ngOnInit(): void {
     this.initialize();
   }
 
-  private initialize(): void {
+  private async initialize(): Promise<void> {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
+          try {
+            await this.octoprintScriptService.initialize(this.configService.getURL(''));
+          } catch {
+            this.notificationService.setError(
+              "Can't get OctoPrint script!",
+              'Please restart your machine. If the error persists open a new issue on GitHub.',
+            );
+          }
           if (this.configService.isTouchscreen()) {
             this.router.navigate(['/main-screen']);
           } else {

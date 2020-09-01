@@ -27,6 +27,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { OctoprintScriptService } from './octoprint-script.service';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { PrinterService } from './printer.service';
@@ -68,7 +69,7 @@ import { URLSafePipe } from './url.pipe';
     BrowserAnimationsModule,
     MatRippleModule,
   ],
-  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService],
+  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService, OctoprintScriptService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
