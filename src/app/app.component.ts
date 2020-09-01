@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
 
@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     private octoprintScriptService: OctoprintScriptService,
     private notificationService: NotificationService,
     private router: Router,
+    private zone: NgZone,
   ) {}
 
   public ngOnInit(): void {
@@ -39,7 +40,10 @@ export class AppComponent implements OnInit {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
           try {
-            await this.octoprintScriptService.initialize(this.configService.getURL(''));
+            await this.zone.run(async () => {
+              await this.octoprintScriptService.initialize(this.configService.getURL(''));
+              // this.octoprintScriptService.authenticate(this.configService.getAccessKey());
+            });
           } catch {
             this.notificationService.setError(
               "Can't get OctoPrint script!",

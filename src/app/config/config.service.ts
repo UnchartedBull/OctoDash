@@ -254,6 +254,10 @@ export class ConfigService {
   public showThumbnailByDefault(): boolean {
     return this.config.octodash.preferPreviewWhilePrinting;
   }
+
+  public getAccessKey(): string {
+    return this.config.octoprint.accessToken;
+  }
 }
 
 interface HttpHeader {
