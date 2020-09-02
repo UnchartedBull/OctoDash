@@ -42,14 +42,13 @@ function createWindow() {
       nodeIntegration: true,
       enableRemoteModule: true,
       worldSafeExecuteJavaScript: true,
+      // TODO: enable + contextBridge (probably electron-ngx before release 12)
+      contextIsolation: false,
     },
     icon: path.join(__dirname, 'src', 'assets', 'icon', 'icon.png'),
   });
 
   if (dev) {
-    require('electron-reload')(__dirname, {
-      electron: require(`${__dirname}/node_modules/electron`),
-    });
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {

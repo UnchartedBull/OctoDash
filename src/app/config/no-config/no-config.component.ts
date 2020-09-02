@@ -23,7 +23,7 @@ export class NoConfigComponent implements OnInit {
   public configValid: boolean;
   public configSaved: string;
 
-  public enterURLManually = false;
+  public manualURL = false;
   public octoprintNodes: OctoprintNodes;
   public octoprintConnection = false;
   public octoprintConnectionError: string;
@@ -77,6 +77,14 @@ export class NoConfigComponent implements OnInit {
     this.config.octoprint.url = node.url;
     this.config = this.configService.revertConfigForInput(this.config);
     this.increasePage();
+  }
+
+  public enterURLManually(): void {
+    this.config.octoprint.urlSplit = {
+      url: 'localhost',
+      port: 5000,
+    };
+    this.manualURL = true;
   }
 
   public async testOctoprintAPI(): Promise<boolean> {

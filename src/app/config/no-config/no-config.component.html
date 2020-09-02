@@ -49,7 +49,7 @@
     </span>
     <!-- TODO -->
 
-    <div *ngIf="!enterURLManually">
+    <div *ngIf="!manualURL">
       <div class="no-config__discovered-instances__wrapper">
         <span
           *ngFor="let node of octoprintNodes"
@@ -67,9 +67,9 @@
         </span>
         <span class="no-config__discovered-instances__searching" *ngIf="!octoprintNodes">searching ...</span>
       </div>
-      <div class="no-config__discovered-instances__manual" (click)="enterURLManually = true">enter manually</div>
+      <div class="no-config__discovered-instances__manual" (click)="enterURLManually()">enter manually</div>
     </div>
-    <div *ngIf="enterURLManually">
+    <div *ngIf="manualURL">
       <form class="no-config__form" style="margin-top: 5vh">
         <span class="no-config__input-prefix">http://</span>
         <input
@@ -93,7 +93,7 @@
         />
         <p class="no-config__input-prefix" style="margin-top: 8vh">Port 5000 for OctoPrint, Port 80 for OctoPi</p>
       </form>
-      <div class="no-config__discovered-instances__manual" (click)="enterURLManually = false" style="margin-top: 5.5vh">
+      <div class="no-config__discovered-instances__manual" (click)="manualURL = false" style="margin-top: 5.5vh">
         search again
       </div>
     </div>
