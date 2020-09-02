@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
 
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
           try {
             await this.zone.run(async () => {
               await this.octoprintScriptService.initialize(this.configService.getURL(''));
-              // this.octoprintScriptService.authenticate(this.configService.getAccessKey());
+              this.octoprintScriptService.authenticate(this.configService.getAccessKey());
             });
           } catch {
             this.notificationService.setError(

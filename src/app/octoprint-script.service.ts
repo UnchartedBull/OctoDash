@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const OctoPrint: any;
+
 @Injectable()
 export class OctoprintScriptService {
   public loaded = false;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private OctoPrint: any;
   private octoprintURL: string;
 
   async initialize(octoprintURL: string): Promise<void> {
@@ -36,12 +37,12 @@ export class OctoprintScriptService {
   }
 
   public authenticate(accessToken: string): void {
-    this.OctoPrint.options.baseurl = this.octoprintURL;
-    this.OctoPrint.options.apikey = accessToken;
+    OctoPrint.options.baseurl = this.octoprintURL;
+    OctoPrint.options.apikey = accessToken;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public getInstance(): any {
-    return this.OctoPrint;
+    return OctoPrint;
   }
 }
