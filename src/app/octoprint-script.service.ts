@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const OctoPrint: any;
 
@@ -11,11 +10,7 @@ export class OctoprintScriptService {
   async initialize(octoprintURL: string): Promise<void> {
     this.octoprintURL = octoprintURL.replace('api/', '');
     const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
-    const scripts: string[] = [
-      `${octoprintStaticURL}js/lib/jquery/jquery.min.js`,
-      `${octoprintStaticURL}js/lib/lodash.min.js`,
-      `${octoprintStaticURL}webassets/packed_client.js`,
-    ];
+    const scripts: string[] = [`${octoprintStaticURL}webassets/packed_client.js`];
     await this.load(scripts);
   }
 

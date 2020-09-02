@@ -82,6 +82,7 @@
     "compare-versions": "^3.6.0",
     "electron-store": "^6.0.0",
     "got": "^11.5.2",
+    "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "mdns": "^2.5.1",
     "ngx-spinner": "^10.0.1",
