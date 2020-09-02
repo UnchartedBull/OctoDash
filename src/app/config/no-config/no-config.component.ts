@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
+import { OctoprintScriptService } from 'src/app/octoprint-script.service';
 
 import { Config, ConfigService } from '../config.service';
 
@@ -25,6 +26,10 @@ export class NoConfigComponent implements OnInit {
 
   public manualURL = false;
   public octoprintNodes: OctoprintNodes;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private OctoPrint: any;
+
   public octoprintConnection = false;
   public octoprintConnectionError: string;
 
@@ -34,6 +39,8 @@ export class NoConfigComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private changeDetector: ChangeDetectorRef,
+    private octoprintScriptService: OctoprintScriptService,
+    private zone: NgZone,
   ) {
     try {
       this.ipc = window.require('electron').ipcRenderer;
@@ -87,6 +94,22 @@ export class NoConfigComponent implements OnInit {
     this.manualURL = true;
   }
 
+  private async loadOctoprintClient() {
+    try {
+      await this.zone.run(async () => {
+        await this.octoprintScriptService.initialize(
+          `http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`,
+        );
+      });
+    } catch (e) {
+      this.notificationService.setError(
+        "Can't connect to OctoPrint!",
+        `Check the URL/IP and make sure that your firewall allows access to port ${this.config.octoprint.urlSplit.port} on host ${this.config.octoprint.urlSplit.url}.`,
+      );
+      this.decreasePage();
+    }
+  }
+
   public async testOctoprintAPI(): Promise<boolean> {
     const httpHeaders = {
       headers: new HttpHeaders({
@@ -132,9 +155,10 @@ export class NoConfigComponent implements OnInit {
     this.router.navigate(['/main-screen']);
   }
 
-  public async increasePage(): Promise<void> {
+  public increasePage(): void {
     if (this.page === 1) {
       this.ipc.send('stopDiscover');
+      this.loadOctoprintClient();
     }
     this.page += 1;
     if (this.page === 1) {
