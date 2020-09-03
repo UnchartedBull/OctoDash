@@ -2,7 +2,7 @@
   <table class="top-bar">
     <tr>
       <td class="top-bar__back" (click)="decreasePage()">
-        <div *ngIf="page !== 0">
+        <div *ngIf="page > 0">
           <img src="assets/back.svg" class="top-bar__back-icon" />
           back
         </div>
@@ -13,7 +13,7 @@
         </div>
       </td>
       <td class="top-bar__next" (click)="increasePage()">
-        <div *ngIf="page !== totalPages">
+        <div *ngIf="page < totalPages && (manualURL || page === 0)">
           next
           <img src="assets/next.svg" class="top-bar__next-icon" />
         </div>

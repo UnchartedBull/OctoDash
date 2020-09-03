@@ -83,7 +83,7 @@ export class NoConfigComponent implements OnInit {
   public setOctoprintInstance(node: OctoprintNodes): void {
     this.config.octoprint.url = node.url;
     this.config = this.configService.revertConfigForInput(this.config);
-    this.increasePage();
+    this.increasePage(true);
   }
 
   public enterURLManually(): void {
@@ -106,7 +106,7 @@ export class NoConfigComponent implements OnInit {
         "Can't connect to OctoPrint!",
         `Check the URL/IP and make sure that your firewall allows access to port ${this.config.octoprint.urlSplit.port} on host ${this.config.octoprint.urlSplit.url}.`,
       );
-      this.decreasePage();
+      this.page = 1;
     }
   }
 
@@ -155,7 +155,10 @@ export class NoConfigComponent implements OnInit {
     this.router.navigate(['/main-screen']);
   }
 
-  public increasePage(): void {
+  public increasePage(force = false): void {
+    if (this.page === this.totalPages || (!this.manualURL && this.page === 1 && force === false)) {
+      return;
+    }
     if (this.page === 1) {
       this.ipc.send('stopDiscover');
       this.loadOctoprintClient();
@@ -171,7 +174,11 @@ export class NoConfigComponent implements OnInit {
   }
 
   public decreasePage(): void {
-    if (this.page == this.totalPages - 1) {
+console.log(this.page);
+    if (this.page === 0) {
+      return;
+    }
+    if (this.page === this.totalPages - 1) {
       this.config = this.configService.revertConfigForInput(this.config);
     }
     this.page -= 1;
