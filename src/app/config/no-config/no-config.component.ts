@@ -156,7 +156,10 @@ export class NoConfigComponent implements OnInit {
   }
 
   public increasePage(force = false): void {
-    if (this.page === this.totalPages || (!this.manualURL && this.page === 1 && force === false)) {
+    if (this.page >= this.totalPages || (!this.manualURL && this.page === 1 && force === false)) {
+      if (this.page > this.totalPages) {
+        this.page = this.totalPages;
+      }
       return;
     }
     if (this.page === 1) {
@@ -174,8 +177,8 @@ export class NoConfigComponent implements OnInit {
   }
 
   public decreasePage(): void {
-console.log(this.page);
-    if (this.page === 0) {
+    if (this.page <= 0) {
+      this.page = 0;
       return;
     }
     if (this.page === this.totalPages - 1) {
