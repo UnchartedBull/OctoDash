@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Notification, NotificationService } from './notification.service';
@@ -18,7 +18,7 @@ export class NotificationComponent implements OnDestroy {
   };
   public show = false;
 
-  public constructor(private notificationService: NotificationService) {
+  public constructor(private notificationService: NotificationService, private changeDetector: ChangeDetectorRef) {
     this.subscriptions.add(
       this.notificationService
         .getObservable()
@@ -37,6 +37,7 @@ export class NotificationComponent implements OnDestroy {
       this.notification = notification;
       this.show = true;
     }
+    this.changeDetector.detectChanges();
   }
 
   public ngOnDestroy(): void {

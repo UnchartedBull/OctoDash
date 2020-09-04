@@ -38,8 +38,8 @@ export class NoConfigComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private notificationService: NotificationService,
-    private changeDetector: ChangeDetectorRef,
     private octoprintScriptService: OctoprintScriptService,
+    private changeDetector: ChangeDetectorRef,
     private zone: NgZone,
   ) {
     try {
@@ -100,6 +100,7 @@ export class NoConfigComponent implements OnInit {
         await this.octoprintScriptService.initialize(
           `http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`,
         );
+        this.OctoPrint = this.octoprintScriptService.getInstance();
       });
     } catch (e) {
       this.notificationService.setError(
@@ -108,6 +109,36 @@ export class NoConfigComponent implements OnInit {
       );
       this.page = 1;
     }
+  }
+
+  public loginWithOctoPrintUI(): void {
+    this.notificationService.setUpdate(
+      'Login request send!',
+      'Please confirm the request via the popup in the OctoPrint WebUI.',
+    );
+
+    const closeInfo = setTimeout(() => {
+      this.notificationService.closeNotification();
+    }, 3000);
+
+    this.OctoPrint.plugins.appkeys
+      .authenticate('OctoDash')
+      .done((apiKey: string) => {
+        this.config.octoprint.accessToken = apiKey;
+        this.changeDetector.detectChanges();
+        setTimeout(() => {
+          this.increasePage();
+        }, 600);
+      })
+      .fail(() => {
+        this.notificationService.setWarning(
+          'Something went wrong!',
+          "Can' retrieve the API Key, please try again or create one manually and enter it down below.",
+        );
+      })
+      .always(() => {
+        clearTimeout(closeInfo);
+      });
   }
 
   public async testOctoprintAPI(): Promise<boolean> {
@@ -163,7 +194,6 @@ export class NoConfigComponent implements OnInit {
     this.page = this.page + value;
     this.afterNavigation();
     this.changeProgress();
-    console.log(this.page);
   }
 
   private beforeNavigation(value: number): void {

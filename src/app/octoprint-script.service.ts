@@ -12,6 +12,7 @@ export class OctoprintScriptService {
     const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
     const scripts: string[] = [`${octoprintStaticURL}webassets/packed_client.js`];
     await this.load(scripts);
+    OctoPrint.options.baseurl = this.octoprintURL;
   }
 
   private load(scripts: string[]): Promise<void[]> {
@@ -32,7 +33,6 @@ export class OctoprintScriptService {
   }
 
   public authenticate(accessToken: string): void {
-    OctoPrint.options.baseurl = this.octoprintURL;
     OctoPrint.options.apikey = accessToken;
   }
 

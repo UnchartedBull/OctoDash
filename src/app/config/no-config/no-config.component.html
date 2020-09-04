@@ -104,7 +104,9 @@
       Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint
       webinterface or enter an API Key manually.
     </span>
-    <span>DO IT</span>
+    <div class="no-config__login-request-button-wrapper">
+      <span class="no-config__6-finish" (click)="loginWithOctoPrintUI()">send request</span>
+    </div>
     <form class="no-config__form">
       <label for="accessToken" class="no-config__input-label">API Key:</label>
       <input

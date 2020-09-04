@@ -32,6 +32,10 @@ export class NotificationService {
     this.observer.next('close');
   }
 
+  public closeNotification(): void {
+    this.observer.next('close');
+  }
+
   public setError(heading: string, text: string): void {
     if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
       if (this.observer) {
