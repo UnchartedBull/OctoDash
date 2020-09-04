@@ -153,7 +153,7 @@ export class NoConfigComponent implements OnInit {
       });
   }
 
-  public async testOctoprintAPI(): Promise<boolean> {
+  public testOctoprintAPI(): void {
     const httpHeaders = {
       headers: new HttpHeaders({
         'x-api-key': this.config.octoprint.accessToken,
@@ -169,15 +169,14 @@ export class NoConfigComponent implements OnInit {
         this.octoprintConnectionError = error.message;
       },
     );
-    return true;
   }
 
-  public createConfig(): boolean {
+  public createConfig(): void {
     this.configErrors = [];
     this.octoprintConnectionError = null;
     this.config = this.configService.createConfigFromInput(this.config);
     this.validateConfig();
-    return true;
+    this.testOctoprintAPI();
   }
 
   public async validateConfig(): Promise<void> {
@@ -230,7 +229,7 @@ export class NoConfigComponent implements OnInit {
         this.discoverOctoprintInstances();
         break;
       case this.totalPages:
-        this.createConfig;
+        this.createConfig();
         break;
     }
   }

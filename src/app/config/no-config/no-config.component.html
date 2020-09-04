@@ -272,14 +272,14 @@
     <div class="no-config__6-check-wrapper">
       <span class="no-config__6-check">
         <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="configValid" />
-        <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="configValid == false" />
+        <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="!configValid" />
         Config Validation
       </span>
       <span class="no-config__6-errors" *ngFor="let error of configErrors">{{ error }}</span>
       <div *ngIf="configValid">
         <span class="no-config__6-check">
           <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection" />
-          <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection == false" />
+          <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="!octoprintConnection" />
           Octoprint Connection
         </span>
         <span class="no-config__6-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
