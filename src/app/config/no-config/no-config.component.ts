@@ -125,6 +125,18 @@ export class NoConfigComponent implements OnInit {
       .authenticate('OctoDash')
       .done((apiKey: string) => {
         this.config.octoprint.accessToken = apiKey;
+        this.octoprintScriptService.authenticate(apiKey);
+        this.OctoPrint = this.octoprintScriptService.getInstance();
+
+        // FIXME: to be removed before merge
+        this.OctoPrint.printerprofiles
+          .list()
+          .done(profiles => {
+            this.config.printer.name = profiles.profiles._default.name;
+          })
+          .fail(() => console.error('ERR'));
+        // END
+
         this.changeDetector.detectChanges();
         setTimeout(() => {
           this.increasePage();
