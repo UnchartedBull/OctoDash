@@ -1,8 +1,8 @@
 <div class="no-config">
   <table class="top-bar">
     <tr>
-      <td class="top-bar__back" (click)="decreasePage()">
-        <div *ngIf="page > 0">
+      <td class="top-bar__back">
+        <div *ngIf="page > 0" (click)="decreasePage()">
           <img src="assets/back.svg" class="top-bar__back-icon" />
           back
         </div>
@@ -12,14 +12,15 @@
           <div class="no-config__progress-bar" id="progressBar"></div>
         </div>
       </td>
-      <td class="top-bar__next" (click)="increasePage()">
-        <div *ngIf="page < totalPages && (manualURL || page === 0)">
+      <td class="top-bar__next">
+        <div *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))" (click)="increasePage()">
           next
           <img src="assets/next.svg" class="top-bar__next-icon" />
         </div>
       </td>
     </tr>
   </table>
+
   <div *ngIf="page === 0">
     <span class="no-config__1-welcome">Hey there!</span>
     <span class="no-config__text" *ngIf="!configUpdate">
@@ -43,12 +44,11 @@
       <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
   </div>
+
   <div *ngIf="page === 1">
     <span class="no-config__text">
       First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
     </span>
-    <!-- TODO -->
-
     <div *ngIf="!manualURL">
       <div class="no-config__discovered-instances__wrapper">
         <span

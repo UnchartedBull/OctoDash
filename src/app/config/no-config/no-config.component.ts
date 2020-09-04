@@ -83,7 +83,7 @@ export class NoConfigComponent implements OnInit {
   public setOctoprintInstance(node: OctoprintNodes): void {
     this.config.octoprint.url = node.url;
     this.config = this.configService.revertConfigForInput(this.config);
-    this.increasePage(true);
+    this.increasePage();
   }
 
   public enterURLManually(): void {
@@ -155,37 +155,50 @@ export class NoConfigComponent implements OnInit {
     this.router.navigate(['/main-screen']);
   }
 
-  public increasePage(force = false): void {
-    if (this.page >= this.totalPages || (!this.manualURL && this.page === 1 && force === false)) {
-      if (this.page > this.totalPages) {
-        this.page = this.totalPages;
-      }
+  private changePage(value: number): void {
+    if (this.page + value > this.totalPages || this.page + value < 0) {
       return;
     }
-    if (this.page === 1) {
-      this.ipc.send('stopDiscover');
-      this.loadOctoprintClient();
-    }
-    this.page += 1;
-    if (this.page === 1) {
-      this.discoverOctoprintInstances();
-    }
-    if (this.page === this.totalPages) {
-      this.createConfig();
-    }
+    this.beforeNavigation(value);
+    this.page = this.page + value;
+    this.afterNavigation();
     this.changeProgress();
+    console.log(this.page);
+  }
+
+  private beforeNavigation(value: number): void {
+    switch (this.page) {
+      case 1:
+        this.ipc.send('stopDiscover');
+        if (value > 0) {
+          this.loadOctoprintClient();
+        }
+        break;
+      case this.totalPages - 1:
+        if (value < 0) {
+          this.config = this.configService.revertConfigForInput(this.config);
+        }
+        break;
+    }
+  }
+
+  private afterNavigation(): void {
+    switch (this.page) {
+      case 1:
+        this.discoverOctoprintInstances();
+        break;
+      case this.totalPages:
+        this.createConfig;
+        break;
+    }
+  }
+
+  public increasePage(): void {
+    this.changePage(1);
   }
 
   public decreasePage(): void {
-    if (this.page <= 0) {
-      this.page = 0;
-      return;
-    }
-    if (this.page === this.totalPages - 1) {
-      this.config = this.configService.revertConfigForInput(this.config);
-    }
-    this.page -= 1;
-    this.changeProgress();
+    this.changePage(-1);
   }
 
   public changeProgress(): void {
