@@ -1,6 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 @include mat-core();
 
 // TODO: needed for ripple effect, need to check why
@@ -11,7 +11,7 @@ $OctoPrintDash-theme: mat-dark-theme($OctoPrintDash-primary, $OctoPrintDash-acce
 @include angular-material-theme($OctoPrintDash-theme);
 
 *:not(path):not(svg) {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #f5f6fa;
   font-size: 4.3vw;
   margin: 0;
@@ -19,11 +19,16 @@ $OctoPrintDash-theme: mat-dark-theme($OctoPrintDash-primary, $OctoPrintDash-acce
   overflow: hidden;
 }
 
-* {
+*,
+*::after,
+*::before {
   -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-app-region: no-drag;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   user-select: none;
+  cursor: default;
 }
 
 html,
