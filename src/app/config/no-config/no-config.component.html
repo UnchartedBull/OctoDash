@@ -147,31 +147,33 @@
     <form class="no-config__form no-config__2-form">
       <label for="feedLength" class="no-config__input-label">Feed Length:</label>
       <input
-        type="number"
+        type="range"
         id="feedLength"
         class="no-config__input no-config__2-input"
         [(ngModel)]="config.filament.feedLength"
         name="feedLength"
         step="1"
         min="0"
-        style="width: 48vw"
+        max="2000"
+        style="width: 38vw; padding: 0; margin-top: 8vh; margin-bottom: 3vh;"
         required
       />
-      <span class="no-config__input-small-suffix" style="padding-right: 3vw">mm</span>
+      <span class="no-config__input-small-suffix" style="padding-right: 3vw">{{ config.filament.feedLength }} mm</span>
       <br />
       <label for="feedSpeed" class="no-config__input-label-small">Feed Speed:</label>
       <input
-        type="number"
+        type="range"
         id="feedSpeed"
         class="no-config__input no-config__2-input"
         [(ngModel)]="config.filament.feedSpeed"
         name="feedSpeed"
         step="0.5"
         min="0"
-        style="width: 48vw"
+        max="2000"
+        style="width: 38vw; padding: 0; margin-top: 8vh; margin-bottom: 3vh;"
         required
       />
-      <span class="no-config__input-small-suffix">mm/s</span>
+      <span class="no-config__input-small-suffix">{{ config.filament.feedSpeed }} mm/s</span>
       <div class="no-config-explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw">
         These values will be used during the Filament Change Process. Be sure to have your Feed Length (length between
         Extruder and Hotend) and Feed Speed configured correctly.
