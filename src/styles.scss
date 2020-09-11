@@ -19,11 +19,16 @@ $OctoDash-theme: mat-dark-theme($OctoDash-primary, $OctoDash-accent, $OctoDash-w
   overflow: hidden;
 }
 
-* {
+*,
+*::after,
+*::before {
   -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-app-region: no-drag;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   user-select: none;
+  cursor: default;
 }
 
 html,
