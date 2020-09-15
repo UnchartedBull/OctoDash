@@ -35,6 +35,7 @@
     border: 2px solid #dcdde1;
     border-radius: 2.5vw;
     width: 55vw;
+    line-height: 125%;
 
     &__numeric {
       border-radius: 0;
@@ -50,7 +51,8 @@
         border: 2px solid #dcdde1;
         border-radius: 2.5vw 0 0 2.5vw;
         margin-right: -2px;
-        font-size: 4.4vw;
+        font-size: 4.3vw;
+        line-height: 125%;
 
         &-increase {
           border-radius: 0 2.5vw 2.5vw 0;
