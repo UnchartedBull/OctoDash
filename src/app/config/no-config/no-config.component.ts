@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
@@ -153,22 +153,24 @@ export class NoConfigComponent implements OnInit {
       });
   }
 
-  public testOctoprintAPI(): void {
-    const httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
-      }),
-    };
-    this.http.get(this.config.octoprint.url + 'connection', httpHeaders).subscribe(
-      (): void => {
-        this.octoprintConnection = true;
-        this.saveConfig();
-      },
-      (error: HttpErrorResponse): void => {
-        this.octoprintConnection = false;
-        this.octoprintConnectionError = error.message;
-      },
-    );
+  changeFeedLength(amount: number): void {
+    if (this.config.filament.feedLength + amount < 0) {
+      this.config.filament.feedLength = 0;
+    } else if (this.config.filament.feedLength + amount > 9999) {
+      this.config.filament.feedLength = 9999;
+    } else {
+      this.config.filament.feedLength += amount;
+    }
+  }
+
+  changeFeedSpeed(amount: number): void {
+    if (this.config.filament.feedSpeed + amount < 0) {
+      this.config.filament.feedSpeed = 0;
+    } else if (this.config.filament.feedSpeed + amount > 999) {
+      this.config.filament.feedSpeed = 999;
+    } else {
+      this.config.filament.feedSpeed += amount;
+    }
   }
 
   public createConfig(): void {
@@ -176,7 +178,6 @@ export class NoConfigComponent implements OnInit {
     this.octoprintConnectionError = null;
     this.config = this.configService.createConfigFromInput(this.config);
     this.validateConfig();
-    this.testOctoprintAPI();
   }
 
   public async validateConfig(): Promise<void> {
@@ -267,7 +268,7 @@ export class NoConfigComponent implements OnInit {
         thickness: 1.75,
         density: 1.25,
         feedLength: 0,
-        feedSpeed: 30,
+        feedSpeed: 20,
         feedSpeedSlow: 3,
         purgeDistance: 30,
         useM600: false,

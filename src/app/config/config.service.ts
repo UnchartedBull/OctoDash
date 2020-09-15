@@ -431,11 +431,11 @@ const schema = {
         },
         feedSpeed: {
           $id: '#/properties/filament/properties/feedSpeed',
-          type: 'integer',
+          type: 'number',
         },
         feedSpeedSlow: {
           $id: '#/properties/filament/properties/feedSpeedSlow',
-          type: 'integer',
+          type: 'number',
         },
         purgeDistance: {
           $id: '#/properties/filament/properties/purgeDistance',

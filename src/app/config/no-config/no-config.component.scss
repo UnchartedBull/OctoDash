@@ -30,11 +30,39 @@
 
   &__input {
     background: transparent;
-    margin-top: 9vh;
-    padding: 1.5vw 3vh;
+    margin-top: 7vh;
+    padding: 3vh 2.5vw;
     border: 2px solid #dcdde1;
     border-radius: 2.5vw;
     width: 55vw;
+
+    &__numeric {
+      border-radius: 0;
+
+      &-wrapper {
+        display: inline-table;
+        text-align: center;
+      }
+
+      &-adjust {
+        display: inline-table;
+        padding: 3vh 3vw;
+        border: 2px solid #dcdde1;
+        border-radius: 2.5vw 0 0 2.5vw;
+        margin-right: -2px;
+        font-size: 4.4vw;
+
+        &-increase {
+          border-radius: 0 2.5vw 2.5vw 0;
+          margin-left: -2px;
+        }
+      }
+
+      &:focus {
+        border: 2px solid #dcdde1 !important;
+        border-bottom: 2px solid #44bd32 !important;
+      }
+    }
 
     &:focus {
       outline: 0;
@@ -47,7 +75,9 @@
 
       &-suffix {
         font-size: 3vw;
-        padding-left: 1vw;
+        display: inline-block;
+        opacity: 0.6;
+        margin-right: 10vw;
       }
     }
 
