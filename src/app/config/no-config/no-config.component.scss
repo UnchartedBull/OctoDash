@@ -30,11 +30,41 @@
 
   &__input {
     background: transparent;
-    margin-top: 9vh;
-    padding: 1.5vw 3vh;
+    margin-top: 7vh;
+    padding: 3vh 2.5vw;
     border: 2px solid #dcdde1;
     border-radius: 2.5vw;
     width: 55vw;
+    line-height: 125%;
+
+    &__numeric {
+      border-radius: 0;
+
+      &-wrapper {
+        display: inline-table;
+        text-align: center;
+      }
+
+      &-adjust {
+        display: inline-flex;
+        padding: 3vh 3vw;
+        border: 2px solid #dcdde1;
+        border-radius: 2.5vw 0 0 2.5vw;
+        margin-right: -2px;
+        font-size: 4.3vw;
+        line-height: 125%;
+
+        &-increase {
+          border-radius: 0 2.5vw 2.5vw 0;
+          margin-left: -2px;
+        }
+      }
+
+      &:focus {
+        border: 2px solid #dcdde1 !important;
+        border-bottom: 2px solid #44bd32 !important;
+      }
+    }
 
     &:focus {
       outline: 0;
@@ -47,7 +77,9 @@
 
       &-suffix {
         font-size: 3vw;
-        padding-left: 1vw;
+        display: inline-block;
+        opacity: 0.6;
+        margin-right: 10vw;
       }
     }
 
@@ -115,6 +147,61 @@
     margin-top: 4vh;
     padding: 2vh 4vw;
     text-align: center;
+  }
+
+  &__discovered-instances {
+    &__wrapper {
+      height: 40vh;
+      padding: 4vh 3vw;
+      margin-right: 2vw;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    &__searching {
+      display: block;
+      text-align: center;
+      margin-top: 10vh;
+      font-size: 0.8rem;
+    }
+
+    &__node {
+      display: block;
+      background-color: #718093;
+      border-radius: 1vw;
+      margin-bottom: 2vh;
+      padding: 2vh 2vw;
+
+      &-name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.8rem;
+        float: left;
+        width: 90%;
+      }
+
+      &-details {
+        font-size: 0.55rem;
+        opacity: 0.7;
+      }
+
+      &-connect-icon {
+        height: 10vh;
+        float: right;
+        margin-top: 1.8vh;
+      }
+    }
+
+    &__manual {
+      text-align: center;
+      font-size: 0.7rem;
+      line-height: 14vh;
+    }
+  }
+
+  &__login-request-button-wrapper {
+    text-align: center;
+    padding: 8vh 0 0;
   }
 
   &__1 {

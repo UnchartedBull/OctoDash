@@ -22,11 +22,13 @@ import { FilesComponent } from './files/files.component';
 import { JobStatusComponent } from './job-status/job-status.component';
 import { JobService } from './job.service';
 import { LayerProgressComponent } from './layer-progress/layer-progress.component';
+import { LongPress } from './long-press.directive';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { OctoprintScriptService } from './octoprint-script.service';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { PrinterService } from './printer.service';
@@ -39,23 +41,24 @@ import { URLSafePipe } from './url.pipe';
   declarations: [
     AppComponent,
     BottomBarComponent,
-    PrinterStatusComponent,
-    JobStatusComponent,
-    LayerProgressComponent,
-    InvalidConfigComponent,
-    NoConfigComponent,
-    PrintControlComponent,
-    NotificationComponent,
-    MainMenuComponent,
     ControlComponent,
-    MainScreenComponent,
-    MainScreenNoTouchComponent,
     FilamentComponent,
     FilesComponent,
+    InvalidConfigComponent,
+    JobStatusComponent,
+    LayerProgressComponent,
+    LongPress,
+    MainMenuComponent,
+    MainScreenComponent,
+    MainScreenNoTouchComponent,
+    NoConfigComponent,
+    NotificationComponent,
+    PrintControlComponent,
+    PrinterStatusComponent,
     SettingsComponent,
-    URLSafePipe,
     StandbyComponent,
     UpdateComponent,
+    URLSafePipe,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,7 @@ import { URLSafePipe } from './url.pipe';
     BrowserAnimationsModule,
     MatRippleModule,
   ],
-  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService],
+  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService, OctoprintScriptService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

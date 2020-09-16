@@ -12,6 +12,10 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // This is an ugly hack, but the OctoPrint JS Library does require JQuery to be globally available
+      window.$ = require('jquery');
+    </script>
   </head>
 
   <body lang="en-US">

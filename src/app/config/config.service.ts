@@ -254,6 +254,10 @@ export class ConfigService {
   public showThumbnailByDefault(): boolean {
     return this.config.octodash.preferPreviewWhilePrinting;
   }
+
+  public getAccessKey(): string {
+    return this.config.octoprint.accessToken;
+  }
 }
 
 interface HttpHeader {
@@ -427,11 +431,11 @@ const schema = {
         },
         feedSpeed: {
           $id: '#/properties/filament/properties/feedSpeed',
-          type: 'integer',
+          type: 'number',
         },
         feedSpeedSlow: {
           $id: '#/properties/filament/properties/feedSpeedSlow',
-          type: 'integer',
+          type: 'number',
         },
         purgeDistance: {
           $id: '#/properties/filament/properties/purgeDistance',

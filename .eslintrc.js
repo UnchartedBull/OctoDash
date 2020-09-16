@@ -17,7 +17,7 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'import/no-unresolved': 'off',
-    camelcase: 'warn',
+    'camelcase': 'warn',
     'simple-import-sort/sort': 'warn',
     'sort-imports': 'off',
     'import/first': 'warn',
@@ -40,6 +40,12 @@ module.exports = {
             'newlines-between': 'always',
           },
         ],
+      },
+    },
+    {
+      files: '**/*.js',
+      env: {
+        node: true,
       },
     },
   ],
