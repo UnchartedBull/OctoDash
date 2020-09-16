@@ -1,23 +1,26 @@
 <div class="no-config">
   <table class="top-bar">
     <tr>
-      <td class="top-bar__back" (click)="decreasePage()" *ngIf="page !== 0">
-        <img src="assets/back.svg" class="top-bar__back-icon" />
-        back
+      <td class="top-bar__back">
+        <div *ngIf="page > 0" (click)="decreasePage()">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
+        </div>
       </td>
-      <td class="top-bar__back" *ngIf="page === 0"></td>
       <td class="top-bar__center">
         <div class="no-config__progress-bar-wrapper">
           <div class="no-config__progress-bar" id="progressBar"></div>
         </div>
       </td>
-      <td class="top-bar__next" (click)="increasePage()" *ngIf="page !== totalPages">
-        next
-        <img src="assets/next.svg" class="top-bar__next-icon" />
+      <td class="top-bar__next">
+        <div *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))" (click)="increasePage()">
+          next
+          <img src="assets/next.svg" class="top-bar__next-icon" />
+        </div>
       </td>
-      <td class="top-bar__next" *ngIf="page === totalPages"></td>
     </tr>
   </table>
+
   <div *ngIf="page === 0">
     <span class="no-config__1-welcome">Hey there!</span>
     <span class="no-config__text" *ngIf="!configUpdate">
@@ -41,9 +44,88 @@
       <fa-icon [icon]="['fas', 'smile']"></fa-icon>
     </span>
   </div>
+
   <div *ngIf="page === 1">
     <span class="no-config__text">
-      First, tell me some facts about your printer so I can personalize OctoDash for you.
+      First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
+    </span>
+    <div *ngIf="!manualURL">
+      <div class="no-config__discovered-instances__wrapper">
+        <span
+          *ngFor="let node of octoprintNodes"
+          class="no-config__discovered-instances__node"
+          (click)="setOctoprintInstance(node)"
+        >
+          <div class="no-config__discovered-instances__node-name">
+            {{ node.name }}
+            <br />
+            <span class="no-config__discovered-instances__node-details">
+              Version {{ node.version }}, URL: {{ node.url.replace('/api/', '') }}
+            </span>
+          </div>
+          <img src="assets/connect.svg" class="no-config__discovered-instances__node-connect-icon" />
+        </span>
+        <span class="no-config__discovered-instances__searching" *ngIf="!octoprintNodes">searching ...</span>
+      </div>
+      <div class="no-config__discovered-instances__manual" (click)="enterURLManually()">enter manually</div>
+    </div>
+    <div *ngIf="manualURL">
+      <form class="no-config__form" style="margin-top: 5vh">
+        <span class="no-config__input-prefix">http://</span>
+        <input
+          type="text"
+          id="octoprintURLName"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.url"
+          name="octoprintURLName"
+          required
+          style="width: 42.5vw"
+        />
+        :
+        <input
+          type="text"
+          id="octoprintURLPort"
+          class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.port"
+          name="octoprintURLPort"
+          required
+          style="width: 14vw"
+        />
+        <p class="no-config__input-prefix" style="margin-top: 8vh">
+          Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
+        </p>
+      </form>
+      <div class="no-config__discovered-instances__manual" (click)="manualURL = false" style="margin-top: 5.5vh">
+        search again
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="page === 2">
+    <span class="no-config__text">
+      Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint
+      webinterface or enter an API Key manually.
+    </span>
+    <div class="no-config__login-request-button-wrapper">
+      <span class="no-config__6-finish" (click)="loginWithOctoPrintUI()">send request</span>
+    </div>
+    <form class="no-config__form">
+      <label for="accessToken" class="no-config__input-label">API Key:</label>
+      <input
+        type="text"
+        id="accessToken"
+        class="no-config__input"
+        [(ngModel)]="this.config.octoprint.accessToken"
+        name="accessToken"
+        style="width: 67vw"
+        required
+      />
+    </form>
+  </div>
+  <!-- TODO: remove page 3 once the OctoPrint client library is fully implemented -->
+  <div *ngIf="page === 3">
+    <span class="no-config__text">
+      Now tell me some facts about your printer so I can personalize OctoDash for you.
     </span>
     <form class="no-config__form">
       <label for="printerName" class="no-config__input-label">Printer Name:</label>
@@ -63,82 +145,98 @@
       Wiki.
     </div>
   </div>
-  <div *ngIf="page === 2">
+  <div *ngIf="page === 4">
     <span class="no-config__text">I also need some information about your extruder.</span>
     <form class="no-config__form no-config__2-form">
       <label for="feedLength" class="no-config__input-label">Feed Length:</label>
-      <input
-        type="number"
-        id="feedLength"
-        class="no-config__input no-config__2-input"
-        [(ngModel)]="config.filament.feedLength"
-        name="feedLength"
-        step="1"
-        min="0"
-        style="width: 48vw"
-        required
-      />
-      <span class="no-config__input-small-suffix" style="padding-right: 3vw">mm</span>
+      <div class="no-config__input__numeric-wrapper" style="width: 63vw">
+        <span
+          class="no-config__input__numeric-adjust"
+          matRipple
+          [matRippleUnbounded]="false"
+          [matRippleCentered]="false"
+          long-press
+          [duration]="650"
+          [frequency]="80"
+          (onShortPress)="changeFeedLength(-1)"
+          (onLongPressing)="changeFeedLength(-5)"
+        >
+          -
+        </span>
+        <input
+          type="number"
+          id="feedLength"
+          class="no-config__input no-config__input__numeric"
+          [(ngModel)]="config.filament.feedLength"
+          name="feedLength"
+          min="0"
+          style="width: 17vw"
+          required
+        />
+        <span
+          class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase"
+          matRipple
+          [matRippleUnbounded]="false"
+          [matRippleCentered]="false"
+          long-press
+          [duration]="650"
+          [frequency]="80"
+          (onShortPress)="changeFeedLength(1)"
+          (onLongPressing)="changeFeedLength(5)"
+        >
+          +
+        </span>
+        <span class="no-config__input-small-suffix" style="margin-left: -16.5vw">mm</span>
+      </div>
       <br />
       <label for="feedSpeed" class="no-config__input-label-small">Feed Speed:</label>
-      <input
-        type="number"
-        id="feedSpeed"
-        class="no-config__input no-config__2-input"
-        [(ngModel)]="config.filament.feedSpeed"
-        name="feedSpeed"
-        step="0.5"
-        min="0"
-        style="width: 48vw"
-        required
-      />
-      <span class="no-config__input-small-suffix">mm/s</span>
+      <div class="no-config__input__numeric-wrapper" style="width: 68.2vw">
+        <span
+          class="no-config__input__numeric-adjust"
+          matRipple
+          [matRippleUnbounded]="false"
+          [matRippleCentered]="false"
+          long-press
+          [duration]="650"
+          [frequency]="150"
+          (onShortPress)="changeFeedSpeed(-0.5)"
+          (onLongPressing)="changeFeedSpeed(-1)"
+        >
+          -
+        </span>
+        <input
+          type="number"
+          id="feedSpeed"
+          class="no-config__input no-config__input__numeric"
+          [(ngModel)]="config.filament.feedSpeed"
+          name="feedSpeed"
+          min="0"
+          style="width: 20vw"
+          required
+        />
+        <span
+          class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase"
+          matRipple
+          [matRippleUnbounded]="false"
+          [matRippleCentered]="false"
+          long-press
+          [duration]="650"
+          [frequency]="150"
+          (onShortPress)="changeFeedSpeed(0.5)"
+          (onLongPressing)="changeFeedSpeed(1)"
+        >
+          +
+        </span>
+        <span class="no-config__input-small-suffix" style="margin-left: -19vw">mm/s</span>
+      </div>
+
       <div class="no-config-explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw">
-        These values will be used during the Filament Change Process. Be sure to have your Feed Length (length between
-        Extruder and Hotend) and Feed Speed configured correctly.
+        These values will be used during the Filament Change Process. Make sure to have your Feed Length (distance
+        Extruder to Hotend) and Feed Speed configured correctly.
       </div>
     </form>
   </div>
-  <div *ngIf="page === 3">
-    <span class="no-config__text">
-      Now I need to know something about your OctoPrint setup, so I can talk to your printer.
-    </span>
-    <form class="no-config__form">
-      <label for="octoprintURLName" class="no-config__input-label">URL:</label>
-      <span class="no-config__input-prefix">http://</span>
-      <input
-        type="text"
-        id="octoprintURLName"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.urlSplit.url"
-        name="octoprintURLName"
-        required
-        style="width: 42.5vw"
-      />
-      :
-      <input
-        type="text"
-        id="octoprintURLPort"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.urlSplit.port"
-        name="octoprintURLPort"
-        required
-        style="width: 14vw"
-      />
-      <br />
-      <label for="accessToken" class="no-config__input-label">API Key:</label>
-      <input
-        type="text"
-        id="accessToken"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.accessToken"
-        name="accessToken"
-        style="width: 67vw"
-        required
-      />
-    </form>
-  </div>
-  <div *ngIf="page === 4">
+  <div *ngIf="page === 5">
     <span class="no-config__text">And now personalize me to your liking.</span>
     <form class="no-config__form">
       <div class="no-config__checkbox-container" (click)="config.octodash.touchscreen = !config.octodash.touchscreen">
@@ -148,6 +246,8 @@
         Use Touchscreen
       </div>
       <br />
+      <!-- TODO: remove page 3 once the OctoPrint client library is fully implemented and set value to 1500 by default -->
+      <!-- Possible replacements: Screensaver once done / Anonymous Tracking (if that ever gets implemented) -->
       <label for="octodashPolling" class="no-config__input-label">Value Refresh Interval:</label>
       <input
         type="number"
@@ -165,7 +265,7 @@
       </div>
     </form>
   </div>
-  <div *ngIf="page === 5">
+  <div *ngIf="page === 6">
     <span class="no-config__text">What plugins are you running?</span>
     <div style="text-align: center">
       <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
@@ -227,24 +327,20 @@
       </div>
     </div>
   </div>
-  <div *ngIf="page === 6">
+  <div *ngIf="page === 7">
     <span class="no-config__text">Great! I'll check everything.</span>
     <div class="no-config__6-check-wrapper">
       <span class="no-config__6-check">
+        <img src="assets/checkmark.svg" class="no-config__6-check-icon" />
+        Octoprint Connection
+      </span>
+      <span class="no-config__6-check">
         <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="configValid" />
-        <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="configValid == false" />
-        Config Validation
+        <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="!configValid" />
+        Validating Config
       </span>
       <span class="no-config__6-errors" *ngFor="let error of configErrors">{{ error }}</span>
       <div *ngIf="configValid">
-        <span class="no-config__6-check">
-          <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection" />
-          <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="octoprintConnection == false" />
-          Octoprint Connection
-        </span>
-        <span class="no-config__6-errors" *ngIf="octoprintConnectionError">{{ octoprintConnectionError }}</span>
-      </div>
-      <div *ngIf="configValid && octoprintConnection">
         <span class="no-config__6-check">
           <img src="assets/checkmark.svg" class="no-config__6-check-icon" *ngIf="!configSaved" />
           <img src="assets/error.svg" class="no-config__6-check-icon" *ngIf="configSaved" />
@@ -252,13 +348,7 @@
         </span>
         <span class="no-config__6-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>
-      <span
-        *ngIf="configValid && octoprintConnection && !configSaved"
-        class="no-config__6-finish"
-        (click)="finishWizard()"
-      >
-        done
-      </span>
+      <span *ngIf="configValid && !configSaved" class="no-config__6-finish" (click)="finishWizard()">done</span>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "OctoPrintDash": {
+    "OctoDash": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,6 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
+            "allowedCommonJsDependencies": ["angular-svg-round-progressbar"],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -40,9 +41,7 @@
                 "output": "/"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -79,18 +78,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "OctoPrintDash:build"
+            "browserTarget": "OctoDash:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "OctoPrintDash:build:production"
+              "browserTarget": "OctoDash:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OctoPrintDash:build"
+            "browserTarget": "OctoDash:build"
           }
         },
         "test": {
@@ -100,46 +99,34 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/assets/icon/icon-main-title.svg"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/assets/icon/icon-main-title.svg"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "OctoPrintDash:serve"
+            "devServerTarget": "OctoDash:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "OctoPrintDash:serve:production"
+              "devServerTarget": "OctoDash:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "OctoPrintDash",
+  "defaultProject": "OctoDash",
   "cli": {
     "analytics": "e1569209-2b82-4195-9c15-0669a78feccb"
   }
