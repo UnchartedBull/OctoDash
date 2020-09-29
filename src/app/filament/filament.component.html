@@ -30,8 +30,7 @@
           {{ spool.displayName }}
         </td>
         <td class="filament-filaments__weight-left">
-          {{ getSpoolWeightLeft(spool.weight, spool.used) }}
-          <span style="font-size: 60%">g left</span>
+          {{ getSpoolWeightLeft(spool.weight, spool.used) }}<span style="font-size: 60%">g left</span>
         </td>
       </tr>
     </table>
@@ -62,11 +61,10 @@
           </div>
         </div>
         <div class="filament-heating__controller-value" colspan="2">
-          {{ isHeating ? hotendTemperature : hotendTarget }}
-          <span class="filament-heating__controller-value-unit">°C</span>
+          {{ isHeating ? hotendTemperature : hotendTarget
+          }}<span class="filament-heating__controller-value-unit">°C</span>
           <span class="filament-heating__controller-current" *ngIf="isHeating">
-            /{{ hotendTarget }}
-            <span>°C</span>
+            /{{ hotendTarget }}<span>°C</span>
           </span>
         </div>
         <div class="filament-heating__controller-row">
@@ -93,9 +91,8 @@
         <span class="filament-heating__information-name">{{ selectedSpool.profile.vendor }}</span>
         <div class="filament-heating__information-offset-wrapper">
           <span class="filament-heating__information-offset-value">
-            {{ getSpoolTemperatureOffset() }}
+            {{ getSpoolTemperatureOffset() }}<span class="filament-heating__information-offset-indicator">°C</span>
           </span>
-          <span class="filament-heating__information-offset-indicator">°C</span>
         </div>
       </div>
     </div>

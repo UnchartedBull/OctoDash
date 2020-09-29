@@ -9,12 +9,10 @@
     >
       <img src="assets/nozzle.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.nozzle.current }}
-        <span class="printer-status__unit">°C</span>
+        {{ printerStatus.nozzle.current }}<span class="printer-status__unit">°C</span>
       </span>
       <span class="printer-status__set-value" *ngIf="printerStatus.nozzle.set">
-        /{{ printerStatus.nozzle.set }}
-        <span class="unit">°C</span>
+        /{{ printerStatus.nozzle.set }}<span class="unit">°C</span>
       </span>
     </td>
     <td
@@ -26,12 +24,10 @@
     >
       <img src="assets/heat-bed.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.heatbed.current }}
-        <span class="printer-status__unit">°C</span>
+        {{ printerStatus.heatbed.current }}<span class="printer-status__unit">°C</span>
       </span>
       <span class="printer-status__set-value" *ngIf="printerStatus.heatbed.set">
-        /{{ printerStatus.heatbed.set }}
-        <span class="unit">°C</span>
+        /{{ printerStatus.heatbed.set }}<span class="unit">°C</span>
       </span>
     </td>
     <td
@@ -42,8 +38,7 @@
     >
       <img src="assets/fan.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.fan }}
-        <span class="printer-status__unit">%</span>
+        {{ printerStatus.fan }}<span class="printer-status__unit">%</span>
       </span>
     </td>
   </tr>
@@ -98,8 +93,7 @@
       matRipple
       [matRippleUnbounded]="false"
     >
-      {{ this.hotendTarget }}
-      <span class="quick-control__controller-value-unit">°C</span>
+      {{ this.hotendTarget }}<span class="quick-control__controller-value-unit">°C</span>
     </div>
     <div
       class="quick-control__controller-value"
@@ -109,8 +103,7 @@
       matRipple
       [matRippleUnbounded]="false"
     >
-      {{ this.heatbedTarget }}
-      <span class="quick-control__controller-value-unit">°C</span>
+      {{ this.heatbedTarget }}<span class="quick-control__controller-value-unit">°C</span>
     </div>
     <div
       class="quick-control__controller-value"

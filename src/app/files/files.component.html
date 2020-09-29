@@ -49,10 +49,7 @@
     <div *ngIf="content.type === 'folder'" (click)="openFolder(content.path)" matRipple [matRippleUnbounded]="false">
       <img src="assets/folder.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value">
-          {{ content.files }}
-          <span class="files__info-unit">files</span>
-        </span>
+        <span class="files__info-value"> {{ content.files }} <span class="files__info-unit">files</span> </span>
       </div>
       <span class="files__name">
         {{ content.name }}
@@ -67,17 +64,12 @@
     >
       <img src="assets/object.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value">
-          {{ content.size }}
-          <span class="files__info-unit">mb</span>
-        </span>
+        <span class="files__info-value"> {{ content.size }}<span class="files__info-unit">mb</span> </span>
         <span class="files__info-value" *ngIf="content.hasOwnProperty('filamentWeight')">
-          {{ content.filamentWeight }}
-          <span class="files__info-unit">g</span>
+          {{ content.filamentWeight }}<span class="files__info-unit">g</span>
         </span>
         <span class="files__info-value" *ngIf="content.hasOwnProperty('printTime')">
-          {{ content.printTime }}
-          <span class="files__info-unit">h</span>
+          {{ content.printTime }}<span class="files__info-unit">h</span>
         </span>
       </div>
       <span class="files__name">
@@ -97,17 +89,12 @@
     <img [src]="fileDetail.thumbnail" class="file__render" />
     <table class="file__details">
       <tr>
-        <td>
-          {{ fileDetail.size }}
-          <span class="file__details-name">mb</span>
-        </td>
+        <td>{{ fileDetail.size }}<span class="file__details-name">mb</span></td>
         <td *ngIf="fileDetail.hasOwnProperty('printTime')">
-          {{ fileDetail.printTime }}
-          <span class="file__details-name">h</span>
+          {{ fileDetail.printTime }}<span class="file__details-name">h</span>
         </td>
         <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">
-          {{ fileDetail.filamentWeight }}
-          <span class="file__details-name">g</span>
+          {{ fileDetail.filamentWeight }}<span class="file__details-name">g</span>
         </td>
       </tr>
     </table>
