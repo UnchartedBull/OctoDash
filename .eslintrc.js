@@ -4,6 +4,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'simple-import-sort', 'prettier'],
   extends: [
     'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -17,7 +18,9 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'import/no-unresolved': 'off',
-    'camelcase': 'warn',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars-experimental': 'warn',
+    camelcase: 'warn',
     'simple-import-sort/sort': 'warn',
     'sort-imports': 'off',
     'import/first': 'warn',

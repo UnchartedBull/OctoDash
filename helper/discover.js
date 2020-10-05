@@ -1,37 +1,37 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
 
-const mdns = require('mdns');
 const compareVersions = require('compare-versions');
 
 const minimumVersion = '1.3.5';
-let mdnsBrowser;
+let browser;
 let nodes = [];
 
 function discoverNodes(window) {
+  const bonjour = require('bonjour')();
   nodes = [];
-  mdnsBrowser = mdns.createBrowser(mdns.tcp('octoprint'));
-  mdnsBrowser.on('serviceUp', service => {
+  browser = bonjour.find({ type: 'octoprint' });
+  browser.on('up', service => {
     nodes.push({
-      id: service.interfaceIndex,
+      id: service.addresses[0] + service.port,
       name: service.name,
-      version: service.txtRecord.version,
-      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txtRecord.path}api/`,
-      disable: compareVersions(minimumVersion, service.txtRecord.version) === -1,
+      version: service.txt.version,
+      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}api/`,
+      disable: compareVersions(minimumVersion, service.txt.version) === -1,
     });
     sendNodes(window);
   });
 
-  mdnsBrowser.on('serviceDown', service => {
+  browser.on('down', service => {
     nodes = nodes.filter(node => node.id !== service.interfaceIndex);
     sendNodes(window);
   });
 
-  mdnsBrowser.start();
+  browser.start();
 }
 
 function stopDiscovery() {
-  mdnsBrowser.stop();
+  browser.stop();
 }
 
 function sendNodes(window) {

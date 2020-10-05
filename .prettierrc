@@ -9,5 +9,5 @@
   "semi": true,
   "singleQuote": true,
   "trailingComma": "all",
-  "htmlWhitespaceSensitivity": "ignore"
+  "htmlWhitespaceSensitivity": "css"
 }
