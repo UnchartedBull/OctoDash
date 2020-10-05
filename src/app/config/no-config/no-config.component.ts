@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
@@ -35,7 +34,6 @@ export class NoConfigComponent implements OnInit {
 
   public constructor(
     private configService: ConfigService,
-    private http: HttpClient,
     private router: Router,
     private notificationService: NotificationService,
     private octoprintScriptService: OctoprintScriptService,
@@ -258,6 +256,7 @@ export class NoConfigComponent implements OnInit {
         name: '',
         xySpeed: 150,
         zSpeed: 5,
+        zBabystepGCode: 'M290 Z',
         defaultTemperatureFanSpeed: {
           hotend: 200,
           heatbed: 60,
