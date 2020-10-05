@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { ConfigService } from '../config/config.service';
 
 import { Job, JobService, JobStatus } from '../job.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
@@ -24,7 +25,11 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public flowrate: number;
   public zOffset: number;
 
-  public constructor(private jobService: JobService, private printerService: PrinterService) {
+  public constructor(
+    private jobService: JobService,
+    private printerService: PrinterService,
+    private configService: ConfigService,
+  ) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
     this.flowrate = 100;
@@ -214,7 +219,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public babystepZ(value: number): void {
     // gotta love JS for that one.
     this.zOffset = Math.round((this.zOffset + value) * 100) / 100;
-    this.printerService.executeGCode(`M290 Z${value}`);
+    this.printerService.executeGCode(`${this.configService.getZBabystepGCode()}${value}`);
   }
 }
 
