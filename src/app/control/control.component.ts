@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../config/config.service';
 import { OctoprintPrinterProfileAPI } from '../octoprint-api/printerProfileAPI';
 import { OctoprintService } from '../octoprint.service';
+import { EnclosureService } from '../plugin-service/enclosure.service';
 import { PsuControlService } from '../plugin-service/psu-control.service';
 import { PrinterService } from '../printer.service';
 import { PrinterProfileService } from '../printerprofile.service';
@@ -29,6 +30,7 @@ export class ControlComponent {
     private octoprintService: OctoprintService,
     private configService: ConfigService,
     private psuControlService: PsuControlService,
+    private enclosureService: EnclosureService,
     private router: Router,
   ) {
     this.printerProfile = {
@@ -121,6 +123,9 @@ export class ControlComponent {
       default: {
         if (command.includes('[!WEB]')) {
           this.openIFrame(command.replace('[!WEB]', ''));
+        } else if (command.includes('[!NEOPIXEL]')) {
+          const values = command.replace('[!NEOPIXEL]', '').split(',');
+          this.setLEDColor(values[0], values[1], values[2], values[3]);
         } else {
           this.printerService.executeGCode(command);
         }
@@ -177,6 +182,10 @@ export class ControlComponent {
       iFrameDOM.style.display = 'none';
       this.iFrameURL = 'about:blank';
     }, 500);
+  }
+
+  public setLEDColor(identifier: string, red: string, green: string, blue: string): void {
+    this.enclosureService.setLEDColor(Number(identifier), Number(red), Number(green), Number(blue));
   }
 }
 

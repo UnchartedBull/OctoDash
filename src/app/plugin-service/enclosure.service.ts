@@ -12,6 +12,7 @@ import { NotificationService } from '../notification/notification.service';
 })
 export class EnclosureService {
   private httpGETRequest: Subscription;
+  private httpPOSTRequest: Subscription;
   private observable: Observable<TemperatureReading>;
   private initialRequest = true;
 
@@ -56,6 +57,35 @@ export class EnclosureService {
   public getObservable(): Observable<TemperatureReading> {
     return this.observable;
   }
+
+  public setLEDColor(identifier: number, red: number, green: number, blue: number): Promise<void> {
+    return new Promise((resolve, reject): void => {
+      const colorBody: EnclosureColorBody = {
+        red,
+        green,
+        blue,
+      };
+      if (this.httpPOSTRequest) {
+        this.httpPOSTRequest.unsubscribe();
+      }
+      console.log(colorBody);
+      console.log(identifier);
+      this.httpPOSTRequest = this.http
+        .patch(
+          this.configService.getURL('plugin/enclosure/neopixel/' + identifier).replace('/api', ''),
+          colorBody,
+          this.configService.getHTTPHeaders(),
+        )
+        .subscribe(
+          (): void => resolve(),
+          (error: HttpErrorResponse): void => {
+            console.log(error.message);
+            this.notificationService.setError("Can't set LED color!", error.message);
+            reject();
+          },
+        );
+    });
+  }
 }
 
 interface EnclosurePluginAPI {
@@ -79,4 +109,10 @@ interface EnclosurePluginAPI {
   index_id: number;
   use_fahrenheit: boolean;
   gpio_pin: string;
+}
+
+interface EnclosureColorBody {
+  red: number;
+  green: number;
+  blue: number;
 }
