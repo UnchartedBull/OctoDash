@@ -97,6 +97,9 @@ export class FilamentManagerService {
           spool: spool,
         },
       };
+      if (this.httpPOSTRequest) {
+        this.httpPOSTRequest.unsubscribe();
+      }
       this.httpPOSTRequest = this.http
         .patch(
           this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
