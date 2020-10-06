@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { ConfigService } from '../config/config.service';
 
 import { Job, JobService, JobStatus } from '../job.service';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
@@ -29,6 +30,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     private jobService: JobService,
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
+    private configService: ConfigService,
   ) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
@@ -226,7 +228,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public babystepZ(value: number): void {
     // gotta love JS for that one.
     this.zOffset = Math.round((this.zOffset + value) * 100) / 100;
-    this.printerService.executeGCode(`M290 Z${value}`);
+    this.printerService.executeGCode(`${this.configService.getZBabystepGCode()}${value}`);
   }
 }
 

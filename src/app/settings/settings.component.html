@@ -67,16 +67,6 @@
               required
             />
             <br />
-            <label for="accessToken" class="settings__input-label">API Key</label>
-            <input
-              type="text"
-              id="accessToken"
-              class="settings__input"
-              name="accessToken"
-              style="width: 44.94vw"
-              [(ngModel)]="this.config.octoprint.accessToken"
-              required
-            />
           </form>
           <span class="settings__heading-2">Printer</span>
           <form class="settings__form">
@@ -309,29 +299,6 @@
         </span>
         <div class="settings__scroll">
           <span class="settings__heading-2">General</span>
-          <label for="api-polling-interval" class="settings__input-label">
-            Value Refresh Interval
-            <span>(ms)</span>
-          </label>
-          <input
-            type="number"
-            id="api-polling-interval"
-            class="settings__input"
-            name="api-polling-interval"
-            style="width: 44.94vw"
-            [(ngModel)]="config.octodash.pollingInterval"
-            required
-          />
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.touchscreen = !config.octodash.touchscreen"
-          >
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.touchscreen"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">Use Touchscreen</span>
-          </div>
-          <br />
           <div
             class="settings__checkbox-container"
             (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping"
