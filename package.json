@@ -81,7 +81,7 @@
     "angular-svg-round-progressbar": "^4.0.0",
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
-    "electron-store": "^6.0.0",
+    "electron-store": "^6.0.1",
     "got": "^11.7.0",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
