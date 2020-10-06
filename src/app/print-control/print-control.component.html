@@ -117,6 +117,31 @@
           <div class="print-control__adjust__controller">
             <div
               class="print-control__adjust__controller-increase"
+              (click)="changeFanSpeed(1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              +
+            </div>
+            <div class="print-control__adjust__controller-value">
+              {{ fanSpeed }}
+              <span class="print-control__adjust__controller-value-unit">%</span>
+            </div>
+            <div
+              class="print-control__adjust__controller-decrease"
+              (click)="changeFanSpeed(-1)"
+              matRipple
+              [matRippleUnbounded]="false"
+            >
+              -
+            </div>
+          </div>
+          <span class="print-control__adjust__name">Fan Speed</span>
+        </td>
+        <td class="print-control__adjust__change-parameter">
+          <div class="print-control__adjust__controller">
+            <div
+              class="print-control__adjust__controller-increase"
               (click)="changeFeedrate(1)"
               matRipple
               [matRippleUnbounded]="false"
@@ -137,31 +162,6 @@
             </div>
           </div>
           <span class="print-control__adjust__name">Feedrate</span>
-        </td>
-        <td class="print-control__adjust__change-parameter">
-          <div class="print-control__adjust__controller">
-            <div
-              class="print-control__adjust__controller-increase"
-              (click)="changeFlowrate(1)"
-              matRipple
-              [matRippleUnbounded]="false"
-            >
-              +
-            </div>
-            <div class="print-control__adjust__controller-value">
-              {{ flowrate }}
-              <span class="print-control__adjust__controller-value-unit">%</span>
-            </div>
-            <div
-              class="print-control__adjust__controller-decrease"
-              (click)="changeFlowrate(-1)"
-              matRipple
-              [matRippleUnbounded]="false"
-            >
-              -
-            </div>
-          </div>
-          <span class="print-control__adjust__name">Flowrate</span>
         </td>
       </tr>
     </table>
