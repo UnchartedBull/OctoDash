@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Job, JobService, JobStatus } from '../job.service';
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
@@ -20,14 +21,18 @@ export class PrintControlComponent implements OnInit, OnDestroy {
 
   public temperatureHotend: number;
   public temperatureHeatbed: number;
+  public fanSpeed: number;
   public feedrate: number;
-  public flowrate: number;
   public zOffset: number;
 
-  public constructor(private jobService: JobService, private printerService: PrinterService) {
+  public constructor(
+    private jobService: JobService,
+    private printerService: PrinterService,
+    private displayLayerProgressService: LayerProgressService,
+  ) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
-    this.flowrate = 100;
+    this.fanSpeed = 0;
     this.feedrate = 100;
     this.zOffset = 0;
   }
@@ -147,6 +152,13 @@ export class PrintControlComponent implements OnInit, OnDestroy {
         this.temperatureHotend = printerStatus.nozzle.set;
         this.temperatureHeatbed = printerStatus.heatbed.set;
       });
+
+    this.displayLayerProgressService
+      .getObservable()
+      .pipe(take(1))
+      .subscribe((layerProgress: DisplayLayerProgressAPI): void => {
+        this.fanSpeed = Number(layerProgress.fanSpeed);
+      });
   }
 
   public changeTemperatureHotend(value: number): void {
@@ -185,14 +197,14 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changeFlowrate(value: number): void {
+  public changeFanSpeed(value: number): void {
     if (this.showControls) {
-      this.flowrate += value;
-      if (this.flowrate < 75) {
-        this.flowrate = 75;
+      this.fanSpeed += value;
+      if (this.fanSpeed < 0) {
+        this.fanSpeed = 0;
       }
-      if (this.flowrate > 125) {
-        this.flowrate = 125;
+      if (this.fanSpeed > 100) {
+        this.fanSpeed = 100;
       }
     }
   }
@@ -202,7 +214,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
       this.printerService.setTemperatureHotend(this.temperatureHotend);
       this.printerService.setTemperatureHeatbed(this.temperatureHeatbed);
       this.printerService.setFeedrate(this.feedrate);
-      this.printerService.setFlowrate(this.flowrate);
+      this.printerService.setFanSpeed(this.fanSpeed);
       this.hideControlOverlay(event);
     }
   }
