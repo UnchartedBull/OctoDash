@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { ConfigService } from '../config/config.service';
 
+import { ConfigService } from '../config/config.service';
 import { Job, JobService, JobStatus } from '../job.service';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
