@@ -79,6 +79,10 @@ If you want to see OctoDash in action, here is an awesome video from Nick on [Yo
 
 More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/master/screenshots).
 
+## Get in contact
+
+We now have a Discord server as well. Feel free to join and ask your support & development questions over there: https://discord.gg/gTasZTz.
+
 ## Troubleshooting
 
 If you encounter an issue, while using OctoDash please have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first! If your issue is not covered please open an issue!
