@@ -78,7 +78,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "ajv": "^6.12.6",
-    "angular-svg-round-progressbar": "^4.0.0",
+    "angular-svg-round-progressbar": "^5.0.2",
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
     "electron-store": "^6.0.1",
