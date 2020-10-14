@@ -139,7 +139,13 @@ export class AppService {
     return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
   }
 
-  public convertFilamentVolumeToWeight(filamentVolume: number): number {
+  public convertFilamentLengthToWeight(filamentLength: number): number {
+    return this.convertFilamentVolumeToWeight(
+      (filamentLength * Math.PI * Math.pow(this.configService.getFilamentThickness() / 2, 2)) / 1000,
+    );
+  }
+
+  private convertFilamentVolumeToWeight(filamentVolume: number): number {
     return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
   }
 }

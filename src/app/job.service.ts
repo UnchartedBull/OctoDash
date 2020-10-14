@@ -53,7 +53,7 @@ export class JobService {
                     progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
                     ...(data.job.filament !== null
                       ? {
-                          filamentAmount: this.service.convertFilamentVolumeToWeight(
+                          filamentAmount: this.service.convertFilamentLengthToWeight(
                             this.getTotalAmountOfFilament(data.job.filament),
                           ),
                         }
@@ -103,9 +103,9 @@ export class JobService {
     for (const property in filamentAmount) {
       if (
         Object.prototype.hasOwnProperty.call(filamentAmount, property) &&
-        Object.prototype.hasOwnProperty.call(filamentAmount[property], 'volume')
+        Object.prototype.hasOwnProperty.call(filamentAmount[property], 'length')
       ) {
-        filamentLength += filamentAmount[property].volume;
+        filamentLength += filamentAmount[property].length;
       }
     }
     return filamentLength;

@@ -68,8 +68,6 @@ export class EnclosureService {
       if (this.httpPOSTRequest) {
         this.httpPOSTRequest.unsubscribe();
       }
-      console.log(colorBody);
-      console.log(identifier);
       this.httpPOSTRequest = this.http
         .patch(
           this.configService.getURL('plugin/enclosure/neopixel/' + identifier).replace('/api', ''),
@@ -79,7 +77,6 @@ export class EnclosureService {
         .subscribe(
           (): void => resolve(),
           (error: HttpErrorResponse): void => {
-            console.log(error.message);
             this.notificationService.setError("Can't set LED color!", error.message);
             reject();
           },
