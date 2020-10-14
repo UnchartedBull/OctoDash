@@ -35,6 +35,10 @@ No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Install
 
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
+### Nightly Builds
+
+Thanks to M1dn1ghtN1nj4 nightly builds are available here: https://sites.google.com/view/m1dn1ght-3d/downloads/unofficial-octodash-builds?authuser=0. They should be stable, still not recommended for production.
+
 ## Update
 
 _deprecated, from v2.0 onwards OctoDash can be updated from within the app_
