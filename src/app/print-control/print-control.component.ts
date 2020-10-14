@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -31,6 +32,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
+    private router: Router,
   ) {
     this.temperatureHotend = 0;
     this.temperatureHeatbed = 0;
@@ -137,6 +139,18 @@ export class PrintControlComponent implements OnInit, OnDestroy {
       this.jobService.resumeJob();
       this.hideControlOverlay(event);
     }
+  }
+
+  public restart(event: MouseEvent): void {
+    if (this.showControls && this.view === ControlView.PAUSE) {
+      this.jobService.restartJob();
+      this.hideControlOverlay(event);
+    }
+  }
+
+  public changeFilament(event: MouseEvent): void {
+    this.router.navigate(['/filament']);
+    this.stopPropagation(event);
   }
 
   public backToControlScreen(event: MouseEvent): void {

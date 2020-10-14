@@ -22,11 +22,8 @@
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
         </ul>
-        <span
-          class="settings__update-available"
-          (click)="changePage(4, 0, 'forward')"
-          [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
-        >
+        <span class="settings__update-available" (click)="changePage(4, 0, 'forward')"
+          [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }">
           update available!
         </span>
         <span class="settings__save" (click)="updateConfig()">save</span>
@@ -47,39 +44,18 @@
           <form class="settings__form">
             <label for="octoprintURLName" class="settings__input-label">Octoprint URL</label>
             <span class="settings__input-prefix">http://</span>
-            <input
-              type="text"
-              id="octoprintURLName"
-              class="settings__input"
-              name="octoprintURLName"
-              style="width: 23.2vw"
-              [(ngModel)]="this.config.octoprint.urlSplit.url"
-              required
-            />
-            <span class="settings__input-divider">:</span>
-            <input
-              type="text"
-              id="octoprintURLPort"
-              class="settings__input"
-              name="octoprintURLPort"
-              style="width: 8vw"
-              [(ngModel)]="this.config.octoprint.urlSplit.port"
-              required
-            />
+            <input type="text" id="octoprintURLName" class="settings__input" name="octoprintURLName"
+              style="width: 23.2vw" [(ngModel)]="this.config.octoprint.urlSplit.url" required /><span
+              class="settings__input-divider">:</span>
+            <input type="text" id="octoprintURLPort" class="settings__input" name="octoprintURLPort" style="width: 8vw"
+              [(ngModel)]="this.config.octoprint.urlSplit.port" required />
             <br />
           </form>
           <span class="settings__heading-2">Printer</span>
           <form class="settings__form">
             <label for="printerName" class="settings__input-label">Name</label>
-            <input
-              type="text"
-              id="printerName"
-              class="settings__input"
-              name="printerName"
-              style="width: 44.94vw"
-              [(ngModel)]="config.printer.name"
-              required
-            />
+            <input type="text" id="printerName" class="settings__input" name="printerName" style="width: 44.94vw"
+              [(ngModel)]="config.printer.name" required />
             <table>
               <tr>
                 <td style="width: 25.6vw; display: block">
@@ -87,30 +63,16 @@
                     XY-Speed
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="xySpeed"
-                    class="settings__input"
-                    name="xySpeed"
-                    style="width: 19vw"
-                    [(ngModel)]="config.printer.xySpeed"
-                    required
-                  />
+                  <input type="number" id="xySpeed" class="settings__input" name="xySpeed" style="width: 19vw"
+                    [(ngModel)]="config.printer.xySpeed" required />
                 </td>
                 <td>
                   <label for="zSpeed" class="settings__input-label">
                     Z-Speed
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="zSpeed"
-                    class="settings__input"
-                    name="zSpeed"
-                    style="width: 19vw"
-                    [(ngModel)]="config.printer.zSpeed"
-                    required
-                  />
+                  <input type="number" id="zSpeed" class="settings__input" name="zSpeed" style="width: 19vw"
+                    [(ngModel)]="config.printer.zSpeed" required />
                 </td>
               </tr>
               <tr>
@@ -122,30 +84,18 @@
                     Hotend
                     <span>(°C)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultHotendTemperature"
-                    class="settings__input"
-                    name="defaultHotendTemperature"
-                    style="width: 19vw"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
-                    required
-                  />
+                  <input type="number" id="defaultHotendTemperature" class="settings__input"
+                    name="defaultHotendTemperature" style="width: 19vw"
+                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend" required />
                 </td>
                 <td>
                   <label for="defaultHeatbedTemperature" class="settings__input-label">
                     Heatbed
                     <span>(°C)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultHeatbedTemperature"
-                    class="settings__input"
-                    name="defaultHeatbedTemperature"
-                    style="width: 19vw"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
-                    required
-                  />
+                  <input type="number" id="defaultHeatbedTemperature" class="settings__input"
+                    name="defaultHeatbedTemperature" style="width: 19vw"
+                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed" required />
                 </td>
               </tr>
               <tr>
@@ -154,15 +104,8 @@
                     Fan Speed
                     <span>(%)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultFanSpeed"
-                    class="settings__input"
-                    name="defaultFanSpeed"
-                    style="width: 19vw"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
-                    required
-                  />
+                  <input type="number" id="defaultFanSpeed" class="settings__input" name="defaultFanSpeed"
+                    style="width: 19vw" [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan" required />
                 </td>
               </tr>
             </table>
@@ -172,10 +115,8 @@
             <table>
               <tr>
                 <td colspan="2" style="text-align: center">
-                  <div
-                    class="settings__checkbox-container"
-                    (click)="config.filament.useM600 = !config.filament.useM600"
-                  >
+                  <div class="settings__checkbox-container"
+                    (click)="config.filament.useM600 = !config.filament.useM600">
                     <span class="settings__checkbox">
                       <span class="settings__checkbox-checked" *ngIf="config.filament.useM600"></span>
                     </span>
@@ -189,32 +130,18 @@
                     Feed Length
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-length"
-                    class="settings__input"
-                    name="filament-feed-length"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.feedLength"
-                    required
-                    [disabled]="config.filament.useM600"
-                  />
+                  <input type="number" id="filament-feed-length" class="settings__input" name="filament-feed-length"
+                    style="width: 19vw" [(ngModel)]="config.filament.feedLength" required
+                    [disabled]="config.filament.useM600" />
                 </td>
                 <td style="width: 25.6vw">
                   <label for="filament-purge-distance" class="settings__input-label">
                     Purge Distance
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-purge-distance"
-                    class="settings__input"
-                    name="filament-purge-distance"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.purgeDistance"
-                    required
-                    [disabled]="config.filament.useM600"
-                  />
+                  <input type="number" id="filament-purge-distance" class="settings__input"
+                    name="filament-purge-distance" style="width: 19vw" [(ngModel)]="config.filament.purgeDistance"
+                    required [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
@@ -223,32 +150,18 @@
                     Feed Speed
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-speed"
-                    class="settings__input"
-                    name="filament-feed-speed"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.feedSpeed"
-                    required
-                    [disabled]="config.filament.useM600"
-                  />
+                  <input type="number" id="filament-feed-speed" class="settings__input" name="filament-feed-speed"
+                    style="width: 19vw" [(ngModel)]="config.filament.feedSpeed" required
+                    [disabled]="config.filament.useM600" />
                 </td>
                 <td>
                   <label for="filament-feed-speed-slow" class="settings__input-label">
                     Feed Speed Slow
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-speed-slow"
-                    class="settings__input"
-                    name="filament-feed-speed-slow"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.feedSpeedSlow"
-                    required
-                    [disabled]="config.filament.useM600"
-                  />
+                  <input type="number" id="filament-feed-speed-slow" class="settings__input"
+                    name="filament-feed-speed-slow" style="width: 19vw" [(ngModel)]="config.filament.feedSpeedSlow"
+                    required [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
@@ -257,30 +170,16 @@
                     Thickness
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-thickness"
-                    class="settings__input"
-                    name="filament-thickness"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.thickness"
-                    required
-                  />
+                  <input type="number" id="filament-thickness" class="settings__input" name="filament-thickness"
+                    style="width: 19vw" [(ngModel)]="config.filament.thickness" required />
                 </td>
                 <td>
                   <label for="filament-density" class="settings__input-label">
                     Density
                     <span>(g/cm³)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-density"
-                    class="settings__input"
-                    name="filament-density"
-                    style="width: 19vw"
-                    [(ngModel)]="config.filament.density"
-                    required
-                  />
+                  <input type="number" id="filament-density" class="settings__input" name="filament-density"
+                    style="width: 19vw" [(ngModel)]="config.filament.density" required />
                 </td>
               </tr>
             </table>
@@ -299,20 +198,16 @@
         </span>
         <div class="settings__scroll">
           <span class="settings__heading-2">General</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
             </span>
             <span class="settings__checkbox-descriptor">Turn screen off while sleeping</span>
           </div>
           <br />
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
             </span>
@@ -327,30 +222,24 @@
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'name'">
                   <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'name'"
-                    ></span>
+                    <span class="settings__checkbox-checked"
+                      *ngIf="config.octodash.fileSorting.attribute === 'name'"></span>
                   </span>
                   <span class="settings__checkbox-descriptor">Name</span>
                 </div>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'date'">
                   <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'date'"
-                    ></span>
+                    <span class="settings__checkbox-checked"
+                      *ngIf="config.octodash.fileSorting.attribute === 'date'"></span>
                   </span>
                   <span class="settings__checkbox-descriptor">Date</span>
                 </div>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'size'">
                   <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'size'"
-                    ></span>
+                    <span class="settings__checkbox-checked"
+                      *ngIf="config.octodash.fileSorting.attribute === 'size'"></span>
                   </span>
                   <span class="settings__checkbox-descriptor">Size</span>
                 </div>
@@ -380,77 +269,46 @@
           <div *ngFor="let number of [0, 1, 2, 3, 4, 5]">
             <span class="settings__heading-3">{{ customActionsPosition[number] }}</span>
             <label for="action-command" class="settings__input-label">GCode / Action</label>
-            <input
-              type="string"
-              id="action-command"
-              class="settings__input"
-              name="action-command"
-              style="width: 44.94vw; margin-bottom: -2vh"
-              [(ngModel)]="config.octodash.customActions[number].command"
-              required
-            />
+            <input type="string" id="action-command" class="settings__input" name="action-command"
+              style="width: 44.94vw; margin-bottom: -2vh" [(ngModel)]="config.octodash.customActions[number].command"
+              required />
             <table>
               <tr>
                 <td>
                   <label for="action-icon" class="settings__input-label">Icon</label>
-                  <input
-                    type="text"
-                    id="action-icon"
-                    class="settings__input"
-                    name="action-icon"
-                    style="width: 14vw"
-                    [(ngModel)]="config.octodash.customActions[number].icon"
-                    required
-                  />
+                  <input type="text" id="action-icon" class="settings__input" name="action-icon" style="width: 14vw"
+                    [(ngModel)]="config.octodash.customActions[number].icon" required />
                 </td>
                 <td style="padding-left: 3vw">
                   <label for="action-color" class="settings__input-label">Color</label>
-                  <input
-                    type="text"
-                    id="action-color"
-                    class="settings__input"
-                    name="action-color"
-                    style="width: 14vw"
-                    [(ngModel)]="config.octodash.customActions[number].color"
-                    required
-                  />
+                  <input type="text" id="action-color" class="settings__input" name="action-color" style="width: 14vw"
+                    [(ngModel)]="config.octodash.customActions[number].color" required />
                 </td>
                 <td>
-                  <fa-icon
-                    [icon]="['fas', config.octodash.customActions[number].icon]"
+                  <fa-icon [icon]="['fas', config.octodash.customActions[number].icon]"
                     class="settings__custom-action-icon"
-                    [styles]="{ color: config.octodash.customActions[number].color }"
-                  ></fa-icon>
+                    [styles]="{ color: config.octodash.customActions[number].color }"></fa-icon>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div
-                    class="settings__checkbox-container"
-                    (click)="
+                  <div class="settings__checkbox-container" (click)="
                       config.octodash.customActions[number].confirm = !config.octodash.customActions[number].confirm
-                    "
-                  >
+                    ">
                     <span class="settings__checkbox">
-                      <span
-                        class="settings__checkbox-checked"
-                        *ngIf="config.octodash.customActions[number].confirm"
-                      ></span>
+                      <span class="settings__checkbox-checked"
+                        *ngIf="config.octodash.customActions[number].confirm"></span>
                     </span>
                     <span class="settings__checkbox-descriptor">Confirm</span>
                   </div>
                 </td>
 
                 <td style="padding-left: 3vw" colspan="2">
-                  <div
-                    class="settings__checkbox-container"
-                    (click)="config.octodash.customActions[number].exit = !config.octodash.customActions[number].exit"
-                  >
+                  <div class="settings__checkbox-container"
+                    (click)="config.octodash.customActions[number].exit = !config.octodash.customActions[number].exit">
                     <span class="settings__checkbox">
-                      <span
-                        class="settings__checkbox-checked"
-                        *ngIf="config.octodash.customActions[number].exit"
-                      ></span>
+                      <span class="settings__checkbox-checked"
+                        *ngIf="config.octodash.customActions[number].exit"></span>
                     </span>
                     <span class="settings__checkbox-descriptor">Return to Home</span>
                   </div>
@@ -470,18 +328,14 @@
           <span class="settings__heading-2">Display Layer Progress</span>
           <div class="settings__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
             <span class="settings__checkbox">
-              <span
-                class="settings__checkbox-checked settings__checkbox-checked-disabled"
-                *ngIf="config.plugins.displayLayerProgress.enabled"
-              ></span>
+              <span class="settings__checkbox-checked settings__checkbox-checked-disabled"
+                *ngIf="config.plugins.displayLayerProgress.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
           </div>
           <span class="settings__heading-2">Enclosure</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
             </span>
@@ -491,70 +345,50 @@
             Ambient Sensor
             <span>(ID)</span>
           </label>
-          <input
-            type="number"
-            id="enclosure-ambient-id"
-            class="settings__input"
-            name="enclosure-ambient-id"
-            style="width: 44.94vw"
-            [(ngModel)]="config.plugins.enclosure.ambientSensorID"
-            required
-            [disabled]="!config.plugins.enclosure.enabled"
-          />
+          <input type="number" id="enclosure-ambient-id" class="settings__input" name="enclosure-ambient-id"
+            style="width: 44.94vw" [(ngModel)]="config.plugins.enclosure.ambientSensorID" required
+            [disabled]="!config.plugins.enclosure.enabled" />
 
           <span class="settings__heading-2">Filament Manager</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
           </div>
           <span class="settings__heading-2">Preheat Button</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
           </div>
           <span class="settings__heading-2">Print Time Genius</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
           </div>
           <span class="settings__heading-2">PSU Control</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled"
-          >
+          <div class="settings__checkbox-container"
+            (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
           </div>
-          <div
-            class="settings__checkbox-container"
-            [ngClass]="{ 'settings__checkbox-container-disabled': !config.plugins.psuControl.enabled }"
-            (click)="
+          <div class="settings__checkbox-container"
+            [ngClass]="{ 'settings__checkbox-container-disabled': !config.plugins.psuControl.enabled }" (click)="
               config.plugins.psuControl.turnOnPSUWhenExitingSleep = !config.plugins.psuControl.turnOnPSUWhenExitingSleep
-            "
-          >
+            ">
             <span class="settings__checkbox">
-              <span
-                class="settings__checkbox-checked"
+              <span class="settings__checkbox-checked"
                 [ngClass]="{ 'settings__checkbox-checked-disabled': !config.plugins.psuControl.enabled }"
-                *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"
-              ></span>
+                *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"></span>
             </span>
             <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
           </div>
@@ -571,11 +405,8 @@
           <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable">
             no update available
           </button>
-          <button
-            class="settings__about-update settings__about-update-available"
-            *ngIf="service.updateAvailable"
-            (click)="showUpdate()"
-          >
+          <button class="settings__about-update settings__about-update-available" *ngIf="service.updateAvailable"
+            (click)="showUpdate()">
             install v{{ service.latestVersion }}
           </button>
           <span class="settings__about-copyright">&#169; 2019-2020 UnchartedBull</span>

@@ -51,11 +51,8 @@
     </span>
     <div *ngIf="!manualURL">
       <div class="no-config__discovered-instances__wrapper">
-        <span
-          *ngFor="let node of octoprintNodes"
-          class="no-config__discovered-instances__node"
-          (click)="setOctoprintInstance(node)"
-        >
+        <span *ngFor="let node of octoprintNodes" class="no-config__discovered-instances__node"
+          (click)="setOctoprintInstance(node)">
           <div class="no-config__discovered-instances__node-name">
             {{ node.name }}
             <br />
@@ -72,25 +69,11 @@
     <div *ngIf="manualURL">
       <form class="no-config__form" style="margin-top: 5vh">
         <span class="no-config__input-prefix">http://</span>
-        <input
-          type="text"
-          id="octoprintURLName"
-          class="no-config__input"
-          [(ngModel)]="this.config.octoprint.urlSplit.url"
-          name="octoprintURLName"
-          required
-          style="width: 42.5vw"
-        />
+        <input type="text" id="octoprintURLName" class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.url" name="octoprintURLName" required style="width: 42.5vw" />
         :
-        <input
-          type="text"
-          id="octoprintURLPort"
-          class="no-config__input"
-          [(ngModel)]="this.config.octoprint.urlSplit.port"
-          name="octoprintURLPort"
-          required
-          style="width: 14vw"
-        />
+        <input type="text" id="octoprintURLPort" class="no-config__input"
+          [(ngModel)]="this.config.octoprint.urlSplit.port" name="octoprintURLPort" required style="width: 14vw" />
         <p class="no-config__input-prefix" style="margin-top: 8vh">
           Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
         </p>
@@ -99,6 +82,10 @@
         search again
       </div>
     </div>
+  </div>
+
+  <div *ngIf="page === 1.5">
+    <span class="no-config__connecting">connecting ...</span>
   </div>
 
   <div *ngIf="page === 2">
@@ -111,15 +98,8 @@
     </div>
     <form class="no-config__form">
       <label for="accessToken" class="no-config__input-label">API Key:</label>
-      <input
-        type="text"
-        id="accessToken"
-        class="no-config__input"
-        [(ngModel)]="this.config.octoprint.accessToken"
-        name="accessToken"
-        style="width: 67vw"
-        required
-      />
+      <input type="text" id="accessToken" class="no-config__input" [(ngModel)]="this.config.octoprint.accessToken"
+        name="accessToken" style="width: 67vw" required />
     </form>
   </div>
   <!-- TODO: remove page 3 once the OctoPrint client library is fully implemented -->
@@ -129,15 +109,8 @@
     </span>
     <form class="no-config__form">
       <label for="printerName" class="no-config__input-label">Printer Name:</label>
-      <input
-        type="text"
-        id="printerName"
-        class="no-config__input no-config__2-input"
-        maxlength="13"
-        [(ngModel)]="config.printer.name"
-        name="printerName"
-        required
-      />
+      <input type="text" id="printerName" class="no-config__input no-config__2-input" maxlength="13"
+        [(ngModel)]="config.printer.name" name="printerName" required />
     </form>
     <div class="no-config-explanation" style="margin-top: 7vh">
       If you're unsure about any values during setup, just stick with the defaults. You can change all values (and even
@@ -150,40 +123,16 @@
     <form class="no-config__form no-config__2-form">
       <label for="feedLength" class="no-config__input-label">Feed Length:</label>
       <div class="no-config__input__numeric-wrapper" style="width: 63vw">
-        <span
-          class="no-config__input__numeric-adjust"
-          matRipple
-          [matRippleUnbounded]="false"
-          [matRippleCentered]="false"
-          long-press
-          [duration]="650"
-          [frequency]="80"
-          (onShortPress)="changeFeedLength(-1)"
-          (onLongPressing)="changeFeedLength(-5)"
-        >
+        <span class="no-config__input__numeric-adjust" matRipple [matRippleUnbounded]="false"
+          [matRippleCentered]="false" long-press [duration]="650" [frequency]="80" (onShortPress)="changeFeedLength(-1)"
+          (onLongPressing)="changeFeedLength(-5)">
           -
         </span>
-        <input
-          type="number"
-          id="feedLength"
-          class="no-config__input no-config__input__numeric"
-          [(ngModel)]="config.filament.feedLength"
-          name="feedLength"
-          min="0"
-          style="width: 17vw"
-          required
-        />
-        <span
-          class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase"
-          matRipple
-          [matRippleUnbounded]="false"
-          [matRippleCentered]="false"
-          long-press
-          [duration]="650"
-          [frequency]="80"
-          (onShortPress)="changeFeedLength(1)"
-          (onLongPressing)="changeFeedLength(5)"
-        >
+        <input type="number" id="feedLength" class="no-config__input no-config__input__numeric"
+          [(ngModel)]="config.filament.feedLength" name="feedLength" min="0" style="width: 17vw" required />
+        <span class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase" matRipple
+          [matRippleUnbounded]="false" [matRippleCentered]="false" long-press [duration]="650" [frequency]="80"
+          (onShortPress)="changeFeedLength(1)" (onLongPressing)="changeFeedLength(5)">
           +
         </span>
         <span class="no-config__input-small-suffix" style="margin-left: -16.5vw">mm</span>
@@ -191,40 +140,16 @@
       <br />
       <label for="feedSpeed" class="no-config__input-label-small">Feed Speed:</label>
       <div class="no-config__input__numeric-wrapper" style="width: 68.2vw">
-        <span
-          class="no-config__input__numeric-adjust"
-          matRipple
-          [matRippleUnbounded]="false"
-          [matRippleCentered]="false"
-          long-press
-          [duration]="650"
-          [frequency]="150"
-          (onShortPress)="changeFeedSpeed(-0.5)"
-          (onLongPressing)="changeFeedSpeed(-1)"
-        >
+        <span class="no-config__input__numeric-adjust" matRipple [matRippleUnbounded]="false"
+          [matRippleCentered]="false" long-press [duration]="650" [frequency]="150"
+          (onShortPress)="changeFeedSpeed(-0.5)" (onLongPressing)="changeFeedSpeed(-1)">
           -
         </span>
-        <input
-          type="number"
-          id="feedSpeed"
-          class="no-config__input no-config__input__numeric"
-          [(ngModel)]="config.filament.feedSpeed"
-          name="feedSpeed"
-          min="0"
-          style="width: 20vw"
-          required
-        />
-        <span
-          class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase"
-          matRipple
-          [matRippleUnbounded]="false"
-          [matRippleCentered]="false"
-          long-press
-          [duration]="650"
-          [frequency]="150"
-          (onShortPress)="changeFeedSpeed(0.5)"
-          (onLongPressing)="changeFeedSpeed(1)"
-        >
+        <input type="number" id="feedSpeed" class="no-config__input no-config__input__numeric"
+          [(ngModel)]="config.filament.feedSpeed" name="feedSpeed" min="0" style="width: 20vw" required />
+        <span class="no-config__input__numeric-adjust no-config__input__numeric-adjust-increase" matRipple
+          [matRippleUnbounded]="false" [matRippleCentered]="false" long-press [duration]="650" [frequency]="150"
+          (onShortPress)="changeFeedSpeed(0.5)" (onLongPressing)="changeFeedSpeed(1)">
           +
         </span>
         <span class="no-config__input-small-suffix" style="margin-left: -19vw">mm/s</span>
@@ -249,15 +174,8 @@
       <!-- TODO: remove page 3 once the OctoPrint client library is fully implemented and set value to 1500 by default -->
       <!-- Possible replacements: Screensaver once done / Anonymous Tracking (if that ever gets implemented) -->
       <label for="octodashPolling" class="no-config__input-label">Value Refresh Interval:</label>
-      <input
-        type="number"
-        id="octodashPolling"
-        class="no-config__input"
-        [(ngModel)]="this.config.octodash.pollingInterval"
-        name="octodashPolling"
-        required
-        style="width: 11vw"
-      />
+      <input type="number" id="octodashPolling" class="no-config__input"
+        [(ngModel)]="this.config.octodash.pollingInterval" name="octodashPolling" required style="width: 11vw" />
       ms
       <div class="no-config-explanation" style="margin-top: 7vh">
         Don't set your Value Refresh Interval too low (und 1000ms) as this may effect the performance of the Raspberry
@@ -270,53 +188,41 @@
     <div style="text-align: center">
       <div class="no-config__checkbox-container" (click)="config.plugins.displayLayerProgress.enabled = true">
         <span class="no-config__checkbox">
-          <span
-            class="no-config__checkbox-checked no-config__checkbox-checked-disabled"
-            *ngIf="config.plugins.displayLayerProgress.enabled"
-          ></span>
+          <span class="no-config__checkbox-checked no-config__checkbox-checked-disabled"
+            *ngIf="config.plugins.displayLayerProgress.enabled"></span>
         </span>
         Display Layer Progress&nbsp;&nbsp;
       </div>
-      <div
-        class="no-config__checkbox-container"
-        (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled"
-      >
+      <div class="no-config__checkbox-container"
+        (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
         <span class="no-config__checkbox">
           <span class="no-config__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
         </span>
         Enclosure
       </div>
-      <div
-        class="no-config__checkbox-container"
-        (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled"
-      >
+      <div class="no-config__checkbox-container"
+        (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
         <span class="no-config__checkbox">
           <span class="no-config__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
         </span>
         Filament Manager&nbsp;&nbsp;
       </div>
-      <div
-        class="no-config__checkbox-container"
-        (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled"
-      >
+      <div class="no-config__checkbox-container"
+        (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
         <span class="no-config__checkbox">
           <span class="no-config__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
         </span>
         Preheat Button
       </div>
-      <div
-        class="no-config__checkbox-container"
-        (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled"
-      >
+      <div class="no-config__checkbox-container"
+        (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
         <span class="no-config__checkbox">
           <span class="no-config__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
         </span>
         Print Time Genius&nbsp;&nbsp;
       </div>
-      <div
-        class="no-config__checkbox-container"
-        (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled"
-      >
+      <div class="no-config__checkbox-container"
+        (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
         <span class="no-config__checkbox">
           <span class="no-config__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
         </span>
