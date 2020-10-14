@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
-
-const path = require('path');
-const url = require('url');
-
 const exec = require('child_process').exec;
 
 const sendCustomStyles = require('./styles');
@@ -24,13 +20,7 @@ function activateScreenSleepListener(ipcMain) {
 
 function activateReloadListener(ipcMain, window) {
   ipcMain.on('reload', () => {
-    window.loadURL(
-      url.format({
-        pathname: path.join(__dirname, 'dist/index.html'),
-        protocol: 'file:',
-        slashes: true,
-      }),
-    );
+    window.reload();
   });
 }
 
