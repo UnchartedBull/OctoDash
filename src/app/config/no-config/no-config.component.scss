@@ -259,4 +259,11 @@
       box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
     }
   }
+
+  &__connecting {
+    display: block;
+    text-align: center;
+    font-size: 140%;
+    margin-top: 20vh;
+  }
 }

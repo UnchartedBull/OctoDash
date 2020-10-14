@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
 
@@ -28,8 +28,9 @@ export class AppComponent implements OnInit {
     private octoprintScriptService: OctoprintScriptService,
     private notificationService: NotificationService,
     private router: Router,
-    private zone: NgZone,
   ) {}
+
+  public activated = false;
 
   public ngOnInit(): void {
     this.initialize();
@@ -39,22 +40,22 @@ export class AppComponent implements OnInit {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
-          try {
-            await this.zone.run(async () => {
-              await this.octoprintScriptService.initialize(this.configService.getURL(''));
+          this.octoprintScriptService
+            .initialize(this.configService.getURL(''))
+            .then(() => {
               this.octoprintScriptService.authenticate(this.configService.getAccessKey());
+              if (this.configService.isTouchscreen()) {
+                this.router.navigate(['/main-screen']);
+              } else {
+                this.router.navigate(['/main-screen-no-touch']);
+              }
+            })
+            .catch(() => {
+              this.notificationService.setError(
+                "Can't get OctoPrint script!",
+                'Please restart your machine. If the error persists open a new issue on GitHub.',
+              );
             });
-          } catch {
-            this.notificationService.setError(
-              "Can't get OctoPrint script!",
-              'Please restart your machine. If the error persists open a new issue on GitHub.',
-            );
-          }
-          if (this.configService.isTouchscreen()) {
-            this.router.navigate(['/main-screen']);
-          } else {
-            this.router.navigate(['/main-screen-no-touch']);
-          }
         } else {
           if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
             if (this.service.autoFixError()) {

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
 import { OctoprintScriptService } from 'src/app/octoprint-script.service';
@@ -38,7 +38,6 @@ export class NoConfigComponent implements OnInit {
     private notificationService: NotificationService,
     private octoprintScriptService: OctoprintScriptService,
     private changeDetector: ChangeDetectorRef,
-    private zone: NgZone,
   ) {
     try {
       this.ipc = window.require('electron').ipcRenderer;
@@ -93,20 +92,19 @@ export class NoConfigComponent implements OnInit {
   }
 
   private async loadOctoprintClient() {
-    try {
-      await this.zone.run(async () => {
-        await this.octoprintScriptService.initialize(
-          `http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`,
-        );
+    this.octoprintScriptService
+      .initialize(`http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`)
+      .then(() => {
         this.OctoPrint = this.octoprintScriptService.getInstance();
+        this.changePage(0.5);
+      })
+      .catch(() => {
+        this.notificationService.setError(
+          "Can't connect to OctoPrint!",
+          `Check the URL/IP and make sure that your firewall allows access to port ${this.config.octoprint.urlSplit.port} on host ${this.config.octoprint.urlSplit.url}.`,
+        );
+        this.changePage(-0.5);
       });
-    } catch (e) {
-      this.notificationService.setError(
-        "Can't connect to OctoPrint!",
-        `Check the URL/IP and make sure that your firewall allows access to port ${this.config.octoprint.urlSplit.port} on host ${this.config.octoprint.urlSplit.url}.`,
-      );
-      this.page = 1;
-    }
   }
 
   public loginWithOctoPrintUI(): void {
@@ -135,7 +133,6 @@ export class NoConfigComponent implements OnInit {
           .fail(() => console.error('ERR'));
         // END
 
-        this.changeDetector.detectChanges();
         setTimeout(() => {
           this.increasePage();
         }, 600);
@@ -200,18 +197,18 @@ export class NoConfigComponent implements OnInit {
     if (this.page + value > this.totalPages || this.page + value < 0) {
       return;
     }
-    this.beforeNavigation(value);
-    this.page = this.page + value;
+    this.page = this.page + this.beforeNavigation(value);
     this.afterNavigation();
     this.changeProgress();
   }
 
-  private beforeNavigation(value: number): void {
+  private beforeNavigation(value: number): number {
     switch (this.page) {
       case 1:
         this.ipc.send('stopDiscover');
         if (value > 0) {
           this.loadOctoprintClient();
+          return 0.5;
         }
         break;
       case this.totalPages - 1:
@@ -220,6 +217,7 @@ export class NoConfigComponent implements OnInit {
         }
         break;
     }
+    return value;
   }
 
   private afterNavigation(): void {
@@ -243,7 +241,6 @@ export class NoConfigComponent implements OnInit {
 
   public changeProgress(): void {
     document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
-    this.changeDetector.detectChanges();
   }
 
   public getDefaultConfig(): Config {

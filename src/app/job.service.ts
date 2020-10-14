@@ -180,6 +180,30 @@ export class JobService {
       );
   }
 
+  public restartJob(): void {
+    if (this.httpPOSTRequest) {
+      this.httpPOSTRequest.unsubscribe();
+    }
+    const pausePayload: JobCommand = {
+      command: 'restart',
+    };
+    this.httpPOSTRequest = this.http
+      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
+      .subscribe(
+        (): void => null,
+        (error: HttpErrorResponse): void => {
+          if (error.status === 409) {
+            this.notificationService.setError(
+              "Can't restart Job!",
+              'There is no running job, that could be restarted (409)',
+            );
+          } else {
+            this.notificationService.setError("Can't restart Job!", error.message);
+          }
+        },
+      );
+  }
+
   public resumeJob(): void {
     if (this.httpPOSTRequest) {
       this.httpPOSTRequest.unsubscribe();

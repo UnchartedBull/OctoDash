@@ -44,9 +44,17 @@
     </table>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
     <span class="print-control__confirm">print paused</span>
-    <div class="print-control__pause__resume" (click)="resume($event)">
-      <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
-      resume
+    <div class="print-control__pause__resume">
+      <div  (click)="restart($event)">
+        restart
+      </div>
+      <div (click)="resume($event)">
+        <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
+        resume
+      </div>
+      <div (click)="changeFilament($event)">
+        filament
+      </div>
     </div>
   </div>
   <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">

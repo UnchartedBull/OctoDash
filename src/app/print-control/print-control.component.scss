@@ -71,14 +71,30 @@
     }
 
     &__resume {
-      display: block;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
       text-align: center;
-      margin-top: 3vh;
+      margin-top: 8vh;
       padding: 5vh 4vw;
+
+      & div {
+        font-size: 70%;
+
+        &:nth-of-type(2) {
+          font-size: 100%;
+          margin: 0 7vw;
+        }
+      }
 
       &-icon {
         width: 6vw;
         vertical-align: -3vh;
+
+        &-small {
+          width: 4vw;
+          vertical-align: -1vh
+        }
       }
     }
   }

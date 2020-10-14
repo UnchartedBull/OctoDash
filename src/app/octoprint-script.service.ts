@@ -8,17 +8,26 @@ export class OctoprintScriptService {
   private octoprintURL: string;
 
   async initialize(octoprintURL: string): Promise<void> {
-    this.octoprintURL = octoprintURL.replace('api/', '');
-    const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
-    const scripts: string[] = [`${octoprintStaticURL}webassets/packed_client.js`];
-    await this.load(scripts);
-    OctoPrint.options.baseurl = this.octoprintURL;
-  }
-
-  private load(scripts: string[]): Promise<void[]> {
-    const promises: Promise<void>[] = [];
-    scripts.forEach(script => promises.push(this.loadScript(script)));
-    return Promise.all(promises);
+    return new Promise((resolve, reject) => {
+      this.octoprintURL = octoprintURL.replace('api/', '');
+      const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
+      this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+        .then(() => {
+          OctoPrint.options.baseurl = this.octoprintURL;
+          resolve();
+        })
+        .catch(() => {
+          // script loading might fail first time around, try again after 2 seconds
+          setTimeout(() => {
+            this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+              .then(() => {
+                OctoPrint.options.baseurl = this.octoprintURL;
+                resolve();
+              })
+              .catch(() => reject());
+          }, 2000);
+        });
+    });
   }
 
   private loadScript(src: string): Promise<void> {
