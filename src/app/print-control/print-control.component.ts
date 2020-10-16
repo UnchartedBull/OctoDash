@@ -65,8 +65,8 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   }
 
   public isClickOnPreview(event: MouseEvent): boolean {
-    const previewSwitchMin = window.innerWidth * 0.08;
-    const previewSwitchMax = window.innerWidth * 0.25;
+    const previewSwitchMin = window.innerWidth * 0.04;
+    const previewSwitchMax = window.innerWidth * 0.28;
 
     return (
       previewSwitchMin < event.clientX &&
