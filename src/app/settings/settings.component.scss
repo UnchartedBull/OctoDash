@@ -1,5 +1,6 @@
 .settings {
   &-wrapper {
+    transform: translate3D(0, 0, 0);
     animation: fadein 0.4s;
     position: absolute;
     top: 0;
@@ -229,6 +230,7 @@
     width: 54vw;
     display: block;
     padding: 2vh 2vw 2vh 4vw;
+    transform: translate3D(0, 0, 0);
 
     &-slideout-forward {
       animation: slideout-forward 0.4s ease-out;

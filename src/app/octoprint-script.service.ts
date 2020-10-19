@@ -8,6 +8,7 @@ export class OctoprintScriptService {
   private octoprintURL: string;
 
   async initialize(octoprintURL: string): Promise<void> {
+    // script loading might fail try 3 times in total, probably can be cleaned up in the future
     return new Promise((resolve, reject) => {
       this.octoprintURL = octoprintURL.replace('api/', '');
       const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
@@ -17,15 +18,23 @@ export class OctoprintScriptService {
           resolve();
         })
         .catch(() => {
-          // script loading might fail first time around, try again after 2 seconds
           setTimeout(() => {
             this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
               .then(() => {
                 OctoPrint.options.baseurl = this.octoprintURL;
                 resolve();
               })
-              .catch(() => reject());
-          }, 2000);
+              .catch(() => {
+                setTimeout(() => {
+                  this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+                    .then(() => {
+                      OctoPrint.options.baseurl = this.octoprintURL;
+                      resolve();
+                    })
+                    .catch(() => reject());
+                }, 10000);
+              });
+          }, 5000);
         });
     });
   }

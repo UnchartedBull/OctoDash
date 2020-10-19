@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/notification/notification.service';
 import { OctoprintScriptService } from 'src/app/octoprint-script.service';
@@ -37,7 +37,6 @@ export class NoConfigComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private octoprintScriptService: OctoprintScriptService,
-    private changeDetector: ChangeDetectorRef,
   ) {
     try {
       this.ipc = window.require('electron').ipcRenderer;
@@ -62,7 +61,6 @@ export class NoConfigComponent implements OnInit {
 
     this.ipc.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
       this.octoprintNodes = nodes;
-      this.changeDetector.detectChanges();
     });
   }
 
@@ -124,7 +122,7 @@ export class NoConfigComponent implements OnInit {
         this.octoprintScriptService.authenticate(apiKey);
         this.OctoPrint = this.octoprintScriptService.getInstance();
 
-        // FIXME: to be removed before merge
+        // FIXME: to be changed
         this.OctoPrint.printerprofiles
           .list()
           .done(profiles => {
@@ -159,6 +157,7 @@ export class NoConfigComponent implements OnInit {
   }
 
   changeFeedSpeed(amount: number): void {
+    console.log(amount);
     if (this.config.filament.feedSpeed + amount < 0) {
       this.config.filament.feedSpeed = 0;
     } else if (this.config.filament.feedSpeed + amount > 999) {

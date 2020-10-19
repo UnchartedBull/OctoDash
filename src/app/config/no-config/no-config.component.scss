@@ -18,6 +18,7 @@
     background-color: #44bd32;
     width: 0;
     transition: width 0.7s ease-in-out;
+    transform: translate3D(0, 0, 0);
 
     &-wrapper {
       background-color: #718093;

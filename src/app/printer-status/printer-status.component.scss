@@ -85,6 +85,7 @@
   backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.75);
   transition: opacity 0.4s ease-in-out;
+  transform: translate3D(0, 0, 0);
   z-index: 10;
   opacity: 0;
 

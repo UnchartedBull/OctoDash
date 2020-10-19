@@ -9,7 +9,7 @@ export class LongPress {
   timeout: number;
   interval: number;
 
-  @Input() duration = 500;
+  @Input() duration = 700;
   @Input() frequency = 100;
 
   @Output()
@@ -22,7 +22,6 @@ export class LongPress {
   onLongPressing = new EventEmitter();
 
   @HostListener('touchstart', ['$event'])
-  @HostListener('mousedown', ['$event'])
   onMouseDown(event: EventSource): void {
     this.pressing = true;
     this.longPressing = false;
@@ -36,8 +35,8 @@ export class LongPress {
   }
 
   @HostListener('touchend', ['$event'])
-  @HostListener('mouseup', ['$event'])
-  @HostListener('mouseleave', ['$event'])
+  @HostListener('touchmove', ['$event'])
+  @HostListener('touchcancel', ['$event'])
   endPress(event: EventSource): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
