@@ -82,10 +82,11 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.75);
+  transition: opacity 0.4s ease-in-out;
   z-index: 10;
   opacity: 0;
-  transition: opacity ease-in-out 0.5s;
 
   &__controller {
     width: 35vw;
