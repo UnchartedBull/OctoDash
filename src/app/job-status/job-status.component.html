@@ -10,13 +10,28 @@
     ></round-progress>
     <div class="job-info__progress-percentage">{{ job.progress }}<span style="font-size: 40%">%</span></div>
   </div>
-  <div class="job-info__progress job-info__progress-stretch" *ngIf="showPreview() && job.thumbnail">
+  <div class="job-info__progress" *ngIf="showPreview() && job.thumbnail">
     <div class="job-info__progress-percentage" [hidden]="true">
       {{ job.progress }}<span style="font-size: 40%">%</span>
     </div>
-    <img class="job-info__progress-preview" [src]="job.thumbnail" />
-    <div class="job-info__progress-bar__wrapper">
-      <div class="job-info__progress-bar" [style.width]="job.progress + '%'"></div>
+    <div *ngIf="!useCircularProgressBar()" style="height: 22vw; padding-top: -1.5vw">
+      <img class="job-info__progress-preview" [src]="job.thumbnail" />
+      <div class="job-info__progress-bar__wrapper">
+        <div class="job-info__progress-bar" [style.width]="job.progress + '%'"></div>
+      </div>
+    </div>
+    <div *ngIf="useCircularProgressBar()" style="height: 23.5vw">
+      <round-progress
+        [current]="job.progress"
+        [max]="100"
+        [stroke]="25"
+        [rounded]="true"
+        [responsive]="true"
+        [color]="'#44bd32'"
+      ></round-progress>
+      <div class="job-info__progress-percentage job-info__progress-preview-image-container">
+        <img class="job-info__progress-preview-image" [src]="job.thumbnail" />
+      </div>
     </div>
   </div>
   <span class="job-info__filename">{{ job.filename }}</span>
@@ -25,8 +40,8 @@
   <br />
   <span class="job-info__time">
     <span *ngIf="hasProperty(job, 'timeLeft')">
-      <span class="job-info__time-left">{{ job.timeLeft.value }}</span>
-      {{ job.timeLeft.unit }} left,
+      <span class="job-info__time-left">{{ job.timeLeft.value }}</span
+      >{{ job.timeLeft.unit }} left,
     </span>
     elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}
   </span>

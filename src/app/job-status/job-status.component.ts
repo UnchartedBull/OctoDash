@@ -71,4 +71,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public hasProperty(object: Record<string, unknown>, name: string): boolean {
     return Object.hasOwnProperty.bind(object)(name);
   }
+
+  public useCircularProgressBar(): boolean {
+    return this.configService.getPreviewProgressCircle();
+  }
 }

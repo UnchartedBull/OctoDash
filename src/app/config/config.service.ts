@@ -262,6 +262,10 @@ export class ConfigService {
   public getZBabystepGCode(): string {
     return this.config.printer.zBabystepGCode;
   }
+
+  public getPreviewProgressCircle(): boolean {
+    return this.config.octodash.previewProgressCircle;
+  }
 }
 
 interface HttpHeader {
@@ -339,6 +343,7 @@ interface OctoDash {
   touchscreen: boolean;
   turnScreenOffWhileSleeping: boolean;
   preferPreviewWhilePrinting: boolean;
+  previewProgressCircle: boolean;
 }
 
 interface CustomAction {
@@ -566,6 +571,7 @@ const schema = {
         'touchscreen',
         'turnScreenOffWhileSleeping',
         'preferPreviewWhilePrinting',
+        'previewProgressCircle',
       ],
       properties: {
         customActions: {
@@ -633,6 +639,10 @@ const schema = {
         },
         preferPreviewWhilePrinting: {
           $id: '#/properties/octodash/properties/preferPreviewWhilePrinting',
+          type: 'boolean',
+        },
+        previewProgressCircle: {
+          $id: '#/properties/octodash/properties/previewProgressCircle',
           type: 'boolean',
         },
       },
