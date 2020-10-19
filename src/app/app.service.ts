@@ -35,13 +35,17 @@ export class AppService {
         'Please restart your system. If the issue persists open an issue on GitHub.',
       );
     }
-    this.updateError = [".printer should have required property 'zBabystepGCode'"];
+    this.updateError = [
+      ".printer should have required property 'zBabystepGCode'",
+      ".octodash should have required property 'previewProgressCircle'",
+    ];
   }
 
   // If the errors can be automatically fixed return true here
   public autoFixError(): boolean {
     const config = this.configService.getCurrentConfig();
     config.printer.zBabystepGCode = 'M290 Z';
+    config.octodash.previewProgressCircle = false;
     this.configService.saveConfig(config);
     this.configService.updateConfig();
     return true;
@@ -57,7 +61,6 @@ export class AppService {
   private enableCustomCSSListener(): void {
     this.ipc.on('customStyles', (_, customCSS: string): void => {
       const css = document.createElement('style');
-      css.type = 'text/css';
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });

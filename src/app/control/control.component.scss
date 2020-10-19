@@ -206,7 +206,7 @@
   &__gcode {
     font-size: 2.2vw;
     padding: 2vh 1.5vw;
-    font-family: "Cousine", monospace;
+    font-family: 'Cousine', monospace;
   }
 
   &__icon {
@@ -218,7 +218,8 @@
   &__wrapper {
     position: fixed;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.77);
     left: 0;
     top: 0;
     right: 0;

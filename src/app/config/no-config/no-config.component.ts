@@ -346,6 +346,7 @@ export class NoConfigComponent implements OnInit {
         touchscreen: true,
         turnScreenOffWhileSleeping: false,
         preferPreviewWhilePrinting: false,
+        previewProgressCircle: false,
       },
     };
   }

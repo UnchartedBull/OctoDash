@@ -19,6 +19,6 @@ export class MainMenuComponent {
   public hideSettings(): void {
     setTimeout((): void => {
       this.settings = false;
-    }, 600);
+    }, 350);
   }
 }

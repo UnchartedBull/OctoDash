@@ -5,10 +5,11 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.77);
+    transition: opacity 0.4s ease-in-out;
     z-index: 50;
     opacity: 1;
-    transition: opacity 0.7s ease-in-out;
   }
 
   &__hide {
@@ -93,7 +94,7 @@
 
         &-small {
           width: 4vw;
-          vertical-align: -1vh
+          vertical-align: -1vh;
         }
       }
     }

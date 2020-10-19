@@ -71,7 +71,7 @@ export class SettingsComponent implements OnInit {
       this.closeFunction.emit();
       setTimeout((): void => {
         this.fadeOutAnimation = false;
-      }, 800);
+      }, 5000);
     } else {
       this.notificationService.setWarning(
         'Configuration not saved!',
@@ -90,7 +90,7 @@ export class SettingsComponent implements OnInit {
       this.pages[current].classList.add('settings__content-inactive');
       this.pages[current].classList.remove('settings__content-slideout-' + direction);
       this.pages[page].classList.remove('settings__content-slidein-' + direction);
-    }, 470);
+    }, 370);
   }
 
   public updateConfig(): void {
