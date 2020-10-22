@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ElectronService } from 'ngx-electron';
 import { NotificationService } from 'src/app/notification/notification.service';
 import { OctoprintScriptService } from 'src/app/octoprint-script.service';
 
@@ -11,9 +12,6 @@ import { Config, ConfigService } from '../config.service';
   styleUrls: ['./no-config.component.scss'],
 })
 export class NoConfigComponent implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ipc: any;
-
   public page = 0;
   public totalPages = 7;
 
@@ -36,17 +34,9 @@ export class NoConfigComponent implements OnInit {
     private configService: ConfigService,
     private router: Router,
     private notificationService: NotificationService,
+    private electronService: ElectronService,
     private octoprintScriptService: OctoprintScriptService,
   ) {
-    try {
-      this.ipc = window.require('electron').ipcRenderer;
-    } catch (e) {
-      this.notificationService.setError(
-        "Can't connect to backend",
-        'Please restart your system. If the issue persists open an issue on GitHub.',
-      );
-    }
-
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
       this.config = configService.getCurrentConfig();
@@ -59,14 +49,14 @@ export class NoConfigComponent implements OnInit {
   public ngOnInit(): void {
     this.changeProgress();
 
-    this.ipc.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
+    this.electronService.ipcRenderer.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
       this.octoprintNodes = nodes;
     });
   }
 
   public discoverOctoprintInstances(): void {
     this.octoprintNodes = null;
-    this.ipc.send('discover');
+    this.electronService.ipcRenderer.send('discover');
     setTimeout(() => {
       const searching = document.querySelector('.no-config__discovered-instances__searching');
       if (searching) {
@@ -157,7 +147,6 @@ export class NoConfigComponent implements OnInit {
   }
 
   changeFeedSpeed(amount: number): void {
-    console.log(amount);
     if (this.config.filament.feedSpeed + amount < 0) {
       this.config.filament.feedSpeed = 0;
     } else if (this.config.filament.feedSpeed + amount > 999) {
@@ -204,7 +193,7 @@ export class NoConfigComponent implements OnInit {
   private beforeNavigation(value: number): number {
     switch (this.page) {
       case 1:
-        this.ipc.send('stopDiscover');
+        this.electronService.ipcRenderer.send('stopDiscover');
         if (value > 0) {
           this.loadOctoprintClient();
           return 0.5;

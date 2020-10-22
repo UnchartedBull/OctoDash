@@ -6,8 +6,8 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 export class LongPress {
   pressing: boolean;
   longPressing: boolean;
-  timeout: number;
-  interval: number;
+  timeout: ReturnType<typeof setTimeout>;
+  interval: ReturnType<typeof setInterval>;
 
   @Input() duration = 700;
   @Input() frequency = 100;

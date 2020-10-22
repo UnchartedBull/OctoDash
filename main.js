@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
 
+require('v8-compile-cache');
+
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
@@ -12,7 +14,7 @@ const dev = args.some(val => val === '--serve');
 const activateListeners = require('./helper/listener');
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
-app.allowRendererProcessReuse = true;
+app.allowRendererProcessReuse = false;
 
 let window;
 
