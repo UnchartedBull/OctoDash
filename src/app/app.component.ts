@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
+import { ElectronService } from 'ngx-electron';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     private octoprintScriptService: OctoprintScriptService,
     private notificationService: NotificationService,
     private router: Router,
+    private electronService: ElectronService,
   ) {}
 
   public activated = false;
@@ -37,6 +39,12 @@ export class AppComponent implements OnInit {
   }
 
   private async initialize(): Promise<void> {
+    if (!this.electronService.isElectronApp) {
+      this.notificationService.setWarning(
+        'Non electron environment detected!',
+        'The app may not work as intended. If you run an official build please open a new issue on GitHub.',
+      );
+    }
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {

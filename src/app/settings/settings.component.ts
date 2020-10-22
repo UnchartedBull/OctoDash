@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { Config, ConfigService } from '../config/config.service';
@@ -29,25 +30,16 @@ export class SettingsComponent implements OnInit {
   ];
   private overwriteNoSave = false;
   private pages = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ipc: any;
   public update = false;
 
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
+    private electronService: ElectronService,
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config = this.configService.revertConfigForInput(this.config);
-    try {
-      this.ipc = window.require('electron').ipcRenderer;
-    } catch (e) {
-      this.notificationService.setError(
-        "Can't connect to backend",
-        'Please restart your system. If the issue persists open an issue on GitHub.',
-      );
-    }
   }
 
   public ngOnInit(): void {
@@ -102,7 +94,7 @@ export class SettingsComponent implements OnInit {
     this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
-    this.ipc.send('reload', '');
+    this.electronService.ipcRenderer.send('reload', '');
   }
 
   public showUpdate(): void {

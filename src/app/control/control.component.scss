@@ -7,7 +7,6 @@
   right: 0;
   z-index: 50;
   transition: opacity ease-in-out 0.5s;
-  transform: translate3D(0, 0, 0);
   opacity: 0;
   background: #2a2f39;
   font-weight: 500;
@@ -140,7 +139,6 @@
       background-color: transparent;
       transition: all 0.3s ease-in-out;
       transition-property: opacity, background;
-      transform: translate3D(0, 0, 0);
 
       &-active {
         opacity: 0.9;

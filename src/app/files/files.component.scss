@@ -137,7 +137,6 @@
   backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.77);
   transition: opacity 0.4s ease-in-out;
-  transform: translate3D(0, 0, 0);
   z-index: 5;
 
   &__close {
@@ -274,7 +273,6 @@
   backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.77);
   transition: opacity 0.4s ease-in-out;
-  transform: translate3D(0, 0, 0);
   left: 0;
   top: 0;
   width: 100vw;
