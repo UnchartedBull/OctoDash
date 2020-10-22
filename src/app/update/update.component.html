@@ -1,9 +1,12 @@
 <div class="update-container">
   <div *ngIf="page === 1">
-    <span class="update-heading">downloading update ...</span>
+    <span class="update-heading">downloading update</span>
     <div class="update-progress-bar__wrapper">
-      <div class="update-progress-bar" [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
-        id="updateDownloadProgress">
+      <div
+        class="update-progress-bar"
+        [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
+        id="updateDownloadProgress"
+      >
         {{ updateProgress.speed }} MB/s&nbsp;
       </div>
     </div>
@@ -11,7 +14,7 @@
     <span class="update-time__remaining">{{ updateProgress.eta }} minutes left</span>
   </div>
   <div *ngIf="page === 2">
-    <span class="update-heading">installing update ...</span>
+    <span class="update-heading">installing update</span>
     <div class="update-progress-bar__wrapper">
       <div class="update-progress-bar update-progress-bar-no-percentage" id="installUpdateProgress"></div>
     </div>

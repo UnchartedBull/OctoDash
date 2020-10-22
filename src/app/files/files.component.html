@@ -30,7 +30,7 @@
 </div>
 <div class="files">
   <ngx-spinner>
-    <p class="la-pacman-text">loading ...</p>
+    <p class="la-pacman-text">loading</p>
   </ngx-spinner>
 
   <div *ngIf="!folderContent" class="files__error">can't load files ...</div>
@@ -120,7 +120,7 @@
   </div>
   <div class="file__wrapper file__loading" *ngIf="!fileDetail">
     <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
-    loading details ...
+    <span class="loading-dots">loading details</span>
   </div>
   <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
     <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />

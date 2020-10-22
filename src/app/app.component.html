@@ -1,8 +1,8 @@
 <app-notification></app-notification>
 <div class="container">
   <div *ngIf="!activated">
-    <img src="assets/icon/icon-main-title.svg" class="splash-screen__icon" />
-    <span class="splash-screen__credits">by UnchartedBull</span>
+    <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
+    <span class="splash-screen__text loading-dots">connecting</span>
   </div>
   <router-outlet (activate)="activated = true"></router-outlet>
 </div>
