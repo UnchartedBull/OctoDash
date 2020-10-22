@@ -50,7 +50,7 @@ export class JobService {
                     thumbnail: await this.fileService.getThumbnail(
                       '/' + data.job.file.origin + '/' + data.job.file.path,
                     ),
-                    progress: Math.round((data.progress.filepos / data.job.file.size) * 100),
+                    progress: Math.round(data.progress.completion),
                     ...(data.job.filament !== null
                       ? {
                           filamentAmount: this.service.convertFilamentLengthToWeight(
