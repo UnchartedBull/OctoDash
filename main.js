@@ -14,7 +14,6 @@ const dev = args.some(val => val === '--serve');
 const activateListeners = require('./helper/listener');
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
-app.allowRendererProcessReuse = false;
 
 let window;
 
