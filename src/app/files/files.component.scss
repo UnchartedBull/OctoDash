@@ -134,8 +134,8 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.77);
+  background-color: rgba(0, 0, 0, 0.85);
+  // backdrop-filter: blur(8px);
   transition: opacity 0.4s ease-in-out;
   z-index: 5;
 
@@ -270,8 +270,8 @@
 .sorting {
   display: block;
   position: fixed;
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.77);
+  background-color: rgba(0, 0, 0, 0.85);
+  // backdrop-filter: blur(8px);
   transition: opacity 0.4s ease-in-out;
   left: 0;
   top: 0;

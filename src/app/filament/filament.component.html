@@ -35,7 +35,7 @@
       </tr>
     </table>
     <div class="filament-no-filaments" *ngIf="!filamentSpools && !isLoadingSpools">no filament spools found</div>
-    <div class="filament-no-filaments" *ngIf="isLoadingSpools">loading spools ...</div>
+    <div class="filament-no-filaments loading-dots" *ngIf="isLoadingSpools">loading spools</div>
     <div class="scroll__thumb-inactive" *ngIf="filamentSpools"></div>
   </div>
   <div *ngIf="page === 1">

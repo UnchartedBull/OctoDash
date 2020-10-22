@@ -65,7 +65,7 @@
           </div>
           <img src="assets/connect.svg" class="no-config__discovered-instances__node-connect-icon" />
         </span>
-        <span class="no-config__discovered-instances__searching" *ngIf="!octoprintNodes">searching ...</span>
+        <span class="no-config__discovered-instances__searching loading-dots" *ngIf="!octoprintNodes">searching</span>
       </div>
       <div class="no-config__discovered-instances__manual" (click)="enterURLManually()">enter manually</div>
     </div>
@@ -102,7 +102,7 @@
   </div>
 
   <div *ngIf="page === 1.5">
-    <span class="no-config__connecting">connecting ...</span>
+    <span class="no-config__connecting loading-dots">connecting</span>
   </div>
 
   <div *ngIf="page === 2">
