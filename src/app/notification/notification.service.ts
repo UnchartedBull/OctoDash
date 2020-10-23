@@ -36,38 +36,44 @@ export class NotificationService {
     this.observer.next('close');
   }
 
-  public setError(heading: string, text: string): void {
-    if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
-      if (this.observer) {
-        this.observer.next({ heading, text, type: 'error' });
-      } else {
-        setTimeout(() => {
-          this.setError(heading, text);
-        }, 1000);
+  public setError(heading: string, text: string): Promise<void> {
+    return new Promise(resolve => {
+      if ((!this.hideNotifications && !this.bootGrace) || (this.bootGrace && !text.endsWith('0 Unknown Error'))) {
+        if (this.observer) {
+          this.observer.next({ heading, text, type: 'error', closed: resolve });
+        } else {
+          setTimeout(() => {
+            this.setError(heading, text);
+          }, 1000);
+        }
       }
-    }
+    });
   }
 
-  public setWarning(heading: string, text: string): void {
-    if (!this.hideNotifications) {
-      if (this.observer) {
-        this.observer.next({ heading, text, type: 'warn' });
-      } else {
-        setTimeout(() => {
-          this.setWarning(heading, text);
-        }, 1000);
+  public setWarning(heading: string, text: string): Promise<void> {
+    return new Promise(resolve => {
+      if (!this.hideNotifications) {
+        if (this.observer) {
+          this.observer.next({ heading, text, type: 'warn', closed: resolve });
+        } else {
+          setTimeout(() => {
+            this.setWarning(heading, text);
+          }, 1000);
+        }
       }
-    }
+    });
   }
 
-  public setUpdate(heading: string, text: string): void {
-    if (this.observer) {
-      this.observer.next({ heading, text, type: 'update' });
-    } else {
-      setTimeout(() => {
-        this.setUpdate(heading, text);
-      }, 1000);
-    }
+  public setNotification(heading: string, text: string): Promise<void> {
+    return new Promise(resolve => {
+      if (this.observer) {
+        this.observer.next({ heading, text, type: 'notification', closed: resolve });
+      } else {
+        setTimeout(() => {
+          this.setNotification(heading, text);
+        }, 1000);
+      }
+    });
   }
 
   public getObservable(): Observable<Notification | 'close'> {
@@ -83,4 +89,5 @@ export interface Notification {
   heading: string;
   text: string;
   type: string;
+  closed: () => void;
 }

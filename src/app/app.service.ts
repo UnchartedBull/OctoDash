@@ -83,11 +83,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.ipcRenderer.send('screenSleep', '');
+    this.electronService.ipcRenderer.send('screenSleep');
   }
 
   public turnDisplayOn(): void {
-    this.electronService.ipcRenderer.send('screenWakeup', '');
+    this.electronService.ipcRenderer.send('screenWakeup');
   }
 
   public getUpdateError(): string[] {

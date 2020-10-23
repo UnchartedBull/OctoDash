@@ -2,7 +2,11 @@
 <div class="container">
   <div *ngIf="!activated">
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
-    <span class="splash-screen__text loading-dots">connecting</span>
+    <span
+      class="splash-screen__text"
+      [ngClass]="{ 'loading-dots': status === 'connecting' || status === 'initializing' }"
+      >{{ status }}</span
+    >
   </div>
   <router-outlet (activate)="activated = true"></router-outlet>
 </div>
