@@ -46,7 +46,7 @@ function createWindow() {
       // TODO: enable + contextBridge (probably electron-ngx before release 12)
       contextIsolation: false,
     },
-    icon: path.join(__dirname, 'src', 'assets', 'icon', 'icon.png'),
+    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   });
 
   if (dev) {
@@ -55,7 +55,7 @@ function createWindow() {
   } else {
     window.loadURL(
       url.format({
-        pathname: path.join(__dirname, 'dist/index.html'),
+        pathname: path.join(__dirname, 'dist', 'index.html'),
         protocol: 'file:',
         slashes: true,
       }),
@@ -63,7 +63,7 @@ function createWindow() {
     window.setFullScreen(true);
   }
 
-  activateListeners(ipcMain, window, app);
+  activateListeners(ipcMain, window, app, dev);
 
   window.on('closed', () => {
     window = null;
