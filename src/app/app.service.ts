@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ElectronService } from 'ngx-electron';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
@@ -10,8 +11,6 @@ import { NotificationService } from './notification/notification.service';
 export class AppService {
   private updateError: string[];
   private loadedFile = false;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ipc: any;
   public version: string;
   public latestVersion: string;
   private latestVersionAssetsURL: string;
@@ -21,20 +20,11 @@ export class AppService {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
+    private electronService: ElectronService,
   ) {
-    try {
-      this.ipc = window.require('electron').ipcRenderer;
-      this.enableVersionListener();
-      this.enableCustomCSSListener();
-      setTimeout(() => {
-        this.ipc.send('appInfo');
-      }, 0);
-    } catch (e) {
-      this.notificationService.setError(
-        "Can't connect to backend",
-        'Please restart your system. If the issue persists open an issue on GitHub.',
-      );
-    }
+    this.enableVersionListener();
+    this.enableCustomCSSListener();
+    this.electronService.ipcRenderer.send('appInfo');
     this.updateError = [
       ".printer should have required property 'zBabystepGCode'",
       ".octodash should have required property 'previewProgressCircle'",
@@ -52,20 +42,20 @@ export class AppService {
   }
 
   private enableVersionListener(): void {
-    this.ipc.on('versionInformation', (_, versionInformation: VersionInformation): void => {
+    this.electronService.ipcRenderer.on('versionInformation', (_, versionInformation: VersionInformation): void => {
       this.version = versionInformation.version;
       this.checkUpdate();
     });
   }
 
   private enableCustomCSSListener(): void {
-    this.ipc.on('customStyles', (_, customCSS: string): void => {
+    this.electronService.ipcRenderer.on('customStyles', (_, customCSS: string): void => {
       const css = document.createElement('style');
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });
 
-    this.ipc.on('customStylesError', (_, customCSSError: string): void => {
+    this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
       this.notificationService.setError("Can't load custom styles!", customCSSError);
     });
   }
@@ -93,15 +83,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    if (this.ipc) {
-      this.ipc.send('screenSleep', '');
-    }
+    this.electronService.ipcRenderer.send('screenSleep');
   }
 
   public turnDisplayOn(): void {
-    if (this.ipc) {
-      this.ipc.send('screenWakeup', '');
-    }
+    this.electronService.ipcRenderer.send('screenWakeup');
   }
 
   public getUpdateError(): string[] {

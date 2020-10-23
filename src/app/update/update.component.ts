@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { NotificationService } from '../notification/notification.service';
@@ -12,9 +13,7 @@ import { OctoprintService } from '../octoprint.service';
 export class UpdateComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>(true);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ipc: any;
-  private installationAnimationInterval: number;
+  private installationAnimationInterval: ReturnType<typeof setInterval>;
   public updateProgress: UpdateDownloadProgress = {
     percentage: 0,
     transferred: 0,
@@ -32,16 +31,8 @@ export class UpdateComponent implements OnInit {
     private notificationService: NotificationService,
     private octoprintService: OctoprintService,
     private changeDetector: ChangeDetectorRef,
-  ) {
-    try {
-      this.ipc = window.require('electron').ipcRenderer;
-    } catch (e) {
-      this.notificationService.setError(
-        "Can't connect to backend",
-        'Please restart your system. If the issue persists open an issue on GitHub.',
-      );
-    }
-  }
+    private electronService: ElectronService,
+  ) {}
 
   ngOnInit(): void {
     if (!this.service.latestVersion || !this.service.getLatestVersionAssetsURL()) {
@@ -57,17 +48,20 @@ export class UpdateComponent implements OnInit {
   }
 
   private setupListeners(): void {
-    this.ipc.on('updateError', (_, updateError: UpdateError): void => {
+    this.electronService.ipcRenderer.on('updateError', (_, updateError: UpdateError): void => {
       this.notificationService.setError("Can't install update!", updateError.error.message);
       this.closeUpdateWindow();
     });
 
-    this.ipc.on('updateDownloadProgress', (_, updateDownloadProgress: UpdateDownloadProgress): void => {
-      this.updateProgress = updateDownloadProgress;
-      this.changeDetector.detectChanges();
-    });
+    this.electronService.ipcRenderer.on(
+      'updateDownloadProgress',
+      (_, updateDownloadProgress: UpdateDownloadProgress): void => {
+        this.updateProgress = updateDownloadProgress;
+        this.changeDetector.detectChanges();
+      },
+    );
 
-    this.ipc.on('updateDownloadFinished', (): void => {
+    this.electronService.ipcRenderer.on('updateDownloadFinished', (): void => {
       this.page = 2;
       this.changeDetector.detectChanges();
       setTimeout(() => {
@@ -79,7 +73,7 @@ export class UpdateComponent implements OnInit {
       }, 250);
     });
 
-    this.ipc.on('updateInstalled', (): void => {
+    this.electronService.ipcRenderer.on('updateInstalled', (): void => {
       this.page = 3;
       this.changeDetector.detectChanges();
     });
@@ -92,7 +86,7 @@ export class UpdateComponent implements OnInit {
   }
 
   private update(assetsURL: string): void {
-    this.ipc.send('update', {
+    this.electronService.ipcRenderer.send('update', {
       assetsURL: assetsURL,
     });
   }

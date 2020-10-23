@@ -1,14 +1,13 @@
 .settings {
   &-wrapper {
-    transform: translate3D(0, 0, 0);
     animation: fadein 0.4s;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.85);
+    // backdrop-filter: blur(8px);
     z-index: 20;
 
     &-fadeout {
@@ -230,7 +229,6 @@
     width: 54vw;
     display: block;
     padding: 2vh 2vw 2vh 4vw;
-    transform: translate3D(0, 0, 0);
 
     &-slideout-forward {
       animation: slideout-forward 0.4s ease-out;

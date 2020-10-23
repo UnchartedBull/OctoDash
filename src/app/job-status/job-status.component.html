@@ -100,5 +100,5 @@
     </span>
   </div>
 </div>
-<div class="job-info__no-job" *ngIf="(!job && isFileLoaded()) || (!job && isPrinting())">loading info ...</div>
+<div class="job-info__no-job loading-dots" *ngIf="(!job && isFileLoaded()) || (!job && isPrinting())">loading info</div>
 <div class="job-info__no-job" *ngIf="!job && !isFileLoaded() && !isPrinting()">no job running ...</div>

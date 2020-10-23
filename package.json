@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "license": "Apache 2.0",
   "homepage": "https://github.com/UnchartedBull/OctoDash",
   "author": {
@@ -9,28 +9,31 @@
     "email": "timon.gaebelein@icloud.com"
   },
   "main": "main.js",
-  "files": [
-    "main.js",
-    "node_modules",
-    "dist",
-    "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-    "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-    "!**/node_modules/*.d.ts",
-    "!**/node_modules/.bin",
-    "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-    "!.editorconfig",
-    "!**/._*",
-    "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
-    "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
-    "!**/{appveyor.yml,.travis.yml,circle.yml}",
-    "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
-  ],
   "build": {
     "appId": "octodash",
     "productName": "OctoDash",
     "directories": {
       "output": "package"
     },
+    "files": [
+      "main.js",
+      "helper",
+      "dist",
+      "node_modules",
+      "themes/**/*.css",
+      "LICENSE.md",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
     "linux": {
       "target": [
         {
@@ -82,23 +85,26 @@
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
     "electron-store": "^6.0.1",
-    "got": "^11.7.0",
+    "got": "^11.8.0",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
+    "ngx-electron": "^2.2.0",
     "ngx-spinner": "^10.0.1",
     "progress-stream": "^2.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.3",
+    "v8-compile-cache": "^2.1.1",
+    "wait-port": "^0.2.9",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.7",
     "@angular/cli": "~10.1.7",
     "@angular/compiler-cli": "~10.0.5",
-    "@angular/language-service": "~10.1.6",
+    "@angular/language-service": "~10.2.0",
     "@types/ajv": "^1.0.0",
     "@types/lodash": "^4.14.162",
-    "@types/node": "^14.11.10",
+    "@types/node": "12.19.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.10.1",
     "codelyzer": "^6.0.1",

@@ -5,10 +5,9 @@
     right: 0;
     top: 0;
     bottom: 0;
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, 0.77);
+    background-color: rgba(0, 0, 0, 0.85);
+    // backdrop-filter: blur(8px);
     transition: opacity 0.4s ease-in-out;
-    transform: translate3D(0, 0, 0);
     z-index: 50;
     opacity: 1;
   }
