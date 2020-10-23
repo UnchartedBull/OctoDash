@@ -1,5 +1,42 @@
 # Changelog
 
+## [v2.1.1](https://github.com/UnchartedBull/OctoDash/tree/v2.1.1) (2020-10-23)
+
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.1.0...v2.1.1)
+
+**Implemented enhancements:**
+
+- Turn off backlight when sleeping, not just display [\#1100](https://github.com/UnchartedBull/OctoDash/issues/1100)
+- Percentage is diffrent. [\#1023](https://github.com/UnchartedBull/OctoDash/issues/1023)
+
+**Fixed bugs:**
+
+- Can't get OctoPrint script... [\#1097](https://github.com/UnchartedBull/OctoDash/issues/1097)
+- Settings SAVE blanks screen and won't respond [\#1071](https://github.com/UnchartedBull/OctoDash/issues/1071)
+- Compatibility issue with Bigtreetech PITFT50 [\#1007](https://github.com/UnchartedBull/OctoDash/issues/1007)
+
+**Closed issues:**
+
+- Laggy Ui \(Hyperpixel 4.0\) 3b+ [\#1113](https://github.com/UnchartedBull/OctoDash/issues/1113)
+- config invalid -\> octodash should have required property 'previewProgressCircle' [\#1107](https://github.com/UnchartedBull/OctoDash/issues/1107)
+- SAVE hangs octodash [\#1103](https://github.com/UnchartedBull/OctoDash/issues/1103)
+- Connecting to Printer after Power On. Sleeping mode [\#1101](https://github.com/UnchartedBull/OctoDash/issues/1101)
+- Non critical error during update from 2.0 to 2.1 [\#1095](https://github.com/UnchartedBull/OctoDash/issues/1095)
+- Failed to fetch http://ftp.halifax.rwth-aachen.de/raspbian/raspbian/pool/main/w/wayland/libwayland-server0\_1.16.0-1\_armhf.deb [\#1094](https://github.com/UnchartedBull/OctoDash/issues/1094)
+- improve electron integration [\#994](https://github.com/UnchartedBull/OctoDash/issues/994)
+
+**Merged pull requests:**
+
+- Better connection handling [\#1117](https://github.com/UnchartedBull/OctoDash/pull/1117) ([UnchartedBull](https://github.com/UnchartedBull))
+- saving works again + packaging improvements [\#1116](https://github.com/UnchartedBull/OctoDash/pull/1116) ([UnchartedBull](https://github.com/UnchartedBull))
+- remove backdrop filter and add dot animation [\#1114](https://github.com/UnchartedBull/OctoDash/pull/1114) ([UnchartedBull](https://github.com/UnchartedBull))
+- Use OctoPrint completion over self-calculated percentage [\#1112](https://github.com/UnchartedBull/OctoDash/pull/1112) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump @angular/language-service from 10.1.6 to 10.2.0 [\#1110](https://github.com/UnchartedBull/OctoDash/pull/1110) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Switch to electron ngx, some performance improvements [\#1109](https://github.com/UnchartedBull/OctoDash/pull/1109) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump got from 11.7.0 to 11.8.0 [\#1106](https://github.com/UnchartedBull/OctoDash/pull/1106) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 14.14.0 to 14.14.1 [\#1105](https://github.com/UnchartedBull/OctoDash/pull/1105) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 14.11.10 to 14.14.0 [\#1102](https://github.com/UnchartedBull/OctoDash/pull/1102) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v2.1.0](https://github.com/UnchartedBull/OctoDash/tree/v2.1.0) (2020-10-19)
 
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.0.0...v2.1.0)
@@ -21,7 +58,7 @@
 - UI state to reflect auto pause state from print. [\#957](https://github.com/UnchartedBull/OctoDash/issues/957)
 - Neopixel Support [\#945](https://github.com/UnchartedBull/OctoDash/issues/945)
 - Add option to change filament roll selection when print is paused [\#939](https://github.com/UnchartedBull/OctoDash/issues/939)
-- Change G_CODE for babysteping [\#919](https://github.com/UnchartedBull/OctoDash/issues/919)
+- Change G\_CODE for babysteping [\#919](https://github.com/UnchartedBull/OctoDash/issues/919)
 - Fan 'OFF' and '100%' buttons in Fan controlls [\#898](https://github.com/UnchartedBull/OctoDash/issues/898)
 - Ability to operate octodash if printer is off or not attached [\#882](https://github.com/UnchartedBull/OctoDash/issues/882)
 - Fan Speed Control [\#841](https://github.com/UnchartedBull/OctoDash/issues/841)
@@ -30,7 +67,6 @@
 **Fixed bugs:**
 
 - Preview model disappears after adjustments \(NOX\) [\#1076](https://github.com/UnchartedBull/OctoDash/issues/1076)
-- Settings SAVE blanks screen and won't respond [\#1071](https://github.com/UnchartedBull/OctoDash/issues/1071)
 - Update texts are wrong [\#1069](https://github.com/UnchartedBull/OctoDash/issues/1069)
 - Unable to start Octodash with mdns on Pi3 [\#1033](https://github.com/UnchartedBull/OctoDash/issues/1033)
 - Large G-Code Print From SD Results in Error [\#1026](https://github.com/UnchartedBull/OctoDash/issues/1026)
@@ -46,7 +82,7 @@
 - no unsleep after connect from octoprint [\#884](https://github.com/UnchartedBull/OctoDash/issues/884)
 - updating from v1.50 to v2.0 failed [\#876](https://github.com/UnchartedBull/OctoDash/issues/876)
 - Thumbnail issue in print screen after V2.0 update [\#873](https://github.com/UnchartedBull/OctoDash/issues/873)
-- issue with upgrade to 2.0.0 [\#869](https://github.com/UnchartedBull/OctoDash/issues/869)
+- issue with upgrade to 2.0.0  [\#869](https://github.com/UnchartedBull/OctoDash/issues/869)
 - error \(undefined\) [\#862](https://github.com/UnchartedBull/OctoDash/issues/862)
 - Slow Touch Response [\#838](https://github.com/UnchartedBull/OctoDash/issues/838)
 
@@ -56,7 +92,7 @@
 - OctoDash Setup Octoprint Connection failure [\#1089](https://github.com/UnchartedBull/OctoDash/issues/1089)
 - Replace icons for the six action buttons [\#1077](https://github.com/UnchartedBull/OctoDash/issues/1077)
 - activate view mouse [\#1057](https://github.com/UnchartedBull/OctoDash/issues/1057)
-- Display gcode thumbnail using Simplify 3D slicer \(S3D\) [\#1054](https://github.com/UnchartedBull/OctoDash/issues/1054)
+- Display gcode thumbnail using Simplify 3D slicer  \(S3D\) [\#1054](https://github.com/UnchartedBull/OctoDash/issues/1054)
 - Preheat Button shows error 405 if the thumbnail size is higher than 200\*200 [\#1052](https://github.com/UnchartedBull/OctoDash/issues/1052)
 - Filament Loading/Unloading doesn't work correctly [\#1050](https://github.com/UnchartedBull/OctoDash/issues/1050)
 - Octodash on a external Pi with a wifi connection. [\#1049](https://github.com/UnchartedBull/OctoDash/issues/1049)
@@ -73,7 +109,7 @@
 - Octodash stuck on starting even though print is running [\#991](https://github.com/UnchartedBull/OctoDash/issues/991)
 - API KEY From Octo Print [\#981](https://github.com/UnchartedBull/OctoDash/issues/981)
 - Octodash Not Showing [\#979](https://github.com/UnchartedBull/OctoDash/issues/979)
-- Picam not recognized ? [\#978](https://github.com/UnchartedBull/OctoDash/issues/978)
+- Picam not recognized ?  [\#978](https://github.com/UnchartedBull/OctoDash/issues/978)
 - Octopi/raspbian/other linux wifi settings? [\#977](https://github.com/UnchartedBull/OctoDash/issues/977)
 - Issue with installation [\#975](https://github.com/UnchartedBull/OctoDash/issues/975)
 - Filament Swap - Keeps advancing filament after selecting OK [\#968](https://github.com/UnchartedBull/OctoDash/issues/968)
@@ -91,7 +127,7 @@
 - Octodash outputs to HDMI and not GPIO 3.5" TFT [\#892](https://github.com/UnchartedBull/OctoDash/issues/892)
 - Any easy way to uninstall Octoprint-TFT to install this? [\#887](https://github.com/UnchartedBull/OctoDash/issues/887)
 - Filament option don't read my Feed Speed Setting [\#880](https://github.com/UnchartedBull/OctoDash/issues/880)
-- Prusa MK3s setup values [\#875](https://github.com/UnchartedBull/OctoDash/issues/875)
+- Prusa MK3s setup values  [\#875](https://github.com/UnchartedBull/OctoDash/issues/875)
 - M600 Setup [\#874](https://github.com/UnchartedBull/OctoDash/issues/874)
 - problems when trying to install octodash [\#839](https://github.com/UnchartedBull/OctoDash/issues/839)
 - Octodash not starting / only ratpoison banner [\#825](https://github.com/UnchartedBull/OctoDash/issues/825)
@@ -256,7 +292,7 @@
 - Building in armv7l VM produces "unsupported arch" from electron-builder [\#760](https://github.com/UnchartedBull/OctoDash/issues/760)
 - File manager screen gets in locked state [\#733](https://github.com/UnchartedBull/OctoDash/issues/733)
 - Can the close button overlay in the internet browser stay while navigating [\#713](https://github.com/UnchartedBull/OctoDash/issues/713)
-- Problems with filemanager / files are not always displayed [\#698](https://github.com/UnchartedBull/OctoDash/issues/698)
+- Problems with filemanager / files  are not always displayed [\#698](https://github.com/UnchartedBull/OctoDash/issues/698)
 - Possible Issue with Scrolling [\#675](https://github.com/UnchartedBull/OctoDash/issues/675)
 - Cancelling a print from the Printers LCD does not cancel the print [\#651](https://github.com/UnchartedBull/OctoDash/issues/651)
 - Waking screen from sleep should not trigger touch event on OctoDash [\#650](https://github.com/UnchartedBull/OctoDash/issues/650)
@@ -279,7 +315,7 @@
 - Hyperpixel 4.0 square? [\#808](https://github.com/UnchartedBull/OctoDash/issues/808)
 - install octodash [\#804](https://github.com/UnchartedBull/OctoDash/issues/804)
 - Update to Version 2? [\#796](https://github.com/UnchartedBull/OctoDash/issues/796)
-- Desktop [\#793](https://github.com/UnchartedBull/OctoDash/issues/793)
+- Desktop  [\#793](https://github.com/UnchartedBull/OctoDash/issues/793)
 - Noobie [\#786](https://github.com/UnchartedBull/OctoDash/issues/786)
 - Touch interface not working on Hyperpixel 4 [\#784](https://github.com/UnchartedBull/OctoDash/issues/784)
 - Screen Calibration [\#783](https://github.com/UnchartedBull/OctoDash/issues/783)
@@ -297,7 +333,7 @@
 - Cannot open config file via Putty [\#717](https://github.com/UnchartedBull/OctoDash/issues/717)
 - Turn off display backlight after xx seconds [\#710](https://github.com/UnchartedBull/OctoDash/issues/710)
 - Trace/breakpoint trap [\#708](https://github.com/UnchartedBull/OctoDash/issues/708)
-- Prusa Mk3S 3.90 firmware and touchscreen not switching off and the files screen never lists the files. [\#704](https://github.com/UnchartedBull/OctoDash/issues/704)
+- Prusa Mk3S 3.90 firmware and touchscreen not switching off and the files screen never lists the files.  [\#704](https://github.com/UnchartedBull/OctoDash/issues/704)
 - Add OSOYOO 5 Inch DSI Touch Screen to Supported Devices List [\#701](https://github.com/UnchartedBull/OctoDash/issues/701)
 - Cannot run it. Nothing happened after reboot. [\#700](https://github.com/UnchartedBull/OctoDash/issues/700)
 - HyperPixel 4 Flicker/Striping [\#699](https://github.com/UnchartedBull/OctoDash/issues/699)
@@ -450,7 +486,7 @@
 - Model thumbnails for PrusaSlicer [\#633](https://github.com/UnchartedBull/OctoDash/issues/633)
 - Add custom actions on "sleep" screen. [\#631](https://github.com/UnchartedBull/OctoDash/issues/631)
 - Webcam Viewer [\#625](https://github.com/UnchartedBull/OctoDash/issues/625)
-- Support for Prusa Thumbnails plugin [\#614](https://github.com/UnchartedBull/OctoDash/issues/614)
+- Support for Prusa Thumbnails plugin  [\#614](https://github.com/UnchartedBull/OctoDash/issues/614)
 - Display preview images from Prusaslicer gcode [\#566](https://github.com/UnchartedBull/OctoDash/issues/566)
 - Add refresh button to file screen [\#565](https://github.com/UnchartedBull/OctoDash/issues/565)
 - OctoDash on Android [\#448](https://github.com/UnchartedBull/OctoDash/issues/448)
@@ -470,7 +506,7 @@
 **Closed issues:**
 
 - Can't Install Octodash [\#620](https://github.com/UnchartedBull/OctoDash/issues/620)
-- screensaver with hyperpixel 4" \(gpio\) [\#617](https://github.com/UnchartedBull/OctoDash/issues/617)
+- screensaver with hyperpixel 4" \(gpio\)  [\#617](https://github.com/UnchartedBull/OctoDash/issues/617)
 - only one underline in the upper left corner of the screen [\#615](https://github.com/UnchartedBull/OctoDash/issues/615)
 - Development question [\#613](https://github.com/UnchartedBull/OctoDash/issues/613)
 - Getting errors and Octodash wont start [\#609](https://github.com/UnchartedBull/OctoDash/issues/609)
@@ -482,9 +518,9 @@
 - Explain ports and host in Troubleshooting guide [\#560](https://github.com/UnchartedBull/OctoDash/issues/560)
 - How to get thumbnail pictures [\#556](https://github.com/UnchartedBull/OctoDash/issues/556)
 - Development Question [\#544](https://github.com/UnchartedBull/OctoDash/issues/544)
-- Cannot connect to octoprint [\#536](https://github.com/UnchartedBull/OctoDash/issues/536)
+-  Cannot connect to octoprint [\#536](https://github.com/UnchartedBull/OctoDash/issues/536)
 - Unable to view SD CARD files plugged into Prusa MK3S [\#481](https://github.com/UnchartedBull/OctoDash/issues/481)
-- no start -bach: xinit: command not found [\#479](https://github.com/UnchartedBull/OctoDash/issues/479)
+- no start   -bach: xinit: command not found [\#479](https://github.com/UnchartedBull/OctoDash/issues/479)
 - IP Address/Hostname of Octoprint instance should be shown [\#465](https://github.com/UnchartedBull/OctoDash/issues/465)
 - XDOTOOL CLICK LOCATIONS [\#463](https://github.com/UnchartedBull/OctoDash/issues/463)
 - Support Pi Zero W. [\#462](https://github.com/UnchartedBull/OctoDash/issues/462)
@@ -594,7 +630,7 @@
 - OctoDash keeps scrolling through 404 errors on the screen [\#518](https://github.com/UnchartedBull/OctoDash/issues/518)
 - Help installing [\#485](https://github.com/UnchartedBull/OctoDash/issues/485)
 - OctoDash installed but not working [\#483](https://github.com/UnchartedBull/OctoDash/issues/483)
-- Touch UI x OctoDash [\#354](https://github.com/UnchartedBull/OctoDash/issues/354)
+- Touch UI x OctoDash  [\#354](https://github.com/UnchartedBull/OctoDash/issues/354)
 
 **Merged pull requests:**
 
@@ -713,7 +749,7 @@
 - Bump @angular/cli from 9.0.1 to 9.0.2 [\#425](https://github.com/UnchartedBull/OctoDash/pull/425) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Migrate to Angular 9 correctly [\#424](https://github.com/UnchartedBull/OctoDash/pull/424) ([UnchartedBull](https://github.com/UnchartedBull))
 - Bump @angular/language-service from 9.0.0 to 9.0.1 [\#423](https://github.com/UnchartedBull/OctoDash/pull/423) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Custom Actions Closing and Confirmation working [\#422](https://github.com/UnchartedBull/OctoDash/pull/422) ([UnchartedBull](https://github.com/UnchartedBull))
+- Custom Actions Closing and Confirmation working  [\#422](https://github.com/UnchartedBull/OctoDash/pull/422) ([UnchartedBull](https://github.com/UnchartedBull))
 - Don't show NaN values [\#420](https://github.com/UnchartedBull/OctoDash/pull/420) ([UnchartedBull](https://github.com/UnchartedBull))
 - Fix filament calculations with multiple tools [\#418](https://github.com/UnchartedBull/OctoDash/pull/418) ([UnchartedBull](https://github.com/UnchartedBull))
 - Bump @types/node from 13.7.0 to 13.7.1 [\#417](https://github.com/UnchartedBull/OctoDash/pull/417) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
@@ -808,7 +844,7 @@
 
 - Raspberry Pi 2 compatability / Illegal Instruction [\#318](https://github.com/UnchartedBull/OctoDash/issues/318)
 - Advice please [\#291](https://github.com/UnchartedBull/OctoDash/issues/291)
-- Help [\#286](https://github.com/UnchartedBull/OctoDash/issues/286)
+- Help  [\#286](https://github.com/UnchartedBull/OctoDash/issues/286)
 - Needs a simple install for a Noob like me :\) [\#266](https://github.com/UnchartedBull/OctoDash/issues/266)
 
 **Merged pull requests:**
@@ -894,14 +930,14 @@
 - 409 CONFLICT error with OctoDash [\#218](https://github.com/UnchartedBull/OctoDash/issues/218)
 - Version Update not working correctly [\#211](https://github.com/UnchartedBull/OctoDash/issues/211)
 - OctoDash dont read/show files [\#210](https://github.com/UnchartedBull/OctoDash/issues/210)
-- Bug: Tap and hold shows text selection [\#203](https://github.com/UnchartedBull/OctoDash/issues/203)
+- Bug: Tap and hold  shows text selection [\#203](https://github.com/UnchartedBull/OctoDash/issues/203)
 - Installation error related to virtual environment [\#197](https://github.com/UnchartedBull/OctoDash/issues/197)
 
 **Closed issues:**
 
 - setting up my configs without keyboard ? [\#207](https://github.com/UnchartedBull/OctoDash/issues/207)
 - Multiple Cameras [\#204](https://github.com/UnchartedBull/OctoDash/issues/204)
-- compatibility problem with waveshare 3.5ich ips lcd [\#199](https://github.com/UnchartedBull/OctoDash/issues/199)
+- compatibility problem with waveshare 3.5ich ips  lcd [\#199](https://github.com/UnchartedBull/OctoDash/issues/199)
 - Errors on launch - possible missing dependencies? [\#198](https://github.com/UnchartedBull/OctoDash/issues/198)
 - Uninstall [\#191](https://github.com/UnchartedBull/OctoDash/issues/191)
 - Design an App Icon [\#85](https://github.com/UnchartedBull/OctoDash/issues/85)
@@ -1004,7 +1040,7 @@
 **Closed issues:**
 
 - Integrate iFrame to be triggered by Custom Actions [\#162](https://github.com/UnchartedBull/OctoDash/issues/162)
-- Screen resolution [\#145](https://github.com/UnchartedBull/OctoDash/issues/145)
+- Screen resolution  [\#145](https://github.com/UnchartedBull/OctoDash/issues/145)
 
 **Merged pull requests:**
 
@@ -1206,4 +1242,6 @@
 - Refactor [\#6](https://github.com/UnchartedBull/OctoDash/pull/6) ([UnchartedBull](https://github.com/UnchartedBull))
 - Create LICENSE.md [\#1](https://github.com/UnchartedBull/OctoDash/pull/1) ([UnchartedBull](https://github.com/UnchartedBull))
 
-\* _This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)_
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
