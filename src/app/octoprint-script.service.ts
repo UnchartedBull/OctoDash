@@ -25,10 +25,19 @@ export class OctoprintScriptService {
                   OctoPrint.options.baseurl = this.octoprintURL;
                   resolve();
                 })
-                .catch(() => reject());
-            }, 10000);
+                .catch(() => {
+                  setTimeout(() => {
+                    this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+                      .then(() => {
+                        OctoPrint.options.baseurl = this.octoprintURL;
+                        resolve();
+                      })
+                      .catch(() => reject());
+                  }, 10000);
+                });
+            }, 5000);
           });
-      }, 3000);
+      }, 2500);
     });
   }
 
