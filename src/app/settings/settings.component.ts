@@ -94,7 +94,7 @@ export class SettingsComponent implements OnInit {
     this.overwriteNoSave = true;
     this.hideSettings();
     this.configService.updateConfig();
-    this.electronService.ipcRenderer.send('reload', '');
+    this.electronService.ipcRenderer.send('reload');
   }
 
   public showUpdate(): void {

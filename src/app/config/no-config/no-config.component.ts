@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'ngx-electron';
 import { NotificationService } from 'src/app/notification/notification.service';
@@ -36,6 +36,7 @@ export class NoConfigComponent implements OnInit {
     private notificationService: NotificationService,
     private electronService: ElectronService,
     private octoprintScriptService: OctoprintScriptService,
+    private ngZone: NgZone,
   ) {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
@@ -50,7 +51,9 @@ export class NoConfigComponent implements OnInit {
     this.changeProgress();
 
     this.electronService.ipcRenderer.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
-      this.octoprintNodes = nodes;
+      this.ngZone.run(() => {
+        this.octoprintNodes = nodes;
+      });
     });
   }
 
@@ -61,6 +64,7 @@ export class NoConfigComponent implements OnInit {
       const searching = document.querySelector('.no-config__discovered-instances__searching');
       if (searching) {
         searching.innerHTML = 'no instances found.';
+        searching.classList.remove('loading-dots');
       }
     }, 10000);
   }
@@ -96,7 +100,7 @@ export class NoConfigComponent implements OnInit {
   }
 
   public loginWithOctoPrintUI(): void {
-    this.notificationService.setUpdate(
+    this.notificationService.setNotification(
       'Login request send!',
       'Please confirm the request via the popup in the OctoPrint WebUI.',
     );

@@ -12,30 +12,23 @@ export class OctoprintScriptService {
     return new Promise((resolve, reject) => {
       this.octoprintURL = octoprintURL.replace('api/', '');
       const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
-      this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-        .then(() => {
-          OctoPrint.options.baseurl = this.octoprintURL;
-          resolve();
-        })
-        .catch(() => {
-          setTimeout(() => {
-            this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-              .then(() => {
-                OctoPrint.options.baseurl = this.octoprintURL;
-                resolve();
-              })
-              .catch(() => {
-                setTimeout(() => {
-                  this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-                    .then(() => {
-                      OctoPrint.options.baseurl = this.octoprintURL;
-                      resolve();
-                    })
-                    .catch(() => reject());
-                }, 10000);
-              });
-          }, 5000);
-        });
+      setTimeout(() => {
+        this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+          .then(() => {
+            OctoPrint.options.baseurl = this.octoprintURL;
+            resolve();
+          })
+          .catch(() => {
+            setTimeout(() => {
+              this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+                .then(() => {
+                  OctoPrint.options.baseurl = this.octoprintURL;
+                  resolve();
+                })
+                .catch(() => reject());
+            }, 10000);
+          });
+      }, 3000);
     });
   }
 

@@ -3,6 +3,7 @@
 const exec = require('child_process').exec;
 const url = require('url');
 const path = require('path');
+const waitPort = require('wait-port');
 
 const sendCustomStyles = require('./styles');
 const { downloadUpdate, sendVersionInfo } = require('./update');
@@ -59,7 +60,27 @@ function activateDiscoverListener(ipcMain, window) {
   });
 }
 
+function activatePortListener(ipcMain, window) {
+  ipcMain.on('checkOctoprintPort', (_, hostInfo) => {
+    const waitPortParams = {
+      host: hostInfo.host,
+      port: hostInfo.port,
+      output: 'silent',
+      timeout: 60000,
+    };
+
+    waitPort(waitPortParams)
+      .then(open => {
+        window.webContents.send('octoprintReady', open);
+      })
+      .catch(error => {
+        window.webContents.send('waitPortError', error);
+      });
+  });
+}
+
 function activateListeners(ipcMain, window, app, dev) {
+  activatePortListener(ipcMain, window);
   activateAppInfoListener(ipcMain, window, app);
   activateScreenSleepListener(ipcMain);
   activateReloadListener(ipcMain, window, dev);
