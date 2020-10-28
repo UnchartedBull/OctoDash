@@ -93,7 +93,7 @@
     "progress-stream": "^2.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.3",
-    "v8-compile-cache": "^2.1.1",
+    "v8-compile-cache": "^2.2.0",
     "wait-port": "^0.2.9",
     "zone.js": "~0.10.3"
   },
