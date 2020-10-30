@@ -103,7 +103,7 @@
     "@angular/compiler-cli": "~10.0.5",
     "@angular/language-service": "~10.2.1",
     "@types/ajv": "^1.0.0",
-    "@types/lodash": "^4.14.163",
+    "@types/lodash": "^4.14.164",
     "@types/node": "12.19.3",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^3.10.1",
