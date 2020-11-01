@@ -51,6 +51,11 @@
         margin: -0.5vw 1vw 0;
         height: 1vw;
       }
+      
+      &-percentage {
+        text-align: center;
+        visibility: hidden;
+      }
     }
   }
 

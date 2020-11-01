@@ -19,6 +19,7 @@
       <div class="job-info__progress-bar__wrapper">
         <div class="job-info__progress-bar" [style.width]="job.progress + '%'"></div>
       </div>
+      <div class="job-info__progress-bar-percentage">{{ job.progress }}<span style="font-size: 75%">%</span></div>
     </div>
     <div *ngIf="useCircularProgressBar()" style="height: 23.5vw">
       <round-progress
