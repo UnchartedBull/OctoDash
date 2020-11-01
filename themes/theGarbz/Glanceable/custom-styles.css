@@ -1,0 +1,113 @@
+
+/**** Override Hidden Blocks ****/
+
+/***[hidden]{
+    display:block!important;
+}**/
+
+/**** Job-Info Resizes ****/
+
+app-job-status ~ app-printer-status .printer-status{
+    position:absolute!important;
+    top: 43vh!important;
+    left: 0vw!important;
+}
+
+/**** Job-Info Layer Progress ****/
+
+.layer-indication{
+    position:absolute!important;
+    top: 65vh!important;
+    left: 0vw!important;
+    font-size: 3vw!important;
+}
+
+.layer-indication__current-layer{
+    font-size: 6vh!important;
+}
+
+.layer-indication__total-layers{
+    font-size: 5vh!important;
+}
+
+/**** Job-Info Progress ****/
+
+.job-info__progress-bar {
+    height: 8vh!important;
+    border-radius: 1.7vw!important;
+}
+
+.job-info__progress-bar__wrapper {
+    position:fixed!important;
+    top: 77vh!important; 
+    left: 3vw!important;
+    width: 92vw!important;
+    height: 8vh!important;
+    border-radius: 2vw!important;
+    background-color: rgba(38, 44, 53, 1);
+    border-style: solid!important;
+    border-color: rgb(121, 121, 121);
+    border-width: 2px!important;
+}
+
+.job-info__progress-bar-percentage {
+    margin-top: -0.3vh!important;
+    margin-left: 0vw!important;
+    font-size: 6.7vh!important;
+    font-weight: 500!important;
+    display:block!important;
+    position:fixed!important;
+    left: 47.4vw!important;
+    top: 77vh!important;
+    z-index:1!important;
+    color:white!important;
+    text-shadow: 1px 1px 4px black;
+    visibility: visible!important;
+}
+
+/**** by-line ****/
+
+.settings-container {
+    height: 86vh!important;
+    top: 8vh!important;
+}
+
+.settings__made::after {
+    content: "Glanceable theme v0.1 by theGarbz";
+    width: auto!important;
+    font-size: 73%;
+    display: inline-block;
+}
+
+/*
+ * Version 2.1.1 and previous of Octodash are missing
+ * the progress-bar-percentage element. As such the
+ * bar renders without showing the percentage complete.
+ * to relocate the percentage complete from the 
+ * circular progress bar to the horizontal progress bar
+ * uncomment the following lines. 
+ *
+ * Note: Doing so will remove the percentage number
+ * from the circular progress bar. (See Readme.md)
+ */
+
+/*.job-info__progress-percentage {
+    margin-top: -0.3vh!important;
+    margin-left: 0vw!important;
+    font-size: 6.7vh!important;
+    font-weight: 500!important;
+    display:block!important;
+    position:fixed!important;
+    left: 43.4vw!important;
+    top: 77vh!important;
+    z-index:1!important;
+    color:white!important;
+    text-shadow: 1px 1px 4px black;
+}*/
+
+
+
+
+
+
+
