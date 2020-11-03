@@ -4,5 +4,6 @@ To setup a local environment you need to do the following steps:
 - Fork the repository to your GitHub account, so you can push your changes
 - Clone the repository
 - Install dependencies: `npm install`
+- Run the build `npm run build` (only required once to copy assets)
 - Start the Live Server: `npm run start` or `npm run start:big`
 - If you want to package OctoDash, so you can install it on your Raspberry Pi: `npm run pack`
