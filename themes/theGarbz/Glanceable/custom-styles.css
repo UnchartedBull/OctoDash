@@ -1,10 +1,4 @@
 
-/**** Override Hidden Blocks ****/
-
-/***[hidden]{
-    display:block!important;
-}**/
-
 /**** Job-Info Resizes ****/
 
 app-job-status ~ app-printer-status .printer-status{
@@ -50,7 +44,7 @@ app-job-status ~ app-printer-status .printer-status{
     border-width: 2px!important;
 }
 
-.job-info__progress-bar-percentage {
+#progress-preview-bar + .job-info__progress-percentage {
     margin-top: -0.3vh!important;
     margin-left: 0vw!important;
     font-size: 6.7vh!important;
@@ -104,10 +98,3 @@ app-job-status ~ app-printer-status .printer-status{
     color:white!important;
     text-shadow: 1px 1px 4px black;
 }*/
-
-
-
-
-
-
-
