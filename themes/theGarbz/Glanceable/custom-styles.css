@@ -3,15 +3,20 @@
 
 app-job-status ~ app-printer-status .printer-status{
     position:absolute!important;
-    top: 43vh!important;
+    top: 42vh!important;
     left: 0vw!important;
+}
+
+app-job-status ~ app-printer-status .printer-status__set-value {
+    margin-top: -2vh!important;
+    font-size: 3.9vw!important;
 }
 
 /**** Job-Info Layer Progress ****/
 
 .layer-indication{
     position:absolute!important;
-    top: 65vh!important;
+    top: 66vh!important;
     left: 0vw!important;
     font-size: 3vw!important;
 }
