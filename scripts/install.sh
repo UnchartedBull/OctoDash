@@ -679,7 +679,7 @@ fi
 dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
 IFS='/' read -ra version <<< "$releaseURL"
 
-echo "Installing OctoDash "${version[7]} $arch
+echo "Installing OctoDash "${version[7]}, $arch
 
 echo "Installing Dependencies ..."
 sudo apt -qq update
