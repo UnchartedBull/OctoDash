@@ -65,6 +65,12 @@ app-filament .scroll__thumb-inactive {
     width: 58vw!important;
 }
 
+/**** Make settings button easier to hit ****/
+
+.main-menu__settings-icon {
+    padding: 5vh 5vw 4vh!important;
+}
+
 /**** Update Settings ****/
 
 .settings-container {
@@ -79,7 +85,7 @@ app-filament .scroll__thumb-inactive {
 }
 
 .settings__made::after {
-    content: "BigFingers theme v0.1 by theGarbz";
+    content: "BigFingers theme v0.2 by theGarbz";
     width: auto!important;
     font-size: 73%;
     display: inline-block;
