@@ -211,10 +211,6 @@ ngx-spinner .overlay{
     width: 95.5vw!important;
 }
 
-.filament-filaments::before {
-    display:none!important;
-}
-
 .filament-filaments__name {
     width: 62vw!important;
 }
