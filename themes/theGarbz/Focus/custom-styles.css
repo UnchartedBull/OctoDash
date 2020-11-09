@@ -592,11 +592,11 @@ round-progress svg circle{
 .job-info__progress-percentage {
     position:fixed!important;
     top: 35vh!important;
-    left: 12vw!important;
+    left: 9vw!important;
     margin:0!important;
     display:block!important;
     font-size: 9.5vw!important;
-    width: auto!important;
+    width: 20vw!important;
 }
 
 #progress-preview-bar + .job-info__progress-percentage {
@@ -606,12 +606,12 @@ round-progress svg circle{
     font-weight: 500!important;
     display:block!important;
     position:fixed!important;
-    left: 48.4vw!important;
+    left: 40vw!important;
     top: 77vh!important;
     z-index:1!important;
     color:white!important;
     visibility: visible!important;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black;
 }
 
 
