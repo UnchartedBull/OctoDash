@@ -668,11 +668,18 @@ text_input() {
 
 
 
-releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
-dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1"
+arch=$(uname -m)
+if [[ $arch == x86_64 ]]; then
+    releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*amd64.deb" | cut -d '"' -f 4)
+elif [[ $arch == aarch64 ]]; then
+    releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*arm64.deb" | cut -d '"' -f 4)
+elif  [[ $arch == arm* ]]; then
+    releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
+fi
+dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
 IFS='/' read -ra version <<< "$releaseURL"
 
-echo "Installing OctoDash "${version[7]}
+echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
 sudo apt -qq update
@@ -723,7 +730,7 @@ if [ $DIRECTORY != "-" ]; then
   fi;
 fi;
 
-echo "Installing OctoDash ..."
+echo "Installing OctoDash "${version[7]}, $arch" ..."
 cd ~
 wget -O octodash.deb $releaseURL -q --show-progress
 
