@@ -1,6 +1,6 @@
 # Focus theme v0.1
 
-This theme is based on the classy NOX theme by NoxHirsch and has been modified to Focus on highlighting the most important information for a user. The goal was to create a theme that could easily be read from a distance. Some of the features are listed below:
+This theme is based on the classy [NOX theme](../../NOX/) by NoxHirsch and has been modified to Focus on highlighting the most important information for a user. The goal was to create a theme that could easily be read from a distance. Some of the features are listed below:
 * High contrast display of relevant information (e.g. print time, temperature)
 * Low contrast display of all other info (e.g. units, time elapsed)
 * Large horizontal and vertical progress bars readable from a distance.
