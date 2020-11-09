@@ -679,7 +679,7 @@ fi
 dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
 IFS='/' read -ra version <<< "$releaseURL"
 
-echo "Installing OctoDash "${version[7]}, $arch
+echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
 sudo apt -qq update
@@ -730,7 +730,7 @@ if [ $DIRECTORY != "-" ]; then
   fi;
 fi;
 
-echo "Installing OctoDash "${version[7]}, $arch..."
+echo "Installing OctoDash "${version[7]}, $arch" ..."
 cd ~
 wget -O octodash.deb $releaseURL -q --show-progress
 
@@ -789,7 +789,7 @@ fi
 
 
 list_input "Shall I reboot your Pi now?" yes_no reboot
-echo "OctoDash "${version[7]} $arch" has been successfully installed! :)"
+echo "OctoDash has been successfully installed! :)"
 if [ $reboot == 'yes' ]; then
     sudo reboot
 fi
