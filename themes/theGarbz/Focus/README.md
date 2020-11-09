@@ -14,6 +14,8 @@ To install copy the custom-styles.css file into the octodash config folder:
 ~/.config/octodash/custom-styles.css
 ```
 
+Please note: This theme like the theme it was based on makes use of more CSS effects than the default theme and does not perform as smoothly on under powered hardware such as older Raspberry Pis. If you have a problem with Octodash performance please try using the default theme before reporting any issues. This theme performs well on a Raspbery Pi4 with a 7" LCD.
+
 ###### Theme by theGarbz.
 
 ## Screenshots:
