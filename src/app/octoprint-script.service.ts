@@ -1,43 +1,46 @@
 import { Injectable } from '@angular/core';
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const OctoPrint: any;
 
 @Injectable()
 export class OctoprintScriptService {
   public loaded = false;
-  private octoprintURL: string;
+  private checkInterval = 1000;
+  private numberDownloadFailed = 0;
 
-  async initialize(octoprintURL: string): Promise<void> {
-    // script loading might fail try 3 times in total, probably can be cleaned up in the future
+  async initialize(octoprintURL: string, apiKey: string): Promise<void> {
+    return new Promise(resolve => {
+      this.tryDownload(octoprintURL, apiKey, resolve);
+    });
+  }
+
+  tryDownload(octoprintURL: string, apiKey: string, resolve: () => void): void {
+    this.downloadScript(octoprintURL)
+      .then(() => {
+        this.authenticate(apiKey);
+        console.clear();
+        resolve();
+      })
+      .catch(() => {
+        if (this.numberDownloadFailed < 30) {
+          this.numberDownloadFailed++;
+        } else if (this.numberDownloadFailed === 30) {
+          this.checkInterval = 15000;
+        }
+        setTimeout(this.tryDownload.bind(this), this.checkInterval, octoprintURL, apiKey, resolve);
+      });
+  }
+
+  downloadScript(octoprintURL: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.octoprintURL = octoprintURL.replace('api/', '');
       const octoprintStaticURL = octoprintURL.replace('/api/', '/static/');
-      setTimeout(() => {
-        this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-          .then(() => {
-            OctoPrint.options.baseurl = this.octoprintURL;
-            resolve();
-          })
-          .catch(() => {
-            setTimeout(() => {
-              this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-                .then(() => {
-                  OctoPrint.options.baseurl = this.octoprintURL;
-                  resolve();
-                })
-                .catch(() => {
-                  setTimeout(() => {
-                    this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
-                      .then(() => {
-                        OctoPrint.options.baseurl = this.octoprintURL;
-                        resolve();
-                      })
-                      .catch(() => reject());
-                  }, 10000);
-                });
-            }, 5000);
-          });
-      }, 2500);
+      this.loadScript(`${octoprintStaticURL}webassets/packed_client.js`)
+        .then(() => {
+          OctoPrint.options.baseurl = octoprintURL;
+          resolve();
+        })
+        .catch(() => reject());
     });
   }
 

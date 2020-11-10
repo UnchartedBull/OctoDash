@@ -30,7 +30,7 @@ export class FilesService {
         this.httpGETRequest.unsubscribe();
         this.notificationService.setError("Can't retrieve folder!", 'Operation timed out. Please try again.');
         reject();
-      }, 6000);
+      }, 10000);
       folderPath = folderPath === '/' ? '' : folderPath;
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
