@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
 
   public activated = false;
   public status = 'connecting';
+  public showConnectionHint = false;
 
   public ngOnInit(): void {
     this.initialize();
@@ -78,23 +79,27 @@ export class AppComponent implements OnInit {
 
   private waitForOctoprint() {
     this.electronService.ipcRenderer.on('octoprintReady', (_, octoprintReady: boolean) => {
-      if (octoprintReady) {
-        this.initializeOctoprintService();
-        this.status = 'initializing';
-      } else {
-        this.notificationService
-          .setWarning(
-            'Connection to OctoPrint timed out!',
-            'Make sure that OctoPrint is up and running, then close this card to try again.',
-          )
-          .then(this.checkOctoprintPort.bind(this));
-        this.status = 'no connection';
-      }
-      this.changeDetector.detectChanges();
+      this.ngZone.run(() => {
+        if (octoprintReady) {
+          this.initializeOctoprintService();
+          this.status = 'initializing';
+        } else {
+          this.notificationService
+            .setWarning(
+              'Connection to OctoPrint timed out!',
+              'Make sure that OctoPrint is up and running, then close this card to try again.',
+            )
+            .then(this.checkOctoprintPort.bind(this));
+          this.status = 'no connection';
+        }
+        this.changeDetector.detectChanges();
+      });
     });
 
     this.electronService.ipcRenderer.on('waitPortError', (_, error: Error) => {
-      this.notificationService.setError('System Error - please restart', error.message);
+      this.ngZone.run(() => {
+        this.notificationService.setError('System Error - please restart', error.message);
+      });
     });
 
     this.checkOctoprintPort();
@@ -111,23 +116,26 @@ export class AppComponent implements OnInit {
   }
 
   private initializeOctoprintService() {
+    const showPrinterConnectedTimeout = setTimeout(() => {
+      this.showConnectionHint = true;
+    }, 30000);
     this.octoprintScriptService
-      .initialize(this.configService.getURL(''))
+      .initialize(this.configService.getURL(''), this.configService.getAccessKey())
       .then(() => {
         this.octoprintScriptService.authenticate(this.configService.getAccessKey());
-        this.ngZone.run(() => {
-          if (this.configService.isTouchscreen()) {
-            this.router.navigate(['/main-screen']);
-          } else {
-            this.router.navigate(['/main-screen-no-touch']);
-          }
-        });
+        if (this.configService.isTouchscreen()) {
+          this.router.navigate(['/main-screen']);
+        } else {
+          this.router.navigate(['/main-screen-no-touch']);
+        }
       })
       .catch(() => {
+        console.log('REJECTED');
         this.notificationService.setError(
           "Can't get OctoPrint script!",
           'Please restart your machine. If the error persists open a new issue on GitHub.',
         );
-      });
+      })
+      .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 }

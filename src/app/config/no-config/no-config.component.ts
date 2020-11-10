@@ -85,7 +85,7 @@ export class NoConfigComponent implements OnInit {
 
   private async loadOctoprintClient() {
     this.octoprintScriptService
-      .initialize(`http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`)
+      .downloadScript(`http://${this.config.octoprint.urlSplit.url}:${this.config.octoprint.urlSplit.port}/api/`)
       .then(() => {
         this.OctoPrint = this.octoprintScriptService.getInstance();
         this.changePage(0.5);
