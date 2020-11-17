@@ -3,8 +3,8 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../config/config.service';
-import { OctoprintPrinterProfileAPI } from '../octoprint-api/printerProfileAPI';
 import { OctoprintService } from '../octoprint.service';
+import { OctoprintPrinterProfileAPI } from '../octoprint-api/printerProfileAPI';
 import { EnclosureService } from '../plugin-service/enclosure.service';
 import { PsuControlService } from '../plugin-service/psu-control.service';
 import { PrinterService } from '../printer.service';
