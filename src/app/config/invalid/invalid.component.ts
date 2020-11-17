@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config.service';
 
 @Component({
-  selector: 'app-invalid-config',
-  templateUrl: './invalid-config.component.html',
-  styleUrls: ['./invalid-config.component.scss'],
+  selector: 'app-config-invalid',
+  templateUrl: './invalid.component.html',
+  styleUrls: ['./invalid.component.scss'],
 })
-export class InvalidConfigComponent implements OnInit {
+export class ConfigInvalidComponent implements OnInit {
   public errors: string[];
 
   public constructor(private configService: ConfigService) {}

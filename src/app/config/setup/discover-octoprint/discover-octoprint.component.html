@@ -1,0 +1,47 @@
+<span class="setup__text">
+  First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
+</span>
+<div *ngIf="!manualURL">
+  <div class="discover-octoprint__wrapper">
+    <span *ngFor="let node of octoprintNodes" class="discover-octoprint__node" (click)="setOctoprintInstance(node)">
+      <div class="discover-octoprint__node-name">
+        {{ node.name }}
+        <br />
+        <span class="discover-octoprint__node-details">
+          Version {{ node.version }}, URL: {{ node.url.replace('/api/', '') }}
+        </span>
+      </div>
+      <img src="assets/connect.svg" class="discover-octoprint__node-connect-icon" />
+    </span>
+    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes">searching</span>
+  </div>
+  <div class="discover-octoprint__manual" (click)="enterURLManually()">enter manually</div>
+</div>
+<div *ngIf="manualURL">
+  <form class="setup__form" style="margin-top: 5vh">
+    <span class="setup__input-prefix">http://</span>
+    <input
+      type="text"
+      id="octoprintURLName"
+      class="setup__input"
+      [ngModel]="octoprintHost"
+      (ngModelChange)="octoprintHostChange.emit($event)"
+      name="octoprintURLName"
+      required
+      style="width: 42.5vw"
+    />
+    :
+    <input
+      type="text"
+      id="octoprintURLPort"
+      class="setup__input"
+      [ngModel]="octoprintPort"
+      (ngModelChange)="octoprintPortChange.emit($event)"
+      name="octoprintURLPort"
+      required
+      style="width: 14vw"
+    />
+    <p class="setup__input-prefix" style="margin-top: 8vh">Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
+  </form>
+  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">search again</div>
+</div>

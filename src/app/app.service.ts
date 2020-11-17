@@ -37,7 +37,6 @@ export class AppService {
     config.printer.zBabystepGCode = 'M290 Z';
     config.octodash.previewProgressCircle = false;
     this.configService.saveConfig(config);
-    this.configService.updateConfig();
     return true;
   }
 

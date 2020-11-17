@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { Component, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Notification, NotificationService } from './notification.service';
@@ -19,7 +19,7 @@ export class NotificationComponent implements OnDestroy {
   };
   public show = false;
 
-  public constructor(private notificationService: NotificationService, private changeDetector: ChangeDetectorRef) {
+  public constructor(private notificationService: NotificationService, private zone: NgZone) {
     this.subscriptions.add(
       this.notificationService
         .getObservable()
@@ -35,13 +35,14 @@ export class NotificationComponent implements OnDestroy {
   }
 
   private setNotification(notification: Notification | 'close'): void {
-    if (notification === 'close') {
-      this.hideNotification();
-    } else {
-      this.notification = notification;
-      this.show = true;
-    }
-    this.changeDetector.detectChanges();
+    this.zone.run(() => {
+      if (notification === 'close') {
+        this.hideNotification();
+      } else {
+        this.notification = notification;
+        this.show = true;
+      }
+    });
   }
 
   public ngOnDestroy(): void {

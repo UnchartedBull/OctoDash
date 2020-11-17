@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { JobCommand } from '../octoprint-api/jobAPI';
+import { JobCommand } from '../octoprint/model/job';
 
 @Injectable({
   providedIn: 'root',

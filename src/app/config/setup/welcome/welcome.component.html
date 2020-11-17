@@ -1,0 +1,21 @@
+<span class="welcome-screen__heading">Hey there!</span>
+<span class="setup__text" *ngIf="!update">
+  It looks like this is the first start of OctoDash.
+  <br />
+  I'll help you set up your config and get you started.
+  <br />
+  If you encounter any issues please check the troubleshooting guide in the GitHub Wiki.
+  <br />
+  <br />
+  Thanks for choosing OctoDash
+  <fa-icon [icon]="['fas', 'smile']"></fa-icon>
+</span>
+<span class="setup__text" *ngIf="update">
+  Sorry for bothering you again ...
+  <br />
+  We've released an update, so awesome, we needed to change the config. Please review your new config!
+  <br />
+  <br />
+  Thanks for choosing OctoDash
+  <fa-icon [icon]="['fas', 'smile']"></fa-icon>
+</span>

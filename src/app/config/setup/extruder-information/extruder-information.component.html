@@ -1,0 +1,91 @@
+<span class="setup__text">I also need some information about your extruder.</span>
+<form class="setup__form setup__2-form">
+  <label for="feedLength" class="setup__input-label">Feed Length:</label>
+  <div class="setup__input__numeric-wrapper" style="width: 63vw">
+    <span
+      class="setup__input__numeric-adjust"
+      matRipple
+      [matRippleUnbounded]="false"
+      [matRippleCentered]="false"
+      long-press
+      [duration]="650"
+      [frequency]="80"
+      (onShortPress)="changeFeedLength(-1)"
+      (onLongPressing)="changeFeedLength(-5)"
+    >
+      -
+    </span>
+    <input
+      type="number"
+      id="feedLength"
+      class="setup__input setup__input__numeric"
+      [ngModel]="feedLength"
+      (ngModelChange)="feedLengthChange.emit($event)"
+      name="feedLength"
+      min="0"
+      style="width: 17vw"
+      required
+    />
+    <span
+      class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
+      matRipple
+      [matRippleUnbounded]="false"
+      [matRippleCentered]="false"
+      long-press
+      [duration]="650"
+      [frequency]="80"
+      (onShortPress)="changeFeedLength(1)"
+      (onLongPressing)="changeFeedLength(5)"
+    >
+      +
+    </span>
+    <span class="setup__input-small-suffix" style="margin-left: -16.5vw">mm</span>
+  </div>
+  <br />
+  <label for="feedSpeed" class="setup__input-label-small">Feed Speed:</label>
+  <div class="setup__input__numeric-wrapper" style="width: 68.2vw">
+    <span
+      class="setup__input__numeric-adjust"
+      matRipple
+      [matRippleUnbounded]="false"
+      [matRippleCentered]="false"
+      long-press
+      [duration]="650"
+      [frequency]="150"
+      (onShortPress)="changeFeedSpeed(-0.5)"
+      (onLongPressing)="changeFeedSpeed(-1)"
+    >
+      -
+    </span>
+    <input
+      type="number"
+      id="feedSpeed"
+      class="setup__input setup__input__numeric"
+      [ngModel]="feedSpeed"
+      (ngModelChange)="feedSpeedChange.emit($event)"
+      name="feedSpeed"
+      min="0"
+      style="width: 20vw"
+      required
+    />
+    <span
+      class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
+      matRipple
+      [matRippleUnbounded]="false"
+      [matRippleCentered]="false"
+      long-press
+      [duration]="650"
+      [frequency]="150"
+      (onShortPress)="changeFeedSpeed(0.5)"
+      (onLongPressing)="changeFeedSpeed(1)"
+    >
+      +
+    </span>
+    <span class="setup__input-small-suffix" style="margin-left: -19vw">mm/s</span>
+  </div>
+
+  <div class="setup__explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw">
+    These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and
+    feed speed configured correctly.
+  </div>
+</form>

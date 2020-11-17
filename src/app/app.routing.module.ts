@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
-import { NoConfigComponent } from './config/no-config/no-config.component';
+import { ConfigInvalidComponent } from './config/invalid/invalid.component';
+import { ConfigSetupComponent } from './config/setup/setup.component';
 import { ControlComponent } from './control/control.component';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
@@ -35,11 +35,11 @@ const routes: Routes = [
   },
   {
     path: 'invalid-config',
-    component: InvalidConfigComponent,
+    component: ConfigInvalidComponent,
   },
   {
     path: 'no-config',
-    component: NoConfigComponent,
+    component: ConfigSetupComponent,
   },
   {
     path: 'settings',
