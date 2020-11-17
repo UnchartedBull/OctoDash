@@ -212,7 +212,7 @@ ngx-spinner .overlay{
 }
 
 .filament-filaments__name {
-    width: 62vw!important;
+    width: 59.5vw!important;
 }
 
 app-filament .scroll__thumb-inactive {
@@ -697,7 +697,7 @@ round-progress svg circle{
 }
 
 .settings__version::after{
-    content: " \00a0 | \00a0 Focus theme v0.1";
+    content: " \00a0 | \00a0 Focus theme v0.2";
     width: auto!important;
 }
 
