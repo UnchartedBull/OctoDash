@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { FilesService } from './files.service';
 import { NotificationService } from './notification/notification.service';
-import { JobCommand, OctoprintFilament, OctoprintJobAPI } from './octoprint-api/jobAPI';
+import { JobCommand, OctoprintFilament, OctoprintJobStatus } from './octoprint/model/job';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class JobService {
         this.httpGETRequest = this.http
           .get(this.configService.getURL('job'), this.configService.getHTTPHeaders())
           .subscribe(
-            async (data: OctoprintJobAPI): Promise<void> => {
+            async (data: OctoprintJobStatus): Promise<void> => {
               let job: Job = null;
               if (data.job && data.job.file.name) {
                 this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(

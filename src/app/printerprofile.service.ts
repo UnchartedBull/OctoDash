@@ -1,11 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintPrinterProfileAPI } from './octoprint-api/printerProfileAPI';
+import { OctoprintPrinterProfile, OctoprintPrinterProfiles } from './octoprint/model/printerProfile';
 import { PrinterService } from './printer.service';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class PrinterProfileService {
     private router: Router,
   ) {}
 
-  public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfileAPI> {
+  public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfile> {
     return new Promise((resolve, reject): void => {
       if (this.httpGETRequest) {
         this.httpGETRequest.unsubscribe();
@@ -30,7 +31,7 @@ export class PrinterProfileService {
       this.httpGETRequest = this.http
         .get(this.configService.getURL('printerprofiles/_default'), this.configService.getHTTPHeaders())
         .subscribe(
-          (printerProfile: OctoprintPrinterProfileAPI): void => {
+          (printerProfile: OctoprintPrinterProfile): void => {
             resolve(printerProfile);
           },
           (error: HttpErrorResponse): void => {
@@ -52,5 +53,22 @@ export class PrinterProfileService {
           },
         );
     });
+  }
+
+  // Needed for initial setup. Config not initialized yet, thus values need to be passed manually.
+  public getActivePrinterProfileName(octoprintURL: string, apiKey: string): Observable<string> {
+    return this.http
+      .get<OctoprintPrinterProfiles>(`${octoprintURL}printerprofiles`, {
+        headers: new HttpHeaders({
+          'x-api-key': apiKey,
+        }),
+      })
+      .pipe(
+        map(profiles => {
+          for (const [_, profile] of Object.entries(profiles.profiles)) {
+            return profile.name;
+          }
+        }),
+      );
   }
 }

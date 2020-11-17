@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, timer } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
+import { OctoprintLayerProgress } from '.././octoprint/model/layerProgress';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { OctoprintLayerProgressAPI } from '../octoprint-api/layerProgressAPI';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class LayerProgressService {
             this.configService.getHTTPHeaders(),
           )
           .subscribe(
-            (data: OctoprintLayerProgressAPI): void => {
+            (data: OctoprintLayerProgress): void => {
               observer.next({
                 current: data.layer.current === '-' ? 0 : Number(data.layer.current),
                 total: data.layer.total === '-' ? 0 : Number(data.layer.total),

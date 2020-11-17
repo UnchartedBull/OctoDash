@@ -1,0 +1,40 @@
+<span class="setup__text">What plugins are you running?</span>
+<div style="text-align: center">
+  <div class="setup__checkbox-container">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked setup__checkbox-checked-disabled" *ngIf="displayLayerProgressPlugin"></span>
+    </span>
+    Display Layer Progress&nbsp;&nbsp;
+  </div>
+  <div class="setup__checkbox-container" (click)="changeEnclosurePlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="enclosurePlugin"></span>
+    </span>
+    Enclosure
+  </div>
+  <div class="setup__checkbox-container" (click)="changeFilamentManagerPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="filamentManagerPlugin"></span>
+    </span>
+    Filament Manager&nbsp;&nbsp;
+  </div>
+  <div class="setup__checkbox-container" (click)="changePreheatButtonPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="preheatButtonPlugin"></span>
+    </span>
+    Preheat Button
+  </div>
+  <div class="setup__checkbox-container" (click)="changePrintTimeGeniusPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="printTimeGeniusPlugin"></span>
+    </span>
+    Print Time Genius&nbsp;&nbsp;
+  </div>
+  <div class="setup__checkbox-container" (click)="changePsuControlPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="psuControlPlugin"></span>
+    </span>
+    PSU Control
+  </div>
+  <div class="setup__explanation">Enclosure and PSU Control Plugin can be configured further in the settings.</div>
+</div>

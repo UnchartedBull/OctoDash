@@ -1,17 +1,4 @@
-.no-config {
-  &__text {
-    display: block;
-    text-align: center;
-    margin-left: 2vh;
-    margin-right: 3vh;
-    font-size: 3.6vw;
-
-    fa-icon {
-      display: block;
-      margin-top: 2vh;
-    }
-  }
-
+.setup {
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
@@ -26,6 +13,27 @@
       display: inline-block;
       border-radius: 2vh;
     }
+  }
+
+  &__text {
+    display: block;
+    text-align: center;
+    margin-left: 2vh;
+    margin-right: 3vh;
+    font-size: 3.6vw;
+
+    fa-icon {
+      display: block;
+      margin-top: 2vh;
+    }
+  }
+
+  &__button {
+    background-color: #44bd32;
+    display: inline-block;
+    padding: 1.4vh 2vw;
+    border-radius: 1vw;
+    box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
   }
 
   &__input {
@@ -140,93 +148,16 @@
     text-align: center;
   }
 
-  &-explanation {
+  &__explanation {
     font-size: 3vw;
     font-style: italic;
     opacity: 0.7;
-    margin-top: 4vh;
+    margin-top: 6vh;
     padding: 2vh 4vw;
     text-align: center;
   }
 
-  &__discovered-instances {
-    &__wrapper {
-      height: 40vh;
-      padding: 4vh 3vw;
-      margin-right: 2vw;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    &__searching {
-      display: block;
-      text-align: center;
-      margin-top: 10vh;
-      font-size: 0.8rem;
-    }
-
-    &__node {
-      display: block;
-      background-color: #718093;
-      border-radius: 1vw;
-      margin-bottom: 2vh;
-      padding: 2vh 2vw;
-
-      &-name {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-size: 0.8rem;
-        float: left;
-        width: 90%;
-      }
-
-      &-details {
-        font-size: 0.55rem;
-        opacity: 0.7;
-      }
-
-      &-connect-icon {
-        height: 10vh;
-        float: right;
-        margin-top: 1.8vh;
-      }
-    }
-
-    &__manual {
-      text-align: center;
-      font-size: 0.7rem;
-      line-height: 14vh;
-    }
-  }
-
-  &__login-request-button-wrapper {
-    text-align: center;
-    padding: 8vh 0 0;
-  }
-
-  &__1 {
-    &-welcome {
-      display: block;
-      text-align: center;
-      font-size: 6vw;
-      margin-top: 2vh;
-      margin-bottom: 6vh;
-      font-weight: 500;
-    }
-  }
-
-  &__2 {
-    &-form {
-      text-align: left;
-      margin-left: 4vw;
-    }
-
-    &-input {
-      margin-top: 5vh;
-    }
-  }
-
-  &__6 {
+  &__validation {
     &-check-wrapper {
       width: 100%;
       text-align: center;
@@ -249,14 +180,6 @@
       font-family: 'Cousine', monospace;
       display: block;
       margin-bottom: 4vh;
-    }
-
-    &-finish {
-      background-color: #44bd32;
-      display: inline-block;
-      padding: 1.4vh 2vw;
-      border-radius: 1vw;
-      box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
     }
   }
 

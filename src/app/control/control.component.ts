@@ -3,8 +3,8 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../config/config.service';
-import { OctoprintPrinterProfileAPI } from '../octoprint-api/printerProfileAPI';
 import { OctoprintService } from '../octoprint.service';
+import { OctoprintPrinterProfile } from '../octoprint/model/printerProfile';
 import { EnclosureService } from '../plugin-service/enclosure.service';
 import { PsuControlService } from '../plugin-service/psu-control.service';
 import { PrinterService } from '../printer.service';
@@ -16,7 +16,7 @@ import { PrinterProfileService } from '../printerprofile.service';
   styleUrls: ['./control.component.scss'],
 })
 export class ControlComponent {
-  public printerProfile: OctoprintPrinterProfileAPI;
+  public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
   public customActions = [];
@@ -36,6 +36,7 @@ export class ControlComponent {
     this.printerProfile = {
       name: '_default',
       model: 'unknown',
+      current: true,
       axes: {
         x: { inverted: false },
         y: { inverted: false },

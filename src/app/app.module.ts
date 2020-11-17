@@ -15,8 +15,14 @@ import { AppRoutingModule } from './app.routing.module';
 import { AppService } from './app.service';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ConfigService } from './config/config.service';
-import { InvalidConfigComponent } from './config/invalid-config/invalid-config.component';
-import { NoConfigComponent } from './config/no-config/no-config.component';
+import { ConfigInvalidComponent } from './config/invalid/invalid.component';
+import { DiscoverOctoprintComponent } from './config/setup/discover-octoprint/discover-octoprint.component';
+import { ExtruderInformationComponent } from './config/setup/extruder-information/extruder-information.component';
+import { OctoprintAuthenticationComponent } from './config/setup/octoprint-authentication/octoprint-authentication.component';
+import { PersonalizationComponent } from './config/setup/personalization/personalization.component';
+import { PluginsComponent } from './config/setup/plugins/plugins.component';
+import { ConfigSetupComponent } from './config/setup/setup.component';
+import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
@@ -29,7 +35,6 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintScriptService } from './octoprint-script.service';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { PrinterService } from './printer.service';
@@ -45,14 +50,14 @@ import { URLSafePipe } from './url.pipe';
     ControlComponent,
     FilamentComponent,
     FilesComponent,
-    InvalidConfigComponent,
+    ConfigInvalidComponent,
     JobStatusComponent,
     LayerProgressComponent,
     LongPress,
     MainMenuComponent,
     MainScreenComponent,
     MainScreenNoTouchComponent,
-    NoConfigComponent,
+    ConfigSetupComponent,
     NotificationComponent,
     PrintControlComponent,
     PrinterStatusComponent,
@@ -60,6 +65,12 @@ import { URLSafePipe } from './url.pipe';
     StandbyComponent,
     UpdateComponent,
     URLSafePipe,
+    WelcomeComponent,
+    DiscoverOctoprintComponent,
+    OctoprintAuthenticationComponent,
+    PersonalizationComponent,
+    ExtruderInformationComponent,
+    PluginsComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +84,7 @@ import { URLSafePipe } from './url.pipe';
     BrowserAnimationsModule,
     MatRippleModule,
   ],
-  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService, OctoprintScriptService],
+  providers: [AppService, ConfigService, NotificationService, PrinterService, JobService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

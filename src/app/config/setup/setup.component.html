@@ -1,0 +1,94 @@
+<div class="setup">
+  <table class="top-bar">
+    <tr>
+      <td class="top-bar__back">
+        <div *ngIf="page > 0" (click)="decreasePage()">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          back
+        </div>
+      </td>
+      <td class="top-bar__center">
+        <div class="setup__progress-bar-wrapper">
+          <div class="setup__progress-bar" id="progressBar"></div>
+        </div>
+      </td>
+      <td class="top-bar__next">
+        <div *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))" (click)="increasePage()">
+          next
+          <img src="assets/next.svg" class="top-bar__next-icon" />
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
+
+  <app-config-setup-discover-octoprint
+    (increasePage)="increasePage()"
+    (changeURLEntryMethod)="changeURLEntryMethod($event)"
+    [(octoprintHost)]="config.octoprint.urlSplit.host"
+    [(octoprintPort)]="config.octoprint.urlSplit.port"
+    *ngIf="page === 1"
+  ></app-config-setup-discover-octoprint>
+
+  <app-config-setup-octoprint-authentication
+    [octoprintURL]="getOctoprintURL().replace('api/', '')"
+    (increasePage)="increasePage()"
+    [(accessToken)]="config.octoprint.accessToken"
+    *ngIf="page === 2"
+  ></app-config-setup-octoprint-authentication>
+
+  <app-config-setup-personalization
+    [octoprintURL]="getOctoprintURL()"
+    [apiKey]="config.octoprint.accessToken"
+    [(printerName)]="config.printer.name"
+    [(useTouchscreen)]="config.octodash.touchscreen"
+    *ngIf="page === 3"
+  ></app-config-setup-personalization>
+
+  <app-config-setup-extruder-information
+    [(feedLength)]="config.filament.feedLength"
+    [(feedSpeed)]="config.filament.feedSpeed"
+    *ngIf="page === 4"
+  ></app-config-setup-extruder-information>
+
+  <app-config-setup-plugins
+    *ngIf="page === 5"
+    [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
+    [(enclosurePlugin)]="config.plugins.enclosure.enabled"
+    [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
+    [(preheatButtonPlugin)]="config.plugins.preheatButton.enabled"
+    [(printTimeGeniusPlugin)]="config.plugins.printTimeGenius.enabled"
+    [(psuControlPlugin)]="config.plugins.psuControl.enabled"
+  ></app-config-setup-plugins>
+
+  <div *ngIf="page === 6">
+    <span class="setup__text">Great! I'll check everything.</span>
+    <div class="setup__validation-check-wrapper">
+      <span class="setup__validation-check">
+        <img
+          [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
+          class="setup__validation-check-icon"
+        />
+        Octoprint Connection
+      </span>
+      <div *ngIf="octoprintConnection">
+        <span class="setup__validation-check">
+          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
+          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
+          Validating Config
+        </span>
+      </div>
+      <div *ngIf="configValid">
+        <span class="setup__validation-check">
+          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
+          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
+          Saving Config
+        </span>
+        <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
+      </div>
+      <span class="setup__validation-errors" *ngFor="let error of configErrors">{{ error }}</span>
+      <span *ngIf="configSaved === null" class="setup__button" (click)="finishWizard()">done</span>
+    </div>
+  </div>
+</div>

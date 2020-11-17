@@ -6,8 +6,8 @@ import { shareReplay } from 'rxjs/operators';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintConnectionAPI } from './octoprint-api/connectionAPI';
-import { OctoprintPrinterStatusAPI } from './octoprint-api/printerStatusAPI';
+import { OctoprintConnection } from './octoprint/model/connection';
+import { OctoprintPrinterStatus } from './octoprint/model/printerStatus';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class PrinterService {
         this.httpGETRequest = this.http
           .get(this.configService.getURL('printer'), this.configService.getHTTPHeaders())
           .subscribe(
-            (data: OctoprintPrinterStatusAPI): void => {
+            (data: OctoprintPrinterStatus): void => {
               const printerStatus: PrinterStatusAPI = {
                 status: data.state.text.toLowerCase(),
                 nozzle: {
@@ -243,7 +243,7 @@ export class PrinterService {
   public isPrinterOffline(): Promise<boolean> {
     return new Promise((resolve): void => {
       this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
-        (data: OctoprintConnectionAPI): void => {
+        (data: OctoprintConnection): void => {
           resolve(data.current.state === 'Closed' || data.current.state.includes('Error:'));
         },
         (error: HttpErrorResponse): void => {
