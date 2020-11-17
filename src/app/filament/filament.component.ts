@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from '../plugin-service/filament-manager.service';
@@ -22,6 +23,7 @@ export class FilamentComponent implements OnInit {
   public filamentSpools: FilamentSpoolList;
   public isLoadingSpools = true;
 
+  private hotendPreviousTemperature = 0;
   public hotendTarget: number;
   public hotendTemperature: number;
   public automaticHeatingStartSeconds: number;
@@ -36,7 +38,14 @@ export class FilamentComponent implements OnInit {
     private configService: ConfigService,
     private filamentManagerService: FilamentManagerService,
     private printerService: PrinterService,
-  ) {}
+  ) {
+    this.printerService
+      .getObservable()
+      .pipe(take(1))
+      .subscribe((printerStatus: PrinterStatusAPI): void => {
+        this.hotendPreviousTemperature = printerStatus.nozzle.set;
+      });
+  }
 
   public ngOnInit(): void {
     if (this.configService.isFilamentManagerEnabled()) {
@@ -230,7 +239,7 @@ export class FilamentComponent implements OnInit {
   }
 
   public setSpoolSelection(): void {
-    this.printerService.setTemperatureHotend(0);
+    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
     if (this.selectedSpool) {
       this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage.bind(this));
     } else {
