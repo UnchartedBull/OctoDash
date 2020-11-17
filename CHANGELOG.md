@@ -1,5 +1,85 @@
 # Changelog
 
+## [v2.1.2](https://github.com/UnchartedBull/OctoDash/tree/v2.1.2) (2020-11-17)
+
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.1.1...v2.1.2)
+
+**Implemented enhancements:**
+
+- Extruder cools down, after Loading the Filament with Filamentmanager [\#1171](https://github.com/UnchartedBull/OctoDash/issues/1171)
+- GCode Viewer like Octoprint [\#1170](https://github.com/UnchartedBull/OctoDash/issues/1170)
+- Shell commands in custom actions [\#1158](https://github.com/UnchartedBull/OctoDash/issues/1158)
+- Add support for setting screen brightness \(via PWM\) [\#1124](https://github.com/UnchartedBull/OctoDash/issues/1124)
+- Increase touchbox size [\#1118](https://github.com/UnchartedBull/OctoDash/issues/1118)
+- OctoDash Custom Setting  change order of items listed [\#1108](https://github.com/UnchartedBull/OctoDash/issues/1108)
+- Display network status icon with a current IP address [\#622](https://github.com/UnchartedBull/OctoDash/issues/622)
+
+**Fixed bugs:**
+
+- arm64 install issue [\#1156](https://github.com/UnchartedBull/OctoDash/issues/1156)
+- initializing - Can't get octoprint script [\#1153](https://github.com/UnchartedBull/OctoDash/issues/1153)
+- octodash 2.1.1 starts PLA print at 425 degree ! [\#1135](https://github.com/UnchartedBull/OctoDash/issues/1135)
+- \[BUG\] 2.1.1 on AMD64 will not connect to OctoPrint - 2.0.0 on same system connects with no problems. [\#1131](https://github.com/UnchartedBull/OctoDash/issues/1131)
+- Filament Change on MK3s  [\#1127](https://github.com/UnchartedBull/OctoDash/issues/1127)
+- Update from 2.0 to 2.1.1 from UI hanging [\#1126](https://github.com/UnchartedBull/OctoDash/issues/1126)
+- Sleepmode after print finished - Will not wake up \(I don't want it to sleep either\) [\#1125](https://github.com/UnchartedBull/OctoDash/issues/1125)
+- Error while updating to 2.1 either via touchscreen or from command line [\#1104](https://github.com/UnchartedBull/OctoDash/issues/1104)
+- No startup Icon [\#1099](https://github.com/UnchartedBull/OctoDash/issues/1099)
+- Can't get OctoPrint script... [\#1097](https://github.com/UnchartedBull/OctoDash/issues/1097)
+
+**Closed issues:**
+
+- movement in the control panel [\#1180](https://github.com/UnchartedBull/OctoDash/issues/1180)
+- octodash nad TFT 3.5 GPIO [\#1174](https://github.com/UnchartedBull/OctoDash/issues/1174)
+- Looping error tab saying "Can't retrieve layer progress!  [\#1169](https://github.com/UnchartedBull/OctoDash/issues/1169)
+- OctoPrint \(TouchUI\) in Custom Action iframe? [\#1166](https://github.com/UnchartedBull/OctoDash/issues/1166)
+- Horizontal green line in filename? [\#1162](https://github.com/UnchartedBull/OctoDash/issues/1162)
+- Setting Up automatic update [\#1152](https://github.com/UnchartedBull/OctoDash/issues/1152)
+- npm start script no longer creates dist folder [\#1150](https://github.com/UnchartedBull/OctoDash/issues/1150)
+- Touch function not working [\#1146](https://github.com/UnchartedBull/OctoDash/issues/1146)
+- No api [\#1140](https://github.com/UnchartedBull/OctoDash/issues/1140)
+- Configuring Ocotdash for first time cannot find Octoprint [\#1137](https://github.com/UnchartedBull/OctoDash/issues/1137)
+- Octodash segfaults after 'sudo apt full-upgrade' [\#1134](https://github.com/UnchartedBull/OctoDash/issues/1134)
+- Does Octodash work with Klipper? [\#1132](https://github.com/UnchartedBull/OctoDash/issues/1132)
+- Possible to increase vertical scrollbar width? [\#1096](https://github.com/UnchartedBull/OctoDash/issues/1096)
+- Octodash setup error "Http failure response for http://localhost:5000/api/connection: 403 FORBIDDEN" [\#1090](https://github.com/UnchartedBull/OctoDash/issues/1090)
+
+**Merged pull requests:**
+
+- Remember last nozzle temperature during filament change [\#1188](https://github.com/UnchartedBull/OctoDash/pull/1188) ([UnchartedBull](https://github.com/UnchartedBull))
+- remove octoprint script + rework setup + scrollable custom actions [\#1186](https://github.com/UnchartedBull/OctoDash/pull/1186) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump electron from 11.0.0 to 11.0.1 [\#1185](https://github.com/UnchartedBull/OctoDash/pull/1185) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump electron from 9.3.2 to 11.0.0 [\#1183](https://github.com/UnchartedBull/OctoDash/pull/1183) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump eslint-plugin-simple-import-sort from 5.0.3 to 6.0.0 [\#1181](https://github.com/UnchartedBull/OctoDash/pull/1181) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Focus Theme: Fixed Filament selector screen [\#1178](https://github.com/UnchartedBull/OctoDash/pull/1178) ([thegarbz](https://github.com/thegarbz))
+- Bump @angular/cli from 10.2.0 to 11.0.1 [\#1175](https://github.com/UnchartedBull/OctoDash/pull/1175) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 10.2.3 to 11.0.0 [\#1172](https://github.com/UnchartedBull/OctoDash/pull/1172) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- increase settings touchbox size [\#1168](https://github.com/UnchartedBull/OctoDash/pull/1168) ([UnchartedBull](https://github.com/UnchartedBull))
+- improved script loading [\#1167](https://github.com/UnchartedBull/OctoDash/pull/1167) ([UnchartedBull](https://github.com/UnchartedBull))
+- \[ImgBot\] Optimize images [\#1165](https://github.com/UnchartedBull/OctoDash/pull/1165) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Bump @angular/language-service from 10.2.2 to 10.2.3 [\#1164](https://github.com/UnchartedBull/OctoDash/pull/1164) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.19.3 to 12.19.4 [\#1163](https://github.com/UnchartedBull/OctoDash/pull/1163) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Garbz theme updates [\#1161](https://github.com/UnchartedBull/OctoDash/pull/1161) ([thegarbz](https://github.com/thegarbz))
+- Bump eslint from 7.12.1 to 7.13.0 [\#1160](https://github.com/UnchartedBull/OctoDash/pull/1160) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- \[ImgBot\] Optimize images [\#1159](https://github.com/UnchartedBull/OctoDash/pull/1159) ([imgbot[bot]](https://github.com/apps/imgbot))
+- Update install.sh [\#1157](https://github.com/UnchartedBull/OctoDash/pull/1157) ([Will-wastelander](https://github.com/Will-wastelander))
+- Bump @types/lodash from 4.14.164 to 4.14.165 [\#1155](https://github.com/UnchartedBull/OctoDash/pull/1155) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 10.2.1 to 10.2.2 [\#1154](https://github.com/UnchartedBull/OctoDash/pull/1154) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Feature: Glanceable UI theme + additional progress percentage.  [\#1151](https://github.com/UnchartedBull/OctoDash/pull/1151) ([thegarbz](https://github.com/thegarbz))
+- Bump @types/lodash from 4.14.163 to 4.14.164 [\#1147](https://github.com/UnchartedBull/OctoDash/pull/1147) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/language-service from 10.2.0 to 10.2.1 [\#1145](https://github.com/UnchartedBull/OctoDash/pull/1145) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/lodash from 4.14.162 to 4.14.163 [\#1143](https://github.com/UnchartedBull/OctoDash/pull/1143) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.19.2 to 12.19.3 [\#1142](https://github.com/UnchartedBull/OctoDash/pull/1142) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump v8-compile-cache from 2.1.1 to 2.2.0 [\#1141](https://github.com/UnchartedBull/OctoDash/pull/1141) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump eslint from 7.12.0 to 7.12.1 [\#1139](https://github.com/UnchartedBull/OctoDash/pull/1139) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.19.1 to 12.19.2 [\#1138](https://github.com/UnchartedBull/OctoDash/pull/1138) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- \[ImgBot\] Optimize images [\#1133](https://github.com/UnchartedBull/OctoDash/pull/1133) ([imgbot[bot]](https://github.com/apps/imgbot))
+- New Theme BigFingers by theGarbz [\#1130](https://github.com/UnchartedBull/OctoDash/pull/1130) ([thegarbz](https://github.com/thegarbz))
+- Bump @angular-devkit/build-angular from 0.1001.7 to 0.1002.0 [\#1122](https://github.com/UnchartedBull/OctoDash/pull/1122) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @angular/cli from 10.1.7 to 10.2.0 [\#1121](https://github.com/UnchartedBull/OctoDash/pull/1121) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump @types/node from 12.19.0 to 12.19.1 [\#1120](https://github.com/UnchartedBull/OctoDash/pull/1120) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump eslint from 7.11.0 to 7.12.0 [\#1119](https://github.com/UnchartedBull/OctoDash/pull/1119) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [v2.1.1](https://github.com/UnchartedBull/OctoDash/tree/v2.1.1) (2020-10-23)
 
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.1.0...v2.1.1)
@@ -11,7 +91,6 @@
 
 **Fixed bugs:**
 
-- Can't get OctoPrint script... [\#1097](https://github.com/UnchartedBull/OctoDash/issues/1097)
 - Settings SAVE blanks screen and won't respond [\#1071](https://github.com/UnchartedBull/OctoDash/issues/1071)
 - Compatibility issue with Bigtreetech PITFT50 [\#1007](https://github.com/UnchartedBull/OctoDash/issues/1007)
 
