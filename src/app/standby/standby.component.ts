@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { OctoprintConnection } from '.././octoprint/model/connection';
 import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { OctoprintConnectionAPI } from '../octoprint-api/connectionAPI';
 import { PsuControlService } from '../plugin-service/psu-control.service';
 
 @Component({
@@ -60,7 +60,7 @@ export class StandbyComponent implements OnInit {
 
   private checkConnection(): void {
     this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
-      (data: OctoprintConnectionAPI): void => {
+      (data: OctoprintConnection): void => {
         if (data.current.state === 'Closed') {
           if (this.connectionRetries <= 0) {
             this.connectionRetries = 3;

@@ -1,6 +1,6 @@
-import { OctoprintFilament } from './jobAPI';
+import { OctoprintFilament } from './job';
 
-export interface OctoprintFilesAPI {
+export interface OctoprintFile {
   date: number;
   display: string;
   gcodeAnalysis?: OctoprintGCodeAnalysis;
@@ -17,14 +17,14 @@ export interface OctoprintFilesAPI {
   thumbnail?: string;
 }
 
-export interface OctoprintFolderAPI {
-  files: [OctoprintFilesAPI & OctoprintFolderContentAPI];
+export interface OctoprintFolder {
+  files: [OctoprintFile & OctoprintFolderContent];
   free: number;
   total: number;
 }
 
-export interface OctoprintFolderContentAPI {
-  children: [OctoprintFilesAPI & OctoprintFolderContentAPI];
+export interface OctoprintFolderContent {
+  children: [OctoprintFile & OctoprintFolderContent];
   display: string;
   name: string;
   origin: string;

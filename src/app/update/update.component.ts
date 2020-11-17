@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
@@ -30,7 +30,7 @@ export class UpdateComponent implements OnInit {
     public service: AppService,
     private notificationService: NotificationService,
     private octoprintService: OctoprintService,
-    private changeDetector: ChangeDetectorRef,
+    private zone: NgZone,
     private electronService: ElectronService,
   ) {}
 
@@ -56,26 +56,29 @@ export class UpdateComponent implements OnInit {
     this.electronService.ipcRenderer.on(
       'updateDownloadProgress',
       (_, updateDownloadProgress: UpdateDownloadProgress): void => {
-        this.updateProgress = updateDownloadProgress;
-        this.changeDetector.detectChanges();
+        this.zone.run(() => {
+          this.updateProgress = updateDownloadProgress;
+        });
       },
     );
 
     this.electronService.ipcRenderer.on('updateDownloadFinished', (): void => {
-      this.page = 2;
-      this.changeDetector.detectChanges();
-      setTimeout(() => {
-        const updateProgressBar = document.getElementById('installUpdateProgress');
-        updateProgressBar.style.marginLeft = '40vw';
-        this.installationAnimationInterval = setInterval(() => {
-          updateProgressBar.style.marginLeft = updateProgressBar.style.marginLeft === '0vw' ? '40vw' : '0vw';
-        }, 2050);
-      }, 250);
+      this.zone.run(() => {
+        this.page = 2;
+        setTimeout(() => {
+          const updateProgressBar = document.getElementById('installUpdateProgress');
+          updateProgressBar.style.marginLeft = '40vw';
+          this.installationAnimationInterval = setInterval(() => {
+            updateProgressBar.style.marginLeft = updateProgressBar.style.marginLeft === '0vw' ? '40vw' : '0vw';
+          }, 2050);
+        }, 250);
+      });
     });
 
     this.electronService.ipcRenderer.on('updateInstalled', (): void => {
-      this.page = 3;
-      this.changeDetector.detectChanges();
+      this.zone.run(() => {
+        this.page = 3;
+      });
     });
   }
 

@@ -164,6 +164,11 @@
     width: 30vw;
     display: block;
     float: right;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &-action {
       display: block;

@@ -43,7 +43,6 @@ function createWindow() {
       nodeIntegration: true,
       enableRemoteModule: true,
       worldSafeExecuteJavaScript: true,
-      // TODO: enable + contextBridge (probably electron-ngx before release 12)
       contextIsolation: false,
     },
     icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),

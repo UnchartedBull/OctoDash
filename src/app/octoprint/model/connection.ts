@@ -1,16 +1,16 @@
-export interface OctoprintConnectionAPI {
-  current: OctoprintConnectionCurrentAPI;
-  options: OctoprintConnectionOptionsAPI;
+export interface OctoprintConnection {
+  current: OctoprintCurrentConnection;
+  options: OctoprintConnectionOptions;
 }
 
-interface OctoprintConnectionCurrentAPI {
+interface OctoprintCurrentConnection {
   state: string;
   port: string;
   baudrate: number;
   printerProfile: string;
 }
 
-interface OctoprintConnectionOptionsAPI {
+interface OctoprintConnectionOptions {
   ports: string[];
   baudrates: number[];
   printerProfiles: Record<string, unknown>;

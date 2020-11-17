@@ -2,7 +2,8 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
-import { Config, ConfigService } from '../config/config.service';
+import { Config } from '../config/config.model';
+import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -39,7 +40,7 @@ export class SettingsComponent implements OnInit {
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
-    this.config = this.configService.revertConfigForInput(this.config);
+    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {
@@ -93,7 +94,6 @@ export class SettingsComponent implements OnInit {
     this.configService.saveConfig(config);
     this.overwriteNoSave = true;
     this.hideSettings();
-    this.configService.updateConfig();
     this.electronService.ipcRenderer.send('reload');
   }
 

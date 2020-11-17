@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
@@ -6,16 +6,6 @@ import { ElectronService } from 'ngx-electron';
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintScriptService } from './octoprint-script.service';
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    require: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    process: any;
-  }
-}
 
 @Component({
   selector: 'app-root',
@@ -26,12 +16,10 @@ export class AppComponent implements OnInit {
   public constructor(
     private service: AppService,
     private configService: ConfigService,
-    private octoprintScriptService: OctoprintScriptService,
     private notificationService: NotificationService,
     private router: Router,
     private electronService: ElectronService,
-    private changeDetector: ChangeDetectorRef,
-    private ngZone: NgZone,
+    private zone: NgZone,
   ) {}
 
   public activated = false;
@@ -79,9 +67,9 @@ export class AppComponent implements OnInit {
 
   private waitForOctoprint() {
     this.electronService.ipcRenderer.on('octoprintReady', (_, octoprintReady: boolean) => {
-      this.ngZone.run(() => {
+      this.zone.run(() => {
         if (octoprintReady) {
-          this.initializeOctoprintService();
+          this.connectWebsocket();
           this.status = 'initializing';
         } else {
           this.notificationService
@@ -92,12 +80,11 @@ export class AppComponent implements OnInit {
             .then(this.checkOctoprintPort.bind(this));
           this.status = 'no connection';
         }
-        this.changeDetector.detectChanges();
       });
     });
 
     this.electronService.ipcRenderer.on('waitPortError', (_, error: Error) => {
-      this.ngZone.run(() => {
+      this.zone.run(() => {
         this.notificationService.setError('System Error - please restart', error.message);
       });
     });
@@ -112,30 +99,29 @@ export class AppComponent implements OnInit {
       host: urlNoProtocol.split(':')[0],
       port: Number(urlNoProtocol.split(':')[1].split('/')[0]),
     });
-    this.changeDetector.detectChanges();
   }
 
-  private initializeOctoprintService() {
-    const showPrinterConnectedTimeout = setTimeout(() => {
-      this.showConnectionHint = true;
-    }, 30000);
-    this.octoprintScriptService
-      .initialize(this.configService.getURL(''), this.configService.getAccessKey())
-      .then(() => {
-        this.octoprintScriptService.authenticate(this.configService.getAccessKey());
-        if (this.configService.isTouchscreen()) {
-          this.router.navigate(['/main-screen']);
-        } else {
-          this.router.navigate(['/main-screen-no-touch']);
-        }
-      })
-      .catch(() => {
-        console.log('REJECTED');
-        this.notificationService.setError(
-          "Can't get OctoPrint script!",
-          'Please restart your machine. If the error persists open a new issue on GitHub.',
-        );
-      })
-      .finally(() => clearTimeout(showPrinterConnectedTimeout));
+  private connectWebsocket() {
+    if (this.configService.isTouchscreen()) {
+      this.router.navigate(['/main-screen']);
+    } else {
+      this.router.navigate(['/main-screen-no-touch']);
+    }
+    // const showPrinterConnectedTimeout = setTimeout(() => {
+    //   this.showConnectionHint = true;
+    // }, 30000);
+    // this.octoprintScriptService
+    //   .initialize(this.configService.getURL(''), this.configService.getAccessKey())
+    //   .then(() => {
+    //     this.octoprintScriptService.authenticate(this.configService.getAccessKey());
+    //   })
+    //   .catch(() => {
+    //     console.log('REJECTED');
+    //     this.notificationService.setError(
+    //       "Can't get OctoPrint script!",
+    //       'Please restart your machine. If the error persists open a new issue on GitHub.',
+    //     );
+    //   })
+    //   .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 }

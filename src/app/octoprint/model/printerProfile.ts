@@ -1,4 +1,11 @@
-export interface OctoprintPrinterProfileAPI {
+export interface OctoprintPrinterProfiles {
+  profiles: {
+    [key: string]: OctoprintPrinterProfile;
+  };
+}
+
+export interface OctoprintPrinterProfile {
+  current: boolean;
   name: string;
   model: string;
   axes: OctoprintPrinterAxis;

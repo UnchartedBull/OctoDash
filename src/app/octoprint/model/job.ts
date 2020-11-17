@@ -1,4 +1,4 @@
-export interface OctoprintJobAPI {
+export interface OctoprintJobStatus {
   job: OctoprintJob;
   progress: OctoprintProgress;
   state: string;

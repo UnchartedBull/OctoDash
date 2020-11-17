@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintFilesAPI, OctoprintFolderAPI, OctoprintFolderContentAPI } from './octoprint-api/filesAPI';
+import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './octoprint/model/file';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +38,7 @@ export class FilesService {
       this.httpGETRequest = this.http
         .get(this.configService.getURL('files' + folderPath), this.configService.getHTTPHeaders())
         .subscribe(
-          (data: OctoprintFolderAPI & OctoprintFolderContentAPI): void => {
+          (data: OctoprintFolder & OctoprintFolderContent): void => {
             if ('children' in data) {
               data.files = data.children;
               delete data.children;
@@ -144,7 +144,7 @@ export class FilesService {
       this.httpGETRequest = this.http
         .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
         .subscribe(
-          (data: OctoprintFilesAPI): void => {
+          (data: OctoprintFile): void => {
             let filamentLength = 0;
             if (data.gcodeAnalysis) {
               _.forEach(data.gcodeAnalysis.filament, (tool): void => {
@@ -190,7 +190,7 @@ export class FilesService {
       this.httpGETRequest = this.http
         .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
         .subscribe(
-          (data: OctoprintFilesAPI): void => {
+          (data: OctoprintFile): void => {
             const thumbnail = data.thumbnail
               ? this.configService.getURL(data.thumbnail).replace('/api/', '/')
               : 'assets/object.svg';

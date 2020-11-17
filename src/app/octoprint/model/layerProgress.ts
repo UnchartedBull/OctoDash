@@ -1,4 +1,4 @@
-export interface OctoprintLayerProgressAPI {
+export interface OctoprintLayerProgress {
   layer: OctoprintLayer;
   height: OctoprintHeight;
   fanSpeed: string;

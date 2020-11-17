@@ -1,4 +1,4 @@
-export interface OctoprintPrinterStatusAPI {
+export interface OctoprintPrinterStatus {
   temperature: OctoprintTemperature;
   sd: OctoprintSD;
   state: OctoprintPrinterState;
