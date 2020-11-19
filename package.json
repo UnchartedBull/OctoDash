@@ -100,7 +100,7 @@
     "@angular-devkit/build-angular": "~0.1100.2",
     "@angular/cli": "~11.0.2",
     "@angular/compiler-cli": "~11.0.0",
-    "@angular/language-service": "~11.0.1",
+    "@angular/language-service": "~11.0.2",
     "@types/ajv": "^1.0.0",
     "@types/lodash": "^4.14.165",
     "@types/node": "12.19.5",
