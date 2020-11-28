@@ -114,7 +114,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-simple-import-sort": "^6.0.1",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.0",
+    "prettier": "^2.2.1",
     "ts-node": "~9.0.0",
     "typescript": "^4.0.5",
     "wait-on": "^5.2.0"
