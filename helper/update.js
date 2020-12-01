@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-sync */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
@@ -12,6 +13,11 @@ const exec = require('child_process').exec;
 
 function downloadUpdate(updateInfo, window) {
   const downloadPath = '/tmp/octodash.deb';
+  const archMapping = {
+    armv7l: 'armv7l',
+    aarch64: 'arm64',
+    x86_64: 'amd64',
+  };
 
   exec('arch', (err, stdout, stderr) => {
     if (err || stderr) {
@@ -26,7 +32,7 @@ function downloadUpdate(updateInfo, window) {
         let downloadURL;
         let packageSize;
         for (const package of JSON.parse(releaseFiles.body)) {
-          if (package.name.includes(stdout.trim())) {
+          if (package.name.includes(archMapping[stdout.trim()])) {
             downloadURL = package.browser_download_url;
             packageSize = package.size;
           }
