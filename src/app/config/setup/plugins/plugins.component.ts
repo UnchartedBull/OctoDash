@@ -12,6 +12,7 @@ export class PluginsComponent {
   @Input() preheatButtonPlugin: boolean;
   @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
+  @Input() tplinkSmartPlugPlugin: boolean;
 
   @Output() displayLayerProgressPluginChange = new EventEmitter<boolean>();
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
@@ -19,6 +20,7 @@ export class PluginsComponent {
   @Output() preheatButtonPluginChange = new EventEmitter<boolean>();
   @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();
+  @Output() tplinkSmartPlugPluginChange = new EventEmitter<boolean>();
 
   public changeDisplayLayerProgressPlugin(): void {
     this.displayLayerProgressPlugin = !this.displayLayerProgressPlugin;
@@ -48,5 +50,10 @@ export class PluginsComponent {
   public changePsuControlPlugin(): void {
     this.psuControlPlugin = !this.psuControlPlugin;
     this.psuControlPluginChange.emit(this.psuControlPlugin);
+  }
+
+  public changeTPLinkSmartPlugPlugin(): void {
+    this.tplinkSmartPlugPlugin = !this.tplinkSmartPlugPlugin;
+    this.tplinkSmartPlugPluginChange.emit(this.tplinkSmartPlugPlugin);
   }
 }

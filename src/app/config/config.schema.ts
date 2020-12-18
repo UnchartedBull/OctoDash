@@ -111,6 +111,7 @@ export const configSchema = {
         'preheatButton',
         'printTimeGenius',
         'psuControl',
+        'tpLinkSmartPlug',
       ],
       properties: {
         displayLayerProgress: {
@@ -194,6 +195,25 @@ export const configSchema = {
             },
             turnOnPSUWhenExitingSleep: {
               $id: '#/properties/plugins/properties/turnOnPSUWhenExitingSleep',
+              type: 'boolean',
+            },
+          },
+        },
+        tpLinkSmartPlug: {
+          $id: '#/properties/plugins/properties/tpLinkSmartPlug',
+          type: 'object',
+          required: ['enabled', 'smartPlugIP', 'turnOnPowerWhenExitingSleep'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/enabled',
+              type: 'boolean',
+            },
+            smartPlugIP: {
+              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/smartPlugIP',
+              type: 'string',
+            },
+            turnOnPowerWhenExitingSleep: {
+              $id: '#/properties/plugins/properties/turnOnPowerWhenExitingSleep',
               type: 'boolean',
             },
           },

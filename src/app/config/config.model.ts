@@ -54,6 +54,7 @@ interface Plugins {
   preheatButton: Plugin;
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
+  tpLinkSmartPlug: TPLinkSmartPlugPlugin;
 }
 
 interface Plugin {
@@ -68,6 +69,11 @@ interface EnclosurePlugin extends Plugin {
 
 interface PSUControlPlugin extends Plugin {
   turnOnPSUWhenExitingSleep: boolean;
+}
+
+interface TPLinkSmartPlugPlugin extends Plugin {
+  smartPlugIP: string;
+  turnOnPowerWhenExitingSleep: boolean;
 }
 
 interface OctoDash {

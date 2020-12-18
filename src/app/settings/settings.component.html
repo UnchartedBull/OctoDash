@@ -567,6 +567,43 @@
             </span>
             <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
           </div>
+          <span class="settings__heading-2">TPLink-SmartPlug</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.tpLinkSmartPlug.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">enabled</span>
+          </div>
+          <div
+            class="settings__checkbox-container"
+            [ngClass]="{ 'settings__checkbox-container-disabled': !config.plugins.tplinkSmartPlug.enabled }"
+            (click)="
+              config.plugins.tplinkSmartPlug.turnOnPowerWhenExitingSleep = !config.plugins.tplinkSmartPlug.turnOnPowerWhenExitingSleep
+            "
+          >
+            <span class="settings__checkbox">
+              <span
+                class="settings__checkbox-checked"
+                [ngClass]="{ 'settings__checkbox-checked-disabled': !config.plugins.tplinkSmartPlug.enabled }"
+                *ngIf="config.plugins.tplinkSmartPlug.turnOnPowerWhenExitingSleep"
+              ></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Turn on TPLink when exiting sleep</span>
+          </div>
+          <label for="smart-plug-ip" class="settings__input-label">Smart plug IP</label>
+          <input
+            type="text"
+            id="smart-plug-ip"
+            class="settings__input"
+            name="smart-plug-ip"
+            style="width: 44.94vw"
+            [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
+            required
+            [disabled]="!config.plugins.tpLinkSmartPlug.enabled"
+          />
         </div>
       </div>
       <div class="settings__content settings__content-inactive" #settingsCredits>

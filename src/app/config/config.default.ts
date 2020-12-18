@@ -48,6 +48,11 @@ export const defaultConfig: Config = {
       enabled: false,
       turnOnPSUWhenExitingSleep: false,
     },
+    tpLinkSmartPlug: {
+      enabled: false,
+      smartPlugIP: '127.0.0.1',
+      turnOnPowerWhenExitingSleep: false,
+    },
   },
   octodash: {
     customActions: [
