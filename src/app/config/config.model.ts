@@ -12,10 +12,16 @@ export interface Config {
   octodash: OctoDash;
 }
 
-interface Octoprint {
+export interface Octoprint {
   url: string;
   accessToken: string;
+  basicAuth?: BasicAuth;
   urlSplit?: URLSplit;
+}
+
+export interface BasicAuth {
+  user?: string;
+  pass?: string;
 }
 
 export interface URLSplit {

@@ -8,6 +8,7 @@ import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
 import { OctoprintPrinterProfile, OctoprintPrinterProfiles } from './octoprint/model/printerProfile';
 import { PrinterService } from './printer.service';
+import { BasicAuth } from './config/config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,12 +57,16 @@ export class PrinterProfileService {
   }
 
   // Needed for initial setup. Config not initialized yet, thus values need to be passed manually.
-  public getActivePrinterProfileName(octoprintURL: string, apiKey: string): Observable<string> {
+  public getActivePrinterProfileName(octoprintURL: string, apiKey: string, basicAuth?: BasicAuth): Observable<string> {
+    const headers = this.configService.generateHttpHeadersForConfig({
+      url: octoprintURL,
+      accessToken: apiKey,
+      basicAuth: basicAuth
+    });
+
     return this.http
       .get<OctoprintPrinterProfiles>(`${octoprintURL}printerprofiles`, {
-        headers: new HttpHeaders({
-          'x-api-key': apiKey,
-        }),
+        headers,
       })
       .pipe(
         map(profiles => {

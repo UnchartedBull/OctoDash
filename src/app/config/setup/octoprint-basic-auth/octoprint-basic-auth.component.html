@@ -1,0 +1,26 @@
+<span class="setup__text">
+  If your OctoPrint Server is using HTTP Basic Authentication, please complete username and password.
+</span>
+<form class="setup__form">
+  <label for="basicAuthUser" class="setup__input-label">User:</label>
+  <input
+    type="text"
+    id="basicAuthUser"
+    class="setup__input"
+    [ngModel]="user"
+    (ngModelChange)="change()"
+    name="basicAuthUser"
+    style="width: 67vw"
+  />
+  <br />
+  <label for="basicAuthPass" class="setup__input-label">Pass:</label>
+  <input
+    type="text"
+    id="basicAuthPass"
+    class="setup__input"
+    [ngModel]="pass"
+    (ngModelChange)="change()"
+    name="basicAuthPass"
+    style="width: 67vw"
+  />
+</form>

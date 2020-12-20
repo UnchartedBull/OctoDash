@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PrinterProfileService } from 'src/app/printerprofile.service';
+import { BasicAuth } from '../../config.model';
 
 @Component({
   selector: 'app-config-setup-personalization',
@@ -11,6 +12,7 @@ export class PersonalizationComponent implements OnInit {
   @Input() useTouchscreen: boolean;
   @Input() octoprintURL: string;
   @Input() apiKey: string;
+  @Input() basicAuth: BasicAuth;
 
   @Output() printerNameChange = new EventEmitter<string>();
   @Output() useTouchscreenChange = new EventEmitter<boolean>();
@@ -18,12 +20,13 @@ export class PersonalizationComponent implements OnInit {
   constructor(private printerProfileService: PrinterProfileService) {}
 
   ngOnInit(): void {
-    this.printerProfileService.getActivePrinterProfileName(this.octoprintURL, this.apiKey).subscribe(printerName => {
+    this.printerProfileService.getActivePrinterProfileName(this.octoprintURL, this.apiKey, this.basicAuth).subscribe(printerName => {
       if (!this.printerName) {
         this.printerName = printerName;
         this.printerNameChange.emit(this.printerName);
       }
     });
+    console.log(this.basicAuth);
   }
 
   changeUseTouchscreen(): void {

@@ -13,7 +13,7 @@ import { ConfigService } from '../config.service';
 })
 export class ConfigSetupComponent implements OnInit {
   public page = 0;
-  public totalPages = 6;
+  public totalPages = 7;
 
   public configUpdate: boolean;
   public config: Config;
@@ -54,12 +54,10 @@ export class ConfigSetupComponent implements OnInit {
   }
 
   private checkOctoPrintConnection(): void {
-    const httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
-      }),
-    };
-    this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
+    const httpHeaders = this.configService.generateHttpHeadersForConfig(this.config.octoprint);
+    this.http.get(this.config.octoprint.url + 'version', {
+      headers: httpHeaders
+    }).subscribe(
       (): void => {
         this.octoprintConnection = true;
         this.validateConfig();

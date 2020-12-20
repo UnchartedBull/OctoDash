@@ -4,7 +4,7 @@ import Ajv from 'ajv';
 import _ from 'lodash';
 
 import { NotificationService } from '../notification/notification.service';
-import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
+import { BasicAuth, Config, CustomAction, HttpHeader, Octoprint, URLSplit } from './config.model';
 import { configSchema } from './config.schema';
 
 @Injectable({
@@ -47,14 +47,24 @@ export class ConfigService {
     this.initialized = true;
   }
 
+  public generateHttpHeadersForConfig(octoprint: Octoprint): HttpHeaders {
+    let headers = new HttpHeaders({
+      'x-api-key': octoprint.accessToken,
+      'Cache-Control': 'no-cache',
+      Pragma: 'no-cache',
+      Expires: '0',
+    });
+
+    if (octoprint.basicAuth) {
+      headers = headers.append('Authorization', 'Basic ' + btoa(`${octoprint.basicAuth.user}:${octoprint.basicAuth.pass}`));
+    }
+
+    return headers;
+  }
+
   public generateHttpHeaders(): void {
     this.httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0',
-      }),
+      headers: this.generateHttpHeadersForConfig(this.config.octoprint),
     };
   }
 

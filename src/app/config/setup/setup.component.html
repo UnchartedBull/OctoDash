@@ -38,22 +38,28 @@
     *ngIf="page === 2"
   ></app-config-setup-octoprint-authentication>
 
+  <app-config-setup-octoprint-basic-auth
+    [(basicAuth)]="config.octoprint.basicAuth"
+    *ngIf="page === 3"
+  ></app-config-setup-octoprint-basic-auth>
+
   <app-config-setup-personalization
     [octoprintURL]="getOctoprintURL()"
     [apiKey]="config.octoprint.accessToken"
+    [basicAuth]="config.octoprint.basicAuth"
     [(printerName)]="config.printer.name"
     [(useTouchscreen)]="config.octodash.touchscreen"
-    *ngIf="page === 3"
+    *ngIf="page === 4"
   ></app-config-setup-personalization>
 
   <app-config-setup-extruder-information
     [(feedLength)]="config.filament.feedLength"
     [(feedSpeed)]="config.filament.feedSpeed"
-    *ngIf="page === 4"
+    *ngIf="page === 5"
   ></app-config-setup-extruder-information>
 
   <app-config-setup-plugins
-    *ngIf="page === 5"
+    *ngIf="page === 6"
     [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
     [(enclosurePlugin)]="config.plugins.enclosure.enabled"
     [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
@@ -62,7 +68,7 @@
     [(psuControlPlugin)]="config.plugins.psuControl.enabled"
   ></app-config-setup-plugins>
 
-  <div *ngIf="page === 6">
+  <div *ngIf="page === 7">
     <span class="setup__text">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">

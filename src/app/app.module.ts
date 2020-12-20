@@ -42,6 +42,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
+import { OctoprintBasicAuthComponent } from './config/setup/octoprint-basic-auth/octoprint-basic-auth.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { URLSafePipe } from './url.pipe';
     WelcomeComponent,
     DiscoverOctoprintComponent,
     OctoprintAuthenticationComponent,
+    OctoprintBasicAuthComponent,
     PersonalizationComponent,
     ExtruderInformationComponent,
     PluginsComponent,

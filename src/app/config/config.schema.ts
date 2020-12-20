@@ -15,6 +15,23 @@ export const configSchema = {
           type: 'string',
           pattern: '^(.*)$',
         },
+        basicAuth: {
+          $id: '#/properties/octoprint/properties/basicAuth',
+          type: 'object',
+          required: ['user', 'pass'],
+          properties: {
+            user: {
+              $id: '#/properties/octoprint/properties/basicAuth/user',
+              type: 'string',
+              pattern: '^(.*)$',
+            },
+            pass: {
+              $id: '#/properties/octoprint/properties/basicAuth/pass',
+              type: 'string',
+              pattern: '^(.*)$',
+            }
+          }
+        },
         url: {
           $id: '#/properties/octoprint/properties/url',
           type: 'string',
