@@ -15,6 +15,8 @@ export class ConfigSetupComponent implements OnInit {
   public page = 0;
   public totalPages = 7;
 
+  public pageDisabled = [];
+
   public configUpdate: boolean;
   public config: Config;
 
@@ -24,6 +26,25 @@ export class ConfigSetupComponent implements OnInit {
   public configErrors: string[];
 
   public manualURL = false;
+
+  private basicAuthPage = 2;
+  private _usebasicAuth = false
+  get useBasicAuth() {
+    return this._usebasicAuth;
+  }
+  set useBasicAuth(useBasicAuth: boolean) {
+    this._usebasicAuth = useBasicAuth;
+    const basicAuthPageIndex = this.pageDisabled.indexOf(this.basicAuthPage);
+    if (this._usebasicAuth) {
+      if (basicAuthPageIndex !== -1) {
+        this.pageDisabled.splice(basicAuthPageIndex , 1);
+      }
+    } else {
+      if (basicAuthPageIndex === -1) {
+        this.pageDisabled.push(this.basicAuthPage);
+      }
+    }
+  }
 
   public constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
     this.configUpdate = this.configService.isUpdate();
@@ -99,7 +120,12 @@ export class ConfigSetupComponent implements OnInit {
       return;
     }
     this.page += value;
-    this.changeProgress();
+
+    if (this.pageDisabled.includes(this.page)) {
+      this.changePage(value < 0 ? -1 : 1);
+    } else {
+      this.changeProgress();
+    }
   }
 
   public increasePage(): void {

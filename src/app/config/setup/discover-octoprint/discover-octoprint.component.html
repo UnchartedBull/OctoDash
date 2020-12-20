@@ -41,6 +41,14 @@
       required
       style="width: 14vw"
     />
+
+    <div class="setup__checkbox-container" (click)="changeUseBasicAuth()">
+      <span class="setup__checkbox">
+        <span class="setup__checkbox-checked" *ngIf="useBasicAuth"></span>
+      </span>
+        Use Basic Auth
+    </div>
+
     <p class="setup__input-prefix" style="margin-top: 8vh">Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
   </form>
   <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">search again</div>

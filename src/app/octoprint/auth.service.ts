@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
-import { HttpClient, HttpResponseBase } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponseBase} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {BasicAuth} from "../config/config.model";
 
 @Injectable({
   providedIn: 'root',
@@ -9,16 +10,24 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  public probeSupport(octoprintURL: string): Observable<HttpResponseBase> {
-    return this.http.get<void>(`${octoprintURL}plugin/appkeys/probe`, { observe: 'response' });
+  private basicAuthHeaders(basicAuth?: BasicAuth) {
+    if (basicAuth) {
+      return new HttpHeaders({
+        'Authorization': 'Basic ' + btoa(`${basicAuth.user}:${basicAuth.pass}`)
+      });
+    }
   }
 
-  public startProcess(octoprintURL: string): Observable<AppToken> {
-    return this.http.post<AppToken>(`${octoprintURL}plugin/appkeys/request`, { app: 'OctoDash' });
+  public probeSupport(octoprintURL: string, basicAuth?: BasicAuth): Observable<HttpResponseBase> {
+    return this.http.get<void>(`${octoprintURL}plugin/appkeys/probe`, { observe: 'response', headers: this.basicAuthHeaders(basicAuth) });
   }
 
-  public pollStatus(octoprintURL: string, token: string): Observable<HttpResponseBase> {
-    return this.http.get<void | string>(`${octoprintURL}plugin/appkeys/request/${token}`, { observe: 'response' });
+  public startProcess(octoprintURL: string, basicAuth?: BasicAuth): Observable<AppToken> {
+    return this.http.post<AppToken>(`${octoprintURL}plugin/appkeys/request`, { app: 'OctoDash', headers: this.basicAuthHeaders(basicAuth) });
+  }
+
+  public pollStatus(octoprintURL: string, token: string, basicAuth?: BasicAuth): Observable<HttpResponseBase> {
+    return this.http.get<void | string>(`${octoprintURL}plugin/appkeys/request/${token}`, { observe: 'response', headers: this.basicAuthHeaders(basicAuth) });
   }
 }
 

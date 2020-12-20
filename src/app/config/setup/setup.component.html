@@ -28,20 +28,22 @@
     (changeURLEntryMethod)="changeURLEntryMethod($event)"
     [(octoprintHost)]="config.octoprint.urlSplit.host"
     [(octoprintPort)]="config.octoprint.urlSplit.port"
+    [(useBasicAuth)]="useBasicAuth"
     *ngIf="page === 1"
   ></app-config-setup-discover-octoprint>
+
+  <app-config-setup-octoprint-basic-auth
+          [(basicAuth)]="config.octoprint.basicAuth"
+          *ngIf="page === 2"
+  ></app-config-setup-octoprint-basic-auth>
 
   <app-config-setup-octoprint-authentication
     [octoprintURL]="getOctoprintURL().replace('api/', '')"
     (increasePage)="increasePage()"
+    [basicAuth]="config.octoprint.basicAuth"
     [(accessToken)]="config.octoprint.accessToken"
-    *ngIf="page === 2"
-  ></app-config-setup-octoprint-authentication>
-
-  <app-config-setup-octoprint-basic-auth
-    [(basicAuth)]="config.octoprint.basicAuth"
     *ngIf="page === 3"
-  ></app-config-setup-octoprint-basic-auth>
+  ></app-config-setup-octoprint-authentication>
 
   <app-config-setup-personalization
     [octoprintURL]="getOctoprintURL()"

@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
 import { NotificationService } from 'src/app/notification/notification.service';
 import { AuthService, TokenSuccess } from 'src/app/octoprint/auth.service';
+import {BasicAuth} from "../../config.model";
 
 @Component({
   selector: 'app-config-setup-octoprint-authentication',
@@ -11,6 +12,7 @@ import { AuthService, TokenSuccess } from 'src/app/octoprint/auth.service';
 })
 export class OctoprintAuthenticationComponent {
   @Input() octoprintURL: string;
+  @Input() basicAuth: BasicAuth = null;
   @Input() accessToken: string;
 
   @Output() increasePage = new EventEmitter<void>();
@@ -19,7 +21,7 @@ export class OctoprintAuthenticationComponent {
   constructor(private authService: AuthService, private notificationService: NotificationService) {}
 
   public loginWithOctoprintUI(): void {
-    this.authService.probeSupport(this.octoprintURL).subscribe(
+    this.authService.probeSupport(this.octoprintURL, this.basicAuth).subscribe(
       result => {
         if (result.status === 204) {
           this.sendLoginRequest();
@@ -47,7 +49,7 @@ export class OctoprintAuthenticationComponent {
   }
 
   private sendLoginRequest(): void {
-    this.authService.startProcess(this.octoprintURL).subscribe(
+    this.authService.startProcess(this.octoprintURL, this.basicAuth).subscribe(
       result => {
         this.notificationService.setNotification(
           'Login request send!',
@@ -69,7 +71,7 @@ export class OctoprintAuthenticationComponent {
       this.notificationService.closeNotification();
     }, 2000);
     const pollInterval = interval(1000).subscribe(() => {
-      this.authService.pollStatus(this.octoprintURL, token).subscribe(
+      this.authService.pollStatus(this.octoprintURL, token, this.basicAuth).subscribe(
         result => {
           if (result.status === 200) {
             pollInterval.unsubscribe();

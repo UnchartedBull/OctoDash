@@ -11,11 +11,13 @@ import { ConfigService } from '../../config.service';
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   @Input() octoprintHost: number;
   @Input() octoprintPort: number;
+  @Input() useBasicAuth: boolean = false;
 
   @Output() increasePage = new EventEmitter<void>();
   @Output() changeURLEntryMethod = new EventEmitter<boolean>();
   @Output() octoprintHostChange = new EventEmitter<string>();
   @Output() octoprintPortChange = new EventEmitter<number>();
+  @Output() useBasicAuthChange = new EventEmitter<boolean>();
 
   public manualURL = false;
   public octoprintNodes: OctoprintNodes;
@@ -34,6 +36,11 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.electronService.ipcRenderer.send('stopDiscover');
+  }
+
+  public changeUseBasicAuth() {
+    this.useBasicAuth = !this.useBasicAuth;
+    this.useBasicAuthChange.emit(this.useBasicAuth);
   }
 
   private discoverOctoprintInstances(): void {
