@@ -66,6 +66,41 @@
               required
             />
             <br />
+            <div class="settings__checkbox-container" (click)="changeUseBasicAuth()">
+              <span class="settings__checkbox">
+                <span class="settings__checkbox-checked" *ngIf="useBasicAuth"></span>
+              </span>
+              <span class="settings__checkbox-descriptor">Use Basic Auth</span>
+            </div>
+
+              <table *ngIf="useBasicAuth">
+                <tr>
+                  <td style="width: 25.6vw; display: block">
+                    <label for="basicAuthUser" class="settings__input-label">User</label>
+                    <input
+                            type="text"
+                            id="basicAuthUser"
+                            class="settings__input"
+                            name="basicAuthUser"
+                            style="width: 19vw"
+                            [(ngModel)]="config.octoprint.basicAuth.user"
+                            required
+                    />
+                  </td>
+                  <td>
+                    <label for="basicAuthPass" class="settings__input-label">Pass</label>
+                    <input
+                            type="text"
+                            id="basicAuthPass"
+                            class="settings__input"
+                            name="basicAuthPass"
+                            style="width: 19vw"
+                            [(ngModel)]="config.octoprint.basicAuth.pass"
+                            required
+                    />
+                  </td>
+                </tr>
+              </table>
           </form>
           <span class="settings__heading-2">Printer</span>
           <form class="settings__form">

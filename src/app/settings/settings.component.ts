@@ -33,6 +33,8 @@ export class SettingsComponent implements OnInit {
   private pages = [];
   public update = false;
 
+  public useBasicAuth;
+
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
@@ -41,6 +43,8 @@ export class SettingsComponent implements OnInit {
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+
+    this.useBasicAuth = !!this.config.octoprint.basicAuth;
   }
 
   public ngOnInit(): void {
@@ -53,6 +57,14 @@ export class SettingsComponent implements OnInit {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
+  }
+
+  public changeUseBasicAuth() {
+    this.useBasicAuth = !this.useBasicAuth;
+
+    if (this.useBasicAuth && !this.config.octoprint.basicAuth) {
+      this.config.octoprint.basicAuth = {};
+    }
   }
 
   public hideSettings(): void {

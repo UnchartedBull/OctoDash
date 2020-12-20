@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   public startProcess(octoprintURL: string, basicAuth?: BasicAuth): Observable<AppToken> {
-    return this.http.post<AppToken>(`${octoprintURL}plugin/appkeys/request`, { app: 'OctoDash', headers: this.basicAuthHeaders(basicAuth) });
+    return this.http.post<AppToken>(`${octoprintURL}plugin/appkeys/request`, { app: 'OctoDash' }, { headers: this.basicAuthHeaders(basicAuth) });
   }
 
   public pollStatus(octoprintURL: string, token: string, basicAuth?: BasicAuth): Observable<HttpResponseBase> {

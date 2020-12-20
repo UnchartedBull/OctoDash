@@ -140,6 +140,11 @@ export class ConfigService {
     const configOut = _.cloneDeep(config);
     configOut.octoprint.url = this.mergeOctoprintURL(config.octoprint.urlSplit);
     delete configOut.octoprint.urlSplit;
+
+    if (configOut.octoprint.basicAuth && (!configOut.octoprint.basicAuth.user || !configOut.octoprint.basicAuth.pass)) {
+      delete configOut.octoprint.basicAuth;
+    }
+
     return configOut;
   }
 
