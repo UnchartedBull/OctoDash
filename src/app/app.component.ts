@@ -40,6 +40,10 @@ export class AppComponent implements OnInit {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
+          // TODO: this call is only here to allow migration path on `turnOnPrinterWhenExitingSleep`
+          //       option release.
+          this.migratePSUControlOption();
+
           this.waitForOctoprint();
         } else {
           this.checkInvalidConfig();
@@ -53,8 +57,10 @@ export class AppComponent implements OnInit {
   }
 
   private checkInvalidConfig() {
-    if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
-      if (this.service.autoFixError()) {
+    const errors = this.configService.getErrors();
+
+    if (this.service.hasUpdateError(errors)) {
+      if (this.service.autoFixErrors(errors)) {
         this.initialize();
       } else {
         this.configService.setUpdate();
@@ -123,5 +129,17 @@ export class AppComponent implements OnInit {
     //     );
     //   })
     //   .finally(() => clearTimeout(showPrinterConnectedTimeout));
+  }
+
+  // TODO: this method is only here to allow migration path on `turnOnPrinterWhenExitingSleep`
+  //       option release, which can break current PSUControl behaviour.
+  //       It will be removed when all people have used a release with this fix.
+  private migratePSUControlOption() {
+    const config = this.configService.getCurrentConfig();
+    if (config.plugins.psuControl.turnOnPSUWhenExitingSleep) {
+      config.octodash.turnOnPrinterWhenExitingSleep = true;
+      config.plugins.psuControl.turnOnPSUWhenExitingSleep = false;
+      this.configService.saveConfig(config);
+    }
   }
 }

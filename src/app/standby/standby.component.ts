@@ -39,7 +39,7 @@ export class StandbyComponent implements OnInit {
 
   public reconnect(): void {
     this.connecting = true;
-    if (this.configService.turnOnPSUWhenExitingSleep()) {
+    if (this.configService.getAutomaticPrinterPowerOn()) {
       if (this.configService.useTpLinkSmartPlug()) {
         this.tpLinkSmartPlugService.changePowerState(true);
       } else {

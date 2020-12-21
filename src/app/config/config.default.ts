@@ -105,6 +105,7 @@ export const defaultConfig: Config = {
     pollingInterval: 2000,
     touchscreen: true,
     turnScreenOffWhileSleeping: false,
+    turnOnPrinterWhenExitingSleep: false,
     preferPreviewWhilePrinting: false,
     previewProgressCircle: false,
   },

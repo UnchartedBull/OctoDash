@@ -193,8 +193,8 @@ export class ConfigService {
     return this.config.octodash.turnScreenOffWhileSleeping;
   }
 
-  public turnOnPSUWhenExitingSleep(): boolean {
-    return this.config.plugins.psuControl.turnOnPSUWhenExitingSleep;
+  public getAutomaticPrinterPowerOn(): boolean {
+    return this.config.octodash.turnOnPrinterWhenExitingSleep;
   }
 
   public useTpLinkSmartPlug(): boolean {

@@ -310,6 +310,23 @@
           <br />
           <div
             class="settings__checkbox-container"
+            [ngClass]="{ 'settings__checkbox-container-disabled': !(config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled) }"
+            (click)="
+              config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep
+            "
+          >
+            <span class="settings__checkbox">
+              <span
+                class="settings__checkbox-checked"
+                [ngClass]="{ 'settings__checkbox-checked-disabled': !(config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled) }"
+                *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
+              ></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Turn on printer when exiting sleep</span>
+          </div>
+          <br />
+          <div
+            class="settings__checkbox-container"
             (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting"
           >
             <span class="settings__checkbox">
@@ -550,22 +567,6 @@
               <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor">enabled</span>
-          </div>
-          <div
-            class="settings__checkbox-container"
-            [ngClass]="{ 'settings__checkbox-container-disabled': !config.plugins.psuControl.enabled }"
-            (click)="
-              config.plugins.psuControl.turnOnPSUWhenExitingSleep = !config.plugins.psuControl.turnOnPSUWhenExitingSleep
-            "
-          >
-            <span class="settings__checkbox">
-              <span
-                class="settings__checkbox-checked"
-                [ngClass]="{ 'settings__checkbox-checked-disabled': !config.plugins.psuControl.enabled }"
-                *ngIf="config.plugins.psuControl.turnOnPSUWhenExitingSleep"
-              ></span>
-            </span>
-            <span class="settings__checkbox-descriptor">Turn on PSU when exiting sleep</span>
           </div>
           <span class="settings__heading-2">TPLink-SmartPlug</span>
           <div
