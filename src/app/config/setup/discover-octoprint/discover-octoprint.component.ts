@@ -11,7 +11,7 @@ import { ConfigService } from '../../config.service';
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   @Input() octoprintHost: number;
   @Input() octoprintPort: number;
-  @Input() useBasicAuth: boolean = false;
+  @Input() useBasicAuth = false;
 
   @Output() increasePage = new EventEmitter<void>();
   @Output() changeURLEntryMethod = new EventEmitter<boolean>();
