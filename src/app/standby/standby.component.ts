@@ -40,10 +40,11 @@ export class StandbyComponent implements OnInit {
   public reconnect(): void {
     this.connecting = true;
     if (this.configService.turnOnPSUWhenExitingSleep()) {
-      this.psuControlService.changePSUState(true);
-      setTimeout(this.checkConnection.bind(this), 5000);
-    } else if (this.configService.turnOnPowerWhenExitingSleep()) {
-      this.tpLinkSmartPlugService.changePowerState(true);
+      if (this.configService.useTpLinkSmartPlug()) {
+        this.tpLinkSmartPlugService.changePowerState(true);
+      } else {
+        this.psuControlService.changePSUState(true);
+      }
       setTimeout(this.checkConnection.bind(this), 5000);
     } else {
       this.checkConnection();

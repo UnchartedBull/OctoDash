@@ -202,7 +202,7 @@ export const configSchema = {
         tpLinkSmartPlug: {
           $id: '#/properties/plugins/properties/tpLinkSmartPlug',
           type: 'object',
-          required: ['enabled', 'smartPlugIP', 'turnOnPowerWhenExitingSleep'],
+          required: ['enabled', 'smartPlugIP'],
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/enabled',
@@ -211,10 +211,6 @@ export const configSchema = {
             smartPlugIP: {
               $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/smartPlugIP',
               type: 'string',
-            },
-            turnOnPowerWhenExitingSleep: {
-              $id: '#/properties/plugins/properties/turnOnPowerWhenExitingSleep',
-              type: 'boolean',
             },
           },
         },

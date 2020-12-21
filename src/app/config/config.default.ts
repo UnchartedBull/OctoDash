@@ -51,7 +51,6 @@ export const defaultConfig: Config = {
     tpLinkSmartPlug: {
       enabled: false,
       smartPlugIP: '127.0.0.1',
-      turnOnPowerWhenExitingSleep: false,
     },
   },
   octodash: {

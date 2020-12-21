@@ -197,14 +197,13 @@ export class ConfigService {
     return this.config.plugins.psuControl.turnOnPSUWhenExitingSleep;
   }
 
+  public useTpLinkSmartPlug(): boolean {
+    return this.config.plugins.tpLinkSmartPlug.enabled;
+  }
+
   public getSmartPlugIP(): string {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
-
-  public turnOnPowerWhenExitingSleep(): boolean {
-    return this.config.plugins.tpLinkSmartPlug.turnOnPowerWhenExitingSleep;
-  }
-
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

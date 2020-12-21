@@ -73,7 +73,6 @@ interface PSUControlPlugin extends Plugin {
 
 interface TPLinkSmartPlugPlugin extends Plugin {
   smartPlugIP: string;
-  turnOnPowerWhenExitingSleep: boolean;
 }
 
 interface OctoDash {
