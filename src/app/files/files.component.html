@@ -48,7 +48,7 @@
     <div *ngIf="content.type === 'folder'" (click)="openFolder(content.path)" matRipple [matRippleUnbounded]="false">
       <img src="assets/folder.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value"> {{ content.files }} <span class="files__info-unit">files</span> </span>
+        <span class="files__info-value"> {{ content.size }} <span class="files__info-unit">mb</span> </span>
       </div>
       <span class="files__name">
         {{ content.name }}
