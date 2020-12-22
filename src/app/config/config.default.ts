@@ -2,12 +2,8 @@ import { Config } from './config.model';
 
 export const defaultConfig: Config = {
   octoprint: {
-    url: 'http://192.168.86.50:8080/api/',
-    accessToken: '3ACED03DE91A47E1AB652943579E59DF',
-    basicAuth: {
-      user: 'octo',
-      pass: 'oprint'
-    }
+    url: 'http://localhost:3000',
+    accessToken: '',
   },
   printer: {
     name: '',
