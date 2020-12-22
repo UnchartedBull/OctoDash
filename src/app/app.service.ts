@@ -35,13 +35,15 @@ export class AppService {
         (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
       ".octodash should have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
-      ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config =>
-        (config.octodash.turnOnPrinterWhenExitingSleep = false),
+      ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
+        config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
+        delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
+      },
     };
   }
 
-  // If the errors can be automatically fixed return true here
-  public autoFixErrors(errors: string[]): boolean {
+  // If all errors can be automatically fixed return true here
+  public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
     let fullyAutofixed = true;

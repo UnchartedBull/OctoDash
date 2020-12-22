@@ -80,7 +80,7 @@ export class ConfigService {
 
   public getErrors(): string[] {
     const errors = [];
-    this.validator.errors.forEach((error): void => {
+    this.validator.errors?.forEach((error): void => {
       if (error.keyword === 'type') {
         errors.push(`${error.dataPath} ${error.message}`);
       } else {
@@ -97,6 +97,7 @@ export class ConfigService {
       const configStored = this.store.get('config');
       if (this.validateGiven(configStored)) {
         this.config = config;
+        this.valid = true;
         this.generateHttpHeaders();
         return null;
       } else {

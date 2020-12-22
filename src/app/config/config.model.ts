@@ -70,7 +70,7 @@ interface EnclosurePlugin extends Plugin {
 interface PSUControlPlugin extends Plugin {
   // TODO: this option still exists to allow migration path... need to be removed
   // when the new `turnOnPSUWhenExitingSleep` will be released
-  turnOnPSUWhenExitingSleep: boolean;
+  turnOnPSUWhenExitingSleep?: boolean;
 }
 
 interface TPLinkSmartPlugPlugin extends Plugin {
