@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import _ from 'lodash';
 import { ElectronService } from 'ngx-electron';
 
+import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
 
@@ -9,7 +11,7 @@ import { NotificationService } from './notification/notification.service';
   providedIn: 'root',
 })
 export class AppService {
-  private updateError: string[];
+  private updateError: Record<string, (config: Config) => void>;
   private loadedFile = false;
   public version: string;
   public latestVersion: string;
@@ -25,19 +27,35 @@ export class AppService {
     this.enableVersionListener();
     this.enableCustomCSSListener();
     this.electronService.ipcRenderer.send('appInfo');
-    this.updateError = [
-      ".printer should have required property 'zBabystepGCode'",
-      ".octodash should have required property 'previewProgressCircle'",
-    ];
+
+    // list of all error following an upgrade
+    this.updateError = {
+      ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
+      ".plugins should have required property 'tpLinkSmartPlug'": config =>
+        (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
+      ".octodash should have required property 'previewProgressCircle'": config =>
+        (config.octodash.previewProgressCircle = false),
+      ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
+        config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
+        delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
+      },
+    };
   }
 
-  // If the errors can be automatically fixed return true here
-  public autoFixError(): boolean {
+  // If all errors can be automatically fixed return true here
+  public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
-    config.printer.zBabystepGCode = 'M290 Z';
-    config.octodash.previewProgressCircle = false;
+
+    let fullyAutofixed = true;
+    for (const error of errors) {
+      if (_.hasIn(this.updateError, error)) {
+        this.updateError[error](config);
+      } else {
+        fullyAutofixed = false;
+      }
+    }
     this.configService.saveConfig(config);
-    return true;
+    return fullyAutofixed;
   }
 
   private enableVersionListener(): void {
@@ -89,8 +107,8 @@ export class AppService {
     this.electronService.ipcRenderer.send('screenWakeup');
   }
 
-  public getUpdateError(): string[] {
-    return this.updateError;
+  public hasUpdateError(errors: string[]): boolean {
+    return _.intersection(errors, _.keys(this.updateError)).length > 0;
   }
 
   public setLoadedFile(value: boolean): void {

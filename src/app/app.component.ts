@@ -53,8 +53,10 @@ export class AppComponent implements OnInit {
   }
 
   private checkInvalidConfig() {
-    if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
-      if (this.service.autoFixError()) {
+    const errors = this.configService.getErrors();
+
+    if (this.service.hasUpdateError(errors)) {
+      if (this.service.fixUpdateErrors(errors)) {
         this.initialize();
       } else {
         this.configService.setUpdate();

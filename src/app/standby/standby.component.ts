@@ -7,6 +7,7 @@ import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
 import { PsuControlService } from '../plugin-service/psu-control.service';
+import { TPLinkSmartPlugService } from '../plugin-service/tplink-smartplug.service';
 
 @Component({
   selector: 'app-standby',
@@ -26,6 +27,7 @@ export class StandbyComponent implements OnInit {
     private service: AppService,
     private notificationService: NotificationService,
     private psuControlService: PsuControlService,
+    private tpLinkSmartPlugService: TPLinkSmartPlugService,
   ) {}
 
   public ngOnInit(): void {
@@ -37,8 +39,12 @@ export class StandbyComponent implements OnInit {
 
   public reconnect(): void {
     this.connecting = true;
-    if (this.configService.turnOnPSUWhenExitingSleep()) {
-      this.psuControlService.changePSUState(true);
+    if (this.configService.getAutomaticPrinterPowerOn()) {
+      if (this.configService.useTpLinkSmartPlug()) {
+        this.tpLinkSmartPlugService.changePowerState(true);
+      } else {
+        this.psuControlService.changePSUState(true);
+      }
       setTimeout(this.checkConnection.bind(this), 5000);
     } else {
       this.checkConnection();

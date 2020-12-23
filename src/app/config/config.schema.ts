@@ -111,6 +111,7 @@ export const configSchema = {
         'preheatButton',
         'printTimeGenius',
         'psuControl',
+        'tpLinkSmartPlug',
       ],
       properties: {
         displayLayerProgress: {
@@ -186,15 +187,26 @@ export const configSchema = {
         psuControl: {
           $id: '#/properties/plugins/properties/psuControl',
           type: 'object',
-          required: ['enabled', 'turnOnPSUWhenExitingSleep'],
+          required: ['enabled'],
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
               type: 'boolean',
             },
-            turnOnPSUWhenExitingSleep: {
-              $id: '#/properties/plugins/properties/turnOnPSUWhenExitingSleep',
+          },
+        },
+        tpLinkSmartPlug: {
+          $id: '#/properties/plugins/properties/tpLinkSmartPlug',
+          type: 'object',
+          required: ['enabled', 'smartPlugIP'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/enabled',
               type: 'boolean',
+            },
+            smartPlugIP: {
+              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/smartPlugIP',
+              type: 'string',
             },
           },
         },
@@ -209,6 +221,7 @@ export const configSchema = {
         'pollingInterval',
         'touchscreen',
         'turnScreenOffWhileSleeping',
+        'turnOnPrinterWhenExitingSleep',
         'preferPreviewWhilePrinting',
         'previewProgressCircle',
       ],
@@ -274,6 +287,10 @@ export const configSchema = {
         },
         turnScreenOffWhileSleeping: {
           $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
+          type: 'boolean',
+        },
+        turnOnPrinterWhenExitingSleep: {
+          $id: '#/properties/octodash/properties/turnOnPrinterWhenExitingSleep',
           type: 'boolean',
         },
         preferPreviewWhilePrinting: {

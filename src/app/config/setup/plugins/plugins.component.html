@@ -36,5 +36,11 @@
     </span>
     PSU Control
   </div>
-  <div class="setup__explanation">Enclosure and PSU Control Plugin can be configured further in the settings.</div>
+  <div class="setup__checkbox-container" (click)="changeTPLinkSmartPlugPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="tplinkSmartPlugPlugin"></span>
+    </span>
+    TPLink-SmartPlug
+  </div>
+  <div class="setup__explanation">Enclosure, PSU Control and TPLink-SmartPlug plugins can be configured further in the settings.</div>
 </div>
