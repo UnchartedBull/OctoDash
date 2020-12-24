@@ -1,6 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
@@ -20,37 +22,61 @@ export class FilamentManagerService {
     private http: HttpClient,
   ) {}
 
-  public getSpoolList(): Promise<FilamentSpoolList> {
-    return new Promise((resolve, reject): void => {
-      if (this.httpGETRequest) {
-        this.httpGETRequest.unsubscribe();
-      }
-      this.httpGETRequest = this.http
-        .get(
-          this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
-          this.configService.getHTTPHeaders(),
-        )
-        .subscribe(
-          (spools: FilamentSpoolList): void => {
-            spools.spools.forEach((spool): void => {
-              const match = colorRegexp.exec(spool.name);
-              if (match) {
-                spool.color = match[1];
-                spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], '')}`;
-              } else {
-                spool.color = '#f5f6fa';
-                spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
-              }
-              colorRegexp.lastIndex = 0;
-            });
-            resolve(spools);
-          },
-          (error: HttpErrorResponse): void => {
-            this.notificationService.setError("Can't load filament spools!", error.message);
-            reject();
-          },
-        );
-    });
+  // public getSpoolList(): Promise<FilamentSpoolList> {
+  //   return new Promise((resolve, reject): void => {
+  //     if (this.httpGETRequest) {
+  //       this.httpGETRequest.unsubscribe();
+  //     }
+  //     this.httpGETRequest = this.http
+  //       .get(
+  //         this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
+  //         this.configService.getHTTPHeaders(),
+  //       )
+  //       .subscribe(
+  //         (spools: FilamentSpoolList): void => {
+  //           spools.spools.forEach((spool): void => {
+  //             const match = colorRegexp.exec(spool.name);
+  //             if (match) {
+  //               spool.color = match[1];
+  //               spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], '')}`;
+  //             } else {
+  //               spool.color = '#f5f6fa';
+  //               spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
+  //             }
+  //             colorRegexp.lastIndex = 0;
+  //           });
+  //           resolve(spools);
+  //         },
+  //         (error: HttpErrorResponse): void => {
+  //           this.notificationService.setError("Can't load filament spools!", error.message);
+  //           reject();
+  //         },
+  //       );
+  //   });
+  // }
+
+  public getSpoolList(): Observable<FilamentSpoolList> {
+    return this.http
+      .get(
+        this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        map((spools: FilamentSpoolList) => {
+          spools.spools.forEach((spool): void => {
+            const match = colorRegexp.exec(spool.name);
+            if (match) {
+              spool.color = match[1];
+              spool.displayName = `${spool.profile.vendor} - ${spool.name.replace(match[0], '')}`;
+            } else {
+              spool.color = '#f5f6fa';
+              spool.displayName = `${spool.profile.vendor} - ${spool.name}`;
+            }
+            colorRegexp.lastIndex = 0;
+          });
+          return spools;
+        }),
+      );
   }
 
   public getCurrentSpool(): Promise<FilamentSpool> {

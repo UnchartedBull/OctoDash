@@ -12,16 +12,11 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
   styleUrls: ['./filament.component.scss'],
 })
 export class FilamentComponent implements OnInit {
-  public selectedSpool: FilamentSpool;
-  private currentSpool: FilamentSpool;
   private totalPages = 5;
 
   public page: number;
   private timeout: ReturnType<typeof setTimeout>;
   private timeout2: ReturnType<typeof setTimeout>;
-
-  public filamentSpools: FilamentSpoolList;
-  public isLoadingSpools = true;
 
   private hotendPreviousTemperature = 0;
   public hotendTarget: number;
@@ -90,8 +85,8 @@ export class FilamentComponent implements OnInit {
       this.feedSpeedSlow = false;
     }
     if (page === 0) {
-      this.selectedSpool = null;
-      this.getSpools();
+      // this.selectedSpool = null;
+      // this.getSpools();
     } else if (page === 1) {
       this.isHeating = false;
       this.automaticHeatingStartSeconds = 6;
@@ -130,57 +125,6 @@ export class FilamentComponent implements OnInit {
 
   // FILAMENT MANAGEMENT
 
-  private getSpools(): void {
-    this.isLoadingSpools = true;
-    this.filamentManagerService
-      .getSpoolList()
-      .then((spools: FilamentSpoolList): void => {
-        this.filamentSpools = spools;
-      })
-      .catch((): void => {
-        this.filamentSpools = null;
-      })
-      .finally((): void => {
-        this.filamentManagerService
-          .getCurrentSpool()
-          .then((spool: FilamentSpool): void => {
-            this.currentSpool = spool;
-          })
-          .catch((): void => {
-            this.currentSpool = null;
-          })
-          .finally((): void => {
-            this.isLoadingSpools = false;
-          });
-      });
-  }
-
-  public getSpoolWeightLeft(weight: number, used: number): number {
-    return Math.floor(weight - used);
-  }
-
-  public getSpoolTemperatureOffset(): string {
-    return `${this.selectedSpool.temp_offset === 0 ? '±' : this.selectedSpool.temp_offset > 0 ? '+' : '-'}${Math.abs(
-      this.selectedSpool.temp_offset,
-    )}`;
-  }
-
-  public getCurrentSpoolColor(): string {
-    if (this.currentSpool) {
-      return this.currentSpool.color;
-    } else {
-      return '#44bd32';
-    }
-  }
-
-  public getSelectedSpoolColor(): string {
-    if (this.selectedSpool) {
-      return this.selectedSpool.color;
-    } else {
-      return '#44bd32';
-    }
-  }
-
   private getFeedLength(): number {
     return this.configService.useM600() ? 0 : this.configService.getFeedLength();
   }
@@ -191,12 +135,6 @@ export class FilamentComponent implements OnInit {
     } else {
       return this.configService.getFeedSpeed();
     }
-  }
-
-  public setSpool(spool: FilamentSpool): void {
-    this.selectedSpool = spool;
-    this.hotendTarget = this.hotendTarget + spool.temp_offset;
-    this.increasePage();
   }
 
   private unloadSpool(): void {
