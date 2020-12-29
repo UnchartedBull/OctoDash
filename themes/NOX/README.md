@@ -6,16 +6,23 @@ I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher (a
 thumbnails = 16x16,330x186
 ```
 
-You also need to activate these settings in OctoDash:
+You also need to activate this setting in OctoDash:
 
 **Settings > OctoDash > Preview by default while printing**
+
+If you want to use the round progress bar:
+
 **Settings > OctoDash > Always use circular progress bar**
 
 ### Screenshots:
 
-1. Printing Screen:
+1a. Printing Screen (progress bar):
 
-   ![Printing screen](screenshots/screenshot_printing.png)
+   ![Printing screen](screenshots/screenshot_printing1.png)
+
+1b. Printing Screen (round progress bar):
+
+   ![Printing screen](screenshots/screenshot_printing2.png)
 
 2. Main Screen:
 
