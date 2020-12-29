@@ -518,11 +518,11 @@ round-progress svg circle{
 }
 
 
-/* .job-info__progress-bar {
+.job-info__progress-bar {
     height: 8vh!important;
-    border-radius: 1.7vw!important;
-    background-color: var(--green)!important;
-} */
+    border-radius: 0.5vw!important;
+    background-color: #105310!important;
+}
 
 .job-info__progress-bar__wrapper {
     position:fixed!important;
