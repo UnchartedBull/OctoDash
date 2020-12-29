@@ -1,4 +1,4 @@
-# NOX theme V0.1
+# NOX theme V0.2
 
 I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher (at least 50%):
 
