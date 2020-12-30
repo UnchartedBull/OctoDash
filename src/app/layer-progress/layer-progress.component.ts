@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 
 @Component({
   selector: 'app-layer-progress',

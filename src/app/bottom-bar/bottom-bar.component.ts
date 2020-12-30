@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { EnclosureService } from '../plugin-service/enclosure.service';
+import { EnclosureService } from '../plugins/enclosure.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({

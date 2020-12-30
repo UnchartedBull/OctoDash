@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
 
 @Component({

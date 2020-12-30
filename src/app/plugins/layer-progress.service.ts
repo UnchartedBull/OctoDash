@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, Subscription, timer } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-import { OctoprintLayerProgress } from '.././octoprint/model/layerProgress';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
+import { OctoprintLayerProgress } from '../octoprint/model/layerProgress';
 
 @Injectable({
   providedIn: 'root',

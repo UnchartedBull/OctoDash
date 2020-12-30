@@ -1,67 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import {
-  FilamentManagerService,
-  FilamentSpool,
-  FilamentSpoolList,
-} from '../../plugin-service/filament-manager.service';
-import { NotificationService } from '../../notification/notification.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { FilamentManagementComponent, FilamentSpool } from '../../plugins';
 
 @Component({
   selector: 'app-filament-choose',
   templateUrl: './choose-filament.component.html',
   styleUrls: ['./choose-filament.component.scss'],
 })
-export class ChooseFilamentComponent implements OnInit {
-  public filamentSpools: FilamentSpoolList;
+export class ChooseFilamentComponent {
+  public filamentSpools: Array<FilamentSpool>;
   public isLoadingSpools = true;
 
   public selectedSpool: FilamentSpool;
-  private currentSpool: FilamentSpool;
 
-  constructor(
-    private filamentManagerService: FilamentManagerService,
-    private notificationService: NotificationService,
-  ) {}
-
-  ngOnInit(): void {
-    this.getSpools();
-  }
-
-  private getSpools(): void {
-    this.isLoadingSpools = true;
-    this.filamentManagerService.getSpoolList().subscribe(
-      (spools: FilamentSpoolList): void => {
-        this.filamentSpools = spools;
-      },
-      (error: HttpErrorResponse): void => {
-        this.notificationService.setError("Can't load filament spools!", error.message);
-      },
-      () => (this.isLoadingSpools = false),
-    );
-    // .then((spools: FilamentSpoolList): void => {
-    //   this.filamentSpools = spools;
-    // })
-    // .catch((): void => {
-    //   this.filamentSpools = null;
-    // })
-    // .finally((): void => {
-    //   this.filamentManagerService
-    //     .getCurrentSpool()
-    //     .then((spool: FilamentSpool): void => {
-    //       this.currentSpool = spool;
-    //     })
-    //     .catch((): void => {
-    //       this.currentSpool = null;
-    //     })
-    //     .finally((): void => {
-    //       this.isLoadingSpools = false;
-    //     });
-    // });
-  }
-
-  private getCurrentSpool() {}
+  constructor(public filament: FilamentManagementComponent) {}
 
   public getSpoolWeightLeft(weight: number, used: number): number {
     return Math.floor(weight - used);

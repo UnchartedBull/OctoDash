@@ -3,13 +3,15 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentManagerService, FilamentSpool, FilamentSpoolList } from '../plugin-service/filament-manager.service';
+import { FilamentManagementComponent } from '../plugins';
+import { FilamentManagerService } from '../plugins/filament/filament-manager.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
   selector: 'app-filament',
   templateUrl: './filament.component.html',
   styleUrls: ['./filament.component.scss'],
+  providers: [FilamentManagementComponent],
 })
 export class FilamentComponent implements OnInit {
   private totalPages = 5;
@@ -138,51 +140,50 @@ export class FilamentComponent implements OnInit {
   }
 
   private unloadSpool(): void {
-    this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
-    setTimeout((): void => {
-      const unloadingProgressBar = document.getElementById('filamentUnloadBar');
-      unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
-      const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
-      unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
-      setTimeout((): void => {
-        unloadingProgressBar.style.width = '0vw';
-        this.timeout = setTimeout((): void => {
-          this.increasePage();
-        }, unloadTime * 1000 + 500);
-      }, 200);
-    }, 0);
+    // this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
+    // setTimeout((): void => {
+    //   const unloadingProgressBar = document.getElementById('filamentUnloadBar');
+    //   unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
+    //   const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
+    //   unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
+    //   setTimeout((): void => {
+    //     unloadingProgressBar.style.width = '0vw';
+    //     this.timeout = setTimeout((): void => {
+    //       this.increasePage();
+    //     }, unloadTime * 1000 + 500);
+    //   }, 200);
+    // }, 0);
   }
 
   private loadSpool(): void {
-    const loadTimeFast = (this.getFeedLength() * 0.75) / this.configService.getFeedSpeed();
-    const loadTimeSlow = (this.getFeedLength() * 0.17) / this.configService.getFeedSpeedSlow();
-    const loadTime = loadTimeFast + loadTimeSlow + 0.5;
-    this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
-    setTimeout((): void => {
-      const loadingProgressBar = document.getElementById('filamentLoadBar');
-      loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
-
-      loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
-      setTimeout((): void => {
-        loadingProgressBar.style.width = '50vw';
-        this.timeout = setTimeout((): void => {
-          this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
-          this.feedSpeedSlow = true;
-          this.timeout2 = setTimeout((): void => {
-            this.increasePage();
-          }, loadTimeSlow * 1000 + 400);
-        }, loadTimeFast * 1000 + 200);
-      }, 200);
-    }, 0);
+    // const loadTimeFast = (this.getFeedLength() * 0.75) / this.configService.getFeedSpeed();
+    // const loadTimeSlow = (this.getFeedLength() * 0.17) / this.configService.getFeedSpeedSlow();
+    // const loadTime = loadTimeFast + loadTimeSlow + 0.5;
+    // this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
+    // setTimeout((): void => {
+    //   const loadingProgressBar = document.getElementById('filamentLoadBar');
+    //   loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
+    //   loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
+    //   setTimeout((): void => {
+    //     loadingProgressBar.style.width = '50vw';
+    //     this.timeout = setTimeout((): void => {
+    //       this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
+    //       this.feedSpeedSlow = true;
+    //       this.timeout2 = setTimeout((): void => {
+    //         this.increasePage();
+    //       }, loadTimeSlow * 1000 + 400);
+    //     }, loadTimeFast * 1000 + 200);
+    //   }, 200);
+    // }, 0);
   }
 
   public setSpoolSelection(): void {
-    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
-    if (this.selectedSpool) {
-      this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage.bind(this));
-    } else {
-      this.increasePage();
-    }
+    // this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
+    // if (this.selectedSpool) {
+    //   this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage.bind(this));
+    // } else {
+    //   this.increasePage();
+    // }
   }
 
   public stopExtruderMovement(): void {
