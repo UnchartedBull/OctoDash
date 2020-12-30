@@ -252,15 +252,6 @@ export class SettingsComponent implements OnInit {
         }
       }
     }
-    console.log('4');
-    if (!enabled) {
-      proc = this.childProcessService.childProcess.spawnSync(
-        'sudo',
-        ['systemctl', 'disable', 'hostapd.service'],
-        {}
-      );
-      return proc.status === 0;
-    }
     console.log('5');
     // Make sure Wi-Fi isn't blocked by rfkill
     this.childProcessService.childProcess.spawnSync(
