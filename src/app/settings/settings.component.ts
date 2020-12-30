@@ -269,7 +269,7 @@ export class SettingsComponent implements OnInit {
       }
   
       if (line.startsWith('Quality=')) {
-        cell.quality = parseInt(line.split(' ')[0].split('=')[1].split('/')[0]);
+        cell.quality = Number(line.split(' ')[0].split('=')[1].split('/')[0]);
       }
   
       if (line.startsWith('Encryption key:')) {
@@ -368,7 +368,7 @@ export class SettingsComponent implements OnInit {
           ['-i', 'wlan0', 'set_network', id, 'psk', `'"${options.key}"'`],
           {shell:true}
         );
-      } else { 
+      } else {
         proc = this.childProcessService.childProcess.spawnSync(
           'sudo wpa_cli',
           ['-i', 'wlan0', 'set_network', id, 'key_mgmt', 'NONE'],
@@ -397,7 +397,7 @@ export class SettingsComponent implements OnInit {
       if (proc.status !== 0) {
         return false;
       }
-    } 
+    }
     return true;
   }
 
