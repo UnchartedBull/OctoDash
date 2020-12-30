@@ -1,13 +1,12 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChildProcessService } from 'ngx-childprocess';
+import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { ChildProcessService } from 'ngx-childprocess';
-import { writeFileSync } from 'fs';
 
 
 @Component({
@@ -123,21 +122,19 @@ export class SettingsComponent implements OnInit {
     this.update = false;
   }
 
-  public getWirelessStatus() {
+  public getWirelessStatus(): unknown {
     let enabled = false;
-    let mode = 'sta';
-    let cipher = '';
-    let mgmt = '';
+    const mode = 'sta';
     const options = {ssid:'',key:'', networks:[],encryption:''};
 
-    let proc = this.childProcessService.childProcess.spawnSync(
+    const proc = this.childProcessService.childProcess.spawnSync(
       'wpa_cli',
       ['-i', 'wlan0', 'status'],
       {encoding: 'utf8'}
     );
 
     if (proc.status !== 0) {
-      return {enabled, mode, options};
+      return { enabled, mode, options };
     }
 
     for (const line of proc.stdout.split('\n')) {
@@ -149,61 +146,14 @@ export class SettingsComponent implements OnInit {
         case 'ssid':
           options.ssid = line.substring(5);
           break;
-        case 'key_mgmt':
-          switch (value) {
-            case 'WPA2-PSK':
-              mgmt = 'psk2';
-              break;
-            default:
-              mgmt = value.toLowerCase();
-              break;
-          }
-          break;
-        case 'pairwise_cipher':
-          if (value.indexOf('TKIP') >= 0) {
-            cipher += '+tkip';
-          }
-          if (value.indexOf('CCMP') >= 0) {
-            cipher += '+ccmp';
-          }
-          break;
       }
     }
-
-    proc = this.childProcessService.childProcess.spawnSync(
-      'wpa_cli',
-      ['-i', 'wlan0', 'list_networks'],
-      {encoding: 'utf8'}
-    );
-    if (proc.status !== 0) {
-      return {enabled, mode, options};
-    }
-
-    options.networks = [];
-    for (const line of proc.stdout.trim().split('\n')) {
-      if (line.startsWith('network')) {
-        continue;
-      }
-
-      const ssid = line.split('\t')[1];
-      if (ssid) {
-        options.networks.push(ssid);
-      }
-    }
-
-    if (mgmt) {
-      options.encryption = mgmt;
-
-      if (mgmt !== 'none' && cipher) {
-        options.encryption += cipher;
-      }
-    }
-
-    return {enabled, mode, options};
+    return { enabled, mode, options };
   }
 
   public scanWirelessNetworks() {
-    let status = this.getWirelessStatus();
+    let status: any = {};
+    status = this.getWirelessStatus();
   
     const proc = this.childProcessService.childProcess.spawnSync(
       'sudo',
@@ -220,20 +170,14 @@ export class SettingsComponent implements OnInit {
     lines.push('');
   
     const cells = new Map();
-    let cell = {
-      ssid: '',
-      configured: true,
-      connected: true,
-      quality: 0,
-      encryption: true
-    };
+    let cell: any = {};
   
     for (const line of lines) {
       // New cell, start over
       if (line.startsWith('Cell ') || line.length === 0) {
-        if (cell.hasOwnProperty('ssid') &&
-            cell.hasOwnProperty('quality') &&
-            cell.hasOwnProperty('encryption') &&
+        if ('ssid' in cell &&
+            'quality' in cell &&
+            'encryption' in cell &&
             cell.ssid.length > 0) {
           if (status.mode === 'sta' && status.options.networks &&
               status.options.networks.includes(cell.ssid)) {
@@ -255,13 +199,7 @@ export class SettingsComponent implements OnInit {
           }
         }
   
-        cell = {
-          ssid: '',
-          configured: true,
-          connected: true,
-          quality: 0,
-          encryption: true
-        };
+        cell = {};
       }
   
       if (line.startsWith('ESSID:')) {
