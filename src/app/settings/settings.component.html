@@ -21,6 +21,10 @@
             about
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
+          <li (click)="changePage(5, 0, 'forward')">
+            Wifi
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </li>
         </ul>
         <span
           class="settings__update-available"
@@ -655,6 +659,42 @@
             Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
           </p>
           <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
+        </div>
+      </div>
+      <div class="settings__content settings__content-inactive" #settingsWifi>
+        <span class="settings__heading" (click)="changePage(0, 5, 'backward')">
+          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          Wifi
+        </span>
+        <div class="settings__scroll">
+          <ul>
+            <li *ngFor="let net of wifiList" class="settings__text" style="white-space: nowrap; text-overflow: ellipsis;">
+              <fa-icon [icon]="['fas', 'wifi']" size="sm"></fa-icon>
+              <span (click)="defineNetwork(net.ssid, true)" *ngIf="net.encryption"> {{net.ssid}}</span>
+              <span (click)="defineNetwork(net.ssid, false)" *ngIf="!net.encryption"> {{net.ssid}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="settings__content settings__content-inactive" #settingsWifiConnect>
+        <span class="settings__heading" (click)="changePage(5, 6, 'backward')">
+          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          {{defineWifi[0].ssid}}
+        </span>
+        <div class="settings__scroll">
+          <form class="settings__form">
+            <label for="password" class="settings__input-label">Password</label>
+            <input
+              #password
+              type="text"
+              id="password"
+              class="settings__input"
+              name="password"
+              style="width: 44.94vw"
+            />
+            <br />
+          </form>
+          <span class="settings__save" (click)="connectNetwork(defineWifi[0].ssid, password.value)">Connect</span>
         </div>
       </div>
     </div>

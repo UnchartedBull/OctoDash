@@ -6,6 +6,7 @@ import { ElectronService } from 'ngx-electron';
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
+import { ChildProcessService } from 'ngx-childprocess';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private electronService: ElectronService,
     private zone: NgZone,
+    private childProcessService: ChildProcessService,
   ) {}
 
   public activated = false;

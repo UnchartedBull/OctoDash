@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { NgxElectronModule } from 'ngx-electron';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxChildProcessModule } from 'ngx-childprocess';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -42,6 +43,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -78,11 +80,13 @@ import { URLSafePipe } from './url.pipe';
     AppRoutingModule,
     RoundProgressModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     NgxElectronModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MatRippleModule,
+    NgxChildProcessModule,
   ],
   providers: [AppService, ConfigService, NotificationService, PrinterService, JobService],
   bootstrap: [AppComponent],

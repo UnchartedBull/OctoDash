@@ -1,10 +1,14 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppService } from '../app.service';
 import { Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
+import { ChildProcessService } from 'ngx-childprocess';
+import { writeFileSync } from 'fs';
+
 
 @Component({
   selector: 'app-settings',
@@ -18,9 +22,19 @@ export class SettingsComponent implements OnInit {
   @ViewChild('settingsOctoDash') private settingsOctoDash: ElementRef;
   @ViewChild('settingsPlugins') private settingsPlugins: ElementRef;
   @ViewChild('settingsCredits') private settingsCredits: ElementRef;
+  @ViewChild('settingsWifi') private settingsWifi: ElementRef;
+  @ViewChild('settingsWifiConnect') private settingsWifiConnect: ElementRef;
 
   public fadeOutAnimation = false;
   public config: Config;
+  public wifiList = [];
+  public defineWifi = [{
+    ssid: '',
+    configured: true,
+    connected: true,
+    quality: 0,
+    encryption: true
+  }];
   public customActionsPosition = [
     'Top Left',
     'Top Right',
@@ -30,13 +44,14 @@ export class SettingsComponent implements OnInit {
     'Bottom Right',
   ];
   private overwriteNoSave = false;
-  private pages = [];
+  private pages = {};
   public update = false;
 
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
     private electronService: ElectronService,
+    private childProcessService: ChildProcessService,
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
@@ -51,7 +66,10 @@ export class SettingsComponent implements OnInit {
         this.settingsOctoDash.nativeElement,
         this.settingsPlugins.nativeElement,
         this.settingsCredits.nativeElement,
+        this.settingsWifi.nativeElement,
+        this.settingsWifiConnect.nativeElement,
       ];
+      this.wifiList = this.scanWirelessNetworks();
     }, 400);
   }
 
@@ -103,5 +121,297 @@ export class SettingsComponent implements OnInit {
 
   public hideUpdate(): void {
     this.update = false;
+  }
+
+  public getWirelessStatus() {
+    let enabled = false;
+    let mode = 'sta';
+    let cipher = '';
+    let mgmt = '';
+    const options = {ssid:'',key:'', networks:[],encryption:''};
+
+    let proc = this.childProcessService.childProcess.spawnSync(
+      'wpa_cli',
+      ['-i', 'wlan0', 'status'],
+      {encoding: 'utf8'}
+    );
+
+    if (proc.status !== 0) {
+      return {enabled, mode, options};
+    }
+
+    for (const line of proc.stdout.split('\n')) {
+      const [key, value] = line.split('=', 2);
+      switch (key) {
+        case 'wpa_state':
+          enabled = line.split('=')[1] === 'COMPLETED';
+          break;
+        case 'ssid':
+          options.ssid = line.substring(5);
+          break;
+        case 'key_mgmt':
+          switch (value) {
+            case 'WPA2-PSK':
+              mgmt = 'psk2';
+              break;
+            default:
+              mgmt = value.toLowerCase();
+              break;
+          }
+          break;
+        case 'pairwise_cipher':
+          if (value.indexOf('TKIP') >= 0) {
+            cipher += '+tkip';
+          }
+          if (value.indexOf('CCMP') >= 0) {
+            cipher += '+ccmp';
+          }
+          break;
+      }
+    }
+
+    proc = this.childProcessService.childProcess.spawnSync(
+      'wpa_cli',
+      ['-i', 'wlan0', 'list_networks'],
+      {encoding: 'utf8'}
+    );
+    if (proc.status !== 0) {
+      return {enabled, mode, options};
+    }
+
+    options.networks = [];
+    for (const line of proc.stdout.trim().split('\n')) {
+      if (line.startsWith('network')) {
+        continue;
+      }
+
+      const ssid = line.split('\t')[1];
+      if (ssid) {
+        options.networks.push(ssid);
+      }
+    }
+
+    if (mgmt) {
+      options.encryption = mgmt;
+
+      if (mgmt !== 'none' && cipher) {
+        options.encryption += cipher;
+      }
+    }
+
+    return {enabled, mode, options};
+  }
+
+  public scanWirelessNetworks() {
+    let status = this.getWirelessStatus();
+  
+    const proc = this.childProcessService.childProcess.spawnSync(
+      'sudo',
+      ['iwlist', 'scanning'],
+      {encoding: 'utf8'}
+    );
+  
+    const lines = proc.stdout
+      .split('\n')
+      .filter((l) => l.startsWith(' '))
+      .map((l) => l.trim());
+  
+    // Add an empty line so we don't miss the last cell.
+    lines.push('');
+  
+    const cells = new Map();
+    let cell = {
+      ssid: '',
+      configured: true,
+      connected: true,
+      quality: 0,
+      encryption: true
+    };
+  
+    for (const line of lines) {
+      // New cell, start over
+      if (line.startsWith('Cell ') || line.length === 0) {
+        if (cell.hasOwnProperty('ssid') &&
+            cell.hasOwnProperty('quality') &&
+            cell.hasOwnProperty('encryption') &&
+            cell.ssid.length > 0) {
+          if (status.mode === 'sta' && status.options.networks &&
+              status.options.networks.includes(cell.ssid)) {
+            cell.configured = true;
+            cell.connected = status.enabled;
+          } else {
+            cell.configured = false;
+            cell.connected = false;
+          }
+  
+          // If there are two networks with the same SSID, but one is encrypted
+          // and the other is not, we need to keep both.
+          const key = `${cell.ssid}-${cell.encryption}`;
+          if (cells.has(key)) {
+            const stored = cells.get(key);
+            stored.quality = Math.max(stored.quality, cell.quality);
+          } else {
+            cells.set(key, cell);
+          }
+        }
+  
+        cell = {
+          ssid: '',
+          configured: true,
+          connected: true,
+          quality: 0,
+          encryption: true
+        };
+      }
+  
+      if (line.startsWith('ESSID:')) {
+        cell.ssid = line.substring(7, line.length - 1);
+      }
+  
+      if (line.startsWith('Quality=')) {
+        cell.quality = parseInt(line.split(' ')[0].split('=')[1].split('/')[0]);
+      }
+  
+      if (line.startsWith('Encryption key:')) {
+        cell.encryption = line.split(':')[1] === 'on';
+      }
+    }
+  
+    return Array.from(cells.values()).sort((a, b) => b.quality - a.quality);
+  }
+
+  public setWirelessMode(enabled, mode = 'ap', options: any = {}) {
+    const valid = ['ap', 'sta'];
+    if (enabled && !valid.includes(mode)) {
+      return false;
+    }
+  
+    // First, remove existing networks
+    console.log('1');
+    let proc = this.childProcessService.childProcess.spawnSync(
+      'sudo wpa_cli',
+      ['-i', 'wlan0', 'list_networks'],
+      {encoding: 'utf8',
+      shell: true}
+    );
+    console.log(proc);
+    if (proc.status === 0) {
+      console.log('removing');
+      const networks = proc.stdout.split('\n')
+        .filter((l) => !l.startsWith('network'))
+        .map((l) => l.split(' ')[0])
+        .reverse();
+  
+      for (const id of networks) {
+        console.log('2');
+        proc = this.childProcessService.childProcess.spawnSync(
+          'sudo wpa_cli',
+          ['-i', 'wlan0', 'remove_network', id],
+          {shell: true}
+        );
+        if (proc.status !== 0) {
+          console.log('Failed to remove network with id:', id);
+        }
+      }
+    }
+    console.log('4');
+    if (!enabled) {
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo',
+        ['systemctl', 'disable', 'hostapd.service'],
+        {}
+      );
+      return proc.status === 0;
+    }
+    console.log('5');
+    // Make sure Wi-Fi isn't blocked by rfkill
+    this.childProcessService.childProcess.spawnSync(
+      'sudo',
+      ['rfkill', 'unblock', 'wifi'],
+      {}
+    );
+    console.log('6');
+    if (mode === 'sta') {
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo wpa_cli',
+        ['-i', 'wlan0', 'add_network'],
+        {encoding: 'utf8', shell: true}
+      );
+      if (proc.status !== 0) {
+        console.log('6 crash');
+        return false;
+      }
+  
+      const id = proc.stdout.trim();
+      console.log(id);
+      console.log('7');
+      options.ssid = options.ssid.replace('"', '\\"');
+      console.log(options.ssid);
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo wpa_cli',
+        // the ssid argument MUST be quoted
+        ['-i', 'wlan0', 'set_network', id, 'ssid', `'"${options.ssid}"'`],
+        {shell:true}
+      );
+      if (proc.status !== 0) {
+        console.log('whoops');
+        return false;
+      }
+      console.log('8');
+      
+      if (options.key) {
+        options.key = options.key.replace('"', '\\"');
+        console.log(options.key);
+        proc = this.childProcessService.childProcess.spawnSync(
+          'sudo wpa_cli',
+          // the psk argument MUST be quoted
+          ['-i', 'wlan0', 'set_network', id, 'psk', `'"${options.key}"'`],
+          {shell:true}
+        );
+      } else { 
+        proc = this.childProcessService.childProcess.spawnSync(
+          'sudo wpa_cli',
+          ['-i', 'wlan0', 'set_network', id, 'key_mgmt', 'NONE'],
+          {shell:true}
+        );
+      }
+      console.log('9');
+      if (proc.status !== 0) {
+        return false;
+      }
+      console.log('10');
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo wpa_cli',
+        ['-i', 'wlan0', 'enable_network', id],
+        {shell:true}
+      );
+      if (proc.status !== 0) {
+        return false;
+      }
+      console.log('11');
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo wpa_cli',
+        ['-i', 'wlan0', 'save_config'],
+        {shell:true}
+      );
+      if (proc.status !== 0) {
+        return false;
+      }
+    } 
+    return true;
+  }
+
+  public connectNetwork(ssid1, pass) {
+    console.log(pass);
+    this.setWirelessMode(true, 'sta', {ssid: ssid1, key: pass});
+  }
+
+  public defineNetwork(ssid, pass) {
+    this.defineWifi = this.wifiList.filter(obj => {return obj.ssid === ssid});
+    if (pass) {
+      this.changePage(6, 5, 'forward');
+    } else {
+      this.setWirelessMode(true, 'sta', {ssid});
+    }
   }
 }
