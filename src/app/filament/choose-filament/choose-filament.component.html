@@ -1,8 +1,17 @@
 <span class="filament-heading">select your new filament</span>
-<ng-container *ngIf="!filament.isLoading; else loadingFilament">
-  <ng-container *ngIf="filament.getSpools(); else noFilaments">
+<ng-container *ngIf="!filament.loading; else loadingFilament">
+  <ng-container *ngIf="filament.filamentSpools; else noFilaments">
     <table class="filaments">
-      <tr *ngFor="let spool of filament.getSpools()" (click)="setSpool(spool)" matRipple [matRippleUnbounded]="false">
+      <tr
+        *ngFor="let spool of filament.filamentSpools"
+        long-press
+        matRipple
+        [matRippleUnbounded]="false"
+        [duration]="1250"
+        [frequency]="2000"
+        (onShortPress)="setSpool(spool)"
+        (onLongPressing)="setSpoolSkipChange(spool)"
+      >
         <td class="filaments__type">
           <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">
             {{ spool.material }}

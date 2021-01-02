@@ -18,7 +18,7 @@
 </table>
 
 <div class="filament">
-  <app-filament-choose *ngIf="page === 0"></app-filament-choose>
+  <app-filament-choose (spoolChange)="setSpool($event)" *ngIf="page === 0"></app-filament-choose>
   <!-- <div *ngIf="page === 1">
     <span class="filament-heading">heating the nozzle</span>
     <div class="filament-heating__center">

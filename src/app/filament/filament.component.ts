@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentManagementComponent } from '../plugins';
-import { FilamentManagerService } from '../plugins/filament/filament-manager.service';
+import { FilamentManagementComponent, FilamentSpool } from '../plugins';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
@@ -15,12 +14,15 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
 })
 export class FilamentComponent implements OnInit {
   private totalPages = 5;
-
   public page: number;
+  private hotendPreviousTemperature = 0;
+
+  private selectedSpool: FilamentSpool;
+  private currentSpool: FilamentSpool;
+
   private timeout: ReturnType<typeof setTimeout>;
   private timeout2: ReturnType<typeof setTimeout>;
 
-  private hotendPreviousTemperature = 0;
   public hotendTarget: number;
   public hotendTemperature: number;
   public automaticHeatingStartSeconds: number;
@@ -33,7 +35,6 @@ export class FilamentComponent implements OnInit {
   public constructor(
     private router: Router,
     private configService: ConfigService,
-    private filamentManagerService: FilamentManagerService,
     private printerService: PrinterService,
   ) {
     this.printerService
@@ -50,21 +51,20 @@ export class FilamentComponent implements OnInit {
     } else {
       this.setPage(1);
     }
-    this.hotendTarget = this.configService.getDefaultHotendTemperature();
-    this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-      this.hotendTemperature = printerStatus.nozzle.current;
-    });
+    // this.hotendTarget = this.configService.getDefaultHotendTemperature();
+    // this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
+    //   this.hotendTemperature = printerStatus.nozzle.current;
+    // });
   }
 
   public increasePage(): void {
+    console.log(this.selectedSpool);
     if (this.page < this.totalPages) {
       this.setPage(this.page + 1);
     } else if (this.page === this.totalPages) {
       this.router.navigate(['/main-screen']);
     }
   }
-
-  // PAGINATION
 
   public decreasePage(): void {
     if (this.page === 0) {
@@ -86,10 +86,7 @@ export class FilamentComponent implements OnInit {
     if (this.page === 4) {
       this.feedSpeedSlow = false;
     }
-    if (page === 0) {
-      // this.selectedSpool = null;
-      // this.getSpools();
-    } else if (page === 1) {
+    if (page === 1) {
       this.isHeating = false;
       this.automaticHeatingStartSeconds = 6;
       this.automaticHeatingStartTimer();
@@ -122,6 +119,15 @@ export class FilamentComponent implements OnInit {
       setTimeout((): void => {
         document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
       }, 200);
+    }
+  }
+
+  public setSpool(spoolInformation: { spool: FilamentSpool; skipChange: boolean }): void {
+    this.selectedSpool = spoolInformation.spool;
+    if (spoolInformation.skipChange) {
+      this.setPage(this.totalPages);
+    } else {
+      this.increasePage();
     }
   }
 

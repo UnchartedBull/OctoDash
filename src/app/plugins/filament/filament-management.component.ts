@@ -13,10 +13,9 @@ import { FilamentManagerService } from './filament-manager.service';
 export class FilamentManagementComponent {
   private filamentPlugin: FilamentManagementPlugin;
 
-  private filamentSpools: Array<FilamentSpool>;
-  private currentSpool: FilamentSpool;
+  private _filamentSpools: Array<FilamentSpool>;
 
-  public isLoading = true;
+  private _loading = true;
 
   constructor(private injector: Injector, private notificationService: NotificationService) {
     this.filamentPlugin = this.injector.get(FilamentManagerService);
@@ -27,18 +26,28 @@ export class FilamentManagementComponent {
   private loadSpools(): void {
     this.filamentPlugin.getSpools().subscribe(
       (spools: Array<FilamentSpool>): void => {
-        this.filamentSpools = spools;
+        this._filamentSpools = spools;
       },
       (error: HttpErrorResponse): void => {
         this.notificationService.setError("Can't load filament spools!", error.message);
       },
       (): void => {
-        this.isLoading = false;
+        this._loading = false;
       },
     );
   }
 
-  public getSpools(): Array<FilamentSpool> {
-    return this.filamentSpools;
+  public get filamentSpools(): Array<FilamentSpool> {
+    return this._filamentSpools;
+  }
+
+  public get loading(): boolean {
+    return this._loading;
+  }
+
+  public getSpoolTemperatureOffsetString(spool: FilamentSpool): string {
+    return `${spool.temperatureOffset === 0 ? '±' : spool.temperatureOffset > 0 ? '+' : '-'}${Math.abs(
+      spool.temperatureOffset,
+    )}`;
   }
 }
