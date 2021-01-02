@@ -2,7 +2,7 @@
 <ng-container *ngIf="!filament.isLoading; else loadingFilament">
   <ng-container *ngIf="filament.getSpools(); else noFilaments">
     <table class="filaments">
-      <tr *ngFor="let spool of filament.getSpools()" (click)="setSpool(spool)">
+      <tr *ngFor="let spool of filament.getSpools()" (click)="setSpool(spool)" matRipple [matRippleUnbounded]="false">
         <td class="filaments__type">
           <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">
             {{ spool.material }}

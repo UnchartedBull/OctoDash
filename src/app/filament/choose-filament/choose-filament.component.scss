@@ -38,7 +38,11 @@
     padding: 0 1vw;
     display: block;
     margin-bottom: 2vh;
-    height: 10.5vh;
+    height: 11vh;
+    transition: color 0.25s;
+    box-sizing: border-box;
+    border: 0;
+    position: relative;
 
     &:first-of-type {
       margin-top: 3.5vh;
@@ -46,6 +50,46 @@
 
     &:last-of-type {
       margin-bottom: 3.5vh;
+    }
+
+    &::before,
+    &::after {
+      border: 3px solid transparent;
+      width: 0;
+      height: 0;
+      width: 0;
+      height: 0;
+      content: '';
+      position: absolute;
+      border-radius: 1vw;
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+    }
+
+    &:active::before,
+    &:active::after {
+      width: calc(100% - 6px);
+      height: calc(100% - 6px);
+    }
+
+    &:active::before {
+      border-top-color: #44bd32;
+      border-right-color: #44bd32;
+      transition: border-color 0s ease-out 0.7s, width 1s ease-out 0.7s, height 0.1s ease-out 1.7s;
+    }
+
+    &:active::after {
+      border-bottom-color: #44bd32;
+      border-left-color: #44bd32;
+      transition: border-color 0s ease-out 1.8s, width 1s ease-out 1.8s, height 0.1s ease-out 2.9s;
     }
   }
 
