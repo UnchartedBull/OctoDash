@@ -128,7 +128,7 @@ export class SettingsComponent implements OnInit {
     const options = {ssid:'',key:'', networks:[],encryption:''};
 
     const proc = this.childProcessService.childProcess.spawnSync(
-      'wpa_cli',
+      'sudo wpa_cli',
       ['-i', 'wlan0', 'status'],
       {encoding: 'utf8'}
     );
