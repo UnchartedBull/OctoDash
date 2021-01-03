@@ -23,8 +23,13 @@
     </div>
   </div>
   <div class="heating__information" *ngIf="selectedSpool">
-    <div class="heating__information-color" [ngStyle]="{ 'background-color': selectedSpool.color }"></div>
-    <span class="heating__information-name">{{ selectedSpool.vendor }}</span>
+    <div class="heating__information-type">
+      <span class="heating__information-type-box" [ngStyle]="{ 'border-color': selectedSpool.color }">
+        {{ selectedSpool.material }}
+      </span>
+    </div>
+    <span class="heating__information-name">{{ selectedSpool.displayName.split(' - ')[1] }}</span>
+    <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
     <div class="heating__information-offset-wrapper">
       <span class="heating__information-offset-value">
         {{ getSpoolTemperatureOffsetString(selectedSpool)
@@ -37,7 +42,7 @@
   <span>
     wait
     <span>{{ automaticHeatingStartSeconds }}</span>
-    s or -
+    s or
   </span>
   <a class="heating__start-heating" matRipple [matRippleUnbounded]="false" (click)="setNozzleTemperature()"> start </a>
 </div>

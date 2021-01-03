@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ConfigService } from 'src/app/config/config.service';
-import { FilamentSpool } from 'src/app/plugins';
+import { FilamentManagementComponent, FilamentSpool } from 'src/app/plugins';
 import { PrinterService, PrinterStatusAPI } from 'src/app/printer.service';
 
 @Component({
@@ -10,7 +10,6 @@ import { PrinterService, PrinterStatusAPI } from 'src/app/printer.service';
   styleUrls: ['./heat-nozzle.component.scss'],
 })
 export class HeatNozzleComponent implements OnInit, OnDestroy {
-  @Input() currentSpool: FilamentSpool;
   @Input() selectedSpool: FilamentSpool;
 
   @Output() increasePage = new EventEmitter<void>();
@@ -24,14 +23,18 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private printerService: PrinterService, private configService: ConfigService) {}
+  constructor(
+    private printerService: PrinterService,
+    private configService: ConfigService,
+    private filament: FilamentManagementComponent,
+  ) {}
 
   ngOnInit(): void {
     this.isHeating = false;
     this.automaticHeatingStartSeconds = 6;
     this.automaticHeatingStartTimer();
-    this.hotendTarget = this.currentSpool
-      ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
+    this.hotendTarget = this.filament.currentSpool
+      ? this.configService.getDefaultHotendTemperature() + this.filament.currentSpool.temperatureOffset
       : this.configService.getDefaultHotendTemperature();
     this.subscriptions.add(
       this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
@@ -78,7 +81,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
 
   private checkTemperature(): void {
     if (this.hotendTemperature >= this.hotendTarget) {
-      // this.increasePage();
+      this.increasePage.emit();
     } else {
       this.checkNozzleTemperatureTimeout = setTimeout(this.checkTemperature.bind(this), 1500);
     }

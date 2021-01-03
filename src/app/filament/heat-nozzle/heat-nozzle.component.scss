@@ -12,16 +12,23 @@
     line-height: 1rem;
     overflow: visible;
     vertical-align: top;
-    margin-top: 8vh;
+    margin-top: 6vh;
     margin-right: -5vw;
 
-    &-color {
-      width: 5vw;
-      height: 5vw;
-      border-radius: 100%;
-      margin: 0 auto;
-      margin-bottom: 3vh;
-      border: 3px solid #f5f6fa;
+    &-type {
+      padding-top: 3vh;
+      text-align: center;
+      margin-left: -2vw;
+      margin-bottom: 4vh;
+      height: 10vh;
+
+      &-box {
+        font-size: 4vw;
+        border: 4px solid;
+        padding: 1.3vh 1.5vw;
+        border-radius: 0.15rem;
+        font-weight: 500;
+      }
     }
 
     &-name {
@@ -31,20 +38,29 @@
       display: block;
     }
 
+    &-vendor {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      display: block;
+      font-size: 0.6rem;
+      margin-top: -0.2rem;
+    }
+
     &-offset {
       &-wrapper {
         text-align: center;
-        margin-top: 6vh;
+        margin-top: 2vh;
         line-height: 2rem;
       }
 
       &-indicator {
         opacity: 0.7;
-        vertical-align: 0.5rem;
+        vertical-align: 0.8rem;
       }
 
       &-value {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
     }
   }
@@ -99,7 +115,7 @@
   &__start {
     &-wrapper {
       text-align: center;
-      margin-top: 4.5vh;
+      margin-top: 2vh;
 
       > span {
         font-size: 50%;

@@ -17,10 +17,14 @@ export class ChooseFilamentComponent {
   }
 
   public setSpool(spool: FilamentSpool): void {
-    this.spoolChange.emit({ spool, skipChange: false });
+    setTimeout(() => {
+      this.spoolChange.emit({ spool, skipChange: false });
+    }, 150);
   }
 
   public setSpoolSkipChange(spool: FilamentSpool): void {
-    this.spoolChange.emit({ spool, skipChange: true });
+    setTimeout(() => {
+      this.spoolChange.emit({ spool, skipChange: true });
+    }, 150);
   }
 }

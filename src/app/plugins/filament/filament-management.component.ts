@@ -14,6 +14,7 @@ export class FilamentManagementComponent {
   private filamentPlugin: FilamentManagementPlugin;
 
   private _filamentSpools: Array<FilamentSpool>;
+  private _currentSpool: FilamentSpool;
 
   private _loading = true;
 
@@ -34,10 +35,22 @@ export class FilamentManagementComponent {
         this._loading = false;
       },
     );
+    this.filamentPlugin.getCurrentSpool().subscribe(
+      (spool: FilamentSpool): void => {
+        this._currentSpool = spool;
+      },
+      (error: HttpErrorResponse): void => {
+        this.notificationService.setError("Can't load active spool!", error.message);
+      },
+    );
   }
 
   public get filamentSpools(): Array<FilamentSpool> {
     return this._filamentSpools;
+  }
+
+  public get currentSpool(): FilamentSpool {
+    return this._currentSpool;
   }
 
   public get loading(): boolean {
