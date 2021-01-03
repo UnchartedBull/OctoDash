@@ -35,6 +35,8 @@ export class SettingsComponent implements OnInit {
     encryption: true
   }];
   public currentNet: any = {};
+  public connecting = false;
+  public status = '';
   public customActionsPosition = [
     'Top Left',
     'Top Right',
@@ -73,8 +75,11 @@ export class SettingsComponent implements OnInit {
   }
 
   public scan_connect(): void {
+    this.connecting = true;
+    this.status = 'Scanning';
     this.wifiList = this.scanWirelessNetworks();
     this.changePage(5, 0, 'forward');
+    this.connecting = false;
   }
 
   public hideSettings(): void {
@@ -134,7 +139,7 @@ export class SettingsComponent implements OnInit {
 
     const proc = this.childProcessService.childProcess.spawnSync(
       'sudo wpa_cli',
-      ['-i', 'wlan0', 'status'],
+      ['-i', 'wlp58s0', 'status'],
       {encoding: 'utf8', shell: true}
     );
 
@@ -237,7 +242,7 @@ export class SettingsComponent implements OnInit {
     console.log('1');
     let proc = this.childProcessService.childProcess.spawnSync(
       'sudo wpa_cli',
-      ['-i', 'wlan0', 'list_networks'],
+      ['-i', 'wlp58s0', 'list_networks'],
       {encoding: 'utf8',
       shell: true}
     );
@@ -253,7 +258,7 @@ export class SettingsComponent implements OnInit {
         console.log('2');
         proc = this.childProcessService.childProcess.spawnSync(
           'sudo wpa_cli',
-          ['-i', 'wlan0', 'remove_network', id],
+          ['-i', 'wlp58s0', 'remove_network', id],
           {shell: true}
         );
         if (proc.status !== 0) {
@@ -272,7 +277,7 @@ export class SettingsComponent implements OnInit {
     if (mode === 'sta') {
       proc = this.childProcessService.childProcess.spawnSync(
         'sudo wpa_cli',
-        ['-i', 'wlan0', 'add_network'],
+        ['-i', 'wlp58s0', 'add_network'],
         {encoding: 'utf8', shell: true}
       );
       if (proc.status !== 0) {
@@ -288,7 +293,7 @@ export class SettingsComponent implements OnInit {
       proc = this.childProcessService.childProcess.spawnSync(
         'sudo wpa_cli',
         // the ssid argument MUST be quoted
-        ['-i', 'wlan0', 'set_network', id, 'ssid', `'"${options.ssid}"'`],
+        ['-i', 'wlp58s0', 'set_network', id, 'ssid', `'"${options.ssid}"'`],
         {shell:true}
       );
       if (proc.status !== 0) {
@@ -303,13 +308,13 @@ export class SettingsComponent implements OnInit {
         proc = this.childProcessService.childProcess.spawnSync(
           'sudo wpa_cli',
           // the psk argument MUST be quoted
-          ['-i', 'wlan0', 'set_network', id, 'psk', `'"${options.key}"'`],
+          ['-i', 'wlp58s0', 'set_network', id, 'psk', `'"${options.key}"'`],
           {shell:true}
         );
       } else {
         proc = this.childProcessService.childProcess.spawnSync(
           'sudo wpa_cli',
-          ['-i', 'wlan0', 'set_network', id, 'key_mgmt', 'NONE'],
+          ['-i', 'wlp58s0', 'set_network', id, 'key_mgmt', 'NONE'],
           {shell:true}
         );
       }
@@ -320,7 +325,7 @@ export class SettingsComponent implements OnInit {
       console.log('10');
       proc = this.childProcessService.childProcess.spawnSync(
         'sudo wpa_cli',
-        ['-i', 'wlan0', 'enable_network', id],
+        ['-i', 'wlp58s0', 'enable_network', id],
         {shell:true}
       );
       if (proc.status !== 0) {
@@ -329,7 +334,7 @@ export class SettingsComponent implements OnInit {
       console.log('11');
       proc = this.childProcessService.childProcess.spawnSync(
         'sudo wpa_cli',
-        ['-i', 'wlan0', 'save_config'],
+        ['-i', 'wlp58s0', 'save_config'],
         {shell:true}
       );
       if (proc.status !== 0) {
@@ -356,10 +361,13 @@ export class SettingsComponent implements OnInit {
   }
 
   public connectNetwork(ssid1, pass) {
+    this.connecting = true;
+    this.status = 'Connecting';
     console.log(pass);
     this.setWirelessMode(true, 'sta', {ssid: ssid1, key: pass});
     this.wifiList = this.scanWirelessNetworks();
     this.changePage(5, 6, 'backward');
+    this.connecting = false;
   }
 
   public defineNetwork(ssid, pass) {

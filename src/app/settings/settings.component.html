@@ -1,4 +1,5 @@
 <div class="settings">
+  <div class="standby__error loading-dots" *ngIf="connecting">{{ status }}</div>
   <div class="settings-wrapper" [ngClass]="{ 'settings-wrapper-fadeout': fadeOutAnimation }">
     <div class="settings-container">
       <img src="assets/error.svg" class="settings__close" (click)="hideSettings()" />
