@@ -69,8 +69,12 @@ export class SettingsComponent implements OnInit {
         this.settingsWifi.nativeElement,
         this.settingsWifiConnect.nativeElement,
       ];
-      this.wifiList = this.scanWirelessNetworks();
     }, 400);
+  }
+
+  public scan_connect(): void {
+    this.wifiList = this.scanWirelessNetworks();
+    this.changePage(5, 0, 'forward');
   }
 
   public hideSettings(): void {
@@ -354,7 +358,7 @@ export class SettingsComponent implements OnInit {
   public connectNetwork(ssid1, pass) {
     console.log(pass);
     this.setWirelessMode(true, 'sta', {ssid: ssid1, key: pass});
-    this.getWirelessStatus();
+    this.wifiList = this.scanWirelessNetworks();
     this.changePage(5, 6, 'backward');
   }
 
