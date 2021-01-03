@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit {
     quality: 0,
     encryption: true
   }];
+  public currentNet: any = {};
   public customActionsPosition = [
     'Top Left',
     'Top Right',
@@ -125,12 +126,12 @@ export class SettingsComponent implements OnInit {
   public getWirelessStatus(): unknown {
     let enabled = false;
     const mode = 'sta';
-    const options = {ssid:'',key:'', networks:[],encryption:''};
+    const options = {ssid:'',key:'', networks:[],encryption:'',ip:''};
 
     const proc = this.childProcessService.childProcess.spawnSync(
       'sudo wpa_cli',
       ['-i', 'wlan0', 'status'],
-      {encoding: 'utf8'}
+      {encoding: 'utf8', shell: true}
     );
 
     if (proc.status !== 0) {
@@ -146,8 +147,12 @@ export class SettingsComponent implements OnInit {
         case 'ssid':
           options.ssid = line.substring(5);
           break;
+        case 'ip_address':
+          options.ip = line.substring(11);
+          break;
       }
     }
+    this.currentNet = options;
     return { enabled, mode, options };
   }
 
@@ -180,7 +185,7 @@ export class SettingsComponent implements OnInit {
             'encryption' in cell &&
             cell.ssid.length > 0) {
           if (status.mode === 'sta' && status.options.networks &&
-              status.options.networks.includes(cell.ssid)) {
+              status.options.ssid === cell.ssid) {
             cell.configured = true;
             cell.connected = status.enabled;
           } else {
@@ -326,6 +331,22 @@ export class SettingsComponent implements OnInit {
       if (proc.status !== 0) {
         return false;
       }
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo dhclient',
+        ['-r'],
+        {shell:true}
+      );
+      if (proc.status !== 0) {
+        return false;
+      }
+      proc = this.childProcessService.childProcess.spawnSync(
+        'sudo dhclient',
+        ['-4'],
+        {shell:true}
+      );
+      if (proc.status !== 0) {
+        return false;
+      }
     }
     return true;
   }
@@ -333,6 +354,8 @@ export class SettingsComponent implements OnInit {
   public connectNetwork(ssid1, pass) {
     console.log(pass);
     this.setWirelessMode(true, 'sta', {ssid: ssid1, key: pass});
+    this.getWirelessStatus();
+    this.changePage(5, 6, 'backward');
   }
 
   public defineNetwork(ssid, pass) {

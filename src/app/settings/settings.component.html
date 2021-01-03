@@ -668,10 +668,19 @@
         </span>
         <div class="settings__scroll">
           <ul>
+            <li class="settings__text" style="white-space: nowrap; text-overflow: ellipsis;"> 
+              <span>SSID: {{currentNet.ssid}}</span>
+            </li>
+            <li class="settings__text" style="white-space: nowrap; text-overflow: ellipsis;"> 
+              <span>IP: {{currentNet.ip}}</span>
+            </li>
+          </ul>
+          <br>
+          <ul>
             <li *ngFor="let net of wifiList" class="settings__text" style="white-space: nowrap; text-overflow: ellipsis;">
-              <fa-icon [icon]="['fas', 'wifi']" size="sm"></fa-icon>
-              <span (click)="defineNetwork(net.ssid, true)" *ngIf="net.encryption"> {{net.ssid}}</span>
-              <span (click)="defineNetwork(net.ssid, false)" *ngIf="!net.encryption"> {{net.ssid}}</span>
+              <fa-icon [icon]="['fas', 'wifi']" size="sm" *ngIf="!net.connected"></fa-icon>
+              <span (click)="defineNetwork(net.ssid, true)" *ngIf="net.encryption && !net.connected"> {{net.ssid}}</span>
+              <span (click)="defineNetwork(net.ssid, false)" *ngIf="!net.encryption && !net.connected"> {{net.ssid}}</span>
             </li>
           </ul>
         </div>
