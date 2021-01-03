@@ -20,7 +20,6 @@ export class FilamentManagementComponent {
   constructor(private injector: Injector, private notificationService: NotificationService) {
     this.filamentPlugin = this.injector.get(FilamentManagerService);
     this.loadSpools();
-    console.log('INSTANTIATED');
   }
 
   private loadSpools(): void {
@@ -43,11 +42,5 @@ export class FilamentManagementComponent {
 
   public get loading(): boolean {
     return this._loading;
-  }
-
-  public getSpoolTemperatureOffsetString(spool: FilamentSpool): string {
-    return `${spool.temperatureOffset === 0 ? '±' : spool.temperatureOffset > 0 ? '+' : '-'}${Math.abs(
-      spool.temperatureOffset,
-    )}`;
   }
 }

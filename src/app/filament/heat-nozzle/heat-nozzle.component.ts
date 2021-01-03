@@ -1,0 +1,97 @@
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ConfigService } from 'src/app/config/config.service';
+import { FilamentSpool } from 'src/app/plugins';
+import { PrinterService, PrinterStatusAPI } from 'src/app/printer.service';
+
+@Component({
+  selector: 'app-filament-heat-nozzle',
+  templateUrl: './heat-nozzle.component.html',
+  styleUrls: ['./heat-nozzle.component.scss'],
+})
+export class HeatNozzleComponent implements OnInit, OnDestroy {
+  @Input() currentSpool: FilamentSpool;
+  @Input() selectedSpool: FilamentSpool;
+
+  @Output() increasePage = new EventEmitter<void>();
+
+  public hotendTarget: number;
+  public hotendTemperature: number;
+  public automaticHeatingStartSeconds: number;
+  public isHeating: boolean;
+
+  private startHeatingTimeout: ReturnType<typeof setTimeout>;
+  private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private printerService: PrinterService, private configService: ConfigService) {}
+
+  ngOnInit(): void {
+    this.isHeating = false;
+    this.automaticHeatingStartSeconds = 6;
+    this.automaticHeatingStartTimer();
+    this.hotendTarget = this.currentSpool
+      ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
+      : this.configService.getDefaultHotendTemperature();
+    this.subscriptions.add(
+      this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
+        this.hotendTemperature = printerStatus.nozzle.current;
+      }),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.clearTimeouts();
+    this.subscriptions.unsubscribe();
+  }
+
+  public changeHotendTarget(value: number): void {
+    this.hotendTarget = this.hotendTarget + value;
+    if (this.hotendTarget < 0) {
+      this.hotendTarget = 0;
+    }
+    if (this.hotendTarget > 999) {
+      this.hotendTarget = 999;
+    }
+    if (!this.isHeating) {
+      this.automaticHeatingStartSeconds = 5;
+    } else {
+      this.setNozzleTemperature();
+    }
+  }
+
+  private automaticHeatingStartTimer(): void {
+    this.automaticHeatingStartSeconds--;
+    if (this.automaticHeatingStartSeconds === 0) {
+      this.setNozzleTemperature();
+    } else {
+      this.startHeatingTimeout = setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
+    }
+  }
+
+  public setNozzleTemperature(): void {
+    this.isHeating = true;
+    this.clearTimeouts();
+    this.printerService.setTemperatureHotend(this.hotendTarget);
+    this.checkNozzleTemperatureTimeout = setTimeout(this.checkTemperature.bind(this), 1500);
+  }
+
+  private checkTemperature(): void {
+    if (this.hotendTemperature >= this.hotendTarget) {
+      // this.increasePage();
+    } else {
+      this.checkNozzleTemperatureTimeout = setTimeout(this.checkTemperature.bind(this), 1500);
+    }
+  }
+
+  private clearTimeouts() {
+    clearTimeout(this.startHeatingTimeout);
+    clearTimeout(this.checkNozzleTemperatureTimeout);
+  }
+
+  public getSpoolTemperatureOffsetString(spool: FilamentSpool): string {
+    return `${spool.temperatureOffset === 0 ? '±' : spool.temperatureOffset > 0 ? '+' : '-'}${Math.abs(
+      spool.temperatureOffset,
+    )}`;
+  }
+}

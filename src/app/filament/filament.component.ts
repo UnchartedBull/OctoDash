@@ -17,8 +17,8 @@ export class FilamentComponent implements OnInit {
   public page: number;
   private hotendPreviousTemperature = 0;
 
-  private selectedSpool: FilamentSpool;
-  private currentSpool: FilamentSpool;
+  public selectedSpool: FilamentSpool;
+  public currentSpool: FilamentSpool;
 
   private timeout: ReturnType<typeof setTimeout>;
   private timeout2: ReturnType<typeof setTimeout>;
@@ -51,14 +51,9 @@ export class FilamentComponent implements OnInit {
     } else {
       this.setPage(1);
     }
-    // this.hotendTarget = this.configService.getDefaultHotendTemperature();
-    // this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-    //   this.hotendTemperature = printerStatus.nozzle.current;
-    // });
   }
 
   public increasePage(): void {
-    console.log(this.selectedSpool);
     if (this.page < this.totalPages) {
       this.setPage(this.page + 1);
     } else if (this.page === this.totalPages) {
@@ -89,7 +84,7 @@ export class FilamentComponent implements OnInit {
     if (page === 1) {
       this.isHeating = false;
       this.automaticHeatingStartSeconds = 6;
-      this.automaticHeatingStartTimer();
+      // this.automaticHeatingStartTimer();
     } else if (page === 2) {
       if (this.getFeedLength() === 0) {
         this.setPage(3);
@@ -222,52 +217,6 @@ export class FilamentComponent implements OnInit {
   }
 
   // NOZZLE HEATING
-
-  public changeHotendTarget(value: number): void {
-    this.hotendTarget = this.hotendTarget + value;
-    if (this.hotendTarget < 0) {
-      this.hotendTarget = 0;
-    }
-    if (this.hotendTarget > 999) {
-      this.hotendTarget = 999;
-    }
-    if (!this.isHeating) {
-      this.automaticHeatingStartSeconds = 5;
-    } else {
-      this.setNozzleTemperature();
-    }
-  }
-
-  private automaticHeatingStartTimer(): void {
-    this.automaticHeatingStartSeconds--;
-    if (this.automaticHeatingStartSeconds === 0) {
-      this.setNozzleTemperature();
-    } else {
-      this.timeout = setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
-    }
-  }
-
-  public setNozzleTemperature(): void {
-    if (this.page === 1) {
-      this.isHeating = true;
-      this.printerService.setTemperatureHotend(this.hotendTarget);
-      if (this.timeout) {
-        clearTimeout(this.timeout);
-      }
-      if (this.timeout2) {
-        clearTimeout(this.timeout2);
-      }
-      this.timeout2 = setTimeout(this.checkTemperature.bind(this), 1500);
-    }
-  }
-
-  private checkTemperature(): void {
-    if (this.hotendTemperature >= this.hotendTarget) {
-      this.increasePage();
-    } else {
-      this.timeout2 = setTimeout(this.checkTemperature.bind(this), 1500);
-    }
-  }
 
   public increasePurgeAmount(length: number): void {
     this.purgeAmount += length;

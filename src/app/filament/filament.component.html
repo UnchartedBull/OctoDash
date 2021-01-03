@@ -19,80 +19,13 @@
 
 <div class="filament">
   <app-filament-choose (spoolChange)="setSpool($event)" *ngIf="page === 0"></app-filament-choose>
-  <!-- <div *ngIf="page === 1">
-    <span class="filament-heading">heating the nozzle</span>
-    <div class="filament-heating__center">
-      <div class="filament-heating__controller">
-        <div class="filament-heating__controller-row">
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(1)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            +1
-          </div>
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(10)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            +10
-          </div>
-        </div>
-        <div class="filament-heating__controller-value" colspan="2">
-          {{ isHeating ? hotendTemperature : hotendTarget
-          }}<span class="filament-heating__controller-value-unit">°C</span>
-          <span class="filament-heating__controller-current" *ngIf="isHeating">
-            /{{ hotendTarget }}<span>°C</span>
-          </span>
-        </div>
-        <div class="filament-heating__controller-row">
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(-1)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            -1
-          </div>
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(-10)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            -10
-          </div>
-        </div>
-      </div>
-      <div class="filament-heating__information" *ngIf="selectedSpool">
-        <div class="filament-heating__information-color" [ngStyle]="{ 'background-color': selectedSpool.color }"></div>
-        <span class="filament-heating__information-name">{{ selectedSpool.profile.vendor }}</span>
-        <div class="filament-heating__information-offset-wrapper">
-          <span class="filament-heating__information-offset-value">
-            {{ getSpoolTemperatureOffset() }}<span class="filament-heating__information-offset-indicator">°C</span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="filament-heating__start-wrapper" *ngIf="!isHeating">
-      <span>
-        wait
-        <span>{{ automaticHeatingStartSeconds }}</span>
-        s or -
-      </span>
-      <a
-        class="filament-heating__start-heating"
-        matRipple
-        [matRippleUnbounded]="false"
-        (click)="setNozzleTemperature()"
-      >
-        start
-      </a>
-    </div>
-  </div>
+  <app-filament-heat-nozzle
+    (increasePage)="increasePage()"
+    [currentSpool]="currentSpool"
+    [selectedSpool]="selectedSpool"
+    *ngIf="page === 1"
+  ></app-filament-heat-nozzle>
+  <!--
   <div *ngIf="page === 2">
     <span class="filament-heading">unloading filament</span>
     <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">

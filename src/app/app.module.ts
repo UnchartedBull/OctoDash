@@ -26,6 +26,7 @@ import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { FilamentComponent } from './filament/filament.component';
+import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.component';
 import { FilesComponent } from './files/files.component';
 import { JobService } from './job.service';
 import { JobStatusComponent } from './job-status/job-status.component';
@@ -73,6 +74,7 @@ import { URLSafePipe } from './url.pipe';
     UpdateComponent,
     URLSafePipe,
     WelcomeComponent,
+    HeatNozzleComponent,
   ],
   imports: [
     AppRoutingModule,
