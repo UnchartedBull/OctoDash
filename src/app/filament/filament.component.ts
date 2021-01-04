@@ -19,7 +19,6 @@ export class FilamentComponent implements OnInit {
   private hotendPreviousTemperature = 0;
 
   public selectedSpool: FilamentSpool;
-  public currentSpool: FilamentSpool;
 
   public constructor(
     private router: Router,
@@ -96,5 +95,9 @@ export class FilamentComponent implements OnInit {
     } else {
       this.increasePage();
     }
+  }
+
+  public get currentSpool(): FilamentSpool {
+    return this.filament.currentSpool;
   }
 }

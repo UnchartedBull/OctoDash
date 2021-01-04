@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Injector } from '@angular/core';
+import { ConfigService } from 'src/app/config/config.service';
 
 import { NotificationService } from '../../notification/notification.service';
 import { FilamentManagementPlugin, FilamentSpool } from './filament.interface';
@@ -18,9 +19,15 @@ export class FilamentManagementComponent {
 
   private _loading = true;
 
-  constructor(private injector: Injector, private notificationService: NotificationService) {
-    this.filamentPlugin = this.injector.get(FilamentManagerService);
-    this.loadSpools();
+  constructor(
+    private injector: Injector,
+    private notificationService: NotificationService,
+    private configService: ConfigService,
+  ) {
+    if (this.configService.isFilamentManagerEnabled()) {
+      this.filamentPlugin = this.injector.get(FilamentManagerService);
+      this.loadSpools();
+    }
   }
 
   private loadSpools(): void {

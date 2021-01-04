@@ -4,9 +4,12 @@
 </ng-container>
 
 <ng-container *ngIf="selectedSpool; else noSpoolSelected">
-  <div style="margin-top: 6vh">
+  <div style="margin-top: 3vh">
     <div class="heating__information-type">
-      <span class="heating__information-type-box" [ngStyle]="{ 'border-color': selectedSpool.color }">
+      <span
+        class="heating__information-type-box"
+        [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
+      >
         {{ selectedSpool.material }}
       </span>
     </div>

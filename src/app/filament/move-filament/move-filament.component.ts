@@ -52,8 +52,8 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
     setTimeout((): void => {
       const unloadingProgressBar = document.getElementById('filamentMoveBar');
-      unloadingProgressBar.style.backgroundColor = this.currentSpool ? this.currentSpool.color : '#44bd32';
       const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
+      unloadingProgressBar.style.backgroundColor = this.currentSpool ? this.currentSpool.color : '#44bd32';
       unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
       setTimeout((): void => {
         unloadingProgressBar.style.width = '0vw';
