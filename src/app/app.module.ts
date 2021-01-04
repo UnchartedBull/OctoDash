@@ -46,6 +46,7 @@ import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
+import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ChangeFilamentComponent } from './filament/change-filament/change-filam
     HeatNozzleComponent,
     MoveFilamentComponent,
     ChangeFilamentComponent,
+    PurgeFilamentComponent,
   ],
   imports: [
     AppRoutingModule,

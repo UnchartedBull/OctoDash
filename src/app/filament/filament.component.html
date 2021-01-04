@@ -1,4 +1,4 @@
-<table class="top-bar">
+<table class="top-bar" *ngIf="!showCheckmark">
   <tr>
     <td class="top-bar__back" (click)="decreasePage()" matRipple [matRippleUnbounded]="false">
       <img src="assets/back.svg" class="top-bar__back-icon" />
@@ -42,38 +42,14 @@
     [selectedSpool]="selectedSpool"
     [action]="'load'"
   ></app-filament-move-filament>
-  <!--
-  <div *ngIf="page === 2">
-    <span class="filament-heading">unloading filament</span>
-    <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">
-      <div class="filament__progress-bar" id="filamentUnloadBar"></div>
-    </div>
-    <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
-    <div class="filament-move__wrapper">
-      <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false" (click)="stopExtruderMovement()">stop</a>
-    </div>
+  <app-filament-purge-filament
+    *ngIf="page === 5 && !showCheckmark"
+    (purgeDone)="setSpoolSelection()"
+  ></app-filament-purge-filament>
+  <div *ngIf="showCheckmark">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+      <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+    </svg>
   </div>
-  <div *ngIf="page === 3">
-    <span class="filament-heading">load new filament</span>
-    <span class="filament-move__speed">Only put a little filament in, I'll pull in the rest.</span>
-    <div *ngIf="selectedSpool" style="margin-top: 15vh">
-      <div class="filament-heating__information-color" [ngStyle]="{ 'background-color': selectedSpool.color }"></div>
-      <span class="filament-heating__information-name">{{ selectedSpool.displayName }}</span>
-    </div>
-    <div *ngIf="!selectedSpool" style="margin-top: 15vh">
-      <span class="filament-heating__information-name">I'll wait for you.</span>
-    </div>
-    <div class="filament-move__wrapper">
-      <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage()">done</a>
-    </div>
-  </div>
-  <div *ngIf="page === 4"> </div>
-  <div *ngIf="page === 5">
-    <span class="filament-heading">purging filament</span>
-    <div class="filament-purge__amount">{{ purgeAmount }}mm</div>
-    <div class="filament-move__wrapper">
-      <a class="filament-purge__more" matRipple [matRippleUnbounded]="false" (click)="increasePurgeAmount(10)">+10mm</a>
-      <a class="filament-purge__done" matRipple [matRippleUnbounded]="false" (click)="setSpoolSelection()">done</a>
-    </div>
-  </div> -->
 </div>

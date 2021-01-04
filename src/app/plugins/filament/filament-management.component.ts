@@ -56,4 +56,33 @@ export class FilamentManagementComponent {
   public get loading(): boolean {
     return this._loading;
   }
+
+  public setSpool(spool: FilamentSpool): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.filamentPlugin.setSpool(spool).subscribe(
+        (): void => {
+          this.filamentPlugin.getCurrentSpool().subscribe(
+            (spoolRemote: FilamentSpool): void => {
+              if (spool.id === spoolRemote.id) resolve();
+              else {
+                this.notificationService.setError(
+                  `Spool IDs didn't match`,
+                  `Can't change spool. Please change spool manually in the OctoPrint UI.`,
+                );
+                reject();
+              }
+            },
+            (error): void => {
+              this.notificationService.setError("Can't set new spool!", error.message);
+              reject();
+            },
+          );
+        },
+        (error): void => {
+          this.notificationService.setError("Can't set new spool!", error.message);
+          reject();
+        },
+      );
+    });
+  }
 }

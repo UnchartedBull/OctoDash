@@ -1,10 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { NotificationService } from '../../notification/notification.service';
 import { FilamentManagementPlugin, FilamentSpool } from './filament.interface';
 
 const colorRegexp = /\((.*)\)$/g;
@@ -13,13 +12,7 @@ const colorRegexp = /\((.*)\)$/g;
   providedIn: 'root',
 })
 export class FilamentManagerService implements FilamentManagementPlugin {
-  private httpPOSTRequest: Subscription;
-
-  public constructor(
-    private configService: ConfigService,
-    private notificationService: NotificationService,
-    private http: HttpClient,
-  ) {}
+  public constructor(private configService: ConfigService, private http: HttpClient) {}
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http
@@ -79,41 +72,21 @@ export class FilamentManagerService implements FilamentManagementPlugin {
     };
   }
 
-  public setCurrentSpool(spool: FilamentManagerSpool): Promise<void> {
-    return new Promise((resolve, reject): void => {
-      const setSpoolBody: FilamentManagerSelectionPatch = {
-        selection: {
-          tool: 0,
-          spool: spool,
+  public setSpool(spool: FilamentSpool): Observable<void> {
+    const setSpoolBody: FilamentManagerSelectionPatch = {
+      selection: {
+        tool: 0,
+        spool: {
+          id: spool.id,
         },
-      };
-      if (this.httpPOSTRequest) {
-        this.httpPOSTRequest.unsubscribe();
-      }
-      this.httpPOSTRequest = this.http
-        .patch(
-          this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
-          setSpoolBody,
-          this.configService.getHTTPHeaders(),
-        )
-        .subscribe(
-          (selection: FilamentManagerSelectionConfirm): void => {
-            if (selection.selection.spool.id === spool.id) {
-              resolve();
-            } else {
-              this.notificationService.setError(
-                `Spool IDs didn't match`,
-                `Can't change spool. Please change spool manually in the OctoPrint UI.`,
-              );
-              reject();
-            }
-          },
-          (error: HttpErrorResponse): void => {
-            this.notificationService.setError("Can't set new spool!", error.message);
-            reject();
-          },
-        );
-    });
+      },
+    };
+
+    return this.http.patch<void>(
+      this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
+      setSpoolBody,
+      this.configService.getHTTPHeaders(),
+    );
   }
 }
 
@@ -128,12 +101,10 @@ interface FilamentManagerSelections {
 interface FilamentManagerSelectionPatch {
   selection: {
     tool: number;
-    spool: FilamentManagerSpool;
+    spool: {
+      id: number;
+    };
   };
-}
-
-interface FilamentManagerSelectionConfirm {
-  selection: FilamentManagerSelection;
 }
 
 interface FilamentManagerSelection {

@@ -15,20 +15,17 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
 export class FilamentComponent implements OnInit {
   private totalPages = 5;
   public page: number;
+  public showCheckmark = false;
   private hotendPreviousTemperature = 0;
 
   public selectedSpool: FilamentSpool;
   public currentSpool: FilamentSpool;
 
-  private timeout: ReturnType<typeof setTimeout>;
-  private timeout2: ReturnType<typeof setTimeout>;
-
-  public purgeAmount: number;
-
   public constructor(
     private router: Router,
     private configService: ConfigService,
     private printerService: PrinterService,
+    private filament: FilamentManagementComponent,
   ) {
     this.printerService
       .getObservable()
@@ -69,10 +66,6 @@ export class FilamentComponent implements OnInit {
   }
 
   private setPage(page: number): void {
-    if (page === 5) {
-      this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();
-      this.purgeFilament(this.purgeAmount);
-    }
     if (page > 0) {
       setTimeout((): void => {
         document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
@@ -91,22 +84,17 @@ export class FilamentComponent implements OnInit {
   }
 
   public setSpoolSelection(): void {
-    // this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
-    // if (this.selectedSpool) {
-    //   this.filamentManagerService.setCurrentSpool(this.selectedSpool).finally(this.increasePage.bind(this));
-    // } else {
-    //   this.increasePage();
-    // }
-  }
-
-  // NOZZLE HEATING
-
-  public increasePurgeAmount(length: number): void {
-    this.purgeAmount += length;
-    this.purgeFilament(length);
-  }
-
-  public purgeFilament(length: number): void {
-    this.printerService.extrude(length, this.configService.getFeedSpeedSlow());
+    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
+    if (this.selectedSpool) {
+      this.filament
+        .setSpool(this.selectedSpool)
+        .then((): void => {
+          this.showCheckmark = true;
+          setTimeout(this.increasePage.bind(this), 1500);
+        })
+        .catch(this.increasePage.bind(this));
+    } else {
+      this.increasePage();
+    }
   }
 }
