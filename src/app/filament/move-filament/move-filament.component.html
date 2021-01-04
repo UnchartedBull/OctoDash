@@ -1,0 +1,12 @@
+<span class="filament-heading">loading filament</span>
+<div class="move-filament__progress-bar-wrapper">
+  <div
+    class="move-filament__progress-bar"
+    id="filamentMoveBar"
+    [ngStyle]="{ width: getInitialProgressBarWidth() }"
+  ></div>
+</div>
+<span class="move-filament__speed">{{ feedSpeed }} mm/s</span>
+<div class="move-filament__wrapper">
+  <a class="move-filament__cancel" matRipple [matRippleUnbounded]="false" (click)="stopExtruderMovement()">stop</a>
+</div>

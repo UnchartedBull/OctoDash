@@ -39,30 +39,6 @@
     font-size: 1rem;
   }
 
-  &-move {
-    &__speed {
-      font-size: 60%;
-      opacity: 0.8;
-      font-style: italic;
-      display: block;
-      text-align: center;
-    }
-
-    &__wrapper {
-      text-align: center;
-      position: absolute;
-      width: 96vw;
-      bottom: 5vh;
-    }
-
-    &__cancel {
-      display: inline-block;
-      background-color: #c23616;
-      padding: 2vh 2vw;
-      border-radius: 8px;
-    }
-  }
-
   &__done {
     display: inline-block;
     background-color: #44bd32;

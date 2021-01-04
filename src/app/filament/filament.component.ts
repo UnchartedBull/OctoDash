@@ -23,13 +23,6 @@ export class FilamentComponent implements OnInit {
   private timeout: ReturnType<typeof setTimeout>;
   private timeout2: ReturnType<typeof setTimeout>;
 
-  public hotendTarget: number;
-  public hotendTemperature: number;
-  public automaticHeatingStartSeconds: number;
-  public isHeating: boolean;
-
-  private feedSpeedSlow = false;
-
   public purgeAmount: number;
 
   public constructor(
@@ -79,18 +72,11 @@ export class FilamentComponent implements OnInit {
     clearTimeout(this.timeout);
     clearTimeout(this.timeout2);
     if (this.page === 4) {
-      this.feedSpeedSlow = false;
-    }
-    if (page === 1) {
-      this.isHeating = false;
-      this.automaticHeatingStartSeconds = 6;
-      // this.automaticHeatingStartTimer();
     } else if (page === 2) {
       if (this.getFeedLength() === 0) {
         this.setPage(3);
         return;
       } else {
-        this.unloadSpool();
       }
     } else if (page === 3) {
       if (this.configService.useM600()) {
@@ -103,7 +89,6 @@ export class FilamentComponent implements OnInit {
         this.setPage(5);
         return;
       } else {
-        this.loadSpool();
       }
     } else if (page === 5) {
       this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();
@@ -132,52 +117,6 @@ export class FilamentComponent implements OnInit {
     return this.configService.useM600() ? 0 : this.configService.getFeedLength();
   }
 
-  public getFeedSpeed(): number {
-    if (this.feedSpeedSlow) {
-      return this.configService.getFeedSpeedSlow();
-    } else {
-      return this.configService.getFeedSpeed();
-    }
-  }
-
-  private unloadSpool(): void {
-    // this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
-    // setTimeout((): void => {
-    //   const unloadingProgressBar = document.getElementById('filamentUnloadBar');
-    //   unloadingProgressBar.style.backgroundColor = this.getCurrentSpoolColor();
-    //   const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
-    //   unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
-    //   setTimeout((): void => {
-    //     unloadingProgressBar.style.width = '0vw';
-    //     this.timeout = setTimeout((): void => {
-    //       this.increasePage();
-    //     }, unloadTime * 1000 + 500);
-    //   }, 200);
-    // }, 0);
-  }
-
-  private loadSpool(): void {
-    // const loadTimeFast = (this.getFeedLength() * 0.75) / this.configService.getFeedSpeed();
-    // const loadTimeSlow = (this.getFeedLength() * 0.17) / this.configService.getFeedSpeedSlow();
-    // const loadTime = loadTimeFast + loadTimeSlow + 0.5;
-    // this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
-    // setTimeout((): void => {
-    //   const loadingProgressBar = document.getElementById('filamentLoadBar');
-    //   loadingProgressBar.style.backgroundColor = this.getSelectedSpoolColor();
-    //   loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
-    //   setTimeout((): void => {
-    //     loadingProgressBar.style.width = '50vw';
-    //     this.timeout = setTimeout((): void => {
-    //       this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
-    //       this.feedSpeedSlow = true;
-    //       this.timeout2 = setTimeout((): void => {
-    //         this.increasePage();
-    //       }, loadTimeSlow * 1000 + 400);
-    //     }, loadTimeFast * 1000 + 200);
-    //   }, 200);
-    // }, 0);
-  }
-
   public setSpoolSelection(): void {
     // this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
     // if (this.selectedSpool) {
@@ -185,27 +124,6 @@ export class FilamentComponent implements OnInit {
     // } else {
     //   this.increasePage();
     // }
-  }
-
-  public stopExtruderMovement(): void {
-    this.printerService.stopMotors();
-    clearTimeout(this.timeout);
-    clearTimeout(this.timeout2);
-
-    let bar: HTMLElement;
-    const wrapper = (document.getElementsByClassName(
-      'filament__progress-bar-wrapper-wide',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    )[0] as any) as HTMLElement;
-
-    if (document.getElementById('filamentLoadBar')) {
-      bar = document.getElementById('filamentLoadBar');
-    } else {
-      bar = document.getElementById('filamentUnloadBar');
-    }
-
-    bar.style.width = Math.floor(bar.getBoundingClientRect().width) + 'px';
-    wrapper.style.borderColor = '#c23616';
   }
 
   private disableExtruderStepper(): void {

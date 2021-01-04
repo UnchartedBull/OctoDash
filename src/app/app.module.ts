@@ -44,6 +44,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
+import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { URLSafePipe } from './url.pipe';
     URLSafePipe,
     WelcomeComponent,
     HeatNozzleComponent,
+    MoveFilamentComponent,
   ],
   imports: [
     AppRoutingModule,
