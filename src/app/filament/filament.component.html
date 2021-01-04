@@ -31,6 +31,11 @@
     [currentSpool]="currentSpool"
     [action]="'unload'"
   ></app-filament-move-filament>
+  <app-filament-change-filament
+    *ngIf="page === 3"
+    (increasePage)="increasePage()"
+    [selectedSpool]="selectedSpool"
+  ></app-filament-change-filament>
   <app-filament-move-filament
     *ngIf="page === 4"
     (increasePage)="increasePage()"

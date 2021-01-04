@@ -6,7 +6,7 @@ import { PrinterService } from 'src/app/printer.service';
 @Component({
   selector: 'app-filament-move-filament',
   templateUrl: './move-filament.component.html',
-  styleUrls: ['./move-filament.component.scss'],
+  styleUrls: ['./move-filament.component.scss', '../filament.component.scss'],
 })
 export class MoveFilamentComponent implements OnInit, OnDestroy {
   @Input() currentSpool: FilamentSpool;

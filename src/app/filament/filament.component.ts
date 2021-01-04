@@ -69,37 +69,16 @@ export class FilamentComponent implements OnInit {
   }
 
   private setPage(page: number): void {
-    clearTimeout(this.timeout);
-    clearTimeout(this.timeout2);
-    if (this.page === 4) {
-    } else if (page === 2) {
-      if (this.getFeedLength() === 0) {
-        this.setPage(3);
-        return;
-      } else {
-      }
-    } else if (page === 3) {
-      if (this.configService.useM600()) {
-        this.initiateM600FilamentChange();
-      } else {
-        this.disableExtruderStepper();
-      }
-    } else if (page === 4) {
-      if (this.getFeedLength() === 0) {
-        this.setPage(5);
-        return;
-      } else {
-      }
-    } else if (page === 5) {
+    if (page === 5) {
       this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();
       this.purgeFilament(this.purgeAmount);
     }
-    this.page = page;
-    if (this.page > 0) {
+    if (page > 0) {
       setTimeout((): void => {
         document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
       }, 200);
     }
+    this.page = page;
   }
 
   public setSpool(spoolInformation: { spool: FilamentSpool; skipChange: boolean }): void {
@@ -111,12 +90,6 @@ export class FilamentComponent implements OnInit {
     }
   }
 
-  // FILAMENT MANAGEMENT
-
-  private getFeedLength(): number {
-    return this.configService.useM600() ? 0 : this.configService.getFeedLength();
-  }
-
   public setSpoolSelection(): void {
     // this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
     // if (this.selectedSpool) {
@@ -124,14 +97,6 @@ export class FilamentComponent implements OnInit {
     // } else {
     //   this.increasePage();
     // }
-  }
-
-  private disableExtruderStepper(): void {
-    this.printerService.executeGCode('M18 E ');
-  }
-
-  private initiateM600FilamentChange(): void {
-    this.printerService.executeGCode('M600');
   }
 
   // NOZZLE HEATING

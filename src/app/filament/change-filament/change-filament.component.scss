@@ -1,0 +1,26 @@
+.change-filament {
+  &__info {
+    font-size: 60%;
+    opacity: 0.8;
+    font-style: italic;
+    display: block;
+    text-align: center;
+  }
+
+  &__filament {
+    &-name {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      display: block;
+    }
+
+    &-weight {
+      opacity: 1;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      display: block;
+      text-align: center;
+    }
+  }
+}

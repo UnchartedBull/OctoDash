@@ -7,7 +7,7 @@ import { PrinterService, PrinterStatusAPI } from 'src/app/printer.service';
 @Component({
   selector: 'app-filament-heat-nozzle',
   templateUrl: './heat-nozzle.component.html',
-  styleUrls: ['./heat-nozzle.component.scss'],
+  styleUrls: ['./heat-nozzle.component.scss', '../filament.component.scss'],
 })
 export class HeatNozzleComponent implements OnInit, OnDestroy {
   @Input() selectedSpool: FilamentSpool;
