@@ -6,8 +6,8 @@ import { OctoprintConnection } from '.././octoprint/model/connection';
 import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { PsuControlService } from '../plugin-service/psu-control.service';
-import { TPLinkSmartPlugService } from '../plugin-service/tplink-smartplug.service';
+import { PsuControlService } from '../plugins/psu-control.service';
+import { TPLinkSmartPlugService } from '../plugins/tplink-smartplug.service';
 
 @Component({
   selector: 'app-standby',
