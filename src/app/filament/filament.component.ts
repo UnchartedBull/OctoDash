@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
   styleUrls: ['./filament.component.scss'],
   providers: [FilamentManagementComponent],
 })
-export class FilamentComponent implements OnInit {
+export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 5;
   public page: number;
   public showCheckmark = false;
@@ -42,6 +42,10 @@ export class FilamentComponent implements OnInit {
     }
   }
 
+  public ngOnDestroy(): void {
+    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
+  }
+
   public increasePage(): void {
     if (this.page < this.totalPages) {
       this.setPage(this.page + 1);
@@ -65,11 +69,12 @@ export class FilamentComponent implements OnInit {
   }
 
   private setPage(page: number): void {
-    if (page > 0) {
-      setTimeout((): void => {
+    setTimeout((): void => {
+      const progressBar = document.getElementById('progressBar');
+      if (progressBar) {
         document.getElementById('progressBar').style.width = this.page * (20 / this.totalPages) + 'vw';
-      }, 200);
-    }
+      }
+    }, 200);
     this.page = page;
   }
 
@@ -83,7 +88,6 @@ export class FilamentComponent implements OnInit {
   }
 
   public setSpoolSelection(): void {
-    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
     if (this.selectedSpool) {
       this.filament
         .setSpool(this.selectedSpool)

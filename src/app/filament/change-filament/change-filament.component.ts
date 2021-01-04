@@ -32,7 +32,7 @@ export class ChangeFilamentComponent implements OnInit {
   }
 
   private initiateM600FilamentChange(): void {
-    this.printerService.executeGCode('M600');
+    // this.printerService.executeGCode('M600');
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private electronService: ElectronService,
     private zone: NgZone,
-  ) { }
+  ) {}
 
   public activated = false;
   public status = 'connecting';

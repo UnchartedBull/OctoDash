@@ -30,7 +30,9 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
         this.loadSpool();
       }
     } else {
-      this.increasePage.emit();
+      setTimeout(() => {
+        this.increasePage.emit();
+      }, 0);
     }
   }
 
