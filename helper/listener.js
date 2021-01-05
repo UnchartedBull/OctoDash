@@ -61,7 +61,7 @@ function activateDiscoverListener(ipcMain, window) {
 }
 
 function activatePortListener(ipcMain, window) {
-  ipcMain.on('checkOctoprintPort', (_, hostInfo) => {
+  ipcMain.on('checkOctoPrintPort', (_, hostInfo) => {
     const waitPortParams = {
       host: hostInfo.host,
       port: hostInfo.port,

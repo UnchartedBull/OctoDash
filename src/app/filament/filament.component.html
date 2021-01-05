@@ -1,4 +1,4 @@
-<table class="top-bar">
+<table class="top-bar" *ngIf="!showCheckmark">
   <tr>
     <td class="top-bar__back" (click)="decreasePage()" matRipple [matRippleUnbounded]="false">
       <img src="assets/back.svg" class="top-bar__back-icon" />
@@ -16,142 +16,40 @@
     </td>
   </tr>
 </table>
+
 <div class="filament">
-  <div *ngIf="page === 0">
-    <span class="filament-heading">select your new filament</span>
-    <table class="filament-filaments" *ngIf="filamentSpools && !isLoadingSpools">
-      <tr *ngFor="let spool of filamentSpools.spools" (click)="setSpool(spool)">
-        <td class="filament-filaments__type">
-          <span class="filament-filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">
-            {{ spool.profile.material }}
-          </span>
-        </td>
-        <td class="filament-filaments__name">
-          {{ spool.displayName }}
-        </td>
-        <td class="filament-filaments__weight-left">
-          {{ getSpoolWeightLeft(spool.weight, spool.used) }}<span style="font-size: 60%">g left</span>
-        </td>
-      </tr>
-    </table>
-    <div class="filament-no-filaments" *ngIf="!filamentSpools && !isLoadingSpools">no filament spools found</div>
-    <div class="filament-no-filaments loading-dots" *ngIf="isLoadingSpools">loading spools</div>
-    <div class="scroll__thumb-inactive" *ngIf="filamentSpools"></div>
-  </div>
-  <div *ngIf="page === 1">
-    <span class="filament-heading">heating the nozzle</span>
-    <div class="filament-heating__center">
-      <div class="filament-heating__controller">
-        <div class="filament-heating__controller-row">
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(1)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            +1
-          </div>
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(10)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            +10
-          </div>
-        </div>
-        <div class="filament-heating__controller-value" colspan="2">
-          {{ isHeating ? hotendTemperature : hotendTarget
-          }}<span class="filament-heating__controller-value-unit">°C</span>
-          <span class="filament-heating__controller-current" *ngIf="isHeating">
-            /{{ hotendTarget }}<span>°C</span>
-          </span>
-        </div>
-        <div class="filament-heating__controller-row">
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(-1)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            -1
-          </div>
-          <div
-            class="filament-heating__controller-control"
-            (click)="changeHotendTarget(-10)"
-            matRipple
-            [matRippleUnbounded]="false"
-          >
-            -10
-          </div>
-        </div>
-      </div>
-      <div class="filament-heating__information" *ngIf="selectedSpool">
-        <div class="filament-heating__information-color" [ngStyle]="{ 'background-color': selectedSpool.color }"></div>
-        <span class="filament-heating__information-name">{{ selectedSpool.profile.vendor }}</span>
-        <div class="filament-heating__information-offset-wrapper">
-          <span class="filament-heating__information-offset-value">
-            {{ getSpoolTemperatureOffset() }}<span class="filament-heating__information-offset-indicator">°C</span>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="filament-heating__start-wrapper" *ngIf="!isHeating">
-      <span>
-        wait
-        <span>{{ automaticHeatingStartSeconds }}</span>
-        s or -
-      </span>
-      <a
-        class="filament-heating__start-heating"
-        matRipple
-        [matRippleUnbounded]="false"
-        (click)="setNozzleTemperature()"
-      >
-        start
-      </a>
-    </div>
-  </div>
-  <div *ngIf="page === 2">
-    <span class="filament-heading">unloading filament</span>
-    <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">
-      <div class="filament__progress-bar" id="filamentUnloadBar"></div>
-    </div>
-    <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
-    <div class="filament-move__wrapper">
-      <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false" (click)="stopExtruderMovement()">stop</a>
-    </div>
-  </div>
-  <div *ngIf="page === 3">
-    <span class="filament-heading">load new filament</span>
-    <span class="filament-move__speed">Only put a little filament in, I'll pull in the rest.</span>
-    <div *ngIf="selectedSpool" style="margin-top: 15vh">
-      <div class="filament-heating__information-color" [ngStyle]="{ 'background-color': selectedSpool.color }"></div>
-      <span class="filament-heating__information-name">{{ selectedSpool.displayName }}</span>
-    </div>
-    <div *ngIf="!selectedSpool" style="margin-top: 15vh">
-      <span class="filament-heating__information-name">I'll wait for you.</span>
-    </div>
-    <div class="filament-move__wrapper">
-      <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage()">done</a>
-    </div>
-  </div>
-  <div *ngIf="page === 4">
-    <span class="filament-heading">loading filament</span>
-    <div class="filament__progress-bar-wrapper filament__progress-bar-wrapper-wide">
-      <div class="filament__progress-bar" style="width: 0" id="filamentLoadBar"></div>
-    </div>
-    <span class="filament-move__speed">{{ getFeedSpeed() }} mm/s</span>
-    <div class="filament-move__wrapper">
-      <a class="filament-move__cancel" matRipple [matRippleUnbounded]="false" click="stopExtruderMovement()">stop</a>
-    </div>
-  </div>
-  <div *ngIf="page === 5">
-    <span class="filament-heading">purging filament</span>
-    <div class="filament-purge__amount">{{ purgeAmount }}mm</div>
-    <div class="filament-move__wrapper">
-      <a class="filament-purge__more" matRipple [matRippleUnbounded]="false" (click)="increasePurgeAmount(10)">+10mm</a>
-      <a class="filament-purge__done" matRipple [matRippleUnbounded]="false" (click)="setSpoolSelection()">done</a>
-    </div>
+  <app-filament-choose (spoolChange)="setSpool($event)" *ngIf="page === 0"></app-filament-choose>
+  <app-filament-heat-nozzle
+    (increasePage)="increasePage()"
+    [currentSpool]="currentSpool"
+    [selectedSpool]="selectedSpool"
+    *ngIf="page === 1"
+  ></app-filament-heat-nozzle>
+  <app-filament-move-filament
+    *ngIf="page === 2"
+    (increasePage)="increasePage()"
+    [currentSpool]="currentSpool"
+    [action]="'unload'"
+  ></app-filament-move-filament>
+  <app-filament-change-filament
+    *ngIf="page === 3"
+    (increasePage)="increasePage()"
+    [selectedSpool]="selectedSpool"
+  ></app-filament-change-filament>
+  <app-filament-move-filament
+    *ngIf="page === 4"
+    (increasePage)="increasePage()"
+    [selectedSpool]="selectedSpool"
+    [action]="'load'"
+  ></app-filament-move-filament>
+  <app-filament-purge-filament
+    *ngIf="page === 5 && !showCheckmark"
+    (purgeDone)="setSpoolSelection()"
+  ></app-filament-purge-filament>
+  <div *ngIf="showCheckmark">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+      <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+    </svg>
   </div>
 </div>

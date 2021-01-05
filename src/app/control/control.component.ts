@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../config/config.service';
 import { OctoprintService } from '../octoprint.service';
 import { OctoprintPrinterProfile } from '../octoprint/model/printerProfile';
-import { EnclosureService } from '../plugin-service/enclosure.service';
-import { PsuControlService } from '../plugin-service/psu-control.service';
+import { EnclosureService } from '../plugins/enclosure.service';
+import { PsuControlService } from '../plugins/psu-control.service';
+import { TPLinkSmartPlugService } from '../plugins/tplink-smartplug.service';
 import { PrinterService } from '../printer.service';
 import { PrinterProfileService } from '../printerprofile.service';
 
@@ -31,6 +32,7 @@ export class ControlComponent {
     private configService: ConfigService,
     private psuControlService: PsuControlService,
     private enclosureService: EnclosureService,
+    private tplinkSmartPlugService: TPLinkSmartPlugService,
     private router: Router,
   ) {
     this.printerProfile = {
@@ -120,6 +122,12 @@ export class ControlComponent {
         break;
       case '[!POWERTOGGLE]':
         this.psuControlService.togglePSU();
+        break;
+      case '[!TPLINKOFF]':
+        this.tplinkSmartPlugService.changePowerState(false);
+        break;
+      case '[!TPLINKON]':
+        this.tplinkSmartPlugService.changePowerState(true);
         break;
       default: {
         if (command.includes('[!WEB]')) {

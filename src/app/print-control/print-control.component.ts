@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { Job, JobService, JobStatus } from '../job.service';
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugin-service/layer-progress.service';
+import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({

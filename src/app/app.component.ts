@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
-          this.waitForOctoprint();
+          this.waitForOctoPrint();
         } else {
           this.checkInvalidConfig();
         }
@@ -53,8 +53,10 @@ export class AppComponent implements OnInit {
   }
 
   private checkInvalidConfig() {
-    if (_.isEqual(this.configService.getErrors(), this.service.getUpdateError())) {
-      if (this.service.autoFixError()) {
+    const errors = this.configService.getErrors();
+
+    if (this.service.hasUpdateError(errors)) {
+      if (this.service.fixUpdateErrors(errors)) {
         this.initialize();
       } else {
         this.configService.setUpdate();
@@ -65,7 +67,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private waitForOctoprint() {
+  private waitForOctoPrint() {
     this.electronService.ipcRenderer.on('octoprintReady', (_, octoprintReady: boolean) => {
       this.zone.run(() => {
         if (octoprintReady) {
@@ -77,7 +79,7 @@ export class AppComponent implements OnInit {
               'Connection to OctoPrint timed out!',
               'Make sure that OctoPrint is up and running, then close this card to try again.',
             )
-            .then(this.checkOctoprintPort.bind(this));
+            .then(this.checkOctoPrintPort.bind(this));
           this.status = 'no connection';
         }
       });
@@ -89,13 +91,13 @@ export class AppComponent implements OnInit {
       });
     });
 
-    this.checkOctoprintPort();
+    this.checkOctoPrintPort();
   }
 
-  private checkOctoprintPort() {
+  private checkOctoPrintPort() {
     this.status = 'connecting';
     const urlNoProtocol = this.configService.getURL('').split('//')[1];
-    this.electronService.ipcRenderer.send('checkOctoprintPort', {
+    this.electronService.ipcRenderer.send('checkOctoPrintPort', {
       host: urlNoProtocol.split(':')[0],
       port: Number(urlNoProtocol.split(':')[1].split('/')[0]),
     });

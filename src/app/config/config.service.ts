@@ -90,7 +90,7 @@ export class ConfigService {
 
   public getErrors(): string[] {
     const errors = [];
-    this.validator.errors.forEach((error): void => {
+    this.validator.errors?.forEach((error): void => {
       if (error.keyword === 'type') {
         errors.push(`${error.dataPath} ${error.message}`);
       } else {
@@ -107,6 +107,7 @@ export class ConfigService {
       const configStored = this.store.get('config');
       if (this.validateGiven(configStored)) {
         this.config = config;
+        this.valid = true;
         this.generateHttpHeaders();
         return null;
       } else {
@@ -208,10 +209,17 @@ export class ConfigService {
     return this.config.octodash.turnScreenOffWhileSleeping;
   }
 
-  public turnOnPSUWhenExitingSleep(): boolean {
-    return this.config.plugins.psuControl.turnOnPSUWhenExitingSleep;
+  public getAutomaticPrinterPowerOn(): boolean {
+    return this.config.octodash.turnOnPrinterWhenExitingSleep;
   }
 
+  public useTpLinkSmartPlug(): boolean {
+    return this.config.plugins.tpLinkSmartPlug.enabled;
+  }
+
+  public getSmartPlugIP(): string {
+    return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
+  }
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

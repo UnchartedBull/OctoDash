@@ -123,6 +123,8 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature-icon {
         margin-right: 1vw;
     }
 
+
+
 /**************************************** NOTIFICATION ****************************************/
 
 .notification {
@@ -178,25 +180,6 @@ ngx-spinner .overlay{
     right: 3.5vw!important;
     top: 5.5vh!important;
     width: 5vw!important;
-}
-
-/************************************** FILAMENT **************************************/
-
-.filament tr{
-    background-color: #222222!important;
-    width: 90vw!important;
-}
-
-.filament-filaments {
-    width: 95.5vw!important;
-}
-
-.filament-filaments::before {
-    display:none!important;
-}
-
-.filament-filaments__name {
-    width: 62vw!important;
 }
 
 /**************************************** FILE ****************************************/
@@ -381,7 +364,7 @@ app-job-status ~ app-printer-status .printer-status__value-1 {
     padding-left: 0!important;
     padding-right: 0!important;
     position: absolute;
-    top: 55vh;
+    top: 37vh;
     left: 38vw;
 }
 app-job-status ~ app-printer-status .printer-status__value-1 img {
@@ -393,7 +376,7 @@ app-job-status ~ app-printer-status .printer-status__value-2 {
     padding-left: 0!important;
     padding-right: 0!important;
     position: absolute;
-    top: 55vh;
+    top: 37vh;
     left: 69vw;
 
 }
@@ -406,7 +389,7 @@ app-job-status ~ app-printer-status .printer-status__value-3 {
     padding-left: 0!important;
     padding-right: 0!important;
     position: absolute;
-    top: 70vh;
+    top: 53vh;
     left: 38vw;
 
 }
@@ -418,7 +401,7 @@ app-job-status ~ app-printer-status .printer-status__value-3 img {
 
 app-job-status ~ app-layer-progress .layer-indication{
     position:absolute!important;
-    top: 74vh;
+    top: 57vh;
     left: 68.8vw;
     visibility: hidden;
     width:auto!important;
@@ -462,6 +445,7 @@ app-job-status ~ app-layer-progress .layer-indication__current-layer::after{
 
 /**************************************** PRINTING ****************************************/
 
+
 .job-info__progress {
     position: absolute!important;
     top: 19vh!important;
@@ -469,16 +453,6 @@ app-job-status ~ app-layer-progress .layer-indication__current-layer::after{
     width: 6vw!important;
     margin: 0!important;
     padding: 0!important;
-}
-
-.job-info__progress-bar__wrapper {
-  width: 6vw !important;
-  height: 5vw !important;
-  margin-top: 0.5vw !important;
-}
-
-.job-info__progress-bar {
-  height: 5vw !important;
 }
 
 round-progress svg path{
@@ -495,9 +469,9 @@ round-progress svg circle{
     stroke: rgba(255, 255, 255, 0.2)!important;
 }
 
-.job-info__progress-preview {
+#progress-preview-circle .job-info__progress-preview-image {
     position:fixed!important;
-    top: 33vh!important;
+    top: 32vh!important;
     left: 4vw!important;
     width: 30vw!important;
     /* height: 30vw!important; /* test square thumbnail */
@@ -505,14 +479,14 @@ round-progress svg circle{
     display:block!important;
 }
 
-.job-info__progress-preview-image {
-  position:fixed!important;
-  top: 33vh!important;
-  left: 4vw!important;
-  width: 30vw!important;
-  /* height: 30vw!important; /* test square thumbnail */
-  margin:0!important;
-  display:block!important;
+#progress-preview-bar .job-info__progress-preview {
+    position:fixed!important;
+    top: 20.5vh!important;
+    left: 4vw!important;
+    width: 30vw!important;
+    /* height: 30vw!important; /* test square thumbnail */
+    margin:0!important;
+    display:block!important;
 }
 
 .job-info__progress-percentage {
@@ -527,13 +501,44 @@ round-progress svg circle{
     width: auto!important;
 }
 
-.job-info__filament{
-    position: absolute!important;
-    top: 35vh!important;
-    left: 38vw!important;
-    margin:0!important;
-    font-size:4vw!important;
+#progress-preview-bar + .job-info__progress-percentage {
+    margin: 0!important;
+    font-size: 8vh!important;
+    font-weight: 500!important;
+    display:block!important;
+    position:fixed!important;
+    top: 76.3vh!important;
+    left: 4vw!important;
+    width: 92vw!important;
+    z-index:1!important;
+    color:white!important;
+    visibility: visible!important;
+    text-align: center!important;
+    text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black;
 }
+
+
+.job-info__progress-bar {
+    height: 8vh!important;
+    border-radius: 0.5vw!important;
+    background-color: #105310!important;
+}
+
+.job-info__progress-bar__wrapper {
+    position:fixed!important;
+    top: 78vh!important;
+    left: 3vw!important;
+    width: 92vw!important;
+    height: 8vh!important;
+    border-radius: 0.5vw!important;
+    background-color: rgb(127, 143, 166, 0.25);
+    border-style: solid!important;
+}
+
+.job-info__filament{
+    visibility: hidden;
+}
+
 .job-info__time{
     position: absolute!important;
     top: 18vh!important;
@@ -582,7 +587,7 @@ round-progress svg circle{
 }
 
 .settings__version::after{
-    content: " \00a0 | \00a0 NOX theme v0.1";
+    content: " \00a0 | \00a0 NOX theme v0.2";
     width: auto!important;
 }
 
@@ -664,7 +669,6 @@ round-progress svg circle{
     padding-top: 1.8vw!important;
     padding-bottom: 1.8vw!important;
 }
-
 
 .settings__close {
     position: fixed!important;
