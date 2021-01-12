@@ -17,6 +17,7 @@ import { TPLinkSmartPlugService } from '../plugins/tplink-smartplug.service';
 export class StandbyComponent implements OnInit {
   public connecting = false;
   public error = '';
+  public actionsVisible = false;
   private connectionRetries = 3;
   private displaySleepTimeout: ReturnType<typeof setTimeout>;
 
@@ -121,6 +122,11 @@ export class StandbyComponent implements OnInit {
       this.notificationService.enableNotifications();
       this.router.navigate(['/main-screen']);
     }, 1000);
+  }
+
+  public openCustomActions(): void {
+    console.log('OPEN');
+    this.actionsVisible = !this.actionsVisible;
   }
 }
 
