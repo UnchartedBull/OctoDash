@@ -39,6 +39,10 @@ export class AppService {
         config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
         delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
       },
+      ".octodash should have required property 'screenSleepCommand'": config =>
+        (config.octodash.screenSleepCommand = 'xset dpms force standby'),
+      ".octodash should have required property 'screenWakeupCommand'": config =>
+        (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
     };
   }
 
@@ -100,11 +104,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.ipcRenderer.send('screenSleep');
+    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
-    this.electronService.ipcRenderer.send('screenWakeup');
+    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
   }
 
   public hasUpdateError(errors: string[]): boolean {

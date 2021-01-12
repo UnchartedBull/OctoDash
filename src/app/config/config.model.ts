@@ -86,6 +86,8 @@ interface OctoDash {
   turnOnPrinterWhenExitingSleep: boolean;
   preferPreviewWhilePrinting: boolean;
   previewProgressCircle: boolean;
+  screenSleepCommand: string;
+  screenWakeupCommand: string;
 }
 
 export interface CustomAction {

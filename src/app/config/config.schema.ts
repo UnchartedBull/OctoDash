@@ -224,6 +224,8 @@ export const configSchema = {
         'turnOnPrinterWhenExitingSleep',
         'preferPreviewWhilePrinting',
         'previewProgressCircle',
+        'screenSleepCommand',
+        'screenWakeupCommand',
       ],
       properties: {
         customActions: {
@@ -300,6 +302,16 @@ export const configSchema = {
         previewProgressCircle: {
           $id: '#/properties/octodash/properties/previewProgressCircle',
           type: 'boolean',
+        },
+        screenSleepCommand: {
+          $id: '#/properties/octodash/properties/screenSleepCommand',
+          type: 'string',
+          pattern: '^(.*)$',
+        },
+        screenWakeupCommand: {
+          $id: '#/properties/octodash/properties/screenWakeupCommand',
+          type: 'string',
+          pattern: '^(.*)$',
         },
       },
     },

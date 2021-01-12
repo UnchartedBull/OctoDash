@@ -35,8 +35,8 @@ function createWindow() {
   const mainScreen = screen.getPrimaryDisplay();
 
   window = new BrowserWindow({
-    width: dev ? (big ? 1360 : 1080) : mainScreen.size.width,
-    height: dev ? (big ? 502 : 342) : mainScreen.size.height,
+    width: dev ? (big ? 1500 : 1200) : mainScreen.size.width,
+    height: dev ? (big ? 600 : 450) : mainScreen.size.height,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
