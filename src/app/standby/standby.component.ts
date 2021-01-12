@@ -124,8 +124,7 @@ export class StandbyComponent implements OnInit {
     }, 1000);
   }
 
-  public openCustomActions(): void {
-    console.log('OPEN');
+  public toggleCustomActions(): void {
     this.actionsVisible = !this.actionsVisible;
   }
 }

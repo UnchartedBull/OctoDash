@@ -47,6 +47,7 @@ import { URLSafePipe } from './url.pipe';
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
+import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament
     MoveFilamentComponent,
     ChangeFilamentComponent,
     PurgeFilamentComponent,
+    CustomActionsComponent,
   ],
   imports: [
     AppRoutingModule,
