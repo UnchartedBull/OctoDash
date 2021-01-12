@@ -1,16 +1,3 @@
-<div class="i-frame" id="iFrame">
-  loading website ...
-  <iframe
-    class="i-frame__content"
-    [src]="iFrameURL | url"
-    onload="this.style.opacity=1;"
-    sandbox="allow-forms, allow-modals, allow-popups, allow-same-origin, allow-scripts, allow-top-navigation-by-user-activation"
-  >
-    That shouldn't happen ...
-  </iframe>
-  <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
-</div>
-
 <table class="top-bar">
   <tr>
     <td class="top-bar__back" routerLink="/main-screen">
@@ -104,22 +91,7 @@
     </div>
     <span class="control__heading">Z</span>
   </div>
-  <div class="control__custom">
-    <div
-      class="control__custom-action"
-      *ngFor="let customAction of customActions"
-      [style.border-color]="customAction.color"
-      (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
-      matRipple
-      [matRippleUnbounded]="false"
-    >
-      <fa-icon
-        [icon]="['fas', customAction.icon]"
-        class="control__custom-action-icon"
-        [styles]="{ color: customAction.color }"
-      ></fa-icon>
-    </div>
-  </div>
+  <app-custom-actions [redirectActive]="true"></app-custom-actions>
   <table class="control__distance">
     <tr>
       <td
@@ -159,14 +131,4 @@
       </td>
     </tr>
   </table>
-</div>
-
-<div class="confirm__wrapper" *ngIf="actionToConfirm">
-  <div class="confirm">
-    <h1>Are you sure?</h1>
-    <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
-    <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
-    <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()" />
-    <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()" />
-  </div>
 </div>

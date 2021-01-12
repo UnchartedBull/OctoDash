@@ -1,0 +1,34 @@
+<div class="i-frame" id="iFrame">
+  loading website ...
+  <iframe class="i-frame__content" [src]="iFrameURL | url" onerror="doActionConfirm()" allow="fullscreen; camera;">
+    That shouldn't happen ...
+  </iframe>
+  <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
+</div>
+
+<div class="custom-actions">
+  <div
+    class="custom-actions__action"
+    *ngFor="let customAction of customActions"
+    [style.border-color]="customAction.color"
+    (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
+    matRipple
+    [matRippleUnbounded]="false"
+  >
+    <fa-icon
+      [icon]="['fas', customAction.icon]"
+      class="custom-actions__action-icon"
+      [styles]="{ color: customAction.color }"
+    ></fa-icon>
+  </div>
+</div>
+
+<div class="confirm__wrapper" *ngIf="actionToConfirm">
+  <div class="confirm">
+    <h1>Are you sure?</h1>
+    <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
+    <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
+    <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()" />
+    <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()" />
+  </div>
+</div>

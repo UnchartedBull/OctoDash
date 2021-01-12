@@ -1,7 +1,29 @@
-<div (click)="reconnect()">
-  <img src="assets/icon/icon-main.svg" class="standby__icon" />
-  <span class="standby__text-big">Shhh! OctoDash is sleeping.</span>
-  <span class="standby__text-small">Press on the screen to wake me up again.</span>
+<div class="standby">
+  <div (click)="reconnect()" class="standby__main-window" [ngStyle]="{ 'flex-basis': actionsVisible ? '54%' : '94%' }">
+    <img src="assets/icon/icon-main.svg" class="standby__icon" />
+    <ng-container *ngIf="!actionsVisible">
+      <span class="standby__text-big">Shhh! OctoDash is sleeping.</span>
+      <span class="standby__text-small">Press on the screen to wake me up again.</span>
+    </ng-container>
+    <span class="standby__text-big" *ngIf="actionsVisible"> sleeping ... </span>
+  </div>
+
+  <div class="standby__actions-toggle">
+    <fa-icon
+      [icon]="['fas', 'caret-left']"
+      class="standby__actions-toggle-icon"
+      (click)="toggleCustomActions()"
+      [ngClass]="{ 'standby__actions-toggle-icon__rotate': actionsVisible }"
+      matRipple
+      [matRippleUnbounded]="true"
+      [matRippleCentered]="true"
+    ></fa-icon>
+  </div>
+
+  <div class="standby__actions" [ngStyle]="{ 'flex-basis': actionsVisible ? '40%' : '0%' }">
+    <span class="standby__actions-text"> Actions </span>
+    <app-custom-actions [redirectActive]="false"></app-custom-actions>
+  </div>
 </div>
 
 <div class="standby__error" *ngIf="error !== ''" (click)="error = ''">
