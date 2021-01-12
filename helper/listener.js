@@ -10,14 +10,8 @@ const { downloadUpdate, sendVersionInfo } = require('./update');
 const { discoverNodes, stopDiscovery } = require('./discover');
 
 function activateScreenSleepListener(ipcMain) {
-  ipcMain.on('screenSleep', () => {
-    exec('xset dpms force standby');
-  });
-
-  ipcMain.on('screenWakeup', () => {
-    exec('xset s off');
-    exec('xset -dpms');
-    exec('xset s noblank');
+  ipcMain.on('screenControl', (_, screenCommand) => {
+    exec(screenCommand.command);
   });
 }
 

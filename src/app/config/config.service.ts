@@ -276,4 +276,12 @@ export class ConfigService {
   public getPreviewProgressCircle(): boolean {
     return this.config.octodash.previewProgressCircle;
   }
+
+  public getScreenSleepCommand(): string {
+    return this.config.octodash.screenSleepCommand;
+  }
+
+  public getScreenWakeupCommand(): string {
+    return this.config.octodash.screenWakeupCommand;
+  }
 }
