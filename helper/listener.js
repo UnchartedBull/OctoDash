@@ -11,7 +11,6 @@ const { discoverNodes, stopDiscovery } = require('./discover');
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => {
-    console.log(screenCommand);
     exec(screenCommand.command);
   });
 }
