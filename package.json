@@ -79,7 +79,7 @@
     "@angular/router": "~11.0.0",
     "@fortawesome/angular-fontawesome": "^0.8.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "ajv": "^6.12.6",
     "angular-svg-round-progressbar": "^5.0.2",
     "bonjour": "^3.5.0",
