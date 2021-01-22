@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
-    "module": "ESNEXT",
+    "module": "ES2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,7 +13,7 @@
     "target": "ES2015",
     "typeRoots": ["node_modules/@types"],
     "types": [],
-    "lib": ["ESNEXT", "dom"],
+    "lib": ["ES2020", "ES2019", "ES2018", "ES2017", "ES2016", "dom"],
     "esModuleInterop": true
   },
   "exclude": ["**/node_modules/**"]
