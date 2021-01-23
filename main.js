@@ -5,7 +5,6 @@ require('v8-compile-cache');
 
 const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
 const path = require('path');
-const url = require('url');
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
@@ -55,13 +54,7 @@ function createWindow() {
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {
-    window.loadURL(
-      url.format({
-        pathname: 'index.html',
-        protocol: `${scheme}:`,
-        slashes: true,
-      }),
-    );
+    window.loadFile('dist/index.html');
     window.setFullScreen(true);
   }
 

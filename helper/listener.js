@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
 const exec = require('child_process').exec;
-const url = require('url');
-const path = require('path');
 const waitPort = require('wait-port');
 
 const sendCustomStyles = require('./styles');
@@ -20,13 +18,7 @@ function activateReloadListener(ipcMain, window, dev) {
     if (dev) {
       window.reload();
     } else {
-      window.loadURL(
-        url.format({
-          pathname: path.join(__dirname, '..', 'dist', 'index.html'),
-          protocol: 'file:',
-          slashes: true,
-        }),
-      );
+      window.loadFile('dist/index.html');
     }
   });
 }
