@@ -4,26 +4,25 @@
 require('v8-compile-cache');
 
 const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
-const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
 const dev = args.some(val => val === '--serve');
-const appPath = path.join(__dirname, 'dist');
+const scheme = 'app';
 
 const activateListeners = require('./helper/listener');
+const createProtocol = require('./helper/protocol');
+
+protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
+createProtocol(scheme, path.join(__dirname, 'dist'));
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 let window;
 
-protocol.registerSchemesAsPrivileged([{ scheme: 'es6', privileges: { standard: true, secure: true } }]);
-
 function createWindow() {
-  registerProtocol();
-
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
       callback({
@@ -52,14 +51,14 @@ function createWindow() {
     icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   });
 
-  if (dev) {
+  if (!dev) {
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {
     window.loadURL(
       url.format({
         pathname: 'index.html',
-        protocol: 'es6:',
+        protocol: `${scheme}:`,
         slashes: true,
       }),
     );
@@ -70,14 +69,6 @@ function createWindow() {
 
   window.on('closed', () => {
     window = null;
-  });
-}
-
-function registerProtocol() {
-  protocol.registerBufferProtocol('es6', (req, cb) => {
-    fs.readFile(path.join(appPath, req.url.replace('es6://', '')), (_, b) => {
-      cb({ mimeType: 'text/javascript', data: b });
-    });
   });
 }
 
