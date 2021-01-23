@@ -46,11 +46,11 @@ export class FilamentComponent implements OnInit, OnDestroy {
     this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
   }
 
-  public increasePage(): void {
-    if (this.page < this.totalPages) {
-      this.setPage(this.page + 1);
-    } else if (this.page === this.totalPages) {
+  public increasePage(returnToMainScreen = false): void {
+    if (this.page === this.totalPages || returnToMainScreen) {
       this.router.navigate(['/main-screen']);
+    } else if (this.page < this.totalPages) {
+      this.setPage(this.page + 1);
     }
   }
 
@@ -81,7 +81,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   public setSpool(spoolInformation: { spool: FilamentSpool; skipChange: boolean }): void {
     this.selectedSpool = spoolInformation.spool;
     if (spoolInformation.skipChange) {
-      this.setPage(this.totalPages);
+      this.setSpoolSelection();
     } else {
       this.increasePage();
     }
@@ -93,11 +93,11 @@ export class FilamentComponent implements OnInit, OnDestroy {
         .setSpool(this.selectedSpool)
         .then((): void => {
           this.showCheckmark = true;
-          setTimeout(this.increasePage.bind(this), 1500);
+          setTimeout(this.increasePage.bind(this), 1500, true);
         })
-        .catch(this.increasePage.bind(this));
+        .catch(() => this.increasePage(true));
     } else {
-      this.increasePage();
+      this.increasePage(true);
     }
   }
 
