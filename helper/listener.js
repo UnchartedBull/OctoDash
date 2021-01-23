@@ -18,7 +18,7 @@ function activateReloadListener(ipcMain, window, dev) {
     if (dev) {
       window.reload();
     } else {
-      window.loadFile('dist/index.html');
+      window.loadURL('app://.');
     }
   });
 }

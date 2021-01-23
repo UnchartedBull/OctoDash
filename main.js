@@ -50,11 +50,11 @@ function createWindow() {
     icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   });
 
-  if (!dev) {
+  if (dev) {
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {
-    window.loadFile('dist/index.html');
+    window.loadURL('app://.');
     window.setFullScreen(true);
   }
 

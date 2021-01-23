@@ -10,9 +10,7 @@ function createProtocol(scheme, basePath) {
   if (!app.isReady()) return app.on('ready', () => createProtocol(...arguments));
 
   protocol.registerBufferProtocol(scheme, (request, callback) => {
-    console.log(request);
     const filePath = path.join(basePath, request.url.replace(`${scheme}://`, ''));
-    console.log(filePath);
     fs.readFile(filePath, (error, buffer) => {
       if (error) {
         fs.readFile(path.join(basePath, 'index.html'), (_, buffer) => {
