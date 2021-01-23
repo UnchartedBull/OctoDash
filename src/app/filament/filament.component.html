@@ -18,7 +18,7 @@
 </table>
 
 <div class="filament">
-  <app-filament-choose (spoolChange)="setSpool($event)" *ngIf="page === 0"></app-filament-choose>
+  <app-filament-choose (spoolChange)="setSpool($event)" *ngIf="page === 0 && !showCheckmark"></app-filament-choose>
   <app-filament-heat-nozzle
     (increasePage)="increasePage()"
     [currentSpool]="currentSpool"
