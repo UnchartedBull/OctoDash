@@ -1,7 +1,7 @@
 <p align="center">
     <img width="300" height="300" src="./src/assets/icon/icon-main-dark-title.svg">
     <br><br>
-    <img src="https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=master">
+    <img src="https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=main">
     <img src="https://www.codefactor.io/repository/github/unchartedbull/octodash/badge">
     <img src="https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg">
     <img src="https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg">
@@ -15,9 +15,12 @@
 
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
+  - [Nightly Builds](#nightly-builds)
 - [Update](#update)
 - [Tips and Tricks](#tips-and-tricks)
+- [Demo](#demo)
 - [Screenshots](#screenshots)
+- [Get in contact](#get-in-contact)
 - [Troubleshooting](#troubleshooting)
 - [Bugs and more](#bugs-and-more)
 - [Contributing](#contributing)
@@ -26,7 +29,7 @@
 ## Installation
 
 ```
-bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/install.sh)
+bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
 ```
 
 For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
@@ -44,7 +47,7 @@ Thanks to M1dn1ghtN1nj4 nightly builds are available here: https://sites.google.
 _deprecated, from v2.0 onwards OctoDash can be updated from within the app_
 
 ```
-wget -qO- https://github.com/UnchartedBull/OctoDash/raw/master/scripts/update.sh | bash
+wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/update.sh | bash
 ```
 
 For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Update)
@@ -64,24 +67,25 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 - You can adjust the temperatures and fan speed in the home screen by pressing on their icons, if you want to set them to zero, just tap the value once (v1.4.1 and up)
 
 ## Demo
+
 If you want to see OctoDash in action, here is an awesome video from Nick on [YouTube](https://youtu.be/YI_c-DY6zU4)
 
 ## Screenshots
 
 <p float="left">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/main-screen.png" width="49.5%" alt-text="Main Screen"/>
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/job.png" width="49.5%" alt-text="Job Running">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/control.png" width="49.5%" alt-text="Printer Controls">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/print_controls.png" width="49.5%" alt-text="In Print">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/files_view.png" width="49.5%" alt-text="List Files">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/file_details.png" width="49.5%" alt-text="Details about Files">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/file_loaded.png" width="49.5%" alt-text="Loaded Files">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/filament_selection.png" width="49.5%" alt-text="Settings">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/filament_heating.png" width="49.5%" alt-text="Settings">
-    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/master/screenshots/settings.png" width="49.5%" alt-text="Settings">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/main-screen.png" width="49.5%" alt-text="Main Screen"/>
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/job.png" width="49.5%" alt-text="Job Running">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/control.png" width="49.5%" alt-text="Printer Controls">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/print_controls.png" width="49.5%" alt-text="In Print">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/files_view.png" width="49.5%" alt-text="List Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_details.png" width="49.5%" alt-text="Details about Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_loaded.png" width="49.5%" alt-text="Loaded Files">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_selection.png" width="49.5%" alt-text="Settings">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_heating.png" width="49.5%" alt-text="Settings">
+    <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/settings.png" width="49.5%" alt-text="Settings">
 </p>
 
-More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/master/screenshots).
+More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/main/screenshots).
 
 ## Get in contact
 
@@ -97,8 +101,8 @@ If you find a bug, please open an issue, so I can have a look at it. Please also
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/UnchartedBull/OctoDash/blob/master/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/UnchartedBull/OctoDash/blob/main/CONTRIBUTING.md).
 
 ## License
 
-The project is licensed under the Apache 2.0 License. [More Information](https://github.com/UnchartedBull/OctoDash/blob/master/LICENSE.md).
+The project is licensed under the Apache 2.0 License. [More Information](https://github.com/UnchartedBull/OctoDash/blob/main/LICENSE.md).
