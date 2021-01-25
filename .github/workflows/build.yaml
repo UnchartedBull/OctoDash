@@ -54,8 +54,6 @@ jobs:
           node-version: '14'
       - name: Installing Dependencies
         run: npm ci
-      - name: Linting Application
-        run: npm run lint
       - name: Building Application
         run: npm run ng:build
       - name: Packaging Application
