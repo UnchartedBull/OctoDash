@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
+import Keyboard from 'simple-keyboard';
 
 import { ConfigService } from '../../config.service';
 
@@ -8,7 +9,7 @@ import { ConfigService } from '../../config.service';
   templateUrl: './discover-octoprint.component.html',
   styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
 })
-export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
+export class DiscoverOctoprintComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() octoprintHost: number;
   @Input() octoprintPort: number;
 
@@ -19,6 +20,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
   public manualURL = false;
   public octoprintNodes: OctoprintNodes;
+  public keyboard: Keyboard;
 
   constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
 
@@ -31,6 +33,29 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
     this.discoverOctoprintInstances();
   }
+
+  ngAfterViewInit(): void {
+    console.log('Showing Keyboard');
+    this.keyboard = new Keyboard({
+      onChange: input => this.onChange(input),
+      onKeyPress: button => this.onKeyPress(button),
+    });
+    this.keyboard.setOptions({
+      theme: 'appleIOS',
+    });
+  }
+
+  onChange = (input: string) => {
+    console.log('Input changed', input);
+  };
+
+  onKeyPress = (button: string) => {
+    console.log('Button pressed', button);
+
+    /**
+     * If you want to handle the shift and caps lock buttons
+     */
+  };
 
   ngOnDestroy(): void {
     this.electronService.ipcRenderer.send('stopDiscover');

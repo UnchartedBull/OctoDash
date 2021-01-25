@@ -24,9 +24,13 @@ import { PluginsComponent } from './config/setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './config/setup/setup.component';
 import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
+import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
+import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { FilamentComponent } from './filament/filament.component';
 import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.component';
+import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
+import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesComponent } from './files/files.component';
 import { JobService } from './job.service';
 import { JobStatusComponent } from './job-status/job-status.component';
@@ -44,10 +48,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
-import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
-import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
-import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
-import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 
 @NgModule({
   declarations: [
