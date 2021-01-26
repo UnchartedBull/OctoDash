@@ -98,7 +98,7 @@
     "tslib": "^2.1.0",
     "v8-compile-cache": "^2.2.0",
     "wait-port": "^0.2.9",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1101.1",
