@@ -41,7 +41,7 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["node_modules/simple-keyboard/build/css/index.css", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -99,7 +99,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets", "src/assets/icon/icon-main-title.svg"],
-            "styles": ["src/styles.scss"],
+            "styles": ["node_modules/simple-keyboard/build/css/index.css", "src/styles.scss"],
             "scripts": []
           }
         },

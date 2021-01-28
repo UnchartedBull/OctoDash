@@ -245,6 +245,48 @@ app-root {
   display: none;
 }
 
+.hg {
+  &-theme-default {
+    background-color: #1b1d20 !important;
+  }
+
+  &-button {
+    border: none !important;
+    background: #5d626c !important;
+
+    & span {
+      font-size: 0.6rem !important;
+    }
+
+    &-space {
+      width: 55vw !important;
+    }
+
+    &-smileys {
+      width: 4vw !important;
+    }
+
+    &-downkeyboard {
+      width: 5vw !important;
+    }
+
+    &-alt,
+    &-altright,
+    &-default,
+    &-back {
+      width: 6vw !important;
+    }
+  }
+
+  &-standardBtn {
+    width: 8vw !important;
+  }
+
+  &-functionBtn {
+    flex-grow: 200 !important;
+  }
+}
+
 @keyframes dots {
   0%,
   10% {
