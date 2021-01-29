@@ -27,6 +27,7 @@ interface Printer {
   name: string;
   xySpeed: number;
   zSpeed: number;
+  disableExtruderGCode: string;
   zBabystepGCode: string;
   defaultTemperatureFanSpeed: DefaultTemperatureFanSpeed;
 }
