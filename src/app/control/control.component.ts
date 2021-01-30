@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
+import { NotificationService } from '../notification/notification.service';
 import { OctoprintPrinterProfile } from '../octoprint/model/printerProfile';
+import { PrinterProfileService } from '../octoprint/printer-profile.service';
 import { PrinterService } from '../printer.service';
-import { PrinterProfileService } from '../printerprofile.service';
 
 @Component({
   selector: 'app-control',
@@ -15,21 +16,17 @@ export class ControlComponent {
   public jogDistance = 10;
   public showHelp = false;
 
-  public constructor(private printerService: PrinterService, private printerProfileService: PrinterProfileService) {
-    this.printerProfile = {
-      name: '_default',
-      model: 'unknown',
-      current: true,
-      axes: {
-        x: { inverted: false },
-        y: { inverted: false },
-        z: { inverted: false },
+  public constructor(
+    private printerService: PrinterService,
+    private printerProfileService: PrinterProfileService,
+    private notificationService: NotificationService,
+  ) {
+    this.printerProfileService.getDefaultPrinterProfile().subscribe(
+      (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
+      err => {
+        this.notificationService.setError("Can't retrieve printer profile!", err.message);
       },
-    };
-
-    this.printerProfileService.getDefaultPrinterProfile().then(profile => {
-      this.printerProfile = profile;
-    });
+    );
   }
 
   public setDistance(distance: number): void {

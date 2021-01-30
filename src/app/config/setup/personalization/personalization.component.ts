@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PrinterProfileService } from 'src/app/printerprofile.service';
+import { PrinterProfileService } from 'src/app/octoprint/printer-profile.service';
 
 @Component({
   selector: 'app-config-setup-personalization',
