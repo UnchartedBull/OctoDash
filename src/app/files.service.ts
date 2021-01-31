@@ -36,7 +36,7 @@ export class FilesService {
         this.httpGETRequest.unsubscribe();
       }
       this.httpGETRequest = this.http
-        .get(this.configService.getURL('files' + folderPath), this.configService.getHTTPHeaders())
+        .get(this.configService.getApiURL('files' + folderPath), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFolder & OctoprintFolderContent): void => {
             if ('children' in data) {
@@ -141,7 +141,7 @@ export class FilesService {
         this.httpGETRequest.unsubscribe();
       }
       this.httpGETRequest = this.http
-        .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
+        .get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFile): void => {
             let filamentLength = 0;
@@ -162,9 +162,7 @@ export class FilesService {
                     filamentWeight: this.service.convertFilamentLengthToWeight(filamentLength),
                   }
                 : {}),
-              thumbnail: data.thumbnail
-                ? this.configService.getURL(data.thumbnail).replace('/api/', '/')
-                : 'assets/object.svg',
+              thumbnail: data.thumbnail ? this.configService.getApiURL(data.thumbnail, false) : 'assets/object.svg',
             } as unknown) as File;
             resolve(file);
           },
@@ -187,11 +185,11 @@ export class FilesService {
         this.httpGETRequest.unsubscribe();
       }
       this.httpGETRequest = this.http
-        .get(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
+        .get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFile): void => {
             const thumbnail = data.thumbnail
-              ? this.configService.getURL(data.thumbnail).replace('/api/', '/')
+              ? this.configService.getApiURL(data.thumbnail, false)
               : 'assets/object.svg';
             resolve(thumbnail);
           },
@@ -212,7 +210,7 @@ export class FilesService {
       print: false,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('files' + filePath), loadFileBody, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('files' + filePath), loadFileBody, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -230,7 +228,7 @@ export class FilesService {
       print: true,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('files' + filePath), printFileBody, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('files' + filePath), printFileBody, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -244,7 +242,7 @@ export class FilesService {
       this.httpDELETERequest.unsubscribe();
     }
     this.httpDELETERequest = this.http
-      .delete(this.configService.getURL('files' + filePath), this.configService.getHTTPHeaders())
+      .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {

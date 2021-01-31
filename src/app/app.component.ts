@@ -19,11 +19,10 @@ export class AppComponent implements OnInit {
     private notificationService: NotificationService,
     private router: Router,
     private electronService: ElectronService,
-    private zone: NgZone,
   ) {}
 
   public activated = false;
-  public status = 'connecting';
+  public status = 'initializing';
   public showConnectionHint = false;
 
   public ngOnInit(): void {
@@ -40,7 +39,8 @@ export class AppComponent implements OnInit {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
-          this.waitForOctoPrint();
+          this.connectWebsocket();
+          this.status = 'connecting';
         } else {
           this.checkInvalidConfig();
         }
@@ -67,51 +67,15 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private waitForOctoPrint() {
-    this.electronService.ipcRenderer.on('octoprintReady', (_, octoprintReady: boolean) => {
-      this.zone.run(() => {
-        if (octoprintReady) {
-          this.connectWebsocket();
-          this.status = 'initializing';
-        } else {
-          this.notificationService
-            .setWarning(
-              'Connection to OctoPrint timed out!',
-              'Make sure that OctoPrint is up and running, then close this card to try again.',
-            )
-            .then(this.checkOctoPrintPort.bind(this));
-          this.status = 'no connection';
-        }
-      });
-    });
-
-    this.electronService.ipcRenderer.on('waitPortError', (_, error: Error) => {
-      this.zone.run(() => {
-        this.notificationService.setError('System Error - please restart', error.message);
-      });
-    });
-
-    this.checkOctoPrintPort();
-  }
-
-  private checkOctoPrintPort() {
-    this.status = 'connecting';
-    const urlNoProtocol = this.configService.getURL('').split('//')[1];
-    this.electronService.ipcRenderer.send('checkOctoPrintPort', {
-      host: urlNoProtocol.split(':')[0],
-      port: Number(urlNoProtocol.split(':')[1].split('/')[0]),
-    });
-  }
-
   private connectWebsocket() {
-    if (this.configService.isTouchscreen()) {
-      this.router.navigate(['/main-screen']);
-    } else {
-      this.router.navigate(['/main-screen-no-touch']);
-    }
-    // const showPrinterConnectedTimeout = setTimeout(() => {
-    //   this.showConnectionHint = true;
-    // }, 30000);
+    const showPrinterConnectedTimeout = setTimeout(() => {
+      this.showConnectionHint = true;
+    }, 2000);
+    // if (this.configService.isTouchscreen()) {
+    //   this.router.navigate(['/main-screen']);
+    // } else {
+    //   this.router.navigate(['/main-screen-no-touch']);
+    // }
     // this.octoprintScriptService
     //   .initialize(this.configService.getURL(''), this.configService.getAccessKey())
     //   .then(() => {

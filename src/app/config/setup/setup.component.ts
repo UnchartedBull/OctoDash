@@ -59,7 +59,7 @@ export class ConfigSetupComponent implements OnInit {
         'x-api-key': this.config.octoprint.accessToken,
       }),
     };
-    this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
+    this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe(
       (): void => {
         this.octoprintConnection = true;
         this.validateConfig();

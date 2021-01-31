@@ -26,7 +26,7 @@ export class LayerProgressService {
         }
         this.httpGETRequest = this.http
           .get(
-            this.configService.getURL('plugin/DisplayLayerProgress/values').replace('/api', ''),
+            this.configService.getApiURL('plugin/DisplayLayerProgress/values', false),
             this.configService.getHTTPHeaders(),
           )
           .subscribe(

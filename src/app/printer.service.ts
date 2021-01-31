@@ -29,7 +29,7 @@ export class PrinterService {
           this.httpGETRequest.unsubscribe();
         }
         this.httpGETRequest = this.http
-          .get(this.configService.getURL('printer'), this.configService.getHTTPHeaders())
+          .get(this.configService.getApiURL('printer'), this.configService.getHTTPHeaders())
           .subscribe(
             (data: OctoprintPrinterStatus): void => {
               const printerStatus: PrinterStatusAPI = {
@@ -105,7 +105,7 @@ export class PrinterService {
       speed: z !== 0 ? this.configService.getZSpeed() * 60 : this.configService.getXYSpeed() * 60,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -142,7 +142,7 @@ export class PrinterService {
       speed: speed * 60,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -159,7 +159,7 @@ export class PrinterService {
       commands: gCode.split('; '),
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -176,7 +176,7 @@ export class PrinterService {
       },
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/tool'), temperatureHotendCommand, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/tool'), temperatureHotendCommand, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -191,7 +191,7 @@ export class PrinterService {
       target: temperature,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/bed'), temperatureHeatbedCommand, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/bed'), temperatureHeatbedCommand, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -209,7 +209,7 @@ export class PrinterService {
       factor: feedrate,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -227,7 +227,7 @@ export class PrinterService {
       factor: flowrate,
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -242,7 +242,7 @@ export class PrinterService {
 
   public isPrinterOffline(): Promise<boolean> {
     return new Promise((resolve): void => {
-      this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
+      this.http.get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe(
         (data: OctoprintConnection): void => {
           resolve(data.current.state === 'Closed' || data.current.state.includes('Error:'));
         },

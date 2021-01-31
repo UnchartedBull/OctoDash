@@ -88,7 +88,7 @@
     "angular-svg-round-progressbar": "^5.0.2",
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
-    "electron-store": "^7.0.0",
+    "electron-store": "^6.0.0",
     "got": "^11.8.1",
     "lodash": "^4.17.20",
     "ngx-electron": "^2.2.0",
@@ -97,7 +97,6 @@
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
     "v8-compile-cache": "^2.2.0",
-    "wait-port": "^0.2.9",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

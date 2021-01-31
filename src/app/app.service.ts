@@ -46,20 +46,22 @@ export class AppService {
     };
   }
 
-  // If all errors can be automatically fixed return true here
   public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
-    let fullyAutofixed = true;
+    config.octoprint.url = config.octoprint.url.replace('api/', '');
+    console.log(config.octoprint);
+
+    let fullyFixed = true;
     for (const error of errors) {
       if (_.hasIn(this.updateError, error)) {
         this.updateError[error](config);
       } else {
-        fullyAutofixed = false;
+        fullyFixed = false;
       }
     }
     this.configService.saveConfig(config);
-    return fullyAutofixed;
+    return fullyFixed;
   }
 
   private enableVersionListener(): void {

@@ -35,7 +35,7 @@ export class JobService {
           this.httpGETRequest.unsubscribe();
         }
         this.httpGETRequest = this.http
-          .get(this.configService.getURL('job'), this.configService.getHTTPHeaders())
+          .get(this.configService.getApiURL('job'), this.configService.getHTTPHeaders())
           .subscribe(
             async (data: OctoprintJobStatus): Promise<void> => {
               let job: Job = null;
@@ -139,7 +139,7 @@ export class JobService {
       command: 'cancel',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('job'), cancelPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('job'), cancelPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -164,7 +164,7 @@ export class JobService {
       action: 'pause',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -188,7 +188,7 @@ export class JobService {
       command: 'restart',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -213,7 +213,7 @@ export class JobService {
       action: 'resume',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -237,7 +237,7 @@ export class JobService {
       command: 'start',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('job'), pausePayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('job'), pausePayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -258,7 +258,7 @@ export class JobService {
       command: 'preheat',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('plugin/preheat'), preheatPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('plugin/preheat'), preheatPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {

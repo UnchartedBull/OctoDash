@@ -28,9 +28,10 @@ export class EnclosureService {
         }
         this.httpGETRequest = this.http
           .get(
-            this.configService
-              .getURL('plugin/enclosure/inputs/' + this.configService.getAmbientTemperatureSensorName())
-              .replace('/api', ''),
+            this.configService.getApiURL(
+              'plugin/enclosure/inputs/' + this.configService.getAmbientTemperatureSensorName(),
+              false,
+            ),
             this.configService.getHTTPHeaders(),
           )
           .subscribe(
@@ -70,7 +71,7 @@ export class EnclosureService {
       }
       this.httpPOSTRequest = this.http
         .patch(
-          this.configService.getURL('plugin/enclosure/neopixel/' + identifier).replace('/api', ''),
+          this.configService.getApiURL('plugin/enclosure/neopixel/' + identifier, false),
           colorBody,
           this.configService.getHTTPHeaders(),
         )

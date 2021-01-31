@@ -25,7 +25,7 @@ export class OctoprintService {
       command: 'disconnect',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -39,7 +39,7 @@ export class OctoprintService {
       this.httpPOSTRequest.unsubscribe();
     }
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {

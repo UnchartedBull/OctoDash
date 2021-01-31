@@ -29,7 +29,7 @@ export class PrinterProfileService {
         this.httpGETRequest.unsubscribe();
       }
       this.httpGETRequest = this.http
-        .get(this.configService.getURL('printerprofiles/_default'), this.configService.getHTTPHeaders())
+        .get(this.configService.getApiURL('printerprofiles/_default'), this.configService.getHTTPHeaders())
         .subscribe(
           (printerProfile: OctoprintPrinterProfile): void => {
             resolve(printerProfile);
@@ -58,7 +58,7 @@ export class PrinterProfileService {
   // Needed for initial setup. Config not initialized yet, thus values need to be passed manually.
   public getActivePrinterProfileName(octoprintURL: string, apiKey: string): Observable<string> {
     return this.http
-      .get<OctoprintPrinterProfiles>(`${octoprintURL}printerprofiles`, {
+      .get<OctoprintPrinterProfiles>(`${octoprintURL}api/printerprofiles`, {
         headers: new HttpHeaders({
           'x-api-key': apiKey,
         }),

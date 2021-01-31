@@ -27,7 +27,7 @@ export class TPLinkSmartPlugService {
       ip: this.configService.getSmartPlugIP(),
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('plugin/tplinksmartplug'), payload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('plugin/tplinksmartplug'), payload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {

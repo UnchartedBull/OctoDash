@@ -26,7 +26,7 @@ export class PsuControlService {
       command: on ? 'turnPSUOn' : 'turnPSUOff',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('plugin/psucontrol'), psuPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('plugin/psucontrol'), psuPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
@@ -43,7 +43,7 @@ export class PsuControlService {
       command: 'togglePSU',
     };
     this.httpPOSTRequest = this.http
-      .post(this.configService.getURL('plugin/psucontrol'), psuPayload, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('plugin/psucontrol'), psuPayload, this.configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {

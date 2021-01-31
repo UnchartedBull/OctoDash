@@ -16,10 +16,7 @@ export class FilamentManagerService implements FilamentManagementPlugin {
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http
-      .get(
-        this.configService.getURL('plugin/filamentmanager/spools').replace('/api', ''),
-        this.configService.getHTTPHeaders(),
-      )
+      .get(this.configService.getApiURL('plugin/filamentmanager/spools', false), this.configService.getHTTPHeaders())
       .pipe(
         map(
           (spools: FilamentManagerSpoolList): Array<FilamentSpool> => {
@@ -36,7 +33,7 @@ export class FilamentManagerService implements FilamentManagementPlugin {
   public getCurrentSpool(): Observable<FilamentSpool> {
     return this.http
       .get(
-        this.configService.getURL('plugin/filamentmanager/selections').replace('/api', ''),
+        this.configService.getApiURL('plugin/filamentmanager/selections', false),
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -83,7 +80,7 @@ export class FilamentManagerService implements FilamentManagementPlugin {
     };
 
     return this.http.patch<void>(
-      this.configService.getURL('plugin/filamentmanager/selections/0').replace('/api', ''),
+      this.configService.getApiURL('plugin/filamentmanager/selections/0', false),
       setSpoolBody,
       this.configService.getHTTPHeaders(),
     );

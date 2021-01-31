@@ -110,7 +110,7 @@ export class ConfigService {
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
-    const port = parseInt(octoprintURL.split(':')[2].replace('/api/', ''), 10);
+    const port = parseInt(octoprintURL.split(':')[2], 10);
 
     return {
       host,
@@ -119,11 +119,10 @@ export class ConfigService {
   }
 
   public mergeOctoprintURL(urlSplit: URLSplit): string {
-    // TODO: remove api/ from URL for v2.2.0
     if (urlSplit.port !== null || !isNaN(urlSplit.port)) {
-      return `http://${urlSplit.host}:${urlSplit.port}/api/`;
+      return `http://${urlSplit.host}:${urlSplit.port}/`;
     } else {
-      return `http://${urlSplit.host}/api/`;
+      return `http://${urlSplit.host}/`;
     }
   }
 
@@ -146,8 +145,9 @@ export class ConfigService {
     return this.httpHeaders;
   }
 
-  public getURL(path: string): string {
-    return this.config.octoprint.url + path;
+  public getApiURL(path: string, includeApi = true): string {
+    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
+    else return `${this.config.octoprint.url}${path}`;
   }
 
   public getAPIPollingInterval(): number {
