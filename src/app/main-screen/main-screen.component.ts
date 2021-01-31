@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AppService } from '../app.service';
+import { FilesService } from '../files.service';
 import { JobService } from '../job.service';
 
 @Component({
@@ -10,13 +10,13 @@ import { JobService } from '../job.service';
 export class MainScreenComponent {
   public printing = false;
 
-  public constructor(private jobService: JobService, private service: AppService) {}
+  public constructor(private _jobService: JobService, private _fileService: FilesService) {}
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    return this._jobService.isPrinting();
   }
 
   public isFileLoaded(): boolean {
-    return this.service.getLoadedFile();
+    return this._fileService.loadedFile;
   }
 }

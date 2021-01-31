@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import _ from 'lodash';
 import { Subscription } from 'rxjs';
 
-import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
+import { ConversionService } from './conversion.service';
 import { NotificationService } from './notification/notification.service';
 import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './octoprint/model/file';
 
@@ -12,31 +12,32 @@ import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './octopr
   providedIn: 'root',
 })
 export class FilesService {
-  private httpGETRequest: Subscription;
-  private httpGETRequestTimeout: ReturnType<typeof setTimeout>;
-  private httpPOSTRequest: Subscription;
-  private httpDELETERequest: Subscription;
+  private _getRequest: Subscription;
+  private _getRequestTimeout: ReturnType<typeof setTimeout>;
+  private _postRequest: Subscription;
+  private _deleteRequest: Subscription;
+  private _loadedFile = false;
 
   public constructor(
-    private configService: ConfigService,
-    private http: HttpClient,
-    private notificationService: NotificationService,
-    private service: AppService,
+    private _configService: ConfigService,
+    private _http: HttpClient,
+    private _notificationService: NotificationService,
+    private _conversionService: ConversionService,
   ) {}
 
   public getFolder(folderPath = '/'): Promise<(File | Folder)[]> {
     return new Promise((resolve, reject): void => {
-      this.httpGETRequestTimeout = setTimeout(() => {
-        this.httpGETRequest.unsubscribe();
-        this.notificationService.setError("Can't retrieve folder!", 'Operation timed out. Please try again.');
+      this._getRequestTimeout = setTimeout(() => {
+        this._getRequest.unsubscribe();
+        this._notificationService.setError("Can't retrieve folder!", 'Operation timed out. Please try again.');
         reject();
       }, 10000);
       folderPath = folderPath === '/' ? '' : folderPath;
-      if (this.httpGETRequest) {
-        this.httpGETRequest.unsubscribe();
+      if (this._getRequest) {
+        this._getRequest.unsubscribe();
       }
-      this.httpGETRequest = this.http
-        .get(this.configService.getApiURL('files' + folderPath), this.configService.getHTTPHeaders())
+      this._getRequest = this._http
+        .get(this._configService.getApiURL('files' + folderPath), this._configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFolder & OctoprintFolderContent): void => {
             if ('children' in data) {
@@ -60,7 +61,7 @@ export class FilesService {
                   type: 'folder',
                   path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
-                  size: this.service.convertByteToMegabyte(fileOrFolder.size),
+                  size: this._conversionService.convertByteToMegabyte(fileOrFolder.size),
                 } as unknown) as Folder);
               } else if (fileOrFolder.typePath.includes('gcode')) {
                 let filamentLength = 0;
@@ -83,11 +84,13 @@ export class FilesService {
                   path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                   name: fileOrFolder.name,
                   date: fileOrFolder.date,
-                  size: this.service.convertByteToMegabyte(fileOrFolder.size),
+                  size: this._conversionService.convertByteToMegabyte(fileOrFolder.size),
                   ...(fileOrFolder.gcodeAnalysis
                     ? {
-                        printTime: this.service.convertSecondsToHours(fileOrFolder.gcodeAnalysis.estimatedPrintTime),
-                        filamentWeight: this.service.convertFilamentLengthToWeight(filamentLength),
+                        printTime: this._conversionService.convertSecondsToHours(
+                          fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                        ),
+                        filamentWeight: this._conversionService.convertFilamentLengthToWeight(filamentLength),
                       }
                     : {}),
                 } as unknown) as File);
@@ -117,19 +120,19 @@ export class FilesService {
           },
           (error: HttpErrorResponse): void => {
             if (error.status === 404) {
-              this.notificationService.setError("Can't find specified folder!", error.message);
+              this._notificationService.setError("Can't find specified folder!", error.message);
               if (folderPath !== '/') {
                 this.getFolder(folderPath.substring(0, folderPath.lastIndexOf('/')));
               } else {
                 reject();
               }
             } else {
-              this.notificationService.setError("Can't retrieve folder!", error.message);
+              this._notificationService.setError("Can't retrieve folder!", error.message);
               reject();
             }
           },
           (): void => {
-            clearTimeout(this.httpGETRequestTimeout);
+            clearTimeout(this._getRequestTimeout);
           },
         );
     });
@@ -137,11 +140,11 @@ export class FilesService {
 
   public getFile(filePath: string): Promise<File> {
     return new Promise((resolve, reject): void => {
-      if (this.httpGETRequest) {
-        this.httpGETRequest.unsubscribe();
+      if (this._getRequest) {
+        this._getRequest.unsubscribe();
       }
-      this.httpGETRequest = this.http
-        .get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
+      this._getRequest = this._http
+        .get(this._configService.getApiURL('files' + filePath), this._configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFile): void => {
             let filamentLength = 0;
@@ -154,24 +157,24 @@ export class FilesService {
               type: 'file',
               path: '/' + data.origin + '/' + data.path,
               name: data.name,
-              size: this.service.convertByteToMegabyte(data.size),
+              size: this._conversionService.convertByteToMegabyte(data.size),
               ...(data.gcodeAnalysis
                 ? {
-                    date: this.service.convertDateToString(new Date(data.date * 1000)),
-                    printTime: this.service.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
-                    filamentWeight: this.service.convertFilamentLengthToWeight(filamentLength),
+                    date: this._conversionService.convertDateToString(new Date(data.date * 1000)),
+                    printTime: this._conversionService.convertSecondsToHours(data.gcodeAnalysis.estimatedPrintTime),
+                    filamentWeight: this._conversionService.convertFilamentLengthToWeight(filamentLength),
                   }
                 : {}),
-              thumbnail: data.thumbnail ? this.configService.getApiURL(data.thumbnail, false) : 'assets/object.svg',
+              thumbnail: data.thumbnail ? this._configService.getApiURL(data.thumbnail, false) : 'assets/object.svg',
             } as unknown) as File;
             resolve(file);
           },
           (error: HttpErrorResponse): void => {
             if (error.status === 404) {
-              this.notificationService.setError("Can't find specified file!", error.message);
+              this._notificationService.setError("Can't find specified file!", error.message);
               reject();
             } else {
-              this.notificationService.setError("Can't retrieve folder!", error.message);
+              this._notificationService.setError("Can't retrieve folder!", error.message);
               reject();
             }
           },
@@ -181,72 +184,80 @@ export class FilesService {
 
   public getThumbnail(filePath: string): Promise<string | undefined> {
     return new Promise((resolve, reject): void => {
-      if (this.httpGETRequest) {
-        this.httpGETRequest.unsubscribe();
+      if (this._getRequest) {
+        this._getRequest.unsubscribe();
       }
-      this.httpGETRequest = this.http
-        .get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
+      this._getRequest = this._http
+        .get(this._configService.getApiURL('files' + filePath), this._configService.getHTTPHeaders())
         .subscribe(
           (data: OctoprintFile): void => {
             const thumbnail = data.thumbnail
-              ? this.configService.getApiURL(data.thumbnail, false)
+              ? this._configService.getApiURL(data.thumbnail, false)
               : 'assets/object.svg';
             resolve(thumbnail);
           },
           (error: HttpErrorResponse): void => {
-            this.notificationService.setError("Can't load thumbnail!", error.message);
+            this._notificationService.setError("Can't load thumbnail!", error.message);
             reject();
           },
         );
     });
   }
 
+  public set loadedFile(value: boolean) {
+    this._loadedFile = value;
+  }
+
+  public get loadedFile(): boolean {
+    return this._loadedFile;
+  }
+
   public loadFile(filePath: string): void {
-    if (this.httpPOSTRequest) {
-      this.httpPOSTRequest.unsubscribe();
+    if (this._postRequest) {
+      this._postRequest.unsubscribe();
     }
     const loadFileBody = {
       command: 'select',
       print: false,
     };
-    this.httpPOSTRequest = this.http
-      .post(this.configService.getApiURL('files' + filePath), loadFileBody, this.configService.getHTTPHeaders())
+    this._postRequest = this._http
+      .post(this._configService.getApiURL('files' + filePath), loadFileBody, this._configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
-          this.notificationService.setError("Can't load the file!", error.message);
+          this._notificationService.setError("Can't load the file!", error.message);
         },
       );
   }
 
   public printFile(filePath: string): void {
-    if (this.httpPOSTRequest) {
-      this.httpPOSTRequest.unsubscribe();
+    if (this._postRequest) {
+      this._postRequest.unsubscribe();
     }
     const printFileBody = {
       command: 'select',
       print: true,
     };
-    this.httpPOSTRequest = this.http
-      .post(this.configService.getApiURL('files' + filePath), printFileBody, this.configService.getHTTPHeaders())
+    this._postRequest = this._http
+      .post(this._configService.getApiURL('files' + filePath), printFileBody, this._configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
-          this.notificationService.setError("Can't start print!", error.message);
+          this._notificationService.setError("Can't start print!", error.message);
         },
       );
   }
 
   public deleteFile(filePath: string): void {
-    if (this.httpDELETERequest) {
-      this.httpDELETERequest.unsubscribe();
+    if (this._deleteRequest) {
+      this._deleteRequest.unsubscribe();
     }
-    this.httpDELETERequest = this.http
-      .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
+    this._deleteRequest = this._http
+      .delete(this._configService.getApiURL('files' + filePath), this._configService.getHTTPHeaders())
       .subscribe(
         (): void => null,
         (error: HttpErrorResponse): void => {
-          this.notificationService.setError("Can't delete file!", error.message);
+          this._notificationService.setError("Can't delete file!", error.message);
         },
       );
   }

@@ -1,11 +1,9 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import _ from 'lodash';
-import { ElectronService } from 'ngx-electron';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
-import { NotificationService } from './notification/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -13,39 +11,27 @@ import { NotificationService } from './notification/notification.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public constructor(
-    private service: AppService,
-    private configService: ConfigService,
-    private notificationService: NotificationService,
-    private router: Router,
-    private electronService: ElectronService,
-  ) {}
-
   public activated = false;
   public status = 'initializing';
   public showConnectionHint = false;
+
+  public constructor(private _service: AppService, private _configService: ConfigService, private _router: Router) {}
 
   public ngOnInit(): void {
     this.initialize();
   }
 
   private initialize(): void {
-    if (!this.electronService.isElectronApp) {
-      this.notificationService.setWarning(
-        'Non electron environment detected!',
-        'The app may not work as intended. If you run an official build please open a new issue on GitHub.',
-      );
-    }
-    if (this.configService && this.configService.isInitialized()) {
-      if (this.configService.isLoaded()) {
-        if (this.configService.isValid()) {
+    if (this._configService && this._configService.isInitialized()) {
+      if (this._configService.isLoaded()) {
+        if (this._configService.isValid()) {
           this.connectWebsocket();
           this.status = 'connecting';
         } else {
           this.checkInvalidConfig();
         }
       } else {
-        this.router.navigate(['/no-config']);
+        this._router.navigate(['/no-config']);
       }
     } else {
       setTimeout(this.initialize.bind(this), 1000);
@@ -53,28 +39,29 @@ export class AppComponent implements OnInit {
   }
 
   private checkInvalidConfig() {
-    const errors = this.configService.getErrors();
+    const errors = this._configService.getErrors();
 
-    if (this.service.hasUpdateError(errors)) {
-      if (this.service.fixUpdateErrors(errors)) {
+    if (this._service.hasUpdateError(errors)) {
+      if (this._service.fixUpdateErrors(errors)) {
         this.initialize();
       } else {
-        this.configService.setUpdate();
-        this.router.navigate(['/no-config']);
+        this._configService.setUpdate();
+        this._router.navigate(['/no-config']);
       }
     } else {
-      this.router.navigate(['/invalid-config']);
+      this._router.navigate(['/invalid-config']);
     }
   }
 
   private connectWebsocket() {
+    this._service.connectSocket();
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
     }, 2000);
-    // if (this.configService.isTouchscreen()) {
-    //   this.router.navigate(['/main-screen']);
+    // if (this._configService.isTouchscreen()) {
+    //   this._router.navigate(['/main-screen']);
     // } else {
-    //   this.router.navigate(['/main-screen-no-touch']);
+    //   this._router.navigate(['/main-screen-no-touch']);
     // }
     // this.octoprintScriptService
     //   .initialize(this.configService.getURL(''), this.configService.getAccessKey())

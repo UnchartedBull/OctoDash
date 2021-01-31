@@ -30,70 +30,70 @@ export class JobService {
     this.previewWhilePrinting = this.configService.showThumbnailByDefault();
     this.observable = new Observable((observer: Observer<Job>): void => {
       this.observer = observer;
-      timer(750, this.configService.getAPIPollingInterval()).subscribe((): void => {
-        if (this.httpGETRequest) {
-          this.httpGETRequest.unsubscribe();
-        }
-        this.httpGETRequest = this.http
-          .get(this.configService.getApiURL('job'), this.configService.getHTTPHeaders())
-          .subscribe(
-            async (data: OctoprintJobStatus): Promise<void> => {
-              let job: Job = null;
-              if (data.job && data.job.file.name) {
-                this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(
-                  data.state,
-                );
-                try {
-                  job = {
-                    status: JobStatus[data.state],
-                    filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
-                    thumbnail: await this.fileService.getThumbnail(
-                      '/' + data.job.file.origin + '/' + data.job.file.path,
-                    ),
-                    progress: Math.round(data.progress.completion),
-                    ...(data.job.filament !== null
-                      ? {
-                          filamentAmount: this.service.convertFilamentLengthToWeight(
-                            this.getTotalAmountOfFilament(data.job.filament),
-                          ),
-                        }
-                      : {}),
-                    ...(data.progress.printTimeLeft !== null
-                      ? {
-                          timeLeft: {
-                            value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
-                            unit: 'h',
-                          },
-                        }
-                      : {}),
-                    timePrinted: {
-                      value: this.service.convertSecondsToHours(data.progress.printTime),
-                      unit: 'h',
-                    },
-                    ...(data.job.estimatedPrintTime !== null
-                      ? {
-                          estimatedPrintTime: {
-                            value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
-                            unit: 'h',
-                          },
-                          estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
-                        }
-                      : {}),
-                  };
-                } catch (error) {
-                  this.notificationService.setError("Can't retrieve Job Status", error);
-                }
-              } else {
-                this.printing = false;
-              }
-              observer.next(job);
-            },
-            (error: HttpErrorResponse): void => {
-              this.printing = false;
-              this.notificationService.setError("Can't retrieve jobs!", error.message);
-            },
-          );
-      });
+      // timer(750, this.configService.getAPIPollingInterval()).subscribe((): void => {
+      //   if (this.httpGETRequest) {
+      //     this.httpGETRequest.unsubscribe();
+      //   }
+      //   this.httpGETRequest = this.http
+      //     .get(this.configService.getApiURL('job'), this.configService.getHTTPHeaders())
+      //     .subscribe(
+      //       async (data: OctoprintJobStatus): Promise<void> => {
+      //         let job: Job = null;
+      //         if (data.job && data.job.file.name) {
+      //           this.printing = ['Printing', 'Pausing', 'Paused', 'Cancelling', 'Printing from SD'].includes(
+      //             data.state,
+      //           );
+      //           try {
+      //             job = {
+      //               status: JobStatus[data.state],
+      //               filename: data.job.file.display.replace('.gcode', '').replace('.ufp', ''),
+      //               thumbnail: await this.fileService.getThumbnail(
+      //                 '/' + data.job.file.origin + '/' + data.job.file.path,
+      //               ),
+      //               progress: Math.round(data.progress.completion),
+      //               ...(data.job.filament !== null
+      //                 ? {
+      //                     filamentAmount: this.service.convertFilamentLengthToWeight(
+      //                       this.getTotalAmountOfFilament(data.job.filament),
+      //                     ),
+      //                   }
+      //                 : {}),
+      //               ...(data.progress.printTimeLeft !== null
+      //                 ? {
+      //                     timeLeft: {
+      //                       value: this.service.convertSecondsToHours(data.progress.printTimeLeft),
+      //                       unit: 'h',
+      //                     },
+      //                   }
+      //                 : {}),
+      //               timePrinted: {
+      //                 value: this.service.convertSecondsToHours(data.progress.printTime),
+      //                 unit: 'h',
+      //               },
+      //               ...(data.job.estimatedPrintTime !== null
+      //                 ? {
+      //                     estimatedPrintTime: {
+      //                       value: this.service.convertSecondsToHours(data.job.estimatedPrintTime),
+      //                       unit: 'h',
+      //                     },
+      //                     estimatedEndTime: this.calculateEndTime(data.job.estimatedPrintTime),
+      //                   }
+      //                 : {}),
+      //             };
+      //           } catch (error) {
+      //             this.notificationService.setError("Can't retrieve Job Status", error);
+      //           }
+      //         } else {
+      //           this.printing = false;
+      //         }
+      //         observer.next(job);
+      //       },
+      //       (error: HttpErrorResponse): void => {
+      //         this.printing = false;
+      //         this.notificationService.setError("Can't retrieve jobs!", error.message);
+      //       },
+      //     );
+      // });
     }).pipe(shareReplay(1));
     this.observable.subscribe();
   }

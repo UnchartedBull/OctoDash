@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
+import { FilesService } from '../files.service';
 import { Job, JobService } from '../job.service';
 import { NotificationService } from '../notification/notification.service';
 
@@ -16,14 +16,14 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public job: Job;
 
   public constructor(
-    private jobService: JobService,
-    private service: AppService,
-    private notificationService: NotificationService,
-    private configService: ConfigService,
+    private _jobService: JobService,
+    private _fileService: FilesService,
+    private _notificationService: NotificationService,
+    private _configService: ConfigService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
+    this.subscriptions.add(this._jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
   }
 
   public ngOnDestroy(): void {
@@ -31,41 +31,41 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public isFileLoaded(): boolean {
-    return this.service.getLoadedFile();
+    return this._fileService.loadedFile;
   }
 
   public isPreheatEnabled(): boolean {
-    return this.configService.isPreheatPluginEnabled();
+    return this._configService.isPreheatPluginEnabled();
   }
 
   public preheat(): void {
-    this.jobService.preheat();
+    this._jobService.preheat();
   }
 
   public preheatDisabled(): void {
-    this.notificationService.setWarning(
+    this._notificationService.setWarning(
       'Preheat Plugin is not enabled!',
       'Please make sure to install and enable the Preheat Plugin to use this functionality.',
     );
   }
 
   public discardLoadedFile(): void {
-    this.service.setLoadedFile(false);
+    this._fileService.loadedFile = false;
   }
 
   public startJob(): void {
-    this.jobService.startJob();
+    this._jobService.startJob();
     setTimeout((): void => {
-      this.service.setLoadedFile(false);
+      this._fileService.loadedFile = false;
     }, 5000);
   }
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    return this._jobService.isPrinting();
   }
 
   public showPreview(): boolean {
-    return this.jobService.showPreviewWhilePrinting();
+    return this._jobService.showPreviewWhilePrinting();
   }
 
   public hasProperty(object: Record<string, unknown>, name: string): boolean {
@@ -73,6 +73,6 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public useCircularProgressBar(): boolean {
-    return this.configService.getPreviewProgressCircle();
+    return this._configService.getPreviewProgressCircle();
   }
 }

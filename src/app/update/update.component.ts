@@ -35,7 +35,7 @@ export class UpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.service.latestVersion || !this.service.getLatestVersionAssetsURL()) {
+    if (!this.service.latestVersion || !this.service.latestVersionAssetsURL) {
       this.notificationService.setWarning(
         "Can't initiate update!",
         'Some information is missing, please try again in an hour or update manually.',
@@ -43,7 +43,7 @@ export class UpdateComponent implements OnInit {
       this.closeUpdateWindow();
     } else {
       this.setupListeners();
-      this.update(this.service.getLatestVersionAssetsURL());
+      this.update(this.service.latestVersionAssetsURL);
     }
   }
 
