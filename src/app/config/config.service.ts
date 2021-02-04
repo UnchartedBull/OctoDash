@@ -269,6 +269,10 @@ export class ConfigService {
     return this.config.octoprint.accessToken;
   }
 
+  public getDisableExtruderGCode(): string {
+    return this.config.printer.disableExtruderGCode;
+  }
+
   public getZBabystepGCode(): string {
     return this.config.printer.zBabystepGCode;
   }

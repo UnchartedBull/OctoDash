@@ -9,6 +9,7 @@ export const defaultConfig: Config = {
     name: '',
     xySpeed: 150,
     zSpeed: 5,
+    disableExtruderGCode: 'M18 E',
     zBabystepGCode: 'M290 Z',
     defaultTemperatureFanSpeed: {
       hotend: 200,
