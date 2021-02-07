@@ -1,6 +1,6 @@
-# NOX theme V0.2
+# NOX theme V0.2.1
 
-I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher (at least 50%):
+I suggest setting the thumbnail resolution in PrusaSlicer a little bit higher if you want a sharper image:
 
 ```
 thumbnails = 16x16,330x186
