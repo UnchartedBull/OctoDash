@@ -294,8 +294,9 @@ ngx-spinner .overlay{
 .job-info__print-details {
     position:absolute!important;
     top: 19vh!important;
-    left: 37vw!important;
+    left: 39.6vw!important;
     margin:0!important;
+    /* line-height: 1!important; */
 }
 
 .job-info__actions-item-heat{
@@ -314,21 +315,17 @@ ngx-spinner .overlay{
     z-index: 10000000000;
 }
 
-.job-info__print-details span br{
-    display: none;
-}
-
 .job-info__print-details-value{
     margin-top: 0!important;
     margin-bottom: 0!important;
     padding-bottom: 0!important;
+    font-size: 3vw!important;
+    position: relative!important;
+    top: -1vh!important;
 }
 
 .job-info__print-details-finish-state{
-    display: table;
-    position: relative;
-    left: 5vw!important;
-    margin-bottom:2vh!important;
+    display: none;
 }
 
 /**************************************** FILE LOADED - PRINTER STATUS ****************************************/
@@ -587,7 +584,7 @@ round-progress svg circle{
 }
 
 .settings__version::after{
-    content: " \00a0 | \00a0 NOX theme v0.2";
+    content: " \00a0 | \00a0 NOX theme v0.2.1";
     width: auto!important;
 }
 
