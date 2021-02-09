@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from './config/config.service';

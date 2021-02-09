@@ -89,7 +89,7 @@ export class ConfigSetupComponent implements OnInit {
   }
 
   private saveConfig(): void {
-    this.configSaved = this.configService.saveConfig(this.config);
+    this.configService.saveConfig(this.config);
   }
 
   public finishWizard(): void {

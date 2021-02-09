@@ -1,4 +1,4 @@
-export const configSchema = {
+const configSchema = {
   definitions: {},
   $schema: 'http://json-schema.org/draft-07/schema#',
   $id: 'http://example.com/root.json',
@@ -322,3 +322,5 @@ export const configSchema = {
     },
   },
 };
+
+module.exports = configSchema;

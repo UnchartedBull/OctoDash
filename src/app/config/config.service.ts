@@ -1,50 +1,59 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import Ajv from 'ajv';
-import _ from 'lodash';
+import { Injectable, NgZone } from '@angular/core';
+import _ from 'lodash-es';
+import { ElectronService } from 'ngx-electron';
 
 import { NotificationService } from '../notification/notification.service';
 import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
-import { configSchema } from './config.schema';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private store: any | undefined;
-  private validator: Ajv.ValidateFunction;
-
   private config: Config;
   private valid: boolean;
+  private errors: string[];
   private update = false;
   private initialized = false;
 
   private httpHeaders: HttpHeader;
 
-  public constructor(private notificationService: NotificationService) {
-    const ajv = new Ajv({ allErrors: true });
-    this.validator = ajv.compile(configSchema);
-    try {
-      const Store = window.require('electron-store');
-      this.store = new Store();
-      this.initialize(this.store.get('config'));
-    } catch (e) {
-      console.error(e);
+  public constructor(
+    private notificationService: NotificationService,
+    private _electronService: ElectronService,
+    private _zone: NgZone,
+  ) {
+    this._electronService.ipcRenderer.addListener('configRead', (_, config: Config) => this.initialize(config));
+    this._electronService.ipcRenderer.addListener('configSaved', (_, config: Config) => this.initialize(config));
+    this._electronService.ipcRenderer.addListener('configError', (_, error: string) => {
       this.notificationService.setError(
-        "Can't read config file!",
+        error,
         'Please restart your system. If the issue persists open an issue on GitHub.',
       );
-    }
+    });
+
+    this._electronService.ipcRenderer.addListener('configPass', () => {
+      this._zone.run(() => {
+        this.valid = true;
+        this.generateHttpHeaders();
+        this.initialized = true;
+      });
+    });
+    this._electronService.ipcRenderer.addListener('configFail', (_, errors) => {
+      this._zone.run(() => {
+        this.valid = false;
+        this.errors = errors;
+        console.error(errors);
+        this.initialized = true;
+      });
+    });
+
+    this._electronService.ipcRenderer.send('readConfig');
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.valid = this.validate();
-    if (this.valid) {
-      this.generateHttpHeaders();
-    }
-    this.initialized = true;
+    this._electronService.ipcRenderer.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -58,10 +67,6 @@ export class ConfigService {
     };
   }
 
-  public getRemoteConfig(): Config {
-    return this.store.get('config');
-  }
-
   public getCurrentConfig(): Config {
     return _.cloneDeep(this.config);
   }
@@ -70,42 +75,17 @@ export class ConfigService {
     return _.isEqual(this.config, changedConfig);
   }
 
-  public validate(): boolean {
-    return this.validator(this.config) ? true : false;
-  }
-
   public validateGiven(config: Config): boolean {
-    return this.validator(config) ? true : false;
+    // TODO
+    return true;
   }
 
   public getErrors(): string[] {
-    const errors = [];
-    this.validator.errors?.forEach((error): void => {
-      if (error.keyword === 'type') {
-        errors.push(`${error.dataPath} ${error.message}`);
-      } else {
-        errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
-      }
-    });
-    console.error(errors);
-    return errors;
+    return this.errors;
   }
 
-  public saveConfig(config: Config): string {
-    try {
-      this.store.set('config', config);
-      const configStored = this.store.get('config');
-      if (this.validateGiven(configStored)) {
-        this.config = config;
-        this.valid = true;
-        this.generateHttpHeaders();
-        return null;
-      } else {
-        return 'Saved config is invalid!';
-      }
-    } catch {
-      return 'Saving config failed!';
-    }
+  public saveConfig(config: Config): void {
+    this._electronService.ipcRenderer.send('saveConfig', config);
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {

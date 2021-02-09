@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
     if (this._configService && this._configService.isInitialized()) {
       if (this._configService.isLoaded()) {
         if (this._configService.isValid()) {
-          this.connectWebsocket();
           this.status = 'connecting';
+          this.connectWebsocket();
         } else {
           this.checkInvalidConfig();
         }

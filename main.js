@@ -10,21 +10,24 @@ const Store = require('electron-store');
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
 const dev = args.some(val => val === '--serve');
-const scheme = 'app';
 
 const activateListeners = require('./helper/listener');
-const createProtocol = require('./helper/protocol');
 
-protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
-createProtocol(scheme, path.join(__dirname, 'dist'));
+if (!dev) {
+  const createProtocol = require('./helper/protocol');
+  const scheme = 'app';
+
+  protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
+  createProtocol(scheme, path.join(__dirname, 'dist'));
+}
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
-
-const store = new Store();
 
 let window;
 
 function createWindow() {
+  const _store = new Store();
+
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
       callback({

@@ -18,7 +18,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "allowedCommonJsDependencies": ["angular-svg-round-progressbar", "lodash", "ajv"],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",

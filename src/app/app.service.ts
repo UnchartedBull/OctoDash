@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { ElectronService } from 'ngx-electron';
 
 import { Config } from './config/config.model';
@@ -30,8 +30,6 @@ export class AppService {
     this.enableCustomCSSListener();
     this._electronService.ipcRenderer.send('appInfo');
 
-    // this._socketService = this._injector.get(OctoPrintSocketService);
-
     // list of all error following an upgrade
     this._updateError = {
       ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
@@ -56,7 +54,6 @@ export class AppService {
     const config = this._configService.getCurrentConfig();
 
     config.octoprint.url = config.octoprint.url.replace('api/', '');
-    console.log(config.octoprint);
 
     let fullyFixed = true;
     for (const error of errors) {
