@@ -43,6 +43,8 @@ export class AppService {
         (config.octodash.screenSleepCommand = 'xset dpms force standby'),
       ".octodash should have required property 'screenWakeupCommand'": config =>
         (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
+      ".printer should have required property 'disableExtruderGCode'": config =>
+        (config.printer.disableExtruderGCode = 'M18 E'),
     };
   }
 
