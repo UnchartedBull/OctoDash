@@ -125,8 +125,8 @@ export class AppService {
     return this._latestVersionAssetsURL;
   }
 
-  public connectSocket(): void {
-    this._socketService.connect();
+  public connectSocket(): Promise<void> {
+    return this._socketService.connect();
   }
 }
 

@@ -54,27 +54,18 @@ export class AppComponent implements OnInit {
   }
 
   private connectWebsocket() {
-    this._service.connectSocket();
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
     }, 2000);
-    // if (this._configService.isTouchscreen()) {
-    //   this._router.navigate(['/main-screen']);
-    // } else {
-    //   this._router.navigate(['/main-screen-no-touch']);
-    // }
-    // this.octoprintScriptService
-    //   .initialize(this.configService.getURL(''), this.configService.getAccessKey())
-    //   .then(() => {
-    //     this.octoprintScriptService.authenticate(this.configService.getAccessKey());
-    //   })
-    //   .catch(() => {
-    //     console.log('REJECTED');
-    //     this.notificationService.setError(
-    //       "Can't get OctoPrint script!",
-    //       'Please restart your machine. If the error persists open a new issue on GitHub.',
-    //     );
-    //   })
-    //   .finally(() => clearTimeout(showPrinterConnectedTimeout));
+    this._service
+      .connectSocket()
+      .then(() => {
+        if (this._configService.isTouchscreen()) {
+          this._router.navigate(['/main-screen']);
+        } else {
+          this._router.navigate(['/main-screen-no-touch']);
+        }
+      })
+      .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 }

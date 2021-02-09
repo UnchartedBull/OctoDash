@@ -17,20 +17,22 @@ export class OctoPrintSocketService implements SocketService {
     private _notificationService: NotificationService,
   ) {}
 
-  public connect(): void {
-    this._authService
-      .getSessionKey(this._configService.getApiURL('login'), this._configService.getHTTPHeaders())
-      .subscribe(
-        socketAuth => {
-          this.connectSocket();
-          this.authenticateSocket(socketAuth);
-          this._socket.subscribe(messages => console.log(messages));
-        },
-        () => {
-          setTimeout(this.connect.bind(this), this._fastInterval < 6 ? 5000 : 15000);
-          this._fastInterval += 1;
-        },
-      );
+  public connect(): Promise<void> {
+    return new Promise(resolve => {
+      this._authService
+        .getSessionKey(this._configService.getApiURL('login'), this._configService.getHTTPHeaders())
+        .subscribe(
+          socketAuth => {
+            this.connectSocket();
+            this.setupSocket(resolve);
+            this.authenticateSocket(socketAuth);
+          },
+          () => {
+            setTimeout(this.connect.bind(this), this._fastInterval < 6 ? 5000 : 15000);
+            this._fastInterval += 1;
+          },
+        );
+    });
   }
 
   private connectSocket() {
@@ -45,6 +47,28 @@ export class OctoPrintSocketService implements SocketService {
       auth: `${socketAuth.user}:${socketAuth.session}`,
     };
     this._socket.next(payload);
+  }
+
+  private setupSocket(resolve: () => void) {
+    this._socket.subscribe(message => {
+      if (Object.hasOwnProperty.bind(message)('current')) {
+        console.log('CURRENT RECEIVED');
+      } else if (Object.hasOwnProperty.bind(message)('event')) {
+        console.log('EVENT RECEIVED');
+      } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+        console.log('PLUGIN RECEIVED');
+      } else if (Object.hasOwnProperty.bind(message)('history')) {
+        console.log('HISTORY RECEIVED');
+      } else if (Object.hasOwnProperty.bind(message)('reauth')) {
+        console.log('REAUTH REQUIRED');
+      } else if (Object.hasOwnProperty.bind(message)('connected')) {
+        console.log('CONNECTED RECEIVED');
+        resolve();
+      } else {
+        console.log('UNKNOWN MESSAGE');
+        console.log(message);
+      }
+    });
   }
 
   public get temperatureSubscribable(): any {
