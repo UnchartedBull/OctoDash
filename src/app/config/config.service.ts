@@ -75,11 +75,6 @@ export class ConfigService {
     return _.isEqual(this.config, changedConfig);
   }
 
-  public validateGiven(config: Config): boolean {
-    // TODO
-    return true;
-  }
-
   public getErrors(): string[] {
     return this.errors;
   }

@@ -14,7 +14,7 @@ function activateScreenSleepListener(ipcMain) {
 function activateReloadListener(ipcMain, window, dev) {
   ipcMain.on('reload', () => {
     if (dev) {
-      window.reload();
+      window.loadURL('http://localhost:4200');
     } else {
       window.loadURL('app://.');
     }

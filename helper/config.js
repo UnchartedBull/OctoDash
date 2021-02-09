@@ -22,28 +22,35 @@ function readConfig(window) {
 
 function saveConfig(window, config) {
   if (validate(config)) {
-    store.set('config', config);
-    window.webContents.send('configSaved', config);
+    try {
+      store.set('config', config);
+      window.webContents.send('configSaved', config);
+    } catch {
+      window.webContents.send('configError', "Can't save config file.");
+    }
   } else {
-    window.webContents.send('configError', "Can't save config.");
+    window.webContents.send('configSaveFail', getConfigErrors());
   }
 }
 
 function checkConfig(window, config) {
   if (!validate(config)) {
-    const errors = [];
-    validate.errors?.forEach(error => {
-      if (error.keyword === 'type') {
-        errors.push(`${error.dataPath} ${error.message}`);
-      } else {
-        errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
-      }
-    });
-
-    window.webContents.send('configFail', errors);
+    window.webContents.send('configFail', getConfigErrors());
   } else {
     window.webContents.send('configPass');
   }
+}
+
+function getConfigErrors() {
+  const errors = [];
+  validate.errors?.forEach(error => {
+    if (error.keyword === 'type') {
+      errors.push(`${error.dataPath} ${error.message}`);
+    } else {
+      errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
+    }
+  });
+  return errors;
 }
 
 module.exports = { readConfig, saveConfig, checkConfig };
