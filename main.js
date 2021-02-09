@@ -5,6 +5,7 @@ require('v8-compile-cache');
 
 const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
 const path = require('path');
+const Store = require('electron-store');
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
@@ -18,6 +19,8 @@ protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: 
 createProtocol(scheme, path.join(__dirname, 'dist'));
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
+
+const store = new Store();
 
 let window;
 

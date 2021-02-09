@@ -25,7 +25,7 @@ export const configSchema = {
     printer: {
       $id: '#/properties/printer',
       type: 'object',
-      required: ['name', 'xySpeed', 'zSpeed', 'zBabystepGCode', 'defaultTemperatureFanSpeed'],
+      required: ['name', 'xySpeed', 'zSpeed', 'disableExtruderGCode', 'zBabystepGCode', 'defaultTemperatureFanSpeed'],
       properties: {
         name: {
           $id: '#/properties/printer/properties/name',
@@ -39,6 +39,11 @@ export const configSchema = {
         zSpeed: {
           $id: '#/properties/printer/properties/zSpeed',
           type: 'integer',
+        },
+        disableExtruderGCode: {
+          $id: '#/properties/printer/properties/disableExtruderGCode',
+          type: 'string',
+          pattern: '^(.*)$',
         },
         zBabystepGCode: {
           $id: '#/properties/printer/properties/zBabystepGCode',

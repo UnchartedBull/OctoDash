@@ -28,7 +28,7 @@ export class ChangeFilamentComponent implements OnInit {
   }
 
   private disableExtruderStepper(): void {
-    this.printerService.executeGCode('M18 E ');
+    this.printerService.executeGCode(`${this.configService.getDisableExtruderGCode()}`);
   }
 
   private initiateM600FilamentChange(): void {
