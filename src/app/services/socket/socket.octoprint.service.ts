@@ -6,7 +6,6 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { ConfigService } from '../../config/config.service';
 import { Temperatures } from '../../model';
 import { OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
-import { NotificationService } from '../../notification/notification.service';
 import { AuthService, SocketAuth } from '../auth/octoprint.auth.service';
 import { SocketService } from './socket.service';
 
@@ -15,13 +14,11 @@ export class OctoPrintSocketService implements SocketService {
   private _fastInterval = 0;
   private _socket: WebSocketSubject<unknown>;
   private _temperatureSubject: Subject<Temperatures>;
+  private _printerStatusSubject: Subject<string>;
 
-  public constructor(
-    private _configService: ConfigService,
-    private _authService: AuthService,
-    private _notificationService: NotificationService,
-  ) {
+  public constructor(private _configService: ConfigService, private _authService: AuthService) {
     this._temperatureSubject = new Subject<Temperatures>();
+    this._printerStatusSubject = new Subject<string>();
   }
 
   public connect(): Promise<void> {
@@ -60,6 +57,7 @@ export class OctoPrintSocketService implements SocketService {
     this._socket.subscribe(message => {
       if (Object.hasOwnProperty.bind(message)('current')) {
         this.extractTemperature(message as OctoprintSocketCurrent);
+        this.extractPrinterStatus(message as OctoprintSocketCurrent);
       } else if (Object.hasOwnProperty.bind(message)('event')) {
         console.log('EVENT RECEIVED');
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
@@ -80,7 +78,6 @@ export class OctoPrintSocketService implements SocketService {
 
   public extractTemperature(message: OctoprintSocketCurrent): void {
     if (message.current.temps[0]) {
-      console.log('PUSHING NEW TEMPERATURE');
       this._temperatureSubject.next({
         bed: {
           current: Math.round(message.current.temps[0].bed.actual),
@@ -94,8 +91,11 @@ export class OctoPrintSocketService implements SocketService {
     }
   }
 
-  public get temperatureSubscribable(): Observable<Temperatures> {
-    console.log('GET TEMPERATURE');
+  public extractPrinterStatus(message: OctoprintSocketCurrent): void {
+    this._printerStatusSubject.next(message.current.state.text.toLowerCase());
+  }
+
+  public getTemperatureSubscribable(): Observable<Temperatures> {
     return this._temperatureSubject.pipe(
       startWith({
         tool0: {
@@ -110,8 +110,7 @@ export class OctoPrintSocketService implements SocketService {
     );
   }
 
-  public get zIndicatorSubscribable(): any {
-    console.log('GET TEMPERATURE');
-    return null;
+  public getPrinterStatusSubscribable(): Observable<string> {
+    return this._printerStatusSubject.pipe(startWith('connecting ...'));
   }
 }

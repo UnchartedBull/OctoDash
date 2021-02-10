@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentSpool } from '../model';
+import { FilamentSpool, Temperatures } from '../model';
 import { FilamentService } from '../plugins';
-import { PrinterService, PrinterStatusAPI } from '../printer.service';
+import { PrinterService } from '../printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-filament',
@@ -25,13 +26,14 @@ export class FilamentComponent implements OnInit, OnDestroy {
     private router: Router,
     private configService: ConfigService,
     private printerService: PrinterService,
+    private socketService: SocketService,
     private filament: FilamentService,
   ) {
-    this.printerService
-      .getObservable()
+    this.socketService
+      .getTemperatureSubscribable()
       .pipe(take(1))
-      .subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.hotendPreviousTemperature = printerStatus.nozzle.set;
+      .subscribe((temperatures: Temperatures): void => {
+        this.hotendPreviousTemperature = temperatures.tool0.current;
       });
   }
 

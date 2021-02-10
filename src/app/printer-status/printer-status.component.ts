@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { Temperatures } from '../model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
+import { PrinterService, PrinterValue } from '../printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -40,7 +40,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
       },
       fan: 0,
     };
-    this.status = 'connecting';
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
     this.fanTarget = this.configService.getDefaultFanSpeed();
@@ -48,15 +47,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        // this.printerStatus.nozzle = printerStatus.nozzle;
-        // this.printerStatus.heatbed = printerStatus.heatbed;
-        this.status = printerStatus.status;
-      }),
-    );
-
-    this.subscriptions.add(
-      this._socketService.temperatureSubscribable.subscribe((temperatures: Temperatures): void => {
+      this._socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
         this.printerTemperatures = temperatures;
       }),
     );

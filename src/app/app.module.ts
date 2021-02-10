@@ -42,6 +42,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { FilamentManagerOctoprintService, FilamentPluginService } from './plugins';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterService } from './printer.service';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
@@ -52,7 +53,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
-import { FilamentManagerOctoprintService, FilamentPluginService } from './plugins';
 
 @NgModule({
   declarations: [
@@ -112,13 +112,9 @@ import { FilamentManagerOctoprintService, FilamentPluginService } from './plugin
     [
       {
         provide: SocketService,
-        deps: [ConfigService, AuthService, NotificationService],
-        useFactory: (
-          configService: ConfigService,
-          authService: AuthService,
-          notificationService: NotificationService,
-        ) => {
-          return new OctoPrintSocketService(configService, authService, notificationService);
+        deps: [ConfigService, AuthService],
+        useFactory: (configService: ConfigService, authService: AuthService) => {
+          return new OctoPrintSocketService(configService, authService);
         },
       },
     ],

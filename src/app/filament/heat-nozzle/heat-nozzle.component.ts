@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
-import { FilamentSpool } from '../../model';
-import { PrinterService, PrinterStatusAPI } from '../../printer.service';
+import { FilamentSpool, Temperatures } from '../../model';
+import { PrinterService } from '../../printer.service';
+import { SocketService } from '../../services/socket/socket.service';
 
 @Component({
   selector: 'app-filament-heat-nozzle',
@@ -25,7 +26,11 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private printerService: PrinterService, private configService: ConfigService) {}
+  constructor(
+    private printerService: PrinterService,
+    private socketService: SocketService,
+    private configService: ConfigService,
+  ) {}
 
   ngOnInit(): void {
     this.isHeating = false;
@@ -35,8 +40,8 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
       ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
       : this.configService.getDefaultHotendTemperature();
     this.subscriptions.add(
-      this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.hotendTemperature = printerStatus.nozzle.current;
+      this.socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
+        this.hotendTemperature = temperatures.tool0.current;
       }),
     );
   }

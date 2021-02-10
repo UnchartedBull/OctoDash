@@ -7,7 +7,7 @@ import { Temperatures } from '../../model';
 export abstract class SocketService {
   abstract connect(): Promise<void>;
 
-  abstract get temperatureSubscribable(): Observable<Temperatures>;
+  abstract getTemperatureSubscribable(): Observable<Temperatures>;
 
-  abstract get zIndicatorSubscribable(): void;
+  abstract getPrinterStatusSubscribable(): Observable<string>;
 }

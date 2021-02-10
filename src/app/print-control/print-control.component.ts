@@ -5,8 +5,10 @@ import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { Job, JobService, JobStatus } from '../job.service';
+import { Temperatures } from '../model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService, PrinterStatusAPI } from '../printer.service';
+import { PrinterService } from '../printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-print-control',
@@ -32,6 +34,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
+    private socketService: SocketService,
     private router: Router,
   ) {
     this.temperatureHotend = 0;
@@ -161,12 +164,12 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   }
 
   private loadData(): void {
-    this.printerService
-      .getObservable()
+    this.socketService
+      .getTemperatureSubscribable()
       .pipe(take(1))
-      .subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.temperatureHotend = printerStatus.nozzle.set;
-        this.temperatureHeatbed = printerStatus.heatbed.set;
+      .subscribe((temperatures: Temperatures): void => {
+        this.temperatureHotend = temperatures.tool0.set;
+        this.temperatureHeatbed = temperatures.bed.set;
       });
 
     this.displayLayerProgressService

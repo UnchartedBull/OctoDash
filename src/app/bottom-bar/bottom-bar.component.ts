@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
 import { EnclosureService } from '../plugins/enclosure.service';
-import { PrinterService, PrinterStatusAPI } from '../printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -12,11 +12,11 @@ import { PrinterService, PrinterStatusAPI } from '../printer.service';
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  public printer: Printer;
+  public printerStatus: string;
   public enclosureTemperature: TemperatureReading;
 
   public constructor(
-    private printerService: PrinterService,
+    private socketService: SocketService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
   ) {
@@ -29,25 +29,20 @@ export class BottomBarComponent implements OnDestroy {
     } else {
       this.enclosureTemperature = null;
     }
-    this.printer = {
-      name: this.configService.getPrinterName(),
-      status: 'connecting ...',
-    };
     this.subscriptions.add(
-      this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.printer.status = printerStatus.status;
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: string): void => {
+        this.printerStatus = printerStatus;
       }),
     );
+  }
+
+  public getPrinterName(): string {
+    return this.configService.getPrinterName();
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-}
-
-interface Printer {
-  name: string;
-  status: string;
 }
 
 export interface TemperatureReading {

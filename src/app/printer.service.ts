@@ -1,96 +1,22 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, Observer, Subscription, timer } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { ConfigService } from './config/config.service';
-import { NotificationService } from './notification/notification.service';
 import { OctoprintConnection } from './model/octoprint/connection.model';
-import { OctoprintPrinterStatus } from './model/octoprint/printer-status.model';
+import { NotificationService } from './notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PrinterService {
-  private httpGETRequest: Subscription;
   private httpPOSTRequest: Subscription;
-  private observable: Observable<PrinterStatusAPI>;
 
   public constructor(
     private http: HttpClient,
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private router: Router,
-  ) {
-    this.observable = new Observable((observer: Observer<PrinterStatusAPI>): void => {
-      timer(500, this.configService.getAPIPollingInterval()).subscribe((): void => {
-        if (this.httpGETRequest) {
-          this.httpGETRequest.unsubscribe();
-        }
-        this.httpGETRequest = this.http
-          .get(this.configService.getApiURL('printer'), this.configService.getHTTPHeaders())
-          .subscribe(
-            (data: OctoprintPrinterStatus): void => {
-              const printerStatus: PrinterStatusAPI = {
-                status: data.state.text.toLowerCase(),
-                nozzle: {
-                  current: Math.round(data.temperature.tool0.actual),
-                  set: Math.round(data.temperature.tool0.target),
-                },
-                heatbed: {
-                  current: data.temperature.bed ? Math.round(data.temperature.bed.actual) : 0,
-                  set: data.temperature.bed ? Math.round(data.temperature.bed.target) : 0,
-                },
-              };
-              observer.next(printerStatus);
-            },
-            (error: HttpErrorResponse): void => {
-              if (error.status === 409) {
-                this.isPrinterOffline().then((printerOffline): void => {
-                  if (printerOffline) {
-                    this.router.navigate(['/standby']);
-                  } else {
-                    this.notificationService.setError("Can't retrieve printer status!", error.message);
-                  }
-                });
-              } else if (error.status === 0 && this.notificationService.getBootGrace()) {
-                const printerStatus: PrinterStatusAPI = {
-                  status: `connecting ...`,
-                  nozzle: {
-                    current: 0,
-                    set: 0,
-                  },
-                  heatbed: {
-                    current: 0,
-                    set: 0,
-                  },
-                };
-                observer.next(printerStatus);
-              } else {
-                const printerStatus: PrinterStatusAPI = {
-                  status: `error (${error.status})`,
-                  nozzle: {
-                    current: 0,
-                    set: 0,
-                  },
-                  heatbed: {
-                    current: 0,
-                    set: 0,
-                  },
-                };
-                observer.next(printerStatus);
-                this.notificationService.setError("Can't retrieve printer status!", error.message);
-              }
-            },
-          );
-      });
-    }).pipe(shareReplay(1));
-  }
-
-  public getObservable(): Observable<PrinterStatusAPI> {
-    return this.observable;
-  }
+  ) {}
 
   public stopMotors(): void {
     this.executeGCode('M410');
