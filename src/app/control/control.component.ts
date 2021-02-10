@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { OctoprintPrinterProfile } from '../octoprint/model/printerProfile';
+import { OctoprintPrinterProfile } from '../model/octoprint/printerProfile';
 import { PrinterService } from '../printer.service';
 import { PrinterProfileService } from '../printerprofile.service';
 

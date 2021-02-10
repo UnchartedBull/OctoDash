@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
+import { Temperatures } from '../model/temperature.model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
+import { SocketService } from '../socket/socket.service';
 
 @Component({
   selector: 'app-printer-status',
@@ -13,6 +15,7 @@ import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.servi
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
+  public printerTemperatures: Temperatures;
   public status: string;
   public QuickControlView = QuickControlView;
   public view = QuickControlView.NONE;
@@ -24,6 +27,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
+    private _socketService: SocketService,
   ) {
     this.printerStatus = {
       nozzle: {
@@ -45,9 +49,15 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.add(
       this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.printerStatus.nozzle = printerStatus.nozzle;
-        this.printerStatus.heatbed = printerStatus.heatbed;
+        // this.printerStatus.nozzle = printerStatus.nozzle;
+        // this.printerStatus.heatbed = printerStatus.heatbed;
         this.status = printerStatus.status;
+      }),
+    );
+
+    this.subscriptions.add(
+      this._socketService.temperatureSubscribable.subscribe((temperatures: Temperatures): void => {
+        this.printerTemperatures = temperatures;
       }),
     );
 

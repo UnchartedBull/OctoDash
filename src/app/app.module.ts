@@ -42,16 +42,16 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
-import { OctoPrintSocketService } from './octoprint/octoprint-socket.service';
-import { SocketService } from './octoprint/socket.service';
+import { AuthService } from './octoprint/auth.service';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterService } from './printer.service';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { SettingsComponent } from './settings/settings.component';
+import { OctoPrintSocketService } from './socket/octoprint-socket.service';
+import { SocketService } from './socket/socket.service';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
-import { AuthService } from './octoprint/auth.service';
 
 @NgModule({
   declarations: [

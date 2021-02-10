@@ -1,33 +1,33 @@
-<table class="printer-status" *ngIf="printerStatus">
+<table class="printer-status" *ngIf="printerTemperatures">
   <tr>
     <td
       class="printer-status__value printer-status__value-1"
-      [ngClass]="{ 'printer-status__no-set-value': printerStatus.nozzle.set === 0 }"
+      [ngClass]="{ 'printer-status__no-set-value': printerTemperatures.tool0.set === 0 }"
       (click)="showQuickControlHotend()"
       matRipple
       [matRippleUnbounded]="false"
     >
       <img src="assets/nozzle.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.nozzle.current }}<span class="printer-status__unit">°C</span>
+        {{ printerTemperatures.tool0.current }}<span class="printer-status__unit">°C</span>
       </span>
-      <span class="printer-status__set-value" *ngIf="printerStatus.nozzle.set">
-        /{{ printerStatus.nozzle.set }}<span class="unit">°C</span>
+      <span class="printer-status__set-value" *ngIf="printerTemperatures.tool0.set">
+        /{{ printerTemperatures.tool0.set }}<span class="unit">°C</span>
       </span>
     </td>
     <td
       class="printer-status__value printer-status__value-2"
-      [ngClass]="{ 'printer-status__no-set-value': printerStatus.heatbed.set === 0 }"
+      [ngClass]="{ 'printer-status__no-set-value': printerTemperatures.bed.set === 0 }"
       (click)="showQuickControlHeatbed()"
       matRipple
       [matRippleUnbounded]="false"
     >
       <img src="assets/heat-bed.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.heatbed.current }}<span class="printer-status__unit">°C</span>
+        {{ printerTemperatures.bed.current }}<span class="printer-status__unit">°C</span>
       </span>
-      <span class="printer-status__set-value" *ngIf="printerStatus.heatbed.set">
-        /{{ printerStatus.heatbed.set }}<span class="unit">°C</span>
+      <span class="printer-status__set-value" *ngIf="printerTemperatures.bed.set">
+        /{{ printerTemperatures.bed.set }}<span class="unit">°C</span>
       </span>
     </td>
     <td

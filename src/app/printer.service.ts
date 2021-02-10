@@ -6,8 +6,8 @@ import { shareReplay } from 'rxjs/operators';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintConnection } from './octoprint/model/connection';
-import { OctoprintPrinterStatus } from './octoprint/model/printerStatus';
+import { OctoprintConnection } from './model/octoprint/connection';
+import { OctoprintPrinterStatus } from './model/octoprint/printerStatus';
 
 @Injectable({
   providedIn: 'root',

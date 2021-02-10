@@ -6,7 +6,6 @@ import { ElectronService } from 'ngx-electron';
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { SocketService } from './octoprint/socket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +23,6 @@ export class AppService {
     private _notificationService: NotificationService,
     private _http: HttpClient,
     private _electronService: ElectronService,
-    private _socketService: SocketService,
   ) {
     this.enableVersionListener();
     this.enableCustomCSSListener();
@@ -122,10 +120,6 @@ export class AppService {
 
   public get latestVersionAssetsURL(): string {
     return this._latestVersionAssetsURL;
-  }
-
-  public connectSocket(): Promise<void> {
-    return this._socketService.connect();
   }
 }
 

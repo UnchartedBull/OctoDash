@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../config/config.service';
+import { Temperatures } from '../model/temperature.model';
 import { NotificationService } from '../notification/notification.service';
-import { AuthService, SocketAuth } from './auth.service';
+import { AuthService, SocketAuth } from '../octoprint/auth.service';
+import { OctoprintSocketCurrent } from '../model/octoprint/socket.model';
 import { SocketService } from './socket.service';
 
 @Injectable()
 export class OctoPrintSocketService implements SocketService {
   private _fastInterval = 0;
   private _socket: WebSocketSubject<unknown>;
+  private _temperatureSubject: Subject<Temperatures>;
 
   public constructor(
     private _configService: ConfigService,
     private _authService: AuthService,
     private _notificationService: NotificationService,
-  ) {}
+  ) {
+    this._temperatureSubject = new Subject<Temperatures>();
+  }
 
   public connect(): Promise<void> {
     return new Promise(resolve => {
@@ -52,7 +59,7 @@ export class OctoPrintSocketService implements SocketService {
   private setupSocket(resolve: () => void) {
     this._socket.subscribe(message => {
       if (Object.hasOwnProperty.bind(message)('current')) {
-        console.log('CURRENT RECEIVED');
+        this.extractTemperature(message as OctoprintSocketCurrent);
       } else if (Object.hasOwnProperty.bind(message)('event')) {
         console.log('EVENT RECEIVED');
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
@@ -71,9 +78,36 @@ export class OctoPrintSocketService implements SocketService {
     });
   }
 
-  public get temperatureSubscribable(): any {
+  public extractTemperature(message: OctoprintSocketCurrent): void {
+    if (message.current.temps[0]) {
+      console.log('PUSHING NEW TEMPERATURE');
+      this._temperatureSubject.next({
+        bed: {
+          current: Math.round(message.current.temps[0].bed.actual),
+          set: Math.round(message.current.temps[0].bed.target),
+        },
+        tool0: {
+          current: Math.round(message.current.temps[0].tool0.actual),
+          set: Math.round(message.current.temps[0].tool0.target),
+        },
+      });
+    }
+  }
+
+  public get temperatureSubscribable(): Observable<Temperatures> {
     console.log('GET TEMPERATURE');
-    return null;
+    return this._temperatureSubject.pipe(
+      startWith({
+        tool0: {
+          current: 0,
+          set: 0,
+        },
+        bed: {
+          current: 0,
+          set: 0,
+        },
+      } as Temperatures),
+    );
   }
 
   public get zIndicatorSubscribable(): any {

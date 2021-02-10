@@ -4,6 +4,7 @@ import _ from 'lodash-es';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
+import { SocketService } from './socket/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,12 @@ export class AppComponent implements OnInit {
   public status = 'initializing';
   public showConnectionHint = false;
 
-  public constructor(private _service: AppService, private _configService: ConfigService, private _router: Router) {}
+  public constructor(
+    private _service: AppService,
+    private _configService: ConfigService,
+    private _socketService: SocketService,
+    private _router: Router,
+  ) {}
 
   public ngOnInit(): void {
     this.initialize();
@@ -57,8 +63,8 @@ export class AppComponent implements OnInit {
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
     }, 2000);
-    this._service
-      .connectSocket()
+    this._socketService
+      .connect()
       .then(() => {
         if (this._configService.isTouchscreen()) {
           this._router.navigate(['/main-screen']);

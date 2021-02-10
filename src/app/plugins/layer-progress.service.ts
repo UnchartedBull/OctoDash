@@ -5,7 +5,7 @@ import { shareReplay } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
-import { OctoprintLayerProgress } from '../octoprint/model/layerProgress';
+import { OctoprintLayerProgress } from '../model/octoprint/layerProgress';
 
 @Injectable({
   providedIn: 'root',
