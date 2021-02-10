@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { HttpHeader } from '../config/config.model';
-import { OctoprintLogin } from '../model/octoprint/login';
+import { HttpHeader } from '../../config/config.model';
+import { OctoprintLogin } from '../../model/octoprint/login.model';
 
 @Injectable({
   providedIn: 'root',

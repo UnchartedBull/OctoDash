@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
 import { NotificationService } from 'src/app/notification/notification.service';
-import { AuthService, TokenSuccess } from 'src/app/octoprint/auth.service';
+import { AuthService, TokenSuccess } from 'src/app/services/auth/octoprint.auth.service';
 
 @Component({
   selector: 'app-config-setup-octoprint-authentication',

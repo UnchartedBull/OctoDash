@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Temperatures } from '../model/temperature.model';
+import { Temperatures } from '../../model';
 
 @Injectable()
 export abstract class SocketService {

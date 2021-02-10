@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from './config/config.service';
 import { ConversionService } from './conversion.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './model/octoprint/file';
+import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './model/octoprint/file.model';
 
 @Injectable({
   providedIn: 'root',

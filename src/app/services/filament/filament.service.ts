@@ -1,37 +1,30 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Injector } from '@angular/core';
-import { ConfigService } from 'src/app/config/config.service';
+import { Injectable } from '@angular/core';
 
+import { ConfigService } from '../../config/config.service';
+import { FilamentSpool } from '../../model';
 import { NotificationService } from '../../notification/notification.service';
-import { FilamentManagementPlugin, FilamentSpool } from './filament.interface';
-import { FilamentManagerService } from './filament-manager.service';
+import { FilamentPluginService } from './filament-plugin.service';
 
-@Component({
-  selector: 'backend-filament-manager',
-  template: '',
-  styles: [],
-})
-export class FilamentManagementComponent {
-  private filamentPlugin: FilamentManagementPlugin;
-
+@Injectable()
+export class FilamentService {
   private _filamentSpools: Array<FilamentSpool>;
   private _currentSpool: FilamentSpool;
 
   private _loading = true;
 
   constructor(
-    private injector: Injector,
     private notificationService: NotificationService,
     private configService: ConfigService,
+    private filamentPluginService: FilamentPluginService,
   ) {
     if (this.configService.isFilamentManagerEnabled()) {
-      this.filamentPlugin = this.injector.get(FilamentManagerService);
       this.loadSpools();
     }
   }
 
   private loadSpools(): void {
-    this.filamentPlugin.getSpools().subscribe(
+    this.filamentPluginService.getSpools().subscribe(
       (spools: Array<FilamentSpool>): void => {
         this._filamentSpools = spools;
       },
@@ -42,7 +35,7 @@ export class FilamentManagementComponent {
         this._loading = false;
       },
     );
-    this.filamentPlugin.getCurrentSpool().subscribe(
+    this.filamentPluginService.getCurrentSpool().subscribe(
       (spool: FilamentSpool): void => {
         this._currentSpool = spool;
       },
@@ -66,9 +59,9 @@ export class FilamentManagementComponent {
 
   public setSpool(spool: FilamentSpool): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.filamentPlugin.setSpool(spool).subscribe(
+      this.filamentPluginService.setSpool(spool).subscribe(
         (): void => {
-          this.filamentPlugin.getCurrentSpool().subscribe(
+          this.filamentPluginService.getCurrentSpool().subscribe(
             (spoolRemote: FilamentSpool): void => {
               if (spool.id === spoolRemote.id) resolve();
               else {

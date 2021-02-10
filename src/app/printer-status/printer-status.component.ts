@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { Temperatures } from '../model/temperature.model';
+import { Temperatures } from '../model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
-import { SocketService } from '../socket/socket.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-printer-status',

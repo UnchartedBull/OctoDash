@@ -4,7 +4,7 @@ import _ from 'lodash-es';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
-import { SocketService } from './socket/socket.service';
+import { SocketService } from './services/socket/socket.service';
 
 @Component({
   selector: 'app-root',

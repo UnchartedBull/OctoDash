@@ -3,14 +3,15 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentManagementComponent, FilamentSpool } from '../plugins';
+import { FilamentSpool } from '../model';
+import { FilamentService } from '../plugins';
 import { PrinterService, PrinterStatusAPI } from '../printer.service';
 
 @Component({
   selector: 'app-filament',
   templateUrl: './filament.component.html',
   styleUrls: ['./filament.component.scss'],
-  providers: [FilamentManagementComponent],
+  providers: [FilamentService],
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 5;
@@ -24,7 +25,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
     private router: Router,
     private configService: ConfigService,
     private printerService: PrinterService,
-    private filament: FilamentManagementComponent,
+    private filament: FilamentService,
   ) {
     this.printerService
       .getObservable()

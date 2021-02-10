@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { OctoprintConnection } from '../model/octoprint/connection';
+import { OctoprintConnection } from '../model/octoprint/connection.model';
 import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';

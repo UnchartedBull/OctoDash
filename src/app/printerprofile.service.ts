@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
-import { OctoprintPrinterProfile, OctoprintPrinterProfiles } from './model/octoprint/printerProfile';
+import { OctoprintPrinterProfile, OctoprintPrinterProfiles } from './model/octoprint/printer-profile.model';
 import { PrinterService } from './printer.service';
 
 @Injectable({

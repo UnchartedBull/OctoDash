@@ -1,11 +1,3 @@
-import { Observable } from 'rxjs';
-
-export interface FilamentManagementPlugin {
-  getSpools(): Observable<Array<FilamentSpool>>;
-  getCurrentSpool(): Observable<FilamentSpool>;
-  setSpool(spool: FilamentSpool): Observable<void>;
-}
-
 export interface FilamentSpoolList {
   spools: Array<FilamentSpool>;
 }

@@ -4,14 +4,21 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { FilamentManagementPlugin, FilamentSpool } from './filament.interface';
+import { FilamentSpool } from '../../model';
+import {
+  FilamentManagerSelectionPatch,
+  FilamentManagerSelections,
+  FilamentManagerSpool,
+  FilamentManagerSpoolList,
+} from '../../model/octoprint/plugins/filament-manager.model';
+import { FilamentPluginService } from './filament-plugin.service';
 
 const colorRegexp = /\((.*)\)$/g;
 
 @Injectable({
   providedIn: 'root',
 })
-export class FilamentManagerService implements FilamentManagementPlugin {
+export class FilamentManagerOctoprintService implements FilamentPluginService {
   public constructor(private configService: ConfigService, private http: HttpClient) {}
 
   public getSpools(): Observable<Array<FilamentSpool>> {
@@ -85,49 +92,4 @@ export class FilamentManagerService implements FilamentManagementPlugin {
       this.configService.getHTTPHeaders(),
     );
   }
-}
-
-export interface FilamentManagerSpoolList {
-  spools: FilamentManagerSpool[];
-}
-
-interface FilamentManagerSelections {
-  selections: FilamentManagerSelection[];
-}
-
-interface FilamentManagerSelectionPatch {
-  selection: {
-    tool: number;
-    spool: {
-      id: number;
-    };
-  };
-}
-
-interface FilamentManagerSelection {
-  // eslint-disable-next-line camelcase
-  client_id: string;
-  spool: FilamentManagerSpool;
-  tool: number;
-}
-
-interface FilamentManagerSpool {
-  /* eslint-disable camelcase */
-  cost: number;
-  id: number;
-  name: string;
-  displayName?: string;
-  color?: string;
-  profile: FilamentManagerProfile;
-  temp_offset: number;
-  used: number;
-  weight: number;
-}
-
-interface FilamentManagerProfile {
-  density: number;
-  diameter: number;
-  id: number;
-  material: string;
-  vendor: string;
 }

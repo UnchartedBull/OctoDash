@@ -3,11 +3,11 @@ import { Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
-import { ConfigService } from '../config/config.service';
-import { Temperatures } from '../model/temperature.model';
-import { NotificationService } from '../notification/notification.service';
-import { AuthService, SocketAuth } from '../octoprint/auth.service';
-import { OctoprintSocketCurrent } from '../model/octoprint/socket.model';
+import { ConfigService } from '../../config/config.service';
+import { Temperatures } from '../../model';
+import { OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
+import { NotificationService } from '../../notification/notification.service';
+import { AuthService, SocketAuth } from '../auth/octoprint.auth.service';
 import { SocketService } from './socket.service';
 
 @Injectable()

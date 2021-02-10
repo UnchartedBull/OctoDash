@@ -7,7 +7,7 @@ import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { FilesService } from './files.service';
 import { NotificationService } from './notification/notification.service';
-import { JobCommand, OctoprintFilament, OctoprintJobStatus } from './model/octoprint/job';
+import { JobCommand, OctoprintFilament, OctoprintJobStatus } from './model/octoprint/job.model';
 
 @Injectable({
   providedIn: 'root',
