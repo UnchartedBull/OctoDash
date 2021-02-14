@@ -638,3 +638,15 @@ app-filament .move-filament__cancel {
 app-filament .purge-filament__done {
     background-color: var(--green) !important;
 }
+
+/* Custom actions */
+
+app-custom-actions .confirm {
+    border-radius: 0 !important;
+    background-color: var(--grey2) !important;
+    padding: 2vw;
+}
+
+app-custom-actions .confirm .confirm__gcode {
+    margin-top: 8px;
+}
