@@ -3,9 +3,9 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../../config/config.service';
-import { OctoprintService } from '../../octoprint.service';
 import { EnclosureService, PsuControlService, TPLinkSmartPlugService } from '../../plugins';
 import { PrinterService } from '../../services/printer/printer.service';
+import { SystemService } from '../../services/system/system.service';
 
 @Component({
   selector: 'app-custom-actions',
@@ -21,7 +21,7 @@ export class CustomActionsComponent {
 
   constructor(
     private printerService: PrinterService,
-    private octoprintService: OctoprintService,
+    private systemService: SystemService,
     private configService: ConfigService,
     private psuControlService: PsuControlService,
     private enclosureService: EnclosureService,
@@ -119,17 +119,17 @@ export class CustomActionsComponent {
 
   // [!RELOAD]
   public reloadOctoPrint(): void {
-    this.octoprintService.sendSystemCommand('restart');
+    this.systemService.sendCommand('restart');
   }
 
   // [!REBOOT]
   public rebootPi(): void {
-    this.octoprintService.sendSystemCommand('reboot');
+    this.systemService.sendCommand('reboot');
   }
 
   // [!SHUTDOWN]
   public shutdownPi(): void {
-    this.octoprintService.sendSystemCommand('shutdown');
+    this.systemService.sendCommand('shutdown');
   }
 
   // [!KILL]

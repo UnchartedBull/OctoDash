@@ -4,9 +4,9 @@ import { startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../../config/config.service';
-import { Temperatures } from '../../model';
+import { SocketAuth, Temperatures } from '../../model';
 import { OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
-import { AuthService, SocketAuth } from '../auth/octoprint.auth.service';
+import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
 
 @Injectable()
@@ -16,26 +16,24 @@ export class OctoPrintSocketService implements SocketService {
   private temperatureSubject: Subject<Temperatures>;
   private printerStatusSubject: Subject<string>;
 
-  public constructor(private configService: ConfigService, private authService: AuthService) {
+  public constructor(private configService: ConfigService, private systemService: SystemService) {
     this.temperatureSubject = new Subject<Temperatures>();
     this.printerStatusSubject = new Subject<string>();
   }
 
   public connect(): Promise<void> {
     return new Promise(resolve => {
-      this.authService
-        .getSessionKey(this.configService.getApiURL('login'), this.configService.getHTTPHeaders())
-        .subscribe(
-          socketAuth => {
-            this.connectSocket();
-            this.setupSocket(resolve);
-            this.authenticateSocket(socketAuth);
-          },
-          () => {
-            setTimeout(this.connect.bind(this), this.fastInterval < 6 ? 5000 : 15000);
-            this.fastInterval += 1;
-          },
-        );
+      this.systemService.getSessionKey().subscribe(
+        socketAuth => {
+          this.connectSocket();
+          this.setupSocket(resolve);
+          this.authenticateSocket(socketAuth);
+        },
+        () => {
+          setTimeout(this.connect.bind(this), this.fastInterval < 6 ? 5000 : 15000);
+          this.fastInterval += 1;
+        },
+      );
     });
   }
 

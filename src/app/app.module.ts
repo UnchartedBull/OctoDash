@@ -45,11 +45,12 @@ import { NotificationService } from './notification/notification.service';
 import { FilamentManagerOctoprintService, FilamentPluginService } from './plugins';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
-import { AuthService } from './services/auth/octoprint.auth.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
 import { OctoPrintSocketService } from './services/socket/socket.octoprint.service';
 import { SocketService } from './services/socket/socket.service';
+import { SystemOctoprintService } from './services/system/system.octoprint.service';
+import { SystemService } from './services/system/system.service';
 import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
@@ -104,26 +105,29 @@ import { URLSafePipe } from './url.pipe';
   ],
   providers: [
     AppService,
-    AuthService,
     ConfigService,
     NotificationService,
     JobService,
     FilesService,
     [
       {
-        provide: SocketService,
-        deps: [ConfigService, AuthService],
-        useFactory: (configService: ConfigService, authService: AuthService) => {
-          return new OctoPrintSocketService(configService, authService);
+        provide: SystemService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new SystemOctoprintService(configService, notificationService, httpClient);
         },
       },
     ],
     [
       {
-        provide: FilamentPluginService,
-        deps: [ConfigService, HttpClient],
-        useFactory: (configService: ConfigService, httpClient: HttpClient) => {
-          return new FilamentManagerOctoprintService(configService, httpClient);
+        provide: SocketService,
+        deps: [ConfigService, SystemService],
+        useFactory: (configService: ConfigService, systemService: SystemService) => {
+          return new OctoPrintSocketService(configService, systemService);
         },
       },
     ],
@@ -137,6 +141,15 @@ import { URLSafePipe } from './url.pipe';
           httpClient: HttpClient,
         ) => {
           return new PrinterOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: FilamentPluginService,
+        deps: [ConfigService, HttpClient],
+        useFactory: (configService: ConfigService, httpClient: HttpClient) => {
+          return new FilamentManagerOctoprintService(configService, httpClient);
         },
       },
     ],

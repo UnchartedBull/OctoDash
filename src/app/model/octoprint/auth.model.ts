@@ -17,3 +17,11 @@ export interface OctoprintLogin {
   session: string;
   user: boolean;
 }
+
+export interface AppToken {
+  app_token: string;
+}
+
+export interface TokenSuccess {
+  api_key: string;
+}

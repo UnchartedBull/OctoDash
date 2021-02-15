@@ -3,7 +3,7 @@ import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { NotificationService } from '../notification/notification.service';
-import { OctoprintService } from '../octoprint.service';
+import { SystemService } from '../services/system/system.service';
 
 @Component({
   selector: 'app-update',
@@ -29,7 +29,7 @@ export class UpdateComponent implements OnInit {
   constructor(
     public service: AppService,
     private notificationService: NotificationService,
-    private octoprintService: OctoprintService,
+    private systemService: SystemService,
     private zone: NgZone,
     private electronService: ElectronService,
   ) {}
@@ -95,7 +95,7 @@ export class UpdateComponent implements OnInit {
   }
 
   public reboot(): void {
-    this.octoprintService.sendSystemCommand('reboot');
+    this.systemService.sendCommand('reboot');
   }
 }
 
