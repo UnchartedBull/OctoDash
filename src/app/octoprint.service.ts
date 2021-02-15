@@ -17,23 +17,6 @@ export class OctoprintService {
     private notificationService: NotificationService,
   ) {}
 
-  public disconnectPrinter(): void {
-    if (this.httpPOSTRequest) {
-      this.httpPOSTRequest.unsubscribe();
-    }
-    const disconnectPayload: DisconnectCommand = {
-      command: 'disconnect',
-    };
-    this.httpPOSTRequest = this.http
-      .post(this.configService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
-      .subscribe(
-        (): void => null,
-        (error: HttpErrorResponse): void => {
-          this.notificationService.setError("Can't disconnect from Printer!", error.message);
-        },
-      );
-  }
-
   public sendSystemCommand(command: string): void {
     if (this.httpPOSTRequest) {
       this.httpPOSTRequest.unsubscribe();
@@ -47,8 +30,4 @@ export class OctoprintService {
         },
       );
   }
-}
-
-interface DisconnectCommand {
-  command: string;
 }

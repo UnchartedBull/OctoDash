@@ -30,8 +30,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private http: HttpClient,
     private router: Router,
-    private _electronService: ElectronService,
-    private _zone: NgZone,
+    private electronService: ElectronService,
+    private zone: NgZone,
   ) {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
@@ -47,8 +47,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this._electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public changeURLEntryMethod(manual: boolean): void {
@@ -92,14 +92,14 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   private onConfigSaved() {
-    this._zone.run(() => {
+    this.zone.run(() => {
       this.configValid = true;
       this.configSaved = null;
     });
   }
 
   private onConfigSaveFail(_, errors) {
-    this._zone.run(() => {
+    this.zone.run(() => {
       this.configValid = false;
 
       this.configErrors = errors;
@@ -107,8 +107,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   private saveConfig(): void {
-    this._electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
-    this._electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
     this.configService.saveConfig(this.config);
   }

@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ConfigService } from 'src/app/config/config.service';
-import { OctoprintService } from 'src/app/octoprint.service';
-import { EnclosureService, PsuControlService, TPLinkSmartPlugService } from 'src/app/plugins';
-import { PrinterService } from 'src/app/printer.service';
+
+import { ConfigService } from '../../config/config.service';
+import { OctoprintService } from '../../octoprint.service';
+import { EnclosureService, PsuControlService, TPLinkSmartPlugService } from '../../plugins';
+import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
   selector: 'app-custom-actions',
@@ -108,7 +109,7 @@ export class CustomActionsComponent {
 
   // [!DISCONNECT]
   public disconnectPrinter(): void {
-    this.octoprintService.disconnectPrinter();
+    this.printerService.disconnectPrinter();
   }
 
   // [!STOPDASHBOARD]

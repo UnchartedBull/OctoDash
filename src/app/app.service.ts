@@ -11,25 +11,25 @@ import { NotificationService } from './notification/notification.service';
   providedIn: 'root',
 })
 export class AppService {
-  private _updateError: Record<string, (config: Config) => void>;
-  private _latestVersionAssetsURL: string;
-  private _version: string;
-  private _latestVersion: string;
+  private updateError: Record<string, (config: Config) => void>;
+  private latestVersionAssetsURL: string;
+  private version: string;
+  private latestVersion: string;
 
   public updateAvailable = false;
 
   public constructor(
-    private _configService: ConfigService,
-    private _notificationService: NotificationService,
-    private _http: HttpClient,
-    private _electronService: ElectronService,
+    private configService: ConfigService,
+    private notificationService: NotificationService,
+    private http: HttpClient,
+    private electronService: ElectronService,
   ) {
     this.enableVersionListener();
     this.enableCustomCSSListener();
-    this._electronService.ipcRenderer.send('appInfo');
+    this.electronService.ipcRenderer.send('appInfo');
 
     // list of all error following an upgrade
-    this._updateError = {
+    this.updateError = {
       ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
       ".plugins should have required property 'tpLinkSmartPlug'": config =>
         (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
@@ -49,77 +49,77 @@ export class AppService {
   }
 
   public fixUpdateErrors(errors: string[]): boolean {
-    const config = this._configService.getCurrentConfig();
+    const config = this.configService.getCurrentConfig();
 
     config.octoprint.url = config.octoprint.url.replace('api/', '');
 
     let fullyFixed = true;
     for (const error of errors) {
-      if (_.hasIn(this._updateError, error)) {
-        this._updateError[error](config);
+      if (_.hasIn(this.updateError, error)) {
+        this.updateError[error](config);
       } else {
         fullyFixed = false;
       }
     }
-    this._configService.saveConfig(config);
+    this.configService.saveConfig(config);
     return fullyFixed;
   }
 
   private enableVersionListener(): void {
-    this._electronService.ipcRenderer.on('versionInformation', (_, versionInformation: VersionInformation): void => {
-      this._version = versionInformation.version;
+    this.electronService.ipcRenderer.on('versionInformation', (_, versionInformation: VersionInformation): void => {
+      this.version = versionInformation.version;
       this.checkUpdate();
     });
   }
 
   private enableCustomCSSListener(): void {
-    this._electronService.ipcRenderer.on('customStyles', (_, customCSS: string): void => {
+    this.electronService.ipcRenderer.on('customStyles', (_, customCSS: string): void => {
       const css = document.createElement('style');
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });
 
-    this._electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
-      this._notificationService.setError("Can't load custom styles!", customCSSError);
+    this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
+      this.notificationService.setError("Can't load custom styles!", customCSSError);
     });
   }
 
   private checkUpdate(): void {
-    this._http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
       (data: GitHubReleaseInformation): void => {
         if (this.version !== data.name.replace('v', '')) {
           this.updateAvailable = true;
         }
-        this._latestVersion = data.name.replace('v', '');
-        this._latestVersionAssetsURL = data.assets_url;
+        this.latestVersion = data.name.replace('v', '');
+        this.latestVersionAssetsURL = data.assets_url;
       },
       (): void => null,
     );
     setTimeout(this.checkUpdate.bind(this), 3600000);
   }
 
-  public get version(): string {
-    return this._version;
+  public getVersion(): string {
+    return this.version;
   }
 
-  public get latestVersion(): string {
-    return this._latestVersion;
+  public getLatestVersion(): string {
+    return this.latestVersion;
   }
 
   public turnDisplayOff(): void {
-    this._electronService.ipcRenderer.send('screenControl', { command: this._configService.getScreenSleepCommand() });
+    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
-    this._electronService.ipcRenderer.send('screenControl', { command: this._configService.getScreenWakeupCommand() });
+    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
   }
 
   public hasUpdateError(errors: string[]): boolean {
-    return _.intersection(errors, _.keys(this._updateError)).length > 0;
+    return _.intersection(errors, _.keys(this.updateError)).length > 0;
   }
 
-  public get latestVersionAssetsURL(): string {
-    return this._latestVersionAssetsURL;
+  public getLatestVersionAssetsURL(): string {
+    return this.latestVersionAssetsURL;
   }
 }
 

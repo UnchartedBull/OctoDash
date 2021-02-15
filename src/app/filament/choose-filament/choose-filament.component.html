@@ -1,5 +1,5 @@
 <span class="filament-heading">select your new filament</span>
-<ng-container *ngIf="!filament.loading; else loadingFilament">
+<ng-container *ngIf="!filament.getLoading(); else loadingFilament">
   <ng-container *ngIf="filament.filamentSpools; else noFilaments">
     <table class="filaments">
       <tr

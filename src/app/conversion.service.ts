@@ -6,7 +6,7 @@ import { ConfigService } from './config/config.service';
   providedIn: 'root',
 })
 export class ConversionService {
-  constructor(private _configService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
   public convertByteToMegabyte(byte: number): string {
     return (byte / 1000000).toFixed(1);
@@ -32,11 +32,11 @@ export class ConversionService {
 
   public convertFilamentLengthToWeight(filamentLength: number): number {
     return this.convertFilamentVolumeToWeight(
-      (filamentLength * Math.PI * Math.pow(this._configService.getFilamentThickness() / 2, 2)) / 1000,
+      (filamentLength * Math.PI * Math.pow(this.configService.getFilamentThickness() / 2, 2)) / 1000,
     );
   }
 
   private convertFilamentVolumeToWeight(filamentVolume: number): number {
-    return Math.round(filamentVolume * this._configService.getFilamentDensity() * 10) / 10;
+    return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
   }
 }

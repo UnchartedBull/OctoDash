@@ -8,10 +8,9 @@ import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()
 export class FilamentService {
-  private _filamentSpools: Array<FilamentSpool>;
-  private _currentSpool: FilamentSpool;
-
-  private _loading = true;
+  private filamentSpools: Array<FilamentSpool>;
+  private currentSpool: FilamentSpool;
+  private loading = true;
 
   constructor(
     private notificationService: NotificationService,
@@ -26,18 +25,18 @@ export class FilamentService {
   private loadSpools(): void {
     this.filamentPluginService.getSpools().subscribe(
       (spools: Array<FilamentSpool>): void => {
-        this._filamentSpools = spools;
+        this.filamentSpools = spools;
       },
       (error: HttpErrorResponse): void => {
         this.notificationService.setError("Can't load filament spools!", error.message);
       },
       (): void => {
-        this._loading = false;
+        this.loading = false;
       },
     );
     this.filamentPluginService.getCurrentSpool().subscribe(
       (spool: FilamentSpool): void => {
-        this._currentSpool = spool;
+        this.currentSpool = spool;
       },
       (error: HttpErrorResponse): void => {
         this.notificationService.setError("Can't load active spool!", error.message);
@@ -45,16 +44,16 @@ export class FilamentService {
     );
   }
 
-  public get filamentSpools(): Array<FilamentSpool> {
-    return this._filamentSpools;
+  public getFilamentSpools(): Array<FilamentSpool> {
+    return this.filamentSpools;
   }
 
-  public get currentSpool(): FilamentSpool {
-    return this._currentSpool;
+  public getCurrentSpool(): FilamentSpool {
+    return this.currentSpool;
   }
 
-  public get loading(): boolean {
-    return this._loading;
+  public getLoading(): boolean {
+    return this.loading;
   }
 
   public setSpool(spool: FilamentSpool): Promise<void> {

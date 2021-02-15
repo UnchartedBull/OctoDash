@@ -17,10 +17,10 @@ export class AppComponent implements OnInit {
   public showConnectionHint = false;
 
   public constructor(
-    private _service: AppService,
-    private _configService: ConfigService,
-    private _socketService: SocketService,
-    private _router: Router,
+    private service: AppService,
+    private configService: ConfigService,
+    private socketService: SocketService,
+    private router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -28,16 +28,16 @@ export class AppComponent implements OnInit {
   }
 
   private initialize(): void {
-    if (this._configService && this._configService.isInitialized()) {
-      if (this._configService.isLoaded()) {
-        if (this._configService.isValid()) {
+    if (this.configService && this.configService.isInitialized()) {
+      if (this.configService.isLoaded()) {
+        if (this.configService.isValid()) {
           this.status = 'connecting';
           this.connectWebsocket();
         } else {
           this.checkInvalidConfig();
         }
       } else {
-        this._router.navigate(['/no-config']);
+        this.router.navigate(['/no-config']);
       }
     } else {
       setTimeout(this.initialize.bind(this), 1000);
@@ -45,17 +45,17 @@ export class AppComponent implements OnInit {
   }
 
   private checkInvalidConfig() {
-    const errors = this._configService.getErrors();
+    const errors = this.configService.getErrors();
 
-    if (this._service.hasUpdateError(errors)) {
-      if (this._service.fixUpdateErrors(errors)) {
+    if (this.service.hasUpdateError(errors)) {
+      if (this.service.fixUpdateErrors(errors)) {
         this.initialize();
       } else {
-        this._configService.setUpdate();
-        this._router.navigate(['/no-config']);
+        this.configService.setUpdate();
+        this.router.navigate(['/no-config']);
       }
     } else {
-      this._router.navigate(['/invalid-config']);
+      this.router.navigate(['/invalid-config']);
     }
   }
 
@@ -63,13 +63,13 @@ export class AppComponent implements OnInit {
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
     }, 2000);
-    this._socketService
+    this.socketService
       .connect()
       .then(() => {
-        if (this._configService.isTouchscreen()) {
-          this._router.navigate(['/main-screen']);
+        if (this.configService.isTouchscreen()) {
+          this.router.navigate(['/main-screen']);
         } else {
-          this._router.navigate(['/main-screen-no-touch']);
+          this.router.navigate(['/main-screen-no-touch']);
         }
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));

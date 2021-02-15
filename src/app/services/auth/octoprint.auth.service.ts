@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { HttpHeader } from '../../config/config.model';
-import { OctoprintLogin } from '../../model/octoprint/login.model';
+import { OctoprintLogin } from '../../model/octoprint/auth.model';
 
 @Injectable({
   providedIn: 'root',

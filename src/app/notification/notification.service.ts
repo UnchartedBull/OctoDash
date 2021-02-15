@@ -9,7 +9,7 @@ export class NotificationService {
   private observable: Observable<Notification | 'close'>;
   private observer: Observer<Notification | 'close'>;
   private hideNotifications = false;
-  private bootGrace = true;
+  private bootGrace = false;
 
   public constructor() {
     this.observable = new Observable((observer: Observer<Notification | 'close'>): void => {

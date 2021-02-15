@@ -21,22 +21,22 @@ export class FilesComponent {
   public homeFolder = '/';
 
   public constructor(
-    private _filesService: FilesService,
-    private _spinner: NgxSpinnerService,
-    private _router: Router,
-    private _jobService: JobService,
-    private _configService: ConfigService,
+    private filesService: FilesService,
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    private jobService: JobService,
+    private configService: ConfigService,
   ) {
     this.showLoader();
     this.folderContent = [];
     this.currentFolder = '/';
-    this.sortingAttribute = this._configService.getDefaultSortingAttribute();
-    this.sortingOrder = this._configService.getDefaultSortingOrder();
+    this.sortingAttribute = this.configService.getDefaultSortingAttribute();
+    this.sortingOrder = this.configService.getDefaultSortingOrder();
     this.openFolder(this.currentFolder);
   }
 
   public openDetails(filePath: string): void {
-    this._filesService
+    this.filesService
       .getFile(filePath)
       .then((data): void => {
         this.fileDetail = data;
@@ -55,7 +55,7 @@ export class FilesComponent {
     setTimeout((): void => {
       this.showLoader();
       this.folderContent = [];
-      this._filesService
+      this.filesService
         .getFolder(folderPath)
         .then((data): void => {
           this.folderContent = data;
@@ -66,12 +66,12 @@ export class FilesComponent {
             this.currentFolder = folderPath;
           }
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
-          this._spinner.hide();
+          this.spinner.hide();
         })
         .catch((): void => {
           this.folderContent = null;
           this.currentFolder = folderPath;
-          this._spinner.hide();
+          this.spinner.hide();
         });
     }, 300);
   }
@@ -148,30 +148,30 @@ export class FilesComponent {
 
   public loadFile(filePath: string): void {
     setTimeout((): void => {
-      this._filesService.loadFile(filePath);
-      this._filesService.loadedFile = true;
-      this._jobService.deleteJobInformation();
-      this._router.navigate(['/main-screen']);
+      this.filesService.loadFile(filePath);
+      this.filesService.setLoadedFile(true);
+      this.jobService.deleteJobInformation();
+      this.router.navigate(['/main-screen']);
     }, 300);
   }
 
   public printFile(filePath: string): void {
     setTimeout((): void => {
-      this._filesService.printFile(filePath);
-      this._router.navigate(['/main-screen']);
+      this.filesService.printFile(filePath);
+      this.router.navigate(['/main-screen']);
     }, 300);
   }
 
   public deleteFile(filePath: string): void {
     setTimeout((): void => {
-      this._filesService.deleteFile(filePath);
+      this.filesService.deleteFile(filePath);
       this.closeDetails();
       this.openFolder(this.currentFolder);
     }, 300);
   }
 
   private showLoader(): void {
-    this._spinner.show(undefined, {
+    this.spinner.show(undefined, {
       bdColor: '#353b48',
       color: '#f5f6fa',
       size: 'medium',

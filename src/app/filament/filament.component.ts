@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { FilamentSpool, Temperatures } from '../model';
 import { FilamentService } from '../plugins';
-import { PrinterService } from '../printer.service';
+import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -105,6 +105,6 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public get currentSpool(): FilamentSpool {
-    return this.filament.currentSpool;
+    return this.filament.getCurrentSpool();
   }
 }

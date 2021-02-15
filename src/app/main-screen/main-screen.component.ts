@@ -10,13 +10,13 @@ import { JobService } from '../job.service';
 export class MainScreenComponent {
   public printing = false;
 
-  public constructor(private _jobService: JobService, private _fileService: FilesService) {}
+  public constructor(private jobService: JobService, private fileService: FilesService) {}
 
   public isPrinting(): boolean {
-    return this._jobService.isPrinting();
+    return this.jobService.isPrinting();
   }
 
   public isFileLoaded(): boolean {
-    return this._fileService.loadedFile;
+    return this.fileService.getLoadedFile();
   }
 }

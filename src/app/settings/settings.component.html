@@ -310,15 +310,21 @@
           <br />
           <div
             class="settings__checkbox-container"
-            [ngClass]="{ 'settings__checkbox-container-disabled': !(config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled) }"
-            (click)="
-              config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep
-            "
+            [ngClass]="{
+              'settings__checkbox-container-disabled': !(
+                config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled
+              )
+            }"
+            (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep"
           >
             <span class="settings__checkbox">
               <span
                 class="settings__checkbox-checked"
-                [ngClass]="{ 'settings__checkbox-checked-disabled': !(config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled) }"
+                [ngClass]="{
+                  'settings__checkbox-checked-disabled': !(
+                    config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled
+                  )
+                }"
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
               ></span>
             </span>
@@ -598,7 +604,7 @@
         </span>
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
-          <span class="settings__about-version">v{{ service.version }}</span>
+          <span class="settings__about-version">v{{ service.getVersion() }}</span>
           <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable">
             no update available
           </button>

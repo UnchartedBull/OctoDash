@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 
 import { ConfigService } from '../../config/config.service';
 import { FilamentSpool } from '../../model';
-import { PrinterService } from '../../printer.service';
+import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
   selector: 'app-filament-move-filament',
@@ -90,7 +90,7 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
   }
 
   public stopExtruderMovement(): void {
-    this.printerService.stopMotors();
+    this.printerService.emergencyStop();
     clearTimeout(this.fastMoveTimeout);
     clearTimeout(this.slowMoveTimeout);
 

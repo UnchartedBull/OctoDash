@@ -11,20 +11,20 @@ import { SocketService } from './socket.service';
 
 @Injectable()
 export class OctoPrintSocketService implements SocketService {
-  private _fastInterval = 0;
-  private _socket: WebSocketSubject<unknown>;
-  private _temperatureSubject: Subject<Temperatures>;
-  private _printerStatusSubject: Subject<string>;
+  private fastInterval = 0;
+  private socket: WebSocketSubject<unknown>;
+  private temperatureSubject: Subject<Temperatures>;
+  private printerStatusSubject: Subject<string>;
 
-  public constructor(private _configService: ConfigService, private _authService: AuthService) {
-    this._temperatureSubject = new Subject<Temperatures>();
-    this._printerStatusSubject = new Subject<string>();
+  public constructor(private configService: ConfigService, private authService: AuthService) {
+    this.temperatureSubject = new Subject<Temperatures>();
+    this.printerStatusSubject = new Subject<string>();
   }
 
   public connect(): Promise<void> {
     return new Promise(resolve => {
-      this._authService
-        .getSessionKey(this._configService.getApiURL('login'), this._configService.getHTTPHeaders())
+      this.authService
+        .getSessionKey(this.configService.getApiURL('login'), this.configService.getHTTPHeaders())
         .subscribe(
           socketAuth => {
             this.connectSocket();
@@ -32,17 +32,17 @@ export class OctoPrintSocketService implements SocketService {
             this.authenticateSocket(socketAuth);
           },
           () => {
-            setTimeout(this.connect.bind(this), this._fastInterval < 6 ? 5000 : 15000);
-            this._fastInterval += 1;
+            setTimeout(this.connect.bind(this), this.fastInterval < 6 ? 5000 : 15000);
+            this.fastInterval += 1;
           },
         );
     });
   }
 
   private connectSocket() {
-    const url = `${this._configService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
-    if (!this._socket) {
-      this._socket = webSocket(url);
+    const url = `${this.configService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
+    if (!this.socket) {
+      this.socket = webSocket(url);
     }
   }
 
@@ -50,18 +50,20 @@ export class OctoPrintSocketService implements SocketService {
     const payload = {
       auth: `${socketAuth.user}:${socketAuth.session}`,
     };
-    this._socket.next(payload);
+    this.socket.next(payload);
   }
 
   private setupSocket(resolve: () => void) {
-    this._socket.subscribe(message => {
+    this.socket.subscribe(message => {
       if (Object.hasOwnProperty.bind(message)('current')) {
         this.extractTemperature(message as OctoprintSocketCurrent);
         this.extractPrinterStatus(message as OctoprintSocketCurrent);
       } else if (Object.hasOwnProperty.bind(message)('event')) {
         console.log('EVENT RECEIVED');
+        console.log(message);
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
         console.log('PLUGIN RECEIVED');
+        console.log(message);
       } else if (Object.hasOwnProperty.bind(message)('history')) {
         console.log('HISTORY RECEIVED');
       } else if (Object.hasOwnProperty.bind(message)('reauth')) {
@@ -78,7 +80,7 @@ export class OctoPrintSocketService implements SocketService {
 
   public extractTemperature(message: OctoprintSocketCurrent): void {
     if (message.current.temps[0]) {
-      this._temperatureSubject.next({
+      this.temperatureSubject.next({
         bed: {
           current: Math.round(message.current.temps[0].bed.actual),
           set: Math.round(message.current.temps[0].bed.target),
@@ -92,11 +94,11 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   public extractPrinterStatus(message: OctoprintSocketCurrent): void {
-    this._printerStatusSubject.next(message.current.state.text.toLowerCase());
+    this.printerStatusSubject.next(message.current.state.text.toLowerCase());
   }
 
   public getTemperatureSubscribable(): Observable<Temperatures> {
-    return this._temperatureSubject.pipe(
+    return this.temperatureSubject.pipe(
       startWith({
         tool0: {
           current: 0,
@@ -111,6 +113,6 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   public getPrinterStatusSubscribable(): Observable<string> {
-    return this._printerStatusSubject.pipe(startWith('connecting ...'));
+    return this.printerStatusSubject.pipe(startWith('connecting ...'));
   }
 }

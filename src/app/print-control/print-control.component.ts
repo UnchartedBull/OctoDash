@@ -7,7 +7,7 @@ import { ConfigService } from '../config/config.service';
 import { Job, JobService, JobStatus } from '../job.service';
 import { Temperatures } from '../model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService } from '../printer.service';
+import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -231,7 +231,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public setAdjustParameters(event: MouseEvent): void {
     if (this.showControls) {
       this.printerService.setTemperatureHotend(this.temperatureHotend);
-      this.printerService.setTemperatureHeatbed(this.temperatureHeatbed);
+      this.printerService.setTemperatureBed(this.temperatureHeatbed);
       this.printerService.setFeedrate(this.feedrate);
       this.printerService.setFanSpeed(this.fanSpeed);
       this.hideControlOverlay(event);

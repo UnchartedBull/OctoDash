@@ -20,27 +20,27 @@ export class ConfigService {
 
   public constructor(
     private notificationService: NotificationService,
-    private _electronService: ElectronService,
-    private _zone: NgZone,
+    private electronService: ElectronService,
+    private zone: NgZone,
   ) {
-    this._electronService.ipcRenderer.addListener('configRead', (_, config: Config) => this.initialize(config));
-    this._electronService.ipcRenderer.addListener('configSaved', (_, config: Config) => this.initialize(config));
-    this._electronService.ipcRenderer.addListener('configError', (_, error: string) => {
+    this.electronService.ipcRenderer.addListener('configRead', (_, config: Config) => this.initialize(config));
+    this.electronService.ipcRenderer.addListener('configSaved', (_, config: Config) => this.initialize(config));
+    this.electronService.ipcRenderer.addListener('configError', (_, error: string) => {
       this.notificationService.setError(
         error,
         'Please restart your system. If the issue persists open an issue on GitHub.',
       );
     });
 
-    this._electronService.ipcRenderer.addListener('configPass', () => {
-      this._zone.run(() => {
+    this.electronService.ipcRenderer.addListener('configPass', () => {
+      this.zone.run(() => {
         this.valid = true;
         this.generateHttpHeaders();
         this.initialized = true;
       });
     });
-    this._electronService.ipcRenderer.addListener('configFail', (_, errors) => {
-      this._zone.run(() => {
+    this.electronService.ipcRenderer.addListener('configFail', (_, errors) => {
+      this.zone.run(() => {
         this.valid = false;
         this.errors = errors;
         console.error(errors);
@@ -48,12 +48,12 @@ export class ConfigService {
       });
     });
 
-    this._electronService.ipcRenderer.send('readConfig');
+    this.electronService.ipcRenderer.send('readConfig');
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this._electronService.ipcRenderer.send('checkConfig', config);
+    this.electronService.ipcRenderer.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -80,7 +80,7 @@ export class ConfigService {
   }
 
   public saveConfig(config: Config): void {
-    this._electronService.ipcRenderer.send('saveConfig', config);
+    this.electronService.ipcRenderer.send('saveConfig', config);
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {

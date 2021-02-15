@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ConfigService } from 'src/app/config/config.service';
-import { PrinterService } from 'src/app/printer.service';
+
+import { ConfigService } from '../../config/config.service';
+import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
   selector: 'app-filament-purge-filament',

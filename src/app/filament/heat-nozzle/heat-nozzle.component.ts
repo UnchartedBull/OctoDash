@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
 import { FilamentSpool, Temperatures } from '../../model';
-import { PrinterService } from '../../printer.service';
+import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';
 
 @Component({

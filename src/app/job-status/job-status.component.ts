@@ -16,14 +16,14 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public job: Job;
 
   public constructor(
-    private _jobService: JobService,
-    private _fileService: FilesService,
-    private _notificationService: NotificationService,
-    private _configService: ConfigService,
+    private jobService: JobService,
+    private fileService: FilesService,
+    private notificationService: NotificationService,
+    private configService: ConfigService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscriptions.add(this._jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
+    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
   }
 
   public ngOnDestroy(): void {
@@ -31,41 +31,41 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public isFileLoaded(): boolean {
-    return this._fileService.loadedFile;
+    return this.fileService.getLoadedFile();
   }
 
   public isPreheatEnabled(): boolean {
-    return this._configService.isPreheatPluginEnabled();
+    return this.configService.isPreheatPluginEnabled();
   }
 
   public preheat(): void {
-    this._jobService.preheat();
+    this.jobService.preheat();
   }
 
   public preheatDisabled(): void {
-    this._notificationService.setWarning(
+    this.notificationService.setWarning(
       'Preheat Plugin is not enabled!',
       'Please make sure to install and enable the Preheat Plugin to use this functionality.',
     );
   }
 
   public discardLoadedFile(): void {
-    this._fileService.loadedFile = false;
+    this.fileService.setLoadedFile(false);
   }
 
   public startJob(): void {
-    this._jobService.startJob();
+    this.jobService.startJob();
     setTimeout((): void => {
-      this._fileService.loadedFile = false;
+      this.fileService.setLoadedFile(false);
     }, 5000);
   }
 
   public isPrinting(): boolean {
-    return this._jobService.isPrinting();
+    return this.jobService.isPrinting();
   }
 
   public showPreview(): boolean {
-    return this._jobService.showPreviewWhilePrinting();
+    return this.jobService.showPreviewWhilePrinting();
   }
 
   public hasProperty(object: Record<string, unknown>, name: string): boolean {
@@ -73,6 +73,6 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public useCircularProgressBar(): boolean {
-    return this._configService.getPreviewProgressCircle();
+    return this.configService.getPreviewProgressCircle();
   }
 }

@@ -38,7 +38,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private electronService: ElectronService,
     public service: AppService,
-    private _electronService: ElectronService,
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
@@ -57,8 +56,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this._electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public hideSettings(): void {
@@ -95,8 +94,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public updateConfig(): void {
     const config = this.configService.createConfigFromInput(this.config);
 
-    this._electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
-    this._electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
     this.configService.saveConfig(config);
   }

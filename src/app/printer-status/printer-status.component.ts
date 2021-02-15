@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { Temperatures } from '../model';
 import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService, PrinterValue } from '../printer.service';
+import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -27,17 +27,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     private printerService: PrinterService,
     private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
-    private _socketService: SocketService,
+    private socketService: SocketService,
   ) {
     this.printerStatus = {
-      nozzle: {
-        current: 0,
-        set: 0,
-      },
-      heatbed: {
-        current: 0,
-        set: 0,
-      },
       fan: 0,
     };
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
@@ -47,7 +39,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this._socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
+      this.socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
         this.printerTemperatures = temperatures;
       }),
     );
@@ -160,7 +152,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   private setTemperatureHeatbed(): void {
-    this.printerService.setTemperatureHeatbed(this.heatbedTarget);
+    this.printerService.setTemperatureBed(this.heatbedTarget);
     this.hideQuickControl();
   }
 
@@ -171,8 +163,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 }
 
 export interface PrinterStatus {
-  nozzle: PrinterValue;
-  heatbed: PrinterValue;
   fan: number | string;
 }
 

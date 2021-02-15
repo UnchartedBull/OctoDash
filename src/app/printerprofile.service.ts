@@ -1,13 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigService } from './config/config.service';
-import { NotificationService } from './notification/notification.service';
 import { OctoprintPrinterProfile, OctoprintPrinterProfiles } from './model/octoprint/printer-profile.model';
-import { PrinterService } from './printer.service';
+import { NotificationService } from './notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +17,6 @@ export class PrinterProfileService {
     private http: HttpClient,
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private printerStatusService: PrinterService,
-    private router: Router,
   ) {}
 
   public getDefaultPrinterProfile(): Promise<OctoprintPrinterProfile> {
@@ -35,20 +31,9 @@ export class PrinterProfileService {
             resolve(printerProfile);
           },
           (error: HttpErrorResponse): void => {
-            if (error.status === 409) {
-              this.printerStatusService.isPrinterOffline().then((printerOffline): void => {
-                if (printerOffline) {
-                  this.router.navigate(['/standby']);
-                } else {
-                  this.notificationService.setError("Can't retrieve printer profile!", error.message);
-                }
-              });
-              reject();
-            } else {
-              reject();
-              if (error.status === 0 && this.notificationService.getBootGrace()) {
-                this.notificationService.setError("Can't retrieve printer status!", error.message);
-              }
+            reject();
+            if (error.status === 0 && this.notificationService.getBootGrace()) {
+              this.notificationService.setError("Can't retrieve printer status!", error.message);
             }
           },
         );
