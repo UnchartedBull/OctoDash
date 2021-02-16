@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { PrinterProfile } from '../../model';
 
 @Injectable()
 export abstract class PrinterService {
+  abstract getActiveProfile(): Observable<PrinterProfile>;
+
   abstract executeGCode(gCode: string): void;
 
   abstract jog(x: number, y: number, z: number): void;

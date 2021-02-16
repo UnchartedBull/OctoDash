@@ -7,9 +7,7 @@ import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AppService {
   private updateError: Record<string, (config: Config) => void>;
   private latestVersionAssetsURL: string;
@@ -48,6 +46,24 @@ export class AppService {
     };
   }
 
+  private checkUpdate(): void {
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
+      (data: GitHubReleaseInformation): void => {
+        if (this.version !== data.name.replace('v', '')) {
+          this.updateAvailable = true;
+        }
+        this.latestVersion = data.name.replace('v', '');
+        this.latestVersionAssetsURL = data.assets_url;
+      },
+      (): void => null,
+    );
+    setTimeout(this.checkUpdate.bind(this), 3600000);
+  }
+
+  public hasUpdateError(errors: string[]): boolean {
+    return _.intersection(errors, _.keys(this.updateError)).length > 0;
+  }
+
   public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
@@ -84,20 +100,6 @@ export class AppService {
     });
   }
 
-  private checkUpdate(): void {
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-      (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace('v', '')) {
-          this.updateAvailable = true;
-        }
-        this.latestVersion = data.name.replace('v', '');
-        this.latestVersionAssetsURL = data.assets_url;
-      },
-      (): void => null,
-    );
-    setTimeout(this.checkUpdate.bind(this), 3600000);
-  }
-
   public getVersion(): string {
     return this.version;
   }
@@ -106,20 +108,16 @@ export class AppService {
     return this.latestVersion;
   }
 
+  public getLatestVersionAssetsURL(): string {
+    return this.latestVersionAssetsURL;
+  }
+
   public turnDisplayOff(): void {
     this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
     this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
-  }
-
-  public hasUpdateError(errors: string[]): boolean {
-    return _.intersection(errors, _.keys(this.updateError)).length > 0;
-  }
-
-  public getLatestVersionAssetsURL(): string {
-    return this.latestVersionAssetsURL;
   }
 }
 

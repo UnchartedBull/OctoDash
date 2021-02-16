@@ -25,6 +25,7 @@ import { ConfigSetupComponent } from './config/setup/setup.component';
 import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
+import { ConversionService } from './conversion.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { FilamentComponent } from './filament/filament.component';
@@ -106,6 +107,7 @@ import { URLSafePipe } from './url.pipe';
   providers: [
     AppService,
     ConfigService,
+    ConversionService,
     NotificationService,
     JobService,
     FilesService,

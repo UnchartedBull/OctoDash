@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
+import { PrinterProfile } from '../../model';
 import {
   DisconnectCommand,
   ExtrudeCommand,
@@ -12,6 +14,7 @@ import {
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
 } from '../../model/octoprint/printer-commands.model';
+import { OctoprintPrinterProfiles } from '../../model/octoprint/printer-profile.model';
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
 
@@ -22,6 +25,21 @@ export class PrinterOctoprintService implements PrinterService {
     private notificationService: NotificationService,
     private http: HttpClient,
   ) {}
+
+  public getActiveProfile(): Observable<PrinterProfile> {
+    return this.http
+      .get<OctoprintPrinterProfiles>(
+        this.configService.getApiURL('printerprofiles'),
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        map(profiles => {
+          for (const [_, profile] of Object.entries(profiles.profiles)) {
+            if (profile.current) return profile;
+          }
+        }),
+      );
+  }
 
   public executeGCode(gCode: string): void {
     const gCodePayload: GCodeCommand = {
