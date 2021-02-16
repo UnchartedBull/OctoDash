@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { AnimationOptions } from 'ngx-lottie';
 
 import { ConfigService } from '../config/config.service';
 import { File, FilesService, Folder } from '../files.service';
@@ -20,9 +20,13 @@ export class FilesComponent {
   public showSorting = false;
   public homeFolder = '/';
 
+  public loadingOptions: AnimationOptions = {
+    path: '/assets/loading.json',
+  };
+  public loading = Date.now();
+
   public constructor(
     private filesService: FilesService,
-    private spinner: NgxSpinnerService,
     private router: Router,
     private jobService: JobService,
     private configService: ConfigService,
@@ -66,14 +70,14 @@ export class FilesComponent {
             this.currentFolder = folderPath;
           }
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
-          this.spinner.hide();
+          this.hideLoader();
         })
         .catch((): void => {
           this.folderContent = null;
           this.currentFolder = folderPath;
-          this.spinner.hide();
+          this.hideLoader();
         });
-    }, 300);
+    }, 240);
   }
 
   public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
@@ -170,13 +174,15 @@ export class FilesComponent {
     }, 300);
   }
 
+  private hideLoader(): void {
+    if (Date.now() - this.loading > 750) {
+      this.loading = 0;
+    } else {
+      setTimeout(this.hideLoader.bind(this), 750 - (Date.now() - this.loading));
+    }
+  }
+
   private showLoader(): void {
-    this.spinner.show(undefined, {
-      bdColor: '#353b48',
-      color: '#f5f6fa',
-      size: 'medium',
-      type: 'pacman',
-      fullScreen: false,
-    });
+    this.loading = Date.now();
   }
 }

@@ -28,9 +28,7 @@
   </span>
 </div>
 <div class="files">
-  <ngx-spinner>
-    <p class="la-pacman-text">loading</p>
-  </ngx-spinner>
+  <ng-lottie [hidden]="loading === 0" id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
 
   <div *ngIf="!folderContent" class="files__error">can't load files ...</div>
 

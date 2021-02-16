@@ -17,6 +17,8 @@ export abstract class PrinterService {
 
   abstract setTemperatureBed(temperature: number): void;
 
+  abstract setFanSpeed(percentage: number): void;
+
   abstract setFeedrate(feedrate: number): void;
 
   abstract setFlowrate(flowrate: number): void;
@@ -24,6 +26,4 @@ export abstract class PrinterService {
   abstract disconnectPrinter(): void;
 
   abstract emergencyStop(): void;
-
-  abstract setFanSpeed(percentage: number): void;
 }
