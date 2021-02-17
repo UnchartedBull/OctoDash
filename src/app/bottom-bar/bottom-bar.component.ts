@@ -1,8 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { EnclosureService } from '../plugins/enclosure.service';
+import { TemperatureReading } from '../model/enclosure.model';
+import { NotificationService } from '../notification/notification.service';
+import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -12,6 +14,8 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
+  private printerReady = false;
+
   public printerStatus: string;
   public enclosureTemperature: TemperatureReading;
 
@@ -19,19 +23,28 @@ export class BottomBarComponent implements OnDestroy {
     private socketService: SocketService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
+    private notificationService: NotificationService,
   ) {
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
       this.subscriptions.add(
-        this.enclosureService.getObservable().subscribe((temperatureReading: TemperatureReading): void => {
-          this.enclosureTemperature = temperatureReading;
+        timer(2500, 15000).subscribe(() => {
+          if (this.printerReady) {
+            this.enclosureService.getEnclosureTemperature().subscribe(
+              (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
+              error => {
+                this.notificationService.setError("Can't retrieve enclosure temperature!", error.message);
+              },
+            );
+          }
         }),
       );
-    } else {
-      this.enclosureTemperature = null;
     }
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: string): void => {
         this.printerStatus = printerStatus;
+        if (!this.printerReady) {
+          this.printerReady = ['operational', 'printing', 'paused'].includes(this.printerStatus);
+        }
       }),
     );
   }
@@ -43,10 +56,4 @@ export class BottomBarComponent implements OnDestroy {
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-}
-
-export interface TemperatureReading {
-  temperature: number;
-  humidity: number;
-  unit: string;
 }

@@ -3,7 +3,8 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../../config/config.service';
-import { EnclosureService, PsuControlService, TPLinkSmartPlugService } from '../../plugins';
+import { PsuControlService, TPLinkSmartPlugService } from '../../plugins';
+import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SystemService } from '../../services/system/system.service';
 

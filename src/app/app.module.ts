@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
-import player from 'lottie-web';
+import player, { LottiePlayer } from 'lottie-web';
 import { NgxElectronModule } from 'ngx-electron';
 import { LottieModule } from 'ngx-lottie';
 
@@ -47,6 +47,8 @@ import { NotificationService } from './notification/notification.service';
 import { FilamentManagerOctoprintService, FilamentPluginService } from './plugins';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
+import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
+import { EnclosureService } from './services/enclosure/enclosure.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
 import { OctoPrintSocketService } from './services/socket/socket.octoprint.service';
@@ -58,7 +60,7 @@ import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 
-export function playerFactory() {
+export function playerFactory(): LottiePlayer {
   return player;
 }
 @NgModule({
@@ -156,6 +158,19 @@ export function playerFactory() {
         deps: [ConfigService, HttpClient],
         useFactory: (configService: ConfigService, httpClient: HttpClient) => {
           return new FilamentManagerOctoprintService(configService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: EnclosureService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new EnclosureOctoprintService(configService, notificationService, httpClient);
         },
       },
     ],
