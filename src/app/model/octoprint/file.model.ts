@@ -17,14 +17,14 @@ export interface OctoprintFile {
   thumbnail?: string;
 }
 
-export interface OctoprintFolder {
-  files: [OctoprintFile & OctoprintFolderContent];
+export interface OctoprintDirectory {
+  files: [OctoprintFile & OctoprintFolder];
   free: number;
   total: number;
 }
 
-export interface OctoprintFolderContent {
-  children: [OctoprintFile & OctoprintFolderContent];
+export interface OctoprintFolder {
+  children: [OctoprintFile & OctoprintFolder];
   display: string;
   name: string;
   origin: string;

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from './config/config.service';
 import { ConversionService } from './conversion.service';
-import { OctoprintFile, OctoprintFolder, OctoprintFolderContent } from './model/octoprint/file.model';
+import { OctoprintDirectory, OctoprintFile, OctoprintFolder } from './model/octoprint/file.model';
 import { NotificationService } from './notification/notification.service';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class FilesService {
       this.getRequest = this.http
         .get(this.configService.getApiURL('files' + folderPath), this.configService.getHTTPHeaders())
         .subscribe(
-          (data: OctoprintFolder & OctoprintFolderContent): void => {
+          (data: OctoprintDirectory & OctoprintFolder): void => {
             if ('children' in data) {
               data.files = data.children;
               delete data.children;

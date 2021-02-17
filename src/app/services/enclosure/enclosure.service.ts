@@ -3,12 +3,6 @@ import { Observable } from 'rxjs';
 
 import { TemperatureReading } from '../../model/enclosure.model';
 
-// TODO
-
-// PsuControlService
-// TPLink SmartPlug
-// Enclosure IO
-
 @Injectable()
 export abstract class EnclosureService {
   abstract getEnclosureTemperature(): Observable<TemperatureReading>;
