@@ -5,7 +5,7 @@ import _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { ConfigService } from '../config/config.service';
-import { File, FilesService, Folder } from '../files.service';
+import { File, FilesService } from '../files.service';
 import { JobService } from '../job.service';
 import { Directory } from '../model';
 import { NotificationService } from '../notification/notification.service';
@@ -42,25 +42,11 @@ export class FilesComponent {
     this.showLoader();
     this.directory = { files: [], folders: [] };
     this.currentFolder = '/';
+
     this.sortingAttribute = this.configService.getDefaultSortingAttribute();
     this.sortingOrder = this.configService.getDefaultSortingOrder();
-    this.openFolder(this.currentFolder);
-  }
 
-  public openDetails(filePath: string): void {
-    this.filesService
-      .getFile(filePath)
-      .then((data): void => {
-        this.fileDetail = data;
-      })
-      .catch((): void => {
-        this.fileDetail = ({ name: 'error' } as unknown) as File;
-      });
-    const fileDOMElement = document.getElementById('fileDetailView');
-    fileDOMElement.style.display = 'block';
-    setTimeout((): void => {
-      fileDOMElement.style.opacity = '1';
-    }, 50);
+    this.openFolder(this.currentFolder);
   }
 
   public openFolder(folderPath: string): void {
@@ -78,6 +64,7 @@ export class FilesComponent {
           } else {
             this.currentFolder = folderPath;
           }
+          this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
         (error: HttpErrorResponse) => {
           this.notificationService.setError("Can't load file/folder!", error.message);
@@ -91,46 +78,24 @@ export class FilesComponent {
   }
 
   public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
-    // switch (by) {
-    //   case 'name': {
-    //     this.directory.files.sort((a, b): number =>
-    //       a.type === b.type
-    //         ? (order === 'asc' ? a.name > b.name : a.name < b.name)
-    //           ? 1
-    //           : -1
-    //         : a.type === 'folder'
-    //         ? -1
-    //         : 1,
-    //     );
-    //     break;
-    //   }
-    //   case 'date': {
-    //     this.sortFolder('name', order);
-    //     this.folderContent.sort((a, b): number => {
-    //       if (a.type === b.type && a.type === 'file') {
-    //         const aFile = (a as unknown) as File;
-    //         const bFile = (b as unknown) as File;
-    //         return (order === 'asc' ? aFile.date > bFile.date : aFile.date < bFile.date) ? 1 : -1;
-    //       } else {
-    //         return a.type === 'folder' ? -1 : 1;
-    //       }
-    //     });
-    //     break;
-    //   }
-    //   case 'size': {
-    //     this.sortFolder('name', order);
-    //     this.folderContent.sort((a, b): number => {
-    //       if (a.type === b.type && (a as File).type) {
-    //         const aFile = (a as unknown) as File;
-    //         const bFile = (b as unknown) as File;
-    //         return (order === 'asc' ? aFile.size > bFile.size : aFile.size < bFile.size) ? 1 : -1;
-    //       } else {
-    //         return 1;
-    //       }
-    //     });
-    //     break;
-    //   }
-    // }
+    this.directory.folders.sort((a, b): number => ((order === 'asc' ? a.name > b.name : a.name < b.name) ? 1 : -1));
+    this.directory.files.sort((a, b): number => ((order === 'asc' ? a[by] > b[by] : a[by] < b[by]) ? 1 : -1));
+  }
+
+  public openDetails(filePath: string): void {
+    this.filesService
+      .getFile(filePath)
+      .then((data): void => {
+        this.fileDetail = data;
+      })
+      .catch((): void => {
+        this.fileDetail = ({ name: 'error' } as unknown) as File;
+      });
+    const fileDOMElement = document.getElementById('fileDetailView');
+    fileDOMElement.style.display = 'block';
+    setTimeout((): void => {
+      fileDOMElement.style.opacity = '1';
+    }, 50);
   }
 
   public closeDetails(): void {
