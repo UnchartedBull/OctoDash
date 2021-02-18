@@ -770,7 +770,6 @@ EOF
 ExecStart=
 ExecStart=-/sbin/agetty --autologin $USER --noclear %I \$TERM
 EOF
-fi 
 
     echo "Setting Permissions ..."
     sudo chmod +x ~/.xinitrc
