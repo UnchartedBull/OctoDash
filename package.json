@@ -90,7 +90,7 @@
     "compare-versions": "^3.6.0",
     "electron-store": "^7.0.2",
     "got": "^11.8.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "ngx-electron": "^2.2.0",
     "ngx-spinner": "^10.0.1",
     "progress-stream": "^2.0.0",
