@@ -94,7 +94,7 @@
     "ngx-electron": "^2.2.0",
     "ngx-spinner": "^10.0.1",
     "progress-stream": "^2.0.0",
-    "rxjs": "~6.6.3",
+    "rxjs": "~6.6.4",
     "tslib": "^2.1.0",
     "v8-compile-cache": "^2.2.0",
     "wait-port": "^0.2.9",
