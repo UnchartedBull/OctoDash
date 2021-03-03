@@ -77,7 +77,7 @@
     "@angular/compiler": "^11.1.2",
     "@angular/core": "^11.2.2",
     "@angular/forms": "^11.2.3",
-    "@angular/material": "^11.2.2",
+    "@angular/material": "^11.2.3",
     "@angular/platform-browser": "^11.2.3",
     "@angular/platform-browser-dynamic": "^11.2.3",
     "@angular/router": "^11.2.3",
