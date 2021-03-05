@@ -6,6 +6,9 @@ import { pluck } from 'rxjs/operators';
 
 import { AppToken } from '../../../model/octoprint/auth.model';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Injectable()
 export class OctoprintAuthenticationService {
   constructor(private http: HttpClient) {}

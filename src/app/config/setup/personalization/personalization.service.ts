@@ -5,7 +5,9 @@ import { defaultIfEmpty, map } from 'rxjs/operators';
 
 import { OctoprintPrinterProfiles } from '../../../model/octoprint/printer-profile.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PersonalizationService {
   public constructor(private http: HttpClient) {}
 

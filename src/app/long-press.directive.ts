@@ -21,7 +21,7 @@ export class LongPress {
   @Output()
   onLongPressing = new EventEmitter();
 
-  @HostListener('touchstart', ['$event'])
+  @HostListener('pointerdown', ['$event'])
   onMouseDown(event: EventSource): void {
     this.pressing = true;
     this.longPressing = false;
@@ -34,8 +34,7 @@ export class LongPress {
     }, this.duration);
   }
 
-  @HostListener('touchend', ['$event'])
-  @HostListener('touchcancel', ['$event'])
+  @HostListener('pointerup', ['$event'])
   endPress(event: EventSource): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
@@ -46,7 +45,7 @@ export class LongPress {
     this.pressing = false;
   }
 
-  @HostListener('touchmove', ['$event'])
+  @HostListener('pointerleave', ['$event'])
   endPressMove(_: EventSource): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
