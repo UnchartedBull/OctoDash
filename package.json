@@ -78,7 +78,7 @@
     "@angular/core": "^11.2.2",
     "@angular/forms": "^11.2.4",
     "@angular/material": "^11.2.3",
-    "@angular/platform-browser": "^11.2.4",
+    "@angular/platform-browser": "^11.2.5",
     "@angular/platform-browser-dynamic": "^11.2.5",
     "@angular/router": "^11.2.5",
     "@fortawesome/angular-fontawesome": "^0.8.2",
