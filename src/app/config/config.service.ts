@@ -173,6 +173,10 @@ export class ConfigService {
     return this.config.octodash.turnOnPrinterWhenExitingSleep;
   }
 
+  public usePSUControl(): boolean {
+    return this.config.plugins.psuControl.enabled;
+  }
+
   public useTpLinkSmartPlug(): boolean {
     return this.config.plugins.tpLinkSmartPlug.enabled;
   }
@@ -180,6 +184,7 @@ export class ConfigService {
   public getSmartPlugIP(): string {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

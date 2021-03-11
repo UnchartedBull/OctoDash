@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { TemperatureReading } from '../../model/enclosure.model';
+import { PSUState, TemperatureReading } from '../../model/enclosure.model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
   EnclosurePluginAPI,
 } from '../../model/octoprint/plugins/enclosure.model';
+import { PSUControlCommand } from '../../model/octoprint/plugins/psucontrol.model';
+import { TPLinkCommand } from '../../model/octoprint/plugins/tp-link.model';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
 
@@ -20,6 +22,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     private notificationService: NotificationService,
     private http: HttpClient,
   ) {}
+  private currentPSUState = PSUState.ON;
 
   getEnclosureTemperature(): Observable<TemperatureReading> {
     return this.http
@@ -69,5 +72,42 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(catchError(error => this.notificationService.setError("Can't set output!", error.message)))
       .subscribe();
+  }
+
+  setPSUState(state: PSUState): void {
+    if (this.configService.usePSUControl()) {
+      this.setPSUStatePSUControl(state);
+    } else if (this.configService.useTpLinkSmartPlug()) {
+      this.setPSUStateTPLink(state);
+    } else {
+      this.notificationService.setWarning("Can't change PSU State!", 'No provider for PSU Control is configured.');
+    }
+  }
+
+  private setPSUStatePSUControl(state: PSUState) {
+    const psuControlPayload: PSUControlCommand = {
+      command: state === PSUState.ON ? 'turnPSUOn' : 'turnPSUOff',
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTPLink(state: PSUState) {
+    const tpLinkPayload: TPLinkCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      ip: this.configService.getSmartPlugIP(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  togglePSU(): void {
+    this.currentPSUState === PSUState.ON ? this.setPSUState(PSUState.OFF) : this.setPSUState(PSUState.ON);
   }
 }

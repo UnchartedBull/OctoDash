@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TemperatureReading } from '../../model/enclosure.model';
+import { PSUState, TemperatureReading } from '../../model/enclosure.model';
 
 @Injectable()
 export abstract class EnclosureService {
@@ -10,4 +10,8 @@ export abstract class EnclosureService {
   abstract setLEDColor(identifier: number, red: number, green: number, blue: number): void;
 
   abstract setOutput(identifier: number, status: boolean): void;
+
+  abstract setPSUState(state: PSUState): void;
+
+  abstract togglePSU(): void;
 }

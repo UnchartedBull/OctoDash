@@ -3,3 +3,8 @@ export interface TemperatureReading {
   humidity: number;
   unit: string;
 }
+
+export enum PSUState {
+  ON,
+  OFF,
+}

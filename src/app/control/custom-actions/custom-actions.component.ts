@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { PSUState } from 'src/app/model';
 
 import { ConfigService } from '../../config/config.service';
-import { PsuControlService, TPLinkSmartPlugService } from '../../plugins';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SystemService } from '../../services/system/system.service';
@@ -24,9 +24,7 @@ export class CustomActionsComponent {
     private printerService: PrinterService,
     private systemService: SystemService,
     private configService: ConfigService,
-    private psuControlService: PsuControlService,
     private enclosureService: EnclosureService,
-    private tplinkSmartPlugService: TPLinkSmartPlugService,
     private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
@@ -39,23 +37,15 @@ export class CustomActionsComponent {
         exit,
       };
     } else {
-      this.executeGCode(command);
+      command.split('; ').forEach(this.executeGCode.bind(this));
       if (exit && this.redirectActive) {
         this.router.navigate(['/main-screen']);
       }
+      this.hideConfirm();
     }
   }
 
-  public doActionConfirm(): void {
-    this.executeGCode(this.actionToConfirm.command);
-    if (this.actionToConfirm.exit) {
-      this.router.navigate(['/main-screen']);
-    } else {
-      this.actionToConfirm = null;
-    }
-  }
-
-  public doActionNoConfirm(): void {
+  public hideConfirm(): void {
     this.actionToConfirm = null;
   }
 
@@ -80,19 +70,13 @@ export class CustomActionsComponent {
         this.kill();
         break;
       case '[!POWEROFF]':
-        this.psuControlService.changePSUState(false);
+        this.enclosureService.setPSUState(PSUState.OFF);
         break;
       case '[!POWERON]':
-        this.psuControlService.changePSUState(true);
+        this.enclosureService.setPSUState(PSUState.ON);
         break;
       case '[!POWERTOGGLE]':
-        this.psuControlService.togglePSU();
-        break;
-      case '[!TPLINKOFF]':
-        this.tplinkSmartPlugService.changePowerState(false);
-        break;
-      case '[!TPLINKON]':
-        this.tplinkSmartPlugService.changePowerState(true);
+        this.enclosureService.togglePSU();
         break;
       default: {
         if (command.includes('[!WEB]')) {

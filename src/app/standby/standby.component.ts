@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { OctoprintConnection } from '../model/octoprint/connection.model';
 import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
+import { PSUState } from '../model';
+import { OctoprintConnection } from '../model/octoprint/connection.model';
 import { NotificationService } from '../notification/notification.service';
-import { PsuControlService } from '../plugins/psu-control.service';
-import { TPLinkSmartPlugService } from '../plugins/tplink-smartplug.service';
+import { EnclosureService } from '../services/enclosure/enclosure.service';
 
 @Component({
   selector: 'app-standby',
@@ -27,8 +27,7 @@ export class StandbyComponent implements OnInit {
     private router: Router,
     private service: AppService,
     private notificationService: NotificationService,
-    private psuControlService: PsuControlService,
-    private tpLinkSmartPlugService: TPLinkSmartPlugService,
+    private enclosureService: EnclosureService,
   ) {}
 
   public ngOnInit(): void {
@@ -41,11 +40,7 @@ export class StandbyComponent implements OnInit {
   public reconnect(): void {
     this.connecting = true;
     if (this.configService.getAutomaticPrinterPowerOn()) {
-      if (this.configService.useTpLinkSmartPlug()) {
-        this.tpLinkSmartPlugService.changePowerState(true);
-      } else {
-        this.psuControlService.changePSUState(true);
-      }
+      this.enclosureService.setPSUState(PSUState.ON);
       setTimeout(this.checkConnection.bind(this), 5000);
     } else {
       this.checkConnection();
