@@ -16,6 +16,13 @@ export interface OctoprintSocketCurrent {
   };
 }
 
+export interface OctoprintPluginMessage {
+  plugin: {
+    plugin: string;
+    data: unknown;
+  };
+}
+
 interface OctoprintSocketResends {
   count: number;
   transmitted: number;

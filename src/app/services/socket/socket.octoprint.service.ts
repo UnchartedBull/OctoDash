@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { DisplayLayerProgressData } from 'src/app/model/octoprint/plugins/display-layer-progress.model';
 
 import { ConfigService } from '../../config/config.service';
 import { SocketAuth, Temperatures } from '../../model';
-import { OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
+import { OctoprintPluginMessage, OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
 
@@ -13,13 +14,18 @@ import { SocketService } from './socket.service';
 export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
   private socket: WebSocketSubject<unknown>;
+
   private temperatureSubject: Subject<Temperatures>;
   private printerStatusSubject: Subject<string>;
+  private fanSpeedSubject: Subject<number>;
 
   public constructor(private configService: ConfigService, private systemService: SystemService) {
     this.temperatureSubject = new ReplaySubject<Temperatures>();
     this.printerStatusSubject = new ReplaySubject<string>();
+    this.fanSpeedSubject = new ReplaySubject<number>();
   }
+
+  //==== SETUP & AUTH ====//
 
   public connect(): Promise<void> {
     return new Promise(resolve => {
@@ -60,8 +66,13 @@ export class OctoPrintSocketService implements SocketService {
         console.log('EVENT RECEIVED');
         console.log(message);
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-        console.log('PLUGIN RECEIVED');
-        console.log(message);
+        const pluginMessage = message as OctoprintPluginMessage;
+        if (pluginMessage.plugin.plugin === 'DisplayLayerProgress-websocket-payload') {
+          this.extractFanSpeed(pluginMessage.plugin.data as DisplayLayerProgressData);
+        } else {
+          console.log('UNKOWN PLUGIN RECEIVED');
+          console.log(message);
+        }
       } else if (Object.hasOwnProperty.bind(message)('history')) {
         console.log('HISTORY RECEIVED');
       } else if (Object.hasOwnProperty.bind(message)('reauth')) {
@@ -75,6 +86,8 @@ export class OctoPrintSocketService implements SocketService {
       }
     });
   }
+
+  //==== Printer State ====//
 
   public extractTemperature(message: OctoprintSocketCurrent): void {
     if (message.current.temps[0]) {
@@ -95,6 +108,12 @@ export class OctoPrintSocketService implements SocketService {
     this.printerStatusSubject.next(message.current.state.text.toLowerCase());
   }
 
+  public extractFanSpeed(message: DisplayLayerProgressData): void {
+    this.fanSpeedSubject.next(Number(message.fanspeed.replace('%', '').trim()));
+  }
+
+  //==== Subscribables ====//
+
   public getTemperatureSubscribable(): Observable<Temperatures> {
     return this.temperatureSubject.pipe(
       startWith({
@@ -112,5 +131,13 @@ export class OctoPrintSocketService implements SocketService {
 
   public getPrinterStatusSubscribable(): Observable<string> {
     return this.printerStatusSubject.pipe(startWith('connecting ...'));
+  }
+
+  getZIndicatorSubscribable(): Observable<string> {
+    throw new Error('Method not implemented.');
+  }
+
+  getFanSpeedSubscribable(): Observable<number> {
+    return this.fanSpeedSubject.pipe(startWith(this.configService.isDisplayLayerProgressEnabled() ? 0 : -1));
   }
 }

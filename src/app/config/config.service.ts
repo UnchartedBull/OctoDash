@@ -213,6 +213,10 @@ export class ConfigService {
     return this.config.printer.defaultTemperatureFanSpeed.fan;
   }
 
+  public isDisplayLayerProgressEnabled(): boolean {
+    return this.config.plugins.displayLayerProgress.enabled;
+  }
+
   public isPreheatPluginEnabled(): boolean {
     return this.config.plugins.preheatButton.enabled;
   }

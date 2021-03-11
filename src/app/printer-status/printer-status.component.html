@@ -38,7 +38,7 @@
     >
       <img src="assets/fan.svg" />
       <span class="printer-status__actual-value">
-        {{ printerStatus.fan }}<span class="printer-status__unit">%</span>
+        {{ fanSpeed >= 0 ? fanSpeed : '-- ' }}<span class="printer-status__unit">%</span>
       </span>
     </td>
   </tr>

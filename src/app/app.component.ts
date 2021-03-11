@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
   private connectWebsocket() {
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
-    }, 15000);
+    }, 30000);
     this.socketService
       .connect()
       .then(() => {

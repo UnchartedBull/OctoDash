@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
 import { Temperatures } from '../model';
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
@@ -14,24 +13,22 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  public printerStatus: PrinterStatus;
   public printerTemperatures: Temperatures;
+  public fanSpeed: number;
   public status: string;
-  public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+
   public hotendTarget: number;
   public heatbedTarget: number;
   public fanTarget: number;
 
+  public QuickControlView = QuickControlView;
+  public view = QuickControlView.NONE;
+
   public constructor(
     private printerService: PrinterService,
-    private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
     private socketService: SocketService,
   ) {
-    this.printerStatus = {
-      fan: 0,
-    };
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
     this.fanTarget = this.configService.getDefaultFanSpeed();
@@ -45,8 +42,8 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.add(
-      this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI): void => {
-        this.printerStatus.fan = layerProgress.fanSpeed;
+      this.socketService.getFanSpeedSubscribable().subscribe((fanSpeed: number): void => {
+        this.fanSpeed = fanSpeed;
       }),
     );
   }
