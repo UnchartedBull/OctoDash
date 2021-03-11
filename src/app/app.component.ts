@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { SocketService } from './services/socket/socket.service';
 
+// TODO: Upgrading settings killed OctoDash
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit {
   private connectWebsocket() {
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
-    }, 2000);
+    }, 15000);
     this.socketService
       .connect()
       .then(() => {

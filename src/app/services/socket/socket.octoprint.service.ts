@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
@@ -17,8 +17,8 @@ export class OctoPrintSocketService implements SocketService {
   private printerStatusSubject: Subject<string>;
 
   public constructor(private configService: ConfigService, private systemService: SystemService) {
-    this.temperatureSubject = new Subject<Temperatures>();
-    this.printerStatusSubject = new Subject<string>();
+    this.temperatureSubject = new ReplaySubject<Temperatures>();
+    this.printerStatusSubject = new ReplaySubject<string>();
   }
 
   public connect(): Promise<void> {
