@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { Temperatures } from '../model';
+import { PrinterStatus } from '../model';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
@@ -13,7 +13,7 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  public printerTemperatures: Temperatures;
+  public printerStatus: PrinterStatus;
   public fanSpeed: number;
   public status: string;
 
@@ -36,14 +36,8 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
-        this.printerTemperatures = temperatures;
-      }),
-    );
-
-    this.subscriptions.add(
-      this.socketService.getFanSpeedSubscribable().subscribe((fanSpeed: number): void => {
-        this.fanSpeed = fanSpeed;
+      this.socketService.getPrinterStatusSubscribable().subscribe((status: PrinterStatus): void => {
+        this.printerStatus = status;
       }),
     );
   }
@@ -157,10 +151,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.printerService.setFanSpeed(this.fanTarget);
     this.hideQuickControl();
   }
-}
-
-export interface PrinterStatus {
-  fan: number | string;
 }
 
 enum QuickControlView {

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
-import { FilamentSpool, Temperatures } from '../../model';
+import { FilamentSpool, PrinterStatus } from '../../model';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';
 
@@ -39,9 +39,10 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
     this.hotendTarget = this.currentSpool
       ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
       : this.configService.getDefaultHotendTemperature();
+
     this.subscriptions.add(
-      this.socketService.getTemperatureSubscribable().subscribe((temperatures: Temperatures): void => {
-        this.hotendTemperature = temperatures.tool0.current;
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
+        this.hotendTemperature = printerStatus.tool0.current;
       }),
     );
   }

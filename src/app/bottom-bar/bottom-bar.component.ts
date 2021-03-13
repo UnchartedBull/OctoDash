@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
+import { PrinterStatus } from '../model';
 import { TemperatureReading } from '../model/enclosure.model';
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
@@ -40,8 +41,8 @@ export class BottomBarComponent implements OnDestroy {
       );
     }
     this.subscriptions.add(
-      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: string): void => {
-        this.printerStatus = printerStatus;
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
+        this.printerStatus = printerStatus.status;
         if (!this.printerReady) {
           this.printerReady = ['operational', 'printing', 'paused'].includes(this.printerStatus);
         }

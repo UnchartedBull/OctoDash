@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { Job, JobService, JobStatus } from '../job.service';
-import { Temperatures } from '../model';
+import { PrinterStatus } from '../model';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
@@ -163,18 +163,12 @@ export class PrintControlComponent implements OnInit, OnDestroy {
 
   private loadData(): void {
     this.socketService
-      .getTemperatureSubscribable()
+      .getPrinterStatusSubscribable()
       .pipe(take(1))
-      .subscribe((temperatures: Temperatures): void => {
-        this.temperatureHotend = temperatures.tool0.set;
-        this.temperatureHeatbed = temperatures.bed.set;
-      });
-
-    this.socketService
-      .getFanSpeedSubscribable()
-      .pipe(take(1))
-      .subscribe((fanSpeed: number): void => {
-        this.fanSpeed = fanSpeed;
+      .subscribe((status: PrinterStatus): void => {
+        this.temperatureHotend = status.tool0.set;
+        this.temperatureHeatbed = status.bed.set;
+        this.fanSpeed = status.fanSpeed;
       });
   }
 

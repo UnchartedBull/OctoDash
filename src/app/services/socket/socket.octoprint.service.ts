@@ -5,7 +5,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { DisplayLayerProgressData } from 'src/app/model/octoprint/plugins/display-layer-progress.model';
 
 import { ConfigService } from '../../config/config.service';
-import { SocketAuth, Temperatures } from '../../model';
+import { JobStatus, PrinterStatus, SocketAuth } from '../../model';
 import { OctoprintPluginMessage, OctoprintSocketCurrent } from '../../model/octoprint/socket.model';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
@@ -15,32 +15,51 @@ export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
   private socket: WebSocketSubject<unknown>;
 
-  private temperatureSubject: Subject<Temperatures>;
-  private printerStatusSubject: Subject<string>;
-  private fanSpeedSubject: Subject<number>;
+  private printerStatusSubject: Subject<PrinterStatus>;
+  private jobSubject: Subject<JobStatus>;
+
+  private printerStatus: PrinterStatus;
 
   public constructor(private configService: ConfigService, private systemService: SystemService) {
-    this.temperatureSubject = new ReplaySubject<Temperatures>();
-    this.printerStatusSubject = new ReplaySubject<string>();
-    this.fanSpeedSubject = new ReplaySubject<number>();
+    this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
+    this.jobSubject = new ReplaySubject<JobStatus>();
   }
 
   //==== SETUP & AUTH ====//
 
   public connect(): Promise<void> {
+    this.printerStatus = {
+      status: 'connecting ...',
+      bed: {
+        current: 0,
+        set: 0,
+        unit: '°C',
+      },
+      tool0: {
+        current: 0,
+        set: 0,
+        unit: '°C',
+      },
+      fanSpeed: this.configService.isDisplayLayerProgressEnabled() ? 0 : -1,
+    } as PrinterStatus;
+
     return new Promise(resolve => {
-      this.systemService.getSessionKey().subscribe(
-        socketAuth => {
-          this.connectSocket();
-          this.setupSocket(resolve);
-          this.authenticateSocket(socketAuth);
-        },
-        () => {
-          setTimeout(this.connect.bind(this), this.fastInterval < 6 ? 5000 : 15000);
-          this.fastInterval += 1;
-        },
-      );
+      this.tryConnect(resolve);
     });
+  }
+
+  private tryConnect(resolve: () => void): void {
+    this.systemService.getSessionKey().subscribe(
+      socketAuth => {
+        this.connectSocket();
+        this.setupSocket(resolve);
+        this.authenticateSocket(socketAuth);
+      },
+      () => {
+        setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
+        this.fastInterval += 1;
+      },
+    );
   }
 
   private connectSocket() {
@@ -60,7 +79,6 @@ export class OctoPrintSocketService implements SocketService {
   private setupSocket(resolve: () => void) {
     this.socket.subscribe(message => {
       if (Object.hasOwnProperty.bind(message)('current')) {
-        this.extractTemperature(message as OctoprintSocketCurrent);
         this.extractPrinterStatus(message as OctoprintSocketCurrent);
       } else if (Object.hasOwnProperty.bind(message)('event')) {
         console.log('EVENT RECEIVED');
@@ -89,55 +107,42 @@ export class OctoPrintSocketService implements SocketService {
 
   //==== Printer State ====//
 
-  public extractTemperature(message: OctoprintSocketCurrent): void {
+  public extractPrinterStatus(message: OctoprintSocketCurrent): void {
+    let hasChanged = false;
     if (message.current.temps[0]) {
-      this.temperatureSubject.next({
-        bed: {
-          current: Math.round(message.current.temps[0].bed.actual),
-          set: Math.round(message.current.temps[0].bed.target),
-        },
-        tool0: {
-          current: Math.round(message.current.temps[0].tool0.actual),
-          set: Math.round(message.current.temps[0].tool0.target),
-        },
-      });
+      this.printerStatus.bed = {
+        current: Math.round(message.current.temps[0].bed.actual),
+        set: Math.round(message.current.temps[0].bed.target),
+        unit: '°C',
+      };
+      this.printerStatus.tool0 = {
+        current: Math.round(message.current.temps[0].tool0.actual),
+        set: Math.round(message.current.temps[0].tool0.target),
+        unit: '°C',
+      };
+      hasChanged = true;
+    }
+    if (this.printerStatus.status !== message.current.state.text.toLowerCase()) {
+      this.printerStatus.status = message.current.state.text.toLowerCase();
+      hasChanged = true;
+    }
+
+    if (hasChanged) {
+      this.printerStatusSubject.next(this.printerStatus);
     }
   }
 
-  public extractPrinterStatus(message: OctoprintSocketCurrent): void {
-    this.printerStatusSubject.next(message.current.state.text.toLowerCase());
-  }
-
   public extractFanSpeed(message: DisplayLayerProgressData): void {
-    this.fanSpeedSubject.next(Number(message.fanspeed.replace('%', '').trim()));
+    this.printerStatus.fanSpeed = Number(message.fanspeed.replace('%', '').trim());
   }
 
   //==== Subscribables ====//
 
-  public getTemperatureSubscribable(): Observable<Temperatures> {
-    return this.temperatureSubject.pipe(
-      startWith({
-        tool0: {
-          current: 0,
-          set: 0,
-        },
-        bed: {
-          current: 0,
-          set: 0,
-        },
-      } as Temperatures),
-    );
+  public getPrinterStatusSubscribable(): Observable<PrinterStatus> {
+    return this.printerStatusSubject.pipe(startWith(this.printerStatus));
   }
 
-  public getPrinterStatusSubscribable(): Observable<string> {
-    return this.printerStatusSubject.pipe(startWith('connecting ...'));
-  }
-
-  getZIndicatorSubscribable(): Observable<string> {
+  public getJobStatusSubscribable(): Observable<JobStatus> {
     throw new Error('Method not implemented.');
-  }
-
-  getFanSpeedSubscribable(): Observable<number> {
-    return this.fanSpeedSubject.pipe(startWith(this.configService.isDisplayLayerProgressEnabled() ? 0 : -1));
   }
 }

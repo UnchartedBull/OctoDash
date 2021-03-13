@@ -214,6 +214,7 @@ export class ConfigService {
   }
 
   public isDisplayLayerProgressEnabled(): boolean {
+    console.log(this.config);
     return this.config.plugins.displayLayerProgress.enabled;
   }
 
