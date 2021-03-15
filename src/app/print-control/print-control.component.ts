@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { Job, JobService, JobStatus } from '../job.service';
-import { PrinterStatus } from '../model';
+import { JobService } from '../job.service';
+import { PrinterState, PrinterStatus } from '../model';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
@@ -44,8 +44,8 @@ export class PrintControlComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.jobService.getObservable().subscribe((job: Job): void => {
-        if (job.status === JobStatus.Paused) {
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus) => {
+        if (printerStatus.status === PrinterState.paused) {
           if (!this.showedPauseScreen) {
             this.view = ControlView.PAUSE;
             this.showControls = true;

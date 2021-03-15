@@ -22,12 +22,6 @@ interface OctoprintFile {
 }
 
 export interface OctoprintFilament {
-  tool0?: OctoprintFilamentValues;
-  tool1?: OctoprintFilamentValues;
-  tool2?: OctoprintFilamentValues;
-  tool3?: OctoprintFilamentValues;
-  tool4?: OctoprintFilamentValues;
-  tool5?: OctoprintFilamentValues;
   [key: string]: OctoprintFilamentValues;
 }
 

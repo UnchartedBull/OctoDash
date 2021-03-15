@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { PrinterStatus } from '../model';
+import { PrinterState, PrinterStatus } from '../model';
 import { TemperatureReading } from '../model/enclosure.model';
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
@@ -17,7 +17,7 @@ export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
   private printerReady = false;
 
-  public printerStatus: string;
+  public printerStatus: PrinterState;
   public enclosureTemperature: TemperatureReading;
 
   public constructor(
@@ -44,10 +44,16 @@ export class BottomBarComponent implements OnDestroy {
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
         this.printerStatus = printerStatus.status;
         if (!this.printerReady) {
-          this.printerReady = ['operational', 'printing', 'paused'].includes(this.printerStatus);
+          this.printerReady = [PrinterState.operational, PrinterState.printing, PrinterState.paused].includes(
+            this.printerStatus,
+          );
         }
       }),
     );
+  }
+
+  public getStringStatus(printerState: PrinterState): string {
+    return PrinterState[printerState];
   }
 
   public getPrinterName(): string {

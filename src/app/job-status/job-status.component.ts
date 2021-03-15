@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
+import { EventService } from '../event.service';
 import { FilesService } from '../files.service';
-import { Job, JobService } from '../job.service';
-import { NotificationService } from '../notification/notification.service';
+import { JobService } from '../job.service';
+import { JobStatus } from '../model';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-job-status',
@@ -13,17 +15,22 @@ import { NotificationService } from '../notification/notification.service';
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  public job: Job;
+  public jobStatus: JobStatus;
 
   public constructor(
     private jobService: JobService,
     private fileService: FilesService,
-    private notificationService: NotificationService,
+    private socketService: SocketService,
+    private eventService: EventService,
     private configService: ConfigService,
   ) {}
 
   public ngOnInit(): void {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
+    this.subscriptions.add(
+      this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
+        this.jobStatus = jobStatus;
+      }),
+    );
   }
 
   public ngOnDestroy(): void {
@@ -42,13 +49,6 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     this.jobService.preheat();
   }
 
-  public preheatDisabled(): void {
-    this.notificationService.setWarning(
-      'Preheat Plugin is not enabled!',
-      'Please make sure to install and enable the Preheat Plugin to use this functionality.',
-    );
-  }
-
   public discardLoadedFile(): void {
     this.fileService.setLoadedFile(false);
   }
@@ -61,7 +61,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    return this.eventService.isPrinting();
   }
 
   public showPreview(): boolean {

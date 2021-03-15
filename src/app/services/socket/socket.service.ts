@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PrinterEvent } from 'src/app/model/event.model';
 
 import { JobStatus, PrinterStatus } from '../../model';
 
@@ -11,7 +12,9 @@ export abstract class SocketService {
 
   abstract getJobStatusSubscribable(): Observable<JobStatus>;
 
+  abstract getEventSubscribable(): Observable<PrinterEvent>;
+
   // TODO
-  // Wakeup & Sleep & Print Start & Print End & Reset print object before starting
+  // Wakeup & Sleep & Print Start & Print End
   // ReAuth
 }

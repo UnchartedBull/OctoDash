@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { OctoprintFile } from './file.model';
 
 export interface OctoprintSocketCurrent {
@@ -14,6 +15,18 @@ export interface OctoprintSocketCurrent {
     state: OctoprintSocketState;
     temps: OctoprintSocketTemperatures;
   };
+}
+
+export interface OctoprintSocketEvent {
+  event: {
+    type: string;
+    payload: unknown;
+  };
+}
+
+export interface OctoprintSocketEventStateChange {
+  state_id: string;
+  state_string: string;
 }
 
 export interface OctoprintPluginMessage {
@@ -90,15 +103,3 @@ interface OctoprintSocketTemperature {
   actual: number;
   target: number;
 }
-
-// busyFiles: []
-// currentZ: null
-// job: {file: {…}, estimatedPrintTime: null, lastPrintTime: null, filament: {…}, user: null}
-// logs: ["Recv: wait"]
-// messages: ["wait"]
-// offsets: {tool0: 0}
-// progress: {completion: null, filepos: null, printTime: null, printTimeLeft: null, printTimeOrigin: null}
-// resends: {count: 0, transmitted: 9, ratio: 0}
-// serverTime: 1612993378.293588
-// state: {text: "Operational", flags: {…}}
-// temps: []

@@ -119,10 +119,6 @@ export class JobService {
     return this.observable;
   }
 
-  public isPrinting(): boolean {
-    return this.printing;
-  }
-
   public togglePreviewWhilePrinting(): void {
     this.previewWhilePrinting = !this.previewWhilePrinting;
   }
