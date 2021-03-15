@@ -1,675 +1,697 @@
 @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Product Sans'), local('ProductSans-Regular'), url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVE9eOcEg.woff2) format('woff2');
-    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-  }
-  /* greek */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Product Sans'), local('ProductSans-Regular'), url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVFNeOcEg.woff2) format('woff2');
-    unicode-range: U+0370-03FF;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Product Sans'), local('ProductSans-Regular'), url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVGdeOcEg.woff2) format('woff2');
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Product Sans'), local('ProductSans-Regular'), url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-  /* cyrillic */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: local('Product Sans Medium'), local('ProductSans-Medium'), url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbS2lBkm8.woff2) format('woff2');
-    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-  }
-  /* greek */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: local('Product Sans Medium'), local('ProductSans-Medium'), url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbTGlBkm8.woff2) format('woff2');
-    unicode-range: U+0370-03FF;
-  }
-  /* latin-ext */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: local('Product Sans Medium'), local('ProductSans-Medium'), url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbQWlBkm8.woff2) format('woff2');
-    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  /* latin */
-  @font-face {
-    font-family: 'Product Sans';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: local('Product Sans Medium'), local('ProductSans-Medium'), url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbT2lB.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Product Sans'), local('ProductSans-Regular'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVE9eOcEg.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Product Sans'), local('ProductSans-Regular'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVFNeOcEg.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Product Sans'), local('ProductSans-Regular'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Product Sans'), local('ProductSans-Regular'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Product Sans Medium'), local('ProductSans-Medium'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbS2lBkm8.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Product Sans Medium'), local('ProductSans-Medium'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbTGlBkm8.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Product Sans Medium'), local('ProductSans-Medium'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbQWlBkm8.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Product Sans Medium'), local('ProductSans-Medium'),
+    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbT2lB.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 /**************************************** GLOBAL ****************************************/
 
-[hidden]{
-	display:block!important;
+[hidden] {
+  display: block !important;
 }
 *:not(path):not(svg) {
-    font-family: 'Product Sans', sans-serif;
+  font-family: 'Product Sans', sans-serif;
 }
 app-root {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 ::-webkit-scrollbar {
-    width: 1.5vw!important;
+  width: 1.5vw !important;
 }
 
 ::-webkit-scrollbar-track-piece:end {
-    margin-bottom: 1.8vh;
+  margin-bottom: 1.8vh;
 }
 
 ::-webkit-scrollbar-track-piece:start {
-    margin-top: 3.7vh;
+  margin-top: 3.7vh;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .scroll__thumb-inactive {
-    background-color: rgba(127, 143, 166, 0.3);
-    width: 1.5vw;
-    height: 70.8vh;
-    position: fixed;
-    right: 2.5vw;
-    top: 26.5vh;
+  background-color: rgba(127, 143, 166, 0.3);
+  width: 1.5vw;
+  height: 70.8vh;
+  position: fixed;
+  right: 2.5vw;
+  top: 26.5vh;
 }
 
 /**************************************** BOTTOM BAR ****************************************/
 
-app-job-status ~ app-bottom-bar .bottom-bar{
-    left: 4vw!important;
-    width: calc(100% - 4vw - 4vw)!important;
+app-job-status ~ app-bottom-bar .bottom-bar {
+  left: 4vw !important;
+  width: calc(100% - 4vw - 4vw) !important;
 }
-app-job-status ~ app-bottom-bar .bottom-bar td{
-    font-size:3vw!important;
+app-job-status ~ app-bottom-bar .bottom-bar td {
+  font-size: 3vw !important;
 }
 app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature-icon {
-        width: 2vw!important;
-        display: inline-block;
-        margin-bottom: -0.8vh;
-        margin-right: 1vw;
-    }
-
-
+  width: 2vw !important;
+  display: inline-block;
+  margin-bottom: -0.8vh;
+  margin-right: 1vw;
+}
 
 /**************************************** NOTIFICATION ****************************************/
 
 .notification {
-    background-color: rgba(0, 0, 0, .85)!important;
-    backdrop-filter: blur(8px)!important;
-    border-radius: 1vw;
-    transition: top .2s ease-in-out!important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 1vw;
+  transition: top 0.2s ease-in-out !important;
 }
 
 /**************************************** FILES ****************************************/
 
-ngx-spinner .overlay{
-    background: rgba(255, 255, 255, 0)!important;
-    backdrop-filter: blur(5px);
+ngx-spinner .overlay {
+  background: rgba(255, 255, 255, 0) !important;
+  backdrop-filter: blur(5px);
 }
 
-.files__object{
-    background-color: #222222!important;
-    width: 92vw!important;
+.files__object {
+  background-color: #222222 !important;
+  width: 92vw !important;
 }
 
 .files__name {
-    font-weight: normal!important;
-    font-size: 3.1vw!important;
+  font-weight: normal !important;
+  font-size: 3.1vw !important;
 }
 
 .files::before {
-    display:none!important;
+  display: none !important;
 }
 
 .files__info {
-    float: right;
-    padding-left: .7vw;
-    line-height: 6vw;
+  float: right;
+  padding-left: 0.7vw;
+  line-height: 6vw;
 }
 
-.files__info-value:first-of-type, .files__info-value:nth-of-type(2){
-    display:none!important; /* hide size and filament use */
+.files__info-value:first-of-type,
+.files__info-value:nth-of-type(2) {
+  display: none !important; /* hide size and filament use */
 }
 
 .sorting {
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, .7)!important;
-    transition: opacity ease-in-out .2s!important;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  transition: opacity ease-in-out 0.2s !important;
 }
 
-.sorting-wrapper{
-    background: transparent!important;
+.sorting-wrapper {
+  background: transparent !important;
 }
 
 .sorting-close {
-    position: fixed!important;
-    right: 3.5vw!important;
-    top: 5.5vh!important;
-    width: 5vw!important;
+  position: fixed !important;
+  right: 3.5vw !important;
+  top: 5.5vh !important;
+  width: 5vw !important;
 }
 
 /**************************************** FILE ****************************************/
 
-.file{
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, .7)!important;
-    left:0!important;
-    right:0!important;
-    top:0!important;
-    bottom:0!important;
-    width:auto!important;
-    height:auto!important;
-    transition: opacity ease-in-out .2s!important;
+.file {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  transition: opacity ease-in-out 0.2s !important;
 }
 
-.file__wrapper{
-    left: 0!important;
-    top: 0!important;
-    right:0!important;
-    bottom:0!important;
-    width: auto!important;
-    height: auto!important;
-    padding: 6vh 5vw!important;
-    background: transparent!important;
+.file__wrapper {
+  left: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 6vh 5vw !important;
+  background: transparent !important;
 }
 
 .file__name {
-    width: 94%!important;
+  width: 94% !important;
 }
 
 .file__close {
-    position: fixed!important;
-    right: 3.5vw!important;
-    top: 5.5vh!important;
-    width: 5vw!important;
+  position: fixed !important;
+  right: 3.5vw !important;
+  top: 5.5vh !important;
+  width: 5vw !important;
 }
 
 .file__render {
-    height: 50vh!important;
-    margin-left: 0!important;
-    margin-right: 0!important;
-    margin-bottom: 1.5vh!important;
-    display:inline-block!important;
-    background: black;
+  height: 50vh !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 1.5vh !important;
+  display: inline-block !important;
+  background: black;
 }
 
 .file__details {
-    width: auto!important;
-    height: 45vh!important;
-    display:inline-block!important;
-    position:relative;
-    top:-4vw;
-    margin-top:0!important;
-    margin-right: auto!important;
-    margin-left: 3vw!important;
+  width: auto !important;
+  height: 45vh !important;
+  display: inline-block !important;
+  position: relative;
+  top: -4vw;
+  margin-top: 0 !important;
+  margin-right: auto !important;
+  margin-left: 3vw !important;
 }
 .file__details td {
-    width: 100%!important;
-    margin-bottom: 1vw!important;
-    text-align: left!important;
-    display:block;
+  width: 100% !important;
+  margin-bottom: 1vw !important;
+  text-align: left !important;
+  display: block;
 }
 
 .job-info__filename {
-    position: fixed;
-    top:0;
-    left:0;
-    font-size: 4vw!important;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 4vh!important;
-    width: 100vw!important;
-    text-overflow: ellipsis;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 4vw !important;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  padding-top: 4vh !important;
+  width: 100vw !important;
+  text-overflow: ellipsis;
 }
 
 /**************************************** PRINTER STATUS ****************************************/
 
 .quick-control {
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, .7)!important;
-    transition: opacity ease-in-out .2s!important;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  transition: opacity ease-in-out 0.2s !important;
 }
 .quick-control__controller {
-    border: solid 0.2vw!important;
-    border-radius: 1vw!important;
+  border: solid 0.2vw !important;
+  border-radius: 1vw !important;
 }
 .quick-control__controller-set {
-    border-top: solid 0.2vw!important;
+  border-top: solid 0.2vw !important;
 }
 
 /**************************************** FILE LOADED ****************************************/
 
 .job-info__preview {
-    position:absolute!important;
-    top: 19vh!important;
-    left: 4vw!important;
-    width: 30vw!important;
+  position: absolute !important;
+  top: 19vh !important;
+  left: 4vw !important;
+  width: 30vw !important;
 }
 
 .job-info__preview-image {
-    width: 30vw!important;
-    margin:0!important;
-    display:block!important;
+  width: 30vw !important;
+  margin: 0 !important;
+  display: block !important;
 }
 
 .job-info__preview-discard {
-    font-size: 2.5vw!important;
-    width: 30vw!important;
+  font-size: 2.5vw !important;
+  width: 30vw !important;
 }
 
 .job-info__print-details {
-    position:absolute!important;
-    top: 19vh!important;
-    left: 39.6vw!important;
-    margin:0!important;
-    /* line-height: 1!important; */
+  position: absolute !important;
+  top: 19vh !important;
+  left: 39.6vw !important;
+  margin: 0 !important;
+  /* line-height: 1!important; */
 }
 
-.job-info__actions-item-heat{
-    position:fixed!important;
-    top: 22vh!important;
-    right: 22vw!important;
-    margin:0!important;
-    z-index: 10000000000;
+.job-info__actions-item-heat {
+  position: fixed !important;
+  top: 22vh !important;
+  right: 22vw !important;
+  margin: 0 !important;
+  z-index: 10000000000;
 }
 
-.job-info__actions-item-print{
-    position:fixed!important;
-    top: 17vh!important;
-    right: 3vw!important;
-    margin:0!important;
-    z-index: 10000000000;
+.job-info__actions-item-print {
+  position: fixed !important;
+  top: 17vh !important;
+  right: 3vw !important;
+  margin: 0 !important;
+  z-index: 10000000000;
 }
 
-.job-info__print-details-value{
-    margin-top: 0!important;
-    margin-bottom: 0!important;
-    padding-bottom: 0!important;
-    font-size: 3vw!important;
-    position: relative!important;
-    top: -1vh!important;
+.job-info__print-details-value {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 3vw !important;
+  position: relative !important;
+  top: -1vh !important;
 }
 
-.job-info__print-details-finish-state{
-    display: none;
+.job-info__print-details-finish-state {
+  display: none;
 }
 
 /**************************************** FILE LOADED - PRINTER STATUS ****************************************/
 
-app-job-status ~ app-printer-status .printer-status{
-    position:absolute;
-    top: 0vh!important;
-    left: 0vw!important;
+app-job-status ~ app-printer-status .printer-status {
+  position: absolute;
+  top: 0vh !important;
+  left: 0vw !important;
 }
 
-app-job-status ~ app-printer-status .printer-status__set-value, app-job-status ~ app-printer-status  .printer-status__actual-value{
-    display:inline!important;
-    font-size: 4vw!important;
+app-job-status ~ app-printer-status .printer-status__set-value,
+app-job-status ~ app-printer-status .printer-status__actual-value {
+  display: inline !important;
+  font-size: 4vw !important;
 }
 
-app-job-status ~ app-printer-status .printer-status__unit, app-job-status ~ app-printer-status  .printer-status .unit{
-    font-size: 3vw!important;
+app-job-status ~ app-printer-status .printer-status__unit,
+app-job-status ~ app-printer-status .printer-status .unit {
+  font-size: 3vw !important;
 }
 
-app-job-status ~ app-printer-status .printer-status__value span:nth-last-child(2) .printer-status__unit{
-    display:none!important;
+app-job-status ~ app-printer-status .printer-status__value span:nth-last-child(2) .printer-status__unit {
+  display: none !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__value img {
-    width: 6vw!important;
-    float: left;
-    padding-top: 1.7vh;
-    padding-right: 2vw;
+  width: 6vw !important;
+  float: left;
+  padding-top: 1.7vh;
+  padding-right: 2vw;
 }
 
 app-job-status ~ app-printer-status .printer-status__value-1 {
-    width: auto!important;
-    padding-left: 0!important;
-    padding-right: 0!important;
-    position: absolute;
-    top: 37vh;
-    left: 38vw;
+  width: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: absolute;
+  top: 37vh;
+  left: 38vw;
 }
 app-job-status ~ app-printer-status .printer-status__value-1 img {
-    margin-top:-3vh!important;
+  margin-top: -3vh !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__value-2 {
-    width: auto!important;
-    padding-left: 0!important;
-    padding-right: 0!important;
-    position: absolute;
-    top: 37vh;
-    left: 69vw;
-
+  width: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: absolute;
+  top: 37vh;
+  left: 69vw;
 }
 app-job-status ~ app-printer-status .printer-status__value-2 img {
-    margin-top:-3vh!important;
+  margin-top: -3vh !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__value-3 {
-    width: auto!important;
-    padding-left: 0!important;
-    padding-right: 0!important;
-    position: absolute;
-    top: 53vh;
-    left: 38vw;
-
+  width: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: absolute;
+  top: 53vh;
+  left: 38vw;
 }
 app-job-status ~ app-printer-status .printer-status__value-3 img {
-    margin-top:-1.6vh!important;
+  margin-top: -1.6vh !important;
 }
 
 /**************************************** FILE LOADED - LAYER PROGRESS ****************************************/
 
-app-job-status ~ app-layer-progress .layer-indication{
-    position:absolute!important;
-    top: 57vh;
-    left: 68.8vw;
-    visibility: hidden;
-    width:auto!important;
-    margin:0!important;
-    letter-spacing: -1em;
+app-job-status ~ app-height-progress .layer-indication {
+  position: absolute !important;
+  top: 57vh;
+  left: 68.8vw;
+  visibility: hidden;
+  width: auto !important;
+  margin: 0 !important;
+  letter-spacing: -1em;
 }
 
-app-job-status ~ app-layer-progress .layer-indication__current-layer{
-    position: relative;
-    top:-0.5vh!important;
-    visibility: visible!important;
-    font-size: 4vw!important;
-    letter-spacing: normal!important;
+app-job-status ~ app-height-progress .layer-indication__current-layer {
+  position: relative;
+  top: -0.5vh !important;
+  visibility: visible !important;
+  font-size: 4vw !important;
+  letter-spacing: normal !important;
 }
 
-app-job-status ~ app-layer-progress .layer-indication__total-layers{
-    position: relative;
-    top: -0.5vh!important;
-    visibility: visible!important;
-    font-size: 4vw!important;
-    letter-spacing: normal!important;
+app-job-status ~ app-height-progress .layer-indication__total-layers {
+  position: relative;
+  top: -0.5vh !important;
+  visibility: visible !important;
+  font-size: 4vw !important;
+  letter-spacing: normal !important;
 }
 
-app-job-status ~ app-layer-progress .layer-indication::before{
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADaUlEQVRo3tXZTYhVZRgHcJ1JncyYGEyldKOZRB+QRtGiCVEioWRIQVdthNkKbdy2EHLbUsgWSghtpE0RUQYV1sawD/qAMFIKk/FjRKYanV+Le4Y5HJ/33HvPPddz54G7ued5/s//fd73/d/nuWfJkj4ZVuAojmNlv/L0i/wGfGPBzmJj07w6Jb8LU+60a5homl8Z8aU4hNvSNocjGGqab5H8GD7SuX2GNU3znie/FecDkrN4I/vMBs/PY2vT5F/HzYDc39iR83sBfwZ+/+BgE8TnJTKyL/BQELMGnyZi7p7UBhKZt6NYXhJ7T3aJ54LY/kuttETewL4ucCa0ZLVo/ZFa5RL5C56ogLkFPwR49Uqtcon8AA/0gH0/3k9g9y61eBq/BeC3sh1ZWlORJvFfkOcPPFcVtEwid9ZBvJBvXAWprXLOaql6l9gzVatSdoTerOMIZQJxsOQIPdtrglGcauASf4ixXguUr1JKRn/FkxUwt+DHAK9/HSu241KQ9Ab2d4EzgesBzhRerp14IfkGfJ3Y9k5bicju3tSm1cy9nSDypUFq5rAcjyWeHcBMQOgvjOf8xrPvijaDAwnsp8p2s1Py63FG68dkMuFT+0BjQVbPYH1V8i8GVTsRbbVyqY0slEiswsmC72W8VGUBh8V9+7fYFPgPaf24lQ31tzOfoSC+rDs9XHUXXsGVAPQ6XkvEpKQ2KZHYjatBzDT2VCKfA38E5xKVOYLhIKYotaFEYjjbkWinf5IQjyqLWJmd/8g+wYNBzAjeyT4jwfO1OJ3ADO9aHQuZxL9Bwgt4vgucZ/B7gDOLQ7UTLyTfJi2bbZOXFOFiN0XodRGr8XFi+9/DfUHMvXg3EfM51vWL7JhAh7ML+FbiAn6HzTnfR/F94DeXYURC8Kpe22kLA82cVu+zLPBJSe009mZEriae7wnw8g1fTzNx1OecxtrAd3NW9ajCbXcoh/Mwvir4JvuldgtIDfWXsD3wH8Ex7S11R1INX7IP6+YIFS2pONIqE8ZoeCY+hdEgpii1oUQakJn4ZzwexMxLbSiRGpqJU3/uTmNv4D8slsj9WnN00aawq3biheTtZuJlJbGLYiYe7BccBVJ1vGKqJpE1LmLxvuTLLWJUDTNx04tYvC+6CwvpeiYeONPhTDzQps1MXJf9D/8DEmah7Y5IAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTA1LTIxVDE3OjUxOjUyKzAwOjAw6dTVAQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wNS0yMVQxNzo1MTo1MiswMDowMJiJbb0AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC');
-    visibility: visible!important;
-    background-size: 6vw 6vh;
-    display: inline-block;
-    width: 6vw;
-    height: 6vh;
-    content:"";
-    margin-right: 2vw;
+app-job-status ~ app-height-progress .layer-indication::before {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADaUlEQVRo3tXZTYhVZRgHcJ1JncyYGEyldKOZRB+QRtGiCVEioWRIQVdthNkKbdy2EHLbUsgWSghtpE0RUQYV1sawD/qAMFIKk/FjRKYanV+Le4Y5HJ/33HvPPddz54G7ued5/s//fd73/d/nuWfJkj4ZVuAojmNlv/L0i/wGfGPBzmJj07w6Jb8LU+60a5homl8Z8aU4hNvSNocjGGqab5H8GD7SuX2GNU3znie/FecDkrN4I/vMBs/PY2vT5F/HzYDc39iR83sBfwZ+/+BgE8TnJTKyL/BQELMGnyZi7p7UBhKZt6NYXhJ7T3aJ54LY/kuttETewL4ucCa0ZLVo/ZFa5RL5C56ogLkFPwR49Uqtcon8AA/0gH0/3k9g9y61eBq/BeC3sh1ZWlORJvFfkOcPPFcVtEwid9ZBvJBvXAWprXLOaql6l9gzVatSdoTerOMIZQJxsOQIPdtrglGcauASf4ixXguUr1JKRn/FkxUwt+DHAK9/HSu241KQ9Ab2d4EzgesBzhRerp14IfkGfJ3Y9k5bicju3tSm1cy9nSDypUFq5rAcjyWeHcBMQOgvjOf8xrPvijaDAwnsp8p2s1Py63FG68dkMuFT+0BjQVbPYH1V8i8GVTsRbbVyqY0slEiswsmC72W8VGUBh8V9+7fYFPgPaf24lQ31tzOfoSC+rDs9XHUXXsGVAPQ6XkvEpKQ2KZHYjatBzDT2VCKfA38E5xKVOYLhIKYotaFEYjjbkWinf5IQjyqLWJmd/8g+wYNBzAjeyT4jwfO1OJ3ADO9aHQuZxL9Bwgt4vgucZ/B7gDOLQ7UTLyTfJi2bbZOXFOFiN0XodRGr8XFi+9/DfUHMvXg3EfM51vWL7JhAh7ML+FbiAn6HzTnfR/F94DeXYURC8Kpe22kLA82cVu+zLPBJSe009mZEriae7wnw8g1fTzNx1OecxtrAd3NW9ajCbXcoh/Mwvir4JvuldgtIDfWXsD3wH8Ex7S11R1INX7IP6+YIFS2pONIqE8ZoeCY+hdEgpii1oUQakJn4ZzwexMxLbSiRGpqJU3/uTmNv4D8slsj9WnN00aawq3biheTtZuJlJbGLYiYe7BccBVJ1vGKqJpE1LmLxvuTLLWJUDTNx04tYvC+6CwvpeiYeONPhTDzQps1MXJf9D/8DEmah7Y5IAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTA1LTIxVDE3OjUxOjUyKzAwOjAw6dTVAQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wNS0yMVQxNzo1MTo1MiswMDowMJiJbb0AAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC');
+  visibility: visible !important;
+  background-size: 6vw 6vh;
+  display: inline-block;
+  width: 6vw;
+  height: 6vh;
+  content: '';
+  margin-right: 2vw;
 }
 
-app-job-status ~ app-layer-progress .layer-indication__current-layer::after{
-    content: '/';
-    font-weight: normal;
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+app-job-status ~ app-height-progress .layer-indication__current-layer::after {
+  content: '/';
+  font-weight: normal;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
 }
 
 /**************************************** PRINTING ****************************************/
 
-
 .job-info__progress {
-    position: absolute!important;
-    top: 19vh!important;
-    left: 4vw!important;
-    width: 6vw!important;
-    margin: 0!important;
-    padding: 0!important;
+  position: absolute !important;
+  top: 19vh !important;
+  left: 4vw !important;
+  width: 6vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-round-progress svg path{
-    stroke-linecap:butt!important;
-    stroke-width: 50!important;
-    transform: scale(0.9);
-    transform-origin: center;
-    stroke: rgb(31, 153, 0)!important;
+round-progress svg path {
+  stroke-linecap: butt !important;
+  stroke-width: 50 !important;
+  transform: scale(0.9);
+  transform-origin: center;
+  stroke: rgb(31, 153, 0) !important;
 }
-round-progress svg circle{
-    stroke-width: 50!important;
-    transform: scale(0.9);
-    transform-origin: center;
-    stroke: rgba(255, 255, 255, 0.2)!important;
+round-progress svg circle {
+  stroke-width: 50 !important;
+  transform: scale(0.9);
+  transform-origin: center;
+  stroke: rgba(255, 255, 255, 0.2) !important;
 }
 
 #progress-preview-circle .job-info__progress-preview-image {
-    position:fixed!important;
-    top: 32vh!important;
-    left: 4vw!important;
-    width: 30vw!important;
-    /* height: 30vw!important; /* test square thumbnail */
-    margin:0!important;
-    display:block!important;
+  position: fixed !important;
+  top: 32vh !important;
+  left: 4vw !important;
+  width: 30vw !important;
+  /* height: 30vw!important; /* test square thumbnail */
+  margin: 0 !important;
+  display: block !important;
 }
 
 #progress-preview-bar .job-info__progress-preview {
-    position:fixed!important;
-    top: 20.5vh!important;
-    left: 4vw!important;
-    width: 30vw!important;
-    /* height: 30vw!important; /* test square thumbnail */
-    margin:0!important;
-    display:block!important;
+  position: fixed !important;
+  top: 20.5vh !important;
+  left: 4vw !important;
+  width: 30vw !important;
+  /* height: 30vw!important; /* test square thumbnail */
+  margin: 0 !important;
+  display: block !important;
 }
 
 .job-info__progress-percentage {
-    position:fixed!important;
-    top: 18vh!important;
-    left: 12vw!important;
-    margin:0!important;
-    display:block!important;
+  position: fixed !important;
+  top: 18vh !important;
+  left: 12vw !important;
+  margin: 0 !important;
+  display: block !important;
 
-    font-size: 6vw!important;
-    text-align: left!important;
-    width: auto!important;
+  font-size: 6vw !important;
+  text-align: left !important;
+  width: auto !important;
 }
 
 #progress-preview-bar + .job-info__progress-percentage {
-    margin: 0!important;
-    font-size: 8vh!important;
-    font-weight: 500!important;
-    display:block!important;
-    position:fixed!important;
-    top: 76.3vh!important;
-    left: 4vw!important;
-    width: 92vw!important;
-    z-index:1!important;
-    color:white!important;
-    visibility: visible!important;
-    text-align: center!important;
-    text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black;
+  margin: 0 !important;
+  font-size: 8vh !important;
+  font-weight: 500 !important;
+  display: block !important;
+  position: fixed !important;
+  top: 76.3vh !important;
+  left: 4vw !important;
+  width: 92vw !important;
+  z-index: 1 !important;
+  color: white !important;
+  visibility: visible !important;
+  text-align: center !important;
+  text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black;
 }
 
-
 .job-info__progress-bar {
-    height: 8vh!important;
-    border-radius: 0.5vw!important;
-    background-color: #105310!important;
+  height: 8vh !important;
+  border-radius: 0.5vw !important;
+  background-color: #105310 !important;
 }
 
 .job-info__progress-bar__wrapper {
-    position:fixed!important;
-    top: 78vh!important;
-    left: 3vw!important;
-    width: 92vw!important;
-    height: 8vh!important;
-    border-radius: 0.5vw!important;
-    background-color: rgb(127, 143, 166, 0.25);
-    border-style: solid!important;
+  position: fixed !important;
+  top: 78vh !important;
+  left: 3vw !important;
+  width: 92vw !important;
+  height: 8vh !important;
+  border-radius: 0.5vw !important;
+  background-color: rgb(127, 143, 166, 0.25);
+  border-style: solid !important;
 }
 
-.job-info__filament{
-    visibility: hidden;
+.job-info__filament {
+  visibility: hidden;
 }
 
-.job-info__time{
-    position: absolute!important;
-    top: 18vh!important;
-    left: 38vw!important;
-    margin:0!important;
-    font-size:4vw!important;
+.job-info__time {
+  position: absolute !important;
+  top: 18vh !important;
+  left: 38vw !important;
+  margin: 0 !important;
+  font-size: 4vw !important;
 }
 
 /**************************************** PRINT CONTROLL ****************************************/
 
 .print-control__container {
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, .7)!important;
-    transition: opacity ease-in-out .2s!important;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  transition: opacity ease-in-out 0.2s !important;
 }
 .print-control__adjust__controller {
-    border: solid 0.2vw!important;
-    border-radius: 1vw!important;
+  border: solid 0.2vw !important;
+  border-radius: 1vw !important;
 }
 .print-control__adjust__save {
-    border: 0.2vw solid!important;
-    border-radius: 1vw!important;
+  border: 0.2vw solid !important;
+  border-radius: 1vw !important;
 }
 
-.print-control__cancel__action:first-child{
-    background-color: rgba(194, 54, 22, 0.85);
-    text-align: center;
-    padding: 2vh 7vw!important;
-    margin: 9vh 6vw!important;
-    border-radius: 0.8vw;
+.print-control__cancel__action:first-child {
+  background-color: rgba(194, 54, 22, 0.85);
+  text-align: center;
+  padding: 2vh 7vw !important;
+  margin: 9vh 6vw !important;
+  border-radius: 0.8vw;
 }
 
-.print-control__cancel__action:last-child{
-    background-color: rgb(31, 153, 0)!important;
-    text-align: center;
-    padding: 2vh 7vw!important;
-    margin: 9vh 6vw!important;
-    border-radius: 0.8vw;
+.print-control__cancel__action:last-child {
+  background-color: rgb(31, 153, 0) !important;
+  text-align: center;
+  padding: 2vh 7vw !important;
+  margin: 9vh 6vw !important;
+  border-radius: 0.8vw;
 }
 
 /**************************************** SETTINGS ****************************************/
 
-.settings__made::after{
-    content: " \00a0 | \00a0 NOX theme by NoxHirsch";
-    width: auto!important;
+.settings__made::after {
+  content: ' \00a0 | \00a0 NOX theme by NoxHirsch';
+  width: auto !important;
 }
 
-.settings__version::after{
-    content: " \00a0 | \00a0 NOX theme v0.2.1";
-    width: auto!important;
+.settings__version::after {
+  content: ' \00a0 | \00a0 NOX theme v0.2.1';
+  width: auto !important;
 }
 
-.settings-wrapper{
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, .7)!important;
+.settings-wrapper {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.settings-container{
-    left:0!important;
-    right:0!important;
-    top:0!important;
-    bottom:0!important;
-    width:auto!important;
-    height:auto!important;
-    background:none!important;
+.settings-container {
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
 }
 
 .settings__content {
-    width: 95vw!important;
-    height: 95vh!important;
+  width: 95vw !important;
+  height: 95vh !important;
 }
 
-.settings__scroll{
-    height: 85vh!important;
+.settings__scroll {
+  height: 85vh !important;
 }
 
-.settings__save{
-    background-color: rgba(194, 54, 22, 0.85);
-    width: 30vw;
-    text-align: center;
-    padding: 1vh 0;
-    border-radius: 0.8vw;
+.settings__save {
+  background-color: rgba(194, 54, 22, 0.85);
+  width: 30vw;
+  text-align: center;
+  padding: 1vh 0;
+  border-radius: 0.8vw;
 }
 
-.settings__input{
-    margin-top: 1.5vh;
-    padding: 1.5vw 3vh;
-    border-radius: 0.5vw!important;
-    width: 82.5vw!important;
-    font-size: 3vw!important;
-    margin-bottom: 2vh;
+.settings__input {
+  margin-top: 1.5vh;
+  padding: 1.5vw 3vh;
+  border-radius: 0.5vw !important;
+  width: 82.5vw !important;
+  font-size: 3vw !important;
+  margin-bottom: 2vh;
 }
 
 .settings__input-small {
-    width: 15vw!important;
+  width: 15vw !important;
 }
 
-#octoprintURLName{
-    width: 34.8vw!important; /*  23.2vw*1.5 */
+#octoprintURLName {
+  width: 34.8vw !important; /*  23.2vw*1.5 */
 }
 
-#octoprintURLPort{
-    width: 12vw!important; /*  8vw*1.5 */
+#octoprintURLPort {
+  width: 12vw !important; /*  8vw*1.5 */
 }
 
-#accessToken, #printerName, #api-polling-interval, #action-command, #enclosure-ambient-id{
-    width: 67.41vw!important; /* 44.94vw*1.5 */
+#accessToken,
+#printerName,
+#api-polling-interval,
+#action-command,
+#enclosure-ambient-id {
+  width: 67.41vw !important; /* 44.94vw*1.5 */
 }
 
-#xySpeed, #zSpeed, #defaultHotendTemperature, #defaultHeatbedTemperature, #defaultFanSpeed, #filament-feed-length, #filament-purge-distance, #filament-feed-speed, #filament-feed-speed-slow, #filament-thickness, #filament-density{
-    width: 28.5vw!important; /* 19vw*1.5 */
+#xySpeed,
+#zSpeed,
+#defaultHotendTemperature,
+#defaultHeatbedTemperature,
+#defaultFanSpeed,
+#filament-feed-length,
+#filament-purge-distance,
+#filament-feed-speed,
+#filament-feed-speed-slow,
+#filament-thickness,
+#filament-density {
+  width: 28.5vw !important; /* 19vw*1.5 */
 }
 
 .settings__input-label {
-    font-size: 2.5vw!important;
-    padding-top: 4vh!important;
+  font-size: 2.5vw !important;
+  padding-top: 4vh !important;
 }
 
-#action-icon, #action-color{
-    width: 21vw!important; /*  14vw*1.5 */
+#action-icon,
+#action-color {
+  width: 21vw !important; /*  14vw*1.5 */
 }
 
-.settings__checkbox-descriptor{
-    padding-right: 3vw;
+.settings__checkbox-descriptor {
+  padding-right: 3vw;
 }
 
-.settings__list li{
-    padding-top: 1.8vw!important;
-    padding-bottom: 1.8vw!important;
+.settings__list li {
+  padding-top: 1.8vw !important;
+  padding-bottom: 1.8vw !important;
 }
 
 .settings__close {
-    position: fixed!important;
-    right: 3vw!important;
-    top: 5.1vh!important;
-    width: 5vw!important;
+  position: fixed !important;
+  right: 3vw !important;
+  top: 5.1vh !important;
+  width: 5vw !important;
 }

@@ -13,7 +13,8 @@ export class MainScreenComponent {
   public constructor(private jobService: JobService, private fileService: FilesService) {}
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    // return this.jobService.isPrinting()
+    return true;
   }
 
   public isFileLoaded(): boolean {

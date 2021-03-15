@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
 import { FilamentSpool, PrinterStatus } from '../model';
-import { FilamentService } from '../plugins';
+import { FilamentService } from '../services/filament/filament.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 

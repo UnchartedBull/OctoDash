@@ -12,6 +12,6 @@ export abstract class SocketService {
   abstract getJobStatusSubscribable(): Observable<JobStatus>;
 
   // TODO
-  // Wakeup & Sleep
+  // Wakeup & Sleep & Print Start & Print End & Reset print object before starting
   // ReAuth
 }

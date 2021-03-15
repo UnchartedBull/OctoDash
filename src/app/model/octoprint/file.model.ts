@@ -1,4 +1,4 @@
-import { OctoprintFilament } from './job.model';
+import { OctoprintFilament } from './socket.model';
 
 export interface OctoprintFile {
   date: number;

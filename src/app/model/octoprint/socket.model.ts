@@ -1,14 +1,14 @@
+import { OctoprintFile } from './file.model';
+
 export interface OctoprintSocketCurrent {
   current: {
     busyFiles: Array<string>;
     currentZ: number;
-    // TODO
-    job: null;
+    job: OctoprintJob;
     logs: Array<string>;
     messages: Array<string>;
-    // TODO
-    offsets: null;
-    progress: null;
+    offsets: OctoprintOffsets;
+    progress: OctoprintProgress;
     resends: OctoprintSocketResends;
     serverTime: number;
     state: OctoprintSocketState;
@@ -21,6 +21,35 @@ export interface OctoprintPluginMessage {
     plugin: string;
     data: unknown;
   };
+}
+
+interface OctoprintJob {
+  averagePrintTime: number;
+  estimatedPrintTime: number;
+  filament: OctoprintFilament;
+  file: OctoprintFile;
+  lastPrintTime: string;
+  user: string;
+}
+export interface OctoprintFilament {
+  [key: string]: OctoprintFilamentValues;
+}
+
+interface OctoprintFilamentValues {
+  length: number;
+  volume: number;
+}
+
+interface OctoprintOffsets {
+  tool0: number;
+}
+
+interface OctoprintProgress {
+  completion: number;
+  filepos: number;
+  printTime: number;
+  printTimeLeft: number;
+  printTimeLeftOrigin: string;
 }
 
 interface OctoprintSocketResends {

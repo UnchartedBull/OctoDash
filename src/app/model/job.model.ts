@@ -1,9 +1,8 @@
 export interface JobStatus {
-  status: string;
   file: string;
   thumbnail: string | undefined;
   progress: number;
-  zIndicatorText: string;
+  zHeight: number | ZHeightLayer;
   filamentAmount?: number;
   timePrinted: Duration;
   timeLeft?: Duration;
@@ -14,4 +13,9 @@ export interface JobStatus {
 interface Duration {
   value: string;
   unit: string;
+}
+
+export interface ZHeightLayer {
+  current: number;
+  total: number;
 }

@@ -35,20 +35,21 @@ import { MoveFilamentComponent } from './filament/move-filament/move-filament.co
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesService } from './files.service';
 import { FilesComponent } from './files/files.component';
+import { HeightProgressComponent } from './height-progress/height-progress.component';
 import { JobService } from './job.service';
 import { JobStatusComponent } from './job-status/job-status.component';
-import { LayerProgressComponent } from './layer-progress/layer-progress.component';
 import { LongPress } from './long-press.directive';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
-import { FilamentManagerOctoprintService, FilamentPluginService } from './plugins';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './services/enclosure/enclosure.service';
+import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
+import { FilamentPluginService } from './services/filament/filament-plugin.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
 import { OctoPrintSocketService } from './services/socket/socket.octoprint.service';
@@ -76,7 +77,7 @@ export function playerFactory(): LottiePlayer {
     FilamentComponent,
     FilesComponent,
     JobStatusComponent,
-    LayerProgressComponent,
+    HeightProgressComponent,
     LongPress,
     MainMenuComponent,
     MainScreenComponent,
@@ -133,9 +134,13 @@ export function playerFactory(): LottiePlayer {
     [
       {
         provide: SocketService,
-        deps: [ConfigService, SystemService],
-        useFactory: (configService: ConfigService, systemService: SystemService) => {
-          return new OctoPrintSocketService(configService, systemService);
+        deps: [ConfigService, SystemService, ConversionService],
+        useFactory: (
+          configService: ConfigService,
+          systemService: SystemService,
+          conversionService: ConversionService,
+        ) => {
+          return new OctoPrintSocketService(configService, systemService, conversionService);
         },
       },
     ],
