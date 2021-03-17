@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     if (this.configService && this.configService.isInitialized()) {
       if (this.configService.isLoaded()) {
         if (this.configService.isValid()) {
-          console.log('CONNECTING');
           this.connectWebsocket();
         } else {
           this.checkInvalidConfig();

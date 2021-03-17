@@ -15,6 +15,5 @@ export abstract class SocketService {
   abstract getEventSubscribable(): Observable<PrinterEvent>;
 
   // TODO
-  // Wakeup & Sleep & Print Start & Print End
   // ReAuth
 }

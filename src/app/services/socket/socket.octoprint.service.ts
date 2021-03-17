@@ -48,6 +48,7 @@ export class OctoPrintSocketService implements SocketService {
   public connect(): Promise<void> {
     this.initPrinterStatus();
     this.initJobStatus();
+    this.lastState = PrinterEvent.UNKNOWN;
 
     return new Promise(resolve => {
       this.tryConnect(resolve);
@@ -169,6 +170,22 @@ export class OctoPrintSocketService implements SocketService {
     }
     this.printerStatus.status = PrinterState[message.current.state.text.toLowerCase()];
 
+    if (this.printerStatus.status === PrinterState.printing && this.lastState === PrinterEvent.UNKNOWN) {
+      this.extractPrinterEvent({
+        event: {
+          type: 'PrintStarted',
+          payload: null,
+        },
+      } as OctoprintSocketEvent);
+    } else if (this.printerStatus.status === PrinterState.paused && this.lastState === PrinterEvent.UNKNOWN) {
+      this.extractPrinterEvent({
+        event: {
+          type: 'PrintPaused',
+          payload: null,
+        },
+      } as OctoprintSocketEvent);
+    }
+
     this.printerStatusSubject.next(this.printerStatus);
   }
 
@@ -264,18 +281,10 @@ export class OctoPrintSocketService implements SocketService {
         newState = PrinterEvent.CLOSED;
         break;
       default:
-        console.log('FALLTHROUGH');
-        console.log(state);
         break;
     }
 
-    if (this.printerStatus.status === PrinterState.printing && this.lastState !== PrinterEvent.PRINTING) {
-      newState = PrinterEvent.PRINTING;
-    } else if (this.printerStatus.status === PrinterState.paused && this.lastState !== PrinterEvent.PAUSED) {
-      newState = PrinterEvent.PAUSED;
-    }
-
-    if (newState) {
+    if (newState !== undefined) {
       this.lastState = newState;
       this.eventSubject.next(newState);
     }

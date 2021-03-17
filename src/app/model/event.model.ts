@@ -4,4 +4,5 @@ export enum PrinterEvent {
   CLOSED,
   CONNECTED,
   IDLE,
+  UNKNOWN,
 }
