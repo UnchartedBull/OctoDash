@@ -19,3 +19,12 @@ interface OctoprintConnectionOptions {
   printerProfilePreference: string;
   autoconnect: boolean;
 }
+
+export interface ConnectCommand {
+  command: string;
+  port?: string;
+  baudrate?: number;
+  printerProfile?: string;
+  save?: boolean;
+  autoconnect?: boolean;
+}

@@ -28,11 +28,13 @@ export class EventService implements OnDestroy {
         if (event === PrinterEvent.CLOSED) {
           this.router.navigate(['/standby']);
         } else if (event === PrinterEvent.CONNECTED) {
-          if (this.configService.isTouchscreen()) {
-            this.router.navigate(['/main-screen']);
-          } else {
-            this.router.navigate(['/main-screen-no-touch']);
-          }
+          setTimeout(() => {
+            if (this.configService.isTouchscreen()) {
+              this.router.navigate(['/main-screen']);
+            } else {
+              this.router.navigate(['/main-screen-no-touch']);
+            }
+          }, 1000);
         }
       }),
     );
@@ -41,7 +43,6 @@ export class EventService implements OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-  // PrinterStateChange -> PRINTING / PAUSING / PAUSED / RESUMING / ... -> enum
 
   public isPrinting(): boolean {
     return this.printing;

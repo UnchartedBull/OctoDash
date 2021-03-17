@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ConnectCommand } from 'src/app/model/octoprint/connection.model';
 
 import { ConfigService } from '../../config/config.service';
 import { SocketAuth } from '../../model';
@@ -39,6 +40,18 @@ export class SystemOctoprintService implements SystemService {
     this.http
       .post(this.configService.getApiURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError(`Can't execute ${command} command!`, error.message)))
+      .subscribe();
+  }
+
+  public connectPrinter(): void {
+    const payload: ConnectCommand = {
+      command: 'connect',
+      save: false,
+    };
+
+    this.http
+      .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't connect to printer!", error.message)))
       .subscribe();
   }
 }

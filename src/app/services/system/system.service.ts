@@ -8,4 +8,6 @@ export abstract class SystemService {
   abstract getSessionKey(): Observable<SocketAuth>;
 
   abstract sendCommand(command: string): void;
+
+  abstract connectPrinter(): void;
 }
