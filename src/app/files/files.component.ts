@@ -6,7 +6,6 @@ import { AnimationOptions } from 'ngx-lottie';
 
 import { ConfigService } from '../config/config.service';
 import { File, FilesService } from '../files.service';
-import { JobService } from '../job.service';
 import { Directory } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { FilesOctoprintService } from '../services/files/files.octoprint.service';
@@ -36,7 +35,6 @@ export class FilesComponent {
     private filesService2: FilesOctoprintService,
     private notificationService: NotificationService,
     private router: Router,
-    private jobService: JobService,
     private configService: ConfigService,
   ) {
     this.showLoader();
@@ -129,7 +127,6 @@ export class FilesComponent {
     setTimeout((): void => {
       this.filesService.loadFile(filePath);
       this.filesService.setLoadedFile(true);
-      this.jobService.deleteJobInformation();
       this.router.navigate(['/main-screen']);
     }, 300);
   }

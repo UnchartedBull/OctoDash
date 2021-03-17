@@ -1,5 +1,8 @@
 <div class="job-info" *ngIf="jobStatus.file && isPrinting()">
-  <div class="job-info__progress" *ngIf="!showPreview() || (showPreview() && !jobStatus.thumbnail)">
+  <div
+    class="job-info__progress"
+    *ngIf="!showPreviewWhilePrinting || (showPreviewWhilePrinting && !jobStatus.thumbnail)"
+  >
     <round-progress
       [current]="jobStatus.progress"
       [max]="100"
@@ -11,7 +14,7 @@
     <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
   </div>
 
-  <div class="job-info__progress" *ngIf="showPreview() && jobStatus.thumbnail">
+  <div class="job-info__progress" *ngIf="showPreviewWhilePrinting && jobStatus.thumbnail">
     <div *ngIf="!useCircularProgressBar()" style="height: 22vw; padding-top: -1.5vw" id="progress-preview-bar">
       <img class="job-info__progress-preview" [src]="jobStatus.thumbnail" />
       <div class="job-info__progress-bar__wrapper">
@@ -108,3 +111,5 @@
 </div>
 
 <div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()">no job running ...</div>
+
+<span id="jobTogglePreview" (click)="togglePreview()"></span>

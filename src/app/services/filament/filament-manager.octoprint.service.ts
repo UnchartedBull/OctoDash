@@ -15,9 +15,7 @@ import { FilamentPluginService } from './filament-plugin.service';
 
 const colorRegexp = /\((.*)\)$/g;
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FilamentManagerOctoprintService implements FilamentPluginService {
   public constructor(private configService: ConfigService, private http: HttpClient) {}
 

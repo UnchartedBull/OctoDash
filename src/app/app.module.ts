@@ -37,7 +37,6 @@ import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament
 import { FilesService } from './files.service';
 import { FilesComponent } from './files/files.component';
 import { HeightProgressComponent } from './height-progress/height-progress.component';
-import { JobService } from './job.service';
 import { JobStatusComponent } from './job-status/job-status.component';
 import { LongPress } from './long-press.directive';
 import { MainMenuComponent } from './main-menu/main-menu.component';
@@ -51,6 +50,8 @@ import { EnclosureOctoprintService } from './services/enclosure/enclosure.octopr
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './services/filament/filament-plugin.service';
+import { JobOctoprintService } from './services/job/job.octoprint.service';
+import { JobService } from './services/job/job.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
 import { OctoPrintSocketService } from './services/socket/socket.octoprint.service';
@@ -118,7 +119,6 @@ export function playerFactory(): LottiePlayer {
     ConversionService,
     EventService,
     NotificationService,
-    JobService,
     FilesService,
     [
       {
@@ -157,6 +157,19 @@ export function playerFactory(): LottiePlayer {
           httpClient: HttpClient,
         ) => {
           return new PrinterOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: JobService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new JobOctoprintService(configService, notificationService, httpClient);
         },
       },
     ],

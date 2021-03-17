@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../config/config.service';
 import { EventService } from '../event.service';
 import { FilesService } from '../files.service';
-import { JobService } from '../job.service';
 import { JobStatus } from '../model';
+import { JobService } from '../services/job/job.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -15,7 +15,9 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
+
   public jobStatus: JobStatus;
+  public showPreviewWhilePrinting: boolean;
 
   public constructor(
     private jobService: JobService,
@@ -26,6 +28,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.showPreviewWhilePrinting = this.configService.showThumbnailByDefault();
     this.subscriptions.add(
       this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
         this.jobStatus = jobStatus;
@@ -64,8 +67,8 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     return this.eventService.isPrinting();
   }
 
-  public showPreview(): boolean {
-    return this.jobService.showPreviewWhilePrinting();
+  public togglePreview(): void {
+    this.showPreviewWhilePrinting = !this.showPreviewWhilePrinting;
   }
 
   public hasProperty(object: Record<string, unknown>, name: string): boolean {
