@@ -13,7 +13,4 @@ export abstract class SocketService {
   abstract getJobStatusSubscribable(): Observable<JobStatus>;
 
   abstract getEventSubscribable(): Observable<PrinterEvent>;
-
-  // TODO
-  // ReAuth
 }

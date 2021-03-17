@@ -134,7 +134,7 @@ export class OctoPrintSocketService implements SocketService {
           this.extractLayerHeight(pluginMessage.plugin.data as DisplayLayerProgressData);
         }
       } else if (Object.hasOwnProperty.bind(message)('reauth')) {
-        console.log('REAUTH REQUIRED');
+        this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
       } else if (Object.hasOwnProperty.bind(message)('connected')) {
         resolve();
         this.checkPrinterConnection();
