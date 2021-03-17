@@ -25,10 +25,11 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     private socketService: SocketService,
     private eventService: EventService,
     private configService: ConfigService,
-  ) {}
+  ) {
+    this.showPreviewWhilePrinting = this.configService.showThumbnailByDefault();
+  }
 
   public ngOnInit(): void {
-    this.showPreviewWhilePrinting = this.configService.showThumbnailByDefault();
     this.subscriptions.add(
       this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
         this.jobStatus = jobStatus;

@@ -20,9 +20,13 @@ export class EventService implements OnDestroy {
     this.subscriptions.add(
       this.socketService.getEventSubscribable().subscribe((event: PrinterEvent) => {
         if (event === PrinterEvent.PRINTING || event === PrinterEvent.PAUSED) {
-          this.printing = true;
+          setTimeout(() => {
+            this.printing = true;
+          }, 500);
         } else {
-          this.printing = false;
+          setTimeout(() => {
+            this.printing = false;
+          }, 1000);
         }
 
         if (event === PrinterEvent.CLOSED) {

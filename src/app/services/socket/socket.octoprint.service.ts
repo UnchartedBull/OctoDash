@@ -190,7 +190,8 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   public extractFanSpeed(message: DisplayLayerProgressData): void {
-    this.printerStatus.fanSpeed = Number(message.fanspeed.replace('%', '').trim());
+    this.printerStatus.fanSpeed =
+      message.fanspeed === 'Off' ? 0 : message.fanspeed === '-' ? 0 : Number(message.fanspeed.replace('%', '').trim());
   }
 
   //==== Job Status ====//
@@ -251,8 +252,8 @@ export class OctoPrintSocketService implements SocketService {
 
   public extractLayerHeight(message: DisplayLayerProgressData): void {
     this.jobStatus.zHeight = {
-      current: Number(message.currentLayer),
-      total: Number(message.totalLayer),
+      current: message.currentLayer === '-' ? 0 : Number(message.currentLayer),
+      total: message.totalLayer === '-' ? 0 : Number(message.totalLayer),
     };
   }
 
@@ -262,13 +263,17 @@ export class OctoPrintSocketService implements SocketService {
     let newState: PrinterEvent;
 
     switch (state.event.type) {
-      case 'PrintStarted' || 'PrintResumed':
+      case 'PrintStarted':
+      case 'PrintResumed':
         newState = PrinterEvent.PRINTING;
         break;
       case 'PrintPaused':
         newState = PrinterEvent.PAUSED;
         break;
-      case 'PrintFailed' || 'PrintDone' || 'PrintCancelled' || 'Connected':
+      case 'PrintFailed':
+      case 'PrintDone':
+      case 'PrintCancelled':
+        console.log('IDLE');
         newState = PrinterEvent.IDLE;
         break;
       case 'Connected':

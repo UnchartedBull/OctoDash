@@ -124,23 +124,23 @@ export class FilesComponent {
   }
 
   public loadFile(filePath: string): void {
+    this.filesService.loadFile(filePath);
+    this.filesService.setLoadedFile(true);
     setTimeout((): void => {
-      this.filesService.loadFile(filePath);
-      this.filesService.setLoadedFile(true);
       this.router.navigate(['/main-screen']);
     }, 300);
   }
 
   public printFile(filePath: string): void {
+    this.filesService.printFile(filePath);
     setTimeout((): void => {
-      this.filesService.printFile(filePath);
       this.router.navigate(['/main-screen']);
-    }, 300);
+    }, 550);
   }
 
   public deleteFile(filePath: string): void {
+    this.filesService.deleteFile(filePath);
     setTimeout((): void => {
-      this.filesService.deleteFile(filePath);
       this.closeDetails();
       this.openFolder(this.currentFolder);
     }, 300);
