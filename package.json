@@ -104,7 +104,7 @@
     "@angular-devkit/build-angular": "~0.1102.4",
     "@angular/cli": "~11.2.4",
     "@angular/compiler-cli": "^11.2.5",
-    "@angular/language-service": "~11.2.5",
+    "@angular/language-service": "~11.2.6",
     "@types/ajv": "^1.0.0",
     "@types/bonjour": "^3.5.8",
     "@types/got": "^9.6.11",
