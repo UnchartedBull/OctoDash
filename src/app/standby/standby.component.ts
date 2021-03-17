@@ -6,7 +6,6 @@ import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
 import { PSUState } from '../model';
 import { OctoprintConnection } from '../model/octoprint/connection.model';
-import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
 
 @Component({
@@ -26,12 +25,10 @@ export class StandbyComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private service: AppService,
-    private notificationService: NotificationService,
     private enclosureService: EnclosureService,
   ) {}
 
   public ngOnInit(): void {
-    this.notificationService.disableNotifications();
     if (this.configService.getAutomaticScreenSleep()) {
       this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
     }
@@ -114,7 +111,6 @@ export class StandbyComponent implements OnInit {
     }
     setTimeout((): void => {
       this.connecting = false;
-      this.notificationService.enableNotifications();
       this.router.navigate(['/main-screen']);
     }, 1000);
   }

@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { ConversionService } from 'src/app/conversion.service';
 import { PrinterEvent } from 'src/app/model/event.model';
@@ -14,7 +15,6 @@ import {
   OctoprintPluginMessage,
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
-  OctoprintSocketEventStateChange,
 } from '../../model/octoprint/socket.model';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
@@ -30,11 +30,13 @@ export class OctoPrintSocketService implements SocketService {
 
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
+  private lastState: PrinterEvent;
 
   public constructor(
     private configService: ConfigService,
     private systemService: SystemService,
     private conversionService: ConversionService,
+    private http: HttpClient,
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
     this.jobStatusSubject = new ReplaySubject<JobStatus>();
@@ -74,10 +76,13 @@ export class OctoPrintSocketService implements SocketService {
       file: null,
       thumbnail: null,
       progress: 0,
-      zHeight: null,
+      zHeight: this.configService.isDisplayLayerProgressEnabled() ? { current: 0, total: -1 } : 0,
       filamentAmount: 0,
       timePrinted: null,
-      timeLeft: null,
+      timeLeft: {
+        value: '---',
+        unit: null,
+      },
       estimatedPrintTime: null,
       estimatedEndTime: null,
     };
@@ -117,13 +122,7 @@ export class OctoPrintSocketService implements SocketService {
         this.extractPrinterStatus(message as OctoprintSocketCurrent);
         this.extractJobStatus(message as OctoprintSocketCurrent);
       } else if (Object.hasOwnProperty.bind(message)('event')) {
-        const eventMessage = message as OctoprintSocketEvent;
-        if (eventMessage.event.type === 'PrinterStateChanged') {
-          this.extractPrinterStatusEvent(eventMessage.event.payload as OctoprintSocketEventStateChange);
-        } else {
-          console.log('EVENT RECEIVED');
-          console.log(message);
-        }
+        this.extractPrinterEvent(message as OctoprintSocketEvent);
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
         const pluginMessage = message as OctoprintPluginMessage;
         if (
@@ -137,8 +136,20 @@ export class OctoPrintSocketService implements SocketService {
         console.log('REAUTH REQUIRED');
       } else if (Object.hasOwnProperty.bind(message)('connected')) {
         resolve();
+        this.checkPrinterConnection();
       }
     });
+  }
+
+  private checkPrinterConnection() {
+    this.http
+      .get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders())
+      .pipe(pluck('current'), pluck('state'))
+      .subscribe((state: string) => {
+        if (state === 'Closed' || state === 'Error') {
+          this.eventSubject.next(PrinterEvent.CLOSED);
+        }
+      });
   }
 
   //==== Printer Status ====//
@@ -146,13 +157,13 @@ export class OctoPrintSocketService implements SocketService {
   public extractPrinterStatus(message: OctoprintSocketCurrent): void {
     if (message.current.temps[0]) {
       this.printerStatus.bed = {
-        current: Math.round(message.current.temps[0].bed.actual),
-        set: Math.round(message.current.temps[0].bed.target),
+        current: Math.round(message?.current?.temps[0]?.bed?.actual),
+        set: Math.round(message?.current?.temps[0]?.bed?.target),
         unit: '°C',
       };
       this.printerStatus.tool0 = {
-        current: Math.round(message.current.temps[0].tool0.actual),
-        set: Math.round(message.current.temps[0].tool0.target),
+        current: Math.round(message?.current?.temps[0]?.tool0?.actual),
+        set: Math.round(message?.current?.temps[0]?.tool0?.target),
         unit: '°C',
       };
     }
@@ -168,14 +179,14 @@ export class OctoPrintSocketService implements SocketService {
   //==== Job Status ====//
 
   public extractJobStatus(message: OctoprintSocketCurrent): void {
-    const file = message.current.job.file.display.replace('.gcode', '').replace('.ufp', '');
+    const file = message?.current?.job?.file?.display?.replace('.gcode', '').replace('.ufp', '');
     if (this.jobStatus.file !== file) {
       this.initJobStatus();
     }
 
     this.jobStatus.file = file;
     this.jobStatus.thumbnail = null; //TODO
-    this.jobStatus.progress = Math.round(message.current.progress.completion);
+    this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
     this.jobStatus.timePrinted = {
       value: this.conversionService.convertSecondsToHours(message.current.progress.printTime),
       unit: 'h',
@@ -230,24 +241,43 @@ export class OctoPrintSocketService implements SocketService {
 
   //==== Event ====//
 
-  public extractPrinterStatusEvent(state: OctoprintSocketEventStateChange): void {
-    switch (state.state_string) {
-      case 'Printing':
-        this.eventSubject.next(PrinterEvent.PRINTING);
+  public extractPrinterEvent(state: OctoprintSocketEvent): void {
+    let newState: PrinterEvent;
+
+    switch (state.event.type) {
+      case 'PrintStarted' || 'PrintResumed':
+        newState = PrinterEvent.PRINTING;
         break;
-      case 'Paused':
-        this.eventSubject.next(PrinterEvent.PAUSED);
+      case 'PrintPaused':
+        newState = PrinterEvent.PAUSED;
         break;
-      case 'Ready':
-        this.eventSubject.next(PrinterEvent.IDLE);
+      case 'PrintFailed' || 'PrintDone' || 'PrintCancelled' || 'Connected':
+        newState = PrinterEvent.IDLE;
         break;
-      case 'ClosedOrError' || 'Error':
-        this.eventSubject.next(PrinterEvent.CLOSED);
+      case 'Connected':
+        newState = PrinterEvent.CONNECTED;
+        break;
+      case 'Disconnected':
+        newState = PrinterEvent.CLOSED;
+        break;
+      case 'Error':
+        newState = PrinterEvent.CLOSED;
         break;
       default:
         console.log('FALLTHROUGH');
         console.log(state);
         break;
+    }
+
+    if (this.printerStatus.status === PrinterState.printing && this.lastState !== PrinterEvent.PRINTING) {
+      newState = PrinterEvent.PRINTING;
+    } else if (this.printerStatus.status === PrinterState.paused && this.lastState !== PrinterEvent.PAUSED) {
+      newState = PrinterEvent.PAUSED;
+    }
+
+    if (newState) {
+      this.lastState = newState;
+      this.eventSubject.next(newState);
     }
   }
 

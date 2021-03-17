@@ -23,12 +23,6 @@ export interface OctoprintSocketEvent {
     payload: unknown;
   };
 }
-
-export interface OctoprintSocketEventStateChange {
-  state_id: string;
-  state_string: string;
-}
-
 export interface OctoprintPluginMessage {
   plugin: {
     plugin: string;
