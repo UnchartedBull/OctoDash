@@ -46,10 +46,11 @@
     *ngIf="page === 5 && !showCheckmark"
     (purgeDone)="setSpoolSelection()"
   ></app-filament-purge-filament>
-  <div *ngIf="showCheckmark">
-    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-      <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-    </svg>
+  <div class="checkmark" *ngIf="showCheckmark">
+    <ng-lottie
+      id="checkmarkAnimation"
+      [options]="checkmarkOptions"
+      (animationCreated)="setAnimationSpeed($event)"
+    ></ng-lottie>
   </div>
 </div>

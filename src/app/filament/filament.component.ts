@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
@@ -16,11 +18,15 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 5;
-  public page: number;
-  public showCheckmark = false;
   private hotendPreviousTemperature = 0;
 
+  public page: number;
+  public showCheckmark = false;
   public selectedSpool: FilamentSpool;
+  public checkmarkOptions: AnimationOptions = {
+    path: '/assets/checkmark.json',
+    loop: false,
+  };
 
   public constructor(
     private router: Router,
@@ -33,7 +39,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
       .getPrinterStatusSubscribable()
       .pipe(take(1))
       .subscribe((printerStatus: PrinterStatus): void => {
-        this.hotendPreviousTemperature = printerStatus.tool0.current;
+        this.hotendPreviousTemperature = printerStatus.tool0.set;
       });
   }
 
@@ -96,7 +102,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
         .setSpool(this.selectedSpool)
         .then((): void => {
           this.showCheckmark = true;
-          setTimeout(this.increasePage.bind(this), 1500, true);
+          setTimeout(this.increasePage.bind(this), 1350, true);
         })
         .catch(() => this.increasePage(true));
     } else {
@@ -106,5 +112,9 @@ export class FilamentComponent implements OnInit, OnDestroy {
 
   public get currentSpool(): FilamentSpool {
     return this.filament.getCurrentSpool();
+  }
+
+  public setAnimationSpeed(animation: AnimationItem): void {
+    animation.setSpeed(0.55);
   }
 }
