@@ -7,9 +7,9 @@ import { Directory, File } from '../../model';
 export abstract class FilesService {
   abstract getFolderContent(folderPath: string): Observable<Directory>;
 
-  abstract getFile(filePath: string): Promise<File>;
+  abstract getFile(filePath: string): Observable<File>;
 
-  abstract getThumbnail(filePath: string): Promise<string | undefined>;
+  abstract getThumbnail(filePath: string): Observable<string | undefined>;
 
   abstract loadFile(filePath: string): void;
 
