@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AppService } from '../app.service';
-import { JobService } from '../job.service';
+import { ConfigService } from '../config/config.service';
+import { EventService } from '../event.service';
+import { FilesService } from '../services/files/files.service';
 
 @Component({
   selector: 'app-main-screen',
@@ -10,13 +12,22 @@ import { JobService } from '../job.service';
 export class MainScreenComponent {
   public printing = false;
 
-  public constructor(private jobService: JobService, private service: AppService) {}
+  public constructor(
+    private eventService: EventService,
+    private fileService: FilesService,
+    private configService: ConfigService,
+    private router: Router,
+  ) {
+    if (!this.configService.isInitialized()) {
+      this.router.navigate(['/']);
+    }
+  }
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    return this.eventService.isPrinting();
   }
 
   public isFileLoaded(): boolean {
-    return this.service.getLoadedFile();
+    return this.fileService.getLoadedFile();
   }
 }

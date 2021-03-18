@@ -2,8 +2,9 @@ import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
+import { UpdateDownloadProgress, UpdateError } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { OctoprintService } from '../octoprint.service';
+import { SystemService } from '../services/system/system.service';
 
 @Component({
   selector: 'app-update',
@@ -29,13 +30,13 @@ export class UpdateComponent implements OnInit {
   constructor(
     public service: AppService,
     private notificationService: NotificationService,
-    private octoprintService: OctoprintService,
+    private systemService: SystemService,
     private zone: NgZone,
     private electronService: ElectronService,
   ) {}
 
   ngOnInit(): void {
-    if (!this.service.latestVersion || !this.service.getLatestVersionAssetsURL()) {
+    if (!this.service.getLatestVersion() || !this.service.getLatestVersionAssetsURL()) {
       this.notificationService.setWarning(
         "Can't initiate update!",
         'Some information is missing, please try again in an hour or update manually.',
@@ -95,24 +96,6 @@ export class UpdateComponent implements OnInit {
   }
 
   public reboot(): void {
-    this.octoprintService.sendSystemCommand('reboot');
+    this.systemService.sendCommand('reboot');
   }
-}
-
-interface UpdateError {
-  error: {
-    message: string;
-    stack?: string;
-  };
-}
-
-interface UpdateDownloadProgress {
-  percentage: number;
-  transferred: number;
-  total: number | string;
-  remaining: number;
-  eta: string;
-  runtime: string;
-  delta: number;
-  speed: number | string;
 }

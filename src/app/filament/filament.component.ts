@@ -1,36 +1,45 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentManagementComponent, FilamentSpool } from '../plugins';
-import { PrinterService, PrinterStatusAPI } from '../printer.service';
+import { FilamentSpool, PrinterStatus } from '../model';
+import { FilamentService } from '../services/filament/filament.service';
+import { PrinterService } from '../services/printer/printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-filament',
   templateUrl: './filament.component.html',
   styleUrls: ['./filament.component.scss'],
-  providers: [FilamentManagementComponent],
+  providers: [FilamentService],
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 5;
-  public page: number;
-  public showCheckmark = false;
   private hotendPreviousTemperature = 0;
 
+  public page: number;
+  public showCheckmark = false;
   public selectedSpool: FilamentSpool;
+  public checkmarkOptions: AnimationOptions = {
+    path: '/assets/checkmark.json',
+    loop: false,
+  };
 
   public constructor(
     private router: Router,
     private configService: ConfigService,
     private printerService: PrinterService,
-    private filament: FilamentManagementComponent,
+    private socketService: SocketService,
+    private filament: FilamentService,
   ) {
-    this.printerService
-      .getObservable()
+    this.socketService
+      .getPrinterStatusSubscribable()
       .pipe(take(1))
-      .subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.hotendPreviousTemperature = printerStatus.nozzle.set;
+      .subscribe((printerStatus: PrinterStatus): void => {
+        this.hotendPreviousTemperature = printerStatus.tool0.set;
       });
   }
 
@@ -93,7 +102,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
         .setSpool(this.selectedSpool)
         .then((): void => {
           this.showCheckmark = true;
-          setTimeout(this.increasePage.bind(this), 1500, true);
+          setTimeout(this.increasePage.bind(this), 1350, true);
         })
         .catch(() => this.increasePage(true));
     } else {
@@ -102,6 +111,10 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public get currentSpool(): FilamentSpool {
-    return this.filament.currentSpool;
+    return this.filament.getCurrentSpool();
+  }
+
+  public setAnimationSpeed(animation: AnimationItem): void {
+    animation.setSpeed(0.55);
   }
 }

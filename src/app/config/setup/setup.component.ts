@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ElectronService } from 'ngx-electron';
 
 import { defaultConfig } from '../config.default';
 import { Config } from '../config.model';
@@ -11,7 +12,7 @@ import { ConfigService } from '../config.service';
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.scss'],
 })
-export class ConfigSetupComponent implements OnInit {
+export class ConfigSetupComponent implements OnInit, OnDestroy {
   public page = 0;
   public totalPages = 6;
 
@@ -20,12 +21,18 @@ export class ConfigSetupComponent implements OnInit {
 
   public octoprintConnection = false;
   public configValid = false;
-  public configSaved = 'no';
+  public configSaved = 'saving config';
   public configErrors: string[];
 
   public manualURL = false;
 
-  public constructor(private configService: ConfigService, private http: HttpClient, private router: Router) {
+  public constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+    private router: Router,
+    private electronService: ElectronService,
+    private zone: NgZone,
+  ) {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
       this.config = configService.getCurrentConfig();
@@ -37,6 +44,11 @@ export class ConfigSetupComponent implements OnInit {
 
   public ngOnInit(): void {
     this.changeProgress();
+  }
+
+  public ngOnDestroy(): void {
+    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public changeURLEntryMethod(manual: boolean): void {
@@ -59,10 +71,10 @@ export class ConfigSetupComponent implements OnInit {
         'x-api-key': this.config.octoprint.accessToken,
       }),
     };
-    this.http.get(this.config.octoprint.url + 'version', httpHeaders).subscribe(
+    this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe(
       (): void => {
         this.octoprintConnection = true;
-        this.validateConfig();
+        this.saveConfig();
       },
       (error: HttpErrorResponse): void => {
         this.octoprintConnection = false;
@@ -79,17 +91,26 @@ export class ConfigSetupComponent implements OnInit {
     );
   }
 
-  private async validateConfig(): Promise<void> {
-    this.configValid = this.configService.validateGiven(this.config);
-    if (!this.configValid) {
-      this.configErrors = this.configService.getErrors();
-    } else {
-      this.saveConfig();
-    }
+  private onConfigSaved() {
+    this.zone.run(() => {
+      this.configValid = true;
+      this.configSaved = null;
+    });
+  }
+
+  private onConfigSaveFail(_, errors) {
+    this.zone.run(() => {
+      this.configValid = false;
+
+      this.configErrors = errors;
+    });
   }
 
   private saveConfig(): void {
-    this.configSaved = this.configService.saveConfig(this.config);
+    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+
+    this.configService.saveConfig(this.config);
   }
 
   public finishWizard(): void {

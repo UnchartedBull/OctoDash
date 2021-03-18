@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
-import { Job, JobService } from '../job.service';
-import { NotificationService } from '../notification/notification.service';
+import { EventService } from '../event.service';
+import { JobStatus } from '../model';
+import { FilesService } from '../services/files/files.service';
+import { JobService } from '../services/job/job.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-job-status',
@@ -13,17 +15,33 @@ import { NotificationService } from '../notification/notification.service';
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  public job: Job;
+
+  public jobStatus: JobStatus;
+  public thumbnail: string;
+  public showPreviewWhilePrinting: boolean;
 
   public constructor(
     private jobService: JobService,
-    private service: AppService,
-    private notificationService: NotificationService,
+    private fileService: FilesService,
+    private socketService: SocketService,
+    private eventService: EventService,
     private configService: ConfigService,
-  ) {}
+  ) {
+    this.showPreviewWhilePrinting = this.configService.showThumbnailByDefault();
+  }
 
   public ngOnInit(): void {
-    this.subscriptions.add(this.jobService.getObservable().subscribe((job: Job): Job => (this.job = job)));
+    this.subscriptions.add(
+      this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
+        if (jobStatus.file !== this.jobStatus?.file) {
+          this.fileService.getThumbnail(jobStatus.fullPath).subscribe(thumbnail => {
+            this.thumbnail = thumbnail;
+            console.log(this.thumbnail);
+          });
+        }
+        this.jobStatus = jobStatus;
+      }),
+    );
   }
 
   public ngOnDestroy(): void {
@@ -31,7 +49,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   }
 
   public isFileLoaded(): boolean {
-    return this.service.getLoadedFile();
+    return this.fileService.getLoadedFile();
   }
 
   public isPreheatEnabled(): boolean {
@@ -42,30 +60,23 @@ export class JobStatusComponent implements OnInit, OnDestroy {
     this.jobService.preheat();
   }
 
-  public preheatDisabled(): void {
-    this.notificationService.setWarning(
-      'Preheat Plugin is not enabled!',
-      'Please make sure to install and enable the Preheat Plugin to use this functionality.',
-    );
-  }
-
   public discardLoadedFile(): void {
-    this.service.setLoadedFile(false);
+    this.fileService.setLoadedFile(false);
   }
 
   public startJob(): void {
     this.jobService.startJob();
     setTimeout((): void => {
-      this.service.setLoadedFile(false);
+      this.fileService.setLoadedFile(false);
     }, 5000);
   }
 
   public isPrinting(): boolean {
-    return this.jobService.isPrinting();
+    return this.eventService.isPrinting();
   }
 
-  public showPreview(): boolean {
-    return this.jobService.showPreviewWhilePrinting();
+  public togglePreview(): void {
+    this.showPreviewWhilePrinting = !this.showPreviewWhilePrinting;
   }
 
   public hasProperty(object: Record<string, unknown>, name: string): boolean {

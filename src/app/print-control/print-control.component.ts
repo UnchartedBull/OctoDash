@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { Job, JobService, JobStatus } from '../job.service';
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService, PrinterStatusAPI } from '../printer.service';
+import { PrinterState, PrinterStatus } from '../model';
+import { JobService } from '../services/job/job.service';
+import { PrinterService } from '../services/printer/printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-print-control',
@@ -30,8 +31,8 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public constructor(
     private jobService: JobService,
     private printerService: PrinterService,
-    private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
+    private socketService: SocketService,
     private router: Router,
   ) {
     this.temperatureHotend = 0;
@@ -43,8 +44,8 @@ export class PrintControlComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.jobService.getObservable().subscribe((job: Job): void => {
-        if (job.status === JobStatus.Paused) {
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus) => {
+        if (printerStatus.status === PrinterState.paused) {
           if (!this.showedPauseScreen) {
             this.view = ControlView.PAUSE;
             this.showControls = true;
@@ -118,7 +119,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
       this.view = ControlView.MAIN;
       this.showControls = true;
     } else {
-      this.jobService.togglePreviewWhilePrinting();
+      document.getElementById('jobTogglePreview').click();
     }
   }
 
@@ -161,19 +162,13 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   }
 
   private loadData(): void {
-    this.printerService
-      .getObservable()
+    this.socketService
+      .getPrinterStatusSubscribable()
       .pipe(take(1))
-      .subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.temperatureHotend = printerStatus.nozzle.set;
-        this.temperatureHeatbed = printerStatus.heatbed.set;
-      });
-
-    this.displayLayerProgressService
-      .getObservable()
-      .pipe(take(1))
-      .subscribe((layerProgress: DisplayLayerProgressAPI): void => {
-        this.fanSpeed = Number(layerProgress.fanSpeed);
+      .subscribe((status: PrinterStatus): void => {
+        this.temperatureHotend = status.tool0.set;
+        this.temperatureHeatbed = status.bed.set;
+        this.fanSpeed = status.fanSpeed;
       });
   }
 
@@ -228,7 +223,7 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   public setAdjustParameters(event: MouseEvent): void {
     if (this.showControls) {
       this.printerService.setTemperatureHotend(this.temperatureHotend);
-      this.printerService.setTemperatureHeatbed(this.temperatureHeatbed);
+      this.printerService.setTemperatureBed(this.temperatureHeatbed);
       this.printerService.setFeedrate(this.feedrate);
       this.printerService.setFanSpeed(this.fanSpeed);
       this.hideControlOverlay(event);

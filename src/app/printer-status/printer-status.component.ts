@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { DisplayLayerProgressAPI, LayerProgressService } from '../plugins/layer-progress.service';
-import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.service';
+import { PrinterStatus } from '../model';
+import { PrinterService } from '../services/printer/printer.service';
+import { SocketService } from '../services/socket/socket.service';
 
 @Component({
   selector: 'app-printer-status',
@@ -13,30 +14,21 @@ import { PrinterService, PrinterStatusAPI, PrinterValue } from '../printer.servi
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
+  public fanSpeed: number;
   public status: string;
-  public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+
   public hotendTarget: number;
   public heatbedTarget: number;
   public fanTarget: number;
 
+  public QuickControlView = QuickControlView;
+  public view = QuickControlView.NONE;
+
   public constructor(
     private printerService: PrinterService,
-    private displayLayerProgressService: LayerProgressService,
     private configService: ConfigService,
+    private socketService: SocketService,
   ) {
-    this.printerStatus = {
-      nozzle: {
-        current: 0,
-        set: 0,
-      },
-      heatbed: {
-        current: 0,
-        set: 0,
-      },
-      fan: 0,
-    };
-    this.status = 'connecting';
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
     this.fanTarget = this.configService.getDefaultFanSpeed();
@@ -44,16 +36,8 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.printerStatus.nozzle = printerStatus.nozzle;
-        this.printerStatus.heatbed = printerStatus.heatbed;
-        this.status = printerStatus.status;
-      }),
-    );
-
-    this.subscriptions.add(
-      this.displayLayerProgressService.getObservable().subscribe((layerProgress: DisplayLayerProgressAPI): void => {
-        this.printerStatus.fan = layerProgress.fanSpeed;
+      this.socketService.getPrinterStatusSubscribable().subscribe((status: PrinterStatus): void => {
+        this.printerStatus = status;
       }),
     );
   }
@@ -159,7 +143,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   private setTemperatureHeatbed(): void {
-    this.printerService.setTemperatureHeatbed(this.heatbedTarget);
+    this.printerService.setTemperatureBed(this.heatbedTarget);
     this.hideQuickControl();
   }
 
@@ -167,12 +151,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.printerService.setFanSpeed(this.fanTarget);
     this.hideQuickControl();
   }
-}
-
-export interface PrinterStatus {
-  nozzle: PrinterValue;
-  heatbed: PrinterValue;
-  fan: number | string;
 }
 
 enum QuickControlView {

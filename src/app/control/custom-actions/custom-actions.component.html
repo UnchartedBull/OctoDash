@@ -28,7 +28,11 @@
     <h1>Are you sure?</h1>
     <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
     <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
-    <img class="confirm__icon" src="assets/confirm.svg" (click)="doActionConfirm()" />
-    <img class="confirm__icon" src="assets/cancel.svg" (click)="doActionNoConfirm()" />
+    <img
+      class="confirm__icon"
+      src="assets/confirm.svg"
+      (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)"
+    />
+    <img class="confirm__icon" src="assets/cancel.svg" (click)="hideConfirm()" />
   </div>
 </div>

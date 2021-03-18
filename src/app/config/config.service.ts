@@ -1,50 +1,59 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import Ajv from 'ajv';
-import _ from 'lodash';
+import { Injectable, NgZone } from '@angular/core';
+import _ from 'lodash-es';
+import { ElectronService } from 'ngx-electron';
 
 import { NotificationService } from '../notification/notification.service';
 import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
-import { configSchema } from './config.schema';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private store: any | undefined;
-  private validator: Ajv.ValidateFunction;
-
   private config: Config;
   private valid: boolean;
+  private errors: string[];
   private update = false;
   private initialized = false;
 
   private httpHeaders: HttpHeader;
 
-  public constructor(private notificationService: NotificationService) {
-    const ajv = new Ajv({ allErrors: true });
-    this.validator = ajv.compile(configSchema);
-    try {
-      const Store = window.require('electron-store');
-      this.store = new Store();
-      this.initialize(this.store.get('config'));
-    } catch (e) {
-      console.error(e);
+  public constructor(
+    private notificationService: NotificationService,
+    private electronService: ElectronService,
+    private zone: NgZone,
+  ) {
+    this.electronService.ipcRenderer.addListener('configRead', (_, config: Config) => this.initialize(config));
+    this.electronService.ipcRenderer.addListener('configSaved', (_, config: Config) => this.initialize(config));
+    this.electronService.ipcRenderer.addListener('configError', (_, error: string) => {
       this.notificationService.setError(
-        "Can't read config file!",
+        error,
         'Please restart your system. If the issue persists open an issue on GitHub.',
       );
-    }
+    });
+
+    this.electronService.ipcRenderer.addListener('configPass', () => {
+      this.zone.run(() => {
+        this.valid = true;
+        this.generateHttpHeaders();
+        this.initialized = true;
+      });
+    });
+    this.electronService.ipcRenderer.addListener('configFail', (_, errors) => {
+      this.zone.run(() => {
+        this.valid = false;
+        this.errors = errors;
+        console.error(errors);
+        this.initialized = true;
+      });
+    });
+
+    this.electronService.ipcRenderer.send('readConfig');
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.valid = this.validate();
-    if (this.valid) {
-      this.generateHttpHeaders();
-    }
-    this.initialized = true;
+    this.electronService.ipcRenderer.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -58,10 +67,6 @@ export class ConfigService {
     };
   }
 
-  public getRemoteConfig(): Config {
-    return this.store.get('config');
-  }
-
   public getCurrentConfig(): Config {
     return _.cloneDeep(this.config);
   }
@@ -70,47 +75,17 @@ export class ConfigService {
     return _.isEqual(this.config, changedConfig);
   }
 
-  public validate(): boolean {
-    return this.validator(this.config) ? true : false;
-  }
-
-  public validateGiven(config: Config): boolean {
-    return this.validator(config) ? true : false;
-  }
-
   public getErrors(): string[] {
-    const errors = [];
-    this.validator.errors?.forEach((error): void => {
-      if (error.keyword === 'type') {
-        errors.push(`${error.dataPath} ${error.message}`);
-      } else {
-        errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
-      }
-    });
-    console.error(errors);
-    return errors;
+    return this.errors;
   }
 
-  public saveConfig(config: Config): string {
-    try {
-      this.store.set('config', config);
-      const configStored = this.store.get('config');
-      if (this.validateGiven(configStored)) {
-        this.config = config;
-        this.valid = true;
-        this.generateHttpHeaders();
-        return null;
-      } else {
-        return 'Saved config is invalid!';
-      }
-    } catch {
-      return 'Saving config failed!';
-    }
+  public saveConfig(config: Config): void {
+    this.electronService.ipcRenderer.send('saveConfig', config);
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
-    const port = parseInt(octoprintURL.split(':')[2].replace('/api/', ''), 10);
+    const port = parseInt(octoprintURL.split(':')[2], 10);
 
     return {
       host,
@@ -119,11 +94,10 @@ export class ConfigService {
   }
 
   public mergeOctoprintURL(urlSplit: URLSplit): string {
-    // TODO: remove api/ from URL for v2.2.0
     if (urlSplit.port !== null || !isNaN(urlSplit.port)) {
-      return `http://${urlSplit.host}:${urlSplit.port}/api/`;
+      return `http://${urlSplit.host}:${urlSplit.port}/`;
     } else {
-      return `http://${urlSplit.host}/api/`;
+      return `http://${urlSplit.host}/`;
     }
   }
 
@@ -146,8 +120,9 @@ export class ConfigService {
     return this.httpHeaders;
   }
 
-  public getURL(path: string): string {
-    return this.config.octoprint.url + path;
+  public getApiURL(path: string, includeApi = true): string {
+    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
+    else return `${this.config.octoprint.url}${path}`;
   }
 
   public getAPIPollingInterval(): number {
@@ -198,6 +173,10 @@ export class ConfigService {
     return this.config.octodash.turnOnPrinterWhenExitingSleep;
   }
 
+  public usePSUControl(): boolean {
+    return this.config.plugins.psuControl.enabled;
+  }
+
   public useTpLinkSmartPlug(): boolean {
     return this.config.plugins.tpLinkSmartPlug.enabled;
   }
@@ -205,6 +184,7 @@ export class ConfigService {
   public getSmartPlugIP(): string {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }
@@ -231,6 +211,10 @@ export class ConfigService {
 
   public getDefaultFanSpeed(): number {
     return this.config.printer.defaultTemperatureFanSpeed.fan;
+  }
+
+  public isDisplayLayerProgressEnabled(): boolean {
+    return this.config.plugins.displayLayerProgress.enabled;
   }
 
   public isPreheatPluginEnabled(): boolean {

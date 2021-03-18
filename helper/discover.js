@@ -16,7 +16,7 @@ function discoverNodes(window) {
       id: service.addresses[0] + service.port,
       name: service.name,
       version: service.txt.version,
-      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}api/`,
+      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
       disable: compareVersions(minimumVersion, service.txt.version) === -1,
     });
     sendNodes(window);

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { FilamentManagementComponent, FilamentSpool } from '../../plugins';
+import { FilamentSpool } from '../../model';
+import { FilamentService } from '../../services/filament/filament.service';
 
 @Component({
   selector: 'app-filament-choose',
@@ -10,7 +11,7 @@ import { FilamentManagementComponent, FilamentSpool } from '../../plugins';
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
 
-  constructor(public filament: FilamentManagementComponent) {}
+  constructor(public filament: FilamentService) {}
 
   public getSpoolWeightLeft(weight: number, used: number): number {
     return Math.floor(weight - used);

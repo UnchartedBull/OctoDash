@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PrinterProfileService } from 'src/app/printerprofile.service';
+
+import { PersonalizationService } from './personalization.service';
 
 @Component({
   selector: 'app-config-setup-personalization',
@@ -15,10 +16,10 @@ export class PersonalizationComponent implements OnInit {
   @Output() printerNameChange = new EventEmitter<string>();
   @Output() useTouchscreenChange = new EventEmitter<boolean>();
 
-  constructor(private printerProfileService: PrinterProfileService) {}
+  constructor(private personalizationService: PersonalizationService) {}
 
   ngOnInit(): void {
-    this.printerProfileService.getActivePrinterProfileName(this.octoprintURL, this.apiKey).subscribe(printerName => {
+    this.personalizationService.getActivePrinterProfileName(this.octoprintURL, this.apiKey).subscribe(printerName => {
       if (!this.printerName) {
         this.printerName = printerName;
         this.printerNameChange.emit(this.printerName);

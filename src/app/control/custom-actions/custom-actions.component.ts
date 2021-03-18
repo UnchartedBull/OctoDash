@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ConfigService } from 'src/app/config/config.service';
-import { OctoprintService } from 'src/app/octoprint.service';
-import { EnclosureService, PsuControlService, TPLinkSmartPlugService } from 'src/app/plugins';
-import { PrinterService } from 'src/app/printer.service';
+
+import { ConfigService } from '../../config/config.service';
+import { PSUState } from '../../model';
+import { EnclosureService } from '../../services/enclosure/enclosure.service';
+import { PrinterService } from '../../services/printer/printer.service';
+import { SystemService } from '../../services/system/system.service';
 
 @Component({
   selector: 'app-custom-actions',
@@ -20,11 +22,9 @@ export class CustomActionsComponent {
 
   constructor(
     private printerService: PrinterService,
-    private octoprintService: OctoprintService,
+    private systemService: SystemService,
     private configService: ConfigService,
-    private psuControlService: PsuControlService,
     private enclosureService: EnclosureService,
-    private tplinkSmartPlugService: TPLinkSmartPlugService,
     private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
@@ -37,23 +37,15 @@ export class CustomActionsComponent {
         exit,
       };
     } else {
-      this.executeGCode(command);
+      command.split('; ').forEach(this.executeGCode.bind(this));
       if (exit && this.redirectActive) {
         this.router.navigate(['/main-screen']);
       }
+      this.hideConfirm();
     }
   }
 
-  public doActionConfirm(): void {
-    this.executeGCode(this.actionToConfirm.command);
-    if (this.actionToConfirm.exit) {
-      this.router.navigate(['/main-screen']);
-    } else {
-      this.actionToConfirm = null;
-    }
-  }
-
-  public doActionNoConfirm(): void {
+  public hideConfirm(): void {
     this.actionToConfirm = null;
   }
 
@@ -78,19 +70,13 @@ export class CustomActionsComponent {
         this.kill();
         break;
       case '[!POWEROFF]':
-        this.psuControlService.changePSUState(false);
+        this.enclosureService.setPSUState(PSUState.OFF);
         break;
       case '[!POWERON]':
-        this.psuControlService.changePSUState(true);
+        this.enclosureService.setPSUState(PSUState.ON);
         break;
       case '[!POWERTOGGLE]':
-        this.psuControlService.togglePSU();
-        break;
-      case '[!TPLINKOFF]':
-        this.tplinkSmartPlugService.changePowerState(false);
-        break;
-      case '[!TPLINKON]':
-        this.tplinkSmartPlugService.changePowerState(true);
+        this.enclosureService.togglePSU();
         break;
       default: {
         if (command.includes('[!WEB]')) {
@@ -108,7 +94,7 @@ export class CustomActionsComponent {
 
   // [!DISCONNECT]
   public disconnectPrinter(): void {
-    this.octoprintService.disconnectPrinter();
+    this.printerService.disconnectPrinter();
   }
 
   // [!STOPDASHBOARD]
@@ -118,17 +104,17 @@ export class CustomActionsComponent {
 
   // [!RELOAD]
   public reloadOctoPrint(): void {
-    this.octoprintService.sendSystemCommand('restart');
+    this.systemService.sendCommand('restart');
   }
 
   // [!REBOOT]
   public rebootPi(): void {
-    this.octoprintService.sendSystemCommand('reboot');
+    this.systemService.sendCommand('reboot');
   }
 
   // [!SHUTDOWN]
   public shutdownPi(): void {
-    this.octoprintService.sendSystemCommand('shutdown');
+    this.systemService.sendCommand('shutdown');
   }
 
   // [!KILL]

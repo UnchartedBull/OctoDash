@@ -1,11 +1,19 @@
 <div class="standby">
   <div (click)="reconnect()" class="standby__main-window" [ngStyle]="{ 'flex-basis': actionsVisible ? '54%' : '94%' }">
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
-    <ng-container *ngIf="!actionsVisible">
+    <ng-container *ngIf="!actionsVisible && !connecting">
       <span class="standby__text-big">Shhh! OctoDash is sleeping.</span>
       <span class="standby__text-small">Press on the screen to wake me up again.</span>
     </ng-container>
-    <span class="standby__text-big" *ngIf="actionsVisible"> sleeping ... </span>
+    <ng-container *ngIf="actionsVisible && !connecting">
+      <span class="standby__text-big" *ngIf="actionsVisible"> sleeping ... </span>
+    </ng-container>
+    <ng-container *ngIf="connecting">
+      <span class="standby__text-big loading-dots">connecting</span>
+      <span class="standby__text-small" *ngIf="showConnectionError"
+        >Connection can't be established. Press screen to try again.</span
+      >
+    </ng-container>
   </div>
 
   <div class="standby__actions-toggle">
@@ -25,10 +33,3 @@
     <app-custom-actions [redirectActive]="false"></app-custom-actions>
   </div>
 </div>
-
-<div class="standby__error" *ngIf="error !== ''" (click)="error = ''">
-  {{ error }}
-  <span class="standby__error-close">tap this card to close it</span>
-</div>
-
-<div class="standby__error loading-dots" *ngIf="connecting">connecting</div>

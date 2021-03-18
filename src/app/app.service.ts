@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { ElectronService } from 'ngx-electron';
 
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AppService {
   private updateError: Record<string, (config: Config) => void>;
-  private loadedFile = false;
-  public version: string;
-  public latestVersion: string;
   private latestVersionAssetsURL: string;
+  private version: string;
+  private latestVersion: string;
+
   public updateAvailable = false;
 
   public constructor(
@@ -48,20 +46,39 @@ export class AppService {
     };
   }
 
-  // If all errors can be automatically fixed return true here
+  private checkUpdate(): void {
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
+      (data: GitHubReleaseInformation): void => {
+        if (this.version !== data.name.replace('v', '')) {
+          this.updateAvailable = true;
+        }
+        this.latestVersion = data.name.replace('v', '');
+        this.latestVersionAssetsURL = data.assets_url;
+      },
+      (): void => null,
+    );
+    setTimeout(this.checkUpdate.bind(this), 3600000);
+  }
+
+  public hasUpdateError(errors: string[]): boolean {
+    return _.intersection(errors, _.keys(this.updateError)).length > 0;
+  }
+
   public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
-    let fullyAutofixed = true;
+    config.octoprint.url = config.octoprint.url.replace('api/', '');
+
+    let fullyFixed = true;
     for (const error of errors) {
       if (_.hasIn(this.updateError, error)) {
         this.updateError[error](config);
       } else {
-        fullyAutofixed = false;
+        fullyFixed = false;
       }
     }
     this.configService.saveConfig(config);
-    return fullyAutofixed;
+    return fullyFixed;
   }
 
   private enableVersionListener(): void {
@@ -83,20 +100,6 @@ export class AppService {
     });
   }
 
-  private checkUpdate(): void {
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-      (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace('v', '')) {
-          this.updateAvailable = true;
-        }
-        this.latestVersion = data.name.replace('v', '');
-        this.latestVersionAssetsURL = data.assets_url;
-      },
-      (): void => null,
-    );
-    setTimeout(this.checkUpdate.bind(this), 3600000);
-  }
-
   public getVersion(): string {
     return this.version;
   }
@@ -105,60 +108,16 @@ export class AppService {
     return this.latestVersion;
   }
 
+  public getLatestVersionAssetsURL(): string {
+    return this.latestVersionAssetsURL;
+  }
+
   public turnDisplayOff(): void {
     this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
     this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
-  }
-
-  public hasUpdateError(errors: string[]): boolean {
-    return _.intersection(errors, _.keys(this.updateError)).length > 0;
-  }
-
-  public setLoadedFile(value: boolean): void {
-    this.loadedFile = value;
-  }
-
-  public getLoadedFile(): boolean {
-    return this.loadedFile;
-  }
-
-  public getLatestVersionAssetsURL(): string {
-    return this.latestVersionAssetsURL;
-  }
-
-  public convertByteToMegabyte(byte: number): string {
-    return (byte / 1000000).toFixed(1);
-  }
-
-  public convertDateToString(date: Date): string {
-    return `${('0' + date.getDate()).slice(-2)}.${('0' + (date.getMonth() + 1)).slice(-2)}.${date.getFullYear()} ${(
-      '0' + date.getHours()
-    ).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}:${('0' + date.getSeconds()).slice(-2)}`;
-  }
-
-  public convertSecondsToHours(input: number): string {
-    const hours = input / 60 / 60;
-    let roundedHours = Math.floor(hours);
-    const minutes = (hours - roundedHours) * 60;
-    let roundedMinutes = Math.round(minutes);
-    if (roundedMinutes === 60) {
-      roundedMinutes = 0;
-      roundedHours += 1;
-    }
-    return roundedHours + ':' + ('0' + roundedMinutes).slice(-2);
-  }
-
-  public convertFilamentLengthToWeight(filamentLength: number): number {
-    return this.convertFilamentVolumeToWeight(
-      (filamentLength * Math.PI * Math.pow(this.configService.getFilamentThickness() / 2, 2)) / 1000,
-    );
-  }
-
-  private convertFilamentVolumeToWeight(filamentVolume: number): number {
-    return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
   }
 }
 

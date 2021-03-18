@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
@@ -11,7 +11,7 @@ import { NotificationService } from '../notification/notification.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
   @Output() closeFunction = new EventEmitter<void>();
   @ViewChild('settingsMain') private settingsMain: ElementRef;
   @ViewChild('settingsGeneral') private settingsGeneral: ElementRef;
@@ -55,6 +55,11 @@ export class SettingsComponent implements OnInit {
     }, 400);
   }
 
+  public ngOnDestroy(): void {
+    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+  }
+
   public hideSettings(): void {
     if (
       this.configService.isEqualToCurrentConfig(this.configService.createConfigFromInput(this.config)) ||
@@ -88,11 +93,18 @@ export class SettingsComponent implements OnInit {
 
   public updateConfig(): void {
     const config = this.configService.createConfigFromInput(this.config);
-    if (!this.configService.validateGiven(config)) {
-      this.notificationService.setError('Config is invalid!', this.configService.getErrors().toString());
-    }
+
+    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+
     this.configService.saveConfig(config);
-    this.overwriteNoSave = true;
+  }
+
+  private onConfigSaveFail(_, errors: string[]) {
+    this.notificationService.setWarning("Can't save invalid config", String(errors));
+  }
+
+  private onConfigSaved() {
     this.hideSettings();
     this.electronService.ipcRenderer.send('reload');
   }

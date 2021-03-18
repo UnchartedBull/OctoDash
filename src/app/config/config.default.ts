@@ -2,7 +2,7 @@ import { Config } from './config.model';
 
 export const defaultConfig: Config = {
   octoprint: {
-    url: 'http://localhost:5000/api/',
+    url: 'http://localhost:5000/',
     accessToken: '',
   },
   printer: {

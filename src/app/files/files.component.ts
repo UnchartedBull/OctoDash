@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import _ from 'lodash-es';
+import { AnimationOptions } from 'ngx-lottie';
 
-import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
-import { File, FilesService, Folder } from '../files.service';
-import { JobService } from '../job.service';
+import { Directory, File } from '../model';
+import { NotificationService } from '../notification/notification.service';
+import { FilesService } from '../services/files/files.service';
 
 @Component({
   selector: 'app-files',
@@ -14,111 +16,81 @@ import { JobService } from '../job.service';
 })
 export class FilesComponent {
   public currentFolder: string;
-  public folderContent: (File | Folder)[];
+  public homeFolder = '/';
+  public directory: Directory;
   public fileDetail: File;
+
   public sortingAttribute: 'name' | 'date' | 'size';
   public sortingOrder: 'asc' | 'dsc';
   public showSorting = false;
-  public homeFolder = '/';
+
+  public loadingOptions: AnimationOptions = {
+    path: '/assets/loading.json',
+  };
+  public loading = Date.now();
 
   public constructor(
     private filesService: FilesService,
-    private spinner: NgxSpinnerService,
-    private service: AppService,
+    private notificationService: NotificationService,
     private router: Router,
-    private jobService: JobService,
     private configService: ConfigService,
   ) {
     this.showLoader();
-    this.folderContent = [];
+    this.directory = { files: [], folders: [] };
     this.currentFolder = '/';
+
     this.sortingAttribute = this.configService.getDefaultSortingAttribute();
     this.sortingOrder = this.configService.getDefaultSortingOrder();
-    this.openFolder(this.currentFolder);
-  }
 
-  public openDetails(filePath: string): void {
-    this.filesService
-      .getFile(filePath)
-      .then((data): void => {
-        this.fileDetail = data;
-      })
-      .catch((): void => {
-        this.fileDetail = ({ name: 'error' } as unknown) as File;
-      });
-    const fileDOMElement = document.getElementById('fileDetailView');
-    fileDOMElement.style.display = 'block';
-    setTimeout((): void => {
-      fileDOMElement.style.opacity = '1';
-    }, 50);
+    this.openFolder(this.currentFolder);
   }
 
   public openFolder(folderPath: string): void {
     setTimeout((): void => {
       this.showLoader();
-      this.folderContent = [];
-      this.filesService
-        .getFolder(folderPath)
-        .then((data): void => {
-          this.folderContent = data;
-          if (folderPath === '/' && !(data[0].name === 'local' && data[1].name == 'sdcard')) {
-            this.currentFolder = data[0].path.startsWith('/local') ? '/local' : '/sdcard';
+      this.directory = { files: [], folders: [] };
+
+      this.filesService.getFolderContent(folderPath).subscribe(
+        (directory: Directory) => {
+          this.directory = directory;
+          const mergedDirectory = _.concat(directory.files, directory.folders);
+          if (folderPath === '/' && !(mergedDirectory[0].name === 'local' && mergedDirectory[1].name == 'sdcard')) {
+            this.currentFolder = mergedDirectory[0].path.startsWith('/local') ? '/local' : '/sdcard';
             this.homeFolder = this.currentFolder;
           } else {
             this.currentFolder = folderPath;
           }
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
-          this.spinner.hide();
-        })
-        .catch((): void => {
-          this.folderContent = null;
+        },
+        (error: HttpErrorResponse) => {
+          this.notificationService.setError("Can't load file/folder!", error.message);
           this.currentFolder = folderPath;
-          this.spinner.hide();
-        });
-    }, 300);
+        },
+        () => {
+          this.hideLoader();
+        },
+      );
+    }, 240);
   }
 
   public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
-    switch (by) {
-      case 'name': {
-        this.folderContent.sort((a, b): number =>
-          a.type === b.type
-            ? (order === 'asc' ? a.name > b.name : a.name < b.name)
-              ? 1
-              : -1
-            : a.type === 'folder'
-            ? -1
-            : 1,
-        );
-        break;
-      }
-      case 'date': {
-        this.sortFolder('name', order);
-        this.folderContent.sort((a, b): number => {
-          if (a.type === b.type && a.type === 'file') {
-            const aFile = (a as unknown) as File;
-            const bFile = (b as unknown) as File;
-            return (order === 'asc' ? aFile.date > bFile.date : aFile.date < bFile.date) ? 1 : -1;
-          } else {
-            return a.type === 'folder' ? -1 : 1;
-          }
-        });
-        break;
-      }
-      case 'size': {
-        this.sortFolder('name', order);
-        this.folderContent.sort((a, b): number => {
-          if (a.type === b.type && (a as File).type) {
-            const aFile = (a as unknown) as File;
-            const bFile = (b as unknown) as File;
-            return (order === 'asc' ? aFile.size > bFile.size : aFile.size < bFile.size) ? 1 : -1;
-          } else {
-            return 1;
-          }
-        });
-        break;
-      }
-    }
+    this.directory.folders.sort((a, b): number => ((order === 'asc' ? a.name > b.name : a.name < b.name) ? 1 : -1));
+    this.directory.files.sort((a, b): number => ((order === 'asc' ? a[by] > b[by] : a[by] < b[by]) ? 1 : -1));
+  }
+
+  public openDetails(filePath: string): void {
+    this.filesService.getFile(filePath).subscribe(
+      (fileData: File) => (this.fileDetail = fileData),
+      (error: HttpErrorResponse) => {
+        this.fileDetail = ({ name: 'error' } as unknown) as File;
+        this.notificationService.setError("Can't load file!", error.message);
+      },
+    );
+    const fileDOMElement = document.getElementById('fileDetailView');
+    fileDOMElement.style.display = 'block';
+    setTimeout((): void => {
+      fileDOMElement.style.opacity = '1';
+    }, 50);
   }
 
   public closeDetails(): void {
@@ -149,36 +121,37 @@ export class FilesComponent {
   }
 
   public loadFile(filePath: string): void {
+    this.filesService.loadFile(filePath);
+    this.filesService.setLoadedFile(true);
     setTimeout((): void => {
-      this.filesService.loadFile(filePath);
-      this.service.setLoadedFile(true);
-      this.jobService.deleteJobInformation();
       this.router.navigate(['/main-screen']);
     }, 300);
   }
 
   public printFile(filePath: string): void {
+    this.filesService.printFile(filePath);
     setTimeout((): void => {
-      this.filesService.printFile(filePath);
       this.router.navigate(['/main-screen']);
-    }, 300);
+    }, 550);
   }
 
   public deleteFile(filePath: string): void {
+    this.filesService.deleteFile(filePath);
     setTimeout((): void => {
-      this.filesService.deleteFile(filePath);
       this.closeDetails();
       this.openFolder(this.currentFolder);
     }, 300);
   }
 
+  private hideLoader(): void {
+    if (Date.now() - this.loading > 750) {
+      this.loading = 0;
+    } else {
+      setTimeout(this.hideLoader.bind(this), 750 - (Date.now() - this.loading));
+    }
+  }
+
   private showLoader(): void {
-    this.spinner.show(undefined, {
-      bdColor: '#353b48',
-      color: '#f5f6fa',
-      size: 'medium',
-      type: 'pacman',
-      fullScreen: false,
-    });
+    this.loading = Date.now();
   }
 }

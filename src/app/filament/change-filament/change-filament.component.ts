@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigService } from 'src/app/config/config.service';
-import { FilamentSpool } from 'src/app/plugins';
-import { PrinterService } from 'src/app/printer.service';
+
+import { ConfigService } from '../../config/config.service';
+import { FilamentSpool } from '../../model';
+import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
   selector: 'app-filament-change-filament',
@@ -32,7 +33,7 @@ export class ChangeFilamentComponent implements OnInit {
   }
 
   private initiateM600FilamentChange(): void {
-    // this.printerService.executeGCode('M600');
+    this.printerService.executeGCode('M600');
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {

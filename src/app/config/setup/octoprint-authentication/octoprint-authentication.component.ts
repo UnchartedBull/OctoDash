@@ -1,8 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
-import { NotificationService } from 'src/app/notification/notification.service';
-import { AuthService, TokenSuccess } from 'src/app/octoprint/auth.service';
+
+import { TokenSuccess } from '../../../model/octoprint/auth.model';
+import { NotificationService } from '../../../notification/notification.service';
+import { OctoprintAuthenticationService } from './octoprint-authentication.service';
 
 @Component({
   selector: 'app-config-setup-octoprint-authentication',
@@ -16,10 +18,10 @@ export class OctoprintAuthenticationComponent {
   @Output() increasePage = new EventEmitter<void>();
   @Output() accessTokenChange = new EventEmitter<string>();
 
-  constructor(private authService: AuthService, private notificationService: NotificationService) {}
+  constructor(private authService: OctoprintAuthenticationService, private notificationService: NotificationService) {}
 
   public loginWithOctoprintUI(): void {
-    this.authService.probeSupport(this.octoprintURL).subscribe(
+    this.authService.probeAuthSupport(this.octoprintURL).subscribe(
       result => {
         if (result.status === 204) {
           this.sendLoginRequest();
@@ -47,13 +49,13 @@ export class OctoprintAuthenticationComponent {
   }
 
   private sendLoginRequest(): void {
-    this.authService.startProcess(this.octoprintURL).subscribe(
-      result => {
+    this.authService.startAuthProcess(this.octoprintURL).subscribe(
+      token => {
         this.notificationService.setNotification(
           'Login request send!',
           'Please confirm the request via the popup in the OctoPrint WebUI.',
         );
-        this.pollResult(result.app_token);
+        this.pollResult(token);
       },
       _ => {
         this.notificationService.setWarning(
@@ -69,7 +71,7 @@ export class OctoprintAuthenticationComponent {
       this.notificationService.closeNotification();
     }, 2000);
     const pollInterval = interval(1000).subscribe(() => {
-      this.authService.pollStatus(this.octoprintURL, token).subscribe(
+      this.authService.pollAuthProcessStatus(this.octoprintURL, token).subscribe(
         result => {
           if (result.status === 200) {
             pollInterval.unsubscribe();

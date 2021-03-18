@@ -7,19 +7,14 @@
     <td class="top-bar__center">
       <img src="assets/folder.svg" class="top-bar__center-icon" />
     </td>
-    <td
-      class="top-bar__next"
-      (click)="openSorting()"
-      matRipple
-      [matRippleUnbounded]="false"
-      *ngIf="folderContent && folderContent.length > 0"
-    >
+    <td class="top-bar__next" (click)="openSorting()" matRipple [matRippleUnbounded]="false" *ngIf="directory">
       sort
       <img src="assets/sort.svg" class="top-bar__next-icon" />
     </td>
-    <td class="top-bar__next" *ngIf="!folderContent || folderContent.length === 0"></td>
+    <td class="top-bar__next" *ngIf="!directory"></td>
   </tr>
 </table>
+
 <div class="breadcrumbs">
   <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')">
     <span (click)="openFolder(currentFolder.split(folder)[0] + folder)">
@@ -27,56 +22,66 @@
     </span>
   </span>
 </div>
+
 <div class="files">
-  <ngx-spinner>
-    <p class="la-pacman-text">loading</p>
-  </ngx-spinner>
+  <ng-lottie [hidden]="loading === 0" id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
 
-  <div *ngIf="!folderContent" class="files__error">can't load files ...</div>
+  <div *ngIf="!directory" class="files__error">can't load files ...</div>
 
-  <div *ngIf="folderContent && currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
+  <div *ngIf="directory">
+    <div *ngIf="currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
+      <div
+        (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        <img src="assets/folder.svg" class="files__icon" />
+        <span class="files__name">..</span>
+      </div>
+    </div>
+
     <div
-      (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
+      (click)="openFolder(folder.path)"
       matRipple
       [matRippleUnbounded]="false"
+      *ngFor="let folder of directory.folders"
+      class="files__object"
     >
       <img src="assets/folder.svg" class="files__icon" />
-      <span class="files__name">..</span>
-    </div>
-  </div>
-  <div *ngFor="let content of folderContent" class="files__object">
-    <div *ngIf="content.type === 'folder'" (click)="openFolder(content.path)" matRipple [matRippleUnbounded]="false">
-      <img src="assets/folder.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value"> {{ content.size }} <span class="files__info-unit">mb</span> </span>
+        <span class="files__info-value">
+          {{ folder.size }} <span class="files__info-unit" *ngIf="folder.size > 0">mb</span>
+        </span>
       </div>
       <span class="files__name">
-        {{ content.name }}
+        {{ folder.name }}
       </span>
     </div>
+
     <div
-      *ngIf="content.type === 'file'"
-      (click)="openDetails(content.path)"
-      (press)="loadFile(content.path)"
+      *ngFor="let file of directory.files"
+      (click)="openDetails(file.path)"
+      (press)="loadFile(file.path)"
       matRipple
       [matRippleUnbounded]="false"
+      class="files__object"
     >
       <img src="assets/object.svg" class="files__icon" />
       <div class="files__info">
-        <span class="files__info-value"> {{ content.size }}<span class="files__info-unit">mb</span> </span>
-        <span class="files__info-value" *ngIf="content.hasOwnProperty('filamentWeight')">
-          {{ content.filamentWeight }}<span class="files__info-unit">g</span>
+        <span class="files__info-value"> {{ file.size }}<span class="files__info-unit">mb</span> </span>
+        <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
+          {{ file.filamentWeight }}<span class="files__info-unit">g</span>
         </span>
-        <span class="files__info-value" *ngIf="content.hasOwnProperty('printTime')">
-          {{ content.printTime }}<span class="files__info-unit">h</span>
+        <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
+          {{ file.printTime }}<span class="files__info-unit">h</span>
         </span>
       </div>
       <span class="files__name">
-        {{ content.name }}
+        {{ file.name }}
       </span>
     </div>
   </div>
-  <div class="scroll__thumb-inactive" *ngIf="folderContent"></div>
+  <div class="scroll__thumb-inactive" *ngIf="directory"></div>
 </div>
 
 <div class="file" id="fileDetailView">

@@ -1,144 +1,67 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { OctoprintConnection } from '.././octoprint/model/connection';
 import { AppService } from '../app.service';
 import { ConfigService } from '../config/config.service';
-import { NotificationService } from '../notification/notification.service';
-import { PsuControlService } from '../plugins/psu-control.service';
-import { TPLinkSmartPlugService } from '../plugins/tplink-smartplug.service';
+import { PSUState } from '../model';
+import { EnclosureService } from '../services/enclosure/enclosure.service';
+import { SystemService } from '../services/system/system.service';
 
 @Component({
   selector: 'app-standby',
   templateUrl: './standby.component.html',
   styleUrls: ['./standby.component.scss'],
 })
-export class StandbyComponent implements OnInit {
+export class StandbyComponent implements OnInit, OnDestroy {
   public connecting = false;
-  public error = '';
   public actionsVisible = false;
-  private connectionRetries = 3;
+  public showConnectionError = false;
   private displaySleepTimeout: ReturnType<typeof setTimeout>;
+  private connectErrorTimeout: ReturnType<typeof setTimeout>;
 
   public constructor(
     private configService: ConfigService,
-    private http: HttpClient,
-    private router: Router,
     private service: AppService,
-    private notificationService: NotificationService,
-    private psuControlService: PsuControlService,
-    private tpLinkSmartPlugService: TPLinkSmartPlugService,
+    private enclosureService: EnclosureService,
+    private systemService: SystemService,
   ) {}
 
   public ngOnInit(): void {
-    this.notificationService.disableNotifications();
     if (this.configService.getAutomaticScreenSleep()) {
       this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
     }
   }
 
-  public reconnect(): void {
-    this.connecting = true;
-    if (this.configService.getAutomaticPrinterPowerOn()) {
-      if (this.configService.useTpLinkSmartPlug()) {
-        this.tpLinkSmartPlugService.changePowerState(true);
-      } else {
-        this.psuControlService.changePSUState(true);
-      }
-      setTimeout(this.checkConnection.bind(this), 5000);
-    } else {
-      this.checkConnection();
-    }
-  }
-
-  private connectToPrinter(): void {
-    this.http
-      .post(this.configService.getURL('connection'), connectPayload, this.configService.getHTTPHeaders())
-      .subscribe(
-        (): void => {
-          setTimeout(this.checkConnection.bind(this), 5000);
-        },
-        (): void => {
-          this.setConnectionError();
-        },
-      );
-  }
-
-  private checkConnection(): void {
-    this.http.get(this.configService.getURL('connection'), this.configService.getHTTPHeaders()).subscribe(
-      (data: OctoprintConnection): void => {
-        if (data.current.state === 'Closed') {
-          if (this.connectionRetries <= 0) {
-            this.connectionRetries = 3;
-            this.setConnectionError();
-          } else {
-            this.connectionRetries--;
-            setTimeout(this.connectToPrinter.bind(this), 500);
-          }
-        } else if (data.current.state.includes('Error')) {
-          if (this.connectionRetries <= 1) {
-            this.connectionRetries = 3;
-            this.setConnectionError();
-          } else {
-            this.connectionRetries--;
-            setTimeout(this.connectToPrinter.bind(this), 500);
-          }
-        } else if (data.current.state === 'Connecting') {
-          if (this.connectionRetries < 0) {
-            this.connectionRetries = 3;
-            this.setConnectionError();
-          } else {
-            this.connectionRetries--;
-            setTimeout(this.checkConnection.bind(this), 5000);
-          }
-        } else {
-          this.disableStandby();
-        }
-      },
-      (): void => {
-        this.connecting = false;
-        this.error =
-          "There is something really wrong, OctoDash can't get a response from OctoPrint. Please check your setup!";
-      },
-    );
-  }
-
-  private setConnectionError(): void {
-    this.connecting = false;
-    this.error =
-      "OctoPrint can't connect to your printer. Please make sure that the connection works, then come back and try again.";
-  }
-
-  private disableStandby(): void {
+  public ngOnDestroy(): void {
+    clearTimeout(this.displaySleepTimeout);
+    clearTimeout(this.connectErrorTimeout);
     if (this.configService.getAutomaticScreenSleep()) {
-      if (this.displaySleepTimeout) {
-        clearTimeout(this.displaySleepTimeout);
-      }
       this.service.turnDisplayOn();
     }
-    setTimeout((): void => {
-      this.connecting = false;
-      this.notificationService.enableNotifications();
-      this.router.navigate(['/main-screen']);
-    }, 1000);
+  }
+
+  public reconnect(): void {
+    this.actionsVisible = false;
+    this.connecting = true;
+    if (this.configService.getAutomaticPrinterPowerOn()) {
+      this.enclosureService.setPSUState(PSUState.ON);
+      setTimeout(this.connectPrinter.bind(this), 5000);
+    } else {
+      this.connectPrinter();
+    }
+  }
+
+  private connectPrinter(): void {
+    this.systemService.connectPrinter();
+    this.connectErrorTimeout = setTimeout(() => {
+      this.showConnectionError = true;
+      this.connectErrorTimeout = setTimeout(() => {
+        this.showConnectionError = false;
+        this.connecting = false;
+      }, 30000);
+    }, 15000);
   }
 
   public toggleCustomActions(): void {
     this.actionsVisible = !this.actionsVisible;
   }
-}
-
-const connectPayload: ConnectCommand = {
-  command: 'connect',
-  save: false,
-};
-
-interface ConnectCommand {
-  command: string;
-  port?: string;
-  baudrate?: number;
-  printerProfile?: string;
-  save?: boolean;
-  autoconnect?: boolean;
 }

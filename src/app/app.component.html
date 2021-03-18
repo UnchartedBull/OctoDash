@@ -8,8 +8,8 @@
       >{{ status }}</span
     >
     <span class="splash-screen__hint" *ngIf="showConnectionHint">
-      Initializing is taking longer than usual. Please make sure that your printer is connected.<br />
-      Trying again every 15 seconds.
+      Initializing is taking longer than usual. <br />
+      Please make sure that OctoPrint is up and running.
     </span>
   </div>
   <router-outlet (activate)="activated = true"></router-outlet>
