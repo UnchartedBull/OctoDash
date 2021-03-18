@@ -34,7 +34,6 @@ import { FilamentComponent } from './filament/filament.component';
 import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.component';
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
-import { FilesService } from './files.service';
 import { FilesComponent } from './files/files.component';
 import { HeightProgressComponent } from './height-progress/height-progress.component';
 import { JobStatusComponent } from './job-status/job-status.component';
@@ -50,6 +49,8 @@ import { EnclosureOctoprintService } from './services/enclosure/enclosure.octopr
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './services/filament/filament-plugin.service';
+import { FilesOctoprintService } from './services/files/files.octoprint.service';
+import { FilesService } from './services/files/files.service';
 import { JobOctoprintService } from './services/job/job.octoprint.service';
 import { JobService } from './services/job/job.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
@@ -119,7 +120,6 @@ export function playerFactory(): LottiePlayer {
     ConversionService,
     EventService,
     NotificationService,
-    FilesService,
     [
       {
         provide: SystemService,
@@ -170,6 +170,20 @@ export function playerFactory(): LottiePlayer {
           httpClient: HttpClient,
         ) => {
           return new JobOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: FilesService,
+        deps: [ConfigService, NotificationService, HttpClient, ConversionService],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+          conversionService: ConversionService,
+        ) => {
+          return new FilesOctoprintService(configService, notificationService, httpClient, conversionService);
         },
       },
     ],

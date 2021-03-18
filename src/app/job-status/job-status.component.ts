@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
 import { EventService } from '../event.service';
-import { FilesService } from '../files.service';
 import { JobStatus } from '../model';
+import { FilesService } from '../services/files/files.service';
 import { JobService } from '../services/job/job.service';
 import { SocketService } from '../services/socket/socket.service';
 
@@ -17,6 +17,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   public jobStatus: JobStatus;
+  public thumbnail: string;
   public showPreviewWhilePrinting: boolean;
 
   public constructor(
@@ -32,6 +33,12 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.add(
       this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
+        if (jobStatus.file !== this.jobStatus?.file) {
+          this.fileService.getThumbnail(jobStatus.fullPath).subscribe(thumbnail => {
+            this.thumbnail = thumbnail;
+            console.log(this.thumbnail);
+          });
+        }
         this.jobStatus = jobStatus;
       }),
     );

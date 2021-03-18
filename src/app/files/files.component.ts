@@ -5,10 +5,9 @@ import _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { ConfigService } from '../config/config.service';
-import { File, FilesService } from '../files.service';
-import { Directory } from '../model';
+import { Directory, File } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { FilesOctoprintService } from '../services/files/files.octoprint.service';
+import { FilesService } from '../services/files/files.service';
 
 @Component({
   selector: 'app-files',
@@ -32,7 +31,6 @@ export class FilesComponent {
 
   public constructor(
     private filesService: FilesService,
-    private filesService2: FilesOctoprintService,
     private notificationService: NotificationService,
     private router: Router,
     private configService: ConfigService,
@@ -52,7 +50,7 @@ export class FilesComponent {
       this.showLoader();
       this.directory = { files: [], folders: [] };
 
-      this.filesService2.getFolderContent(folderPath).subscribe(
+      this.filesService.getFolderContent(folderPath).subscribe(
         (directory: Directory) => {
           this.directory = directory;
           const mergedDirectory = _.concat(directory.files, directory.folders);
@@ -81,14 +79,13 @@ export class FilesComponent {
   }
 
   public openDetails(filePath: string): void {
-    this.filesService
-      .getFile(filePath)
-      .then((data): void => {
-        this.fileDetail = data;
-      })
-      .catch((): void => {
+    this.filesService.getFile(filePath).subscribe(
+      (fileData: File) => (this.fileDetail = fileData),
+      (error: HttpErrorResponse) => {
         this.fileDetail = ({ name: 'error' } as unknown) as File;
-      });
+        this.notificationService.setError("Can't load file!", error.message);
+      },
+    );
     const fileDOMElement = document.getElementById('fileDetailView');
     fileDOMElement.style.display = 'block';
     setTimeout((): void => {

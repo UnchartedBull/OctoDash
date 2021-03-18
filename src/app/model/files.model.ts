@@ -15,8 +15,8 @@ export interface File {
   path: string;
   name: string;
   size: string;
+  thumbnail: string;
   printTime?: string;
   filamentWeight?: number;
   date?: string;
-  thumbnail?: string;
 }

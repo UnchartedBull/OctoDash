@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { OctoprintFile, OctoprintFolder } from 'src/app/model/octoprint/file.model';
+import { FileCommand, OctoprintFile, OctoprintFolder } from 'src/app/model/octoprint/file.model';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
@@ -114,6 +114,7 @@ export class FilesOctoprintService implements FilesService {
             name: file.name,
             date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
             size: this.conversionService.convertByteToMegabyte(file.size),
+            thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
             ...(file.gcodeAnalysis
               ? {
                   printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
@@ -129,7 +130,6 @@ export class FilesOctoprintService implements FilesService {
   }
 
   public getThumbnail(filePath: string): Observable<string> {
-    // TODO also include in getFile
     return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
       map((file: OctoprintFile): string => {
         return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
@@ -138,27 +138,25 @@ export class FilesOctoprintService implements FilesService {
   }
 
   public loadFile(filePath: string): void {
-    // TODO interface
-    const loadFileBody = {
+    const payload: FileCommand = {
       command: 'select',
       print: false,
     };
 
     this.http
-      .post(this.configService.getApiURL('files' + filePath), loadFileBody, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError("Can't load file!", error.message)))
       .subscribe();
   }
 
   public printFile(filePath: string): void {
-    // TODO interface
-    const printFileBody = {
+    const payload: FileCommand = {
       command: 'select',
       print: true,
     };
 
     this.http
-      .post(this.configService.getApiURL('files' + filePath), printFileBody, this.configService.getHTTPHeaders())
+      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError("Can't start print!", error.message)))
       .subscribe();
   }

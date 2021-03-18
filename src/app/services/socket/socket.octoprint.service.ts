@@ -75,7 +75,7 @@ export class OctoPrintSocketService implements SocketService {
   private initJobStatus(): void {
     this.jobStatus = {
       file: null,
-      thumbnail: null,
+      fullPath: null,
       progress: 0,
       zHeight: this.configService.isDisplayLayerProgressEnabled() ? { current: 0, total: -1 } : 0,
       filamentAmount: 0,
@@ -86,7 +86,7 @@ export class OctoPrintSocketService implements SocketService {
       },
       estimatedPrintTime: null,
       estimatedEndTime: null,
-    };
+    } as JobStatus;
   }
 
   private tryConnect(resolve: () => void): void {
@@ -203,7 +203,7 @@ export class OctoPrintSocketService implements SocketService {
     }
 
     this.jobStatus.file = file;
-    this.jobStatus.thumbnail = null; //TODO
+    this.jobStatus.fullPath = '/' + message?.current?.job?.file?.origin + '/' + message?.current?.job?.file?.path;
     this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
     this.jobStatus.timePrinted = {
       value: this.conversionService.convertSecondsToHours(message.current.progress.printTime),
@@ -273,7 +273,6 @@ export class OctoPrintSocketService implements SocketService {
       case 'PrintFailed':
       case 'PrintDone':
       case 'PrintCancelled':
-        console.log('IDLE');
         newState = PrinterEvent.IDLE;
         break;
       case 'Connected':

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ConfigService } from '../config/config.service';
 import { EventService } from '../event.service';
-import { FilesService } from '../files.service';
+import { FilesService } from '../services/files/files.service';
 
 @Component({
   selector: 'app-main-screen',

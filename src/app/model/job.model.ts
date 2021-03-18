@@ -1,6 +1,6 @@
 export interface JobStatus {
   file: string;
-  thumbnail: string | undefined;
+  fullPath: string;
   progress: number;
   zHeight: number | ZHeightLayer;
   filamentAmount?: number;

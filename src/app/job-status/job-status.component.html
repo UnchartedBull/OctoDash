@@ -1,8 +1,5 @@
 <div class="job-info" *ngIf="jobStatus.file && isPrinting()">
-  <div
-    class="job-info__progress"
-    *ngIf="!showPreviewWhilePrinting || (showPreviewWhilePrinting && !jobStatus.thumbnail)"
-  >
+  <div class="job-info__progress" *ngIf="!showPreviewWhilePrinting">
     <round-progress
       [current]="jobStatus.progress"
       [max]="100"
@@ -14,9 +11,9 @@
     <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
   </div>
 
-  <div class="job-info__progress" *ngIf="showPreviewWhilePrinting && jobStatus.thumbnail">
+  <div class="job-info__progress" *ngIf="showPreviewWhilePrinting">
     <div *ngIf="!useCircularProgressBar()" style="height: 22vw; padding-top: -1.5vw" id="progress-preview-bar">
-      <img class="job-info__progress-preview" [src]="jobStatus.thumbnail" />
+      <img class="job-info__progress-preview" [src]="thumbnail" />
       <div class="job-info__progress-bar__wrapper">
         <div class="job-info__progress-bar" [style.width]="jobStatus.progress + '%'"></div>
       </div>
@@ -33,7 +30,7 @@
       ></round-progress>
 
       <div class="job-info__progress-percentage job-info__progress-preview-image-container">
-        <img class="job-info__progress-preview-image" [src]="jobStatus.thumbnail" />
+        <img class="job-info__progress-preview-image" [src]="thumbnail" />
       </div>
     </div>
     <div class="job-info__progress-percentage" [hidden]="true">
@@ -59,7 +56,7 @@
 
 <div class="job-info__file-loaded" *ngIf="jobStatus.file && !isPrinting() && isFileLoaded()">
   <div class="job-info__preview">
-    <img src="{{ jobStatus.thumbnail ? jobStatus.thumbnail : 'assets/object.svg' }}" class="job-info__preview-image" />
+    <img [src]="thumbnail" class="job-info__preview-image" />
     <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
   </div>
   <span class="job-info__filename">{{ jobStatus.file }}</span>

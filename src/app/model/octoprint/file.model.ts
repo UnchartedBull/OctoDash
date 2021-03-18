@@ -74,3 +74,8 @@ interface OctoprintRefs {
   download?: string;
   resource: string;
 }
+
+export interface FileCommand {
+  command: 'select';
+  print: boolean;
+}
