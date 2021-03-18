@@ -1,6 +1,6 @@
-<span class="filament-heading">purging filament</span>
+<span class="filament-heading">purge du filament</span>
 <div class="purge-filament__amount">{{ purgeAmount }}mm</div>
 <div class="filament__wrapper-button">
   <a class="purge-filament__more" matRipple [matRippleUnbounded]="false" (click)="increasePurgeAmount(10)">+10mm</a>
-  <a class="purge-filament__done" matRipple [matRippleUnbounded]="false" (click)="this.purgeDone.emit()">done</a>
+  <a class="purge-filament__done" matRipple [matRippleUnbounded]="false" (click)="this.purgeDone.emit()">terminé</a>
 </div>

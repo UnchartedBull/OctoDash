@@ -8,13 +8,13 @@
       <tr>
         <td class="top-bar__back">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          retour
         </td>
       </tr>
     </table>
     <div class="print-control__action" (click)="cancel($event)">
       <img src="assets/cancel.svg" />
-      cancel
+      annuler
     </div>
     <div class="print-control__action" (click)="pause($event)">
       <img src="assets/pause.svg" />
@@ -22,15 +22,15 @@
     </div>
     <div class="print-control__action" (click)="adjust($event)">
       <img src="assets/adjust.svg" />
-      adjust
+      ajuster
     </div>
   </div>
   <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
     <img src="assets/cancel.svg" class="print-control__center-icon" />
-    <span class="print-control__confirm">cancel print?</span>
+    <span class="print-control__confirm">annuler l'impression ?</span>
     <div style="text-align: center">
-      <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
-      <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
+      <span class="print-control__cancel__action" (click)="cancelPrint($event)">oui</span>
+      <span class="print-control__cancel__action" (click)="backToControlScreen($event)">non</span>
     </div>
   </div>
   <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
@@ -38,17 +38,17 @@
       <tr>
         <td class="top-bar__back">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          retour
         </td>
       </tr>
     </table>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
-    <span class="print-control__confirm">print paused</span>
+    <span class="print-control__confirm">impression mise en pause</span>
     <div class="print-control__pause__resume">
-      <div (click)="restart($event)">restart</div>
+      <div (click)="restart($event)">recommencer</div>
       <div (click)="resume($event)">
         <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
-        resume
+        reprendre
       </div>
       <div (click)="changeFilament($event)">filament</div>
     </div>
@@ -58,7 +58,7 @@
       <tr>
         <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          retour
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
@@ -90,7 +90,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Hotend</span>
+          <span class="print-control__adjust__name">Buse</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -115,7 +115,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Heatbed</span>
+          <span class="print-control__adjust__name">Lit</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -140,7 +140,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Fan Speed</span>
+          <span class="print-control__adjust__name">Ventilateur</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -165,7 +165,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Feedrate</span>
+          <span class="print-control__adjust__name">Extrusion</span>
         </td>
       </tr>
     </table>
@@ -180,7 +180,7 @@
         matRipple
         [matRippleUnbounded]="false"
       >
-        save
+        sauvegarder
       </div>
     </div>
   </div>
@@ -189,7 +189,7 @@
       <tr>
         <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          retour
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>

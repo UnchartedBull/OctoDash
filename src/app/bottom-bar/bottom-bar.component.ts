@@ -31,11 +31,11 @@ export class BottomBarComponent implements OnDestroy {
     }
     this.printer = {
       name: this.configService.getPrinterName(),
-      status: 'connecting ...',
+      status: 'connexion en cours...',
     };
     this.subscriptions.add(
       this.printerService.getObservable().subscribe((printerStatus: PrinterStatusAPI): void => {
-        this.printer.status = printerStatus.status;
+                this.printer.status = printerStatus.status;
       }),
     );
   }

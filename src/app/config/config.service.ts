@@ -32,8 +32,8 @@ export class ConfigService {
     } catch (e) {
       console.error(e);
       this.notificationService.setError(
-        "Can't read config file!",
-        'Please restart your system. If the issue persists open an issue on GitHub.',
+        "Impossible de lire le fichier de configuration !",
+        'Veuillez redémarrer votre système. Si le problème persiste, ouvrez une issue sur GitHub.',
       );
     }
   }
@@ -101,13 +101,12 @@ export class ConfigService {
         this.generateHttpHeaders();
         return null;
       } else {
-        return 'Saved config is invalid!';
+        return 'La configuration sauvegardée est invalide !';
       }
     } catch {
-      return 'Saving config failed!';
+      return 'La sauvegarde de la configuration a échoué !';
     }
   }
-
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
     const port = parseInt(octoprintURL.split(':')[2].replace('/api/', ''), 10);

@@ -3,7 +3,7 @@
     <div class="settings-container">
       <img src="assets/error.svg" class="settings__close" (click)="hideSettings()" />
       <div class="settings__content" #settingsMain>
-        <span class="settings__heading">settings</span>
+        <span class="settings__heading">paramètres</span>
         <ul class="settings__list">
           <li (click)="changePage(1, 0, 'forward')">
             general
@@ -18,7 +18,7 @@
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
           <li (click)="changePage(4, 0, 'forward')">
-            about
+            informations
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
         </ul>
@@ -27,11 +27,11 @@
           (click)="changePage(4, 0, 'forward')"
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
         >
-          update available!
+          mise à jour disponible !
         </span>
-        <span class="settings__save" (click)="updateConfig()">save</span>
+        <span class="settings__save" (click)="updateConfig()">sauvegarder</span>
         <span class="settings__made">
-          made with
+          produit avec le
           <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
           by /u/UnchartedBull
         </span>
@@ -43,9 +43,9 @@
           general
         </span>
         <div class="settings__scroll">
-          <span class="settings__heading-2">OctoPrint Connection</span>
+          <span class="settings__heading-2">Connexion OctoPrint</span>
           <form class="settings__form">
-            <label for="octoprintURLName" class="settings__input-label">Octoprint URL</label>
+            <label for="octoprintURLName" class="settings__input-label">URL d'OctoPrint</label>
             <span class="settings__input-prefix">http://</span>
             <input
               type="text"
@@ -67,9 +67,9 @@
             />
             <br />
           </form>
-          <span class="settings__heading-2">Printer</span>
+          <span class="settings__heading-2">Imprimante</span>
           <form class="settings__form">
-            <label for="printerName" class="settings__input-label">Name</label>
+            <label for="printerName" class="settings__input-label">Nom</label>
             <input
               type="text"
               id="printerName"
@@ -83,7 +83,7 @@
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="xySpeed" class="settings__input-label">
-                    XY-Speed
+                    Vitesse XY
                     <span>(mm/s)</span>
                   </label>
                   <input
@@ -98,7 +98,7 @@
                 </td>
                 <td>
                   <label for="zSpeed" class="settings__input-label">
-                    Z-Speed
+                    Vitesse Z
                     <span>(mm/s)</span>
                   </label>
                   <input
@@ -113,12 +113,12 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2" class="settings__sub-heading">Default Temperatures & Fan Speed</td>
+                <td colspan="2" class="settings__sub-heading">Températures & Vitesses par défaut</td>
               </tr>
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="defaultHotendTemperature" class="settings__input-label">
-                    Hotend
+                    Buse
                     <span>(°C)</span>
                   </label>
                   <input
@@ -133,7 +133,7 @@
                 </td>
                 <td>
                   <label for="defaultHeatbedTemperature" class="settings__input-label">
-                    Heatbed
+                    Lit
                     <span>(°C)</span>
                   </label>
                   <input
@@ -150,7 +150,7 @@
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="defaultFanSpeed" class="settings__input-label">
-                    Fan Speed
+                    Ventilateur
                     <span>(%)</span>
                   </label>
                   <input
@@ -178,14 +178,14 @@
                     <span class="settings__checkbox">
                       <span class="settings__checkbox-checked" *ngIf="config.filament.useM600"></span>
                     </span>
-                    <span class="settings__checkbox-descriptor">Use M600 to change Filament</span>
+                    <span class="settings__checkbox-descriptor">M600 : changer le filament</span>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="filament-feed-length" class="settings__input-label">
-                    Feed Length
+                    Longueur d'amorce
                     <span>(mm)</span>
                   </label>
                   <input
@@ -201,7 +201,7 @@
                 </td>
                 <td style="width: 25.6vw">
                   <label for="filament-purge-distance" class="settings__input-label">
-                    Purge Distance
+                    Distance de purge
                     <span>(mm)</span>
                   </label>
                   <input
@@ -219,7 +219,7 @@
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="filament-feed-speed" class="settings__input-label">
-                    Feed Speed
+                    Vitesse d'extrusion
                     <span>(mm/s)</span>
                   </label>
                   <input
@@ -235,7 +235,7 @@
                 </td>
                 <td>
                   <label for="filament-feed-speed-slow" class="settings__input-label">
-                    Feed Speed Slow
+                    Vitesse réduite d'extrusion
                     <span>(mm/s)</span>
                   </label>
                   <input
@@ -253,7 +253,7 @@
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="filament-thickness" class="settings__input-label">
-                    Thickness
+                    Épaisseur
                     <span>(mm)</span>
                   </label>
                   <input
@@ -268,7 +268,7 @@
                 </td>
                 <td>
                   <label for="filament-density" class="settings__input-label">
-                    Density
+                    Densité
                     <span>(g/cm³)</span>
                   </label>
                   <input
@@ -284,8 +284,8 @@
               </tr>
             </table>
             <div class="filament-feed-speed-info">
-              Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your
-              Feed Speed to high and your Feed Length to long.
+              Veuillez définir ces valeurs avec soin, car elles pourraient endommager des parties de votre imprimante.
+              Ne réglez pas votre vitesse d'alimentation sur rapide et votre longueur d'alimentation sur longue.
             </div>
           </form>
           <br />
@@ -305,7 +305,7 @@
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
             </span>
-            <span class="settings__checkbox-descriptor">Turn screen off while sleeping</span>
+            <span class="settings__checkbox-descriptor">Éteindre l'écran lors de la veille</span>
           </div>
           <br />
           <div
@@ -322,7 +322,7 @@
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
               ></span>
             </span>
-            <span class="settings__checkbox-descriptor">Turn on printer when exiting sleep</span>
+            <span class="settings__checkbox-descriptor">Allumer l'imprimante en sortie de veille</span>
           </div>
           <br />
           <div
@@ -332,7 +332,7 @@
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
             </span>
-            <span class="settings__checkbox-descriptor">Preview by default while printing</span>
+            <span class="settings__checkbox-descriptor">Aperçu par défaut lors de l'impression</span>
           </div>
           <br />
           <div
@@ -342,14 +342,14 @@
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.previewProgressCircle"></span>
             </span>
-            <span class="settings__checkbox-descriptor">Always use circular progress bar</span>
+            <span class="settings__checkbox-descriptor">Toujours utiliser la barre de progression circulaire</span>
           </div>
           <br />
-          <span class="settings__heading-2">Files</span>
+          <span class="settings__heading-2">Fichiers</span>
           <table class="settings__files">
             <tr>
               <td>
-                <span style="font-size: 2.9vw">sort by</span>
+                <span style="font-size: 2.9vw">trier par</span>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'name'">
                   <span class="settings__checkbox">
@@ -358,7 +358,7 @@
                       *ngIf="config.octodash.fileSorting.attribute === 'name'"
                     ></span>
                   </span>
-                  <span class="settings__checkbox-descriptor">Name</span>
+                  <span class="settings__checkbox-descriptor">Nom</span>
                 </div>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'date'">
@@ -378,31 +378,31 @@
                       *ngIf="config.octodash.fileSorting.attribute === 'size'"
                     ></span>
                   </span>
-                  <span class="settings__checkbox-descriptor">Size</span>
+                  <span class="settings__checkbox-descriptor">Taille</span>
                 </div>
                 <br />
               </td>
               <td>
-                <span style="font-size: 2.9vw">order</span>
+                <span style="font-size: 2.9vw">ordre</span>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'asc'">
                   <span class="settings__checkbox">
                     <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'asc'"></span>
                   </span>
-                  <span class="settings__checkbox-descriptor">Ascending</span>
+                  <span class="settings__checkbox-descriptor">Croissant</span>
                 </div>
                 <br />
                 <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'dsc'">
                   <span class="settings__checkbox">
                     <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'dsc'"></span>
                   </span>
-                  <span class="settings__checkbox-descriptor">Descending</span>
+                  <span class="settings__checkbox-descriptor">Décroissant</span>
                 </div>
                 <br />
               </td>
             </tr>
           </table>
-          <span class="settings__heading-2">Custom Actions</span>
+         <span class="settings__heading-2">Actions personnalisées</span>
           <div *ngFor="let number of [0, 1, 2, 3, 4, 5]">
             <span class="settings__heading-3">{{ customActionsPosition[number] }}</span>
             <label for="action-command" class="settings__input-label">GCode / Action</label>
@@ -594,13 +594,13 @@
       <div class="settings__content settings__content-inactive" #settingsCredits>
         <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
           <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
-          about
+          informations
         </span>
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
           <span class="settings__about-version">v{{ service.version }}</span>
           <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable">
-            no update available
+            le système est à jour
           </button>
           <button
             class="settings__about-update settings__about-update-available"
@@ -617,11 +617,11 @@
             http://www.apache.org/licenses/LICENSE-2.0
             <br />
             <br />
-            Unless required by applicable law or agreed to in writing, software distributed under the License is
-            distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-            See the License for the specific language governing permissions and limitations under the License.
+            À moins que la loi applicable ne l'exige ou que cela ne fasse l'objet d'un accord écrit,
+            le logiciel distribué sous la Licence est distribué "EN L'ÉTAT", SANS GARANTIES NI CONDITIONS DE QUELQUE NATURE QUE CE SOIT,
+            explicites ou implicites. Voir la Licence pour les termes spécifiques régissant les permissions et les limitations de la Licence.
           </p>
-          <span class="settings__heading-2">Icons</span>
+          <span class="settings__heading-2">Icônes</span>
           <ul class="settings__text">
             <li>"bed plate, heated, Plate, Bed icon" from shareicon.net</li>
             <li>"filament, spool, Reel icon" from shareicon.net</li>
@@ -650,9 +650,9 @@
             <li>"height" by Ralf Schmitzer from thenounproject.com</li>
             <li>"connect" by Sebastian Belalcazar Lareo from thenounproject.com</li>
           </ul>
-          <span class="settings__heading-2">Special Thanks</span>
+          <span class="settings__heading-2">Remerciements spéciaux</span>
           <p class="settings__text">
-            Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
+            Merci à /u/Slateclean pour avoir fourni les écrans tactiles, afin que le développement puisse continuer !
           </p>
           <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
         </div>

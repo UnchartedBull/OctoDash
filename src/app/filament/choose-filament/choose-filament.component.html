@@ -1,4 +1,4 @@
-<span class="filament-heading">select your new filament</span>
+<span class="filament-heading">sélectionnez un nouveau filament</span>
 <ng-container *ngIf="!filament.loading; else loadingFilament">
   <ng-container *ngIf="filament.filamentSpools; else noFilaments">
     <table class="filaments">
@@ -30,9 +30,9 @@
 </ng-container>
 
 <ng-template #noFilaments>
-  <div class="no-filaments">no filament spools found</div>
+  <div class="no-filaments">aucune bobine de filament trouvée</div>
 </ng-template>
 
 <ng-template #loadingFilament>
-  <div class="no-filaments loading-dots">loading spools</div>
+  <div class="no-filaments loading-dots">chargement des bobines</div>
 </ng-template>

@@ -1,5 +1,5 @@
 <span class="setup__text">
-  First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
+  Tout d'abord : veuillez sélectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.
 </span>
 <div *ngIf="!manualURL">
   <div class="discover-octoprint__wrapper">
@@ -13,9 +13,9 @@
       </div>
       <img src="assets/connect.svg" class="discover-octoprint__node-connect-icon" />
     </span>
-    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes">searching</span>
+    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes">recherche</span>
   </div>
-  <div class="discover-octoprint__manual" (click)="enterURLManually()">enter manually</div>
+  <div class="discover-octoprint__manual" (click)="enterURLManually()">entrer manuellement</div>
 </div>
 <div *ngIf="manualURL">
   <form class="setup__form" style="margin-top: 5vh">
@@ -41,7 +41,7 @@
       required
       style="width: 14vw"
     />
-    <p class="setup__input-prefix" style="margin-top: 8vh">Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
+    <p class="setup__input-prefix" style="margin-top: 8vh">Port 5000 pour OctoPrint, Port 80 pour OctoPi</p>
   </form>
-  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">search again</div>
+  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">rechercher de nouveau</div>
 </div>

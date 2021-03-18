@@ -41,15 +41,15 @@
   <span class="job-info__time">
     <span *ngIf="hasProperty(job, 'timeLeft')">
       <span class="job-info__time-left">{{ job.timeLeft.value }}</span
-      >{{ job.timeLeft.unit }} left,
+      >{{ job.timeLeft.unit }} restant,
     </span>
-    elapsed: {{ job.timePrinted.value }}{{ job.timePrinted.unit }}
+    temps écoulé : {{ job.timePrinted.value }}{{ job.timePrinted.unit }}
   </span>
 </div>
 <div class="job-info__file-loaded" *ngIf="job && !isPrinting() && isFileLoaded()">
   <div class="job-info__preview">
     <img src="{{ job.thumbnail ? job.thumbnail : 'assets/object.svg' }}" class="job-info__preview-image" />
-    <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
+    <span class="job-info__preview-discard" (click)="discardLoadedFile()">ignorer</span>
   </div>
   <span class="job-info__filename">{{ job.filename }}</span>
   <br />
@@ -90,15 +90,15 @@
       <span class="job-info__print-details-value">
         {{ job.estimatedPrintTime.value }}{{ job.estimatedPrintTime.unit }}
       </span>
-      <span class="job-info__print-details-finish-state">- will finish ~{{ job.estimatedEndTime }}</span>
+      <span class="job-info__print-details-finish-state">- finira à ~{{ job.estimatedEndTime }}</span>
       <br />
     </span>
     <span *ngIf="hasProperty(job, 'filamentAmount')">
       <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">{{ job.filamentAmount }}g</span>
-      <span class="job-info__print-details-finish-state">filament will be used</span>
+      <span class="job-info__print-details-finish-state">de filament seront utilisés</span>
     </span>
   </div>
 </div>
-<div class="job-info__no-job loading-dots" *ngIf="(!job && isFileLoaded()) || (!job && isPrinting())">loading info</div>
-<div class="job-info__no-job" *ngIf="!job && !isFileLoaded() && !isPrinting()">no job running ...</div>
+<div class="job-info__no-job loading-dots" *ngIf="(!job && isFileLoaded()) || (!job && isPrinting())">chargement des informations</div>
+<div class="job-info__no-job" *ngIf="!job && !isFileLoaded() && !isPrinting()">pas de tâche en cours...</div>
