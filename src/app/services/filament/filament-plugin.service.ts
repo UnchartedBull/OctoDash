@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FilamentSpool } from 'src/app/model/filament.model';
+
+import { FilamentSpool } from '../../model';
 
 @Injectable()
 export abstract class FilamentPluginService {

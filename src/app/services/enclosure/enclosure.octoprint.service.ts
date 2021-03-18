@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { PSUState, TemperatureReading } from '../../model/enclosure.model';
+import { PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
   EnclosurePluginAPI,
-} from '../../model/octoprint/plugins/enclosure.model';
-import { PSUControlCommand } from '../../model/octoprint/plugins/psucontrol.model';
-import { TPLinkCommand } from '../../model/octoprint/plugins/tp-link.model';
+  PSUControlCommand,
+  TPLinkCommand,
+} from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PSUState, TemperatureReading } from '../../model/enclosure.model';
+import { PSUState, TemperatureReading } from '../../model';
 
 @Injectable()
 export abstract class EnclosureService {

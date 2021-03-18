@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 
-import { AppToken } from '../../../model/octoprint/auth.model';
+import { AppToken } from '../../../model/octoprint';
 
 @Injectable({
   providedIn: 'root',

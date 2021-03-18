@@ -4,18 +4,17 @@ import _ from 'lodash-es';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { ConversionService } from 'src/app/conversion.service';
-import { PrinterEvent } from 'src/app/model/event.model';
-import { DisplayLayerProgressData } from 'src/app/model/octoprint/plugins/display-layer-progress.model';
 
 import { ConfigService } from '../../config/config.service';
-import { JobStatus, PrinterState, PrinterStatus, SocketAuth } from '../../model';
+import { ConversionService } from '../../conversion.service';
+import { JobStatus, PrinterEvent, PrinterState, PrinterStatus, SocketAuth } from '../../model';
 import {
+  DisplayLayerProgressData,
   OctoprintFilament,
   OctoprintPluginMessage,
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
-} from '../../model/octoprint/socket.model';
+} from '../../model/octoprint';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FilamentService } from 'src/app/services/filament/filament.service';
 
 import { FilamentSpool } from '../../model';
+import { FilamentService } from '../../services/filament/filament.service';
 
 @Component({
   selector: 'app-filament-choose',

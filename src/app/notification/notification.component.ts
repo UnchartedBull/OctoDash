@@ -1,7 +1,8 @@
 import { Component, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Notification, NotificationService } from './notification.service';
+import { Notification } from '../model';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-notification',

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
+import { Notification } from '../model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -66,11 +68,4 @@ export class NotificationService {
   public getBootGrace(): boolean {
     return this.bootGrace;
   }
-}
-
-export interface Notification {
-  heading: string;
-  text: string;
-  type: string;
-  closed: () => void;
 }

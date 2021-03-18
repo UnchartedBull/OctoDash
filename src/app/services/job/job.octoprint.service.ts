@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { JobCommand } from 'src/app/model/octoprint/job.model';
-import { NotificationService } from 'src/app/notification/notification.service';
 
 import { ConfigService } from '../../config/config.service';
+import { JobCommand } from '../../model/octoprint';
+import { NotificationService } from '../../notification/notification.service';
 import { JobService } from './job.service';
 
 @Injectable()

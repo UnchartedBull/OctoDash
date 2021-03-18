@@ -2,8 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { PrinterState, PrinterStatus } from '../model';
-import { TemperatureReading } from '../model/enclosure.model';
+import { PrinterState, PrinterStatus, TemperatureReading } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SocketService } from '../services/socket/socket.service';

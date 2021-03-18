@@ -11,10 +11,10 @@ import {
   FeedrateCommand,
   GCodeCommand,
   JogCommand,
+  OctoprintPrinterProfiles,
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
-} from '../../model/octoprint/printer-commands.model';
-import { OctoprintPrinterProfiles } from '../../model/octoprint/printer-profile.model';
+} from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
 

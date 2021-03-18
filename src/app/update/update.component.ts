@@ -2,6 +2,7 @@ import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
+import { UpdateDownloadProgress, UpdateError } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
 
@@ -97,22 +98,4 @@ export class UpdateComponent implements OnInit {
   public reboot(): void {
     this.systemService.sendCommand('reboot');
   }
-}
-
-interface UpdateError {
-  error: {
-    message: string;
-    stack?: string;
-  };
-}
-
-interface UpdateDownloadProgress {
-  percentage: number;
-  transferred: number;
-  total: number | string;
-  remaining: number;
-  eta: string;
-  runtime: string;
-  delta: number;
-  speed: number | string;
 }

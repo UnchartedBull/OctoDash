@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { FileCommand, OctoprintFile, OctoprintFolder } from 'src/app/model/octoprint/file.model';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
 import { Directory, File, Folder } from '../../model';
+import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { FilesService } from './files.service';
 

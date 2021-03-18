@@ -11,12 +11,12 @@ export interface OctoprintPrinterProfile {
   axes: OctoprintPrinterAxis;
 }
 
-export interface OctoprintPrinterAxis {
+interface OctoprintPrinterAxis {
   x: OctoprintAxisDetails;
   y: OctoprintAxisDetails;
   z: OctoprintAxisDetails;
 }
 
-export interface OctoprintAxisDetails {
+interface OctoprintAxisDetails {
   inverted: boolean;
 }

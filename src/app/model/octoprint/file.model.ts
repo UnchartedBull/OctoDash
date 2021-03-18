@@ -17,12 +17,6 @@ export interface OctoprintFile {
   thumbnail?: string;
 }
 
-export interface OctoprintDirectory {
-  files: [OctoprintFile & OctoprintFolder];
-  free: number;
-  total: number;
-}
-
 export interface OctoprintFolder {
   children: [OctoprintFile & OctoprintFolder];
   display: string;

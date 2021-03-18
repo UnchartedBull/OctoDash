@@ -15,7 +15,7 @@ export interface FilamentManagerSelectionPatch {
   };
 }
 
-export interface FilamentManagerSelection {
+interface FilamentManagerSelection {
   // eslint-disable-next-line camelcase
   client_id: string;
   spool: FilamentManagerSpool;
@@ -35,7 +35,7 @@ export interface FilamentManagerSpool {
   weight: number;
 }
 
-export interface FilamentManagerProfile {
+interface FilamentManagerProfile {
   density: number;
   diameter: number;
   id: number;

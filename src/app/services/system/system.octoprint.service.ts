@@ -3,11 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ConnectCommand } from 'src/app/model/octoprint/connection.model';
 
 import { ConfigService } from '../../config/config.service';
 import { SocketAuth } from '../../model';
-import { OctoprintLogin } from '../../model/octoprint/auth.model';
+import { ConnectCommand, OctoprintLogin } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { SystemService } from './system.service';
 

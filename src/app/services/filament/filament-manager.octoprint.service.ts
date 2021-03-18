@@ -10,7 +10,7 @@ import {
   FilamentManagerSelections,
   FilamentManagerSpool,
   FilamentManagerSpoolList,
-} from '../../model/octoprint/plugins/filament-manager.model';
+} from '../../model/octoprint';
 import { FilamentPluginService } from './filament-plugin.service';
 
 const colorRegexp = /\((.*)\)$/g;
