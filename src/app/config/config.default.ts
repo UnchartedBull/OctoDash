@@ -92,8 +92,8 @@ export const defaultConfig: Config = {
         exit: false,
       },
       {
-        icon: 'skull',
-        command: '[!KILL]',
+        icon: 'power-off',
+        command: '[!SHUTDOWN]',
         color: '#e84118',
         confirm: true,
         exit: false,

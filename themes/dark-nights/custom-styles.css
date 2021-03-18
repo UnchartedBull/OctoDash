@@ -1,0 +1,652 @@
+/* Global */
+
+:root {
+    /* If a other accent color is more to your personal liking, change it here. ;) */
+    --accent: #d32f2f;
+    --accent-transparent: #d32f2f24;
+    --background: #1e1e20;
+    --background-transparent: #1e1e2066;
+    --grey2: #242424;
+    --grey3: #2d2d2f;
+    --grey4: #3e3e3e;
+    --red: #f44336;
+    --red-shadow: #f4433666;
+    --green: #4caf50;
+    --quiteWhite-shadow: #f7f7f766;
+    --grey: #999999;
+    --black-transparent: #111111ea;
+}
+
+/* DON'T change anything below here, unless you know what are you doing. */
+
+app-root {
+    background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+.mat-ripple .mat-ripple-element {
+    background-color: var(--accent-transparent);
+}
+
+.loading-dots {
+    text-transform: capitalize;
+}
+
+.loading-dots:after {
+    content: " |" !important;
+    animation: red-pipes 1s steps(8, end) infinite
+}
+
+@keyframes red-pipes {
+    0%, 10% {
+        color: var(--black-transparent);
+        text-shadow: 0.25em 0 0 var(--black-transparent), 0.5em 0 0 var(--black-transparent);
+    }
+    20% {
+        color: var(--accent);
+        text-shadow: 0.25em 0 0 var(--black-transparent), 0.5em 0 0 var(--black-transparent);
+    }
+    30% {
+        text-shadow: 0.25em 0 0 var(--accent), 0.5em 0 0 var(--black-transparent);
+    }
+    52%, 60% {
+        text-shadow: 0.25em 0 0 var(--accent), 0.5em 0 0 var(--accent);
+    }
+    70% {
+        color: var(--black-transparent);
+        text-shadow: 0.25em 0 0 var(--accent), 0.5em 0 0 var(--accent);
+    }
+    80% {
+        text-shadow: 0.25em 0 0 var(--black-transparent), 0.5em 0 0 var(--accent);
+    }
+    90%, 100% {
+        color: var(--black-transparent);
+        text-shadow: 0.25em 0 0 var(--black-transparent), 0.5em 0 0 var(--black-transparent);
+    }
+}
+
+.top-bar .top-bar__back, .top-bar .top-bar__next {
+    text-transform: capitalize;
+}
+
+/* Dashboard */
+
+app-main-menu .main-menu {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+app-main-menu .main-menu > span{
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+app-main-menu .main-menu__heading .main-menu__heading {
+    color: var(--accent) !important;
+}
+
+app-main-menu .main-menu__settings-icon {
+    width: 5vw !important;
+    flex-basis: 5vw;
+    margin: 0 16px 0 0 !important;
+    padding: 8px !important;
+    background-color: var(--grey3);
+    border-radius: 2px;
+    overflow: initial !important;
+}
+
+app-main-menu .main-menu table {
+    width: 100% !important;
+    margin: 0 16px !important;
+}
+
+app-main-menu .main-menu__options tr {
+    display: flex;
+    justify-content: space-around;
+}
+
+app-main-menu .main-menu__options td {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 24vw !important;
+    padding: 8px !important;
+    background-color: var(--accent);
+    text-transform: capitalize;
+    border-radius: 2px;
+}
+
+app-main-menu .main-menu__options td img {
+    width: 10vw !important;
+    height: 10vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Printer Status */
+
+app-printer-status .printer-status {
+    width: auto !important;
+    height: auto !important;
+    margin: 8px !important;
+}
+
+app-printer-status .printer-status tr {
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 !important;
+}
+
+app-printer-status .printer-status td {
+    width: 26vw !important;
+    height: 20vh !important;
+    margin: 0 !important;
+    padding: 4px 16px !important;
+    background-color: var(--grey2);
+}
+
+app-printer-status .printer-status td > * {
+    margin: 0 !important;
+    padding: 0;
+}
+
+app-printer-status .printer-status td > img {
+    padding-right: 0 !important;
+}
+
+app-printer-status .printer-status td > span {
+    padding: 0 4px;
+}
+
+app-printer-status .printer-status td > span:first-of-type {
+    margin-top: 1vh !important;
+}
+
+app-printer-status .printer-status td > span:last-of-type:first-of-type {
+    margin-top: 5vh !important;
+}
+
+app-printer-status .printer-status td > .printer-status__actual-value,
+app-printer-status .printer-status td > .printer-status__actual-value .unit {
+    height: auto;
+    font-size: 8vh !important;
+}
+
+app-printer-status .printer-status td > .printer-status__set-value,
+app-printer-status .printer-status td > .printer-status__set-value .unit {
+    height: auto;
+    font-size: 5vh !important;
+}
+
+app-printer-status .quick-control__controller {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+app-printer-status .quick-control__controller-increase,
+app-printer-status .quick-control__controller-decrease {
+    background-color: var(--grey3);
+}
+
+app-printer-status .quick-control__controller-increase:first-of-type {
+    border-radius: 4px 0 0;
+}
+
+app-printer-status .quick-control__controller-increase:last-of-type {
+    border-radius: 0 4px 0 0;
+}
+
+app-printer-status .quick-control__controller-decrease:first-of-type {
+    border-radius: 0 0 0 4px;
+}
+
+app-printer-status .quick-control__controller-decrease:last-of-type {
+    border-radius: 0 0 4px;
+}
+
+app-printer-status .quick-control__controller-value {
+    background-color: var(--grey2);
+}
+
+app-printer-status .quick-control__controller-set {
+    margin-top: 4vh !important;
+    border: none !important;
+    border-radius: 2px;
+    background-color: var(--accent);
+    text-transform: capitalize;
+}
+
+/* Bottom Bar */
+
+app-bottom-bar .bottom-bar {
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+}
+
+app-bottom-bar .bottom-bar tr {
+    display: flex !important;
+    justify-content: space-between;
+    margin: 8px 16px;
+}
+
+app-bottom-bar .bottom-bar td {
+    width: auto !important;
+    color: var(--grey) !important;
+}
+
+app-bottom-bar .bottom-bar .bottom-bar__current-status {
+    text-transform: capitalize;
+}
+
+/* Job status */
+
+app-job-status round-progress svg > circle {
+    stroke: var(--grey3) !important;
+}
+
+app-job-status round-progress svg > path {
+    stroke: var(--accent) !important;
+}
+
+app-job-status .job-info__progress-bar__wrapper {
+    background-color: var(--grey3) !important;
+}
+
+app-job-status .job-info__progress-bar {
+    background-color: var(--accent) !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__preview-discard {
+    background-color: var(--grey3);
+    border: none !important;
+    border-radius: 2px !important;
+    text-transform: capitalize;
+    padding: 16px 24px !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__print-details-value {
+    margin-right: 4px !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__filename {
+    width: 76vw !important;
+    margin-bottom: 2vh;
+}
+
+app-job-status .job-info__file-loaded .job-info__print-details {
+    width: 60vw !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__actions-item-heat {
+    background-color: var(--grey3);
+    border: none !important;
+    border-radius: 2px !important;
+    margin: -3vh 5vw 0 0 !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__actions-item-heat-disabled {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 2px !important;
+    background-image: repeating-linear-gradient(-60deg, var(--grey4), var(--grey4) 0.25rem, transparent 0.25rem, transparent 0.5rem) !important;
+    opacity: .45 !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__actions-item-print {
+    background-color: var(--accent);
+    border: none !important;
+    border-radius: 2px !important;
+    margin: 4vh 5vw 0 0 !important;
+}
+
+app-job-status .job-info__file-loaded .job-info__actions-item-print,
+app-job-status .job-info__file-loaded .job-info__actions-item-heat {
+    padding: 8px 32px 0;
+}
+
+app-job-status .job-info__file-loaded .job-info__actions-item-print > img,
+app-job-status .job-info__file-loaded .job-info__actions-item-heat > img {
+    width: auto !important;
+    height: 8vh !important;
+}
+
+
+/* Layer progress */
+
+app-layer-progress > span {
+    margin: 0 !important;
+}
+
+/* Print control */
+
+app-print-control .print-control__container {
+    background-color: var(--black-transparent) !important;
+}
+
+app-print-control .print-control__action, app-print-control .print-control__confirm,
+app-print-control .print-control__pause__resume div {
+    text-transform: capitalize;
+}
+
+app-print-control .print-control__adjust__save {
+    background-color: var(--accent);
+    border: none !important;
+    border-radius: 2px !important;
+    text-transform: capitalize;
+}
+
+app-print-control .print-control__adjust__controller {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+app-print-control .print-control__adjust__controller-increase {
+    background-color: var(--grey3);
+    border-radius: 4px 4px 0 0;
+}
+
+app-print-control .print-control__adjust__controller-decrease {
+    background-color: var(--grey3);
+    border-radius: 0 0 4px 4px;
+}
+
+app-print-control .print-control__adjust__controller-value {
+    background-color: var(--grey2);
+}
+
+app-print-control .print-control__adjust-babystep {
+    margin: 2vh 8vw 0 !important;
+    padding: 2vh 2vw !important;
+    background-color: var(--grey3);
+    border-radius: 2px;
+}
+
+app-print-control .print-control__adjust-babystep__change-value {
+    background-color: var(--grey2);
+    border: none !important;
+    border-radius: 2px !important;
+}
+
+app-print-control .print-control__cancel__action {
+    padding: 4vh 6vw !important;
+    margin: 6vh 8vw !important;
+    border: none !important;
+    border-radius: 2px !important;
+    background-color: var(--green);
+    text-transform: capitalize;
+}
+
+app-print-control .print-control__cancel__action:first-of-type {
+    background-color: var(--red);
+}
+
+/* Notifications */
+
+app-notification .notification {
+    background-color: var(--grey2) !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    transition: box-shadow 0.2s ease-in-out !important;
+    box-shadow: 0 0 8px 4px var(--quiteWhite-shadow) !important;
+}
+
+app-notification .notification__border-warn {
+    border-left: 1vw solid var(--grey) !important;
+}
+
+app-notification .notification__border-error {
+    border-left: 1vw solid var(--red) !important;
+    box-shadow: 0 0 8px 4px var(--red-shadow) !important;
+}
+
+/* Files */
+
+app-files .breadcrumbs__item:before {
+    padding: 0 0.5vw !important;
+}
+
+app-files .files:before {
+    background: linear-gradient(var(--background), transparent 4%, transparent 96%, var(--background)) !important;
+}
+
+app-files .la-pacman div:last-of-type {
+    background-color: var(--accent) !important;
+}
+
+app-files ngx-spinner > div {
+    background-color: transparent !important;
+}
+
+app-files .files__error {
+    color: var(--red) !important;
+}
+
+app-files .files__object {
+    background-color: var(--grey3) !important;
+}
+
+app-files .sorting-wrapper, app-files .file__wrapper {
+    border-radius: 0 !important;
+    padding: 16px !important;
+    background-color: var(--grey2) !important;
+}
+
+app-files .file__wrapper, app-files .file__wrapper.file__loading {
+    height: 80vh !important;
+    width: 80vw !important;
+    left: 8.25vw !important;
+}
+
+app-files .sorting-wrapper .sorting-close,
+app-files .file__wrapper .file__close {
+    padding: 4px !important;
+}
+
+app-files .sorting-wrapper .sorting-heading {
+    text-transform: capitalize;
+}
+
+app-files .sorting-wrapper .sorting__checkbox-checked {
+    background-color: var(--accent) !important;
+}
+
+app-files .file__wrapper .file__name {
+    width: 75vw !important;
+}
+
+app-files .file__wrapper .file__actions {
+    margin: 6vh 0 0 !important;
+    width: 100%;
+    overflow: initial;
+}
+
+app-files .file__wrapper .file__actions tr {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    overflow: initial;
+}
+
+app-files .file__wrapper .file__actions td {
+    width: auto !important;
+    display: block;
+    overflow: initial;
+}
+
+app-files .file__wrapper .file__actions td > span {
+    position: initial !important;
+    padding: 8px 32px 0 !important;
+    margin: 0 !important;
+    border-radius: 2px;
+    background-color: var(--grey3) !important;
+}
+
+app-files .file__wrapper .file__actions td > span img {
+    height: 10vh !important;
+    vertical-align: sub;
+}
+
+app-files .file__wrapper .file__actions td:nth-of-type(2) > span {
+    background-color: var(--accent) !important;
+}
+
+/* Settings */
+
+app-settings .settings-container {
+    /*left: 8.25vw !important;*/
+    border-radius: 0 !important;
+    background-color: var(--grey2) !important;
+    padding: 2vw;
+    top: 6vh !important;
+}
+
+app-settings .settings__heading, app-settings .settings__list > li {
+    text-transform: capitalize;
+}
+
+app-settings .settings__update-available {
+    color: var(--accent) !important;
+    box-shadow: 0 0 8px 4px var(--accent-transparent) !important;
+}
+
+app-settings .settings__save {
+    margin: 2vh 18vw !important;
+    padding: 8px 32px;
+    background-color: var(--accent);
+    border-radius: 2px;
+    text-transform: capitalize;
+}
+
+app-settings .settings__scroll {
+    width: 100%;
+}
+
+app-settings .settings__checkbox-checked {
+    background-color: var(--accent) !important;
+}
+
+app-settings .settings__list fa-icon {
+    color: var(--accent);
+    opacity: inherit;
+}
+
+app-settings .settings__input {
+    border: none !important;
+    border-bottom: 2px solid var(--accent) !important;
+    border-radius: 0 !important;
+}
+
+app-settings .settings__input:disabled {
+    color: var(--grey);
+    border-bottom: 2px solid var(--grey) !important;
+    opacity: 0.6 !important;
+}
+
+/* Control panel */
+
+app-control .control .control__heading {
+    opacity: 0.8;
+}
+
+app-control .control__distance tr > td {
+    border: none !important;
+    background-color: var(--grey3) !important;
+}
+
+app-control .control__distance tr > td:first-of-type {
+    border-radius: 4px 0 0 4px !important;
+}
+
+app-control .control__distance tr > td:last-of-type {
+    border-radius: 0 4px 4px 0 !important;
+}
+
+app-control .control__distance .control__distance-field-active {
+    background-color: var(--accent) !important;
+}
+
+app-control .help .help__card {
+    background-color: var(--grey2) !important;
+}
+
+/* Filament change */
+
+app-filament .filament__progress-bar-wrapper {
+    background-color: var(--grey3) !important;
+}
+
+app-filament .filament__progress-bar-wrapper .filament__progress-bar {
+    background-color: var(--accent) !important;
+}
+
+app-filament .filament-heading {
+    text-transform: capitalize;
+}
+
+app-filament .filaments:before {
+    background: linear-gradient(var(--background), transparent 4%, transparent 96%, var(--background)) !important;
+}
+
+app-filament .filaments tr {
+    background-color: var(--grey3) !important;
+}
+
+app-filament .heating__controller {
+    border: none !important;
+    border-radius: 4px !important;
+}
+
+app-filament .heating__controller .heating__controller-control {
+    background-color: var(--grey3);
+    border-right: none !important;
+}
+
+app-filament .heating__controller .heating__controller-value {
+    background-color: var(--grey2);
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+app-filament .heating__start-wrapper {
+    margin-top: 0 !important;
+}
+
+app-filament .heating__start-heating, app-filament .filament__done,
+app-filament .move-filament__cancel, app-filament .purge-filament__more,
+app-filament .purge-filament__done {
+    padding: 8px 32px !important;
+    background-color: var(--grey3) !important;
+    text-transform: capitalize;
+    border-radius: 2px;
+}
+
+app-filament .heating__start-heating, app-filament .filament__done {
+    background-color: var(--accent) !important;
+}
+
+app-filament .move-filament__cancel {
+    background-color: var(--red) !important;
+}
+
+app-filament .purge-filament__done {
+    background-color: var(--green) !important;
+}
+
+/* Custom actions */
+
+app-custom-actions .confirm {
+    border-radius: 0 !important;
+    background-color: var(--grey2) !important;
+    padding: 2vw;
+}
+
+app-custom-actions .confirm .confirm__gcode {
+    margin-top: 8px;
+}
