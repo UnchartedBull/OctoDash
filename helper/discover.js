@@ -9,7 +9,7 @@ let browser;
 let nodes = [];
 
 function startDiscovery(window) {
-  exec('hostname', (err, stdout, _) => {
+  exec('hostname', (err, stdout) => {
     if (err) {
       discoverNodes(window, null);
     } else {
