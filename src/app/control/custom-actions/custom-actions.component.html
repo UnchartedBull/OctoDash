@@ -25,14 +25,14 @@
 
 <div class="confirm__wrapper" *ngIf="actionToConfirm">
   <div class="confirm">
-    <h1>Are you sure?</h1>
-    <p class="confirm__sub-heading">Do you want to execute the following GCode?</p>
+    <h1>are you sure?</h1>
+    <p class="confirm__sub-heading">do you want to execute the following command?</p>
     <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
     <img
       class="confirm__icon"
-      src="assets/confirm.svg"
+      src="assets/confirm-small.svg"
       (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)"
     />
-    <img class="confirm__icon" src="assets/cancel.svg" (click)="hideConfirm()" />
+    <img class="confirm__icon" src="assets/cancel-small.svg" (click)="hideConfirm()" />
   </div>
 </div>
