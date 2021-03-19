@@ -36,7 +36,6 @@ export class JobStatusComponent implements OnInit, OnDestroy {
         if (jobStatus.file !== this.jobStatus?.file) {
           this.fileService.getThumbnail(jobStatus.fullPath).subscribe(thumbnail => {
             this.thumbnail = thumbnail;
-            console.log(this.thumbnail);
           });
         }
         this.jobStatus = jobStatus;

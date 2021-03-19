@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
+import { URLSplit } from '../../config.model';
 import { ConfigService } from '../../config.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
   public manualURL = false;
   public octoprintNodes: OctoprintNodes;
+  public urlSplit: URLSplit;
 
   constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
 
@@ -50,8 +52,21 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
   public setOctoprintInstance(node: OctoprintNodes): void {
     const urlSplit = this.configService.splitOctoprintURL(node.url);
+    if (node.local) {
+      this.urlSplit = urlSplit;
+    } else {
+      this.emitOctoprintInstance(urlSplit);
+    }
+  }
+
+  public emitLocalOctoprintInstance(urlSplit: URLSplit): void {
+    this.emitOctoprintInstance({ host: 'localhost', port: urlSplit.port } as URLSplit);
+  }
+
+  public emitOctoprintInstance(urlSplit: URLSplit): void {
     this.octoprintHostChange.emit(urlSplit.host);
     this.octoprintPortChange.emit(urlSplit.port);
+    this.urlSplit = undefined;
     this.increasePage.emit();
   }
 
@@ -71,5 +86,6 @@ interface OctoprintNodes {
   name: string;
   version: string;
   url: string;
+  local: boolean;
   disable: boolean;
 }

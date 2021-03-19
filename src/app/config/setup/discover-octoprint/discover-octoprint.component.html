@@ -43,3 +43,14 @@
   </form>
   <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">search again</div>
 </div>
+
+<div class="confirm__wrapper" *ngIf="urlSplit">
+  <div class="confirm">
+    <h1>connect to localhost?</h1>
+    <p class="confirm__sub-heading">
+      are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
+    </p>
+    <img class="confirm__icon" src="assets/confirm-small.svg" (click)="emitLocalOctoprintInstance(urlSplit)" />
+    <img class="confirm__icon" src="assets/cancel-small.svg" (click)="emitOctoprintInstance(urlSplit)" />
+  </div>
+</div>
