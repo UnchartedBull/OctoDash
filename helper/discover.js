@@ -2,12 +2,23 @@
 /* eslint-disable import/no-commonjs */
 
 const compareVersions = require('compare-versions');
+const exec = require('child_process').exec;
 
 const minimumVersion = '1.3.5';
 let browser;
 let nodes = [];
 
-function discoverNodes(window) {
+function startDiscovery(window) {
+  exec('hostname', (err, stdout) => {
+    if (err) {
+      discoverNodes(window, null);
+    } else {
+      discoverNodes(window, `${stdout}.local`);
+    }
+  });
+}
+
+function discoverNodes(window, localDomain) {
   const bonjour = require('bonjour')();
   nodes = [];
   browser = bonjour.find({ type: 'octoprint' });
@@ -17,6 +28,7 @@ function discoverNodes(window) {
       name: service.name,
       version: service.txt.version,
       url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
+      local: service.host === localDomain,
       disable: compareVersions(minimumVersion, service.txt.version) === -1,
     });
     sendNodes(window);
@@ -38,4 +50,4 @@ function sendNodes(window) {
   window.webContents.send('discoveredNodes', nodes);
 }
 
-module.exports = { discoverNodes, stopDiscovery };
+module.exports = { startDiscovery, stopDiscovery };
