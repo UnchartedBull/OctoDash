@@ -185,6 +185,18 @@ export class ConfigService {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
 
+  public useTasmota(): boolean {
+    return this.config.plugins.tasmota.enabled;
+  }
+
+  public getTasmotaIP(): string {
+    return this.config.plugins.tasmota.ip;
+  }
+
+  public getTasmotaIdx(): number {
+    return this.config.plugins.tasmota.idx;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

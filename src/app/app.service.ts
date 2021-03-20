@@ -31,6 +31,8 @@ export class AppService {
       ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
       ".plugins should have required property 'tpLinkSmartPlug'": config =>
         (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
+      ".plugins should have required property 'tasmota'": config =>
+        (config.plugins.tasmota = { enabled: true, ip: '127.0.0.1', idx: null }),
       ".octodash should have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
       ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {

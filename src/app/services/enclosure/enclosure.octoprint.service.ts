@@ -11,6 +11,7 @@ import {
   EnclosurePluginAPI,
   PSUControlCommand,
   TPLinkCommand,
+  TasmotaCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
@@ -79,6 +80,8 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStatePSUControl(state);
     } else if (this.configService.useTpLinkSmartPlug()) {
       this.setPSUStateTPLink(state);
+    } else if (this.configService.useTasmota()) {
+      this.setPSUStateTasmota(state);
     } else {
       this.notificationService.setWarning("Can't change PSU State!", 'No provider for PSU Control is configured.');
     }
@@ -103,6 +106,19 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTasmota(state: PSUState) {
+    const tasmotaPayload: TasmotaCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      ip: this.configService.getTasmotaIP(),
+      idx: this.configService.getTasmotaIdx(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
       .subscribe();
   }

@@ -53,6 +53,11 @@ export const defaultConfig: Config = {
       enabled: false,
       smartPlugIP: '127.0.0.1',
     },
+    tasmota: {
+      enabled: false,
+      ip: '127.0.0.1',
+      idx: null,
+    },
   },
   octodash: {
     customActions: [
