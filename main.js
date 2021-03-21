@@ -23,36 +23,34 @@ let dev = false;
 
 function parseArgs(mainScreen, args) {
   // ordered so that --serve and --big can be used single or combined
-  let screenSize = {
+  let c = {
     width: mainScreen.size.width,
     height: mainScreen.size.height,
+    x: 0,
+    y: 0,
   };
   if (args.includes('--serve')) {
     dev = true;
-    screenSize = {
-      width: 1200,
-      height: 450,
-    };
+    c.width = 1200;
+    c.height = 450;
   }
   if (args.includes('--big')) {
-    screenSize = {
-      width: 1500,
-      height: 600,
-    };
+    c.width = 1500;
+    c.height = 600;
   }
   if (args.includes('--cosmos')) {
-    screenSize = {
-      width: 800,
-      height: 480 - 26,
-    };
+    const panelHeight = 26;
+    c.width = 800;
+    c.height = 480 - panelHeight;
+    c.y = panelHeight;
   }
-  return screenSize;
+  return c;
 }
 
 function createWindow() {
 
   const mainScreen = screen.getPrimaryDisplay();
-  const screenSize = parseArgs(mainScreen, process.argv.slice(1));
+  const coordinates = parseArgs(mainScreen, process.argv.slice(1));
 
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -67,8 +65,7 @@ function createWindow() {
   }
 
   window = new BrowserWindow({
-    width: screenSize.width,
-    height: screenSize.height,
+    ...coordinates,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
