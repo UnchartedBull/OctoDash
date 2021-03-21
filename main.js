@@ -10,7 +10,8 @@ const Store = require('electron-store');
 const activateListeners = require('./helper/listener');
 const createProtocol = require('./helper/protocol');
 
-protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
+const scheme = 'app';
+protocol.registerSchemesAsPrivileged([{ scheme, privileges: { standard: true } }]);
 createProtocol(scheme, path.join(__dirname, 'dist'));
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
