@@ -27,20 +27,20 @@ function parseArgs(mainScreen, args) {
     width: mainScreen.size.width,
     height: mainScreen.size.height,
   };
-  if ('--serve' in args) {
+  if (args.includes('--serve')) {
     dev = true;
     screenSize = {
       width: 1200,
       height: 450,
     };
   }
-  if ('--big' in args) {
+  if (args.includes('--big')) {
     screenSize = {
       width: 1500,
       height: 600,
     };
   }
-  if ('--cosmos' in args) {
+  if (args.includes('--cosmos')) {
     screenSize = {
       width: 640,
       height: 480,
