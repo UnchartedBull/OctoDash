@@ -42,8 +42,8 @@ function parseArgs(mainScreen, args) {
   }
   if (args.includes('--cosmos')) {
     screenSize = {
-      width: 640,
-      height: 480,
+      width: 800,
+      height: 480 - 26,
     };
   }
   return screenSize;
