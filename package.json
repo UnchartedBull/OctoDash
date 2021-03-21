@@ -55,6 +55,7 @@
     "ng": "ng",
     "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
     "start:big": "npm-run-all -p ng:serve electron:serve:big",
+    "start:cosmos": "npm-run-all -p ng:serve electron:serve:cosmos",
     "build": "npm run ng:build && electron .",
     "test": "",
     "lint": "eslint ./src/ -c .eslintrc.js --ext .ts",
@@ -63,11 +64,14 @@
     "electron:dev": "electron . --serve --big",
     "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
     "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
+    "electron:serve:cosmos": "wait-on http-get://localhost:4200/ && electron . --serve --cosmos",
     "electron:pack": "electron-builder build -l",
     "pack": "npm run ng:build && npm run electron:pack",
     "pack:mac": "npm run ng:build && electron-builder build -m",
+    "pack:cosmos": "npm run ng:build:cosmos && npm run electron:pack",
     "ng:serve": "ng serve",
-    "ng:build": "ng build --prod"
+    "ng:build": "ng build --prod",
+    "ng:build:cosmos": "ng build --prod --cosmos"
   },
   "private": true,
   "dependencies": {
