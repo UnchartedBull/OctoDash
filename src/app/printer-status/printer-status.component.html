@@ -30,7 +30,7 @@
         /{{ printerStatus.heatbed.set }}<span class="unit">°C</span>
       </span>
     </td>
-    <td
+<!--    <td
       class="printer-status__value printer-status__value-3 printer-status__no-set-value"
       (click)="showQuickControlFan()"
       matRipple
@@ -41,6 +41,7 @@
         {{ printerStatus.fan }}<span class="printer-status__unit">%</span>
       </span>
     </td>
+    -->
   </tr>
 </table>
 <div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl">
@@ -105,7 +106,7 @@
     >
       {{ this.heatbedTarget }}<span class="quick-control__controller-value-unit">°C</span>
     </div>
-    <div
+<!--    <div
       class="quick-control__controller-value"
       colspan="2"
       *ngIf="view === QuickControlView.FAN"
@@ -116,6 +117,7 @@
       {{ this.fanTarget }}
       <span class="quick-control__controller-value-unit">%</span>
     </div>
+    -->
     <div class="quick-control__controller-row">
       <div
         class="quick-control__controller-decrease"
