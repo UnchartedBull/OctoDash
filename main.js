@@ -7,15 +7,11 @@ const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('elec
 const path = require('path');
 const Store = require('electron-store');
 
-const args = process.argv.slice(1);
-const big = args.some(val => val === '--big');
-const dev = args.some(val => val === '--serve');
-const scheme = 'app';
-
 const activateListeners = require('./helper/listener');
 const createProtocol = require('./helper/protocol');
 
-protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
+const scheme = 'app';
+protocol.registerSchemesAsPrivileged([{ scheme, privileges: { standard: true } }]);
 createProtocol(scheme, path.join(__dirname, 'dist'));
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
@@ -23,8 +19,39 @@ app.commandLine.appendSwitch('touch-events', 'enabled');
 const store = new Store();
 
 let window;
+let dev = false;
+
+function parseArgs(mainScreen, args) {
+  // ordered so that --serve and --big can be used single or combined
+  let c = {
+    width: mainScreen.size.width,
+    height: mainScreen.size.height,
+    x: 0,
+    y: 0,
+  };
+  if (args.includes('--serve')) {
+    dev = true;
+    c.width = 1200;
+    c.height = 450;
+  }
+  if (args.includes('--big')) {
+    c.width = 1500;
+    c.height = 600;
+  }
+  if (args.includes('--cosmos')) {
+    const panelHeight = 26;
+    c.width = 800;
+    c.height = 480 - panelHeight;
+    c.y = panelHeight;
+  }
+  return c;
+}
 
 function createWindow() {
+
+  const mainScreen = screen.getPrimaryDisplay();
+  const coordinates = parseArgs(mainScreen, process.argv.slice(1));
+
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
       callback({
@@ -37,11 +64,8 @@ function createWindow() {
     });
   }
 
-  const mainScreen = screen.getPrimaryDisplay();
-
   window = new BrowserWindow({
-    width: dev ? (big ? 1500 : 1200) : mainScreen.size.width,
-    height: dev ? (big ? 600 : 450) : mainScreen.size.height,
+    ...coordinates,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
