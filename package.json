@@ -68,10 +68,8 @@
     "electron:pack": "electron-builder build -l",
     "pack": "npm run ng:build && npm run electron:pack",
     "pack:mac": "npm run ng:build && electron-builder build -m",
-    "pack:cosmos": "npm run ng:build:cosmos && npm run electron:pack",
     "ng:serve": "ng serve",
-    "ng:build": "ng build --prod",
-    "ng:build:cosmos": "ng build --prod --cosmos"
+    "ng:build": "ng build --prod"
   },
   "private": true,
   "dependencies": {
