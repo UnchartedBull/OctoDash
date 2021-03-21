@@ -703,7 +703,7 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' )
+  plugins=( 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
   echo "Installing Plugins..."
 
@@ -727,6 +727,15 @@ if [ $DIRECTORY != "-" ]; then
   fi;
   if [[ " ${selected_plugins[@]} " =~ "PrusaSlicer Thumbnails" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "TPLinkSmartplug" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Tasmota" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-Tasmota/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "TasmotaMQTT" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TasmotaMQTT/archive/master.zip"
   fi;
 fi;
 
