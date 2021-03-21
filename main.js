@@ -7,11 +7,6 @@ const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('elec
 const path = require('path');
 const Store = require('electron-store');
 
-const args = process.argv.slice(1);
-const big = args.some(val => val === '--big');
-const dev = args.some(val => val === '--serve');
-const scheme = 'app';
-
 const activateListeners = require('./helper/listener');
 const createProtocol = require('./helper/protocol');
 
@@ -23,8 +18,41 @@ app.commandLine.appendSwitch('touch-events', 'enabled');
 const store = new Store();
 
 let window;
+let dev = false;
+
+function parseArgs(mainScreen, args) {
+  // ordered so that --serve and --big can be used single or combined
+  let screenSize = {
+    width: mainScreen.size.width,
+    height: mainScreen.size.height,
+  };
+  if ('--serve' in args) {
+    dev = true;
+    screenSize = {
+      width: 1200,
+      height: 450,
+    };
+  }
+  if ('--big' in args) {
+    screenSize = {
+      width: 1500,
+      height: 600,
+    };
+  }
+  if ('--cosmos' in args) {
+    screenSize = {
+      width: 640,
+      height: 480,
+    };
+  }
+  return screenSize;
+}
 
 function createWindow() {
+
+  const mainScreen = screen.getPrimaryDisplay();
+  const screenSize = parseArgs(mainScreen, process.argv.slice(1));
+
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
       callback({
@@ -37,11 +65,9 @@ function createWindow() {
     });
   }
 
-  const mainScreen = screen.getPrimaryDisplay();
-
   window = new BrowserWindow({
-    width: dev ? (big ? 1500 : 1200) : mainScreen.size.width,
-    height: dev ? (big ? 600 : 450) : mainScreen.size.height,
+    width: screenSize.width,
+    height: screenSize.height,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
