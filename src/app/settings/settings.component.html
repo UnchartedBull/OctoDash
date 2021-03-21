@@ -312,7 +312,7 @@
             class="settings__checkbox-container"
             [ngClass]="{
               'settings__checkbox-container-disabled': !(
-                config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled
+                config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled || config.plugins.tasmotaMqtt.enabled
               )
             }"
             (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep"
@@ -322,7 +322,7 @@
                 class="settings__checkbox-checked"
                 [ngClass]="{
                   'settings__checkbox-checked-disabled': !(
-                    config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled
+                    config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled || config.plugins.tasmotaMqtt.enabled
                   )
                 }"
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
@@ -616,6 +616,7 @@
             required
             [disabled]="!config.plugins.tasmota.enabled"
           />
+          <label for="tasmota-idx" class="settings__input-label">Index</label>
           <input
             type="number"
             id="tasmota-idx"
@@ -624,6 +625,37 @@
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.idx"
             [disabled]="!config.plugins.tasmota.enabled"
+          />
+          <span class="settings__heading-2">Tasmota MQTT</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.tasmotaMqtt.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">enabled</span>
+          </div>
+          <label for="tasmotaMqtt-topic" class="settings__input-label">Topic</label>
+          <input
+            type="text"
+            id="tasmotaMqtt-topic"
+            class="settings__input"
+            name="tasmotaMqtt-topic"
+            style="width: 44.94vw"
+            [(ngModel)]="config.plugins.tasmotaMqtt.topic"
+            required
+            [disabled]="!config.plugins.tasmotaMqtt.enabled"
+          />
+          <label for="tasmotaMqtt-relayN" class="settings__input-label">RelayN</label>
+          <input
+            type="number"
+            id="tasmotaMqtt-relayN"
+            class="settings__input"
+            name="tasmotaMqtt-relayN"
+            style="width: 44.94vw"
+            [(ngModel)]="config.plugins.tasmotaMqtt.relayN"
+            [disabled]="!config.plugins.tasmotaMqtt.enabled"
           />
         </div>
       </div>
