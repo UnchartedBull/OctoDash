@@ -21,36 +21,52 @@ const store = new Store();
 let window;
 let dev = false;
 
-function parseArgs(mainScreen, args) {
-  // ordered so that --serve and --big can be used single or combined
-  let c = {
+function configureWindow(mainScreen, args) {
+
+  let properties = {
+    frame: false,
+    fullscreen: true,
     width: mainScreen.size.width,
     height: mainScreen.size.height,
     x: 0,
     y: 0,
+    backgroundColor: '#353b48',
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      worldSafeExecuteJavaScript: true,
+      contextIsolation: false,
+    },
+    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   };
+
+  // ordered so that --serve and --big can be used single or combined
   if (args.includes('--serve')) {
     dev = true;
-    c.width = 1200;
-    c.height = 450;
+    properties.frame = true;
+    properties.fullscreen = false;
+    properties.width = 1200;
+    properties.height = 450;
   }
   if (args.includes('--big')) {
-    c.width = 1500;
-    c.height = 600;
+    properties.width = 1500;
+    properties.height = 600;
   }
   if (args.includes('--cosmos')) {
     const panelHeight = 26;
-    c.width = 800;
-    c.height = 480 - panelHeight;
-    c.y = panelHeight;
+    properties.fullscreen = false;
+    properties.width = 800;
+    properties.height = 480 - panelHeight;
+    properties.y = panelHeight;
   }
-  return c;
+  return properties;
 }
 
 function createWindow() {
 
   const mainScreen = screen.getPrimaryDisplay();
-  const coordinates = parseArgs(mainScreen, process.argv.slice(1));
+  // modifies global variable dev
+  const properties = configureWindow(mainScreen, process.argv.slice(1));
 
   if (!dev) {
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -64,25 +80,10 @@ function createWindow() {
     });
   }
 
-  window = new BrowserWindow({
-    ...coordinates,
-    frame: dev,
-    backgroundColor: '#353b48',
-    webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-      worldSafeExecuteJavaScript: true,
-      contextIsolation: false,
-    },
-    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
-  });
-
+  window = new BrowserWindow(properties);
+  window.loadURL(dev ? 'http://localhost:4200' : 'app://.');
   if (dev) {
-    window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
-  } else {
-    window.loadURL('app://.');
-    window.setFullScreen(true);
   }
 
   activateListeners(ipcMain, window, app, dev);
