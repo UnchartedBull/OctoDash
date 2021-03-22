@@ -91,7 +91,7 @@
     "electron-store": "^7.0.2",
     "got": "^11.8.2",
     "lodash-es": "^4.17.21",
-    "lottie-web": "^5.7.6",
+    "lottie-web": "^5.7.7",
     "ngx-electron": "^2.2.0",
     "ngx-lottie": "^6.4.0",
     "ngx-spinner": "^10.0.1",
