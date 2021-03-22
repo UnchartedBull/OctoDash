@@ -38,7 +38,7 @@ export class OctoPrintSocketService implements SocketService {
     private http: HttpClient,
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
-    this.jobStatusSubject = new ReplaySubject<JobStatus>();
+    this.jobStatusSubject = new Subject<JobStatus>();
     this.eventSubject = new ReplaySubject<PrinterEvent>();
   }
 
