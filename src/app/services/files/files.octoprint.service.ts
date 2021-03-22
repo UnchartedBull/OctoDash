@@ -56,7 +56,7 @@ export class FilesOctoprintService implements FilesService {
                 origin: fileOrFolder.origin,
                 path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
                 name: fileOrFolder.name,
-                date: this.conversionService.convertDateToString(new Date(fileOrFolder.date * 1000)),
+                date: this.conversionService.convertDateToString(new Date(fileOrFolder.date)),
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
@@ -84,18 +84,21 @@ export class FilesOctoprintService implements FilesService {
             );
 
             if (localCount > 0 && sdCardCount > 0) {
-              directory.folders.push({
-                origin: 'local',
-                path: '/local',
-                name: 'local',
-                size: `${localCount} files`,
-              } as Folder);
-              directory.folders.push({
-                origin: 'sdcard',
-                path: '/sdcard',
-                name: 'sdcard',
-                size: `${localCount} files`,
-              } as Folder);
+              directory.folders = [
+                {
+                  origin: 'local',
+                  path: '/local',
+                  name: 'local',
+                  size: undefined,
+                },
+                {
+                  origin: 'sdcard',
+                  path: '/sdcard',
+                  name: 'sdcard',
+                  size: undefined,
+                },
+              ];
+              directory.files = [];
             }
           }
 
