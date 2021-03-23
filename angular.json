@@ -26,6 +26,8 @@
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
+            "localize": true,
+            "i18nMissingTranslation": "warning",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
