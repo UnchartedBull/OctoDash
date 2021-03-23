@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnimationOptions } from 'ngx-lottie';
 
 import { AppService } from './app.service';
 import { ConfigService } from './config/config.service';
 import { SocketService } from './services/socket/socket.service';
 
-// TODO: Upgrading settings killed OctoDash
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +15,15 @@ export class AppComponent implements OnInit {
   public activated = false;
   public status = 'initializing';
   public showConnectionHint = false;
+
+  public loadingOptionsCache: AnimationOptions = {
+    path: '/assets/loading.json',
+  };
+  public checkmarkOptionsCache: AnimationOptions = {
+    path: '/assets/checkmark.json',
+  };
+  public loadingAnimationCached = false;
+  public checkmarkAnimationCached = false;
 
   public constructor(
     private service: AppService,
@@ -72,5 +81,13 @@ export class AppComponent implements OnInit {
         }
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
+  }
+
+  public loadingAnimationCacheDone(): void {
+    this.loadingAnimationCached = true;
+  }
+
+  public checkmarkAnimationCacheDone(): void {
+    this.checkmarkAnimationCached = true;
   }
 }
