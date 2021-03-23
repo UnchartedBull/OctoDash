@@ -1,6 +1,6 @@
-<span class="setup__text"> Now tell me some facts about your setup so I can personalize OctoDash for you. </span>
+<span class="setup__text" i18n> Now tell me some facts about your setup so I can personalize OctoDash for you. </span>
 <form class="setup__form">
-  <label for="printerName" class="setup__input-label">Printer Name:</label>
+  <label for="printerName" class="setup__input-label" i18n>Printer Name:</label>
   <input
     type="text"
     id="printerName"
@@ -15,10 +15,12 @@
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="useTouchscreen"></span>
     </span>
-    Use Touchscreen
+    <span i18n>
+      Use Touchscreen
+    </span>
   </div>
 </form>
-<div class="setup__explanation">
+<div class="setup__explanation" i18n>
   You can change all settings (and even more) in the settings menu anytime. There is also a description of each
   attribute available in the GitHub Wiki.
 </div>

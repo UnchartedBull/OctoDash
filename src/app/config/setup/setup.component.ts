@@ -21,7 +21,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public octoprintConnection = false;
   public configValid = false;
-  public configSaved = 'saving config';
+  public configSaved = $localize`saving config`;
   public configErrors: string[];
 
   public manualURL = false;
@@ -79,10 +79,10 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
       (error: HttpErrorResponse): void => {
         this.octoprintConnection = false;
         if (error.message.includes('403 FORBIDDEN')) {
-          this.configErrors.push("403 Forbidden - This most likely means that your API Key isn't working.");
+          this.configErrors.push($localize`403 Forbidden - This most likely means that your API Key isn't working.`);
         } else if (error.message.includes('0 Unknown Error')) {
           this.configErrors.push(
-            "0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.",
+            $localize`0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
           );
         } else {
           this.configErrors.push(error.message);

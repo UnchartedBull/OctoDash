@@ -1,4 +1,4 @@
-<span class="setup__text">
+<span class="setup__text" i18n>
   First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
 </span>
 <div *ngIf="!manualURL">
@@ -7,13 +7,13 @@
       <div class="discover-octoprint__node-name">
         {{ node.name }}
         <br />
-        <span class="discover-octoprint__node-details"> Version {{ node.version }}, URL: {{ node.url }} </span>
+        <span class="discover-octoprint__node-details" i18n> Version {{ node.version }}, URL: {{ node.url }} </span>
       </div>
       <img src="assets/connect.svg" class="discover-octoprint__node-connect-icon" />
     </span>
-    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes">searching</span>
+    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes" i18n>searching</span>
   </div>
-  <div class="discover-octoprint__manual" (click)="enterURLManually()">enter manually</div>
+  <div class="discover-octoprint__manual" (click)="enterURLManually()" i18n>enter manually</div>
 </div>
 <div *ngIf="manualURL">
   <form class="setup__form" style="margin-top: 5vh">
@@ -39,15 +39,15 @@
       required
       style="width: 14vw"
     />
-    <p class="setup__input-prefix" style="margin-top: 8vh">Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
+    <p class="setup__input-prefix" style="margin-top: 8vh" i18n>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
   </form>
-  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh">search again</div>
+  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n>search again</div>
 </div>
 
 <div class="confirm__wrapper" *ngIf="urlSplit">
   <div class="confirm">
-    <h1>connect to localhost?</h1>
-    <p class="confirm__sub-heading">
+    <h1 i18n>connect to localhost?</h1>
+    <p class="confirm__sub-heading" i18n>
       are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
     </p>
     <img class="confirm__icon" src="assets/confirm-small.svg" (click)="emitLocalOctoprintInstance(urlSplit)" />

@@ -19,7 +19,7 @@ export class ControlComponent {
     this.printerService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       err => {
-        this.notificationService.setError("Can't retrieve printer profile!", err.message);
+        this.notificationService.setError($localize`Can't retrieve printer profile!`, err.message);
       },
     );
   }

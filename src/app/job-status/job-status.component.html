@@ -40,9 +40,12 @@
 
   <span class="job-info__filename">{{ jobStatus.file }}</span>
   <br />
-  <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')"
-    >{{ jobStatus.filamentAmount }}g Filament</span
-  >
+  <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')">
+    {{ jobStatus.filamentAmount }}
+  </span>
+  <span i18n>
+    g Filament
+  </span>
   <br />
 
   <span class="job-info__time">
@@ -50,7 +53,8 @@
       <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span
       >{{ jobStatus.timeLeft.unit }} left,
     </span>
-    elapsed: {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
+    <span i18n>elapsed:</span>
+    {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
   </span>
 </div>
 
@@ -91,22 +95,24 @@
       <span class="job-info__print-details-value">
         {{ jobStatus.estimatedPrintTime.value }}{{ jobStatus.estimatedPrintTime.unit }}
       </span>
-      <span class="job-info__print-details-finish-state">- will finish ~{{ jobStatus.estimatedEndTime }}</span>
+      <span class="job-info__print-details-finish-state" i18n>- will finish ~</span>
+      <span>{{ jobStatus.estimatedEndTime }}</span>
       <br />
     </span>
 
     <span *ngIf="hasProperty(jobStatus, 'filamentAmount')">
       <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
-      <span class="job-info__print-details-value">{{ jobStatus.filamentAmount }}g</span>
-      <span class="job-info__print-details-finish-state">filament will be used</span>
+      <span class="job-info__print-details-value">{{ jobStatus.filamentAmount }}</span>
+      <span i18n>g</span>
+      <span class="job-info__print-details-finish-state" i18n>filament will be used</span>
     </span>
   </div>
 </div>
 
-<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())">
+<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())" i18n>
   loading info
 </div>
 
-<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()">no job running ...</div>
+<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()" i18n>no job running ...</div>
 
 <span id="jobTogglePreview" (click)="togglePreview()"></span>

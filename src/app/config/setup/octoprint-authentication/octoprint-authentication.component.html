@@ -1,12 +1,12 @@
-<span class="setup__text">
+<span class="setup__text" i18n>
   Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint
   webinterface or enter an API Key manually.
 </span>
 <div class="octoprint-authentication__login-button">
-  <span class="setup__button" (click)="loginWithOctoprintUI()">send request</span>
+  <span class="setup__button" (click)="loginWithOctoprintUI()" i18n>send request</span>
 </div>
 <form class="setup__form">
-  <label for="accessToken" class="setup__input-label">API Key:</label>
+  <label for="accessToken" class="setup__input-label" i18n>API Key:</label>
   <input
     type="text"
     id="accessToken"

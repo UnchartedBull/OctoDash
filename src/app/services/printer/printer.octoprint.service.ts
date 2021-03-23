@@ -47,7 +47,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't send GCode!`, error.message)))
       .subscribe();
   }
 
@@ -61,7 +61,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't move Printhead!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't move Printhead!`, error.message)))
       .subscribe();
   }
 
@@ -73,7 +73,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't extrude Filament!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't extrude Filament!`, error.message)))
       .subscribe();
   }
 
@@ -86,7 +86,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), temperatureHotendCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't set Hotend Temperature!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't set Hotend Temperature!`, error.message)))
       .subscribe();
   }
 
@@ -97,7 +97,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/bed'), temperatureHeatbedCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't set Bed Temperature!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't set Bed Temperature!`, error.message)))
       .subscribe();
   }
 
@@ -111,7 +111,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't set Feedrate!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't set Feedrate!`, error.message)))
       .subscribe();
   }
 
@@ -125,7 +125,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't set Flowrate!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't set Flowrate!`, error.message)))
       .subscribe();
   }
 
@@ -135,7 +135,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't disconnect Printer!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't disconnect Printer!`, error.message)))
       .subscribe();
   }
 

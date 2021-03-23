@@ -1,21 +1,35 @@
 <span class="welcome-screen__heading">Hey there!</span>
 <span class="setup__text" *ngIf="!update">
-  It looks like this is the first start of OctoDash.
+  <span i18n>
+    It looks like this is the first start of OctoDash.
+  </span>
   <br />
-  I'll help you set up your config and get you started.
+  <span i18n>
+    I'll help you set up your config and get you started.
+  </span>
   <br />
-  If you encounter any issues please check the troubleshooting guide in the GitHub Wiki.
+  <span i18n>
+    If you encounter any issues please check the troubleshooting guide in the GitHub Wiki.
+  </span>
   <br />
   <br />
-  Thanks for choosing OctoDash
+  <span i18n>
+    Thanks for choosing OctoDash
+  </span>
   <fa-icon [icon]="['fas', 'smile']"></fa-icon>
 </span>
 <span class="setup__text" *ngIf="update">
-  Sorry for bothering you again ...
+  <span i18n>
+    Sorry for bothering you again ...
+  </span>
   <br />
-  We've released an update, so awesome, we needed to change the config. Please review your new config!
+  <span i18n>
+    We've released an update, so awesome, we needed to change the config. Please review your new config!
+  </span>
   <br />
   <br />
-  Thanks for choosing OctoDash
+  <span i18n>
+    Thanks for choosing OctoDash
+  </span>
   <fa-icon [icon]="['fas', 'smile']"></fa-icon>
 </span>

@@ -22,7 +22,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't start job!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't start job!`, error.message)))
       .subscribe();
   }
 
@@ -34,7 +34,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't pause job!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't pause job!`, error.message)))
       .subscribe();
   }
 
@@ -46,7 +46,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't resume job!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't resume job!`, error.message)))
       .subscribe();
   }
 
@@ -57,7 +57,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't cancel job!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't cancel job!`, error.message)))
       .subscribe();
   }
 
@@ -68,7 +68,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't restart job!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't restart job!`, error.message)))
       .subscribe();
   }
 
@@ -79,7 +79,7 @@ export class JobOctoprintService implements JobService {
 
     this.http
       .post(this.configService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't preheat printer!", error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`Can't preheat printer!`, error.message)))
       .subscribe();
   }
 }

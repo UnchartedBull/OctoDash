@@ -67,7 +67,8 @@
     "pack": "npm run ng:build && npm run electron:pack",
     "pack:mac": "npm run ng:build && electron-builder build -m",
     "ng:serve": "ng serve",
-    "ng:build": "ng build --prod"
+    "ng:build": "ng build --prod",
+    "extract:locale": "ng extract-i18n --output-path src/locale"
   },
   "private": true,
   "dependencies": {
@@ -106,6 +107,7 @@
     "@angular/cli": "~11.2.5",
     "@angular/compiler-cli": "^11.2.6",
     "@angular/language-service": "~11.2.6",
+    "@angular/localize": "^11.2.6",
     "@types/ajv": "^1.0.0",
     "@types/bonjour": "^3.5.8",
     "@types/got": "^9.6.11",

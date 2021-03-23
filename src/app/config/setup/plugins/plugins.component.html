@@ -1,45 +1,59 @@
-<span class="setup__text">What plugins are you running?</span>
+<span class="setup__text" i18n>What plugins are you running?</span>
 <div style="text-align: center">
   <div class="setup__checkbox-container">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked setup__checkbox-checked-disabled" *ngIf="displayLayerProgressPlugin"></span>
     </span>
-    Display Layer Progress&nbsp;&nbsp;
+    <span i18n>
+      Display Layer Progress&nbsp;&nbsp;
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changeEnclosurePlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="enclosurePlugin"></span>
     </span>
-    Enclosure
+    <span i18n>
+      Enclosure
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changeFilamentManagerPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="filamentManagerPlugin"></span>
     </span>
-    Filament Manager&nbsp;&nbsp;
+    <span i18n>
+      Filament Manager&nbsp;&nbsp;
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changePreheatButtonPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="preheatButtonPlugin"></span>
     </span>
-    Preheat Button
+    <span i18n>
+      Preheat Button
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changePrintTimeGeniusPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="printTimeGeniusPlugin"></span>
     </span>
-    Print Time Genius&nbsp;&nbsp;
+    <span i18n>
+      Print Time Genius&nbsp;&nbsp;
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changePsuControlPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="psuControlPlugin"></span>
     </span>
-    PSU Control
+    <span i18n>
+      PSU Control
+    </span>
   </div>
   <div class="setup__checkbox-container" (click)="changeTPLinkSmartPlugPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="tpLinkSmartPlugPlugin"></span>
     </span>
-    TPLink SmartPlug
+    <span i18n>
+      TPLink SmartPlug
+    </span>
   </div>
 </div>

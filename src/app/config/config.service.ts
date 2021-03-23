@@ -28,7 +28,7 @@ export class ConfigService {
     this.electronService.ipcRenderer.addListener('configError', (_, error: string) => {
       this.notificationService.setError(
         error,
-        'Please restart your system. If the issue persists open an issue on GitHub.',
+        $localize`Please restart your system. If the issue persists open an issue on GitHub.`,
       );
     });
 

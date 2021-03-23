@@ -1,6 +1,6 @@
 <ng-container *ngIf="!usingM600(); else M600Change">
-  <span class="filament-heading">load new filament</span>
-  <span class="change-filament__info">only put a little filament in, I'll pull in the rest.</span>
+  <span class="filament-heading" i18n>load new filament</span>
+  <span class="change-filament__info" i18n>only put a little filament in, I'll pull in the rest.</span>
 </ng-container>
 
 <ng-container *ngIf="selectedSpool; else noSpoolSelected">
@@ -14,23 +14,26 @@
       </span>
     </div>
     <span class="change-filament__filament-name">{{ selectedSpool.displayName }}</span>
-    <span class="change-filament__filament-weight"
-      >{{ getSpoolWeightLeft(selectedSpool.weight, selectedSpool.used) }}g left</span
-    >
+    <span class="change-filament__filament-weight">
+      {{ getSpoolWeightLeft(selectedSpool.weight, selectedSpool.used) }}
+    </span>
+    <span i18n>g left</span>
   </div>
 </ng-container>
 
 <div class="filament__wrapper-button">
-  <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage.emit()">done</a>
+  <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage.emit()" i18n>
+    done
+  </a>
 </div>
 
 <ng-template #noSpoolSelected>
   <div style="margin-top: 15vh">
-    <span class="change-filament__filament-name">I'll wait for you.</span>
+    <span class="change-filament__filament-name" i18n>I'll wait for you.</span>
   </div>
 </ng-template>
 
 <ng-template #M600Change>
-  <span class="filament-heading">M600 sent</span>
-  <span class="change-filament__info">follow the instructions on your printers' display</span>
+  <span class="filament-heading" i18n>M600 sent</span>
+  <span class="change-filament__info" i18n>follow the instructions on your printers' display</span>
 </ng-template>

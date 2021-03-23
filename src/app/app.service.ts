@@ -96,7 +96,7 @@ export class AppService {
     });
 
     this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setError("Can't load custom styles!", customCSSError);
+      this.notificationService.setError($localize`Can't load custom styles!`, customCSSError);
     });
   }
 

@@ -22,12 +22,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public fadeOutAnimation = false;
   public config: Config;
   public customActionsPosition = [
-    'Top Left',
-    'Top Right',
-    'Middle Left',
-    'Middle Right',
-    'Bottom Left',
-    'Bottom Right',
+    $localize`Top Left`,
+    $localize`Top Right`,
+    $localize`Middle Left`,
+    $localize`Middle Right`,
+    $localize`Bottom Left`,
+    $localize`Bottom Right`,
   ];
   private overwriteNoSave = false;
   private pages = [];
@@ -72,8 +72,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
       }, 5000);
     } else {
       this.notificationService.setWarning(
-        'Configuration not saved!',
-        "You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!",
+        $localize`Configuration not saved!`,
+        $localize`You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
       );
       this.overwriteNoSave = true;
     }
@@ -101,7 +101,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setWarning("Can't save invalid config", String(errors));
+    this.notificationService.setWarning($localize`Can't save invalid config`, String(errors));
   }
 
   private onConfigSaved() {
