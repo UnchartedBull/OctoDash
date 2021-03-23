@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
     if (this.service.hasUpdateError(errors)) {
       if (this.service.fixUpdateErrors(errors)) {
-        this.initialize();
+        setTimeout(this.initialize.bind(this), 1500);
       } else {
         this.configService.setUpdate();
         this.router.navigate(['/no-config']);
