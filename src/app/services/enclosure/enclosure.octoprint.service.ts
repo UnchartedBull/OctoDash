@@ -85,7 +85,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStateTasmota(state);
     } else if (this.configService.useTasmotaMqtt()) {
       this.setPSUStateTasmotaMqtt(state);
-    }else {
+    } else {
       this.notificationService.setWarning("Can't change PSU State!", 'No provider for PSU Control is configured.');
     }
   }
