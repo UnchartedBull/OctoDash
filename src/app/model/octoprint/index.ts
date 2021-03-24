@@ -12,3 +12,4 @@ export * from './plugins/filament-manager.model';
 export * from './plugins/psucontrol.model';
 export * from './plugins/tp-link.model';
 export * from './plugins/tasmota.model';
+export * from './plugins/tasmota-mqtt.model';

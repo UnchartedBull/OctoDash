@@ -197,6 +197,18 @@ export class ConfigService {
     return this.config.plugins.tasmota.idx;
   }
 
+  public useTasmotaMqtt(): boolean {
+    return this.config.plugins.tasmotaMqtt.enabled;
+  }
+
+  public getTasmotaMqttTopic(): string {
+    return this.config.plugins.tasmotaMqtt.topic;
+  }
+
+  public getTasmotaMqttRelayN(): number {
+    return this.config.plugins.tasmotaMqtt.relayN;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }

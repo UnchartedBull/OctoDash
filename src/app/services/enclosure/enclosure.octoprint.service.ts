@@ -12,6 +12,7 @@ import {
   PSUControlCommand,
   TPLinkCommand,
   TasmotaCommand,
+  TasmotaMqttCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
@@ -82,7 +83,9 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStateTPLink(state);
     } else if (this.configService.useTasmota()) {
       this.setPSUStateTasmota(state);
-    } else {
+    } else if (this.configService.useTasmotaMqtt()) {
+      this.setPSUStateTasmotaMqtt(state);
+    }else {
       this.notificationService.setWarning("Can't change PSU State!", 'No provider for PSU Control is configured.');
     }
   }
@@ -119,6 +122,19 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTasmotaMqtt(state: PSUState) {
+    const tasmotaMqttPayload: TasmotaMqttCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      topic: this.configService.getTasmotaMqttTopic(),
+      relayN: this.configService.getTasmotaMqttRelayN(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tasmota_mqtt'), tasmotaMqttPayload, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
       .subscribe();
   }

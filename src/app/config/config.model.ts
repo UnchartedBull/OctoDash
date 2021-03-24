@@ -57,6 +57,7 @@ interface Plugins {
   psuControl: PSUControlPlugin;
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
   tasmota: TasmotaPlugin;
+  tasmotaMqtt: TasmotaMqttPlugin;
 }
 
 interface Plugin {
@@ -82,6 +83,11 @@ interface TPLinkSmartPlugPlugin extends Plugin {
 interface TasmotaPlugin extends Plugin {
   ip: string;
   idx: number;
+}
+
+interface TasmotaMqttPlugin extends Plugin {
+  topic: string;
+  relayN: number;
 }
 
 interface OctoDash {
