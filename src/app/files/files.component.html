@@ -23,9 +23,11 @@
   </span>
 </div>
 
-<div class="files">
-  <ng-lottie [hidden]="loading === 0" id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
+<div class="files" *ngIf="loading !== 0">
+  <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
+</div>
 
+<div class="files" *ngIf="loading === 0">
   <div *ngIf="!directory" class="files__error">can't load files ...</div>
 
   <div *ngIf="directory">
@@ -50,7 +52,7 @@
       <img src="assets/folder.svg" class="files__icon" />
       <div class="files__info">
         <span class="files__info-value">
-          {{ folder.size }} <span class="files__info-unit" *ngIf="folder.size > 0">mb</span>
+          {{ folder.size }} <span class="files__info-unit" *ngIf="folder.size !== undefined">mb</span>
         </span>
       </div>
       <span class="files__name">

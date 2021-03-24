@@ -38,7 +38,7 @@ export class OctoPrintSocketService implements SocketService {
     private http: HttpClient,
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
-    this.jobStatusSubject = new ReplaySubject<JobStatus>();
+    this.jobStatusSubject = new Subject<JobStatus>();
     this.eventSubject = new ReplaySubject<PrinterEvent>();
   }
 
@@ -238,7 +238,7 @@ export class OctoPrintSocketService implements SocketService {
   private getTotalFilamentWeight(filament: OctoprintFilament) {
     let filamentLength = 0;
     _.forEach(filament, (tool): void => {
-      filamentLength += tool.length;
+      filamentLength += tool?.length;
     });
     return this.conversionService.convertFilamentLengthToWeight(filamentLength);
   }

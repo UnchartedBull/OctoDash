@@ -80,6 +80,7 @@ export class AppService {
       }
     }
     this.configService.saveConfig(config);
+
     return fullyFixed;
   }
 

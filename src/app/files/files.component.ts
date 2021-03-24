@@ -46,6 +46,7 @@ export class FilesComponent {
   }
 
   public openFolder(folderPath: string): void {
+    folderPath = folderPath === '' ? '/' : folderPath;
     setTimeout((): void => {
       this.showLoader();
       this.directory = { files: [], folders: [] };

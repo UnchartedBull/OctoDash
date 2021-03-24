@@ -112,7 +112,7 @@ export function playerFactory(): LottiePlayer {
     MatRippleModule,
     NgxElectronModule,
     RoundProgressModule,
-    [LottieModule.forRoot({ player: playerFactory })],
+    [LottieModule.forRoot({ player: playerFactory, useCache: true })],
   ],
   providers: [
     AppService,

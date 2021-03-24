@@ -14,3 +14,21 @@
   </div>
   <router-outlet (activate)="activated = true"></router-outlet>
 </div>
+
+<ng-container *ngIf="!loadingAnimationCached">
+  <ng-lottie
+    id="loadingAnimationCache"
+    [hidden]="true"
+    [options]="loadingOptionsCache"
+    (dataReady)="loadingAnimationCacheDone()"
+  ></ng-lottie>
+
+  <ng-container *ngIf="!checkmarkAnimationCached">
+    <ng-lottie
+      id="checkmarkAnimationCache"
+      [hidden]="true"
+      [options]="checkmarkOptionsCache"
+      (dataReady)="checkmarkAnimationCacheDone()"
+    ></ng-lottie>
+  </ng-container>
+</ng-container>
