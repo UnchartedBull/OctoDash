@@ -1,0 +1,130 @@
+{
+  "name": "octodash",
+  "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
+  "version": "2.1.2",
+  "license": "Apache 2.0",
+  "homepage": "https://github.com/UnchartedBull/OctoDash",
+  "author": {
+    "name": "Timon Gaebelein",
+    "email": "timon.gaebelein@icloud.com"
+  },
+  "main": "main.js",
+  "browserslist": [
+    "chrome > 87"
+  ],
+  "build": {
+    "appId": "octodash",
+    "productName": "OctoDash",
+    "directories": {
+      "output": "package"
+    },
+    "files": [
+      "main.js",
+      "helper",
+      "dist",
+      "node_modules",
+      "themes/**/*.css",
+      "LICENSE.md",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "armv7l",
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility"
+    }
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "npm-run-all -p ng:serve electron:serve electron:serve:big",
+    "start:big": "npm-run-all -p ng:serve electron:serve:big",
+    "build": "npm run ng:build && electron .",
+    "test": "",
+    "lint": "eslint ./src/ -c .eslintrc.js --ext .ts",
+    "lint:fix": "eslint ./src/ -c .eslintrc.js --ext .ts --fix",
+    "electron": "electron .",
+    "electron:dev": "electron . --serve --big",
+    "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
+    "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
+    "electron:pack": "electron-builder build -l",
+    "pack": "npm run ng:build && npm run electron:pack",
+    "pack:mac": "npm run ng:build && electron-builder build -m",
+    "ng:serve": "ng serve",
+    "ng:build": "ng build --prod"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^11.2.7",
+    "@angular/cdk": "^11.1.0",
+    "@angular/common": "^11.2.5",
+    "@angular/compiler": "^11.2.7",
+    "@angular/core": "^11.2.2",
+    "@angular/forms": "^11.2.7",
+    "@angular/localize": "^11.2.7",
+    "@angular/material": "^11.2.6",
+    "@angular/platform-browser": "^11.2.5",
+    "@angular/platform-browser-dynamic": "^11.2.7",
+    "@angular/router": "^11.2.7",
+    "@fortawesome/angular-fontawesome": "^0.8.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "ajv": "^6.12.6",
+    "angular-svg-round-progressbar": "^6.0.0",
+    "bonjour": "^3.5.0",
+    "compare-versions": "^3.6.0",
+    "electron-store": "^7.0.2",
+    "got": "^11.8.2",
+    "lodash-es": "^4.17.21",
+    "lottie-web": "^5.7.7",
+    "ngx-electron": "^2.2.0",
+    "ngx-lottie": "^6.4.0",
+    "ngx-spinner": "^10.0.1",
+    "progress-stream": "^2.0.0",
+    "rxjs": "~6.6.6",
+    "tslib": "^2.1.0",
+    "v8-compile-cache": "^2.3.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1102.6",
+    "@angular/cli": "~11.2.6",
+    "@angular/compiler-cli": "^11.2.7",
+    "@angular/language-service": "~11.2.7",
+    "@types/ajv": "^1.0.0",
+    "@types/bonjour": "^3.5.8",
+    "@types/got": "^9.6.11",
+    "@types/lodash-es": "^4.17.4",
+    "@types/node": "14.14.36",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "codelyzer": "^6.0.1",
+    "electron": "^12.0.2",
+    "electron-builder": "~22.10.5",
+    "eslint": "7.22.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "ts-node": "~9.1.1",
+    "typescript": "4.1.5",
+    "wait-on": "^5.3.0"
+  }
+}
