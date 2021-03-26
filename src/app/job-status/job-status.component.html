@@ -43,7 +43,7 @@
   <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')">
     {{ jobStatus.filamentAmount }}
   </span>
-  <span i18n>
+  <span i18n="@@job-filament-g">
     g Filament
   </span>
   <br />
@@ -53,7 +53,7 @@
       <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span
       >{{ jobStatus.timeLeft.unit }} left,
     </span>
-    <span i18n>elapsed:</span>
+    <span i18n="@@job-elapsed">elapsed:</span>
     {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
   </span>
 </div>
@@ -95,7 +95,7 @@
       <span class="job-info__print-details-value">
         {{ jobStatus.estimatedPrintTime.value }}{{ jobStatus.estimatedPrintTime.unit }}
       </span>
-      <span class="job-info__print-details-finish-state" i18n>- will finish ~</span>
+      <span class="job-info__print-details-finish-state" i18n="@@will-finish">- will finish ~</span>
       <span>{{ jobStatus.estimatedEndTime }}</span>
       <br />
     </span>
@@ -103,16 +103,16 @@
     <span *ngIf="hasProperty(jobStatus, 'filamentAmount')">
       <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">{{ jobStatus.filamentAmount }}</span>
-      <span i18n>g</span>
-      <span class="job-info__print-details-finish-state" i18n>filament will be used</span>
+      <span i18n="@@job-g">g</span>
+      <span class="job-info__print-details-finish-state" i18n="@@filament-used">filament will be used</span>
     </span>
   </div>
 </div>
 
-<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())" i18n>
+<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())" i18n="@@loading-info">
   loading info
 </div>
 
-<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()" i18n>no job running ...</div>
+<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running ...</div>
 
 <span id="jobTogglePreview" (click)="togglePreview()"></span>

@@ -17,8 +17,8 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
   @Output() increasePage = new EventEmitter<void>();
 
   public feedSpeed: number;
-  public loadingMessage: string = $localize`loading`;
-  public unloadingMessage: string = $localize`unloading`;
+  public loadingMessage: string = $localize`:@@loading-filament:loading`;
+  public unloadingMessage: string = $localize`:@@unloading-filament:unloading`;
   private fastMoveTimeout: ReturnType<typeof setTimeout>;
   private slowMoveTimeout: ReturnType<typeof setTimeout>;
 

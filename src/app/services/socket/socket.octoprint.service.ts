@@ -206,7 +206,7 @@ export class OctoPrintSocketService implements SocketService {
     this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
     this.jobStatus.timePrinted = {
       value: this.conversionService.convertSecondsToHours(message.current.progress.printTime),
-      unit: $localize`h`,
+      unit: $localize`:@@unit-h-1:h`,
     };
 
     if (message.current.job.filament) {
@@ -216,7 +216,7 @@ export class OctoPrintSocketService implements SocketService {
     if (message.current.progress.printTimeLeft) {
       this.jobStatus.timeLeft = {
         value: this.conversionService.convertSecondsToHours(message.current.progress.printTimeLeft),
-        unit: $localize`h`,
+        unit: $localize`:@@unit-h-2:h`,
       };
       this.jobStatus.estimatedEndTime = this.calculateEndTime(message.current.progress.printTimeLeft);
     }
@@ -224,7 +224,7 @@ export class OctoPrintSocketService implements SocketService {
     if (message.current.job.estimatedPrintTime) {
       this.jobStatus.estimatedPrintTime = {
         value: this.conversionService.convertSecondsToHours(message.current.job.estimatedPrintTime),
-        unit: $localize`h`,
+        unit: $localize`:@@unit-h-3:h`,
       };
     }
 

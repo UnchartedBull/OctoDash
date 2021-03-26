@@ -88,13 +88,13 @@ export class FilesOctoprintService implements FilesService {
                 {
                   origin: 'local',
                   path: '/local',
-                  name: $localize`local`,
+                  name: $localize`:@@local:local`,
                   size: undefined,
                 },
                 {
                   origin: 'sdcard',
                   path: '/sdcard',
-                  name: $localize`sdcard`,
+                  name: $localize`:@@sdcard:sdcard`,
                   size: undefined,
                 },
               ];
@@ -148,7 +148,7 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`Can't load file!`, error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message)))
       .subscribe();
   }
 
@@ -160,14 +160,14 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`Can't start print!`, error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message)))
       .subscribe();
   }
 
   public deleteFile(filePath: string): void {
     this.http
       .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`Can't delete file!`, error.message)))
+      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message)))
       .subscribe();
   }
 

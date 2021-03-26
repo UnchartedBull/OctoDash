@@ -1,6 +1,6 @@
 <div class="i-frame" id="iFrame">
-  <span i18n>loading website ...</span>
-  <iframe class="i-frame__content" [src]="iFrameURL | url" onerror="doActionConfirm()" allow="fullscreen; camera;" i18n>
+  <span i18n="@@website-loading">loading website ...</span>
+  <iframe class="i-frame__content" [src]="iFrameURL | url" onerror="doActionConfirm()" allow="fullscreen; camera;" i18n="@@should-not-happen">
     That shouldn't happen ...
   </iframe>
   <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
@@ -25,8 +25,8 @@
 
 <div class="confirm__wrapper" *ngIf="actionToConfirm">
   <div class="confirm">
-    <h1 i18n>are you sure?</h1>
-    <p class="confirm__sub-heading" i18n>do you want to execute the following command?</p>
+    <h1 i18n="@@are-you-sure">are you sure?</h1>
+    <p class="confirm__sub-heading" i18n="@@confirm-exec">do you want to execute the following command?</p>
     <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
     <img
       class="confirm__icon"

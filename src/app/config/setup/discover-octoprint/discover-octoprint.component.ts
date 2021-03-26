@@ -44,7 +44,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       const searching = document.querySelector('.discover-octoprint__searching');
       if (searching) {
-        searching.innerHTML = $localize`no instances found.`;
+        searching.innerHTML = $localize`:@@no-instance-found:no instances found.`;
         searching.classList.remove('loading-dots');
       }
     }, 10000);

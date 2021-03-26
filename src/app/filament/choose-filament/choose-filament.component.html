@@ -1,4 +1,4 @@
-<span class="filament-heading" i18n>select your new filament</span>
+<span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
 <ng-container *ngIf="!filament.getLoading(); else loadingFilament">
   <ng-container *ngIf="filament.filamentSpools; else noFilaments">
     <table class="filaments">
@@ -22,7 +22,7 @@
         </td>
         <td class="filaments__weight-left">
           {{ getSpoolWeightLeft(spool.weight, spool.used) }}
-          <span style="font-size: 60%" i18n>g left</span>
+          <span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
         </td>
       </tr>
     </table>
@@ -31,9 +31,9 @@
 </ng-container>
 
 <ng-template #noFilaments>
-  <div class="no-filaments" i18n>no filament spools found</div>
+  <div class="no-filaments" i18n="@@no-spools">no filament spools found</div>
 </ng-template>
 
 <ng-template #loadingFilament>
-  <div class="no-filaments loading-dots" i18n>loading spools</div>
+  <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
 </ng-template>

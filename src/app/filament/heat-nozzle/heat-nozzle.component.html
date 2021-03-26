@@ -1,4 +1,4 @@
-<span class="filament-heading" i18n>heating the nozzle</span>
+<span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle</span>
 <div class="heating__center">
   <div class="heating__controller">
     <div class="heating__controller-row">
@@ -43,11 +43,11 @@
 </div>
 <div class="heating__start-wrapper" *ngIf="!isHeating">
   <span>
-    <span i18n>wait</span>
+    <span i18n="@@nozzle-heating-wait">wait</span>
     <span>{{ automaticHeatingStartSeconds }}</span>
-    <span i18n>s or</span>
+    <span i18n="@@nozzle-heating-wait-seconds-or">s or</span>
   </span>
-  <a class="heating__start-heating" matRipple [matRippleUnbounded]="false" (click)="setNozzleTemperature()" i18n>
+  <a class="heating__start-heating" matRipple [matRippleUnbounded]="false" (click)="setNozzleTemperature()" i18n="@@nozzle-heating-start">
     start
   </a>
 </div>
