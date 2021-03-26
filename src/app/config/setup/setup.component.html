@@ -71,26 +71,26 @@
           [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon"
         />
-        <span i18n="@@checking-octoprint-connection">
+        <ng-container i18n="@@checking-octoprint-connection">
           Octoprint Connection
-        </span>
+        </ng-container>
       </span>
       <div *ngIf="octoprintConnection">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
-          <span i18n="@@checking-config">
+          <ng-container i18n="@@checking-config">
             Validating Config
-          </span>
+          </ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
-          <span i18n="@@checking-save">
+          <ng-container i18n="@@checking-save">
             Saving Config
-          </span>
+          </ng-container>
         </span>
         <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>

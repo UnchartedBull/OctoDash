@@ -8,9 +8,9 @@
         id="updateDownloadProgress"
       >
         {{ updateProgress.speed }}
-        <span i18n="@@mbs">
+        <ng-container i18n="@@mbs">
           MB/s&nbsp;
-        </span>
+        </ng-container>
       </div>
     </div>
     <span class="update-size__total">{{ updateProgress.total }}</span><span i18n="@@update-mb">MB</span>

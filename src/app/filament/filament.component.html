@@ -2,9 +2,9 @@
   <tr>
     <td class="top-bar__back" (click)="decreasePage()" matRipple [matRippleUnbounded]="false">
       <img src="assets/back.svg" class="top-bar__back-icon" />
-      <span i18n="@@filament-back">
+      <ng-container i18n="@@filament-back">
         back
-      </span>
+      </ng-container>
     </td>
     <td class="top-bar__center">
       <img src="assets/filament.svg" class="top-bar__center-icon" *ngIf="page === 0" />
@@ -13,9 +13,9 @@
       </div>
     </td>
     <td class="top-bar__next" (click)="increasePage()" matRipple [matRippleUnbounded]="false">
-      <span i18n="@@filament-skip">
+      <ng-container i18n="@@filament-skip">
         skip
-      </span>
+      </ng-container>
       <img src="assets/next.svg" class="top-bar__next-icon" />
     </td>
   </tr>

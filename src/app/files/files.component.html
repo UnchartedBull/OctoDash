@@ -2,13 +2,13 @@
   <tr>
     <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
       <img src="assets/back.svg" class="top-bar__back-icon" />
-      <span i18n="@@files-back">back</span>
+      <ng-container i18n="@@files-back">back</ng-container>
     </td>
     <td class="top-bar__center">
       <img src="assets/folder.svg" class="top-bar__center-icon" />
     </td>
     <td class="top-bar__next" (click)="openSorting()" matRipple [matRippleUnbounded]="false" *ngIf="directory">
-      <span i18n="@@files-sort">sort</span>
+      <ng-container i18n="@@files-sort">sort</ng-container>
       <img src="assets/sort.svg" class="top-bar__next-icon" />
     </td>
     <td class="top-bar__next" *ngIf="!directory"></td>
