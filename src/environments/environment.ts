@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   config: 'assets/config.testing.json',
+  releaseCheckUrl: 'http://127.0.0.1:8888/latest'
 };
 
 /*

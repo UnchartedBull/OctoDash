@@ -666,7 +666,12 @@ text_input() {
 
 ################## INQUIRER.SH ##################
 
-
+echo "This script requires root privileges. Please enter your sudo password when prompted."
+sudo true
+if [ $? -ne 0 ]
+then
+    exit 1
+fi
 
 arch=$(uname -m)
 if [[ $arch == x86_64 ]]; then
@@ -676,14 +681,10 @@ elif [[ $arch == aarch64 ]]; then
 elif  [[ $arch == arm* ]]; then
     releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
 fi
-dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
+
 IFS='/' read -ra version <<< "$releaseURL"
 
 echo "Installing OctoDash "${version[7]}, $arch""
-
-echo "Installing Dependencies ..."
-sudo apt -qq update
-sudo apt -qq install $dependencies -y
 
 if [ -d "/home/pi/OctoPrint/venv" ]; then
     DIRECTORY="/home/pi/OctoPrint/venv"
@@ -739,75 +740,21 @@ if [ $DIRECTORY != "-" ]; then
   fi;
 fi;
 
+
+echo "Downloading package..."
+DEB_FILE=$(mktemp)
+sudo wget "${releaseURL}" -O "${DEB_FILE}" -q --show-progress
+
+
+echo "Installing Dependencies ..."
+dependencies=$(dpkg -I "${DEB_FILE}" | grep '^ Depends: ' | awk -F'Depends: ' ' { print $2 } ' | sed 's/,//g')
+sudo apt -qq update
+sudo apt -qq install $dependencies -y
+
+
 echo "Installing OctoDash "${version[7]}, $arch" ..."
-cd ~
-wget -O octodash.deb $releaseURL -q --show-progress
+sudo dpkg -i "${DEB_FILE}"
 
-sudo dpkg -i octodash.deb
+sudo rm "${DEB_FILE}"
 
-rm octodash.deb
-
-yes_no=( 'yes' 'no' )
-
-list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
-
-echo $auto_start
-if [ $auto_start == 'yes' ]; then
-    echo "Setting up Autostart ..."
-    cat <<EOF > ~/.xinitrc
-#!/bin/sh
-
-xset s off
-xset s noblank
-xset -dpms
-
-ratpoison&
-octodash
-EOF
-
-    cat <<EOF >> ~/.bashrc
-if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
-    xinit -- -nocursor
-fi
-EOF
-
-    echo "Setting up Console Autologin ..."
-    sudo systemctl set-default multi-user.target
-    sudo ln -fs /lib/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
-    sudo bash -c 'cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf' << EOF
-[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin $USER --noclear %I \$TERM
-EOF
-
-    echo "Setting Permissions ..."
-    sudo chmod +x ~/.xinitrc
-    sudo chmod ug+s /usr/lib/xorg/Xorg
-
-    echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
-fi
-
-list_input "Should I setup the update script? This will allow installing '~/tmp/octodash.deb' without sudo or root access. For more info visit the Update section of the wiki. " yes_no update
-if [ $update == 'yes' ]; then
-    mkdir -p ~/scripts
-    echo "Setting up update script ..."
-    cat <<EOF > ~/scripts/update-octodash
-#!/bin/bash
-
-dpkg -i /tmp/octodash.deb
-rm /tmp/octodash.deb
-EOF
-
-    sudo chmod +x ~/scripts/update-octodash
-
-    sudo bash -c 'cat >> /etc/sudoers.d/update-octodash' <<EOF
-pi ALL=NOPASSWD: /home/pi/scripts/update-octodash
-EOF
-fi
-
-
-list_input "Shall I reboot your Pi now?" yes_no reboot
-echo "OctoDash has been successfully installed! :)"
-if [ $reboot == 'yes' ]; then
-    sudo reboot
-fi
+echo "Installation complete!"

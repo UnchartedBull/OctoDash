@@ -1,0 +1,18 @@
+Source: octodash
+Section: x11
+Priority: optional
+Maintainer: Name <email>
+Homepage: https://github.com/UnchartedBull/OctoDash
+Vcs-Git: https://github.com/UnchartedBull/OctoDash.git
+Vcs-Browser: https://github.com/UnchartedBull/OctoDash
+Build-Depends:  debhelper (>= 9),
+                dh-systemd (>= 1.5)
+
+Package: octodash
+Architecture: all
+Depends: bc, desktop-file-utils, libappindicator3-1, libatspi2.0-0, libavahi-compat-libdnssd1, libgtk-3-0, libgtk-3-0, libnotify4, libnss3, libpam0g-dev, libsecret-1-0, libuuid1, libx11-dev, libxss1, libxtst6, rsync, x11-xserver-utils, xdg-utils, xinit, xserver-xorg
+Description: OctoDash is a User Interface for OctoPrint, it utilizes the OctoPrint API 
+ but tries to use modern design principles in order to fully enable the power of your 
+ Raspberry Pi attached to your 3D Printer. OctoDash works best with a Touchscreen and 
+ will support almost all functions that OctoPrint offers just in a nicer format.
+

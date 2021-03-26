@@ -41,7 +41,15 @@
     "linux": {
       "target": [
         {
-          "target": "deb",
+          "target": "dir",
+          "arch": [
+            "armv7l",
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "tar.gz",
           "arch": [
             "armv7l",
             "arm64",
@@ -65,7 +73,7 @@
     "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
     "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
     "electron:pack": "electron-builder build -l",
-    "pack": "npm run ng:build && npm run electron:pack",
+    "pack": "npm run ng:build && npm run electron:pack && ./distribution/debian.sh",
     "pack:mac": "npm run ng:build && electron-builder build -m",
     "ng:serve": "ng serve $npm_config_serve",
     "ng:build": "ng build --prod",
@@ -94,6 +102,7 @@
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
     "electron-store": "^8.0.0",
+    "electron-root-path": "^1.0.16",
     "got": "^11.8.2",
     "lodash-es": "^4.17.21",
     "lottie-web": "^5.7.8",

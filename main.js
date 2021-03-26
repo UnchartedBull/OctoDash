@@ -29,6 +29,12 @@ if (!dev) {
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
+if (app.commandLine.hasSwitch('version')) {
+  console.log(app.getVersion());
+  app.quit();
+}
+
+
 function createWindow() {
   const _store = new Store();
 
@@ -56,6 +62,7 @@ function createWindow() {
       enableRemoteModule: true,
       worldSafeExecuteJavaScript: true,
       contextIsolation: false,
+      webSecurity: !dev
     },
     icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   });

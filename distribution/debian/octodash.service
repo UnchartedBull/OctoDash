@@ -1,0 +1,20 @@
+[Unit]
+Description=OctoDash
+After=octoprint.service
+Requires=graphical.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/octodash
+Environment=DISPLAY=:0.0
+Environment=XINITRC=/etc/X11/xinit/octodash.xinit
+ExecStart=/bin/su $OCTODASH_USER -w DISPLAY,XINITRC -l -c '/usr/bin/xinit -- -nocursor'
+ExecStop=/bin/kill -TERM $MAINPID
+TimeoutStopSec=30
+Restart=always
+RestartSec=2
+StartLimitInterval=0
+
+[Install]
+WantedBy=graphical.target

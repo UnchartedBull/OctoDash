@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@ --with=systemd
+
+# No init script, only systemd
+override_dh_installinit:
+	true
+
+override_dh_install:
+	dh_install package/* /opt/OctoDash

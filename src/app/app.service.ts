@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { ElectronService } from 'ngx-electron';
 
+import { environment } from '../environments/environment';
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { NotificationService } from './notification/notification.service';
@@ -53,7 +54,7 @@ export class AppService {
   }
 
   private checkUpdate(): void {
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
+    this.http.get(environment.releaseCheckUrl).subscribe(
       (data: GitHubReleaseInformation): void => {
         if (this.version !== data.name.replace('v', '')) {
           this.updateAvailable = true;
