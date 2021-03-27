@@ -60,7 +60,7 @@ function createWindow() {
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {
-    window.loadURL('app://.');
+    window.loadURL(`file://${__dirname}/dist/fr/index.html`);
     window.setFullScreen(true);
   }
 
