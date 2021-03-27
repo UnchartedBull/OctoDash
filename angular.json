@@ -19,11 +19,20 @@
           "fr": "src/locale/messages.fr.xlf"
         }
       },
+      "i18n": {
+      "sourceLocale": "en-US",
+      "locales": {
+        "fr": "src/locale/messages.fr.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+            ],
+            "localize": ["fr"],
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
