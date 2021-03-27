@@ -78,6 +78,7 @@ export class AppService {
       }
     }
     this.configService.saveConfig(config);
+
     return fullyFixed;
   }
 
@@ -96,7 +97,7 @@ export class AppService {
     });
 
     this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setError($localize`Can't load custom styles!`, customCSSError);
+      this.notificationService.setError($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
 
