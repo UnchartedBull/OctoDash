@@ -16,7 +16,7 @@
       "i18n": {
         "sourceLocale": "en-US",
         "locales": {
-          "fr-FR": "src/locale/messages.fr-FR.xlf"
+          "fr": "src/locale/messages.fr.xlf"
         }
       },
       "architect": {
@@ -27,7 +27,7 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "i18nMissingTranslation": "warning",
-            "localize": ["fr-FR"],
+            "localize": ["fr"],
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
