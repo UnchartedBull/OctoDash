@@ -763,7 +763,7 @@
       </trans-unit>
       <trans-unit id="purging-done" datatype="html">
         <source>done</source>
-        <source>terminé</source>
+        <target>terminé</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/purge-filament/purge-filament.component.html</context>
           <context context-type="linenumber">5</context>
@@ -771,7 +771,7 @@
       </trans-unit>
       <trans-unit id="files-back" datatype="html">
         <source>back</source>
-        <source>retour</source>
+        <target>retour</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
           <context context-type="linenumber">5</context>
