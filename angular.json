@@ -19,21 +19,15 @@
           "fr": "src/locale/messages.fr.xlf"
         }
       },
-      "i18n": {
-      "sourceLocale": "en-US",
-      "locales": {
-        "fr": "src/locale/messages.fr.xlf"
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": ["fr"],
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "i18nMissingTranslation": "warning",
+            "localize": ["fr"],
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
