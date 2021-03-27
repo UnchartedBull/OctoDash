@@ -68,7 +68,7 @@
     "pack:mac": "npm run ng:build && electron-builder build -m",
     "ng:serve": "ng serve",
     "ng:build": "ng build --prod",
-    "extract:locale": "ng extract-i18n --output-path src/locale --out-file messages.{lang}.xlf"
+    "extract:locale": "ng extract-i18n --output-path src/locale"
   },
   "private": true,
   "dependencies": {
