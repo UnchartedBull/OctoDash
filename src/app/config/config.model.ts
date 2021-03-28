@@ -89,6 +89,7 @@ interface OctoDash {
   previewProgressCircle: boolean;
   screenSleepCommand: string;
   screenWakeupCommand: string;
+  showExtruderControl: boolean;
 }
 
 export interface CustomAction {
