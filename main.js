@@ -15,6 +15,7 @@ const activateListeners = require('./helper/listener');
 
 let window;
 let locale;
+let url;
 
 if (!dev) {
   const createProtocol = require('./helper/protocol');
@@ -60,14 +61,15 @@ function createWindow() {
   });
 
   if (dev) {
-    window.loadURL('http://localhost:4200');
+    url = 'http://localhost:4200'
     window.webContents.openDevTools();
   } else {
-    window.loadURL(`file://${__dirname}/dist/${locale}/index.html`);
+    url = `file://${__dirname}/dist/${locale}/index.html`
     window.setFullScreen(true);
   }
 
-  activateListeners(ipcMain, window, app, dev);
+  window.loadURL(url);
+  activateListeners(ipcMain, window, app, url);
 
   window.on('closed', () => {
     window = null;
