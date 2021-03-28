@@ -38,8 +38,8 @@ export class UpdateComponent implements OnInit {
   ngOnInit(): void {
     if (!this.service.getLatestVersion() || !this.service.getLatestVersionAssetsURL()) {
       this.notificationService.setWarning(
-        "Can't initiate update!",
-        'Some information is missing, please try again in an hour or update manually.',
+        $localize`:@@error-update:Can't initiate update!`,
+        $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
       );
       this.closeUpdateWindow();
     } else {
@@ -50,7 +50,7 @@ export class UpdateComponent implements OnInit {
 
   private setupListeners(): void {
     this.electronService.ipcRenderer.on('updateError', (_, updateError: UpdateError): void => {
-      this.notificationService.setError("Can't install update!", updateError.error.message);
+      this.notificationService.setError($localize`:@@error-install-update:Can't install update!`, updateError.error.message);
       this.closeUpdateWindow();
     });
 

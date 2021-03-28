@@ -28,7 +28,7 @@ export class FilamentService {
         this.filamentSpools = spools;
       },
       (error: HttpErrorResponse): void => {
-        this.notificationService.setError("Can't load filament spools!", error.message);
+        this.notificationService.setError($localize`:@@error-spools:Can't load filament spools!`, error.message);
       },
       (): void => {
         this.loading = false;
@@ -39,7 +39,7 @@ export class FilamentService {
         this.currentSpool = spool;
       },
       (error: HttpErrorResponse): void => {
-        this.notificationService.setError("Can't load active spool!", error.message);
+        this.notificationService.setError($localize`:@@error-spool:Can't load active spool!`, error.message);
       },
     );
   }
@@ -65,20 +65,20 @@ export class FilamentService {
               if (spool.id === spoolRemote.id) resolve();
               else {
                 this.notificationService.setError(
-                  `Spool IDs didn't match`,
-                  `Can't change spool. Please change spool manually in the OctoPrint UI.`,
+                  $localize`:@@error-spool-id:Spool IDs didn't match`,
+                  $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
                 );
                 reject();
               }
             },
             (error): void => {
-              this.notificationService.setError("Can't set new spool!", error.message);
+              this.notificationService.setError($localize`:@@error-set-new-spool:Can't set new spool!`, error.message);
               reject();
             },
           );
         },
         (error): void => {
-          this.notificationService.setError("Can't set new spool!", error.message);
+          this.notificationService.setError($localize`:@@error-set-new-spool-2:Can't set new spool!`, error.message);
           reject();
         },
       );

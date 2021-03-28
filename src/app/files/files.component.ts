@@ -64,7 +64,7 @@ export class FilesComponent {
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
         (error: HttpErrorResponse) => {
-          this.notificationService.setError("Can't load file/folder!", error.message);
+          this.notificationService.setError($localize`:@@error-load-file-folder:Can't load file/folder!`, error.message);
           this.currentFolder = folderPath;
         },
         () => {
@@ -84,7 +84,7 @@ export class FilesComponent {
       (fileData: File) => (this.fileDetail = fileData),
       (error: HttpErrorResponse) => {
         this.fileDetail = ({ name: 'error' } as unknown) as File;
-        this.notificationService.setError("Can't load file!", error.message);
+        this.notificationService.setError($localize`:@@error-load-file:Can't load file!`, error.message);
       },
     );
     const fileDOMElement = document.getElementById('fileDetailView');

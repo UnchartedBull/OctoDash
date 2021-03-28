@@ -13,17 +13,21 @@ const dev = args.some(val => val === '--serve');
 
 const activateListeners = require('./helper/listener');
 
+let window;
+let locale;
+let url;
+
 if (!dev) {
   const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
   createProtocol(scheme, path.join(__dirname, 'dist'));
+
+  locale = require('./helper/locale.js').getLocale();
 }
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
-
-let window;
 
 function createWindow() {
   const _store = new Store();
@@ -57,14 +61,15 @@ function createWindow() {
   });
 
   if (dev) {
-    window.loadURL('http://localhost:4200');
+    url = 'http://localhost:4200'
     window.webContents.openDevTools();
   } else {
-    window.loadURL('app://.');
+    url = `file://${__dirname}/dist/${locale}/index.html`
     window.setFullScreen(true);
   }
 
-  activateListeners(ipcMain, window, app, dev);
+  window.loadURL(url);
+  activateListeners(ipcMain, window, app, url);
 
   window.on('closed', () => {
     window = null;

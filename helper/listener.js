@@ -11,13 +11,9 @@ function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => exec(screenCommand.command));
 }
 
-function activateReloadListener(ipcMain, window, dev) {
+function activateReloadListener(ipcMain, window, url) {
   ipcMain.on('reload', () => {
-    if (dev) {
-      window.loadURL('http://localhost:4200');
-    } else {
-      window.loadURL('app://.');
-    }
+    window.loadURL(url);
   });
 }
 
@@ -44,11 +40,11 @@ function activateConfigListener(ipcMain, window) {
   ipcMain.on('checkConfig', (_, config) => checkConfig(window, config));
 }
 
-function activateListeners(ipcMain, window, app, dev) {
+function activateListeners(ipcMain, window, app, url) {
   activateConfigListener(ipcMain, window);
   activateAppInfoListener(ipcMain, window, app);
   activateScreenSleepListener(ipcMain);
-  activateReloadListener(ipcMain, window, dev);
+  activateReloadListener(ipcMain, window, url);
   activateUpdateListener(ipcMain, window);
   activateDiscoverListener(ipcMain, window);
 }

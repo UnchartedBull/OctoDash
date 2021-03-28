@@ -4,7 +4,7 @@
       <td class="top-bar__back">
         <div *ngIf="page > 0" (click)="decreasePage()">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          <span i18n="@@setup-back">back</span>
         </div>
       </td>
       <td class="top-bar__center">
@@ -14,7 +14,7 @@
       </td>
       <td class="top-bar__next">
         <div *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))" (click)="increasePage()">
-          next
+          <span i18n="@@setup-next">next</span>
           <img src="assets/next.svg" class="top-bar__next-icon" />
         </div>
       </td>
@@ -64,32 +64,38 @@
   ></app-config-setup-plugins>
 
   <div *ngIf="page === 6">
-    <span class="setup__text">Great! I'll check everything.</span>
+    <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
         <img
           [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon"
         />
-        Octoprint Connection
+        <ng-container i18n="@@checking-octoprint-connection">
+          Octoprint Connection
+        </ng-container>
       </span>
       <div *ngIf="octoprintConnection">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
-          Validating Config
+          <ng-container i18n="@@checking-config">
+            Validating Config
+          </ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
-          Saving Config
+          <ng-container i18n="@@checking-save">
+            Saving Config
+          </ng-container>
         </span>
         <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>
       <span class="setup__validation-errors" *ngFor="let error of configErrors">{{ error }}</span>
-      <span *ngIf="configSaved === null" class="setup__button" (click)="finishWizard()">done</span>
+      <span *ngIf="configSaved === null" class="setup__button" (click)="finishWizard()" i18n="@@wizard-done">done</span>
     </div>
   </div>
 </div>
