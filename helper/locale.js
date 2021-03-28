@@ -64,6 +64,7 @@ module.exports = {
 
           // hard copy of messages.xlf
           const newTranslation = JSON.parse(JSON.stringify(extracted))
+          newTranslation.targetLanguage = translated.targetLanguage;
           // transfer the locale's translations to the copy of the extracted locale
           for (id in newTranslation.resources['ng2.template']) {
             const source = translated.resources['ng2.template'];
@@ -81,6 +82,7 @@ module.exports = {
               `./src/locale/${translatedXLFRef.filename}`,
               `./src/locale/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`
             );
+            console.info(`updating ${translatedXLFRef.filename}...`)
             fs.writeFileSync(`./src/locale/${translatedXLFRef.filename}`, result);
           })
         })

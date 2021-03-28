@@ -71,7 +71,7 @@
     "ng:build": "ng build --prod",
     "locale:extract": "ng extract-i18n --output-path src/locale",
     "locale:update:all": "node -e 'require(`./helper/locale.js`).updateLocales()'",
-    "locale:update": "npm run locale:extract && npm locale:update:all"
+    "locale:update": "npm run locale:extract && npm run locale:update:all"
   },
   "private": true,
   "dependencies": {

@@ -1,5 +1,5 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="ng2.template" datatype="plaintext" source-language="en">
+  <file original="ng2.template" datatype="plaintext" source-language="en" target-language="fr">
     <body>
       <trans-unit id="long-init" datatype="html">
         <source> Initializing is taking longer than usual. 
