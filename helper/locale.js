@@ -1,7 +1,8 @@
-const angularConf = require('../angular.json')
-
 module.exports = {
+
+  // returns the correct supported locale given the LANG variable
   getLocale() {
+    const angularConf = require('../angular.json')
     const i18n = angularConf.projects.OctoDash.i18n;
     let lang;
     try {
@@ -26,5 +27,66 @@ module.exports = {
     const locale = exactLocale || approximateLocale || i18n.sourceLocale;
     console.info('selected language: ' + locale);
     return locale;
+  },
+
+  // updates all supported locales consuming an updated messages.xlf
+  updateLocales() {
+    const fs = require('fs');
+    const xliff = require('xliff');
+
+    // list all existing locales
+    // transtaledXLFs = [{
+    //   filename: 'messages.fr.xlf',
+    //   lang: 'fr',
+    // }]
+    let translatedXLFs = [];
+    const filenames = fs.readdirSync('./src/locale');
+    for (filename of filenames) {
+      const match = filename.match(/messages.(..|..-..).xlf/)
+      if (match) {
+        const lang = match[1];
+        translatedXLFs.push({ filename, lang });
+      }
+    }
+
+    // get extracted messages
+    const extractedXLF = fs.readFileSync('./src/locale/messages.xlf').toString();
+    xliff.xliff12ToJs(extractedXLF, (err, extracted) => {
+      if (err) throw new Error(err.message);
+
+      // for each supported locale
+      for (translatedXLFRef of translatedXLFs) {
+        const translatedXLF = fs.readFileSync(`./src/locale/${translatedXLFRef.filename}`).toString();
+
+        // load this locale
+        xliff.xliff12ToJs(translatedXLF, (err, translated) => {
+          if (err) throw new Error(err.message);
+
+          // hard copy of messages.xlf
+          const newTranslation = JSON.parse(JSON.stringify(extracted))
+          // transfer the locale's translations to the copy of the extracted locale
+          for (id in newTranslation.resources['ng2.template']) {
+            const source = translated.resources['ng2.template'];
+            const target = newTranslation.resources['ng2.template'];
+            // only copy if the translation has a target
+            if (source[id]) {
+              target[id].target = source[id].target;
+            }
+          }
+          // backup the previous version of the locale and write the new locale
+          xliff.jsToXliff12(newTranslation, (err, result) => {
+            if (err) throw new Error(err.message);
+            const now = new Date()
+            fs.renameSync(
+              `./src/locale/${translatedXLFRef.filename}`,
+              `./src/locale/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`
+            );
+            fs.writeFileSync(`./src/locale/${translatedXLFRef.filename}`, result);
+          })
+        })
+      }
+      // remove extracted messages
+      fs.unlinkSync('./src/locale/messages.xlf')
+    })
   }
 };

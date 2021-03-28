@@ -22,8 +22,9 @@ npm run start --serve="--configuration=<lang>"
 
 To add a language to the list of supported languages, follow these steps:
 - find your language code in [this list](https://github.com/angular/angular/tree/master/packages/common/locales) (angular country codes are not all standard)
-- run `npm run locale:extract` to generate a new locale file in src/locale (or duplicate an existing one, it's easier)
+- in src/locale, duplicate an existing locale (or run `npm run locale:extract` to generate a new locale file)
 - rename the file to include your language code in the format `messages.<languageCode>.xlf`
+- in the `<file>` tag (second line of the xlf file) adapt `source-language="<languageCode>"` to your language code
 - add the translations for your language between `target` tags
 - add your language reference in `angular.json` 
   - `Projects.OctoDash.i18n.locales`
@@ -53,3 +54,7 @@ To add a language to the list of supported languages, follow these steps:
           "browserTarget": "OctoDash:build:<lang>"
         },
       ```
+
+## Update translations IDs and sources
+
+To update translations with the latest codebase and IDs, run `npm run update:locales`. Only commit the files that do not have a date, these are only backups of the locale versions before the update.
