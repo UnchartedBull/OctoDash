@@ -22,6 +22,7 @@
       "main.js",
       "helper",
       "dist",
+      "angular.json",
       "node_modules",
       "themes/**/*.css",
       "LICENSE.md",
@@ -66,7 +67,7 @@
     "electron:pack": "electron-builder build -l",
     "pack": "npm run ng:build && npm run electron:pack",
     "pack:mac": "npm run ng:build && electron-builder build -m",
-    "ng:serve": "ng serve",
+    "ng:serve": "ng serve $npm_config_serve",
     "ng:build": "ng build --prod",
     "extract:locale": "ng extract-i18n --output-path src/locale"
   },

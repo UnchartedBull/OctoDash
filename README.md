@@ -65,6 +65,7 @@ For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDas
 - You can press multiple arrows directly after another in the control view. All actions will be executed in series, even if the prior didn't finish
 - The six actions on the right in the control view can be customized. They can either send GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your camera
 - You can adjust the temperatures and fan speed in the home screen by pressing on their icons, if you want to set them to zero, just tap the value once (v1.4.1 and up)
+- OctoDash will start in your host's language if it is supported. You can start OctoDash in a different supported language by starting it with `LANG=fr_FR.UTF-8 octodash`.
 
 ## Demo
 

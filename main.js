@@ -13,17 +13,20 @@ const dev = args.some(val => val === '--serve');
 
 const activateListeners = require('./helper/listener');
 
+let window;
+let locale;
+
 if (!dev) {
   const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
   createProtocol(scheme, path.join(__dirname, 'dist'));
+
+  locale = require('./helper/locale.js').getLocale();
 }
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
-
-let window;
 
 function createWindow() {
   const _store = new Store();
@@ -60,7 +63,7 @@ function createWindow() {
     window.loadURL('http://localhost:4200');
     window.webContents.openDevTools();
   } else {
-    window.loadURL(`file://${__dirname}/dist/fr/index.html`);
+    window.loadURL(`file://${__dirname}/dist/${locale}/index.html`);
     window.setFullScreen(true);
   }
 
