@@ -25,7 +25,7 @@ app.on('ready', () => {
   if (globals.dev) {
     window.webContents.openDevTools();
   }
-  window.loadURL(url);
+  window.loadURL(globals.url);
   activateListeners(ipcMain, window, app, url);
 
   window.on('closed', () => {

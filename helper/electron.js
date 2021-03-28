@@ -1,3 +1,14 @@
+const { readConfig } = require('./config');
+
+function replaceExistingProperties(config, properties, keys, path) {
+  const config = readConfig()
+  for (key of keys) {
+    if (config[path][key]) {
+      properties[key] = config[path][key];
+    }
+  }
+}
+
 module.exports = {
   configure(globals, args) {
 
@@ -19,35 +30,39 @@ module.exports = {
     };
 
     // ordered so that --serve and --big can be used single or combined
+    // --big overrides custom properties as it explicitly asks for a size
     if (args.includes('--serve')) {
       globals.dev = true;
-      properties.frame = true;
-      properties.fullscreen = false;
       properties.width = 1200;
       properties.height = 450;
     }
+
+    replaceExistingProperties(properties, ['width', 'height', 'x', 'y', 'fullscreen']);
+
     if (args.includes('--big')) {
       properties.width = 1500;
       properties.height = 600;
     }
-    if (args.includes('--cosmos')) {
-      const panelHeight = 26;
-      properties.fullscreen = false;
-      properties.width = 800;
-      properties.height = 480 - panelHeight;
-      properties.y = panelHeight;
-    }
 
-    if (!globals.dev) {
+    // if (args.includes('--cosmos')) {
+    //   const panelHeight = 26;
+    //   properties.fullscreen = false;
+    //   properties.width = 800;
+    //   properties.height = 480 - panelHeight;
+    //   properties.y = panelHeight;
+    // }
+
+    if (globals.dev) {
+      globals.url = 'http://localhost:4200';
+      properties.frame = true;
+      properties.fullscreen = false;
+    } else {
       const { protocol, session } = require('electron');
       const createProtocol = require('./helper/protocol');
 
       const scheme = 'app';
       protocol.registerSchemesAsPrivileged([{ scheme, privileges: { standard: true } }]);
       createProtocol(scheme, path.join(__dirname, 'dist'));
-
-      const locale = require('./helper/locale.js').getLocale();
-      globals.url = `file://${__dirname}/dist/${locale}/index.html`;
 
       session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
         callback({
@@ -58,8 +73,9 @@ module.exports = {
           },
         });
       });
-    } else {
-      globals.url = 'http://localhost:4200';
+
+      const locale = require('./helper/locale.js').getLocale();
+      globals.url = `file://${__dirname}/dist/${locale}/index.html`;
     }
 
     return properties;
