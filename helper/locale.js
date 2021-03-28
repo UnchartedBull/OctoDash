@@ -11,7 +11,7 @@ module.exports = {
       // if not defined, set it to the source locale
       lang = process.env['LANG']
         ? process.env['LANG'].split('.')[0].replace('_', '-')
-        : i18n.sourceLocale;
+        : i18n.sourceLocale.code;
     } catch(e) {
       // LANG was populated with something else than a standard locale code
       lang = i18n.souceLocale;
@@ -24,7 +24,7 @@ module.exports = {
     // This matches 'fr-CA' to 'fr' if 'fr-CA' is not defined but 'fr' is
     const approximateLocale = Object.keys(i18n.locales).includes(shortLang) && shortLang;
     // Define locale by either the exact, approximate, or source locale in this order
-    const locale = exactLocale || approximateLocale || i18n.sourceLocale;
+    const locale = exactLocale || approximateLocale || i18n.sourceLocale.code;
     console.info('selected language: ' + locale);
     return locale;
   },
