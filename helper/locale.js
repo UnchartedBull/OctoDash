@@ -2,7 +2,7 @@ module.exports = {
 
   // returns the correct supported locale given the LANG variable
   getLocale() {
-    const angularConf = require('../angular.json')
+    const angularConf = require('../angular.json');
     const i18n = angularConf.projects.OctoDash.i18n;
     let lang;
     try {
@@ -42,7 +42,7 @@ module.exports = {
     let translatedXLFs = [];
     const filenames = fs.readdirSync('./src/locale');
     for (filename of filenames) {
-      const match = filename.match(/messages.(..|..-..).xlf/)
+      const match = filename.match(/messages.(..|..-..).xlf/);
       if (match) {
         const lang = match[1];
         translatedXLFs.push({ filename, lang });
@@ -63,7 +63,7 @@ module.exports = {
           if (err) throw new Error(err.message);
 
           // hard copy of messages.xlf
-          const newTranslation = JSON.parse(JSON.stringify(extracted))
+          const newTranslation = JSON.parse(JSON.stringify(extracted));
           newTranslation.targetLanguage = translated.targetLanguage;
           // transfer the locale's translations to the copy of the extracted locale
           for (id in newTranslation.resources['ng2.template']) {
@@ -77,18 +77,18 @@ module.exports = {
           // backup the previous version of the locale and write the new locale
           xliff.jsToXliff12(newTranslation, (err, result) => {
             if (err) throw new Error(err.message);
-            const now = new Date()
+            const now = new Date();
             fs.renameSync(
               `./src/locale/${translatedXLFRef.filename}`,
               `./src/locale/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`
             );
-            console.info(`updating ${translatedXLFRef.filename}...`)
+            console.info(`updating ${translatedXLFRef.filename}...`);
             fs.writeFileSync(`./src/locale/${translatedXLFRef.filename}`, result);
           })
         })
       }
       // remove extracted messages
-      fs.unlinkSync('./src/locale/messages.xlf')
+      fs.unlinkSync('./src/locale/messages.xlf');
     })
   }
 };
