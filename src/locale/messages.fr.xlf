@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
-        <target>Impossible de récupérer la température du boîtier !</target>
+        <target>Impossible de récupérer la température de l'enceinte !</target>
       </trans-unit>
       <trans-unit id="error-restart" datatype="html">
         <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="select-instance" datatype="html">
         <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target> Tout d'abord: veuillez entrer votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
+        <target> Tout d'abord: veuillez selectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
         <source> Version 
@@ -310,7 +310,7 @@
       </trans-unit>
       <trans-unit id="follow-printer-screen" datatype="html">
         <source>follow the instructions on your printers' display</source>
-        <target>suivez les instructions sur l'affichage de votre imprimantes</target>
+        <target>suivez les instructions sur l'affichage de votre imprimante</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -483,6 +483,10 @@
       <trans-unit id="job-filament-g" datatype="html">
         <source> g Filament </source>
         <target> g de filament </target>
+      </trans-unit>
+      <trans-unit id="job-info__time-left" datatype="html">
+        <source> left,</source>
+        <target> restant,</target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
         <source>elapsed:</source>
@@ -658,7 +662,7 @@
       </trans-unit>
       <trans-unit id="error-spool-id" datatype="html">
         <source>Spool IDs didn't match</source>
-        <target>Les ID de spool ne correspondent pas</target>
+        <target>Les ID des bobines ne correspondent pas</target>
       </trans-unit>
       <trans-unit id="error-change-spool" datatype="html">
         <source>Can't change spool. Please change spool manually in the OctoPrint UI.</source>
@@ -834,7 +838,7 @@
       </trans-unit>
       <trans-unit id="general-default" datatype="html">
         <source>Default Temperatures &amp; Fan Speed</source>
-        <target>Températures par défaut et vitesse du ventilateur</target>
+        <target>Températures et vitesse par défaut du ventilateur</target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
         <source> Hotend 
@@ -909,7 +913,7 @@
       </trans-unit>
       <trans-unit id="general-warning" datatype="html">
         <source> Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your Feed Speed to high and your Feed Length to long. </source>
-        <target> Veuillez définir ces valeurs avec soin, car elles pourraient endommager certaines parties de votre imprimante. Ne réglez pas votre vitesse d'alimentation sur rapide et votre longueur d'alimentation sur longue. </target>
+        <target> Veuillez définir ces valeurs avec soin, car elles pourraient endommager certaines parties de votre imprimante. Ne réglez pas simplement votre vitesse d'alimentation sur rapide et votre longueur d'alimentation sur longue. </target>
       </trans-unit>
       <trans-unit id="octodash-general" datatype="html">
         <source>General</source>
