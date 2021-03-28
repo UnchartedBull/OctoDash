@@ -14,7 +14,7 @@ module.exports = {
         : i18n.sourceLocale.code;
     } catch(e) {
       // LANG was populated with something else than a standard locale code
-      lang = i18n.souceLocale;
+      lang = i18n.sourceLocale.code;
     }
     // Check if exact LANG exists in our locales
     const exactLocale = Object.keys(i18n.locales).includes(lang) && lang;
