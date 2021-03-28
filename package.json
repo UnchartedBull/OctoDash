@@ -69,7 +69,7 @@
     "pack:mac": "npm run ng:build && electron-builder build -m",
     "ng:serve": "ng serve $npm_config_serve",
     "ng:build": "ng build --prod",
-    "extract:locale": "ng extract-i18n --output-path src/locale"
+    "locale:extract": "ng extract-i18n --output-path src/locale"
   },
   "private": true,
   "dependencies": {
