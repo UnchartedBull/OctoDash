@@ -272,4 +272,8 @@ export class ConfigService {
   public getScreenWakeupCommand(): string {
     return this.config.octodash.screenWakeupCommand;
   }
+
+  public getShowExtruderControl(): boolean {
+    return this.config.octodash.showExtruderControl;
+  }
 }

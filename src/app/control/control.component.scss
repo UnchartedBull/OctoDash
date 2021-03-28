@@ -1,25 +1,21 @@
 .control {
-  border: solid yellow;
   margin-top: 5vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   &-jog {
-    border: solid blue;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 
     &-arrows {
-      border: solid green;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
 
       &__XY {
-        border: solid white;
         display: block;
         height: 60vh;
         text-align: center;
@@ -27,7 +23,6 @@
         overflow: visible;
 
         &-wrapper {
-          border: solid red;
           position: relative;
           width: 35vw;
           height: 50vh;
@@ -36,8 +31,7 @@
         }
       }
 
-      &__Z {
-        border: solid white;
+      &__vertical {
         display: block;
         height: 60vh;
         text-align: center;
@@ -45,7 +39,6 @@
         overflow: visible;
 
         &-wrapper {
-          border: solid red;
           position: relative;
           width: 10vw;
           height: 50vh;
@@ -111,7 +104,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: solid red;
     }
 
     &-field {
@@ -152,7 +144,6 @@
 }
 
 app-custom-actions {
-  border: solid black;
   float: right;
   height: 75vh;
   overflow-y: scroll;

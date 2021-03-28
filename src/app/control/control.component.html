@@ -73,8 +73,8 @@
         <span class="control__heading">X / Y</span>
       </div>
 
-      <div class="control-jog-arrows__Z">
-        <div class="control-jog-arrows__Z-wrapper">
+      <div class="control-jog-arrows__vertical">
+        <div class="control-jog-arrows__vertical-wrapper">
           <fa-icon
             [icon]="['fas', 'angle-up']"
             class="control__icon control__icon-5"
@@ -93,6 +93,28 @@
           ></fa-icon>
         </div>
         <span class="control__heading">Z</span>
+      </div>
+
+      <div class="control-jog-arrows__vertical" *ngIf="showExtruder">
+        <div class="control-jog-arrows__vertical-wrapper">
+          <fa-icon
+            [icon]="['fas', 'angle-up']"
+            class="control__icon control__icon-5"
+            (click)="extrude('-')"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true"
+          ></fa-icon>
+          <fa-icon
+            [icon]="['fas', 'angle-down']"
+            class="control__icon control__icon-6"
+            (click)="extrude('+')"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true"
+          ></fa-icon>
+        </div>
+        <span class="control__heading">E</span>
       </div>
     </div>
 
