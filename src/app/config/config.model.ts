@@ -90,6 +90,7 @@ interface OctoDash {
   screenSleepCommand: string;
   screenWakeupCommand: string;
   showExtruderControl: boolean;
+  window: Window;
 }
 
 export interface CustomAction {
@@ -103,4 +104,12 @@ export interface CustomAction {
 interface FileSorting {
   attribute: 'name' | 'date' | 'size';
   order: 'asc' | 'dsc';
+}
+
+interface Window {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  fullscreen: boolean;
 }

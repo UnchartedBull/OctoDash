@@ -322,6 +322,32 @@ const configSchema = {
           $id: '#/properties/octodash/properties/showExtruderControl',
           type: 'boolean',
         },
+        window: {
+          $id: '#/properties/octodash/properties/window',
+          type: 'object',
+          properties: {
+            width: {
+              $id: '#/properties/octodash/properties/window/width',
+              type: 'number',
+            },
+            height: {
+              $id: '#/properties/octodash/properties/window/height',
+              type: 'number',
+            },
+            x: {
+              $id: '#/properties/octodash/properties/window/x',
+              type: 'number',
+            },
+            y: {
+              $id: '#/properties/octodash/properties/window/y',
+              type: 'number',
+            },
+            fullscreen: {
+              $id: '#/properties/octodash/properties/window/fullscreen',
+              type: 'boolean',
+            },
+          },
+        },
       },
     },
   },
