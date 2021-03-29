@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="error-restart" datatype="html">
         <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez ouvrez un ticket.</target>
+        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
       </trans-unit>
       <trans-unit id="invalid-config" datatype="html">
         <source>Your config is invalid!</source>
