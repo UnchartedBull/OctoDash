@@ -238,6 +238,8 @@ export class PrintControlComponent implements OnInit, OnDestroy {
     // gotta love JS for that one.
     this.zOffset = Math.round((this.zOffset + value) * 100) / 100;
     this.printerService.executeGCode(`${this.configService.getZBabystepGCode()}${value}`);
+    // save babystepZ to EEPROM
+    this.printerService.executeGCode('M500');
   }
 }
 
