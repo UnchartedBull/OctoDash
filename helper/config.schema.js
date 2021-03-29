@@ -344,6 +344,10 @@ const configSchema = {
           type: 'string',
           pattern: '^(.*)$',
         },
+        showExtruderControl: {
+          $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
+        },
       },
     },
   },
