@@ -185,6 +185,30 @@ export class ConfigService {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
 
+  public useTasmota(): boolean {
+    return this.config.plugins.tasmota.enabled;
+  }
+
+  public getTasmotaIP(): string {
+    return this.config.plugins.tasmota.ip;
+  }
+
+  public getTasmotaIndex(): number {
+    return this.config.plugins.tasmota.index;
+  }
+
+  public useTasmotaMqtt(): boolean {
+    return this.config.plugins.tasmotaMqtt.enabled;
+  }
+
+  public getTasmotaMqttTopic(): string {
+    return this.config.plugins.tasmotaMqtt.topic;
+  }
+
+  public getTasmotaMqttRelayNumber(): number {
+    return this.config.plugins.tasmotaMqtt.relayNumber;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }
