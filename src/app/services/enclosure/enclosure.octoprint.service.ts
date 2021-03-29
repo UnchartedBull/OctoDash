@@ -117,7 +117,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     const tasmotaPayload: TasmotaCommand = {
       command: state === PSUState.ON ? 'turnOn' : 'turnOff',
       ip: this.configService.getTasmotaIP(),
-      idx: this.configService.getTasmotaIdx(),
+      idx: this.configService.getTasmotaIndex(),
     };
 
     this.http
@@ -130,7 +130,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     const tasmotaMqttPayload: TasmotaMqttCommand = {
       command: state === PSUState.ON ? 'turnOn' : 'turnOff',
       topic: this.configService.getTasmotaMqttTopic(),
-      relayN: this.configService.getTasmotaMqttRelayN(),
+      relayN: this.configService.getTasmotaMqttRelayNumber(),
     };
 
     this.http

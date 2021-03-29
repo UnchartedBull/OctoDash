@@ -193,8 +193,8 @@ export class ConfigService {
     return this.config.plugins.tasmota.ip;
   }
 
-  public getTasmotaIdx(): number {
-    return this.config.plugins.tasmota.idx;
+  public getTasmotaIndex(): number {
+    return this.config.plugins.tasmota.index;
   }
 
   public useTasmotaMqtt(): boolean {
@@ -205,8 +205,8 @@ export class ConfigService {
     return this.config.plugins.tasmotaMqtt.topic;
   }
 
-  public getTasmotaMqttRelayN(): number {
-    return this.config.plugins.tasmotaMqtt.relayN;
+  public getTasmotaMqttRelayNumber(): number {
+    return this.config.plugins.tasmotaMqtt.relayNumber;
   }
 
   public getFilamentThickness(): number {

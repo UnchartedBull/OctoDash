@@ -82,12 +82,12 @@ interface TPLinkSmartPlugPlugin extends Plugin {
 
 interface TasmotaPlugin extends Plugin {
   ip: string;
-  idx: number;
+  index: number;
 }
 
 interface TasmotaMqttPlugin extends Plugin {
   topic: string;
-  relayN: number;
+  relayNumber: number;
 }
 
 interface OctoDash {

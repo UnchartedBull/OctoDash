@@ -623,7 +623,7 @@
             class="settings__input"
             name="tasmota-idx"
             style="width: 44.94vw"
-            [(ngModel)]="config.plugins.tasmota.idx"
+            [(ngModel)]="config.plugins.tasmota.index"
             [disabled]="!config.plugins.tasmota.enabled"
           />
           <span class="settings__heading-2">Tasmota MQTT</span>
@@ -654,7 +654,7 @@
             class="settings__input"
             name="tasmotaMqtt-relayN"
             style="width: 44.94vw"
-            [(ngModel)]="config.plugins.tasmotaMqtt.relayN"
+            [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
             [disabled]="!config.plugins.tasmotaMqtt.enabled"
           />
         </div>

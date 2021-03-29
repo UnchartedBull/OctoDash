@@ -56,12 +56,12 @@ export const defaultConfig: Config = {
     tasmota: {
       enabled: false,
       ip: '127.0.0.1',
-      idx: null,
+      index: null,
     },
     tasmotaMqtt: {
       enabled: false,
       topic: 'topic',
-      relayN: null,
+      relayNumber: null,
     },
   },
   octodash: {
