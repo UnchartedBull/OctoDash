@@ -8,14 +8,22 @@ let store;
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(configSchema);
 
-function readConfig(window) {
+function fetchConfig(window) {
   try {
     if (!store) {
       store = new Store();
     }
-    const config = store.get('config');
-    window.webContents.send('configRead', config);
+    return store.get('config')
   } catch {
+    return null
+  }
+}
+
+function readConfig(window) {
+  const config = fetchConfig()
+  if (config) {
+    window.webContents.send('configRead', config);
+  } else {
     window.webContents.send('configError', "Can't read config file.");
   }
 }
@@ -53,4 +61,4 @@ function getConfigErrors() {
   return errors;
 }
 
-module.exports = { readConfig, saveConfig, checkConfig };
+module.exports = { fetchConfig, readConfig, saveConfig, checkConfig };

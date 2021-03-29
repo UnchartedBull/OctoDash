@@ -112,5 +112,12 @@ export const defaultConfig: Config = {
     screenSleepCommand: 'xset dpms force standby',
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
     showExtruderControl: false,
+    window: {
+      width: null,
+      height: null,
+      x: null,
+      y: null,
+      fullscreen: null,
+    }
   },
 };

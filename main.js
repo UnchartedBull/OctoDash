@@ -13,32 +13,39 @@ const globals = {
   window: null,
   url: null,
   dev: false,
-  mainScreen: screen.getPrimaryDisplay(),
+  mainScreen: null,
 };
 
-const windowProperties = electron.configure(globals, process.argv.slice(1))
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
-app.on('ready', () => {
+function createWindow() {
   const _store = new Store();
-  window = new BrowserWindow(windowProperties);
+  globals.mainScreen = screen.getPrimaryDisplay();
+
+  window = new BrowserWindow(
+    electron.configure(globals, process.argv.slice(1))
+  );
+
   if (globals.dev) {
     window.webContents.openDevTools();
   }
+
   window.loadURL(globals.url);
-  activateListeners(ipcMain, window, app, url);
+  activateListeners(ipcMain, window, app, globals.url);
 
   window.on('closed', () => {
     window = null;
   });
-});
+}
 
-app.on('window-all-closed', () => {
-  app.quit();
-});
+app.on('ready', createWindow);
 
 app.on('activate', () => {
   if (window === null) {
     createWindow();
   }
+});
+
+app.on('window-all-closed', () => {
+  app.quit();
 });

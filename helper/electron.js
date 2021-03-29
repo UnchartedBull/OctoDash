@@ -1,20 +1,52 @@
-const { readConfig } = require('./config');
+const path = require('path');
+const { fetchConfig } = require('./config.js');
 
-function replaceExistingProperties(config, properties, keys, path) {
-  const config = readConfig()
+function replaceExistingProperties(properties, config, keys) {
   for (key of keys) {
-    if (config[path][key]) {
-      properties[key] = config[path][key];
+    if (config[key]) {
+      properties[key] = config[key];
     }
+  }
+}
+
+function configureWindow(properties, args, globals) {
+  // ordered so that --serve and --big can be used single or combined
+  // --big overrides custom properties as it explicitly asks for a size
+
+  if (args.includes('--serve')) {
+    globals.dev = true;
+    properties.width = 1200;
+    properties.height = 450;
+  }
+
+  if (globals.dev) {
+    properties.frame = true;
+    properties.fullscreen = false;
+  }
+
+  const config = fetchConfig()
+  replaceExistingProperties(
+    properties,
+    config.octodash.window,
+    ['width', 'height', 'x', 'y', 'fullscreen'],
+  );
+
+  if (args.includes('--big')) {
+    properties.width = 1500;
+    properties.height = 600;
   }
 }
 
 module.exports = {
   configure(globals, args) {
 
+    // defaults
     const properties = {
       frame: false,
       fullscreen: true,
+      // width and height web treated as page size
+      // actual window size will include the frame/devtools and be larger
+      useContentSize: true,
       width: globals.mainScreen.size.width,
       height: globals.mainScreen.size.height,
       x: 0,
@@ -29,33 +61,10 @@ module.exports = {
       icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
     };
 
-    // ordered so that --serve and --big can be used single or combined
-    // --big overrides custom properties as it explicitly asks for a size
-    if (args.includes('--serve')) {
-      globals.dev = true;
-      properties.width = 1200;
-      properties.height = 450;
-    }
-
-    replaceExistingProperties(properties, ['width', 'height', 'x', 'y', 'fullscreen']);
-
-    if (args.includes('--big')) {
-      properties.width = 1500;
-      properties.height = 600;
-    }
-
-    // if (args.includes('--cosmos')) {
-    //   const panelHeight = 26;
-    //   properties.fullscreen = false;
-    //   properties.width = 800;
-    //   properties.height = 480 - panelHeight;
-    //   properties.y = panelHeight;
-    // }
+    configureWindow(properties, args, globals);
 
     if (globals.dev) {
       globals.url = 'http://localhost:4200';
-      properties.frame = true;
-      properties.fullscreen = false;
     } else {
       const { protocol, session } = require('electron');
       const createProtocol = require('./helper/protocol');
@@ -78,6 +87,7 @@ module.exports = {
       globals.url = `file://${__dirname}/dist/${locale}/index.html`;
     }
 
+    console.debug({ properties })
     return properties;
   },
 };
