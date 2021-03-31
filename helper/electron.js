@@ -25,11 +25,13 @@ function configureWindow(properties, args, globals) {
   }
 
   const config = fetchConfig()
-  replaceExistingProperties(
-    properties,
-    config.octodash.window,
-    ['width', 'height', 'x', 'y', 'fullscreen'],
-  );
+  if (config.octodash.window) {
+    replaceExistingProperties(
+      properties,
+      config.octodash.window,
+      ['width', 'height', 'x', 'y', 'fullscreen'],
+    );
+  }
 
   if (args.includes('--big')) {
     properties.width = 1500;

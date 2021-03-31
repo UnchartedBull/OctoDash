@@ -8,15 +8,17 @@ let store;
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(configSchema);
 
-function fetchConfig(window) {
+function fetchConfig() {
+  let config;
   try {
     if (!store) {
       store = new Store();
     }
-    return store.get('config')
-  } catch {
-    return null
+    config = store.get('config')
+  } catch (e) {
+    console.error(e.message);
   }
+  return config;
 }
 
 function readConfig(window) {
