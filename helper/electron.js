@@ -72,10 +72,6 @@ module.exports = {
           },
         });
       });
-
-      // const createProtocol = require('./protocol.js');
-      // createProtocol(globals.scheme, path.join(__dirname, 'dist'));
-
       properties.url = 'file://' + getPath('index.html');
     }
 

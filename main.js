@@ -11,12 +11,6 @@ const electron = require('./helper/electron.js');
 
 let window;
 
-app.commandLine.appendSwitch('touch-events', 'enabled');
-// protocol.registerSchemesAsPrivileged([{
-//   scheme: globals.scheme,
-//   privileges: { standard: true }
-// }]);
-
 function createWindow() {
   const _store = new Store();
   const properties = electron.configure(process.argv.slice(1))
@@ -35,14 +29,8 @@ function createWindow() {
   });
 }
 
+app.commandLine.appendSwitch('touch-events', 'enabled');
+
 app.on('ready', createWindow);
-
-app.on('activate', () => {
-  if (window === null) {
-    createWindow();
-  }
-});
-
-app.on('window-all-closed', () => {
-  app.quit();
-});
+app.on('activate', () => window ? null : createWindow())
+app.on('window-all-closed', () => app.quit());
