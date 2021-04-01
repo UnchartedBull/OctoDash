@@ -346,6 +346,10 @@ const configSchema = {
               $id: '#/properties/octodash/properties/window/fullscreen',
               type: 'boolean',
             },
+            backgroundColor: {
+              $id: '#/properties/octodash/properties/window/backgroundColor',
+              type: 'string',
+            },
           },
         },
       },
