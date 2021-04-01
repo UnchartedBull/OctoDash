@@ -118,6 +118,7 @@ export const defaultConfig: Config = {
       x: null,
       y: null,
       fullscreen: null,
+      backgroundColor: null,
     }
   },
 };

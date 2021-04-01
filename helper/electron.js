@@ -80,7 +80,7 @@ module.exports = {
       replaceExistingProperties(
         properties.window,
         config.octodash.window,
-        ['width', 'height', 'x', 'y', 'fullscreen'],
+        ['width', 'height', 'x', 'y', 'fullscreen', 'backgroundColor'],
       );
     }
 

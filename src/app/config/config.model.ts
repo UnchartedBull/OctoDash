@@ -112,4 +112,5 @@ interface Window {
   x: number;
   y: number;
   fullscreen: boolean;
+  backgroundColor: string;
 }
