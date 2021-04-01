@@ -3,35 +3,32 @@
 
 require('v8-compile-cache');
 
-const { app, BrowserWindow, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const Store = require('electron-store');
 
 const activateListeners = require('./helper/listener');
 const electron = require('./helper/electron.js');
 
-const globals = {
-  window: null,
-  url: null,
-  dev: false,
-  mainScreen: null,
-};
+let window;
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
+// protocol.registerSchemesAsPrivileged([{
+//   scheme: globals.scheme,
+//   privileges: { standard: true }
+// }]);
 
 function createWindow() {
   const _store = new Store();
-  globals.mainScreen = screen.getPrimaryDisplay();
+  const properties = electron.configure(process.argv.slice(1))
 
-  window = new BrowserWindow(
-    electron.configure(globals, process.argv.slice(1))
-  );
+  window = new BrowserWindow(properties.window);
 
-  if (globals.dev) {
+  if (properties.dev) {
     window.webContents.openDevTools();
   }
 
-  window.loadURL(globals.url);
-  activateListeners(ipcMain, window, app, globals.url);
+  window.loadURL(properties.url);
+  activateListeners(ipcMain, window, app, properties.url);
 
   window.on('closed', () => {
     window = null;
