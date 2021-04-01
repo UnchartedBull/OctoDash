@@ -7,7 +7,7 @@ const { getLocale } = require('./locale.js');
 // replaces properties in <properties> from <config> when it exists
 function replaceExistingProperties(properties, config, keys) {
   for (key of keys) {
-    if (config[key]) {
+    if (config[key] !== undefined) {
       properties[key] = config[key];
     }
   }
