@@ -47,7 +47,7 @@ body {
 
 app-root {
   display: block;
-  background-color: #353b48;
+  background-color: #000000;
   padding: 0.9vh 0.9vw;
   overflow: hidden;
 }
@@ -138,7 +138,7 @@ app-root {
 
 .splash-screen {
   &__icon {
-    height: 50vh;
+    height: 40vh;
     margin-top: 20vh;
     margin-left: auto;
     margin-right: auto;
