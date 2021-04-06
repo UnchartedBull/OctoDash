@@ -12,6 +12,13 @@
     font-family: 'Arvo';
   }
 
+  &__logo {
+    display: block;
+    height: 48px;
+    max-width: 100vw;
+    margin: 4vh auto 0 auto;
+  }
+
   &__settings-icon {
     width: 7vw;
     float: right;

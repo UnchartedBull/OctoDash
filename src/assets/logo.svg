@@ -1,0 +1,25 @@
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="100mm"
+   height="17mm"
+   viewBox="0 0 100 17"
+   >
+  <g>
+    <text style="font-family:Arvo;font-weight:bold;font-size:19.5px;">
+      <tspan
+        x="0"
+        y="16"
+        style="fill:white;"
+      >
+        OctoDash
+      </tspan>
+      <tspan
+        x="95"
+        y="15.8"
+        style="fill:#14c141;"
+      >
+        .
+      </tspan>
+    </text>
+  </g>
+</svg>
