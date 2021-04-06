@@ -56,4 +56,16 @@
       TPLink SmartPlug
     </ng-container>
   </div>
+  <div class="setup__checkbox-container" (click)="changeTasmotaPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="tasmotaPlugin"></span>
+    </span>
+    Tasmota
+  </div>
+  <div class="setup__checkbox-container" (click)="changeTasmotaMqttPlugin()">
+    <span class="setup__checkbox">
+      <span class="setup__checkbox-checked" *ngIf="tasmotaMqttPlugin"></span>
+    </span>
+    Tasmota MQTT
+  </div>
 </div>

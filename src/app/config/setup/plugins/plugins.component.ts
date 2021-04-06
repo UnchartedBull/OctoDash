@@ -13,6 +13,8 @@ export class PluginsComponent {
   @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
   @Input() tpLinkSmartPlugPlugin: boolean;
+  @Input() tasmotaPlugin: boolean;
+  @Input() tasmotaMqttPlugin: boolean;
 
   @Output() displayLayerProgressPluginChange = new EventEmitter<boolean>();
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
@@ -21,6 +23,8 @@ export class PluginsComponent {
   @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();
   @Output() tpLinkSmartPlugPluginChange = new EventEmitter<boolean>();
+  @Output() tasmotaPluginChange = new EventEmitter<boolean>();
+  @Output() tasmotaMqttPluginChange = new EventEmitter<boolean>();
 
   public changeDisplayLayerProgressPlugin(): void {
     this.displayLayerProgressPlugin = !this.displayLayerProgressPlugin;
@@ -55,5 +59,15 @@ export class PluginsComponent {
   public changeTPLinkSmartPlugPlugin(): void {
     this.tpLinkSmartPlugPlugin = !this.tpLinkSmartPlugPlugin;
     this.tpLinkSmartPlugPluginChange.emit(this.tpLinkSmartPlugPlugin);
+  }
+
+  public changeTasmotaPlugin(): void {
+    this.tasmotaPlugin = !this.tasmotaPlugin;
+    this.tasmotaPluginChange.emit(this.tasmotaPlugin);
+  }
+
+  public changeTasmotaMqttPlugin(): void {
+    this.tasmotaMqttPlugin = !this.tasmotaMqttPlugin;
+    this.tasmotaMqttPluginChange.emit(this.tasmotaMqttPlugin);
   }
 }

@@ -56,6 +56,8 @@ interface Plugins {
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
+  tasmota: TasmotaPlugin;
+  tasmotaMqtt: TasmotaMqttPlugin;
 }
 
 interface Plugin {
@@ -76,6 +78,16 @@ interface PSUControlPlugin extends Plugin {
 
 interface TPLinkSmartPlugPlugin extends Plugin {
   smartPlugIP: string;
+}
+
+interface TasmotaPlugin extends Plugin {
+  ip: string;
+  index: number;
+}
+
+interface TasmotaMqttPlugin extends Plugin {
+  topic: string;
+  relayNumber: number;
 }
 
 interface OctoDash {

@@ -10,6 +10,28 @@ $OctoDash-warn: mat-palette($mat-red);
 $OctoDash-theme: mat-dark-theme($OctoDash-primary, $OctoDash-accent, $OctoDash-warn);
 @include angular-material-theme($OctoDash-theme);
 
+@font-face {
+  font-family: Arvo;
+  src: url(assets/fonts/Arvo-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: Cousine;
+  src: url(assets/fonts/Cousine-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  src: url(assets/fonts/Montserrat-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  src: url(assets/fonts/Montserrat-Medium.ttf) format('truetype');
+}
+
 *:not(path):not(svg) {
   font-family: 'Montserrat', sans-serif;
   color: #f5f6fa;
