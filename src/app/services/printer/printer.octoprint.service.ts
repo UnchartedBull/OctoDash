@@ -41,6 +41,10 @@ export class PrinterOctoprintService implements PrinterService {
       );
   }
 
+  saveToEPROM(): void {
+    this.executeGCode('M500');
+  }
+
   public executeGCode(gCode: string): void {
     const gCodePayload: GCodeCommand = {
       commands: gCode.split('; '),
