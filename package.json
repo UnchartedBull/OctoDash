@@ -58,7 +58,7 @@
     "start:big": "npm-run-all -p ng:serve electron:serve:big",
     "build": "npm run ng:build && electron .",
     "test": "",
-    "lint": "eslint ./src/ -c .eslintrc.js --ext .ts",
+    "lint": "eslint ./src/ -c .eslintrc.js --ext .ts --max-warnings=0",
     "lint:fix": "eslint ./src/ -c .eslintrc.js --ext .ts --fix",
     "electron": "electron .",
     "electron:dev": "electron . --serve --big",

@@ -10,9 +10,9 @@ import {
   EnclosureOutputBody,
   EnclosurePluginAPI,
   PSUControlCommand,
-  TPLinkCommand,
   TasmotaCommand,
   TasmotaMqttCommand,
+  TPLinkCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
@@ -134,7 +134,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.configService.getApiURL('plugin/tasmota_mqtt'), tasmotaMqttPayload, this.configService.getHTTPHeaders())
+      .post(
+        this.configService.getApiURL('plugin/tasmota_mqtt'),
+        tasmotaMqttPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
       .subscribe();
   }
