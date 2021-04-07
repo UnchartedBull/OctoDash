@@ -1,4 +1,4 @@
-name: Automatically approve and merge PRs by dependabot
+name: Dependencies
 
 on:
   pull_request:
@@ -7,23 +7,23 @@ on:
 
 jobs:
   auto-approve:
-    name: Auto Approve a PR by dependabot
+    name: Approve
     runs-on: ubuntu-latest
     steps:
-      - name: Auto approve
+      - name: Auto Approve
         uses: hmarr/auto-approve-action@v2
         if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
-          github-token: ${{ secrets.ACTIONS_TOKEN }}
+          github-token: '${{ secrets.ACTIONS_TOKEN }}'
   auto-merge:
-    name: Auto Merge after successful checks
+    name: Merge
     needs: auto-approve
     runs-on: ubuntu-latest
     steps:
-      - name: Auto merge
+      - name: Auto Merge
         uses: pascalgn/automerge-action@v0.13.1
         if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
-          MERGE_LABELS: dependencies
-          MERGE_METHOD: squash
+          GITHUB_TOKEN: '${{ secrets.ACTIONS_TOKEN }}'
+          MERGE_LABELS: 'dependencies'
+          MERGE_METHOD: 'squash'
