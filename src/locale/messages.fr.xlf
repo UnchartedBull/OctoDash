@@ -486,7 +486,7 @@
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
         <source> left,</source>
-        <target> restant,</target>
+        <target> restant, </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
         <source>elapsed:</source>
