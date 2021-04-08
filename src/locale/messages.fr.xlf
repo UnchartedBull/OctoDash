@@ -578,7 +578,7 @@
       </trans-unit>
       <trans-unit id="adjust-hotend" datatype="html">
         <source>Hotend</source>
-        <target>Buse d'impression</target>
+        <target>Buse</target>
       </trans-unit>
       <trans-unit id="adjust-heatbed" datatype="html">
         <source>Heatbed</source>
@@ -586,7 +586,7 @@
       </trans-unit>
       <trans-unit id="adjust-fanspeed" datatype="html">
         <source>Fan Speed</source>
-        <target>Vitesse du ventilateur</target>
+        <target>Ventilateur</target>
       </trans-unit>
       <trans-unit id="offset-mm" datatype="html">
         <source>mm</source>
