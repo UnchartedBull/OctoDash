@@ -8,7 +8,6 @@ on:
 jobs:
   auto-approve:
     name: Approve
-    needs: [build, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Auto Approve
@@ -18,7 +17,7 @@ jobs:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:
     name: Merge
-    needs: [build, lint, auto-approve]
+    needs: auto-approve
     runs-on: ubuntu-latest
     steps:
       - name: Auto Merge
@@ -28,3 +27,5 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           MERGE_METHOD: 'squash'
           MERGE_LABELS: 'dependencies'
+          MERGE_RETRIES: 15
+          MERGE_RETRY_SLEEP: 60000
