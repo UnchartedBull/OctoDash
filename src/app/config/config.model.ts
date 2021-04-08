@@ -93,6 +93,7 @@ interface TasmotaMqttPlugin extends Plugin {
 interface OctoDash {
   customActions: CustomAction[];
   fileSorting: FileSorting;
+  invertAxisControl: InvertAxisControl;
   pollingInterval: number;
   touchscreen: boolean;
   turnScreenOffWhileSleeping: boolean;
@@ -125,4 +126,9 @@ interface Window {
   y: number;
   fullscreen: boolean;
   backgroundColor: string;
+}
+interface InvertAxisControl {
+  x: boolean;
+  y: boolean;
+  z: boolean;
 }

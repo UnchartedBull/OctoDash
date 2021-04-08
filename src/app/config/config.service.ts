@@ -300,4 +300,16 @@ export class ConfigService {
   public getShowExtruderControl(): boolean {
     return this.config.octodash.showExtruderControl;
   }
+
+  public isXAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.x;
+  }
+
+  public isYAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.y;
+  }
+
+  public isZAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.z;
+  }
 }

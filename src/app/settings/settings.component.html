@@ -313,7 +313,10 @@
             class="settings__checkbox-container"
             [ngClass]="{
               'settings__checkbox-container-disabled': !(
-                config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled || config.plugins.tasmotaMqtt.enabled
+                config.plugins.psuControl.enabled ||
+                config.plugins.tpLinkSmartPlug.enabled ||
+                config.plugins.tasmota.enabled ||
+                config.plugins.tasmotaMqtt.enabled
               )
             }"
             (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep"
@@ -323,7 +326,10 @@
                 class="settings__checkbox-checked"
                 [ngClass]="{
                   'settings__checkbox-checked-disabled': !(
-                    config.plugins.psuControl.enabled || config.plugins.tpLinkSmartPlug.enabled || config.plugins.tasmota.enabled || config.plugins.tasmotaMqtt.enabled
+                    config.plugins.psuControl.enabled ||
+                    config.plugins.tpLinkSmartPlug.enabled ||
+                    config.plugins.tasmota.enabled ||
+                    config.plugins.tasmotaMqtt.enabled
                   )
                 }"
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
@@ -352,6 +358,35 @@
             <span class="settings__checkbox-descriptor" i18n="@@always-circular">Always use circular progress bar</span>
           </div>
           <br />
+          <span class="settings__heading-2">Invert Axis Control</span>
+          <div
+            class="settings__checkbox-container settings__checkbox-container__space-right"
+            (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.x"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">X</span>
+          </div>
+          <div
+            class="settings__checkbox-container settings__checkbox-container__space-right"
+            (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.y"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Y</span>
+          </div>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.z"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Z</span>
+          </div>
+
           <span class="settings__heading-2" i18n="@@octodash-files">Files</span>
           <table class="settings__files">
             <tr>
@@ -648,12 +683,12 @@
             required
             [disabled]="!config.plugins.tasmotaMqtt.enabled"
           />
-          <label for="tasmotaMqtt-relayN" class="settings__input-label">RelayN</label>
+          <label for="tasmotaMqtt-relayNumber" class="settings__input-label">Relay Number</label>
           <input
             type="number"
-            id="tasmotaMqtt-relayN"
+            id="tasmotaMqtt-relayNumber"
             class="settings__input"
-            name="tasmotaMqtt-relayN"
+            name="tasmotaMqtt-relayNumber"
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
             [disabled]="!config.plugins.tasmotaMqtt.enabled"

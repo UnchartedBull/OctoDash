@@ -113,6 +113,11 @@ export const defaultConfig: Config = {
       attribute: 'name',
       order: 'asc',
     },
+    invertAxisControl: {
+      x: false,
+      y: false,
+      z: false,
+    },
     pollingInterval: 2000,
     touchscreen: true,
     turnScreenOffWhileSleeping: false,
