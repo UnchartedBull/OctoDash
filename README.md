@@ -1,11 +1,10 @@
 <p align="center">
     <img width="300" height="300" src="./src/assets/icon/icon-main-dark-title.svg">
     <br><br>
-    <img src="https://travis-ci.org/UnchartedBull/OctoDash.svg?branch=main">
-    <img src="https://www.codefactor.io/repository/github/unchartedbull/octodash/badge">
-    <img src="https://img.shields.io/github/issues/UnchartedBull/OctoDash.svg">
-    <img src="https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash.svg">
-    <img src="https://img.shields.io/github/downloads/UnchartedBull/OctoDash/total.svg?color=brightgreen">
+    <img src="https://img.shields.io/github/workflow/status/UnchartedBull/OctoDash/build/main?style=for-the-badge">
+    <img src="https://img.shields.io/codefactor/grade/github/UnchartedBull/OctoDash/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/package-json/v/UnchartedBull/OctoDash/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/downloads/UnchartedBull/OctoDash/latest/total?color=lightgrey&style=for-the-badge">
     <br>
     <b>OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!</b><br />
     OctoDash is a User Interface for OctoPrint, it utilizes the OctoPrint API but tries to use modern design principles in order to fully enable the power of your Raspberry Pi attached to your 3D Printer. OctoDash works best with a Touchscreen and will support almost all functions that OctoPrint offers just in a nicer format. Give it a try!
