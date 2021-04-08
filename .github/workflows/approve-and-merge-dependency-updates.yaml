@@ -8,6 +8,7 @@ on:
 jobs:
   auto-approve:
     name: Approve
+    needs: [build, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Auto Approve
@@ -17,7 +18,7 @@ jobs:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:
     name: Merge
-    needs: auto-approve
+    needs: [build, lint, auto-approve]
     runs-on: ubuntu-latest
     steps:
       - name: Auto Merge
