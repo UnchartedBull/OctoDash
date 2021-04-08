@@ -117,6 +117,8 @@ const configSchema = {
         'printTimeGenius',
         'psuControl',
         'tpLinkSmartPlug',
+        'tasmota',
+        'tasmotaMqtt',
       ],
       properties: {
         displayLayerProgress: {
@@ -215,6 +217,44 @@ const configSchema = {
             },
           },
         },
+        tasmota: {
+          $id: '#/properties/plugins/properties/tasmota',
+          type: 'object',
+          required: ['enabled', 'ip', 'index'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/tasmota/properties/enabled',
+              type: 'boolean',
+            },
+            ip: {
+              $id: '#/properties/plugins/properties/tasmota/properties/ip',
+              type: 'string',
+            },
+            index: {
+              $id: '#/properties/plugins/properties/tasmota/properties/index',
+              type: ['number', 'null'],
+            },
+          },
+        },
+        tasmotaMqtt: {
+          $id: '#/properties/plugins/properties/tasmotaMqtt',
+          type: 'object',
+          required: ['enabled', 'topic', 'relayNumber'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/enabled',
+              type: 'boolean',
+            },
+            topic: {
+              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/topic',
+              type: 'string',
+            },
+            relayNumber: {
+              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/relayNumber',
+              type: ['number', 'null'],
+            },
+          },
+        },
       },
     },
     octodash: {
@@ -223,6 +263,7 @@ const configSchema = {
       required: [
         'customActions',
         'fileSorting',
+        'invertAxisControl',
         'pollingInterval',
         'touchscreen',
         'turnScreenOffWhileSleeping',
@@ -281,6 +322,25 @@ const configSchema = {
               $id: '#/properties/octodash/properties/fileSorting/properties/order',
               type: 'string',
               pattern: '^(asc|dsc)$',
+            },
+          },
+        },
+        invertAxisControl: {
+          $id: '#/properties/octodash/properties/invertAxisControl',
+          type: 'object',
+          required: ['x', 'y', 'z'],
+          properties: {
+            x: {
+              $id: '#/properties/octodash/properties/invertAxisControl/properties/x',
+              type: 'boolean',
+            },
+            y: {
+              $id: '#/properties/octodash/properties/invertAxisControl/properties/y',
+              type: 'boolean',
+            },
+            z: {
+              $id: '#/properties/octodash/properties/invertAxisControl/properties/z',
+              type: 'boolean',
             },
           },
         },

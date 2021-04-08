@@ -296,4 +296,16 @@ export class ConfigService {
   public getScreenWakeupCommand(): string {
     return this.config.octodash.screenWakeupCommand;
   }
+
+  public isXAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.x;
+  }
+
+  public isYAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.y;
+  }
+
+  public isZAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.z;
+  }
 }
