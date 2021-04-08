@@ -1,7 +1,7 @@
 name: Dependencies
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - main
 
@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Auto Approve
         uses: hmarr/auto-approve-action@v2
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+        if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
         with:
-          github-token: '${{ secrets.ACTIONS_TOKEN }}'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:
     name: Merge
     needs: auto-approve
@@ -22,8 +22,7 @@ jobs:
     steps:
       - name: Auto Merge
         uses: pascalgn/automerge-action@v0.13.1
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+        if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
         env:
-          GITHUB_TOKEN: '${{ secrets.ACTIONS_TOKEN }}'
-          MERGE_LABELS: 'dependencies'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           MERGE_METHOD: 'squash'
