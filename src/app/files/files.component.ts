@@ -66,7 +66,7 @@ export class FilesComponent {
         (error: HttpErrorResponse) => {
           this.notificationService.setError(
             $localize`:@@error-load-file-folder:Can't load file/folder!`,
-            error.message
+            error.message,
           );
           this.currentFolder = folderPath;
         },

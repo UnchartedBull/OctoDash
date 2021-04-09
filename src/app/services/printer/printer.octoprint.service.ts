@@ -51,8 +51,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@printer-error-gcode:Can't send GCode!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@printer-error-gcode:Can't send GCode!`, error.message)
+        )
+      ).subscribe();
   }
 
   public jog(x: number, y: number, z: number): void {
@@ -65,8 +68,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-head:Can't move Printhead!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-head:Can't move Printhead!`, error.message)
+        )
+      ).subscribe();
   }
 
   private moveExtruder(amount: number, speed: number): void {
@@ -77,8 +83,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-extrude:Can't extrude Filament!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-extrude:Can't extrude Filament!`, error.message)
+        )
+      ).subscribe();
   }
 
   public setTemperatureHotend(temperature: number): void {
@@ -90,8 +99,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), temperatureHotendCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-hotend:Can't set Hotend Temperature!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-hotend:Can't set Hotend Temperature!`, error.message)
+        )
+      ).subscribe();
   }
 
   public setTemperatureBed(temperature: number): void {
@@ -101,8 +113,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/bed'), temperatureHeatbedCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-bed:Can't set Bed Temperature!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-bed:Can't set Bed Temperature!`, error.message)
+        )
+      ).subscribe();
   }
 
   public setFeedrate(feedrate: number): void {
@@ -112,8 +127,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-feedrate:Can't set Feedrate!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-feedrate:Can't set Feedrate!`, error.message)
+        )
+      ).subscribe();
   }
 
   public setFlowrate(flowrate: number): void {
@@ -123,8 +141,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-flowrate:Can't set Flowrate!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-flowrate:Can't set Flowrate!`, error.message)
+        )
+      ).subscribe();
   }
 
   public disconnectPrinter(): void {
@@ -133,8 +154,11 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(this.configService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-printer-disconnect:Can't disconnect Printer!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-printer-disconnect:Can't disconnect Printer!`, error.message)
+        )
+      ).subscribe();
   }
 
   public extrude(amount: number, speed: number): void {

@@ -80,7 +80,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
         this.octoprintConnection = false;
         if (error.message.includes('403 FORBIDDEN')) {
           this.configErrors.push(
-            $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`
+            $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`,
           );
         } else if (error.message.includes('0 Unknown Error')) {
           this.configErrors.push(

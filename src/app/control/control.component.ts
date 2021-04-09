@@ -21,7 +21,7 @@ export class ControlComponent {
       err => {
         this.notificationService.setError(
           $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
-          err.message
+          err.message,
         );
       },
     );

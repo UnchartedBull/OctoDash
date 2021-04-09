@@ -148,8 +148,11 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message)
+        )
+      ).subscribe();
   }
 
   public printFile(filePath: string): void {
@@ -160,15 +163,21 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error => 
+          this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message)
+        )
+      ).subscribe();
   }
 
   public deleteFile(filePath: string): void {
     this.http
       .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message)))
-      .subscribe();
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message)
+        )
+      ).subscribe();
   }
 
   public setLoadedFile(value: boolean): void {
