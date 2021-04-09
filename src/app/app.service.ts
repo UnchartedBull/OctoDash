@@ -30,7 +30,11 @@ export class AppService {
     this.updateError = {
       ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
       ".plugins should have required property 'tpLinkSmartPlug'": config =>
-        (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
+        (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),
+      ".plugins should have required property 'tasmota'": config =>
+        (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
+      ".plugins should have required property 'tasmotaMqtt'": config =>
+        (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
       ".octodash should have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
       ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
@@ -41,6 +45,8 @@ export class AppService {
         (config.octodash.screenSleepCommand = 'xset dpms force standby'),
       ".octodash should have required property 'screenWakeupCommand'": config =>
         (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
+      ".octodash should have required property 'invertAxisControl'": config =>
+        (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
       ".printer should have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
     };

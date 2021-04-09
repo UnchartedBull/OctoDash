@@ -148,6 +148,10 @@
       cursor: pointer;
       overflow: visible;
 
+      &__space-right {
+        margin-right: 14vw;
+      }
+
       &-disabled {
         opacity: 0.5;
       }

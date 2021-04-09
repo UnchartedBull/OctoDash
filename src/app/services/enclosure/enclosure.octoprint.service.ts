@@ -10,6 +10,8 @@ import {
   EnclosureOutputBody,
   EnclosurePluginAPI,
   PSUControlCommand,
+  TasmotaCommand,
+  TasmotaMqttCommand,
   TPLinkCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
@@ -79,6 +81,10 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStatePSUControl(state);
     } else if (this.configService.useTpLinkSmartPlug()) {
       this.setPSUStateTPLink(state);
+    } else if (this.configService.useTasmota()) {
+      this.setPSUStateTasmota(state);
+    } else if (this.configService.useTasmotaMqtt()) {
+      this.setPSUStateTasmotaMqtt(state);
     } else {
       this.notificationService.setWarning($localize`:@@error-psu-state:Can't change PSU State!`, $localize`:@@error-psu-provider:No provider for PSU Control is configured.`);
     }
@@ -104,6 +110,36 @@ export class EnclosureOctoprintService implements EnclosureService {
     this.http
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
       .pipe(catchError(error => this.notificationService.setError($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTasmota(state: PSUState) {
+    const tasmotaPayload: TasmotaCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      ip: this.configService.getTasmotaIP(),
+      idx: this.configService.getTasmotaIndex(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTasmotaMqtt(state: PSUState) {
+    const tasmotaMqttPayload: TasmotaMqttCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      topic: this.configService.getTasmotaMqttTopic(),
+      relayN: this.configService.getTasmotaMqttRelayNumber(),
+    };
+
+    this.http
+      .post(
+        this.configService.getApiURL('plugin/tasmota_mqtt'),
+        tasmotaMqttPayload,
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
       .subscribe();
   }
 

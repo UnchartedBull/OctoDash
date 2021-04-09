@@ -29,6 +29,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+            ],
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",

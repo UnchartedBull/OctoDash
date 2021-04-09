@@ -41,6 +41,10 @@ export class PrinterOctoprintService implements PrinterService {
       );
   }
 
+  saveToEPROM(): void {
+    this.executeGCode('M500');
+  }
+
   public executeGCode(gCode: string): void {
     const gCodePayload: GCodeCommand = {
       commands: gCode.split('; '),
@@ -54,9 +58,9 @@ export class PrinterOctoprintService implements PrinterService {
   public jog(x: number, y: number, z: number): void {
     const jogPayload: JogCommand = {
       command: 'jog',
-      x,
-      y,
-      z,
+      x: this.configService.isXAxisInverted() ? x * -1 : x,
+      y: this.configService.isYAxisInverted() ? y * -1 : y,
+      z: this.configService.isZAxisInverted() ? z * -1 : z,
       speed: z !== 0 ? this.configService.getZSpeed() * 60 : this.configService.getXYSpeed() * 60,
     };
     this.http
@@ -102,9 +106,6 @@ export class PrinterOctoprintService implements PrinterService {
   }
 
   public setFeedrate(feedrate: number): void {
-    if (feedrate === 100) {
-      return;
-    }
     const feedrateCommand: FeedrateCommand = {
       command: 'feedrate',
       factor: feedrate,
@@ -116,9 +117,6 @@ export class PrinterOctoprintService implements PrinterService {
   }
 
   public setFlowrate(flowrate: number): void {
-    if (flowrate === 100) {
-      return;
-    }
     const flowrateCommand: FeedrateCommand = {
       command: 'flowrate',
       factor: flowrate,

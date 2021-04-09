@@ -56,6 +56,8 @@ interface Plugins {
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
+  tasmota: TasmotaPlugin;
+  tasmotaMqtt: TasmotaMqttPlugin;
 }
 
 interface Plugin {
@@ -78,9 +80,20 @@ interface TPLinkSmartPlugPlugin extends Plugin {
   smartPlugIP: string;
 }
 
+interface TasmotaPlugin extends Plugin {
+  ip: string;
+  index: number;
+}
+
+interface TasmotaMqttPlugin extends Plugin {
+  topic: string;
+  relayNumber: number;
+}
+
 interface OctoDash {
   customActions: CustomAction[];
   fileSorting: FileSorting;
+  invertAxisControl: InvertAxisControl;
   pollingInterval: number;
   touchscreen: boolean;
   turnScreenOffWhileSleeping: boolean;
@@ -102,4 +115,10 @@ export interface CustomAction {
 interface FileSorting {
   attribute: 'name' | 'date' | 'size';
   order: 'asc' | 'dsc';
+}
+
+interface InvertAxisControl {
+  x: boolean;
+  y: boolean;
+  z: boolean;
 }
