@@ -164,7 +164,7 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error => 
+        catchError(error =>
           this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message)
         )
       ).subscribe();
