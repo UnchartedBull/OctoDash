@@ -52,7 +52,7 @@ export class UpdateComponent implements OnInit {
     this.electronService.ipcRenderer.on('updateError', (_, updateError: UpdateError): void => {
       this.notificationService.setError(
         $localize`:@@error-install-update:Can't install update!`,
-        updateError.error.message
+        updateError.error.message,
       );
       this.closeUpdateWindow();
     });

@@ -24,9 +24,10 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-start-job:Can't start job!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-start-job:Can't start job!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   pauseJob(): void {
@@ -39,9 +40,10 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-pause-job:Can't pause job!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-pause-job:Can't pause job!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   resumeJob(): void {
@@ -54,9 +56,10 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-resume-job:Can't resume job!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-resume-job:Can't resume job!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   cancelJob(): void {
@@ -68,9 +71,10 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-cancel-job:Can't cancel job!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-cancel-job:Can't cancel job!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   restartJob(): void {
@@ -82,9 +86,10 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-restart-job:Can't restart job!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-restart-job:Can't restart job!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   preheat(): void {
@@ -96,8 +101,9 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
-          this.notificationService.setError($localize`:@@error-preheat:Can't preheat printer!`, error.message)
-        )
-      ).subscribe();
+          this.notificationService.setError($localize`:@@error-preheat:Can't preheat printer!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 }
