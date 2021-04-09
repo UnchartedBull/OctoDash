@@ -477,8 +477,8 @@
         <target> Couche </target>
       </trans-unit>
       <trans-unit id="height-of" datatype="html">
-        <source>of</source>
-        <target>sur</target>
+        <source> of </source>
+        <target> sur </target>
       </trans-unit>
       <trans-unit id="job-filament-g" datatype="html">
         <source> g Filament </source>
@@ -587,6 +587,10 @@
       <trans-unit id="adjust-fanspeed" datatype="html">
         <source>Fan Speed</source>
         <target>Ventilateur</target>
+      </trans-unit>
+      <trans-unit id="adjust-speed" datatype="html">
+        <source>Speed</source>
+        <target>Vitesse</target>
       </trans-unit>
       <trans-unit id="offset-mm" datatype="html">
         <source>mm</source>
@@ -934,6 +938,10 @@
       <trans-unit id="always-circular" datatype="html">
         <source>Always use circular progress bar</source>
         <target>Toujours utiliser la barre de progression circulaire</target>
+      </trans-unit>
+      <trans-unit id="invert-axis-control" datatype="html">
+        <source>Invert Axis Control</source>
+        <target>Inversion des axes</target>
       </trans-unit>
       <trans-unit id="octodash-files" datatype="html">
         <source>Files</source>

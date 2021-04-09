@@ -67,7 +67,7 @@ module.exports = {
             const target = newTranslation.resources['ng2.template'];
             // only copy if the translation has a target
             if (source[id]) {
-              target[id].target = source[id].target;
+              target[id].target = source[id]?.target || '';
             }
           }
           // backup the previous version of the locale and write the new locale
