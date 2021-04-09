@@ -12,8 +12,12 @@
     <ng-container i18n="@@heing-layer">
       Layer
     </ng-container>
-    <span class="height-indication__current-height">{{ height.current }}</span>
-    <ng-container i18n="@@height-of">of</ng-container>
+    <span class="height-indication__current-height">
+      {{ height.current }}
+    </span>
+    <ng-container i18n="@@height-of">
+      of
+    </ng-container>
     {{ height.total >= 0 ? height.total : '---' }}
   </span>
 </ng-template>

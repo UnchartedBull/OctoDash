@@ -7,6 +7,8 @@ import { PrinterProfile } from '../../model';
 export abstract class PrinterService {
   abstract getActiveProfile(): Observable<PrinterProfile>;
 
+  abstract saveToEPROM(): void;
+
   abstract executeGCode(gCode: string): void;
 
   abstract jog(x: number, y: number, z: number): void;

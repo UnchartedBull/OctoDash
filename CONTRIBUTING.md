@@ -1,9 +1,17 @@
-# General
+# Contributing
 
 If you can think of something nice to add or want to change / extend some of the functionality, feel free to create a Pull Request or an Issue. Please make sure to follow the code style (.prettierrc is included in the GitHub) and not break any of the existing functionality. Any help is greatly appreciated!
 ## Setting up the repository and build the package
 
+## Prerequisites
+
+- NodeJS v14
+- npm 7
+
+## Setup
+
 To setup a local environment you need to do the following steps:
+
 - Fork the repository to your GitHub account, so you can push your changes
 - Clone the repository
 - Install dependencies: `npm install`

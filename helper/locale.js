@@ -35,10 +35,6 @@ module.exports = {
     const xliff = require('xliff');
 
     // list all existing locales
-    // transtaledXLFs = [{
-    //   filename: 'messages.fr.xlf',
-    //   lang: 'fr',
-    // }]
     let translatedXLFs = [];
     const filenames = fs.readdirSync('./src/locale');
     for (filename of filenames) {
@@ -71,7 +67,7 @@ module.exports = {
             const target = newTranslation.resources['ng2.template'];
             // only copy if the translation has a target
             if (source[id]) {
-              target[id].target = source[id].target;
+              target[id].target = source[id]?.target || '';
             }
           }
           // backup the previous version of the locale and write the new locale
