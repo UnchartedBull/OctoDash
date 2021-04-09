@@ -35,10 +35,6 @@ module.exports = {
     const xliff = require('xliff');
 
     // list all existing locales
-    // transtaledXLFs = [{
-    //   filename: 'messages.fr.xlf',
-    //   lang: 'fr',
-    // }]
     let translatedXLFs = [];
     const filenames = fs.readdirSync('./src/locale');
     for (filename of filenames) {

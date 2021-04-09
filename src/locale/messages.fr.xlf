@@ -485,7 +485,7 @@
         <target> g de filament </target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
-        <source> left,</source>
+        <source> left, </source>
         <target> restant, </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
