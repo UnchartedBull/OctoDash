@@ -1,4 +1,5 @@
-<span class="filament-heading">{{ action === 'load' ? 'loading' : 'unloading' }} filament</span>
+<span class="filament-heading">{{ action === 'load' ? loadingMessage : unloadingMessage }}</span>
+<span i18n="@@move-filament">filament</span>
 <div class="move-filament__progress-bar-wrapper">
   <div
     class="move-filament__progress-bar"
@@ -6,7 +7,10 @@
     [ngStyle]="{ width: getInitialProgressBarWidth() }"
   ></div>
 </div>
-<span class="move-filament__speed">{{ feedSpeed }} mm/s</span>
+<span class="move-filament__speed">{{ feedSpeed }}</span>
+<span i18n="@@move-filament-speed">mm/s</span>
 <div class="filament__wrapper-button">
-  <a class="move-filament__cancel" matRipple [matRippleUnbounded]="false" (click)="stopExtruderMovement()">stop</a>
+  <a class="move-filament__cancel" matRipple [matRippleUnbounded]="false" (click)="stopExtruderMovement()" i18n="@@move-filament-stop">
+    stop
+  </a>
 </div>

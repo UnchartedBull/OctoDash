@@ -22,12 +22,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public fadeOutAnimation = false;
   public config: Config;
   public customActionsPosition = [
-    'Top Left',
-    'Top Right',
-    'Middle Left',
-    'Middle Right',
-    'Bottom Left',
-    'Bottom Right',
+    $localize`:@@top-left:Top Left`,
+    $localize`:@@top-right:Top Right`,
+    $localize`:@@middle-left:Middle Left`,
+    $localize`:@@middle-right:Middle Right`,
+    $localize`:@@bottom-left:Bottom Left`,
+    $localize`:@@bottom-right:Bottom Right`,
   ];
   private overwriteNoSave = false;
   private pages = [];
@@ -73,8 +73,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
       }, 5000);
     } else {
       this.notificationService.setWarning(
-        'Configuration not saved!',
-        "You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!",
+        $localize`:@@conf-unsaved:Configuration not saved!`,
+        $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
       );
       this.overwriteNoSave = true;
     }
@@ -102,7 +102,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setWarning("Can't save invalid config", String(errors));
+    this.notificationService.setWarning($localize`:@@error-invalid-config:Can't save invalid config`, String(errors));
   }
 
   private onConfigSaved() {

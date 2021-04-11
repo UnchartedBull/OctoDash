@@ -13,7 +13,7 @@ import { SocketService } from './services/socket/socket.service';
 })
 export class AppComponent implements OnInit {
   public activated = false;
-  public status = 'initializing';
+  public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
 
   public loadingOptionsCache: AnimationOptions = {

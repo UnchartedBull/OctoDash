@@ -1,46 +1,60 @@
-<span class="setup__text">What plugins are you running?</span>
+<span class="setup__text" i18n="@@prompt-plugins">What plugins are you running?</span>
 <div style="text-align: center">
   <div class="setup__checkbox-container">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked setup__checkbox-checked-disabled" *ngIf="displayLayerProgressPlugin"></span>
     </span>
-    Display Layer Progress&nbsp;&nbsp;
+    <ng-container i18n="@@plugin-display-layer-progress">
+      Display Layer Progress&nbsp;&nbsp;
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changeEnclosurePlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="enclosurePlugin"></span>
     </span>
-    Enclosure
+    <ng-container i18n="@@plugin-enclosure">
+      Enclosure
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changeFilamentManagerPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="filamentManagerPlugin"></span>
     </span>
-    Filament Manager&nbsp;&nbsp;
+    <ng-container i18n="@@plugin-filament-manager">
+      Filament Manager&nbsp;&nbsp;
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changePreheatButtonPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="preheatButtonPlugin"></span>
     </span>
-    Preheat Button
+    <ng-container i18n="@@plugin-preheat-button">
+      Preheat Button
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changePrintTimeGeniusPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="printTimeGeniusPlugin"></span>
     </span>
-    Print Time Genius&nbsp;&nbsp;
+    <ng-container i18n="@@plugin-print-time-genius">
+      Print Time Genius&nbsp;&nbsp;
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changePsuControlPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="psuControlPlugin"></span>
     </span>
-    PSU Control
+    <ng-container i18n="@@plugin-psu-control">
+      PSU Control
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changeTPLinkSmartPlugPlugin()">
     <span class="setup__checkbox">
       <span class="setup__checkbox-checked" *ngIf="tpLinkSmartPlugPlugin"></span>
     </span>
-    TPLink SmartPlug
+    <ng-container i18n="@@plugin-tplink-smartplug">
+      TPLink SmartPlug
+    </ng-container>
   </div>
   <div class="setup__checkbox-container" (click)="changeTasmotaPlugin()">
     <span class="setup__checkbox">
