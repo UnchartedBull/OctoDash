@@ -1,18 +1,18 @@
-module.exports = {
+/* eslint-disable @typescript-eslint/no-var-requires */
 
+const _ = require('lodash-es');
+
+module.exports = {
   // returns the correct supported locale given the LANG variable
   getLocale() {
-    const angularConf = require('../angular.json');
-    const i18n = angularConf.projects.OctoDash.i18n;
+    const i18n = require('../angular.json').projects.OctoDash.i18n;
     let lang;
     try {
       // Detect if environment LANG is set
       // if it is defined, convert LANG from ie 'en_US.UTF-8' to 'en-US'
       // if not defined, set it to the source locale
-      lang = process.env['LANG']
-        ? process.env['LANG'].split('.')[0].replace('_', '-')
-        : i18n.sourceLocale.code;
-    } catch(e) {
+      lang = process.env['LANG'] ? process.env['LANG'].split('.')[0].replace('_', '-') : i18n.sourceLocale.code;
+    } catch (e) {
       // LANG was populated with something else than a standard locale code
       lang = i18n.sourceLocale.code;
     }
@@ -20,7 +20,6 @@ module.exports = {
     const exactLocale = Object.keys(i18n.locales).includes(lang) && lang;
     // Make the short version, convert ie 'en-US' to 'en'
     const shortLang = lang.split('-')[0];
-    // Check if short LANG exists in our locales
     // This matches 'fr-CA' to 'fr' if 'fr-CA' is not defined but 'fr' is
     const approximateLocale = Object.keys(i18n.locales).includes(shortLang) && shortLang;
     // Define locale by either the exact, approximate, or source locale in this order
@@ -37,7 +36,7 @@ module.exports = {
     // list all existing locales
     let translatedXLFs = [];
     const filenames = fs.readdirSync('./src/locale');
-    for (filename of filenames) {
+    for (let filename of filenames) {
       const match = filename.match(/messages.(..|..-..).xlf/);
       if (match) {
         const lang = match[1];
@@ -51,7 +50,7 @@ module.exports = {
       if (err) throw new Error(err.message);
 
       // for each supported locale
-      for (translatedXLFRef of translatedXLFs) {
+      for (let translatedXLFRef of translatedXLFs) {
         const translatedXLF = fs.readFileSync(`./src/locale/${translatedXLFRef.filename}`).toString();
 
         // load this locale
@@ -59,10 +58,10 @@ module.exports = {
           if (err) throw new Error(err.message);
 
           // hard copy of messages.xlf
-          const newTranslation = JSON.parse(JSON.stringify(extracted));
+          const newTranslation = _.cloneDeep(extracted);
           newTranslation.targetLanguage = translated.targetLanguage;
           // transfer the locale's translations to the copy of the extracted locale
-          for (id in newTranslation.resources['ng2.template']) {
+          for (let id in newTranslation.resources['ng2.template']) {
             const source = translated.resources['ng2.template'];
             const target = newTranslation.resources['ng2.template'];
             // only copy if the translation has a target
@@ -76,15 +75,15 @@ module.exports = {
             const now = new Date();
             fs.renameSync(
               `./src/locale/${translatedXLFRef.filename}`,
-              `./src/locale/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`
+              `./src/locale/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`,
             );
             console.info(`updating ${translatedXLFRef.filename}...`);
             fs.writeFileSync(`./src/locale/${translatedXLFRef.filename}`, result);
-          })
-        })
+          });
+        });
       }
       // remove extracted messages
       fs.unlinkSync('./src/locale/messages.xlf');
-    })
-  }
+    });
+  },
 };
