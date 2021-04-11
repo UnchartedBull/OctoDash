@@ -58,7 +58,11 @@ export class EnclosureOctoprintService implements EnclosureService {
         colorBody,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-set-color:Can't set LED color!`, error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-color:Can't set LED color!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
@@ -72,7 +76,11 @@ export class EnclosureOctoprintService implements EnclosureService {
         outputBody,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
@@ -86,7 +94,10 @@ export class EnclosureOctoprintService implements EnclosureService {
     } else if (this.configService.useTasmotaMqtt()) {
       this.setPSUStateTasmotaMqtt(state);
     } else {
-      this.notificationService.setWarning($localize`:@@error-psu-state:Can't change PSU State!`, $localize`:@@error-psu-provider:No provider for PSU Control is configured.`);
+      this.notificationService.setWarning(
+        $localize`:@@error-psu-state:Can't change PSU State!`,
+        $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
+      );
     }
   }
 
@@ -97,7 +108,11 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
@@ -109,7 +124,11 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message),
+        ),
+      )
       .subscribe();
   }
 

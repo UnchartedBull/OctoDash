@@ -9,8 +9,6 @@ const Store = require('electron-store');
 const activateListeners = require('./helper/listener');
 const electron = require('./helper/electron.js');
 
-let window;
-
 function createWindow() {
   const _store = new Store();
   const properties = electron.configure(process.argv.slice(1))

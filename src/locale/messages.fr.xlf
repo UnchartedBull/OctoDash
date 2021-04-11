@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="error-restart" datatype="html">
         <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez ouvrez un ticket.</target>
+        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
       </trans-unit>
       <trans-unit id="invalid-config" datatype="html">
         <source>Your config is invalid!</source>
@@ -477,16 +477,16 @@
         <target> Couche </target>
       </trans-unit>
       <trans-unit id="height-of" datatype="html">
-        <source>of</source>
-        <target>sur</target>
+        <source> of </source>
+        <target> sur </target>
       </trans-unit>
       <trans-unit id="job-filament-g" datatype="html">
         <source> g Filament </source>
         <target> g de filament </target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
-        <source> left,</source>
-        <target> restant,</target>
+        <source> left, </source>
+        <target> restant, </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
         <source>elapsed:</source>
@@ -578,7 +578,7 @@
       </trans-unit>
       <trans-unit id="adjust-hotend" datatype="html">
         <source>Hotend</source>
-        <target>Buse d'impression</target>
+        <target>Buse</target>
       </trans-unit>
       <trans-unit id="adjust-heatbed" datatype="html">
         <source>Heatbed</source>
@@ -586,7 +586,11 @@
       </trans-unit>
       <trans-unit id="adjust-fanspeed" datatype="html">
         <source>Fan Speed</source>
-        <target>Vitesse du ventilateur</target>
+        <target>Ventilateur</target>
+      </trans-unit>
+      <trans-unit id="adjust-speed" datatype="html">
+        <source>Speed</source>
+        <target>Vitesse</target>
       </trans-unit>
       <trans-unit id="offset-mm" datatype="html">
         <source>mm</source>
@@ -934,6 +938,10 @@
       <trans-unit id="always-circular" datatype="html">
         <source>Always use circular progress bar</source>
         <target>Toujours utiliser la barre de progression circulaire</target>
+      </trans-unit>
+      <trans-unit id="invert-axis-control" datatype="html">
+        <source>Invert Axis Control</source>
+        <target>Inversion des axes</target>
       </trans-unit>
       <trans-unit id="octodash-files" datatype="html">
         <source>Files</source>

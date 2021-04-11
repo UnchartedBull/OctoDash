@@ -50,7 +50,10 @@
 
   <span class="job-info__time">
     <span *ngIf="hasProperty(jobStatus, 'timeLeft')">
-      <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span>{{ jobStatus.timeLeft.unit }} <ng-container i18n="@@job-info__time-left"> left,</ng-container></span>
+      <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span>
+      {{ jobStatus.timeLeft.unit }}
+      <ng-container i18n="@@job-info__time-left"> left, </ng-container>
+    </span>
     <ng-container i18n="@@job-elapsed">elapsed:</ng-container>
     {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
   </span>
