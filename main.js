@@ -61,10 +61,10 @@ function createWindow() {
   });
 
   if (dev) {
-    url = 'http://localhost:4200'
+    url = 'http://localhost:4200';
     window.webContents.openDevTools();
   } else {
-    url = `file://${__dirname}/dist/${locale}/index.html`
+    url = `file://${__dirname}/dist/${locale}/index.html`;
     window.setFullScreen(true);
   }
 
