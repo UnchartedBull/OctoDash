@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Auto Approve
         uses: hmarr/auto-approve-action@v2
-        if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+        if: github.actor == 'dependabot[bot]'
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Auto Merge
         uses: pascalgn/automerge-action@v0.13.1
-        if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+        if: github.actor == 'dependabot[bot]'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           MERGE_METHOD: 'squash'
