@@ -35,16 +35,43 @@ export class EventService implements OnDestroy {
   private isPrinterNotification(object: any): object is PrinterNotification {
     return typeof object === 'object'
       && object !== null
-      && ('text' in object || 'message' in object);
+      && ('text' in object || 'message' in object || 'action' in object);
   }
 
   private handlePrinterNotification(event: PrinterNotification): void {
-    if (event.choices?.length > 0) {
+    const messages = {
+      'FilamentRunout T0': $localize`:@@prompt-filament-runout-t0:Filament runout detected. Ejecting filament, please wait...`,
+      'Nozzle Parked': $localize`:@@prompt-filament-runout:A filament runout has been detected. Please remove the ejected filament, insert filament from a new spool and press Continue.`,
+      'Continue': $localize`:@@prompt-continue:Continue`,
+      'Paused': $localize`:@@prompt-filament-runout-resume:The filament has been primed. Do you want to continue printing?`,
+      'PurgeMore': $localize`:@@prompt-filament-runout-purge:Purge more filament`,
+      'Heater Timeout': $localize`:@@prompt-heater-timeout:The hotend has been disabled due to inactivity, to avoid burning the filament. Press Reheat when ready to resume.`,
+      'Reheat': $localize`:@@prompt-reheat:Reheat`,
+      'Reheat Done': $localize`:@@prompt-reheat-done:The hotend is now ready.`,
+    };
+    if (event.action === 'close') {
+      this.notificationService.closeNotification();
+    } else if (event.choices?.length > 0) {
       // event is action:prompt
-      this.notificationService.setPrompt($localize`:@@action-required:Action required`, event.text, event.choices)
+      this.notificationService.setPrompt(
+        $localize`:@@action-required:Action required`,
+        messages[event.text] || event.text,
+        event.choices.map(c => messages[c] || c)
+      );
+    } else if (event.choices?.length == 0) {
+      // event is action:prompt without choices
+      this.notificationService.setWarning(
+        $localize`:@@printer-information:Printer information`,
+        messages[event.text] || event.text
+      );
     } else {
       // event is action:notification
-      this.notificationService.setInfo($localize`:@@printer-information:Printer information`, event.message)
+      // this.notificationService.setInfo(
+      //   $localize`:@@printer-information:Printer information`,
+      //   messages[event.message] || event.message
+      // );
+      // TODO: annoying as a notification
+      // should be put with an autoclear timeout in the bottom-right statusline
     }
   }
 

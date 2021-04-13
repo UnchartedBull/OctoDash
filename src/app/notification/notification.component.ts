@@ -57,7 +57,6 @@ export class NotificationComponent implements OnDestroy {
         ),
       )
       .subscribe();
-    this.hideNotification()
   }
 
   private setNotification(notification: Notification | 'close'): void {

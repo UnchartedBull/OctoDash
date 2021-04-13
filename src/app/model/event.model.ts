@@ -7,9 +7,10 @@ export enum PrinterEvent {
   UNKNOWN,
 }
 
-// either notification (message) or prompt (text and choices)
+// either notification (message) or prompt (action, text and choices)
 export interface PrinterNotification {
   message?: string,
+  action?: string,
   text?: string,
   choices?: string[],
 }
