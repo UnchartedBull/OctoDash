@@ -49,13 +49,13 @@ export class NotificationService {
     });
   }
 
-  public setNotification(heading: string, text: string): Promise<void> {
+  public setInfo(heading: string, text: string): Promise<void> {
     return new Promise(resolve => {
       if (this.observer) {
-        this.observer.next({ heading, text, type: 'notification', closed: resolve });
+        this.observer.next({ heading, text, type: 'info', closed: resolve });
       } else {
         setTimeout(() => {
-          this.setNotification(heading, text);
+          this.setInfo(heading, text);
         }, 1000);
       }
     });
