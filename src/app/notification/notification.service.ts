@@ -61,6 +61,18 @@ export class NotificationService {
     });
   }
 
+  public setPrompt(heading: string, text: string, choices: string[]): Promise<void> {
+    return new Promise(resolve => {
+      if (this.observer) {
+        this.observer.next({ heading, text, type: 'prompt', choices, closed: resolve });
+      } else {
+        setTimeout(() => {
+          this.setPrompt(heading, text, choices);
+        }, 1000);
+      }
+    });
+  }
+
   public getObservable(): Observable<Notification | 'close'> {
     return this.observable;
   }

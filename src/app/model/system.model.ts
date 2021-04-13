@@ -2,6 +2,7 @@ export interface Notification {
   heading: string;
   text: string;
   type: string;
+  choices?: string[];
   closed: () => void;
 }
 
