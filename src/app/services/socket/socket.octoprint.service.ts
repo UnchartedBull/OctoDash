@@ -7,7 +7,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
-import { JobStatus, PrinterEvent, PrinterState, PrinterStatus, SocketAuth } from '../../model';
+import { JobStatus, PrinterEvent, PrinterNotification, PrinterState, PrinterStatus, SocketAuth } from '../../model';
 import {
   DisplayLayerProgressData,
   OctoprintFilament,
@@ -25,7 +25,7 @@ export class OctoPrintSocketService implements SocketService {
 
   private printerStatusSubject: Subject<PrinterStatus>;
   private jobStatusSubject: Subject<JobStatus>;
-  private eventSubject: Subject<PrinterEvent>;
+  private eventSubject: Subject<PrinterEvent | PrinterNotification>;
 
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
@@ -39,7 +39,7 @@ export class OctoPrintSocketService implements SocketService {
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
     this.jobStatusSubject = new Subject<JobStatus>();
-    this.eventSubject = new ReplaySubject<PrinterEvent>();
+    this.eventSubject = new ReplaySubject<PrinterEvent | PrinterNotification>();
   }
 
   //==== SETUP & AUTH ====//
@@ -116,6 +116,27 @@ export class OctoPrintSocketService implements SocketService {
     this.socket.next(payload);
   }
 
+  private handlePluginMessage(pluginMessage: OctoprintPluginMessage) {
+    const plugins = [
+      {
+        check: (plugin: string) => plugin === 'DisplayLayerProgress-websocket-payload'
+          && this.configService.isDisplayLayerProgressEnabled(),
+        handler: (data: unknown) => {
+          this.extractFanSpeed(data as DisplayLayerProgressData);
+          this.extractLayerHeight(data as DisplayLayerProgressData);
+        },
+      },
+      {
+        check: (plugin: string) => ['action_command_prompt', 'action_command_notification'].includes(plugin),
+        handler: (data: unknown) => this.eventSubject.next(data as PrinterNotification),
+      },
+    ];
+
+    plugins.forEach(plugin =>
+      plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data)
+    );
+  }
+
   private setupSocket(resolve: () => void) {
     this.socket.subscribe(message => {
       if (Object.hasOwnProperty.bind(message)('current')) {
@@ -124,14 +145,7 @@ export class OctoPrintSocketService implements SocketService {
       } else if (Object.hasOwnProperty.bind(message)('event')) {
         this.extractPrinterEvent(message as OctoprintSocketEvent);
       } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-        const pluginMessage = message as OctoprintPluginMessage;
-        if (
-          pluginMessage.plugin.plugin === 'DisplayLayerProgress-websocket-payload' &&
-          this.configService.isDisplayLayerProgressEnabled()
-        ) {
-          this.extractFanSpeed(pluginMessage.plugin.data as DisplayLayerProgressData);
-          this.extractLayerHeight(pluginMessage.plugin.data as DisplayLayerProgressData);
-        }
+        this.handlePluginMessage(message as OctoprintPluginMessage);
       } else if (Object.hasOwnProperty.bind(message)('reauth')) {
         this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
       } else if (Object.hasOwnProperty.bind(message)('connected')) {
@@ -303,7 +317,7 @@ export class OctoPrintSocketService implements SocketService {
     return this.jobStatusSubject.pipe(startWith(this.jobStatus));
   }
 
-  public getEventSubscribable(): Observable<PrinterEvent> {
+  public getEventSubscribable(): Observable<PrinterEvent | PrinterNotification> {
     return this.eventSubject;
   }
 }

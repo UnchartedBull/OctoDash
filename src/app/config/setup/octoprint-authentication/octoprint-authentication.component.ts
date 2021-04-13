@@ -48,7 +48,7 @@ export class OctoprintAuthenticationComponent {
   private sendLoginRequest(): void {
     this.authService.startAuthProcess(this.octoprintURL).subscribe(
       token => {
-        this.notificationService.setNotification(
+        this.notificationService.setInfo(
           $localize`:@@login-request-sent:Login request send!`,
           $localize`:@@login-request-sent-message:Please confirm the request via the popup in the OctoPrint WebUI.`,
         );
