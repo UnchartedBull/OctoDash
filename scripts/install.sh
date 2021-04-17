@@ -739,9 +739,9 @@ if [ $DIRECTORY != "-" ]; then
   fi;
 fi;
 
-if /home/pi/oprint/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
+if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
         echo "Enabling CORS ..."
-        /home/pi/oprint/bin/octoprint config set --bool "api.allowCrossOrigin" true
+        "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
 fi
 
 echo "Installing OctoDash "${version[7]}, $arch" ..."
