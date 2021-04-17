@@ -785,6 +785,9 @@ EOF
     sudo chmod ug+s /usr/lib/xorg/Xorg
 
     echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
+
+    echo "Enabling CORS ..."
+    /home/pi/oprint/bin/octoprint config set --bool "api.allowCrossOrigin" true
 fi
 
 list_input "Should I setup the update script? This will allow installing '~/tmp/octodash.deb' without sudo or root access. For more info visit the Update section of the wiki. " yes_no update
