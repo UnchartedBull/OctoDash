@@ -93,7 +93,7 @@
     "angular-svg-round-progressbar": "^6.0.0",
     "bonjour": "^3.5.0",
     "compare-versions": "^3.6.0",
-    "electron-store": "^7.0.3",
+    "electron-store": "^8.0.0",
     "got": "^11.8.2",
     "lodash-es": "^4.17.21",
     "lottie-web": "^5.7.8",
