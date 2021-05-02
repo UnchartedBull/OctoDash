@@ -742,7 +742,7 @@ fi;
 if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
 yes_no=( 'yes' 'no' )
 
-list_input ${red}${bold}"Should I enable CORS ? FYI, this is required by OctoDash v3 and OctoPrint 1.6.0, and may have security implications"${normal} yes_no cors
+list_input "Should I enable CORS ? FYI, this is required by OctoDash v3 and OctoPrint 1.6.0, and may have security implications" yes_no cors
 
 echo $cors
 if [ $cors == 'yes' ]; then
