@@ -749,7 +749,8 @@ if [ $cors == 'yes' ]; then
         echo "Enabling CORS ..."
         "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
 else
-  echo "\e[31mCORS has \e[1mNOT\e[22m been enabled. OctoDash most likely won't work if CORS is disabled. You can always enable it in the API settings in OctoPrint"
+  echo "${red}CORS has ${bold}NOT${normal} been enabled. OctoDash most likely won't work if CORS is disabled. You can always enable it in the API settings in OctoPrint"
+fi
 fi;
 
 echo "Installing OctoDash "${version[7]}, $arch" ..."
