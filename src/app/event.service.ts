@@ -47,6 +47,7 @@ export class EventService implements OnDestroy {
       'PurgeMore': $localize`:@@prompt-filament-runout-purge:Purge more filament`,
       'Heater Timeout': $localize`:@@prompt-heater-timeout:The hotend has been disabled due to inactivity, to avoid burning the filament. Press Reheat when ready to resume.`,
       'Reheat': $localize`:@@prompt-reheat:Reheat`,
+      'Reheating...': $localize`:@@prompt-reheating:Reheating...`,
       'Reheat Done': $localize`:@@prompt-reheat-done:The hotend is now ready.`,
     };
     if (event.action === 'close') {
