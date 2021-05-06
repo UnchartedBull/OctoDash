@@ -109,7 +109,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.12",
     "@angular/cli": "~11.2.12",
-    "@angular/compiler-cli": "^11.2.10",
+    "@angular/compiler-cli": "^11.2.13",
     "@angular/language-service": "~11.2.13",
     "@types/ajv": "^1.0.0",
     "@types/bonjour": "^3.5.8",
