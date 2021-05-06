@@ -43,24 +43,6 @@
     </div>
 
     <div
-      (click)="openFolder(folder.path)"
-      matRipple
-      [matRippleUnbounded]="false"
-      *ngFor="let folder of directory.folders"
-      class="files__object"
-    >
-      <img src="assets/folder.svg" class="files__icon" />
-      <div class="files__info">
-        <span class="files__info-value">
-          {{ folder.size }} <span class="files__info-unit" *ngIf="folder.size !== undefined" i18n="@@files-mb-1">mb</span>
-        </span>
-      </div>
-      <span class="files__name">
-        {{ folder.name }}
-      </span>
-    </div>
-
-    <div
       *ngFor="let file of directory.files"
       (click)="openDetails(file.path)"
       (press)="loadFile(file.path)"
@@ -82,6 +64,25 @@
         {{ file.name }}
       </span>
     </div>
+
+    <div
+      (click)="openFolder(folder.path)"
+      matRipple
+      [matRippleUnbounded]="false"
+      *ngFor="let folder of directory.folders"
+      class="files__object"
+    >
+      <img src="assets/folder.svg" class="files__icon" />
+      <div class="files__info">
+        <span class="files__info-value">
+          {{ folder.size }} <span class="files__info-unit" *ngIf="folder.size !== undefined" i18n="@@files-mb-1">mb</span>
+        </span>
+      </div>
+      <span class="files__name">
+        {{ folder.name }}
+      </span>
+    </div>
+
   </div>
   <div class="scroll__thumb-inactive" *ngIf="directory"></div>
 </div>

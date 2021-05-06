@@ -312,6 +312,10 @@
         <source>Reheat</source>
         <target>Activer la chauffe</target>
       </trans-unit>
+      <trans-unit id="prompt-reheating" datatype="html">
+        <source>Reheating...</source>
+        <target>Reprise de la chauffe...</target>
+      </trans-unit>
       <trans-unit id="prompt-reheat-done" datatype="html">
         <source>The hotend is now ready.</source>
         <target>La buse est à température.</target>
