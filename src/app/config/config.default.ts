@@ -76,7 +76,7 @@ export const defaultConfig: Config = {
       {
         icon: 'ruler-vertical',
         command: 'G29',
-        color: '#44bd32',
+        color: '#4bae50',
         confirm: false,
         exit: true,
       },

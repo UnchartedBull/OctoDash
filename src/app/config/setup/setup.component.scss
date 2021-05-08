@@ -2,7 +2,7 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #44bd32;
+    background-color: #4bae50;
     width: 0;
     transition: width 0.7s ease-in-out;
 
@@ -29,7 +29,7 @@
   }
 
   &__button {
-    background-color: #44bd32;
+    background-color: #4bae50;
     display: inline-block;
     padding: 1.4vh 2vw;
     border-radius: 1vw;
@@ -70,13 +70,13 @@
 
       &:focus {
         border: 2px solid #dcdde1 !important;
-        border-bottom: 2px solid #44bd32 !important;
+        border-bottom: 2px solid #4bae50 !important;
       }
     }
 
     &:focus {
       outline: 0;
-      border: 2px solid #44bd32;
+      border: 2px solid #4bae50;
     }
 
     &-small {
