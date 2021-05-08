@@ -4,7 +4,7 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #44bd32;
+    background-color: #4bae50;
     width: 0;
     transition: width 0.7s ease-in-out;
 
@@ -48,7 +48,7 @@
 
   &__done {
     display: inline-block;
-    background-color: #44bd32;
+    background-color: #4bae50;
     padding: 2vh 2vw;
     border-radius: 8px;
   }
