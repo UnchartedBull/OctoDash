@@ -11,7 +11,6 @@ import {
   FeedrateCommand,
   GCodeCommand,
   JogCommand,
-  OctoprintPrinterProfiles,
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
 } from '../../model/octoprint';
@@ -20,26 +19,14 @@ import { PrinterService } from './printer.service';
 
 @Injectable()
 export class PrinterOctoprintService implements PrinterService {
+  private printerProfile: PrinterProfile;
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
   ) {}
 
-  public getActiveProfile(): Observable<PrinterProfile> {
-    return this.http
-      .get<OctoprintPrinterProfiles>(
-        this.configService.getApiURL('printerprofiles'),
-        this.configService.getHTTPHeaders(),
-      )
-      .pipe(
-        map(profiles => {
-          for (const [_, profile] of Object.entries(profiles.profiles)) {
-            if (profile.current) return profile;
-          }
-        }),
-      );
-  }
+
 
   saveToEPROM(): void {
     this.executeGCode('M500');

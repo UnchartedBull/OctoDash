@@ -268,6 +268,10 @@
         <source>Can't retrieve printer profile!</source>
         <target>Impossible de récupérer le profil de l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="error-printer-profile-save" datatype="html">
+        <source>Can't save printer profile!</source>
+        <target>Impossible d'enregistrer le profil d'imprimante!</target>
+      </trans-unit>
       <trans-unit id="website-loading" datatype="html">
         <source>loading website ...</source>
         <target>chargement du site Web ...</target>

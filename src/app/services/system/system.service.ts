@@ -9,5 +9,7 @@ export abstract class SystemService {
 
   abstract sendCommand(command: string): void;
 
-  abstract connectPrinter(): void;
+  abstract connectPrinter(profileID: string): void;
+
+  abstract disconnetPrinter(): void;
 }

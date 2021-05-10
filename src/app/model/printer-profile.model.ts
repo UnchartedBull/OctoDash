@@ -1,4 +1,5 @@
 export interface PrinterProfile {
+  id: string;
   current: boolean;
   name: string;
   model: string;

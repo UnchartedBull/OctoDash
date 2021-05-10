@@ -1,6 +1,6 @@
 <table class="bottom-bar">
   <tr>
-    <td class="bottom-bar__printer-name">{{ getPrinterName() }}</td>
+    <td class="bottom-bar__printer-name" (click)="showProfiles()">{{ PrinterName }}</td>
     <td class="bottom-bar__enclosure-temperature" *ngIf="enclosureTemperature">
       <img src="assets/thermometer.svg" class="bottom-bar__enclosure-temperature-icon" />
       {{ enclosureTemperature.temperature }}{{ enclosureTemperature.unit }}
@@ -10,3 +10,4 @@
     </td>
   </tr>
 </table>
+<app-profiles *ngIf="profiles" (closeFunction)="hideProfiles()"></app-profiles>
