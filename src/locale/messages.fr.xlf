@@ -286,11 +286,11 @@
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament</source>
-        <target>charger un nouveau filament</target>
+        <target>charger le nouveau filament</target>
       </trans-unit>
       <trans-unit id="load-new-filament-message" datatype="html">
-        <source>only put a little filament in, I'll pull in the rest.</source>
-        <target>il suffit de mettre un peu de filament, je vais tirer le reste.</target>
+        <source>push the filament until feeling a slight pressure and press done</source>
+        <target>poussez le filament jusqu'à sentir une légère pression et appuyez sur continuer</target>
       </trans-unit>
       <trans-unit id="filament-grams-left" datatype="html">
         <source>g left</source>
@@ -298,7 +298,7 @@
       </trans-unit>
       <trans-unit id="filament-done" datatype="html">
         <source> done </source>
-        <target> terminé </target>
+        <target> continuer </target>
       </trans-unit>
       <trans-unit id="filament-waiting" datatype="html">
         <source>I'll wait for you.</source>
@@ -337,8 +337,8 @@
         <target> passer </target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
-        <source>heating the nozzle</source>
-        <target>préchauffage de la buse</target>
+        <source>heating the nozzle, please wait...</source>
+        <target>préchauffage de la buse, veuillez patienter...</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait" datatype="html">
         <source>wait</source>
@@ -362,19 +362,19 @@
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
         <source> stop </source>
-        <target> arrêter </target>
+        <target> annuler </target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
         <source>loading</source>
-        <target>Chargement</target>
+        <target>Chargement du filament en cours</target>
       </trans-unit>
       <trans-unit id="unloading-filament" datatype="html">
-        <source>unloading</source>
-        <target>déchargement</target>
+        <source>unloading filament</source>
+        <target>déchargement du filament en cours</target>
       </trans-unit>
       <trans-unit id="purging-filament" datatype="html">
-        <source>purging filament</source>
-        <target>purge du filament</target>
+        <source>Check your filament color. If the color is right, click done.</source>
+        <target>Vérifiez la couleur de votre filament. Si la couleur est bonne, cliquez sur terminé.</target>
       </trans-unit>
       <trans-unit id="purging-mm" datatype="html">
         <source>mm</source>
