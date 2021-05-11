@@ -352,10 +352,6 @@
         <source> start </source>
         <target> lancer </target>
       </trans-unit>
-      <trans-unit id="move-filament" datatype="html">
-        <source>filament</source>
-        <target>filament</target>
-      </trans-unit>
       <trans-unit id="move-filament-speed" datatype="html">
         <source>mm/s</source>
         <target>mm/s</target>
@@ -365,8 +361,8 @@
         <target> annuler </target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
-        <source>loading</source>
-        <target>Chargement du filament en cours</target>
+        <source>loading filament</source>
+        <target>chargement du filament en cours</target>
       </trans-unit>
       <trans-unit id="unloading-filament" datatype="html">
         <source>unloading filament</source>
