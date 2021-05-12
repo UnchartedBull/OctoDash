@@ -1,0 +1,28 @@
+.setup__plugin-list {
+  margin: 3vh 2.45vw 3vh 4vw;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  height: 69vh;
+
+  &::before {
+    content: '';
+    width: 91vw;
+    height: 70vh;
+    position: fixed;
+    left: 2vw;
+    top: 28vh;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+  }
+
+  span {
+    display: block;
+    font-size: 0.8rem;
+  }
+}
+
+.scroll__thumb-inactive {
+  top: 31.6vh;
+  height: 60.1vh;
+}

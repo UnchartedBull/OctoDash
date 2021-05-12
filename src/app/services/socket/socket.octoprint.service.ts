@@ -138,21 +138,32 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private setupSocket(resolve: () => void) {
-    this.socket.subscribe(message => {
-      if (Object.hasOwnProperty.bind(message)('current')) {
-        this.extractPrinterStatus(message as OctoprintSocketCurrent);
-        this.extractJobStatus(message as OctoprintSocketCurrent);
-      } else if (Object.hasOwnProperty.bind(message)('event')) {
-        this.extractPrinterEvent(message as OctoprintSocketEvent);
-      } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-        this.handlePluginMessage(message as OctoprintPluginMessage);
-      } else if (Object.hasOwnProperty.bind(message)('reauth')) {
-        this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
-      } else if (Object.hasOwnProperty.bind(message)('connected')) {
-        resolve();
-        this.checkPrinterConnection();
-      }
-    });
+    this.socket.subscribe(
+      message => {
+        if (Object.hasOwnProperty.bind(message)('current')) {
+          this.extractPrinterStatus(message as OctoprintSocketCurrent);
+          this.extractJobStatus(message as OctoprintSocketCurrent);
+        } else if (Object.hasOwnProperty.bind(message)('event')) {
+          this.extractPrinterEvent(message as OctoprintSocketEvent);
+        } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+          this.handlePluginMessage(message as OctoprintPluginMessage);
+        } else if (Object.hasOwnProperty.bind(message)('reauth')) {
+          this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
+        } else if (Object.hasOwnProperty.bind(message)('connected')) {
+          resolve();
+          this.checkPrinterConnection();
+        }
+      },
+      error => {
+        if (error['type'] === 'close') {
+          this.printerStatus.status = PrinterState.reconnecting;
+          this.printerStatusSubject.next(this.printerStatus);
+          this.tryConnect(() => null);
+        } else {
+          console.error(error);
+        }
+      },
+    );
   }
 
   private checkPrinterConnection() {

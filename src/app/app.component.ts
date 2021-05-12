@@ -22,8 +22,12 @@ export class AppComponent implements OnInit {
   public checkmarkOptionsCache: AnimationOptions = {
     path: '/assets/checkmark.json',
   };
+  public toggleSwitchOptionsCache: AnimationOptions = {
+    path: '/assets/toggle-switch.json',
+  };
   public loadingAnimationCached = false;
   public checkmarkAnimationCached = false;
+  public toggleSwitchAnimationCached = false;
 
   public constructor(
     private service: AppService,
@@ -89,5 +93,9 @@ export class AppComponent implements OnInit {
 
   public checkmarkAnimationCacheDone(): void {
     this.checkmarkAnimationCached = true;
+  }
+
+  public toggleSwitchAnimationCacheDone(): void {
+    this.toggleSwitchAnimationCached = true;
   }
 }
