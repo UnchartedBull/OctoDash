@@ -102,6 +102,7 @@ interface OctoDash {
   previewProgressCircle: boolean;
   screenSleepCommand: string;
   screenWakeupCommand: string;
+  window: Window;
 }
 
 export interface CustomAction {
@@ -121,4 +122,13 @@ interface InvertAxisControl {
   x: boolean;
   y: boolean;
   z: boolean;
+}
+
+interface Window {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  fullscreen: boolean;
+  backgroundColor: string;
 }
