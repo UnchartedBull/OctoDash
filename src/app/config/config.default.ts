@@ -126,5 +126,13 @@ export const defaultConfig: Config = {
     previewProgressCircle: false,
     screenSleepCommand: 'xset dpms force standby',
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
+    window: {
+      width: null,
+      height: null,
+      x: null,
+      y: null,
+      fullscreen: null,
+      backgroundColor: null,
+    }
   },
 };

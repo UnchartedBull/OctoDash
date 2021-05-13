@@ -378,6 +378,36 @@ const configSchema = {
           type: 'string',
           pattern: '^(.*)$',
         },
+        window: {
+          $id: '#/properties/octodash/properties/window',
+          type: 'object',
+          properties: {
+            width: {
+              $id: '#/properties/octodash/properties/window/width',
+              type: 'number',
+            },
+            height: {
+              $id: '#/properties/octodash/properties/window/height',
+              type: 'number',
+            },
+            x: {
+              $id: '#/properties/octodash/properties/window/x',
+              type: 'number',
+            },
+            y: {
+              $id: '#/properties/octodash/properties/window/y',
+              type: 'number',
+            },
+            fullscreen: {
+              $id: '#/properties/octodash/properties/window/fullscreen',
+              type: 'boolean',
+            },
+            backgroundColor: {
+              $id: '#/properties/octodash/properties/window/backgroundColor',
+              type: 'string',
+            },
+          },
+        },
       },
     },
   },
