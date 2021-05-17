@@ -54,6 +54,9 @@ Please note: This theme like the theme it was based on makes use of more CSS eff
 
 ### Version History:
 
+__v0.3:__
+* Temporary change in Layer display code to suit new Layer-Progress Component.
+
 __v0.2:__
 * Fixed bug which prevented the filament weight from being shown in the filament selector.
 
