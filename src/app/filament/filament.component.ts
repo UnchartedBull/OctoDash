@@ -24,7 +24,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   public showCheckmark = false;
   public selectedSpool: FilamentSpool;
   public checkmarkOptions: AnimationOptions = {
-    path: '/assets/checkmark.json',
+    path: 'assets/animations/checkmark.json',
     loop: false,
   };
 

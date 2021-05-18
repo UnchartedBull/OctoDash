@@ -25,7 +25,7 @@ export class FilesComponent {
   public showSorting = false;
 
   public loadingOptions: AnimationOptions = {
-    path: '/assets/loading.json',
+    path: 'assets/animations/loading.json',
   };
   public loading = Date.now();
 
