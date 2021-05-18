@@ -109,26 +109,24 @@ export class FilesOctoprintService implements FilesService {
 
   public getFile(filePath: string): Observable<File> {
     return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
-      map(
-        (file: OctoprintFile): File => {
-          return {
-            origin: file.origin,
-            path: '/' + file.origin + '/' + file.path,
-            name: file.name,
-            date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
-            size: this.conversionService.convertByteToMegabyte(file.size),
-            thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
-            ...(file.gcodeAnalysis
-              ? {
-                  printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
-                  filamentWeight: this.conversionService.convertFilamentLengthToWeight(
-                    _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
-                  ),
-                }
-              : {}),
-          } as File;
-        },
-      ),
+      map((file: OctoprintFile): File => {
+        return {
+          origin: file.origin,
+          path: '/' + file.origin + '/' + file.path,
+          name: file.name,
+          date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
+          size: this.conversionService.convertByteToMegabyte(file.size),
+          thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
+          ...(file.gcodeAnalysis
+            ? {
+                printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                  _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
+                ),
+              }
+            : {}),
+        } as File;
+      }),
     );
   }
 

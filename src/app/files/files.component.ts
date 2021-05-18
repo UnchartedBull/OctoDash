@@ -86,7 +86,7 @@ export class FilesComponent {
     this.filesService.getFile(filePath).subscribe(
       (fileData: File) => (this.fileDetail = fileData),
       (error: HttpErrorResponse) => {
-        this.fileDetail = ({ name: 'error' } as unknown) as File;
+        this.fileDetail = { name: 'error' } as unknown as File;
         this.notificationService.setError($localize`:@@error-load-file:Can't load file!`, error.message);
       },
     );
