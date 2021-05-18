@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
   public showConnectionHint = false;
 
   public loadingOptionsCache: AnimationOptions = {
-    path: '/assets/loading.json',
+    path: 'assets/animations/loading.json',
   };
   public checkmarkOptionsCache: AnimationOptions = {
-    path: '/assets/checkmark.json',
+    path: 'assets/animations/checkmark.json',
   };
   public toggleSwitchOptionsCache: AnimationOptions = {
-    path: '/assets/toggle-switch.json',
+    path: 'assets/animations/toggle-switch.json',
   };
   public loadingAnimationCached = false;
   public checkmarkAnimationCached = false;

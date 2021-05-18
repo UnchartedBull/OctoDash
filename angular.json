@@ -50,12 +50,17 @@
                 "output": "/assets/icon/"
               },
               {
+                "glob": "*",
+                "input": "src/assets/animations/",
+                "output": "/assets/animations/"
+              },
+              {
                 "glob": "favicon.ico",
                 "input": "src/",
                 "output": "/"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "src/reset.css"],
             "scripts": []
           },
           "configurations": {
@@ -119,8 +124,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets", "src/assets/icon/icon-main-title.svg"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "src/reset.css"],
             "scripts": []
           }
         },
