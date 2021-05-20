@@ -5,6 +5,7 @@ export interface OctoprintPrinterProfiles {
 }
 
 export interface OctoprintPrinterProfile {
+  id: string;
   current: boolean;
   name: string;
   model: string;

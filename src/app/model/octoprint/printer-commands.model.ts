@@ -37,3 +37,7 @@ export interface TemperatureHeatbedCommand {
 export interface DisconnectCommand {
   command: string;
 }
+
+export interface ProfileCommand {
+  current: boolean;
+}

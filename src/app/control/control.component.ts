@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
+import { ProfileService } from '../services/profiles/profiles.service';
 
 @Component({
   selector: 'app-control',
@@ -15,8 +16,8 @@ export class ControlComponent {
   public jogDistance = 10;
   public showHelp = false;
 
-  public constructor(private printerService: PrinterService, private notificationService: NotificationService) {
-    this.printerService.getActiveProfile().subscribe(
+  public constructor(private printerService: PrinterService, private profileService: ProfileService, private notificationService: NotificationService) {
+    this.profileService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       err => {
         this.notificationService.setError(
