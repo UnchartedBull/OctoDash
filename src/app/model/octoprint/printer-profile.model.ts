@@ -10,6 +10,7 @@ export interface OctoprintPrinterProfile {
   name: string;
   model: string;
   axes: OctoprintPrinterAxis;
+  volume: OctoprintVolumeDetails;
 }
 
 interface OctoprintPrinterAxis {
@@ -20,4 +21,10 @@ interface OctoprintPrinterAxis {
 
 interface OctoprintAxisDetails {
   inverted: boolean;
+}
+
+interface OctoprintVolumeDetails {
+  width:number;
+  depth:number;
+  height:number;
 }

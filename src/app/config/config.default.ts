@@ -67,11 +67,11 @@ export const defaultConfig: Config = {
   octodash: {
     customActions: [
       {
-        icon: 'home',
-        command: 'G28',
+        icon: '',
+        command: '[!LEVELBED]',
         color: '#dcdde1',
         confirm: false,
-        exit: true,
+        exit: false
       },
       {
         icon: 'ruler-vertical',

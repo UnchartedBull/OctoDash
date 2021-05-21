@@ -19,6 +19,7 @@ export class CustomActionsComponent {
   public customActions = [];
   public iFrameURL: SafeResourceUrl = 'about:blank';
   public actionToConfirm: ActionToConfirm;
+  public showBedLeveling: boolean;
 
   constructor(
     private printerService: PrinterService,
@@ -77,6 +78,9 @@ export class CustomActionsComponent {
         break;
       case '[!POWERTOGGLE]':
         this.enclosureService.togglePSU();
+        break;
+      case '[!LEVELBED]':
+        this.showBedLeveling = true;
         break;
       default: {
         if (command.includes('[!WEB]')) {
@@ -144,6 +148,10 @@ export class CustomActionsComponent {
 
   public setLEDColor(identifier: string, red: string, green: string, blue: string): void {
     this.enclosureService.setLEDColor(Number(identifier), Number(red), Number(green), Number(blue));
+  }
+
+  public closeBedLeveling(): void{
+    this.showBedLeveling = false;
   }
 }
 

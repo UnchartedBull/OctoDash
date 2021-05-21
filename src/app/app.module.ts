@@ -67,6 +67,7 @@ import { URLSafePipe } from './url.pipe';
 import { ProfilesComponent } from './profiles/profiles.component';
 import { ProfileService } from './services/profiles/profiles.service';
 import { ProfileOctoprintService } from './services/profiles/profiles.octoprint.service';
+import { BedLevelingComponent } from './bed-leveling/bed-leveling.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 
 export function playerFactory(): LottiePlayer {
@@ -108,6 +109,7 @@ export function playerFactory(): LottiePlayer {
     CustomActionsComponent,
     ToggleSwitchComponent,
     ProfilesComponent,
+    BedLevelingComponent,
     ConfirmComponent,
   ],
   imports: [

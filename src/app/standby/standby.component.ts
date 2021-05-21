@@ -29,27 +29,23 @@ export class StandbyComponent implements OnInit, OnDestroy {
   ) {
     setInterval(() => {
       this.time = new Date();
+      this.decide();
    }, 1000);
 
    this.decide();
   }
   decide() {
     this.hours = new Date().getHours();
-    console.log("this.hours",this.hours)
-    if(this.hours < 10){
+    if(this.hours < 12){
       this.msg = "Good Morning"
-      console.log(this.time)
     }else if(this.hours < 16){
       this.msg = "Good Afternoon"
-      console.log(this.time)
     }else if(this.hours < 19){
       this.msg = "Good Evening"
     }else if(this.hours < 24){
       this.msg = "Good Night"
-      console.log(this.time)
     }else if(this.hours < 6){
-      this.msg = "Sleep lah"
-      console.log(this.time)
+      this.msg = "Get some Sleep"
     }
   }
 

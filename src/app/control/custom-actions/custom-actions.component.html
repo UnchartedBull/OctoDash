@@ -15,7 +15,8 @@
     matRipple
     [matRippleUnbounded]="false"
   >
-    <fa-icon
+    <img src="assets/dice.svg" class="custom-actions__action-icon" *ngIf="customAction.command === '[!LEVELBED]'" />
+    <fa-icon *ngIf="customAction.command != '[!LEVELBED]'"
       [icon]="['fas', customAction.icon]"
       class="custom-actions__action-icon"
       [styles]="{ color: customAction.color }"
@@ -36,3 +37,4 @@
     <img class="confirm__icon" src="assets/cancel-small.svg" (click)="hideConfirm()" />
   </div>
 </div>
+<app-bed-leveling *ngIf="showBedLeveling" (closeFunction)="closeBedLeveling()"></app-bed-leveling>
