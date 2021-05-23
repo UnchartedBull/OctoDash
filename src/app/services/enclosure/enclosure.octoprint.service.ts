@@ -8,6 +8,7 @@ import { PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
+  EnclosurePWMBody,
   EnclosurePluginAPI,
   PSUControlCommand,
   TasmotaCommand,
@@ -74,6 +75,24 @@ export class EnclosureOctoprintService implements EnclosureService {
       .patch(
         this.configService.getApiURL('plugin/enclosure/outputs/' + identifier, false),
         outputBody,
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
+
+  setPWM(identifier: number, duty_cycle: number): void {
+    const pwmBody: EnclosurePWMBody = {
+      duty_cycle,
+    };
+    this.http
+      .patch(
+        this.configService.getApiURL('plugin/enclosure/pwm/' + identifier, false),
+        pwmBody,
         this.configService.getHTTPHeaders(),
       )
       .pipe(

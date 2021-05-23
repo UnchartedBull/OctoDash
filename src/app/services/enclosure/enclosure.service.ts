@@ -11,6 +11,8 @@ export abstract class EnclosureService {
 
   abstract setOutput(identifier: number, status: boolean): void;
 
+  abstract setPWM(identifier: number, duty_cycle: number): void;
+
   abstract setPSUState(state: PSUState): void;
 
   abstract togglePSU(): void;
