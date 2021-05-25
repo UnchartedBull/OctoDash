@@ -18,12 +18,12 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         env:
-          cache-name: octodash-node-modules
+          cache-name: node-modules
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          path: '**/node_modules'
+          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+            octodash-build-${{ env.cache-name }}-
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -44,12 +44,12 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         env:
-          cache-name: octodash-node-modules
+          cache-name: node-modules
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          path: '**/node_modules'
+          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+            octodash-build-${{ env.cache-name }}-
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
