@@ -83,10 +83,3 @@ app-filament .scroll__thumb-inactive {
 .settings__content {
     width: 59vw!important;
 }
-
-.settings__made::after {
-    content: "BigFingers theme v0.2 by theGarbz";
-    width: auto!important;
-    font-size: 73%;
-    display: inline-block;
-}

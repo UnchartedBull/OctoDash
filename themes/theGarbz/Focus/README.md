@@ -1,4 +1,4 @@
-# Focus theme v0.3
+# Focus theme v0.4
 
 This theme is based on the classy [NOX theme](../../NOX/) by NoxHirsch and has been modified to Focus on highlighting the most important information for a user. The goal was to create a theme that could easily be read from a distance. Some of the features are listed below:
 * High contrast display of relevant information (e.g. print time, temperature)
@@ -53,6 +53,11 @@ Please note: This theme like the theme it was based on makes use of more CSS eff
    ![Settings](screenshots/screenshot_menu.png)
 
 ### Version History:
+
+__v0.4:__
+* Fix for Layer display code - Reenables the icon in place of text.
+* Fixed settings items running off the edge of the screen.
+* Fxied settings scroll bars so they no longer run off the bottom of the screen.
 
 __v0.3:__
 * Temporary change in Layer display code to suit new Layer-Progress Component.
