@@ -1,7 +1,13 @@
 <div class="job-info" *ngIf="jobStatus.file && isPrinting()">
   <div class="job-info__progress" *ngIf="!showPreviewWhilePrinting">
-    <round-progress [current]="jobStatus.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
-      [color]="'#4bae50'"></round-progress>
+    <round-progress
+      [current]="jobStatus.progress"
+      [max]="100"
+      [stroke]="25"
+      [rounded]="true"
+      [responsive]="true"
+      [color]="'#4bae50'"
+    ></round-progress>
     <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
   </div>
 
@@ -14,8 +20,14 @@
     </div>
 
     <div *ngIf="useCircularProgressBar()" style="height: 23.5vw" id="progress-preview-circle">
-      <round-progress [current]="jobStatus.progress" [max]="100" [stroke]="25" [rounded]="true" [responsive]="true"
-        [color]="'#4bae50'"></round-progress>
+      <round-progress
+        [current]="jobStatus.progress"
+        [max]="100"
+        [stroke]="25"
+        [rounded]="true"
+        [responsive]="true"
+        [color]="'#4bae50'"
+      ></round-progress>
 
       <div class="job-info__progress-percentage job-info__progress-preview-image-container">
         <img class="job-info__progress-preview-image" [src]="thumbnail" />
@@ -30,9 +42,7 @@
   <br />
   <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')">
     {{ jobStatus.filamentAmount }}
-    <ng-container i18n="@@job-filament-g">
-      g Filament
-    </ng-container>
+    <ng-container i18n="@@job-filament-g"> g Filament </ng-container>
   </span>
   <br />
 
@@ -55,14 +65,25 @@
   <span class="job-info__filename">{{ jobStatus.file }}</span>
   <br />
 
-  <span (click)="preheat()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-    class="job-info__actions-item-heat" *ngIf="isPreheatEnabled()">
+  <span
+    (click)="preheat()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"
+    class="job-info__actions-item-heat"
+    *ngIf="isPreheatEnabled()"
+  >
     <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
   </span>
   <br />
 
-  <span (click)="startJob()" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true"
-    class="job-info__actions-item-print">
+  <span
+    (click)="startJob()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"
+    class="job-info__actions-item-print"
+  >
     <img src="assets/print.svg" class="job-info__actions-item-print-icon" />
   </span>
   <br />
@@ -89,12 +110,14 @@
   </div>
 </div>
 
-<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
-  i18n="@@loading-info">
+<div
+  class="job-info__no-job loading-dots"
+  *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
+  i18n="@@loading-info"
+>
   loading info
 </div>
 
-<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running
-  ...</div>
+<div class="job-info__no-job" *ngIf="!isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running ...</div>
 
 <span id="jobTogglePreview" (click)="togglePreview()"></span>
