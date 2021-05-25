@@ -85,9 +85,9 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  setPWM(identifier: number, duty_cycle: number): void {
+  setPWM(identifier: number, dutyCycle: number): void {
     const pwmBody: EnclosurePWMBody = {
-      duty_cycle,
+      dutyCycle,
     };
     this.http
       .patch(
