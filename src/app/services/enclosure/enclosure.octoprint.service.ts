@@ -8,8 +8,8 @@ import { PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
-  EnclosurePWMBody,
   EnclosurePluginAPI,
+  EnclosurePWMBody,
   PSUControlCommand,
   TasmotaCommand,
   TasmotaMqttCommand,
