@@ -64,6 +64,8 @@ import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 
+import { QuickControlComponent } from './shared/quick-control/quick-control.component';
+
 export function playerFactory(): LottiePlayer {
   return player;
 }
@@ -91,6 +93,7 @@ export function playerFactory(): LottiePlayer {
     PluginsComponent,
     PrintControlComponent,
     PrinterStatusComponent,
+    QuickControlComponent,
     SettingsComponent,
     StandbyComponent,
     UpdateComponent,
