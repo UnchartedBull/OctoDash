@@ -161,5 +161,25 @@
     </div>
   </div>
 
-  <app-custom-actions [redirectActive]="true"></app-custom-actions>
+  <div class="control-actions">
+    <app-custom-actions [redirectActive]="true"></app-custom-actions>
+    <div
+      class=control-actions-z-offset
+      matRipple
+      [matRippleUnbounded]="false"
+      (click)="showQuickControl()"
+    >
+      <span>
+        Z
+      </span>
+      {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}mm
+    </div>
+  </div>
 </div>
+
+<app-quick-control
+  *ngIf="zOffsetControl === true"
+  id="quickControl"
+  [settings]="quickControlSettings()"
+  [hide]="hideQuickControl.bind(this)"
+></app-quick-control>

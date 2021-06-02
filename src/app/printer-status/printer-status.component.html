@@ -48,5 +48,5 @@
   *ngIf="view !== QuickControlView.NONE"
   id="quickControl"
   [settings]="quickControlSettings()"
-  [hide]="hideQuickControl"
+  [hide]="hideQuickControl.bind(this)"
 ></app-quick-control>

@@ -137,18 +137,27 @@
       border-right: 0.25vw solid #f5f6fa;
     }
   }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2vw;
+
+    &-z-offset {
+      border: 3px solid;
+      border-radius: 1vw;
+      font-size: 2.5vw;
+      text-align: center;
+      margin: 1vw 1.7vh;
+      padding: 1vh 0;
+
+      span {
+        font-size: inherit;
+      }
+    }
+  }
 }
 
 .top-bar__next-icon {
   vertical-align: -3vh;
-}
-
-app-custom-actions {
-  float: right;
-  height: 75vh;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }

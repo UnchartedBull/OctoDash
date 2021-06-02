@@ -26,4 +26,7 @@ export abstract class PrinterService {
   abstract disconnectPrinter(): void;
 
   abstract emergencyStop(): void;
+
+  abstract getZOffset(): number;
+  abstract setZOffset(offset: number): void;
 }

@@ -20,16 +20,16 @@
 
     <div class="quick-control__controller-row">
       <div
-        class="quick-control__controller-increase"
-        (click)="settings.changeValue(1)"
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(+settings.smallStep)"
         matRipple
         [matRippleUnbounded]="false"
       >
         +{{ this.settings.smallStep }}
       </div>
       <div
-        class="quick-control__controller-increase"
-        (click)="settings.changeValue(10)"
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(+settings.bigStep)"
         matRipple
         [matRippleUnbounded]="false"
       >
@@ -52,16 +52,16 @@
 
     <div class="quick-control__controller-row">
       <div
-        class="quick-control__controller-decrease"
-        (click)="settings.changeValue(-1)"
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(-settings.smallStep)"
         matRipple
         [matRippleUnbounded]="false"
       >
         -{{ this.settings.smallStep }}
       </div>
       <div
-        class="quick-control__controller-decrease"
-        (click)="settings.changeValue(-10)"
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(-settings.bigStep)"
         matRipple
         [matRippleUnbounded]="false"
       >

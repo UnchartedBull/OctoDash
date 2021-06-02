@@ -34,10 +34,11 @@
 }
 
 .custom-actions {
-  // height: 75vh;
-  width: 30vw;
-  display: block;
-  overflow: scroll;
+  width: 25vw;
+  height: 63vh;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     display: none;
@@ -46,17 +47,17 @@
   &__action {
     display: block;
     float: left;
-    width: 10vw;
-    height: 10vw;
+    width: 9vw;
+    height: 9vw;
     border: 0.8vw solid #f5f6fa;
     border-radius: 1.5vw;
     text-align: center;
     opacity: 0.9;
-    margin: 0 1.4vw 3vh;
+    margin: 0.7vw 1.5vh;
 
     &-icon {
-      font-size: 5.5vw;
-      vertical-align: -3vw;
+      font-size: 5vw;
+      vertical-align: -2.4vw;
     }
   }
 }
