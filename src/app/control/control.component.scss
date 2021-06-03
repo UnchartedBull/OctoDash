@@ -43,50 +43,6 @@
   display: flex;
   flex-direction: column;
 
-  // &-top {
-  //   margin: 5vh 3vw;
-  //   height: 10vh;
-  //   min-height: 10vh;
-  //   display: flex;
-
-  //   & > * {
-  //     flex-basis: calc(100% / 3);
-  //   }
-
-  //   &-left {
-  //     display: flex;
-  //     font-weight: 500;
-  //     align-items: center;
-
-  //     &-logo {
-  //       height: 100%;
-  //       margin-right: 2vw;
-
-  //       & > img {
-  //         height: 120%;
-  //       }
-  //     }
-  //   }
-
-  //   &-middle {
-  //     height: 100%;
-  //     text-align: center;
-
-  //     & > img {
-  //       height: 100%
-  //     }
-  //   }
-
-  //   &-right {
-  //     height: 100%;
-  //     text-align: right;
-
-  //     & > img {
-  //       height: 100%;
-  //     }
-  //   }
-  // }
-
   &-middle {
     flex-grow: 1;
     display: flex;
