@@ -34,30 +34,46 @@
 }
 
 .custom-actions {
-  width: 25vw;
-  height: 63vh;
-  display: flex;
-  flex-wrap: wrap;
+  height: 100%;
   overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   &__action {
-    display: block;
-    float: left;
-    width: 9vw;
-    height: 9vw;
-    border: 0.8vw solid #f5f6fa;
+    // 2 squares per row
+    // 50% width minus margin and border
+    flex-basis: calc(50% - 2 * (0.7vw + 0.8vh));
+    margin: 0.7vw 0.7vw;
+    border: 0.8vh solid #f5f6fa;
     border-radius: 1.5vw;
-    text-align: center;
     opacity: 0.9;
-    margin: 0.7vw 1.5vh;
+    position: relative;
+
+    // create squares no matter the width
+    &:after{
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
 
     &-icon {
-      font-size: 5vw;
-      vertical-align: -2.4vw;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & fa-icon {
+        font-size: 10vh;
+      }
     }
   }
 }

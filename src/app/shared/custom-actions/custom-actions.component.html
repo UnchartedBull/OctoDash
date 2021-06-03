@@ -15,11 +15,12 @@
     matRipple
     [matRippleUnbounded]="false"
   >
-    <fa-icon
-      [icon]="['fas', customAction.icon]"
-      class="custom-actions__action-icon"
-      [styles]="{ color: customAction.color }"
-    ></fa-icon>
+    <div class="custom-actions__action-icon">
+      <fa-icon
+        [icon]="['fas', customAction.icon]"
+        [styles]="{ color: customAction.color }"
+      ></fa-icon>
+    </div>
   </div>
 </div>
 
