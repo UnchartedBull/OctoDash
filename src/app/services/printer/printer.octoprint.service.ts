@@ -203,4 +203,21 @@ export class PrinterOctoprintService implements PrinterService {
   public setFanSpeed(percentage: number): void {
     this.executeGCode('M106 S' + Math.round((percentage / 100) * 255));
   }
+
+  public getZOffset(): Observable<Object> {
+    return this.http.get(
+      this.configService.getApiURL('plugin/z_probe_offset'),
+      this.configService.getHTTPHeaders()
+    );
+  }
+
+  public setZOffset(offset: number): void {
+    // this.http.post(
+    //   this.configService.getApiURL('plugin/z_probe_offset'),
+    //   offset,
+    //   this.configService.getHTTPHeaders()
+    // );
+    this.executeGCode('M851 Z' + offset)
+    setTimeout(() => this.executeGCode('M500'), 500);
+  }
 }

@@ -25,7 +25,7 @@ import { PluginsComponent } from './config/setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './config/setup/setup.component';
 import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
-import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
+import { CustomActionsComponent } from './shared/custom-actions/custom-actions.component';
 import { ConversionService } from './conversion.service';
 import { EventService } from './event.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -64,6 +64,8 @@ import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 
+import { QuickControlComponent } from './shared/quick-control/quick-control.component';
+
 export function playerFactory(): LottiePlayer {
   return player;
 }
@@ -91,6 +93,7 @@ export function playerFactory(): LottiePlayer {
     PluginsComponent,
     PrintControlComponent,
     PrinterStatusComponent,
+    QuickControlComponent,
     SettingsComponent,
     StandbyComponent,
     UpdateComponent,

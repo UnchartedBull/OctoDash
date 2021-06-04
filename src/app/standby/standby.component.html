@@ -28,8 +28,11 @@
     ></fa-icon>
   </div>
 
-  <div class="standby__actions" [ngStyle]="{ 'flex-basis': actionsVisible ? '40%' : '0%' }">
+  <div class="standby__actions" [ngStyle]="{ 'width': actionsVisible ? '40%' : '0' }">
     <span class="standby__actions-text" i18n="@@actions"> Actions </span>
-    <app-custom-actions [redirectActive]="false"></app-custom-actions>
+    <app-custom-actions
+      [redirectActive]="false"
+      [actionWidth]="'13.5vw'"
+    ></app-custom-actions>
   </div>
 </div>

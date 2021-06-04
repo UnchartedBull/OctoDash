@@ -15,6 +15,7 @@ import { SystemService } from '../../services/system/system.service';
 })
 export class CustomActionsComponent {
   @Input() redirectActive = true;
+  @Input() actionWidth: string;
 
   public customActions = [];
   public iFrameURL: SafeResourceUrl = 'about:blank';

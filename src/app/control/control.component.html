@@ -1,21 +1,173 @@
-<table class="top-bar">
-  <tr>
-    <td class="top-bar__back" routerLink="/main-screen">
-      <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-        <img src="assets/back.svg" class="top-bar__back-icon" />
-        <span i18n="@@control-back">back</span>
+<div class="control">
+
+  <table class="top-bar">
+    <tr>
+      <td class="top-bar__back" routerLink="/main-screen">
+        <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
+          <img src="assets/back.svg" class="top-bar__back-icon" />
+          <span i18n="@@control-back">back</span>
+        </span>
+      </td>
+      <td class="top-bar__center">
+        <img src="assets/control.svg" class="top-bar__center-icon" />
+      </td>
+      <td class="top-bar__next" (click)="showHelp = true">
+        <span matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+          <img src="assets/help.svg" class="top-bar__next-icon" />
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="control-middle">
+    <div class="control-middle-wrapper">
+      <div class="control-middle-jogs">
+
+        <div class="control-middle-jog square-jog">
+          <div class="control-middle-jog-square">
+            <div class="control-middle-jog-square-content">
+              <div class="jog-icon-wrapper-vertical">
+                <fa-icon
+                  [icon]="['fas', 'angle-up']"
+                  class="jog-icon"
+                  (click)="moveAxis('y', '-')"
+                  matRipple
+                  [matRippleUnbounded]="true"
+                  [matRippleCentered]="true"
+                ></fa-icon>
+              </div>
+              <div class="control-middle-jog-square-content-middle">
+                <div class="jog-icon-wrapper-horizontal">
+                  <fa-icon
+                    [icon]="['fas', 'angle-left']"
+                    class="jog-icon"
+                    (click)="moveAxis('x', '-')"
+                    matRipple
+                    [matRippleUnbounded]="true"
+                    [matRippleCentered]="true"
+                  ></fa-icon>
+                </div>
+                <div class="jog-icon-wrapper-horizontal">
+                  <fa-icon
+                    [icon]="['fas', 'angle-right']"
+                    class="jog-icon"
+                    (click)="moveAxis('x', '+')"
+                    matRipple
+                    [matRippleUnbounded]="true"
+                    [matRippleCentered]="true"
+                  ></fa-icon>
+                </div>
+              </div>
+              <div class="jog-icon-wrapper-vertical">
+                <fa-icon
+                  [icon]="['fas', 'angle-down']"
+                  class="jog-icon"
+                  (click)="moveAxis('y', '+')"
+                  matRipple
+                  [matRippleUnbounded]="true"
+                  [matRippleCentered]="true"
+                ></fa-icon>
+              </div>
+            </div>
+          </div>
+          <span class="control-middle-jog__heading">X / Y</span>
+        </div>
+
+        <div class="control-middle-jog vertical-jog">
+          <div class="control-middle-jog-vertical">
+            <div class="jog-icon-wrapper-vertical">
+              <fa-icon
+                [icon]="['fas', 'angle-up']"
+                class="jog-icon"
+                (click)="moveAxis('z', '+')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"
+              ></fa-icon>
+            </div>
+            <div class="jog-icon-wrapper-vertical">
+              <fa-icon
+                [icon]="['fas', 'angle-down']"
+                class="jog-icon"
+                (click)="moveAxis('z', '-')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"
+              ></fa-icon>
+            </div>
+          </div>
+          <span class="control-middle-jog__heading">Z</span>
+        </div>
+
+        <div class="control-middle-jog vertical-jog" *ngIf="showExtruder">
+          <div class="control-middle-jog-vertical">
+            <div class="jog-icon-wrapper-vertical">
+              <fa-icon
+                [icon]="['fas', 'angle-up']"
+                class="jog-icon"
+                (click)="extrude('-')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"
+              ></fa-icon>
+            </div>
+            <div class="jog-icon-wrapper-vertical">
+              <fa-icon
+                [icon]="['fas', 'angle-down']"
+                class="jog-icon"
+                (click)="extrude('+')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"
+              ></fa-icon>
+            </div>
+          </div>
+          <span class="control-middle-jog__heading">E</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="control-middle-actions">
+      <app-custom-actions
+        [redirectActive]="true"
+        [actionWidth]="'11.5vw'"
+      ></app-custom-actions>
+    </div>
+
+  </div>
+
+  <div class="control-bottom">
+
+    <div class="control-bottom__distance-wrapper">
+      <table class="control-bottom__distance">
+        <tr>
+          <td
+            *ngFor="let distance of [1, 5, 10, 50, 100]"
+            class="control-bottom__distance-field"
+            [ngClass]="{ 'control-bottom__distance-field-active': jogDistance === distance }"
+            (click)="setDistance(distance)"
+          >
+            {{ distance }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div
+      class=control-bottom-z-offset
+      matRipple
+      [matRippleUnbounded]="false"
+      (click)="showQuickControl()"
+    >
+      <span>
+        Z
       </span>
-    </td>
-    <td class="top-bar__center">
-      <img src="assets/control.svg" class="top-bar__center-icon" />
-    </td>
-    <td class="top-bar__next" (click)="showHelp = true">
-      <span matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-        <img src="assets/help.svg" class="top-bar__next-icon" />
-      </span>
-    </td>
-  </tr>
-</table>
+      {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '' }}{{ getZOffset() }} mm
+    </div>
+
+  </div>
+</div>
 
 <div class="help" *ngIf="showHelp">
   <div class="help__card">
@@ -38,134 +190,9 @@
   </div>
 </div>
 
-<div class="control">
-  <div class="control-jog">
-    <div class="control-jog-arrows">
-      <div class="control-jog-arrows__XY">
-        <div class="control-jog-arrows__XY-wrapper">
-          <fa-icon
-            [icon]="['fas', 'angle-up']"
-            class="control__icon control__icon-1"
-            (click)="moveAxis('y', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-          <fa-icon
-            [icon]="['fas', 'angle-left']"
-            class="control__icon control__icon-2"
-            (click)="moveAxis('x', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-          <fa-icon
-            [icon]="['fas', 'angle-right']"
-            class="control__icon control__icon-3"
-            (click)="moveAxis('x', '+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-          <fa-icon
-            [icon]="['fas', 'angle-down']"
-            class="control__icon control__icon-4"
-            (click)="moveAxis('y', '+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-        </div>
-        <span class="control__heading">X / Y</span>
-      </div>
-
-      <div class="control-jog-arrows__vertical">
-        <div class="control-jog-arrows__vertical-wrapper">
-          <fa-icon
-            [icon]="['fas', 'angle-up']"
-            class="control__icon control__icon-5"
-            (click)="moveAxis('z', '+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-          <fa-icon
-            [icon]="['fas', 'angle-down']"
-            class="control__icon control__icon-6"
-            (click)="moveAxis('z', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-        </div>
-        <span class="control__heading">Z</span>
-      </div>
-
-      <div class="control-jog-arrows__vertical" *ngIf="showExtruder">
-        <div class="control-jog-arrows__vertical-wrapper">
-          <fa-icon
-            [icon]="['fas', 'angle-up']"
-            class="control__icon control__icon-5"
-            (click)="extrude('-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-          <fa-icon
-            [icon]="['fas', 'angle-down']"
-            class="control__icon control__icon-6"
-            (click)="extrude('+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
-        </div>
-        <span class="control__heading">E</span>
-      </div>
-    </div>
-
-    <div class="control__distance-wrapper">
-      <table class="control__distance">
-        <tr>
-          <td
-            class="control__distance-field"
-            [ngClass]="{ 'control__distance-field-active': jogDistance === 1 }"
-            (click)="setDistance(1)"
-          >
-            1
-          </td>
-          <td
-            class="control__distance-field"
-            [ngClass]="{ 'control__distance-field-active': jogDistance === 5 }"
-            (click)="setDistance(5)"
-          >
-            5
-          </td>
-          <td
-            class="control__distance-field"
-            [ngClass]="{ 'control__distance-field-active': jogDistance === 10 }"
-            (click)="setDistance(10)"
-          >
-            10
-          </td>
-          <td
-            class="control__distance-field"
-            [ngClass]="{ 'control__distance-field-active': jogDistance === 50 }"
-            (click)="setDistance(50)"
-          >
-            50
-          </td>
-          <td
-            class="control__distance-field"
-            [ngClass]="{ 'control__distance-field-active': jogDistance === 100 }"
-            (click)="setDistance(100)"
-          >
-            100
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <app-custom-actions [redirectActive]="true"></app-custom-actions>
-</div>
+<app-quick-control
+  *ngIf="zOffsetControl === true"
+  id="quickControl"
+  [settings]="quickControlSettings()"
+  [hide]="hideQuickControl.bind(this)"
+></app-quick-control>
