@@ -1,0 +1,85 @@
+<div class="quick-control">
+
+  <table class="top-bar" (click)="hide()">
+    <tr>
+      <td class="top-bar__back">
+        <img src="assets/back.svg" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
+        back
+      </td>
+      <td class="top-bar__center">
+        <img
+          [src]="'/assets/' + settings.image"
+          class="top-bar__center-icon"
+        />
+      </td>
+      <td class="top-bar__back"></td>
+    </tr>
+  </table>
+
+  <div class="quick-control__controller">
+
+    <div class="quick-control__controller-row">
+      <div
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(+settings.smallStep)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        +{{ this.settings.smallStep }}
+      </div>
+      <div
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(+settings.bigStep)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        +{{ this.settings.bigStep }}
+      </div>
+    </div>
+
+    <div
+      class="quick-control__controller-value"
+      colspan="2"
+      (click)="settings.changeValue(settings.reset - 1)"
+      matRipple
+      [matRippleUnbounded]="false"
+    >
+      {{ Number(this.settings.target) < Number(this.settings.reset) ? '...' : this.settings.target }}
+      <span class="quick-control__controller-value-unit">
+        {{ this.settings.unit }}
+      </span>
+    </div>
+
+    <div class="quick-control__controller-row">
+      <div
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(-settings.smallStep)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        -{{ this.settings.smallStep }}
+      </div>
+      <div
+        class="quick-control__controller-change"
+        (click)="settings.changeValue(-settings.bigStep)"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        -{{ this.settings.bigStep }}
+      </div>
+    </div>
+
+    <div class="quick-control__controller-row">
+      <div
+        class="quick-control__controller-set"
+        colspan="2"
+        (click)="settings.setValue()"
+        matRipple
+        [matRippleUnbounded]="false"
+      >
+        <span class="quick-control__controller-set-span">set</span>
+      </div>
+    </div>
+
+  </div>
+</div>

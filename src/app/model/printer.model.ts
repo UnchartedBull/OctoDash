@@ -20,3 +20,13 @@ export enum PrinterState {
   closed,
   connecting,
 }
+
+interface PrinterCap {
+  eeprom: number;
+  z_probe: number;
+}
+
+export interface ZOffset {
+  printer_cap: PrinterCap;
+  z_offset: number;
+}

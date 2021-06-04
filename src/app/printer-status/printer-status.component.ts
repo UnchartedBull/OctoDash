@@ -46,21 +46,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public showQuickControlHotend(): void {
-    this.view = QuickControlView.HOTEND;
-    this.showQuickControl();
-  }
-
-  public showQuickControlHeatbed(): void {
-    this.view = QuickControlView.HEATBED;
-    this.showQuickControl();
-  }
-
-  public showQuickControlFan(): void {
-    this.view = QuickControlView.FAN;
-    this.showQuickControl();
-  }
-
   private showQuickControl(): void {
     setTimeout((): void => {
       const controlViewDOM = document.getElementById('quickControl');
@@ -76,80 +61,90 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  public quickControlChangeValue(value: number): void {
+  public showQuickControlHotend(): void {
+    this.view = QuickControlView.HOTEND;
+    this.showQuickControl();
+  }
+
+  public showQuickControlHeatbed(): void {
+    this.view = QuickControlView.HEATBED;
+    this.showQuickControl();
+  }
+
+  public showQuickControlFan(): void {
+    this.view = QuickControlView.FAN;
+    this.showQuickControl();
+  }
+
+  private changeValue(item: string, value: number, defaultValue: number) {
+    this[item] += value;
+    if (this[item] < -999) {
+      this[item] = defaultValue;
+    } else if (this[item] < 0) {
+      this[item] = 0;
+    } else if (this[item] > 999) {
+      this[item] = 999;
+    }
+  }
+
+  public quickControlSettings(): any {
+    const settings = {
+      hotend: {
+        image: 'nozzle.svg',
+        target: this.hotendTarget,
+        unit: '°C',
+        changeValue: (value: number) => this.changeValue(
+          'hotendTarget',
+          value,
+          this.configService.getDefaultHotendTemperature()
+        ),
+        setValue: () => {
+          this.printerService.setTemperatureHotend(this.hotendTarget);
+          this.hideQuickControl();
+        },
+      },
+      heatbed: {
+        image: 'heat-bed.svg',
+        target: this.heatbedTarget,
+        unit: '°C',
+        changeValue: (value: number) => this.changeValue(
+          'heatbedTarget',
+          value,
+          this.configService.getDefaultHeatbedTemperature()
+        ),
+        setValue: () => {
+          this.printerService.setTemperatureBed(this.heatbedTarget);
+          this.hideQuickControl();
+        },
+      },
+      fan: {
+        image: 'fan.svg',
+        target: this.fanTarget,
+        unit: '%',
+        changeValue: (value: number) => this.changeValue(
+          'fanTarget',
+          value,
+          this.configService.getDefaultFanSpeed()
+        ),
+        setValue: () => {
+          this.printerService.setFanSpeed(this.fanTarget);
+          this.hideQuickControl();
+        },
+      },
+    };
+    for (let item in settings) {
+      settings[item].smallStep = 1;
+      settings[item].bigStep = 10;
+      settings[item].reset = -999;
+    }
     switch (this.view) {
       case QuickControlView.HOTEND:
-        this.changeTemperatureHotend(value);
-        break;
+        return settings.hotend;
       case QuickControlView.HEATBED:
-        this.changeTemperatureHeatbed(value);
-        break;
+        return settings.heatbed;
       case QuickControlView.FAN:
-        this.changeSpeedFan(value);
-        break;
+        return settings.fan;
     }
-  }
-
-  public quickControlSetValue(): void {
-    switch (this.view) {
-      case QuickControlView.HOTEND:
-        this.setTemperatureHotend();
-        break;
-      case QuickControlView.HEATBED:
-        this.setTemperatureHeatbed();
-        break;
-      case QuickControlView.FAN:
-        this.setFanSpeed();
-        break;
-    }
-  }
-
-  private changeTemperatureHotend(value: number): void {
-    this.hotendTarget += value;
-    if (this.hotendTarget < -999) {
-      this.hotendTarget = this.configService.getDefaultHotendTemperature();
-    } else if (this.hotendTarget < 0) {
-      this.hotendTarget = 0;
-    } else if (this.hotendTarget > 999) {
-      this.hotendTarget = 999;
-    }
-  }
-
-  private changeTemperatureHeatbed(value: number): void {
-    this.heatbedTarget += value;
-    if (this.heatbedTarget < -999) {
-      this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
-    } else if (this.heatbedTarget < 0) {
-      this.heatbedTarget = 0;
-    } else if (this.heatbedTarget > 999) {
-      this.heatbedTarget = 999;
-    }
-  }
-
-  private changeSpeedFan(value: number): void {
-    this.fanTarget += value;
-    if (this.fanTarget < -999) {
-      this.fanTarget = this.configService.getDefaultFanSpeed();
-    } else if (this.fanTarget < 0) {
-      this.fanTarget = 0;
-    } else if (this.fanTarget > 100) {
-      this.fanTarget = 100;
-    }
-  }
-
-  private setTemperatureHotend(): void {
-    this.printerService.setTemperatureHotend(this.hotendTarget);
-    this.hideQuickControl();
-  }
-
-  private setTemperatureHeatbed(): void {
-    this.printerService.setTemperatureBed(this.heatbedTarget);
-    this.hideQuickControl();
-  }
-
-  private setFanSpeed(): void {
-    this.printerService.setFanSpeed(this.fanTarget);
-    this.hideQuickControl();
   }
 }
 
