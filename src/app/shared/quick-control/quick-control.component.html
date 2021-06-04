@@ -40,11 +40,11 @@
     <div
       class="quick-control__controller-value"
       colspan="2"
-      (click)="settings.changeValue(settings.reset - Number(settings.target))"
+      (click)="settings.changeValue(settings.reset - 1)"
       matRipple
       [matRippleUnbounded]="false"
     >
-      {{ Number(this.settings.target) === Number(this.settings.reset) ? '...' : this.settings.target }}
+      {{ Number(this.settings.target) < Number(this.settings.reset) ? '...' : this.settings.target }}
       <span class="quick-control__controller-value-unit">
         {{ this.settings.unit }}
       </span>

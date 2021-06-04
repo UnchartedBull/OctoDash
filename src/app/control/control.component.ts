@@ -67,7 +67,7 @@ export class ControlComponent {
 
   private changeValue(item: string, value: number): void {
     this[item] = Math.round((this[item] + value) * 100) / 100;
-    if (this[item] === -999) {
+    if (this[item] <= -999) {
       this.fetchZOffset()
     }
     console.log(this.zOffset)
