@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class QuickControlComponent {
   @Input() settings;
   @Input() hide;
+  public Number: NumberConstructor = Number;
 }

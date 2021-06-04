@@ -135,6 +135,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     for (let item in settings) {
       settings[item].smallStep = 1;
       settings[item].bigStep = 10;
+      settings[item].reset = -999;
     }
     switch (this.view) {
       case QuickControlView.HOTEND:

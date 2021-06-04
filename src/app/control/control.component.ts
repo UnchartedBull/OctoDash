@@ -4,6 +4,7 @@ import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { ConfigService } from '../config/config.service';
+import { ZOffset } from '../model';
 
 @Component({
   selector: 'app-control',
@@ -24,7 +25,7 @@ export class ControlComponent {
     private configService: ConfigService,
     private notificationService: NotificationService
   ) {
-    this.zOffset = this.fetchZOffset();
+    this.fetchZOffset();
     this.printerService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       err => {
@@ -54,35 +55,37 @@ export class ControlComponent {
     );
   }
 
-  private fetchZOffset(): number {
-    // return this.printerService.getZOffset();
-    return 0.0;
+  private fetchZOffset(): void {
+    this.printerService.getZOffset().subscribe((data: ZOffset) => {
+      this.zOffset = data.z_offset;
+    });
   }
 
   public getZOffset(): string {
-    return Math.abs(this.zOffset).toFixed(2);
+    return this.zOffset.toFixed(2);
   }
 
-  private changeValue(item: string, value: number, defaultValue: number) {
+  private changeValue(item: string, value: number): void {
     this[item] = Math.round((this[item] + value) * 100) / 100;
-    if (this[item] < -999) {
-      this[item] = defaultValue;
-    } else if (this[item] > 999) {
-      this[item] = 999;
+    if (this[item] === -999) {
+      this.fetchZOffset()
     }
+    console.log(this.zOffset)
   }
 
   public quickControlSettings() {
     return {
       image: 'height.svg',
-      target: this.zOffset,
+      target: this.getZOffset(),
       unit: 'mm',
       smallStep: 0.01,
       bigStep: 0.1,
-      changeValue: (value: number) => this.changeValue('zOffset', value, this.fetchZOffset()),
+      reset: -999,
+      changeValue: (value: number) => this.changeValue('zOffset', Number(value)),
       setValue: () => {
-        // this.printerService.setZOffset()
-        this.hideQuickControl()
+        this.printerService.setZOffset(this.zOffset);
+        setTimeout(() => this.fetchZOffset(), 500);
+        this.hideQuickControl();
       },
     }
   }
