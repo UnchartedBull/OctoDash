@@ -11,6 +11,8 @@
     class="custom-actions__action"
     *ngFor="let customAction of customActions"
     [style.border-color]="customAction.color"
+    [style.width]="'calc((' + actionWidth + ') - 2 * (0.7vw + 0.8vh))'"
+    [style.min-width]="'calc((' + actionWidth + ') - 2 * (0.7vw + 0.8vh))'"
     (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
     matRipple
     [matRippleUnbounded]="false"
@@ -19,6 +21,7 @@
       <fa-icon
         [icon]="['fas', customAction.icon]"
         [styles]="{ color: customAction.color }"
+        [style.font-size]="'calc((' + actionWidth + ') / 2)'"
       ></fa-icon>
     </div>
   </div>

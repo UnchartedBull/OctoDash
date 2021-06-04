@@ -47,7 +47,7 @@
   &__action {
     // 2 squares per row
     // 50% width minus margin and border
-    flex-basis: calc(50% - 2 * (0.7vw + 0.8vh));
+    // flex-basis: calc(50% - 2 * (0.7vw + 0.8vh));
     margin: 0.7vw 0.7vw;
     border: 0.8vh solid #f5f6fa;
     border-radius: 1.5vw;

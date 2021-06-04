@@ -30,10 +30,9 @@
 
   &__actions {
     display: flex;
-    max-width: 45vh;
     flex-direction: column;
     order: 3;
-    transition: flex-basis 0.6s ease-out;
+    transition: width 0.6s ease-out;
     height: 100%;
 
     &-text {
