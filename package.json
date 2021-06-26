@@ -67,7 +67,7 @@
     "electron:pack": "electron-builder build -l",
     "pack": "npm run ng:build && npm run electron:pack",
     "pack:mac": "npm run ng:build && electron-builder build -m",
-    "ng:serve": "ng serve $npm_config_serve",
+    "ng:serve": "ng serve",
     "ng:build": "ng build --configuration production",
     "locale:extract": "ng extract-i18n --output-path src/locale",
     "locale:update:all": "node -e 'require(`./helper/locale.js`).updateLocales()'",
