@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
+
 export interface EnclosurePluginAPI {
-  /* eslint-disable camelcase */
   controlled_io: string;
   temp_sensor_address: string;
   temp_sensor_navbar: boolean;
@@ -29,4 +30,8 @@ export interface EnclosureColorBody {
 
 export interface EnclosureOutputBody {
   status: boolean;
+}
+
+export interface EnclosurePWMBody {
+  duty_cycle: number;
 }

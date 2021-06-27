@@ -12,7 +12,7 @@ export class ToggleSwitchComponent {
   @Output() valueChange = new EventEmitter<boolean>();
 
   public toggleSwitchOptions: AnimationOptions = {
-    path: '/assets/toggle-switch.json',
+    path: 'assets/animations/toggle-switch.json',
     loop: false,
   };
 

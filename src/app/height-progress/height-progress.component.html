@@ -18,6 +18,8 @@
     <ng-container i18n="@@height-of">
       of
     </ng-container>
-    {{ height.total >= 0 ? height.total : '---' }}
+    <span class="height-indication__total-height">
+      {{ height.total >= 0 ? height.total : '---' }}
+    </span>
   </span>
 </ng-template>

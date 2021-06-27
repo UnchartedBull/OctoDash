@@ -13,16 +13,14 @@
         (onLongPressing)="setSpoolSkipChange(spool)"
       >
         <td class="filaments__type">
-          <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">
-            {{ spool.material }}
-          </span>
+          <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
         </td>
         <td class="filaments__name">
           {{ spool.displayName }}
         </td>
         <td class="filaments__weight-left">
-          {{ getSpoolWeightLeft(spool.weight, spool.used) }}
-          <span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
+          {{ getSpoolWeightLeft(spool.weight, spool.used)
+          }}<span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
         </td>
       </tr>
     </table>

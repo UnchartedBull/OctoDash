@@ -53,7 +53,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
-    console.log(this.config);
   }
 
   public ngOnDestroy(): void {

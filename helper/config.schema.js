@@ -144,17 +144,14 @@ const configSchema = {
             ambientSensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/ambientSensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
             filament1SensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/filament1SensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
             filament2SensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/filament2SensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
           },
         },
@@ -197,7 +194,7 @@ const configSchema = {
           required: ['enabled'],
           properties: {
             enabled: {
-              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              $id: '#/properties/plugins/properties/psuControl/properties/enabled',
               type: 'boolean',
             },
           },

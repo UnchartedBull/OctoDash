@@ -97,10 +97,10 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     clearTimeout(this.slowMoveTimeout);
 
     const bar = document.getElementById('filamentMoveBar');
-    const wrapper = (document.getElementsByClassName(
+    const wrapper = document.getElementsByClassName(
       'move-filament__progress-bar-wrapper',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    )[0] as any) as HTMLElement;
+    )[0] as any as HTMLElement;
 
     bar.style.width = Math.floor(bar.getBoundingClientRect().width) + 'px';
     wrapper.style.borderColor = '#c23616';

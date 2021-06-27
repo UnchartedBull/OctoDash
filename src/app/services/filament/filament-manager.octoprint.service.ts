@@ -23,15 +23,11 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
     return this.http
       .get(this.configService.getApiURL('plugin/filamentmanager/spools', false), this.configService.getHTTPHeaders())
       .pipe(
-        map(
-          (spools: FilamentManagerSpoolList): Array<FilamentSpool> => {
-            return spools.spools.map(
-              (spool: FilamentManagerSpool): FilamentSpool => {
-                return this.convertFilamentManagerSpool(spool);
-              },
-            );
-          },
-        ),
+        map((spools: FilamentManagerSpoolList): Array<FilamentSpool> => {
+          return spools.spools.map((spool: FilamentManagerSpool): FilamentSpool => {
+            return this.convertFilamentManagerSpool(spool);
+          });
+        }),
       );
   }
 
@@ -42,15 +38,13 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
         this.configService.getHTTPHeaders(),
       )
       .pipe(
-        map(
-          (selection: FilamentManagerSelections): FilamentSpool => {
-            if (selection.selections.length > 0) {
-              return this.convertFilamentManagerSpool(selection.selections[0].spool);
-            } else {
-              return null;
-            }
-          },
-        ),
+        map((selection: FilamentManagerSelections): FilamentSpool => {
+          if (selection.selections.length > 0) {
+            return this.convertFilamentManagerSpool(selection.selections[0].spool);
+          } else {
+            return null;
+          }
+        }),
       );
   }
 

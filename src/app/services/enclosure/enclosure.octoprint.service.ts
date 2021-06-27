@@ -9,6 +9,7 @@ import {
   EnclosureColorBody,
   EnclosureOutputBody,
   EnclosurePluginAPI,
+  EnclosurePWMBody,
   PSUControlCommand,
   TasmotaCommand,
   TasmotaMqttCommand,
@@ -74,6 +75,25 @@ export class EnclosureOctoprintService implements EnclosureService {
       .patch(
         this.configService.getApiURL('plugin/enclosure/outputs/' + identifier, false),
         outputBody,
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
+
+  setPWM(identifier: number, dutyCycle: number): void {
+    const pwmBody: EnclosurePWMBody = {
+      /* eslint-disable camelcase */
+      duty_cycle: dutyCycle,
+    };
+    this.http
+      .patch(
+        this.configService.getApiURL('plugin/enclosure/pwm/' + identifier, false),
+        pwmBody,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
