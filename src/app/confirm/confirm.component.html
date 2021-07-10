@@ -1,0 +1,13 @@
+<div style="z-index: 9999" class="confirm__wrapper" *ngIf="show">
+    <div class="confirm">
+      <h1 i18n="@@are-you-sure">are you sure?</h1>
+      <p class="confirm__sub-heading" i18n="@@confirm-exec">{{Question}}</p>
+      <p class="confirm__gcode" *ngIf="Command">{{ Command }}</p>
+      <img
+        class="confirm__icon"
+        src="assets/confirm-small.svg"
+        (click)="okClicked()"
+      />
+      <img class="confirm__icon" src="assets/cancel-small.svg" (click)="cancelClicked()" />
+    </div>
+</div>

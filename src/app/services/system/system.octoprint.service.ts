@@ -49,12 +49,28 @@ export class SystemOctoprintService implements SystemService {
       .subscribe();
   }
 
-  public connectPrinter(): void {
-    const payload: ConnectCommand = {
+  public connectPrinter(profileID: string): void {
+    var payload: ConnectCommand = {
       command: 'connect',
       save: false,
     };
+    if (profileID != null){
+      payload.printerProfile = profileID;
+    }
+    this.http
+      .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-connect:Can't connect to printer!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
 
+  public disconnetPrinter(): void{
+    var payload: ConnectCommand = {
+      command: 'disconnect'
+    };
     this.http
       .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
       .pipe(

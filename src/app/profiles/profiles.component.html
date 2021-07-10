@@ -1,0 +1,21 @@
+<div class="profiles">
+    <div class="profiles-wrapper" [ngClass]="{ 'profiles-wrapper-fadeout': fadeOutAnimation }">
+        <div class="profiles-container">
+            <img src="assets/error.svg" class="profiles__close" (click)="hideProfiles()" />
+            <div class="profiles__content" #profilesMain>
+                <span class="profiles__heading" i18n="@@profiles">Printers</span>
+                <ul class="profiles__list">
+                    <li *ngFor="let profile of profiles; index as i" >
+                        <div [ngClass]="{selected: profile.current}" (click)="onProfileClick(i)">
+                            <h2 class="profiles_printer_name">{{profile.name}}</h2>
+                            <p class="profiles_printer_model">{{profile.model}}</p>
+                            <hr />
+                        </div>
+                    </li>
+                </ul>
+                <span class="profiles__save" (click)="save()">Select</span>
+              </div>
+        </div>
+    </div>
+</div>
+<app-confirm [(Show)]="confirm" [Question]="question" (Ok)="onConfirmation()" (Cancel)="onCancel()"></app-confirm>

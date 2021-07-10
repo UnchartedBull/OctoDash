@@ -1,0 +1,371 @@
+.leveling {
+    &-wrapper {
+      animation: fadein 0.4s;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      // backdrop-filter: blur(8px);
+      z-index: 20;
+  
+      &-fadeout {
+        animation: fadeout 0.4s;
+      }
+    }
+  
+    &-container {
+      position: absolute;
+      top: 10vh;
+      left: 20vw;
+      height: 81vh;
+      width: 60vw;
+      background-color: #353b48;
+      border-radius: 2vw;
+    }
+  
+    &__heading {
+      padding: 3vh 0;
+      display: block;
+      font-weight: 500;
+      font-size: 4vw;
+  
+      &-2 {
+        display: block;
+        font-size: 3.5vw;
+        font-weight: 500;
+        margin-bottom: 1.2vh;
+        margin-top: 3vh;
+      }
+  
+      &-3 {
+        display: block;
+        font-size: 2.5vw;
+        font-weight: 500;
+        margin-bottom: 1.2vh;
+        margin-top: 2vh;
+      }
+  
+      &-back {
+        font-size: 3vw;
+        margin-right: 1vw;
+      }
+    }
+  
+    &__sub-heading {
+      font-size: 2.3vw;
+      font-weight: 500;
+      padding: 2vh 0 1vh;
+    }
+  
+    &__text {
+      font-size: 2vw;
+      text-align: justify;
+  
+      & li {
+        font-size: 1.2vw;
+        line-height: 1.7;
+      }
+    }
+  
+    &__input {
+      background: transparent;
+      margin-top: 1.5vh;
+      padding: 1.5vw 3vh;
+      border: 2px solid #dcdde1;
+      border-radius: 1.7vw;
+      width: 55vw;
+      font-size: 2vw;
+      margin-bottom: 2vh;
+  
+      &:disabled {
+        opacity: 0.5;
+      }
+  
+      &:focus {
+        outline: 0;
+        border: 2px solid #44bd32;
+      }
+  
+      &-small {
+        width: 10vw;
+        text-align: right;
+  
+        &-suffix {
+          font-size: 3vw;
+          padding-left: 1vw;
+        }
+      }
+  
+      &-label {
+        display: block;
+        font-size: 1.8vw;
+  
+        & span {
+          font-size: inherit;
+          opacity: 0.5;
+        }
+      }
+  
+      &-prefix {
+        font-size: 2vw;
+        opacity: 0.7;
+        padding-right: 1vw;
+      }
+  
+      &-divider {
+        padding: 0 0.9vw;
+        font-size: 2.5vw;
+      }
+    }
+  
+    &__checkbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 3vw;
+      width: 3vw;
+      background-color: transparent;
+      border: 2px solid #dcdde1;
+      border-radius: 1vw;
+  
+      &-container {
+        display: inline-block;
+        position: relative;
+        user-select: none;
+        padding-left: 5vw;
+        height: 4.5vw;
+        margin-top: 1.4vh;
+        cursor: pointer;
+        overflow: visible;
+  
+        &__space-right {
+          margin-right: 14vw;
+        }
+  
+        &-disabled {
+          opacity: 0.5;
+        }
+      }
+  
+      &-checked {
+        background-color: #2196f3;
+        width: 1.8vw;
+        height: 1.8vw;
+        display: block;
+        margin-left: 0.6vw;
+        margin-top: 0.6vw;
+        border-radius: 0.4vw;
+  
+        &-disabled {
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+      }
+  
+      &-descriptor {
+        font-size: 2.5vw;
+        vertical-align: 2vh;
+      }
+    }
+  
+    &__close {
+      position: absolute;
+      right: 1.5vw;
+      top: 2vh;
+      width: 4vw;
+      z-index: 10;
+    }
+  
+    &__list {
+      & fa-icon {
+        font-size: 3vw;
+        margin-left: 0.5vw;
+        opacity: 0.7;
+      }
+  
+      & li {
+        font-size: 3vw;
+        padding: 2vh 0;
+      }
+    }
+  
+    &__made {
+      font-size: 2.3vw;
+      display: block;
+      opacity: 0.6;
+      text-align: center;
+      margin-top: 4vh;
+  
+      &-heart {
+        font-size: 2vw;
+        vertical-align: -0.7vh;
+        display: inline-block;
+        color: #e84118;
+      }
+    }
+  
+    &__save {
+      display: block;
+      text-align: center;
+      margin: 4vh 0;
+    }
+  
+    &__scroll {
+      height: 63vh;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 2vw;
+      z-index: 1;
+    }
+  
+    &__content {
+      position: absolute;
+      left: 0;
+      width: 54vw;
+      display: block;
+      padding: 2vh 2vw 2vh 4vw;
+  
+      &-slideout-forward {
+        animation: slideout-forward 0.4s ease-out;
+      }
+  
+      &-slidein-forward {
+        animation: slidein-forward 0.4s ease-out;
+      }
+  
+      &-slideout-backward {
+        animation: slideout-backward 0.4s ease-out;
+      }
+  
+      &-slidein-backward {
+        animation: slidein-backward 0.4s ease-out;
+      }
+  
+      &-inactive {
+        left: 100vw;
+      }
+    }
+  
+    &__made-in-berlin {
+      display: block;
+      margin: 5vh auto 0;
+      width: 20vw;
+    }
+
+    &_printer_name {
+      margin-left: 6px;
+      font-size: 3.5vw;
+    }
+    &_printer_model {
+      margin-left: 6px;
+      font-size: 2vw;
+    }
+    & hr {
+      margin-top: 4px;
+    }
+  }
+ 
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideout-forward {
+    from {
+      left: 0;
+    }
+  
+    to {
+      left: -60vw;
+    }
+  }
+  
+  @keyframes slidein-forward {
+    from {
+      left: 60vw;
+    }
+  
+    to {
+      left: 0;
+    }
+  }
+  
+  @keyframes slidein-backward {
+    from {
+      left: -60vw;
+    }
+  
+    to {
+      left: 0;
+    }
+  }
+  
+  @keyframes slideout-backward {
+    from {
+      left: 0;
+    }
+  
+    to {
+      left: 60vw;
+    }
+  }
+.level_icon{
+  width: 10vw;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row; 
+} 
+.flex-col{
+  padding: 15px;
+  margin: 0 15px;
+}
+.flex-row-multicolum{ 
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  flex-flow: row wrap; 
+}
+.home-icon{
+  display: block;
+  float: left;
+  width: 10vw;
+  height: 10vw;
+  border: 0.8vw solid #f5f6fa;
+  border-radius: 1.5vw;
+  text-align: center;
+  opacity: 0.9;
+  margin: 0 1.4vw 3vh;
+}
+.border-left {
+  border-left: 0.2vw solid gray;
+  margin-left: 0px;
+  padding-left: 30px;
+}
+.border-bottom{
+  border-bottom: 0.2vw solid gray;
+}
+.homing-text{
+  font-size: 2vw;
+  display: block;
+  opacity: 0.6;
+  text-align: center;
+  margin-top: 4vh;
+}

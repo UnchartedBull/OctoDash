@@ -1,0 +1,39 @@
+<div class="leveling">
+    <div class="leveling-wrapper" [ngClass]="{ 'leveling-wrapper-fadeout': fadeOutAnimation }">
+        <div class="leveling-container">
+            <img src="assets/error.svg" class="leveling__close" (click)="hideScreen()" />
+            <div class="leveling__content" #levelingMain>
+                <span class="leveling__heading" i18n="@@leveling">Level Corners</span>
+                <div class="flex-row-multicolum">
+                    <div class="flex-col border-bottom" (click)="buttonClick(0)">
+                        <!-- Home -->
+                        <img src="assets/home.svg" class="level_icon" />
+                    </div>
+                    <div class="flex-col border-left" (click)="buttonClick(4)" >
+                        <!-- Rear Left -->
+                        <img src="assets/rl.svg" class="level_icon" />
+                    </div>
+                    <div class="flex-col" (click)="buttonClick(3)" >
+                        <!-- Rear Right -->
+                        <img src="assets/rr.svg" class="level_icon" />
+                    </div>
+                </div>
+                <div class="flex-row-multicolum">
+                    <div class="flex-col" (click)="buttonClick(5)" >
+                        <!-- Center -->
+                        <img src="assets/c.svg" class="level_icon" />
+                    </div>
+                    <div class="flex-col border-left" (click)="buttonClick(1)">
+                        <!-- Front Left -->
+                        <img src="assets/fl.svg" class="level_icon" />
+                    </div>
+                    <div class="flex-col" (click)="buttonClick(2)">
+                        <!-- Front Right -->
+                        <img src="assets/fr.svg" class="level_icon" />
+                    </div>
+                </div>
+                <span class="homing-text" *ngIf="isHomingNeeded">Homing is needed before starting leveling.</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<svg viewBox="0 0 100 100" y="0" x="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- <path stroke-miterlimit="10" stroke-width="3.5" stroke="#f5f6fa" fill="none" d="M84.84 90H15.16A5.16 5.16 0 0 1 10 84.84V15.16A5.16 5.16 0 0 1 15.16 10h69.68A5.16 5.16 0 0 1 90 15.16v69.68A5.16 5.16 0 0 1 84.84 90z" style="stroke:#f5f6fa" ></path> -->
+    <circle fill="#f5f6fa" r="8.504" cy="49.999" cx="49.999" style="fill:#f5f6fa;animation-play-state:paused" ></circle> 
+    <circle fill="#f5f6fa" r="8.504" cy="32.992" cx="67.006" style="fill:#f5f6fa;animation-play-state:paused" ></circle>
+    <circle fill="#f5f6fa" r="8.504" cy="67.006" cx="67.006" style="fill:#f5f6fa;animation-play-state:paused" ></circle>
+    <circle fill="#f5f6fa" r="8.504" cy="67.006" cx="32.992" style="fill:#f5f6fa;animation-play-state:paused" ></circle>
+    <circle fill="#f5f6fa" r="8.504" cy="32.992" cx="32.992" style="fill:#f5f6fa;animation-play-state:paused" ></circle>
+</svg>

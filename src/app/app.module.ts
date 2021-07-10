@@ -64,6 +64,11 @@ import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.comp
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
+import { ProfilesComponent } from './profiles/profiles.component';
+import { ProfileService } from './services/profiles/profiles.service';
+import { ProfileOctoprintService } from './services/profiles/profiles.octoprint.service';
+import { BedLevelingComponent } from './bed-leveling/bed-leveling.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 export function playerFactory(): LottiePlayer {
   return player;
@@ -103,6 +108,9 @@ export function playerFactory(): LottiePlayer {
     PurgeFilamentComponent,
     CustomActionsComponent,
     ToggleSwitchComponent,
+    ProfilesComponent,
+    BedLevelingComponent,
+    ConfirmComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -123,6 +131,17 @@ export function playerFactory(): LottiePlayer {
     EventService,
     NotificationService,
     [
+      {
+        provide: ProfileService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new ProfileOctoprintService(configService, notificationService, httpClient);
+        },
+      },
       {
         provide: SystemService,
         deps: [ConfigService, NotificationService, HttpClient],

@@ -17,13 +17,37 @@ export class StandbyComponent implements OnInit, OnDestroy {
   public showConnectionError = false;
   private displaySleepTimeout: ReturnType<typeof setTimeout>;
   private connectErrorTimeout: ReturnType<typeof setTimeout>;
-
+  title = 'clock-greets';
+  time;
+  hours;
+  msg;
   public constructor(
     private configService: ConfigService,
     private service: AppService,
     private enclosureService: EnclosureService,
     private systemService: SystemService,
-  ) {}
+  ) {
+    setInterval(() => {
+      this.time = new Date();
+      this.decide();
+   }, 1000);
+
+   this.decide();
+  }
+  decide() {
+    this.hours = new Date().getHours();
+    if(this.hours < 12){
+      this.msg = "Good Morning"
+    }else if(this.hours < 16){
+      this.msg = "Good Afternoon"
+    }else if(this.hours < 19){
+      this.msg = "Good Evening"
+    }else if(this.hours < 24){
+      this.msg = "Good Night"
+    }else if(this.hours < 6){
+      this.msg = "Get some Sleep"
+    }
+  }
 
   public ngOnInit(): void {
     if (this.configService.getAutomaticScreenSleep()) {
@@ -51,7 +75,7 @@ export class StandbyComponent implements OnInit, OnDestroy {
   }
 
   private connectPrinter(): void {
-    this.systemService.connectPrinter();
+    this.systemService.connectPrinter(null);
     this.connectErrorTimeout = setTimeout(() => {
       this.showConnectionError = true;
       this.connectErrorTimeout = setTimeout(() => {

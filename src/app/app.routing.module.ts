@@ -9,6 +9,7 @@ import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StandbyComponent } from './standby/standby.component';
 
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'standby',
     component: StandbyComponent,
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
   },
 ];
 

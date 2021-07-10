@@ -1,5 +1,21 @@
-<div class="standby">
-  <div (click)="reconnect()" class="standby__main-window" [ngStyle]="{ 'flex-basis': actionsVisible ? '54%' : '94%' }">
+<div class="standby" (click)="reconnect()" > 
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <div class="standby__main-window" [ngStyle]="{ 'flex-basis': actionsVisible ? '54%' : '94%' }">
+    <p class="txt-time">{{time | date:'mediumTime'}}</p>
+    <p class="txt-greetings">{{msg}}, Maker!</p>
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
     <ng-container *ngIf="!actionsVisible && !connecting">
       <span class="standby__text-big" i18n="@@octoprint-sleeping">Shhh! OctoDash is sleeping.</span>

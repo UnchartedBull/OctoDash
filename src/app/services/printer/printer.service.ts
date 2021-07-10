@@ -5,7 +5,6 @@ import { PrinterProfile } from '../../model';
 
 @Injectable()
 export abstract class PrinterService {
-  abstract getActiveProfile(): Observable<PrinterProfile>;
 
   abstract saveToEPROM(): void;
 

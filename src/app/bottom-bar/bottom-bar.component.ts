@@ -5,6 +5,7 @@ import { ConfigService } from '../config/config.service';
 import { PrinterState, PrinterStatus, TemperatureReading } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
+import { ProfileService } from '../services/profiles/profiles.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -18,12 +19,14 @@ export class BottomBarComponent implements OnDestroy {
 
   public printerStatus: PrinterState;
   public enclosureTemperature: TemperatureReading;
-
+  public profiles:boolean = false;
+  public PrinterName:String;
   public constructor(
     private socketService: SocketService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
+    private profileService: ProfileService
   ) {
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
       this.subscriptions.add(
@@ -52,17 +55,33 @@ export class BottomBarComponent implements OnDestroy {
         }
       }),
     );
+    this.getPrinterName();
   }
 
   public getStringStatus(printerState: PrinterState): string {
     return PrinterState[printerState];
   }
 
-  public getPrinterName(): string {
-    return this.configService.getPrinterName();
+  public getPrinterName(): void {
+    this.profileService.getActiveProfile().subscribe((profile)=>{
+      this.PrinterName = profile.name;
+    });
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  public showProfiles(){
+    if (this.printerStatus == PrinterState.operational){
+      this.profiles = true;
+    }
+  }
+
+  public hideProfiles(): void {
+    setTimeout((): void => {
+      this.profiles = false;
+      this.getPrinterName();
+    }, 350);
   }
 }
