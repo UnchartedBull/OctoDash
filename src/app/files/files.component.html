@@ -66,16 +66,16 @@
       (press)="loadFile(file.path)"
       matRipple
       [matRippleUnbounded]="false"
-      class="files__object"
+      class={{file.successfull}}
     >
-      <img src="assets/object.svg" class="files__icon" />
+      <img src={{file.successfull_icon}} class="files__icon" />
       <div class="files__info">
         <span class="files__info-value"> {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span> </span>
         <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
           {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
         </span>
         <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
-          {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
+            {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
         </span>
       </div>
       <span class="files__name">
@@ -97,7 +97,7 @@
       <tr>
         <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>
         <td *ngIf="fileDetail.hasOwnProperty('printTime')">
-          {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
+            {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
         </td>
         <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">
           {{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span>
