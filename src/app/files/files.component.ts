@@ -1,161 +1,193 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { AnimationOptions } from 'ngx-lottie';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
-import { ConfigService } from '../config/config.service';
-import { Directory, File } from '../model';
-import { NotificationService } from '../notification/notification.service';
-import { FilesService } from '../services/files/files.service';
+import { ConfigService } from '../../config/config.service';
+import { ConversionService } from '../../conversion.service';
+import { Directory, File, Folder } from '../../model';
+import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
+import { NotificationService } from '../../notification/notification.service';
+import { FilesService } from './files.service';
 
-@Component({
-  selector: 'app-files',
-  templateUrl: './files.component.html',
-  styleUrls: ['./files.component.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class FilesComponent {
-  public currentFolder: string;
-  public homeFolder = '/';
-  public directory: Directory;
-  public fileDetail: File;
-
-  public sortingAttribute: 'name' | 'date' | 'size';
-  public sortingOrder: 'asc' | 'dsc';
-  public showSorting = false;
-
-  public loadingOptions: AnimationOptions = {
-    path: 'assets/animations/loading.json',
-  };
-  public loading = Date.now();
+export class FilesOctoprintService implements FilesService {
+  private loadedFile = false;
 
   public constructor(
-    private filesService: FilesService,
-    private notificationService: NotificationService,
-    private router: Router,
     private configService: ConfigService,
-  ) {
-    this.showLoader();
-    this.directory = { files: [], folders: [] };
-    this.currentFolder = '/';
+    private notificationService: NotificationService,
+    private http: HttpClient,
+    private conversionService: ConversionService,
+  ) {}
 
-    this.sortingAttribute = this.configService.getDefaultSortingAttribute();
-    this.sortingOrder = this.configService.getDefaultSortingOrder();
-
-    this.openFolder(this.currentFolder);
-  }
-
-  public openFolder(folderPath: string): void {
-    folderPath = folderPath === '' ? '/' : folderPath;
-    setTimeout((): void => {
-      this.showLoader();
-      this.directory = { files: [], folders: [] };
-
-      this.filesService.getFolderContent(folderPath).subscribe(
-        (directory: Directory) => {
-          this.directory = directory;
-          const mergedDirectory = _.concat(directory.files, directory.folders);
-          if (folderPath === '/' && !(mergedDirectory[0].name === 'local' && mergedDirectory[1].name == 'sdcard')) {
-            this.currentFolder = mergedDirectory[0].path.startsWith('/local') ? '/local' : '/sdcard';
-            this.homeFolder = this.currentFolder;
+  public getFolderContent(folderPath?: string): Observable<Directory> {
+    return this.http
+      .get(
+        this.configService.getApiURL('files' + (folderPath === '/' ? '' : folderPath)),
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        map(response => {
+          if (Object.prototype.hasOwnProperty.call(response, 'children')) {
+            return response['children'];
           } else {
-            this.currentFolder = folderPath;
+            return response['files'];
           }
-          this.sortFolder(this.sortingAttribute, this.sortingOrder);
-        },
-        (error: HttpErrorResponse) => {
-          this.notificationService.setError(
-            $localize`:@@error-load-file-folder:Can't load file/folder!`,
-            error.message,
-          );
-          this.currentFolder = folderPath;
-        },
-        () => {
-          this.hideLoader();
-        },
+        }),
+        map((folderContent: Array<OctoprintFile & OctoprintFolder>) => {
+          const directory: Directory = { files: [], folders: [] };
+
+          folderContent.forEach(fileOrFolder => {
+            if (fileOrFolder.type === 'folder') {
+              directory.folders.push({
+                origin: fileOrFolder.origin,
+                path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
+                name: fileOrFolder.name,
+                size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
+              } as Folder);
+            }
+
+            if (fileOrFolder.typePath.includes('gcode')) {
+              directory.files.push({
+                origin: fileOrFolder.origin,
+                path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
+                name: fileOrFolder.name,
+                date: this.conversionService.convertDateToString(new Date(fileOrFolder.date)),
+                size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
+                ...(fileOrFolder.gcodeAnalysis
+                    ? {
+                        successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'mat-ripple files__object_success' : 'mat-ripple files__object_failed' : 'mat-ripple files__object',
+                        successfull_icon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'assets/confirm-small.svg' : 'assets/cancel-small.svg' : fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
+                      printTime: this.conversionService.convertSecondsToHours(
+                        fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                      ),
+                      filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                        _.sumBy(_.values(fileOrFolder.gcodeAnalysis.filament), tool => tool.length),
+                      ),
+                    }
+                  : {}),
+              } as File);
+            }
+          });
+
+          return directory;
+        }),
+        map((directory: Directory) => {
+          if (folderPath === '/') {
+            const localCount = _.sumBy(_.concat(directory.files, directory.folders), (fileOrFolder: File & Folder) =>
+              fileOrFolder.origin === 'local' ? 1 : 0,
+            );
+            const sdCardCount = _.sumBy(_.concat(directory.files, directory.folders), (fileOrFolder: File & Folder) =>
+              fileOrFolder.origin === 'sdcard' ? 1 : 0,
+            );
+
+            if (localCount > 0 && sdCardCount > 0) {
+              directory.folders = [
+                {
+                  origin: 'local',
+                  path: '/local',
+                  name: $localize`:@@local:local`,
+                  size: undefined,
+                },
+                {
+                  origin: 'sdcard',
+                  path: '/sdcard',
+                  name: $localize`:@@sdcard:sdcard`,
+                  size: undefined,
+                },
+              ];
+              directory.files = [];
+            }
+          }
+
+          return directory;
+        }),
       );
-    }, 240);
   }
 
-  public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
-    this.directory.folders.sort((a, b): number => ((order === 'asc' ? a.name > b.name : a.name < b.name) ? 1 : -1));
-    this.directory.files.sort((a, b): number => ((order === 'asc' ? a[by] > b[by] : a[by] < b[by]) ? 1 : -1));
-  }
-
-  public openDetails(filePath: string): void {
-    this.filesService.getFile(filePath).subscribe(
-      (fileData: File) => (this.fileDetail = fileData),
-      (error: HttpErrorResponse) => {
-        this.fileDetail = { name: 'error' } as unknown as File;
-        this.notificationService.setError($localize`:@@error-load-file:Can't load file!`, error.message);
-      },
+  public getFile(filePath: string): Observable<File> {
+    return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
+      map((file: OctoprintFile): File => {
+        return {
+          origin: file.origin,
+          path: '/' + file.origin + '/' + file.path,
+          name: file.name,
+          date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
+          size: this.conversionService.convertByteToMegabyte(file.size),
+          thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
+          ...(file.gcodeAnalysis
+              ? {
+                  printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                  filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                  _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
+                ),
+              }
+            : {}),
+        } as File;
+      }),
     );
-    const fileDOMElement = document.getElementById('fileDetailView');
-    fileDOMElement.style.display = 'block';
-    setTimeout((): void => {
-      fileDOMElement.style.opacity = '1';
-    }, 50);
   }
 
-  public closeDetails(): void {
-    const fileDOMElement = document.getElementById('fileDetailView');
-    fileDOMElement.style.opacity = '0';
-    setTimeout((): void => {
-      fileDOMElement.style.display = 'none';
-      this.fileDetail = null;
-    }, 500);
-  }
-
-  public openSorting(): void {
-    this.showSorting = true;
-    setTimeout((): void => {
-      const sortingDOMElement = document.getElementById('sortingView');
-      sortingDOMElement.style.opacity = '1';
-    }, 50);
-  }
-
-  public closeSorting(): void {
-    const sortingDOMElement = document.getElementById('sortingView');
-    sortingDOMElement.style.opacity = '0';
-    this.sortFolder(this.sortingAttribute, this.sortingOrder);
-    setTimeout((): void => {
-      sortingDOMElement.style.display = 'none';
-      this.showSorting = false;
-    }, 500);
+  public getThumbnail(filePath: string): Observable<string> {
+    return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
+      map((file: OctoprintFile): string => {
+        return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
+      }),
+    );
   }
 
   public loadFile(filePath: string): void {
-    this.filesService.loadFile(filePath);
-    this.filesService.setLoadedFile(true);
-    setTimeout((): void => {
-      this.router.navigate(['/main-screen']);
-    }, 300);
+    const payload: FileCommand = {
+      command: 'select',
+      print: false,
+    };
+
+    this.http
+      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   public printFile(filePath: string): void {
-    this.filesService.printFile(filePath);
-    setTimeout((): void => {
-      this.router.navigate(['/main-screen']);
-    }, 550);
+    const payload: FileCommand = {
+      command: 'select',
+      print: true,
+    };
+
+    this.http
+      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
   public deleteFile(filePath: string): void {
-    this.filesService.deleteFile(filePath);
-    setTimeout((): void => {
-      this.closeDetails();
-      this.openFolder(this.currentFolder);
-    }, 300);
+    this.http
+      .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message),
+        ),
+      )
+      .subscribe();
   }
 
-  private hideLoader(): void {
-    if (Date.now() - this.loading > 750) {
-      this.loading = 0;
-    } else {
-      setTimeout(this.hideLoader.bind(this), 750 - (Date.now() - this.loading));
-    }
+  public setLoadedFile(value: boolean): void {
+    this.loadedFile = value;
   }
 
-  private showLoader(): void {
-    this.loading = Date.now();
+  public getLoadedFile(): boolean {
+    return this.loadedFile;
   }
 }
