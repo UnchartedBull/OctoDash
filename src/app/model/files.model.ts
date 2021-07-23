@@ -19,4 +19,6 @@ export interface File {
   printTime?: string;
   filamentWeight?: number;
   date?: string;
+  successfull: string;
+  successfull_icon: string;
 }

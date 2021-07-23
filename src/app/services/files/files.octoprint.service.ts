@@ -62,6 +62,8 @@ export class FilesOctoprintService implements FilesService {
                   ? {
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                        successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'mat-ripple files__object_success' : 'mat-ripple files__object_failed' : 'mat-ripple files__object',
+                        successfull_icon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'assets/confirm-small.svg' : 'assets/cancel-small.svg' : fileOrFolder.thumbnail ? this.configSe
                       ),
                       filamentWeight: this.conversionService.convertFilamentLengthToWeight(
                         _.sumBy(_.values(fileOrFolder.gcodeAnalysis.filament), tool => tool.length),
