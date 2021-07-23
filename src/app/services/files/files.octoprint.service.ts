@@ -61,7 +61,8 @@ export class FilesOctoprintService implements FilesService {
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
                         successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'mat-ripple files__object_success' : 'mat-ripple files__object_failed' : 'mat-ripple files__object',
-                        successfull_icon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'assets/confirm-small.svg' : 'assets/cancel-small.svg' : fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
+                        successfull_icon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'assets/check.svg' : 'assets/close.svg' : 'assets/blank.svg',
+                        thumbnail: fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
                         printTime: this.conversionService.convertSecondsToHours(
                             fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                         ),
