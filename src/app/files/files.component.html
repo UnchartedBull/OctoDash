@@ -69,7 +69,11 @@
       class="files__object"
     >
       <div class="files__icon_wrapper {{file.successfull}}">
-          <img src={{file.thumbnail}} class="files__icon" />
+        <fa-icon
+          [icon]="['fas', file.successfullIcon]"
+          class="custom-actions__action-icon"
+        ></fa-icon>
+        <img src={{file.thumbnail}} class="files__icon" />
       </div>
       <div class="files__info">
         <span class="files__info-value"> {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span> </span>
