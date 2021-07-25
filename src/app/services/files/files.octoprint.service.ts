@@ -61,7 +61,7 @@ export class FilesOctoprintService implements FilesService {
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
                         successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'files__object_success' : 'files__object_failed' : 'files__object_unknown',
-                        successfullIcon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'check-circle' : 'minus-circle' : 'circle',
+                        successfullIcon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'check-circle' : 'times-circle' : 'minus-circle',
                         thumbnail: fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
                         printTime: this.conversionService.convertSecondsToHours(
                             fileOrFolder.gcodeAnalysis.estimatedPrintTime,
