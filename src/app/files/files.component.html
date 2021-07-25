@@ -68,10 +68,9 @@
       [matRippleUnbounded]="false"
       class="files__object"
     >
-        <div>
-            <img src={{file.thumbnail}} class="files__icon" style="position:absolute; top:0; left:0;" />
-            <img src={{file.successfull_icon}} class="files__icon" style="position:absolute; top:-18px; left:0; width:20px;" />
-        </div>
+      <div class="files__icon_wrapper {{file.successfull}}">
+          <img src={{file.thumbnail}} class="files__icon" />
+      </div>
       <div class="files__info">
         <span class="files__info-value"> {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span> </span>
         <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
@@ -81,7 +80,7 @@
           {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
         </span>
       </div>
-      <span class="files__name" style="margin-left:80px;">
+      <span class="files__name" >
         {{ file.name }}
       </span>
     </div>

@@ -1,3 +1,18 @@
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v93/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+/* fallback */
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v68/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2');
+}
+
 .top-bar {
   &__next-icon {
     width: 6.5vw;
@@ -84,6 +99,41 @@
       margin-bottom: 5.5vh;
     }
   }
+  &__icon_wrapper {
+    width: 50px;
+    height: 50px;
+    float: left;
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    padding-top: .5vh;
+    padding-left: .5vw;
+
+    &.files__object_success:before {
+      content: '\e834';
+      color: #44bd32;
+    }
+
+    &.files__object_failed:before {
+      content: '\e909';
+      color: #e84118;
+    }
+
+    &.files__object_unknown:before {
+      content: '\e835';
+    }
+  }
 
   &__name {
     font-size: 3.2vw;
@@ -96,8 +146,11 @@
   }
 
   &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 8vh;
-    margin: 1.7vh 1vw 0;
+    margin: 1vh 2vw 0;
     display: block;
     float: left;
   }
