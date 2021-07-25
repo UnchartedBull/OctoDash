@@ -84,6 +84,27 @@
       margin-bottom: 5.5vh;
     }
   }
+  &__icon_wrapper {
+    float: left;
+    line-height: 1;
+
+    & fa-icon {
+        position: absolute;
+        font-size: 2vw;
+    }
+
+    &.files__object_success fa-icon {
+      color: #44bd32;
+    }
+
+    &.files__object_failed fa-icon {
+      color: #e84118;
+    }
+
+    &.files__object_unknown fa-icon {
+      color: currentColor;
+    }
+  }
 
   &__name {
     font-size: 3.2vw;
@@ -93,11 +114,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
+    margin-left: 9vw;
   }
 
   &__icon {
-    height: 8vh;
-    margin: 1.7vh 1vw 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 9vh;
+    margin: 1vh 2vw 0;
     display: block;
     float: left;
   }

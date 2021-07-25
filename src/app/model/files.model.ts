@@ -20,5 +20,5 @@ export interface File {
   filamentWeight?: number;
   date?: string;
   successfull: string;
-  successfull_icon: string;
+  successfullIcon: string;
 }
