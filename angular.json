@@ -94,6 +94,10 @@
                   "maximumWarning": "6kb"
                 }
               ]
+            },
+            "development": {
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -108,13 +112,17 @@
             },
             "production": {
               "browserTarget": "OctoDash:build:production"
+            },
+            "development": {
+              "browserTarget": "OctoDash:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OctoDash:build"
+            "browserTarget": "OctoDash:build:production"
           }
         },
         "test": {

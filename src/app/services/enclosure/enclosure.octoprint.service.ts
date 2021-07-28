@@ -47,7 +47,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       );
   }
 
-  setLEDColor(identifier: number, red: number, green: number, blue: number): void {
+  public setLEDColor(identifier: number, red: number, green: number, blue: number): void {
     const colorBody: EnclosureColorBody = {
       red,
       green,
@@ -67,7 +67,9 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  setOutput(identifier: number, status: boolean): void {
+  public setOutput(identifier: number, status: boolean): void {
+    console.log(identifier, status);
+
     const outputBody: EnclosureOutputBody = {
       status,
     };
@@ -85,7 +87,9 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  setPWM(identifier: number, dutyCycle: number): void {
+  public setOutputPWM(identifier: number, dutyCycle: number): void {
+    console.log(identifier, dutyCycle);
+
     const pwmBody: EnclosurePWMBody = {
       /* eslint-disable camelcase */
       duty_cycle: dutyCycle,
@@ -104,7 +108,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  setPSUState(state: PSUState): void {
+  public setPSUState(state: PSUState): void {
     if (this.configService.usePSUControl()) {
       this.setPSUStatePSUControl(state);
     } else if (this.configService.useTpLinkSmartPlug()) {

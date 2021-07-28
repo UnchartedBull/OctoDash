@@ -3,7 +3,7 @@
     <td class="top-bar__back" routerLink="/main-screen">
       <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
         <img src="assets/back.svg" class="top-bar__back-icon" />
-        <span i18n="@@control-back">back</span>
+        <span i18n="@@control-back" class="top-bar__back">back</span>
       </span>
     </td>
     <td class="top-bar__center">
@@ -31,9 +31,7 @@
         predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information.
       </span>
       <br />
-      <ng-container i18n="@@help-custom-actions">
-        Wiki page is called "CustomActions".
-      </ng-container>
+      <ng-container i18n="@@help-custom-actions"> Wiki page is called "CustomActions". </ng-container>
     </span>
   </div>
 </div>

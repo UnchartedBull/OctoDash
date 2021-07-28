@@ -84,6 +84,12 @@ export class CustomActionsComponent {
         } else if (command.includes('[!NEOPIXEL]')) {
           const values = command.replace('[!NEOPIXEL]', '').split(',');
           this.setLEDColor(values[0], values[1], values[2], values[3]);
+        } else if (command.includes('[!OUTPUT]')) {
+          const values = command.replace('[!OUTPUT]', '').split(',');
+          this.setOutput(values[0], values[1]);
+        } else if (command.includes('[!OUTPUT_PWM]')) {
+          const values = command.replace('[!OUTPUT_PWM]', '').split(',');
+          this.setOutputPWM(values[0], values[1]);
         } else {
           this.printerService.executeGCode(command);
         }
@@ -93,38 +99,38 @@ export class CustomActionsComponent {
   }
 
   // [!DISCONNECT]
-  public disconnectPrinter(): void {
+  private disconnectPrinter(): void {
     this.printerService.disconnectPrinter();
   }
 
   // [!STOPDASHBOARD]
-  public stopOctoDash(): void {
+  private stopOctoDash(): void {
     window.close();
   }
 
   // [!RELOAD]
-  public reloadOctoPrint(): void {
+  private reloadOctoPrint(): void {
     this.systemService.sendCommand('restart');
   }
 
   // [!REBOOT]
-  public rebootPi(): void {
+  private rebootPi(): void {
     this.systemService.sendCommand('reboot');
   }
 
   // [!SHUTDOWN]
-  public shutdownPi(): void {
+  private shutdownPi(): void {
     this.systemService.sendCommand('shutdown');
   }
 
   // [!KILL]
-  public kill(): void {
+  private kill(): void {
     this.shutdownPi();
     setTimeout(this.stopOctoDash, 500);
   }
 
   // [!WEB]
-  public openIFrame(url: string): void {
+  private openIFrame(url: string): void {
     this.iFrameURL = url;
     const iFrameDOM = document.getElementById('iFrame');
     iFrameDOM.style.display = 'block';
@@ -142,8 +148,17 @@ export class CustomActionsComponent {
     }, 500);
   }
 
-  public setLEDColor(identifier: string, red: string, green: string, blue: string): void {
+  private setLEDColor(identifier: string, red: string, green: string, blue: string): void {
     this.enclosureService.setLEDColor(Number(identifier), Number(red), Number(green), Number(blue));
+  }
+
+  private setOutput(identifier: string, status: string): void {
+    console.log(identifier);
+    this.enclosureService.setOutput(Number(identifier), status === 'true' || status === 'on');
+  }
+
+  private setOutputPWM(identifier: string, dutyCycle: string): void {
+    this.enclosureService.setOutputPWM(Number(identifier), Number(dutyCycle));
   }
 }
 
