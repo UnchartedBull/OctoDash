@@ -116,6 +116,10 @@ export class FilesComponent {
     }, 500);
   }
 
+  public stopPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
   public openSorting(): void {
     this.showSorting = true;
     setTimeout((): void => {
