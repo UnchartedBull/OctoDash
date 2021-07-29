@@ -9,32 +9,9 @@
     <td class="top-bar__center">
       <img src="assets/control.svg" class="top-bar__center-icon" />
     </td>
-    <td class="top-bar__next" (click)="showHelp = true">
-      <span matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-        <img src="assets/help.svg" class="top-bar__next-icon" />
-      </span>
-    </td>
+    <td class="top-bar__next"></td>
   </tr>
 </table>
-
-<div class="help" *ngIf="showHelp">
-  <div class="help__card">
-    <img src="assets/error.svg" class="help__close" (click)="showHelp = false" />
-    <span class="help__heading">Control Screen</span>
-    <span class="help__text">
-      <ng-container i18n="@@help-adjust-speed">
-        You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z).
-      </ng-container>
-      <br />
-      <span i18n="@@help-custom-actions-message">
-        You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few
-        predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information.
-      </span>
-      <br />
-      <ng-container i18n="@@help-custom-actions"> Wiki page is called "CustomActions". </ng-container>
-    </span>
-  </div>
-</div>
 
 <div class="control">
   <div class="control__XY">

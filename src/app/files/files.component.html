@@ -89,8 +89,8 @@
   <div class="scroll__thumb-inactive" *ngIf="directory"></div>
 </div>
 
-<div class="file" id="fileDetailView">
-  <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'">
+<div class="file" id="fileDetailView" (click)="closeDetails()">
+  <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'" (click)="stopPropagation($event)">
     <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
     <span class="file__name">{{ fileDetail.name }}</span>
     <span class="file__directory">{{ fileDetail.path }}</span>
@@ -137,8 +137,8 @@
   </div>
 </div>
 
-<div class="sorting" id="sortingView" *ngIf="showSorting">
-  <div class="sorting-wrapper">
+<div class="sorting" id="sortingView" *ngIf="showSorting" (click)="closeSorting()">
+  <div class="sorting-wrapper" (click)="stopPropagation($event)">
     <img src="assets/error.svg" class="sorting-close" (click)="closeSorting()" />
     <span class="sorting-heading" i18n="@@files-sort">sort files</span>
     <table class="sorting-selection">

@@ -79,6 +79,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }
   }
 
+  public stopPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
   public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
     this.pages[current].classList.add('settings__content-slideout-' + direction);
     this.pages[page].classList.remove('settings__content-inactive');
