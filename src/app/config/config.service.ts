@@ -308,4 +308,14 @@ export class ConfigService {
   public isZAxisInverted(): boolean {
     return this.config.octodash.invertAxisControl.z;
   }
+
+  public setSortingAttribute(attribute: 'name' | 'date' | 'size'): void {
+    this.config.octodash.fileSorting.attribute = attribute;
+    this.saveConfig(this.config);
+  }
+
+  public setSortingOrder(order: 'asc' | 'dsc'): void {
+    this.config.octodash.fileSorting.order = order;
+    this.saveConfig(this.config);
+  }
 }
