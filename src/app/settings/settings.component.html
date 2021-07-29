@@ -34,9 +34,7 @@
         <span class="settings__made">
           <span i18n="@@made-with">made with</span>
           <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
-          <span i18n="@@by-unchartedbull">
-            by /u/UnchartedBull
-          </span>
+          <span i18n="@@by-unchartedbull"> by /u/UnchartedBull </span>
         </span>
         <!-- <span class="settings__version">OctoDash v{{ version }}</span> -->
       </div>
@@ -48,7 +46,9 @@
         <div class="settings__scroll">
           <span class="settings__heading-2" i18n="@@general-octoprint-connection">OctoPrint Connection</span>
           <form class="settings__form">
-            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url">Octoprint URL</label>
+            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url"
+              >Octoprint URL</label
+            >
             <span class="settings__input-prefix">http://</span>
             <input
               type="text"
@@ -114,7 +114,9 @@
                 </td>
               </tr>
               <tr>
-                <td colspan="2" class="settings__sub-heading" i18n="@@general-default">Default Temperatures & Fan Speed</td>
+                <td colspan="2" class="settings__sub-heading" i18n="@@general-default">
+                  Default Temperatures & Fan Speed
+                </td>
               </tr>
               <tr>
                 <td style="width: 25.6vw; display: block">
@@ -335,7 +337,9 @@
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
               ></span>
             </span>
-            <span class="settings__checkbox-descriptor" i18n="@@turn-on-after-sleep">Turn on printer when exiting sleep</span>
+            <span class="settings__checkbox-descriptor" i18n="@@turn-on-after-sleep"
+              >Turn on printer when exiting sleep</span
+            >
           </div>
           <br />
           <div
@@ -345,7 +349,9 @@
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
             </span>
-            <span class="settings__checkbox-descriptor" i18n="@@default-preview">Preview by default while printing</span>
+            <span class="settings__checkbox-descriptor" i18n="@@default-preview"
+              >Preview by default while printing</span
+            >
           </div>
           <br />
           <div
@@ -387,63 +393,6 @@
             <span class="settings__checkbox-descriptor">Z</span>
           </div>
 
-          <span class="settings__heading-2" i18n="@@octodash-files">Files</span>
-          <table class="settings__files">
-            <tr>
-              <td>
-                <span style="font-size: 2.9vw" i18n="@@octodash-files-sort">sort by</span>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'name'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'name'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-name">Name</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'date'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'date'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-date">Date</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'size'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'size'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-size">Size</span>
-                </div>
-                <br />
-              </td>
-              <td>
-                <span style="font-size: 2.9vw" i18n="@@octodash-files-order">order</span>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'asc'">
-                  <span class="settings__checkbox">
-                    <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'asc'"></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-ascending">Ascending</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'dsc'">
-                  <span class="settings__checkbox">
-                    <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'dsc'"></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-descending">Descending</span>
-                </div>
-                <br />
-              </td>
-            </tr>
-          </table>
           <span class="settings__heading-2" i18n="@@octodash-custom">Custom Actions</span>
           <div *ngFor="let number of [0, 1, 2, 3, 4, 5]">
             <span class="settings__heading-3">{{ customActionsPosition[number] }}</span>
@@ -620,7 +569,9 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-tplink-smartplug-enabled">enabled</span>
           </div>
-          <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip">SmartPlug IP</label>
+          <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
+            >SmartPlug IP</label
+          >
           <input
             type="text"
             id="smart-plug-ip"
@@ -703,7 +654,11 @@
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
           <span class="settings__about-version">v{{ service.getVersion() }}</span>
-          <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable" i18n="@@about-no-update">
+          <button
+            class="settings__about-update settings__about-update-not-available"
+            *ngIf="!service.updateAvailable"
+            i18n="@@about-no-update"
+          >
             no update available
           </button>
           <button

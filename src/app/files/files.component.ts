@@ -77,6 +77,16 @@ export class FilesComponent {
     }, 240);
   }
 
+  public setSortAttribute(attribute: 'name' | 'date' | 'size'): void {
+    this.sortingAttribute = attribute;
+    this.configService.setSortingAttribute(attribute);
+  }
+
+  public setSortOrder(order: 'asc' | 'dsc'): void {
+    this.sortingOrder = order;
+    this.configService.setSortingOrder(order);
+  }
+
   public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
     this.directory.folders.sort((a, b): number => ((order === 'asc' ? a.name > b.name : a.name < b.name) ? 1 : -1));
     this.directory.files.sort((a, b): number => ((order === 'asc' ? a[by] > b[by] : a[by] < b[by]) ? 1 : -1));
