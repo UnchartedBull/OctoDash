@@ -1,11 +1,9 @@
-<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd"
-  xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="ng2.template" datatype="plaintext" source-language="en" target-language="de">
     <body>
       <trans-unit id="long-init" datatype="html">
         <source> Initializing is taking longer than usual. 
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>
- Please make sure that OctoPrint is running and that CORS is enabled for the API. 
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API. 
         </source>
         <target> L'initialisation prend plus de temps que d'habitude. 
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>
@@ -42,8 +40,7 @@
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
         <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>
-, URL: 
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
           <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
         </source>
         <target> Version </target>
@@ -186,9 +183,11 @@
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source> Tasmota MQTT </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
@@ -261,18 +260,6 @@
       <trans-unit id="control-back" datatype="html">
         <source>back</source>
         <target>zurück</target>
-      </trans-unit>
-      <trans-unit id="help-adjust-speed" datatype="html">
-        <source> You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z). </source>
-        <target> Sie können die Druckkopfgeschwindigkeit in den Einstellungen anpassen (Standard 150 mm/s für XY - 5 mm/s für Z) </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions-message" datatype="html">
-        <source> You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. </source>
-        <target> Du kannst die 6 Symbole auf der rechten Seite anpassen. Du kannst entweder GCode-Befehle an den Drucker senden oder einige vordefinierte Aktionen aufrufen (wie das Neustarten des Pi). </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions" datatype="html">
-        <source> Wiki page is called "CustomActions". </source>
-        <target> Die Seite heißt "CustomActions". </target>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
@@ -355,11 +342,11 @@
         <target>warte</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait-seconds-or" datatype="html">
-        <source>s oder</source>
+        <source>s or</source>
         <target>s ou</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-start" datatype="html">
-        <source> start </source>
+        <source>start</source>
         <target> Start </target>
       </trans-unit>
       <trans-unit id="move-filament" datatype="html">
@@ -371,7 +358,7 @@
         <target>mm/s</target>
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
-        <source> stop </source>
+        <source>stop</source>
         <target> Stop </target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
@@ -638,10 +625,6 @@
         <source>mm</source>
         <target>mm</target>
       </trans-unit>
-      <trans-unit id="quick-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
-      </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
         <target>LED-Farbe kann nicht eingestellt werden!</target>
@@ -780,8 +763,7 @@
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
         <source>Can't execute 
-          <x id="PH" equiv-text="command"/>
- command!
+          <x id="PH" equiv-text="command"/> command!
         </source>
         <target>Kann nicht ausgeführt werden 
           <x id="PH" equiv-text="command"/>
@@ -853,29 +835,26 @@
         <target>Z-Geschwindigkeit (mm/s)</target>
       </trans-unit>
       <trans-unit id="general-default" datatype="html">
-        <source>Default Temperatures &amp; Fan Speed</source>
+        <source> Default Temperatures &amp; Fan Speed </source>
         <target>Standardtemperaturen &amp; Lüftergeschwindigkeit</target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
         <source> Hotend 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(°C)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Düse </target>
       </trans-unit>
       <trans-unit id="default-heatbed" datatype="html">
         <source> Heatbed 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(°C)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Heizbett </target>
       </trans-unit>
       <trans-unit id="default-fanspeed" datatype="html">
         <source> Fan Speed 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(%)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Lüftergeschwindigkeit </target>
@@ -890,48 +869,42 @@
       </trans-unit>
       <trans-unit id="general-feedlength" datatype="html">
         <source> Feed Length 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(mm)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Vorschublänge </target>
       </trans-unit>
       <trans-unit id="general-purge-distance" datatype="html">
         <source> Purge Distance 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(mm)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Säuberungslänge </target>
       </trans-unit>
       <trans-unit id="general-feedrate" datatype="html">
         <source> Feed Speed 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(mm/s)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Vorschubgeschwindigkeit </target>
       </trans-unit>
       <trans-unit id="general-feedrate-slow" datatype="html">
         <source> Feed Speed Slow 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(mm/s)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Vorschubgeschwindigkeit langsam </target>
       </trans-unit>
       <trans-unit id="general-thickness" datatype="html">
         <source> Thickness 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(mm)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Dicke </target>
       </trans-unit>
       <trans-unit id="general-density" datatype="html">
         <source> Density 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(g/cm³)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Dichte </target>
@@ -963,38 +936,6 @@
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
         <target>Achsensteuerung invertieren</target>
-      </trans-unit>
-      <trans-unit id="octodash-files" datatype="html">
-        <source>Files</source>
-        <target>Dateien</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-sort" datatype="html">
-        <source>sort by</source>
-        <target>Sortieren nach</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-name" datatype="html">
-        <source>Name</source>
-        <target>Name</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-date" datatype="html">
-        <source>Date</source>
-        <target>Datum</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-size" datatype="html">
-        <source>Size</source>
-        <target>Größe</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-order" datatype="html">
-        <source>ordnen</source>
-        <target>ordre</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-ascending" datatype="html">
-        <source>Ascending</source>
-        <target>Aufsteigend</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-descending" datatype="html">
-        <source>Descending</source>
-        <target>Absteigend</target>
       </trans-unit>
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
@@ -1038,8 +979,7 @@
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
         <source> Ambient Sensor 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
-(ID)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(ID)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
         <target> Umgebungssensor
@@ -1206,8 +1146,7 @@
       </trans-unit>
       <trans-unit id="update-confirmation" datatype="html">
         <source>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
- installed
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed
         </source>
         <target>v
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>

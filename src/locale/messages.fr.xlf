@@ -182,9 +182,11 @@
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source> Tasmota MQTT </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
@@ -257,18 +259,6 @@
       <trans-unit id="control-back" datatype="html">
         <source>back</source>
         <target>retour</target>
-      </trans-unit>
-      <trans-unit id="help-adjust-speed" datatype="html">
-        <source> You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z). </source>
-        <target> Vous pouvez régler la vitesse de la tête d'impression dans les paramètres (par défaut 150 mm / s pour XY - 5 mm / s pour Z). </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions-message" datatype="html">
-        <source> You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. </source>
-        <target> Vous pouvez personnaliser les 6 icônes sur la droite. Ils peuvent soit envoyer des commandes GCode à l'imprimante, soit appeler quelques actions prédéfinies (comme le redémarrage du Pi). Veuillez visiter le Wiki GitHub pour obtenir de plus amples informations. </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions" datatype="html">
-        <source> Wiki page is called "CustomActions". </source>
-        <target> La page Wiki s'appelle " CustomActions ". </target>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
@@ -355,7 +345,7 @@
         <target>s ou</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-start" datatype="html">
-        <source> start </source>
+        <source>start</source>
         <target> lancer </target>
       </trans-unit>
       <trans-unit id="move-filament" datatype="html">
@@ -367,7 +357,7 @@
         <target>mm/s</target>
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
-        <source> stop </source>
+        <source>stop</source>
         <target> arrêter </target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
@@ -634,10 +624,6 @@
         <source>mm</source>
         <target>mm</target>
       </trans-unit>
-      <trans-unit id="quick-back" datatype="html">
-        <source>back</source>
-        <target>retour</target>
-      </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
         <target>Impossible de définir la couleur des LED !</target>
@@ -847,7 +833,7 @@
         <target>Vitesse Z (mm/s)</target>
       </trans-unit>
       <trans-unit id="general-default" datatype="html">
-        <source>Default Temperatures &amp; Fan Speed</source>
+        <source> Default Temperatures &amp; Fan Speed </source>
         <target>Températures et vitesse par défaut du ventilateur</target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
@@ -948,38 +934,6 @@
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
-      </trans-unit>
-      <trans-unit id="octodash-files" datatype="html">
-        <source>Files</source>
-        <target>Fichiers</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-sort" datatype="html">
-        <source>sort by</source>
-        <target>trier par</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-name" datatype="html">
-        <source>Name</source>
-        <target>Nom</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-date" datatype="html">
-        <source>Date</source>
-        <target>Date</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-size" datatype="html">
-        <source>Size</source>
-        <target>Taille</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-order" datatype="html">
-        <source>order</source>
-        <target>ordre</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-ascending" datatype="html">
-        <source>Ascending</source>
-        <target>Croissant</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-descending" datatype="html">
-        <source>Descending</source>
-        <target>Décroissant</target>
       </trans-unit>
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
