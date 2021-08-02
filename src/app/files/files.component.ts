@@ -51,8 +51,8 @@ export class FilesComponent {
       this.showLoader();
       this.directory = { files: [], folders: [] };
 
-      this.filesService.getFolderContent(folderPath).subscribe(
-        (directory: Directory) => {
+      this.filesService.getFolderContent(folderPath).subscribe({
+        next: (directory: Directory) => {
           this.directory = directory;
           const mergedDirectory = _.concat(directory.files, directory.folders);
           if (folderPath === '/' && !(mergedDirectory[0].name === 'local' && mergedDirectory[1].name == 'sdcard')) {
@@ -63,17 +63,17 @@ export class FilesComponent {
           }
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.notificationService.setError(
             $localize`:@@error-load-file-folder:Can't load file/folder!`,
             error.message,
           );
           this.currentFolder = folderPath;
         },
-        () => {
+        complete: () => {
           this.hideLoader();
         },
-      );
+      });
     }, 240);
   }
 
@@ -93,13 +93,13 @@ export class FilesComponent {
   }
 
   public openDetails(filePath: string): void {
-    this.filesService.getFile(filePath).subscribe(
-      (fileData: File) => (this.fileDetail = fileData),
-      (error: HttpErrorResponse) => {
+    this.filesService.getFile(filePath).subscribe({
+      next: (fileData: File) => (this.fileDetail = fileData),
+      error: (error: HttpErrorResponse) => {
         this.fileDetail = { name: 'error' } as unknown as File;
         this.notificationService.setError($localize`:@@error-load-file:Can't load file!`, error.message);
       },
-    );
+    });
     const fileDOMElement = document.getElementById('fileDetailView');
     fileDOMElement.style.display = 'block';
     setTimeout((): void => {

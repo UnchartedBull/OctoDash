@@ -53,17 +53,16 @@ export class AppService {
   }
 
   private checkUpdate(): void {
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-      (data: GitHubReleaseInformation): void => {
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
+      next: (data: GitHubReleaseInformation): void => {
         if (this.version !== data.name.replace('v', '')) {
           this.updateAvailable = true;
         }
         this.latestVersion = data.name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;
       },
-      (): void => null,
-    );
-    setTimeout(this.checkUpdate.bind(this), 3600000);
+      complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
+    });
   }
 
   public hasUpdateError(errors: string[]): boolean {

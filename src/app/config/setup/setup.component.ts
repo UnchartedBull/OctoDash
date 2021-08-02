@@ -71,12 +71,13 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
         'x-api-key': this.config.octoprint.accessToken,
       }),
     };
-    this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe(
-      (): void => {
+
+    this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe({
+      next: () => {
         this.octoprintConnection = true;
         this.saveConfig();
       },
-      (error: HttpErrorResponse): void => {
+      error: (error: HttpErrorResponse): void => {
         this.octoprintConnection = false;
         if (error.message.includes('403 FORBIDDEN')) {
           this.configErrors.push(
@@ -90,7 +91,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
           this.configErrors.push(error.message);
         }
       },
-    );
+    });
   }
 
   private onConfigSaved() {
