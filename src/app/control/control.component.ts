@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { ConfigService } from '../config/config.service';
 import { ZOffset } from '../model';
+import { SocketService } from '../services/socket/socket.service';
+import { PrinterStatus } from '../model';
 
 @Component({
   selector: 'app-control',
   templateUrl: './control.component.html',
   styleUrls: ['./control.component.scss'],
 })
-export class ControlComponent {
+export class ControlComponent implements OnInit {
+  private subscriptions: Subscription = new Subscription();
+  public printerStatus: PrinterStatus;
   public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
@@ -23,7 +28,8 @@ export class ControlComponent {
   public constructor(
     private printerService: PrinterService,
     private configService: ConfigService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private socketService: SocketService,
   ) {
     this.fetchZOffset();
     this.printerService.getActiveProfile().subscribe(
@@ -34,6 +40,14 @@ export class ControlComponent {
           err.message,
         );
       },
+    );
+  }
+
+  public ngOnInit(): void {
+    this.subscriptions.add(
+      this.socketService.getPrinterStatusSubscribable().subscribe((status: PrinterStatus): void => {
+        this.printerStatus = status;
+      }),
     );
   }
 

@@ -111,6 +111,16 @@
                 [matRippleCentered]="true"
               ></fa-icon>
             </div>
+            <div class="jog-icon-wrapper-vertical-temp">
+              <span>
+                {{ printerStatus.tool0.current }}<span>°C</span>
+              </span>
+              <!--
+              <span *ngIf="printerStatus.tool0.set">
+                /{{ printerStatus.tool0.set }}<span>°C</span>
+              </span>
+              -->
+            </div>
             <div class="jog-icon-wrapper-vertical">
               <fa-icon
                 [icon]="['fas', 'angle-down']"

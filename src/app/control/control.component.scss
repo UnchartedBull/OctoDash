@@ -13,6 +13,10 @@
       display: flex;
       justify-content: center;
 
+      &-temp {
+        height: initial;
+      }
+
       & > fa-icon {
         position: absolute;
         top: -5vw;
