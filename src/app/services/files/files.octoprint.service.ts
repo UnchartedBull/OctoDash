@@ -60,15 +60,15 @@ export class FilesOctoprintService implements FilesService {
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
-                        successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'files__object_success' : 'files__object_failed' : 'files__object_unknown',
-                        successfullIcon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'check-circle' : 'minus-circle' : 'circle',
-                        thumbnail: fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
-                        printTime: this.conversionService.convertSecondsToHours(
-                            fileOrFolder.gcodeAnalysis.estimatedPrintTime,
-                        ),
-                        filamentWeight: this.conversionService.convertFilamentLengthToWeight(
-                            _.sumBy(_.values(fileOrFolder.gcodeAnalysis.filament), tool => tool.length),
-                        ),
+                      successfull: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'files__object_success' : 'files__object_failed' : 'files__object_unknown',
+                      successfullIcon: fileOrFolder.prints != null ? fileOrFolder.prints.last.success ? 'check-circle' : 'minus-circle' : 'circle',
+                      thumbnail: fileOrFolder.thumbnail ? this.configService.getApiURL(fileOrFolder.thumbnail, false) : 'assets/object.svg',
+                      printTime: this.conversionService.convertSecondsToHours(
+                          fileOrFolder.gcodeAnalysis.estimatedPrintTime,
+                      ),
+                      filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                          _.sumBy(_.values(fileOrFolder.gcodeAnalysis.filament), tool => tool.length),
+                      ),
                     }
                   : {}),
               } as File);
