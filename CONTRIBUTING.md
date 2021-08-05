@@ -32,13 +32,15 @@ For a list of available locales have a look at the `angular.json` (`projects.Oct
 
 ### Add a new language
 
-To add a language to the list of supported languages, follow these steps:
+To add a language to the list of supported languages, follow these steps or follow the official Angular Tutorial [here](https://angular.io/guide/i18n#translate-each-translation-file):
 
-- find your language code in [this list](https://github.com/angular/angular/tree/master/packages/common/locales) (angular country codes are not all standard)
-- in src/locale, duplicate an existing locale (or run `npm run locale:extract` to generate a new locale file)
+- find your ISO639-2 language code [here](https://www.loc.gov/standards/iso639-2/php/code_list.php)
+- run `npm run locale:extract` to generate a new locale file
+- locate the newly created file in the `src/locale` folder
 - rename the file to include your language code in the format `messages.<languageCode>.xlf`
-- in the `<file>` tag (second line of the xlf file) adapt `source-language="<languageCode>"` to your language code
-- add the translations for your language between `target` tags
+- in the `<file>` tag (second line of the xlf file) add `target-language="<languageCode>"`
+- duplicate the `<source>` tags for each element, replace `source` with `target` and put your translation in that tag
+- you can also use any XLIFF translation tool (i.e. [Brightex XLIFF](http://xliff.brightec.co.uk/)) to speed up the process
 - add your language reference in `angular.json`
 
   - `Projects.OctoDash.i18n.locales`
