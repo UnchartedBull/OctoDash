@@ -55,6 +55,9 @@ export class BottomBarComponent implements OnDestroy {
   }
 
   public getStringStatus(printerState: PrinterState): string {
+    if (printerState === PrinterState.socketDead) {
+      return 'socket is dead';
+    }
     return PrinterState[printerState];
   }
 

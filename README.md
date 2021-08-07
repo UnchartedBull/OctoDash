@@ -41,16 +41,6 @@ Having issues during the installation? Please have a look at the [Troubleshootin
 
 Thanks to M1dn1ghtN1nj4 nightly builds are available here: https://sites.google.com/view/m1dn1ght-3d/downloads/unofficial-octodash-builds?authuser=0. They should be stable, still not recommended for production.
 
-## Update
-
-_deprecated, from v2.0 onwards OctoDash can be updated from within the app_
-
-```
-wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/update.sh | bash
-```
-
-For more info have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Update)
-
 ## Tips and Tricks
 
 - OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v1.5.0 and up)
