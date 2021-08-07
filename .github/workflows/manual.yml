@@ -2,6 +2,9 @@ name: Manual Build with Artifacts
 
 on:
   workflow_dispatch:
+  push: 
+    branches:
+    - manual_build
     
 jobs:
   build:
