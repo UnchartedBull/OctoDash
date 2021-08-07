@@ -13,7 +13,6 @@ export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
-  public showHelp = false;
 
   public constructor(private printerService: PrinterService, private notificationService: NotificationService) {
     this.printerService.getActiveProfile().subscribe(

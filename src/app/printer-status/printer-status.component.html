@@ -15,6 +15,7 @@
         /{{ printerStatus.tool0.set }}<span class="unit">°C</span>
       </span>
     </td>
+
     <td
       class="printer-status__value printer-status__value-2"
       [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }"
@@ -30,6 +31,7 @@
         /{{ printerStatus.bed.set }}<span class="unit">°C</span>
       </span>
     </td>
+
     <td
       class="printer-status__value printer-status__value-3 printer-status__no-set-value"
       (click)="showQuickControlFan()"
@@ -43,12 +45,12 @@
     </td>
   </tr>
 </table>
-<div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl">
-  <table class="top-bar" (click)="hideQuickControl()">
+
+<div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl" (click)="hideQuickControl()">
+  <table class="top-bar">
     <tr>
       <td class="top-bar__back">
         <img src="assets/back.svg" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
-        <ng-container i18n="@@quick-back">back</ng-container>
       </td>
       <td class="top-bar__center">
         <img
@@ -63,10 +65,11 @@
           class="top-bar__center-icon"
         />
       </td>
-      <td class="top-bar__back"></td>
+      <td class="top-bar__next"></td>
     </tr>
   </table>
-  <div class="quick-control__controller">
+
+  <div class="quick-control__controller" (click)="stopPropagation($event)">
     <div class="quick-control__controller-row">
       <div
         class="quick-control__controller-increase"
@@ -85,6 +88,7 @@
         +10
       </div>
     </div>
+
     <div
       class="quick-control__controller-value"
       colspan="2"
@@ -116,6 +120,7 @@
       {{ this.fanTarget }}
       <span class="quick-control__controller-value-unit">%</span>
     </div>
+
     <div class="quick-control__controller-row">
       <div
         class="quick-control__controller-decrease"
@@ -134,6 +139,7 @@
         -10
       </div>
     </div>
+
     <div class="quick-control__controller-row">
       <div
         class="quick-control__controller-set"

@@ -9,7 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import player, { LottiePlayer } from 'lottie-web';
 import { NgxElectronModule } from 'ngx-electron';
-import { LottieModule } from 'ngx-lottie';
+import { LottieCacheModule, LottieModule } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -114,7 +114,7 @@ export function playerFactory(): LottiePlayer {
     MatRippleModule,
     NgxElectronModule,
     RoundProgressModule,
-    [LottieModule.forRoot({ player: playerFactory, useCache: true })],
+    [LottieModule.forRoot({ player: playerFactory }), LottieCacheModule.forRoot()],
   ],
   providers: [
     AppService,

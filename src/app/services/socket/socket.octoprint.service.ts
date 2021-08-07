@@ -21,6 +21,7 @@ import { SocketService } from './socket.service';
 @Injectable()
 export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
+  private socketDeadTimeout: ReturnType<typeof setTimeout>;
   private socket: WebSocketSubject<unknown>;
 
   private printerStatusSubject: Subject<PrinterStatus>;
@@ -119,6 +120,11 @@ export class OctoPrintSocketService implements SocketService {
   private setupSocket(resolve: () => void) {
     this.socket.subscribe(
       message => {
+        clearTimeout(this.socketDeadTimeout);
+        this.socketDeadTimeout = setTimeout(() => {
+          this.printerStatus.status = PrinterState.socketDead;
+          this.printerStatusSubject.next(this.printerStatus);
+        }, 30000);
         if (Object.hasOwnProperty.bind(message)('current')) {
           this.extractPrinterStatus(message as OctoprintSocketCurrent);
           this.extractJobStatus(message as OctoprintSocketCurrent);
@@ -133,7 +139,7 @@ export class OctoPrintSocketService implements SocketService {
             this.extractFanSpeed(pluginMessage.plugin.data as DisplayLayerProgressData);
             this.extractLayerHeight(pluginMessage.plugin.data as DisplayLayerProgressData);
           }
-        } else if (Object.hasOwnProperty.bind(message)('reauth')) {
+        } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
           this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
         } else if (Object.hasOwnProperty.bind(message)('connected')) {
           resolve();
