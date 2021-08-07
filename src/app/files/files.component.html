@@ -68,12 +68,12 @@
       [matRippleUnbounded]="false"
       class="files__object"
     >
-      <div class="files__icon_wrapper {{file.successfull}}">
+      <div [ngClass]="{files__icon_wrapper: file.successfull}">
         <fa-icon
           [icon]="['fas', file.successfullIcon]"
           class="custom-actions__action-icon"
         ></fa-icon>
-        <img src={{file.thumbnail}} class="files__icon" />
+        <img [src]="file.thumbnail"}}" class="files__icon" />
       </div>
       <div class="files__info">
         <span class="files__info-value"> {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span> </span>
@@ -84,7 +84,7 @@
           {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
         </span>
       </div>
-      <span class="files__name" >
+      <span class="files__name">
         {{ file.name }}
       </span>
     </div>
