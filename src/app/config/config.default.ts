@@ -39,6 +39,9 @@ export const defaultConfig: Config = {
     filamentManager: {
       enabled: true,
     },
+    spoolManager: {
+      enabled: false,
+    },
     preheatButton: {
       enabled: true,
     },

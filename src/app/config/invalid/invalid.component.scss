@@ -21,13 +21,13 @@
 
   &__error-list {
     margin-left: 2vw;
-    font-size: 3.6vw;
     margin-top: 5vh;
     list-style-type: disc;
-    font-family: 'Cousine', monospace;
 
     & li {
       margin-top: 2vh;
+      font-size: 2.8vw;
+      font-family: 'Cousine', monospace;
 
       &::before {
         content: '-';
