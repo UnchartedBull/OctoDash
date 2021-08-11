@@ -703,7 +703,7 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
+  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
   echo "Installing Plugins..."
 
@@ -715,6 +715,9 @@ if [ $DIRECTORY != "-" ]; then
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Spool Manager" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-SpoolManager/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
