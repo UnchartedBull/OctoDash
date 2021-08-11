@@ -245,8 +245,12 @@ export class ConfigService {
     return this.config.plugins.preheatButton.enabled;
   }
 
-  public isFilamentManagerEnabled(): boolean {
-    return this.config.plugins.filamentManager.enabled;
+  public isFilamentManagerUsed(): boolean {
+    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+  }
+
+  public isSpoolManagerPluginEnabled(): boolean {
+    return this.config.plugins.spoolManager.enabled;
   }
 
   public getFeedLength(): number {
