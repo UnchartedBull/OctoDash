@@ -68,14 +68,9 @@
       matRipple
       [matRippleUnbounded]="false"
       class="files__object"
+      [ngClass]="[file.successful]"
     >
-      <div [ngClass]="['files__icon_wrapper', file.successfull]">
-        <fa-icon
-          [icon]="['fas', file.successfullIcon]"
-          class="custom-actions__action-icon"
-        ></fa-icon>
-        <img [src]="file.thumbnail" class="files__icon" />
-      </div>
+      <img [src]="file.thumbnail" class="files__icon" />
       <div class="files__info">
         <span class="files__info-value">
           {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
