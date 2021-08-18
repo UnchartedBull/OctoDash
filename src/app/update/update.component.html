@@ -1,31 +1,34 @@
 <div class="update-container">
   <div *ngIf="page === 1">
-    <span class="update-heading">downloading update</span>
+    <span class="update-heading" i18n="@@downloading-update">downloading update</span>
     <div class="update-progress-bar__wrapper">
       <div
         class="update-progress-bar"
         [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
         id="updateDownloadProgress"
       >
-        {{ updateProgress.speed }} MB/s&nbsp;
+        {{ updateProgress.speed }}
+        <ng-container i18n="@@mbs">
+          MB/s&nbsp;
+        </ng-container>
       </div>
     </div>
-    <span class="update-size__total">{{ updateProgress.total }} MB</span>
-    <span class="update-time__remaining">{{ updateProgress.eta }} minutes left</span>
+    <span class="update-size__total">{{ updateProgress.total }}</span><span i18n="@@update-mb">MB</span>
+    <span class="update-time__remaining">{{ updateProgress.eta }}</span><span i18n="@@update-minutes-left">minutes left</span>
   </div>
   <div *ngIf="page === 2">
-    <span class="update-heading">installing update</span>
+    <span class="update-heading" i18n="@@installing-update">installing update</span>
     <div class="update-progress-bar__wrapper">
       <div class="update-progress-bar update-progress-bar-no-percentage" id="installUpdateProgress"></div>
     </div>
-    <span class="update-notice">this might take a while</span>
+    <span class="update-notice" i18n="@@update-wait">this might take a while</span>
   </div>
   <div *ngIf="page === 3">
-    <span class="update-heading">v{{ service.latestVersion }} installed</span>
-    <span class="update-restart">would you like to reboot now to activate the latest version?</span>
+    <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion }} installed</span>
+    <span class="update-restart" i18n="@@update-reboot">would you like to reboot now to activate the latest version?</span>
     <div class="update-restart-button__wrapper">
-      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()">no</button>
-      <button class="update-restart-button update-restart-button__yes" (click)="reboot()">yes</button>
+      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@reboot-no">no</button>
+      <button class="update-restart-button update-restart-button__yes" (click)="reboot()" i18n="@@reboot-yes">yes</button>
     </div>
   </div>
 </div>

@@ -8,29 +8,29 @@
       <tr>
         <td class="top-bar__back">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          <ng-container i18n="@@control-back">back</ng-container>
         </td>
       </tr>
     </table>
     <div class="print-control__action" (click)="cancel($event)">
       <img src="assets/cancel.svg" />
-      cancel
+      <ng-container i18n="@@control-cancel">cancel</ng-container>
     </div>
     <div class="print-control__action" (click)="pause($event)">
       <img src="assets/pause.svg" />
-      pause
+      <ng-container i18n="@@control-pause">pause</ng-container>
     </div>
     <div class="print-control__action" (click)="adjust($event)">
       <img src="assets/adjust.svg" />
-      adjust
+      <ng-container i18n="@@control-adjust">adjust</ng-container>
     </div>
   </div>
   <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
     <img src="assets/cancel.svg" class="print-control__center-icon" />
-    <span class="print-control__confirm">cancel print?</span>
+    <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
     <div style="text-align: center">
-      <span class="print-control__cancel__action" (click)="cancelPrint($event)">yes</span>
-      <span class="print-control__cancel__action" (click)="backToControlScreen($event)">no</span>
+      <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@cancel-yes">yes</span>
+      <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@cancel-no">no</span>
     </div>
   </div>
   <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
@@ -38,19 +38,19 @@
       <tr>
         <td class="top-bar__back">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          <ng-container i18n="@@pause-back">back</ng-container>
         </td>
       </tr>
     </table>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
-    <span class="print-control__confirm">print paused</span>
+    <span class="print-control__confirm" i18n="@@print-pause">print paused</span>
     <div class="print-control__pause__resume">
-      <div (click)="restart($event)">restart</div>
+      <div (click)="restart($event)" i18n="@@print-restart">restart</div>
       <div (click)="resume($event)">
         <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
-        resume
+        <ng-container i18n="@@print-resume">resume</ng-container>
       </div>
-      <div (click)="changeFilament($event)">filament</div>
+      <div (click)="changeFilament($event)" i18n="@@print-filament">filament</div>
     </div>
   </div>
   <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
@@ -58,7 +58,7 @@
       <tr>
         <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          <ng-container i18n="@@adjust-back">back</ng-container>
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
@@ -90,7 +90,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Hotend</span>
+          <span class="print-control__adjust__name" i18n="@@adjust-hotend">Hotend</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -115,7 +115,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Heatbed</span>
+          <span class="print-control__adjust__name" i18n="@@adjust-heatbed">Heatbed</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -140,7 +140,7 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Fan Speed</span>
+          <span class="print-control__adjust__name" i18n="@@adjust-fanspeed">Fan Speed</span>
         </td>
         <td class="print-control__adjust__change-parameter">
           <div class="print-control__adjust__controller">
@@ -165,20 +165,22 @@
               -
             </div>
           </div>
-          <span class="print-control__adjust__name">Feedrate</span>
+          <span class="print-control__adjust__name" i18n="@@adjust-speed">Speed</span>
         </td>
       </tr>
     </table>
     <div>
       <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)">
         <span class="print-control__adjust-babystep-axis">Z</span>
-        {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}mm
+        {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}
+        <ng-container i18n="@@offset-mm">mm</ng-container>
       </span>
       <div
         class="print-control__adjust__save"
         (click)="setAdjustParameters($event)"
         matRipple
         [matRippleUnbounded]="false"
+        i18n="@@offset-save"
       >
         save
       </div>
@@ -189,14 +191,14 @@
       <tr>
         <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
           <img src="assets/back.svg" class="top-bar__back-icon" />
-          back
+          <ng-container i18n="@@babystep-back">back</ng-container>
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
       </tr>
     </table>
     <img src="assets/height.svg" class="print-control__center-icon-small" />
-    <span class="print-control__confirm">Babystep Z</span>
+    <span class="print-control__confirm" i18n="@@babystep-z">Babystep Z</span>
     <div>
       <div class="print-control__adjust-babystep__change">
         <span
@@ -206,7 +208,7 @@
           (click)="babystepZ(0.02)"
         >
           + 0.02
-          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm">mm</span>
         </span>
         <span
           class="print-control__adjust-babystep__change-value"
@@ -215,14 +217,14 @@
           (click)="babystepZ(0.01)"
         >
           + 0.01
-          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm-2">mm</span>
         </span>
       </div>
       <div class="print-control__adjust-babystep__change">
         <span class="print-control__adjust-babystep__change-current">
           {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }}
           <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
-          mm
+          <ng-container i18n="@@zoffset-mm">mm</ng-container>
         </span>
       </div>
       <div class="print-control__adjust-babystep__change">
@@ -233,7 +235,7 @@
           (click)="babystepZ(-0.02)"
         >
           - 0.02
-          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-2">mm</span>
         </span>
         <span
           class="print-control__adjust-babystep__change-value"
@@ -242,7 +244,7 @@
           (click)="babystepZ(-0.01)"
         >
           - 0.01
-          <span class="print-control__adjust-babystep__change-value__unit">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-3">mm</span>
         </span>
       </div>
     </div>

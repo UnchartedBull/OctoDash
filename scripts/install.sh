@@ -703,15 +703,21 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' )
+  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
   echo "Installing Plugins..."
 
+  if [[ " ${selected_plugins[@]} " =~ "OctoDash Companion" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-OctoDashCompanion/archive/master.zip"
+  fi;
   if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress (mandatory)" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Spool Manager" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-SpoolManager/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
@@ -728,6 +734,29 @@ if [ $DIRECTORY != "-" ]; then
   if [[ " ${selected_plugins[@]} " =~ "PrusaSlicer Thumbnails" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip"
   fi;
+  if [[ " ${selected_plugins[@]} " =~ "TPLinkSmartplug" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Tasmota" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-Tasmota/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "TasmotaMQTT" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TasmotaMQTT/archive/master.zip"
+  fi;
+fi;
+
+if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
+yes_no=( 'yes' 'no' )
+
+list_input "Should I enable CORS ? FYI, this is required by OctoDash v3 and OctoPrint 1.6.0, and may have security implications" yes_no cors
+
+echo $cors
+if [ $cors == 'yes' ]; then
+        echo "Enabling CORS ..."
+        "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
+else
+  echo "${red}CORS has ${bold}NOT${normal} been enabled. OctoDash most likely won't work if CORS is disabled. You can always enable it in the API settings in OctoPrint"
+fi
 fi;
 
 echo "Installing OctoDash "${version[7]}, $arch" ..."

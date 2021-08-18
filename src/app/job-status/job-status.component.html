@@ -6,7 +6,7 @@
       [stroke]="25"
       [rounded]="true"
       [responsive]="true"
-      [color]="'#44bd32'"
+      [color]="'#4bae50'"
     ></round-progress>
     <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
   </div>
@@ -26,7 +26,7 @@
         [stroke]="25"
         [rounded]="true"
         [responsive]="true"
-        [color]="'#44bd32'"
+        [color]="'#4bae50'"
       ></round-progress>
 
       <div class="job-info__progress-percentage job-info__progress-preview-image-container">
@@ -40,17 +40,20 @@
 
   <span class="job-info__filename">{{ jobStatus.file }}</span>
   <br />
-  <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')"
-    >{{ jobStatus.filamentAmount }}g Filament</span
-  >
+  <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')">
+    {{ jobStatus.filamentAmount }}
+    <ng-container i18n="@@job-filament-g"> g Filament </ng-container>
+  </span>
   <br />
 
   <span class="job-info__time">
     <span *ngIf="hasProperty(jobStatus, 'timeLeft')">
-      <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span
-      >{{ jobStatus.timeLeft.unit }} left,
+      <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span>
+      {{ jobStatus.timeLeft.unit }}
+      <ng-container i18n="@@job-info__time-left"> left, </ng-container>
     </span>
-    elapsed: {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
+    <ng-container i18n="@@job-elapsed">elapsed:</ng-container>
+    {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
   </span>
 </div>
 
@@ -91,22 +94,30 @@
       <span class="job-info__print-details-value">
         {{ jobStatus.estimatedPrintTime.value }}{{ jobStatus.estimatedPrintTime.unit }}
       </span>
-      <span class="job-info__print-details-finish-state">- will finish ~{{ jobStatus.estimatedEndTime }}</span>
+      <span class="job-info__print-details-finish-state" i18n="@@will-finish">- will finish ~</span>
+      <span>{{ jobStatus.estimatedEndTime }}</span>
       <br />
     </span>
 
     <span *ngIf="hasProperty(jobStatus, 'filamentAmount')">
       <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
-      <span class="job-info__print-details-value">{{ jobStatus.filamentAmount }}g</span>
-      <span class="job-info__print-details-finish-state">filament will be used</span>
+      <span class="job-info__print-details-value">
+        {{ jobStatus.filamentAmount }}
+        <ng-container i18n="@@job-g">g</ng-container>
+      </span>
+      <span class="job-info__print-details-finish-state" i18n="@@filament-used">filament will be used</span>
     </span>
   </div>
 </div>
 
-<div class="job-info__no-job loading-dots" *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())">
+<div
+  class="job-info__no-job loading-dots"
+  *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
+  i18n="@@loading-info"
+>
   loading info
 </div>
 
-<div class="job-info__no-job" *ngIf="!jobStatus.file && !isFileLoaded() && !isPrinting()">no job running ...</div>
+<div class="job-info__no-job" *ngIf="!isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running ...</div>
 
 <span id="jobTogglePreview" (click)="togglePreview()"></span>

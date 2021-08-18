@@ -34,6 +34,8 @@
       font-size: 0.8rem;
       opacity: 0.7;
       display: block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &-vendor {
@@ -129,7 +131,7 @@
 
     &-heating {
       display: inline-block;
-      background-color: #44bd32;
+      background-color: #4bae50;
       padding: 1vh 2vw;
       border-radius: 1vw;
       font-size: 0.8rem;

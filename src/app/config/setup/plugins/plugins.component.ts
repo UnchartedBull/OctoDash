@@ -13,6 +13,8 @@ export class PluginsComponent {
   @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
   @Input() tpLinkSmartPlugPlugin: boolean;
+  @Input() tasmotaPlugin: boolean;
+  @Input() tasmotaMqttPlugin: boolean;
 
   @Output() displayLayerProgressPluginChange = new EventEmitter<boolean>();
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
@@ -21,39 +23,6 @@ export class PluginsComponent {
   @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();
   @Output() tpLinkSmartPlugPluginChange = new EventEmitter<boolean>();
-
-  public changeDisplayLayerProgressPlugin(): void {
-    this.displayLayerProgressPlugin = !this.displayLayerProgressPlugin;
-    this.displayLayerProgressPluginChange.emit(this.displayLayerProgressPlugin);
-  }
-
-  public changeEnclosurePlugin(): void {
-    this.enclosurePlugin = !this.enclosurePlugin;
-    this.enclosurePluginChange.emit(this.enclosurePlugin);
-  }
-
-  public changeFilamentManagerPlugin(): void {
-    this.filamentManagerPlugin = !this.filamentManagerPlugin;
-    this.filamentManagerPluginChange.emit(this.filamentManagerPlugin);
-  }
-
-  public changePreheatButtonPlugin(): void {
-    this.preheatButtonPlugin = !this.preheatButtonPlugin;
-    this.preheatButtonPluginChange.emit(this.preheatButtonPlugin);
-  }
-
-  public changePrintTimeGeniusPlugin(): void {
-    this.printTimeGeniusPlugin = !this.printTimeGeniusPlugin;
-    this.printTimeGeniusPluginChange.emit(this.printTimeGeniusPlugin);
-  }
-
-  public changePsuControlPlugin(): void {
-    this.psuControlPlugin = !this.psuControlPlugin;
-    this.psuControlPluginChange.emit(this.psuControlPlugin);
-  }
-
-  public changeTPLinkSmartPlugPlugin(): void {
-    this.tpLinkSmartPlugPlugin = !this.tpLinkSmartPlugPlugin;
-    this.tpLinkSmartPlugPluginChange.emit(this.tpLinkSmartPlugPlugin);
-  }
+  @Output() tasmotaPluginChange = new EventEmitter<boolean>();
+  @Output() tasmotaMqttPluginChange = new EventEmitter<boolean>();
 }

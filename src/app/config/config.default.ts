@@ -39,6 +39,9 @@ export const defaultConfig: Config = {
     filamentManager: {
       enabled: true,
     },
+    spoolManager: {
+      enabled: false,
+    },
     preheatButton: {
       enabled: true,
     },
@@ -53,6 +56,16 @@ export const defaultConfig: Config = {
       enabled: false,
       smartPlugIP: '127.0.0.1',
     },
+    tasmota: {
+      enabled: false,
+      ip: '127.0.0.1',
+      index: null,
+    },
+    tasmotaMqtt: {
+      enabled: false,
+      topic: 'topic',
+      relayNumber: null,
+    },
   },
   octodash: {
     customActions: [
@@ -66,7 +79,7 @@ export const defaultConfig: Config = {
       {
         icon: 'ruler-vertical',
         command: 'G29',
-        color: '#44bd32',
+        color: '#4bae50',
         confirm: false,
         exit: true,
       },
@@ -102,6 +115,11 @@ export const defaultConfig: Config = {
     fileSorting: {
       attribute: 'name',
       order: 'asc',
+    },
+    invertAxisControl: {
+      x: false,
+      y: false,
+      z: false,
     },
     pollingInterval: 2000,
     touchscreen: true,

@@ -13,16 +13,28 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": ""
+        },
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "lottie-web"
-            ],
+            "allowedCommonJsDependencies": ["lottie-web"],
             "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
+            "i18nMissingTranslation": "warning",
+            "localize": ["en"],
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
@@ -38,16 +50,25 @@
                 "output": "/assets/icon/"
               },
               {
+                "glob": "*",
+                "input": "src/assets/animations/",
+                "output": "/assets/animations/"
+              },
+              {
                 "glob": "favicon.ico",
                 "input": "src/",
                 "output": "/"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "src/reset.css"],
             "scripts": []
           },
           "configurations": {
+            "fr": {
+              "localize": ["fr"]
+            },
             "production": {
+              "localize": ["en", "fr"],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -73,8 +94,17 @@
                   "maximumWarning": "6kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -82,15 +112,22 @@
             "browserTarget": "OctoDash:build"
           },
           "configurations": {
+            "fr": {
+              "browserTarget": "OctoDash:build:fr"
+            },
             "production": {
               "browserTarget": "OctoDash:build:production"
+            },
+            "development": {
+              "browserTarget": "OctoDash:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OctoDash:build"
+            "browserTarget": "OctoDash:build:production"
           }
         },
         "test": {
@@ -100,8 +137,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets", "src/assets/icon/icon-main-title.svg"],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "src/reset.css"],
             "scripts": []
           }
         },

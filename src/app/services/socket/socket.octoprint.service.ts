@@ -21,6 +21,7 @@ import { SocketService } from './socket.service';
 @Injectable()
 export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
+  private socketDeadTimeout: ReturnType<typeof setTimeout>;
   private socket: WebSocketSubject<unknown>;
 
   private printerStatusSubject: Subject<PrinterStatus>;
@@ -117,28 +118,44 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private setupSocket(resolve: () => void) {
-    this.socket.subscribe(message => {
-      if (Object.hasOwnProperty.bind(message)('current')) {
-        this.extractPrinterStatus(message as OctoprintSocketCurrent);
-        this.extractJobStatus(message as OctoprintSocketCurrent);
-      } else if (Object.hasOwnProperty.bind(message)('event')) {
-        this.extractPrinterEvent(message as OctoprintSocketEvent);
-      } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-        const pluginMessage = message as OctoprintPluginMessage;
-        if (
-          pluginMessage.plugin.plugin === 'DisplayLayerProgress-websocket-payload' &&
-          this.configService.isDisplayLayerProgressEnabled()
-        ) {
-          this.extractFanSpeed(pluginMessage.plugin.data as DisplayLayerProgressData);
-          this.extractLayerHeight(pluginMessage.plugin.data as DisplayLayerProgressData);
+    this.socket.subscribe(
+      message => {
+        clearTimeout(this.socketDeadTimeout);
+        this.socketDeadTimeout = setTimeout(() => {
+          this.printerStatus.status = PrinterState.socketDead;
+          this.printerStatusSubject.next(this.printerStatus);
+        }, 30000);
+        if (Object.hasOwnProperty.bind(message)('current')) {
+          this.extractPrinterStatus(message as OctoprintSocketCurrent);
+          this.extractJobStatus(message as OctoprintSocketCurrent);
+        } else if (Object.hasOwnProperty.bind(message)('event')) {
+          this.extractPrinterEvent(message as OctoprintSocketEvent);
+        } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+          const pluginMessage = message as OctoprintPluginMessage;
+          if (
+            pluginMessage.plugin.plugin === 'DisplayLayerProgress-websocket-payload' &&
+            this.configService.isDisplayLayerProgressEnabled()
+          ) {
+            this.extractFanSpeed(pluginMessage.plugin.data as DisplayLayerProgressData);
+            this.extractLayerHeight(pluginMessage.plugin.data as DisplayLayerProgressData);
+          }
+        } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
+          this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
+        } else if (Object.hasOwnProperty.bind(message)('connected')) {
+          resolve();
+          this.checkPrinterConnection();
         }
-      } else if (Object.hasOwnProperty.bind(message)('reauth')) {
-        this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
-      } else if (Object.hasOwnProperty.bind(message)('connected')) {
-        resolve();
-        this.checkPrinterConnection();
-      }
-    });
+      },
+      error => {
+        if (error['type'] === 'close') {
+          this.printerStatus.status = PrinterState.reconnecting;
+          this.printerStatusSubject.next(this.printerStatus);
+          this.tryConnect(() => null);
+        } else {
+          console.error(error);
+        }
+      },
+    );
   }
 
   private checkPrinterConnection() {
@@ -206,7 +223,7 @@ export class OctoPrintSocketService implements SocketService {
     this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
     this.jobStatus.timePrinted = {
       value: this.conversionService.convertSecondsToHours(message.current.progress.printTime),
-      unit: 'h',
+      unit: $localize`:@@unit-h-1:h`,
     };
 
     if (message.current.job.filament) {
@@ -216,7 +233,7 @@ export class OctoPrintSocketService implements SocketService {
     if (message.current.progress.printTimeLeft) {
       this.jobStatus.timeLeft = {
         value: this.conversionService.convertSecondsToHours(message.current.progress.printTimeLeft),
-        unit: 'h',
+        unit: $localize`:@@unit-h-2:h`,
       };
       this.jobStatus.estimatedEndTime = this.calculateEndTime(message.current.progress.printTimeLeft);
     }
@@ -224,7 +241,7 @@ export class OctoPrintSocketService implements SocketService {
     if (message.current.job.estimatedPrintTime) {
       this.jobStatus.estimatedPrintTime = {
         value: this.conversionService.convertSecondsToHours(message.current.job.estimatedPrintTime),
-        unit: 'h',
+        unit: $localize`:@@unit-h-3:h`,
       };
     }
 

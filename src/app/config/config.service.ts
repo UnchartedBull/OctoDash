@@ -28,7 +28,7 @@ export class ConfigService {
     this.electronService.ipcRenderer.addListener('configError', (_, error: string) => {
       this.notificationService.setError(
         error,
-        'Please restart your system. If the issue persists open an issue on GitHub.',
+        $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
       );
     });
 
@@ -185,6 +185,30 @@ export class ConfigService {
     return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
   }
 
+  public useTasmota(): boolean {
+    return this.config.plugins.tasmota.enabled;
+  }
+
+  public getTasmotaIP(): string {
+    return this.config.plugins.tasmota.ip;
+  }
+
+  public getTasmotaIndex(): number {
+    return this.config.plugins.tasmota.index;
+  }
+
+  public useTasmotaMqtt(): boolean {
+    return this.config.plugins.tasmotaMqtt.enabled;
+  }
+
+  public getTasmotaMqttTopic(): string {
+    return this.config.plugins.tasmotaMqtt.topic;
+  }
+
+  public getTasmotaMqttRelayNumber(): number {
+    return this.config.plugins.tasmotaMqtt.relayNumber;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }
@@ -221,8 +245,12 @@ export class ConfigService {
     return this.config.plugins.preheatButton.enabled;
   }
 
-  public isFilamentManagerEnabled(): boolean {
-    return this.config.plugins.filamentManager.enabled;
+  public isFilamentManagerUsed(): boolean {
+    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+  }
+
+  public isSpoolManagerPluginEnabled(): boolean {
+    return this.config.plugins.spoolManager.enabled;
   }
 
   public getFeedLength(): number {
@@ -275,5 +303,27 @@ export class ConfigService {
 
   public getShowExtruderControl(): boolean {
     return this.config.octodash.showExtruderControl;
+  }
+
+  public isXAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.x;
+  }
+
+  public isYAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.y;
+  }
+
+  public isZAxisInverted(): boolean {
+    return this.config.octodash.invertAxisControl.z;
+  }
+
+  public setSortingAttribute(attribute: 'name' | 'date' | 'size'): void {
+    this.config.octodash.fileSorting.attribute = attribute;
+    this.saveConfig(this.config);
+  }
+
+  public setSortingOrder(order: 'asc' | 'dsc'): void {
+    this.config.octodash.fileSorting.order = order;
+    this.saveConfig(this.config);
   }
 }

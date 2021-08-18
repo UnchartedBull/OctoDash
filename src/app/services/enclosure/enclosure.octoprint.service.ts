@@ -9,7 +9,10 @@ import {
   EnclosureColorBody,
   EnclosureOutputBody,
   EnclosurePluginAPI,
+  EnclosurePWMBody,
   PSUControlCommand,
+  TasmotaCommand,
+  TasmotaMqttCommand,
   TPLinkCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
@@ -44,7 +47,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       );
   }
 
-  setLEDColor(identifier: number, red: number, green: number, blue: number): void {
+  public setLEDColor(identifier: number, red: number, green: number, blue: number): void {
     const colorBody: EnclosureColorBody = {
       red,
       green,
@@ -56,11 +59,17 @@ export class EnclosureOctoprintService implements EnclosureService {
         colorBody,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(catchError(error => this.notificationService.setError("Can't set LED color!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-color:Can't set LED color!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
-  setOutput(identifier: number, status: boolean): void {
+  public setOutput(identifier: number, status: boolean): void {
+    console.log(identifier, status);
+
     const outputBody: EnclosureOutputBody = {
       status,
     };
@@ -70,17 +79,49 @@ export class EnclosureOctoprintService implements EnclosureService {
         outputBody,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(catchError(error => this.notificationService.setError("Can't set output!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
-  setPSUState(state: PSUState): void {
+  public setOutputPWM(identifier: number, dutyCycle: number): void {
+    console.log(identifier, dutyCycle);
+
+    const pwmBody: EnclosurePWMBody = {
+      /* eslint-disable camelcase */
+      duty_cycle: dutyCycle,
+    };
+    this.http
+      .patch(
+        this.configService.getApiURL('plugin/enclosure/pwm/' + identifier, false),
+        pwmBody,
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
+
+  public setPSUState(state: PSUState): void {
     if (this.configService.usePSUControl()) {
       this.setPSUStatePSUControl(state);
     } else if (this.configService.useTpLinkSmartPlug()) {
       this.setPSUStateTPLink(state);
+    } else if (this.configService.useTasmota()) {
+      this.setPSUStateTasmota(state);
+    } else if (this.configService.useTasmotaMqtt()) {
+      this.setPSUStateTasmotaMqtt(state);
     } else {
-      this.notificationService.setWarning("Can't change PSU State!", 'No provider for PSU Control is configured.');
+      this.notificationService.setWarning(
+        $localize`:@@error-psu-state:Can't change PSU State!`,
+        $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
+      );
     }
   }
 
@@ -91,7 +132,11 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
@@ -103,6 +148,40 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
+
+  private setPSUStateTasmota(state: PSUState) {
+    const tasmotaPayload: TasmotaCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      ip: this.configService.getTasmotaIP(),
+      idx: this.configService.getTasmotaIndex(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
+      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .subscribe();
+  }
+
+  private setPSUStateTasmotaMqtt(state: PSUState) {
+    const tasmotaMqttPayload: TasmotaMqttCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      topic: this.configService.getTasmotaMqttTopic(),
+      relayN: this.configService.getTasmotaMqttRelayNumber(),
+    };
+
+    this.http
+      .post(
+        this.configService.getApiURL('plugin/tasmota_mqtt'),
+        tasmotaMqttPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
       .subscribe();
   }

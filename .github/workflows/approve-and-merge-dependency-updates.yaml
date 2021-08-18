@@ -1,0 +1,31 @@
+name: Dependencies
+
+on:
+  pull_request_target:
+    branches:
+      - main
+
+jobs:
+  auto-approve:
+    name: Approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Approve
+        uses: hmarr/auto-approve-action@v2
+        if: github.actor == 'dependabot[bot]'
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+  auto-merge:
+    name: Merge
+    needs: auto-approve
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Merge
+        uses: pascalgn/automerge-action@v0.13.1
+        if: github.actor == 'dependabot[bot]'
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          MERGE_METHOD: 'squash'
+          MERGE_LABELS: 'dependencies'
+          MERGE_RETRIES: 15
+          MERGE_RETRY_SLEEP: 60000

@@ -94,6 +94,9 @@ export class PrintControlComponent implements OnInit, OnDestroy {
 
   public adjust(event: MouseEvent): void {
     if (this.showControls) {
+      if (this.view === ControlView.BABYSTEP) {
+        this.printerService.saveToEPROM();
+      }
       this.view = ControlView.ADJUST;
       this.stopPropagation(event);
     }

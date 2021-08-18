@@ -25,7 +25,7 @@ export class FilesComponent {
   public showSorting = false;
 
   public loadingOptions: AnimationOptions = {
-    path: '/assets/loading.json',
+    path: 'assets/animations/loading.json',
   };
   public loading = Date.now();
 
@@ -64,7 +64,10 @@ export class FilesComponent {
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
         (error: HttpErrorResponse) => {
-          this.notificationService.setError("Can't load file/folder!", error.message);
+          this.notificationService.setError(
+            $localize`:@@error-load-file-folder:Can't load file/folder!`,
+            error.message,
+          );
           this.currentFolder = folderPath;
         },
         () => {
@@ -72,6 +75,16 @@ export class FilesComponent {
         },
       );
     }, 240);
+  }
+
+  public setSortAttribute(attribute: 'name' | 'date' | 'size'): void {
+    this.sortingAttribute = attribute;
+    this.configService.setSortingAttribute(attribute);
+  }
+
+  public setSortOrder(order: 'asc' | 'dsc'): void {
+    this.sortingOrder = order;
+    this.configService.setSortingOrder(order);
   }
 
   public sortFolder(by: 'name' | 'date' | 'size' = 'name', order: 'asc' | 'dsc' = 'asc'): void {
@@ -83,8 +96,8 @@ export class FilesComponent {
     this.filesService.getFile(filePath).subscribe(
       (fileData: File) => (this.fileDetail = fileData),
       (error: HttpErrorResponse) => {
-        this.fileDetail = ({ name: 'error' } as unknown) as File;
-        this.notificationService.setError("Can't load file!", error.message);
+        this.fileDetail = { name: 'error' } as unknown as File;
+        this.notificationService.setError($localize`:@@error-load-file:Can't load file!`, error.message);
       },
     );
     const fileDOMElement = document.getElementById('fileDetailView');
@@ -101,6 +114,10 @@ export class FilesComponent {
       fileDOMElement.style.display = 'none';
       this.fileDetail = null;
     }, 500);
+  }
+
+  public stopPropagation(event: Event): void {
+    event.stopPropagation();
   }
 
   public openSorting(): void {

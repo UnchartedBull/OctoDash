@@ -76,6 +76,10 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
+  public stopPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
   public quickControlChangeValue(value: number): void {
     switch (this.view) {
       case QuickControlView.HOTEND:

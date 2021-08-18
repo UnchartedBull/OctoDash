@@ -32,7 +32,10 @@ export class BottomBarComponent implements OnDestroy {
             this.enclosureService.getEnclosureTemperature().subscribe(
               (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
               error => {
-                this.notificationService.setError("Can't retrieve enclosure temperature!", error.message);
+                this.notificationService.setError(
+                  $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
+                  error.message,
+                );
               },
             );
           }
@@ -52,6 +55,9 @@ export class BottomBarComponent implements OnDestroy {
   }
 
   public getStringStatus(printerState: PrinterState): string {
+    if (printerState === PrinterState.socketDead) {
+      return 'socket is dead';
+    }
     return PrinterState[printerState];
   }
 

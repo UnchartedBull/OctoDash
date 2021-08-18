@@ -25,26 +25,23 @@ export class OctoprintAuthenticationComponent {
       result => {
         if (result.status === 204) {
           this.sendLoginRequest();
-        } else {
-          this.notificationService.setWarning(
-            'Automatic login not supported!',
-            `Please create the API Key manually and paste it in the bottom field.`,
-          );
-        }
+        } else this.setAutologinWarning();
       },
       error => {
         if (error.status === 0) {
           this.notificationService.setError(
-            "Can't connect to OctoPrint!",
-            `Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.`,
+            $localize`:@@octoprint-connection-failed:Can't connect to OctoPrint!`,
+            $localize`:@@octoprint-connection-failed-message:Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.`,
           );
-        } else {
-          this.notificationService.setWarning(
-            'Automatic Login not supported!',
-            `Please create the API Key manually and paste it in the bottom field.`,
-          );
-        }
+        } else this.setAutologinWarning();
       },
+    );
+  }
+
+  private setAutologinWarning(): void {
+    this.notificationService.setWarning(
+      $localize`:@@unsupported-autologin:Automatic login not supported!`,
+      $localize`:@@manually-create-api-key:Please create the API Key manually and paste it in the bottom field.`,
     );
   }
 
@@ -52,16 +49,13 @@ export class OctoprintAuthenticationComponent {
     this.authService.startAuthProcess(this.octoprintURL).subscribe(
       token => {
         this.notificationService.setNotification(
-          'Login request send!',
-          'Please confirm the request via the popup in the OctoPrint WebUI.',
+          $localize`:@@login-request-sent:Login request send!`,
+          $localize`:@@login-request-sent-message:Please confirm the request via the popup in the OctoPrint WebUI.`,
         );
         this.pollResult(token);
       },
       _ => {
-        this.notificationService.setWarning(
-          'Automatic Login failed!',
-          `Please try again or create the API Key manually and paste it in the bottom field.`,
-        );
+        this.setAutologinWarning();
       },
     );
   }
@@ -84,10 +78,7 @@ export class OctoprintAuthenticationComponent {
           }
         },
         _ => {
-          this.notificationService.setWarning(
-            'Automatic Login failed!',
-            `Please try again or create the API Key manually and paste it in the bottom field.`,
-          );
+          this.setAutologinWarning();
           pollInterval.unsubscribe();
         },
       );

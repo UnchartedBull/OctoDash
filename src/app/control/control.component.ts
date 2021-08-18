@@ -14,7 +14,6 @@ export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
-  public showHelp = false;
   public showExtruder = this.configService.getShowExtruderControl();
 
   public constructor(
@@ -25,7 +24,10 @@ export class ControlComponent {
     this.printerService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       err => {
-        this.notificationService.setError("Can't retrieve printer profile!", err.message);
+        this.notificationService.setError(
+          $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
+          err.message,
+        );
       },
     );
   }

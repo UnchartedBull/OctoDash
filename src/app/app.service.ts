@@ -28,23 +28,31 @@ export class AppService {
 
     // list of all error following an upgrade
     this.updateError = {
-      ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
-      ".plugins should have required property 'tpLinkSmartPlug'": config =>
-        (config.plugins.tpLinkSmartPlug = { enabled: true, smartPlugIP: '127.0.0.1' }),
-      ".octodash should have required property 'previewProgressCircle'": config =>
+      "/printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
+      "/plugins should have required property 'tpLinkSmartPlug'": config =>
+        (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),
+      "/plugins should have required property 'tasmota'": config =>
+        (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
+      "/plugins should have required property 'tasmotaMqtt'": config =>
+        (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
+      "/octodash should have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
-      ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
+      "/octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
         config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
         delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
       },
-      ".octodash should have required property 'screenSleepCommand'": config =>
+      "/octodash should have required property 'screenSleepCommand'": config =>
         (config.octodash.screenSleepCommand = 'xset dpms force standby'),
-      ".octodash should have required property 'screenWakeupCommand'": config =>
+      "/octodash should have required property 'screenWakeupCommand'": config =>
         (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
-      ".printer should have required property 'disableExtruderGCode'": config =>
+      "/octodash should have required property 'invertAxisControl'": config =>
+        (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
+      "/printer should have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
       ".octodash should have required property 'showExtruderControl'": config =>
         (config.octodash.showExtruderControl = true),
+      "/plugins must have required property 'spoolManager'": config =>
+        (config.plugins.spoolManager = { enabled: false }),
     };
   }
 
@@ -99,7 +107,7 @@ export class AppService {
     });
 
     this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setError("Can't load custom styles!", customCSSError);
+      this.notificationService.setError($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
 

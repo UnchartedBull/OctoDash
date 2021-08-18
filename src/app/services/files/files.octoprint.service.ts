@@ -88,13 +88,13 @@ export class FilesOctoprintService implements FilesService {
                 {
                   origin: 'local',
                   path: '/local',
-                  name: 'local',
+                  name: $localize`:@@local:local`,
                   size: undefined,
                 },
                 {
                   origin: 'sdcard',
                   path: '/sdcard',
-                  name: 'sdcard',
+                  name: $localize`:@@sdcard:sdcard`,
                   size: undefined,
                 },
               ];
@@ -109,26 +109,24 @@ export class FilesOctoprintService implements FilesService {
 
   public getFile(filePath: string): Observable<File> {
     return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
-      map(
-        (file: OctoprintFile): File => {
-          return {
-            origin: file.origin,
-            path: '/' + file.origin + '/' + file.path,
-            name: file.name,
-            date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
-            size: this.conversionService.convertByteToMegabyte(file.size),
-            thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
-            ...(file.gcodeAnalysis
-              ? {
-                  printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
-                  filamentWeight: this.conversionService.convertFilamentLengthToWeight(
-                    _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
-                  ),
-                }
-              : {}),
-          } as File;
-        },
-      ),
+      map((file: OctoprintFile): File => {
+        return {
+          origin: file.origin,
+          path: '/' + file.origin + '/' + file.path,
+          name: file.name,
+          date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
+          size: this.conversionService.convertByteToMegabyte(file.size),
+          thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
+          ...(file.gcodeAnalysis
+            ? {
+                printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                  _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
+                ),
+              }
+            : {}),
+        } as File;
+      }),
     );
   }
 
@@ -148,7 +146,11 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't load file!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
@@ -160,14 +162,22 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't start print!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message),
+        ),
+      )
       .subscribe();
   }
 
   public deleteFile(filePath: string): void {
     this.http
       .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't delete file!", error.message)))
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message),
+        ),
+      )
       .subscribe();
   }
 

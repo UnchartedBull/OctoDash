@@ -8,15 +8,15 @@
     <tr>
       <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
         <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
-        files
+        <ng-container i18n="@@menu-files">files</ng-container>
       </td>
       <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
         <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
-        filament
+        <ng-container i18n="@@menu-filament">filament</ng-container>
       </td>
       <td routerLink="/control" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
         <img src="assets/control.svg" class="main-menu__option-icon main-menu__option-icon__3" />
-        control
+        <ng-container i18n="@@menu-control">control</ng-container>
       </td>
     </tr>
   </table>

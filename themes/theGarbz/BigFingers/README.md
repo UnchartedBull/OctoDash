@@ -1,4 +1,4 @@
-# BigFingers theme v0.2
+# BigFingers theme v0.3
 
 This variation on the standard theme increases the width of the scroll bars to make them easier to touch on small displays.
 No special requirements exist for this theme, however it is intended for small low resolution displays.
@@ -25,6 +25,9 @@ To install copy the custom-styles.css file into the octodash config folder:
 
 
 ### Version History:
+
+__v0.3:__
+* Extra text removed from settings menu which ran off the screen.
 
 __v0.2:__
 * Hitbox of settings button increased.

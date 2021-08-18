@@ -93,7 +93,7 @@
 
     &:focus {
       outline: 0;
-      border: 2px solid #44bd32;
+      border: 2px solid #4bae50;
     }
 
     &-small {
@@ -147,6 +147,10 @@
       margin-top: 1.4vh;
       cursor: pointer;
       overflow: visible;
+
+      &__space-right {
+        margin-right: 14vw;
+      }
 
       &-disabled {
         opacity: 0.5;
@@ -311,7 +315,7 @@
       }
 
       &-available {
-        background-color: #44bd32;
+        background-color: #4bae50;
       }
     }
 

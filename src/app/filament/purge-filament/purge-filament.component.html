@@ -1,6 +1,20 @@
-<span class="filament-heading">purging filament</span>
-<div class="purge-filament__amount">{{ purgeAmount }}mm</div>
+<span class="filament-heading" i18n="@@purging-filament">purging filament</span>
+<div class="purge-filament__amount">{{ purgeAmount }}<span i18n="@@purging-mm">mm</span></div>
 <div class="filament__wrapper-button">
-  <a class="purge-filament__more" matRipple [matRippleUnbounded]="false" (click)="increasePurgeAmount(10)">+10mm</a>
-  <a class="purge-filament__done" matRipple [matRippleUnbounded]="false" (click)="this.purgeDone.emit()">done</a>
+  <a
+    class="purge-filament__more"
+    matRipple
+    [matRippleUnbounded]="false"
+    (click)="increasePurgeAmount(10)"
+    i18n="@@puging-10mm"
+    >+10mm</a
+  >
+  <a
+    class="purge-filament__done"
+    matRipple
+    [matRippleUnbounded]="false"
+    (click)="this.purgeDone.emit()"
+    i18n="@@purging-done"
+    >done</a
+  >
 </div>

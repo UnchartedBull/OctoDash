@@ -13,17 +13,21 @@ import { SocketService } from './services/socket/socket.service';
 })
 export class AppComponent implements OnInit {
   public activated = false;
-  public status = 'initializing';
+  public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
 
   public loadingOptionsCache: AnimationOptions = {
-    path: '/assets/loading.json',
+    path: 'assets/animations/loading.json',
   };
   public checkmarkOptionsCache: AnimationOptions = {
-    path: '/assets/checkmark.json',
+    path: 'assets/animations/checkmark.json',
+  };
+  public toggleSwitchOptionsCache: AnimationOptions = {
+    path: 'assets/animations/toggle-switch.json',
   };
   public loadingAnimationCached = false;
   public checkmarkAnimationCached = false;
+  public toggleSwitchAnimationCached = false;
 
   public constructor(
     private service: AppService,
@@ -89,5 +93,9 @@ export class AppComponent implements OnInit {
 
   public checkmarkAnimationCacheDone(): void {
     this.checkmarkAnimationCached = true;
+  }
+
+  public toggleSwitchAnimationCacheDone(): void {
+    this.toggleSwitchAnimationCached = true;
   }
 }

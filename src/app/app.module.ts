@@ -9,7 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import player, { LottiePlayer } from 'lottie-web';
 import { NgxElectronModule } from 'ngx-electron';
-import { LottieModule } from 'ngx-lottie';
+import { LottieCacheModule, LottieModule } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -49,6 +49,7 @@ import { EnclosureOctoprintService } from './services/enclosure/enclosure.octopr
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './services/filament/filament-plugin.service';
+import { SpoolManagerOctoprintService } from './services/filament/spool-manager.octoprint.service';
 import { FilesOctoprintService } from './services/files/files.octoprint.service';
 import { FilesService } from './services/files/files.service';
 import { JobOctoprintService } from './services/job/job.octoprint.service';
@@ -60,6 +61,7 @@ import { SocketService } from './services/socket/socket.service';
 import { SystemOctoprintService } from './services/system/system.octoprint.service';
 import { SystemService } from './services/system/system.service';
 import { SettingsComponent } from './settings/settings.component';
+import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
@@ -101,6 +103,7 @@ export function playerFactory(): LottiePlayer {
     ChangeFilamentComponent,
     PurgeFilamentComponent,
     CustomActionsComponent,
+    ToggleSwitchComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -112,7 +115,7 @@ export function playerFactory(): LottiePlayer {
     MatRippleModule,
     NgxElectronModule,
     RoundProgressModule,
-    [LottieModule.forRoot({ player: playerFactory, useCache: true })],
+    [LottieModule.forRoot({ player: playerFactory }), LottieCacheModule.forRoot()],
   ],
   providers: [
     AppService,
@@ -192,6 +195,9 @@ export function playerFactory(): LottiePlayer {
         provide: FilamentPluginService,
         deps: [ConfigService, HttpClient],
         useFactory: (configService: ConfigService, httpClient: HttpClient) => {
+          if (configService.isSpoolManagerPluginEnabled()) {
+            return new SpoolManagerOctoprintService(configService, httpClient);
+          }
           return new FilamentManagerOctoprintService(configService, httpClient);
         },
       },
