@@ -303,6 +303,16 @@
           <span class="settings__heading-2" i18n="@@octodash-general">General</span>
           <div
             class="settings__checkbox-container"
+            (click)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.showExtruderControl"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Show extruder controls</span>
+          </div>
+          <br />
+          <div
+            class="settings__checkbox-container"
             (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping"
           >
             <span class="settings__checkbox">
