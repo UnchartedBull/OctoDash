@@ -281,6 +281,7 @@ const configSchema = {
         'previewProgressCircle',
         'screenSleepCommand',
         'screenWakeupCommand',
+        'showExtruderControl',
       ],
       properties: {
         customActions: {
@@ -386,6 +387,10 @@ const configSchema = {
           $id: '#/properties/octodash/properties/screenWakeupCommand',
           type: 'string',
           pattern: '^(.*)$',
+        },
+        showExtruderControl: {
+          $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
         },
       },
     },

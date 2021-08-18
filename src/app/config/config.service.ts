@@ -301,6 +301,10 @@ export class ConfigService {
     return this.config.octodash.screenWakeupCommand;
   }
 
+  public getShowExtruderControl(): boolean {
+    return this.config.octodash.showExtruderControl;
+  }
+
   public isXAxisInverted(): boolean {
     return this.config.octodash.invertAxisControl.x;
   }
