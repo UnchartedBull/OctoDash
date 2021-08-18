@@ -231,6 +231,7 @@ const configSchema = {
         'previewProgressCircle',
         'screenSleepCommand',
         'screenWakeupCommand',
+        'showExtruderControl',
       ],
       properties: {
         customActions: {

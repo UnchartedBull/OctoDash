@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
+import { ConfigService } from '../config/config.service';
 import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
-import { ConfigService } from '../config/config.service';
 
 @Component({
   selector: 'app-control',
@@ -20,7 +20,7 @@ export class ControlComponent {
   public constructor(
     private printerService: PrinterService,
     private configService: ConfigService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     this.printerService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
@@ -35,6 +35,9 @@ export class ControlComponent {
   }
 
   public extrude(direction: '+' | '-'): void {
+    if (this.printerProfile.axes['e'].inverted == true) {
+      direction = direction === '+' ? '-' : '+';
+    }
     const distance = Number(direction + this.jogDistance);
     this.printerService.extrude(distance, this.configService.getFeedSpeed());
   }

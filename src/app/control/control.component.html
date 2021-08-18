@@ -33,10 +33,10 @@
 </div>
 
 <div class="control">
-  <div class="control-jog">
-    <div class="control-jog-arrows">
-      <div class="control-jog-arrows__XY">
-        <div class="control-jog-arrows__XY-wrapper">
+  <div class="control__jog">
+    <div class="control__jog-arrows">
+      <div class="control__jog-arrows__XY">
+        <div class="control__jog-arrows__XY__wrapper">
           <fa-icon
             [icon]="['fas', 'angle-up']"
             class="control__icon control__icon-1"
@@ -73,8 +73,8 @@
         <span class="control__heading">X / Y</span>
       </div>
 
-      <div class="control-jog-arrows__vertical">
-        <div class="control-jog-arrows__vertical-wrapper">
+      <div class="control__jog-arrows--vertical">
+        <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
             [icon]="['fas', 'angle-up']"
             class="control__icon control__icon-5"
@@ -95,20 +95,20 @@
         <span class="control__heading">Z</span>
       </div>
 
-      <div class="control-jog-arrows__vertical" *ngIf="showExtruder">
-        <div class="control-jog-arrows__vertical-wrapper">
+      <div class="control__jog-arrows--vertical" *ngIf="showExtruder">
+        <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
-            [icon]="['fas', 'angle-up']"
-            class="control__icon control__icon-5"
-            (click)="extrude('-')"
+            [icon]="['fas', 'redo-alt']"
+            class="control__icon control__icon-7"
+            (click)="extrude('+')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"
           ></fa-icon>
           <fa-icon
-            [icon]="['fas', 'angle-down']"
-            class="control__icon control__icon-6"
-            (click)="extrude('+')"
+            [icon]="['fas', 'undo-alt']"
+            class="control__icon control__icon-8"
+            (click)="extrude('-')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"

@@ -43,6 +43,8 @@ export class AppService {
         (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
       ".printer should have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
+      ".octodash should have required property 'showExtruderControl'": config =>
+        (config.octodash.showExtruderControl = true),
     };
   }
 
