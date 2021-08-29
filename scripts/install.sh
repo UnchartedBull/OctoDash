@@ -682,7 +682,7 @@ IFS='/' read -ra version <<< "$releaseURL"
 echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
-sudo apt -qq update
+sudo apt -qq update --allow-releaseinfo-change
 sudo apt -qq install $dependencies -y
 
 if [ -d "/home/pi/OctoPrint/venv" ]; then
