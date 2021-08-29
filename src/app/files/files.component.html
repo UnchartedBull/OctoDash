@@ -68,8 +68,9 @@
       matRipple
       [matRippleUnbounded]="false"
       class="files__object"
+      [ngClass]="[file.successful]"
     >
-      <img src="assets/object.svg" class="files__icon" />
+      <img [src]="file.thumbnail" class="files__icon" />
       <div class="files__info">
         <span class="files__info-value">
           {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>

@@ -75,6 +75,7 @@
     height: 11vh;
     line-height: 11vh;
     margin-bottom: 2vh;
+    border-left: .2em solid transparent;
 
     &:first-of-type {
       margin-top: 3.5vh;
@@ -82,6 +83,18 @@
 
     &:last-of-type {
       margin-bottom: 5.5vh;
+    }
+
+    &--success {
+      border-left-color: #44bd32;
+    }
+
+    &--failed {
+      border-left-color: #e84118;
+    }
+
+    &--unknown {
+      border-left-color: #f5f6fa;
     }
   }
 
@@ -93,11 +106,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
+    margin-left: 9vw;
   }
 
   &__icon {
-    height: 8vh;
-    margin: 1.7vh 1vw 0;
+    height: 9vh;
+    margin: 1vh 1.2vw 0;
     display: block;
     float: left;
   }
