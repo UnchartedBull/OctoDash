@@ -114,7 +114,7 @@
     "@types/bonjour": "~3.5.9",
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.4",
-    "@types/node": "16.7.8",
+    "@types/node": "16.7.10",
     "@typescript-eslint/eslint-plugin": "~4.30.0",
     "@typescript-eslint/parser": "~4.30.0",
     "codelyzer": "~6.0.2",
