@@ -116,7 +116,7 @@
     "@types/lodash-es": "~4.17.4",
     "@types/node": "16.7.13",
     "@typescript-eslint/eslint-plugin": "~4.31.0",
-    "@typescript-eslint/parser": "~4.30.0",
+    "@typescript-eslint/parser": "~4.31.0",
     "codelyzer": "~6.0.2",
     "electron": "~13.2.3",
     "electron-builder": "~22.11.7",
