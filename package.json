@@ -85,7 +85,7 @@
     "@angular/material": "~12.2.4",
     "@angular/platform-browser": "~12.2.4",
     "@angular/platform-browser-dynamic": "~12.2.2",
-    "@angular/router": "~12.2.4",
+    "@angular/router": "~12.2.5",
     "@fortawesome/angular-fontawesome": "~0.9.0",
     "@fortawesome/fontawesome-svg-core": "~1.2.36",
     "@fortawesome/free-solid-svg-icons": "~5.15.4",
