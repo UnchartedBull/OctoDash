@@ -682,8 +682,18 @@ IFS='/' read -ra version <<< "$releaseURL"
 echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
-sudo apt -qq update --allow-releaseinfo-change
-sudo apt -qq install $dependencies -y
+{
+  sudo apt -qq update
+  sudo apt -qq install $dependencies -y
+} || {
+  echo ""
+  echo "Couldn't install dependenices!"
+  echo "Seems like there is something wrong with the package manager 'apt'"
+  echo ""
+  echo "If the error is similar to: 'E: Repository 'http://raspbian.raspberrypi.org/raspbian buster InRelease' changed its 'Suite' value from 'stable' to 'oldstable''"
+  echo "you can run 'sudo apt update --allow-releaseinfo-change' and then execute the OctoDash installation command again"
+  exit -1
+}
 
 if [ -d "/home/pi/OctoPrint/venv" ]; then
     DIRECTORY="/home/pi/OctoPrint/venv"
