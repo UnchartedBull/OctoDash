@@ -1,9 +1,9 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
+import { ElectronService } from '../electron.service';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -56,8 +56,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public hideSettings(): void {
@@ -98,8 +98,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public updateConfig(): void {
     const config = this.configService.createConfigFromInput(this.config);
 
-    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
     this.configService.saveConfig(config);
   }
@@ -110,7 +110,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private onConfigSaved() {
     this.hideSettings();
-    this.electronService.ipcRenderer.send('reload');
+    this.electronService.send('reload');
   }
 
   public showUpdate(): void {

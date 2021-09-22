@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { ElectronService } from 'ngx-electron';
 
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
+import { ElectronService } from './electron.service';
 import { NotificationService } from './notification/notification.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class AppService {
   ) {
     this.enableVersionListener();
     this.enableCustomCSSListener();
-    this.electronService.ipcRenderer.send('appInfo');
+    this.electronService.send('appInfo');
 
     // list of all error following an upgrade
     this.updateError = {
@@ -93,20 +93,20 @@ export class AppService {
   }
 
   private enableVersionListener(): void {
-    this.electronService.ipcRenderer.on('versionInformation', (_, versionInformation: VersionInformation): void => {
+    this.electronService.on('versionInformation', (_, versionInformation: VersionInformation): void => {
       this.version = versionInformation.version;
       this.checkUpdate();
     });
   }
 
   private enableCustomCSSListener(): void {
-    this.electronService.ipcRenderer.on('customStyles', (_, customCSS: string): void => {
+    this.electronService.on('customStyles', (_, customCSS: string): void => {
       const css = document.createElement('style');
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });
 
-    this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
+    this.electronService.on('customStylesError', (_, customCSSError: string): void => {
       this.notificationService.setError($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
@@ -124,11 +124,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
+    this.electronService.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
-    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
+    this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
   }
 }
 

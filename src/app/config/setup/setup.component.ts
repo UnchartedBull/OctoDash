@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ElectronService } from 'ngx-electron';
+import { ElectronService } from 'src/app/electron.service';
 
 import { defaultConfig } from '../config.default';
 import { Config } from '../config.model';
@@ -47,8 +47,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public changeURLEntryMethod(manual: boolean): void {
@@ -109,8 +109,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   private saveConfig(): void {
-    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
     this.configService.saveConfig(this.config);
   }
