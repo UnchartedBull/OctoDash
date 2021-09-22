@@ -8,7 +8,6 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import player, { LottiePlayer } from 'lottie-web';
-import { NgxElectronModule } from 'ngx-electron';
 import { LottieCacheModule, LottieModule } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
@@ -113,7 +112,6 @@ export function playerFactory(): LottiePlayer {
     FormsModule,
     HttpClientModule,
     MatRippleModule,
-    NgxElectronModule,
     RoundProgressModule,
     [LottieModule.forRoot({ player: playerFactory }), LottieCacheModule.forRoot()],
   ],
