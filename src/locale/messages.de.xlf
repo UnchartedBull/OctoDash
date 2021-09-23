@@ -1,0 +1,1189 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww32540\viewh24020\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">\
+  <file original="ng2.template" datatype="plaintext" source-language="en" target-language="de">\
+    <body>\
+      <trans-unit id="long-init" datatype="html">\
+        <source> Initializing is taking longer than usual. \
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API. \
+        </source>\
+        <target> Bitte stelle sicher, dass OctoPrint l\'e4uft und CORS f\'fcr API aktiviert ist.\
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>\
+ Veuillez vous assurer qu'OctoPrint est op\'e9rationnel. \
+        </target>\
+      </trans-unit>\
+      <trans-unit id="initializing" datatype="html">\
+        <source>initializing</source>\
+        <target>Initialisieren</target>\
+      </trans-unit>\
+      <trans-unit id="error-load-style" datatype="html">\
+        <source>Can't load custom styles!</source>\
+        <target>Benutzerdefinierte Templates k\'f6nnen nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-enclosure-temp" datatype="html">\
+        <source>Can't retrieve enclosure temperature!</source>\
+        <target>Geh\'e4usetemperatur kann nicht abgerufen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-restart" datatype="html">\
+        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>\
+        <target>Bitte starte das System neu. Wenn das Problem weiterhin besteht, wende dich bitte an den Entwickler.</target>\
+      </trans-unit>\
+      <trans-unit id="invalid-config" datatype="html">\
+        <source>Your config is invalid!</source>\
+        <target>Deine Konfiguration ist ung\'fcltig!</target>\
+      </trans-unit>\
+      <trans-unit id="correct-errors" datatype="html">\
+        <source>Please correct the errors listed below!</source>\
+        <target>Bitte korrigiere die unten aufgef\'fchrten Fehler!</target>\
+      </trans-unit>\
+      <trans-unit id="select-instance" datatype="html">\
+        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>\
+        <target> Das Wichtigste zuerst: Bitte w\'e4hle Deine OctoPrint-Instanz aus der Liste unten aus oder geben die IP/URL manuell ein.</target>\
+      </trans-unit>\
+      <trans-unit id="version-url" datatype="html">\
+        <source> Version \
+          <x id="INTERPOLATION" equiv-text="\{\{ node.version \}\}"/>, URL: \
+          <x id="INTERPOLATION_1" equiv-text="\{\{ node.url \}\}"/>\
+        </source>\
+        <target> Version </target>\
+      </trans-unit>\
+      <trans-unit id="searching" datatype="html">\
+        <source>searching</source>\
+        <target>suche\'85</target>\
+      </trans-unit>\
+      <trans-unit id="enter-manually" datatype="html">\
+        <source>enter manually</source>\
+        <target>Manuell eintragen</target>\
+      </trans-unit>\
+      <trans-unit id="port-recommendation" datatype="html">\
+        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>\
+        <target>Port 5000 f\'fcr Vanilla OctoPrint, Port 80 f\'fcr OctoPi</target>\
+      </trans-unit>\
+      <trans-unit id="search-again" datatype="html">\
+        <source>search again</source>\
+        <target>erneut suchen</target>\
+      </trans-unit>\
+      <trans-unit id="connect-localhost" datatype="html">\
+        <source>connect to localhost?</source>\
+        <target>Mit localhost verbinden?</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-same-machine" datatype="html">\
+        <source> are you trying to connect to OctoPrint that is running on the same machine as OctoDash? </source>\
+        <target> Versuchst Du eine Verbindung zu OctoPrint herzustellen, welches auf demselben Computer wie OctoDash ausgef\'fchrt wird? </target>\
+      </trans-unit>\
+      <trans-unit id="no-instance-found" datatype="html">\
+        <source>no instances found.</source>\
+        <target>Keine Instanzen gefunden.</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-extruder-info" datatype="html">\
+        <source>I also need some information about your extruder.</source>\
+        <target>Ich ben\'f6tige Informationen \'fcber Deinen Extruder.</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-feed-length" datatype="html">\
+        <source>Feed Length:</source>\
+        <target>Zufuhrl\'e4nge:</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-info-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-feed-speed" datatype="html">\
+        <source>Feed Speed:</source>\
+        <target>Vorschubgeschwindigkeit:</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-info-mms" datatype="html">\
+        <source>mm/s</source>\
+        <target>mm/s</target>\
+      </trans-unit>\
+      <trans-unit id="filament-changing-warning" datatype="html">\
+        <source> These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and feed speed configured correctly. </source>\
+        <target> Diese Werte werden f\'fcr den Filamentwechsel verwendet. Stelle sicher, dass die Vorschubl\'e4nge (Abstand Extruder zum Hotend) und Vorschubgeschwindigkeit richtig konfiguriert sind. </target>\
+      </trans-unit>\
+      <trans-unit id="prompt-auth" datatype="html">\
+        <source> Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint webinterface or enter an API Key manually.</source>\
+        <target> Bitte authentifiziere mich jetzt. Du kannst entweder auf die Schaltfl\'e4che unten klicken und die Anfrage in deinem OctoPrint-Webinterface best\'e4tigen oder manuell einen API-Schl\'fcssel eingeben.</target>\
+      </trans-unit>\
+      <trans-unit id="send-request" datatype="html">\
+        <source>send request</source>\
+        <target>Anfrage senden</target>\
+      </trans-unit>\
+      <trans-unit id="api-key" datatype="html">\
+        <source>API Key:</source>\
+        <target>API Key:</target>\
+      </trans-unit>\
+      <trans-unit id="octoprint-connection-failed" datatype="html">\
+        <source>Can't connect to OctoPrint!</source>\
+        <target>Verbindung zu OctoPrint nicht m\'f6glich!</target>\
+      </trans-unit>\
+      <trans-unit id="octoprint-connection-failed-message" datatype="html">\
+        <source>Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.</source>\
+        <target>\'dcberpr\'fcfe die URL/IP und stelle sicher, dass die OctoPrint-Instanz von diesem Ger\'e4t aus erreichbar ist.</target>\
+      </trans-unit>\
+      <trans-unit id="unsupported-autologin" datatype="html">\
+        <source>Automatic login not supported!</source>\
+        <target>Automatische Anmeldung nicht unterst\'fctzt!</target>\
+      </trans-unit>\
+      <trans-unit id="manually-create-api-key" datatype="html">\
+        <source>Please create the API Key manually and paste it in the bottom field.</source>\
+        <target>Bitte erstelle den API-Schl\'fcssel manuell und f\'fcge ihn in das untere Feld ein.</target>\
+      </trans-unit>\
+      <trans-unit id="login-request-sent" datatype="html">\
+        <source>Login request send!</source>\
+        <target>Login-Anfrage senden!</target>\
+      </trans-unit>\
+      <trans-unit id="login-request-sent-message" datatype="html">\
+        <source>Please confirm the request via the popup in the OctoPrint WebUI.</source>\
+        <target>Bitte best\'e4tige die Anfrage \'fcber das Popup in der OctoPrint WebUI.</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-customization-details" datatype="html">\
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>\
+        <target> EF\'fcge weitere Informationen ein, damit ich OctoDash f\'fcr dich personalisieren kann. </target>\
+      </trans-unit>\
+      <trans-unit id="prompt-printer-name" datatype="html">\
+        <source>Printer Name:</source>\
+        <target>Druckername:</target>\
+      </trans-unit>\
+      <trans-unit id="use-touchscreen" datatype="html">\
+        <source> Use Touchscreen </source>\
+        <target> Benutze den Touchscreen </target>\
+      </trans-unit>\
+      <trans-unit id="change-settings-info" datatype="html">\
+        <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>\
+        <target> Du kannst alle Einstellungen jederzeit im Einstellungsmen\'fc \'e4ndern.</target>\
+      </trans-unit>\
+      <trans-unit id="prompt-plugins" datatype="html">\
+        <source>What plugins are you running?</source>\
+        <target>Welche Plugins verwendest du?</target>\
+      </trans-unit>\
+      <trans-unit id="plugin-display-layer-progress" datatype="html">\
+        <source> Display Layer Progress\'a0\'a0 </source>\
+        <target> Layer-Fortschritt anzeigen\'a0\'a0 </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-enclosure" datatype="html">\
+        <source> Enclosure </source>\
+        <target> Geh\'e4use</target>\
+      </trans-unit>\
+      <trans-unit id="plugin-filament-manager" datatype="html">\
+        <source> Filament Manager </source>\
+        <target> Filament Manager\'a0\'a0 </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-preheat-button" datatype="html">\
+        <source> Preheat Button </source>\
+        <target> Preheat Button </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-print-time-genius" datatype="html">\
+        <source> Print Time Genius </source>\
+        <target> Print Time Genius\'a0\'a0 </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-psu-control" datatype="html">\
+        <source> PSU Control </source>\
+        <target> PSU Control </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-tplink-smartplug" datatype="html">\
+        <source> TPLink SmartPlug </source>\
+        <target> TPLink SmartPlug </target>\
+      </trans-unit>\
+      <trans-unit id="plugin-tasmota" datatype="html">\
+        <source> Tasmota </source>\
+        <target></target>\
+      </trans-unit>\
+      <trans-unit id="plugin-tasmota-mqtt" datatype="html">\
+        <source> Tasmota MQTT </source>\
+        <target></target>\
+      </trans-unit>\
+      <trans-unit id="setup-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="setup-next" datatype="html">\
+        <source>next</source>\
+        <target>weiter</target>\
+      </trans-unit>\
+      <trans-unit id="checking" datatype="html">\
+        <source>Great! I'll check everything.</source>\
+        <target>Super! Ich werde alles \'fcberpr\'fcfen.</target>\
+      </trans-unit>\
+      <trans-unit id="checking-octoprint-connection" datatype="html">\
+        <source> Octoprint Connection </source>\
+        <target> Octoprint-Verbindung </target>\
+      </trans-unit>\
+      <trans-unit id="checking-config" datatype="html">\
+        <source> Validating Config </source>\
+        <target> \'dcberpr\'fcfung der Konfiguration </target>\
+      </trans-unit>\
+      <trans-unit id="checking-save" datatype="html">\
+        <source> Saving Config </source>\
+        <target> Konfiguration speichern </target>\
+      </trans-unit>\
+      <trans-unit id="wizard-done" datatype="html">\
+        <source>done</source>\
+        <target>fertig</target>\
+      </trans-unit>\
+      <trans-unit id="saving-config" datatype="html">\
+        <source>saving config</source>\
+        <target>Konfiguration speichern</target>\
+      </trans-unit>\
+      <trans-unit id="error-403" datatype="html">\
+        <source>403 Forbidden - This most likely means that your API Key isn't working.</source>\
+        <target>403 Forbidden \'96 Dies bedeutet h\'f6chstwahrscheinlich, dass dein API-Schl\'fcssel nicht funktioniert.</target>\
+      </trans-unit>\
+      <trans-unit id="error-unknown" datatype="html">\
+        <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.</source>\
+        <target>0 Unbekannter Fehler - Dies bedeutet h\'f6chstwahrscheinlich, dass Dein OctoPrint-Host und -Port nicht korrekt ist.</target>\
+      </trans-unit>\
+      <trans-unit id="welcome-1" datatype="html">\
+        <source> It looks like this is the first start of OctoDash. </source>\
+        <target> Es sieht so aus, als ob dies der erste Start von OctoDash ist. </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-2" datatype="html">\
+        <source> I'll help you set up your config and get you started. </source>\
+        <target> Ich helfe dir beim Einrichten deiner Konfiguration und beim Einstieg. </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-3" datatype="html">\
+        <source> If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. </source>\
+        <target> Wenn Probleme auftreten, wende dich bitte an den Entwickler. </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-4" datatype="html">\
+        <source> Thanks for choosing OctoDash </source>\
+        <target> Danke, dass du dich f\'fcr OctoDash entschieden hast </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-5" datatype="html">\
+        <source> Sorry for bothering you again ... </source>\
+        <target> Entschuldige f\'fcr die St\'f6rung... </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-6" datatype="html">\
+        <source> We've released an update, so awesome, we needed to change the config. Please review your new config! </source>\
+        <target> Wir haben ein Update ver\'f6ffentlicht, das so gro\'dfartig ist, dass wir die Konfiguration \'e4ndern mussten. Bitte \'fcberpr\'fcfe deine neue Konfiguration! </target>\
+      </trans-unit>\
+      <trans-unit id="welcome-7" datatype="html">\
+        <source> Thanks for choosing OctoDash </source>\
+        <target> Danke, dass du dich f\'fcr OctoDash entschieden haben </target>\
+      </trans-unit>\
+      <trans-unit id="control-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-profile" datatype="html">\
+        <source>Can't retrieve printer profile!</source>\
+        <target>Druckerprofil kann nicht abgerufen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="website-loading" datatype="html">\
+        <source>loading website ...</source>\
+        <target>Laden der Webseite...</target>\
+      </trans-unit>\
+      <trans-unit id="should-not-happen" datatype="html">\
+        <source> That shouldn't happen ... </source>\
+        <target> Das darf nicht passieren... </target>\
+      </trans-unit>\
+      <trans-unit id="are-you-sure" datatype="html">\
+        <source>are you sure?</source>\
+        <target>Bist du dir sicher?</target>\
+      </trans-unit>\
+      <trans-unit id="confirm-exec" datatype="html">\
+        <source>do you want to execute the following command?</source>\
+        <target>M\'f6chtest Du den folgenden Befehl ausf\'fchren?</target>\
+      </trans-unit>\
+      <trans-unit id="load-new-filament" datatype="html">\
+        <source>load new filament</source>\
+        <target>Neues Filament laden</target>\
+      </trans-unit>\
+      <trans-unit id="load-new-filament-message" datatype="html">\
+        <source>only put a little filament in, I'll pull in the rest.</source>\
+        <target>Nur ein wenig Filament einlegen, den Rest ziehe ich ein.</target>\
+      </trans-unit>\
+      <trans-unit id="filament-grams-left" datatype="html">\
+        <source>g left</source>\
+        <target>g verbleibend</target>\
+      </trans-unit>\
+      <trans-unit id="filament-done" datatype="html">\
+        <source> done </source>\
+        <target> fertig </target>\
+      </trans-unit>\
+      <trans-unit id="filament-waiting" datatype="html">\
+        <source>I'll wait for you.</source>\
+        <target>Ich werde auf dich warten.</target>\
+      </trans-unit>\
+      <trans-unit id="filament-m600" datatype="html">\
+        <source>M600 sent</source>\
+        <target>M600 gesendet</target>\
+      </trans-unit>\
+      <trans-unit id="follow-printer-screen" datatype="html">\
+        <source>follow the instructions on your printers' display</source>\
+        <target>Folge den Anweisungen auf dem Display des Druckers</target>\
+      </trans-unit>\
+      <trans-unit id="choose-filament" datatype="html">\
+        <source>select your new filament</source>\
+        <target>W\'e4hle dein neues Filament aus</target>\
+      </trans-unit>\
+      <trans-unit id="choose-filament-grams-left" datatype="html">\
+        <source>g left</source>\
+        <target>g verbleibend</target>\
+      </trans-unit>\
+      <trans-unit id="no-spools" datatype="html">\
+        <source>no filament spools found</source>\
+        <target>Keine Filamentrollen gefunden</target>\
+      </trans-unit>\
+      <trans-unit id="loading-spools" datatype="html">\
+        <source>loading spools</source>\
+        <target>Lade Filamentrollen</target>\
+      </trans-unit>\
+      <trans-unit id="filament-back" datatype="html">\
+        <source> back </source>\
+        <target> zur\'fcck </target>\
+      </trans-unit>\
+      <trans-unit id="filament-skip" datatype="html">\
+        <source> skip </source>\
+        <target> \'fcberspringen </target>\
+      </trans-unit>\
+      <trans-unit id="nozzle-heating" datatype="html">\
+        <source>heating the nozzle</source>\
+        <target>Erhitzen der D\'fcse</target>\
+      </trans-unit>\
+      <trans-unit id="nozzle-heating-wait" datatype="html">\
+        <source>wait</source>\
+        <target>warte</target>\
+      </trans-unit>\
+      <trans-unit id="nozzle-heating-wait-seconds-or" datatype="html">\
+        <source>s or</source>\
+        <target>s oder</target>\
+      </trans-unit>\
+      <trans-unit id="nozzle-heating-start" datatype="html">\
+        <source>start</source>\
+        <target> Start </target>\
+      </trans-unit>\
+      <trans-unit id="move-filament" datatype="html">\
+        <source>filament</source>\
+        <target>Filament</target>\
+      </trans-unit>\
+      <trans-unit id="move-filament-speed" datatype="html">\
+        <source>mm/s</source>\
+        <target>mm/s</target>\
+      </trans-unit>\
+      <trans-unit id="move-filament-stop" datatype="html">\
+        <source>stop</source>\
+        <target> Stop </target>\
+      </trans-unit>\
+      <trans-unit id="loading-filament" datatype="html">\
+        <source>loading</source>\
+        <target>laden</target>\
+      </trans-unit>\
+      <trans-unit id="unloading-filament" datatype="html">\
+        <source>unloading</source>\
+        <target>entladen</target>\
+      </trans-unit>\
+      <trans-unit id="purging-filament" datatype="html">\
+        <source>purging filament</source>\
+        <target>S\'e4ubere Filament</target>\
+      </trans-unit>\
+      <trans-unit id="purging-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="puging-10mm" datatype="html">\
+        <source>+10mm</source>\
+        <target>+10mm</target>\
+      </trans-unit>\
+      <trans-unit id="purging-done" datatype="html">\
+        <source>done</source>\
+        <target>fertig</target>\
+      </trans-unit>\
+      <trans-unit id="files-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="files-top-sort" datatype="html">\
+        <source>sort</source>\
+        <target>sortieren</target>\
+      </trans-unit>\
+      <trans-unit id="files-mb-1" datatype="html">\
+        <source>mb</source>\
+        <target>mb</target>\
+      </trans-unit>\
+      <trans-unit id="files-mb-2" datatype="html">\
+        <source>mb</source>\
+        <target>mb</target>\
+      </trans-unit>\
+      <trans-unit id="files-g" datatype="html">\
+        <source>g</source>\
+        <target>g</target>\
+      </trans-unit>\
+      <trans-unit id="files-h" datatype="html">\
+        <source>h</source>\
+        <target>h</target>\
+      </trans-unit>\
+      <trans-unit id="files-mb-3" datatype="html">\
+        <source>mb</source>\
+        <target>mb</target>\
+      </trans-unit>\
+      <trans-unit id="files-h-2" datatype="html">\
+        <source>h</source>\
+        <target>h</target>\
+      </trans-unit>\
+      <trans-unit id="files-g-2" datatype="html">\
+        <source>g</source>\
+        <target>g</target>\
+      </trans-unit>\
+      <trans-unit id="files-loading" datatype="html">\
+        <source>loading details</source>\
+        <target>lade Details</target>\
+      </trans-unit>\
+      <trans-unit id="files-sort" datatype="html">\
+        <source>sort files</source>\
+        <target>Dateien sortieren</target>\
+      </trans-unit>\
+      <trans-unit id="files-sort-by" datatype="html">\
+        <source>sort by</source>\
+        <target>Sortieren nach</target>\
+      </trans-unit>\
+      <trans-unit id="files-name" datatype="html">\
+        <source>Name</source>\
+        <target>Name</target>\
+      </trans-unit>\
+      <trans-unit id="files-date" datatype="html">\
+        <source>Date</source>\
+        <target>Datum</target>\
+      </trans-unit>\
+      <trans-unit id="files-size" datatype="html">\
+        <source>Size</source>\
+        <target>Gr\'f6\'dfe</target>\
+      </trans-unit>\
+      <trans-unit id="files-order" datatype="html">\
+        <source>order</source>\
+        <target>sortieren</target>\
+      </trans-unit>\
+      <trans-unit id="files-ascending" datatype="html">\
+        <source>Ascending</source>\
+        <target>Aufsteigend</target>\
+      </trans-unit>\
+      <trans-unit id="files-descending" datatype="html">\
+        <source>Descending</source>\
+        <target>Absteigend</target>\
+      </trans-unit>\
+      <trans-unit id="error-load-file-folder" datatype="html">\
+        <source>Can't load file/folder!</source>\
+        <target>Datei/Ordner kann nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-load-file" datatype="html">\
+        <source>Can't load file!</source>\
+        <target>Datei kann nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="height-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="heing-layer" datatype="html">\
+        <source> Layer </source>\
+        <target> Schicht </target>\
+      </trans-unit>\
+      <trans-unit id="height-of" datatype="html">\
+        <source> of </source>\
+        <target> von </target>\
+      </trans-unit>\
+      <trans-unit id="job-filament-g" datatype="html">\
+        <source> g Filament </source>\
+        <target> g Filament </target>\
+      </trans-unit>\
+      <trans-unit id="job-info__time-left" datatype="html">\
+        <source> left, </source>\
+        <target> verbleibend, </target>\
+      </trans-unit>\
+      <trans-unit id="job-elapsed" datatype="html">\
+        <source>elapsed:</source>\
+        <target>abgelaufen:</target>\
+      </trans-unit>\
+      <trans-unit id="will-finish" datatype="html">\
+        <source>- will finish ~</source>\
+        <target>- beende ~</target>\
+      </trans-unit>\
+      <trans-unit id="job-g" datatype="html">\
+        <source>g</source>\
+        <target>g</target>\
+      </trans-unit>\
+      <trans-unit id="filament-used" datatype="html">\
+        <source>filament will be used</source>\
+        <target>Filament wird verwendet</target>\
+      </trans-unit>\
+      <trans-unit id="loading-info" datatype="html">\
+        <source> loading info</source>\
+        <target> lade Info</target>\
+      </trans-unit>\
+      <trans-unit id="no-job" datatype="html">\
+        <source>no job running ...</source>\
+        <target>kein Job aktiv\'85</target>\
+      </trans-unit>\
+      <trans-unit id="menu-files" datatype="html">\
+        <source>files</source>\
+        <target>Dateien</target>\
+      </trans-unit>\
+      <trans-unit id="menu-filament" datatype="html">\
+        <source>filament</source>\
+        <target>Filament</target>\
+      </trans-unit>\
+      <trans-unit id="menu-control" datatype="html">\
+        <source>control</source>\
+        <target>Steuerung</target>\
+      </trans-unit>\
+      <trans-unit id="tap-close" datatype="html">\
+        <source>tap this card to close it</source>\
+        <target>Tippe auf diese Karte, um sie zu schlie\'dfen</target>\
+      </trans-unit>\
+      <trans-unit id="control-cancel" datatype="html">\
+        <source>cancel</source>\
+        <target>Abbrechen</target>\
+      </trans-unit>\
+      <trans-unit id="control-pause" datatype="html">\
+        <source>pause</source>\
+        <target>Pause</target>\
+      </trans-unit>\
+      <trans-unit id="control-adjust" datatype="html">\
+        <source>adjust</source>\
+        <target>Anpassen</target>\
+      </trans-unit>\
+      <trans-unit id="cancel-print" datatype="html">\
+        <source>cancel print?</source>\
+        <target>Druck abbrechen?</target>\
+      </trans-unit>\
+      <trans-unit id="cancel-yes" datatype="html">\
+        <source>yes</source>\
+        <target>Ja</target>\
+      </trans-unit>\
+      <trans-unit id="cancel-no" datatype="html">\
+        <source>no</source>\
+        <target>Nein</target>\
+      </trans-unit>\
+      <trans-unit id="pause-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="print-pause" datatype="html">\
+        <source>print paused</source>\
+        <target>Druck pausiert</target>\
+      </trans-unit>\
+      <trans-unit id="print-restart" datatype="html">\
+        <source>restart</source>\
+        <target>Neustart</target>\
+      </trans-unit>\
+      <trans-unit id="print-resume" datatype="html">\
+        <source>resume</source>\
+        <target>Weiter</target>\
+      </trans-unit>\
+      <trans-unit id="print-filament" datatype="html">\
+        <source>filament</source>\
+        <target>Filament</target>\
+      </trans-unit>\
+      <trans-unit id="adjust-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="adjust-hotend" datatype="html">\
+        <source>Hotend</source>\
+        <target>D\'fcse</target>\
+      </trans-unit>\
+      <trans-unit id="adjust-heatbed" datatype="html">\
+        <source>Heatbed</source>\
+        <target>Heizbett</target>\
+      </trans-unit>\
+      <trans-unit id="adjust-fanspeed" datatype="html">\
+        <source>Fan Speed</source>\
+        <target>L\'fcftergeschwindigkeit</target>\
+      </trans-unit>\
+      <trans-unit id="adjust-speed" datatype="html">\
+        <source>Speed</source>\
+        <target>Geschwindigkeit</target>\
+      </trans-unit>\
+      <trans-unit id="offset-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="offset-save" datatype="html">\
+        <source> save </source>\
+        <target> speichern </target>\
+      </trans-unit>\
+      <trans-unit id="babystep-back" datatype="html">\
+        <source>back</source>\
+        <target>zur\'fcck</target>\
+      </trans-unit>\
+      <trans-unit id="babystep-z" datatype="html">\
+        <source>Babystep Z</source>\
+        <target>Babystep Z</target>\
+      </trans-unit>\
+      <trans-unit id="babystep-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="babystep-mm-2" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="zoffset-mm" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="zoffset-mm-2" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="zoffset-mm-3" datatype="html">\
+        <source>mm</source>\
+        <target>mm</target>\
+      </trans-unit>\
+      <trans-unit id="error-set-color" datatype="html">\
+        <source>Can't set LED color!</source>\
+        <target>LED-Farbe kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-set-output" datatype="html">\
+        <source>Can't set output!</source>\
+        <target>Ausgang kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-psu-state" datatype="html">\
+        <source>Can't change PSU State!</source>\
+        <target>Netzteilstatus kann nicht ge\'e4ndert werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-psu-provider" datatype="html">\
+        <source>No provider for PSU Control is configured.</source>\
+        <target>Es ist kein Anbieter f\'fcr PSU Control konfiguriert.</target>\
+      </trans-unit>\
+      <trans-unit id="error-send-psu-gcode" datatype="html">\
+        <source>Can't send GCode!</source>\
+        <target>GCode kann nicht gesendet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-send-smartplug-gcode" datatype="html">\
+        <source>Can't send GCode!</source>\
+        <target>GCode kann nicht gesendet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-spools" datatype="html">\
+        <source>Can't load filament spools!</source>\
+        <target>Filamentrollen k\'f6nnen nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-spool" datatype="html">\
+        <source>Can't load active spool!</source>\
+        <target>Aktive Rolle kann nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-spool-id" datatype="html">\
+        <source>Spool IDs didn't match</source>\
+        <target>Filamentrollen-IDs stimmten nicht \'fcberein</target>\
+      </trans-unit>\
+      <trans-unit id="error-change-spool" datatype="html">\
+        <source>Can't change spool. Please change spool manually in the OctoPrint UI.</source>\
+        <target>Rolle kann nicht gewechselt werden. Bitte \'e4ndere die Rolle manuell in der OctoPrint-Benutzeroberfl\'e4che.</target>\
+      </trans-unit>\
+      <trans-unit id="error-set-new-spool" datatype="html">\
+        <source>Can't set new spool!</source>\
+        <target>Kann keine neue Rolle einsetzen!</target>\
+      </trans-unit>\
+      <trans-unit id="error-set-new-spool-2" datatype="html">\
+        <source>Can't set new spool!</source>\
+        <target>Kann keine neue Rolle einsetzen!</target>\
+      </trans-unit>\
+      <trans-unit id="local" datatype="html">\
+        <source>local</source>\
+        <target>lokal</target>\
+      </trans-unit>\
+      <trans-unit id="sdcard" datatype="html">\
+        <source>sdcard</source>\
+        <target>SD-Karte</target>\
+      </trans-unit>\
+      <trans-unit id="files-error-file" datatype="html">\
+        <source>Can't load file!</source>\
+        <target>Datei kann nicht geladen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="files-error-print" datatype="html">\
+        <source>Can't start print!</source>\
+        <target>Drucken kann nicht gestartet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="files-error-delete" datatype="html">\
+        <source>Can't delete file!</source>\
+        <target>Datei kann nicht gel\'f6scht werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-start-job" datatype="html">\
+        <source>Can't start job!</source>\
+        <target>Kann den Job nicht starten!</target>\
+      </trans-unit>\
+      <trans-unit id="error-pause-job" datatype="html">\
+        <source>Can't pause job!</source>\
+        <target>Job kann nicht angehalten werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-resume-job" datatype="html">\
+        <source>Can't resume job!</source>\
+        <target>Job kann nicht wieder aufgenommen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-cancel-job" datatype="html">\
+        <source>Can't cancel job!</source>\
+        <target>Job kann nicht abgebrochen werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-restart-job" datatype="html">\
+        <source>Can't restart job!</source>\
+        <target>Job kann nicht neu gestartet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-preheat" datatype="html">\
+        <source>Can't preheat printer!</source>\
+        <target>Drucker kann nicht vorgeheizt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="printer-error-gcode" datatype="html">\
+        <source>Can't send GCode!</source>\
+        <target>GCode kann nicht gesendet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-head" datatype="html">\
+        <source>Can't move Printhead!</source>\
+        <target>Druckkopf kann nicht bewegt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-extrude" datatype="html">\
+        <source>Can't extrude Filament!</source>\
+        <target>Filament kann nicht extrudiert werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-hotend" datatype="html">\
+        <source>Can't set Hotend Temperature!</source>\
+        <target>D\'fcsen-Temperatur kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-bed" datatype="html">\
+        <source>Can't set Bed Temperature!</source>\
+        <target>Heizbetttemperatur kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-feedrate" datatype="html">\
+        <source>Can't set Feedrate!</source>\
+        <target>Feedrate kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-flowrate" datatype="html">\
+        <source>Can't set Flowrate!</source>\
+        <target>Flussrate kann nicht eingestellt werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-printer-disconnect" datatype="html">\
+        <source>Can't disconnect Printer!</source>\
+        <target>Kann Drucker nicht trennen!</target>\
+      </trans-unit>\
+      <trans-unit id="unit-h-1" datatype="html">\
+        <source>h</source>\
+        <target>h</target>\
+      </trans-unit>\
+      <trans-unit id="unit-h-2" datatype="html">\
+        <source>h</source>\
+        <target>h</target>\
+      </trans-unit>\
+      <trans-unit id="unit-h-3" datatype="html">\
+        <source>h</source>\
+        <target>h</target>\
+      </trans-unit>\
+      <trans-unit id="error-execute" datatype="html">\
+        <source>Can't execute \
+          <x id="PH" equiv-text="command"/> command!\
+        </source>\
+        <target>Kann nicht ausgef\'fchrt werden \
+          <x id="PH" equiv-text="command"/>\
+!\
+        </target>\
+      </trans-unit>\
+      <trans-unit id="error-connect" datatype="html">\
+        <source>Can't connect to printer!</source>\
+        <target>Kann keine Verbindung zum Drucker herstellen!</target>\
+      </trans-unit>\
+      <trans-unit id="settings" datatype="html">\
+        <source>settings</source>\
+        <target>Einstellungen</target>\
+      </trans-unit>\
+      <trans-unit id="settings-general" datatype="html">\
+        <source>general</source>\
+        <target>Allgemein</target>\
+      </trans-unit>\
+      <trans-unit id="settings-octodash" datatype="html">\
+        <source>octodash</source>\
+        <target>OctoDash</target>\
+      </trans-unit>\
+      <trans-unit id="settings-plugins" datatype="html">\
+        <source>plugins</source>\
+        <target>Plugins</target>\
+      </trans-unit>\
+      <trans-unit id="settings-about" datatype="html">\
+        <source>about</source>\
+        <target>\'dcber</target>\
+      </trans-unit>\
+      <trans-unit id="update-available" datatype="html">\
+        <source> update available! </source>\
+        <target> Update verf\'fcgbar! </target>\
+      </trans-unit>\
+      <trans-unit id="made-with" datatype="html">\
+        <source>made with</source>\
+        <target>erstellt mit</target>\
+      </trans-unit>\
+      <trans-unit id="by-unchartedbull" datatype="html">\
+        <source> by /u/UnchartedBull </source>\
+        <target> by /u/UnchartedBull </target>\
+      </trans-unit>\
+      <trans-unit id="settings-general-menu" datatype="html">\
+        <source>general</source>\
+        <target>Allgemein</target>\
+      </trans-unit>\
+      <trans-unit id="general-octoprint-connection" datatype="html">\
+        <source>OctoPrint Connection</source>\
+        <target>OctoPrint-Verbindung</target>\
+      </trans-unit>\
+      <trans-unit id="general-octoprint-url" datatype="html">\
+        <source>Octoprint URL</source>\
+        <target>Octoprint URL</target>\
+      </trans-unit>\
+      <trans-unit id="general-printer" datatype="html">\
+        <source>Printer</source>\
+        <target>Drucker</target>\
+      </trans-unit>\
+      <trans-unit id="general-name" datatype="html">\
+        <source>Name</source>\
+        <target>Name</target>\
+      </trans-unit>\
+      <trans-unit id="general-xyspeed" datatype="html">\
+        <source>XY-Speed (mm/s)</source>\
+        <target>XY-Geschwindigkeit (mm/s)</target>\
+      </trans-unit>\
+      <trans-unit id="general-zspeed" datatype="html">\
+        <source>Z-Speed (mm/s)</source>\
+        <target>Z-Geschwindigkeit (mm/s)</target>\
+      </trans-unit>\
+      <trans-unit id="general-default" datatype="html">\
+        <source> Default Temperatures &amp; Fan Speed </source>\
+        <target>Standardtemperaturen &amp; L\'fcftergeschwindigkeit</target>\
+      </trans-unit>\
+      <trans-unit id="default-hotend" datatype="html">\
+        <source> Hotend \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(\'b0C)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> D\'fcse </target>\
+      </trans-unit>\
+      <trans-unit id="default-heatbed" datatype="html">\
+        <source> Heatbed \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(\'b0C)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Heizbett </target>\
+      </trans-unit>\
+      <trans-unit id="default-fanspeed" datatype="html">\
+        <source> Fan Speed \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> L\'fcftergeschwindigkeit </target>\
+      </trans-unit>\
+      <trans-unit id="general-filament" datatype="html">\
+        <source>Filament</source>\
+        <target>Filament</target>\
+      </trans-unit>\
+      <trans-unit id="general-m600" datatype="html">\
+        <source>Use M600 to change Filament</source>\
+        <target>Verwende M600, um das Filament zu wechseln</target>\
+      </trans-unit>\
+      <trans-unit id="general-feedlength" datatype="html">\
+        <source> Feed Length \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Vorschubl\'e4nge </target>\
+      </trans-unit>\
+      <trans-unit id="general-purge-distance" datatype="html">\
+        <source> Purge Distance \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> S\'e4uberungsl\'e4nge </target>\
+      </trans-unit>\
+      <trans-unit id="general-feedrate" datatype="html">\
+        <source> Feed Speed \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Vorschubgeschwindigkeit </target>\
+      </trans-unit>\
+      <trans-unit id="general-feedrate-slow" datatype="html">\
+        <source> Feed Speed Slow \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Vorschubgeschwindigkeit langsam </target>\
+      </trans-unit>\
+      <trans-unit id="general-thickness" datatype="html">\
+        <source> Thickness \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Dicke </target>\
+      </trans-unit>\
+      <trans-unit id="general-density" datatype="html">\
+        <source> Density \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm\'b3)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Dichte </target>\
+      </trans-unit>\
+      <trans-unit id="general-warning" datatype="html">\
+        <source> Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your Feed Speed to high and your Feed Length to long. </source>\
+        <target> Bitte stelle diese Werte sorgf\'e4ltig ein, da sie m\'f6glicherweise Teile deines Druckers zerst\'f6ren k\'f6nnen. Stelle die Vorschubgeschwindigkeit nur nicht zu hoch und die Vorschubl\'e4nge nicht zu lang ein. </target>\
+      </trans-unit>\
+      <trans-unit id="octodash-general" datatype="html">\
+        <source>General</source>\
+        <target>Allgemein</target>\
+      </trans-unit>\
+      <trans-unit id="screen-off" datatype="html">\
+        <source>Turn screen off while sleeping</source>\
+        <target>Bildschirm im Schlaf ausschalten</target>\
+      </trans-unit>\
+      <trans-unit id="turn-on-after-sleep" datatype="html">\
+        <source>Turn on printer when exiting sleep</source>\
+        <target>Drucker beim Beenden des Ruhezustands einschalten</target>\
+      </trans-unit>\
+      <trans-unit id="default-preview" datatype="html">\
+        <source>Preview by default while printing</source>\
+        <target>Standardm\'e4\'dfig Vorschau beim Drucken</target>\
+      </trans-unit>\
+      <trans-unit id="always-circular" datatype="html">\
+        <source>Always use circular progress bar</source>\
+        <target>Verwende einen kreisf\'f6rmigen Fortschrittsbalken</target>\
+      </trans-unit>\
+      <trans-unit id="invert-axis-control" datatype="html">\
+        <source>Invert Axis Control</source>\
+        <target>Achsensteuerung invertieren</target>\
+      </trans-unit>\
+      <trans-unit id="octodash-custom" datatype="html">\
+        <source>Custom Actions</source>\
+        <target>Benutzerdefinierte Aktionen</target>\
+      </trans-unit>\
+      <trans-unit id="octodash-gcode" datatype="html">\
+        <source>GCode / Action</source>\
+        <target>GCode / Aktion</target>\
+      </trans-unit>\
+      <trans-unit id="action-icon" datatype="html">\
+        <source>Icon</source>\
+        <target>Symbol</target>\
+      </trans-unit>\
+      <trans-unit id="action-color" datatype="html">\
+        <source>Color</source>\
+        <target>Farbe</target>\
+      </trans-unit>\
+      <trans-unit id="action-confirm" datatype="html">\
+        <source>Confirm</source>\
+        <target>Best\'e4tigen</target>\
+      </trans-unit>\
+      <trans-unit id="action-home" datatype="html">\
+        <source>Return to Home</source>\
+        <target>Hauptseite</target>\
+      </trans-unit>\
+      <trans-unit id="settings-display-layer-progress" datatype="html">\
+        <source>Display Layer Progress</source>\
+        <target>Layer-Fortschritt anzeigen</target>\
+      </trans-unit>\
+      <trans-unit id="settings-display-layer-progress-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-enclosure" datatype="html">\
+        <source>Enclosure</source>\
+        <target>Geh\'e4use</target>\
+      </trans-unit>\
+      <trans-unit id="settings-enclosure-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-ambiant-sensor" datatype="html">\
+        <source> Ambient Sensor \
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(ID)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </source>\
+        <target> Umgebungssensor\
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>\
+(ID)\
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>\
+        </target>\
+      </trans-unit>\
+      <trans-unit id="settings-filament-manager" datatype="html">\
+        <source>Filament Manager</source>\
+        <target>Filament Manager</target>\
+      </trans-unit>\
+      <trans-unit id="settings-filament-manager-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-preheat-button" datatype="html">\
+        <source>Preheat Button</source>\
+        <target>Vorheiztaste</target>\
+      </trans-unit>\
+      <trans-unit id="settings-preheat-button-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-print-time-genius" datatype="html">\
+        <source>Print Time Genius</source>\
+        <target>Print Time Genius</target>\
+      </trans-unit>\
+      <trans-unit id="settings-print-time-genius-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-psu-control" datatype="html">\
+        <source>PSU Control</source>\
+        <target>Netzteilsteuerung</target>\
+      </trans-unit>\
+      <trans-unit id="settings-psu-control-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-tplink-smartplug" datatype="html">\
+        <source>TPLink-SmartPlug</source>\
+        <target>TPLink-SmartPlug</target>\
+      </trans-unit>\
+      <trans-unit id="settings-tplink-smartplug-enabled" datatype="html">\
+        <source>enabled</source>\
+        <target>aktiviert</target>\
+      </trans-unit>\
+      <trans-unit id="settings-tplink-smartplug-ip" datatype="html">\
+        <source>SmartPlug IP</source>\
+        <target>SmartPlug IP</target>\
+      </trans-unit>\
+      <trans-unit id="about" datatype="html">\
+        <source>about</source>\
+        <target>\'fcber</target>\
+      </trans-unit>\
+      <trans-unit id="about-no-update" datatype="html">\
+        <source> no update available </source>\
+        <target> kein Update verf\'fcgbar </target>\
+      </trans-unit>\
+      <trans-unit id="about-install-v" datatype="html">\
+        <source> install v\
+          <x id="INTERPOLATION" equiv-text="\{\{ service.latestVersion \}\}"/>\
+        </source>\
+        <target>installieren v\
+          <x id="INTERPOLATION" equiv-text="\{\{ service.latestVersion \}\}"/>\
+        </target>\
+      </trans-unit>\
+      <trans-unit id="licence" datatype="html">\
+        <source>License</source>\
+        <target>Lizenz</target>\
+      </trans-unit>\
+      <trans-unit id="special-thanks" datatype="html">\
+        <source>Special Thanks</source>\
+        <target>Besonderer Dank</target>\
+      </trans-unit>\
+      <trans-unit id="special-thanks-message" datatype="html">\
+        <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>\
+        <target> Besonderer Dank an /u / Slateclean f\'fcr die Bereitstellung von Touchscreens, damit die Entwicklung fortgesetzt werden kann! </target>\
+      </trans-unit>\
+      <trans-unit id="top-left" datatype="html">\
+        <source>Top Left</source>\
+        <target>Oben links</target>\
+      </trans-unit>\
+      <trans-unit id="top-right" datatype="html">\
+        <source>Top Right</source>\
+        <target>Oben rechts</target>\
+      </trans-unit>\
+      <trans-unit id="middle-left" datatype="html">\
+        <source>Middle Left</source>\
+        <target>Mitte links</target>\
+      </trans-unit>\
+      <trans-unit id="middle-right" datatype="html">\
+        <source>Middle Right</source>\
+        <target>Mitte rechts</target>\
+      </trans-unit>\
+      <trans-unit id="bottom-left" datatype="html">\
+        <source>Bottom Left</source>\
+        <target>Unten links</target>\
+      </trans-unit>\
+      <trans-unit id="bottom-right" datatype="html">\
+        <source>Bottom Right</source>\
+        <target>Unten rechts</target>\
+      </trans-unit>\
+      <trans-unit id="conf-unsaved" datatype="html">\
+        <source>Configuration not saved!</source>\
+        <target>Konfiguration nicht gespeichert!</target>\
+      </trans-unit>\
+      <trans-unit id="conf-unsaved-message" datatype="html">\
+        <source>You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>\
+        <target>Sie haben Ihre Konfiguration noch nicht gespeichert, daher werden Ihre \'c4nderungen nicht \'fcbernommen. Klicken Sie erneut auf Schlie\'dfen, wenn Sie Ihre \'c4nderungen verwerfen m\'f6chten!</target>\
+      </trans-unit>\
+      <trans-unit id="error-invalid-config" datatype="html">\
+        <source>Can't save invalid config</source>\
+        <target>Ung\'fcltige Konfiguration kann nicht gespeichert werden</target>\
+      </trans-unit>\
+      <trans-unit id="octoprint-sleeping" datatype="html">\
+        <source>Shhh! OctoDash is sleeping.</source>\
+        <target>Schhh! OctoDash schl\'e4ft.</target>\
+      </trans-unit>\
+      <trans-unit id="octoprint-sleeping-message" datatype="html">\
+        <source>Press on the screen to wake me up again.</source>\
+        <target>Dr\'fccke auf den Bildschirm, um mich wieder aufzuwecken.</target>\
+      </trans-unit>\
+      <trans-unit id="sleeping" datatype="html">\
+        <source> sleeping ... </source>\
+        <target> schlafe... </target>\
+      </trans-unit>\
+      <trans-unit id="connecting" datatype="html">\
+        <source>connecting</source>\
+        <target>verbinden</target>\
+      </trans-unit>\
+      <trans-unit id="connection-failed" datatype="html">\
+        <source> Connection can't be established. Press screen to try again. </source>\
+        <target> Verbindung kann nicht hergestellt werden. Dr\'fccke auf den Bildschirm, um es erneut zu versuchen. </target>\
+      </trans-unit>\
+      <trans-unit id="actions" datatype="html">\
+        <source> Actions </source>\
+        <target> Aktionen </target>\
+      </trans-unit>\
+      <trans-unit id="downloading-update" datatype="html">\
+        <source>downloading update</source>\
+        <target>Update wird heruntergeladen</target>\
+      </trans-unit>\
+      <trans-unit id="mbs" datatype="html">\
+        <source> MB/s\'a0 </source>\
+        <target> MB/s\'a0 </target>\
+      </trans-unit>\
+      <trans-unit id="update-mb" datatype="html">\
+        <source>MB</source>\
+        <target>MB</target>\
+      </trans-unit>\
+      <trans-unit id="update-minutes-left" datatype="html">\
+        <source>minutes left</source>\
+        <target>Minuten \'fcbrig</target>\
+      </trans-unit>\
+      <trans-unit id="installing-update" datatype="html">\
+        <source>installing update</source>\
+        <target>Update installieren</target>\
+      </trans-unit>\
+      <trans-unit id="update-wait" datatype="html">\
+        <source>this might take a while</source>\
+        <target>das kann dauern</target>\
+      </trans-unit>\
+      <trans-unit id="update-confirmation" datatype="html">\
+        <source>v\
+          <x id="INTERPOLATION" equiv-text="\{\{ service.latestVersion \}\}"/> installed\
+        </source>\
+        <target>v\
+          <x id="INTERPOLATION" equiv-text="\{\{ service.latestVersion \}\}"/>\
+ Installiert\
+        </target>\
+      </trans-unit>\
+      <trans-unit id="update-reboot" datatype="html">\
+        <source>would you like to reboot now to activate the latest version?</source>\
+        <target>M\'f6chtest Du jetzt neu starten, um die neueste Version zu aktivieren?</target>\
+      </trans-unit>\
+      <trans-unit id="reboot-no" datatype="html">\
+        <source>no</source>\
+        <target>Nein</target>\
+      </trans-unit>\
+      <trans-unit id="reboot-yes" datatype="html">\
+        <source>yes</source>\
+        <target>Ja</target>\
+      </trans-unit>\
+      <trans-unit id="error-update" datatype="html">\
+        <source>Can't initiate update!</source>\
+        <target>Update kann nicht gestartet werden!</target>\
+      </trans-unit>\
+      <trans-unit id="error-update-message" datatype="html">\
+        <source>Some information is missing, please try again in an hour or update manually.</source>\
+        <target>Einige Informationen fehlen. Bitte versuche es in einer Stunde erneut oder aktualisiere manuell..</target>\
+      </trans-unit>\
+      <trans-unit id="error-install-update" datatype="html">\
+        <source>Can't install update!</source>\
+        <target>Update kann nicht installiert werden!</target>\
+      </trans-unit>\
+    </body>\
+  </file>\
+</xliff>}
