@@ -2,10 +2,9 @@ name: Manual Build with Artifacts
 
 on:
   workflow_dispatch:
-  push: 
+  push:
     branches:
     - manual_build
-    
 jobs:
   build:
     runs-on: ubuntu-latest
