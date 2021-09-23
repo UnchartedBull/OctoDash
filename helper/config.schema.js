@@ -113,6 +113,7 @@ const configSchema = {
         'displayLayerProgress',
         'enclosure',
         'filamentManager',
+        'spoolManager',
         'preheatButton',
         'printTimeGenius',
         'psuControl',
@@ -162,6 +163,17 @@ const configSchema = {
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/filamentManager/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
+        spoolManager: {
+          $id: '#/properties/plugins/properties/spoolManager',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/spoolManager/properties/enabled',
               type: 'boolean',
             },
           },
@@ -269,6 +281,7 @@ const configSchema = {
         'previewProgressCircle',
         'screenSleepCommand',
         'screenWakeupCommand',
+        'showExtruderControl',
       ],
       properties: {
         customActions: {
@@ -374,6 +387,10 @@ const configSchema = {
           $id: '#/properties/octodash/properties/screenWakeupCommand',
           type: 'string',
           pattern: '^(.*)$',
+        },
+        showExtruderControl: {
+          $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
         },
       },
     },

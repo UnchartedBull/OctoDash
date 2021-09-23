@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 
+import { ElectronService } from '../../../electron.service';
 import { URLSplit } from '../../config.model';
 import { ConfigService } from '../../config.service';
 
@@ -25,7 +25,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
 
   ngOnInit(): void {
-    this.electronService.ipcRenderer.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
+    this.electronService.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
       this.zone.run(() => {
         this.octoprintNodes = nodes;
       });
@@ -35,12 +35,12 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.electronService.ipcRenderer.send('stopDiscover');
+    this.electronService.send('stopDiscover');
   }
 
   private discoverOctoprintInstances(): void {
     this.octoprintNodes = null;
-    this.electronService.ipcRenderer.send('discover');
+    this.electronService.send('discover');
     setTimeout(() => {
       const searching = document.querySelector('.discover-octoprint__searching');
       if (searching) {

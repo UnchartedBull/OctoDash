@@ -44,7 +44,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    if (this.configService.isFilamentManagerEnabled()) {
+    if (this.configService.isFilamentManagerUsed()) {
       this.setPage(0);
     } else {
       this.setPage(1);
@@ -66,7 +66,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   public decreasePage(): void {
     if (this.page === 0) {
       this.router.navigate(['/main-screen']);
-    } else if (this.page === 1 && this.configService.isFilamentManagerEnabled()) {
+    } else if (this.page === 1 && this.configService.isFilamentManagerUsed()) {
       this.setPage(0);
     } else if (this.page === 1) {
       this.router.navigate(['/main-screen']);
