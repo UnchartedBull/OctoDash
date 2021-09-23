@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ConfigService } from '../config/config.service';
 import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
@@ -13,8 +14,13 @@ export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
+  public showExtruder = this.configService.getShowExtruderControl();
 
-  public constructor(private printerService: PrinterService, private notificationService: NotificationService) {
+  public constructor(
+    private printerService: PrinterService,
+    private configService: ConfigService,
+    private notificationService: NotificationService,
+  ) {
     this.printerService.getActiveProfile().subscribe(
       (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       err => {
@@ -28,6 +34,14 @@ export class ControlComponent {
 
   public setDistance(distance: number): void {
     this.jogDistance = distance;
+  }
+
+  public extrude(direction: '+' | '-'): void {
+    if (this.printerProfile.axes['e'].inverted == true) {
+      direction = direction === '+' ? '-' : '+';
+    }
+    const distance = Number(direction + this.jogDistance);
+    this.printerService.extrude(distance, this.configService.getFeedSpeed());
   }
 
   public moveAxis(axis: string, direction: '+' | '-'): void {

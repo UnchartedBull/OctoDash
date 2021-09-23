@@ -8,7 +8,6 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import player, { LottiePlayer } from 'lottie-web';
-import { NgxElectronModule } from 'ngx-electron';
 import { LottieCacheModule, LottieModule } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
@@ -49,6 +48,7 @@ import { EnclosureOctoprintService } from './services/enclosure/enclosure.octopr
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './services/filament/filament-plugin.service';
+import { SpoolManagerOctoprintService } from './services/filament/spool-manager.octoprint.service';
 import { FilesOctoprintService } from './services/files/files.octoprint.service';
 import { FilesService } from './services/files/files.service';
 import { JobOctoprintService } from './services/job/job.octoprint.service';
@@ -112,7 +112,6 @@ export function playerFactory(): LottiePlayer {
     FormsModule,
     HttpClientModule,
     MatRippleModule,
-    NgxElectronModule,
     RoundProgressModule,
     [LottieModule.forRoot({ player: playerFactory }), LottieCacheModule.forRoot()],
   ],
@@ -194,6 +193,9 @@ export function playerFactory(): LottiePlayer {
         provide: FilamentPluginService,
         deps: [ConfigService, HttpClient],
         useFactory: (configService: ConfigService, httpClient: HttpClient) => {
+          if (configService.isSpoolManagerPluginEnabled()) {
+            return new SpoolManagerOctoprintService(configService, httpClient);
+          }
           return new FilamentManagerOctoprintService(configService, httpClient);
         },
       },

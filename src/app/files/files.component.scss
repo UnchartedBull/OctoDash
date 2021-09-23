@@ -75,6 +75,7 @@
     height: 11vh;
     line-height: 11vh;
     margin-bottom: 2vh;
+    border-left: .2em solid transparent;
 
     &:first-of-type {
       margin-top: 3.5vh;
@@ -83,26 +84,17 @@
     &:last-of-type {
       margin-bottom: 5.5vh;
     }
-  }
-  &__icon_wrapper {
-    float: left;
-    line-height: 1;
 
-    & fa-icon {
-        position: absolute;
-        font-size: 2vw;
+    &--success {
+      border-left-color: #44bd32;
     }
 
-    &.files__object_success fa-icon {
-      color: #44bd32;
+    &--failed {
+      border-left-color: #e84118;
     }
 
-    &.files__object_failed fa-icon {
-      color: #e84118;
-    }
-
-    &.files__object_unknown fa-icon {
-      color: currentColor;
+    &--unknown {
+      border-left-color: #f5f6fa;
     }
   }
 
@@ -118,11 +110,8 @@
   }
 
   &__icon {
-    position: absolute;
-    top: 0;
-    left: 0;
     height: 9vh;
-    margin: 1vh 2vw 0;
+    margin: 1vh 1.2vw 0;
     display: block;
     float: left;
   }

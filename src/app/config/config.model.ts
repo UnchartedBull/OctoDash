@@ -52,6 +52,7 @@ interface Plugins {
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
+  spoolManager: Plugin;
   preheatButton: Plugin;
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
@@ -102,6 +103,7 @@ interface OctoDash {
   previewProgressCircle: boolean;
   screenSleepCommand: string;
   screenWakeupCommand: string;
+  showExtruderControl: boolean;
 }
 
 export interface CustomAction {

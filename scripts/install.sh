@@ -682,8 +682,18 @@ IFS='/' read -ra version <<< "$releaseURL"
 echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
-sudo apt -qq update
-sudo apt -qq install $dependencies -y
+{
+  sudo apt -qq update
+  sudo apt -qq install $dependencies -y
+} || {
+  echo ""
+  echo "Couldn't install dependenices!"
+  echo "Seems like there is something wrong with the package manager 'apt'"
+  echo ""
+  echo "If the error is similar to: 'E: Repository 'http://raspbian.raspberrypi.org/raspbian buster InRelease' changed its 'Suite' value from 'stable' to 'oldstable''"
+  echo "you can run 'sudo apt update --allow-releaseinfo-change' and then execute the OctoDash installation command again"
+  exit -1
+}
 
 if [ -d "/home/pi/OctoPrint/venv" ]; then
     DIRECTORY="/home/pi/OctoPrint/venv"
@@ -703,7 +713,7 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
+  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
   echo "Installing Plugins..."
 
@@ -715,6 +725,9 @@ if [ $DIRECTORY != "-" ]; then
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Spool Manager" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-SpoolManager/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"

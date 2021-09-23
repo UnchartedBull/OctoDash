@@ -1,7 +1,7 @@
 import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
+import { ElectronService } from '../electron.service';
 import { UpdateDownloadProgress, UpdateError } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
@@ -49,7 +49,7 @@ export class UpdateComponent implements OnInit {
   }
 
   private setupListeners(): void {
-    this.electronService.ipcRenderer.on('updateError', (_, updateError: UpdateError): void => {
+    this.electronService.on('updateError', (_, updateError: UpdateError): void => {
       this.notificationService.setError(
         $localize`:@@error-install-update:Can't install update!`,
         updateError.error.message,
@@ -57,16 +57,13 @@ export class UpdateComponent implements OnInit {
       this.closeUpdateWindow();
     });
 
-    this.electronService.ipcRenderer.on(
-      'updateDownloadProgress',
-      (_, updateDownloadProgress: UpdateDownloadProgress): void => {
-        this.zone.run(() => {
-          this.updateProgress = updateDownloadProgress;
-        });
-      },
-    );
+    this.electronService.on('updateDownloadProgress', (_, updateDownloadProgress: UpdateDownloadProgress): void => {
+      this.zone.run(() => {
+        this.updateProgress = updateDownloadProgress;
+      });
+    });
 
-    this.electronService.ipcRenderer.on('updateDownloadFinished', (): void => {
+    this.electronService.on('updateDownloadFinished', (): void => {
       this.zone.run(() => {
         this.page = 2;
         setTimeout(() => {
@@ -79,7 +76,7 @@ export class UpdateComponent implements OnInit {
       });
     });
 
-    this.electronService.ipcRenderer.on('updateInstalled', (): void => {
+    this.electronService.on('updateInstalled', (): void => {
       this.zone.run(() => {
         this.page = 3;
       });
@@ -93,7 +90,7 @@ export class UpdateComponent implements OnInit {
   }
 
   private update(assetsURL: string): void {
-    this.electronService.ipcRenderer.send('update', {
+    this.electronService.send('update', {
       assetsURL: assetsURL,
     });
   }
