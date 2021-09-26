@@ -177,6 +177,10 @@ export class ConfigService {
     return this.config.plugins.psuControl.enabled;
   }
 
+  public useOphomControl(): boolean {
+    return this.config.plugins.ophom.enabled;
+  }
+
   public useTpLinkSmartPlug(): boolean {
     return this.config.plugins.tpLinkSmartPlug.enabled;
   }

@@ -326,6 +326,7 @@
             [ngClass]="{
               'settings__checkbox-container-disabled': !(
                 config.plugins.psuControl.enabled ||
+                config.plugins.ophom.enabled ||
                 config.plugins.tpLinkSmartPlug.enabled ||
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled
@@ -339,6 +340,7 @@
                 [ngClass]="{
                   'settings__checkbox-checked-disabled': !(
                     config.plugins.psuControl.enabled ||
+                    config.plugins.ophomControl.enabled ||
                     config.plugins.tpLinkSmartPlug.enabled ||
                     config.plugins.tasmota.enabled ||
                     config.plugins.tasmotaMqtt.enabled
@@ -580,6 +582,16 @@
               <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-psu-control-enabled">enabled</span>
+          </div>
+          <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled"
+          >
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.ophom.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@settings-ophom-control-enabled">enabled</span>
           </div>
           <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
           <div

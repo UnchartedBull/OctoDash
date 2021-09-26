@@ -56,6 +56,7 @@ interface Plugins {
   preheatButton: Plugin;
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
+  ophom: PSUControlPlugin,
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
   tasmota: TasmotaPlugin;
   tasmotaMqtt: TasmotaMqttPlugin;
