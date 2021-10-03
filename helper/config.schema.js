@@ -117,6 +117,7 @@ const configSchema = {
         'preheatButton',
         'printTimeGenius',
         'psuControl',
+        'ophom', 
         'tpLinkSmartPlug',
         'tasmota',
         'tasmotaMqtt',
@@ -207,6 +208,17 @@ const configSchema = {
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/psuControl/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
+        ophom: {
+          $id: '#/properties/plugins/properties/ophom',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/ophom/properties/enabled',
               type: 'boolean',
             },
           },
