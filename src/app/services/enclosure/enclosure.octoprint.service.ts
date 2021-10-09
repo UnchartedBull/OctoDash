@@ -11,6 +11,7 @@ import {
   EnclosurePluginAPI,
   EnclosurePWMBody,
   PSUControlCommand,
+  OphomPlugStatus,
   TasmotaCommand,
   TasmotaMqttCommand,
   TPLinkCommand,
@@ -111,6 +112,8 @@ export class EnclosureOctoprintService implements EnclosureService {
   public setPSUState(state: PSUState): void {
     if (this.configService.usePSUControl()) {
       this.setPSUStatePSUControl(state);
+    } else if (this.configService.useOphomControl()) {
+      this.setPSUStateOphomControl(state);
     } else if (this.configService.useTpLinkSmartPlug()) {
       this.setPSUStateTPLink(state);
     } else if (this.configService.useTasmota()) {
@@ -123,6 +126,7 @@ export class EnclosureOctoprintService implements EnclosureService {
         $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
       );
     }
+    this.currentPSUState = state;
   }
 
   private setPSUStatePSUControl(state: PSUState) {
@@ -132,6 +136,39 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
+        ),
+      )
+      .subscribe();
+  }
+
+  private setPSUStateOphomControl(state: PSUState) {
+    this.http
+      .get(this.configService.getApiURL('plugin/ophom?action=checkplugstatus'), this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error =>
+          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
+        ),
+        map((data: OphomPlugStatus) => {
+          if (data.reponse == 1) {
+            if (state == PSUState.OFF){
+               this.toggleOphom();
+            }
+          } else {
+            if (state == PSUState.ON){
+              this.toggleOphom();
+            }
+          }
+        }),
+      )
+      .subscribe();
+  }
+
+  private toggleOphom() {
+    this.http
+      .get(this.configService.getApiURL('plugin/ophom?action=toggle'), this.configService.getHTTPHeaders())
       .pipe(
         catchError(error =>
           this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),

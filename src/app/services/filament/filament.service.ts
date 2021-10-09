@@ -17,7 +17,7 @@ export class FilamentService {
     private configService: ConfigService,
     private filamentPluginService: FilamentPluginService,
   ) {
-    if (this.configService.isFilamentManagerEnabled()) {
+    if (this.configService.isFilamentManagerUsed()) {
       this.loadSpools();
     }
   }

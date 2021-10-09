@@ -55,8 +55,12 @@ export class FilesComponent {
         next: (directory: Directory) => {
           this.directory = directory;
           const mergedDirectory = _.concat(directory.files, directory.folders);
-          if (folderPath === '/' && !(mergedDirectory[0].name === 'local' && mergedDirectory[1].name == 'sdcard')) {
-            this.currentFolder = mergedDirectory[0].path.startsWith('/local') ? '/local' : '/sdcard';
+          if (
+            folderPath === '/' &&
+            mergedDirectory.length > 0 &&
+            !(mergedDirectory[0]?.name === 'local' && mergedDirectory[1]?.name == 'sdcard')
+          ) {
+            this.currentFolder = mergedDirectory[0]?.path.startsWith('/sdcard') ? '/sdcard' : '/local';
             this.homeFolder = this.currentFolder;
           } else {
             this.currentFolder = folderPath;

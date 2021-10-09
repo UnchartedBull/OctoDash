@@ -60,6 +60,15 @@ export class FilesOctoprintService implements FilesService {
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
+                      successful:
+                        fileOrFolder.prints != null
+                          ? fileOrFolder.prints.last.success
+                            ? 'files__object--success'
+                            : 'files__object--failed'
+                          : 'files__object--unknown',
+                      thumbnail: fileOrFolder.thumbnail
+                        ? this.configService.getApiURL(fileOrFolder.thumbnail, false)
+                        : 'assets/object.svg',
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),

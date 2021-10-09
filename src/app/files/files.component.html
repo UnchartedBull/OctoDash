@@ -28,65 +28,73 @@
 </div>
 
 <div class="files" *ngIf="loading === 0">
-  <div *ngIf="!directory" class="files__error">can't load files ...</div>
+  <div
+    *ngIf="!directory || (directory.files?.length === 0 && directory.folders?.length === 0); else fileList"
+    class="files__error"
+  >
+    can't load files ...
+  </div>
 
-  <div *ngIf="directory">
-    <div *ngIf="currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
+  <ng-template #fileList>
+    <div>
+      <div *ngIf="currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
+        <div
+          (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
+          matRipple
+          [matRippleUnbounded]="false"
+        >
+          <img src="assets/folder.svg" class="files__icon" />
+          <span class="files__name">..</span>
+        </div>
+      </div>
+
       <div
-        (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
+        (click)="openFolder(folder.path)"
         matRipple
         [matRippleUnbounded]="false"
+        *ngFor="let folder of directory.folders"
+        class="files__object"
       >
         <img src="assets/folder.svg" class="files__icon" />
-        <span class="files__name">..</span>
+        <div class="files__info">
+          <span class="files__info-value">
+            {{ folder.size }}
+            <span class="files__info-unit" *ngIf="folder.size !== undefined" i18n="@@files-mb-1">mb</span>
+          </span>
+        </div>
+        <span class="files__name">
+          {{ folder.name }}
+        </span>
       </div>
-    </div>
 
-    <div
-      (click)="openFolder(folder.path)"
-      matRipple
-      [matRippleUnbounded]="false"
-      *ngFor="let folder of directory.folders"
-      class="files__object"
-    >
-      <img src="assets/folder.svg" class="files__icon" />
-      <div class="files__info">
-        <span class="files__info-value">
-          {{ folder.size }}
-          <span class="files__info-unit" *ngIf="folder.size !== undefined" i18n="@@files-mb-1">mb</span>
+      <div
+        *ngFor="let file of directory.files"
+        (click)="openDetails(file.path)"
+        (press)="loadFile(file.path)"
+        matRipple
+        [matRippleUnbounded]="false"
+        class="files__object"
+        [ngClass]="[file.successful]"
+      >
+        <img [src]="file.thumbnail" class="files__icon" />
+        <div class="files__info">
+          <span class="files__info-value">
+            {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
+          </span>
+          <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
+            {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
+          </span>
+          <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
+            {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
+          </span>
+        </div>
+        <span class="files__name">
+          {{ file.name }}
         </span>
       </div>
-      <span class="files__name">
-        {{ folder.name }}
-      </span>
     </div>
-
-    <div
-      *ngFor="let file of directory.files"
-      (click)="openDetails(file.path)"
-      (press)="loadFile(file.path)"
-      matRipple
-      [matRippleUnbounded]="false"
-      class="files__object"
-    >
-      <img src="assets/object.svg" class="files__icon" />
-      <div class="files__info">
-        <span class="files__info-value">
-          {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
-        </span>
-        <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
-          {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
-        </span>
-        <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
-          {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
-        </span>
-      </div>
-      <span class="files__name">
-        {{ file.name }}
-      </span>
-    </div>
-  </div>
-  <div class="scroll__thumb-inactive" *ngIf="directory"></div>
+    <div class="scroll__thumb-inactive"></div>
+  </ng-template>
 </div>
 
 <div class="file" id="fileDetailView" (click)="closeDetails()">

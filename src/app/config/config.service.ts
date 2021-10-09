@@ -1,8 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import _ from 'lodash-es';
-import { ElectronService } from 'ngx-electron';
 
+import { ElectronService } from '../electron.service';
 import { NotificationService } from '../notification/notification.service';
 import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
 
@@ -23,23 +23,23 @@ export class ConfigService {
     private electronService: ElectronService,
     private zone: NgZone,
   ) {
-    this.electronService.ipcRenderer.addListener('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.ipcRenderer.addListener('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.ipcRenderer.addListener('configError', (_, error: string) => {
+    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
+    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
+    this.electronService.on('configError', (_, error: string) => {
       this.notificationService.setError(
         error,
         $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
       );
     });
 
-    this.electronService.ipcRenderer.addListener('configPass', () => {
+    this.electronService.on('configPass', () => {
       this.zone.run(() => {
         this.valid = true;
         this.generateHttpHeaders();
         this.initialized = true;
       });
     });
-    this.electronService.ipcRenderer.addListener('configFail', (_, errors) => {
+    this.electronService.on('configFail', (_, errors) => {
       this.zone.run(() => {
         this.valid = false;
         this.errors = errors;
@@ -48,12 +48,12 @@ export class ConfigService {
       });
     });
 
-    this.electronService.ipcRenderer.send('readConfig');
+    this.electronService.send('readConfig');
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.electronService.ipcRenderer.send('checkConfig', config);
+    this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -80,7 +80,7 @@ export class ConfigService {
   }
 
   public saveConfig(config: Config): void {
-    this.electronService.ipcRenderer.send('saveConfig', config);
+    this.electronService.send('saveConfig', config);
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -177,6 +177,10 @@ export class ConfigService {
     return this.config.plugins.psuControl.enabled;
   }
 
+  public useOphomControl(): boolean {
+    return this.config.plugins.ophom.enabled;
+  }
+
   public useTpLinkSmartPlug(): boolean {
     return this.config.plugins.tpLinkSmartPlug.enabled;
   }
@@ -245,8 +249,12 @@ export class ConfigService {
     return this.config.plugins.preheatButton.enabled;
   }
 
-  public isFilamentManagerEnabled(): boolean {
-    return this.config.plugins.filamentManager.enabled;
+  public isFilamentManagerUsed(): boolean {
+    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+  }
+
+  public isSpoolManagerPluginEnabled(): boolean {
+    return this.config.plugins.spoolManager.enabled;
   }
 
   public getFeedLength(): number {
@@ -295,6 +303,10 @@ export class ConfigService {
 
   public getScreenWakeupCommand(): string {
     return this.config.octodash.screenWakeupCommand;
+  }
+
+  public getShowExtruderControl(): boolean {
+    return this.config.octodash.showExtruderControl;
   }
 
   public isXAxisInverted(): boolean {

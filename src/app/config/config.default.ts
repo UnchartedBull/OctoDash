@@ -39,6 +39,9 @@ export const defaultConfig: Config = {
     filamentManager: {
       enabled: true,
     },
+    spoolManager: {
+      enabled: false,
+    },
     preheatButton: {
       enabled: true,
     },
@@ -46,6 +49,10 @@ export const defaultConfig: Config = {
       enabled: true,
     },
     psuControl: {
+      enabled: false,
+      turnOnPSUWhenExitingSleep: false,
+    },
+    ophom: {
       enabled: false,
       turnOnPSUWhenExitingSleep: false,
     },
@@ -126,5 +133,6 @@ export const defaultConfig: Config = {
     previewProgressCircle: false,
     screenSleepCommand: 'xset dpms force standby',
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
+    showExtruderControl: true,
   },
 };

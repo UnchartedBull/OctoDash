@@ -113,9 +113,11 @@ const configSchema = {
         'displayLayerProgress',
         'enclosure',
         'filamentManager',
+        'spoolManager',
         'preheatButton',
         'printTimeGenius',
         'psuControl',
+        'ophom', 
         'tpLinkSmartPlug',
         'tasmota',
         'tasmotaMqtt',
@@ -166,6 +168,17 @@ const configSchema = {
             },
           },
         },
+        spoolManager: {
+          $id: '#/properties/plugins/properties/spoolManager',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/spoolManager/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
         preheatButton: {
           $id: '#/properties/plugins/properties/preheatButton',
           type: 'object',
@@ -195,6 +208,17 @@ const configSchema = {
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/psuControl/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
+        ophom: {
+          $id: '#/properties/plugins/properties/ophom',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/ophom/properties/enabled',
               type: 'boolean',
             },
           },
@@ -269,6 +293,7 @@ const configSchema = {
         'previewProgressCircle',
         'screenSleepCommand',
         'screenWakeupCommand',
+        'showExtruderControl',
       ],
       properties: {
         customActions: {
@@ -374,6 +399,10 @@ const configSchema = {
           $id: '#/properties/octodash/properties/screenWakeupCommand',
           type: 'string',
           pattern: '^(.*)$',
+        },
+        showExtruderControl: {
+          $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
         },
       },
     },

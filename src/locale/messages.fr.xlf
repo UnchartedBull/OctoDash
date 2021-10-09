@@ -176,6 +176,10 @@
         <source> PSU Control </source>
         <target> PSU Control </target>
       </trans-unit>
+      <trans-unit id="plugin-ophom" datatype="html">
+        <source> Ophom (Phillips HUE) </source>
+        <target> Ophom (Phillips HUE) </target>
+      </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source> TPLink SmartPlug </source>
         <target> TPLink SmartPlug </target>
@@ -1060,6 +1064,14 @@
         <target>Contrôle PSU</target>
       </trans-unit>
       <trans-unit id="settings-psu-control-enabled" datatype="html">
+        <source>enabled</source>
+        <target>activé</target>
+      </trans-unit>
+      <trans-unit id="settings-ophom-control" datatype="html">
+        <source>Ophom (Phillips HUE)</source>
+        <target>Contrôle (Phillips HUE)</target>
+      </trans-unit>
+      <trans-unit id="settings-ophom-control-enabled" datatype="html">
         <source>enabled</source>
         <target>activé</target>
       </trans-unit>
