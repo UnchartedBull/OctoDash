@@ -38,9 +38,9 @@ export class OctoPrintSocketService implements SocketService {
     private conversionService: ConversionService,
     private http: HttpClient,
   ) {
-    this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
+    this.printerStatusSubject = new ReplaySubject<PrinterStatus>(1);
     this.jobStatusSubject = new Subject<JobStatus>();
-    this.eventSubject = new ReplaySubject<PrinterEvent>();
+    this.eventSubject = new ReplaySubject<PrinterEvent>(1);
   }
 
   //==== SETUP & AUTH ====//
@@ -70,6 +70,7 @@ export class OctoPrintSocketService implements SocketService {
       },
       fanSpeed: this.configService.isDisplayLayerProgressEnabled() ? 0 : -1,
     } as PrinterStatus;
+    this.printerStatusSubject.next(this.printerStatus);
   }
 
   private initJobStatus(): void {
@@ -90,17 +91,17 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private tryConnect(resolve: () => void): void {
-    this.systemService.getSessionKey().subscribe(
-      socketAuth => {
+    this.systemService.getSessionKey().subscribe({
+      next: (socketAuth: SocketAuth) => {
         this.connectSocket();
         this.setupSocket(resolve);
         this.authenticateSocket(socketAuth);
       },
-      () => {
+      error: () => {
         setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
         this.fastInterval += 1;
       },
-    );
+    });
   }
 
   private connectSocket() {
@@ -118,8 +119,8 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private setupSocket(resolve: () => void) {
-    this.socket.subscribe(
-      message => {
+    this.socket.subscribe({
+      next: message => {
         clearTimeout(this.socketDeadTimeout);
         this.socketDeadTimeout = setTimeout(() => {
           this.printerStatus.status = PrinterState.socketDead;
@@ -146,7 +147,7 @@ export class OctoPrintSocketService implements SocketService {
           this.checkPrinterConnection();
         }
       },
-      error => {
+      error: error => {
         if (error['type'] === 'close') {
           this.printerStatus.status = PrinterState.reconnecting;
           this.printerStatusSubject.next(this.printerStatus);
@@ -155,7 +156,7 @@ export class OctoPrintSocketService implements SocketService {
           console.error(error);
         }
       },
-    );
+    });
   }
 
   private checkPrinterConnection() {

@@ -19,12 +19,14 @@ export class PersonalizationComponent implements OnInit {
   constructor(private personalizationService: PersonalizationService) {}
 
   ngOnInit(): void {
-    this.personalizationService.getActivePrinterProfileName(this.octoprintURL, this.apiKey).subscribe(printerName => {
-      if (!this.printerName) {
-        this.printerName = printerName;
-        this.printerNameChange.emit(this.printerName);
-      }
-    });
+    this.personalizationService
+      .getActivePrinterProfileName(this.octoprintURL, this.apiKey)
+      .subscribe((printerName: string) => {
+        if (!this.printerName) {
+          this.printerName = printerName;
+          this.printerNameChange.emit(this.printerName);
+        }
+      });
   }
 
   changeUseTouchscreen(): void {

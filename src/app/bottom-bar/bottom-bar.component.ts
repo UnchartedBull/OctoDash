@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
@@ -29,19 +30,21 @@ export class BottomBarComponent implements OnDestroy {
       this.subscriptions.add(
         timer(2500, 15000).subscribe(() => {
           if (this.printerReady) {
-            this.enclosureService.getEnclosureTemperature().subscribe(
-              (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
-              error => {
+            // TODO
+            this.enclosureService.getEnclosureTemperature().subscribe({
+              next: (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
+              error: (error: HttpErrorResponse) => {
                 this.notificationService.setError(
                   $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
                   error.message,
                 );
               },
-            );
+            });
           }
         }),
       );
     }
+
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
         this.printerStatus = printerStatus.status;

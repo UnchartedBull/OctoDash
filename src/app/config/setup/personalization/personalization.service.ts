@@ -23,7 +23,8 @@ export class PersonalizationService {
           for (const [_, profile] of Object.entries(profiles.profiles)) {
             if (profile.current) return profile.name;
           }
-        }, defaultIfEmpty('')),
+        }),
+        defaultIfEmpty(''),
       );
   }
 }
