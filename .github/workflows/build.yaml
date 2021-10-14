@@ -54,8 +54,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14'
-      - name: Install npm v7
-        run: sudo npm install -g npm@lts
+      - name: Install latest npm
+        run: sudo npm install -g npm@latest
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
