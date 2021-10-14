@@ -22,7 +22,7 @@ export class ControlComponent {
     private configService: ConfigService,
     private notificationService: NotificationService,
   ) {
-    this.printerService.getActiveProfile().subscribe(
+    this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {
         this.notificationService.setError(
