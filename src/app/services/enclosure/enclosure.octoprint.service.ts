@@ -10,8 +10,8 @@ import {
   EnclosureOutputBody,
   EnclosurePluginAPI,
   EnclosurePWMBody,
-  PSUControlCommand,
   OphomPlugStatus,
+  PSUControlCommand,
   TasmotaCommand,
   TasmotaMqttCommand,
   TPLinkCommand,
@@ -153,11 +153,11 @@ export class EnclosureOctoprintService implements EnclosureService {
         ),
         map((data: OphomPlugStatus) => {
           if (data.reponse == 1) {
-            if (state == PSUState.OFF){
-               this.toggleOphom();
+            if (state == PSUState.OFF) {
+              this.toggleOphom();
             }
           } else {
-            if (state == PSUState.ON){
+            if (state == PSUState.ON) {
               this.toggleOphom();
             }
           }
