@@ -53,6 +53,14 @@
   </span>
 
   <span>
+    <app-toggle-switch [value]="ophomPlugin" (valueChange)="ophomPluginChange.emit(!ophomPlugin)">
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-opom">
+      Ophom (Phillips HUE)
+    </ng-container>
+  </span>
+
+  <span>
     <app-toggle-switch [value]="tpLinkSmartPlugPlugin"
       (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-tplink-smartplug">

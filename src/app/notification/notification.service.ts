@@ -18,7 +18,7 @@ export class NotificationService {
       setTimeout((): void => {
         this.bootGrace = false;
       }, 30000);
-    }).pipe(shareReplay(1));
+    }).pipe(shareReplay({ bufferSize: 1, refCount: true }));
   }
 
   public closeNotification(): void {

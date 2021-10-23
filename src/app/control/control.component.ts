@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { ConfigService } from '../config/config.service';
@@ -21,15 +22,15 @@ export class ControlComponent {
     private configService: ConfigService,
     private notificationService: NotificationService,
   ) {
-    this.printerService.getActiveProfile().subscribe(
-      (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
-      err => {
+    this.printerService.getActiveProfile().subscribe({
+      next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
+      error: (error: HttpErrorResponse) => {
         this.notificationService.setError(
           $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
-          err.message,
+          error.message,
         );
       },
-    );
+    });
   }
 
   public setDistance(distance: number): void {

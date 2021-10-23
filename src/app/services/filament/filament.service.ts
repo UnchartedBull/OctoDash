@@ -23,25 +23,17 @@ export class FilamentService {
   }
 
   private loadSpools(): void {
-    this.filamentPluginService.getSpools().subscribe(
-      (spools: Array<FilamentSpool>): void => {
-        this.filamentSpools = spools;
-      },
-      (error: HttpErrorResponse): void => {
-        this.notificationService.setError($localize`:@@error-spools:Can't load filament spools!`, error.message);
-      },
-      (): void => {
-        this.loading = false;
-      },
-    );
-    this.filamentPluginService.getCurrentSpool().subscribe(
-      (spool: FilamentSpool): void => {
-        this.currentSpool = spool;
-      },
-      (error: HttpErrorResponse): void => {
-        this.notificationService.setError($localize`:@@error-spool:Can't load active spool!`, error.message);
-      },
-    );
+    this.filamentPluginService.getSpools().subscribe({
+      next: (spools: Array<FilamentSpool>) => (this.filamentSpools = spools),
+      error: (error: HttpErrorResponse) =>
+        this.notificationService.setError($localize`:@@error-spools:Can't load filament spools!`, error.message),
+      complete: () => (this.loading = false),
+    });
+    this.filamentPluginService.getCurrentSpool().subscribe({
+      next: (spool: FilamentSpool) => (this.currentSpool = spool),
+      error: (error: HttpErrorResponse) =>
+        this.notificationService.setError($localize`:@@error-spool:Can't load active spool!`, error.message),
+    });
   }
 
   public getFilamentSpools(): Array<FilamentSpool> {
@@ -58,10 +50,10 @@ export class FilamentService {
 
   public setSpool(spool: FilamentSpool): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.filamentPluginService.setSpool(spool).subscribe(
-        (): void => {
-          this.filamentPluginService.getCurrentSpool().subscribe(
-            (spoolRemote: FilamentSpool): void => {
+      this.filamentPluginService.setSpool(spool).subscribe({
+        next: () => {
+          this.filamentPluginService.getCurrentSpool().subscribe({
+            next: (spoolRemote: FilamentSpool) => {
               if (spool.id === spoolRemote.id) resolve();
               else {
                 this.notificationService.setError(
@@ -71,17 +63,17 @@ export class FilamentService {
                 reject();
               }
             },
-            (error): void => {
+            error: (error: HttpErrorResponse) => {
               this.notificationService.setError($localize`:@@error-set-new-spool:Can't set new spool!`, error.message);
               reject();
             },
-          );
+          });
         },
-        (error): void => {
+        error: (error: HttpErrorResponse): void => {
           this.notificationService.setError($localize`:@@error-set-new-spool-2:Can't set new spool!`, error.message);
           reject();
         },
-      );
+      });
     });
   }
 }

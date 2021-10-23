@@ -12,6 +12,7 @@ export class PluginsComponent {
   @Input() preheatButtonPlugin: boolean;
   @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
+  @Input() ophomPlugin: boolean;
   @Input() tpLinkSmartPlugPlugin: boolean;
   @Input() tasmotaPlugin: boolean;
   @Input() tasmotaMqttPlugin: boolean;
@@ -22,6 +23,7 @@ export class PluginsComponent {
   @Output() preheatButtonPluginChange = new EventEmitter<boolean>();
   @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();
+  @Output() ophomPluginChange = new EventEmitter<boolean>();
   @Output() tpLinkSmartPlugPluginChange = new EventEmitter<boolean>();
   @Output() tasmotaPluginChange = new EventEmitter<boolean>();
   @Output() tasmotaMqttPluginChange = new EventEmitter<boolean>();
