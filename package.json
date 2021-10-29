@@ -79,7 +79,7 @@
     "@angular/cdk": "~12.2.0",
     "@angular/common": "~12.2.12",
     "@angular/compiler": "~12.0.4",
-    "@angular/core": "~12.2.11",
+    "@angular/core": "~12.2.12",
     "@angular/forms": "~12.2.12",
     "@angular/localize": "~12.0.5",
     "@angular/material": "~12.2.12",
