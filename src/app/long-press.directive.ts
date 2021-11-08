@@ -25,9 +25,11 @@ export class LongPress {
   onMouseDown(event: EventSource): void {
     this.pressing = true;
     this.longPressing = false;
+
     this.timeout = setTimeout(() => {
       this.longPressing = true;
       this.onLongPress.emit(event);
+
       this.interval = setInterval(() => {
         this.onLongPressing.emit(event);
       }, this.frequency);
@@ -38,6 +40,7 @@ export class LongPress {
   endPress(event: EventSource): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
+
     if (!this.longPressing && this.pressing) {
       this.onShortPress.emit(event);
     }
@@ -46,9 +49,10 @@ export class LongPress {
   }
 
   @HostListener('pointerleave', ['$event'])
-  endPressMove(_: EventSource): void {
+  endPressMove(): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
+
     this.longPressing = false;
     this.pressing = false;
   }

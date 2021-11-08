@@ -53,4 +53,5 @@ Thumbs.db
 **/config.testing.json
 
 docs/images/compilation.psd
-scripts/clean-github.sh 
+scripts/clean-github.sh
+.angular

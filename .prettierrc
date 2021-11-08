@@ -4,7 +4,7 @@
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "endOfLine": "lf",
-  "jsxBracketSameLine": true,
+  "bracketSameLine": true,
   "printWidth": 120,
   "semi": true,
   "singleQuote": true,

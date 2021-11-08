@@ -20,7 +20,7 @@ export class PersonalizationService {
       })
       .pipe(
         map(profiles => {
-          for (const [_, profile] of Object.entries(profiles.profiles)) {
+          for (const profile of Object.values(profiles.profiles)) {
             if (profile.current) return profile.name;
           }
         }),
