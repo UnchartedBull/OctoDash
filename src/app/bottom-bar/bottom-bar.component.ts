@@ -47,7 +47,7 @@ export class BottomBarComponent implements OnDestroy {
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-        this.printerStatus = printerStatus.status;
+        this.printerStatus = printerStatus?.status;
         if (!this.printerReady) {
           this.printerReady = [PrinterState.operational, PrinterState.printing, PrinterState.paused].includes(
             this.printerStatus,

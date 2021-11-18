@@ -117,7 +117,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public finishWizard(): void {
-    this.router.navigate(['/main-screen']);
+    this.electronService.send('reload');
   }
 
   private changePage(value: number): void {
