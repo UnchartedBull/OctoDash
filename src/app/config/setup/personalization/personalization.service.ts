@@ -13,7 +13,7 @@ export class PersonalizationService {
 
   public getActivePrinterProfileName(octoprintURL: string, apiKey: string): Observable<string> {
     return this.http
-      .get<OctoprintPrinterProfiles>(`${octoprintURL}printerprofiles`, {
+      .get<OctoprintPrinterProfiles>(`${octoprintURL}api/printerprofiles`, {
         headers: new HttpHeaders({
           'x-api-key': apiKey,
         }),
