@@ -93,7 +93,7 @@
     "bonjour": "~3.5.0",
     "compare-versions": "~4.1.1",
     "electron-store": "~8.0.1",
-    "got": "~11.8.2",
+    "got": "~11.8.3",
     "lodash-es": "~4.17.21",
     "lottie-web": "~5.8.1",
     "ngx-lottie": "~7.0.4",
