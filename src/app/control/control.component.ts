@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { ConfigService } from '../config/config.service';
+import { NotificationType } from '../model';
 import { OctoprintPrinterProfile } from '../model/octoprint';
 import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
@@ -25,10 +26,11 @@ export class ControlComponent {
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {
-        this.notificationService.setError(
-          $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
-          error.message,
-        );
+        this.notificationService.setNotification({
+          heading: $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
+          text: error.message,
+          type: NotificationType.ERROR,
+        });
       },
     });
   }

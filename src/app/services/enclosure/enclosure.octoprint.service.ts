@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { PSUState, TemperatureReading } from '../../model';
+import { NotificationType, PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
@@ -61,9 +61,14 @@ export class EnclosureOctoprintService implements EnclosureService {
         this.configService.getHTTPHeaders(),
       )
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-set-color:Can't set LED color!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-set-color:Can't set LED color!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -81,9 +86,14 @@ export class EnclosureOctoprintService implements EnclosureService {
         this.configService.getHTTPHeaders(),
       )
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-set-output:Can't set output!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -102,9 +112,14 @@ export class EnclosureOctoprintService implements EnclosureService {
         this.configService.getHTTPHeaders(),
       )
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-set-output:Can't set output!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-set-output:Can't set output!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -121,10 +136,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     } else if (this.configService.useTasmotaMqtt()) {
       this.setPSUStateTasmotaMqtt(state);
     } else {
-      this.notificationService.setWarning(
-        $localize`:@@error-psu-state:Can't change PSU State!`,
-        $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
-      );
+      this.notificationService.setNotification({
+        heading: $localize`:@@error-psu-state:Can't change PSU State!`,
+        text: $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
+        type: NotificationType.WARN,
+      });
     }
     this.currentPSUState = state;
   }
@@ -137,9 +153,14 @@ export class EnclosureOctoprintService implements EnclosureService {
     this.http
       .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -148,9 +169,14 @@ export class EnclosureOctoprintService implements EnclosureService {
     this.http
       .get(this.configService.getApiURL('plugin/ophom?action=checkplugstatus'), this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-ophom-gcode:Can't update Ophom Plug!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
         map((data: OphomPlugStatus) => {
           if (data.reponse == 1) {
             if (state == PSUState.OFF) {
@@ -170,9 +196,14 @@ export class EnclosureOctoprintService implements EnclosureService {
     this.http
       .get(this.configService.getApiURL('plugin/ophom?action=toggle'), this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -186,9 +217,14 @@ export class EnclosureOctoprintService implements EnclosureService {
     this.http
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-smartplug-gcode:Can't send GCode!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -202,7 +238,16 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
-      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-tasmota-plug:Can't update Tasmota!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
+      )
       .subscribe();
   }
 
@@ -219,7 +264,16 @@ export class EnclosureOctoprintService implements EnclosureService {
         tasmotaMqttPayload,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(catchError(error => this.notificationService.setError("Can't send GCode!", error.message)))
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-tasmota-plug-mqtt:Can't update Tasmota MQTT!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
+      )
       .subscribe();
   }
 

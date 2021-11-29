@@ -12,12 +12,7 @@ import { NotificationService } from './notification.service';
 export class NotificationComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
-  public notification: Notification = {
-    heading: '',
-    text: '',
-    type: '',
-    closed: null,
-  };
+  public notification?: Notification;
   public show = false;
 
   public constructor(private notificationService: NotificationService, private zone: NgZone) {
@@ -30,9 +25,9 @@ export class NotificationComponent implements OnDestroy {
 
   public hideNotification(): void {
     this.show = false;
-    if (this.notification.closed) {
-      this.notification.closed();
-    }
+    // if (this.notification.closed) {
+    //   this.notification.closed();
+    // }
   }
 
   private setNotification(notification: Notification | 'close'): void {

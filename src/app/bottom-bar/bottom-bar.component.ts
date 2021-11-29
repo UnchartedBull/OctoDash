@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
 import { ConfigService } from '../config/config.service';
-import { PrinterState, PrinterStatus, TemperatureReading } from '../model';
+import { NotificationType, PrinterState, PrinterStatus, TemperatureReading } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SocketService } from '../services/socket/socket.service';
@@ -34,10 +34,11 @@ export class BottomBarComponent implements OnDestroy {
             this.enclosureService.getEnclosureTemperature().subscribe({
               next: (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
               error: (error: HttpErrorResponse) => {
-                this.notificationService.setError(
-                  $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
-                  error.message,
-                );
+                this.notificationService.setNotification({
+                  heading: $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
+                  text: error.message,
+                  type: NotificationType.ERROR,
+                });
               },
             });
           }

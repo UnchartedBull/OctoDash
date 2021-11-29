@@ -4,6 +4,7 @@ import { AppService } from '../app.service';
 import { Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
 import { ElectronService } from '../electron.service';
+import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -71,10 +72,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.fadeOutAnimation = false;
       }, 5000);
     } else {
-      this.notificationService.setWarning(
-        $localize`:@@conf-unsaved:Configuration not saved!`,
-        $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
-      );
+      this.notificationService.setNotification({
+        heading: $localize`:@@conf-unsaved:Configuration not saved!`,
+        // eslint-disable-next-line max-len
+        text: $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
+        type: NotificationType.WARN,
+      });
       this.overwriteNoSave = true;
     }
   }
@@ -105,7 +108,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setWarning($localize`:@@error-invalid-config:Can't save invalid config`, String(errors));
+    this.notificationService.setNotification({
+      heading: $localize`:@@error-invalid-config:Can't save invalid config`,
+      text: String(errors),
+      type: NotificationType.WARN,
+    });
   }
 
   private onConfigSaved() {

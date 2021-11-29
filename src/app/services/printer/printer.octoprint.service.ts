@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { PrinterProfile } from '../../model';
+import { NotificationType, PrinterProfile } from '../../model';
 import {
   DisconnectCommand,
   ExtrudeCommand,
@@ -52,9 +52,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@printer-error-gcode:Can't send GCode!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@printer-error-gcode:Can't send GCode!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -70,9 +75,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-printer-head:Can't move Printhead!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-head:Can't move Printhead!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -86,9 +96,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-printer-extrude:Can't extrude Filament!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-extrude:Can't extrude Filament!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -103,12 +118,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/tool'), temperatureHotendCommand, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError(
-            $localize`:@@error-printer-hotend:Can't set Hotend Temperature!`,
-            error.message,
-          ),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-hotend:Can't set Hotend Temperature!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -121,9 +138,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/bed'), temperatureHeatbedCommand, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-printer-bed:Can't set Bed Temperature!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-bed:Can't set Bed Temperature!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -136,9 +158,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-printer-feedrate:Can't set Feedrate!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-feedrate:Can't set Feedrate!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -151,9 +178,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-printer-flowrate:Can't set Flowrate!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-flowrate:Can't set Flowrate!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -165,12 +197,14 @@ export class PrinterOctoprintService implements PrinterService {
     this.http
       .post(this.configService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError(
-            $localize`:@@error-printer-disconnect:Can't disconnect Printer!`,
-            error.message,
-          ),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-disconnect:Can't disconnect Printer!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
