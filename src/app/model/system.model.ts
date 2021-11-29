@@ -2,7 +2,6 @@ export interface Notification {
   heading: string;
   text: string;
   type: NotificationType;
-  // closed: () => void;
 }
 
 export enum NotificationType {

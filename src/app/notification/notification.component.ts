@@ -25,9 +25,6 @@ export class NotificationComponent implements OnDestroy {
 
   public hideNotification(): void {
     this.show = false;
-    // if (this.notification.closed) {
-    //   this.notification.closed();
-    // }
   }
 
   private setNotification(notification: Notification | 'close'): void {

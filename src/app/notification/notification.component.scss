@@ -39,15 +39,15 @@
   }
 
   &__border {
-    &-error {
+    &-2 {
       border-left: 1vw solid #c23616;
     }
 
-    &-warn {
+    &-1 {
       border-left: 1vw solid #fbc531;
     }
 
-    &-notification {
+    &-0 {
       border-left: 1vw solid #4bae50;
     }
   }

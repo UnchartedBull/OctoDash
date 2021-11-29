@@ -27,6 +27,22 @@ export class AppService {
     this.enableCustomCSSListener();
     this.electronService.send('appInfo');
 
+    this.notificationService.setNotification({
+      heading: 'TEST I',
+      text: 'this is for testing',
+      type: NotificationType.INFO,
+    });
+    this.notificationService.setNotification({
+      heading: 'TEST W',
+      text: 'this is for testing',
+      type: NotificationType.WARN,
+    });
+    this.notificationService.setNotification({
+      heading: 'TEST E',
+      text: 'this is for testing',
+      type: NotificationType.ERROR,
+    });
+
     // list of all error following an upgrade
     this.updateError = {
       "/printer must have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),

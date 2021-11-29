@@ -12,7 +12,7 @@ export class NotificationService {
   private observer: Observer<Notification | 'close'>;
   private bootGrace = false;
 
-  public notificationStack: Array<Notification>;
+  public notificationStack: Array<Notification> = [];
 
   public constructor() {
     this.observable = new Observable((observer: Observer<Notification | 'close'>): void => {

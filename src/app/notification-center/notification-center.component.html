@@ -3,7 +3,11 @@
     <div>
       <span class="time">{{ time }}</span>
     </div>
-    <div class="notifications"></div>
+    <div class="notifications">
+      <div *ngFor="let notification of getAllNotifications()">
+        {{ notification.heading }}
+      </div>
+    </div>
   </div>
   <div class="right-pane">
     <app-custom-actions [redirectActive]="false"></app-custom-actions>
