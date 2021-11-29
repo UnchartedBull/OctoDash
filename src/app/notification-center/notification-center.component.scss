@@ -3,21 +3,22 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
   z-index: 100;
   transition: top 0.3s ease-in-out;
-}
-
-.hide__icon {
-  position: absolute;
-  bottom: -8px;
-  left: calc(50% - 10px);
+  background-color: rgba(0, 0, 0, 0.67);
+  backdrop-filter: blur(8px);
 }
 
 .wrapper {
   display: flex;
   padding: 5vh 0;
   height: 90vh;
+}
+
+.hide__icon {
+  position: absolute;
+  bottom: -8px;
+  left: calc(50% - 10px);
 }
 
 .right-pane {
@@ -30,4 +31,10 @@
 
 .left-pane {
   width: 70vw;
+  padding-left: 3vw;
+}
+
+.time {
+  font-size: 10vw;
+  padding-left: 3vw;
 }
