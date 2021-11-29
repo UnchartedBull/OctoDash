@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <div class="left-pane">
+    <div class="time"></div>
+    <div class="notifications"></div>
+  </div>
+  <div class="right-pane">
+    <app-custom-actions [redirectActive]="false"></app-custom-actions>
+  </div>
+</div>
+<fa-icon
+  [icon]="['fas', 'caret-up']"
+  (click)="hideNotificationCenter.emit()"
+  matRipple
+  [matRippleUnbounded]="true"
+  [matRippleCentered]="true"
+  class="hide__icon"></fa-icon>

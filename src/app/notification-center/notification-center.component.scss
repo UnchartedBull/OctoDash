@@ -1,0 +1,33 @@
+:host {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 100;
+  transition: top 0.3s ease-in-out;
+}
+
+.hide__icon {
+  position: absolute;
+  bottom: -8px;
+  left: calc(50% - 10px);
+}
+
+.wrapper {
+  display: flex;
+  padding: 5vh 0;
+  height: 90vh;
+}
+
+.right-pane {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.left-pane {
+  width: 70vw;
+}

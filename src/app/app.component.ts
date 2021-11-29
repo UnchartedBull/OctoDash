@@ -13,8 +13,10 @@ import { SocketService } from './services/socket/socket.service';
 })
 export class AppComponent implements OnInit {
   public activated = false;
+  public initialized = false;
   public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
+  public notificationCenterTop = '-100%';
 
   public loadingOptionsCache: AnimationOptions = {
     path: 'assets/animations/loading.json',
@@ -83,6 +85,7 @@ export class AppComponent implements OnInit {
         } else {
           this.router.navigate(['/main-screen-no-touch']);
         }
+        this.initialized = true;
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
@@ -97,5 +100,13 @@ export class AppComponent implements OnInit {
 
   public toggleSwitchAnimationCacheDone(): void {
     this.toggleSwitchAnimationCached = true;
+  }
+
+  public hideNotificationCenter() {
+    this.notificationCenterTop = '-100%';
+  }
+
+  public showNotificationCenter() {
+    this.notificationCenterTop = '0%';
   }
 }

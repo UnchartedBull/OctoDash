@@ -4,3 +4,9 @@
   display: block;
   position: relative;
 }
+
+fa-icon {
+  position: fixed;
+  left: calc(50% - 10px);
+  top: -8px;
+}
