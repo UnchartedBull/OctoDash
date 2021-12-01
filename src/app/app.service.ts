@@ -82,6 +82,8 @@ export class AppService {
       "/plugins must have required property 'spoolManager'": config =>
         (config.plugins.spoolManager = { enabled: false }),
       "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
+      "/octodash must have required property 'showNotificationCenterIcon'": config =>
+        (config.octodash.showNotificationCenterIcon = true),
     };
   }
 

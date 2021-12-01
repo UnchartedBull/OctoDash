@@ -24,7 +24,7 @@
   </div>
 
   <fa-icon
-    *ngIf="initialized"
+    *ngIf="initialized && showNotificationCenterIcon()"
     [icon]="['fas', 'caret-down']"
     (click)="showNotificationCenter()"
     matRipple

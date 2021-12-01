@@ -334,4 +334,8 @@ export class ConfigService {
     this.config.octodash.fileSorting.order = order;
     this.saveConfig(this.config);
   }
+
+  public showNotificationCenterIcon(): boolean {
+    return this.config.octodash.showNotificationCenterIcon;
+  }
 }

@@ -100,6 +100,10 @@ export class AppComponent implements OnInit {
     this.checkmarkAnimationCached = true;
   }
 
+  public showNotificationCenterIcon(): boolean {
+    return this.configService.showNotificationCenterIcon();
+  }
+
   public toggleSwitchAnimationCacheDone(): void {
     this.toggleSwitchAnimationCached = true;
   }
