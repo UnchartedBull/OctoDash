@@ -2,8 +2,14 @@
 <app-notification-center
   *ngIf="initialized"
   [ngStyle]="{ top: notificationCenterTop }"
-  (hideNotificationCenter)="hideNotificationCenter()"></app-notification-center>
-<div class="container">
+  (setNotificationCenterAnimation)="setNotificationCenterAnimation($event)"
+  (setNotificationCenterPosition)="setNotificationCenterPosition($event)"
+  [ngClass]="{ animateNotificationCenter: animateNotificationCenter }"></app-notification-center>
+<div
+  class="container"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)">
   <div *ngIf="!activated">
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
     <span

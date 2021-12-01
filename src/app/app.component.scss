@@ -10,3 +10,7 @@ fa-icon {
   left: calc(50% - 10px);
   top: -8px;
 }
+
+.animateNotificationCenter {
+  transition: top 0.3s ease-in-out;
+}

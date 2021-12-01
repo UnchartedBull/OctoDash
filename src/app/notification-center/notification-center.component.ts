@@ -9,9 +9,11 @@ import { NotificationService } from '../notification/notification.service';
   styleUrls: ['./notification-center.component.scss'],
 })
 export class NotificationCenterComponent {
-  @Output() hideNotificationCenter = new EventEmitter<void>();
+  @Output() setNotificationCenterAnimation = new EventEmitter<boolean>();
+  @Output() setNotificationCenterPosition = new EventEmitter<string>();
 
   public time: string;
+  public startSwipe: Touch | undefined;
 
   constructor(private notificationService: NotificationService) {
     this.updateTime();
@@ -29,5 +31,42 @@ export class NotificationCenterComponent {
 
   public removeNotification(notification: Notification) {
     this.notificationService.removeNotification(notification);
+  }
+
+  public hideNotificationCenter() {
+    this.setNotificationCenterPosition.emit('-100%');
+  }
+
+  public showNotificationCenter() {
+    this.setNotificationCenterPosition.emit('0%');
+  }
+
+  public onTouchStart(event: TouchEvent) {
+    if (event.changedTouches[0].clientY > event.view.innerHeight - event.view.innerHeight / 5) {
+      this.startSwipe = event.changedTouches[0];
+      this.setNotificationCenterAnimation.emit(false);
+    } else {
+      this.startSwipe = undefined;
+    }
+  }
+
+  public onTouchMove(event: TouchEvent) {
+    if (this.startSwipe) {
+      this.setNotificationCenterPosition.emit(
+        `${(100 - (event.changedTouches[0].clientY / event.view.innerHeight) * 100) * -1}%`,
+      );
+    }
+  }
+
+  public onTouchEnd(event: TouchEvent) {
+    if (this.startSwipe) {
+      this.setNotificationCenterAnimation.emit(true);
+      const endSwipe = event.changedTouches[0];
+      if (endSwipe.clientY < event.view.innerHeight - event.view.innerHeight / 3) {
+        this.hideNotificationCenter();
+      } else {
+        this.showNotificationCenter();
+      }
+    }
   }
 }

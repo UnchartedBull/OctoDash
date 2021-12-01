@@ -1,4 +1,8 @@
-<div class="wrapper">
+<div
+  class="wrapper"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)">
   <div class="left-pane">
     <div>
       <span class="time">{{ time }}</span>
@@ -25,7 +29,7 @@
 </div>
 <fa-icon
   [icon]="['fas', 'caret-up']"
-  (click)="hideNotificationCenter.emit()"
+  (click)="hideNotificationCenter()"
   matRipple
   [matRippleUnbounded]="true"
   [matRippleCentered]="true"

@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
   public notificationCenterTop = '-100%';
+  public animateNotificationCenter = true;
+  public startSwipe: Touch | undefined;
 
   public loadingOptionsCache: AnimationOptions = {
     path: 'assets/animations/loading.json',
@@ -108,5 +110,40 @@ export class AppComponent implements OnInit {
 
   public showNotificationCenter() {
     this.notificationCenterTop = '0%';
+  }
+
+  public setNotificationCenterPosition(position: string) {
+    this.notificationCenterTop = position;
+  }
+
+  public setNotificationCenterAnimation(enabled: boolean) {
+    this.animateNotificationCenter = enabled;
+  }
+
+  public onTouchStart(event: TouchEvent) {
+    if (event.changedTouches[0].clientY < event.view.innerHeight / 8) {
+      this.startSwipe = event.changedTouches[0];
+      this.animateNotificationCenter = false;
+    } else {
+      this.startSwipe = undefined;
+    }
+  }
+
+  public onTouchMove(event: TouchEvent) {
+    if (this.startSwipe) {
+      this.notificationCenterTop = `${(100 - (event.changedTouches[0].clientY / event.view.innerHeight) * 100) * -1}%`;
+    }
+  }
+
+  public onTouchEnd(event: TouchEvent) {
+    if (this.startSwipe) {
+      this.animateNotificationCenter = true;
+      const endSwipe = event.changedTouches[0];
+      if (endSwipe.clientY > event.view.innerHeight / 3) {
+        this.showNotificationCenter();
+      } else {
+        this.hideNotificationCenter();
+      }
+    }
   }
 }
