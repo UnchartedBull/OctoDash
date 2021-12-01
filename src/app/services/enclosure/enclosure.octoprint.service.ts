@@ -66,6 +66,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-set-color:Can't set LED color!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -91,6 +92,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-set-output:Can't set output!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -117,6 +119,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-set-output:Can't set output!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -140,6 +143,7 @@ export class EnclosureOctoprintService implements EnclosureService {
         heading: $localize`:@@error-psu-state:Can't change PSU State!`,
         text: $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
         type: NotificationType.WARN,
+        time: new Date(),
       });
     }
     this.currentPSUState = state;
@@ -158,6 +162,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -174,6 +179,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-ophom-gcode:Can't update Ophom Plug!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -201,6 +207,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -222,6 +229,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-smartplug-gcode:Can't send GCode!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -244,6 +252,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-tasmota-plug:Can't update Tasmota!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -270,6 +279,7 @@ export class EnclosureOctoprintService implements EnclosureService {
             heading: $localize`:@@error-send-tasmota-plug-mqtt:Can't update Tasmota MQTT!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),

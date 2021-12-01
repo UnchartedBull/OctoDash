@@ -30,6 +30,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-start-job:Can't start job!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -51,6 +52,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-pause-job:Can't pause job!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -72,6 +74,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-resume-job:Can't resume job!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -92,6 +95,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-cancel-job:Can't cancel job!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -112,6 +116,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-restart-job:Can't restart job!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -132,6 +137,7 @@ export class JobOctoprintService implements JobService {
             heading: $localize`:@@error-preheat:Can't preheat printer!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),

@@ -18,6 +18,8 @@ export class ElectronService {
         heading: "Can't load electron library",
         text: 'Please restart your system and open a new issue on GitHub if this issue persists.',
         type: NotificationType.ERROR,
+        time: new Date(),
+        sticky: true,
       });
     }
   }

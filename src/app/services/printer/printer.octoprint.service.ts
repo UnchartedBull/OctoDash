@@ -57,6 +57,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@printer-error-gcode:Can't send GCode!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -80,6 +81,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-head:Can't move Printhead!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -101,6 +103,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-extrude:Can't extrude Filament!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -123,6 +126,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-hotend:Can't set Hotend Temperature!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -143,6 +147,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-bed:Can't set Bed Temperature!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -163,6 +168,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-feedrate:Can't set Feedrate!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -183,6 +189,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-flowrate:Can't set Flowrate!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -202,6 +209,7 @@ export class PrinterOctoprintService implements PrinterService {
             heading: $localize`:@@error-printer-disconnect:Can't disconnect Printer!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),

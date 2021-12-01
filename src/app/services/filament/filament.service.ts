@@ -30,6 +30,7 @@ export class FilamentService {
           heading: $localize`:@@error-spools:Can't load filament spools!`,
           text: error.message,
           type: NotificationType.ERROR,
+          time: new Date(),
         }),
       complete: () => (this.loading = false),
     });
@@ -40,6 +41,7 @@ export class FilamentService {
           heading: $localize`:@@error-spool:Can't load active spool!`,
           text: error.message,
           type: NotificationType.ERROR,
+          time: new Date(),
         }),
     });
   }
@@ -68,6 +70,7 @@ export class FilamentService {
                   heading: $localize`:@@error-spool-id:Spool IDs didn't match`,
                   text: $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
                   type: NotificationType.ERROR,
+                  time: new Date(),
                 });
                 reject();
               }
@@ -77,6 +80,7 @@ export class FilamentService {
                 heading: $localize`:@@error-set-new-spool:Can't set new spool!`,
                 text: error.message,
                 type: NotificationType.ERROR,
+                time: new Date(),
               });
               reject();
             },
@@ -87,6 +91,7 @@ export class FilamentService {
             heading: $localize`:@@error-set-new-spool-2:Can't set new spool!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           reject();
         },

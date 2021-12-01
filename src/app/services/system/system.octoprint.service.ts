@@ -44,6 +44,7 @@ export class SystemOctoprintService implements SystemService {
             heading: $localize`:@@error-execute:Can't execute ${command} command!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(error);
         }),
@@ -65,6 +66,8 @@ export class SystemOctoprintService implements SystemService {
             heading: $localize`:@@error-connect:Can't connect to printer!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
+            sticky: true,
           });
           return of(error);
         }),

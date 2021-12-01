@@ -161,6 +161,7 @@ export class FilesOctoprintService implements FilesService {
             heading: $localize`:@@files-error-file:Can't load file!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -182,6 +183,7 @@ export class FilesOctoprintService implements FilesService {
             heading: $localize`:@@files-error-print:Can't start print!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),
@@ -198,6 +200,7 @@ export class FilesOctoprintService implements FilesService {
             heading: $localize`:@@files-error-delete:Can't delete file!`,
             text: error.message,
             type: NotificationType.ERROR,
+            time: new Date(),
           });
           return of(null);
         }),

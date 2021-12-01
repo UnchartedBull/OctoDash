@@ -20,10 +20,14 @@ export class NotificationCenterComponent {
   public updateTime(): void {
     const now = new Date();
     this.time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-    setTimeout(this.updateTime, 5000);
+    setTimeout(this.updateTime.bind(this), 5000);
   }
 
   public getAllNotifications(): Array<Notification> {
     return this.notificationService.notificationStack;
+  }
+
+  public removeNotification(notification: Notification) {
+    this.notificationService.removeNotification(notification);
   }
 }

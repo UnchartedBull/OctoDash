@@ -32,10 +32,12 @@ export class NotificationService {
       this.observer.next(notification);
       this.notificationStack.push(notification);
     } else {
-      setTimeout(() => {
-        this.setNotification(notification);
-      }, 1000);
+      setTimeout(this.setNotification.bind(this), 1000, notification);
     }
+  }
+
+  public removeNotification(notification: Notification) {
+    this.notificationStack = this.notificationStack.filter(n => n.time !== notification.time);
   }
 
   public getObservable(): Observable<Notification | 'close'> {

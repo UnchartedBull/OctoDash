@@ -38,6 +38,14 @@
     opacity: 0.4;
   }
 
+  &__time {
+    position: absolute;
+    right: 0.3vw;
+    top: 0.6vw;
+    font-size: 2.4vw;
+    opacity: 0.6;
+  }
+
   &__border {
     &-2 {
       border-left: 1vw solid #c23616;

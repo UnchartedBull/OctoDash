@@ -31,16 +31,27 @@ export class AppService {
       heading: 'TEST I',
       text: 'this is for testing',
       type: NotificationType.INFO,
+      time: new Date(),
+      sticky: true,
     });
     this.notificationService.setNotification({
       heading: 'TEST W',
       text: 'this is for testing',
       type: NotificationType.WARN,
+      time: new Date(),
     });
     this.notificationService.setNotification({
       heading: 'TEST E',
       text: 'this is for testing',
       type: NotificationType.ERROR,
+      time: new Date(),
+    });
+    this.notificationService.setNotification({
+      heading: 'TEST 2',
+      text: 'this is for testing',
+      type: NotificationType.INFO,
+      time: new Date(),
+      sticky: true,
     });
 
     // list of all error following an upgrade
@@ -128,6 +139,7 @@ export class AppService {
         heading: $localize`:@@error-load-style:Can't load custom styles!`,
         text: customCSSError,
         type: NotificationType.ERROR,
+        time: new Date(),
       });
     });
   }

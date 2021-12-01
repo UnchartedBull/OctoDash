@@ -2,6 +2,8 @@ export interface Notification {
   heading: string;
   text: string;
   type: NotificationType;
+  time: Date;
+  sticky?: boolean;
 }
 
 export enum NotificationType {
