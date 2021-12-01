@@ -134,5 +134,6 @@ export const defaultConfig: Config = {
     screenSleepCommand: 'xset dpms force standby',
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
     showExtruderControl: true,
+    showNotificationCenterIcon: true,
   },
 };

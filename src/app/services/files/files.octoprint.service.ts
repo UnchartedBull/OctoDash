@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
-import { Directory, File, Folder } from '../../model';
+import { Directory, File, Folder, NotificationType } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { FilesService } from './files.service';
@@ -156,9 +156,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-file:Can't load file!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -172,9 +178,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-print:Can't start print!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -183,9 +195,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-delete:Can't delete file!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }

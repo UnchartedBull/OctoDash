@@ -117,7 +117,7 @@ const configSchema = {
         'preheatButton',
         'printTimeGenius',
         'psuControl',
-        'ophom', 
+        'ophom',
         'tpLinkSmartPlug',
         'tasmota',
         'tasmotaMqtt',
@@ -294,6 +294,7 @@ const configSchema = {
         'screenSleepCommand',
         'screenWakeupCommand',
         'showExtruderControl',
+        'showNotificationCenterIcon',
       ],
       properties: {
         customActions: {
@@ -402,6 +403,10 @@ const configSchema = {
         },
         showExtruderControl: {
           $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
+        },
+        showNotificationCenterIcon: {
+          $id: '#/properties/octodash/properties/showNotificationCenterIcon',
           type: 'boolean',
         },
       },

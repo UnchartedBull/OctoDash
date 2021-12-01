@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
-import { SocketAuth } from '../../model';
+import { NotificationType, SocketAuth } from '../../model';
 import { ConnectCommand, OctoprintLogin } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { SystemService } from './system.service';
@@ -39,12 +39,15 @@ export class SystemOctoprintService implements SystemService {
     this.http
       .post(this.configService.getApiURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError(
-            $localize`:@@error-execute:Can't execute ${command} command!`,
-            error.message,
-          ),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-execute:Can't execute ${command} command!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(error);
+        }),
       )
       .subscribe();
   }
@@ -58,9 +61,16 @@ export class SystemOctoprintService implements SystemService {
     this.http
       .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-connect:Can't connect to printer!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-connect:Can't connect to printer!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+            sticky: true,
+          });
+          return of(error);
+        }),
       )
       .subscribe();
   }

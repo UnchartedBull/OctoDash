@@ -13,7 +13,6 @@ import { SystemService } from '../services/system/system.service';
 })
 export class StandbyComponent implements OnInit, OnDestroy {
   public connecting = false;
-  public actionsVisible = false;
   public showConnectionError = false;
   private displaySleepTimeout: ReturnType<typeof setTimeout>;
   private connectErrorTimeout: ReturnType<typeof setTimeout>;
@@ -26,9 +25,11 @@ export class StandbyComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    if (this.configService.getAutomaticScreenSleep()) {
-      this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
-    }
+    setTimeout(() => {
+      if (this.configService.getAutomaticScreenSleep()) {
+        this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
+      }
+    });
   }
 
   public ngOnDestroy(): void {
@@ -40,7 +41,6 @@ export class StandbyComponent implements OnInit, OnDestroy {
   }
 
   public reconnect(): void {
-    this.actionsVisible = false;
     this.connecting = true;
     if (this.configService.getAutomaticPrinterPowerOn()) {
       this.enclosureService.setPSUState(PSUState.ON);
@@ -59,9 +59,5 @@ export class StandbyComponent implements OnInit, OnDestroy {
         this.connecting = false;
       }, 30000);
     }, 15000);
-  }
-
-  public toggleCustomActions(): void {
-    this.actionsVisible = !this.actionsVisible;
   }
 }

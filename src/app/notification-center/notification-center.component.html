@@ -1,0 +1,36 @@
+<div
+  class="wrapper"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)">
+  <div class="left-pane">
+    <div>
+      <span class="time">{{ time }}</span>
+    </div>
+    <div class="notifications">
+      <div *ngFor="let notification of getAllNotifications()">
+        <div
+          class="notification"
+          [ngClass]="['notification__border-' + notification?.type, show ? 'notification__show' : '']"
+          (click)="removeNotification(notification)">
+          <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
+          <span class="notification__heading">{{ notification?.heading }}</span>
+          <span class="notification__text">{{ notification?.text }}</span>
+        </div>
+      </div>
+      <span class="no-notifications" i18n="@@no-new-notifications" *ngIf="getAllNotifications()?.length === 0">
+        no new notifications.
+      </span>
+    </div>
+  </div>
+  <div class="right-pane">
+    <app-custom-actions [redirectActive]="false"></app-custom-actions>
+  </div>
+</div>
+<fa-icon
+  [icon]="['fas', 'caret-up']"
+  (click)="hideNotificationCenter()"
+  matRipple
+  [matRippleUnbounded]="true"
+  [matRippleCentered]="true"
+  class="hide__icon"></fa-icon>

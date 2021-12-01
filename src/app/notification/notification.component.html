@@ -1,9 +1,9 @@
 <div
   class="notification"
-  [ngClass]="['notification__border-' + notification.type, show ? 'notification__show' : '']"
-  (click)="hideNotification()"
->
-  <span class="notification__heading">{{ notification.heading }}</span>
-  <span class="notification__text">{{ notification.text }}</span>
+  [ngClass]="['notification__border-' + notification?.type, show ? 'notification__show' : '']"
+  (click)="hideNotification()">
+  <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
+  <span class="notification__heading">{{ notification?.heading }}</span>
+  <span class="notification__text">{{ notification?.text }}</span>
   <span class="notification__close" i18n="@@tap-close">tap this card to close it</span>
 </div>

@@ -1,8 +1,15 @@
 export interface Notification {
   heading: string;
   text: string;
-  type: string;
-  closed: () => void;
+  type: NotificationType;
+  time: Date;
+  sticky?: boolean;
+}
+
+export enum NotificationType {
+  INFO,
+  WARN,
+  ERROR,
 }
 
 export interface UpdateError {
