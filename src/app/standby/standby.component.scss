@@ -1,45 +1,8 @@
 .standby {
-  display: flex;
   height: 100%;
 
   &__main-window {
-    order: 1;
-    transition: flex-basis 0.6s ease-out;
-    margin-left: 13vw;
-    margin-right: 8vw;
-  }
-
-  &__actions-toggle {
-    order: 2;
-    flex-basis: 6%;
-    box-shadow: 10px 0 12px -6px rgba(0, 0, 0, 0.75);
-
-    &-icon {
-      display: block;
-      font-size: 6vw;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%) rotate(0deg);
-      transition: transform 0.4s ease-out;
-
-      &__rotate {
-        transform: translateY(-50%) rotate(180deg);
-      }
-    }
-  }
-
-  &__actions {
-    order: 3;
-    transition: flex-basis 0.6s ease-out;
-
-    &-text {
-      width: 30vw;
-      position: relative;
-      top: 6vh;
-      float: right;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+    margin: 0 8vw;
   }
 
   &__icon {
@@ -85,29 +48,5 @@
       display: block;
       margin-top: 4vh;
     }
-  }
-}
-
-app-custom-actions {
-  float: right;
-  height: 78vh;
-  position: relative;
-  top: 13vh;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }

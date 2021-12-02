@@ -5,6 +5,7 @@ import _ from 'lodash-es';
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { ElectronService } from './electron.service';
+import { NotificationType } from './model';
 import { NotificationService } from './notification/notification.service';
 
 @Injectable()
@@ -54,6 +55,8 @@ export class AppService {
       "/plugins must have required property 'spoolManager'": config =>
         (config.plugins.spoolManager = { enabled: false }),
       "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
+      "/octodash must have required property 'showNotificationCenterIcon'": config =>
+        (config.octodash.showNotificationCenterIcon = true),
     };
   }
 
@@ -107,7 +110,12 @@ export class AppService {
     });
 
     this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setError($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
+      this.notificationService.setNotification({
+        heading: $localize`:@@error-load-style:Can't load custom styles!`,
+        text: customCSSError,
+        type: NotificationType.ERROR,
+        time: new Date(),
+      });
     });
   }
 

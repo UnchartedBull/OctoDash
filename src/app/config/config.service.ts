@@ -3,6 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import _ from 'lodash-es';
 
 import { ElectronService } from '../electron.service';
+import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
 
@@ -26,10 +27,13 @@ export class ConfigService {
     this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
     this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
     this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.setError(
-        error,
-        $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-      );
+      this.notificationService.setNotification({
+        heading: error,
+        text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
+        type: NotificationType.ERROR,
+        time: new Date(),
+        sticky: true,
+      });
     });
 
     this.electronService.on('configPass', () => {
@@ -329,5 +333,9 @@ export class ConfigService {
   public setSortingOrder(order: 'asc' | 'dsc'): void {
     this.config.octodash.fileSorting.order = order;
     this.saveConfig(this.config);
+  }
+
+  public showNotificationCenterIcon(): boolean {
+    return this.config.octodash.showNotificationCenterIcon;
   }
 }

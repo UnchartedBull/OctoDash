@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { NotificationType } from 'src/app/model';
 
 import { ConfigService } from '../../config/config.service';
 import { JobCommand } from '../../model/octoprint';
@@ -23,9 +25,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-start-job:Can't start job!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-start-job:Can't start job!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -39,9 +47,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-pause-job:Can't pause job!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-pause-job:Can't pause job!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -55,9 +69,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-resume-job:Can't resume job!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-resume-job:Can't resume job!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -70,9 +90,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-cancel-job:Can't cancel job!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-cancel-job:Can't cancel job!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -85,9 +111,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-restart-job:Can't restart job!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-restart-job:Can't restart job!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -100,9 +132,15 @@ export class JobOctoprintService implements JobService {
     this.http
       .post(this.configService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-preheat:Can't preheat printer!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-preheat:Can't preheat printer!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }

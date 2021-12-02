@@ -42,6 +42,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
+import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
@@ -103,6 +104,7 @@ export function playerFactory(): LottiePlayer {
     PurgeFilamentComponent,
     CustomActionsComponent,
     ToggleSwitchComponent,
+    NotificationCenterComponent,
   ],
   imports: [
     AppRoutingModule,

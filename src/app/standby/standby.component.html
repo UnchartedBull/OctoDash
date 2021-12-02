@@ -1,12 +1,11 @@
 <div class="standby">
-  <div (click)="reconnect()" class="standby__main-window" [ngStyle]="{ 'flex-basis': actionsVisible ? '54%' : '94%' }">
+  <div (click)="reconnect()" class="standby__main-window">
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
-    <ng-container *ngIf="!actionsVisible && !connecting">
+    <ng-container *ngIf="!connecting">
       <span class="standby__text-big" i18n="@@octoprint-sleeping">Shhh! OctoDash is sleeping.</span>
-      <span class="standby__text-small" i18n="@@octoprint-sleeping-message">Press on the screen to wake me up again.</span>
-    </ng-container>
-    <ng-container *ngIf="actionsVisible && !connecting">
-      <span class="standby__text-big" *ngIf="actionsVisible" i18n="@@sleeping"> sleeping ... </span>
+      <span class="standby__text-small" i18n="@@octoprint-sleeping-message"
+        >Press on the screen to wake me up again.</span
+      >
     </ng-container>
     <ng-container *ngIf="connecting">
       <span class="standby__text-big loading-dots" i18n="@@connecting">connecting</span>
@@ -14,22 +13,5 @@
         Connection can't be established. Press screen to try again.
       </span>
     </ng-container>
-  </div>
-
-  <div class="standby__actions-toggle">
-    <fa-icon
-      [icon]="['fas', 'caret-left']"
-      class="standby__actions-toggle-icon"
-      (click)="toggleCustomActions()"
-      [ngClass]="{ 'standby__actions-toggle-icon__rotate': actionsVisible }"
-      matRipple
-      [matRippleUnbounded]="true"
-      [matRippleCentered]="true"
-    ></fa-icon>
-  </div>
-
-  <div class="standby__actions" [ngStyle]="{ 'flex-basis': actionsVisible ? '40%' : '0%' }">
-    <span class="standby__actions-text" i18n="@@actions"> Actions </span>
-    <app-custom-actions [redirectActive]="false"></app-custom-actions>
   </div>
 </div>

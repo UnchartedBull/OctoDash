@@ -2,7 +2,7 @@ import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 
 import { AppService } from '../app.service';
 import { ElectronService } from '../electron.service';
-import { UpdateDownloadProgress, UpdateError } from '../model';
+import { NotificationType, UpdateDownloadProgress, UpdateError } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
 
@@ -37,10 +37,12 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.service.getLatestVersion() || !this.service.getLatestVersionAssetsURL()) {
-      this.notificationService.setWarning(
-        $localize`:@@error-update:Can't initiate update!`,
-        $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
-      );
+      this.notificationService.setNotification({
+        heading: $localize`:@@error-update:Can't initiate update!`,
+        text: $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
+        type: NotificationType.ERROR,
+        time: new Date(),
+      });
       this.closeUpdateWindow();
     } else {
       this.setupListeners();
@@ -50,10 +52,12 @@ export class UpdateComponent implements OnInit {
 
   private setupListeners(): void {
     this.electronService.on('updateError', (_, updateError: UpdateError): void => {
-      this.notificationService.setError(
-        $localize`:@@error-install-update:Can't install update!`,
-        updateError.error.message,
-      );
+      this.notificationService.setNotification({
+        heading: $localize`:@@error-install-update:Can't install update!`,
+        text: updateError.error.message,
+        type: NotificationType.ERROR,
+        time: new Date(),
+      });
       this.closeUpdateWindow();
     });
 
