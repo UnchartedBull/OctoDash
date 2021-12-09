@@ -97,7 +97,7 @@
     "lodash-es": "~4.17.21",
     "lottie-web": "~5.8.1",
     "ngx-lottie": "~8.0.1",
-    "ngx-spinner": "~12.0.0",
+    "ngx-spinner": "~13.0.0",
     "progress-stream": "~2.0.0",
     "rxjs": "~7.4.0",
     "tslib": "~2.3.1",
