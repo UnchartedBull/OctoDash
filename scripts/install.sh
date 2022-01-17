@@ -713,14 +713,14 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress (mandatory)' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT', 'Ophom (Phillips HUE)')
-  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
+  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT', 'Ophom (Phillips HUE)')
+  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
   echo "Installing Plugins..."
 
   if [[ " ${selected_plugins[@]} " =~ "OctoDash Companion" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-OctoDashCompanion/archive/master.zip"
   fi;
-  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress (mandatory)" ]]; then
+  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
