@@ -88,7 +88,7 @@
     "@fortawesome/angular-fontawesome": "~0.10.1",
     "@fortawesome/fontawesome-svg-core": "~1.2.36",
     "@fortawesome/free-solid-svg-icons": "~5.15.4",
-    "ajv": "~8.8.2",
+    "ajv": "~8.9.0",
     "angular-svg-round-progressbar": "~8.0.0",
     "bonjour": "~3.5.0",
     "compare-versions": "~4.1.3",
