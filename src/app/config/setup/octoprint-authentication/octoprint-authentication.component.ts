@@ -2,9 +2,9 @@ import { HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/comm
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
 import { NotificationType } from 'src/app/model';
-import { NotificationService } from 'src/app/notification/notification.service';
 
 import { TokenSuccess } from '../../../model/octoprint/auth.model';
+import { NotificationService } from '../../../notification/notification.service';
 import { OctoprintAuthenticationService } from './octoprint-authentication.service';
 
 @Component({
