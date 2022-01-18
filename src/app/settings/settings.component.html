@@ -1,24 +1,24 @@
 <div class="settings">
-  <div class="settings-wrapper" [ngClass]="{ 'settings-wrapper-fadeout': fadeOutAnimation }">
-    <div class="settings-container">
+  <div class="settings-wrapper" [ngClass]="{ 'settings-wrapper-fadeout': fadeOutAnimation }" (click)="hideSettings()">
+    <div class="settings-container" (click)="stopPropagation($event)">
       <img src="assets/error.svg" class="settings__close" (click)="hideSettings()" />
       <div class="settings__content" #settingsMain>
         <span class="settings__heading" i18n="@@settings">settings</span>
         <ul class="settings__list">
           <li (click)="changePage(1, 0, 'forward')">
-            <span i18n="@@settings-general">general</span>
+            <span i18n="@@settings-general" class="settings__section-heading">general</span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
           <li (click)="changePage(2, 0, 'forward')">
-            <span i18n="@@settings-octodash">octodash</span>
+            <span i18n="@@settings-octodash" class="settings__section-heading">octodash</span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
           <li (click)="changePage(3, 0, 'forward')">
-            <span i18n="@@settings-plugins">plugins</span>
+            <span i18n="@@settings-plugins" class="settings__section-heading">plugins</span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
           <li (click)="changePage(4, 0, 'forward')">
-            <span i18n="@@settings-about">about</span>
+            <span i18n="@@settings-about" class="settings__section-heading">about</span>
             <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
           </li>
         </ul>
@@ -26,19 +26,14 @@
           class="settings__update-available"
           (click)="changePage(4, 0, 'forward')"
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
-          i18n="@@update-available"
-        >
+          i18n="@@update-available">
           update available!
         </span>
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
-          <span i18n="@@made-with">made with</span>
-          <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
-          <span i18n="@@by-unchartedbull">
-            by /u/UnchartedBull
-          </span>
+          made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
+          by /u/UnchartedBull
         </span>
-        <!-- <span class="settings__version">OctoDash v{{ version }}</span> -->
       </div>
       <div class="settings__content settings__content-inactive" #settingsGeneral>
         <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
@@ -48,7 +43,9 @@
         <div class="settings__scroll">
           <span class="settings__heading-2" i18n="@@general-octoprint-connection">OctoPrint Connection</span>
           <form class="settings__form">
-            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url">Octoprint URL</label>
+            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url"
+              >Octoprint URL</label
+            >
             <span class="settings__input-prefix">http://</span>
             <input
               type="text"
@@ -57,8 +54,7 @@
               name="octoprintURLName"
               style="width: 23.2vw"
               [(ngModel)]="this.config.octoprint.urlSplit.host"
-              required
-            /><span class="settings__input-divider">:</span>
+              required /><span class="settings__input-divider">:</span>
             <input
               type="text"
               id="octoprintURLPort"
@@ -66,8 +62,7 @@
               name="octoprintURLPort"
               style="width: 8vw"
               [(ngModel)]="this.config.octoprint.urlSplit.port"
-              required
-            />
+              required />
             <br />
           </form>
           <span class="settings__heading-2" i18n="@@general-printer">Printer</span>
@@ -80,8 +75,7 @@
               name="printerName"
               style="width: 44.94vw"
               [(ngModel)]="config.printer.name"
-              required
-            />
+              required />
             <table>
               <tr>
                 <td style="width: 25.6vw; display: block">
@@ -95,8 +89,7 @@
                     name="xySpeed"
                     style="width: 19vw"
                     [(ngModel)]="config.printer.xySpeed"
-                    required
-                  />
+                    required />
                 </td>
                 <td>
                   <label for="zSpeed" class="settings__input-label">
@@ -109,12 +102,13 @@
                     name="zSpeed"
                     style="width: 19vw"
                     [(ngModel)]="config.printer.zSpeed"
-                    required
-                  />
+                    required />
                 </td>
               </tr>
               <tr>
-                <td colspan="2" class="settings__sub-heading" i18n="@@general-default">Default Temperatures & Fan Speed</td>
+                <td colspan="2" class="settings__sub-heading" i18n="@@general-default">
+                  Default Temperatures & Fan Speed
+                </td>
               </tr>
               <tr>
                 <td style="width: 25.6vw; display: block">
@@ -129,8 +123,7 @@
                     name="defaultHotendTemperature"
                     style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
-                    required
-                  />
+                    required />
                 </td>
                 <td>
                   <label for="defaultHeatbedTemperature" class="settings__input-label" i18n="@@default-heatbed">
@@ -144,8 +137,7 @@
                     name="defaultHeatbedTemperature"
                     style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
-                    required
-                  />
+                    required />
                 </td>
               </tr>
               <tr>
@@ -161,8 +153,7 @@
                     name="defaultFanSpeed"
                     style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
-                    required
-                  />
+                    required />
                 </td>
               </tr>
             </table>
@@ -174,8 +165,7 @@
                 <td colspan="2" style="text-align: center">
                   <div
                     class="settings__checkbox-container"
-                    (click)="config.filament.useM600 = !config.filament.useM600"
-                  >
+                    (click)="config.filament.useM600 = !config.filament.useM600">
                     <span class="settings__checkbox">
                       <span class="settings__checkbox-checked" *ngIf="config.filament.useM600"></span>
                     </span>
@@ -197,8 +187,7 @@
                     style="width: 19vw"
                     [(ngModel)]="config.filament.feedLength"
                     required
-                    [disabled]="config.filament.useM600"
-                  />
+                    [disabled]="config.filament.useM600" />
                 </td>
                 <td style="width: 25.6vw">
                   <label for="filament-purge-distance" class="settings__input-label" i18n="@@general-purge-distance">
@@ -213,8 +202,7 @@
                     style="width: 19vw"
                     [(ngModel)]="config.filament.purgeDistance"
                     required
-                    [disabled]="config.filament.useM600"
-                  />
+                    [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
@@ -231,8 +219,7 @@
                     style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeed"
                     required
-                    [disabled]="config.filament.useM600"
-                  />
+                    [disabled]="config.filament.useM600" />
                 </td>
                 <td>
                   <label for="filament-feed-speed-slow" class="settings__input-label" i18n="@@general-feedrate-slow">
@@ -247,8 +234,7 @@
                     style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeedSlow"
                     required
-                    [disabled]="config.filament.useM600"
-                  />
+                    [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
@@ -264,8 +250,7 @@
                     name="filament-thickness"
                     style="width: 19vw"
                     [(ngModel)]="config.filament.thickness"
-                    required
-                  />
+                    required />
                 </td>
                 <td>
                   <label for="filament-density" class="settings__input-label" i18n="@@general-density">
@@ -279,8 +264,7 @@
                     name="filament-density"
                     style="width: 19vw"
                     [(ngModel)]="config.filament.density"
-                    required
-                  />
+                    required />
                 </td>
               </tr>
             </table>
@@ -301,8 +285,25 @@
           <span class="settings__heading-2" i18n="@@octodash-general">General</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping"
-          >
+            (click)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.showExtruderControl"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Show extruder controls</span>
+          </div>
+          <br />
+          <div
+            class="settings__checkbox-container"
+            (click)="config.octodash.showNotificationCenterIcon = !config.octodash.showNotificationCenterIcon">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.octodash.showNotificationCenterIcon"></span>
+            </span>
+            <span class="settings__checkbox-descriptor">Show icon for Notification Center</span>
+          </div>
+          <br />
+          <div
+            class="settings__checkbox-container"
+            (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
             </span>
@@ -314,44 +315,46 @@
             [ngClass]="{
               'settings__checkbox-container-disabled': !(
                 config.plugins.psuControl.enabled ||
+                config.plugins.ophom.enabled ||
                 config.plugins.tpLinkSmartPlug.enabled ||
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled
               )
             }"
-            (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep"
-          >
+            (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep">
             <span class="settings__checkbox">
               <span
                 class="settings__checkbox-checked"
                 [ngClass]="{
                   'settings__checkbox-checked-disabled': !(
                     config.plugins.psuControl.enabled ||
+                    config.plugins.ophom.enabled ||
                     config.plugins.tpLinkSmartPlug.enabled ||
                     config.plugins.tasmota.enabled ||
                     config.plugins.tasmotaMqtt.enabled
                   )
                 }"
-                *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"
-              ></span>
+                *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"></span>
             </span>
-            <span class="settings__checkbox-descriptor" i18n="@@turn-on-after-sleep">Turn on printer when exiting sleep</span>
+            <span class="settings__checkbox-descriptor" i18n="@@turn-on-after-sleep"
+              >Turn on printer when exiting sleep</span
+            >
           </div>
           <br />
           <div
             class="settings__checkbox-container"
-            (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting"
-          >
+            (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
             </span>
-            <span class="settings__checkbox-descriptor" i18n="@@default-preview">Preview by default while printing</span>
+            <span class="settings__checkbox-descriptor" i18n="@@default-preview"
+              >Preview by default while printing</span
+            >
           </div>
           <br />
           <div
             class="settings__checkbox-container"
-            (click)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle"
-          >
+            (click)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.previewProgressCircle"></span>
             </span>
@@ -361,8 +364,7 @@
           <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>
           <div
             class="settings__checkbox-container settings__checkbox-container__space-right"
-            (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x"
-          >
+            (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.x"></span>
             </span>
@@ -370,8 +372,7 @@
           </div>
           <div
             class="settings__checkbox-container settings__checkbox-container__space-right"
-            (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y"
-          >
+            (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.y"></span>
             </span>
@@ -379,71 +380,13 @@
           </div>
           <div
             class="settings__checkbox-container"
-            (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z"
-          >
+            (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.z"></span>
             </span>
             <span class="settings__checkbox-descriptor">Z</span>
           </div>
 
-          <span class="settings__heading-2" i18n="@@octodash-files">Files</span>
-          <table class="settings__files">
-            <tr>
-              <td>
-                <span style="font-size: 2.9vw" i18n="@@octodash-files-sort">sort by</span>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'name'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'name'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-name">Name</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'date'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'date'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-date">Date</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.attribute = 'size'">
-                  <span class="settings__checkbox">
-                    <span
-                      class="settings__checkbox-checked"
-                      *ngIf="config.octodash.fileSorting.attribute === 'size'"
-                    ></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-size">Size</span>
-                </div>
-                <br />
-              </td>
-              <td>
-                <span style="font-size: 2.9vw" i18n="@@octodash-files-order">order</span>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'asc'">
-                  <span class="settings__checkbox">
-                    <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'asc'"></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-ascending">Ascending</span>
-                </div>
-                <br />
-                <div class="settings__checkbox-container" (click)="config.octodash.fileSorting.order = 'dsc'">
-                  <span class="settings__checkbox">
-                    <span class="settings__checkbox-checked" *ngIf="config.octodash.fileSorting.order === 'dsc'"></span>
-                  </span>
-                  <span class="settings__checkbox-descriptor" i18n="@@octodash-files-descending">Descending</span>
-                </div>
-                <br />
-              </td>
-            </tr>
-          </table>
           <span class="settings__heading-2" i18n="@@octodash-custom">Custom Actions</span>
           <div *ngFor="let number of [0, 1, 2, 3, 4, 5]">
             <span class="settings__heading-3">{{ customActionsPosition[number] }}</span>
@@ -455,8 +398,7 @@
               name="action-command"
               style="width: 44.94vw; margin-bottom: -2vh"
               [(ngModel)]="config.octodash.customActions[number].command"
-              required
-            />
+              required />
             <table>
               <tr>
                 <td>
@@ -468,8 +410,7 @@
                     name="action-icon"
                     style="width: 14vw"
                     [(ngModel)]="config.octodash.customActions[number].icon"
-                    required
-                  />
+                    required />
                 </td>
                 <td style="padding-left: 3vw">
                   <label for="action-color" class="settings__input-label" i18n="@@action-color">Color</label>
@@ -480,15 +421,13 @@
                     name="action-color"
                     style="width: 14vw"
                     [(ngModel)]="config.octodash.customActions[number].color"
-                    required
-                  />
+                    required />
                 </td>
                 <td>
                   <fa-icon
                     [icon]="['fas', config.octodash.customActions[number].icon]"
                     class="settings__custom-action-icon"
-                    [styles]="{ color: config.octodash.customActions[number].color }"
-                  ></fa-icon>
+                    [styles]="{ color: config.octodash.customActions[number].color }"></fa-icon>
                 </td>
               </tr>
               <tr>
@@ -497,13 +436,11 @@
                     class="settings__checkbox-container"
                     (click)="
                       config.octodash.customActions[number].confirm = !config.octodash.customActions[number].confirm
-                    "
-                  >
+                    ">
                     <span class="settings__checkbox">
                       <span
                         class="settings__checkbox-checked"
-                        *ngIf="config.octodash.customActions[number].confirm"
-                      ></span>
+                        *ngIf="config.octodash.customActions[number].confirm"></span>
                     </span>
                     <span class="settings__checkbox-descriptor" i18n="@@action-confirm">Confirm</span>
                   </div>
@@ -512,13 +449,11 @@
                 <td style="padding-left: 3vw" colspan="2">
                   <div
                     class="settings__checkbox-container"
-                    (click)="config.octodash.customActions[number].exit = !config.octodash.customActions[number].exit"
-                  >
+                    (click)="config.octodash.customActions[number].exit = !config.octodash.customActions[number].exit">
                     <span class="settings__checkbox">
                       <span
                         class="settings__checkbox-checked"
-                        *ngIf="config.octodash.customActions[number].exit"
-                      ></span>
+                        *ngIf="config.octodash.customActions[number].exit"></span>
                     </span>
                     <span class="settings__checkbox-descriptor" i18n="@@action-home">Return to Home</span>
                   </div>
@@ -538,8 +473,7 @@
           <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled"
-          >
+            (click)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.displayLayerProgress.enabled"></span>
             </span>
@@ -548,8 +482,7 @@
           <span class="settings__heading-2" i18n="@@settings-enclosure">Enclosure</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled"
-          >
+            (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
             </span>
@@ -567,24 +500,32 @@
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.enclosure.ambientSensorID"
             required
-            [disabled]="!config.plugins.enclosure.enabled"
-          />
+            [disabled]="!config.plugins.enclosure.enabled" />
 
           <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled"
-          >
+            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-filament-manager-enabled">enabled</span>
           </div>
+
+          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager (Beta)</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.spoolManager.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@settings-spool-manager-enabled">enabled</span>
+          </div>
+
           <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled"
-          >
+            (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
             </span>
@@ -593,8 +534,7 @@
           <span class="settings__heading-2" i18n="@@settings-print-time-genius">Print Time Genius</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled"
-          >
+            (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
             </span>
@@ -603,24 +543,33 @@
           <span class="settings__heading-2" i18n="@@settings-psu-control">PSU Control</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled"
-          >
+            (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-psu-control-enabled">enabled</span>
           </div>
+          <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.ophom.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@settings-ophom-control-enabled">enabled</span>
+          </div>
           <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled"
-          >
+            (click)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.tpLinkSmartPlug.enabled"></span>
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-tplink-smartplug-enabled">enabled</span>
           </div>
-          <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip">SmartPlug IP</label>
+          <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
+            >SmartPlug IP</label
+          >
           <input
             type="text"
             id="smart-plug-ip"
@@ -629,13 +578,11 @@
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
             required
-            [disabled]="!config.plugins.tpLinkSmartPlug.enabled"
-          />
+            [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
           <span class="settings__heading-2">Tasmota</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled"
-          >
+            (click)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.tasmota.enabled"></span>
             </span>
@@ -650,8 +597,7 @@
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.ip"
             required
-            [disabled]="!config.plugins.tasmota.enabled"
-          />
+            [disabled]="!config.plugins.tasmota.enabled" />
           <label for="tasmota-idx" class="settings__input-label">Index</label>
           <input
             type="number"
@@ -660,13 +606,11 @@
             name="tasmota-idx"
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.index"
-            [disabled]="!config.plugins.tasmota.enabled"
-          />
+            [disabled]="!config.plugins.tasmota.enabled" />
           <span class="settings__heading-2">Tasmota MQTT</span>
           <div
             class="settings__checkbox-container"
-            (click)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled"
-          >
+            (click)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
             <span class="settings__checkbox">
               <span class="settings__checkbox-checked" *ngIf="config.plugins.tasmotaMqtt.enabled"></span>
             </span>
@@ -681,8 +625,7 @@
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.topic"
             required
-            [disabled]="!config.plugins.tasmotaMqtt.enabled"
-          />
+            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
           <label for="tasmotaMqtt-relayNumber" class="settings__input-label">Relay Number</label>
           <input
             type="number"
@@ -691,8 +634,7 @@
             name="tasmotaMqtt-relayNumber"
             style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
-            [disabled]="!config.plugins.tasmotaMqtt.enabled"
-          />
+            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
         </div>
       </div>
       <div class="settings__content settings__content-inactive" #settingsCredits>
@@ -703,15 +645,17 @@
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
           <span class="settings__about-version">v{{ service.getVersion() }}</span>
-          <button class="settings__about-update settings__about-update-not-available" *ngIf="!service.updateAvailable" i18n="@@about-no-update">
+          <button
+            class="settings__about-update settings__about-update-not-available"
+            *ngIf="!service.updateAvailable"
+            i18n="@@about-no-update">
             no update available
           </button>
           <button
             class="settings__about-update settings__about-update-available"
             *ngIf="service.updateAvailable"
             (click)="showUpdate()"
-            i18n="@@about-install-v"
-          >
+            i18n="@@about-install-v">
             install v{{ service.latestVersion }}
           </button>
           <span class="settings__about-copyright">&#169; 2019-2020 UnchartedBull</span>

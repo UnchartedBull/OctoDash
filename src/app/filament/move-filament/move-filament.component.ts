@@ -58,7 +58,7 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     setTimeout((): void => {
       const unloadingProgressBar = document.getElementById('filamentMoveBar');
       const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
-      unloadingProgressBar.style.backgroundColor = this.currentSpool ? this.currentSpool.color : '#44bd32';
+      unloadingProgressBar.style.backgroundColor = this.currentSpool ? this.currentSpool.color : '#4bae50';
       unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
       setTimeout((): void => {
         unloadingProgressBar.style.width = '0vw';
@@ -76,7 +76,7 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
     setTimeout((): void => {
       const loadingProgressBar = document.getElementById('filamentMoveBar');
-      loadingProgressBar.style.backgroundColor = this.selectedSpool ? this.selectedSpool.color : '#44bd32';
+      loadingProgressBar.style.backgroundColor = this.selectedSpool ? this.selectedSpool.color : '#4bae50';
       loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
       setTimeout((): void => {
         loadingProgressBar.style.width = '50vw';
@@ -97,10 +97,10 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     clearTimeout(this.slowMoveTimeout);
 
     const bar = document.getElementById('filamentMoveBar');
-    const wrapper = (document.getElementsByClassName(
+    const wrapper = document.getElementsByClassName(
       'move-filament__progress-bar-wrapper',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    )[0] as any) as HTMLElement;
+    )[0] as any as HTMLElement;
 
     bar.style.width = Math.floor(bar.getBoundingClientRect().width) + 'px';
     wrapper.style.borderColor = '#c23616';

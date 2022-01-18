@@ -1,71 +1,83 @@
 <span class="setup__text" i18n="@@prompt-plugins">What plugins are you running?</span>
-<div style="text-align: center">
-  <div class="setup__checkbox-container">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked setup__checkbox-checked-disabled" *ngIf="displayLayerProgressPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-display-layer-progress">
-      Display Layer Progress&nbsp;&nbsp;
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changeEnclosurePlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="enclosurePlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-enclosure">
-      Enclosure
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changeFilamentManagerPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="filamentManagerPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-filament-manager">
-      Filament Manager&nbsp;&nbsp;
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changePreheatButtonPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="preheatButtonPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-preheat-button">
-      Preheat Button
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changePrintTimeGeniusPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="printTimeGeniusPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-print-time-genius">
-      Print Time Genius&nbsp;&nbsp;
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changePsuControlPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="psuControlPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-psu-control">
-      PSU Control
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changeTPLinkSmartPlugPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="tpLinkSmartPlugPlugin"></span>
-    </span>
-    <ng-container i18n="@@plugin-tplink-smartplug">
-      TPLink SmartPlug
-    </ng-container>
-  </div>
-  <div class="setup__checkbox-container" (click)="changeTasmotaPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="tasmotaPlugin"></span>
-    </span>
-    Tasmota
-  </div>
-  <div class="setup__checkbox-container" (click)="changeTasmotaMqttPlugin()">
-    <span class="setup__checkbox">
-      <span class="setup__checkbox-checked" *ngIf="tasmotaMqttPlugin"></span>
-    </span>
-    Tasmota MQTT
-  </div>
+
+<div class="setup__plugin-list">
+  <div class="scroll__thumb-inactive"></div>
+  <span>
+    <app-toggle-switch
+      [value]="displayLayerProgressPlugin"
+      (valueChange)="displayLayerProgressPluginChange.emit(!displayLayerProgressPlugin)"
+    >
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-display-layer-progress">Display Layer Progress</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch [value]="enclosurePlugin" (valueChange)="enclosurePluginChange.emit(!enclosurePlugin)">
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-enclosure">Enclosure</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch
+      [value]="filamentManagerPlugin"
+      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)"
+    ></app-toggle-switch>
+    <ng-container i18n="@@plugin-filament-manager">Filament Manager</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch
+      [value]="spoolManagerPlugin"
+      (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)"
+    ></app-toggle-switch>
+    <ng-container i18n="@@plugin-spool-manager">Spool Manager (Beta)</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch
+      [value]="preheatButtonPlugin"
+      (valueChange)="preheatButtonPluginChange.emit(!preheatButtonPlugin)"
+    >
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-preheat-button">Preheat Button</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch
+      [value]="printTimeGeniusPlugin"
+      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)"
+    ></app-toggle-switch>
+    <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch [value]="psuControlPlugin" (valueChange)="psuControlPluginChange.emit(!psuControlPlugin)">
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-psu-control">PSU Control</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch [value]="ophomPlugin" (valueChange)="ophomPluginChange.emit(!ophomPlugin)"> </app-toggle-switch>
+    <ng-container i18n="@@plugin-opom">Ophom (Phillips HUE)</ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch
+      [value]="tpLinkSmartPlugPlugin"
+      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"
+    ></app-toggle-switch>
+    <ng-container i18n="@@plugin-tplink-smartplug"> TPLink SmartPlug </ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch [value]="tasmotaPlugin" (valueChange)="tasmotaPluginChange.emit(!tasmotaPlugin)">
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-tasmota"> Tasmota </ng-container>
+  </span>
+
+  <span>
+    <app-toggle-switch [value]="tasmotaMqttPlugin" (valueChange)="tasmotaMqttPluginChange.emit(!tasmotaMqttPlugin)">
+    </app-toggle-switch>
+    <ng-container i18n="@@plugin-tasmota-mqtt"> Tasmota MQTT </ng-container>
+  </span>
 </div>

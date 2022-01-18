@@ -19,4 +19,6 @@ export enum PrinterState {
   cancelling,
   closed,
   connecting,
+  reconnecting,
+  socketDead,
 }

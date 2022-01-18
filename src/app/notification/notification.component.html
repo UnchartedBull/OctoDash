@@ -1,19 +1,18 @@
 <div
   class="notification"
   *ngIf="!notification.choices"
-  [ngClass]="['notification__border-' + notification.type, show ? 'notification__show' : '']"
-  (click)="hideNotification()"
->
-  <span class="notification__heading">{{ notification.heading }}</span>
-  <span class="notification__text">{{ notification.text }}</span>
+  [ngClass]="['notification__border-' + notification?.type, show ? 'notification__show' : '']"
+  (click)="hideNotification()">
+  <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
+  <span class="notification__heading">{{ notification?.heading }}</span>
+  <span class="notification__text">{{ notification?.text }}</span>
   <span class="notification__close" i18n="@@tap-close">tap this card to close it</span>
 </div>
 
 <div
   class="notification-prompt"
   *ngIf="notification.choices?.length > 0"
-  [ngClass]="[show ? 'notification-prompt__show' : '']"
->
+  [ngClass]="[show ? 'notification-prompt__show' : '']">
   <div class="notification__heading">{{ notification.heading }}</div>
   <div class="notification__text">{{ notification.text }}</div>
   <div class="notification-prompt__choices">
@@ -21,8 +20,7 @@
       class="notification-prompt__choice"
       *ngFor="let choice of notification.choices; index as i; first as isFirst"
       [ngClass]="[isFirst ? 'notification-prompt__choice-first' : '']"
-      (click)="answerPrompt(i)"
-    >
+      (click)="answerPrompt(i)">
       {{ choice }}
     </div>
   </div>

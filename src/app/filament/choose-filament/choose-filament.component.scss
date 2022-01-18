@@ -79,14 +79,14 @@
     }
 
     &:active::before {
-      border-top-color: #44bd32;
-      border-right-color: #44bd32;
+      border-top-color: #4bae50;
+      border-right-color: #4bae50;
       transition: border-color 0s ease-out 0.7s, width 1s ease-out 0.7s, height 0.1s ease-out 1.7s;
     }
 
     &:active::after {
-      border-bottom-color: #44bd32;
-      border-left-color: #44bd32;
+      border-bottom-color: #4bae50;
+      border-left-color: #4bae50;
       transition: border-color 0s ease-out 1.8s, width 1s ease-out 1.8s, height 0.1s ease-out 2.9s;
     }
   }

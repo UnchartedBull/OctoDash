@@ -113,9 +113,11 @@ const configSchema = {
         'displayLayerProgress',
         'enclosure',
         'filamentManager',
+        'spoolManager',
         'preheatButton',
         'printTimeGenius',
         'psuControl',
+        'ophom',
         'tpLinkSmartPlug',
         'tasmota',
         'tasmotaMqtt',
@@ -144,17 +146,14 @@ const configSchema = {
             ambientSensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/ambientSensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
             filament1SensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/filament1SensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
             filament2SensorID: {
               $id: '#/properties/plugins/properties/enclosure/properties/filament2SensorID',
               type: ['number', 'null'],
-              pattern: '^(.*)$',
             },
           },
         },
@@ -165,6 +164,17 @@ const configSchema = {
           properties: {
             enabled: {
               $id: '#/properties/plugins/properties/filamentManager/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
+        spoolManager: {
+          $id: '#/properties/plugins/properties/spoolManager',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/spoolManager/properties/enabled',
               type: 'boolean',
             },
           },
@@ -197,7 +207,18 @@ const configSchema = {
           required: ['enabled'],
           properties: {
             enabled: {
-              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
+              $id: '#/properties/plugins/properties/psuControl/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
+        ophom: {
+          $id: '#/properties/plugins/properties/ophom',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/ophom/properties/enabled',
               type: 'boolean',
             },
           },
@@ -272,6 +293,8 @@ const configSchema = {
         'previewProgressCircle',
         'screenSleepCommand',
         'screenWakeupCommand',
+        'showExtruderControl',
+        'showNotificationCenterIcon',
       ],
       properties: {
         customActions: {
@@ -377,6 +400,14 @@ const configSchema = {
           $id: '#/properties/octodash/properties/screenWakeupCommand',
           type: 'string',
           pattern: '^(.*)$',
+        },
+        showExtruderControl: {
+          $id: '#/properties/octodash/properties/showExtruderControl',
+          type: 'boolean',
+        },
+        showNotificationCenterIcon: {
+          $id: '#/properties/octodash/properties/showNotificationCenterIcon',
+          type: 'boolean',
         },
       },
     },

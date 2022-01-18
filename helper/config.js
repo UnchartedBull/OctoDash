@@ -45,9 +45,9 @@ function getConfigErrors() {
   const errors = [];
   validate.errors?.forEach(error => {
     if (error.keyword === 'type') {
-      errors.push(`${error.dataPath} ${error.message}`);
+      errors.push(`${error.instancePath} ${error.message}`);
     } else {
-      errors.push(`${error.dataPath === '' ? '.' : error.dataPath} ${error.message}`);
+      errors.push(`${error.instancePath === '' ? '/' : error.instancePath} ${error.message}`);
     }
   });
   return errors;

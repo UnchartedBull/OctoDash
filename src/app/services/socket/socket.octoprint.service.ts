@@ -21,6 +21,7 @@ import { SocketService } from './socket.service';
 @Injectable()
 export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
+  private socketDeadTimeout: ReturnType<typeof setTimeout>;
   private socket: WebSocketSubject<unknown>;
 
   private printerStatusSubject: Subject<PrinterStatus>;
@@ -37,7 +38,7 @@ export class OctoPrintSocketService implements SocketService {
     private conversionService: ConversionService,
     private http: HttpClient,
   ) {
-    this.printerStatusSubject = new ReplaySubject<PrinterStatus>();
+    this.printerStatusSubject = new ReplaySubject<PrinterStatus>(1);
     this.jobStatusSubject = new Subject<JobStatus>();
     this.eventSubject = new ReplaySubject<PrinterEvent | PrinterNotification>();
   }
@@ -69,6 +70,7 @@ export class OctoPrintSocketService implements SocketService {
       },
       fanSpeed: this.configService.isDisplayLayerProgressEnabled() ? 0 : -1,
     } as PrinterStatus;
+    this.printerStatusSubject.next(this.printerStatus);
   }
 
   private initJobStatus(): void {
@@ -89,17 +91,17 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private tryConnect(resolve: () => void): void {
-    this.systemService.getSessionKey().subscribe(
-      socketAuth => {
+    this.systemService.getSessionKey().subscribe({
+      next: (socketAuth: SocketAuth) => {
         this.connectSocket();
         this.setupSocket(resolve);
         this.authenticateSocket(socketAuth);
       },
-      () => {
+      error: () => {
         setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
         this.fastInterval += 1;
       },
-    );
+    });
   }
 
   private connectSocket() {
@@ -119,8 +121,8 @@ export class OctoPrintSocketService implements SocketService {
   private handlePluginMessage(pluginMessage: OctoprintPluginMessage) {
     const plugins = [
       {
-        check: (plugin: string) => plugin === 'DisplayLayerProgress-websocket-payload'
-          && this.configService.isDisplayLayerProgressEnabled(),
+        check: (plugin: string) =>
+          plugin === 'DisplayLayerProgress-websocket-payload' && this.configService.isDisplayLayerProgressEnabled(),
         handler: (data: unknown) => {
           this.extractFanSpeed(data as DisplayLayerProgressData);
           this.extractLayerHeight(data as DisplayLayerProgressData);
@@ -132,26 +134,40 @@ export class OctoPrintSocketService implements SocketService {
       },
     ];
 
-    plugins.forEach(plugin =>
-      plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data)
-    );
+    plugins.forEach(plugin => plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data));
   }
 
   private setupSocket(resolve: () => void) {
-    this.socket.subscribe(message => {
-      if (Object.hasOwnProperty.bind(message)('current')) {
-        this.extractPrinterStatus(message as OctoprintSocketCurrent);
-        this.extractJobStatus(message as OctoprintSocketCurrent);
-      } else if (Object.hasOwnProperty.bind(message)('event')) {
-        this.extractPrinterEvent(message as OctoprintSocketEvent);
-      } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-        this.handlePluginMessage(message as OctoprintPluginMessage);
-      } else if (Object.hasOwnProperty.bind(message)('reauth')) {
-        this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
-      } else if (Object.hasOwnProperty.bind(message)('connected')) {
-        resolve();
-        this.checkPrinterConnection();
-      }
+    this.socket.subscribe({
+      next: message => {
+        clearTimeout(this.socketDeadTimeout);
+        this.socketDeadTimeout = setTimeout(() => {
+          this.printerStatus.status = PrinterState.socketDead;
+          this.printerStatusSubject.next(this.printerStatus);
+        }, 30000);
+        if (Object.hasOwnProperty.bind(message)('current')) {
+          this.extractPrinterStatus(message as OctoprintSocketCurrent);
+          this.extractJobStatus(message as OctoprintSocketCurrent);
+        } else if (Object.hasOwnProperty.bind(message)('event')) {
+          this.extractPrinterEvent(message as OctoprintSocketEvent);
+        } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+          this.handlePluginMessage(message as OctoprintPluginMessage);
+        } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
+          this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
+        } else if (Object.hasOwnProperty.bind(message)('connected')) {
+          resolve();
+          this.checkPrinterConnection();
+        }
+      },
+      error: error => {
+        if (error['type'] === 'close') {
+          this.printerStatus.status = PrinterState.reconnecting;
+          this.printerStatusSubject.next(this.printerStatus);
+          this.tryConnect(() => null);
+        } else {
+          console.error(error);
+        }
+      },
     });
   }
 

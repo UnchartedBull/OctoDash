@@ -1,5 +1,15 @@
 <app-notification></app-notification>
-<div class="container">
+<app-notification-center
+  *ngIf="initialized"
+  [ngStyle]="{ top: notificationCenterTop }"
+  (setNotificationCenterAnimation)="setNotificationCenterAnimation($event)"
+  (setNotificationCenterPosition)="setNotificationCenterPosition($event)"
+  [ngClass]="{ animateNotificationCenter: animateNotificationCenter }"></app-notification-center>
+<div
+  class="container"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd($event)">
   <div *ngIf="!activated">
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
     <span
@@ -9,9 +19,17 @@
     >
     <span class="splash-screen__hint" *ngIf="showConnectionHint" i18n="@@long-init">
       Initializing is taking longer than usual. <br />
-      Please make sure that OctoPrint is up and running.
+      Please make sure that OctoPrint is running and that CORS is enabled for the API.
     </span>
   </div>
+
+  <fa-icon
+    *ngIf="initialized && showNotificationCenterIcon()"
+    [icon]="['fas', 'caret-down']"
+    (click)="showNotificationCenter()"
+    matRipple
+    [matRippleUnbounded]="true"
+    [matRippleCentered]="true"></fa-icon>
   <router-outlet (activate)="activated = true"></router-outlet>
 </div>
 
@@ -20,15 +38,21 @@
     id="loadingAnimationCache"
     [hidden]="true"
     [options]="loadingOptionsCache"
-    (dataReady)="loadingAnimationCacheDone()"
-  ></ng-lottie>
+    (dataReady)="loadingAnimationCacheDone()"></ng-lottie>
+</ng-container>
 
-  <ng-container *ngIf="!checkmarkAnimationCached">
-    <ng-lottie
-      id="checkmarkAnimationCache"
-      [hidden]="true"
-      [options]="checkmarkOptionsCache"
-      (dataReady)="checkmarkAnimationCacheDone()"
-    ></ng-lottie>
-  </ng-container>
+<ng-container *ngIf="!checkmarkAnimationCached">
+  <ng-lottie
+    id="checkmarkAnimationCache"
+    [hidden]="true"
+    [options]="checkmarkOptionsCache"
+    (dataReady)="checkmarkAnimationCacheDone()"></ng-lottie>
+</ng-container>
+
+<ng-container *ngIf="!toggleSwitchAnimationCached">
+  <ng-lottie
+    id="toggleSwitchAnimationCache"
+    [hidden]="true"
+    [options]="toggleSwitchOptionsCache"
+    (dataReady)="toggleSwitchAnimationCacheDone()"></ng-lottie>
 </ng-container>

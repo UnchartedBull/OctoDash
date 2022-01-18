@@ -682,8 +682,18 @@ IFS='/' read -ra version <<< "$releaseURL"
 echo "Installing OctoDash "${version[7]}, $arch""
 
 echo "Installing Dependencies ..."
-sudo apt -qq update
-sudo apt -qq install $dependencies -y
+{
+  sudo apt -qq update
+  sudo apt -qq install $dependencies -y
+} || {
+  echo ""
+  echo "Couldn't install dependenices!"
+  echo "Seems like there is something wrong with the package manager 'apt'"
+  echo ""
+  echo "If the error is similar to: 'E: Repository 'http://raspbian.raspberrypi.org/raspbian buster InRelease' changed its 'Suite' value from 'stable' to 'oldstable''"
+  echo "you can run 'sudo apt update --allow-releaseinfo-change' and then execute the OctoDash installation command again"
+  exit -1
+}
 
 if [ -d "/home/pi/OctoPrint/venv" ]; then
     DIRECTORY="/home/pi/OctoPrint/venv"
@@ -703,15 +713,21 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'Display Layer Progress (mandatory)' 'Filament Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT')
-  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI)?" plugins selected_plugins
+  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT', 'Ophom (Phillips HUE)')
+  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
   echo "Installing Plugins..."
 
-  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress (mandatory)" ]]; then
+  if [[ " ${selected_plugins[@]} " =~ "OctoDash Companion" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-OctoDashCompanion/archive/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Spool Manager" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-SpoolManager/releases/latest/download/master.zip"
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
@@ -737,6 +753,23 @@ if [ $DIRECTORY != "-" ]; then
   if [[ " ${selected_plugins[@]} " =~ "TasmotaMQTT" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TasmotaMQTT/archive/master.zip"
   fi;
+  if [[ " ${selected_plugins[@]} " =~ "Ophom (Phillips HUE)" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/Salamafet/ophom/archive/refs/heads/master.zip"
+  fi;
+fi;
+
+if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
+yes_no=( 'yes' 'no' )
+
+list_input "Should I enable CORS ? FYI, this is required by OctoDash v3 and OctoPrint 1.6.0, and may have security implications" yes_no cors
+
+echo $cors
+if [ $cors == 'yes' ]; then
+        echo "Enabling CORS ..."
+        "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
+else
+  echo "${red}CORS has ${bold}NOT${normal} been enabled. OctoDash most likely won't work if CORS is disabled. You can always enable it in the API settings in OctoPrint"
+fi
 fi;
 
 echo "Installing OctoDash "${version[7]}, $arch" ..."

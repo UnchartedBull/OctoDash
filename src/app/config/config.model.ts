@@ -52,9 +52,11 @@ interface Plugins {
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
+  spoolManager: Plugin;
   preheatButton: Plugin;
   printTimeGenius: Plugin;
   psuControl: PSUControlPlugin;
+  ophom: PSUControlPlugin;
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
   tasmota: TasmotaPlugin;
   tasmotaMqtt: TasmotaMqttPlugin;
@@ -102,6 +104,8 @@ interface OctoDash {
   previewProgressCircle: boolean;
   screenSleepCommand: string;
   screenWakeupCommand: string;
+  showExtruderControl: boolean;
+  showNotificationCenterIcon: boolean;
 }
 
 export interface CustomAction {

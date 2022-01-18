@@ -13,17 +13,18 @@ export class PersonalizationService {
 
   public getActivePrinterProfileName(octoprintURL: string, apiKey: string): Observable<string> {
     return this.http
-      .get<OctoprintPrinterProfiles>(`${octoprintURL}printerprofiles`, {
+      .get<OctoprintPrinterProfiles>(`${octoprintURL}api/printerprofiles`, {
         headers: new HttpHeaders({
           'x-api-key': apiKey,
         }),
       })
       .pipe(
         map(profiles => {
-          for (const [_, profile] of Object.entries(profiles.profiles)) {
+          for (const profile of Object.values(profiles.profiles)) {
             if (profile.current) return profile.name;
           }
-        }, defaultIfEmpty('')),
+        }),
+        defaultIfEmpty(''),
       );
   }
 }

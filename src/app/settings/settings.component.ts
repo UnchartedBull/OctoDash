@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 
 import { AppService } from '../app.service';
 import { Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
+import { ElectronService } from '../electron.service';
+import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -53,12 +54,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
-    console.log(this.config);
   }
 
   public ngOnDestroy(): void {
-    this.electronService.ipcRenderer.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public hideSettings(): void {
@@ -72,12 +72,19 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.fadeOutAnimation = false;
       }, 5000);
     } else {
-      this.notificationService.setWarning(
-        $localize`:@@conf-unsaved:Configuration not saved!`,
-        $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
-      );
+      this.notificationService.setNotification({
+        heading: $localize`:@@conf-unsaved:Configuration not saved!`,
+        // eslint-disable-next-line max-len
+        text: $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
+        type: NotificationType.WARN,
+        time: new Date(),
+      });
       this.overwriteNoSave = true;
     }
+  }
+
+  public stopPropagation(event: Event): void {
+    event.stopPropagation();
   }
 
   public changePage(page: number, current: number, direction: 'forward' | 'backward'): void {
@@ -95,19 +102,24 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public updateConfig(): void {
     const config = this.configService.createConfigFromInput(this.config);
 
-    this.electronService.ipcRenderer.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.ipcRenderer.on('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
+    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
     this.configService.saveConfig(config);
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setWarning($localize`:@@error-invalid-config:Can't save invalid config`, String(errors));
+    this.notificationService.setNotification({
+      heading: $localize`:@@error-invalid-config:Can't save invalid config`,
+      text: String(errors),
+      type: NotificationType.WARN,
+      time: new Date(),
+    });
   }
 
   private onConfigSaved() {
     this.hideSettings();
-    this.electronService.ipcRenderer.send('reload');
+    this.electronService.send('reload');
   }
 
   public showUpdate(): void {

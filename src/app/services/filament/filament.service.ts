@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { ConfigService } from '../../config/config.service';
-import { FilamentSpool } from '../../model';
+import { FilamentSpool, NotificationType } from '../../model';
 import { NotificationService } from '../../notification/notification.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
@@ -17,31 +17,33 @@ export class FilamentService {
     private configService: ConfigService,
     private filamentPluginService: FilamentPluginService,
   ) {
-    if (this.configService.isFilamentManagerEnabled()) {
+    if (this.configService.isFilamentManagerUsed()) {
       this.loadSpools();
     }
   }
 
   private loadSpools(): void {
-    this.filamentPluginService.getSpools().subscribe(
-      (spools: Array<FilamentSpool>): void => {
-        this.filamentSpools = spools;
-      },
-      (error: HttpErrorResponse): void => {
-        this.notificationService.setError($localize`:@@error-spools:Can't load filament spools!`, error.message);
-      },
-      (): void => {
-        this.loading = false;
-      },
-    );
-    this.filamentPluginService.getCurrentSpool().subscribe(
-      (spool: FilamentSpool): void => {
-        this.currentSpool = spool;
-      },
-      (error: HttpErrorResponse): void => {
-        this.notificationService.setError($localize`:@@error-spool:Can't load active spool!`, error.message);
-      },
-    );
+    this.filamentPluginService.getSpools().subscribe({
+      next: (spools: Array<FilamentSpool>) => (this.filamentSpools = spools),
+      error: (error: HttpErrorResponse) =>
+        this.notificationService.setNotification({
+          heading: $localize`:@@error-spools:Can't load filament spools!`,
+          text: error.message,
+          type: NotificationType.ERROR,
+          time: new Date(),
+        }),
+      complete: () => (this.loading = false),
+    });
+    this.filamentPluginService.getCurrentSpool().subscribe({
+      next: (spool: FilamentSpool) => (this.currentSpool = spool),
+      error: (error: HttpErrorResponse) =>
+        this.notificationService.setNotification({
+          heading: $localize`:@@error-spool:Can't load active spool!`,
+          text: error.message,
+          type: NotificationType.ERROR,
+          time: new Date(),
+        }),
+    });
   }
 
   public getFilamentSpools(): Array<FilamentSpool> {
@@ -58,30 +60,42 @@ export class FilamentService {
 
   public setSpool(spool: FilamentSpool): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.filamentPluginService.setSpool(spool).subscribe(
-        (): void => {
-          this.filamentPluginService.getCurrentSpool().subscribe(
-            (spoolRemote: FilamentSpool): void => {
+      this.filamentPluginService.setSpool(spool).subscribe({
+        next: () => {
+          this.filamentPluginService.getCurrentSpool().subscribe({
+            next: (spoolRemote: FilamentSpool) => {
               if (spool.id === spoolRemote.id) resolve();
               else {
-                this.notificationService.setError(
-                  $localize`:@@error-spool-id:Spool IDs didn't match`,
-                  $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
-                );
+                this.notificationService.setNotification({
+                  heading: $localize`:@@error-spool-id:Spool IDs didn't match`,
+                  text: $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
+                  type: NotificationType.ERROR,
+                  time: new Date(),
+                });
                 reject();
               }
             },
-            (error): void => {
-              this.notificationService.setError($localize`:@@error-set-new-spool:Can't set new spool!`, error.message);
+            error: (error: HttpErrorResponse) => {
+              this.notificationService.setNotification({
+                heading: $localize`:@@error-set-new-spool:Can't set new spool!`,
+                text: error.message,
+                type: NotificationType.ERROR,
+                time: new Date(),
+              });
               reject();
             },
-          );
+          });
         },
-        (error): void => {
-          this.notificationService.setError($localize`:@@error-set-new-spool-2:Can't set new spool!`, error.message);
+        error: (error: HttpErrorResponse): void => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-set-new-spool-2:Can't set new spool!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
           reject();
         },
-      );
+      });
     });
   }
 }

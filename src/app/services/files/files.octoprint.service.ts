@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
-import { Directory, File, Folder } from '../../model';
+import { Directory, File, Folder, NotificationType } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { FilesService } from './files.service';
@@ -60,6 +60,15 @@ export class FilesOctoprintService implements FilesService {
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
                 ...(fileOrFolder.gcodeAnalysis
                   ? {
+                      successful:
+                        fileOrFolder.prints != null
+                          ? fileOrFolder.prints.last.success
+                            ? 'files__object--success'
+                            : 'files__object--failed'
+                          : 'files__object--unknown',
+                      thumbnail: fileOrFolder.thumbnail
+                        ? this.configService.getApiURL(fileOrFolder.thumbnail, false)
+                        : 'assets/object.svg',
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),
@@ -109,26 +118,24 @@ export class FilesOctoprintService implements FilesService {
 
   public getFile(filePath: string): Observable<File> {
     return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
-      map(
-        (file: OctoprintFile): File => {
-          return {
-            origin: file.origin,
-            path: '/' + file.origin + '/' + file.path,
-            name: file.name,
-            date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
-            size: this.conversionService.convertByteToMegabyte(file.size),
-            thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
-            ...(file.gcodeAnalysis
-              ? {
-                  printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
-                  filamentWeight: this.conversionService.convertFilamentLengthToWeight(
-                    _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
-                  ),
-                }
-              : {}),
-          } as File;
-        },
-      ),
+      map((file: OctoprintFile): File => {
+        return {
+          origin: file.origin,
+          path: '/' + file.origin + '/' + file.path,
+          name: file.name,
+          date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
+          size: this.conversionService.convertByteToMegabyte(file.size),
+          thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
+          ...(file.gcodeAnalysis
+            ? {
+                printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                  _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
+                ),
+              }
+            : {}),
+        } as File;
+      }),
     );
   }
 
@@ -149,9 +156,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-file:Can't load file!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-file:Can't load file!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -165,9 +178,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-print:Can't start print!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-print:Can't start print!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }
@@ -176,9 +195,15 @@ export class FilesOctoprintService implements FilesService {
     this.http
       .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
       .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@files-error-delete:Can't delete file!`, error.message),
-        ),
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@files-error-delete:Can't delete file!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
       )
       .subscribe();
   }

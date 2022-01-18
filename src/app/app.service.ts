@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { ElectronService } from 'ngx-electron';
 
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
+import { ElectronService } from './electron.service';
+import { NotificationType } from './model';
 import { NotificationService } from './notification/notification.service';
 
 @Injectable()
@@ -24,46 +25,52 @@ export class AppService {
   ) {
     this.enableVersionListener();
     this.enableCustomCSSListener();
-    this.electronService.ipcRenderer.send('appInfo');
+    this.electronService.send('appInfo');
 
     // list of all error following an upgrade
     this.updateError = {
-      ".printer should have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
-      ".plugins should have required property 'tpLinkSmartPlug'": config =>
+      "/printer must have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
+      "/plugins must have required property 'tpLinkSmartPlug'": config =>
         (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),
-      ".plugins should have required property 'tasmota'": config =>
+      "/plugins must have required property 'tasmota'": config =>
         (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
-      ".plugins should have required property 'tasmotaMqtt'": config =>
+      "/plugins must have required property 'tasmotaMqtt'": config =>
         (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
-      ".octodash should have required property 'previewProgressCircle'": config =>
+      "/octodash must have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
-      ".octodash should have required property 'turnOnPrinterWhenExitingSleep'": config => {
+      "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
         config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
         delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
       },
-      ".octodash should have required property 'screenSleepCommand'": config =>
+      "/octodash must have required property 'screenSleepCommand'": config =>
         (config.octodash.screenSleepCommand = 'xset dpms force standby'),
-      ".octodash should have required property 'screenWakeupCommand'": config =>
+      "/octodash must have required property 'screenWakeupCommand'": config =>
         (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
-      ".octodash should have required property 'invertAxisControl'": config =>
+      "/octodash must have required property 'invertAxisControl'": config =>
         (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
-      ".printer should have required property 'disableExtruderGCode'": config =>
+      "/printer must have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
+      "/octodash must have required property 'showExtruderControl'": config =>
+        (config.octodash.showExtruderControl = true),
+      "/plugins must have required property 'spoolManager'": config =>
+        (config.plugins.spoolManager = { enabled: false }),
+      "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
+      "/octodash must have required property 'showNotificationCenterIcon'": config =>
+        (config.octodash.showNotificationCenterIcon = true),
     };
   }
 
   private checkUpdate(): void {
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe(
-      (data: GitHubReleaseInformation): void => {
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
+      next: (data: GitHubReleaseInformation): void => {
         if (this.version !== data.name.replace('v', '')) {
           this.updateAvailable = true;
         }
         this.latestVersion = data.name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;
       },
-      (): void => null,
-    );
-    setTimeout(this.checkUpdate.bind(this), 3600000);
+      complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
+    });
   }
 
   public hasUpdateError(errors: string[]): boolean {
@@ -89,21 +96,26 @@ export class AppService {
   }
 
   private enableVersionListener(): void {
-    this.electronService.ipcRenderer.on('versionInformation', (_, versionInformation: VersionInformation): void => {
+    this.electronService.on('versionInformation', (_, versionInformation: VersionInformation): void => {
       this.version = versionInformation.version;
       this.checkUpdate();
     });
   }
 
   private enableCustomCSSListener(): void {
-    this.electronService.ipcRenderer.on('customStyles', (_, customCSS: string): void => {
+    this.electronService.on('customStyles', (_, customCSS: string): void => {
       const css = document.createElement('style');
       css.appendChild(document.createTextNode(customCSS));
       document.head.append(css);
     });
 
-    this.electronService.ipcRenderer.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setError($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
+    this.electronService.on('customStylesError', (_, customCSSError: string): void => {
+      this.notificationService.setNotification({
+        heading: $localize`:@@error-load-style:Can't load custom styles!`,
+        text: customCSSError,
+        type: NotificationType.ERROR,
+        time: new Date(),
+      });
     });
   }
 
@@ -120,11 +132,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenSleepCommand() });
+    this.electronService.send('screenControl', { command: this.configService.getScreenSleepCommand() });
   }
 
   public turnDisplayOn(): void {
-    this.electronService.ipcRenderer.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
+    this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
   }
 }
 

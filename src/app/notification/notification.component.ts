@@ -15,13 +15,8 @@ import { NotificationService } from './notification.service';
 export class NotificationComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
-  public notification: Notification = {
-    heading: '',
-    text: '',
-    type: '',
-    choices: null,
-    closed: null,
-  };
+  public notification?: Notification;
+  public notificationCloseTimeout: ReturnType<typeof setTimeout>;
   public show = false;
 
   public constructor(
@@ -37,19 +32,19 @@ export class NotificationComponent implements OnDestroy {
     );
   }
 
-  public hideNotification(): void {
+  public hideNotification(removeFromStack = true): void {
     this.show = false;
-    if (this.notification.closed) {
-      this.notification.closed();
-    }
+    clearTimeout(this.notificationCloseTimeout);
+    if (removeFromStack) this.notificationService.removeNotification(this.notification);
   }
 
+  // TODO:
   public answerPrompt(index: number): void {
     this.http
       .post(
         this.configService.getApiURL('plugin/action_command_prompt'),
         { command: 'select', choice: index },
-        this.configService.getHTTPHeaders()
+        this.configService.getHTTPHeaders(),
       )
       .pipe(
         catchError(error =>
@@ -64,8 +59,14 @@ export class NotificationComponent implements OnDestroy {
       if (notification === 'close') {
         this.hideNotification();
       } else {
+        this.hideNotification(false);
         this.notification = notification;
         this.show = true;
+
+        if (!notification.sticky) {
+          clearTimeout(this.notificationCloseTimeout);
+          this.notificationCloseTimeout = setTimeout(this.hideNotification.bind(this), 30 * 1000, false);
+        }
       }
     });
   }

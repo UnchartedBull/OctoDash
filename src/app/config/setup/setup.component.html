@@ -57,9 +57,11 @@
     [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
     [(enclosurePlugin)]="config.plugins.enclosure.enabled"
     [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
+    [(spoolManagerPlugin)]="config.plugins.spoolManager.enabled"
     [(preheatButtonPlugin)]="config.plugins.preheatButton.enabled"
     [(printTimeGeniusPlugin)]="config.plugins.printTimeGenius.enabled"
     [(psuControlPlugin)]="config.plugins.psuControl.enabled"
+    [(ophomPlugin)]="config.plugins.ophom.enabled"
     [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
     [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
     [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"
@@ -73,26 +75,20 @@
           [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon"
         />
-        <ng-container i18n="@@checking-octoprint-connection">
-          Octoprint Connection
-        </ng-container>
+        <ng-container i18n="@@checking-octoprint-connection"> Octoprint Connection </ng-container>
       </span>
       <div *ngIf="octoprintConnection">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
-          <ng-container i18n="@@checking-config">
-            Validating Config
-          </ng-container>
+          <ng-container i18n="@@checking-config"> Validating Config </ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
-          <ng-container i18n="@@checking-save">
-            Saving Config
-          </ng-container>
+          <ng-container i18n="@@checking-save"> Saving Config </ng-container>
         </span>
         <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>
