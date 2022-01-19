@@ -42,7 +42,7 @@ export class EventService implements OnDestroy {
         } else {
           this.router.navigate(['/main-screen-no-touch']);
         }
-      }, 1000);
+      }, 500);
     }
   }
 

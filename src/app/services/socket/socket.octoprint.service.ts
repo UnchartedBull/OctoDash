@@ -141,7 +141,6 @@ export class OctoPrintSocketService implements SocketService {
       },
       {
         check: (plugin: string) => ['action_command_prompt', 'action_command_notification'].includes(plugin),
-        // handler: (data: unknown) => this.eventSubject.next(data as PrinterNotification),
         handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
       },
     ];
@@ -181,18 +180,6 @@ export class OctoPrintSocketService implements SocketService {
         }
       },
     });
-
-    setTimeout(() => {
-      this.notificationService.setNotification({
-        heading: $localize`:@@action-required:Action required`,
-        text: 'testing',
-        type: NotificationType.PROMPT,
-        time: new Date(),
-        choices: ['some longer text', 'some longer text', 'some longer text'],
-        callback: this.callbackFunction.bind(this),
-        sticky: true,
-      } as Notification);
-    }, 2000);
   }
 
   private checkPrinterConnection() {
