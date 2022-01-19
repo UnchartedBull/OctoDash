@@ -337,13 +337,10 @@ export class OctoPrintSocketService implements SocketService {
   //==== Notifications ====//
 
   private handlePrinterNotification(notification: PrinterNotification) {
-    console.log(notification);
-    if (this.isValidPrinterNotification) {
-      console.log('VALID');
+    if (Object.keys(notification).length !== 0) {
       if (notification.action === 'close') {
         this.notificationService.closeNotification();
       } else if (notification.choices?.length > 0) {
-        // event is action:prompt
         this.notificationService.setNotification({
           heading: $localize`:@@action-required:Action required`,
           text: notification.text,
@@ -393,13 +390,6 @@ export class OctoPrintSocketService implements SocketService {
         }),
       )
       .subscribe();
-  }
-
-  private isValidPrinterNotification(notification: PrinterNotification): boolean {
-    return (
-      typeof notification === 'object' &&
-      ('text' in notification || 'message' in notification || 'action' in notification)
-    );
   }
 
   //==== Subscribables ====//
