@@ -1,13 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { pluck, startWith } from 'rxjs/operators';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { catchError, pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
-import { JobStatus, PrinterEvent, PrinterNotification, PrinterState, PrinterStatus, SocketAuth } from '../../model';
+import {
+  JobStatus,
+  Notification,
+  NotificationType,
+  PrinterEvent,
+  PrinterNotification,
+  PrinterState,
+  PrinterStatus,
+  SocketAuth,
+} from '../../model';
 import {
   DisplayLayerProgressData,
   OctoprintFilament,
@@ -15,6 +24,7 @@ import {
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
 } from '../../model/octoprint';
+import { NotificationService } from '../../notification/notification.service';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
 
@@ -26,7 +36,7 @@ export class OctoPrintSocketService implements SocketService {
 
   private printerStatusSubject: Subject<PrinterStatus>;
   private jobStatusSubject: Subject<JobStatus>;
-  private eventSubject: Subject<PrinterEvent | PrinterNotification>;
+  private eventSubject: Subject<PrinterEvent>;
 
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
@@ -36,11 +46,12 @@ export class OctoPrintSocketService implements SocketService {
     private configService: ConfigService,
     private systemService: SystemService,
     private conversionService: ConversionService,
+    private notificationService: NotificationService,
     private http: HttpClient,
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>(1);
     this.jobStatusSubject = new Subject<JobStatus>();
-    this.eventSubject = new ReplaySubject<PrinterEvent | PrinterNotification>();
+    this.eventSubject = new ReplaySubject<PrinterEvent>();
   }
 
   //==== SETUP & AUTH ====//
@@ -123,14 +134,15 @@ export class OctoPrintSocketService implements SocketService {
       {
         check: (plugin: string) =>
           plugin === 'DisplayLayerProgress-websocket-payload' && this.configService.isDisplayLayerProgressEnabled(),
-        handler: (data: unknown) => {
-          this.extractFanSpeed(data as DisplayLayerProgressData);
-          this.extractLayerHeight(data as DisplayLayerProgressData);
+        handler: (message: unknown) => {
+          this.extractFanSpeed(message as DisplayLayerProgressData);
+          this.extractLayerHeight(message as DisplayLayerProgressData);
         },
       },
       {
         check: (plugin: string) => ['action_command_prompt', 'action_command_notification'].includes(plugin),
-        handler: (data: unknown) => this.eventSubject.next(data as PrinterNotification),
+        // handler: (data: unknown) => this.eventSubject.next(data as PrinterNotification),
+        handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
       },
     ];
 
@@ -323,6 +335,74 @@ export class OctoPrintSocketService implements SocketService {
     }
   }
 
+  //==== Notifications ====//
+
+  private handlePrinterNotification(notification: PrinterNotification) {
+    console.log(notification);
+    if (this.isValidPrinterNotification) {
+      console.log('VALID');
+      if (notification.action === 'close') {
+        this.notificationService.closeNotification();
+      } else if (notification.choices?.length > 0) {
+        // event is action:prompt
+        this.notificationService.setNotification({
+          heading: $localize`:@@action-required:Action required`,
+          text: notification.text,
+          type: NotificationType.INFO,
+          time: new Date(),
+          choices: notification.choices,
+          callback: this.callbackFunction.bind(this),
+          sticky: true,
+        } as Notification);
+      } else if (notification.choices?.length == 0) {
+        this.notificationService.setNotification({
+          heading: $localize`:@@printer-information:Printer information`,
+          text: notification.text,
+          type: NotificationType.WARN,
+          time: new Date(),
+          sticky: true,
+        } as Notification);
+      } else {
+        // TODO: check if annoying
+        this.notificationService.setNotification({
+          heading: $localize`:@@printer-information:Printer information`,
+          text: notification.text,
+          type: NotificationType.INFO,
+          time: new Date(),
+        } as Notification);
+      }
+    }
+  }
+
+  private callbackFunction(index: number) {
+    console.log('CALLBACK');
+    this.http
+      .post(
+        this.configService.getApiURL('plugin/action_command_prompt'),
+        { command: 'select', choice: index },
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-answer-prompt:Can't answer prompt!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
+  private isValidPrinterNotification(notification: PrinterNotification): boolean {
+    return (
+      typeof notification === 'object' &&
+      ('text' in notification || 'message' in notification || 'action' in notification)
+    );
+  }
+
   //==== Subscribables ====//
 
   public getPrinterStatusSubscribable(): Observable<PrinterStatus> {
@@ -333,7 +413,7 @@ export class OctoPrintSocketService implements SocketService {
     return this.jobStatusSubject.pipe(startWith(this.jobStatus));
   }
 
-  public getEventSubscribable(): Observable<PrinterEvent | PrinterNotification> {
+  public getEventSubscribable(): Observable<PrinterEvent> {
     return this.eventSubject;
   }
 }

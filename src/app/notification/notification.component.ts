@@ -1,10 +1,9 @@
-import { Component, NgZone, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-import { Notification } from '../model';
 import { ConfigService } from '../config/config.service';
+import { Notification } from '../model';
 import { NotificationService } from './notification.service';
 
 @Component({
@@ -36,22 +35,6 @@ export class NotificationComponent implements OnDestroy {
     this.show = false;
     clearTimeout(this.notificationCloseTimeout);
     if (removeFromStack) this.notificationService.removeNotification(this.notification);
-  }
-
-  // TODO:
-  public answerPrompt(index: number): void {
-    this.http
-      .post(
-        this.configService.getApiURL('plugin/action_command_prompt'),
-        { command: 'select', choice: index },
-        this.configService.getHTTPHeaders(),
-      )
-      .pipe(
-        catchError(error =>
-          this.notificationService.setError($localize`:@@error-answer-prompt:Can't answer prompt!`, error.message),
-        ),
-      )
-      .subscribe();
   }
 
   private setNotification(notification: Notification | 'close'): void {
