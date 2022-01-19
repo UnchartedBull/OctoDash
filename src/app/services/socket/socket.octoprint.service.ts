@@ -187,14 +187,14 @@ export class OctoPrintSocketService implements SocketService {
     }
     this.printerStatus.status = PrinterState[message.current.state.text.toLowerCase()];
 
-    if (this.printerStatus.status === PrinterState.printing && this.lastState === PrinterEvent.UNKNOWN) {
+    if (this.printerStatus.status === PrinterState.printing && this.lastState !== PrinterEvent.PRINTING) {
       this.extractPrinterEvent({
         event: {
           type: 'PrintStarted',
           payload: null,
         },
       } as OctoprintSocketEvent);
-    } else if (this.printerStatus.status === PrinterState.paused && this.lastState === PrinterEvent.UNKNOWN) {
+    } else if (this.printerStatus.status === PrinterState.paused && this.lastState !== PrinterEvent.PAUSED) {
       this.extractPrinterEvent({
         event: {
           type: 'PrintPaused',
