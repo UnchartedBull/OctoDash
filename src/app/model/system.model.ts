@@ -12,6 +12,7 @@ export enum NotificationType {
   INFO,
   WARN,
   ERROR,
+  PROMPT,
 }
 
 export interface UpdateError {

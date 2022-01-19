@@ -12,38 +12,21 @@
   border-right: 1vw solid #5a6675;
 
   &-prompt {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    left: 0vw;
-    top: -100vh;
-    transition: top 0.7s ease-in-out;
-    background-color: #5a6675;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-    &__show {
-      top: 0vh;
-    }
-
     &__choices {
       display: flex;
-      flex-direction: column;
       flex-wrap: wrap;
-      justify-content: center;
-      padding: 0vw 5vw;
+      justify-content: space-evenly;
     }
 
     &__choice {
       display: block;
-      font-size: 3vw;
+      font-size: 2.7vw;
       background-color: #2196f3;
       text-align: center;
       padding: 3vh;
       border-radius: 0.8vw;
       margin: 1vw;
+      flex-grow: 100;
 
       &-first {
         background-color: #44bd32;
@@ -87,6 +70,10 @@
   }
 
   &__border {
+    &-3 {
+      border-left: 1vw solid #a1abb7;
+    }
+
     &-2 {
       border-left: 1vw solid #c23616;
     }

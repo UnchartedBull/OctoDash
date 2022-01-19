@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from '../config/config.service';
 import { Notification } from '../model';
 import { NotificationService } from './notification.service';
 
@@ -18,12 +16,7 @@ export class NotificationComponent implements OnDestroy {
   public notificationCloseTimeout: ReturnType<typeof setTimeout>;
   public show = false;
 
-  public constructor(
-    private notificationService: NotificationService,
-    private zone: NgZone,
-    private http: HttpClient,
-    private configService: ConfigService,
-  ) {
+  public constructor(private notificationService: NotificationService, private zone: NgZone) {
     this.subscriptions.add(
       this.notificationService
         .getObservable()
@@ -31,10 +24,17 @@ export class NotificationComponent implements OnDestroy {
     );
   }
 
-  public hideNotification(removeFromStack = true): void {
-    this.show = false;
-    clearTimeout(this.notificationCloseTimeout);
-    if (removeFromStack) this.notificationService.removeNotification(this.notification);
+  public hideNotification(removeFromStack = true, userTriggered = false): void {
+    if (!userTriggered || (userTriggered && !this.notification.choices)) {
+      this.show = false;
+      clearTimeout(this.notificationCloseTimeout);
+      if (removeFromStack) this.notificationService.removeNotification(this.notification);
+    }
+  }
+
+  public chooseAction(index: number, callback: (index: number) => void): void {
+    callback(index);
+    this.hideNotification();
   }
 
   private setNotification(notification: Notification | 'close'): void {

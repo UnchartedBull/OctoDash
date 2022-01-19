@@ -181,6 +181,18 @@ export class OctoPrintSocketService implements SocketService {
         }
       },
     });
+
+    setTimeout(() => {
+      this.notificationService.setNotification({
+        heading: $localize`:@@action-required:Action required`,
+        text: 'testing',
+        type: NotificationType.PROMPT,
+        time: new Date(),
+        choices: ['some longer text', 'some longer text', 'some longer text'],
+        callback: this.callbackFunction.bind(this),
+        sticky: true,
+      } as Notification);
+    }, 2000);
   }
 
   private checkPrinterConnection() {
@@ -348,7 +360,7 @@ export class OctoPrintSocketService implements SocketService {
         this.notificationService.setNotification({
           heading: $localize`:@@action-required:Action required`,
           text: notification.text,
-          type: NotificationType.INFO,
+          type: NotificationType.PROMPT,
           time: new Date(),
           choices: notification.choices,
           callback: this.callbackFunction.bind(this),
@@ -375,7 +387,7 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private callbackFunction(index: number) {
-    console.log('CALLBACK');
+    console.log('CALLBACK', index);
     this.http
       .post(
         this.configService.getApiURL('plugin/action_command_prompt'),
