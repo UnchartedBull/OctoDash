@@ -1,64 +1,64 @@
 /**** Job-Info Resizes ****/
 
-app-job-status ~ app-printer-status .printer-status{
-    position:absolute!important;
-    top: 42vh!important;
-    left: 0vw!important;
+app-job-status ~ app-printer-status .printer-status {
+  position: absolute !important;
+  top: 42vh !important;
+  left: 0 !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__set-value {
-    margin-top: -2vh!important;
-    font-size: 3.9vw!important;
+  margin-top: -2vh !important;
+  font-size: 3.9vw !important;
 }
 
 /**** Job-Info Layer Progress ****/
 
-.height-indication{
-    position:absolute!important;
-    top: 66vh!important;
-    left: 0vw!important;
-    font-size: 3vw!important;
+.height-indication {
+  position: absolute !important;
+  top: 66vh !important;
+  left: 0 !important;
+  font-size: 3vw !important;
 }
 
-.height-indication__current-height{
-    font-size: 6vh!important;
+.height-indication__current-height {
+  font-size: 6vh !important;
 }
 
-.height-indication__total-height{
-    font-size: 5vh!important;
+.height-indication__total-height {
+  font-size: 5vh !important;
 }
 
 /**** Job-Info Progress ****/
 
 .job-info__progress-bar {
-    height: 8vh!important;
-    border-radius: 1.7vw!important;
+  height: 8vh !important;
+  border-radius: 1.7vw !important;
 }
 
 .job-info__progress-bar__wrapper {
-    position:fixed!important;
-    top: 77vh!important;
-    left: 3vw!important;
-    width: 92vw!important;
-    height: 8vh!important;
-    border-radius: 2vw!important;
-    background-color: rgba(38, 44, 53, 1);
-    border-style: solid!important;
-    border-color: rgb(121, 121, 121);
-    border-width: 2px!important;
+  position: fixed !important;
+  top: 77vh !important;
+  left: 3vw !important;
+  width: 92vw !important;
+  height: 8vh !important;
+  border-radius: 2vw !important;
+  background-color: rgba(38, 44, 53, 1);
+  border-style: solid !important;
+  border-color: rgb(121, 121, 121);
+  border-width: 2px !important;
 }
 
 #progress-preview-bar + .job-info__progress-percentage {
-    margin-top: -0.3vh!important;
-    margin-left: 0vw!important;
-    font-size: 6.7vh!important;
-    font-weight: 500!important;
-    display:block!important;
-    position:fixed!important;
-    left: 43.4vw!important;
-    top: 77vh!important;
-    z-index:1!important;
-    color:white!important;
-    text-shadow: 1px 1px 4px black;
-    visibility: visible!important;
+  margin-top: -0.3vh !important;
+  margin-left: 0 !important;
+  font-size: 6.7vh !important;
+  font-weight: 500 !important;
+  display: block !important;
+  position: fixed !important;
+  left: 43.4vw !important;
+  top: 77vh !important;
+  z-index: 1 !important;
+  color: white !important;
+  text-shadow: 1px 1px 4px black;
+  visibility: visible !important;
 }
