@@ -5,7 +5,7 @@
   <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
   <span class="notification__heading">{{ notification?.heading }}</span>
   <span class="notification__text">{{ notification?.text }}</span>
-  <span class="notification__close" i18n="@@tap-close">tap this card to close it</span>
+  <span class="notification__close" i18n="@@tap-close" *ngIf="!notification?.choices">tap this card to close it</span>
   <div class="notification-prompt__choices">
     <div
       class="notification-prompt__choice"
