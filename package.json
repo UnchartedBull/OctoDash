@@ -113,7 +113,7 @@
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.5",
     "@types/node": "17.0.13",
-    "@typescript-eslint/eslint-plugin": "~5.10.1",
+    "@typescript-eslint/eslint-plugin": "~5.10.2",
     "@typescript-eslint/parser": "~5.10.1",
     "codelyzer": "~6.0.2",
     "electron": "~17.0.0",
