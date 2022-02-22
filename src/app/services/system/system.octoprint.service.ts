@@ -27,7 +27,6 @@ export class SystemOctoprintService implements SystemService {
       )
       .pipe(
         map(octoprintLogin => {
-          console.log(octoprintLogin);
           return {
             user: octoprintLogin.name,
             session: octoprintLogin.session,
