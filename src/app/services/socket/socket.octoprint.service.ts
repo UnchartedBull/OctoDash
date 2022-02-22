@@ -325,7 +325,7 @@ export class OctoPrintSocketService implements SocketService {
         newState = PrinterEvent.CLOSED;
         if (state.event.payload) {
           this.notificationService.setNotification({
-            heading: $localize`:@@printer-information:Printer error`,
+            heading: $localize`:@@printer-error:Printer error`,
             text: state.event.payload.error,
             type: NotificationType.ERROR,
             time: new Date(),
@@ -357,14 +357,6 @@ export class OctoPrintSocketService implements SocketService {
           time: new Date(),
           choices: notification.choices,
           callback: this.callbackFunction.bind(this),
-          sticky: true,
-        } as Notification);
-      } else if (notification.choices?.length == 0) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@printer-information:Printer information`,
-          text: notification.text ?? notification.message,
-          type: NotificationType.WARN,
-          time: new Date(),
           sticky: true,
         } as Notification);
       } else if (notification.text || notification.message) {
