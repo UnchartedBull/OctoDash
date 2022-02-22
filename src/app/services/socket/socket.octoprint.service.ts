@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
@@ -104,9 +104,32 @@ export class OctoPrintSocketService implements SocketService {
   private tryConnect(resolve: () => void): void {
     this.systemService.getSessionKey().subscribe({
       next: (socketAuth: SocketAuth) => {
-        this.connectSocket();
-        this.setupSocket(resolve);
-        this.authenticateSocket(socketAuth);
+        this.http.get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
+          next: () => {
+            this.connectSocket();
+            this.setupSocket(resolve);
+            this.authenticateSocket(socketAuth);
+          },
+          error: (err: HttpErrorResponse) => {
+            if (err.status === 403) {
+              this.notificationService.setNotification({
+                heading: $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
+                text: $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
+                type: NotificationType.ERROR,
+                time: new Date(),
+                sticky: true,
+              } as Notification);
+            } else {
+              this.notificationService.setNotification({
+                heading: $localize`:@@http-unknown-heading:Unknown HTTP Error`,
+                text: err.message,
+                type: NotificationType.ERROR,
+                time: new Date(),
+                sticky: true,
+              } as Notification);
+            }
+          },
+        });
       },
       error: () => {
         setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
