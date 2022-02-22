@@ -78,8 +78,6 @@ function updateLocales() {
         });
       });
     }
-    // remove extracted messages
-    fs.unlinkSync('./src/locale/messages.xlf');
   });
 }
 

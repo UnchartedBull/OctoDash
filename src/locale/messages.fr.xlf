@@ -153,32 +153,34 @@
         <target>Quels plugins utilisez-vous ?</target>
       </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
-        <source> Display Layer Progress   </source>
+        <source>Display Layer Progress</source>
         <target> Display Layer Progress   </target>
       </trans-unit>
       <trans-unit id="plugin-enclosure" datatype="html">
-        <source> Enclosure </source>
+        <source>Enclosure</source>
         <target> Enclosure </target>
       </trans-unit>
       <trans-unit id="plugin-filament-manager" datatype="html">
-        <source> Filament Manager </source>
+        <source>Filament Manager</source>
         <target> Filament Manager   </target>
       </trans-unit>
+      <trans-unit id="plugin-spool-manager" datatype="html">
+        <source>Spool Manager (Beta)</source>
+      </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
-        <source> Preheat Button </source>
+        <source>Preheat Button</source>
         <target> Preheat Button </target>
       </trans-unit>
       <trans-unit id="plugin-print-time-genius" datatype="html">
-        <source> Print Time Genius </source>
+        <source>Print Time Genius</source>
         <target> Print Time Genius   </target>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
-        <source> PSU Control </source>
+        <source>PSU Control</source>
         <target> PSU Control </target>
       </trans-unit>
-      <trans-unit id="plugin-ophom" datatype="html">
-        <source> Ophom (Phillips HUE) </source>
-        <target> Ophom (Phillips HUE) </target>
+      <trans-unit id="plugin-opom" datatype="html">
+        <source>Ophom (Phillips HUE)</source>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source> TPLink SmartPlug </source>
@@ -186,9 +188,11 @@
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source> Tasmota MQTT </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
@@ -262,18 +266,6 @@
         <source>back</source>
         <target>retour</target>
       </trans-unit>
-      <trans-unit id="help-adjust-speed" datatype="html">
-        <source> You can adjust the printhead speed in the settings (default 150mm/s for XY - 5mm/s for Z). </source>
-        <target> Vous pouvez régler la vitesse de la tête d'impression dans les paramètres (par défaut 150 mm / s pour XY - 5 mm / s pour Z). </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions-message" datatype="html">
-        <source> You can customize the 6 icons on the right. They can either send GCode Commands to the printer or call a few predefined actions (like rebooting the Pi). Please visit the GitHub Wiki to get further information. </source>
-        <target> Vous pouvez personnaliser les 6 icônes sur la droite. Ils peuvent soit envoyer des commandes GCode à l'imprimante, soit appeler quelques actions prédéfinies (comme le redémarrage du Pi). Veuillez visiter le Wiki GitHub pour obtenir de plus amples informations. </target>
-      </trans-unit>
-      <trans-unit id="help-custom-actions" datatype="html">
-        <source> Wiki page is called "CustomActions". </source>
-        <target> La page Wiki s'appelle " CustomActions ". </target>
-      </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
         <target>Impossible de récupérer le profil de l'imprimante !</target>
@@ -293,50 +285,6 @@
       <trans-unit id="confirm-exec" datatype="html">
         <source>do you want to execute the following command?</source>
         <target>voulez-vous exécuter la commande suivante ?</target>
-      </trans-unit>
-      <trans-unit id="prompt-filament-runout-t0" datatype="html">
-        <source>Filament runout detected. Ejecting filament, please wait...</source>
-        <target>Fin de filament détectée. Ejection du filament, veuillez patienter...</target>
-      </trans-unit>
-      <trans-unit id="prompt-filament-runout" datatype="html">
-        <source>A filament runout has been detected. Please remove the ejected filament, insert filament from a new spool and press Continue.</source>
-        <target>Une fin de filament a été détectée. Veuillez retirer le filament éjecté, insérer le filament d'une nouvelle bobine et presser Continuer.</target>
-      </trans-unit>
-      <trans-unit id="prompt-continue" datatype="html">
-        <source>Continue</source>
-        <target>Continuer</target>
-      </trans-unit>
-      <trans-unit id="prompt-filament-runout-resume" datatype="html">
-        <source>The filament has been primed. Do you want to continue printing?</source>
-        <target>Le filament a été amorcé. Souhaitez-vous continuer l'impression ?</target>
-      </trans-unit>
-      <trans-unit id="prompt-filament-runout-purge" datatype="html">
-        <source>Purge more filament</source>
-        <target>Purger plus de filament</target>
-      </trans-unit>
-      <trans-unit id="prompt-heater-timeout" datatype="html">
-        <source>The hotend has been disabled due to inactivity, to avoid burning the filament. Press Reheat when ready to resume.</source>
-        <target>La buse a été désactivée car l'imprimante était inactive, pour éviter de surchauffer le filament. Appuyez sur 'Activer la chauffe' pour reprendre</target>
-      </trans-unit>
-      <trans-unit id="prompt-reheat" datatype="html">
-        <source>Reheat</source>
-        <target>Activer la chauffe</target>
-      </trans-unit>
-      <trans-unit id="prompt-reheating" datatype="html">
-        <source>Reheating...</source>
-        <target>Reprise de la chauffe...</target>
-      </trans-unit>
-      <trans-unit id="prompt-reheat-done" datatype="html">
-        <source>The hotend is now ready.</source>
-        <target>La buse est à température.</target>
-      </trans-unit>
-      <trans-unit id="action-required" datatype="html">
-        <source>Action required</source>
-        <target>Action requise</target>
-      </trans-unit>
-      <trans-unit id="printer-information" datatype="html">
-        <source>Printer information</source>
-        <target>Information de l'imprimante</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament</source>
@@ -403,7 +351,7 @@
         <target>s ou</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-start" datatype="html">
-        <source> start </source>
+        <source>start</source>
         <target> lancer </target>
       </trans-unit>
       <trans-unit id="move-filament" datatype="html">
@@ -415,7 +363,7 @@
         <target>mm/s</target>
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
-        <source> stop </source>
+        <source>stop</source>
         <target> arrêter </target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
@@ -578,13 +526,12 @@
         <source>control</source>
         <target>contrôles</target>
       </trans-unit>
+      <trans-unit id="no-new-notifications" datatype="html">
+        <source> no new notifications. </source>
+      </trans-unit>
       <trans-unit id="tap-close" datatype="html">
         <source>tap this card to close it</source>
         <target>touchez cette carte pour la fermer</target>
-      </trans-unit>
-      <trans-unit id="error-answer-prompt" datatype="html">
-        <source>Can't answer prompt!</source>
-        <target>Impossible de répondre à la demande!</target>
       </trans-unit>
       <trans-unit id="control-cancel" datatype="html">
         <source>cancel</source>
@@ -686,10 +633,6 @@
         <source>mm</source>
         <target>mm</target>
       </trans-unit>
-      <trans-unit id="quick-back" datatype="html">
-        <source>back</source>
-        <target>retour</target>
-      </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
         <target>Impossible de définir la couleur des LED !</target>
@@ -710,9 +653,18 @@
         <source>Can't send GCode!</source>
         <target>Impossible d'envoyer le GCode !</target>
       </trans-unit>
+      <trans-unit id="error-send-ophom-gcode" datatype="html">
+        <source>Can't update Ophom Plug!</source>
+      </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can't send GCode!</source>
         <target>Impossible d'envoyer le GCode !</target>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug" datatype="html">
+        <source>Can't update Tasmota!</source>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
+        <source>Can't update Tasmota MQTT!</source>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
@@ -826,6 +778,21 @@
         <source>h</source>
         <target>h</target>
       </trans-unit>
+      <trans-unit id="printer-error" datatype="html">
+        <source>Printer error</source>
+      </trans-unit>
+      <trans-unit id="action-required" datatype="html">
+        <source>Action required</source>
+        <target>Action requise</target>
+      </trans-unit>
+      <trans-unit id="printer-information" datatype="html">
+        <source>Printer information</source>
+        <target>Information de l'imprimante</target>
+      </trans-unit>
+      <trans-unit id="error-answer-prompt" datatype="html">
+        <source>Can't answer prompt!</source>
+        <target>Impossible de répondre à la demande!</target>
+      </trans-unit>
       <trans-unit id="error-execute" datatype="html">
         <source>Can't execute 
           <x id="PH" equiv-text="command"/> command!
@@ -862,14 +829,6 @@
         <source> update available! </source>
         <target> mise à jour disponible ! </target>
       </trans-unit>
-      <trans-unit id="made-with" datatype="html">
-        <source>made with</source>
-        <target>fabriqué avec</target>
-      </trans-unit>
-      <trans-unit id="by-unchartedbull" datatype="html">
-        <source> by /u/UnchartedBull </source>
-        <target> par /u/UnchartedBull </target>
-      </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
         <target>général</target>
@@ -899,7 +858,7 @@
         <target>Vitesse Z (mm/s)</target>
       </trans-unit>
       <trans-unit id="general-default" datatype="html">
-        <source>Default Temperatures &amp; Fan Speed</source>
+        <source> Default Temperatures &amp; Fan Speed </source>
         <target>Températures et vitesse par défaut du ventilateur</target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
@@ -1001,38 +960,6 @@
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
       </trans-unit>
-      <trans-unit id="octodash-files" datatype="html">
-        <source>Files</source>
-        <target>Fichiers</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-sort" datatype="html">
-        <source>sort by</source>
-        <target>trier par</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-name" datatype="html">
-        <source>Name</source>
-        <target>Nom</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-date" datatype="html">
-        <source>Date</source>
-        <target>Date</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-size" datatype="html">
-        <source>Size</source>
-        <target>Taille</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-order" datatype="html">
-        <source>order</source>
-        <target>ordre</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-ascending" datatype="html">
-        <source>Ascending</source>
-        <target>Croissant</target>
-      </trans-unit>
-      <trans-unit id="octodash-files-descending" datatype="html">
-        <source>Descending</source>
-        <target>Décroissant</target>
-      </trans-unit>
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
         <target>Actions personnalisées</target>
@@ -1091,6 +1018,12 @@
         <source>enabled</source>
         <target>activé</target>
       </trans-unit>
+      <trans-unit id="settings-spool-manager" datatype="html">
+        <source>Spool Manager (Beta)</source>
+      </trans-unit>
+      <trans-unit id="settings-spool-manager-enabled" datatype="html">
+        <source>enabled</source>
+      </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Bouton de préchauffage</target>
@@ -1116,7 +1049,7 @@
         <target>activé</target>
       </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
-        <source>Ophom (Phillips HUE)</source>
+        <source>Ophon Control (Phillips HUE)</source>
         <target>Contrôle (Phillips HUE)</target>
       </trans-unit>
       <trans-unit id="settings-ophom-control-enabled" datatype="html">
@@ -1207,10 +1140,6 @@
         <source>Press on the screen to wake me up again.</source>
         <target>Appuyez sur l'écran pour me réveiller à nouveau.</target>
       </trans-unit>
-      <trans-unit id="sleeping" datatype="html">
-        <source> sleeping ... </source>
-        <target> en train de dormir ... </target>
-      </trans-unit>
       <trans-unit id="connecting" datatype="html">
         <source>connecting</source>
         <target>connexion en cours</target>
@@ -1218,10 +1147,6 @@
       <trans-unit id="connection-failed" datatype="html">
         <source> Connection can't be established. Press screen to try again. </source>
         <target> La connexion ne peut pas être établie. Appuyez sur l'écran pour réessayer. </target>
-      </trans-unit>
-      <trans-unit id="actions" datatype="html">
-        <source> Actions </source>
-        <target> Actions </target>
       </trans-unit>
       <trans-unit id="downloading-update" datatype="html">
         <source>downloading update</source>

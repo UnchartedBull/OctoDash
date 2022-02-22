@@ -28,29 +28,25 @@
     (changeURLEntryMethod)="changeURLEntryMethod($event)"
     [(octoprintHost)]="config.octoprint.urlSplit.host"
     [(octoprintPort)]="config.octoprint.urlSplit.port"
-    *ngIf="page === 1"
-  ></app-config-setup-discover-octoprint>
+    *ngIf="page === 1"></app-config-setup-discover-octoprint>
 
   <app-config-setup-octoprint-authentication
     [octoprintURL]="getOctoprintURL().replace('api/', '')"
     (increasePage)="increasePage()"
     [(accessToken)]="config.octoprint.accessToken"
-    *ngIf="page === 2"
-  ></app-config-setup-octoprint-authentication>
+    *ngIf="page === 2"></app-config-setup-octoprint-authentication>
 
   <app-config-setup-personalization
     [octoprintURL]="getOctoprintURL()"
     [apiKey]="config.octoprint.accessToken"
     [(printerName)]="config.printer.name"
     [(useTouchscreen)]="config.octodash.touchscreen"
-    *ngIf="page === 3"
-  ></app-config-setup-personalization>
+    *ngIf="page === 3"></app-config-setup-personalization>
 
   <app-config-setup-extruder-information
     [(feedLength)]="config.filament.feedLength"
     [(feedSpeed)]="config.filament.feedSpeed"
-    *ngIf="page === 4"
-  ></app-config-setup-extruder-information>
+    *ngIf="page === 4"></app-config-setup-extruder-information>
 
   <app-config-setup-plugins
     *ngIf="page === 5"
@@ -64,8 +60,7 @@
     [(ophomPlugin)]="config.plugins.ophom.enabled"
     [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
     [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
-    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"
-  ></app-config-setup-plugins>
+    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"></app-config-setup-plugins>
 
   <div *ngIf="page === 6">
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
@@ -73,9 +68,8 @@
       <span class="setup__validation-check">
         <img
           [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
-          class="setup__validation-check-icon"
-        />
-        <ng-container i18n="@@checking-octoprint-connection"> Octoprint Connection </ng-container>
+          class="setup__validation-check-icon" />
+        <ng-container i18n="@@checking-octoprint-connection"> OctoPrint Connection </ng-container>
       </span>
       <div *ngIf="octoprintConnection">
         <span class="setup__validation-check">
