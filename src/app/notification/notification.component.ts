@@ -48,7 +48,7 @@ export class NotificationComponent implements OnDestroy {
 
         if (!notification.sticky) {
           clearTimeout(this.notificationCloseTimeout);
-          this.notificationCloseTimeout = setTimeout(this.hideNotification.bind(this), 30 * 1000, false);
+          this.notificationCloseTimeout = setTimeout(this.hideNotification.bind(this), 15 * 1000, false);
         }
       }
     });
