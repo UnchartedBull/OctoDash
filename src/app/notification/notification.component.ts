@@ -24,10 +24,17 @@ export class NotificationComponent implements OnDestroy {
     );
   }
 
-  public hideNotification(removeFromStack = true): void {
-    this.show = false;
-    clearTimeout(this.notificationCloseTimeout);
-    if (removeFromStack) this.notificationService.removeNotification(this.notification);
+  public hideNotification(removeFromStack = true, userTriggered = false): void {
+    if (!userTriggered || (userTriggered && !this.notification.choices)) {
+      this.show = false;
+      clearTimeout(this.notificationCloseTimeout);
+      if (removeFromStack) this.notificationService.removeNotification(this.notification);
+    }
+  }
+
+  public chooseAction(index: number, callback: (index: number) => void): void {
+    callback(index);
+    this.hideNotification();
   }
 
   private setNotification(notification: Notification | 'close'): void {
@@ -41,7 +48,7 @@ export class NotificationComponent implements OnDestroy {
 
         if (!notification.sticky) {
           clearTimeout(this.notificationCloseTimeout);
-          this.notificationCloseTimeout = setTimeout(this.hideNotification.bind(this), 30 * 1000, false);
+          this.notificationCloseTimeout = setTimeout(this.hideNotification.bind(this), 15 * 1000, false);
         }
       }
     });

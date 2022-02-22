@@ -139,14 +139,21 @@ export function playerFactory(): LottiePlayer {
     [
       {
         provide: SocketService,
-        deps: [ConfigService, SystemService, ConversionService, HttpClient],
+        deps: [ConfigService, SystemService, ConversionService, NotificationService, HttpClient],
         useFactory: (
           configService: ConfigService,
           systemService: SystemService,
           conversionService: ConversionService,
+          notificationService: NotificationService,
           httpClient: HttpClient,
         ) => {
-          return new OctoPrintSocketService(configService, systemService, conversionService, httpClient);
+          return new OctoPrintSocketService(
+            configService,
+            systemService,
+            conversionService,
+            notificationService,
+            httpClient,
+          );
         },
       },
     ],

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { JobStatus, PrinterEvent, PrinterStatus } from '../../model';
+import { JobStatus, PrinterEvent, PrinterNotification, PrinterStatus } from '../../model';
 
 @Injectable()
 export abstract class SocketService {
@@ -11,5 +11,5 @@ export abstract class SocketService {
 
   abstract getJobStatusSubscribable(): Observable<JobStatus>;
 
-  abstract getEventSubscribable(): Observable<PrinterEvent>;
+  abstract getEventSubscribable(): Observable<PrinterEvent | PrinterNotification>;
 }

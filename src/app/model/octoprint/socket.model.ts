@@ -20,7 +20,10 @@ export interface OctoprintSocketCurrent {
 export interface OctoprintSocketEvent {
   event: {
     type: string;
-    payload: unknown;
+    payload: {
+      error: string;
+      reason: string;
+    };
   };
 }
 export interface OctoprintPluginMessage {

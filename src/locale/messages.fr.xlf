@@ -294,6 +294,50 @@
         <source>do you want to execute the following command?</source>
         <target>voulez-vous exécuter la commande suivante ?</target>
       </trans-unit>
+      <trans-unit id="prompt-filament-runout-t0" datatype="html">
+        <source>Filament runout detected. Ejecting filament, please wait...</source>
+        <target>Fin de filament détectée. Ejection du filament, veuillez patienter...</target>
+      </trans-unit>
+      <trans-unit id="prompt-filament-runout" datatype="html">
+        <source>A filament runout has been detected. Please remove the ejected filament, insert filament from a new spool and press Continue.</source>
+        <target>Une fin de filament a été détectée. Veuillez retirer le filament éjecté, insérer le filament d'une nouvelle bobine et presser Continuer.</target>
+      </trans-unit>
+      <trans-unit id="prompt-continue" datatype="html">
+        <source>Continue</source>
+        <target>Continuer</target>
+      </trans-unit>
+      <trans-unit id="prompt-filament-runout-resume" datatype="html">
+        <source>The filament has been primed. Do you want to continue printing?</source>
+        <target>Le filament a été amorcé. Souhaitez-vous continuer l'impression ?</target>
+      </trans-unit>
+      <trans-unit id="prompt-filament-runout-purge" datatype="html">
+        <source>Purge more filament</source>
+        <target>Purger plus de filament</target>
+      </trans-unit>
+      <trans-unit id="prompt-heater-timeout" datatype="html">
+        <source>The hotend has been disabled due to inactivity, to avoid burning the filament. Press Reheat when ready to resume.</source>
+        <target>La buse a été désactivée car l'imprimante était inactive, pour éviter de surchauffer le filament. Appuyez sur 'Activer la chauffe' pour reprendre</target>
+      </trans-unit>
+      <trans-unit id="prompt-reheat" datatype="html">
+        <source>Reheat</source>
+        <target>Activer la chauffe</target>
+      </trans-unit>
+      <trans-unit id="prompt-reheating" datatype="html">
+        <source>Reheating...</source>
+        <target>Reprise de la chauffe...</target>
+      </trans-unit>
+      <trans-unit id="prompt-reheat-done" datatype="html">
+        <source>The hotend is now ready.</source>
+        <target>La buse est à température.</target>
+      </trans-unit>
+      <trans-unit id="action-required" datatype="html">
+        <source>Action required</source>
+        <target>Action requise</target>
+      </trans-unit>
+      <trans-unit id="printer-information" datatype="html">
+        <source>Printer information</source>
+        <target>Information de l'imprimante</target>
+      </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament</source>
         <target>charger un nouveau filament</target>
@@ -537,6 +581,10 @@
       <trans-unit id="tap-close" datatype="html">
         <source>tap this card to close it</source>
         <target>touchez cette carte pour la fermer</target>
+      </trans-unit>
+      <trans-unit id="error-answer-prompt" datatype="html">
+        <source>Can't answer prompt!</source>
+        <target>Impossible de répondre à la demande!</target>
       </trans-unit>
       <trans-unit id="control-cancel" datatype="html">
         <source>cancel</source>

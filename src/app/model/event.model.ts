@@ -6,3 +6,10 @@ export enum PrinterEvent {
   IDLE,
   UNKNOWN,
 }
+
+export interface PrinterNotification {
+  message?: string;
+  action?: string;
+  text?: string;
+  choices?: string[];
+}

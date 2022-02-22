@@ -3,6 +3,8 @@ export interface Notification {
   text: string;
   type: NotificationType;
   time: Date;
+  choices?: Array<string>;
+  callback?: (index: number) => void;
   sticky?: boolean;
 }
 
@@ -10,6 +12,7 @@ export enum NotificationType {
   INFO,
   WARN,
   ERROR,
+  PROMPT,
 }
 
 export interface UpdateError {
