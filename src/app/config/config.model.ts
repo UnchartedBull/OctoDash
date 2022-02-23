@@ -5,24 +5,25 @@ export interface HttpHeader {
 }
 
 export interface Config {
-  octoprint: Octoprint;
+  backend: string;
   printer: Printer;
   filament: Filament;
-  plugins: Plugins;
-  octodash: OctoDash;
+  customActions: CustomAction[];
+  fileSorting: FileSorting;
+  invertAxisControl: InvertAxisControl;
+  pollingInterval: number;
+  touchscreen: boolean;
+  turnScreenOffWhileSleeping: boolean;
+  turnOnPrinterWhenExitingSleep: boolean;
+  preferPreviewWhilePrinting: boolean;
+  previewProgressCircle: boolean;
+  screenSleepCommand: string;
+  screenWakeupCommand: string;
+  showExtruderControl: boolean;
+  showNotificationCenterIcon: boolean;
+  octoprint?: OctoprintConfig;
+  moonraker?: MoonrakerConfig;
 }
-
-interface Octoprint {
-  url: string;
-  accessToken: string;
-  urlSplit?: URLSplit;
-}
-
-export interface URLSplit {
-  host: string;
-  port: number;
-}
-
 interface Printer {
   name: string;
   xySpeed: number;
@@ -55,8 +56,8 @@ interface Plugins {
   spoolManager: Plugin;
   preheatButton: Plugin;
   printTimeGenius: Plugin;
-  psuControl: PSUControlPlugin;
-  ophom: PSUControlPlugin;
+  psuControl: Plugin;
+  ophom: Plugin;
   tpLinkSmartPlug: TPLinkSmartPlugPlugin;
   tasmota: TasmotaPlugin;
   tasmotaMqtt: TasmotaMqttPlugin;
@@ -72,12 +73,6 @@ interface EnclosurePlugin extends Plugin {
   filament2SensorID: number | null;
 }
 
-interface PSUControlPlugin extends Plugin {
-  // TODO: this option still exists to allow migration path... need to be removed
-  // when the new `turnOnPSUWhenExitingSleep` will be released
-  turnOnPSUWhenExitingSleep?: boolean;
-}
-
 interface TPLinkSmartPlugPlugin extends Plugin {
   smartPlugIP: string;
 }
@@ -90,22 +85,6 @@ interface TasmotaPlugin extends Plugin {
 interface TasmotaMqttPlugin extends Plugin {
   topic: string;
   relayNumber: number;
-}
-
-interface OctoDash {
-  customActions: CustomAction[];
-  fileSorting: FileSorting;
-  invertAxisControl: InvertAxisControl;
-  pollingInterval: number;
-  touchscreen: boolean;
-  turnScreenOffWhileSleeping: boolean;
-  turnOnPrinterWhenExitingSleep: boolean;
-  preferPreviewWhilePrinting: boolean;
-  previewProgressCircle: boolean;
-  screenSleepCommand: string;
-  screenWakeupCommand: string;
-  showExtruderControl: boolean;
-  showNotificationCenterIcon: boolean;
 }
 
 export interface CustomAction {
@@ -125,4 +104,20 @@ interface InvertAxisControl {
   x: boolean;
   y: boolean;
   z: boolean;
+}
+
+export interface OctoprintConfig {
+  url: string;
+  accessToken: string;
+  plugins: Plugins;
+  urlSplit?: URLSplit;
+}
+
+export interface MoonrakerConfig {
+  url: string;
+  urlSplit?: URLSplit;
+}
+export interface URLSplit {
+  host: string;
+  port: number;
 }
