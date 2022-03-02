@@ -9,6 +9,8 @@ export abstract class SocketService {
 
   abstract getPrinterStatusSubscribable(): Observable<PrinterStatus>;
 
+  abstract getPrinterStatusText(): Observable<string>;
+
   abstract getJobStatusSubscribable(): Observable<JobStatus>;
 
   abstract getEventSubscribable(): Observable<PrinterEvent | PrinterNotification>;

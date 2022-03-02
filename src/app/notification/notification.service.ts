@@ -31,6 +31,10 @@ export class NotificationService {
     if (this.observer) {
       this.observer.next(notification);
       this.notificationStack.push(notification);
+
+      if (this.notificationStack.length > 25) {
+        this.notificationStack.shift();
+      }
     } else {
       setTimeout(this.setNotification.bind(this), 1000, notification);
     }
