@@ -46,7 +46,7 @@ export class FilesOctoprintService implements FilesService {
               directory.folders.push({
                 origin: fileOrFolder.origin,
                 path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
-                name: fileOrFolder.name,
+                name: fileOrFolder.display,
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
               } as Folder);
             }
@@ -55,7 +55,7 @@ export class FilesOctoprintService implements FilesService {
               directory.files.push({
                 origin: fileOrFolder.origin,
                 path: '/' + fileOrFolder.origin + '/' + fileOrFolder.path,
-                name: fileOrFolder.name,
+                name: fileOrFolder.display,
                 date: this.conversionService.convertDateToString(new Date(fileOrFolder.date)),
                 size: this.conversionService.convertByteToMegabyte(fileOrFolder.size),
                 ...(fileOrFolder.gcodeAnalysis
