@@ -82,7 +82,7 @@
     "@angular/forms": "~13.3.5",
     "@angular/localize": "~13.0.3",
     "@angular/material": "~13.3.6",
-    "@angular/platform-browser": "~13.3.4",
+    "@angular/platform-browser": "~13.3.6",
     "@angular/platform-browser-dynamic": "~13.3.5",
     "@angular/router": "~13.3.5",
     "@fortawesome/angular-fontawesome": "~0.10.2",
