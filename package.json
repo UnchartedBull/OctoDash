@@ -79,7 +79,7 @@
     "@angular/common": "~13.3.6",
     "@angular/compiler": "~13.0.3",
     "@angular/core": "~13.3.1",
-    "@angular/forms": "~13.3.6",
+    "@angular/forms": "~13.3.7",
     "@angular/localize": "~13.0.3",
     "@angular/material": "~13.3.6",
     "@angular/platform-browser": "~13.3.6",
