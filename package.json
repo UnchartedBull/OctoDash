@@ -102,7 +102,7 @@
     "rxjs": "~7.5.5",
     "tslib": "~2.4.0",
     "v8-compile-cache": "~2.3.0",
-    "zone.js": "~0.11.5"
+    "zone.js": "~0.11.6"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.7",
