@@ -70,7 +70,8 @@
     "pack": "npm run build:prod && npm run electron:pack",
     "serve": "ng serve",
     "start:big": "npm-run-all -p serve electron:serve:big",
-    "start": "npm-run-all -p serve electron:serve electron:serve:big"
+    "start": "npm-run-all -p serve electron:serve electron:serve:big",
+    "tauri": "tauri"
   },
   "private": true,
   "dependencies": {
@@ -88,6 +89,7 @@
     "@fortawesome/angular-fontawesome": "~0.10.2",
     "@fortawesome/fontawesome-svg-core": "~1.2.36",
     "@fortawesome/free-solid-svg-icons": "~5.15.4",
+    "@tauri-apps/api": "^1.0.1",
     "ajv": "~8.11.0",
     "angular-svg-round-progressbar": "~8.0.0",
     "bonjour": "~3.5.0",
@@ -109,6 +111,7 @@
     "@angular/cli": "~14.0.3",
     "@angular/compiler-cli": "~13.0.2",
     "@angular/language-service": "~14.0.3",
+    "@tauri-apps/cli": "^1.0.0",
     "@types/bonjour": "~3.5.10",
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.6",

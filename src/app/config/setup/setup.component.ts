@@ -47,8 +47,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
+    this.electronService.removeListener('configSaved');
+    this.electronService.removeListener('configSaveFail');
   }
 
   public changeURLEntryMethod(manual: boolean): void {

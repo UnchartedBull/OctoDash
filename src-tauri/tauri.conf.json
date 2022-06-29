@@ -1,0 +1,60 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "npm run build:prod",
+    "beforeDevCommand": "npm run serve",
+    "devPath": "http://localhost:4200",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "octodash",
+    "version": "2.3.1"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "category": "Utility",
+      "copyright": "2022 by UnchartedBull",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": ["icons/icon.png"],
+      "identifier": "com.octodash",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "OctoDash",
+        "width": 800
+      }
+    ]
+  }
+}
