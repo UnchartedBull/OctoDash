@@ -1,3 +1,11 @@
-<span class="setup__text" i18n="@@select-backend-type">
-  First things first: Please choose the software that your printer is running:
-</span>
+<span class="setup__text" i18n="@@select-backend-type">Please choose the software that your printer is running:</span>
+<div class="container">
+  <div class="container__child" matRipple (click)="setBackend(backendType.OCTOPRINT)">
+    <img src="/assets/octoprint-logo.png" class="octoprint-logo" />
+    OctoPrint
+  </div>
+  <div class="container__child" matRipple (click)="setBackend(backendType.MOONRAKER)">
+    <img src="/assets/klipper-logo.png" class="klipper-logo" />
+    Moonraker (Klipper)
+  </div>
+</div>

@@ -2,9 +2,10 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
+import { UrlHelper } from 'src/app/helper/url.helper';
 
 import { getDefaultConfig } from '../config.default';
-import { Config } from '../config.model';
+import { BackendType, Config, URLSplit as UrlSplit } from '../config.model';
 import { ConfigService } from '../config.service';
 
 @Component({
@@ -43,14 +44,29 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.changeProgress();
   }
 
-  public newConfig(config: Config): void {
-    this.config = config;
-  }
-
   public ngOnDestroy(): void {
     this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
     this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
+
+  public useNewConfig(config: Config): void {
+    console.log(config);
+    this.config = config;
+  }
+
+  public hasOctoprintBackend(): boolean {
+    return this.config.backend.type === BackendType.OCTOPRINT;
+  }
+
+  public hasMoonrakerBackend(): boolean {
+    return this.config.backend.type === BackendType.MOONRAKER;
+  }
+
+  public splitUrl(url: string): UrlSplit {
+    return UrlHelper.splitUrl(url);
+  }
+
+  //
 
   public changeURLEntryMethod(manual: boolean): void {
     this.manualURL = manual;

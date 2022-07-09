@@ -3,7 +3,7 @@ import { BackendType, Config } from './config.model';
 export const octoprintConfig: Partial<Config> = {
   backend: {
     type: BackendType.OCTOPRINT,
-    host: 'http://localhost:5000',
+    url: 'http://localhost:5000',
     accessToken: '',
     pollingInterval: 2000,
     commands: {

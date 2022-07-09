@@ -32,8 +32,26 @@ $OctoDash-theme: mat-dark-theme($OctoDash-primary, $OctoDash-accent, $OctoDash-w
   src: url(assets/fonts/Montserrat-Medium.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Nunito Sans';
+  font-weight: 400;
+  src: url(assets/fonts/Nunito-Sans-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  font-weight: 500;
+  src: url(assets/fonts/Nunito-Sans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  src: url(assets/fonts/Nunito-Sans-Bold.ttf) format('truetype');
+}
+
 *:not(path):not(svg) {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   color: #f5f6fa;
   font-size: 4.3vw;
   margin: 0;

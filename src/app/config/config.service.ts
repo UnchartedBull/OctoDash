@@ -87,6 +87,7 @@ export class ConfigService {
     this.electronService.send('saveConfig', config);
   }
 
+  // TODO: remove
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
     const port = parseInt(octoprintURL.split(':')[2], 10);
@@ -123,8 +124,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.backend.host}api/${path}`;
-    else return `${this.config.backend.host}${path}`;
+    if (includeApi) return `${this.config.backend.url}api/${path}`;
+    else return `${this.config.backend.url}${path}`;
   }
 
   public getAPIPollingInterval(): number {

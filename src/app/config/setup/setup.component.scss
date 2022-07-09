@@ -1,4 +1,6 @@
 .setup {
+  overflow: visible;
+
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
@@ -18,9 +20,9 @@
   &__text {
     display: block;
     text-align: center;
-    margin-left: 2vh;
-    margin-right: 3vh;
-    font-size: 3.6vw;
+    max-width: 80%;
+    margin: 0 auto;
+    font-size: 3.3vw;
 
     fa-icon {
       display: block;

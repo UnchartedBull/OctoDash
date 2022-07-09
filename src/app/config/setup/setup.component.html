@@ -13,7 +13,9 @@
         </div>
       </td>
       <td class="top-bar__next">
-        <div *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))" (click)="increasePage()">
+        <div
+          *ngIf="!(this.page === this.totalPages || (this.page === 2 && !this.manualURL) || this.page === 1)"
+          (click)="increasePage()">
           <span i18n="@@setup-next">next</span>
           <img src="assets/next.svg" class="top-bar__next-icon" />
         </div>
@@ -23,17 +25,21 @@
 
   <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
 
-  <app-config-choose-backend (increasePage)="increasePage()" (configGenerated)="" *ngIf="page === 1">
-  </app-config-choose-backend>
-
-  <!-- <app-config-setup-discover-octoprint
+  <app-config-setup-choose-backend
+    *ngIf="page === 1"
     (increasePage)="increasePage()"
-    (changeURLEntryMethod)="changeURLEntryMethod($event)"
-    [(octoprintHost)]="config.octoprint.urlSplit.host"
-    [(octoprintPort)]="config.octoprint.urlSplit.port"
-    *ngIf="page === 1"></app-config-setup-discover-octoprint>
+    (configGenerated)="useNewConfig($event)">
+  </app-config-setup-choose-backend>
 
-  <app-config-setup-octoprint-authentication
+  <app-config-setup-discover-octoprint
+    *ngIf="page === 2 && hasOctoprintBackend()"
+    [(octoprintHost)]="splitUrl(config.backend.url).host"
+    [(octoprintPort)]="splitUrl(config.backend.url).port"
+    (increasePage)="increasePage()"
+    (changeURLEntryMethod)="changeURLEntryMethod($event)">
+  </app-config-setup-discover-octoprint>
+
+  <!-- <app-config-setup-octoprint-authentication
     [octoprintURL]="getOctoprintURL().replace('api/', '')"
     (increasePage)="increasePage()"
     [(accessToken)]="config.octoprint.accessToken"
@@ -69,7 +75,8 @@
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
-        <img [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
+        <img
+          [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon" />
         <ng-container i18n="@@checking-octoprint-connection"> OctoPrint Connection </ng-container>
       </span>

@@ -5,8 +5,8 @@ export interface HttpHeader {
 }
 
 export enum BackendType {
-  OCTOPRINT,
-  MOONRAKER,
+  OCTOPRINT = 'OCTOPRINT',
+  MOONRAKER = 'MOONRAKER',
 }
 
 export interface Config {
@@ -22,7 +22,7 @@ export interface Config {
 
 interface Backend {
   type: BackendType;
-  host: string;
+  url: string;
   accessToken: string;
   pollingInterval: number;
   commands: BackendCommands;

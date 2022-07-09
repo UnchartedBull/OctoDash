@@ -29,7 +29,7 @@ function activateUpdateListener(ipcMain, window) {
 }
 
 function activateDiscoverListener(ipcMain, window) {
-  ipcMain.on('discover', () => startDiscovery(window));
+  ipcMain.on('discover', (_, type) => startDiscovery(window, type));
 
   ipcMain.on('stopDiscover', () => stopDiscovery());
 }

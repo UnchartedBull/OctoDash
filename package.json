@@ -39,16 +39,14 @@
       "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
     ],
     "linux": {
-      "target": [
-        {
-          "target": "deb",
-          "arch": [
-            "armv7l",
-            "arm64",
-            "x64"
-          ]
-        }
-      ],
+      "target": [{
+        "target": "deb",
+        "arch": [
+          "armv7l",
+          "arm64",
+          "x64"
+        ]
+      }],
       "category": "Utility"
     }
   },
