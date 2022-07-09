@@ -43,6 +43,10 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.changeProgress();
   }
 
+  public newConfig(config: Config): void {
+    this.config = config;
+  }
+
   public ngOnDestroy(): void {
     this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
     this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
@@ -121,6 +125,9 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public increasePage(): void {
+    if (this.page === 0 && this.config) {
+      return this.changePage(2);
+    }
     this.changePage(1);
   }
 

@@ -29,12 +29,14 @@ export class ConversionService {
   }
 
   public convertFilamentLengthToWeight(filamentLength: number): number {
-    return this.convertFilamentVolumeToWeight(
-      (filamentLength * Math.PI * Math.pow(this.configService.getFilamentThickness() / 2, 2)) / 1000,
-    );
+    throw new Error('FIX ME');
+    // return this.convertFilamentVolumeToWeight(
+    //   (filamentLength * Math.PI * Math.pow(this.configService.getFilamentThickness() / 2, 2)) / 1000,
+    // );
   }
 
   private convertFilamentVolumeToWeight(filamentVolume: number): number {
-    return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
+    throw new Error('FIX ME');
+    // return Math.round(filamentVolume * this.configService.getFilamentDensity() * 10) / 10;
   }
 }

@@ -63,7 +63,7 @@ export class ConfigService {
   public generateHttpHeaders(): void {
     this.httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        'x-api-key': this.config.backend.accessToken,
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',
@@ -107,8 +107,6 @@ export class ConfigService {
 
   public createConfigFromInput(config: Config): Config {
     const configOut = _.cloneDeep(config);
-    configOut.octoprint.url = this.mergeOctoprintURL(config.octoprint.urlSplit);
-    delete configOut.octoprint.urlSplit;
     return configOut;
   }
 
@@ -125,12 +123,12 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    if (includeApi) return `${this.config.backend.host}api/${path}`;
+    else return `${this.config.backend.host}${path}`;
   }
 
   public getAPIPollingInterval(): number {
-    return this.config.octodash.pollingInterval;
+    return this.config.backend.pollingInterval;
   }
 
   public getPrinterName(): string {
@@ -138,7 +136,7 @@ export class ConfigService {
   }
 
   public getCustomActions(): CustomAction[] {
-    return this.config.octodash.customActions;
+    return this.config.customActions;
   }
 
   public getXYSpeed(): number {
@@ -162,180 +160,174 @@ export class ConfigService {
   }
 
   public isTouchscreen(): boolean {
-    return this.config.octodash.touchscreen;
-  }
-
-  public getAmbientTemperatureSensorName(): number {
-    return this.config.plugins.enclosure.ambientSensorID;
+    return this.config.screen.touchscreen;
   }
 
   public getAutomaticScreenSleep(): boolean {
-    return this.config.octodash.turnScreenOffWhileSleeping;
+    return this.config.screen.turnOffWhileSleeping;
   }
 
   public getAutomaticPrinterPowerOn(): boolean {
-    return this.config.octodash.turnOnPrinterWhenExitingSleep;
-  }
-
-  public usePSUControl(): boolean {
-    return this.config.plugins.psuControl.enabled;
-  }
-
-  public useOphomControl(): boolean {
-    return this.config.plugins.ophom.enabled;
-  }
-
-  public useTpLinkSmartPlug(): boolean {
-    return this.config.plugins.tpLinkSmartPlug.enabled;
-  }
-
-  public getSmartPlugIP(): string {
-    return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
-  }
-
-  public useTasmota(): boolean {
-    return this.config.plugins.tasmota.enabled;
-  }
-
-  public getTasmotaIP(): string {
-    return this.config.plugins.tasmota.ip;
-  }
-
-  public getTasmotaIndex(): number {
-    return this.config.plugins.tasmota.index;
-  }
-
-  public useTasmotaMqtt(): boolean {
-    return this.config.plugins.tasmotaMqtt.enabled;
-  }
-
-  public getTasmotaMqttTopic(): string {
-    return this.config.plugins.tasmotaMqtt.topic;
-  }
-
-  public getTasmotaMqttRelayNumber(): number {
-    return this.config.plugins.tasmotaMqtt.relayNumber;
-  }
-
-  public getFilamentThickness(): number {
-    return this.config.filament.thickness;
-  }
-
-  public getFilamentDensity(): number {
-    return this.config.filament.density;
+    return this.config.customization.turnOnPrinterWhenExitingSleep;
   }
 
   public getDefaultSortingAttribute(): 'name' | 'date' | 'size' {
-    return this.config.octodash.fileSorting.attribute;
+    return this.config.customization.fileSorting.attribute;
   }
 
   public getDefaultSortingOrder(): 'asc' | 'dsc' {
-    return this.config.octodash.fileSorting.order;
+    return this.config.customization.fileSorting.order;
   }
 
   public getDefaultHotendTemperature(): number {
-    return this.config.printer.defaultTemperatureFanSpeed.hotend;
+    return this.config.preheatConfigurations[0].hotend;
   }
 
   public getDefaultHeatbedTemperature(): number {
-    return this.config.printer.defaultTemperatureFanSpeed.heatbed;
+    return this.config.preheatConfigurations[0].heatbed;
   }
 
   public getDefaultFanSpeed(): number {
-    return this.config.printer.defaultTemperatureFanSpeed.fan;
+    return this.config.preheatConfigurations[0].fan;
+  }
+
+  public getAmbientTemperatureSensorName(): number {
+    return this.config.octoprint.plugins.enclosure.ambientSensorID;
+  }
+
+  public usePSUControl(): boolean {
+    return this.config.octoprint.plugins.psuControl.enabled;
+  }
+
+  public useOphomControl(): boolean {
+    return this.config.octoprint.plugins.ophom.enabled;
+  }
+
+  public useTpLinkSmartPlug(): boolean {
+    return this.config.octoprint.plugins.tpLinkSmartPlug.enabled;
+  }
+
+  public getSmartPlugIP(): string {
+    return this.config.octoprint.plugins.tpLinkSmartPlug.smartPlugIP;
+  }
+
+  public useTasmota(): boolean {
+    return this.config.octoprint.plugins.tasmota.enabled;
+  }
+
+  public getTasmotaIP(): string {
+    return this.config.octoprint.plugins.tasmota.ip;
+  }
+
+  public getTasmotaIndex(): number {
+    return this.config.octoprint.plugins.tasmota.index;
+  }
+
+  public useTasmotaMqtt(): boolean {
+    return this.config.octoprint.plugins.tasmotaMqtt.enabled;
+  }
+
+  public getTasmotaMqttTopic(): string {
+    return this.config.octoprint.plugins.tasmotaMqtt.topic;
+  }
+
+  public getTasmotaMqttRelayNumber(): number {
+    return this.config.octoprint.plugins.tasmotaMqtt.relayNumber;
   }
 
   public isDisplayLayerProgressEnabled(): boolean {
-    return this.config.plugins.displayLayerProgress.enabled;
+    return this.config.octoprint.plugins.displayLayerProgress.enabled;
   }
 
   public isPreheatPluginEnabled(): boolean {
-    return this.config.plugins.preheatButton.enabled;
+    return this.config.octoprint.plugins.preheatButton.enabled;
   }
 
   public isFilamentManagerUsed(): boolean {
-    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+    return this.config.octoprint.plugins.filamentManager.enabled || this.config.octoprint.plugins.spoolManager.enabled;
   }
 
   public isSpoolManagerPluginEnabled(): boolean {
-    return this.config.plugins.spoolManager.enabled;
+    return this.config.octoprint.plugins.spoolManager.enabled;
   }
 
+  // TODO
+
   public getFeedLength(): number {
-    return this.config.filament.feedLength;
+    return this.config.filamentChange.integrated.feedLength;
   }
 
   public getFeedSpeed(): number {
-    return this.config.filament.feedSpeed;
+    return this.config.filamentChange.integrated.feedSpeed;
   }
 
   public getFeedSpeedSlow(): number {
-    return this.config.filament.feedSpeedSlow;
+    return this.config.filamentChange.integrated.feedSpeedSlow;
   }
 
   public getPurgeDistance(): number {
-    return this.config.filament.purgeDistance;
+    return this.config.filamentChange.integrated.purgeDistance;
   }
 
   public useM600(): boolean {
-    return this.config.filament.useM600;
+    return false;
   }
 
   public showThumbnailByDefault(): boolean {
-    return this.config.octodash.preferPreviewWhilePrinting;
+    return this.config.customization.preferPreviewWhilePrinting;
   }
 
   public getAccessKey(): string {
-    return this.config.octoprint.accessToken;
+    return this.config.backend.accessToken;
   }
 
   public getDisableExtruderGCode(): string {
-    return this.config.printer.disableExtruderGCode;
+    return this.config.backend.commands.disableExtruder;
   }
 
   public getZBabystepGCode(): string {
-    return this.config.printer.zBabystepGCode;
+    return this.config.backend.commands.babystepZ;
   }
 
   public getPreviewProgressCircle(): boolean {
-    return this.config.octodash.previewProgressCircle;
+    return this.config.customization.previewProgressCircle;
   }
 
   public getScreenSleepCommand(): string {
-    return this.config.octodash.screenSleepCommand;
+    return this.config.screen.sleepCommand;
   }
 
   public getScreenWakeupCommand(): string {
-    return this.config.octodash.screenWakeupCommand;
+    return this.config.screen.wakeupCommand;
   }
 
   public getShowExtruderControl(): boolean {
-    return this.config.octodash.showExtruderControl;
+    return this.config.customization.showExtruderControl;
   }
 
   public isXAxisInverted(): boolean {
-    return this.config.octodash.invertAxisControl.x;
+    return this.config.customization.invertAxisControl.x;
   }
 
   public isYAxisInverted(): boolean {
-    return this.config.octodash.invertAxisControl.y;
+    return this.config.customization.invertAxisControl.y;
   }
 
   public isZAxisInverted(): boolean {
-    return this.config.octodash.invertAxisControl.z;
+    return this.config.customization.invertAxisControl.z;
   }
 
   public setSortingAttribute(attribute: 'name' | 'date' | 'size'): void {
-    this.config.octodash.fileSorting.attribute = attribute;
+    this.config.customization.fileSorting.attribute = attribute;
     this.saveConfig(this.config);
   }
 
   public setSortingOrder(order: 'asc' | 'dsc'): void {
-    this.config.octodash.fileSorting.order = order;
+    this.config.customization.fileSorting.order = order;
     this.saveConfig(this.config);
   }
 
   public showNotificationCenterIcon(): boolean {
-    return this.config.octodash.showNotificationCenterIcon;
+    return this.config.customization.showNotificationCenterIcon;
   }
 }

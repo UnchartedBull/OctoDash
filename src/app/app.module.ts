@@ -16,6 +16,7 @@ import { AppService } from './app.service';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ConfigService } from './config/config.service';
 import { ConfigInvalidComponent } from './config/invalid/invalid.component';
+import { ChooseBackendComponent } from './config/setup/choose-backend/choose-backend.component';
 import { DiscoverOctoprintComponent } from './config/setup/discover-octoprint/discover-octoprint.component';
 import { ExtruderInformationComponent } from './config/setup/extruder-information/extruder-information.component';
 import { OctoprintAuthenticationComponent } from './config/setup/octoprint-authentication/octoprint-authentication.component';
@@ -104,6 +105,7 @@ export function playerFactory(): LottiePlayer {
     PurgeFilamentComponent,
     CustomActionsComponent,
     ToggleSwitchComponent,
+    ChooseBackendComponent,
     NotificationCenterComponent,
   ],
   imports: [

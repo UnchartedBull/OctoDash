@@ -23,6 +23,9 @@
 
   <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
 
+  <app-config-choose-backend (increasePage)="increasePage()" (configGenerated)="" *ngIf="page === 1">
+  </app-config-choose-backend>
+
   <!-- <app-config-setup-discover-octoprint
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)"

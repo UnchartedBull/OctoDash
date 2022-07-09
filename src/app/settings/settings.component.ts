@@ -41,7 +41,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
-    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {

@@ -28,36 +28,7 @@ export class AppService {
     this.electronService.send('appInfo');
 
     // list of all error following an upgrade
-    this.updateError = {
-      "/printer must have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
-      "/plugins must have required property 'tpLinkSmartPlug'": config =>
-        (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),
-      "/plugins must have required property 'tasmota'": config =>
-        (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
-      "/plugins must have required property 'tasmotaMqtt'": config =>
-        (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
-      "/octodash must have required property 'previewProgressCircle'": config =>
-        (config.octodash.previewProgressCircle = false),
-      "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
-        config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
-        delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
-      },
-      "/octodash must have required property 'screenSleepCommand'": config =>
-        (config.octodash.screenSleepCommand = 'xset dpms force standby'),
-      "/octodash must have required property 'screenWakeupCommand'": config =>
-        (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
-      "/octodash must have required property 'invertAxisControl'": config =>
-        (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
-      "/printer must have required property 'disableExtruderGCode'": config =>
-        (config.printer.disableExtruderGCode = 'M18 E'),
-      "/octodash must have required property 'showExtruderControl'": config =>
-        (config.octodash.showExtruderControl = true),
-      "/plugins must have required property 'spoolManager'": config =>
-        (config.plugins.spoolManager = { enabled: false }),
-      "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
-      "/octodash must have required property 'showNotificationCenterIcon'": config =>
-        (config.octodash.showNotificationCenterIcon = true),
-    };
+    this.updateError = {};
   }
 
   private checkUpdate(): void {
@@ -80,7 +51,8 @@ export class AppService {
   public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
-    config.octoprint.url = config.octoprint.url.replace('api/', '');
+    // FIXME
+    // config.octoprint.url = config.octoprint.url.replace('api/', '');
 
     let fullyFixed = true;
     for (const error of errors) {

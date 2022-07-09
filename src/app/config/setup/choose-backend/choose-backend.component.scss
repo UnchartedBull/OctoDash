@@ -1,0 +1,49 @@
+.discover-octoprint {
+  &__wrapper {
+    height: 40vh;
+    padding: 4vh 3vw;
+    margin-right: 2vw;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__searching {
+    display: block;
+    text-align: center;
+    margin-top: 10vh;
+    font-size: 0.8rem;
+  }
+
+  &__node {
+    display: block;
+    background-color: #718093;
+    border-radius: 1vw;
+    margin-bottom: 2vh;
+    padding: 2vh 2vw;
+
+    &-name {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 0.8rem;
+      float: left;
+      width: 90%;
+    }
+
+    &-details {
+      font-size: 0.55rem;
+      opacity: 0.7;
+    }
+
+    &-connect-icon {
+      height: 10vh;
+      float: right;
+      margin-top: 1.8vh;
+    }
+  }
+
+  &__manual {
+    text-align: center;
+    font-size: 0.7rem;
+    line-height: 14vh;
+  }
+}
