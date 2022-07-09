@@ -23,7 +23,7 @@
 
   <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
 
-  <app-config-setup-discover-octoprint
+  <!-- <app-config-setup-discover-octoprint
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)"
     [(octoprintHost)]="config.octoprint.urlSplit.host"
@@ -60,14 +60,13 @@
     [(ophomPlugin)]="config.plugins.ophom.enabled"
     [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
     [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
-    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"></app-config-setup-plugins>
+    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"></app-config-setup-plugins> -->
 
   <div *ngIf="page === 6">
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
-        <img
-          [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
+        <img [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon" />
         <ng-container i18n="@@checking-octoprint-connection"> OctoPrint Connection </ng-container>
       </span>

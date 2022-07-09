@@ -1,30 +1,38 @@
-import { Config } from './config.model';
+import { merge } from 'lodash-es';
+
+import { BackendType, Config } from './config.model';
+import { moonrakerConfig } from './config.moonraker.default';
 import { octoprintConfig } from './config.octoprint.default';
 
-const octodashConfig = {
-  printer: {
-    name: '',
-    xySpeed: 150,
-    zSpeed: 5,
-    // TODO switch those around for klipper
-    disableExtruderGCode: 'M18 E',
-    zBabystepGCode: 'M290 Z',
-    defaultTemperatureFanSpeed: {
-      hotend: 200,
-      heatbed: 60,
-      fan: 100,
+const octodashConfig: Partial<Config> = {
+  customization: {
+    turnOnPrinterWhenExitingSleep: false,
+    preferPreviewWhilePrinting: false,
+    previewProgressCircle: false,
+    showExtruderControl: true,
+    showNotificationCenterIcon: false,
+    fileSorting: {
+      attribute: 'date',
+      order: 'dsc',
+    },
+    invertAxisControl: {
+      x: false,
+      y: false,
+      z: false,
     },
   },
-  filament: {
-    // TODO remove thickness and density
-    thickness: 1.75,
-    density: 1.25,
-    feedLength: 0,
-    feedSpeed: 20,
-    feedSpeedSlow: 3,
-    purgeDistance: 30,
-    // TODO think about how to handle this with klipper
-    useM600: false,
+  printer: {
+    name: '',
+    xySpeed: 80,
+    zSpeed: 5,
+  },
+  filamentChange: {
+    integrated: {
+      feedLength: 0,
+      feedSpeed: 20,
+      feedSpeedSlow: 3,
+      purgeDistance: 30,
+    },
   },
   customActions: [
     {
@@ -70,35 +78,9 @@ const octodashConfig = {
       exit: false,
     },
   ],
-  fileSorting: {
-    attribute: 'name',
-    order: 'asc',
-  },
-  invertAxisControl: {
-    x: false,
-    y: false,
-    z: false,
-  },
-  pollingInterval: 2000,
-  touchscreen: true,
-  turnScreenOffWhileSleeping: false,
-  turnOnPrinterWhenExitingSleep: false,
-  preferPreviewWhilePrinting: false,
-  previewProgressCircle: false,
-  screenSleepCommand: 'xset dpms force standby',
-  screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
-  showExtruderControl: true,
-  showNotificationCenterIcon: true,
 };
 
-module.exports.config = (backend: 'octoprint' | 'moonraker') => {
-  if (backend === 'octoprint')
-    return {
-      ...octodashConfig,
-      octoprint: octoprintConfig,
-    } as Config;
-  else
-    return {
-      ...octodashConfig,
-    };
-};
+export function getDefaultConfig(backend: BackendType) {
+  if (backend === BackendType.OCTOPRINT) return merge(octodashConfig, octoprintConfig) as Config;
+  else return merge(octodashConfig, moonrakerConfig) as Config;
+}

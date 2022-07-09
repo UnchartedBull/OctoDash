@@ -4,52 +4,109 @@ export interface HttpHeader {
   headers: HttpHeaders;
 }
 
+export enum BackendType {
+  OCTOPRINT,
+  MOONRAKER,
+}
+
 export interface Config {
-  backend: string;
+  backend: Backend;
+  customization: Customization;
   printer: Printer;
-  filament: Filament;
-  customActions: CustomAction[];
-  fileSorting: FileSorting;
-  invertAxisControl: InvertAxisControl;
+  screen: Screen;
+  preheatConfigurations: Array<PreheatConfiguration>;
+  filamentChange: FilamentChange;
+  customActions: Array<CustomAction>;
+  octoprint?: OctoprintConfig;
+}
+
+interface Backend {
+  type: BackendType;
+  host: string;
+  accessToken: string;
   pollingInterval: number;
-  touchscreen: boolean;
-  turnScreenOffWhileSleeping: boolean;
+  commands: BackendCommands;
+}
+
+interface BackendCommands {
+  disableExtruder: string;
+  babystepZ: string;
+}
+
+interface Customization {
   turnOnPrinterWhenExitingSleep: boolean;
   preferPreviewWhilePrinting: boolean;
   previewProgressCircle: boolean;
-  screenSleepCommand: string;
-  screenWakeupCommand: string;
   showExtruderControl: boolean;
   showNotificationCenterIcon: boolean;
-  octoprint?: OctoprintConfig;
-  moonraker?: MoonrakerConfig;
+  fileSorting: FileSorting;
+  invertAxisControl: InvertAxisControl;
 }
 interface Printer {
   name: string;
   xySpeed: number;
   zSpeed: number;
-  disableExtruderGCode: string;
-  zBabystepGCode: string;
-  defaultTemperatureFanSpeed: DefaultTemperatureFanSpeed;
 }
 
-interface DefaultTemperatureFanSpeed {
+interface Screen {
+  touchscreen: boolean;
+  turnOffWhileSleeping: boolean;
+  sleepCommand: string;
+  wakeupCommand: string;
+}
+
+interface PreheatConfiguration {
+  name: string;
   hotend: number;
   heatbed: number;
   fan: number;
 }
 
-interface Filament {
-  thickness: number;
-  density: number;
-  feedLength: number;
-  feedSpeed: number;
-  feedSpeedSlow: number;
-  purgeDistance: number;
-  useM600: boolean;
+interface FilamentChange {
+  integrated?: {
+    feedLength: number;
+    feedSpeed: number;
+    feedSpeedSlow: number;
+    purgeDistance: number;
+  };
+  loadAndUnload?: {
+    unloadCommand: string;
+    loadCommand: string;
+  };
+  change?: {
+    changeCommand: string;
+  };
 }
 
-interface Plugins {
+export interface CustomAction {
+  icon: string;
+  command: string;
+  color: string;
+  confirm: boolean;
+  exit: boolean;
+}
+
+interface FileSorting {
+  attribute: 'name' | 'date' | 'size';
+  order: 'asc' | 'dsc';
+}
+
+interface InvertAxisControl {
+  x: boolean;
+  y: boolean;
+  z: boolean;
+}
+
+export interface OctoprintConfig {
+  plugins: OctoprintPlugins;
+}
+
+export interface URLSplit {
+  host: string;
+  port: number;
+}
+
+interface OctoprintPlugins {
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
@@ -85,39 +142,4 @@ interface TasmotaPlugin extends Plugin {
 interface TasmotaMqttPlugin extends Plugin {
   topic: string;
   relayNumber: number;
-}
-
-export interface CustomAction {
-  icon: string;
-  command: string;
-  color: string;
-  confirm: boolean;
-  exit: boolean;
-}
-
-interface FileSorting {
-  attribute: 'name' | 'date' | 'size';
-  order: 'asc' | 'dsc';
-}
-
-interface InvertAxisControl {
-  x: boolean;
-  y: boolean;
-  z: boolean;
-}
-
-export interface OctoprintConfig {
-  url: string;
-  accessToken: string;
-  plugins: Plugins;
-  urlSplit?: URLSplit;
-}
-
-export interface MoonrakerConfig {
-  url: string;
-  urlSplit?: URLSplit;
-}
-export interface URLSplit {
-  host: string;
-  port: number;
 }

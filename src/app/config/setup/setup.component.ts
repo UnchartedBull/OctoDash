@@ -3,7 +3,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 
-import { defaultConfig } from '../config.default';
+import { getDefaultConfig } from '../config.default';
 import { Config } from '../config.model';
 import { ConfigService } from '../config.service';
 
@@ -36,10 +36,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.configUpdate = this.configService.isUpdate();
     if (this.configUpdate) {
       this.config = configService.getCurrentConfig();
-    } else {
-      this.config = defaultConfig;
     }
-    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {
@@ -55,10 +52,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.manualURL = manual;
   }
 
-  public getOctoprintURL(): string {
-    return this.configService.mergeOctoprintURL(this.config.octoprint.urlSplit);
-  }
-
   public createConfig(): void {
     this.configErrors = [];
     this.config = this.configService.createConfigFromInput(this.config);
@@ -66,32 +59,31 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   private checkOctoPrintConnection(): void {
-    const httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
-      }),
-    };
-
-    this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe({
-      next: () => {
-        this.octoprintConnection = true;
-        this.saveConfig();
-      },
-      error: (error: HttpErrorResponse): void => {
-        this.octoprintConnection = false;
-        if (error.message.includes('403 FORBIDDEN')) {
-          this.configErrors.push(
-            $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`,
-          );
-        } else if (error.message.includes('0 Unknown Error')) {
-          this.configErrors.push(
-            $localize`:@@error-unknown:0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
-          );
-        } else {
-          this.configErrors.push(error.message);
-        }
-      },
-    });
+    // const httpHeaders = {
+    //   headers: new HttpHeaders({
+    //     'x-api-key': this.config.octoprint.accessToken,
+    //   }),
+    // };
+    // this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe({
+    //   next: () => {
+    //     this.octoprintConnection = true;
+    //     this.saveConfig();
+    //   },
+    //   error: (error: HttpErrorResponse): void => {
+    //     this.octoprintConnection = false;
+    //     if (error.message.includes('403 FORBIDDEN')) {
+    //       this.configErrors.push(
+    //         $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`,
+    //       );
+    //     } else if (error.message.includes('0 Unknown Error')) {
+    //       this.configErrors.push(
+    //         $localize`:@@error-unknown:0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
+    //       );
+    //     } else {
+    //       this.configErrors.push(error.message);
+    //     }
+    //   },
+    // });
   }
 
   private onConfigSaved() {
@@ -129,16 +121,10 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public increasePage(): void {
-    if (this.page === this.totalPages - 1) {
-      this.createConfig();
-    }
     this.changePage(1);
   }
 
   public decreasePage(): void {
-    if (this.page === this.totalPages) {
-      this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
-    }
     this.changePage(-1);
   }
 
