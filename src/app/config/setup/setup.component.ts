@@ -20,7 +20,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   public configUpdate: boolean;
   public config: Config;
 
-  public octoprintConnection = false;
+  public backendConnection = false;
   public configValid = false;
   public configSaved = $localize`:@@saving-config:saving config`;
   public configErrors: string[];
@@ -73,44 +73,47 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     return !(this.page === this.totalPages || (this.page === 2 && !this.manualURL) || this.page === 1);
   }
 
-  //
-
   public changeURLEntryMethod(manual: boolean): void {
     this.manualURL = manual;
   }
 
   public createConfig(): void {
     this.configErrors = [];
-    this.config = this.configService.createConfigFromInput(this.config);
-    this.checkOctoPrintConnection();
+    this.checkBackendConnection();
   }
 
-  private checkOctoPrintConnection(): void {
-    // const httpHeaders = {
-    //   headers: new HttpHeaders({
-    //     'x-api-key': this.config.octoprint.accessToken,
-    //   }),
-    // };
-    // this.http.get(`${this.config.octoprint.url}api/version`, httpHeaders).subscribe({
-    //   next: () => {
-    //     this.octoprintConnection = true;
-    //     this.saveConfig();
-    //   },
-    //   error: (error: HttpErrorResponse): void => {
-    //     this.octoprintConnection = false;
-    //     if (error.message.includes('403 FORBIDDEN')) {
-    //       this.configErrors.push(
-    //         $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`,
-    //       );
-    //     } else if (error.message.includes('0 Unknown Error')) {
-    //       this.configErrors.push(
-    //         $localize`:@@error-unknown:0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
-    //       );
-    //     } else {
-    //       this.configErrors.push(error.message);
-    //     }
-    //   },
-    // });
+  private checkBackendConnection(): void {
+    const httpHeaders = {
+      headers: new HttpHeaders({
+        'x-api-key': this.config.backend.accessToken,
+      }),
+    };
+    let url;
+    if (this.config.backend.type === BackendType.OCTOPRINT) {
+      url = `${this.config.backend.url}/api/version`;
+    } else {
+      url = `${this.config.backend.url}/machine/system_info`;
+    }
+    this.http.get(url, httpHeaders).subscribe({
+      next: () => {
+        this.backendConnection = true;
+        this.saveConfig();
+      },
+      error: (error: HttpErrorResponse): void => {
+        this.backendConnection = false;
+        if (error.message.includes('403 FORBIDDEN')) {
+          this.configErrors.push(
+            $localize`:@@error-403:403 Forbidden - This most likely means that your API Key isn't working.`,
+          );
+        } else if (error.message.includes('0 Unknown Error')) {
+          this.configErrors.push(
+            $localize`:@@error-unknown:0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
+          );
+        } else {
+          this.configErrors.push(error.message);
+        }
+      },
+    });
   }
 
   private onConfigSaved() {
@@ -155,6 +158,9 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
         return this.changePage(2);
       }
       this.changePage(1);
+      if (this.page === 7) {
+        this.createConfig();
+      }
     }, 200);
   }
 

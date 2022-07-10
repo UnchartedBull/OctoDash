@@ -70,11 +70,11 @@
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
         <img
-          [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
+          [src]="backendConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
           class="setup__validation-check-icon" />
-        <ng-container i18n="@@checking-octoprint-connection"> OctoPrint Connection </ng-container>
+        <ng-container i18n="@@checking-octoprint-connection"> Backend Connection </ng-container>
       </span>
-      <div *ngIf="octoprintConnection">
+      <div *ngIf="backendConnection">
         <span class="setup__validation-check">
           <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
           <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
