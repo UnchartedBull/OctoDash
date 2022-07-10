@@ -3,7 +3,6 @@ import { UrlHelper } from 'src/app/helper/url.helper';
 
 import { ElectronService } from '../../../electron.service';
 import { BackendType, URLSplit } from '../../config.model';
-import { ConfigService } from '../../config.service';
 
 @Component({
   selector: 'app-config-setup-discover-backend',
@@ -22,10 +21,11 @@ export class DiscoverBackendComponent implements OnInit, OnDestroy {
   public nodes: Nodes;
   public urlSplit: URLSplit;
   public showLocalDialog: boolean;
+  public backendTypeEnum = BackendType;
 
   private noInstanceTimeout: ReturnType<typeof setTimeout>;
 
-  constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
+  constructor(private electronService: ElectronService, private zone: NgZone) {}
 
   ngOnInit(): void {
     this.urlSplit = UrlHelper.splitUrl(this.backend);
@@ -62,18 +62,22 @@ export class DiscoverBackendComponent implements OnInit, OnDestroy {
     if (node.local) {
       this.showLocalDialog = true;
     } else {
-      this.emitNode(this.urlSplit);
+      this.emitNode(true);
     }
   }
 
   public chooseLocalInstance(urlSplit: URLSplit): void {
-    this.emitNode({ host: 'localhost', port: urlSplit.port } as URLSplit);
+    this.urlSplit = { host: 'localhost', port: urlSplit.port };
+    this.emitNode(true);
   }
 
-  public emitNode(urlSplit: URLSplit): void {
+  public emitNode(nextPage = false): void {
+    console.log(this.urlSplit);
     this.showLocalDialog = false;
-    this.backendChange.emit(UrlHelper.mergeUrl(urlSplit));
-    this.increasePage.emit();
+    this.backendChange.emit(UrlHelper.mergeUrl(this.urlSplit));
+    if (nextPage) {
+      this.increasePage.emit();
+    }
   }
 
   public searchForInstance(): void {

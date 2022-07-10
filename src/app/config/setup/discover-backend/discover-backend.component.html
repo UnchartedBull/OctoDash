@@ -11,7 +11,7 @@
           Version {{ node.version }}, URL: {{ node.url }}
         </span>
       </div>
-      <img src="assets/connect.svg" class="discover-backend__node-connect-icon" />
+      <fa-icon [icon]="['fas', 'link']" class="discover-backend__node-connect-icon"></fa-icon>
     </span>
     <span class="discover-backend__searching loading-dots" *ngIf="!nodes" i18n="@@searching">searching</span>
   </div>
@@ -24,42 +24,53 @@
       type="text"
       id="url"
       class="setup__input"
-      [ngModel]="backendHost"
-      (ngModelChange)="backendHostChange.emit($event)"
+      [(ngModel)]="urlSplit.host"
+      (ngModelChange)="emitNode()"
       name="url"
       required
       style="width: 42.5vw" />
-    :
+    <span class="setup__input-prefix" style="padding-left: 1vw">:</span>
     <input
       type="text"
       id="port"
       class="setup__input"
-      [ngModel]="backendPort"
-      (ngModelChange)="backendPortChange.emit($event)"
+      [(ngModel)]="urlSplit.port"
+      (ngModelChange)="emitNode()"
       name="port"
       required
       style="width: 14vw" />
-    <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
-      Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
+    <p
+      class="setup__input-prefix"
+      style="margin-top: 8vh"
+      i18n="@@port-recommendation"
+      *ngIf="backendType === backendTypeEnum.OCTOPRINT">
+      Use port 5000 for vanilla OctoPrint or 80 for OctoPi
+    </p>
+    <p
+      class="setup__input-prefix"
+      style="margin-top: 8vh"
+      i18n="@@port-recommendation"
+      *ngIf="backendType === backendTypeEnum.MOONRAKER">
+      Use port 7125 for vanilla Moonraker
     </p>
   </form>
-  <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
+  <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 11.5vh" i18n="@@search-again">
     search again
   </div>
 </div>
 
-<div class="confirm__wrapper" *ngIf="!showLocalDialog">
+<div class="confirm__wrapper" *ngIf="showLocalDialog">
   <div class="confirm">
-    <h1 i18n="@@connect-localhost">connect to localhost?</h1>
+    <h1 i18n="@@connect-localhost">Connect to localhost?</h1>
     <p class="confirm__sub-heading" i18n="@@prompt-same-machine">
-      are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
+      Are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
     </p>
     <div class="confirm__action-row">
       <div class="confirm__button confirm__button-positive" (click)="chooseLocalInstance(urlSplit)" matRipple>
         <fa-icon [icon]="['fas', 'check']"></fa-icon>
       </div>
       <div class="confirm__button confirm__button-negative" (click)="emitNode(urlSplit)" matRipple>
-        <fa-icon [icon]="['far', 'xmark']"></fa-icon>
+        <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
       </div>
     </div>
   </div>

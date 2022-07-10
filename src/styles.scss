@@ -249,6 +249,7 @@ app-root {
     display: block;
     text-align: center;
     font-size: 4vw;
+    font-weight: 500;
   }
 
   &__sub-heading {
@@ -269,7 +270,7 @@ app-root {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    gap: 4vw;
+    gap: 2.5vw;
     justify-items: center;
     justify-content: center;
     margin-top: 8vh;
@@ -284,6 +285,10 @@ app-root {
     width: 10vw;
     padding: 1.5vh 2vw;
     text-align: center;
+
+    fa-icon {
+      font-size: 4vw;
+    }
 
     &-negative fa-icon {
       color: #c23616;

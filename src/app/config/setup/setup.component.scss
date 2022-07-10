@@ -4,7 +4,7 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #4bae50;
+    background-color: #44bd32;
     width: 0;
     transition: width 0.7s ease-in-out;
 
@@ -31,7 +31,7 @@
   }
 
   &__button {
-    background-color: #4bae50;
+    background-color: #44bd32;
     display: inline-block;
     padding: 1.4vh 2vw;
     border-radius: 1vw;
@@ -41,9 +41,9 @@
   &__input {
     background: transparent;
     margin-top: 7vh;
-    padding: 3vh 2.5vw;
-    border: 2px solid #dcdde1;
-    border-radius: 2.5vw;
+    padding: 2.4vh 2.1vw;
+    border: 2px solid #848487;
+    border-radius: 1vw;
     width: 55vw;
     line-height: 125%;
 
@@ -58,7 +58,7 @@
       &-adjust {
         display: inline-flex;
         padding: 3vh 3vw;
-        border: 2px solid #dcdde1;
+        border: 2px solid #848487;
         border-radius: 2.5vw 0 0 2.5vw;
         margin-right: -2px;
         font-size: 4.3vw;
@@ -71,14 +71,14 @@
       }
 
       &:focus {
-        border: 2px solid #dcdde1 !important;
-        border-bottom: 2px solid #4bae50 !important;
+        border: 2px solid #848487 !important;
+        border-bottom: 2px solid #44bd32 !important;
       }
     }
 
     &:focus {
       outline: 0;
-      border: 2px solid #4bae50;
+      border: 2px solid #f5f6fa;
     }
 
     &-small {
@@ -103,7 +103,7 @@
 
     &-prefix {
       font-size: 3vw;
-      opacity: 0.7;
+      color: #848487;
       padding-right: 1vw;
     }
   }
