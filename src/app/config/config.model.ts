@@ -5,8 +5,8 @@ export interface HttpHeader {
 }
 
 export enum BackendType {
-  OCTOPRINT = 'OCTOPRINT',
-  MOONRAKER = 'MOONRAKER',
+  OCTOPRINT = 'OctoPrint',
+  MOONRAKER = 'Moonraker',
 }
 
 export interface Config {

@@ -10,4 +10,8 @@ export class UrlHelper {
       port: isNaN(port) ? null : port,
     };
   }
+
+  static mergeUrl(urlSplit: URLSplit) {
+    return `http://${urlSplit.host}:${urlSplit.port ? urlSplit.port : ''}`;
+  }
 }

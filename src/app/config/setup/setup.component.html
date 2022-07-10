@@ -1,27 +1,25 @@
 <div class="setup">
-  <table class="top-bar">
-    <tr>
-      <td class="top-bar__back">
-        <div *ngIf="page > 0" (click)="decreasePage()">
-          <img src="assets/back.svg" class="top-bar__back-icon" />
-          <span i18n="@@setup-back">back</span>
-        </div>
-      </td>
-      <td class="top-bar__center">
-        <div class="setup__progress-bar-wrapper">
-          <div class="setup__progress-bar" id="progressBar"></div>
-        </div>
-      </td>
-      <td class="top-bar__next">
-        <div
-          *ngIf="!(this.page === this.totalPages || (this.page === 2 && !this.manualURL) || this.page === 1)"
-          (click)="increasePage()">
-          <span i18n="@@setup-next">next</span>
-          <img src="assets/next.svg" class="top-bar__next-icon" />
-        </div>
-      </td>
-    </tr>
-  </table>
+  <div class="top-bar">
+    <div class="top-bar__side" [ngClass]="{ 'top-bar__side-hidden': !showBackButton() }" matRipple>
+      <div *ngIf="showBackButton()" (click)="decreasePage()">
+        <img src="assets/back.svg" class="top-bar__side-icon top-bar__side-icon-left" />
+        <span i18n="@@setup-back">back</span>
+      </div>
+    </div>
+
+    <div class="top-bar__center">
+      <div class="setup__progress-bar-wrapper">
+        <div class="setup__progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="top-bar__side" [ngClass]="{ 'top-bar__side-hidden': !showNextButton() }" matRipple>
+      <div *ngIf="showNextButton()" (click)="increasePage()">
+        <span i18n="@@setup-next">next</span>
+        <img src="assets/next.svg" class="top-bar__side-icon top-bar__side-icon-right" />
+      </div>
+    </div>
+  </div>
 
   <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
 
@@ -31,13 +29,13 @@
     (configGenerated)="useNewConfig($event)">
   </app-config-setup-choose-backend>
 
-  <app-config-setup-discover-octoprint
-    *ngIf="page === 2 && hasOctoprintBackend()"
-    [(octoprintHost)]="splitUrl(config.backend.url).host"
-    [(octoprintPort)]="splitUrl(config.backend.url).port"
+  <app-config-setup-discover-backend
+    *ngIf="page === 2"
+    [(backend)]="config.backend.url"
+    [backendType]="config.backend.type"
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)">
-  </app-config-setup-discover-octoprint>
+  </app-config-setup-discover-backend>
 
   <!-- <app-config-setup-octoprint-authentication
     [octoprintURL]="getOctoprintURL().replace('api/', '')"

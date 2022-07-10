@@ -50,7 +50,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public useNewConfig(config: Config): void {
-    console.log(config);
     this.config = config;
   }
 
@@ -64,6 +63,14 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public splitUrl(url: string): UrlSplit {
     return UrlHelper.splitUrl(url);
+  }
+
+  public showBackButton(): boolean {
+    return this.page > 0;
+  }
+
+  public showNextButton(): boolean {
+    return !(this.page === this.totalPages || (this.page === 2 && !this.manualURL) || this.page === 1);
   }
 
   //
@@ -141,14 +148,19 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public increasePage(): void {
-    if (this.page === 0 && this.config) {
-      return this.changePage(2);
-    }
-    this.changePage(1);
+    setTimeout(() => {
+      if (this.page === 0 && this.config) {
+        return this.changePage(2);
+      }
+      this.changePage(1);
+    }, 200);
   }
 
   public decreasePage(): void {
-    this.changePage(-1);
+    console.log(this.config);
+    setTimeout(() => {
+      this.changePage(-1);
+    }, 200);
   }
 
   public changeProgress(): void {

@@ -1,0 +1,66 @@
+<span class="setup__text" i18n="@@select-instance">
+  Select your {{ backendType }} instance from the list below or enter the IP/URL manually.
+</span>
+<div *ngIf="!manualURL">
+  <div class="discover-backend__wrapper">
+    <span *ngFor="let node of nodes" class="discover-backend__node" (click)="chooseNode(node)" matRipple>
+      <div class="discover-backend__node-name">
+        {{ node.name }}
+        <br />
+        <span class="discover-backend__node-details" i18n="@@version-url">
+          Version {{ node.version }}, URL: {{ node.url }}
+        </span>
+      </div>
+      <img src="assets/connect.svg" class="discover-backend__node-connect-icon" />
+    </span>
+    <span class="discover-backend__searching loading-dots" *ngIf="!nodes" i18n="@@searching">searching</span>
+  </div>
+  <div class="discover-backend__manual" (click)="enterURLManually()" i18n="@@enter-manually">enter manually</div>
+</div>
+<div *ngIf="manualURL">
+  <form class="setup__form" style="margin-top: 5vh">
+    <span class="setup__input-prefix">http://</span>
+    <input
+      type="text"
+      id="url"
+      class="setup__input"
+      [ngModel]="backendHost"
+      (ngModelChange)="backendHostChange.emit($event)"
+      name="url"
+      required
+      style="width: 42.5vw" />
+    :
+    <input
+      type="text"
+      id="port"
+      class="setup__input"
+      [ngModel]="backendPort"
+      (ngModelChange)="backendPortChange.emit($event)"
+      name="port"
+      required
+      style="width: 14vw" />
+    <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
+      Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
+    </p>
+  </form>
+  <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
+    search again
+  </div>
+</div>
+
+<div class="confirm__wrapper" *ngIf="!showLocalDialog">
+  <div class="confirm">
+    <h1 i18n="@@connect-localhost">connect to localhost?</h1>
+    <p class="confirm__sub-heading" i18n="@@prompt-same-machine">
+      are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
+    </p>
+    <div class="confirm__action-row">
+      <div class="confirm__button confirm__button-positive" (click)="chooseLocalInstance(urlSplit)" matRipple>
+        <fa-icon [icon]="['fas', 'check']"></fa-icon>
+      </div>
+      <div class="confirm__button confirm__button-negative" (click)="emitNode(urlSplit)" matRipple>
+        <fa-icon [icon]="['far', 'xmark']"></fa-icon>
+      </div>
+    </div>
+  </div>
+</div>

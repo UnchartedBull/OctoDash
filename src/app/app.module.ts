@@ -5,6 +5,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import player, { LottiePlayer } from 'lottie-web';
@@ -17,7 +18,7 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ConfigService } from './config/config.service';
 import { ConfigInvalidComponent } from './config/invalid/invalid.component';
 import { ChooseBackendComponent } from './config/setup/choose-backend/choose-backend.component';
-import { DiscoverOctoprintComponent } from './config/setup/discover-octoprint/discover-octoprint.component';
+import { DiscoverBackendComponent } from './config/setup/discover-backend/discover-backend.component';
 import { ExtruderInformationComponent } from './config/setup/extruder-information/extruder-information.component';
 import { OctoprintAuthenticationComponent } from './config/setup/octoprint-authentication/octoprint-authentication.component';
 import { PersonalizationComponent } from './config/setup/personalization/personalization.component';
@@ -78,7 +79,7 @@ export function playerFactory(): LottiePlayer {
     ConfigInvalidComponent,
     ConfigSetupComponent,
     ControlComponent,
-    DiscoverOctoprintComponent,
+    DiscoverBackendComponent,
     ExtruderInformationComponent,
     FilamentComponent,
     FilesComponent,
@@ -230,6 +231,6 @@ export function playerFactory(): LottiePlayer {
 })
 export class AppModule {
   public constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas);
+    library.addIconPacks(fas, far);
   }
 }

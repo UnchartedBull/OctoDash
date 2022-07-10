@@ -95,38 +95,45 @@ app-root {
 .top-bar {
   width: 100%;
   height: 10vh;
+  display: flex;
+  gap: 2vw;
+  align-items: center;
+  padding: 3vh 2vw;
+  margin-bottom: 4vh;
 
-  & td {
-    width: 33.3%;
+  > div {
+    text-align: center;
   }
 
-  &__back {
-    padding: 4vh 2vw 2vh;
-    font-weight: 500;
+  &__side {
+    width: 20vw;
+    margin: 2vh 0;
+    background-color: #252932;
+    box-shadow: 0px 4px 14px -5px #000000;
+    border-radius: 0.8vw;
+    line-height: 11vh;
 
-    &-icon {
-      width: 6vw;
-      vertical-align: -5vh;
-      margin-right: 1.4vw;
-      display: inline-block;
+    &-hidden {
+      background: transparent;
+      box-shadow: none;
     }
-  }
-
-  &__next {
-    padding: 4vh 2vw 2vh;
-    text-align: right;
-    font-weight: 500;
 
     &-icon {
-      width: 6vw;
-      vertical-align: -5vh;
-      margin-left: 1.4vw;
-      margin-right: 1vw;
+      height: 7vh;
+      vertical-align: -2vh;
+
+      &-left {
+        margin-right: 1vw;
+      }
+
+      &-right {
+        margin-left: 1vw;
+      }
     }
   }
 
   &__center {
-    text-align: center;
+    width: 52vw;
 
     &-icon {
       width: 7vw;
@@ -231,17 +238,25 @@ app-root {
 .confirm {
   position: fixed;
   top: 22vh;
+  left: 15vw;
   width: 64vw;
-  margin-left: calc(15vw - 5px);
   background-color: #353b48;
-  border: 5px solid rgba(255, 255, 255, 0.4);
-  border-radius: 2vw;
+  border-radius: 0.8vw;
   padding: 3vh 3vw;
   z-index: 10;
 
+  h1 {
+    display: block;
+    text-align: center;
+    font-size: 4vw;
+  }
+
   &__sub-heading {
     font-size: 2.4vw;
-    padding-top: 2vh;
+    line-height: 3.5vw;
+    padding-top: 4vh;
+    display: block;
+    text-align: center;
   }
 
   &__gcode {
@@ -250,16 +265,41 @@ app-root {
     font-family: 'Cousine', monospace;
   }
 
-  &__icon {
-    height: 15vh;
-    margin-top: 7vh;
-    margin-left: 15vw;
+  &__action-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 4vw;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+    overflow: visible;
+  }
+
+  &__button {
+    background-color: #252932;
+    box-shadow: 0px 4px 14px -5px #000000;
+    border-radius: 0.8vw;
+    width: 10vw;
+    padding: 1.5vh 2vw;
+    text-align: center;
+
+    &-negative fa-icon {
+      color: #c23616;
+    }
+
+    &-positive fa-icon {
+      color: #44bd32;
+    }
   }
 
   &__wrapper {
     position: fixed;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    box-shadow: 0px 4px 14px -5px #000000;
     left: 0;
     top: 0;
     right: 0;
