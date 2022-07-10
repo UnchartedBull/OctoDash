@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { BackendType } from '../../config.model';
 import { PersonalizationService } from './personalization.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { PersonalizationService } from './personalization.service';
 export class PersonalizationComponent implements OnInit {
   @Input() printerName: string;
   @Input() useTouchscreen: boolean;
-  @Input() octoprintURL: string;
+  @Input() backendUrl: string;
+  @Input() backendType: BackendType;
   @Input() apiKey: string;
 
   @Output() printerNameChange = new EventEmitter<string>();
@@ -19,14 +21,22 @@ export class PersonalizationComponent implements OnInit {
   constructor(private personalizationService: PersonalizationService) {}
 
   ngOnInit(): void {
-    this.personalizationService
-      .getActivePrinterProfileName(this.octoprintURL, this.apiKey)
-      .subscribe((printerName: string) => {
-        if (!this.printerName) {
-          this.printerName = printerName;
-          this.printerNameChange.emit(this.printerName);
-        }
-      });
+    if (this.backendType === BackendType.OCTOPRINT) {
+      this.personalizationService
+        .getOctoprintActivePrinterProfileName(this.backendUrl, this.apiKey)
+        .subscribe(this.updatePrinterName.bind(this));
+    } else {
+      this.personalizationService
+        .getMoonrakerPrinterName(this.backendUrl, this.apiKey)
+        .subscribe(this.updatePrinterName.bind(this));
+    }
+  }
+
+  private updatePrinterName(printerName: string): void {
+    if (!this.printerName) {
+      this.printerName = printerName;
+      this.printerNameChange.emit(this.printerName);
+    }
   }
 
   changeUseTouchscreen(): void {

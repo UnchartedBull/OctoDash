@@ -40,21 +40,21 @@
       required
       style="width: 14vw" />
     <p
-      class="setup__input-prefix"
+      class="setup__explanation"
       style="margin-top: 8vh"
       i18n="@@port-recommendation"
       *ngIf="backendType === backendTypeEnum.OCTOPRINT">
       Use port 5000 for vanilla OctoPrint or 80 for OctoPi
     </p>
     <p
-      class="setup__input-prefix"
+      class="setup__explanation"
       style="margin-top: 8vh"
       i18n="@@port-recommendation"
       *ngIf="backendType === backendTypeEnum.MOONRAKER">
       Use port 7125 for vanilla Moonraker
     </p>
   </form>
-  <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 11.5vh" i18n="@@search-again">
+  <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 7.5vh" i18n="@@search-again">
     search again
   </div>
 </div>

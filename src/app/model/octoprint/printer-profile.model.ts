@@ -11,6 +11,12 @@ export interface OctoprintPrinterProfile {
   axes: OctoprintPrinterAxis;
 }
 
+export interface MoonrakerPrinterInfo {
+  result: {
+    hostname: string;
+  };
+}
+
 interface OctoprintPrinterAxis {
   x: OctoprintAxisDetails;
   y: OctoprintAxisDetails;

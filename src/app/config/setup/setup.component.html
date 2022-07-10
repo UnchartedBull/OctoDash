@@ -48,14 +48,15 @@
     [(accessToken)]="config.backend.accessToken"
     *ngIf="page === 3 && hasMoonrakerBackend()"></app-config-setup-moonraker-authentication>
 
-  <!-- <app-config-setup-personalization
-    [octoprintURL]="getOctoprintURL()"
-    [apiKey]="config.octoprint.accessToken"
+  <app-config-setup-personalization
+    [backendUrl]="config.backend.url"
+    [backendType]="config.backend.type"
+    [apiKey]="config.backend.accessToken"
     [(printerName)]="config.printer.name"
-    [(useTouchscreen)]="config.octodash.touchscreen"
-    *ngIf="page === 3"></app-config-setup-personalization>
+    [(useTouchscreen)]="config.screen.touchscreen"
+    *ngIf="page === 4"></app-config-setup-personalization>
 
-  <app-config-setup-extruder-information
+  <!-- <app-config-setup-extruder-information
     [(feedLength)]="config.filament.feedLength"
     [(feedSpeed)]="config.filament.feedSpeed"
     *ngIf="page === 4"></app-config-setup-extruder-information>

@@ -26,6 +26,20 @@ const octodashConfig: Partial<Config> = {
     xySpeed: 80,
     zSpeed: 5,
   },
+  screen: {
+    touchscreen: true,
+    turnOffWhileSleeping: true,
+    sleepCommand: 'xset dpms force standby',
+    wakeupCommand: 'xset s off && xset -dpms && xset s noblank',
+  },
+  preheatConfigurations: [
+    {
+      name: 'PLA',
+      hotend: 200,
+      heatbed: 60,
+      fan: 0,
+    },
+  ],
   filamentChange: {
     integrated: {
       feedLength: 0,
