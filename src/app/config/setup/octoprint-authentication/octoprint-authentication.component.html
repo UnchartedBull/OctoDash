@@ -7,13 +7,11 @@
 </div>
 <span class="octoprint-authentication_or">- or -</span>
 <form class="setup__form">
-  <input
-    type="text"
+  <app-input-control
+    [(value)]="accessToken"
+    (valueChange)="accessTokenChange.emit($event)"
     id="accessToken"
-    class="setup__input"
-    [ngModel]="this.accessToken"
-    (ngModelChange)="accessTokenChange.emit($event)"
-    name="accessToken"
-    style="width: 67vw"
-    required />
+    label="Access Token"
+    width="large"
+    [required]="true"></app-input-control>
 </form>

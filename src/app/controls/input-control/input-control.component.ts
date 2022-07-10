@@ -13,6 +13,4 @@ export class InputControlComponent {
   @Input() width: 'small' | 'medium' | 'large';
 
   @Output() valueChange = new EventEmitter<string>();
-
-  public disabled = false;
 }

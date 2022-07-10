@@ -23,15 +23,29 @@
 }
 
 .setup {
-  &__input {
-    margin-top: 3vh !important;
-  }
-
   &__explanation {
-    margin-top: 4vh !important;
+    margin-top: 10vh !important;
   }
 }
 
 .setup__form {
-  padding: 0 6vw;
+  padding: 7vh 4vw;
+}
+
+.integrated {
+  display: flex;
+  gap: 8vw;
+  justify-content: center;
+}
+
+.filament-routine__wrapper {
+  text-align: center;
+}
+
+.filament-load-unload {
+  margin: 2vh 0 3vh;
+}
+
+.filament-change {
+  margin: 8vh 0;
 }

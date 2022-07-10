@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +29,7 @@ import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 import { InputControlComponent } from './controls/input-control/input-control.component';
+import { NumberControlComponent } from './controls/number-control/number-control.component';
 import { ConversionService } from './conversion.service';
 import { EventService } from './event.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -112,6 +113,7 @@ export function playerFactory(): LottiePlayer {
     ChooseBackendComponent,
     NotificationCenterComponent,
     InputControlComponent,
+    NumberControlComponent,
   ],
   imports: [
     AppRoutingModule,

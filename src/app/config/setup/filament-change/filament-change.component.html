@@ -24,92 +24,65 @@
   >
 </div>
 
-<form class="setup__form" *ngIf="currentPage === filamentRoutine.INTEGRATED">
-  <label for="feedLength" class="setup__input-label-small" i18n="@@prompt-feed-length">Feed Length:</label>
-  <div class="setup__input__numeric-wrapper" style="width: 58vw">
-    <span
-      class="setup__input__numeric-adjust"
-      matRipple
-      [matRippleUnbounded]="false"
-      [matRippleCentered]="false"
-      long-press
-      [duration]="650"
-      [frequency]="80"
-      (onShortPress)="changeFeedLength(-1)"
-      (onLongPressing)="changeFeedLength(-5)">
-      -
-    </span>
-    <input
-      type="number"
-      id="feedLength"
-      class="setup__input setup__input__numeric"
-      [ngModel]="feedLength"
-      (ngModelChange)="feedLengthChange.emit($event)"
-      name="feedLength"
-      min="0"
-      style="width: 20vw"
-      required />
-    <span
-      class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
-      matRipple
-      [matRippleUnbounded]="false"
-      [matRippleCentered]="false"
-      long-press
-      [duration]="650"
-      [frequency]="80"
-      (onShortPress)="changeFeedLength(1)"
-      (onLongPressing)="changeFeedLength(5)">
-      +
-    </span>
-    <span class="setup__input-small-suffix" style="margin-left: -16.5vw" i18n="@@prompt-info-mm">mm</span>
-  </div>
+<div class="setup__form integrated" *ngIf="currentPage === filamentRoutine.INTEGRATED">
+  <app-number-control
+    [(value)]="filamentChange.integrated.feedLength"
+    (valueChange)="updateConfig()"
+    id="feedLength"
+    label="Feed Length"
+    width="small"
+    [required]="true"
+    [min]="0"
+    [max]="9999">
+  </app-number-control>
+  <span class="setup__input-suffix" style="left: -13vw; bottom: -1.3vh" i18n="@@prompt-info-mm">mm</span>
 
-  <br />
-
-  <label for="feedSpeed" class="setup__input-label-small" i18n="@@prompt-feed-speed">Feed Speed:</label>
-  <div class="setup__input__numeric-wrapper" style="width: 58vw">
-    <span
-      class="setup__input__numeric-adjust"
-      matRipple
-      [matRippleUnbounded]="false"
-      [matRippleCentered]="false"
-      long-press
-      [duration]="650"
-      [frequency]="150"
-      (onShortPress)="changeFeedSpeed(-0.5)"
-      (onLongPressing)="changeFeedSpeed(-1)">
-      -
-    </span>
-    <input
-      type="number"
-      id="feedSpeed"
-      class="setup__input setup__input__numeric"
-      [ngModel]="feedSpeed"
-      (ngModelChange)="feedSpeedChange.emit($event)"
-      name="feedSpeed"
-      min="0"
-      style="width: 20vw"
-      required />
-    <span
-      class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
-      matRipple
-      [matRippleUnbounded]="false"
-      [matRippleCentered]="false"
-      long-press
-      [duration]="650"
-      [frequency]="150"
-      (onShortPress)="changeFeedSpeed(0.5)"
-      (onLongPressing)="changeFeedSpeed(1)">
-      +
-    </span>
-    <span class="setup__input-small-suffix" style="margin-left: -19vw" i18n="@@prompt-info-mms">mm/s</span>
-  </div>
+  <app-number-control
+    [(value)]="filamentChange.integrated.feedSpeed"
+    (valueChange)="updateConfig()"
+    id="feedSpeed"
+    label="Feed Speed"
+    width="small"
+    [required]="true"
+    [min]="0"
+    [max]="100">
+  </app-number-control>
+  <span class="setup__input-suffix" style="left: -14.8vw; bottom: -1.3vh" i18n="@@prompt-info-mms">mm/s</span>
 
   <div class="setup__explanation" style="padding: 2vh 4vw 2vh 0; margin-right: 4vw" i18n="@@filament-changing-warning">
     Feed Length is the distance between extruder and hotend.
   </div>
-</form>
+</div>
 
-<div class="filament-routine__wrapper" *ngIf="currentPage === filamentRoutine.LOAD_UNLOAD">LOAD UNLOAD</div>
+<div class="filament-routine__wrapper" *ngIf="currentPage === filamentRoutine.LOAD_UNLOAD">
+  <div class="filament-load-unload">
+    <app-input-control
+      [(value)]="filamentChange.loadAndUnload.unloadCommand"
+      (valueChange)="updateConfig()"
+      id="unloadCommand"
+      label="Unload Command"
+      width="large"
+      [required]="true"></app-input-control>
+  </div>
+  <div class="filament-load-unload">
+    <app-input-control
+      [(value)]="filamentChange.loadAndUnload.loadCommand"
+      (valueChange)="updateConfig()"
+      id="loadCommand"
+      label="Load Command"
+      width="large"
+      [required]="true"></app-input-control>
+  </div>
+</div>
 
-<div class="filament-routine__wrapper" *ngIf="currentPage === filamentRoutine.CHANGE">CHANGE</div>
+<div class="filament-routine__wrapper" *ngIf="currentPage === filamentRoutine.CHANGE">
+  <div class="filament-change">
+    <app-input-control
+      [(value)]="filamentChange.change.changeCommand"
+      (valueChange)="updateConfig()"
+      id="changeCommand"
+      label="Change Command"
+      width="large"
+      [required]="true"></app-input-control>
+  </div>
+</div>

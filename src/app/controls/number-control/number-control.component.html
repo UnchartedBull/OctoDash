@@ -1,0 +1,34 @@
+<fa-icon
+  [icon]="['fas', 'minus']"
+  long-press
+  [duration]="650"
+  [frequency]="80"
+  (onShortPress)="changeValue(-1)"
+  (onLongPressing)="changeValue(-5)"
+  matRipple
+  [matRippleCentered]="true">
+</fa-icon>
+
+<label [ngClass]="'input-wrapper__' + width">
+  <input
+    placeholder=" "
+    type="number"
+    [min]="min"
+    [max]="max"
+    [id]="id"
+    [required]="required"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)" />
+  <span>{{ label }}</span>
+</label>
+
+<fa-icon
+  [icon]="['fas', 'plus']"
+  long-press
+  [duration]="650"
+  [frequency]="80"
+  (onShortPress)="changeValue(+1)"
+  (onLongPressing)="changeValue(+5)"
+  matRipple
+  [matRippleCentered]="true">
+</fa-icon>

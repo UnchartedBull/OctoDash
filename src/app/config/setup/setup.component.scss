@@ -38,75 +38,88 @@
     box-shadow: 0px 4px 14px -5px #000000;
   }
 
-  &__input {
-    background: transparent;
-    margin-top: 7vh;
-    padding: 2.4vh 2.1vw;
-    border: 2px solid #848487;
-    border-radius: 1vw;
-    width: 55vw;
-    line-height: 125%;
-
-    &__numeric {
-      border-radius: 0;
-
-      &-wrapper {
-        display: inline-table;
-        text-align: center;
-      }
-
-      &-adjust {
-        display: inline-flex;
-        padding: 2.4vh 3vw;
-        border: 2px solid #848487;
-        border-radius: 2.5vw 0 0 2.5vw;
-        margin-right: -2px;
-        font-size: 4.3vw;
-        line-height: 125%;
-
-        &-increase {
-          border-radius: 0 2.5vw 2.5vw 0;
-          margin-left: -2px;
-        }
-      }
-
-      &:focus {
-        border: 2px solid #848487 !important;
-        border-bottom: 2px solid #f5f6fa !important;
-      }
-    }
-
-    &:focus {
-      outline: 0;
-      border: 2px solid #f5f6fa;
-    }
-
-    &-small {
-      width: 10vw;
-      text-align: right;
-
-      &-suffix {
-        font-size: 3vw;
-        display: inline-block;
-        opacity: 0.6;
-        margin-right: 10vw;
-      }
-    }
-
-    &-label {
-      padding-right: 3vw;
-
-      &-small {
-        padding-right: 2vw;
-      }
-    }
-
-    &-prefix {
-      font-size: 3vw;
-      color: #848487;
-      padding-right: 1vw;
-    }
+  &__input-suffix {
+    font-size: 3vw;
+    display: inline-block;
+    color: #848487;
+    position: relative;
   }
+
+  &__input-prefix {
+    font-size: 3vw;
+    color: #848487;
+    padding-right: 1vw;
+  }
+
+  // &__input {
+  //   background: transparent;
+  //   margin-top: 7vh;
+  //   padding: 2.4vh 2.1vw;
+  //   border: 2px solid #848487;
+  //   border-radius: 1vw;
+  //   width: 55vw;
+  //   line-height: 125%;
+
+  //   &__numeric {
+  //     border-radius: 0;
+
+  //     &-wrapper {
+  //       display: inline-table;
+  //       text-align: center;
+  //     }
+
+  //     &-adjust {
+  //       display: inline-flex;
+  //       padding: 2.4vh 3vw;
+  //       border: 2px solid #848487;
+  //       border-radius: 2.5vw 0 0 2.5vw;
+  //       margin-right: -2px;
+  //       font-size: 4.3vw;
+  //       line-height: 125%;
+
+  //       &-increase {
+  //         border-radius: 0 2.5vw 2.5vw 0;
+  //         margin-left: -2px;
+  //       }
+  //     }
+
+  //     &:focus {
+  //       border: 2px solid #848487 !important;
+  //       border-bottom: 2px solid #f5f6fa !important;
+  //     }
+  //   }
+
+  //   &:focus {
+  //     outline: 0;
+  //     border: 2px solid #f5f6fa;
+  //   }
+
+  //   &-small {
+  //     width: 10vw;
+  //     text-align: right;
+
+  //     &-suffix {
+  //       font-size: 3vw;
+  //       display: inline-block;
+  //       opacity: 0.6;
+  //       margin-right: 10vw;
+  //     }
+  //   }
+
+  //   &-label {
+  //     padding-right: 3vw;
+
+  //     &-small {
+  //       padding-right: 2vw;
+  //     }
+  //   }
+
+  //   &-prefix {
+  //     font-size: 3vw;
+  //     color: #848487;
+  //     padding-right: 1vw;
+  //   }
+  // }
 
   &__checkbox {
     position: absolute;
