@@ -31,8 +31,8 @@
 
   <app-config-setup-discover-backend
     *ngIf="page === 2"
-    [(backend)]="config.backend.url"
     [backendType]="config.backend.type"
+    [(backend)]="config.backend.url"
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)">
   </app-config-setup-discover-backend>
@@ -56,12 +56,12 @@
     [(useTouchscreen)]="config.screen.touchscreen"
     *ngIf="page === 4"></app-config-setup-personalization>
 
-  <!-- <app-config-setup-extruder-information
-    [(feedLength)]="config.filament.feedLength"
-    [(feedSpeed)]="config.filament.feedSpeed"
-    *ngIf="page === 4"></app-config-setup-extruder-information>
+  <app-config-setup-filament-change
+    [backendType]="config.backend.type"
+    [(filamentChange)]="config.filamentChange"
+    *ngIf="page === 5"></app-config-setup-filament-change>
 
-  <app-config-setup-plugins
+  <!-- <app-config-setup-plugins
     *ngIf="page === 5"
     [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
     [(enclosurePlugin)]="config.plugins.enclosure.enabled"
@@ -75,7 +75,7 @@
     [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
     [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"></app-config-setup-plugins> -->
 
-  <div *ngIf="page === 6">
+  <div *ngIf="page === 7">
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">

@@ -62,7 +62,7 @@ interface PreheatConfiguration {
   fan: number;
 }
 
-interface FilamentChange {
+export interface FilamentChange {
   integrated?: {
     feedLength: number;
     feedSpeed: number;

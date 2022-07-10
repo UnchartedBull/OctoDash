@@ -1,0 +1,10 @@
+<label [ngClass]="'input-wrapper__' + width">
+  <input
+    placeholder=" "
+    type="text"
+    [id]="id"
+    [required]="required"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)" />
+  <span>{{ label }}</span>
+</label>

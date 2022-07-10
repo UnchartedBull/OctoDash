@@ -18,27 +18,23 @@
   <div class="discover-backend__manual" (click)="enterURLManually()" i18n="@@enter-manually">enter manually</div>
 </div>
 <div *ngIf="manualURL">
-  <form class="setup__form" style="margin-top: 5vh">
+  <div class="setup__form" style="margin-top: 5vh">
     <span class="setup__input-prefix">http://</span>
-    <input
-      type="text"
-      id="url"
-      class="setup__input"
-      [(ngModel)]="urlSplit.host"
-      (ngModelChange)="emitNode()"
-      name="url"
-      required
-      style="width: 42.5vw" />
+    <app-input-control
+      [(value)]="urlSplit.host"
+      (valueChange)="emitNode()"
+      id="host"
+      label="Host"
+      width="medium"
+      [required]="true"></app-input-control>
     <span class="setup__input-prefix" style="padding-left: 1vw">:</span>
-    <input
-      type="text"
+    <app-input-control
+      [(value)]="urlSplit.port"
+      (valueChange)="emitNode()"
       id="port"
-      class="setup__input"
-      [(ngModel)]="urlSplit.port"
-      (ngModelChange)="emitNode()"
-      name="port"
-      required
-      style="width: 14vw" />
+      label="Port"
+      width="small"
+      [required]="true"></app-input-control>
     <p
       class="setup__explanation"
       style="margin-top: 8vh"
@@ -53,7 +49,7 @@
       *ngIf="backendType === backendTypeEnum.MOONRAKER">
       Use port 7125 for vanilla Moonraker
     </p>
-  </form>
+  </div>
   <div class="discover-backend__manual" (click)="searchForInstance()" style="margin-top: 7.5vh" i18n="@@search-again">
     search again
   </div>

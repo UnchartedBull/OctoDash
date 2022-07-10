@@ -1,0 +1,37 @@
+.tab-selector {
+  display: flex;
+  margin: 4vh 0;
+  height: 10vh;
+  gap: 2vh;
+  justify-content: center;
+  overflow: visible;
+
+  &__option {
+    text-align: center;
+    font-size: 3vw;
+    background-color: #252932;
+    padding: 0 2vw;
+    line-height: 10vh;
+    border-radius: 0.8vw;
+    box-shadow: 0px 4px 14px -5px #000000;
+    transition: background-color 0.5s;
+
+    &-active {
+      background-color: #5f6a81;
+    }
+  }
+}
+
+.setup {
+  &__input {
+    margin-top: 3vh !important;
+  }
+
+  &__explanation {
+    margin-top: 4vh !important;
+  }
+}
+
+.setup__form {
+  padding: 0 6vw;
+}

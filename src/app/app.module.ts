@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +19,7 @@ import { ConfigService } from './config/config.service';
 import { ConfigInvalidComponent } from './config/invalid/invalid.component';
 import { ChooseBackendComponent } from './config/setup/choose-backend/choose-backend.component';
 import { DiscoverBackendComponent } from './config/setup/discover-backend/discover-backend.component';
-import { ExtruderInformationComponent } from './config/setup/extruder-information/extruder-information.component';
+import { FilamentChangeComponent } from './config/setup/filament-change/filament-change.component';
 import { MoonrakerAuthenticationComponent } from './config/setup/moonraker-authentication/moonraker-authentication.component';
 import { OctoprintAuthenticationComponent } from './config/setup/octoprint-authentication/octoprint-authentication.component';
 import { PersonalizationComponent } from './config/setup/personalization/personalization.component';
@@ -28,6 +28,7 @@ import { ConfigSetupComponent } from './config/setup/setup.component';
 import { WelcomeComponent } from './config/setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
+import { InputControlComponent } from './controls/input-control/input-control.component';
 import { ConversionService } from './conversion.service';
 import { EventService } from './event.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -81,7 +82,7 @@ export function playerFactory(): LottiePlayer {
     ConfigSetupComponent,
     ControlComponent,
     DiscoverBackendComponent,
-    ExtruderInformationComponent,
+    FilamentChangeComponent,
     FilamentComponent,
     FilesComponent,
     JobStatusComponent,
@@ -110,6 +111,7 @@ export function playerFactory(): LottiePlayer {
     ToggleSwitchComponent,
     ChooseBackendComponent,
     NotificationCenterComponent,
+    InputControlComponent,
   ],
   imports: [
     AppRoutingModule,
