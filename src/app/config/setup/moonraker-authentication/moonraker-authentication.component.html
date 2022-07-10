@@ -1,0 +1,15 @@
+<span class="setup__text" i18n="@@prompt-auth-moonraker">
+  Please authenticate me now and enter a valid API key below. If you haven't enabled authorization, leave the field
+  blank and continue.
+</span>
+<form class="setup__form">
+  <input
+    type="text"
+    id="accessToken"
+    class="setup__input"
+    [ngModel]="this.accessToken"
+    (ngModelChange)="accessTokenChange.emit($event)"
+    name="accessToken"
+    style="width: 67vw"
+    required />
+</form>

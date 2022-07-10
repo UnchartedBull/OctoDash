@@ -3,10 +3,10 @@
   webinterface or enter an API Key manually.
 </span>
 <div class="octoprint-authentication__login-button">
-  <span class="setup__button" (click)="loginWithOctoprintUI()" i18n="@@send-request">send request</span>
+  <span class="setup__button" (click)="loginWithOctoprintUI()" i18n="@@send-request" matRipple>send request</span>
 </div>
+<span class="octoprint-authentication_or">- or -</span>
 <form class="setup__form">
-  <label for="accessToken" class="setup__input-label" i18n="@@api-key">API Key:</label>
   <input
     type="text"
     id="accessToken"
@@ -15,6 +15,5 @@
     (ngModelChange)="accessTokenChange.emit($event)"
     name="accessToken"
     style="width: 67vw"
-    required
-  />
+    required />
 </form>

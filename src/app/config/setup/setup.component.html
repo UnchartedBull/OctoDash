@@ -37,13 +37,18 @@
     (changeURLEntryMethod)="changeURLEntryMethod($event)">
   </app-config-setup-discover-backend>
 
-  <!-- <app-config-setup-octoprint-authentication
-    [octoprintURL]="getOctoprintURL().replace('api/', '')"
+  <app-config-setup-octoprint-authentication
+    [octoprintURL]="config.backend.url"
     (increasePage)="increasePage()"
-    [(accessToken)]="config.octoprint.accessToken"
-    *ngIf="page === 2"></app-config-setup-octoprint-authentication>
+    [(accessToken)]="config.backend.accessToken"
+    *ngIf="page === 3 && hasOctoprintBackend()"></app-config-setup-octoprint-authentication>
 
-  <app-config-setup-personalization
+  <app-config-setup-moonraker-authentication
+    (increasePage)="increasePage()"
+    [(accessToken)]="config.backend.accessToken"
+    *ngIf="page === 3 && hasMoonrakerBackend()"></app-config-setup-moonraker-authentication>
+
+  <!-- <app-config-setup-personalization
     [octoprintURL]="getOctoprintURL()"
     [apiKey]="config.octoprint.accessToken"
     [(printerName)]="config.printer.name"

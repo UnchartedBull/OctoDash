@@ -20,6 +20,7 @@ import { ConfigInvalidComponent } from './config/invalid/invalid.component';
 import { ChooseBackendComponent } from './config/setup/choose-backend/choose-backend.component';
 import { DiscoverBackendComponent } from './config/setup/discover-backend/discover-backend.component';
 import { ExtruderInformationComponent } from './config/setup/extruder-information/extruder-information.component';
+import { MoonrakerAuthenticationComponent } from './config/setup/moonraker-authentication/moonraker-authentication.component';
 import { OctoprintAuthenticationComponent } from './config/setup/octoprint-authentication/octoprint-authentication.component';
 import { PersonalizationComponent } from './config/setup/personalization/personalization.component';
 import { PluginsComponent } from './config/setup/plugins/plugins.component';
@@ -91,6 +92,7 @@ export function playerFactory(): LottiePlayer {
     MainScreenNoTouchComponent,
     NotificationComponent,
     OctoprintAuthenticationComponent,
+    MoonrakerAuthenticationComponent,
     PersonalizationComponent,
     PluginsComponent,
     PrintControlComponent,
