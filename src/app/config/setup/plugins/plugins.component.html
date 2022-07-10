@@ -3,80 +3,68 @@
 <div class="setup__plugin-list">
   <div class="scroll__thumb-inactive"></div>
   <span>
-    <app-toggle-switch
-      [value]="displayLayerProgressPlugin"
-      (valueChange)="displayLayerProgressPluginChange.emit(!displayLayerProgressPlugin)"
-    >
+    <app-toggle-switch [(value)]="octoprintPlugins.displayLayerProgress.enabled" (valueChange)="emitUpdate()">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-display-layer-progress">Display Layer Progress</ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="enclosurePlugin" (valueChange)="enclosurePluginChange.emit(!enclosurePlugin)">
-    </app-toggle-switch>
+    <app-toggle-switch [(value)]="octoprintPlugins.enclosure.enabled" (valueChange)="emitUpdate()"> </app-toggle-switch>
     <ng-container i18n="@@plugin-enclosure">Enclosure</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
-      [value]="filamentManagerPlugin"
-      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)"
-    ></app-toggle-switch>
+      [(value)]="octoprintPlugins.filamentManager.enabled"
+      (valueChange)="emitUpdate()"></app-toggle-switch>
     <ng-container i18n="@@plugin-filament-manager">Filament Manager</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
-      [value]="spoolManagerPlugin"
-      (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)"
-    ></app-toggle-switch>
+      [(value)]="octoprintPlugins.spoolManager.enabled"
+      (valueChange)="emitUpdate()"></app-toggle-switch>
     <ng-container i18n="@@plugin-spool-manager">Spool Manager (Beta)</ng-container>
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="preheatButtonPlugin"
-      (valueChange)="preheatButtonPluginChange.emit(!preheatButtonPlugin)"
-    >
+    <app-toggle-switch [(value)]="octoprintPlugins.preheatButton.enabled" (valueChange)="emitUpdate()">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-preheat-button">Preheat Button</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
-      [value]="printTimeGeniusPlugin"
-      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)"
-    ></app-toggle-switch>
+      [(value)]="octoprintPlugins.printTimeGenius.enabled"
+      (valueChange)="emitUpdate()"></app-toggle-switch>
     <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="psuControlPlugin" (valueChange)="psuControlPluginChange.emit(!psuControlPlugin)">
+    <app-toggle-switch [(value)]="octoprintPlugins.psuControl.enabled" (valueChange)="emitUpdate()">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-psu-control">PSU Control</ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="ophomPlugin" (valueChange)="ophomPluginChange.emit(!ophomPlugin)"> </app-toggle-switch>
+    <app-toggle-switch [(value)]="octoprintPlugins.ophom.enabled" (valueChange)="emitUpdate()"> </app-toggle-switch>
     <ng-container i18n="@@plugin-opom">Ophom (Phillips HUE)</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
-      [value]="tpLinkSmartPlugPlugin"
-      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"
-    ></app-toggle-switch>
+      [(value)]="octoprintPlugins.tpLinkSmartPlug.enabled"
+      (valueChange)="emitUpdate()"></app-toggle-switch>
     <ng-container i18n="@@plugin-tplink-smartplug"> TPLink SmartPlug </ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="tasmotaPlugin" (valueChange)="tasmotaPluginChange.emit(!tasmotaPlugin)">
-    </app-toggle-switch>
+    <app-toggle-switch [(value)]="octoprintPlugins.tasmota.enabled" (valueChange)="emitUpdate()"> </app-toggle-switch>
     <ng-container i18n="@@plugin-tasmota"> Tasmota </ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="tasmotaMqttPlugin" (valueChange)="tasmotaMqttPluginChange.emit(!tasmotaMqttPlugin)">
+    <app-toggle-switch [(value)]="octoprintPlugins.tasmotaMqtt.enabled" (valueChange)="emitUpdate()">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-tasmota-mqtt"> Tasmota MQTT </ng-container>
   </span>

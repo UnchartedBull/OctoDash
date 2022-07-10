@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { has } from 'lodash-es';
 
 import { BackendType, FilamentChange } from '../../config.model';
 
@@ -42,14 +43,24 @@ const changeKlipper: FilamentChange = {
   templateUrl: './filament-change.component.html',
   styleUrls: ['./filament-change.component.scss', '../setup.component.scss'],
 })
-export class FilamentChangeComponent {
+export class FilamentChangeComponent implements OnInit {
   @Input() filamentChange: FilamentChange;
   @Input() backendType: BackendType;
 
   @Output() filamentChangeChange = new EventEmitter<FilamentChange>();
 
-  public currentPage = FilamentRoutine.INTEGRATED;
+  public currentPage;
   public filamentRoutine = FilamentRoutine;
+
+  public ngOnInit(): void {
+    if (has(this.filamentChange, 'integrated')) {
+      this.currentPage = FilamentRoutine.INTEGRATED;
+    } else if (has(this.filamentChange, 'loadAndUnload')) {
+      this.currentPage = FilamentRoutine.LOAD_UNLOAD;
+    } else {
+      this.currentPage = FilamentRoutine.CHANGE;
+    }
+  }
 
   public changePage(newPage: FilamentRoutine) {
     this.currentPage = newPage;

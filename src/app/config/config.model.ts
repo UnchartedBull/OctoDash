@@ -106,7 +106,7 @@ export interface URLSplit {
   port: number;
 }
 
-interface OctoprintPlugins {
+export interface OctoprintPlugins {
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;

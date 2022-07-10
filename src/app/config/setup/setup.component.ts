@@ -151,6 +151,8 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if (this.page === 0 && this.config) {
         return this.changePage(2);
+      } else if (this.page === 5 && this.config.backend.type === BackendType.MOONRAKER) {
+        return this.changePage(2);
       }
       this.changePage(1);
     }, 200);
@@ -159,6 +161,9 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   public decreasePage(): void {
     console.log(this.config);
     setTimeout(() => {
+      if (this.page === 7 && this.config.backend.type === BackendType.MOONRAKER) {
+        return this.changePage(-2);
+      }
       this.changePage(-1);
     }, 200);
   }

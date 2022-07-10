@@ -61,19 +61,9 @@
     [(filamentChange)]="config.filamentChange"
     *ngIf="page === 5"></app-config-setup-filament-change>
 
-  <!-- <app-config-setup-plugins
-    *ngIf="page === 5"
-    [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
-    [(enclosurePlugin)]="config.plugins.enclosure.enabled"
-    [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
-    [(spoolManagerPlugin)]="config.plugins.spoolManager.enabled"
-    [(preheatButtonPlugin)]="config.plugins.preheatButton.enabled"
-    [(printTimeGeniusPlugin)]="config.plugins.printTimeGenius.enabled"
-    [(psuControlPlugin)]="config.plugins.psuControl.enabled"
-    [(ophomPlugin)]="config.plugins.ophom.enabled"
-    [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
-    [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
-    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"></app-config-setup-plugins> -->
+  <app-config-setup-plugins
+    *ngIf="page === 6"
+    [(octoprintPlugins)]="config.octoprint.plugins"></app-config-setup-plugins>
 
   <div *ngIf="page === 7">
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
