@@ -26,16 +26,13 @@ function discoverNodes(window, type, localDomain) {
   const bonjour = require('bonjour')();
   nodes = [];
 
-  // browser = bonjour.find({ type: 'octoprint' });
   browser = bonjour.find({ type });
   browser.on('up', service => {
-    console.log(service);
-    console.log(service.host === localDomain);
     nodes.push({
       id: service.addresses[0] + service.port,
       name: service.name,
       version: service.txt?.version ?? 'unknown',
-      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt?.path ?? ''}`,
+      url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
       local: service.host === localDomain,
       disable: minimumVersion ? compareVersions(minimumVersion, service.txt.version) === -1 : false,
     });

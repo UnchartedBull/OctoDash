@@ -46,7 +46,7 @@ export class DiscoverBackendComponent implements OnInit, OnDestroy {
 
   private discoverNodes(): void {
     this.nodes = null;
-    this.electronService.send('discover');
+    this.electronService.send('discover', this.backendType.toLowerCase());
 
     this.noInstanceTimeout = setTimeout(() => {
       const searching = document.querySelector('.discover-backend__searching');
