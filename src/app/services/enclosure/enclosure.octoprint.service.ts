@@ -127,6 +127,28 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
+  public runShell(identifier: number): void {
+    console.log(identifier);
+
+    this.http
+      .post(
+        this.configService.getApiURL('plugin/enclosure/shell/' + identifier, false),
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-run-shell:Can't run shell!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
   public setPSUState(state: PSUState): void {
     if (this.configService.usePSUControl()) {
       this.setPSUStatePSUControl(state);
