@@ -1,10 +1,9 @@
 import { BackendType, Config } from './config.model';
 
-// FIXME
 export const moonrakerConfig: Partial<Config> = {
   backend: {
     type: BackendType.MOONRAKER,
-    url: 'http://vcore-3.local:7125',
+    url: 'http://localhost:7125',
     accessToken: '',
     pollingInterval: 2000,
     commands: {

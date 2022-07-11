@@ -69,28 +69,23 @@
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
-        <img
-          [src]="backendConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
-          class="setup__validation-check-icon" />
+        <fa-icon [icon]="['fas', backendConnection ? 'check' : 'xmark']" [ngClass]="{'icon-good': backendConnection, 'icon-bad': !backendConnection}"></fa-icon>
         <ng-container i18n="@@checking-octoprint-connection"> Backend Connection </ng-container>
       </span>
       <div *ngIf="backendConnection">
         <span class="setup__validation-check">
-          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
-          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
+          <fa-icon [icon]="['fas', configValid ? 'check' : 'xmark']" [ngClass]="{'icon-good': configValid, 'icon-bad': !configValid}"></fa-icon>
           <ng-container i18n="@@checking-config"> Validating Config </ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
-          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
-          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
+          <fa-icon [icon]="['fas', configValid ? 'check' : 'xmark']" [ngClass]="{'icon-good': configValid, 'icon-bad': !configValid}"></fa-icon>
           <ng-container i18n="@@checking-save"> Saving Config </ng-container>
         </span>
-        <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>
       <span class="setup__validation-errors" *ngFor="let error of configErrors">{{ error }}</span>
-      <span *ngIf="configSaved === null" class="setup__button" (click)="finishWizard()" i18n="@@wizard-done">done</span>
+      <span *ngIf="configValid" class="setup__button" (click)="finishWizard()" i18n="@@wizard-done">done</span>
     </div>
   </div>
 </div>

@@ -1,413 +1,431 @@
 const configSchema = {
-  definitions: {},
-  $schema: 'http://json-schema.org/draft-07/schema#',
-  $id: 'http://example.com/root.json',
+  $schema: 'https://json-schema.org/draft/2019-09/schema',
+  $id: 'octodash.schema',
+  title: 'OctoDash Schema',
   type: 'object',
-  required: ['octoprint', 'printer', 'filament', 'plugins', 'octodash'],
+  required: [
+    'customization',
+    'printer',
+    'screen',
+    'preheatConfigurations',
+    'filamentChange',
+    'customActions',
+    'backend',
+  ],
   properties: {
-    octoprint: {
-      $id: '#/properties/octoprint',
-      type: 'object',
-      required: ['accessToken', 'url'],
-      properties: {
-        accessToken: {
-          $id: '#/properties/octoprint/properties/accessToken',
-          type: 'string',
-          pattern: '^(.*)$',
-        },
-        url: {
-          $id: '#/properties/octoprint/properties/url',
-          type: 'string',
-          pattern: '^(.*)$',
-        },
-      },
-    },
-    printer: {
-      $id: '#/properties/printer',
-      type: 'object',
-      required: ['name', 'xySpeed', 'zSpeed', 'disableExtruderGCode', 'zBabystepGCode', 'defaultTemperatureFanSpeed'],
-      properties: {
-        name: {
-          $id: '#/properties/printer/properties/name',
-          type: 'string',
-          pattern: '^(.*)$',
-        },
-        xySpeed: {
-          $id: '#/properties/printer/properties/xySpeed',
-          type: 'integer',
-        },
-        zSpeed: {
-          $id: '#/properties/printer/properties/zSpeed',
-          type: 'integer',
-        },
-        disableExtruderGCode: {
-          $id: '#/properties/printer/properties/disableExtruderGCode',
-          type: 'string',
-          pattern: '^(.*)$',
-        },
-        zBabystepGCode: {
-          $id: '#/properties/printer/properties/zBabystepGCode',
-          type: 'string',
-          pattern: '^(.*)$',
-        },
-        defaultTemperatureFanSpeed: {
-          $id: '#/properties/printer/properties/defaultTemperatureFanSpeed',
-          type: 'object',
-          required: ['hotend', 'heatbed', 'fan'],
-          properties: {
-            hotend: {
-              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/hotend',
-              type: 'integer',
-            },
-            heatbed: {
-              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/heatbed',
-              type: 'integer',
-            },
-            fan: {
-              $id: '#/properties/printer/properties/defaultTemperatureFanSpeed/fan',
-              type: 'integer',
-            },
-          },
-        },
-      },
-    },
-    filament: {
-      $id: '#/properties/filament',
-      type: 'object',
-      required: ['density', 'thickness', 'feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance', 'useM600'],
-      properties: {
-        density: {
-          $id: '#/properties/filament/properties/density',
-          type: 'number',
-        },
-        thickness: {
-          $id: '#/properties/filament/properties/thickness',
-          type: 'number',
-        },
-        feedLength: {
-          $id: '#/properties/filament/properties/feedLength',
-          type: 'integer',
-        },
-        feedSpeed: {
-          $id: '#/properties/filament/properties/feedSpeed',
-          type: 'number',
-        },
-        feedSpeedSlow: {
-          $id: '#/properties/filament/properties/feedSpeedSlow',
-          type: 'number',
-        },
-        purgeDistance: {
-          $id: '#/properties/filament/properties/purgeDistance',
-          type: 'integer',
-        },
-        useM600: {
-          $id: '#/properties/filament/properties/useM600',
-          type: 'boolean',
-        },
-      },
-    },
-    plugins: {
-      $id: '#/properties/plugins',
+    customization: {
+      title: 'The customization Schema',
       type: 'object',
       required: [
-        'displayLayerProgress',
-        'enclosure',
-        'filamentManager',
-        'spoolManager',
-        'preheatButton',
-        'printTimeGenius',
-        'psuControl',
-        'ophom',
-        'tpLinkSmartPlug',
-        'tasmota',
-        'tasmotaMqtt',
-      ],
-      properties: {
-        displayLayerProgress: {
-          $id: '#/properties/plugins/properties/displayLayerProgress',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/displayLayerProgress/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        enclosure: {
-          $id: '#/properties/plugins/properties/enclosure',
-          type: 'object',
-          required: ['enabled', 'ambientSensorID', 'filament1SensorID', 'filament2SensorID'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/enclosure/properties/enabled',
-              type: 'boolean',
-            },
-            ambientSensorID: {
-              $id: '#/properties/plugins/properties/enclosure/properties/ambientSensorID',
-              type: ['number', 'null'],
-            },
-            filament1SensorID: {
-              $id: '#/properties/plugins/properties/enclosure/properties/filament1SensorID',
-              type: ['number', 'null'],
-            },
-            filament2SensorID: {
-              $id: '#/properties/plugins/properties/enclosure/properties/filament2SensorID',
-              type: ['number', 'null'],
-            },
-          },
-        },
-        filamentManager: {
-          $id: '#/properties/plugins/properties/filamentManager',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/filamentManager/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        spoolManager: {
-          $id: '#/properties/plugins/properties/spoolManager',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/spoolManager/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        preheatButton: {
-          $id: '#/properties/plugins/properties/preheatButton',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/preheatButton/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        printTimeGenius: {
-          $id: '#/properties/plugins/properties/printTimeGenius',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/printTimeGenius/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        psuControl: {
-          $id: '#/properties/plugins/properties/psuControl',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/psuControl/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        ophom: {
-          $id: '#/properties/plugins/properties/ophom',
-          type: 'object',
-          required: ['enabled'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/ophom/properties/enabled',
-              type: 'boolean',
-            },
-          },
-        },
-        tpLinkSmartPlug: {
-          $id: '#/properties/plugins/properties/tpLinkSmartPlug',
-          type: 'object',
-          required: ['enabled', 'smartPlugIP'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/enabled',
-              type: 'boolean',
-            },
-            smartPlugIP: {
-              $id: '#/properties/plugins/properties/tpLinkSmartPlug/properties/smartPlugIP',
-              type: 'string',
-            },
-          },
-        },
-        tasmota: {
-          $id: '#/properties/plugins/properties/tasmota',
-          type: 'object',
-          required: ['enabled', 'ip', 'index'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/tasmota/properties/enabled',
-              type: 'boolean',
-            },
-            ip: {
-              $id: '#/properties/plugins/properties/tasmota/properties/ip',
-              type: 'string',
-            },
-            index: {
-              $id: '#/properties/plugins/properties/tasmota/properties/index',
-              type: ['number', 'null'],
-            },
-          },
-        },
-        tasmotaMqtt: {
-          $id: '#/properties/plugins/properties/tasmotaMqtt',
-          type: 'object',
-          required: ['enabled', 'topic', 'relayNumber'],
-          properties: {
-            enabled: {
-              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/enabled',
-              type: 'boolean',
-            },
-            topic: {
-              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/topic',
-              type: 'string',
-            },
-            relayNumber: {
-              $id: '#/properties/plugins/properties/tasmotaMqtt/properties/relayNumber',
-              type: ['number', 'null'],
-            },
-          },
-        },
-      },
-    },
-    octodash: {
-      $id: '#/properties/octodash',
-      type: 'object',
-      required: [
-        'customActions',
-        'fileSorting',
-        'invertAxisControl',
-        'pollingInterval',
-        'touchscreen',
-        'turnScreenOffWhileSleeping',
         'turnOnPrinterWhenExitingSleep',
         'preferPreviewWhilePrinting',
         'previewProgressCircle',
-        'screenSleepCommand',
-        'screenWakeupCommand',
         'showExtruderControl',
         'showNotificationCenterIcon',
+        'fileSorting',
+        'invertAxisControl',
       ],
       properties: {
-        customActions: {
-          $id: '#/properties/octodash/properties/customActions',
-          type: 'array',
-          items: {
-            $id: '#/properties/octodash/properties/customActions/items',
-            type: 'object',
-            required: ['icon', 'command', 'color', 'confirm', 'exit'],
-            properties: {
-              icon: {
-                $id: '#/properties/octodash/properties/customActions/items/properties/icon',
-                type: 'string',
-                pattern: '^(.*)$',
-              },
-              command: {
-                $id: '#/properties/octodash/properties/customActions/items/properties/command',
-                type: 'string',
-                pattern: '^(.*)$',
-              },
-              color: {
-                $id: '#/properties/octodash/properties/customActions/items/properties/color',
-                type: 'string',
-                pattern: '^(.*)$',
-              },
-              confirm: {
-                $id: '#/properties/octodash/properties/customActions/items/properties/confirm',
-                type: 'boolean',
-              },
-              exit: {
-                $id: '#/properties/octodash/properties/customActions/items/properties/exit',
-                type: 'boolean',
-              },
-            },
-          },
+        turnOnPrinterWhenExitingSleep: {
+          title: 'The turnOnPrinterWhenExitingSleep Schema',
+          type: 'boolean',
+        },
+        preferPreviewWhilePrinting: {
+          title: 'The preferPreviewWhilePrinting Schema',
+          type: 'boolean',
+        },
+        previewProgressCircle: {
+          title: 'The previewProgressCircle Schema',
+          type: 'boolean',
+        },
+        showExtruderControl: {
+          title: 'The showExtruderControl Schema',
+          type: 'boolean',
+        },
+        showNotificationCenterIcon: {
+          title: 'The showNotificationCenterIcon Schema',
+          type: 'boolean',
         },
         fileSorting: {
-          $id: '#/properties/octodash/properties/fileSorting',
+          title: 'The fileSorting Schema',
           type: 'object',
           required: ['attribute', 'order'],
           properties: {
             attribute: {
-              $id: '#/properties/octodash/properties/fileSorting/properties/attribute',
+              title: 'The attribute Schema',
               type: 'string',
-              pattern: '^(name|date|size)$',
             },
             order: {
-              $id: '#/properties/octodash/properties/fileSorting/properties/order',
+              title: 'The order Schema',
               type: 'string',
-              pattern: '^(asc|dsc)$',
             },
           },
         },
         invertAxisControl: {
-          $id: '#/properties/octodash/properties/invertAxisControl',
+          title: 'The invertAxisControl Schema',
           type: 'object',
           required: ['x', 'y', 'z'],
           properties: {
             x: {
-              $id: '#/properties/octodash/properties/invertAxisControl/properties/x',
+              title: 'The x Schema',
               type: 'boolean',
             },
             y: {
-              $id: '#/properties/octodash/properties/invertAxisControl/properties/y',
+              title: 'The y Schema',
               type: 'boolean',
             },
             z: {
-              $id: '#/properties/octodash/properties/invertAxisControl/properties/z',
+              title: 'The z Schema',
               type: 'boolean',
             },
           },
         },
-        pollingInterval: {
-          $id: '#/properties/octodash/properties/pollingInterval',
+      },
+    },
+    printer: {
+      title: 'The printer Schema',
+      type: 'object',
+      required: ['name', 'xySpeed', 'zSpeed'],
+      properties: {
+        name: {
+          title: 'The name Schema',
+          type: 'string',
+        },
+        xySpeed: {
+          title: 'The xySpeed Schema',
           type: 'integer',
         },
+        zSpeed: {
+          title: 'The zSpeed Schema',
+          type: 'integer',
+        },
+      },
+    },
+    screen: {
+      title: 'The screen Schema',
+      type: 'object',
+      required: ['touchscreen', 'turnOffWhileSleeping', 'sleepCommand', 'wakeupCommand'],
+      properties: {
         touchscreen: {
-          $id: '#/properties/octodash/properties/touchscreen',
+          title: 'The touchscreen Schema',
           type: 'boolean',
         },
-        turnScreenOffWhileSleeping: {
-          $id: '#/properties/octodash/properties/turnScreenOffWhileSleeping',
+        turnOffWhileSleeping: {
+          title: 'The turnOffWhileSleeping Schema',
           type: 'boolean',
         },
-        turnOnPrinterWhenExitingSleep: {
-          $id: '#/properties/octodash/properties/turnOnPrinterWhenExitingSleep',
-          type: 'boolean',
-        },
-        preferPreviewWhilePrinting: {
-          $id: '#/properties/octodash/properties/preferPreviewWhilePrinting',
-          type: 'boolean',
-        },
-        previewProgressCircle: {
-          $id: '#/properties/octodash/properties/previewProgressCircle',
-          type: 'boolean',
-        },
-        screenSleepCommand: {
-          $id: '#/properties/octodash/properties/screenSleepCommand',
+        sleepCommand: {
+          title: 'The sleepCommand Schema',
           type: 'string',
-          pattern: '^(.*)$',
         },
-        screenWakeupCommand: {
-          $id: '#/properties/octodash/properties/screenWakeupCommand',
+        wakeupCommand: {
+          title: 'The wakeupCommand Schema',
           type: 'string',
-          pattern: '^(.*)$',
         },
-        showExtruderControl: {
-          $id: '#/properties/octodash/properties/showExtruderControl',
-          type: 'boolean',
+      },
+    },
+    preheatConfigurations: {
+      title: 'The preheatConfigurations Schema',
+      type: 'array',
+      items: {
+        title: 'A Schema',
+        type: 'object',
+        required: ['name', 'hotend', 'heatbed', 'fan'],
+        properties: {
+          name: {
+            title: 'The name Schema',
+            type: 'string',
+          },
+          hotend: {
+            title: 'The hotend Schema',
+            type: 'integer',
+          },
+          heatbed: {
+            title: 'The heatbed Schema',
+            type: 'integer',
+          },
+          fan: {
+            title: 'The fan Schema',
+            type: 'integer',
+          },
         },
-        showNotificationCenterIcon: {
-          $id: '#/properties/octodash/properties/showNotificationCenterIcon',
-          type: 'boolean',
+      },
+    },
+    filamentChange: {
+      title: 'The filamentChange Schema',
+      type: 'object',
+      required: ['integrated'],
+      properties: {
+        integrated: {
+          title: 'The integrated Schema',
+          type: 'object',
+          required: ['feedLength', 'feedSpeed', 'feedSpeedSlow', 'purgeDistance'],
+          properties: {
+            feedLength: {
+              title: 'The feedLength Schema',
+              type: 'integer',
+            },
+            feedSpeed: {
+              title: 'The feedSpeed Schema',
+              type: 'integer',
+            },
+            feedSpeedSlow: {
+              title: 'The feedSpeedSlow Schema',
+              type: 'integer',
+            },
+            purgeDistance: {
+              title: 'The purgeDistance Schema',
+              type: 'integer',
+            },
+          },
+        },
+      },
+    },
+    customActions: {
+      title: 'The customActions Schema',
+      type: 'array',
+      items: {
+        title: 'A Schema',
+        type: 'object',
+        required: ['icon', 'command', 'color', 'confirm', 'exit'],
+        properties: {
+          icon: {
+            title: 'The icon Schema',
+            type: 'string',
+          },
+          command: {
+            title: 'The command Schema',
+            type: 'string',
+          },
+          color: {
+            title: 'The color Schema',
+            type: 'string',
+          },
+          confirm: {
+            title: 'The confirm Schema',
+            type: 'boolean',
+          },
+          exit: {
+            title: 'The exit Schema',
+            type: 'boolean',
+          },
+        },
+      },
+    },
+    backend: {
+      title: 'The backend Schema',
+      type: 'object',
+      required: ['type', 'url', 'accessToken', 'pollingInterval', 'commands'],
+      properties: {
+        type: {
+          title: 'The type Schema',
+          type: 'string',
+        },
+        url: {
+          title: 'The url Schema',
+          type: 'string',
+        },
+        accessToken: {
+          title: 'The accessToken Schema',
+          type: 'string',
+        },
+        pollingInterval: {
+          title: 'The pollingInterval Schema',
+          type: 'integer',
+        },
+        commands: {
+          title: 'The commands Schema',
+          type: 'object',
+          required: ['disableExtruder', 'babystepZ'],
+          properties: {
+            disableExtruder: {
+              title: 'The disableExtruder Schema',
+              type: 'string',
+            },
+            babystepZ: {
+              title: 'The babystepZ Schema',
+              type: 'string',
+            },
+          },
+        },
+      },
+    },
+    octoprint: {
+      title: 'The octoprint Schema',
+      type: 'object',
+      required: ['plugins'],
+      properties: {
+        plugins: {
+          title: 'The plugins Schema',
+          type: 'object',
+          required: [
+            'displayLayerProgress',
+            'enclosure',
+            'filamentManager',
+            'spoolManager',
+            'preheatButton',
+            'printTimeGenius',
+            'psuControl',
+            'ophom',
+            'tpLinkSmartPlug',
+            'tasmota',
+            'tasmotaMqtt',
+          ],
+          properties: {
+            displayLayerProgress: {
+              title: 'The displayLayerProgress Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            enclosure: {
+              title: 'The enclosure Schema',
+              type: 'object',
+              required: ['enabled', 'ambientSensorID', 'filament1SensorID', 'filament2SensorID'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+                ambientSensorID: {
+                  title: 'The ambientSensorID Schema',
+                  type: 'null',
+                },
+                filament1SensorID: {
+                  title: 'The filament1SensorID Schema',
+                  type: 'null',
+                },
+                filament2SensorID: {
+                  title: 'The filament2SensorID Schema',
+                  type: 'null',
+                },
+              },
+            },
+            filamentManager: {
+              title: 'The filamentManager Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            spoolManager: {
+              title: 'The spoolManager Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            preheatButton: {
+              title: 'The preheatButton Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            printTimeGenius: {
+              title: 'The printTimeGenius Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            psuControl: {
+              title: 'The psuControl Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            ophom: {
+              title: 'The ophom Schema',
+              type: 'object',
+              required: ['enabled'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+              },
+            },
+            tpLinkSmartPlug: {
+              title: 'The tpLinkSmartPlug Schema',
+              type: 'object',
+              required: ['enabled', 'smartPlugIP'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+                smartPlugIP: {
+                  title: 'The smartPlugIP Schema',
+                  type: 'string',
+                },
+              },
+            },
+            tasmota: {
+              title: 'The tasmota Schema',
+              type: 'object',
+              required: ['enabled', 'ip', 'index'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+                ip: {
+                  title: 'The ip Schema',
+                  type: 'string',
+                },
+                index: {
+                  title: 'The index Schema',
+                  type: 'null',
+                },
+              },
+            },
+            tasmotaMqtt: {
+              title: 'The tasmotaMqtt Schema',
+              type: 'object',
+              required: ['enabled', 'topic', 'relayNumber'],
+              properties: {
+                enabled: {
+                  title: 'The enabled Schema',
+                  type: 'boolean',
+                },
+                topic: {
+                  title: 'The topic Schema',
+                  type: 'string',
+                },
+                relayNumber: {
+                  title: 'The relayNumber Schema',
+                  type: 'null',
+                },
+              },
+            },
+          },
         },
       },
     },

@@ -72,7 +72,6 @@ export class DiscoverBackendComponent implements OnInit, OnDestroy {
   }
 
   public emitNode(nextPage = false): void {
-    console.log(this.urlSplit);
     this.showLocalDialog = false;
     this.backendChange.emit(UrlHelper.mergeUrl(this.urlSplit));
     if (nextPage) {

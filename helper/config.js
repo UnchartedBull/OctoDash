@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const Store = require('electron-store');
-const Ajv = require('ajv');
+const Ajv2019 = require('ajv/dist/2019');
 const configSchema = require('./config.schema');
 
 let store;
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv2019({ allErrors: true });
 const validate = ajv.compile(configSchema);
 
 function readConfig(window) {

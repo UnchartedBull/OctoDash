@@ -1,10 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 import { UrlHelper } from 'src/app/helper/url.helper';
 
-import { getDefaultConfig } from '../config.default';
 import { BackendType, Config, URLSplit as UrlSplit } from '../config.model';
 import { ConfigService } from '../config.service';
 
@@ -30,7 +28,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   public constructor(
     private configService: ConfigService,
     private http: HttpClient,
-    private router: Router,
     private electronService: ElectronService,
     private zone: NgZone,
   ) {
@@ -77,7 +74,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.manualURL = manual;
   }
 
-  public createConfig(): void {
+  public validateConfig(): void {
     this.configErrors = [];
     this.checkBackendConnection();
   }
@@ -107,7 +104,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
           );
         } else if (error.message.includes('0 Unknown Error')) {
           this.configErrors.push(
-            $localize`:@@error-unknown:0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.`,
+            $localize`:@@error-unknown:0 Unknown Error - This most likely means that your host and port aren't correct.`,
           );
         } else {
           this.configErrors.push(error.message);
@@ -119,7 +116,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   private onConfigSaved() {
     this.zone.run(() => {
       this.configValid = true;
-      this.configSaved = null;
     });
   }
 
@@ -152,14 +148,18 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public increasePage(): void {
     setTimeout(() => {
+      let increasePageBy = 1;
+
       if (this.page === 0 && this.config) {
-        return this.changePage(2);
+        increasePageBy = 2;
       } else if (this.page === 5 && this.config.backend.type === BackendType.MOONRAKER) {
-        return this.changePage(2);
+        increasePageBy = 2;
       }
-      this.changePage(1);
+
+      this.changePage(increasePageBy);
+
       if (this.page === 7) {
-        this.createConfig();
+        this.validateConfig();
       }
     }, 200);
   }
