@@ -138,7 +138,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({
-            heading: $localize`:@@error-run-shell:Can't run shell!`,
+            heading: $localize`:@@error-run-enc-shell:Can't run enclosure shell!`,
             text: error.message,
             type: NotificationType.ERROR,
             time: new Date(),
