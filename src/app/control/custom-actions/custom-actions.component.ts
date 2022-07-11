@@ -90,9 +90,9 @@ export class CustomActionsComponent {
         } else if (command.includes('[!OUTPUT_PWM]')) {
           const values = command.replace('[!OUTPUT_PWM]', '').split(',');
           this.setOutputPWM(values[0], values[1]);
-        } else if (command.includes('[!SHELL]')) {
-            const values = command.replace('[!SHELL]', '').split(',');
-            this.runShell(values[0]);
+        } else if (command.includes('[!ENC_SHELL]')) {
+          const values = command.replace('[!ENC_SHELL]', '').split(',');
+          this.runShell(values[0]);
         } else {
           this.printerService.executeGCode(command);
         }
