@@ -92,7 +92,7 @@ export class CustomActionsComponent {
           this.setOutputPWM(values[0], values[1]);
         } else if (command.includes('[!ENC_SHELL]')) {
           const values = command.replace('[!ENC_SHELL]', '').split(',');
-          this.runShell(values[0]);
+          this.runEncShell(values[0]);
         } else {
           this.printerService.executeGCode(command);
         }
@@ -164,9 +164,9 @@ export class CustomActionsComponent {
     this.enclosureService.setOutputPWM(Number(identifier), Number(dutyCycle));
   }
 
-  private runShell(identifier: string): void {
+  private runEncShell(identifier: string): void {
     console.log(identifier);
-    this.enclosureService.runShell(Number(identifier));
+    this.enclosureService.runEncShell(Number(identifier));
   }
 }
 

@@ -127,7 +127,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  public runShell(identifier: number): void {
+  public runEncShell(identifier: number): void {
     console.log(identifier);
 
     this.http
