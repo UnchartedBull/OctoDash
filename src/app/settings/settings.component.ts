@@ -61,10 +61,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public hideSettings(): void {
-    if (
-      this.configService.isEqualToCurrentConfig(this.configService.createConfigFromInput(this.config)) ||
-      this.overwriteNoSave
-    ) {
+    if (this.configService.isEqualToCurrentConfig(this.config) || this.overwriteNoSave) {
       this.fadeOutAnimation = true;
       this.closeFunction.emit();
       setTimeout((): void => {
@@ -99,12 +96,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public updateConfig(): void {
-    const config = this.configService.createConfigFromInput(this.config);
-
     this.electronService.on('configSaved', this.onConfigSaved.bind(this));
     this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
-    this.configService.saveConfig(config);
+    this.configService.saveConfig(this.config);
   }
 
   private onConfigSaveFail(_, errors: string[]) {

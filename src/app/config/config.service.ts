@@ -90,6 +90,11 @@ export class ConfigService {
     };
   }
 
+  public saveConfig(config: Config): void {
+    this.electronService.send('saveConfig', config);
+    this.electronService.send('reload');
+  }
+
   public getCurrentConfig(): Config {
     return _.cloneDeep(this.config);
   }
@@ -100,15 +105,6 @@ export class ConfigService {
 
   public getErrors(): string[] {
     return this.errors;
-  }
-
-  public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
-  }
-
-  public createConfigFromInput(config: Config): Config {
-    const configOut = _.cloneDeep(config);
-    return configOut;
   }
 
   public setUpdate(): void {

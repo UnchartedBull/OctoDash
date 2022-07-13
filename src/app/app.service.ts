@@ -48,23 +48,20 @@ export class AppService {
     return _.intersection(errors, _.keys(this.updateError)).length > 0;
   }
 
-  public fixUpdateErrors(errors: string[]): boolean {
+  public fixUpdateErrors(errors: string[]): void {
     const config = this.configService.getCurrentConfig();
+    let updatedConfig = false;
 
-    // FIXME
-    // config.octoprint.url = config.octoprint.url.replace('api/', '');
-
-    let fullyFixed = true;
     for (const error of errors) {
       if (_.hasIn(this.updateError, error)) {
+        updatedConfig = true;
         this.updateError[error](config);
-      } else {
-        fullyFixed = false;
       }
     }
-    this.configService.saveConfig(config);
 
-    return fullyFixed;
+    if (updatedConfig) {
+      this.configService.saveConfig(config);
+    }
   }
 
   private enableVersionListener(): void {

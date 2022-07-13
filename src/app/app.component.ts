@@ -50,13 +50,11 @@ export class AppComponent {
     const errors = this.configService.getErrors();
 
     if (this.service.hasUpdateError(errors)) {
-      if (this.service.fixUpdateErrors(errors)) {
-        // TODO: should be fixed
-        // setTimeout(this.initialize.bind(this), 1500);
-      } else {
+      this.service.fixUpdateErrors(errors);
+      setTimeout(() => {
         this.configService.setUpdate();
         this.router.navigate(['/no-config']);
-      }
+      }, 400);
     } else {
       this.router.navigate(['/invalid-config']);
     }
