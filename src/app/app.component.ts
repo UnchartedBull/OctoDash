@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 
@@ -11,7 +11,7 @@ import { SocketService } from './services/socket/socket.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public activated = false;
   public initialized = false;
   public status = $localize`:@@initializing:initializing`;
@@ -38,25 +38,11 @@ export class AppComponent implements OnInit {
     private configService: ConfigService,
     private socketService: SocketService,
     private router: Router,
-  ) {}
-
-  public ngOnInit(): void {
-    this.initialize();
-  }
-
-  private initialize(): void {
-    if (this.configService && this.configService.isInitialized()) {
-      if (this.configService.isLoaded()) {
-        if (this.configService.isValid()) {
-          this.connectWebsocket();
-        } else {
-          this.checkInvalidConfig();
-        }
-      } else {
-        this.router.navigate(['/no-config']);
-      }
+  ) {
+    if (this.configService.isValid()) {
+      this.connectWebsocket();
     } else {
-      setTimeout(this.initialize.bind(this), 1000);
+      this.checkInvalidConfig();
     }
   }
 
@@ -65,7 +51,8 @@ export class AppComponent implements OnInit {
 
     if (this.service.hasUpdateError(errors)) {
       if (this.service.fixUpdateErrors(errors)) {
-        setTimeout(this.initialize.bind(this), 1500);
+        // TODO: should be fixed
+        // setTimeout(this.initialize.bind(this), 1500);
       } else {
         this.configService.setUpdate();
         this.router.navigate(['/no-config']);

@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -61,6 +61,7 @@ import { JobOctoprintService } from './services/job/job.octoprint.service';
 import { JobService } from './services/job/job.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
+import { MoonrakerService } from './services/socket/socket.moonraker.service';
 import { OctoPrintSocketService } from './services/socket/socket.octoprint.service';
 import { SocketService } from './services/socket/socket.service';
 import { SystemOctoprintService } from './services/system/system.octoprint.service';
@@ -134,6 +135,14 @@ export function playerFactory(): LottiePlayer {
     NotificationService,
     [
       {
+        provide: APP_INITIALIZER,
+        useFactory: appFactory,
+        deps: [ConfigService],
+        multi: true,
+      },
+    ],
+    [
+      {
         provide: SystemService,
         deps: [ConfigService, NotificationService, HttpClient],
         useFactory: (
@@ -149,21 +158,7 @@ export function playerFactory(): LottiePlayer {
       {
         provide: SocketService,
         deps: [ConfigService, SystemService, ConversionService, NotificationService, HttpClient],
-        useFactory: (
-          configService: ConfigService,
-          systemService: SystemService,
-          conversionService: ConversionService,
-          notificationService: NotificationService,
-          httpClient: HttpClient,
-        ) => {
-          return new OctoPrintSocketService(
-            configService,
-            systemService,
-            conversionService,
-            notificationService,
-            httpClient,
-          );
-        },
+        useFactory: socketServiceFactory,
       },
     ],
     [
@@ -238,5 +233,23 @@ export function playerFactory(): LottiePlayer {
 export class AppModule {
   public constructor(library: FaIconLibrary) {
     library.addIconPacks(fas, far);
+  }
+}
+
+function appFactory(configService: ConfigService): () => Promise<void> {
+  return () => configService.readConfig();
+}
+
+function socketServiceFactory(
+  configService: ConfigService,
+  systemService: SystemService,
+  conversionService: ConversionService,
+  notificationService: NotificationService,
+  httpClient: HttpClient,
+): SocketService {
+  if (configService.isOctoprintBackend()) {
+    return new OctoPrintSocketService(configService, systemService, conversionService, notificationService, httpClient);
+  } else {
+    return new MoonrakerService(configService, systemService, conversionService, notificationService, httpClient);
   }
 }

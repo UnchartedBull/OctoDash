@@ -5,7 +5,7 @@ import _ from 'lodash-es';
 import { ElectronService } from '../electron.service';
 import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
+import { BackendType, Config, CustomAction, HttpHeader } from './config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +24,8 @@ export class ConfigService {
     private electronService: ElectronService,
     private zone: NgZone,
   ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
+    // TODO: reload instead or might not be needed
+    // this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
     this.electronService.on('configError', (_, error: string) => {
       this.notificationService.setNotification({
         heading: error,
@@ -35,29 +35,48 @@ export class ConfigService {
         sticky: true,
       });
     });
+  }
+
+  public async readConfig(): Promise<void> {
+    let resolvePromise;
+    let rejectPromise;
+
+    setTimeout(() => rejectPromise(), 4000);
+
+    this.electronService.on('configRead', (_, config: Config) => {
+      this.zone.run(() => {
+        this.config = config;
+        this.electronService.send('checkConfig', config);
+      });
+    });
 
     this.electronService.on('configPass', () => {
       this.zone.run(() => {
         this.valid = true;
         this.generateHttpHeaders();
         this.initialized = true;
+
+        resolvePromise();
       });
     });
+
     this.electronService.on('configFail', (_, errors) => {
       this.zone.run(() => {
         this.valid = false;
         this.errors = errors;
-        console.error(errors);
         this.initialized = true;
+
+        console.error(errors);
+        rejectPromise();
       });
     });
 
     this.electronService.send('readConfig');
-  }
 
-  private initialize(config: Config): void {
-    this.config = config;
-    this.electronService.send('checkConfig', config);
+    return new Promise((resolve, reject) => {
+      resolvePromise = resolve;
+      rejectPromise = reject;
+    });
   }
 
   public generateHttpHeaders(): void {
@@ -87,49 +106,35 @@ export class ConfigService {
     this.electronService.send('saveConfig', config);
   }
 
-  // TODO: remove
-  public splitOctoprintURL(octoprintURL: string): URLSplit {
-    const host = octoprintURL.split(':')[1].replace('//', '');
-    const port = parseInt(octoprintURL.split(':')[2], 10);
-
-    return {
-      host,
-      port: isNaN(port) ? null : port,
-    };
-  }
-
-  public mergeOctoprintURL(urlSplit: URLSplit): string {
-    if (urlSplit.port !== null || !isNaN(urlSplit.port)) {
-      return `http://${urlSplit.host}:${urlSplit.port}/`;
-    } else {
-      return `http://${urlSplit.host}/`;
-    }
-  }
-
   public createConfigFromInput(config: Config): Config {
     const configOut = _.cloneDeep(config);
     return configOut;
-  }
-
-  public isLoaded(): boolean {
-    return this.config ? true : false;
   }
 
   public setUpdate(): void {
     this.update = true;
   }
 
+  // CONFIG ACCESS METHODS
   public getHTTPHeaders(): HttpHeader {
     return this.httpHeaders;
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.backend.url}api/${path}`;
-    else return `${this.config.backend.url}${path}`;
+    if (includeApi) return `${this.config.backend.url}/api/${path}`;
+    else return `${this.config.backend.url}/${path}`;
   }
 
   public getAPIPollingInterval(): number {
     return this.config.backend.pollingInterval;
+  }
+
+  public isOctoprintBackend(): boolean {
+    return this.config.backend.type === BackendType.OCTOPRINT;
+  }
+
+  public isMoonrakerBackend(): boolean {
+    return this.config.backend.type === BackendType.MOONRAKER;
   }
 
   public getPrinterName(): string {
