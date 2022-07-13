@@ -127,8 +127,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
-  public runEncShell(identifier: number): void {
-    console.log(identifier);
+  public runEnclosureShell(identifier: number): void {
 
     this.http
       .post(
@@ -138,7 +137,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({
-            heading: $localize`:@@error-run-enc-shell:Can't run enclosure shell!`,
+            heading: $localize`:@@error-run-enclosure-shell:Can't run enclosure shell!`,
             text: error.message,
             type: NotificationType.ERROR,
             time: new Date(),
