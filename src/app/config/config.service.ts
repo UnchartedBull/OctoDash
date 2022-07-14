@@ -194,7 +194,7 @@ export class ConfigService {
   }
 
   public getAmbientTemperatureSensorName(): number {
-    return this.config.octoprint.plugins.enclosure.ambientSensorID;
+    return this.config.octoprint?.plugins.enclosure.ambientSensorID;
   }
 
   public usePSUControl(): boolean {

@@ -58,7 +58,7 @@ export class MoonrakerService implements SocketService {
 
   public connect(): Promise<void> {
     console.log('KLIPPER SOCKET');
-    return;
+    return new Promise(resolve => resolve());
     // this.initPrinterStatus();
     // this.initJobStatus();
     // this.lastState = PrinterEvent.UNKNOWN;
