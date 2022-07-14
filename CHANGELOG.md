@@ -1,12 +1,44 @@
 # Changelog
 
-## [Unreleased](https://github.com/UnchartedBull/OctoDash/tree/HEAD)
+## [v2.3.1](https://github.com/UnchartedBull/OctoDash/tree/v2.3.1) (2022-03-02)
 
-[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.3.0...HEAD)
+[Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.3.0...v2.3.1)
+
+**Fixed bugs:**
+
+- Blue fan icon is actually roll of filament  [\#2711](https://github.com/UnchartedBull/OctoDash/issues/2711)
+- Control Panel "triangle" too small to be touched by finger [\#2707](https://github.com/UnchartedBull/OctoDash/issues/2707)
+- Printer information impairs touch responsiveness [\#2720](https://github.com/UnchartedBull/OctoDash/issues/2720)
+
+**Closed issues:**
+
+- 0000 delete [\#2713](https://github.com/UnchartedBull/OctoDash/issues/2713)
+- Can't load Electron library when accessing dev environment throught localhost in Chrome [\#2712](https://github.com/UnchartedBull/OctoDash/issues/2712)
+- HyperPixel 4.0 on RPi 4 - How to: [\#2309](https://github.com/UnchartedBull/OctoDash/issues/2309)
 
 **Merged pull requests:**
 
-- Bump @angular/language-service from 12.2.11 to 12.2.12 [\#2385](https://github.com/UnchartedBull/OctoDash/pull/2385) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Increase notification center icon hitbox [\#2724](https://github.com/UnchartedBull/OctoDash/pull/2724) ([UnchartedBull](https://github.com/UnchartedBull))
+- update status icons [\#2723](https://github.com/UnchartedBull/OctoDash/pull/2723) ([UnchartedBull](https://github.com/UnchartedBull))
+- fix annoying notifications [\#2722](https://github.com/UnchartedBull/OctoDash/pull/2722) ([UnchartedBull](https://github.com/UnchartedBull))
+- Bump ts-node from 10.5.0 to 10.6.0 [\#2721](https://github.com/UnchartedBull/OctoDash/pull/2721) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @typescript-eslint/eslint-plugin from 5.12.1 to 5.13.0 [\#2719](https://github.com/UnchartedBull/OctoDash/pull/2719) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @typescript-eslint/parser from 5.12.1 to 5.13.0 [\#2718](https://github.com/UnchartedBull/OctoDash/pull/2718) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump eslint from 8.9.0 to 8.10.0 [\#2716](https://github.com/UnchartedBull/OctoDash/pull/2716) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump xliff from 6.0.1 to 6.0.3 [\#2715](https://github.com/UnchartedBull/OctoDash/pull/2715) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump electron from 17.0.1 to 17.1.0 [\#2706](https://github.com/UnchartedBull/OctoDash/pull/2706) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/cli from 13.2.4 to 13.2.5 [\#2705](https://github.com/UnchartedBull/OctoDash/pull/2705) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/platform-browser from 13.2.3 to 13.2.4 [\#2704](https://github.com/UnchartedBull/OctoDash/pull/2704) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/forms from 13.2.3 to 13.2.4 [\#2703](https://github.com/UnchartedBull/OctoDash/pull/2703) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/router from 13.2.3 to 13.2.4 [\#2702](https://github.com/UnchartedBull/OctoDash/pull/2702) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/common from 13.2.3 to 13.2.4 [\#2701](https://github.com/UnchartedBull/OctoDash/pull/2701) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/language-service from 13.2.3 to 13.2.4 [\#2700](https://github.com/UnchartedBull/OctoDash/pull/2700) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @types/node from 17.0.19 to 17.0.21 [\#2699](https://github.com/UnchartedBull/OctoDash/pull/2699) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular-devkit/build-angular from 13.2.4 to 13.2.5 [\#2698](https://github.com/UnchartedBull/OctoDash/pull/2698) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/animations from 13.2.3 to 13.2.4 [\#2697](https://github.com/UnchartedBull/OctoDash/pull/2697) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/platform-browser-dynamic from 13.2.3 to 13.2.4 [\#2696](https://github.com/UnchartedBull/OctoDash/pull/2696) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @angular/material from 13.2.3 to 13.2.4 [\#2695](https://github.com/UnchartedBull/OctoDash/pull/2695) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump @typescript-eslint/eslint-plugin from 5.12.0 to 5.12.1 [\#2689](https://github.com/UnchartedBull/OctoDash/pull/2689) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v2.3.0](https://github.com/UnchartedBull/OctoDash/tree/v2.3.0) (2022-02-22)
 

@@ -37,6 +37,7 @@ export class OctoPrintSocketService implements SocketService {
   private printerStatusSubject: Subject<PrinterStatus>;
   private jobStatusSubject: Subject<JobStatus>;
   private eventSubject: Subject<PrinterEvent>;
+  private statusTextSubject: Subject<string>;
 
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
@@ -51,7 +52,8 @@ export class OctoPrintSocketService implements SocketService {
   ) {
     this.printerStatusSubject = new ReplaySubject<PrinterStatus>(1);
     this.jobStatusSubject = new Subject<JobStatus>();
-    this.eventSubject = new ReplaySubject<PrinterEvent>();
+    this.eventSubject = new ReplaySubject<PrinterEvent>(5);
+    this.statusTextSubject = new ReplaySubject<string>(1);
   }
 
   //==== SETUP & AUTH ====//
@@ -383,12 +385,8 @@ export class OctoPrintSocketService implements SocketService {
           sticky: true,
         } as Notification);
       } else if (notification.text || notification.message) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@printer-information:Printer information`,
-          text: notification.text ?? notification.message,
-          type: NotificationType.INFO,
-          time: new Date(),
-        } as Notification);
+        console.log(notification.text ?? notification.message);
+        this.statusTextSubject.next(notification.text ?? notification.message);
       }
     }
   }
@@ -426,5 +424,9 @@ export class OctoPrintSocketService implements SocketService {
 
   public getEventSubscribable(): Observable<PrinterEvent> {
     return this.eventSubject;
+  }
+
+  public getPrinterStatusText(): Observable<string> {
+    return this.statusTextSubject;
   }
 }

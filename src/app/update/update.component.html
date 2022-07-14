@@ -5,16 +5,15 @@
       <div
         class="update-progress-bar"
         [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
-        id="updateDownloadProgress"
-      >
+        id="updateDownloadProgress">
         {{ updateProgress.speed }}
-        <ng-container i18n="@@mbs">
-          MB/s&nbsp;
-        </ng-container>
+        <ng-container i18n="@@mbs"> MB/s&nbsp; </ng-container>
       </div>
     </div>
-    <span class="update-size__total">{{ updateProgress.total }}</span><span i18n="@@update-mb">MB</span>
-    <span class="update-time__remaining">{{ updateProgress.eta }}</span><span i18n="@@update-minutes-left">minutes left</span>
+    <span class="update-size__total">{{ updateProgress.total }}<ng-container i18n="@@update-mb">MB</ng-container></span>
+    <span class="update-time__remaining"
+      >{{ updateProgress.eta }}<ng-container i18n="@@update-minutes-left">minutes left</ng-container></span
+    >
   </div>
   <div *ngIf="page === 2">
     <span class="update-heading" i18n="@@installing-update">installing update</span>
@@ -25,10 +24,16 @@
   </div>
   <div *ngIf="page === 3">
     <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion }} installed</span>
-    <span class="update-restart" i18n="@@update-reboot">would you like to reboot now to activate the latest version?</span>
+    <span class="update-restart" i18n="@@update-reboot"
+      >would you like to reboot now to activate the latest version?</span
+    >
     <div class="update-restart-button__wrapper">
-      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@reboot-no">no</button>
-      <button class="update-restart-button update-restart-button__yes" (click)="reboot()" i18n="@@reboot-yes">yes</button>
+      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@reboot-no">
+        no
+      </button>
+      <button class="update-restart-button update-restart-button__yes" (click)="reboot()" i18n="@@reboot-yes">
+        yes
+      </button>
     </div>
   </div>
 </div>

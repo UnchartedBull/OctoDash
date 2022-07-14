@@ -4,7 +4,7 @@
 /* eslint-disable import/no-commonjs */
 
 const fs = require('fs');
-const got = require('got-cjs');
+const { got } = require('got-cjs');
 const stream = require('stream');
 const { promisify } = require('util');
 const progress = require('progress-stream');
