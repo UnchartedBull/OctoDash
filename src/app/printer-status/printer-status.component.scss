@@ -1,20 +1,24 @@
 .printer-status {
   width: 100%;
   margin-top: 3vh;
-  height: 23vh;
-  display: block;
-  table-layout: fixed;
+  display: flex;
+  gap: 2vw;
+  justify-content: space-around;
   overflow: visible;
 
-  & tr {
-    vertical-align: middle;
+  > div {
+    width: 30vw;
+    text-align: right;
+    height: 19vh;
+    padding: 2.5vh 2vw;
+    background-color: #252932;
+    border-radius: 0.8vw;
+    box-shadow: 0px 4px 14px -5px #000000;
+    overflow: visible;
+    font-size: 4vw;
   }
 
   &__value {
-    text-align: right;
-    height: 23vh;
-    vertical-align: middle;
-
     & img {
       width: 10vw;
       float: left;
@@ -53,12 +57,13 @@
   }
 
   &__actual-value {
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 500;
     display: inline-block;
   }
 
   &__set-value {
+    font-size: 3.7vw;
     display: block;
     text-align: right;
   }

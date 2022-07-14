@@ -2,23 +2,35 @@
   <span class="main-menu__heading">
     OctoDash<span class="main-menu__heading" style="color: #1ec02c; display: inline">.</span>
   </span>
-  <img src="assets/settings.svg" class="main-menu__settings-icon" (click)="showSettings()" />
+  <fa-icon
+    [icon]="['fas', 'gear']"
+    (click)="showSettings()"
+    matRipple
+    class="main-menu__settings-icon"
+    [matRippleCentered]="true"
+    [matRippleUnbounded]="true"></fa-icon>
+
   <div class="main-menu__update-notifier" *ngIf="service.updateAvailable"></div>
-  <table class="main-menu__options">
-    <tr>
-      <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-        <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
-        <ng-container i18n="@@menu-files">files</ng-container>
-      </td>
-      <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-        <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
-        <ng-container i18n="@@menu-filament">filament</ng-container>
-      </td>
-      <td routerLink="/control" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
-        <img src="assets/control.svg" class="main-menu__option-icon main-menu__option-icon__3" />
-        <ng-container i18n="@@menu-control">control</ng-container>
-      </td>
-    </tr>
-  </table>
+
+  <div class="main-menu__options">
+    <div routerLink="/files" matRipple [matRippleCentered]="true">
+      <div class="icon-wrapper">
+        <img src="assets/files-color.png" class="main-menu__option-icon main-menu__option-icon__files" />
+      </div>
+      <ng-container i18n="@@menu-files">files</ng-container>
+    </div>
+    <div routerLink="/filament" matRipple [matRippleCentered]="true">
+      <div class="icon-wrapper">
+        <img src="assets/filament-color.png" class="main-menu__option-icon main-menu__option-icon__filament" />
+      </div>
+      <ng-container i18n="@@menu-filament">filament</ng-container>
+    </div>
+    <div routerLink="/control" matRipple [matRippleCentered]="true">
+      <div class="icon-wrapper">
+        <img src="assets/control-color.png" class="main-menu__option-icon main-menu__option-icon__control" />
+      </div>
+      <ng-container i18n="@@menu-control">control</ng-container>
+    </div>
+  </div>
 </div>
-<app-settings *ngIf="settings" (closeFunction)="hideSettings()"></app-settings>
+<!-- <app-settings *ngIf="settings" (closeFunction)="hideSettings()"></app-settings> -->

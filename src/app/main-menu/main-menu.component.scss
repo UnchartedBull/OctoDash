@@ -1,3 +1,9 @@
+.icon-wrapper {
+  width: 25vw;
+  height: 33vh;
+  margin: 0 auto;
+}
+
 .main-menu {
   display: block;
   width: 100%;
@@ -13,21 +19,21 @@
   }
 
   &__settings-icon {
-    width: 7vw;
-    float: right;
-    padding: 5vh 5vw;
-    margin: 0 -3vw -5vh 0;
-    margin-top: -15.5vh;
+    position: absolute;
+    right: 3vw;
+    top: 4vh;
+    font-size: 6vw;
   }
 
   &__options {
-    margin-top: 3vw;
-    margin-left: 5vw;
-    width: 90vw;
+    margin: 4vh 2vw 0;
+    width: 96vw;
+    display: flex;
+    gap: 2vw;
+    justify-content: space-around;
 
-    & td {
-      width: 29.66vw;
-      display: inline-block;
+    > div {
+      width: 29vw;
       text-align: center;
       font-weight: 500;
     }
@@ -35,21 +41,21 @@
 
   &__option-icon {
     display: block;
-    padding-bottom: 4vh;
-    margin: auto;
+    margin: 0 auto;
 
-    &__1 {
+    &__files {
+      width: 14.8vw;
+      padding-top: 3vh;
+    }
+
+    &__filament {
       width: 15.5vw;
-      margin-bottom: -1.3vw;
+      padding-top: 3vh;
     }
 
-    &__2 {
-      width: 13.5vw;
-    }
-
-    &__3 {
-      width: 10.5vw;
-      margin-bottom: 1.6vw;
+    &__control {
+      width: 15.5vw;
+      padding-top: 5.7vh;
     }
   }
 
