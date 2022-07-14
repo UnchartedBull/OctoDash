@@ -58,8 +58,8 @@ export class MoonrakerService implements SocketService {
 
   public connect(): Promise<void> {
     console.log('KLIPPER SOCKET');
+    this.initPrinterStatus();
     return new Promise(resolve => resolve());
-    // this.initPrinterStatus();
     // this.initJobStatus();
     // this.lastState = PrinterEvent.UNKNOWN;
 
@@ -72,16 +72,16 @@ export class MoonrakerService implements SocketService {
     this.printerStatus = {
       status: PrinterState.connecting,
       bed: {
-        current: 0,
-        set: 0,
+        current: 210,
+        set: 210,
         unit: '°C',
       },
       tool0: {
-        current: 0,
-        set: 0,
+        current: 80,
+        set: 80,
         unit: '°C',
       },
-      fanSpeed: this.configService.isDisplayLayerProgressEnabled() ? 0 : -1,
+      fanSpeed: 50,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
