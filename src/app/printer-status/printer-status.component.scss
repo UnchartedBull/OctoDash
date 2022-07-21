@@ -6,20 +6,21 @@
   justify-content: center;
   overflow: visible;
 
-  > div {
+  &__value {
     width: 23vw;
     height: 19vh;
     padding: 2.5vh 2vw;
     border-radius: 0.8vw;
     box-shadow: 0px 4px 14px -5px #000000;
-    overflow: visible;
     font-size: 4vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
 
-  &__value {
+    > div {
+      text-align: right;
+    }
+
     & img {
       width: 7vw;
       float: left;
@@ -54,10 +55,6 @@
     font-size: 3.7vw;
     display: block;
     text-align: right;
-  }
-
-  &__no-set-value {
-    overflow: visible;
   }
 }
 

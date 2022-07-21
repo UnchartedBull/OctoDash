@@ -116,9 +116,8 @@ export class ConfigService {
     return this.httpHeaders;
   }
 
-  public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.backend.url}/api/${path}`;
-    else return `${this.config.backend.url}/${path}`;
+  public getApiURL(path: string, includeApi = this.isOctoprintBackend() ? true : false): string {
+    return `${this.config.backend.url}/${includeApi ? 'api/' : ''}${path}`;
   }
 
   public getAPIPollingInterval(): number {

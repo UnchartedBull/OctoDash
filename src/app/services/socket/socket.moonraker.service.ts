@@ -1,26 +1,17 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+/* eslint-disable camelcase */
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { catchError, pluck, startWith } from 'rxjs/operators';
+import { pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
-import {
-  JobStatus,
-  Notification,
-  NotificationType,
-  PrinterEvent,
-  PrinterNotification,
-  PrinterState,
-  PrinterStatus,
-  SocketAuth,
-} from '../../model';
+import { JobStatus, Notification, NotificationType, PrinterEvent, PrinterState, PrinterStatus } from '../../model';
 import {
   DisplayLayerProgressData,
   OctoprintFilament,
-  OctoprintPluginMessage,
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
 } from '../../model/octoprint';
@@ -33,6 +24,8 @@ export class MoonrakerService implements SocketService {
   private fastInterval = 0;
   private socketDeadTimeout: ReturnType<typeof setTimeout>;
   private socket: WebSocketSubject<unknown>;
+  private socketConnected = false;
+  private socketId?: number;
 
   private printerStatusSubject: Subject<PrinterStatus>;
   private jobStatusSubject: Subject<JobStatus>;
@@ -59,29 +52,28 @@ export class MoonrakerService implements SocketService {
   public connect(): Promise<void> {
     console.log('KLIPPER SOCKET');
     this.initPrinterStatus();
-    return new Promise(resolve => resolve());
-    // this.initJobStatus();
-    // this.lastState = PrinterEvent.UNKNOWN;
+    this.initJobStatus();
+    this.lastState = PrinterEvent.UNKNOWN;
 
-    // return new Promise(resolve => {
-    //   this.tryConnect(resolve);
-    // });
+    return new Promise(resolve => {
+      this.tryConnect(resolve);
+    });
   }
 
   private initPrinterStatus(): void {
     this.printerStatus = {
       status: PrinterState.connecting,
       bed: {
-        current: 210,
-        set: 210,
+        current: 0,
+        set: 0,
         unit: '°C',
       },
       tool0: {
-        current: 80,
-        set: 80,
+        current: 0,
+        set: 0,
         unit: '°C',
       },
-      fanSpeed: 50,
+      fanSpeed: 0,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
@@ -91,7 +83,7 @@ export class MoonrakerService implements SocketService {
       file: null,
       fullPath: null,
       progress: 0,
-      zHeight: this.configService.isDisplayLayerProgressEnabled() ? { current: 0, total: -1 } : 0,
+      zHeight: { current: 0, total: -1 },
       filamentAmount: 0,
       timePrinted: null,
       timeLeft: {
@@ -104,97 +96,89 @@ export class MoonrakerService implements SocketService {
   }
 
   private tryConnect(resolve: () => void): void {
-    this.systemService.getSessionKey().subscribe({
-      next: (socketAuth: SocketAuth) => {
-        this.http.get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
-          next: () => {
-            this.connectSocket();
-            this.setupSocket(resolve);
-            this.authenticateSocket(socketAuth);
-          },
-          error: (err: HttpErrorResponse) => {
-            if (err.status === 403) {
-              this.notificationService.setNotification({
-                heading: $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
-                text: $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
-                type: NotificationType.ERROR,
-                time: new Date(),
-                sticky: true,
-              } as Notification);
-            } else {
-              this.notificationService.setNotification({
-                heading: $localize`:@@http-unknown-heading:Unknown HTTP Error`,
-                text: err.message,
-                type: NotificationType.ERROR,
-                time: new Date(),
-                sticky: true,
-              } as Notification);
-            }
-          },
-        });
-      },
-      error: () => {
-        setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
-        this.fastInterval += 1;
-      },
-    });
+    try {
+      this.connectSocket();
+      this.setupSocket(resolve);
+    } catch {
+      setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
+      this.fastInterval += 1;
+    }
   }
 
   private connectSocket() {
-    console.log('Trying to connect to socket');
-    // const url = `${this.configService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
-    // if (!this.socket) {
-    //   this.socket = webSocket(url);
-    // }
-  }
-
-  private authenticateSocket(socketAuth: SocketAuth) {
-    const payload = {
-      auth: `${socketAuth.user}:${socketAuth.session}`,
-    };
-    this.socket.next(payload);
-  }
-
-  private handlePluginMessage(pluginMessage: OctoprintPluginMessage) {
-    const plugins = [
-      {
-        check: (plugin: string) =>
-          plugin === 'DisplayLayerProgress-websocket-payload' && this.configService.isDisplayLayerProgressEnabled(),
-        handler: (message: unknown) => {
-          this.extractFanSpeed(message as DisplayLayerProgressData);
-          this.extractLayerHeight(message as DisplayLayerProgressData);
-        },
-      },
-      {
-        check: (plugin: string) => ['action_command_prompt', 'action_command_notification'].includes(plugin),
-        handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
-      },
-    ];
-
-    plugins.forEach(plugin => plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data));
+    const url = `${this.configService.getApiURL('websocket').replace(/^http/, 'ws')}`;
+    if (!this.socket) {
+      this.socket = webSocket(url);
+    }
   }
 
   private setupSocket(resolve: () => void) {
     this.socket.subscribe({
-      next: message => {
+      next: (message: Message) => {
+        if (!this.socketConnected) {
+          this.socketConnected = true;
+
+          this.socket.next({
+            jsonrpc: '2.0',
+            method: 'server.connection.identify',
+            params: {
+              client_name: 'OctoDash',
+              version: '1.0.0',
+              type: 'display',
+              url: 'https://github.com/UnchartedBull/OctoDash',
+            },
+            id: 4656,
+          });
+        }
+
+        if (!this.socketId && isConnectionMessage(message)) {
+          this.socketId = message.result.connection_id;
+
+          this.socket.next({
+            jsonrpc: '2.0',
+            method: 'printer.objects.subscribe',
+            params: {
+              objects: {
+                // gcode_move: ['speed_factor', 'extrude_factor'],
+                extruder: ['temperature', 'target'],
+                heater_bed: ['temperature', 'target'],
+                fan: ['speed'],
+                print_stats: ['filename', 'total_duration', 'print_duration', 'state', 'message'],
+              },
+            },
+            id: 5434,
+          });
+        }
+
+        if (isUpdateConfigMessage(message)) {
+          resolve();
+
+          this.extractPrinterStatus(message.result.status);
+        }
+
         clearTimeout(this.socketDeadTimeout);
         this.socketDeadTimeout = setTimeout(() => {
           this.printerStatus.status = PrinterState.socketDead;
           this.printerStatusSubject.next(this.printerStatus);
         }, 30000);
-        if (Object.hasOwnProperty.bind(message)('current')) {
-          this.extractPrinterStatus(message as OctoprintSocketCurrent);
-          this.extractJobStatus(message as OctoprintSocketCurrent);
-        } else if (Object.hasOwnProperty.bind(message)('event')) {
-          this.extractPrinterEvent(message as OctoprintSocketEvent);
-        } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-          this.handlePluginMessage(message as OctoprintPluginMessage);
-        } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
-          this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
-        } else if (Object.hasOwnProperty.bind(message)('connected')) {
-          resolve();
-          this.checkPrinterConnection();
+        console.log(message);
+
+        if (isStatusUpdateMessage(message)) {
+          this.extractPrinterStatus(message.params[0]);
         }
+        // if (Object.hasOwnProperty.bind(message)('current')) {
+        //   this.extractPrinterStatus(message as OctoprintSocketCurrent);
+        //   this.extractJobStatus(message as OctoprintSocketCurrent);
+        // } else if (Object.hasOwnProperty.bind(message)('event')) {
+        //   this.extractPrinterEvent(message as OctoprintSocketEvent);
+        // } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+        //   this.handlePluginMessage(message as OctoprintPluginMessage);
+        // } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
+        //   this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
+        // } else if (Object.hasOwnProperty.bind(message)('connected')) {
+        //   resolve();
+        //   this.checkPrinterConnection();
+        // }
       },
       error: error => {
         if (error['type'] === 'close') {
@@ -208,6 +192,7 @@ export class MoonrakerService implements SocketService {
     });
   }
 
+  // TODO
   private checkPrinterConnection() {
     this.http
       .get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders())
@@ -221,46 +206,37 @@ export class MoonrakerService implements SocketService {
 
   //==== Printer Status ====//
 
-  public extractPrinterStatus(message: OctoprintSocketCurrent): void {
-    if (message.current.temps[0]) {
-      this.printerStatus.bed = {
-        current: Math.round(message?.current?.temps[0]?.bed?.actual),
-        set: Math.round(message?.current?.temps[0]?.bed?.target),
-        unit: '°C',
-      };
-      this.printerStatus.tool0 = {
-        current: Math.round(message?.current?.temps[0]?.tool0?.actual),
-        set: Math.round(message?.current?.temps[0]?.tool0?.target),
-        unit: '°C',
-      };
-    }
-    this.printerStatus.status = PrinterState[message.current.state.text.toLowerCase()];
-
-    if (this.printerStatus.status === PrinterState.printing && this.lastState !== PrinterEvent.PRINTING) {
-      this.extractPrinterEvent({
-        event: {
-          type: 'PrintStarted',
-          payload: null,
-        },
-      } as OctoprintSocketEvent);
-    } else if (this.printerStatus.status === PrinterState.paused && this.lastState !== PrinterEvent.PAUSED) {
-      this.extractPrinterEvent({
-        event: {
-          type: 'PrintPaused',
-          payload: null,
-        },
-      } as OctoprintSocketEvent);
-    }
+  public extractPrinterStatus(status: MoonrakerStatusUpdate): void {
+    if (status.extruder?.temperature != null)
+      this.printerStatus.tool0.current = Math.round(status.extruder.temperature);
+    if (status.extruder?.target != null) this.printerStatus.tool0.set = Math.round(status.extruder.target);
+    if (status.heater_bed?.temperature != null)
+      this.printerStatus.bed.current = Math.round(status.heater_bed.temperature);
+    if (status.heater_bed?.target != null) this.printerStatus.bed.set = Math.round(status.heater_bed.target);
+    if (status.fan?.speed != null) this.printerStatus.fanSpeed = Math.round(status.fan.speed * 100);
+    if (status.print_stats?.state) this.printerStatus.status = this.convertPrinterState(status.print_stats.state);
 
     this.printerStatusSubject.next(this.printerStatus);
   }
 
-  public extractFanSpeed(message: DisplayLayerProgressData): void {
-    this.printerStatus.fanSpeed =
-      message.fanspeed === 'Off' ? 0 : message.fanspeed === '-' ? 0 : Number(message.fanspeed.replace('%', '').trim());
+  private convertPrinterState(state: string): PrinterState {
+    switch (state) {
+      case 'standby':
+      case 'complete':
+      case 'cancelled':
+        return PrinterState.operational;
+      case 'printing':
+        return PrinterState.printing;
+      case 'paused':
+        return PrinterState.paused;
+      case 'error':
+        // TODO: should return error, maybe?
+        return PrinterState.closed;
+    }
   }
 
   //==== Job Status ====//
+  // TODO
 
   public extractJobStatus(message: OctoprintSocketCurrent): void {
     const file = message?.current?.job?.file?.display?.replace('.gcode', '').replace('.ufp', '');
@@ -324,6 +300,7 @@ export class MoonrakerService implements SocketService {
   }
 
   //==== Event ====//
+  // TODO
 
   public extractPrinterEvent(state: OctoprintSocketEvent): void {
     let newState: PrinterEvent;
@@ -369,54 +346,6 @@ export class MoonrakerService implements SocketService {
     }
   }
 
-  //==== Notifications ====//
-
-  private handlePrinterNotification(notification: PrinterNotification) {
-    if (Object.keys(notification).length > 0) {
-      if (notification.action === 'close') {
-        this.notificationService.closeNotification();
-      } else if (notification.choices?.length > 0) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@action-required:Action required`,
-          text: notification.text ?? notification.message,
-          type: NotificationType.PROMPT,
-          time: new Date(),
-          choices: notification.choices,
-          callback: this.callbackFunction.bind(this),
-          sticky: true,
-        } as Notification);
-      } else if (notification.text || notification.message) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@printer-information:Printer information`,
-          text: notification.text ?? notification.message,
-          type: NotificationType.INFO,
-          time: new Date(),
-        } as Notification);
-      }
-    }
-  }
-
-  private callbackFunction(index: number) {
-    this.http
-      .post(
-        this.configService.getApiURL('plugin/action_command_prompt'),
-        { command: 'select', choice: index },
-        this.configService.getHTTPHeaders(),
-      )
-      .pipe(
-        catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-answer-prompt:Can't answer prompt!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
-          return of(null);
-        }),
-      )
-      .subscribe();
-  }
-
   //==== Subscribables ====//
 
   public getPrinterStatusSubscribable(): Observable<PrinterStatus> {
@@ -432,6 +361,72 @@ export class MoonrakerService implements SocketService {
   }
 
   public getPrinterStatusText(): Observable<string> {
-    return of('wip');
+    return of('connecting');
   }
+}
+
+function isConnectionMessage(message: Message): message is ConnectionMessage {
+  return message.id === 4656;
+}
+
+function isUpdateConfigMessage(message: Message): message is UpdateConfigMessage {
+  return message.id === 5434;
+}
+
+function isStatusUpdateMessage(message: Message): message is StatusUpdateMessage {
+  return message.method === 'notify_status_update';
+}
+
+interface Message {
+  jsonrpc: string;
+  method?: string;
+  id?: number;
+  params?: unknown;
+}
+
+interface ConnectionMessage {
+  jsonrpc: string;
+  id: 4656;
+  result: {
+    connection_id: number;
+  };
+}
+
+interface UpdateConfigMessage {
+  jsonrpc: string;
+  id: 5434;
+  result: {
+    eventtime: number;
+    status: MoonrakerStatusUpdate;
+  };
+}
+
+interface StatusUpdateMessage {
+  jsonrpc: string;
+  method: 'notify_status_update';
+  params: {
+    0: MoonrakerStatusUpdate;
+    1: number;
+  };
+}
+
+interface MoonrakerStatusUpdate {
+  extruder?: {
+    target?: number;
+    temperature?: number;
+  };
+  fan?: {
+    speed?: number;
+  };
+  heater_bed?: {
+    target?: number;
+    temperature?: number;
+  };
+  print_stats?: {
+    filename?: string;
+    message?: string;
+    print_duration?: number;
+    total_duration?: number;
+    state?: string;
+  };
 }
