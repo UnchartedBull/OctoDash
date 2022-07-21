@@ -15,7 +15,6 @@ import { SocketService } from '../services/socket/socket.service';
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
-  private lastStatusText: string;
 
   public statusText: string;
   public enclosureTemperature: TemperatureReading;
@@ -26,7 +25,7 @@ export class BottomBarComponent implements OnDestroy {
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
   ) {
-    if (this.configService.getAmbientTemperatureSensorName() !== null) {
+    if (this.configService.getAmbientTemperatureSensorName()) {
       this.subscriptions.add(
         timer(10000, 15000).subscribe(() => {
           this.enclosureService.getEnclosureTemperature().subscribe({
@@ -46,15 +45,19 @@ export class BottomBarComponent implements OnDestroy {
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-        this.setStatusText(this.getStringStatus(printerStatus?.status));
+        this.statusText = this.getStringStatus(printerStatus?.status);
       }),
     );
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusText().subscribe((statusText: string): void => {
-        this.setStatusText(statusText);
+        this.statusText = statusText;
       }),
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private getStringStatus(printerState: PrinterState): string {
@@ -64,18 +67,7 @@ export class BottomBarComponent implements OnDestroy {
     return PrinterState[printerState];
   }
 
-  private setStatusText(statusText: string) {
-    if (statusText !== this.lastStatusText) {
-      this.lastStatusText = this.statusText;
-      this.statusText = statusText;
-    }
-  }
-
   public getPrinterName(): string {
     return this.configService.getPrinterName();
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 }

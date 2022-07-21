@@ -1,6 +1,6 @@
 .icon-wrapper {
   width: 25vw;
-  height: 33vh;
+  height: 31vh;
   margin: 0 auto;
 }
 
@@ -26,7 +26,7 @@
   }
 
   &__options {
-    margin: 4vh 2vw 0;
+    margin: 2.5vh 2vw 0;
     width: 96vw;
     display: flex;
     gap: 2vw;
@@ -36,6 +36,8 @@
       width: 29vw;
       text-align: center;
       font-weight: 500;
+      padding-bottom: 2vh;
+      border-radius: 1vw;
     }
   }
 

@@ -87,7 +87,7 @@ body {
 
 app-root {
   display: block;
-  background-color: #353b48;
+  background: radial-gradient(circle, rgba(93, 98, 108, 1) 0%, rgba(42, 47, 57, 1) 100%);
   padding: 0.9vh 0.9vw;
   overflow: hidden;
 }

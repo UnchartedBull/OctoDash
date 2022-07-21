@@ -1,41 +1,38 @@
 <div class="printer-status" *ngIf="printerStatus">
-  <div
-    class="printer-status__value printer-status__value-nozzle"
-    [ngClass]="{ 'printer-status__no-set-value': printerStatus.tool0.set === 0 }"
-    (click)="showQuickControlHotend()"
-    matRipple>
+  <div class="printer-status__value printer-status__value-nozzle" (click)="showQuickControlHotend()" matRipple>
     <img src="assets/nozzle.svg" />
-    <span class="printer-status__actual-value">
-      {{ printerStatus.tool0.current }}<span class="printer-status__unit"> °C</span>
-    </span>
-    <span class="printer-status__set-value" *ngIf="printerStatus.tool0.set">
-      / {{ printerStatus.tool0.set }}<span class="printer-status__unit"> °C</span>
-    </span>
+    <div>
+      <span class="printer-status__actual-value">
+        {{ printerStatus.tool0.current }}<span class="printer-status__unit"> °C</span>
+      </span>
+      <span class="printer-status__set-value" *ngIf="printerStatus.tool0.set">
+        / {{ printerStatus.tool0.set }}<span class="printer-status__unit"> °C</span>
+      </span>
+    </div>
   </div>
 
-  <div
-    class="printer-status__value printer-status__value-bed"
-    [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }"
-    (click)="showQuickControlHeatbed()"
-    matRipple>
+  <div class="printer-status__value printer-status__value-bed" (click)="showQuickControlHeatbed()" matRipple>
     <img src="assets/heat-bed.svg" />
-    <span class="printer-status__actual-value">
-      {{ printerStatus.bed.current }}<span class="printer-status__unit"> °C</span>
-    </span>
-    <span class="printer-status__set-value" *ngIf="printerStatus.bed.set">
-      / {{ printerStatus.bed.set }}<span class="printer-status__unit"> °C</span>
-    </span>
+    <div>
+      <span class="printer-status__actual-value">
+        {{ printerStatus.bed.current }}<span class="printer-status__unit"> °C</span>
+      </span>
+      <span class="printer-status__set-value" *ngIf="printerStatus.bed.set">
+        / {{ printerStatus.bed.set }}<span class="printer-status__unit"> °C</span>
+      </span>
+    </div>
   </div>
 
   <div
     class="printer-status__value printer-status__value-fan printer-status__no-set-value"
     (click)="showQuickControlFan()"
-    matRipple
-    [matRippleUnbounded]="false">
+    matRipple>
     <img src="assets/fan.svg" />
-    <span class="printer-status__actual-value">
-      {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit"> %</span>
-    </span>
+    <div>
+      <span class="printer-status__actual-value">
+        {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit"> %</span>
+      </span>
+    </div>
   </div>
 </div>
 

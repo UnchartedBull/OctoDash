@@ -430,4 +430,8 @@ export class MoonrakerService implements SocketService {
   public getEventSubscribable(): Observable<PrinterEvent> {
     return this.eventSubject;
   }
+
+  public getPrinterStatusText(): Observable<string> {
+    return of('wip');
+  }
 }

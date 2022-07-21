@@ -3,49 +3,39 @@
   margin-top: 3vh;
   display: flex;
   gap: 2vw;
-  justify-content: space-around;
+  justify-content: center;
   overflow: visible;
 
   > div {
-    width: 30vw;
-    text-align: right;
+    width: 23vw;
     height: 19vh;
     padding: 2.5vh 2vw;
-    background-color: #252932;
     border-radius: 0.8vw;
     box-shadow: 0px 4px 14px -5px #000000;
     overflow: visible;
     font-size: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__value {
     & img {
-      width: 9vw;
+      width: 7vw;
       float: left;
-      padding-top: 1.7vh;
       padding-right: 2vw;
-      padding-bottom: 2vh;
     }
 
-    &-1 {
-      width: 29vw;
-      padding-left: 0.4vw;
-      padding-right: 7.5vw;
-
-      & img {
-        padding-left: 1.6vw;
-        padding-right: 1vw;
-      }
+    &-nozzle {
+      background-color: rgba(77, 18, 21, 0.4);
     }
 
-    &-2 {
-      width: 26vw;
-      padding-right: 6vw;
+    &-bed {
+      background-color: rgba(90, 70, 17, 0.4);
     }
 
-    &-3 {
-      padding-right: 3vw;
-      width: 27.2vw;
+    &-fan {
+      background-color: rgba(0, 60, 92, 0.4);
     }
   }
 
@@ -60,6 +50,7 @@
   }
 
   &__set-value {
+    margin-top: -2vh;
     font-size: 3.7vw;
     display: block;
     text-align: right;
@@ -67,14 +58,6 @@
 
   &__no-set-value {
     overflow: visible;
-
-    & span {
-      margin-bottom: -4vh;
-    }
-
-    & img {
-      margin-top: -4vh;
-    }
   }
 }
 

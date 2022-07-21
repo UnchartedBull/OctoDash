@@ -8,6 +8,7 @@ import { FilesService } from '../services/files/files.service';
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',
+  styles: ['div {overflow: visible}'],
 })
 export class MainScreenComponent {
   public printing = false;

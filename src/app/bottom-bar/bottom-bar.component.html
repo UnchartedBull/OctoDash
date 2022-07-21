@@ -1,12 +1,14 @@
-<table class="bottom-bar">
-  <tr>
-    <td class="bottom-bar__printer-name">{{ getPrinterName() }}</td>
-    <td class="bottom-bar__enclosure-temperature" *ngIf="enclosureTemperature">
+<div class="bottom-bar">
+  <div class="bottom-bar__printer-name">{{ getPrinterName() }}</div>
+
+  <div class="bottom-bar__enclosure-temperature">
+    <ng-container *ngIf="enclosureTemperature">
       <img src="assets/thermometer.svg" class="bottom-bar__enclosure-temperature-icon" />
       {{ enclosureTemperature.temperature }}{{ enclosureTemperature.unit }}
-    </td>
-    <td class="bottom-bar__current-status">
-      {{ statusText }}
-    </td>
-  </tr>
-</table>
+    </ng-container>
+  </div>
+
+  <div class="bottom-bar__current-status">
+    {{ statusText }}
+  </div>
+</div>
