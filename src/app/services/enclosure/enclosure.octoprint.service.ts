@@ -128,7 +128,6 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   public runEnclosureShell(identifier: number): void {
-
     this.http
       .post(
         this.configService.getApiURL('plugin/enclosure/shell/' + identifier, false),
