@@ -38,9 +38,6 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     return this.callSpoolManagerAPI('hideInactiveSpools', 0, 3000, 'lastUse', 'desc').pipe(
       map((spools: SpoolManagerSpoolList): FilamentSpool => {
         if (spools.selectedSpools.length > 0) {
-          console.log(spools.selectedSpools);
-          console.log(tool);
-
           return this.convertFilamentManagerSpool(spools.selectedSpools[tool]);
         } else {
           return null;
