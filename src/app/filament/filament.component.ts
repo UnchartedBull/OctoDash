@@ -39,7 +39,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
       .getPrinterStatusSubscribable()
       .pipe(take(1))
       .subscribe((printerStatus: PrinterStatus): void => {
-        this.hotendPreviousTemperature = printerStatus.tool0.set;
+        this.hotendPreviousTemperature = printerStatus.tools[0].set;
       });
   }
 

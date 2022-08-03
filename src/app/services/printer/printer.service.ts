@@ -15,7 +15,7 @@ export abstract class PrinterService {
 
   abstract extrude(amount: number, speed: number): void;
 
-  abstract setTemperatureHotend(temperature: number): void;
+  abstract setTemperatureHotend(temperature: number, tool?: number): void;
 
   abstract setTemperatureBed(temperature: number): void;
 

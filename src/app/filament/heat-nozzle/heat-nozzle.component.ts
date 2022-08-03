@@ -42,7 +42,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-        this.hotendTemperature = printerStatus.tool0.current;
+        this.hotendTemperature = printerStatus.tools[0].current;
       }),
     );
   }
