@@ -110,6 +110,22 @@
     width: 62vw;
   }
 
+  &__in-use {
+    .filaments__name {
+      width: 56vw;
+    }
+  }
+
+  &__in-use-icon {
+    width: 6vw;
+    vertical-align: center;
+    text-align: right;
+
+    img {
+      width: 4vw;
+    }
+  }
+
   &__weight-left {
     width: 14vw;
     text-align: right;

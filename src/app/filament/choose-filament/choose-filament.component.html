@@ -4,6 +4,7 @@
     <table class="filaments">
       <tr
         *ngFor="let spool of filament.filamentSpools"
+        [ngClass]="{ 'filaments__in-use': currentSpools.includes(spool.id) }"
         long-press
         matRipple
         [matRippleUnbounded]="false"
@@ -20,6 +21,9 @@
         <td class="filaments__weight-left">
           {{ getSpoolWeightLeft(spool.weight, spool.used)
           }}<span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
+        </td>
+        <td class="filaments__in-use-icon" *ngIf="currentSpools.includes(spool.id)">
+          <img src="assets/nozzle.svg" />
         </td>
       </tr>
     </table>
