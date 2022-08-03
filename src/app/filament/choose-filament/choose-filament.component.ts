@@ -4,7 +4,7 @@ import { FilamentSpool } from '../../model';
 import { FilamentService } from '../../services/filament/filament.service';
 
 @Component({
-  selector: 'app-filament-choose',
+  selector: 'app-filament-choose-spool',
   templateUrl: './choose-filament.component.html',
   styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
 })

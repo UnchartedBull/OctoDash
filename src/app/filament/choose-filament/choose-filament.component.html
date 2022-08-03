@@ -10,8 +10,7 @@
         [duration]="1250"
         [frequency]="2000"
         (onShortPress)="setSpool(spool)"
-        (onLongPressing)="setSpoolSkipChange(spool)"
-      >
+        (onLongPressing)="setSpoolSkipChange(spool)">
         <td class="filaments__type">
           <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
         </td>
