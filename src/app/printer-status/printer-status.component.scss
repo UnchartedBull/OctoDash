@@ -43,6 +43,10 @@
       }
 
       &.printer-status__multi-value {
+        .printer-status__individual-value {
+          display: block;
+        }
+
         .printer-status__actual-value {
           font-size: 4vw;
         }
