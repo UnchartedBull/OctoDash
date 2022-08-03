@@ -27,6 +27,7 @@
     (increasePage)="increasePage()"
     [currentSpool]="currentSpool"
     [selectedSpool]="selectedSpool"
+    [selectedTool]="selectedTool"
     *ngIf="page === 2"></app-filament-heat-nozzle>
   <app-filament-move-filament
     *ngIf="page === 3"
@@ -36,14 +37,17 @@
   <app-filament-change-filament
     *ngIf="page === 4"
     (increasePage)="increasePage()"
-    [selectedSpool]="selectedSpool"></app-filament-change-filament>
+    [selectedSpool]="selectedSpool"
+    [selectedTool]="selectedTool"></app-filament-change-filament>
   <app-filament-move-filament
     *ngIf="page === 5"
     (increasePage)="increasePage()"
     [selectedSpool]="selectedSpool"
+    [selectedTool]="selectedTool"
     [action]="'load'"></app-filament-move-filament>
   <app-filament-purge-filament
     *ngIf="page === 6 && !showCheckmark"
+    [selectedTool]="selectedTool"
     (purgeDone)="setSpoolSelection()"></app-filament-purge-filament>
   <div class="checkmark" *ngIf="showCheckmark">
     <ng-lottie

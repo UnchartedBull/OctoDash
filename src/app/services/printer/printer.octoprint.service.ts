@@ -217,7 +217,7 @@ export class PrinterOctoprintService implements PrinterService {
       .subscribe();
   }
 
-  public extrude(amount: number, speed: number): void {
+  public extrude(amount: number, speed: number, tool?: number): void {
     let multiplier = 1;
     let toBeExtruded: number;
     if (amount < 0) {
@@ -225,6 +225,27 @@ export class PrinterOctoprintService implements PrinterService {
       toBeExtruded = amount * -1;
     } else {
       toBeExtruded = amount;
+    }
+
+    if (tool) {
+      const selectionPayload = {
+        command: 'select',
+        tool: `tool${tool}`,
+      };
+      this.http
+        .post(this.configService.getApiURL('printer/tool'), selectionPayload, this.configService.getHTTPHeaders())
+        .pipe(
+          catchError(error => {
+            this.notificationService.setNotification({
+              heading: $localize`:@@error-printer-extrude:Can't extrude Filament!`,
+              text: error.message,
+              type: NotificationType.ERROR,
+              time: new Date(),
+            });
+            return of(null);
+          }),
+        )
+        .subscribe();
     }
 
     while (toBeExtruded > 0) {

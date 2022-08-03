@@ -85,10 +85,10 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
     };
   }
 
-  public setSpool(spool: FilamentSpool): Observable<void> {
+  public setSpool(spool: FilamentSpool, tool: number): Observable<void> {
     const setSpoolBody: FilamentManagerSelectionPatch = {
       selection: {
-        tool: 0,
+        tool,
         spool: {
           id: spool.id,
         },

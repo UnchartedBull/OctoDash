@@ -38,6 +38,9 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     return this.callSpoolManagerAPI('hideInactiveSpools', 0, 3000, 'lastUse', 'desc').pipe(
       map((spools: SpoolManagerSpoolList): FilamentSpool => {
         if (spools.selectedSpools.length > 0) {
+          console.log(spools.selectedSpools);
+          console.log(tool);
+
           return this.convertFilamentManagerSpool(spools.selectedSpools[tool]);
         } else {
           return null;
@@ -84,10 +87,10 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     };
   }
 
-  public setSpool(spool: FilamentSpool): Observable<void> {
+  public setSpool(spool: FilamentSpool, tool: number): Observable<void> {
     const setSpoolBody: SpoolManagerSelectionPut = {
       databaseId: spool.id,
-      toolIndex: 0,
+      toolIndex: tool,
     };
 
     return this.http.put<void>(
