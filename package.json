@@ -85,7 +85,7 @@
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~14.2.2",
     "@angular/router": "~13.3.11",
-    "@fortawesome/angular-fontawesome": "~0.10.2",
+    "@fortawesome/angular-fontawesome": "~0.11.0",
     "@fortawesome/fontawesome-svg-core": "~1.2.36",
     "@fortawesome/free-solid-svg-icons": "~5.15.4",
     "ajv": "~8.11.0",
