@@ -27,7 +27,7 @@
         <source>Can&apos;t retrieve enclosure temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/bottom-bar/bottom-bar.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-restart" datatype="html">
@@ -352,35 +352,35 @@
         <source>Great! I&apos;ll check everything.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
-        <source> Octoprint Connection </source>
+        <source> OctoPrint Connection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source> Validating Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source> Saving Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saving-config" datatype="html">
@@ -1127,57 +1127,64 @@
           <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="error-run-enclosure-shell" datatype="html">
+        <source>Can&apos;t run enclosure shell!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
+          <context context-type="linenumber">139</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="error-psu-state" datatype="html">
         <source>Can&apos;t change PSU State!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-psu-provider" datatype="html">
         <source>No provider for PSU Control is configured.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-psu-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">182</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">207</context>
+          <context context-type="linenumber">227</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can&apos;t update Ophom Plug!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">199</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">229</context>
+          <context context-type="linenumber">249</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can&apos;t update Tasmota!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">272</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can&apos;t update Tasmota MQTT!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">279</context>
+          <context context-type="linenumber">299</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
@@ -1355,53 +1362,67 @@
           <context context-type="linenumber">209</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="http-403-heading" datatype="html">
+        <source>HTTP Error 403 - FORBIDDEN</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="http-403-text" datatype="html">
+        <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="http-unknown-heading" datatype="html">
+        <source>Unknown HTTP Error</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="unit-h-1" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">250</context>
+          <context context-type="linenumber">275</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-h-2" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">260</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-h-3" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">268</context>
+          <context context-type="linenumber">293</context>
         </context-group>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">328</context>
+          <context context-type="linenumber">353</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">354</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="printer-information" datatype="html">
-        <source>Printer information</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">364</context>
+          <context context-type="linenumber">379</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-answer-prompt" datatype="html">
         <source>Can&apos;t answer prompt!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">383</context>
+          <context context-type="linenumber">404</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
@@ -1972,42 +1993,42 @@
         <source> MB/s  </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-mb" datatype="html">
         <source>MB</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-minutes-left" datatype="html">
         <source>minutes left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="installing-update" datatype="html">
         <source>installing update</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-wait" datatype="html">
         <source>this might take a while</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-confirmation" datatype="html">
         <source>v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-reboot" datatype="html">
@@ -2018,17 +2039,17 @@
         </context-group>
       </trans-unit>
       <trans-unit id="reboot-no" datatype="html">
-        <source>no</source>
+        <source> no </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reboot-yes" datatype="html">
-        <source>yes</source>
+        <source> yes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
