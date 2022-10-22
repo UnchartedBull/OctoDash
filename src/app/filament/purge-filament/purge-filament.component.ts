@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ConfigService } from '../../config/config.service';
 import { PrinterService } from '../../services/printer/printer.service';

@@ -11,11 +11,10 @@ import { FilamentService } from '../../services/filament/filament.service';
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
 
-  private currentSpools: any[];
+  private currentSpools: number[];
 
   constructor(public filament: FilamentService) {
     this.currentSpools = filament.getCurrentSpools().map(s => s.id);
-    console.log(this.currentSpools);
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {
