@@ -238,6 +238,24 @@ export class PrinterOctoprintService implements PrinterService {
     }
   }
 
+  public firmwareRestart(): void {
+    this.notificationService.setNotification({
+      heading: $localize`:@@error-firmware-restart-not-supported:[!FIRMWARE_RESTART] command not supported on OctoPrint!`,
+      text: $localize`:@@error-command-not-supported-details:Please check the docs for alternatives.`,
+      type: NotificationType.WARN,
+      time: new Date(),
+    });
+  }
+
+  public restart(): void {
+    this.notificationService.setNotification({
+      heading: $localize`:@@error-restart-not-supported:[!RESTART] command not supported on OctoPrint!`,
+      text: $localize`:@@error-command-not-supported-details:Please check the docs for alternatives.`,
+      type: NotificationType.WARN,
+      time: new Date(),
+    });
+  }
+
   public emergencyStop(): void {
     this.executeGCode('M410');
   }

@@ -54,6 +54,12 @@ export class CustomActionsComponent {
       case '[!DISCONNECT]':
         this.disconnectPrinter();
         break;
+      case '[!RESTART]':
+        this.restart();
+        break;
+      case '[!FIRMWARE_RESTART]':
+        this.firmwareRestart();
+        break;
       case '[!STOPDASHBOARD]':
         this.stopOctoDash();
         break;
@@ -104,6 +110,17 @@ export class CustomActionsComponent {
   // [!DISCONNECT]
   private disconnectPrinter(): void {
     this.printerService.disconnectPrinter();
+  }
+
+  // TODO: check if those should be moved to system service
+  // [!RESTART]
+  private restart(): void {
+    this.printerService.restart();
+  }
+
+  // [!FIRMWARE_RESTART]
+  private firmwareRestart(): void {
+    this.printerService.firmwareRestart();
   }
 
   // [!STOPDASHBOARD]

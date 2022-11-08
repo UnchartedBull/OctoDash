@@ -111,6 +111,16 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     }
   }
 
+  public quickControlSetPreset(preset: PreheatConfiguration): void {
+    if (this.view == QuickControlView.HOTEND) {
+      this.hotendTarget = preset.hotend;
+      this.printerService.setTemperatureHotend(this.hotendTarget);
+    } else {
+      this.heatbedTarget = preset.heatbed;
+      this.printerService.setTemperatureBed(this.heatbedTarget);
+    }
+  }
+
   private changeTemperatureHotend(value: number): void {
     this.hotendTarget += value;
     if (this.hotendTarget < -999) {

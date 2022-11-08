@@ -71,6 +71,7 @@ import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.comp
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
+import { PrinterMoonrakerService } from './services/printer/printer.moonraker.service';
 
 export function playerFactory(): LottiePlayer {
   return player;
@@ -170,7 +171,14 @@ export function playerFactory(): LottiePlayer {
           notificationService: NotificationService,
           httpClient: HttpClient,
         ) => {
-          return new PrinterOctoprintService(configService, notificationService, httpClient);
+          if (configService.isValid()) {
+            if (configService.isOctoprintBackend()) {
+              return new PrinterOctoprintService(configService, notificationService, httpClient);
+            } else {
+              return new PrinterMoonrakerService(configService, notificationService, httpClient);
+            }
+          }
+          return null;
         },
       },
     ],
@@ -211,9 +219,8 @@ export function playerFactory(): LottiePlayer {
               return new SpoolManagerOctoprintService(configService, httpClient);
             }
             return new FilamentManagerOctoprintService(configService, httpClient);
-          } else {
-            return null;
           }
+          return null;
         },
       },
     ],
@@ -263,7 +270,6 @@ function socketServiceFactory(
     } else {
       return new MoonrakerService(configService, systemService, conversionService, notificationService, httpClient);
     }
-  } else {
-    return null;
   }
+  return null;
 }

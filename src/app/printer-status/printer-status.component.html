@@ -139,7 +139,11 @@
     </div>
     <ng-container *ngIf="view !== QuickControlView.FAN">
       <div class="quick-control__preset">
-        <div *ngFor="let preset of presets | slice: 0:5" [ngStyle]="{ 'background-color': preset.color }">
+        <div
+          *ngFor="let preset of presets | slice: 0:5"
+          [ngStyle]="{ 'background-color': preset.color }"
+          matRipple
+          (click)="quickControlSetPreset(preset)">
           <span>{{ preset.name }}</span>
           <span class="quick-control__preset-temperature" *ngIf="view === QuickControlView.HOTEND">
             - {{ preset.hotend }}°C</span

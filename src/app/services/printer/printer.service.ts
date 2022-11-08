@@ -27,5 +27,9 @@ export abstract class PrinterService {
 
   abstract disconnectPrinter(): void;
 
+  abstract firmwareRestart(): void;
+
+  abstract restart(): void;
+
   abstract emergencyStop(): void;
 }
