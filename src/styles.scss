@@ -115,6 +115,13 @@ app-root {
 
   > div {
     text-align: center;
+    font-weight: 500;
+
+    fa-icon {
+      padding: 0 1.4vw;
+      font-size: 84%;
+      vertical-align: 2px;
+    }
   }
 
   &__side {
@@ -125,22 +132,19 @@ app-root {
     border-radius: 0.8vw;
     line-height: 11vh;
 
+    &-left {
+      text-align: left !important;
+      padding-left: 0.6vw;
+    }
+
+    &-right {
+      text-align: right !important;
+      padding-right: 0.6vw;
+    }
+
     &-hidden {
       background: transparent;
       box-shadow: none;
-    }
-
-    &-icon {
-      height: 7vh;
-      vertical-align: -2vh;
-
-      &-left {
-        margin-right: 1vw;
-      }
-
-      &-right {
-        margin-left: 1vw;
-      }
     }
   }
 
@@ -148,8 +152,8 @@ app-root {
     width: 52vw;
 
     &-icon {
+      padding-top: 1vh;
       width: 7vw;
-      margin-bottom: -3vh;
     }
   }
 }

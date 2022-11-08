@@ -1,3 +1,5 @@
+@import '../../mixins';
+
 .printer-status {
   width: 100%;
   margin-top: 3vh;
@@ -71,6 +73,20 @@
   }
 }
 
+.top-bar__center {
+  &-nozzle {
+    width: 5vw;
+  }
+
+  &-heat-bed {
+    width: 7vw;
+  }
+
+  &-fan {
+    width: 5.7vw;
+  }
+}
+
 .quick-control {
   position: fixed;
   left: 0;
@@ -80,14 +96,44 @@
   background-color: rgba(0, 0, 0, 0.85);
   transition: opacity 0.4s ease-in-out;
   z-index: 10;
-  opacity: 0;
+  opacity: 1;
+
+  &__wrapper {
+    display: flex;
+    gap: 3vw;
+    justify-content: center;
+  }
+
+  &__preset {
+    width: 30vw;
+    margin-top: 1.5vh;
+    background-color: #252932;
+    padding: 4vh 2vw;
+    border-radius: 2vw;
+    box-shadow: 0px 4px 14px -5px #000000;
+
+    > div {
+      @include list-entry;
+      line-height: 3vw;
+
+      span {
+        font-size: 3vw;
+      }
+    }
+
+    &-temperature {
+      font-size: 2.5vw !important;
+      opacity: 0.8;
+    }
+  }
 
   &__controller {
     width: 35vw;
-    margin: 0 auto;
-    border: solid 0.6vw;
-    border-radius: 3vw;
     margin-top: 1.5vh;
+    background-color: #252932;
+    padding: 0 2vw;
+    border-radius: 2vw;
+    box-shadow: 0px 4px 14px -5px #000000;
 
     &-row {
       display: flex;
@@ -100,8 +146,9 @@
       text-align: center;
 
       &-unit {
-        text-align: center;
+        padding-left: 0.5vw;
         font-size: 4vw;
+        opacity: 0.7;
         font-weight: 400;
       }
     }
@@ -119,16 +166,8 @@
     }
 
     &-set {
-      height: 10vw;
-      border-top: solid 0.6vw;
-      flex: 1;
-      align-items: center;
-      display: flex;
-
-      &-span {
-        text-align: center;
-        flex: 1;
-      }
+      @include highlight-button;
+      margin: 5vh auto 3vh;
     }
   }
 }

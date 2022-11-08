@@ -1,0 +1,20 @@
+@mixin highlight-button {
+  background-color: #399e2a;
+  padding: 1vh 2.1vw;
+  border-radius: 0.8vw;
+  box-shadow: 0px 4px 14px -5px #000000;
+}
+
+@mixin list-entry {
+  display: block;
+  background-color: #252932;
+  box-shadow: 0px 4px 14px -5px #000000;
+  border-radius: 0.8vw;
+  margin-bottom: 2vh;
+  padding: 2vh 2vw;
+}
+
+@mixin list-entry-alt {
+  @include list-entry;
+  background-color: red;
+}

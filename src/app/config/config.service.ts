@@ -5,7 +5,7 @@ import _ from 'lodash-es';
 import { ElectronService } from '../electron.service';
 import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { BackendType, Config, CustomAction, HttpHeader } from './config.model';
+import { BackendType, Config, CustomAction, HttpHeader, PreheatConfiguration } from './config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -190,6 +190,10 @@ export class ConfigService {
 
   public getDefaultFanSpeed(): number {
     return this.config.preheatConfigurations[0].fan;
+  }
+
+  public getPreheatConfigurations(): Array<PreheatConfiguration> {
+    return this.config.preheatConfigurations;
   }
 
   public getAmbientTemperatureSensorName(): number {

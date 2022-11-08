@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { PreheatConfiguration } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
 import { PrinterStatus } from '../model';
 import { PrinterService } from '../services/printer/printer.service';
@@ -17,12 +18,13 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public fanSpeed: number;
   public status: string;
 
+  public presets: Array<PreheatConfiguration>;
   public hotendTarget: number;
   public heatbedTarget: number;
   public fanTarget: number;
 
   public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+  public view = QuickControlView.HOTEND;
 
   public constructor(
     private printerService: PrinterService,
@@ -32,6 +34,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
     this.fanTarget = this.configService.getDefaultFanSpeed();
+    this.presets = this.configService.getPreheatConfigurations();
   }
 
   public ngOnInit(): void {

@@ -38,6 +38,7 @@ const octodashConfig: Partial<Config> = {
       hotend: 200,
       heatbed: 60,
       fan: 0,
+      color: 'rgba(0,151,230,.4)',
     },
   ],
   filamentChange: {

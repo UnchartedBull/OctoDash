@@ -130,7 +130,7 @@ const configSchema = {
       items: {
         title: 'A Schema',
         type: 'object',
-        required: ['name', 'hotend', 'heatbed', 'fan'],
+        required: ['name', 'hotend', 'heatbed', 'fan', 'color'],
         properties: {
           name: {
             title: 'The name Schema',
@@ -147,6 +147,10 @@ const configSchema = {
           fan: {
             title: 'The fan Schema',
             type: 'integer',
+          },
+          color: {
+            title: 'The color Schema',
+            type: 'string',
           },
         },
       },

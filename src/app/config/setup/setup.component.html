@@ -1,10 +1,12 @@
 <div class="setup">
   <div class="top-bar">
-    <div class="top-bar__side" [ngClass]="{ 'top-bar__side-hidden': !showBackButton() }" matRipple>
-      <div *ngIf="showBackButton()" (click)="decreasePage()">
-        <img src="assets/back.svg" class="top-bar__side-icon top-bar__side-icon-left" />
-        <span i18n="@@setup-back">back</span>
-      </div>
+    <div
+      class="top-bar__side top-bar__side-left"
+      [ngClass]="{ 'top-bar__side-hidden': !showBackButton() }"
+      (click)="decreasePage()"
+      matRipple>
+      <fa-icon [icon]="['fas', 'circle-chevron-left']"></fa-icon>
+      <span i18n="@@setup-back">back</span>
     </div>
 
     <div class="top-bar__center">
@@ -13,11 +15,13 @@
       </div>
     </div>
 
-    <div class="top-bar__side" [ngClass]="{ 'top-bar__side-hidden': !showNextButton() }" matRipple>
-      <div *ngIf="showNextButton()" (click)="increasePage()">
-        <span i18n="@@setup-next">next</span>
-        <img src="assets/next.svg" class="top-bar__side-icon top-bar__side-icon-right" />
-      </div>
+    <div
+      class="top-bar__side top-bar__side-right"
+      [ngClass]="{ 'top-bar__side-hidden': !showNextButton() }"
+      (click)="increasePage()"
+      matRipple>
+      <span i18n="@@setup-next">next</span>
+      <fa-icon [icon]="['fas', 'circle-chevron-right']"></fa-icon>
     </div>
   </div>
 
@@ -69,18 +73,24 @@
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
-        <fa-icon [icon]="['fas', backendConnection ? 'check' : 'xmark']" [ngClass]="{'icon-good': backendConnection, 'icon-bad': !backendConnection}"></fa-icon>
+        <fa-icon
+          [icon]="['fas', backendConnection ? 'check' : 'xmark']"
+          [ngClass]="{ 'icon-good': backendConnection, 'icon-bad': !backendConnection }"></fa-icon>
         <ng-container i18n="@@checking-octoprint-connection"> Backend Connection </ng-container>
       </span>
       <div *ngIf="backendConnection">
         <span class="setup__validation-check">
-          <fa-icon [icon]="['fas', configValid ? 'check' : 'xmark']" [ngClass]="{'icon-good': configValid, 'icon-bad': !configValid}"></fa-icon>
+          <fa-icon
+            [icon]="['fas', configValid ? 'check' : 'xmark']"
+            [ngClass]="{ 'icon-good': configValid, 'icon-bad': !configValid }"></fa-icon>
           <ng-container i18n="@@checking-config"> Validating Config </ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
-          <fa-icon [icon]="['fas', configValid ? 'check' : 'xmark']" [ngClass]="{'icon-good': configValid, 'icon-bad': !configValid}"></fa-icon>
+          <fa-icon
+            [icon]="['fas', configValid ? 'check' : 'xmark']"
+            [ngClass]="{ 'icon-good': configValid, 'icon-bad': !configValid }"></fa-icon>
           <ng-container i18n="@@checking-save"> Saving Config </ng-container>
         </span>
       </div>

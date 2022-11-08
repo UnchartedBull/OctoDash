@@ -55,11 +55,12 @@ interface Screen {
   wakeupCommand: string;
 }
 
-interface PreheatConfiguration {
+export interface PreheatConfiguration {
   name: string;
   hotend: number;
   heatbed: number;
   fan: number;
+  color: string;
 }
 
 export interface FilamentChange {
