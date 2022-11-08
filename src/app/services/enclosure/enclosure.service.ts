@@ -5,6 +5,7 @@ import { PSUState, TemperatureReading } from '../../model';
 
 @Injectable()
 export abstract class EnclosureService {
+  //TODO this should be moved to the socket service
   abstract getEnclosureTemperature(): Observable<TemperatureReading>;
 
   abstract setLEDColor(identifier: number, red: number, green: number, blue: number): void;

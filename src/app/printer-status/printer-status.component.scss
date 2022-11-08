@@ -22,7 +22,6 @@
     }
 
     & img {
-      width: 7vw;
       float: left;
       padding-right: 2vw;
     }
@@ -55,6 +54,20 @@
     font-size: 3.7vw;
     display: block;
     text-align: right;
+  }
+}
+
+.icon {
+  &__nozzle {
+    width: 4.4vw;
+  }
+
+  &__heat-bed {
+    width: 6.3vw;
+  }
+
+  &__fan {
+    width: 5.3vw;
   }
 }
 

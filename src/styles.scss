@@ -21,37 +21,49 @@ $OctoDash-theme: mat-dark-theme($OctoDash-primary, $OctoDash-accent, $OctoDash-w
 }
 
 @font-face {
-  font-family: Montserrat;
+  font-family: 'Manrope';
+  font-weight: 300;
+  src: url(assets/fonts/Manrope-ExtraLight.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
   font-weight: 400;
-  src: url(assets/fonts/Montserrat-Regular.ttf) format('truetype');
+  src: url(assets/fonts/Manrope-Light.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: Montserrat;
+  font-family: 'Manrope';
   font-weight: 500;
-  src: url(assets/fonts/Montserrat-Medium.ttf) format('truetype');
+  src: url(assets/fonts/Manrope-Regular.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Nunito Sans';
-  font-weight: 400;
-  src: url(assets/fonts/Nunito-Sans-Light.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Nunito Sans';
+  font-family: 'Manrope';
   font-weight: 500;
-  src: url(assets/fonts/Nunito-Sans-Regular.ttf) format('truetype');
+  src: url(assets/fonts/Manrope-Medium.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Nunito Sans';
+  font-family: 'Manrope';
   font-weight: 600;
-  src: url(assets/fonts/Nunito-Sans-Bold.ttf) format('truetype');
+  src: url(assets/fonts/Manrope-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 700;
+  src: url(assets/fonts/Manrope-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 800;
+  src: url(assets/fonts/Manrope-ExtraBold.ttf) format('truetype');
 }
 
 *:not(path):not(svg) {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   color: #f5f6fa;
   font-size: 4.3vw;
   margin: 0;
@@ -173,13 +185,15 @@ app-root {
     font-size: 5vw;
     margin-top: 20vh;
     opacity: 0.7;
+    font-weight: 500;
+    overflow: visible;
+    padding-bottom: 7vh;
   }
 
   &__hint {
     display: block;
     text-align: center;
     font-size: 0.5rem;
-    margin-top: 7vh;
     opacity: 0.5;
     line-height: 150%;
   }

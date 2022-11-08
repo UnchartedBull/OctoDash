@@ -1,6 +1,6 @@
 <div class="printer-status" *ngIf="printerStatus">
   <div class="printer-status__value printer-status__value-nozzle" (click)="showQuickControlHotend()" matRipple>
-    <img src="assets/nozzle.svg" />
+    <img src="assets/nozzle.png" class="icon__nozzle" />
     <div>
       <span class="printer-status__actual-value">
         {{ printerStatus.tool0.current }}<span class="printer-status__unit"> °C</span>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="printer-status__value printer-status__value-bed" (click)="showQuickControlHeatbed()" matRipple>
-    <img src="assets/heat-bed.svg" />
+    <img src="assets/heat-bed.png" class="icon__heat-bed" />
     <div>
       <span class="printer-status__actual-value">
         {{ printerStatus.bed.current }}<span class="printer-status__unit"> °C</span>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="printer-status__value printer-status__value-fan" (click)="showQuickControlFan()" matRipple>
-    <img src="assets/fan.svg" />
+    <img src="assets/fan.png" class="icon__fan" />
     <div>
       <span class="printer-status__actual-value">
         {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit"> %</span>

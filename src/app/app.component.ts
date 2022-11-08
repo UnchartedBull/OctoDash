@@ -77,6 +77,10 @@ export class AppComponent {
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 
+  public getBackendName(): string {
+    return this.configService.isOctoprintBackend() ? 'Octoprint' : 'Moonraker';
+  }
+
   public loadingAnimationCacheDone(): void {
     this.loadingAnimationCached = true;
   }

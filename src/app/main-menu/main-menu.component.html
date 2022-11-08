@@ -14,22 +14,16 @@
 
   <div class="main-menu__options">
     <div routerLink="/files" matRipple [matRippleCentered]="true">
-      <div class="icon-wrapper">
-        <img src="assets/files-color.png" class="main-menu__option-icon main-menu__option-icon__files" />
-      </div>
-      <ng-container i18n="@@menu-files">files</ng-container>
+      <fa-icon [icon]="['fas', 'folder-closed']"></fa-icon>
+      <span i18n="@@menu-files">files</span>
     </div>
     <div routerLink="/filament" matRipple [matRippleCentered]="true">
-      <div class="icon-wrapper">
-        <img src="assets/filament-color.png" class="main-menu__option-icon main-menu__option-icon__filament" />
-      </div>
-      <ng-container i18n="@@menu-filament">filament</ng-container>
+      <fa-icon [icon]="['fas', 'circle-dot']"></fa-icon>
+      <span i18n="@@menu-filament">filament</span>
     </div>
     <div routerLink="/control" matRipple [matRippleCentered]="true">
-      <div class="icon-wrapper">
-        <img src="assets/control-color.png" class="main-menu__option-icon main-menu__option-icon__control" />
-      </div>
-      <ng-container i18n="@@menu-control">control</ng-container>
+      <fa-icon [icon]="['fas', 'gamepad']"></fa-icon>
+      <span i18n="@@menu-control">control</span>
     </div>
   </div>
 </div>

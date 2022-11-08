@@ -48,12 +48,6 @@ export class BottomBarComponent implements OnDestroy {
         this.statusText = this.getStringStatus(printerStatus?.status);
       }),
     );
-
-    this.subscriptions.add(
-      this.socketService.getPrinterStatusText().subscribe((statusText: string): void => {
-        this.statusText = statusText;
-      }),
-    );
   }
 
   public ngOnDestroy(): void {

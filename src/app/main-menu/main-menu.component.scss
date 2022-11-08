@@ -23,41 +23,33 @@
     right: 3vw;
     top: 4vh;
     font-size: 6vw;
+    filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.75));
+    opacity: 0.95;
   }
 
   &__options {
-    margin: 2.5vh 2vw 0;
-    width: 96vw;
+    margin: 2.5vh 5vw 0;
+    width: 90vw;
+    height: 43vh;
     display: flex;
     gap: 2vw;
     justify-content: space-around;
 
     > div {
       width: 29vw;
-      text-align: center;
-      font-weight: 500;
-      padding-bottom: 2vh;
       border-radius: 1vw;
-    }
-  }
+      font-weight: 500;
+      gap: 3vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-  &__option-icon {
-    display: block;
-    margin: 0 auto;
-
-    &__files {
-      width: 14.8vw;
-      padding-top: 3vh;
-    }
-
-    &__filament {
-      width: 15.5vw;
-      padding-top: 3vh;
-    }
-
-    &__control {
-      width: 15.5vw;
-      padding-top: 5.7vh;
+      > fa-icon {
+        font-size: 10vw;
+        opacity: 0.95;
+        filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.75));
+      }
     }
   }
 
