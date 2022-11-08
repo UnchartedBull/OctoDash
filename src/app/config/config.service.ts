@@ -39,9 +39,8 @@ export class ConfigService {
 
   public async readConfig(): Promise<void> {
     let resolvePromise;
-    let rejectPromise;
 
-    setTimeout(() => rejectPromise(), 4000);
+    setTimeout(() => resolvePromise(), 4000);
 
     this.electronService.on('configRead', (_, config: Config) => {
       this.zone.run(() => {
@@ -67,15 +66,14 @@ export class ConfigService {
         this.initialized = true;
 
         console.error(errors);
-        rejectPromise();
+        resolvePromise();
       });
     });
 
     this.electronService.send('readConfig');
 
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       resolvePromise = resolve;
-      rejectPromise = reject;
     });
   }
 
@@ -90,9 +88,11 @@ export class ConfigService {
     };
   }
 
-  public saveConfig(config: Config): void {
+  public saveConfig(config: Config, reload = true): void {
     this.electronService.send('saveConfig', config);
-    this.electronService.send('reload');
+    if (reload) {
+      this.electronService.send('reload');
+    }
   }
 
   public getCurrentConfig(): Config {

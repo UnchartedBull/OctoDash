@@ -75,8 +75,6 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   public setOutput(identifier: number, status: boolean): void {
-    console.log(identifier, status);
-
     const outputBody: EnclosureOutputBody = {
       status,
     };
@@ -101,8 +99,6 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   public setOutputPWM(identifier: number, dutyCycle: number): void {
-    console.log(identifier, dutyCycle);
-
     const pwmBody: EnclosurePWMBody = {
       /* eslint-disable camelcase */
       duty_cycle: dutyCycle,
@@ -128,7 +124,6 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   public runEnclosureShell(identifier: number): void {
-
     this.http
       .post(
         this.configService.getApiURL('plugin/enclosure/shell/' + identifier, false),

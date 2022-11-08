@@ -206,10 +206,14 @@ export function playerFactory(): LottiePlayer {
         provide: FilamentPluginService,
         deps: [ConfigService, HttpClient],
         useFactory: (configService: ConfigService, httpClient: HttpClient) => {
-          if (configService.isSpoolManagerPluginEnabled()) {
-            return new SpoolManagerOctoprintService(configService, httpClient);
+          if (configService.isValid()) {
+            if (configService.isSpoolManagerPluginEnabled()) {
+              return new SpoolManagerOctoprintService(configService, httpClient);
+            }
+            return new FilamentManagerOctoprintService(configService, httpClient);
+          } else {
+            return null;
           }
-          return new FilamentManagerOctoprintService(configService, httpClient);
         },
       },
     ],
@@ -247,9 +251,19 @@ function socketServiceFactory(
   notificationService: NotificationService,
   httpClient: HttpClient,
 ): SocketService {
-  if (configService.isOctoprintBackend()) {
-    return new OctoPrintSocketService(configService, systemService, conversionService, notificationService, httpClient);
+  if (configService.isValid()) {
+    if (configService.isOctoprintBackend()) {
+      return new OctoPrintSocketService(
+        configService,
+        systemService,
+        conversionService,
+        notificationService,
+        httpClient,
+      );
+    } else {
+      return new MoonrakerService(configService, systemService, conversionService, notificationService, httpClient);
+    }
   } else {
-    return new MoonrakerService(configService, systemService, conversionService, notificationService, httpClient);
+    return null;
   }
 }

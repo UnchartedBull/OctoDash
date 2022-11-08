@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { isEqual } from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { AppService } from './app.service';
@@ -56,7 +57,11 @@ export class AppComponent {
         this.router.navigate(['/no-config']);
       }, 400);
     } else {
-      this.router.navigate(['/invalid-config']);
+      if (isEqual(errors, [' must be object'])) {
+        this.router.navigate(['/no-config']);
+      } else {
+        this.router.navigate(['/invalid-config']);
+      }
     }
   }
 

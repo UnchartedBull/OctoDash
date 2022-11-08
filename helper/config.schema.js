@@ -154,7 +154,7 @@ const configSchema = {
     filamentChange: {
       title: 'The filamentChange Schema',
       type: 'object',
-      required: ['integrated'],
+      oneOf: [{ required: ['integrated'] }, { required: ['loadAndUnload'] }, { required: ['change'] }],
       properties: {
         integrated: {
           title: 'The integrated Schema',
@@ -176,6 +176,32 @@ const configSchema = {
             purgeDistance: {
               title: 'The purgeDistance Schema',
               type: 'integer',
+            },
+          },
+        },
+        loadAndUnload: {
+          title: 'The loadAndUnload Schema',
+          type: 'object',
+          required: ['unloadCommand', 'loadCommand'],
+          properties: {
+            unloadCommand: {
+              title: 'The unloadCommand Schema',
+              type: 'string',
+            },
+            loadCommand: {
+              title: 'The loadCommand Schema',
+              type: 'string',
+            },
+          },
+        },
+        change: {
+          title: 'The change Schema',
+          type: 'object',
+          required: ['changeCommand'],
+          properties: {
+            changeCommand: {
+              title: 'The changeCommand Schema',
+              type: 'string',
             },
           },
         },

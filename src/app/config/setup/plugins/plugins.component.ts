@@ -13,7 +13,6 @@ export class PluginsComponent {
   @Output() octoprintPluginsChange = new EventEmitter<OctoprintPlugins>();
 
   public emitUpdate() {
-    console.log(this.octoprintPlugins);
     this.octoprintPluginsChange.emit(this.octoprintPlugins);
   }
 }

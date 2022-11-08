@@ -131,7 +131,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     this.electronService.on('configSaved', this.onConfigSaved.bind(this));
     this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
 
-    this.configService.saveConfig(this.config);
+    this.configService.saveConfig(this.config, false);
   }
 
   public finishWizard(): void {
@@ -165,7 +165,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public decreasePage(): void {
-    console.log(this.config);
     setTimeout(() => {
       if (this.page === 7 && this.config.backend.type === BackendType.MOONRAKER) {
         return this.changePage(-2);
