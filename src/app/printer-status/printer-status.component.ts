@@ -24,7 +24,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public fanTarget: number;
 
   public QuickControlView = QuickControlView;
-  public view = QuickControlView.HOTEND;
+  public view = QuickControlView.NONE;
 
   public constructor(
     private printerService: PrinterService,

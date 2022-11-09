@@ -34,7 +34,7 @@ export class PrinterMoonrakerService implements PrinterService {
     z = this.configService.isZAxisInverted() ? z * -1 : z;
 
     this.sendGCode(
-      `G91 G0 F${this.convertMMpStoMMpH(this.configService.getZSpeed())} Z${z} G0 F${this.convertMMpStoMMpH(
+      `G91 : G0 F${this.convertMMpStoMMpH(this.configService.getZSpeed())} Z${z} : G0 F${this.convertMMpStoMMpH(
         this.configService.getXYSpeed(),
       )} X${x} Y${y} `,
       $localize`:@@error-printer-head:Can't move Printhead!`,
@@ -43,7 +43,7 @@ export class PrinterMoonrakerService implements PrinterService {
 
   extrude(amount: number, speed: number): void {
     this.sendGCode(
-      `M83 G1 F${this.convertMMpStoMMpH(speed)} E${amount}`,
+      `M83 : G1 F${this.convertMMpStoMMpH(speed)} E${amount}`,
       $localize`:@@error-printer-head:Can't move Printhead!`,
     );
   }
@@ -63,10 +63,7 @@ export class PrinterMoonrakerService implements PrinterService {
   }
 
   setFanSpeed(percentage: number): void {
-    this.sendGCode(
-      `SET_FAN_SPEED FAN=fan TARGET=${percentage / 100}`,
-      $localize`:@@error-printer-fan:Can't set Fan Speed!`,
-    );
+    this.sendGCode(`M106 P0 S${percentage * 2.55}`, $localize`:@@error-printer-fan:Can't set Fan Speed!`);
   }
 
   setFeedrate(feedrate: number): void {

@@ -78,14 +78,20 @@ export class ConfigService {
   }
 
   public generateHttpHeaders(): void {
-    this.httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.backend.accessToken,
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0',
-      }),
-    };
+    if (this.isOctoprintBackend()) {
+      this.httpHeaders = {
+        headers: new HttpHeaders({
+          'x-api-key': this.config.backend.accessToken,
+          'Cache-Control': 'no-cache',
+          Pragma: 'no-cache',
+          Expires: '0',
+        }),
+      };
+    } else {
+      this.httpHeaders = {
+        headers: new HttpHeaders({}),
+      };
+    }
   }
 
   public saveConfig(config: Config, reload = true): void {

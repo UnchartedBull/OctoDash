@@ -59,6 +59,7 @@ import { FilesOctoprintService } from './services/files/files.octoprint.service'
 import { FilesService } from './services/files/files.service';
 import { JobOctoprintService } from './services/job/job.octoprint.service';
 import { JobService } from './services/job/job.service';
+import { PrinterMoonrakerService } from './services/printer/printer.moonraker.service';
 import { PrinterOctoprintService } from './services/printer/printer.octoprint.service';
 import { PrinterService } from './services/printer/printer.service';
 import { MoonrakerService } from './services/socket/socket.moonraker.service';
@@ -71,7 +72,6 @@ import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.comp
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
-import { PrinterMoonrakerService } from './services/printer/printer.moonraker.service';
 
 export function playerFactory(): LottiePlayer {
   return player;
