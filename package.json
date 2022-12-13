@@ -91,7 +91,7 @@
     "ajv": "~8.11.2",
     "angular-svg-round-progressbar": "~8.0.0",
     "bonjour": "~3.5.0",
-    "compare-versions": "~5.0.1",
+    "compare-versions": "~5.0.2",
     "electron-store": "~8.1.0",
     "got-cjs": "~12.5.4",
     "lodash-es": "~4.17.21",
