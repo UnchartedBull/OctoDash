@@ -72,7 +72,7 @@ export const defaultConfig: Config = {
     },
     companionPlugin: {
       enabled: false,
-    }
+    },
   },
   octodash: {
     customActions: [

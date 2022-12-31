@@ -82,7 +82,8 @@ export class OctoPrintSocketService implements SocketService {
         set: 0,
         unit: '°C',
       },
-      fanSpeed: this.configService.isDisplayLayerProgressEnabled() || this.configService.isCompanionPluginEnabled() ? 0 : -1,
+      fanSpeed:
+        this.configService.isDisplayLayerProgressEnabled() || this.configService.isCompanionPluginEnabled() ? 0 : -1,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
@@ -261,10 +262,14 @@ export class OctoPrintSocketService implements SocketService {
 
   public extractFanSpeed(message: DisplayLayerProgressData | CompanionData): void {
     if (typeof message.fanspeed === 'object') {
-      this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed["1"]));
+      this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed['1']));
     } else {
       this.printerStatus.fanSpeed =
-        message.fanspeed === 'Off' ? 0 : message.fanspeed === '-' ? 0 : Number(message.fanspeed.replace('%', '').trim());
+        message.fanspeed === 'Off'
+          ? 0
+          : message.fanspeed === '-'
+          ? 0
+          : Number(message.fanspeed.replace('%', '').trim());
     }
   }
 
