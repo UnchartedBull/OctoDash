@@ -1,3 +1,3 @@
 export interface CompanionData {
-  fanspeed: Object;
+  fanspeed: object;
 }
