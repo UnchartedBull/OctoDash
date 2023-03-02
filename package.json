@@ -106,7 +106,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.9",
-    "@angular/cli": "~15.2.0",
+    "@angular/cli": "~15.2.1",
     "@angular/compiler-cli": "~13.0.2",
     "@angular/language-service": "~15.2.0",
     "@types/bonjour": "~3.5.10",
