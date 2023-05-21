@@ -7,7 +7,6 @@ import { NotificationType, PrinterState, PrinterStatus, TemperatureReading } fro
 import { NotificationService } from '../notification/notification.service';
 import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SocketService } from '../services/socket/socket.service';
-import { PurgeFilamentComponent } from '../filament/purge-filament/purge-filament.component';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -28,7 +27,6 @@ export class BottomBarComponent implements OnDestroy {
     private notificationService: NotificationService,
   ) {
 
-    
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
       this.subscriptions.add(
         timer(10000, 15000).subscribe(() => {
