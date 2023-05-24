@@ -26,7 +26,6 @@ export class BottomBarComponent implements OnDestroy {
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
   ) {
-
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
       this.subscriptions.add(
         timer(10000, 15000).subscribe(() => {
@@ -48,10 +47,10 @@ export class BottomBarComponent implements OnDestroy {
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
         if (printerStatus.chamber.current > 0) {
-          let chamberReading: TemperatureReading = {
+          const chamberReading: TemperatureReading = {
             temperature: printerStatus.chamber.current,
             humidity: 0,
-            unit: printerStatus.chamber.unit
+            unit: printerStatus.chamber.unit,
           };
           this.enclosureTemperature = chamberReading;
         }
