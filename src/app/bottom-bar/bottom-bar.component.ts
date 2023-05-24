@@ -42,8 +42,7 @@ export class BottomBarComponent implements OnDestroy {
           });
         }),
       );
-    } 
-    else {
+    } else {
       this.subscriptions.add(
         this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
           if (printerStatus.chamber.current > 0) {
@@ -56,7 +55,7 @@ export class BottomBarComponent implements OnDestroy {
           }
         }),
       );
-  }
+    }
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
