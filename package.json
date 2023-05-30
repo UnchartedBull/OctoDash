@@ -95,7 +95,7 @@
     "electron-store": "~8.1.0",
     "got-cjs": "~12.5.4",
     "lodash-es": "~4.17.21",
-    "lottie-web": "~5.11.0",
+    "lottie-web": "~5.12.0",
     "ngx-lottie": "~8.3.0",
     "ngx-spinner": "~13.1.1",
     "progress-stream": "~2.0.0",
