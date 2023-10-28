@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '14'
+      - name: Install latest npm
+        run: sudo npm install -g npm@latest
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
