@@ -109,7 +109,7 @@
     "@angular/cli": "~15.2.7",
     "@angular/compiler-cli": "~13.0.2",
     "@angular/language-service": "~16.2.12",
-    "@types/bonjour": "~3.5.12",
+    "@types/bonjour": "~3.5.13",
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.10",
     "@types/node": "20.8.10",
