@@ -81,7 +81,7 @@
     "@angular/core": "~13.3.11",
     "@angular/forms": "~13.3.11",
     "@angular/localize": "~13.0.3",
-    "@angular/material": "~13.3.8",
+    "@angular/material": "~18.2.12",
     "@angular/platform-browser": "~13.3.11",
     "@angular/platform-browser-dynamic": "~18.2.11",
     "@angular/router": "~13.3.11",
