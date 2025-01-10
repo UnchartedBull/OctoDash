@@ -126,7 +126,7 @@
     "prettier": "~2.8.8",
     "ts-node": "~10.9.2",
     "typescript": "4.4.4",
-    "wait-on": "~8.0.1",
+    "wait-on": "~8.0.2",
     "xliff": "~6.2.1"
   }
 }
