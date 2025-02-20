@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config.service';
 
 @Component({
-  selector: 'app-config-invalid',
-  templateUrl: './invalid.component.html',
-  styleUrls: ['./invalid.component.scss'],
+    selector: 'app-config-invalid',
+    templateUrl: './invalid.component.html',
+    styleUrls: ['./invalid.component.scss'],
+    standalone: false
 })
 export class ConfigInvalidComponent implements OnInit {
   public errors: string[];
