@@ -3,9 +3,10 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
-  selector: 'app-toggle-switch',
-  templateUrl: './toggle-switch.component.html',
-  styleUrls: ['./toggle-switch.component.scss'],
+    selector: 'app-toggle-switch',
+    templateUrl: './toggle-switch.component.html',
+    styleUrls: ['./toggle-switch.component.scss'],
+    standalone: false
 })
 export class ToggleSwitchComponent {
   @Input() value: boolean;

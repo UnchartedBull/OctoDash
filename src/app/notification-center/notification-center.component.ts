@@ -4,9 +4,10 @@ import { Notification } from '../model';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
-  selector: 'app-notification-center',
-  templateUrl: './notification-center.component.html',
-  styleUrls: ['./notification-center.component.scss'],
+    selector: 'app-notification-center',
+    templateUrl: './notification-center.component.html',
+    styleUrls: ['./notification-center.component.scss'],
+    standalone: false
 })
 export class NotificationCenterComponent {
   @Output() setNotificationCenterAnimation = new EventEmitter<boolean>();

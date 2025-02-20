@@ -9,9 +9,10 @@ import { JobService } from '../services/job/job.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
-  selector: 'app-job-status',
-  templateUrl: './job-status.component.html',
-  styleUrls: ['./job-status.component.scss'],
+    selector: 'app-job-status',
+    templateUrl: './job-status.component.html',
+    styleUrls: ['./job-status.component.scss'],
+    standalone: false
 })
 export class JobStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();

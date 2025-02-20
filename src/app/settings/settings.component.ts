@@ -8,9 +8,10 @@ import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss'],
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss'],
+    standalone: false
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   @Output() closeFunction = new EventEmitter<void>();
