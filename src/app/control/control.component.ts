@@ -8,10 +8,10 @@ import { NotificationService } from '../notification/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
 
 @Component({
-    selector: 'app-control',
-    templateUrl: './control.component.html',
-    styleUrls: ['./control.component.scss'],
-    standalone: false
+  selector: 'app-control',
+  templateUrl: './control.component.html',
+  styleUrls: ['./control.component.scss'],
+  standalone: false,
 })
 export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;

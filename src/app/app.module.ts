@@ -69,127 +69,164 @@ import { URLSafePipe } from './url.pipe';
 export function playerFactory(): LottiePlayer {
   return player;
 }
-@NgModule({ declarations: [
-        AppComponent,
-        BottomBarComponent,
-        ChooseFilamentComponent,
-        ConfigInvalidComponent,
-        ConfigSetupComponent,
-        ControlComponent,
-        DiscoverOctoprintComponent,
-        ExtruderInformationComponent,
-        FilamentComponent,
-        FilesComponent,
-        JobStatusComponent,
-        HeightProgressComponent,
-        LongPress,
-        MainMenuComponent,
-        MainScreenComponent,
-        MainScreenNoTouchComponent,
-        NotificationComponent,
-        OctoprintAuthenticationComponent,
-        PersonalizationComponent,
-        PluginsComponent,
-        PrintControlComponent,
-        PrinterStatusComponent,
-        SettingsComponent,
-        StandbyComponent,
-        UpdateComponent,
-        URLSafePipe,
-        WelcomeComponent,
-        HeatNozzleComponent,
-        MoveFilamentComponent,
-        ChangeFilamentComponent,
-        PurgeFilamentComponent,
-        CustomActionsComponent,
-        ToggleSwitchComponent,
-        NotificationCenterComponent,
+@NgModule({
+  declarations: [
+    AppComponent,
+    BottomBarComponent,
+    ChooseFilamentComponent,
+    ConfigInvalidComponent,
+    ConfigSetupComponent,
+    ControlComponent,
+    DiscoverOctoprintComponent,
+    ExtruderInformationComponent,
+    FilamentComponent,
+    FilesComponent,
+    JobStatusComponent,
+    HeightProgressComponent,
+    LongPress,
+    MainMenuComponent,
+    MainScreenComponent,
+    MainScreenNoTouchComponent,
+    NotificationComponent,
+    OctoprintAuthenticationComponent,
+    PersonalizationComponent,
+    PluginsComponent,
+    PrintControlComponent,
+    PrinterStatusComponent,
+    SettingsComponent,
+    StandbyComponent,
+    UpdateComponent,
+    URLSafePipe,
+    WelcomeComponent,
+    HeatNozzleComponent,
+    MoveFilamentComponent,
+    ChangeFilamentComponent,
+    PurgeFilamentComponent,
+    CustomActionsComponent,
+    ToggleSwitchComponent,
+    NotificationCenterComponent,
+  ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FontAwesomeModule,
+    FormsModule,
+    MatRippleModule,
+    RoundProgressModule,
+  ],
+  providers: [
+    provideCacheableAnimationLoader(),
+    provideLottieOptions({ player: () => import('lottie-web') }),
+    AppService,
+    ConfigService,
+    ConversionService,
+    EventService,
+    NotificationService,
+    [
+      {
+        provide: SystemService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new SystemOctoprintService(configService, notificationService, httpClient);
+        },
+      },
     ],
-    bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [AppRoutingModule,
-        BrowserAnimationsModule,
-        BrowserModule,
-        FontAwesomeModule,
-        FormsModule,
-        MatRippleModule,
-        RoundProgressModule,
+    [
+      {
+        provide: SocketService,
+        deps: [ConfigService, SystemService, ConversionService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          systemService: SystemService,
+          conversionService: ConversionService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new OctoPrintSocketService(
+            configService,
+            systemService,
+            conversionService,
+            notificationService,
+            httpClient,
+          );
+        },
+      },
     ],
-    providers: [
-        provideCacheableAnimationLoader(),
-        provideLottieOptions({player: ()=>import('lottie-web')}),
-        AppService,
-        ConfigService,
-        ConversionService,
-        EventService,
-        NotificationService,
-        [
-            {
-                provide: SystemService,
-                deps: [ConfigService, NotificationService, HttpClient],
-                useFactory: (configService: ConfigService, notificationService: NotificationService, httpClient: HttpClient) => {
-                    return new SystemOctoprintService(configService, notificationService, httpClient);
-                },
-            },
-        ],
-        [
-            {
-                provide: SocketService,
-                deps: [ConfigService, SystemService, ConversionService, NotificationService, HttpClient],
-                useFactory: (configService: ConfigService, systemService: SystemService, conversionService: ConversionService, notificationService: NotificationService, httpClient: HttpClient) => {
-                    return new OctoPrintSocketService(configService, systemService, conversionService, notificationService, httpClient);
-                },
-            },
-        ],
-        [
-            {
-                provide: PrinterService,
-                deps: [ConfigService, NotificationService, HttpClient],
-                useFactory: (configService: ConfigService, notificationService: NotificationService, httpClient: HttpClient) => {
-                    return new PrinterOctoprintService(configService, notificationService, httpClient);
-                },
-            },
-        ],
-        [
-            {
-                provide: JobService,
-                deps: [ConfigService, NotificationService, HttpClient],
-                useFactory: (configService: ConfigService, notificationService: NotificationService, httpClient: HttpClient) => {
-                    return new JobOctoprintService(configService, notificationService, httpClient);
-                },
-            },
-        ],
-        [
-            {
-                provide: FilesService,
-                deps: [ConfigService, NotificationService, HttpClient, ConversionService],
-                useFactory: (configService: ConfigService, notificationService: NotificationService, httpClient: HttpClient, conversionService: ConversionService) => {
-                    return new FilesOctoprintService(configService, notificationService, httpClient, conversionService);
-                },
-            },
-        ],
-        [
-            {
-                provide: FilamentPluginService,
-                deps: [ConfigService, HttpClient],
-                useFactory: (configService: ConfigService, httpClient: HttpClient) => {
-                    if (configService.isSpoolManagerPluginEnabled()) {
-                        return new SpoolManagerOctoprintService(configService, httpClient);
-                  }
-                    return new FilamentManagerOctoprintService(configService, httpClient);
-                },
-            },
-        ],
-        [
-            {
-                provide: EnclosureService,
-                deps: [ConfigService, NotificationService, HttpClient],
-                useFactory: (configService: ConfigService, notificationService: NotificationService, httpClient: HttpClient) => {
-                    return new EnclosureOctoprintService(configService, notificationService, httpClient);
-                },
-            },
-        ],
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    [
+      {
+        provide: PrinterService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new PrinterOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: JobService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new JobOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: FilesService,
+        deps: [ConfigService, NotificationService, HttpClient, ConversionService],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+          conversionService: ConversionService,
+        ) => {
+          return new FilesOctoprintService(configService, notificationService, httpClient, conversionService);
+        },
+      },
+    ],
+    [
+      {
+        provide: FilamentPluginService,
+        deps: [ConfigService, HttpClient],
+        useFactory: (configService: ConfigService, httpClient: HttpClient) => {
+          if (configService.isSpoolManagerPluginEnabled()) {
+            return new SpoolManagerOctoprintService(configService, httpClient);
+          }
+          return new FilamentManagerOctoprintService(configService, httpClient);
+        },
+      },
+    ],
+    [
+      {
+        provide: EnclosureService,
+        deps: [ConfigService, NotificationService, HttpClient],
+        useFactory: (
+          configService: ConfigService,
+          notificationService: NotificationService,
+          httpClient: HttpClient,
+        ) => {
+          return new EnclosureOctoprintService(configService, notificationService, httpClient);
+        },
+      },
+    ],
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AppModule {
   public constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);

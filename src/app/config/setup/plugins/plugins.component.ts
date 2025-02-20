@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-config-setup-plugins',
-    templateUrl: './plugins.component.html',
-    styleUrls: ['./plugins.component.scss', '../setup.component.scss'],
-    standalone: false
+  selector: 'app-config-setup-plugins',
+  templateUrl: './plugins.component.html',
+  styleUrls: ['./plugins.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class PluginsComponent {
   @Input() displayLayerProgressPlugin: boolean;
