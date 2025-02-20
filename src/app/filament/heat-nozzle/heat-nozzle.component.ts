@@ -7,9 +7,10 @@ import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';
 
 @Component({
-  selector: 'app-filament-heat-nozzle',
-  templateUrl: './heat-nozzle.component.html',
-  styleUrls: ['./heat-nozzle.component.scss', '../filament.component.scss'],
+    selector: 'app-filament-heat-nozzle',
+    templateUrl: './heat-nozzle.component.html',
+    styleUrls: ['./heat-nozzle.component.scss', '../filament.component.scss'],
+    standalone: false
 })
 export class HeatNozzleComponent implements OnInit, OnDestroy {
   @Input() selectedSpool: FilamentSpool;

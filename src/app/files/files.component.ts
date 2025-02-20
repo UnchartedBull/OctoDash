@@ -10,9 +10,10 @@ import { NotificationService } from '../notification/notification.service';
 import { FilesService } from '../services/files/files.service';
 
 @Component({
-  selector: 'app-files',
-  templateUrl: './files.component.html',
-  styleUrls: ['./files.component.scss'],
+    selector: 'app-files',
+    templateUrl: './files.component.html',
+    styleUrls: ['./files.component.scss'],
+    standalone: false
 })
 export class FilesComponent {
   public currentFolder: string;
