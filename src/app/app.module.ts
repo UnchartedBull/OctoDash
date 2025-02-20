@@ -174,7 +174,7 @@ export function playerFactory(): LottiePlayer {
                 useFactory: (configService: ConfigService, httpClient: HttpClient) => {
                     if (configService.isSpoolManagerPluginEnabled()) {
                         return new SpoolManagerOctoprintService(configService, httpClient);
-                    }
+                  }
                     return new FilamentManagerOctoprintService(configService, httpClient);
                 },
             },
