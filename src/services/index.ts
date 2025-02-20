@@ -9,6 +9,7 @@ import { EventService } from './event.service';
 import { FilamentManagerOctoprintService } from './filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './filament/filament-plugin.service';
 import { SpoolManagerOctoprintService } from './filament/spool-manager.octoprint.service';
+import { SpoolmanOctoprintService } from './filament/spoolman.service';
 import { FilesOctoprintService } from './files/files.octoprint.service';
 import { FilesService } from './files/files.service';
 import { JobOctoprintService } from './job/job.octoprint.service';
@@ -100,6 +101,8 @@ export default [
       useFactory: (configService: ConfigService, httpClient: HttpClient) => {
         if (configService.isSpoolManagerPluginEnabled()) {
           return new SpoolManagerOctoprintService(configService, httpClient);
+        } else if (configService.isSpoolmanPluginEnabled()) {
+          return new SpoolmanOctoprintService(configService, httpClient);
         }
         return new FilamentManagerOctoprintService(configService, httpClient);
       },

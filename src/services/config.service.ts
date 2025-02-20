@@ -272,7 +272,15 @@ export class ConfigService {
   }
 
   public isFilamentManagerUsed(): boolean {
-    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+    return (
+      this.config.plugins.filamentManager.enabled ||
+      this.config.plugins.spoolManager.enabled ||
+      this.config.plugins.spoolman.enabled
+    );
+  }
+
+  public isSpoolmanPluginEnabled(): boolean {
+    return this.config.plugins.spoolman.enabled;
   }
 
   public isSpoolManagerPluginEnabled(): boolean {
