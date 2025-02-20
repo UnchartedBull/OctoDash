@@ -34,6 +34,14 @@
       <ng-container i18n="@@plugin-spool-manager">Spool Manager</ng-container>
     </app-toggle-switch>
   </span>
+  <span>
+    <app-toggle-switch
+      [value]="spoolmanPlugin"
+      (valueChange)="spoolmanPluginChange.emit(!spoolmanPlugin)"
+    >
+      <ng-container i18n="@@plugin-spoolman">Spoolman</ng-container>
+    </app-toggle-switch>
+  </span>
 
   <span>
     <app-toggle-switch
