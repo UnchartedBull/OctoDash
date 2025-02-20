@@ -39,6 +39,9 @@ export const defaultConfig: Config = {
     filamentManager: {
       enabled: true,
     },
+    spoolman: {
+      enabled: false,
+    },
     spoolManager: {
       enabled: false,
     },

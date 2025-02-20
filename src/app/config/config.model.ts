@@ -52,6 +52,7 @@ interface Plugins {
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
+  spoolman: Plugin;
   spoolManager: Plugin;
   preheatButton: Plugin;
   printTimeGenius: Plugin;
