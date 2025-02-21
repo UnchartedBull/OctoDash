@@ -6,7 +6,7 @@ export interface SpoolmanSpoolList {
 
 export interface SpoolmanVendor {
   external_id: string;
-  extra: any;
+  extra: object;
   id: number;
   name: string;
   registered: string;
@@ -17,7 +17,7 @@ export interface SpoolmanFilament {
   density: number;
   diameter: number;
   external_id: string;
-  extra: any;
+  extra: object;
   id: number;
   material: string;
   name: string;
@@ -32,7 +32,7 @@ export interface SpoolmanFilament {
 
 export interface SpoolmanSpool {
   archived: boolean;
-  extra: any;
+  extra: object;
   filament: SpoolmanFilament;
   first_used: string;
   id: number;
@@ -47,12 +47,11 @@ export interface SpoolmanSpool {
   used_weight: number;
 }
 
-
 export interface SpoolmanCurrentJobRequirements {
   data: {
     isFilamentUsageAvailable: boolean;
     tools: SpoolmanToolInfo;
-  }
+  };
 }
 
 export interface SpoolmanToolInfo {
