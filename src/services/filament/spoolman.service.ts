@@ -39,6 +39,9 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
       map(results => {
         const spools = results[0];
         const requirements = results[1];
+        if (!requirements.data.isFilamentUsageAvailable) {
+          return;
+        }
         const selected = spools.find(spool => spool.id === requirements.data.tools[0].spoolId);
         return selected;
       }),
