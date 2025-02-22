@@ -338,4 +338,8 @@ export class ConfigService {
   public showNotificationCenterIcon(): boolean {
     return this.config.octodash.showNotificationCenterIcon;
   }
+
+  public getDefaultDirectory(): string {
+    return this.config.octodash.defaultDirectory;
+  }
 }

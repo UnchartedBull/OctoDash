@@ -135,5 +135,6 @@ export const defaultConfig: Config = {
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
     showExtruderControl: true,
     showNotificationCenterIcon: true,
+    defaultDirectory: '/',
   },
 };
