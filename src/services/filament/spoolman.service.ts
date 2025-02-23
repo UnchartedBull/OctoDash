@@ -58,13 +58,13 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
       color: spool.filament.color_hex,
       density: spool.filament.density,
       diameter: spool.filament.diameter,
-      displayName: `${spool.filament.vendor.name} - ${spool.filament.name}`,
+      displayName: `${spool.filament.vendor?.name || ''} - ${spool.filament.name || ''}`,
       id: spool.id,
-      material: spool.filament.material,
+      material: spool.filament.material || '',
       name: spool.filament.name,
       temperatureOffset: 0,
       used: spool.used_weight,
-      vendor: spool.filament.vendor.name,
+      vendor: spool.filament.vendor?.name || 'Unknown',
       weight: spool.initial_weight || spool.filament.weight || 1000,
     };
   }
