@@ -5,7 +5,7 @@ export interface SpoolmanSpoolList {
 }
 
 export interface SpoolmanVendor {
-  external_id: string;
+  external_id: string | null;
   extra: object;
   id: number;
   name: string;
@@ -19,14 +19,14 @@ export interface SpoolmanFilament {
   external_id: string;
   extra: object;
   id: number;
-  material: string;
-  name: string;
-  price: number;
+  material: string | null;
+  name: string | null;
+  price: number | null;
   registered: string;
   settings_bed_temp: number;
   settings_extruder_temp: number;
   spool_weight: number;
-  vendor: SpoolmanVendor;
+  vendor: SpoolmanVendor | null;
   weight: number;
 }
 
@@ -34,15 +34,15 @@ export interface SpoolmanSpool {
   archived: boolean;
   extra: object;
   filament: SpoolmanFilament;
-  first_used: string;
+  first_used: string | null;
   id: number;
-  initial_weight: number;
-  last_used: string;
-  price: number;
+  initial_weight: number | null;
+  last_used: string | null;
+  price: number | null;
   registered: string;
-  remaining_length: number;
-  remaining_weight: number;
-  spool_weight: number;
+  remaining_length: number | null;
+  remaining_weight: number | null;
+  spool_weight: number | null;
   used_length: number;
   used_weight: number;
 }
