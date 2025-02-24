@@ -77,7 +77,7 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
       },
     };
 
-    return this.http.patch<void>(
+    return this.http.post<void>(
       this.configService.getApiURL('plugin/Spoolman/self/spool', false),
       setSpoolBody,
       this.configService.getHTTPHeaders(),
