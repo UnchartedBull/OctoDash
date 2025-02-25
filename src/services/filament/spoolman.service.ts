@@ -71,10 +71,8 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
 
   public setSpool(spool: FilamentSpool): Observable<void> {
     const setSpoolBody = {
-      selection: {
-        toolIdx: 0,
-        spoolId: spool.id,
-      },
+      toolIdx: 0,
+      spoolId: spool.id,
     };
 
     return this.http.post<void>(
