@@ -20,7 +20,7 @@
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
@@ -63,49 +63,49 @@
         <source> Version <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">10,11</context>
+          <context context-type="linenumber">11,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="searching" datatype="html">
         <source>searching</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="enter-manually" datatype="html">
         <source>enter manually</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">16,19</context>
+          <context context-type="linenumber">18,21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
-        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">42,44</context>
+          <context context-type="linenumber">43,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source>search again</source>
+        <source> search again </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">44,49</context>
+          <context context-type="linenumber">47,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connect-localhost" datatype="html">
         <source>connect to localhost?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">49,51</context>
+          <context context-type="linenumber">53,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-same-machine" datatype="html">
         <source> are you trying to connect to OctoPrint that is running on the same machine as OctoDash? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">55,57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
@@ -133,28 +133,28 @@
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/extruder-information/extruder-information.component.html</context>
-          <context context-type="linenumber">42,45</context>
+          <context context-type="linenumber">39,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-feed-speed" datatype="html">
         <source>Feed Speed:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/extruder-information/extruder-information.component.html</context>
-          <context context-type="linenumber">45,48</context>
+          <context context-type="linenumber">42,45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-info-mms" datatype="html">
         <source>mm/s</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/extruder-information/extruder-information.component.html</context>
-          <context context-type="linenumber">84,87</context>
+          <context context-type="linenumber">78,81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filament-changing-warning" datatype="html">
         <source> These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and feed speed configured correctly. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/extruder-information/extruder-information.component.html</context>
-          <context context-type="linenumber">88,92</context>
+          <context context-type="linenumber">82,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-auth" datatype="html">
@@ -222,24 +222,25 @@
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.
+</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/personalization/personalization.component.html</context>
-          <context context-type="linenumber">1,4</context>
+          <context context-type="linenumber">2,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
         <source>Printer Name:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/personalization/personalization.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">5,9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="use-touchscreen" datatype="html">
         <source> Use Touchscreen </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/personalization/personalization.component.html</context>
-          <context context-type="linenumber">10,13</context>
+          <context context-type="linenumber">17,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="change-settings-info" datatype="html">
@@ -247,7 +248,7 @@
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/personalization/personalization.component.html</context>
-          <context context-type="linenumber">14,16</context>
+          <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-plugins" datatype="html">
@@ -257,60 +258,67 @@
           <context context-type="linenumber">1,5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="plugin-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
+          <context context-type="linenumber">8,13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">11,15</context>
+          <context context-type="linenumber">16,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-enclosure" datatype="html">
         <source>Enclosure</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">17,22</context>
+          <context context-type="linenumber">22,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-filament-manager" datatype="html">
         <source>Filament Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">25,31</context>
+          <context context-type="linenumber">29,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager (Beta)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">33,39</context>
+          <context context-type="linenumber">36,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">42,48</context>
+          <context context-type="linenumber">44,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">50,54</context>
+          <context context-type="linenumber">51,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">56,60</context>
+          <context context-type="linenumber">57,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-opom" datatype="html">
         <source>Ophom (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">61,66</context>
+          <context context-type="linenumber">62,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
@@ -320,25 +328,32 @@
           <context context-type="linenumber">69,73</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="plugin-tuya" datatype="html">
+        <source> Tuya SmartPlug </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
+          <context context-type="linenumber">74,78</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">75,79</context>
+          <context context-type="linenumber">80,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source> Tasmota MQTT </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">81,85</context>
+          <context context-type="linenumber">86,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source> Wemo </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">87,90</context>
+          <context context-type="linenumber">91,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="setup-back" datatype="html">
@@ -359,35 +374,35 @@
         <source>Great! I&apos;ll check everything.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">67,69</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
         <source> OctoPrint Connection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">73,76</context>
+          <context context-type="linenumber">74,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source> Validating Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">79,83</context>
+          <context context-type="linenumber">80,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source> Saving Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">86,88</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">91,95</context>
+          <context context-type="linenumber">92,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saving-config" datatype="html">
@@ -415,49 +430,49 @@
         <source> It looks like this is the first start of OctoDash. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">4,8</context>
+          <context context-type="linenumber">3,5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-2" datatype="html">
         <source> I&apos;ll help you set up your config and get you started. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">8,12</context>
+          <context context-type="linenumber">5,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-3" datatype="html">
         <source> If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">12,17</context>
+          <context context-type="linenumber">8,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-4" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">17,21</context>
+          <context context-type="linenumber">12,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-5" datatype="html">
         <source> Sorry for bothering you again ... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">23,27</context>
+          <context context-type="linenumber">16,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-6" datatype="html">
         <source> We&apos;ve released an update, so awesome, we needed to change the config. Please review your new config! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">27,32</context>
+          <context context-type="linenumber">19,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-7" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">32,36</context>
+          <context context-type="linenumber">23,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="control-back" datatype="html">
@@ -468,7 +483,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">11,15</context>
+          <context context-type="linenumber">10,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
@@ -482,28 +497,28 @@
         <source>loading website ...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/control/custom-actions/custom-actions.component.html</context>
-          <context context-type="linenumber">2,3</context>
+          <context context-type="linenumber">2,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="should-not-happen" datatype="html">
         <source> That shouldn&apos;t happen ... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/control/custom-actions/custom-actions.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="are-you-sure" datatype="html">
         <source>are you sure?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/control/custom-actions/custom-actions.component.html</context>
-          <context context-type="linenumber">28,29</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirm-exec" datatype="html">
         <source>do you want to execute the following command?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/control/custom-actions/custom-actions.component.html</context>
-          <context context-type="linenumber">29,32</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
@@ -650,14 +665,14 @@
         <source>mm/s</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/move-filament/move-filament.component.html</context>
-          <context context-type="linenumber">12,15</context>
+          <context context-type="linenumber">11,14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
         <source>stop</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/move-filament/move-filament.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
@@ -720,112 +735,112 @@
         <source>mb</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">62,66</context>
+          <context context-type="linenumber">59,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-mb-2" datatype="html">
         <source>mb</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">82,84</context>
+          <context context-type="linenumber">78,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-g" datatype="html">
         <source>g</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">86,87</context>
+          <context context-type="linenumber">82,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-h" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">89,92</context>
+          <context context-type="linenumber">85,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-mb-3" datatype="html">
         <source>mb</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">109,111</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-h-2" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">112,113</context>
+          <context context-type="linenumber">108,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-g-2" datatype="html">
         <source>g</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">115,119</context>
+          <context context-type="linenumber">111,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-loading" datatype="html">
         <source>loading details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">140,142</context>
+          <context context-type="linenumber">136,138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-sort" datatype="html">
         <source>sort files</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">151,155</context>
+          <context context-type="linenumber">147,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-sort-by" datatype="html">
         <source>sort by</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">155,157</context>
+          <context context-type="linenumber">151,153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-name" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">161,164</context>
+          <context context-type="linenumber">157,160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-date" datatype="html">
         <source>Date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">168,171</context>
+          <context context-type="linenumber">164,167</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-size" datatype="html">
         <source>Size</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">175,180</context>
+          <context context-type="linenumber">171,176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-order" datatype="html">
         <source>order</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">180,182</context>
+          <context context-type="linenumber">176,178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-ascending" datatype="html">
         <source>Ascending</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">186,189</context>
+          <context context-type="linenumber">182,185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-descending" datatype="html">
         <source>Descending</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">193,200</context>
+          <context context-type="linenumber">189,196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-file-folder" datatype="html">
@@ -846,63 +861,63 @@
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
-          <context context-type="linenumber">6,11</context>
+          <context context-type="linenumber">7,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="heing-layer" datatype="html">
         <source> Layer </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
-          <context context-type="linenumber">13,16</context>
+          <context context-type="linenumber">13,15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="height-of" datatype="html">
         <source> of </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
-          <context context-type="linenumber">19,22</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="job-filament-g" datatype="html">
         <source> g Filament </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">45,50</context>
+          <context context-type="linenumber">43,48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
         <source> left, </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">51,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
         <source>elapsed:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">55,57</context>
+          <context context-type="linenumber">53,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="will-finish" datatype="html">
         <source>- will finish ~</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">97,102</context>
+          <context context-type="linenumber">93,98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="job-g" datatype="html">
         <source>g</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">106,108</context>
+          <context context-type="linenumber">102,104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filament-used" datatype="html">
         <source>filament will be used</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">108,115</context>
+          <context context-type="linenumber">104,111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="loading-info" datatype="html">
@@ -910,14 +925,14 @@
 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">113,116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
         <source>no job running ...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/job-status/job-status.component.html</context>
-          <context context-type="linenumber">121,124</context>
+          <context context-type="linenumber">116,119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-files" datatype="html">
@@ -959,260 +974,267 @@
         <source>cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">16,18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="control-pause" datatype="html">
         <source>pause</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">20,22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="control-adjust" datatype="html">
         <source>adjust</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">24,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cancel-print" datatype="html">
         <source>cancel print?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">30,32</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cancel-yes" datatype="html">
         <source>yes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">32,33</context>
+          <context context-type="linenumber">31,32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cancel-no" datatype="html">
         <source>no</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">33,36</context>
+          <context context-type="linenumber">32,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="pause-back" datatype="html">
         <source>back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">41,45</context>
+          <context context-type="linenumber">40,44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="print-pause" datatype="html">
         <source>print paused</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">46,48</context>
+          <context context-type="linenumber">45,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="print-restart" datatype="html">
         <source>restart</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">48,50</context>
+          <context context-type="linenumber">47,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="print-resume" datatype="html">
         <source>resume</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">51,53</context>
+          <context context-type="linenumber">50,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="print-filament" datatype="html">
         <source>filament</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">53,56</context>
+          <context context-type="linenumber">52,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="adjust-back" datatype="html">
         <source>back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">61,64</context>
+          <context context-type="linenumber">60,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="adjust-hotend" datatype="html">
         <source>Hotend</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">93,96</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="adjust-heatbed" datatype="html">
         <source>Heatbed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">118,121</context>
+          <context context-type="linenumber">113,116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="adjust-fanspeed" datatype="html">
         <source>Fan Speed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">143,146</context>
+          <context context-type="linenumber">136,139</context>
         </context-group>
       </trans-unit>
       <trans-unit id="adjust-speed" datatype="html">
         <source>Speed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">168,173</context>
+          <context context-type="linenumber">159,164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="offset-mm" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">176,179</context>
+          <context context-type="linenumber">167,170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="offset-save" datatype="html">
         <source> save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">185,189</context>
+          <context context-type="linenumber">175,179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="babystep-back" datatype="html">
         <source>back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">194,197</context>
+          <context context-type="linenumber">184,187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">201,204</context>
+          <context context-type="linenumber">191,194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="babystep-mm" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">211,214</context>
+          <context context-type="linenumber">200,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="babystep-mm-2" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">220,223</context>
+          <context context-type="linenumber">208,211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="zoffset-mm" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">227,230</context>
+          <context context-type="linenumber">215,218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="zoffset-mm-2" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">238,241</context>
+          <context context-type="linenumber">225,228</context>
         </context-group>
       </trans-unit>
       <trans-unit id="zoffset-mm-3" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/print-control/print-control.component.html</context>
-          <context context-type="linenumber">247,253</context>
+          <context context-type="linenumber">233,239</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can&apos;t set LED color!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-output" datatype="html">
         <source>Can&apos;t set output!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">94</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-run-enclosure-shell" datatype="html">
         <source>Can&apos;t run enclosure shell!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-psu-state" datatype="html">
         <source>Can&apos;t change PSU State!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-psu-provider" datatype="html">
         <source>No provider for PSU Control is configured.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">167</context>
+          <context context-type="linenumber">170</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-psu-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">188</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">233</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can&apos;t update Ophom Plug!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">202</context>
+          <context context-type="linenumber">205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">252</context>
+          <context context-type="linenumber">255</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can&apos;t update Tasmota!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">275</context>
+          <context context-type="linenumber">278</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can&apos;t update Tasmota MQTT!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">302</context>
+          <context context-type="linenumber">305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-wemo-plug" datatype="html">
         <source>Can&apos;t update Wemo!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">324</context>
+          <context context-type="linenumber">327</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="error-send-tuya-plug" datatype="html">
+        <source>Can&apos;t update Tuya!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/enclosure/enclosure.octoprint.service.ts</context>
+          <context context-type="linenumber">349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
@@ -1338,130 +1360,130 @@
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-head" datatype="html">
         <source>Can&apos;t move Printhead!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-extrude" datatype="html">
         <source>Can&apos;t extrude Filament!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">104</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-set-tool" datatype="html">
         <source>Can&apos;t set active tool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can&apos;t set Hotend Temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-bed" datatype="html">
         <source>Can&apos;t set Bed Temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-feedrate" datatype="html">
         <source>Can&apos;t set Feedrate!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-flowrate" datatype="html">
         <source>Can&apos;t set Flowrate!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">210</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-disconnect" datatype="html">
         <source>Can&apos;t disconnect Printer!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">231</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-text" datatype="html">
         <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-unknown-heading" datatype="html">
         <source>Unknown HTTP Error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-h-1" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">285</context>
+          <context context-type="linenumber">304</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-h-2" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">295</context>
+          <context context-type="linenumber">314</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-h-3" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">303</context>
+          <context context-type="linenumber">322</context>
         </context-group>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">363</context>
+          <context context-type="linenumber">382</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">408</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-answer-prompt" datatype="html">
         <source>Can&apos;t answer prompt!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">414</context>
+          <context context-type="linenumber">433</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
@@ -1507,7 +1529,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">472,475</context>
+          <context context-type="linenumber">474,477</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-about" datatype="html">
@@ -1682,343 +1704,385 @@
         <source>Turn on printer when exiting sleep</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">342,347</context>
+          <context context-type="linenumber">344,349</context>
         </context-group>
       </trans-unit>
       <trans-unit id="default-preview" datatype="html">
         <source>Preview by default while printing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">353,358</context>
+          <context context-type="linenumber">355,360</context>
         </context-group>
       </trans-unit>
       <trans-unit id="always-circular" datatype="html">
         <source>Always use circular progress bar</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">363,366</context>
+          <context context-type="linenumber">365,368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">366,368</context>
+          <context context-type="linenumber">368,370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">392,394</context>
+          <context context-type="linenumber">394,396</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">395,399</context>
+          <context context-type="linenumber">397,401</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-icon" datatype="html">
         <source>Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">407,410</context>
+          <context context-type="linenumber">409,412</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-color" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">418,421</context>
+          <context context-type="linenumber">420,423</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-confirm" datatype="html">
         <source>Confirm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">447,451</context>
+          <context context-type="linenumber">449,453</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-home" datatype="html">
         <source>Return to Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">460,464</context>
+          <context context-type="linenumber">462,466</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">477,480</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+        <source>enabled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">484,486</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">475,478</context>
+          <context context-type="linenumber">486,489</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">482,485</context>
+          <context context-type="linenumber">493,496</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
         <source>Enclosure</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">484,487</context>
+          <context context-type="linenumber">495,498</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-enclosure-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">491,493</context>
+          <context context-type="linenumber">502,504</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
         <source> Ambient Sensor <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>(ID)<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">494,496</context>
+          <context context-type="linenumber">505,507</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-filament-manager" datatype="html">
         <source>Filament Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">507,510</context>
+          <context context-type="linenumber">518,521</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-filament-manager-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">514,517</context>
+          <context context-type="linenumber">525,528</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager (Beta)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">517,520</context>
+          <context context-type="linenumber">528,531</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-spool-manager-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">524,527</context>
+          <context context-type="linenumber">535,538</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">527,530</context>
+          <context context-type="linenumber">538,541</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-preheat-button-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">534,536</context>
+          <context context-type="linenumber">545,547</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">536,539</context>
+          <context context-type="linenumber">547,550</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-print-time-genius-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">543,545</context>
+          <context context-type="linenumber">554,556</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">545,548</context>
+          <context context-type="linenumber">556,559</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-psu-control-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">552,554</context>
+          <context context-type="linenumber">563,565</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">554,557</context>
+          <context context-type="linenumber">565,568</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ophom-control-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">561,563</context>
+          <context context-type="linenumber">572,574</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">563,566</context>
+          <context context-type="linenumber">574,577</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">570,572</context>
+          <context context-type="linenumber">581,583</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">573,578</context>
+          <context context-type="linenumber">584,589</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-tuya" datatype="html">
+        <source>Tuya Smart Plug</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">595,598</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-tuya-enabled" datatype="html">
+        <source>enabled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">602,604</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-tuya-label" datatype="html">
+        <source>Label</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">604,608</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">640,643</context>
+          <context context-type="linenumber">670,673</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo-enabled" datatype="html">
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">647,649</context>
+          <context context-type="linenumber">677,679</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
         <source>Wemo IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">649,653</context>
+          <context context-type="linenumber">679,683</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo-port" datatype="html">
         <source>Wemo Port</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">659,663</context>
+          <context context-type="linenumber">689,693</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">674,677</context>
+          <context context-type="linenumber">704,707</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> no update available </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">683,686</context>
+          <context context-type="linenumber">713,716</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">690,691</context>
+          <context context-type="linenumber">720,721</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">727,728</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">696,698</context>
+          <context context-type="linenumber">731,733</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">737,739</context>
+          <context context-type="linenumber">772,774</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">739,741</context>
+          <context context-type="linenumber">774,776</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-right" datatype="html">
         <source>Top Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-left" datatype="html">
         <source>Middle Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-right" datatype="html">
         <source>Middle Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-left" datatype="html">
         <source>Bottom Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-right" datatype="html">
         <source>Bottom Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved" datatype="html">
         <source>Configuration not saved!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved-message" datatype="html">
         <source>You haven&apos;t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can&apos;t save invalid config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">

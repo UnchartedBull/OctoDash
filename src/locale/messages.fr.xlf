@@ -53,11 +53,11 @@
         <target>entrer manuellement</target>
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
-        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
         <target>Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi</target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source>search again</source>
+        <source> search again </source>
         <target>chercher à nouveau</target>
       </trans-unit>
       <trans-unit id="connect-localhost" datatype="html">
@@ -133,7 +133,7 @@
         <target>Veuillez confirmer la demande via la fenêtre contextuelle de l'interface Web OctoPrint.</target>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
         <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
@@ -151,6 +151,9 @@
       <trans-unit id="prompt-plugins" datatype="html">
         <source>What plugins are you running?</source>
         <target>Quels plugins utilisez-vous ?</target>
+      </trans-unit>
+      <trans-unit id="plugin-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
       </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -188,6 +191,9 @@
         <source> TPLink SmartPlug </source>
         <target> TPLink SmartPlug </target>
       </trans-unit>
+      <trans-unit id="plugin-tuya" datatype="html">
+        <source> Tuya SmartPlug </source>
+      </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
         <target></target>
@@ -198,6 +204,7 @@
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source> Wemo </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
@@ -695,6 +702,10 @@
       </trans-unit>
       <trans-unit id="error-send-wemo-plug" datatype="html">
         <source>Can't update Wemo!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-send-tuya-plug" datatype="html">
+        <source>Can't update Tuya!</source>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
@@ -1027,6 +1038,12 @@
         <source>Return to Home</source>
         <target>Retourner à la position initiale</target>
       </trans-unit>
+      <trans-unit id="settings-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+        <source>enabled</source>
+      </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <target>Afficher la progression de la couche</target>
@@ -1113,17 +1130,30 @@
         <source>SmartPlug IP</source>
         <target>SmartPlug IP</target>
       </trans-unit>
+      <trans-unit id="settings-tuya" datatype="html">
+        <source>Tuya Smart Plug</source>
+      </trans-unit>
+      <trans-unit id="settings-tuya-enabled" datatype="html">
+        <source>enabled</source>
+      </trans-unit>
+      <trans-unit id="settings-tuya-label" datatype="html">
+        <source>Label</source>
+      </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
         <source>Wemo IP</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo-port" datatype="html">
         <source>Wemo Port</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
@@ -1140,6 +1170,9 @@
         <target>installer v
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
         </target>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
