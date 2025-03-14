@@ -3,56 +3,63 @@
   margin: auto 3vh;
   height: 23vh;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: 1fr 2fr;
+  column-gap: 2vw;
   row-gap: 1vw;
   align-items: center;
   align-content: center;
   justify-items: start;
 
+  &.printer-status__multi-hotend {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+
+    .printer-status__row {
+      grid-column: 1 / -1;
+    }
+  }
+
   .printer-status__row {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-column: 1 / -1;
     column-gap: 2vw;
+    align-items: center;
+    align-content: center;
+    justify-items: start;
 
     &:last-child {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
 
-  .printer-status__item {
-    width: 100%;
+    .printer-status__item {
+      width: 100%;
 
-    .printer-status__icon {
-      vertical-align: middle;
-      display: inline-block;
-      width: 6vw;
-    }
-
-    .printer-status__value {
-      display: inline-block;
-      width: calc(100% - 6vw);
-      text-align: right;
-      vertical-align: middle;
-      font-size: 6vw;
-
-      .printer-status__unit {
-        font-size: 60%;
+      .printer-status__icon {
+        vertical-align: middle;
+        display: inline-block;
+        width: 6vw;
       }
 
-      .printer-status__actual-value {
-        font-size: 5vw;
-        font-weight: 500;
-      }
+      .printer-status__value {
+        display: inline-block;
+        width: calc(100% - 6vw);
+        text-align: right;
+        vertical-align: middle;
+        font-size: 6vw;
 
-      &.printer-status__small-value {
-        .printer-status__actual-value {
-          font-size: 3vw;
+        &.printer-status__small-text span {
+          font-size: 2.5vw;
         }
 
-        .printer-status__set-value {
-          display: none;
+        .printer-status__unit {
+          font-size: 60%;
+        }
+
+        .printer-status__actual-value {
+          font-size: 5vw;
+          font-weight: 500;
         }
       }
     }
