@@ -64,7 +64,7 @@
     "lint:fix": "eslint ./src/ --ext .ts --fix",
     "lint": "eslint ./src/ --ext .ts --max-warnings=0",
     "locale:extract": "ng extract-i18n --output-path src/locale",
-    "locale:update:all": "node -e '(await import(`./helper/locale.js`)).updateLocales()'",
+    "locale:update:all": "node -e 'const {updateLocales} = await import(`./helper/locale.js`); updateLocales()'",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "ng": "ng",
     "pack:mac": "npm run ng:build && electron-builder build -m",
