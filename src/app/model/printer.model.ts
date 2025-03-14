@@ -1,6 +1,7 @@
 export interface PrinterStatus {
   status: PrinterState;
   bed: Temperature;
+  chamber: Temperature;
   fanSpeed: number;
   tools: Temperature[];
 }
