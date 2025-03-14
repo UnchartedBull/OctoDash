@@ -27,6 +27,9 @@ export const defaultConfig: Config = {
     useM600: false,
   },
   plugins: {
+    companion: {
+      enabled: false,
+    },
     displayLayerProgress: {
       enabled: true,
     },
@@ -78,9 +81,6 @@ export const defaultConfig: Config = {
       enabled: false,
       ip: '127.0.0.1',
       port: 49152,
-    },
-    companion: {
-      enabled: false,
     },
   },
   octodash: {
