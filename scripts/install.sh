@@ -834,7 +834,7 @@ EOF
     sudo chmod +x ~/scripts/update-octodash
 
     sudo bash -c 'cat >> /etc/sudoers.d/update-octodash' <<EOF
-pi ALL=NOPASSWD: $HOME/scripts/update-octodash
+$USER ALL=NOPASSWD: $HOME/scripts/update-octodash
 EOF
 fi
 
