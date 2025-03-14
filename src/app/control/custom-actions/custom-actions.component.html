@@ -1,6 +1,11 @@
 <div class="i-frame" id="iFrame">
   <span i18n="@@website-loading">loading website ...</span>
-  <iframe class="i-frame__content" [src]="iFrameURL | url" onerror="doActionConfirm()" allow="fullscreen; camera;" i18n="@@should-not-happen">
+  <iframe
+    class="i-frame__content"
+    [src]="iFrameURL | url"
+    onerror="doActionConfirm()"
+    allow="fullscreen; camera;"
+    i18n="@@should-not-happen">
     That shouldn't happen ...
   </iframe>
   <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
@@ -13,13 +18,11 @@
     [style.border-color]="customAction.color"
     (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
     matRipple
-    [matRippleUnbounded]="false"
-  >
+    [matRippleUnbounded]="false">
     <fa-icon
       [icon]="['fas', customAction.icon]"
       class="custom-actions__action-icon"
-      [styles]="{ color: customAction.color }"
-    ></fa-icon>
+      [styles]="{ color: customAction.color }"></fa-icon>
   </div>
 </div>
 
@@ -31,8 +34,7 @@
     <img
       class="confirm__icon"
       src="assets/confirm-small.svg"
-      (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)"
-    />
+      (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)" />
     <img class="confirm__icon" src="assets/cancel-small.svg" (click)="hideConfirm()" />
   </div>
 </div>

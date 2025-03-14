@@ -30,8 +30,7 @@
 <div class="files" *ngIf="loading === 0">
   <div
     *ngIf="!directory || (directory.files?.length === 0 && directory.folders?.length === 0); else fileList"
-    class="files__error"
-  >
+    class="files__error">
     can't load files ...
   </div>
 
@@ -41,8 +40,7 @@
         <div
           (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
           matRipple
-          [matRippleUnbounded]="false"
-        >
+          [matRippleUnbounded]="false">
           <img src="assets/folder.svg" class="files__icon" />
           <span class="files__name">..</span>
         </div>
@@ -53,8 +51,7 @@
         matRipple
         [matRippleUnbounded]="false"
         *ngFor="let folder of directory.folders"
-        class="files__object"
-      >
+        class="files__object">
         <img src="assets/folder.svg" class="files__icon" />
         <div class="files__info">
           <span class="files__info-value">
@@ -74,8 +71,7 @@
         matRipple
         [matRippleUnbounded]="false"
         class="files__object"
-        [ngClass]="[file.successful]"
-      >
+        [ngClass]="[file.successful]">
         <img [src]="file.thumbnail" class="files__icon" />
         <div class="files__info">
           <span class="files__info-value">

@@ -273,29 +273,43 @@ app-root {
   0%,
   10% {
     color: rgba(255, 255, 255, 0.2);
-    text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0.2), 0.5em 0 0 rgba(255, 255, 255, 0.2);
+    text-shadow:
+      0.25em 0 0 rgba(255, 255, 255, 0.2),
+      0.5em 0 0 rgba(255, 255, 255, 0.2);
   }
   20% {
     color: #f5f6fa;
-    text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0.2), 0.5em 0 0 rgba(255, 255, 255, 0.2);
+    text-shadow:
+      0.25em 0 0 rgba(255, 255, 255, 0.2),
+      0.5em 0 0 rgba(255, 255, 255, 0.2);
   }
   30% {
-    text-shadow: 0.25em 0 0 #f5f6fa, 0.5em 0 0 rgba(255, 255, 255, 0.2);
+    text-shadow:
+      0.25em 0 0 #f5f6fa,
+      0.5em 0 0 rgba(255, 255, 255, 0.2);
   }
   52%,
   60% {
-    text-shadow: 0.25em 0 0 #f5f6fa, 0.5em 0 0 #f5f6fa;
+    text-shadow:
+      0.25em 0 0 #f5f6fa,
+      0.5em 0 0 #f5f6fa;
   }
   70% {
     color: rgba(255, 255, 255, 0.2);
-    text-shadow: 0.25em 0 0 #f5f6fa, 0.5em 0 0 #f5f6fa;
+    text-shadow:
+      0.25em 0 0 #f5f6fa,
+      0.5em 0 0 #f5f6fa;
   }
   80% {
-    text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0.2), 0.5em 0 0 #f5f6fa;
+    text-shadow:
+      0.25em 0 0 rgba(255, 255, 255, 0.2),
+      0.5em 0 0 #f5f6fa;
   }
   90%,
   100% {
     color: rgba(255, 255, 255, 0.2);
-    text-shadow: 0.25em 0 0 rgba(255, 255, 255, 0.2), 0.5em 0 0 rgba(255, 255, 255, 0.2);
+    text-shadow:
+      0.25em 0 0 rgba(255, 255, 255, 0.2),
+      0.5em 0 0 rgba(255, 255, 255, 0.2);
   }
 }

@@ -1,628 +1,734 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <title>OctoDash</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<head>
-  <title>OctoDash</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet" />
 
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Arvo:700|Cousine|Baloo+Bhaina+2:400,500&display=swap"
+      rel="stylesheet" />
 
-  <link href="https://fonts.googleapis.com/css?family=Arvo:700|Cousine|Baloo+Bhaina+2:400,500&display=swap"
-    rel="stylesheet">
+    <link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/icomoon.css" />
 
-  <link rel="stylesheet" href="css/ionicons.min.css">
-  <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-  <div class="main-section">
-
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand">OctoDash</a>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link icon d-flex align-items-center goto-installation">
-                Installation
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link icon d-flex align-items-center goto-faq">
-                FAQ
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link icon d-flex align-items-center goto-screenshots">
-                Screenshots
-              </a>
-            </li>
-            <li class="nav-item cta"><a href="https://github.com/UnchartedBull/OctoDash"
-                class="nav-link icon d-flex align-items-center"><i class="icon-github mr-2"></i> View on
-                GitHub</a></li>
-          </ul>
+  <body>
+    <div class="main-section">
+      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+          <a class="navbar-brand">OctoDash</a>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="#" class="nav-link icon d-flex align-items-center goto-installation"> Installation </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link icon d-flex align-items-center goto-faq"> FAQ </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link icon d-flex align-items-center goto-screenshots"> Screenshots </a>
+              </li>
+              <li class="nav-item cta">
+                <a href="https://github.com/UnchartedBull/OctoDash" class="nav-link icon d-flex align-items-center"
+                  ><i class="icon-github mr-2"></i> View on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
-    <section class="main-section hero-wrap" style="background-image: url(images/main.png);"
-      data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row description align-items-center justify-content-center">
-          <div class="col-md-8 text-center">
-            <div class="text">
-              <img src="images/icon-main-title.svg" class="main-icon">
-              <h4 class="mb-5 subtitle">A simple, but beautiful dashboard for OctoPrint.</h4>
+      <section
+        class="main-section hero-wrap"
+        style="background-image: url(images/main.png)"
+        data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row description align-items-center justify-content-center">
+            <div class="col-md-8 text-center">
+              <div class="text">
+                <img src="images/icon-main-title.svg" class="main-icon" />
+                <h4 class="mb-5 subtitle">A simple, but beautiful dashboard for OctoPrint.</h4>
+                <p>
+                  <a href="#" class="btn btn-primary px-5 py-4 mb-2 goto-installation main-button">
+                    <i class="ion-ios-cloud-download mr-2"></i>Installation
+                  </a>
+                  <a href="#" class="btn btn-dark px-5 py-4 mb-2 goto-features main-button">
+                    <i class="ion-ios-star mr-2"></i>Features
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mouse">
+          <a href="#" class="mouse-icon">
+            <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="about-section goto-here">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title" style="margin-top: 10%">
+              <h1>About</h1>
               <p>
-                <a href="#" class="btn btn-primary px-5 py-4 mb-2 goto-installation main-button">
-                  <i class="ion-ios-cloud-download mr-2"></i>Installation
+                OctoDash is an Open-Source Dashboard for OctoPrint, which is optimized for 3.5" to 7" touchscreen
+                devices. I mainly created this project, because there was just no nice-looking UI available, which could
+                be run on the Raspberry Pi and provide access to OctoPrint where it is needed most - directly at the
+                printer. The main goal of the project is to offer a simplified experience of OctoPrint in a very
+                compelling and easy-to-use design. It is important to note here, that OctoDash does not replace
+                OctoPrint, but rather uses the backend of this awesome program and just offers a different User
+                Interface.
+              </p>
+              <p>
+                I'm currently developing OctoDash, with the help of a lot of other people over on
+                <a href="https://github.com/UnchartedBull/OctoDash">GitHub</a> in my free time. If you want to support
+                OctoDash you can do that, by either creating PRs to fix open issues or donate via the Sponsor button in
+                GitHub, if you really feel like it :).
+              </p>
+              <p>
+                As mentioned above, OctoDash is completely Open-Source and all the Source Code can be found on GitHub.
+                The whole project is licensed under the Apache 2.0 License, so go ahead and create your custom version!
+                If you think you've done something really cool open up a PR and it may get merged into main. But please,
+                keep the LICENSE file and Copyright notices unchanged, if you want to remove those contact me first,
+                please.
+              </p>
+              <h5>I'm hoping that you're going to enjoy OctoDash!</h5>
+              <p>Timon</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ftco-section pb-0 installation-anchor">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Installation</h1>
+              <p>
+                The installation script, which can be found
+                <a href="https://github.com/UnchartedBull/OctoDash/blob/main/scripts/install.sh">here</a>, will work on
+                most systems and sets up the most common things. During the installation process you have the option to
+                decide, whether you want to start OctoDash automatically on boot among other things. <br />
+                There also is a manual
+                <a href="https://github.com/UnchartedBull/OctoDash/wiki/Installation#manual-installation">
+                  installation guide
                 </a>
-                <a href="#" class="btn btn-dark px-5 py-4 mb-2 goto-features main-button">
-                  <i class="ion-ios-star
-                                    mr-2"></i>Features
-                </a>
+                available in the GitHub Wiki.
+              </p>
+              <div class="install-script">
+                bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
+              </div>
+              <p class="text-muted">
+                The script will ask you some questions about your setup during the installation, please answer them
+                carefully!
+              </p>
+
+              <p style="padding-top: 3%">
+                If you encounter any issues during the installation or setup please check the
+                <a href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting"> Troubleshooting Guide </a>
+                before opening a
+                <a
+                  href="https://github.com/UnchartedBull/OctoDash/issues/new?assignees=&labels=support&template=support.md&title=">
+                  new issue</a
+                >.
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="mouse">
-        <a href="#" class="mouse-icon">
-          <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
-        </a>
-      </div>
-    </section>
+      </section>
 
-    <section class="about-section goto-here">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title" style="margin-top: 10%;">
-            <h1>About</h1>
-            <p>
-              OctoDash is an Open-Source Dashboard for OctoPrint, which is optimized for 3.5" to 7"
-              touchscreen devices. I mainly created this project, because there was just no nice-looking
-              UI available, which could be run on the Raspberry Pi and provide access to OctoPrint where it
-              is needed most - directly at the printer. The main goal of the project is to offer a simplified
-              experience of OctoPrint in a very compelling
-              and easy-to-use design. It is important to note here, that OctoDash does not replace
-              OctoPrint, but rather uses the backend of this awesome program and just offers a different
-              User Interface.
-            </p>
-            <p>
-              I'm currently developing OctoDash, with the help of a lot of other people over on <a
-                href="https://github.com/UnchartedBull/OctoDash">GitHub</a> in my free time. If you want
-              to support OctoDash you can do that, by either creating PRs to fix open issues or donate via
-              the Sponsor button in GitHub, if you really feel like it :).
-            </p>
-            <p>
-              As mentioned above, OctoDash is completely Open-Source and all the Source Code can be found
-              on GitHub. The whole project is licensed under the Apache 2.0 License, so go ahead and
-              create your custom version! If you think you've done something really cool open up a PR
-              and it may get merged into main. But please, keep the LICENSE file and Copyright notices
-              unchanged, if you want to remove those contact me first, please.
-            </p>
-            <h5>
-              I'm hoping that you're going to enjoy OctoDash!
-            </h5>
-            <p> Timon </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="ftco-section pb-0 installation-anchor">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Installation</h1>
-            <p>
-              The installation script, which can be found <a
-                href="https://github.com/UnchartedBull/OctoDash/blob/main/scripts/install.sh">here</a>,
-              will work on most systems and sets up the most common things. During the installation process you have the
-              option to decide, whether you want to start OctoDash automatically on boot among other things. <br>
-              There also is a manual
-              <a href="https://github.com/UnchartedBull/OctoDash/wiki/Installation#manual-installation">
-                installation guide
-              </a> available in the GitHub Wiki.
-            </p>
-            <div class="install-script">
-              bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh) </div>
-                <p class="text-muted">The script will ask you some questions about your setup during the
-                  installation, please answer them carefully!</p>
-
-                <p style="padding-top: 3%">If you encounter any issues during the installation or setup
-                  please
-                  check the
-                  <a href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">
-                    Troubleshooting Guide
-                  </a>
-                  before opening a
-                  <a
-                    href="https://github.com/UnchartedBull/OctoDash/issues/new?assignees=&labels=support&template=support.md&title=">
-                    new issue</a>.
-                </p>
+      <section class="ftco-section pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Removal</h1>
+              <p>
+                I'm sad to see you go! If something bugs you, that you think can be fixed, don't hesitate to open an
+                <a href="https://github.com/UnchartedBull/OctoDash/issues/new/choose">issue</a>.
+              </p>
+              <p>
+                The removal script, which can be found
+                <a href="https://github.com/UnchartedBull/OctoDash/blob/main/scripts/remove.sh">here</a>, will
+                completely remove OctoDash from your system. You can also manually remove OctoDash by just uninstalling
+                the <span style="font-family: 'Cousine', monospace; font-size: 90%">octodash</span> package and removing
+                the octodash line from your
+                <span style="font-family: 'Cousine', monospace; font-size: 90%">~/.xinitrc</span> file.<br />
+              </p>
+              <div class="install-script">
+                wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/remove.sh | bash
+              </div>
             </div>
           </div>
         </div>
-    </section>
+      </section>
 
-    <section class="ftco-section pb-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Removal</h1>
-            <p>
-              I'm sad to see you go! If something bugs you, that you think can be fixed, don't hesitate to
-              open an <a href="https://github.com/UnchartedBull/OctoDash/issues/new/choose">issue</a>.
-            </p>
-            <p>
-              The removal script, which can be found <a
-                href="https://github.com/UnchartedBull/OctoDash/blob/main/scripts/remove.sh">here</a>,
-              will completely remove OctoDash from your system. You can also manually remove OctoDash by
-              just uninstalling the <span style="font-family: 'Cousine', monospace; font-size: 90%;">octodash</span>
-              package and removing the octodash line from your <span
-                style="font-family: 'Cousine', monospace; font-size: 90%;">~/.xinitrc</span>
-              file.<br>
-            </p>
-            <div class="install-script">
-              wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/remove.sh | bash
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="ftco-section pb-0 features-anchor">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Main Features</h1>
-            <ul style="font-size: 119%;">
-              <li>Monitor your prints with a beautiful, easy to read interface</li>
-              <li>Browse your files and preview your objects directly from your Raspberry Pi</li>
-              <li>Adjust temperatures, speed and even Z-Height (Babystepping) while printing</li>
-              <li>Change filaments with an automated procedure (heating up, retracting, extruding,
-                purging) even if your printer doesn't support M600. You can also keep track of your
-                usage and apply temperature offsets to each roll with Filament Manager.</li>
-              <li>Turn your printer on and off</li>
-              <li>Move printer axis and execute GCode while the printer is idling</li>
-              <li>View your camera feed directly from the display</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="ftco-section pb-0 screenshots-anchor">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Screenshots</h1>
-            <p>Probably the part you came here for - so here are some juicy screenshots for you. If those
-              aren't enough, there are even more <a
-                href="https://github.com/UnchartedBull/OctoDash/tree/main/screenshots">here</a>.</p>
-    </section>
-    <section class="ftco-section ftco-no-pt ftco-no-pb" id="carousel">
-      <div class="container-fluid px-0">
-        <div class="row no-gutters justify-content-center">
-          <div class="col-md-12">
-            <div id="screenshots" class="carousel slide" data-ride="carousel">
-              <ul class="carousel-indicators">
-                <li data-target="#screenshots" data-slide-to="0" class="active"></li>
-                <li data-target="#screenshots" data-slide-to="1"></li>
-                <li data-target="#screenshots" data-slide-to="2"></li>
-                <li data-target="#screenshots" data-slide-to="3"></li>
-                <li data-target="#screenshots" data-slide-to="4"></li>
-                <li data-target="#screenshots" data-slide-to="5"></li>
-                <li data-target="#screenshots" data-slide-to="6"></li>
-                <li data-target="#screenshots" data-slide-to="7"></li>
-                <li data-target="#screenshots" data-slide-to="8"></li>
-                <li data-target="#screenshots" data-slide-to="9"></li>
-                <li data-target="#screenshots" data-slide-to="10"></li>
-                <li data-target="#screenshots" data-slide-to="11"></li>
+      <section class="ftco-section pb-0 features-anchor">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Main Features</h1>
+              <ul style="font-size: 119%">
+                <li>Monitor your prints with a beautiful, easy to read interface</li>
+                <li>Browse your files and preview your objects directly from your Raspberry Pi</li>
+                <li>Adjust temperatures, speed and even Z-Height (Babystepping) while printing</li>
+                <li>
+                  Change filaments with an automated procedure (heating up, retracting, extruding, purging) even if your
+                  printer doesn't support M600. You can also keep track of your usage and apply temperature offsets to
+                  each roll with Filament Manager.
+                </li>
+                <li>Turn your printer on and off</li>
+                <li>Move printer axis and execute GCode while the printer is idling</li>
+                <li>View your camera feed directly from the display</li>
               </ul>
-              <div class="carousel-inner">
-                <div class="carousel-item active img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/main-screen.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/job.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/control.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/print_controls.png); height: 750px;">
-                </div>                
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/adjust_parameters_print.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/files_view.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_details.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_loaded.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_selection.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_heating.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_extruding.png); height: 750px;">
-                </div>
-                <div class="carousel-item img"
-                  style="background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_purging.png); height: 750px;">
-                </div>
-              </div>
-              <a class="carousel-control-prev" href="#screenshots" data-slide="prev">
-                <span class="ion-ios-arrow-round-back"></span>
-              </a>
-              <a class="carousel-control-next" href="#screenshots" data-slide="next">
-                <span class="ion-ios-arrow-round-forward"></span>
-              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="ftco-section pb-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Tips and Tricks</h1>
-            <ul style="font-size: 119%;">
-              <li>OctoDash supports printing from your Raspberry and the printers SD card if
-                configured in OctoPrint </li>
-              <li>If you're using FilamentManager add the color (in HEX format) to the end of the name,
-                like "Vendor black (#000000)", this color will then be shown in the filament selection
-                menu</li>
-              <li>You can adjust the look of OctoDash by adjusting the
-                ~/.config/octodash/custom-styles.css file and adding your own CSS rules</li>
-              <li>OctoDash supports .ufp package preview images and PrusaSlicer thumbnails</li>
-              <ul>
-                <li>To get the best results, you should use a square aspect ration, like 256x256</li>
+      <section class="ftco-section pb-0 screenshots-anchor">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Screenshots</h1>
+              <p>
+                Probably the part you came here for - so here are some juicy screenshots for you. If those aren't
+                enough, there are even more
+                <a href="https://github.com/UnchartedBull/OctoDash/tree/main/screenshots">here</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ftco-section ftco-no-pt ftco-no-pb" id="carousel">
+        <div class="container-fluid px-0">
+          <div class="row no-gutters justify-content-center">
+            <div class="col-md-12">
+              <div id="screenshots" class="carousel slide" data-ride="carousel">
+                <ul class="carousel-indicators">
+                  <li data-target="#screenshots" data-slide-to="0" class="active"></li>
+                  <li data-target="#screenshots" data-slide-to="1"></li>
+                  <li data-target="#screenshots" data-slide-to="2"></li>
+                  <li data-target="#screenshots" data-slide-to="3"></li>
+                  <li data-target="#screenshots" data-slide-to="4"></li>
+                  <li data-target="#screenshots" data-slide-to="5"></li>
+                  <li data-target="#screenshots" data-slide-to="6"></li>
+                  <li data-target="#screenshots" data-slide-to="7"></li>
+                  <li data-target="#screenshots" data-slide-to="8"></li>
+                  <li data-target="#screenshots" data-slide-to="9"></li>
+                  <li data-target="#screenshots" data-slide-to="10"></li>
+                  <li data-target="#screenshots" data-slide-to="11"></li>
+                </ul>
+                <div class="carousel-inner">
+                  <div
+                    class="carousel-item active img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/main-screen.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/job.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/control.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/print_controls.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/adjust_parameters_print.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/files_view.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_details.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/file_loaded.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_selection.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_heating.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_extruding.png);
+                      height: 750px;
+                    "></div>
+                  <div
+                    class="carousel-item img"
+                    style="
+                      background-image: url(https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/filament_purging.png);
+                      height: 750px;
+                    "></div>
+                </div>
+                <a class="carousel-control-prev" href="#screenshots" data-slide="prev">
+                  <span class="ion-ios-arrow-round-back"></span>
+                </a>
+                <a class="carousel-control-next" href="#screenshots" data-slide="next">
+                  <span class="ion-ios-arrow-round-forward"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ftco-section pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Tips and Tricks</h1>
+              <ul style="font-size: 119%">
+                <li>
+                  OctoDash supports printing from your Raspberry and the printers SD card if configured in OctoPrint
+                </li>
+                <li>
+                  If you're using FilamentManager add the color (in HEX format) to the end of the name, like "Vendor
+                  black (#000000)", this color will then be shown in the filament selection menu
+                </li>
+                <li>
+                  You can adjust the look of OctoDash by adjusting the ~/.config/octodash/custom-styles.css file and
+                  adding your own CSS rules
+                </li>
+                <li>OctoDash supports .ufp package preview images and PrusaSlicer thumbnails</li>
+                <ul>
+                  <li>To get the best results, you should use a square aspect ration, like 256x256</li>
+                </ul>
+                <li>
+                  You can also view the previews during print if you press on the percentage inside the progress ring
+                </li>
+                <li>
+                  You can press multiple arrows directly after another in the control view. All actions will be executed
+                  in series, even if the prior didn't finish before pressing the button
+                </li>
+                <li>
+                  The six actions on the right in the control view can be customized. They can either send GCode
+                  commands to your printer, restart OctoPrint or your Pi and even open iFrames so you can view your
+                  camera for example
+                </li>
+                <li>
+                  You can adjust the temperatures and fan speed in the home screen by pressing on their icons if you
+                  want to set them to zero, just tap the value once
+                </li>
               </ul>
-              <li>You can also view the previews during print if you press on the percentage inside the
-                progress ring</li>
-              <li>You can press multiple arrows directly after another in the control view. All actions
-                will be executed in series, even if the prior didn't finish before pressing the
-                button</li>
-              <li>The six actions on the right in the control view can be customized. They can either send
-                GCode commands to your printer, restart OctoPrint or your Pi and even open iFrames so
-                you can view your camera for example</li>
-              <li>You can adjust the temperatures and fan speed in the home screen by pressing on their
-                icons if you want to set them to zero, just tap the value once</li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="ftco-section pb-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Supported Plugins</h1>
-            <h4>Display Layer Progress</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <span class="badge badge-pill badge-warning p-1 px-3">required</span> <br>
-            <p style="clear: both">Display Layer Progress is currently used to display the Layer
-              Progress in the Printing
-              Screen. This plugin can't be disabled currently, there are plans to make this optional as
-              well in the future though.</p>
-            <h4>Preheat Button</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br>
-            <p style="clear: both">Adds a preheat button to the loaded file screen, which can be used to
-              preheat the hotend and heatbed to the print temperatures.</p>
-            <h4>Filament Manager</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br>
-            <p style="clear: both">Allows OctoDash to directly change the filament, if the filament is
-              changed. This will also add a screen to the Filament Change Screen to choose the
-              new filament. </p>
-            <p class="text-muted" style="margin-top: -1vh">Tip: Put the color of the filament (HEX) in
-              brackets at
-              the very end of the
-              filament name to make your list more colorful!</p>
-            <h4>Enclosure</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br>
-            <p style="clear: both">Adds support for a temperature display at the bottom of the main screen.
-              The temperature sensor to use can be set up in the settings menu.</p>
-            <h4>PSU Control</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br>
-            <p style="clear: both">This enables OctoDash to control the Power Supply of your printer. This
-              plugin also adds some additional Custom Actions to turn off the printers power supply.
-              Turning on the PSU, while exiting from sleep is also supported.</p>
-            <h4>Print Time Genius</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <p style="clear: both">Greatly improves print time predictions. If Print Time Genius is
-              installed OctoDash will display PTG's predictions.</p>
-            <h4>Ultimaker Format Package</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <p style="clear: both">Adds thumbnail images for .ufp files in the detailed file view, in the
-              loaded file screen, and while a file is printing. To view the preview while printing just
-              tap on the progress percentage. Tap again to return to the percentage.</p>
-            <h4>PrusaSlicer Thumbnails</h4>
-            <span class="badge badge-pill badge-success p-1 px-3">supported</span>
-            <p style="clear: both">Adds thumbnail images for objects, that have been sliced with
-              PrusaSlicer, in the detailed file view, in the
-              loaded file screen, and while a file is printing. To view the preview while printing just
-              tap on the progress percentage. Tap again to return to the percentage. Also works for
-              Ultimaker Format Package.</p>
-            <h4>Exclude Region</h4>
-            <span class="badge badge-pill badge-info p-1 px-3">planned</span>
-            <p style="clear: both">Adds the option to exclude some regions from being printed further, if
-              they failed for example. This can help salvage parts of the print.</p>
-            <h4>Cancel Object</h4>
-            <span class="badge badge-pill badge-danger p-1 px-3">not supported</span>
-            <p style="clear: both">Exclude region seems to work for a broader group of users, thus Exclude
-              Region will be used over Cancel Objects</p>
-            <br>
-            <p>Want to see more plugins here? Please open an issue on GitHub, ideally together with a PR to
-              implement the plugin.</p>
+      <section class="ftco-section pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Supported Plugins</h1>
+              <h4>Display Layer Progress</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <span class="badge badge-pill badge-warning p-1 px-3">required</span> <br />
+              <p style="clear: both">
+                Display Layer Progress is currently used to display the Layer Progress in the Printing Screen. This
+                plugin can't be disabled currently, there are plans to make this optional as well in the future though.
+              </p>
+              <h4>Preheat Button</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br />
+              <p style="clear: both">
+                Adds a preheat button to the loaded file screen, which can be used to preheat the hotend and heatbed to
+                the print temperatures.
+              </p>
+              <h4>Filament Manager</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span> <br />
+              <p style="clear: both">
+                Allows OctoDash to directly change the filament, if the filament is changed. This will also add a screen
+                to the Filament Change Screen to choose the new filament.
+              </p>
+              <p class="text-muted" style="margin-top: -1vh">
+                Tip: Put the color of the filament (HEX) in brackets at the very end of the filament name to make your
+                list more colorful!
+              </p>
+              <h4>Enclosure</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br />
+              <p style="clear: both">
+                Adds support for a temperature display at the bottom of the main screen. The temperature sensor to use
+                can be set up in the settings menu.
+              </p>
+              <h4>PSU Control</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <span class="badge badge-pill badge-info p-1 px-3">additional config</span> <br />
+              <p style="clear: both">
+                This enables OctoDash to control the Power Supply of your printer. This plugin also adds some additional
+                Custom Actions to turn off the printers power supply. Turning on the PSU, while exiting from sleep is
+                also supported.
+              </p>
+              <h4>Print Time Genius</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <p style="clear: both">
+                Greatly improves print time predictions. If Print Time Genius is installed OctoDash will display PTG's
+                predictions.
+              </p>
+              <h4>Ultimaker Format Package</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <p style="clear: both">
+                Adds thumbnail images for .ufp files in the detailed file view, in the loaded file screen, and while a
+                file is printing. To view the preview while printing just tap on the progress percentage. Tap again to
+                return to the percentage.
+              </p>
+              <h4>PrusaSlicer Thumbnails</h4>
+              <span class="badge badge-pill badge-success p-1 px-3">supported</span>
+              <p style="clear: both">
+                Adds thumbnail images for objects, that have been sliced with PrusaSlicer, in the detailed file view, in
+                the loaded file screen, and while a file is printing. To view the preview while printing just tap on the
+                progress percentage. Tap again to return to the percentage. Also works for Ultimaker Format Package.
+              </p>
+              <h4>Exclude Region</h4>
+              <span class="badge badge-pill badge-info p-1 px-3">planned</span>
+              <p style="clear: both">
+                Adds the option to exclude some regions from being printed further, if they failed for example. This can
+                help salvage parts of the print.
+              </p>
+              <h4>Cancel Object</h4>
+              <span class="badge badge-pill badge-danger p-1 px-3">not supported</span>
+              <p style="clear: both">
+                Exclude region seems to work for a broader group of users, thus Exclude Region will be used over Cancel
+                Objects
+              </p>
+              <br />
+              <p>
+                Want to see more plugins here? Please open an issue on GitHub, ideally together with a PR to implement
+                the plugin.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="ftco-section pb-0 faq-anchor">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>FAQ</h1>
-            <div id="accordion" class="myaccordion w-100 text-center">
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link"
-                      data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                      aria-controls="collapseOne">
-                      Will it work on my setup?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>If you're running something similar to a Raspberry Pi 2 or better then
-                      probably yes.
-                      You can find more information <a
-                        href="https://github.com/UnchartedBull/OctoDash/wiki/Supported-Devices">here.</a>
-                    </p>
+      <section class="ftco-section pb-0 faq-anchor">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>FAQ</h1>
+              <div id="accordion" class="myaccordion w-100 text-center">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link"
+                        data-toggle="collapse"
+                        data-target="#collapseOne"
+                        aria-expanded="true"
+                        aria-controls="collapseOne">
+                        Will it work on my setup?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        If you're running something similar to a Raspberry Pi 2 or better then probably yes. You can
+                        find more information
+                        <a href="https://github.com/UnchartedBull/OctoDash/wiki/Supported-Devices">here.</a>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingOneAndAHalf">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseOneAndAHalf" aria-expanded="true"
-                      aria-controls="collapseOneAndAHalf">
-                      Do i need to have a touchscreen?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseOneAndAHalf" class="collapse" aria-labelledby="headingOneAndAHalf"
-                  data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>No, you can also use OctoDash as a "read-only" display. You will still get
-                      the main screen with all the information available during print. All screens
-                      that require interaction, like the File Browser and the Filament Change
-                      Process won't available though.</p>
+                <div class="card">
+                  <div class="card-header" id="headingOneAndAHalf">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseOneAndAHalf"
+                        aria-expanded="true"
+                        aria-controls="collapseOneAndAHalf">
+                        Do i need to have a touchscreen?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div
+                    id="collapseOneAndAHalf"
+                    class="collapse"
+                    aria-labelledby="headingOneAndAHalf"
+                    data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        No, you can also use OctoDash as a "read-only" display. You will still get the main screen with
+                        all the information available during print. All screens that require interaction, like the File
+                        Browser and the Filament Change Process won't available though.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="card">
-                <div class="card-header" id="headingTwo">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                      aria-controls="collapseTwo">
-                      Is it really free?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>Yes. OctoDash is and will stay free.</p>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseTwo"
+                        aria-expanded="false"
+                        aria-controls="collapseTwo">
+                        Is it really free?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>Yes. OctoDash is and will stay free.</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseThree" aria-expanded="false"
-                      aria-controls="collapseThree">
-                      Does OctoDash track my data?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>No. OctoDash doesn't track one bit of your data. Check out the code if you
-                      don't trust me :)</p>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseThree"
+                        aria-expanded="false"
+                        aria-controls="collapseThree">
+                        Does OctoDash track my data?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        No. OctoDash doesn't track one bit of your data. Check out the code if you don't trust me :)
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingFour">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
-                      aria-controls="collapseFour">
-                      Can I uninstall OctoPrint once I have OctoDash installed?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>No, OctoDash is only a nice interface for OctoPrint. All the heavy lifting
-                      and communication with the printer is still done by OctoPrint, so definitely
-                      keep that installed.</p>
+                <div class="card">
+                  <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseFour"
+                        aria-expanded="false"
+                        aria-controls="collapseFour">
+                        Can I uninstall OctoPrint once I have OctoDash installed?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        No, OctoDash is only a nice interface for OctoPrint. All the heavy lifting and communication
+                        with the printer is still done by OctoPrint, so definitely keep that installed.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingFive">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseFive" aria-expanded="false"
-                      aria-controls="collapseFive">
-                      Will this impact my Print Quality?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>Most likely not, but it can. OctoDash uses around 60MB of memory and only
-                      very few CPU resources, so it shouldn't affect the print quality plus there
-                      are
-                      also no, known-to-me cases of OctoDash affecting the quality of your prints.
-                      If you
-                      encounter quality loss after installing OctoDash, try removing it to see,
-                      whether this fixes the problem. If it does open a new issue, so I can have a
-                      look at that.</p>
+                <div class="card">
+                  <div class="card-header" id="headingFive">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseFive"
+                        aria-expanded="false"
+                        aria-controls="collapseFive">
+                        Will this impact my Print Quality?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        Most likely not, but it can. OctoDash uses around 60MB of memory and only very few CPU
+                        resources, so it shouldn't affect the print quality plus there are also no, known-to-me cases of
+                        OctoDash affecting the quality of your prints. If you encounter quality loss after installing
+                        OctoDash, try removing it to see, whether this fixes the problem. If it does open a new issue,
+                        so I can have a look at that.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingSix">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseSix" aria-expanded="false"
-                      aria-controls="collapseSix">
-                      How can I support the project?
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>The best way to support the project is just to grab an unassigned issue from
-                      the backlog and start working on that. You can also donate to the
-                      project via the GitHub Sponsor Button if you feel like it.</p>
+                <div class="card">
+                  <div class="card-header" id="headingSix">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseSix"
+                        aria-expanded="false"
+                        aria-controls="collapseSix">
+                        How can I support the project?
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        The best way to support the project is just to grab an unassigned issue from the backlog and
+                        start working on that. You can also donate to the project via the GitHub Sponsor Button if you
+                        feel like it.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingSeven">
-                  <h2 class="mb-0">
-                    <button class="d-flex align-items-center justify-content-between btn btn-link collapsed"
-                      data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false"
-                      aria-controls="collapseSeven">
-                      I want to make a custom version.
-                      <i class="fa" aria-hidden="true"></i>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                  <div class="card-body text-left">
-                    <p>Sure thing. Go ahead and do whatever you want. Just make sure to respect the
-                      license and keep the credits to the original author, other than that you can
-                      do pretty much anything.</p>
+                <div class="card">
+                  <div class="card-header" id="headingSeven">
+                    <h2 class="mb-0">
+                      <button
+                        class="d-flex align-items-center justify-content-between btn btn-link collapsed"
+                        data-toggle="collapse"
+                        data-target="#collapseSeven"
+                        aria-expanded="false"
+                        aria-controls="collapseSeven">
+                        I want to make a custom version.
+                        <i class="fa" aria-hidden="true"></i>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                    <div class="card-body text-left">
+                      <p>
+                        Sure thing. Go ahead and do whatever you want. Just make sure to respect the license and keep
+                        the credits to the original author, other than that you can do pretty much anything.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="ftco-section pb-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 heading-title">
-            <h1>Bugs</h1>
-            <p>If you find any bugs please report them on GitHub, there is also a <a
-                href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">Troubleshooting
-                Guide</a> available, which might cover your issue. Please fill out all the requested
-              information in the <a href="https://github.com/UnchartedBull/OctoDash/issues/new/choose">new
-                issue</a>, so someone can help you quickly. If possible please attach your config file
-              (remove your token first) and the GCode file.</p>
-          </div>
-          <div class="col-md-12 heading-title">
-            <h1>Contributing</h1>
-            <p>If you can think of something nice to add or want to change / extend some of the
-              functionality, feel free
-              to create a Pull Request or an Issue. Please make sure to follow the code style and not break any of the
-              existing functionality. Any help is
-              greatly appreciated!</p>
-            <p>Information on how to develop and build OctoDash can be found <a
-                href="https://github.com/UnchartedBull/OctoDash">here</a>.</p>
+      <section class="ftco-section pb-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 heading-title">
+              <h1>Bugs</h1>
+              <p>
+                If you find any bugs please report them on GitHub, there is also a
+                <a href="https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting">Troubleshooting Guide</a>
+                available, which might cover your issue. Please fill out all the requested information in the
+                <a href="https://github.com/UnchartedBull/OctoDash/issues/new/choose">new issue</a>, so someone can help
+                you quickly. If possible please attach your config file (remove your token first) and the GCode file.
+              </p>
+            </div>
+            <div class="col-md-12 heading-title">
+              <h1>Contributing</h1>
+              <p>
+                If you can think of something nice to add or want to change / extend some of the functionality, feel
+                free to create a Pull Request or an Issue. Please make sure to follow the code style and not break any
+                of the existing functionality. Any help is greatly appreciated!
+              </p>
+              <p>
+                Information on how to develop and build OctoDash can be found
+                <a href="https://github.com/UnchartedBull/OctoDash">here</a>.
+              </p>
               <div class="iframe-wrapper">
-                <iframe src="https://discord.com/widget?id=765143433727574016&theme=dark" class="iframe" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                <iframe
+                  src="https://discord.com/widget?id=765143433727574016&theme=dark"
+                  class="iframe"
+                  allowtransparency="true"
+                  frameborder="0"
+                  sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
               </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer class="ftco-section ftco-section-2">
-      <div class="col-md-12 text-center">
-        <img src="images/made-in-berlin.png"> <br>
-        <p class="mb-0">
-          Made with <i class="icon-heart" aria-hidden="true"></i> by UnchartedBull
-        </p>
-      </div>
-    </footer>
+      <footer class="ftco-section ftco-section-2">
+        <div class="col-md-12 text-center">
+          <img src="images/made-in-berlin.png" /> <br />
+          <p class="mb-0">Made with <i class="icon-heart" aria-hidden="true"></i> by UnchartedBull</p>
+        </div>
+      </footer>
 
-    <footer class="ftco-section ftco-section-2" style="padding: 0; opacity: .65">
-      <div class="col-md-12 text-center">
-        <p class="mb-0">
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          Copyright &copy;
-          <script>
-            document.write(new Date().getFullYear());
+      <footer class="ftco-section ftco-section-2" style="padding: 0; opacity: 0.65">
+        <div class="col-md-12 text-center">
+          <p class="mb-0">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by
+            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </footer>
+    </div>
 
-          </script> All rights reserved | This template is made with <i class="icon-heart"
-            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        </p>
-      </div>
-    </footer>
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+        <circle
+          class="path"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          stroke="#F96D00" />
+      </svg>
+    </div>
 
-  </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/aos.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
 
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-        stroke="#F96D00" /></svg></div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/aos.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-
-  <script src="js/main.js"></script>
-
-</body>
-
+    <script src="js/main.js"></script>
+  </body>
 </html>

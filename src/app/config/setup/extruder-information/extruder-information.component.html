@@ -11,8 +11,7 @@
       [duration]="650"
       [frequency]="80"
       (onShortPress)="changeFeedLength(-1)"
-      (onLongPressing)="changeFeedLength(-5)"
-    >
+      (onLongPressing)="changeFeedLength(-5)">
       -
     </span>
     <input
@@ -24,8 +23,7 @@
       name="feedLength"
       min="0"
       style="width: 17vw"
-      required
-    />
+      required />
     <span
       class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
       matRipple
@@ -35,8 +33,7 @@
       [duration]="650"
       [frequency]="80"
       (onShortPress)="changeFeedLength(1)"
-      (onLongPressing)="changeFeedLength(5)"
-    >
+      (onLongPressing)="changeFeedLength(5)">
       +
     </span>
     <span class="setup__input-small-suffix" style="margin-left: -16.5vw" i18n="@@prompt-info-mm">mm</span>
@@ -53,8 +50,7 @@
       [duration]="650"
       [frequency]="150"
       (onShortPress)="changeFeedSpeed(-0.5)"
-      (onLongPressing)="changeFeedSpeed(-1)"
-    >
+      (onLongPressing)="changeFeedSpeed(-1)">
       -
     </span>
     <input
@@ -66,8 +62,7 @@
       name="feedSpeed"
       min="0"
       style="width: 20vw"
-      required
-    />
+      required />
     <span
       class="setup__input__numeric-adjust setup__input__numeric-adjust-increase"
       matRipple
@@ -77,8 +72,7 @@
       [duration]="650"
       [frequency]="150"
       (onShortPress)="changeFeedSpeed(0.5)"
-      (onLongPressing)="changeFeedSpeed(1)"
-    >
+      (onLongPressing)="changeFeedSpeed(1)">
       +
     </span>
     <span class="setup__input-small-suffix" style="margin-left: -19vw" i18n="@@prompt-info-mms">mm/s</span>

@@ -321,7 +321,7 @@
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled ||
                 config.plugins.wemo.enabled
-              )
+              ),
             }"
             (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep">
             <span class="settings__checkbox">
@@ -336,7 +336,7 @@
                     config.plugins.tasmota.enabled ||
                     config.plugins.tasmotaMqtt.enabled ||
                     config.plugins.wemo.enabled
-                  )
+                  ),
                 }"
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"></span>
             </span>
@@ -601,9 +601,7 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-tuya-enabled">enabled</span>
           </div>
-          <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label"
-            >Label</label
-          >
+          <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
           <input
             type="text"
             id="tuya-label"
@@ -678,7 +676,7 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-wemo-enabled">enabled</span>
           </div>
-          <label for="wemo-ip" class="settings__input-label" i18n="@@settings-wemo-ip" >Wemo IP</label>
+          <label for="wemo-ip" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
           <input
             type="text"
             id="wemo-ip"
@@ -688,7 +686,7 @@
             [(ngModel)]="config.plugins.wemo.ip"
             required
             [disabled]="!config.plugins.wemo.enabled" />
-          <label for="wemo-port" class="settings__input-label" i18n="@@settings-wemo-port" >Wemo Port</label>
+          <label for="wemo-port" class="settings__input-label" i18n="@@settings-wemo-port">Wemo Port</label>
           <input
             type="number"
             id="wemo-port"
@@ -726,8 +724,8 @@
             https://github.com/UnchartedBull/OctoDash
           </span>
           <span class="settings__heading-2" i18n="@@connection">Connection</span>
-          <p class="settings__text" *ngIf="{address: localIpAddress$ | async} as vm">
-            {{vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
+          <p class="settings__text" *ngIf="{ address: localIpAddress$ | async } as vm">
+            {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
           </p>
           <span class="settings__heading-2" i18n="@@licence">License</span>
           <p class="settings__text">
