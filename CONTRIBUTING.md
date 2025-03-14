@@ -6,8 +6,8 @@ If you can think of something nice to add or want to change / extend some of the
 
 ## Prerequisites
 
-- NodeJS v14
-- npm 7
+- NodeJS v20
+- npm 11
 
 ## Setup
 
