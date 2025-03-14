@@ -3,10 +3,7 @@
 <div class="setup__plugin-list">
   <div class="scroll__thumb-inactive"></div>
   <span>
-    <app-toggle-switch
-      [value]="companionPlugin"
-      (valueChange)="companionPluginChange.emit(!companionPlugin)"
-    >
+    <app-toggle-switch [value]="companionPlugin" (valueChange)="companionPluginChange.emit(!companionPlugin)">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-octodash-companion">OctoDash Companion</ng-container>
   </span>
@@ -14,8 +11,7 @@
   <span>
     <app-toggle-switch
       [value]="displayLayerProgressPlugin"
-      (valueChange)="displayLayerProgressPluginChange.emit(!displayLayerProgressPlugin)"
-    >
+      (valueChange)="displayLayerProgressPluginChange.emit(!displayLayerProgressPlugin)">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-display-layer-progress">Display Layer Progress</ng-container>
   </span>
@@ -29,24 +25,21 @@
   <span>
     <app-toggle-switch
       [value]="filamentManagerPlugin"
-      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)"
-    ></app-toggle-switch>
+      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-filament-manager">Filament Manager</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="spoolManagerPlugin"
-      (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)"
-    ></app-toggle-switch>
+      (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-spool-manager">Spool Manager (Beta)</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="preheatButtonPlugin"
-      (valueChange)="preheatButtonPluginChange.emit(!preheatButtonPlugin)"
-    >
+      (valueChange)="preheatButtonPluginChange.emit(!preheatButtonPlugin)">
     </app-toggle-switch>
     <ng-container i18n="@@plugin-preheat-button">Preheat Button</ng-container>
   </span>
@@ -54,8 +47,7 @@
   <span>
     <app-toggle-switch
       [value]="printTimeGeniusPlugin"
-      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)"
-    ></app-toggle-switch>
+      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
   </span>
 
@@ -73,16 +65,12 @@
   <span>
     <app-toggle-switch
       [value]="tpLinkSmartPlugPlugin"
-      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"
-    ></app-toggle-switch>
+      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-tplink-smartplug"> TPLink SmartPlug </ng-container>
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="tuyaPlugin"
-      (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)"
-    ></app-toggle-switch>
+    <app-toggle-switch [value]="tuyaPlugin" (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-tuya"> Tuya SmartPlug </ng-container>
   </span>
 
@@ -99,8 +87,7 @@
   </span>
 
   <span>
-    <app-toggle-switch [value]="wemoPlugin" (valueChange)="wemoPluginChange.emit(!wemoPlugin)">
-    </app-toggle-switch>
+    <app-toggle-switch [value]="wemoPlugin" (valueChange)="wemoPluginChange.emit(!wemoPlugin)"> </app-toggle-switch>
     <ng-container i18n="@@plugin-wemo"> Wemo </ng-container>
   </span>
 </div>

@@ -266,7 +266,7 @@ export class ConfigService {
   }
 
   public isCompanionPluginEnabled(): boolean {
-    return this.config.plugins.companionPlugin.enabled;
+    return this.config.plugins.companion.enabled;
   }
 
   public isPreheatPluginEnabled(): boolean {

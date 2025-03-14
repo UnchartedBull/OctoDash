@@ -283,8 +283,8 @@ export class OctoPrintSocketService implements SocketService {
         message.fanspeed === 'Off'
           ? 0
           : message.fanspeed === '-'
-          ? 0
-          : Number(message.fanspeed.replace('%', '').trim());
+            ? 0
+            : Number(message.fanspeed.replace('%', '').trim());
     }
   }
 
