@@ -21,6 +21,11 @@ export interface FeedrateCommand {
   factor: number;
 }
 
+export interface ToolCommand {
+  command: string;
+  tool: string;
+}
+
 export interface TemperatureHotendCommand {
   command: string;
   targets: {
