@@ -8,7 +8,7 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import lottiePlayer from 'lottie-web';
-import { LottieComponent, provideLottieOptions, provideCacheableAnimationLoader } from 'ngx-lottie';
+import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';

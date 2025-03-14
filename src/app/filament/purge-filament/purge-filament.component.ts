@@ -4,17 +4,20 @@ import { ConfigService } from '../../config/config.service';
 import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
-    selector: 'app-filament-purge-filament',
-    templateUrl: './purge-filament.component.html',
-    styleUrls: ['./purge-filament.component.scss', '../filament.component.scss'],
-    standalone: false
+  selector: 'app-filament-purge-filament',
+  templateUrl: './purge-filament.component.html',
+  styleUrls: ['./purge-filament.component.scss', '../filament.component.scss'],
+  standalone: false,
 })
 export class PurgeFilamentComponent implements OnInit {
   @Output() purgeDone = new EventEmitter<void>();
 
   public purgeAmount: number;
 
-  constructor(private configService: ConfigService, private printerService: PrinterService) {}
+  constructor(
+    private configService: ConfigService,
+    private printerService: PrinterService,
+  ) {}
 
   ngOnInit(): void {
     this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();

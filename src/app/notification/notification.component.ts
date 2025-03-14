@@ -5,10 +5,10 @@ import { Notification } from '../model';
 import { NotificationService } from './notification.service';
 
 @Component({
-    selector: 'app-notification',
-    templateUrl: './notification.component.html',
-    styleUrls: ['./notification.component.scss'],
-    standalone: false
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.scss'],
+  standalone: false,
 })
 export class NotificationComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -17,7 +17,10 @@ export class NotificationComponent implements OnDestroy {
   public notificationCloseTimeout: ReturnType<typeof setTimeout>;
   public show = false;
 
-  public constructor(private notificationService: NotificationService, private zone: NgZone) {
+  public constructor(
+    private notificationService: NotificationService,
+    private zone: NgZone,
+  ) {
     this.subscriptions.add(
       this.notificationService
         .getObservable()

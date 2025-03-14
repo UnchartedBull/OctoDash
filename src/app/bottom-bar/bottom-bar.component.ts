@@ -9,10 +9,10 @@ import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
-    selector: 'app-bottom-bar',
-    templateUrl: './bottom-bar.component.html',
-    styleUrls: ['./bottom-bar.component.scss'],
-    standalone: false
+  selector: 'app-bottom-bar',
+  templateUrl: './bottom-bar.component.html',
+  styleUrls: ['./bottom-bar.component.scss'],
+  standalone: false,
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();

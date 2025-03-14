@@ -7,10 +7,10 @@ import { EnclosureService } from '../services/enclosure/enclosure.service';
 import { SystemService } from '../services/system/system.service';
 
 @Component({
-    selector: 'app-standby',
-    templateUrl: './standby.component.html',
-    styleUrls: ['./standby.component.scss'],
-    standalone: false
+  selector: 'app-standby',
+  templateUrl: './standby.component.html',
+  styleUrls: ['./standby.component.scss'],
+  standalone: false,
 })
 export class StandbyComponent implements OnInit, OnDestroy {
   public connecting = false;

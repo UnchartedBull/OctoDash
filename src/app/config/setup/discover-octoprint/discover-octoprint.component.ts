@@ -5,10 +5,10 @@ import { URLSplit } from '../../config.model';
 import { ConfigService } from '../../config.service';
 
 @Component({
-    selector: 'app-config-setup-discover-octoprint',
-    templateUrl: './discover-octoprint.component.html',
-    styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
-    standalone: false
+  selector: 'app-config-setup-discover-octoprint',
+  templateUrl: './discover-octoprint.component.html',
+  styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   @Input() octoprintHost: number;
@@ -23,7 +23,11 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   public octoprintNodes: OctoprintNodes;
   public urlSplit: URLSplit;
 
-  constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
+  constructor(
+    private configService: ConfigService,
+    private electronService: ElectronService,
+    private zone: NgZone,
+  ) {}
 
   ngOnInit(): void {
     this.electronService.on('discoveredNodes', (_, nodes: OctoprintNodes) => {

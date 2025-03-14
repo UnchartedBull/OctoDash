@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 
 @Component({
-    selector: 'app-main-menu',
-    templateUrl: './main-menu.component.html',
-    styleUrls: ['./main-menu.component.scss'],
-    standalone: false
+  selector: 'app-main-menu',
+  templateUrl: './main-menu.component.html',
+  styleUrls: ['./main-menu.component.scss'],
+  standalone: false,
 })
 export class MainMenuComponent {
   public constructor(public service: AppService) {}
