@@ -4,7 +4,7 @@ import { FilamentSpool } from '../../model';
 import { FilamentService } from '../../services/filament/filament.service';
 
 @Component({
-  selector: 'app-filament-choose',
+  selector: 'app-filament-choose-spool',
   templateUrl: './choose-filament.component.html',
   styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
   standalone: false,
@@ -12,7 +12,11 @@ import { FilamentService } from '../../services/filament/filament.service';
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
 
-  constructor(public filament: FilamentService) {}
+  private currentSpools: number[];
+
+  constructor(public filament: FilamentService) {
+    this.currentSpools = (filament.getCurrentSpools() || []).map(s => s.id);
+  }
 
   public getSpoolWeightLeft(weight: number, used: number): number {
     return Math.floor(weight - used);

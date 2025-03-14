@@ -16,6 +16,7 @@ import { PrinterService } from '../../services/printer/printer.service';
 })
 export class ChangeFilamentComponent implements OnInit {
   @Input() selectedSpool: FilamentSpool;
+  @Input() selectedTool: number;
 
   @Output() increasePage = new EventEmitter<void>();
 
@@ -37,7 +38,7 @@ export class ChangeFilamentComponent implements OnInit {
   }
 
   private initiateM600FilamentChange(): void {
-    this.printerService.executeGCode('M600');
+    this.printerService.executeGCode(`M600 T${this.selectedTool}`);
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {

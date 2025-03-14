@@ -24,32 +24,28 @@
             (click)="moveAxis('y', '-')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
           <fa-icon
             [icon]="['fas', 'angle-left']"
             class="control__icon control__icon-2"
             (click)="moveAxis('x', '-')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
           <fa-icon
             [icon]="['fas', 'angle-right']"
             class="control__icon control__icon-3"
             (click)="moveAxis('x', '+')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
           <fa-icon
             [icon]="['fas', 'angle-down']"
             class="control__icon control__icon-4"
             (click)="moveAxis('y', '+')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
         </div>
         <span class="control__heading">X / Y</span>
       </div>
@@ -62,16 +58,14 @@
             (click)="moveAxis('z', '+')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
           <fa-icon
             [icon]="['fas', 'angle-down']"
             class="control__icon control__icon-6"
             (click)="moveAxis('z', '-')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
         </div>
         <span class="control__heading">Z</span>
       </div>
@@ -84,19 +78,31 @@
             (click)="extrude('+')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
           <fa-icon
             [icon]="['fas', 'undo-alt']"
             class="control__icon control__icon-8"
             (click)="extrude('-')"
             matRipple
             [matRippleUnbounded]="true"
-            [matRippleCentered]="true"
-          ></fa-icon>
+            [matRippleCentered]="true"></fa-icon>
         </div>
         <span class="control__heading">E</span>
       </div>
+    </div>
+
+    <div class="control__tool-wrapper" *ngIf="printerStatus.tools.length > 1">
+      <table class="control__tool">
+        <tr>
+          <td
+            class="control__tool-field"
+            *ngFor="let tool of printerStatus.tools; index as i"
+            [ngClass]="{ 'control__tool-field-active': selectedTool === i }"
+            (click)="setTool(i)">
+            T{{ i }}
+          </td>
+        </tr>
+      </table>
     </div>
 
     <div class="control__distance-wrapper">
@@ -105,36 +111,31 @@
           <td
             class="control__distance-field"
             [ngClass]="{ 'control__distance-field-active': jogDistance === 1 }"
-            (click)="setDistance(1)"
-          >
+            (click)="setDistance(1)">
             1
           </td>
           <td
             class="control__distance-field"
             [ngClass]="{ 'control__distance-field-active': jogDistance === 5 }"
-            (click)="setDistance(5)"
-          >
+            (click)="setDistance(5)">
             5
           </td>
           <td
             class="control__distance-field"
             [ngClass]="{ 'control__distance-field-active': jogDistance === 10 }"
-            (click)="setDistance(10)"
-          >
+            (click)="setDistance(10)">
             10
           </td>
           <td
             class="control__distance-field"
             [ngClass]="{ 'control__distance-field-active': jogDistance === 50 }"
-            (click)="setDistance(50)"
-          >
+            (click)="setDistance(50)">
             50
           </td>
           <td
             class="control__distance-field"
             [ngClass]="{ 'control__distance-field-active': jogDistance === 100 }"
-            (click)="setDistance(100)"
-          >
+            (click)="setDistance(100)">
             100
           </td>
         </tr>

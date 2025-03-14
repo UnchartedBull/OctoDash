@@ -34,7 +34,24 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
       );
   }
 
-  public getCurrentSpool(): Observable<FilamentSpool> {
+  public getCurrentSpools(): Observable<Array<FilamentSpool>> {
+    return this.http
+      .get(
+        this.configService.getApiURL('plugin/filamentmanager/selections', false),
+        this.configService.getHTTPHeaders(),
+      )
+      .pipe(
+        map((selection: FilamentManagerSelections): Array<FilamentSpool> => {
+          if (selection.selections.length > 0) {
+            return selection.selections.map((sel): FilamentSpool => this.convertFilamentManagerSpool(sel.spool));
+          } else {
+            return null;
+          }
+        }),
+      );
+  }
+
+  public getCurrentSpool(tool: number): Observable<FilamentSpool> {
     return this.http
       .get(
         this.configService.getApiURL('plugin/filamentmanager/selections', false),
@@ -43,7 +60,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
       .pipe(
         map((selection: FilamentManagerSelections): FilamentSpool => {
           if (selection.selections.length > 0) {
-            return this.convertFilamentManagerSpool(selection.selections[0].spool);
+            return this.convertFilamentManagerSpool(selection.selections[tool].spool);
           } else {
             return null;
           }
@@ -71,10 +88,10 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
     };
   }
 
-  public setSpool(spool: FilamentSpool): Observable<void> {
+  public setSpool(spool: FilamentSpool, tool: number): Observable<void> {
     const setSpoolBody: FilamentManagerSelectionPatch = {
       selection: {
-        tool: 0,
+        tool,
         spool: {
           id: spool.id,
         },

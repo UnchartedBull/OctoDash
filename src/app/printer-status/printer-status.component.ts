@@ -19,6 +19,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public status: string;
 
   public hotendTarget: number;
+  public selectedHotend: number;
   public heatbedTarget: number;
   public fanTarget: number;
 
@@ -47,8 +48,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public showQuickControlHotend(): void {
+  public showQuickControlHotend(tool: number): void {
     this.view = QuickControlView.HOTEND;
+    this.selectedHotend = tool;
     this.showQuickControl();
   }
 
@@ -143,7 +145,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   private setTemperatureHotend(): void {
-    this.printerService.setTemperatureHotend(this.hotendTarget);
+    this.printerService.setTemperatureHotend(this.hotendTarget, this.selectedHotend);
     this.hideQuickControl();
   }
 

@@ -29,6 +29,7 @@ import { ConversionService } from './conversion.service';
 import { EventService } from './event.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
+import { ChooseToolComponent } from './filament/choose-tool/choose-tool.component';
 import { FilamentComponent } from './filament/filament.component';
 import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.component';
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
@@ -71,6 +72,7 @@ import { URLSafePipe } from './url.pipe';
     AppComponent,
     BottomBarComponent,
     ChooseFilamentComponent,
+    ChooseToolComponent,
     ConfigInvalidComponent,
     ConfigSetupComponent,
     ControlComponent,

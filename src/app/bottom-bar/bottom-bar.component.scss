@@ -5,11 +5,17 @@
   width: calc(100% - 5.6vw);
 
   td {
-    width: 33.3%;
+    font-size: 4vw;
+    width: 40%;
+  }
+
+  &__printer-name {
+    text-overflow: ellipsis;
   }
 
   &__enclosure-temperature {
     text-align: center;
+    width: 20%;
 
     &-icon {
       width: 2.5vw;

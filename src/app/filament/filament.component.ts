@@ -18,11 +18,12 @@ import { SocketService } from '../services/socket/socket.service';
   standalone: false,
 })
 export class FilamentComponent implements OnInit, OnDestroy {
-  private totalPages = 5;
-  private hotendPreviousTemperature = 0;
+  private totalPages = 6;
+  private hotendPreviousTemperature = [0];
 
   public page: number;
   public showCheckmark = false;
+  public selectedTool = 0;
   public selectedSpool: FilamentSpool;
   public checkmarkOptions: AnimationOptions = {
     path: 'assets/animations/checkmark.json',
@@ -40,25 +41,30 @@ export class FilamentComponent implements OnInit, OnDestroy {
       .getPrinterStatusSubscribable()
       .pipe(take(1))
       .subscribe((printerStatus: PrinterStatus): void => {
-        this.hotendPreviousTemperature = printerStatus.tool0.set;
+        this.hotendPreviousTemperature = printerStatus.tools.map(t => t.set);
       });
   }
 
   public ngOnInit(): void {
-    if (this.configService.isFilamentManagerUsed()) {
-      this.setPage(0);
-    } else {
+    if (this.hotendPreviousTemperature.length === 1) {
+      if (!this.configService.isFilamentManagerUsed()) {
+        this.setPage(2);
+      }
       this.setPage(1);
     }
+    this.setPage(0);
   }
 
   public ngOnDestroy(): void {
-    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature);
+    this.printerService.setTemperatureHotend(this.hotendPreviousTemperature[this.selectedTool], this.selectedTool);
   }
 
   public increasePage(returnToMainScreen = false): void {
     if (this.page === this.totalPages || returnToMainScreen) {
       this.router.navigate(['/main-screen']);
+    } else if (this.page === 0 && !this.configService.isFilamentManagerUsed()) {
+      // Skip spool selection page if no filament manager is used
+      this.setPage(2);
     } else if (this.page < this.totalPages) {
       this.setPage(this.page + 1);
     }
@@ -67,14 +73,24 @@ export class FilamentComponent implements OnInit, OnDestroy {
   public decreasePage(): void {
     if (this.page === 0) {
       this.router.navigate(['/main-screen']);
-    } else if (this.page === 1 && this.configService.isFilamentManagerUsed()) {
-      this.setPage(0);
     } else if (this.page === 1) {
-      this.router.navigate(['/main-screen']);
-    } else if (this.page === 2 || this.page === 3) {
-      this.setPage(1);
-    } else if (this.page === 4 || this.page === 5) {
-      this.setPage(3);
+      if (this.hotendPreviousTemperature.length > 1) {
+        this.setPage(0);
+      } else {
+        this.router.navigate(['/main-screen']);
+      }
+    } else if (this.page === 2) {
+      if (this.configService.isFilamentManagerUsed()) {
+        this.setPage(1);
+      } else if (this.hotendPreviousTemperature.length > 1) {
+        this.setPage(0);
+      } else {
+        this.router.navigate(['/main-screen']);
+      }
+    } else if (this.page === 3 || this.page === 4) {
+      this.setPage(2);
+    } else if (this.page === 5 || this.page === 6) {
+      this.setPage(4);
     }
   }
 
@@ -86,6 +102,11 @@ export class FilamentComponent implements OnInit, OnDestroy {
       }
     }, 200);
     this.page = page;
+  }
+
+  public setTool(tool: number): void {
+    this.selectedTool = tool;
+    this.increasePage();
   }
 
   public setSpool(spoolInformation: { spool: FilamentSpool; skipChange: boolean }): void {
@@ -100,7 +121,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   public setSpoolSelection(): void {
     if (this.selectedSpool) {
       this.filament
-        .setSpool(this.selectedSpool)
+        .setSpool(this.selectedSpool, this.selectedTool)
         .then((): void => {
           this.showCheckmark = true;
           setTimeout(this.increasePage.bind(this), 1350, true);
@@ -112,7 +133,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public get currentSpool(): FilamentSpool {
-    return this.filament.getCurrentSpool();
+    return this.filament.getCurrentSpool(this.selectedTool);
   }
 
   public setAnimationSpeed(animation: AnimationItem): void {

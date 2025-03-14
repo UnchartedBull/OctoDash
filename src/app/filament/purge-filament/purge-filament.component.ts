@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ConfigService } from '../../config/config.service';
 import { PrinterService } from '../../services/printer/printer.service';
@@ -10,6 +10,8 @@ import { PrinterService } from '../../services/printer/printer.service';
   standalone: false,
 })
 export class PurgeFilamentComponent implements OnInit {
+  @Input() selectedTool: number;
+
   @Output() purgeDone = new EventEmitter<void>();
 
   public purgeAmount: number;
@@ -34,6 +36,6 @@ export class PurgeFilamentComponent implements OnInit {
   }
 
   public purgeFilament(length: number): void {
-    this.printerService.extrude(length, this.configService.getFeedSpeedSlow());
+    this.printerService.extrude(length, this.configService.getFeedSpeedSlow(), this.selectedTool);
   }
 }

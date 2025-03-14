@@ -15,6 +15,7 @@ import { SocketService } from '../../services/socket/socket.service';
 export class HeatNozzleComponent implements OnInit, OnDestroy {
   @Input() selectedSpool: FilamentSpool;
   @Input() currentSpool: FilamentSpool;
+  @Input() selectedTool: number;
 
   @Output() increasePage = new EventEmitter<void>();
 
@@ -22,6 +23,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   public hotendTemperature: number;
   public automaticHeatingStartSeconds: number;
   public isHeating: boolean;
+  public isComplete: boolean;
 
   private startHeatingTimeout: ReturnType<typeof setTimeout>;
   private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
@@ -35,6 +37,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isHeating = false;
+    this.isComplete = false;
     this.automaticHeatingStartSeconds = 6;
     this.automaticHeatingStartTimer();
     this.hotendTarget = this.currentSpool
@@ -43,7 +46,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-        this.hotendTemperature = printerStatus.tool0.current;
+        this.hotendTemperature = printerStatus.tools[this.selectedTool].current;
       }),
     );
   }
@@ -80,13 +83,16 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   public setNozzleTemperature(): void {
     this.isHeating = true;
     this.clearTimeouts();
-    this.printerService.setTemperatureHotend(this.hotendTarget);
+    this.printerService.setTemperatureHotend(this.hotendTarget, this.selectedTool);
     this.checkNozzleTemperatureTimeout = setTimeout(this.checkTemperature.bind(this), 1500);
   }
 
   private checkTemperature(): void {
     if (this.hotendTemperature >= this.hotendTarget) {
-      this.increasePage.emit();
+      if (!this.isComplete) {
+        this.increasePage.emit();
+        this.isComplete = true;
+      }
     } else {
       this.checkNozzleTemperatureTimeout = setTimeout(this.checkTemperature.bind(this), 1500);
     }
