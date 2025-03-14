@@ -6,8 +6,9 @@ import { EventService } from '../event.service';
 import { FilesService } from '../services/files/files.service';
 
 @Component({
-  selector: 'app-main-screen',
-  templateUrl: './main-screen.component.html',
+    selector: 'app-main-screen',
+    templateUrl: './main-screen.component.html',
+    standalone: false
 })
 export class MainScreenComponent {
   public printing = false;

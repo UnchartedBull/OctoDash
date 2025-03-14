@@ -4,9 +4,10 @@ import { FilamentSpool } from '../../model';
 import { FilamentService } from '../../services/filament/filament.service';
 
 @Component({
-  selector: 'app-filament-choose',
-  templateUrl: './choose-filament.component.html',
-  styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
+    selector: 'app-filament-choose',
+    templateUrl: './choose-filament.component.html',
+    styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
+    standalone: false
 })
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();

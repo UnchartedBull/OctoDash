@@ -7,9 +7,10 @@ import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
 
 @Component({
-  selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss'],
+    selector: 'app-update',
+    templateUrl: './update.component.html',
+    styleUrls: ['./update.component.scss'],
+    standalone: false
 })
 export class UpdateComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>(true);

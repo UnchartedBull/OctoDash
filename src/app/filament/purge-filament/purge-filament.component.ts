@@ -4,9 +4,10 @@ import { ConfigService } from '../../config/config.service';
 import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
-  selector: 'app-filament-purge-filament',
-  templateUrl: './purge-filament.component.html',
-  styleUrls: ['./purge-filament.component.scss', '../filament.component.scss'],
+    selector: 'app-filament-purge-filament',
+    templateUrl: './purge-filament.component.html',
+    styleUrls: ['./purge-filament.component.scss', '../filament.component.scss'],
+    standalone: false
 })
 export class PurgeFilamentComponent implements OnInit {
   @Output() purgeDone = new EventEmitter<void>();

@@ -5,9 +5,10 @@ import { ZHeightLayer } from '../model';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
-  selector: 'app-height-progress',
-  templateUrl: './height-progress.component.html',
-  styleUrls: ['./height-progress.component.scss'],
+    selector: 'app-height-progress',
+    templateUrl: './height-progress.component.html',
+    styleUrls: ['./height-progress.component.scss'],
+    standalone: false
 })
 export class HeightProgressComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
