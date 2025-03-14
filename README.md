@@ -1,7 +1,7 @@
 <p align="center">
     <img width="300" height="300" src="./src/assets/icon/icon-main-dark-title.svg">
     <br><br>
-    <img src="https://img.shields.io/github/workflow/status/queengooborg/OctoDash/build/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/actions/workflow/status/queengooborg/OctoDash/build.yaml?style=for-the-badge">
     <img src="https://img.shields.io/codefactor/grade/github/queengooborg/OctoDash/main?style=for-the-badge">
     <img src="https://img.shields.io/github/package-json/v/queengooborg/OctoDash/main?style=for-the-badge">
     <img src="https://img.shields.io/github/downloads/queengooborg/OctoDash/latest/total?color=lightgrey&style=for-the-badge">
@@ -10,7 +10,7 @@
     OctoDash is a User Interface for OctoPrint, it utilizes the OctoPrint API but tries to use modern design principles in order to fully enable the power of your Raspberry Pi attached to your 3D Printer. OctoDash works best with a Touchscreen and will support almost all functions that OctoPrint offers just in a nicer format. Give it a try!
 </p>
 
-<p align="center">This page is for queengooborg's fork. [Click here for the original version.](https://github.com/UnchartedBull/OctoDash/)</p>
+<p align="center"><b>This page is for queengooborg's fork. <a href="https://github.com/UnchartedBull/OctoDash/">Click here for the original version.</a></b></p>
 
 ## Table of Contents
 
