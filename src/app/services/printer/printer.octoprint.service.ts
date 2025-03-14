@@ -111,6 +111,27 @@ export class PrinterOctoprintService implements PrinterService {
       .subscribe();
   }
 
+  public setTool(tool: number): void {
+    const toolPayload: any = {
+      command: 'select',
+      tool: `tool${tool}`,
+    };
+    this.http
+      .post(this.configService.getApiURL('printer/tool'), toolPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-extrude:Can't set active tool!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
   public setTemperatureHotend(temperature: number, tool?: number): void {
     const temperatureHotendCommand: TemperatureHotendCommand = {
       command: 'target',
