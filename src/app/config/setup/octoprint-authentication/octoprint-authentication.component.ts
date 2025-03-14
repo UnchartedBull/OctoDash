@@ -8,10 +8,10 @@ import { NotificationService } from '../../../notification/notification.service'
 import { OctoprintAuthenticationService } from './octoprint-authentication.service';
 
 @Component({
-    selector: 'app-config-setup-octoprint-authentication',
-    templateUrl: './octoprint-authentication.component.html',
-    styleUrls: ['./octoprint-authentication.component.scss', '../setup.component.scss'],
-    standalone: false
+  selector: 'app-config-setup-octoprint-authentication',
+  templateUrl: './octoprint-authentication.component.html',
+  styleUrls: ['./octoprint-authentication.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class OctoprintAuthenticationComponent {
   @Input() octoprintURL: string;
@@ -20,7 +20,10 @@ export class OctoprintAuthenticationComponent {
   @Output() increasePage = new EventEmitter<void>();
   @Output() accessTokenChange = new EventEmitter<string>();
 
-  constructor(private authService: OctoprintAuthenticationService, private notificationService: NotificationService) {}
+  constructor(
+    private authService: OctoprintAuthenticationService,
+    private notificationService: NotificationService,
+  ) {}
 
   public loginWithOctoprintUI(): void {
     this.authService.probeAuthSupport(this.octoprintURL).subscribe({

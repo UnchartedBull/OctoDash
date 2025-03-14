@@ -11,11 +11,11 @@ import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
-    selector: 'app-filament',
-    templateUrl: './filament.component.html',
-    styleUrls: ['./filament.component.scss'],
-    providers: [FilamentService],
-    standalone: false
+  selector: 'app-filament',
+  templateUrl: './filament.component.html',
+  styleUrls: ['./filament.component.scss'],
+  providers: [FilamentService],
+  standalone: false,
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 5;

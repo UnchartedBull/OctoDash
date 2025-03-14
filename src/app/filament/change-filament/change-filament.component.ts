@@ -5,21 +5,24 @@ import { FilamentSpool } from '../../model';
 import { PrinterService } from '../../services/printer/printer.service';
 
 @Component({
-    selector: 'app-filament-change-filament',
-    templateUrl: './change-filament.component.html',
-    styleUrls: [
-        './change-filament.component.scss',
-        '../filament.component.scss',
-        '../heat-nozzle/heat-nozzle.component.scss',
-    ],
-    standalone: false
+  selector: 'app-filament-change-filament',
+  templateUrl: './change-filament.component.html',
+  styleUrls: [
+    './change-filament.component.scss',
+    '../filament.component.scss',
+    '../heat-nozzle/heat-nozzle.component.scss',
+  ],
+  standalone: false,
 })
 export class ChangeFilamentComponent implements OnInit {
   @Input() selectedSpool: FilamentSpool;
 
   @Output() increasePage = new EventEmitter<void>();
 
-  constructor(private configService: ConfigService, private printerService: PrinterService) {}
+  constructor(
+    private configService: ConfigService,
+    private printerService: PrinterService,
+  ) {}
 
   ngOnInit(): void {
     if (this.configService.useM600()) {

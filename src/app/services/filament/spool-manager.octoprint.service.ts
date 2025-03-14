@@ -10,7 +10,10 @@ import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()
 export class SpoolManagerOctoprintService implements FilamentPluginService {
-  public constructor(private configService: ConfigService, private http: HttpClient) {}
+  public constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+  ) {}
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.callSpoolManagerAPI('hideInactiveSpools', 0, 3000, 'lastUse', 'desc').pipe(

@@ -9,10 +9,10 @@ import { PrinterService } from '../../services/printer/printer.service';
 import { SystemService } from '../../services/system/system.service';
 
 @Component({
-    selector: 'app-custom-actions',
-    templateUrl: './custom-actions.component.html',
-    styleUrls: ['./custom-actions.component.scss'],
-    standalone: false
+  selector: 'app-custom-actions',
+  templateUrl: './custom-actions.component.html',
+  styleUrls: ['./custom-actions.component.scss'],
+  standalone: false,
 })
 export class CustomActionsComponent {
   @Input() redirectActive = true;
