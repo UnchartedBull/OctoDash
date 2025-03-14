@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
   push:
@@ -7,10 +7,9 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +32,5 @@ jobs:
         run: sudo npm install -g npm@latest
       - name: Installing Dependencies
         run: npm ci
-      - name: Building Application
-        run: npm run build:prod
-      - name: Packaging Application
-        run: npm run electron:pack
+      - name: Linting Application
+        run: npm run lint
