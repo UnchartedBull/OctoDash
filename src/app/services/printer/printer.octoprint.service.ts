@@ -121,7 +121,7 @@ export class PrinterOctoprintService implements PrinterService {
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({
-            heading: $localize`:@@error-printer-extrude:Can't set active tool!`,
+            heading: $localize`:@@error-printer-set-tool:Can't set active tool!`,
             text: error.message,
             type: NotificationType.ERROR,
             time: new Date(),

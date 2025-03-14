@@ -1342,11 +1342,14 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">261</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can&apos;t set active tool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">

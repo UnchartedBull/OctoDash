@@ -334,11 +334,13 @@
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
         <source>select tool</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="tool-selection" datatype="html">
         <source>Tool 
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="filament-back" datatype="html">
         <source> back </source>
@@ -656,6 +658,7 @@
       </trans-unit>
       <trans-unit id="error-run-enclosure-shell" datatype="html">
         <source>Can't run enclosure shell!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-psu-state" datatype="html">
         <source>Can't change PSU State!</source>
@@ -765,6 +768,9 @@
         <source>Can't extrude Filament!</source>
         <target>Filament kann nicht extrudiert werden!</target>
       </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can't set active tool!</source>
+      </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
         <target>Hotend Temperatur kann nicht gesetzt werden!</target>
@@ -787,12 +793,15 @@
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="http-403-text" datatype="html">
         <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="http-unknown-heading" datatype="html">
         <source>Unknown HTTP Error</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="unit-h-1" datatype="html">
         <source>h</source>
