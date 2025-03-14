@@ -70,6 +70,10 @@ export const defaultConfig: Config = {
       topic: 'topic',
       relayNumber: null,
     },
+    tuya: {
+      enabled: false,
+      label: 'label',
+    },
     wemo: {
       enabled: false,
       ip: '127.0.0.1',
