@@ -346,7 +346,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({
-            heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
+            heading: $localize`:@@error-send-tuya-plug:Can't update Tuya!`,
             text: error.message,
             type: NotificationType.ERROR,
             time: new Date(),

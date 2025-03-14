@@ -119,6 +119,7 @@ const configSchema = {
         'psuControl',
         'ophom',
         'tpLinkSmartPlug',
+        'tuya',
         'tasmota',
         'tasmotaMqtt',
         'wemo',
@@ -274,6 +275,17 @@ const configSchema = {
             relayNumber: {
               $id: '#/properties/plugins/properties/tasmotaMqtt/properties/relayNumber',
               type: ['number', 'null'],
+            },
+          },
+        },
+        tuya: {
+          $id: '#/properties/plugins/properties/tuya',
+          type: 'object',
+          required: ['label'],
+          properties: {
+            label: {
+              $id: '#/properties/plugins/properties/tuya/properties/label',
+              type: 'string',
             },
           },
         },
