@@ -55,7 +55,7 @@ export class FilamentService {
   }
 
   public getCurrentSpool(tool: number): FilamentSpool {
-    return this.currentSpool[tool];
+    return this.currentSpool && this.currentSpool[tool];
   }
 
   public getLoading(): boolean {

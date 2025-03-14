@@ -45,14 +45,13 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    let offset = 0;
-    if (!this.configService.isFilamentManagerUsed()) {
-      offset += 1;
-    }
     if (this.hotendPreviousTemperature.length === 1) {
-      offset += 1;
+      if (!this.configService.isFilamentManagerUsed()) {
+        this.setPage(2);
+      }
+      this.setPage(1);
     }
-    this.setPage(offset);
+    this.setPage(0);
   }
 
   public ngOnDestroy(): void {

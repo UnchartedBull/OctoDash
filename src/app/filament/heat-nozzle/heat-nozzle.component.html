@@ -1,4 +1,4 @@
-<span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle</span>
+<span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle for tool {{ selectedTool }}</span>
 <div class="heating__center">
   <div class="heating__controller">
     <div class="heating__controller-row">
@@ -32,7 +32,6 @@
     </div>
     <span class="heating__information-name">{{ selectedSpool.name }}</span>
     <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
-    <span class="heating__information-tool">Tool {{ selectedTool }}</span>
     <div class="heating__information-offset-wrapper">
       <span class="heating__information-offset-value">
         {{ getSpoolTemperatureOffsetString(selectedSpool)
