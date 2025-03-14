@@ -79,6 +79,9 @@ export const defaultConfig: Config = {
       ip: '127.0.0.1',
       port: 49152,
     },
+    companionPlugin: {
+      enabled: false,
+    },
   },
   octodash: {
     customActions: [

@@ -61,7 +61,9 @@ function createWindow() {
 
   if (dev) {
     url = 'http://localhost:4200';
-    window.webContents.openDevTools();
+    let devtools = new BrowserWindow();
+    window.webContents.setDevToolsWebContents(devtools.webContents);
+    window.webContents.openDevTools({ mode: 'detach' });
   } else {
     url = new URL(`./dist/${locale}/index.html`, import.meta.url);
     window.setFullScreen(true);

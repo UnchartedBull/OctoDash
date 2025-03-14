@@ -62,6 +62,7 @@ interface Plugins {
   tasmotaMqtt: TasmotaMqttPlugin;
   tuya: TuyaPlugin;
   wemo: WemoPlugin;
+  companionPlugin: Plugin;
 }
 
 interface Plugin {
