@@ -1,30 +1,30 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
+import path from 'node:path';
 
-require('v8-compile-cache');
+import 'v8-compile-cache';
+import electron from 'electron';
+import Store from 'electron-store';
 
-const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
-const path = require('path');
-const Store = require('electron-store');
+import activateListeners from './helper/listener.js';
+import createProtocol from './helper/protocol.js';
+import { getLocale } from './helper/locale.js';
+
+const { app, BrowserWindow, ipcMain, protocol, screen, session } = electron;
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
 const dev = args.some(val => val === '--serve');
-
-const activateListeners = require('./helper/listener');
 
 let window;
 let locale;
 let url;
 
 if (!dev) {
-  const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
-  createProtocol(scheme, path.join(__dirname, 'dist'));
+  createProtocol(scheme, new URL('./dist', import.meta.url));
 
-  locale = require('./helper/locale.js').getLocale();
+  locale = getLocale();
 }
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
@@ -56,14 +56,14 @@ function createWindow() {
       enableRemoteModule: true,
       contextIsolation: false,
     },
-    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
+    icon: new URL('./dist/assets/icon/icon.png', import.meta.url),
   });
 
   if (dev) {
     url = 'http://localhost:4200';
     window.webContents.openDevTools();
   } else {
-    url = `file://${__dirname}/dist/${locale}/index.html`;
+    url = new URL(`./dist/${locale}/index.html`, import.meta.url);
     window.setFullScreen(true);
   }
 

@@ -1,7 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+import fs from 'node:fs';
 
-function getLocale() {
-  const i18n = require('../angular.json').projects.OctoDash.i18n;
+import xliff from 'xliff';
+
+import angularConfig from '../angular.json' with { type: 'json' };
+
+export function getLocale() {
+  const i18n = angularConfig.projects.OctoDash.i18n;
   let lang;
   try {
     // Detect if environment LANG is set
@@ -25,10 +29,7 @@ function getLocale() {
 }
 
 // updates all supported locales consuming an updated messages.xlf
-function updateLocales() {
-  const fs = require('fs');
-  const xliff = require('xliff');
-
+export function updateLocales() {
   // list all existing locales
   let translatedXLFs = [];
   const filenames = fs.readdirSync('./src/locale');
@@ -80,5 +81,3 @@ function updateLocales() {
     }
   });
 }
-
-module.exports = { getLocale, updateLocales };

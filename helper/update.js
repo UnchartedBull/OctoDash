@@ -1,24 +1,21 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-sync */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
 
-const fs = require('fs');
-const { got } = require('got-cjs');
-const stream = require('stream');
-const { promisify } = require('util');
-const progress = require('progress-stream');
+import fs from 'node:fs';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
+import stream from 'node:stream';
 
-const exec = require('child_process').exec;
+import { got } from 'got';
+import progress from 'progress-stream';
 
-function downloadUpdate(updateInfo, window) {
+export function downloadUpdate(updateInfo, window) {
   const downloadPath = '/tmp/octodash.deb';
   const archMapping = {
     armv7l: 'armv7l',
     aarch64: 'arm64',
     x86_64: 'amd64',
   };
-
   exec('arch', (err, stdout, stderr) => {
     if (err || stderr) {
       window.webContents.send('updateError', {
@@ -31,10 +28,10 @@ function downloadUpdate(updateInfo, window) {
         const averageETA = [];
         let downloadURL;
         let packageSize;
-        for (const package of JSON.parse(releaseFiles.body)) {
-          if (package.name.includes(archMapping[stdout.trim()])) {
-            downloadURL = package.browser_download_url;
-            packageSize = package.size;
+        for (const pkg of JSON.parse(releaseFiles.body)) {
+          if (pkg.name.includes(archMapping[stdout.trim()])) {
+            downloadURL = pkg.browser_download_url;
+            packageSize = pkg.size;
           }
         }
         if (downloadURL) {
@@ -43,7 +40,6 @@ function downloadUpdate(updateInfo, window) {
             length: packageSize,
             time: 300,
           });
-
           downloadProgress.on('progress', progress => {
             averageETA.push(progress.eta);
             if (averageETA.length > 4) averageETA.shift();
@@ -58,13 +54,11 @@ function downloadUpdate(updateInfo, window) {
               speed: (progress.speed / 1000000).toFixed(2),
             });
           });
-
           try {
             if (fs.existsSync(downloadPath)) fs.unlinkSync(downloadPath);
           } catch {
             // no need to handle this properly
           }
-
           downloadPipeline(got.stream(downloadURL), downloadProgress, fs.createWriteStream(downloadPath))
             .catch(error => {
               window.webContents.send('updateError', {
@@ -100,10 +94,8 @@ function downloadUpdate(updateInfo, window) {
   });
 }
 
-function sendVersionInfo(window, app) {
+export function sendVersionInfo(window, app) {
   window.webContents.send('versionInformation', {
     version: app.getVersion(),
   });
 }
-
-module.exports = { downloadUpdate, sendVersionInfo };

@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
+import { exec } from 'node:child_process';
 
-const compareVersions = require('compare-versions');
-const exec = require('child_process').exec;
+import * as compareVersions from 'compare-versions';
+import bonjour from 'bonjour';
 
 const minimumVersion = '1.3.5';
 let browser;
 let nodes = [];
 
-function startDiscovery(window) {
+export function startDiscovery(window) {
   exec('hostname', (err, stdout) => {
     if (err) {
       discoverNodes(window, null);
@@ -19,7 +18,7 @@ function startDiscovery(window) {
 }
 
 function discoverNodes(window, localDomain) {
-  const bonjour = require('bonjour')();
+  const bonjour = bonjour();
   nodes = [];
   browser = bonjour.find({ type: 'octoprint' });
   browser.on('up', service => {
@@ -42,12 +41,10 @@ function discoverNodes(window, localDomain) {
   browser.start();
 }
 
-function stopDiscovery() {
+export function stopDiscovery() {
   browser.stop();
 }
 
 function sendNodes(window) {
   window.webContents.send('discoveredNodes', nodes);
 }
-
-module.exports = { startDiscovery, stopDiscovery };
