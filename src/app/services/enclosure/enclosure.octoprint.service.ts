@@ -308,6 +308,7 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   togglePSU(): void {
-    this.currentPSUState === PSUState.ON ? this.setPSUState(PSUState.OFF) : this.setPSUState(PSUState.ON);
+    const newState = this.currentPSUState === PSUState.ON ? PSUState.OFF : PSUState.ON;
+    this.setPSUState(newState);
   }
 }
