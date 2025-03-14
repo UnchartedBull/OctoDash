@@ -166,6 +166,7 @@
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager (Beta)</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
@@ -181,6 +182,7 @@
       </trans-unit>
       <trans-unit id="plugin-opom" datatype="html">
         <source>Ophom (Phillips HUE)</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source> TPLink SmartPlug </source>
@@ -207,7 +209,7 @@
         <target>Génial ! Je vais tout vérifier.</target>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
-        <source> Octoprint Connection </source>
+        <source> OctoPrint Connection </source>
         <target> Connexion Octoprint </target>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
@@ -287,7 +289,9 @@
         <target>voulez-vous exécuter la commande suivante ?</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
-        <source>load new filament</source>
+        <source>load new filament into tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
         <target>charger un nouveau filament</target>
       </trans-unit>
       <trans-unit id="load-new-filament-message" datatype="html">
@@ -330,6 +334,16 @@
         <source>loading spools</source>
         <target>chargement des bobines</target>
       </trans-unit>
+      <trans-unit id="choose-tool" datatype="html">
+        <source>select tool</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="tool-selection" datatype="html">
+        <source>Tool 
+          <x id="INTERPOLATION" equiv-text="{{ i }}"/>
+        </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="filament-back" datatype="html">
         <source> back </source>
         <target> retour </target>
@@ -339,7 +353,9 @@
         <target> passer </target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
-        <source>heating the nozzle</source>
+        <source>heating the nozzle for tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
         <target>préchauffage de la buse</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait" datatype="html">
@@ -528,6 +544,7 @@
       </trans-unit>
       <trans-unit id="no-new-notifications" datatype="html">
         <source> no new notifications. </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="tap-close" datatype="html">
         <source>tap this card to close it</source>
@@ -641,6 +658,10 @@
         <source>Can't set output!</source>
         <target>Impossible de définir la sortie !</target>
       </trans-unit>
+      <trans-unit id="error-run-enclosure-shell" datatype="html">
+        <source>Can't run enclosure shell!</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-psu-state" datatype="html">
         <source>Can't change PSU State!</source>
         <target>Impossible de changer l'état du bloc d'alimentation !</target>
@@ -655,6 +676,7 @@
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can't update Ophom Plug!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can't send GCode!</source>
@@ -662,9 +684,11 @@
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can't update Tasmota!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can't update Tasmota MQTT!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
@@ -746,6 +770,9 @@
         <source>Can't extrude Filament!</source>
         <target>Impossible d'extruder le filament !</target>
       </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can't set active tool!</source>
+      </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
         <target>Impossible de régler la température de la buse !</target>
@@ -766,6 +793,18 @@
         <source>Can't disconnect Printer!</source>
         <target>Impossible de déconnecter l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="http-403-heading" datatype="html">
+        <source>HTTP Error 403 - FORBIDDEN</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="http-403-text" datatype="html">
+        <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="http-unknown-heading" datatype="html">
+        <source>Unknown HTTP Error</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="unit-h-1" datatype="html">
         <source>h</source>
         <target>h</target>
@@ -780,14 +819,11 @@
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
         <target>Action requise</target>
-      </trans-unit>
-      <trans-unit id="printer-information" datatype="html">
-        <source>Printer information</source>
-        <target>Information de l'imprimante</target>
       </trans-unit>
       <trans-unit id="error-answer-prompt" datatype="html">
         <source>Can't answer prompt!</source>
@@ -1020,9 +1056,11 @@
       </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager (Beta)</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-spool-manager-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
@@ -1185,11 +1223,11 @@
         <target>Souhaitez-vous redémarrer maintenant pour activer la dernière version ?</target>
       </trans-unit>
       <trans-unit id="reboot-no" datatype="html">
-        <source>no</source>
+        <source> no </source>
         <target>non</target>
       </trans-unit>
       <trans-unit id="reboot-yes" datatype="html">
-        <source>yes</source>
+        <source> yes </source>
         <target>oui</target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
