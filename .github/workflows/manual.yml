@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -20,9 +20,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '22'
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
@@ -30,6 +30,6 @@ jobs:
       - name: Packaging Application
         run: npm run electron:pack
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           path: package/octodash*.deb
