@@ -112,7 +112,7 @@ export class PrinterOctoprintService implements PrinterService {
   }
 
   public setTool(tool: number): void {
-    const toolPayload: any = {
+    const toolPayload: ToolCommand = {
       command: 'select',
       tool: `tool${tool}`,
     };
