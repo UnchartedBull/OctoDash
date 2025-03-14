@@ -14,6 +14,7 @@ import {
   OctoprintPrinterProfiles,
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
+  ToolCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
