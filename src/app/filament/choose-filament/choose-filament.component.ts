@@ -14,7 +14,7 @@ export class ChooseFilamentComponent {
   private currentSpools: number[];
 
   constructor(public filament: FilamentService) {
-    this.currentSpools = filament.getCurrentSpools().map(s => s.id);
+    this.currentSpools = (filament.getCurrentSpools() || []).map(s => s.id);
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {
