@@ -194,6 +194,9 @@
         <source> Tasmota MQTT </source>
         <target>Tasmota MQTT </target>
       </trans-unit>
+      <trans-unit id="plugin-wemo" datatype="html">
+        <source> Wemo </source>
+      </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
         <target>zurück</target>
@@ -688,6 +691,9 @@
         <source>Can't update Tasmota MQTT!</source>
         <target>Tasmota Stecker kann nicht geändert werden!</target>
       </trans-unit>
+      <trans-unit id="error-send-wemo-plug" datatype="html">
+        <source>Can't update Wemo!</source>
+      </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
         <target>Filament Rollen können nicht geladen werden!</target>
@@ -1099,6 +1105,18 @@
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
         <target>SmartPlug IP</target>
+      </trans-unit>
+      <trans-unit id="settings-wemo" datatype="html">
+        <source>Wemo</source>
+      </trans-unit>
+      <trans-unit id="settings-wemo-enabled" datatype="html">
+        <source>enabled</source>
+      </trans-unit>
+      <trans-unit id="settings-wemo-ip" datatype="html">
+        <source>Wemo IP</source>
+      </trans-unit>
+      <trans-unit id="settings-wemo-port" datatype="html">
+        <source>Wemo Port</source>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
