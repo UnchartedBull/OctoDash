@@ -32,7 +32,7 @@
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
           made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
-          by /u/UnchartedBull
+          by UnchartedBull + contributors
         </span>
       </div>
       <div class="settings__content settings__content-inactive" #settingsGeneral>
@@ -721,7 +721,8 @@
           </button>
           <span class="settings__about-copyright">
             &#169; 2019-2024 UnchartedBull + various contributors<br />
-            https://github.com/UnchartedBull/OctoDash
+            Running queengooborg's fork<br />
+            https://github.com/queengooborg/OctoDash
           </span>
           <span class="settings__heading-2" i18n="@@connection">Connection</span>
           <p class="settings__text" *ngIf="{ address: localIpAddress$ | async } as vm">
