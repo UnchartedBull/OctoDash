@@ -770,6 +770,7 @@
       </trans-unit>
       <trans-unit id="error-printer-set-tool" datatype="html">
         <source>Can't set active tool!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
