@@ -36,7 +36,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private pages = [];
   public update = false;
 
-  public localIpAddress$ = this.systemService.getLocalIpAddress();
+  public localIpAddress$;
 
   public constructor(
     private configService: ConfigService,
@@ -47,6 +47,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ) {
     this.config = this.configService.getCurrentConfig();
     this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    this.localIpAddress$ = this.systemService.getLocalIpAddress();
   }
 
   public ngOnInit(): void {
