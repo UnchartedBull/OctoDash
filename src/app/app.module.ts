@@ -1,4 +1,4 @@
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
@@ -105,14 +105,13 @@ import { URLSafePipe } from './url.pipe';
     ToggleSwitchComponent,
     NotificationCenterComponent,
   ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     FontAwesomeModule,
     FormsModule,
+    HttpClientModule,
     MatRippleModule,
     RoundProgressModule,
     LottieComponent,
@@ -222,10 +221,11 @@ import { URLSafePipe } from './url.pipe';
         },
       },
     ],
-    provideHttpClient(withInterceptorsFromDi()),
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
   ],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
   public constructor(library: FaIconLibrary) {
