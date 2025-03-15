@@ -10,7 +10,6 @@ import { SocketService } from '../services/socket/socket.service';
   selector: 'app-printer-status',
   templateUrl: './printer-status.component.html',
   styleUrls: ['./printer-status.component.scss'],
-  standalone: false,
 })
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();

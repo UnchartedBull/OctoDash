@@ -13,7 +13,6 @@ import { SocketService } from '../services/socket/socket.service';
   selector: 'app-print-control',
   templateUrl: './print-control.component.html',
   styleUrls: ['./print-control.component.scss'],
-  standalone: false,
 })
 export class PrintControlComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();

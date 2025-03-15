@@ -11,7 +11,6 @@ import { PrinterService } from '../services/printer/printer.service';
   selector: 'app-control',
   templateUrl: './control.component.html',
   styleUrls: ['./control.component.scss'],
-  standalone: false,
 })
 export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;
