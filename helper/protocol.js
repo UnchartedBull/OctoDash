@@ -1,9 +1,10 @@
-import fs from 'node:fs';
-import path, { extname } from 'node:path';
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-commonjs */
 
-import electron from 'electron';
-
-const { app, protocol } = electron;
+const { app, protocol } = require('electron');
+const fs = require('fs');
+const path = require('path');
+const { extname } = require('path');
 
 function createProtocol(scheme, basePath) {
   if (!app.isReady()) return app.on('ready', () => createProtocol(...arguments));
@@ -34,4 +35,4 @@ const mimeType = filename => mimeType[extname(`${filename || ''}`).toLowerCase()
   (mimeType['.jpg'] = mimeType['.jpeg'] = 'image/jpeg'),
   (mimeType['.ico'] = 'image/x-icon');
 
-export default createProtocol;
+module.exports = createProtocol;

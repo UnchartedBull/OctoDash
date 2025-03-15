@@ -1,13 +1,14 @@
-import Store from 'electron-store';
-import { Ajv } from 'ajv';
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-import configSchema from './config.schema.js';
+const Store = require('electron-store');
+const Ajv = require('ajv');
+const configSchema = require('./config.schema');
 
 let store;
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(configSchema);
 
-export function readConfig(window) {
+function readConfig(window) {
   try {
     if (!store) {
       store = new Store();
@@ -19,7 +20,7 @@ export function readConfig(window) {
   }
 }
 
-export function saveConfig(window, config) {
+function saveConfig(window, config) {
   if (validate(config)) {
     try {
       store.set('config', config);
@@ -32,7 +33,7 @@ export function saveConfig(window, config) {
   }
 }
 
-export function checkConfig(window, config) {
+function checkConfig(window, config) {
   if (!validate(config)) {
     window.webContents.send('configFail', getConfigErrors());
   } else {
@@ -51,3 +52,5 @@ function getConfigErrors() {
   });
   return errors;
 }
+
+module.exports = { readConfig, saveConfig, checkConfig };

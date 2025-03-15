@@ -1,30 +1,28 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-commonjs */
 
-import electron from 'electron';
-import Store from 'electron-store';
-
-import activateListeners from './helper/listener.js';
-import createProtocol from './helper/protocol.js';
-import { getLocale } from './helper/locale.js';
-
-const { app, BrowserWindow, ipcMain, protocol, screen, session } = electron;
+const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
+const path = require('path');
+const Store = require('electron-store');
 
 const args = process.argv.slice(1);
 const big = args.some(val => val === '--big');
 const dev = args.some(val => val === '--serve');
+
+const activateListeners = require('./helper/listener');
 
 let window;
 let locale;
 let url;
 
 if (!dev) {
+  const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
-  createProtocol(scheme, new URL('./dist', import.meta.url));
+  createProtocol(scheme, path.join(__dirname, 'dist'));
 
-  locale = getLocale();
+  locale = require('./helper/locale.js').getLocale();
 }
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
@@ -56,7 +54,7 @@ function createWindow() {
       enableRemoteModule: true,
       contextIsolation: false,
     },
-    icon: new URL('./dist/assets/icon/icon.png', import.meta.url),
+    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
   });
 
   if (dev) {
@@ -65,7 +63,7 @@ function createWindow() {
     window.webContents.setDevToolsWebContents(devtools.webContents);
     window.webContents.openDevTools({ mode: 'detach' });
   } else {
-    url = fileURLToPath(new URL(`./dist/${locale}/index.html`, import.meta.url));
+    url = `file://${__dirname}/dist/${locale}/index.html`;
     window.setFullScreen(true);
   }
 
