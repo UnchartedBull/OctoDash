@@ -667,6 +667,11 @@ text_input() {
 ################## INQUIRER.SH ##################
 
 
+if [ ! -f "/etc/debian_version" ]; then
+   echo ""
+   echo "OctoDash is only compatible with Debian-based Linux installations!"
+   echo ""
+fi
 
 arch=$(dpkg --print-architecture)
 if  [[ $arch == armhf ]]; then
