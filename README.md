@@ -3,7 +3,7 @@
     <br><br>
     <img src="https://img.shields.io/github/actions/workflow/status/queengooborg/OctoDash/build.yaml?style=for-the-badge">
     <img src="https://img.shields.io/codefactor/grade/github/queengooborg/OctoDash/main?style=for-the-badge">
-    <img src="https://img.shields.io/github/package-json/v/queengooborg/OctoDash/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/v/release/queengooborg/OctoDash?style=for-the-badge&label=Latest">
     <img src="https://img.shields.io/github/downloads/queengooborg/OctoDash/latest/total?color=lightgrey&style=for-the-badge">
     <br>
     <b>OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!</b><br />
