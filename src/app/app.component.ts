@@ -14,6 +14,7 @@ import { SocketService } from './services/socket/socket.service';
 export class AppComponent implements OnInit {
   public activated = false;
   public initialized = false;
+  public settings = false;
   public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
   public notificationCenterTop = '-100%';
@@ -149,5 +150,15 @@ export class AppComponent implements OnInit {
         this.hideNotificationCenter();
       }
     }
+  }
+
+  public showSettings(): void {
+    this.settings = true;
+  }
+
+  public hideSettings(): void {
+    setTimeout((): void => {
+      this.settings = false;
+    }, 350);
   }
 }
