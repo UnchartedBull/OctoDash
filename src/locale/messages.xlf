@@ -6,21 +6,39 @@
         <source> Initializing is taking longer than usual. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Please make sure that OctoPrint is running and that CORS is enabled for the API. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">20,23</context>
+          <context context-type="linenumber">21,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="initializing" datatype="html">
         <source>initializing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="update-available" datatype="html">
+        <source>Update available!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.service.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">29,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="update-available-long" datatype="html">
+        <source>Version <x id="PH" equiv-text="this.latestVersion"/> is available. Go to Settings &gt; About to update.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.service.ts</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
@@ -1539,13 +1557,6 @@
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="update-available" datatype="html">
-        <source> update available! </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">29,31</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
         <context-group purpose="location">
@@ -2187,21 +2198,21 @@
         <source>Can&apos;t initiate update!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-update-message" datatype="html">
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-install-update" datatype="html">
         <source>Can&apos;t install update!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
     </body>

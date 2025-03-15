@@ -70,7 +70,19 @@ export class AppService {
       next: (data: GitHubReleaseInformation): void => {
         this.latestVersion = data.tag_name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;
-        this.updateAvailable = this.version != this.latestVersion;
+        if (this.version != this.latestVersion) {
+          if (!this.updateAvailable) {
+            // Display notification first time that update is detected
+            this.notificationService.setNotification({
+              heading: $localize`:@@update-available:Update available!`,
+              text: $localize`:@@update-available-long:Version ${this.latestVersion} is available. Go to Settings > About to update.`,
+              type: NotificationType.INFO,
+              time: new Date(),
+            });
+          }
+
+          this.updateAvailable = true;
+        }
       },
       complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
     });

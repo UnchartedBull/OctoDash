@@ -13,6 +13,16 @@
         <source>initializing</source>
         <target>initialisation</target>
       </trans-unit>
+      <trans-unit id="update-available" datatype="html">
+        <source>Update available!</source>
+        <target> mise à jour disponible ! </target>
+      </trans-unit>
+      <trans-unit id="update-available-long" datatype="html">
+        <source>Version 
+          <x id="PH" equiv-text="this.latestVersion"/> is available. Go to Settings &gt; About to update.
+        </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
         <target>Impossible de charger les styles personnalisés !</target>
@@ -881,10 +891,6 @@
       <trans-unit id="settings-about" datatype="html">
         <source>about</source>
         <target>à propos</target>
-      </trans-unit>
-      <trans-unit id="update-available" datatype="html">
-        <source> update available! </source>
-        <target> mise à jour disponible ! </target>
       </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
