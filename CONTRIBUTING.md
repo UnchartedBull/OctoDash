@@ -8,24 +8,29 @@ If you can think of something nice to add or want to change / extend some of the
 
 - NodeJS v20
 - npm 11
+- Recommended: Unix-based OS (or WSL on Windows)
 
 ## Setup
 
-To setup a local environment you need to do the following steps:
+To setup a local environment, perform the following steps:
 
 - Fork the repository to your GitHub account, so you can push your changes
 - Clone the repository
 - Install dependencies: `npm install`
 - Run the build `npm run build` (only required once to copy assets)
-- Start the Live Server: `npm run start` or `npm run start:big`
-- If you want to package OctoDash, so you can install it on your Raspberry Pi: `npm run pack`
 
-## Languages
+## Testing
 
-To launch the app in development mode in a specific locale instead of the source english locale, use
+To test locally in a dev environment, simply run `npm start`. The app will automatically reload when changes are made.
+
+If you want to package OctoDash so you can install it on your target device, run `npm run pack`. This will generate `.deb` files in the `package/` folder, which you can upload to your target device for installation and testing in a production environment.
+
+## Localization
+
+To launch the app in development mode in a specific locale instead of the source English locale, use:
 
 ```
-npm run start --serve="--configuration=<lang>"
+npm start --serve="--configuration=<lang>"
 ```
 
 For a list of available locales have a look at the `angular.json` (`projects.OctoDash.i18n.locales`) file.
@@ -34,18 +39,18 @@ For a list of available locales have a look at the `angular.json` (`projects.Oct
 
 To add a language to the list of supported languages, follow these steps or follow the official Angular Tutorial [here](https://angular.io/guide/i18n#translate-each-translation-file):
 
-- find your ISO639-2 language code [here](https://www.loc.gov/standards/iso639-2/php/code_list.php)
-- run `npm run locale:extract` to generate a new locale file
-- locate the newly created file in the `src/locale` folder
-- rename the file to include your language code in the format `messages.<languageCode>.xlf`
-- in the `<file>` tag (second line of the xlf file) add `target-language="<languageCode>"`
-- duplicate the `<source>` tags for each element, replace `source` with `target` and put your translation in that tag
-- you can also use any XLIFF translation tool (i.e. [Brightex XLIFF](http://xliff.brightec.co.uk/)) to speed up the process
-- add your language reference in `angular.json`
+- Find your ISO639-2 language code [here](https://www.loc.gov/standards/iso639-2/php/code_list.php)
+- Run `npm run locale:extract` to generate a new locale file
+- Locate the newly created file in the `src/locale` folder
+- Rename the file to include your language code in the format `messages.<languageCode>.xlf`
+- In the `<file>` tag (second line of the xlf file), add `target-language="<languageCode>"`
+- Duplicate the `<source>` tags for each element, replace `source` with `target` and put your translation in that tag
+- You can also use any XLIFF translation tool (i.e. [Brightex XLIFF](http://xliff.brightec.co.uk/)) to speed up the process
+- Add your language reference in `angular.json`
 
   - `Projects.OctoDash.i18n.locales`
 
-    - add:
+    - Add:
 
       ```
       "<lang>": {
@@ -56,7 +61,7 @@ To add a language to the list of supported languages, follow these steps or foll
 
   - `Projects.OctoDash.architect.build.configurations.production.localize`.
 
-    - add:
+    - Add:
 
       ```
         "<lang>"
@@ -64,7 +69,7 @@ To add a language to the list of supported languages, follow these steps or foll
 
   - `Projects.OctoDash.architect.build.configurations`.
 
-    - add:
+    - Add:
 
       ```
       "<lang>": {
@@ -74,7 +79,7 @@ To add a language to the list of supported languages, follow these steps or foll
 
   - `Projects.OctoDash.architect.serve.configurations`.
 
-    - add:
+    - Add:
 
       ```
         "<lang>": {
