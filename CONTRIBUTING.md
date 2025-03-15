@@ -84,4 +84,4 @@ To add a language to the list of supported languages, follow these steps or foll
 
 ## Update translations IDs and sources
 
-To update translations with the latest codebase and IDs, run `npm run locale:update`. Only commit the files that do not have a date, these are only backups of the locale versions before the update.
+To update translations with the latest codebase and IDs, run `npm run locale:update`. Previous versions of the localization files will be stored locally in `src/locale/backups/`.
