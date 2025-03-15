@@ -1236,7 +1236,7 @@
         <target>Chut ! OctoDash dort.</target>
       </trans-unit>
       <trans-unit id="octoprint-sleeping-message" datatype="html">
-        <source>Press on the screen to wake me up again.</source>
+        <source>Tap the screen to wake me up again.</source>
         <target>Appuyez sur l'écran pour me réveiller à nouveau.</target>
       </trans-unit>
       <trans-unit id="connecting" datatype="html">
