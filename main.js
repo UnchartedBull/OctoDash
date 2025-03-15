@@ -63,7 +63,7 @@ function createWindow() {
     window.webContents.setDevToolsWebContents(devtools.webContents);
     window.webContents.openDevTools({ mode: 'detach' });
   } else {
-    url = `file://${__dirname}/dist/${locale}/index.html`;
+    url = `file://${__dirname}/dist/browser/${locale}/index.html`;
     window.setFullScreen(true);
   }
 
