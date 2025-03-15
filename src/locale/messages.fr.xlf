@@ -154,6 +154,7 @@
       </trans-unit>
       <trans-unit id="plugin-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -193,6 +194,7 @@
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
         <source> Tuya SmartPlug </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
@@ -706,6 +708,7 @@
       </trans-unit>
       <trans-unit id="error-send-tuya-plug" datatype="html">
         <source>Can't update Tuya!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
@@ -1040,9 +1043,11 @@
       </trans-unit>
       <trans-unit id="settings-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-octodash-companion-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -1132,12 +1137,15 @@
       </trans-unit>
       <trans-unit id="settings-tuya" datatype="html">
         <source>Tuya Smart Plug</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-tuya-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
@@ -1160,7 +1168,7 @@
         <target>à propos</target>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
-        <source> no update available </source>
+        <source> up to date </source>
         <target> pas de mise à jour disponible </target>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
@@ -1173,6 +1181,7 @@
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
