@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import electron from 'electron';
 import Store from 'electron-store';
@@ -64,7 +65,7 @@ function createWindow() {
     window.webContents.setDevToolsWebContents(devtools.webContents);
     window.webContents.openDevTools({ mode: 'detach' });
   } else {
-    url = new URL(`./dist/${locale}/index.html`, import.meta.url);
+    url = fileURLToPath(new URL(`./dist/${locale}/index.html`, import.meta.url));
     window.setFullScreen(true);
   }
 
