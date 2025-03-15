@@ -12,7 +12,6 @@ import { SystemService } from '../services/system/system.service';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  standalone: false,
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   @Output() closeFunction = new EventEmitter<void>();

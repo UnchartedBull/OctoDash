@@ -13,7 +13,6 @@ import { SocketService } from '../services/socket/socket.service';
   selector: 'app-control',
   templateUrl: './control.component.html',
   styleUrls: ['./control.component.scss'],
-  standalone: false,
 })
 export class ControlComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();

@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
-import * as _ from 'lodash-es';
+import _ from 'lodash-es';
 
 import { ElectronService } from '../electron.service';
 import { NotificationType } from '../model';

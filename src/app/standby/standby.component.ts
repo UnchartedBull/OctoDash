@@ -10,7 +10,6 @@ import { SystemService } from '../services/system/system.service';
   selector: 'app-standby',
   templateUrl: './standby.component.html',
   styleUrls: ['./standby.component.scss'],
-  standalone: false,
 })
 export class StandbyComponent implements OnInit, OnDestroy {
   public connecting = false;

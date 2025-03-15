@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash-es';
+import _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { catchError, pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';

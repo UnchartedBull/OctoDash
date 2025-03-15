@@ -41,7 +41,9 @@
             "index": "src/index.html",
             "i18nMissingTranslation": "warning",
             "localize": false,
-            "polyfills": ["src/polyfills.ts", "@angular/localize/init"],
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {

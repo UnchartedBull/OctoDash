@@ -7,7 +7,6 @@ import { FilamentService } from '../../services/filament/filament.service';
   selector: 'app-filament-choose-spool',
   templateUrl: './choose-filament.component.html',
   styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
-  standalone: false,
 })
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();

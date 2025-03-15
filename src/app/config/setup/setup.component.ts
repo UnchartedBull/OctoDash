@@ -11,7 +11,6 @@ import { ConfigService } from '../config.service';
   selector: 'app-config-setup',
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.scss'],
-  standalone: false,
 })
 export class ConfigSetupComponent implements OnInit, OnDestroy {
   public page = 0;

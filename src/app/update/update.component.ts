@@ -10,7 +10,6 @@ import { SystemService } from '../services/system/system.service';
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
-  standalone: false,
 })
 export class UpdateComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>(true);

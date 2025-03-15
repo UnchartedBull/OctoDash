@@ -8,7 +8,6 @@ import { NotificationService } from './notification.service';
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
-  standalone: false,
 })
 export class NotificationComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();

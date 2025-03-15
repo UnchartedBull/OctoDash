@@ -7,7 +7,6 @@ import { NotificationService } from '../notification/notification.service';
   selector: 'app-notification-center',
   templateUrl: './notification-center.component.html',
   styleUrls: ['./notification-center.component.scss'],
-  standalone: false,
 })
 export class NotificationCenterComponent {
   @Output() setNotificationCenterAnimation = new EventEmitter<boolean>();
