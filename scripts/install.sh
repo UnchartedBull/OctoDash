@@ -668,7 +668,6 @@ text_input() {
 
 
 
-arch=$(uname -m)
 arch=$(dpkg --print-architecture)
 if  [[ $arch == armhf ]]; then
   releaseURL=$(curl -s "https://api.github.com/repos/queengooborg/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
