@@ -1,6 +1,5 @@
 import path from 'node:path';
 
-import 'v8-compile-cache';
 import electron from 'electron';
 import Store from 'electron-store';
 
