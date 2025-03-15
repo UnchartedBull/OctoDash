@@ -63,7 +63,7 @@ function createWindow() {
     url = 'http://localhost:4200';
     window.webContents.openDevTools();
   } else {
-    url = `file://${__dirname}/dist/browser/${locale}/index.html`;
+    url = `file://${__dirname}/dist/${locale}/index.html`;
     window.setFullScreen(true);
   }
 
