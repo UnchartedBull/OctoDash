@@ -1,0 +1,5 @@
+<div class="settings-icon">
+  <img src="assets/settings.svg" (click)="showSettings()" />
+  <div class="settings-icon__update-notifier" *ngIf="service.updateAvailable"></div>
+</div>
+<app-settings *ngIf="settingsVisible" (closeFunction)="hideSettings()"></app-settings>

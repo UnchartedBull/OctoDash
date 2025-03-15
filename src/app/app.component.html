@@ -11,7 +11,7 @@
   (touchmove)="onTouchMove($event)"
   (touchend)="onTouchEnd($event)">
   <div *ngIf="!activated">
-    <img src="assets/settings.svg" class="settings-icon" (click)="showSettings()" />
+    <app-settings-icon></app-settings-icon>
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
     <span
       class="splash-screen__text"
@@ -58,5 +58,3 @@
     [options]="toggleSwitchOptionsCache"
     (dataReady)="toggleSwitchAnimationCacheDone()"></ng-lottie>
 </ng-container>
-
-<app-settings *ngIf="settings" (closeFunction)="hideSettings()"></app-settings>

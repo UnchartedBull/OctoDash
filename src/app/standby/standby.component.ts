@@ -14,7 +14,6 @@ import { SystemService } from '../services/system/system.service';
 export class StandbyComponent implements OnInit, OnDestroy {
   public connecting = false;
   public showConnectionError = false;
-  public settings = false;
   private displaySleepTimeout: ReturnType<typeof setTimeout>;
   private connectErrorTimeout: ReturnType<typeof setTimeout>;
 
@@ -60,15 +59,5 @@ export class StandbyComponent implements OnInit, OnDestroy {
         this.connecting = false;
       }, 30000);
     }, 15000);
-  }
-
-  public showSettings(): void {
-    this.settings = true;
-  }
-
-  public hideSettings(): void {
-    setTimeout((): void => {
-      this.settings = false;
-    }, 350);
   }
 }

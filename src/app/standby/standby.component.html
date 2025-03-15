@@ -1,5 +1,4 @@
 <div class="standby">
-  <img src="assets/settings.svg" class="standby__settings-icon" (click)="showSettings()" />
   <div (click)="reconnect()" class="standby__main-window">
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
     <ng-container *ngIf="!connecting">
@@ -15,4 +14,4 @@
   </div>
 </div>
 
-<app-settings *ngIf="settings" (closeFunction)="hideSettings()"></app-settings>
+<app-settings-icon></app-settings-icon>
