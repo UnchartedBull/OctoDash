@@ -68,11 +68,9 @@ export class AppService {
   private checkUpdate(): void {
     this.http.get('https://api.github.com/repos/queengooborg/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace('v', '')) {
-          this.updateAvailable = true;
-        }
-        this.latestVersion = data.name.replace('v', '');
+        this.latestVersion = data.tag_name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;
+        this.updateAvailable = this.version != this.latestVersion;
       },
       complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
     });
