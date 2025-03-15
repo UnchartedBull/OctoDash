@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.4.1-goofork",
+  "version": "2.4.2-goofork",
   "license": "Apache 2.0",
   "homepage": "https://github.com/queengooborg/OctoDash",
   "author": {
@@ -55,9 +55,8 @@
   "scripts": {
     "build:prod": "ng build --configuration production",
     "build": "ng build",
-    "electron:dev": "electron . --serve --big",
+    "electron:dev": "electron . --serve",
     "electron:pack": "electron-builder build -l",
-    "electron:serve:big": "wait-on http-get://localhost:4200/ && electron . --serve --big",
     "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
     "electron": "electron .",
     "lint:fix": "eslint ./src/ --ext .ts --fix && prettier --write .",
@@ -69,8 +68,7 @@
     "pack:mac": "npm run ng:build && electron-builder build -m",
     "pack": "npm run build:prod && npm run electron:pack",
     "serve": "ng serve",
-    "start:big": "npm-run-all -p serve electron:serve:big",
-    "start": "npm-run-all -p serve electron:serve electron:serve:big"
+    "start": "npm-run-all -p serve electron:serve"
   },
   "private": true,
   "dependencies": {

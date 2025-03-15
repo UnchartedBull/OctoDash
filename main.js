@@ -6,7 +6,6 @@ const path = require('path');
 const Store = require('electron-store');
 
 const args = process.argv.slice(1);
-const big = args.some(val => val === '--big');
 const dev = args.some(val => val === '--serve');
 
 const activateListeners = require('./helper/listener');
@@ -45,8 +44,8 @@ function createWindow() {
   const mainScreen = screen.getPrimaryDisplay();
 
   window = new BrowserWindow({
-    width: dev ? (big ? 1500 : 1200) : mainScreen.size.width,
-    height: dev ? (big ? 600 : 450) : mainScreen.size.height,
+    width: dev ? 1100 : mainScreen.size.width,
+    height: dev ? 600 : mainScreen.size.height,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
