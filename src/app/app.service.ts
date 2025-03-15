@@ -16,6 +16,7 @@ export class AppService {
   private latestVersion: string;
 
   public updateAvailable = false;
+  public dev = !!process.env.APP_DEV;
 
   public constructor(
     private configService: ConfigService,
@@ -66,6 +67,11 @@ export class AppService {
   }
 
   private checkUpdate(): void {
+    if (this.dev) {
+      // Disable updates in developer mode
+      return;
+    }
+
     this.http.get('https://api.github.com/repos/queengooborg/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
         this.latestVersion = data.tag_name.replace('v', '');

@@ -5,14 +5,13 @@ const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('elec
 const path = require('path');
 const Store = require('electron-store');
 
-const args = process.argv.slice(1);
-const dev = args.some(val => val === '--serve');
-
 const activateListeners = require('./helper/listener');
 
 let window;
 let locale;
 let url;
+
+const dev = !!process.env.APP_DEV;
 
 if (!dev) {
   const createProtocol = require('./helper/protocol');
@@ -29,17 +28,17 @@ app.commandLine.appendSwitch('touch-events', 'enabled');
 function createWindow() {
   const _store = new Store();
 
-  if (!dev) {
-    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-      callback({
-        responseHeaders: {
-          ...details.responseHeaders,
-          // TODO: re-enable
-          // "Content-Security-Policy": ["script-src 'self'"],
-        },
-      });
-    });
-  }
+  // TODO: re-enable
+  // if (!dev) {
+  //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+  //     callback({
+  //       responseHeaders: {
+  //         ...details.responseHeaders,
+  //         "Content-Security-Policy": ["script-src 'self'"],
+  //       },
+  //     });
+  //   });
+  // }
 
   const mainScreen = screen.getPrimaryDisplay();
 

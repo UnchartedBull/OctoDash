@@ -55,9 +55,9 @@
   "scripts": {
     "build:prod": "ng build --configuration production",
     "build": "ng build",
-    "electron:dev": "electron . --serve",
+    "electron:dev": "APP_DEV=true electron .",
     "electron:pack": "electron-builder build -l",
-    "electron:serve": "wait-on http-get://localhost:4200/ && electron . --serve",
+    "electron:serve": "wait-on http-get://localhost:4200/ && electron .",
     "electron": "electron .",
     "lint:fix": "eslint ./src/ --ext .ts --fix && prettier --write .",
     "lint": "eslint ./src/ --ext .ts --max-warnings=0 && prettier .",
@@ -68,7 +68,7 @@
     "pack:mac": "npm run build:prod && electron-builder build -m",
     "pack": "npm run build:prod && npm run electron:pack",
     "serve": "ng serve",
-    "start": "npm-run-all -p serve electron:serve"
+    "start": "APP_DEV=true npm-run-all -p serve electron:serve"
   },
   "private": true,
   "dependencies": {
