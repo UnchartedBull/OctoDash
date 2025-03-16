@@ -36,7 +36,7 @@ function discoverNodes(window, localDomain) {
       version: service.txt.version,
       url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
       local: service.host === localDomain,
-      disable: compareVersions(minimumVersion, service.txt.version, '>'),
+      disabled: compareVersions(minimumVersion, service.txt.version, '>'),
     });
     sendNodes(window);
   });
