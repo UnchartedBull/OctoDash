@@ -18,13 +18,11 @@ If you want to use the round progress bar:
 
 1a. Printing Screen (progress bar):
 
-   ![Printing screen 1](screenshots/screenshot_printing1.png)
-
+![Printing screen 1](screenshots/screenshot_printing1.png)
 
 1b. Printing Screen (round progress bar):
 
-   ![Printing screen 2](screenshots/screenshot_printing2.png)
-
+![Printing screen 2](screenshots/screenshot_printing2.png)
 
 2. Main Screen:
 
