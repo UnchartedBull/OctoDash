@@ -46,6 +46,7 @@ import { NotificationService } from './notification/notification.service';
 import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
+import { ResetComponent } from './reset/reset.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
@@ -66,7 +67,6 @@ import { SettingsIconComponent } from './settings/settings-icon/settings-icon.co
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
-import { ResetComponent } from './reset/reset.component';
 import { URLSafePipe } from './url.pipe';
 
 @NgModule({
