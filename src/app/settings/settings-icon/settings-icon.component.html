@@ -1,4 +1,4 @@
-<div class="settings-icon">
+<div class="settings-icon" *ngIf="configService.isLoaded()">
   <img src="assets/settings.svg" (click)="showSettings()" />
   <div class="settings-icon__update-notifier" *ngIf="service.updateAvailable"></div>
 </div>
