@@ -106,7 +106,7 @@
     "xliff": "~6.2.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.13",
+    "@angular-devkit/build-angular": "^19.2.3",
     "@angular/cli": "^17.3.13",
     "@angular/compiler-cli": "^17.3.12",
     "@angular/language-service": "^17.3.12",
