@@ -66,6 +66,7 @@ import { SettingsIconComponent } from './settings/settings-icon/settings-icon.co
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
+import { ResetComponent } from './reset/reset.component';
 import { URLSafePipe } from './url.pipe';
 
 @NgModule({
@@ -97,6 +98,7 @@ import { URLSafePipe } from './url.pipe';
     SettingsIconComponent,
     StandbyComponent,
     UpdateComponent,
+    ResetComponent,
     URLSafePipe,
     WelcomeComponent,
     HeatNozzleComponent,

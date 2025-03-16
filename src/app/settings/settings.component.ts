@@ -34,6 +34,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private overwriteNoSave = false;
   private pages = [];
   public update = false;
+  public reset = false;
 
   public localIpAddress$;
 
@@ -133,5 +134,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public hideUpdate(): void {
     this.update = false;
+  }
+
+  public showReset(): void {
+    this.reset = true;
+  }
+
+  public hideReset(): void {
+    this.reset = false;
   }
 }

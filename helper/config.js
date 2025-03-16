@@ -20,6 +20,15 @@ function readConfig(window) {
   }
 }
 
+function resetConfig(window) {
+  try {
+    store.delete('config');
+    window.webContents.send('configErased');
+  } catch {
+    window.webContents.send('configError', "Can't reset config file.");
+  }
+}
+
 function saveConfig(window, config) {
   if (validate(config)) {
     try {
@@ -53,4 +62,4 @@ function getConfigErrors() {
   return errors;
 }
 
-module.exports = { readConfig, saveConfig, checkConfig };
+module.exports = { readConfig, resetConfig, saveConfig, checkConfig };

@@ -780,9 +780,15 @@
             Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
           </p>
           <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
+          <hr />
+          <p class="settings_reset-button" (click)="showReset()">
+            <span i18n="@@reset-config">Reset Config</span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 <app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>
+<app-reset *ngIf="reset" (closeFunction)="hideReset()"></app-reset>

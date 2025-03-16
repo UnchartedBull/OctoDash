@@ -330,6 +330,16 @@
       margin-top: 5vh;
     }
   }
+
+  &_reset-button,
+  &_reset-button * {
+    font-size: 0.6rem;
+    margin: 1em 0;
+
+    span {
+      margin-right: 0.25em;
+    }
+  }
 }
 
 .filament-feed-speed-info {
