@@ -815,6 +815,10 @@ if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
 fi
 EOF
 
+    cat <<EOF >> ~/.ratpoisonrc
+startup_message off
+EOF
+
     echo "Setting up Console Autologin ..."
     sudo systemctl set-default multi-user.target
     sudo ln -fs /lib/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service

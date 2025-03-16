@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.4.2-goofork",
+  "version": "2.4.3-goofork",
   "license": "Apache 2.0",
   "homepage": "https://github.com/queengooborg/OctoDash",
   "author": {
