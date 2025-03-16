@@ -13,14 +13,14 @@
         <source>initializing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-available" datatype="html">
         <source>Update available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
@@ -31,14 +31,14 @@
         <source>Version <x id="PH" equiv-text="this.latestVersion"/> is available. Go to Settings &gt; About to update.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
@@ -466,7 +466,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-4" datatype="html">
-        <source> Thanks for choosing OctoDash </source>
+        <source> Note: you will need to connect a keyboard for the setup process </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
           <context context-type="linenumber">12</context>
@@ -476,21 +476,21 @@
         <source> Sorry for bothering you again ... </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-6" datatype="html">
         <source> We&apos;ve released an update, so awesome, we needed to change the config. Please review your new config! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">18,20</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-7" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/welcome/welcome.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="control-back" datatype="html">
@@ -957,21 +957,21 @@
         <source>files</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-filament" datatype="html">
         <source>filament</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-control" datatype="html">
         <source>control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-new-notifications" datatype="html">
@@ -1991,46 +1991,53 @@
           <context context-type="linenumber">704</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="about-developer-mode" datatype="html">
+        <source> updates disabled (dev mode) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/settings.component.html</context>
+          <context context-type="linenumber">712,714</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> up to date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">712,714</context>
+          <context context-type="linenumber">718,720</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">719,721</context>
+          <context context-type="linenumber">725,727</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">727</context>
+          <context context-type="linenumber">733</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">731</context>
+          <context context-type="linenumber">737</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">772</context>
+          <context context-type="linenumber">778</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">773,775</context>
+          <context context-type="linenumber">779,781</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
@@ -2100,28 +2107,28 @@
         <source>Shhh! OctoDash is sleeping.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/standby/standby.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-sleeping-message" datatype="html">
         <source>Tap the screen to wake me up again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/standby/standby.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connecting" datatype="html">
         <source>connecting</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/standby/standby.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection-failed" datatype="html">
         <source> Connection can&apos;t be established. Press screen to try again. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/standby/standby.component.html</context>
-          <context context-type="linenumber">11,13</context>
+          <context context-type="linenumber">10,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="downloading-update" datatype="html">

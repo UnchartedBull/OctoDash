@@ -269,8 +269,7 @@
         <target>Wenn du auf Probleme stößt, lesen bitte die Anleitung zur Fehlerbehebung im GitHub-Wiki. </target>
       </trans-unit>
       <trans-unit id="welcome-4" datatype="html">
-        <source> Thanks for choosing OctoDash </source>
-        <target>Danke, dass du dich für OctoDash entschieden hast</target>
+        <source> Note: you will need to connect a keyboard for the setup process </source>
       </trans-unit>
       <trans-unit id="welcome-5" datatype="html">
         <source> Sorry for bothering you again ... </source>
@@ -1165,6 +1164,9 @@
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <target>Info</target>
+      </trans-unit>
+      <trans-unit id="about-developer-mode" datatype="html">
+        <source> updates disabled (dev mode) </source>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> up to date </source>
