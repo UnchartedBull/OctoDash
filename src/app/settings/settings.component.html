@@ -360,6 +360,17 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@always-circular">Always use circular progress bar</span>
           </div>
+          <form class="settings__form">
+            <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory">Default directory for file browser</label>
+            <input
+              type="text"
+              id="defaultDirectory"
+              class="settings__input"
+              name="defaultDirectory"
+              style="width: 44.94vw"
+              [(ngModel)]="config.octodash.defaultDirectory"
+              required />
+          </form>
           <br />
           <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>
           <div
