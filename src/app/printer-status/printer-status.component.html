@@ -2,7 +2,7 @@
   class="printer-status"
   *ngIf="printerStatus"
   [ngClass]="{
-    'printer-status__multi-hotend': printerStatus.tools.length > 1
+    'printer-status__multi-hotend': printerStatus.tools.length > 1,
   }">
   <div class="printer-status__row">
     <div
@@ -16,7 +16,7 @@
         class="printer-status__value"
         [ngClass]="{
           'printer-status__small-text': printerStatus.tools.length > 2,
-          'printer-status__no-set-value': tool.set === 0
+          'printer-status__no-set-value': tool.set === 0,
         }">
         <span class="printer-status__tool-number" *ngIf="printerStatus.tools.length > 1">T{{ i }}:</span>
         <span class="printer-status__actual-value">
