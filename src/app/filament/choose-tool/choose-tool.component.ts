@@ -15,7 +15,10 @@ export class ChooseToolComponent {
 
   @Output() toolChange = new EventEmitter<number>();
 
-  public constructor(private printerService: PrinterService, private socketService: SocketService) {
+  public constructor(
+    private printerService: PrinterService,
+    private socketService: SocketService,
+  ) {
     this.socketService
       .getPrinterStatusSubscribable()
       .pipe(take(1))
