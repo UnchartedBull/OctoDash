@@ -60,7 +60,7 @@
     "electron:serve": "wait-on http-get://localhost:4200/ && electron .",
     "electron": "electron .",
     "lint:fix": "eslint ./src/ --ext .ts --fix && prettier --write .",
-    "lint": "eslint ./src/ --ext .ts --max-warnings=0 && prettier .",
+    "lint": "eslint ./src/ --ext .ts --max-warnings=0 && prettier --check .",
     "locale:extract": "ng extract-i18n --output-path src/locale",
     "locale:update:all": "node -e 'require(`./helper/locale.js`).updateLocales()'",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
