@@ -658,7 +658,10 @@
             i18n="@@about-install-v">
             install v{{ service.latestVersion }}
           </button>
-          <span class="settings__about-copyright">&#169; 2019-2020 UnchartedBull</span>
+          <span class="settings__about-copyright">
+            &#169; 2019-2024 UnchartedBull + various contributors<br />
+            https://github.com/UnchartedBull/OctoDash
+          </span>
           <span class="settings__heading-2" i18n="@@connection">Connection</span>
           <p class="settings__text" *ngIf="{address: localIpAddress$ | async} as vm">
             {{vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
