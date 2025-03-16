@@ -22,7 +22,7 @@ export class ControlComponent implements OnInit, OnDestroy {
 
   public jogDistance = 10;
   public selectedTool = 0;
-  public showExtruder = this.configService.getShowExtruderControl();
+  public showExtruder = false;
 
   public constructor(
     private printerService: PrinterService,
@@ -30,6 +30,7 @@ export class ControlComponent implements OnInit, OnDestroy {
     private notificationService: NotificationService,
     private socketService: SocketService,
   ) {
+    this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {

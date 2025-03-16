@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
-import player, { LottiePlayer } from 'lottie-web';
-import { LottieCacheModule, LottieModule } from 'ngx-lottie';
+import lottiePlayer from 'lottie-web';
+import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
@@ -67,9 +67,6 @@ import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 
-export function playerFactory(): LottiePlayer {
-  return player;
-}
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +114,7 @@ export function playerFactory(): LottiePlayer {
     HttpClientModule,
     MatRippleModule,
     RoundProgressModule,
-    [LottieModule.forRoot({ player: playerFactory }), LottieCacheModule.forRoot()],
+    LottieComponent,
   ],
   providers: [
     AppService,
@@ -224,6 +221,8 @@ export function playerFactory(): LottiePlayer {
         },
       },
     ],
+    [provideLottieOptions({ player: () => lottiePlayer })],
+    [provideCacheableAnimationLoader()],
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

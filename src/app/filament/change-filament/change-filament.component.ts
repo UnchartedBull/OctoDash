@@ -19,7 +19,10 @@ export class ChangeFilamentComponent implements OnInit {
 
   @Output() increasePage = new EventEmitter<void>();
 
-  constructor(private configService: ConfigService, private printerService: PrinterService) {}
+  constructor(
+    private configService: ConfigService,
+    private printerService: PrinterService,
+  ) {}
 
   ngOnInit(): void {
     if (this.configService.useM600()) {

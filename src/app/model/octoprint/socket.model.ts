@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { OctoprintFile } from './file.model';
 
 export interface OctoprintSocketCurrent {

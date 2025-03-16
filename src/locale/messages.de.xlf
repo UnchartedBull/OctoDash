@@ -51,11 +51,11 @@
         <target>manuell eingeben</target>
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
-        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
         <target>Port 5000 für Standardinstallation, Port 80 für OctoPi</target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source>search again</source>
+        <source> search again </source>
         <target>erneut suchen</target>
       </trans-unit>
       <trans-unit id="connect-localhost" datatype="html">
@@ -131,7 +131,7 @@
         <target>Bitte bestätige die Anfrage über das Popup im OctoPrint WebUI.</target>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
         <target>Erzählen mir jetzt etwas mehr über dein System, damit ich OctoDash für dich anpassen kann. </target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
@@ -334,13 +334,11 @@
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
         <source>select tool</source>
-        <target></target>
       </trans-unit>
       <trans-unit id="tool-selection" datatype="html">
         <source>Tool 
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </source>
-        <target></target>
       </trans-unit>
       <trans-unit id="filament-back" datatype="html">
         <source> back </source>
@@ -1112,6 +1110,9 @@
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
         </source>
         <target>installiere v</target>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>

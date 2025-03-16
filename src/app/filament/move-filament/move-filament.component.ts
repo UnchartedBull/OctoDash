@@ -22,7 +22,10 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
   private fastMoveTimeout: ReturnType<typeof setTimeout>;
   private slowMoveTimeout: ReturnType<typeof setTimeout>;
 
-  constructor(private configService: ConfigService, private printerService: PrinterService) {}
+  constructor(
+    private configService: ConfigService,
+    private printerService: PrinterService,
+  ) {}
 
   ngOnInit(): void {
     if (this.getFeedLength() > 0) {
@@ -62,9 +65,12 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
       unloadingProgressBar.style.transition = 'width ' + unloadTime + 's ease-in';
       setTimeout((): void => {
         unloadingProgressBar.style.width = '0vw';
-        this.fastMoveTimeout = setTimeout((): void => {
-          this.increasePage.emit();
-        }, unloadTime * 1000 + 500);
+        this.fastMoveTimeout = setTimeout(
+          (): void => {
+            this.increasePage.emit();
+          },
+          unloadTime * 1000 + 500,
+        );
       }, 200);
     }, 0);
   }
@@ -80,13 +86,19 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
       loadingProgressBar.style.transition = 'width ' + loadTime + 's ease-in';
       setTimeout((): void => {
         loadingProgressBar.style.width = '50vw';
-        this.fastMoveTimeout = setTimeout((): void => {
-          this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
-          this.feedSpeed = this.configService.getFeedSpeedSlow();
-          this.slowMoveTimeout = setTimeout((): void => {
-            this.increasePage.emit();
-          }, loadTimeSlow * 1000 + 400);
-        }, loadTimeFast * 1000 + 200);
+        this.fastMoveTimeout = setTimeout(
+          (): void => {
+            this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
+            this.feedSpeed = this.configService.getFeedSpeedSlow();
+            this.slowMoveTimeout = setTimeout(
+              (): void => {
+                this.increasePage.emit();
+              },
+              loadTimeSlow * 1000 + 400,
+            );
+          },
+          loadTimeFast * 1000 + 200,
+        );
       }, 200);
     }, 0);
   }

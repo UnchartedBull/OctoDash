@@ -15,7 +15,10 @@ export class PurgeFilamentComponent implements OnInit {
 
   public purgeAmount: number;
 
-  constructor(private configService: ConfigService, private printerService: PrinterService) {}
+  constructor(
+    private configService: ConfigService,
+    private printerService: PrinterService,
+  ) {}
 
   ngOnInit(): void {
     this.purgeAmount = this.configService.useM600() ? 0 : this.configService.getPurgeDistance();

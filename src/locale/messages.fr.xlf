@@ -53,11 +53,11 @@
         <target>entrer manuellement</target>
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
-        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
         <target>Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi</target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source>search again</source>
+        <source> search again </source>
         <target>chercher à nouveau</target>
       </trans-unit>
       <trans-unit id="connect-localhost" datatype="html">
@@ -133,7 +133,7 @@
         <target>Veuillez confirmer la demande via la fenêtre contextuelle de l'interface Web OctoPrint.</target>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
         <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
@@ -772,6 +772,7 @@
       </trans-unit>
       <trans-unit id="error-printer-set-tool" datatype="html">
         <source>Can't set active tool!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
@@ -1121,6 +1122,9 @@
         <target>installer v
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
         </target>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
