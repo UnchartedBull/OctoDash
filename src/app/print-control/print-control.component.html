@@ -1,8 +1,7 @@
 <div
   class="print-control__container"
   (click)="showControlOverlay($event)"
-  [ngClass]="{ 'print-control__hide': !showControls }"
->
+  [ngClass]="{ 'print-control__hide': !showControls }">
   <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
     <table class="top-bar" (click)="hideControlOverlay($event)">
       <tr>
@@ -73,8 +72,7 @@
               class="print-control__adjust__controller-increase"
               (click)="changeTemperatureHotend(1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               +
             </div>
             <div class="print-control__adjust__controller-value">
@@ -85,8 +83,7 @@
               class="print-control__adjust__controller-decrease"
               (click)="changeTemperatureHotend(-1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               -
             </div>
           </div>
@@ -98,8 +95,7 @@
               class="print-control__adjust__controller-increase"
               (click)="changeTemperatureHeatbed(1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               +
             </div>
             <div class="print-control__adjust__controller-value">
@@ -110,8 +106,7 @@
               class="print-control__adjust__controller-decrease"
               (click)="changeTemperatureHeatbed(-1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               -
             </div>
           </div>
@@ -123,8 +118,7 @@
               class="print-control__adjust__controller-increase"
               (click)="changeFanSpeed(1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               +
             </div>
             <div class="print-control__adjust__controller-value">
@@ -135,8 +129,7 @@
               class="print-control__adjust__controller-decrease"
               (click)="changeFanSpeed(-1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               -
             </div>
           </div>
@@ -148,8 +141,7 @@
               class="print-control__adjust__controller-increase"
               (click)="changeFeedrate(1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               +
             </div>
             <div class="print-control__adjust__controller-value">
@@ -160,8 +152,7 @@
               class="print-control__adjust__controller-decrease"
               (click)="changeFeedrate(-1)"
               matRipple
-              [matRippleUnbounded]="false"
-            >
+              [matRippleUnbounded]="false">
               -
             </div>
           </div>
@@ -180,8 +171,7 @@
         (click)="setAdjustParameters($event)"
         matRipple
         [matRippleUnbounded]="false"
-        i18n="@@offset-save"
-      >
+        i18n="@@offset-save">
         save
       </div>
     </div>
@@ -205,8 +195,7 @@
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
-          (click)="babystepZ(0.02)"
-        >
+          (click)="babystepZ(0.02)">
           + 0.02
           <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm">mm</span>
         </span>
@@ -214,8 +203,7 @@
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
-          (click)="babystepZ(0.01)"
-        >
+          (click)="babystepZ(0.01)">
           + 0.01
           <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm-2">mm</span>
         </span>
@@ -232,8 +220,7 @@
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
-          (click)="babystepZ(-0.02)"
-        >
+          (click)="babystepZ(-0.02)">
           - 0.02
           <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-2">mm</span>
         </span>
@@ -241,8 +228,7 @@
           class="print-control__adjust-babystep__change-value"
           matRipple
           [matRippleUnbounded]="false"
-          (click)="babystepZ(-0.01)"
-        >
+          (click)="babystepZ(-0.01)">
           - 0.01
           <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-3">mm</span>
         </span>

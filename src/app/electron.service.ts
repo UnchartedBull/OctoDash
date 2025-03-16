@@ -38,7 +38,6 @@ export class ElectronService {
     this.ipcRenderer.removeListener(channel, listener);
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public send(channel: string, ...args): void {
     if (!this.ipcRenderer) {
       return;

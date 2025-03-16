@@ -319,7 +319,7 @@
                 config.plugins.tpLinkSmartPlug.enabled ||
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled
-              )
+              ),
             }"
             (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep">
             <span class="settings__checkbox">
@@ -332,7 +332,7 @@
                     config.plugins.tpLinkSmartPlug.enabled ||
                     config.plugins.tasmota.enabled ||
                     config.plugins.tasmotaMqtt.enabled
-                  )
+                  ),
                 }"
                 *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"></span>
             </span>

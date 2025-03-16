@@ -7,7 +7,9 @@
       <div class="discover-octoprint__node-name">
         {{ node.name }}
         <br />
-        <span class="discover-octoprint__node-details" i18n="@@version-url"> Version {{ node.version }}, URL: {{ node.url }} </span>
+        <span class="discover-octoprint__node-details" i18n="@@version-url">
+          Version {{ node.version }}, URL: {{ node.url }}
+        </span>
       </div>
       <img src="assets/connect.svg" class="discover-octoprint__node-connect-icon" />
     </span>
@@ -26,8 +28,7 @@
       (ngModelChange)="octoprintHostChange.emit($event)"
       name="octoprintURLName"
       required
-      style="width: 42.5vw"
-    />
+      style="width: 42.5vw" />
     :
     <input
       type="text"
@@ -37,11 +38,14 @@
       (ngModelChange)="octoprintPortChange.emit($event)"
       name="octoprintURLPort"
       required
-      style="width: 14vw"
-    />
-    <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</p>
+      style="width: 14vw" />
+    <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
+      Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
+    </p>
   </form>
-  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">search again</div>
+  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
+    search again
+  </div>
 </div>
 
 <div class="confirm__wrapper" *ngIf="urlSplit">
