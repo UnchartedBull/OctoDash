@@ -196,6 +196,10 @@
         <source> Tasmota MQTT </source>
         <target></target>
       </trans-unit>
+      <trans-unit id="plugin-wemo" datatype="html">
+        <source> Wemo </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="setup-back" datatype="html">
         <source>back</source>
         <target>retour</target>
@@ -676,6 +680,10 @@
         <source>Can't update Tasmota MQTT!</source>
         <target></target>
       </trans-unit>
+      <trans-unit id="error-send-wemo-plug" datatype="html">
+        <source>Can't update Wemo!</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
         <target>Impossible de charger les bobines de filament !</target>
@@ -1088,6 +1096,21 @@
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
         <target>SmartPlug IP</target>
+      </trans-unit>
+      <trans-unit id="settings-wemo" datatype="html">
+        <source>Wemo</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-wemo-enabled" datatype="html">
+        <source>enabled</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-wemo-ip" datatype="html">
+        <source>Wemo IP</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-wemo-port" datatype="html">
+        <source>Wemo Port</source>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>

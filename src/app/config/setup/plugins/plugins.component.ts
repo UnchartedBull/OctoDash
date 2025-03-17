@@ -18,6 +18,7 @@ export class PluginsComponent {
   @Input() tuyaPlugin: boolean;
   @Input() tasmotaPlugin: boolean;
   @Input() tasmotaMqttPlugin: boolean;
+  @Input() wemoPlugin: boolean;
 
   @Output() displayLayerProgressPluginChange = new EventEmitter<boolean>();
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
@@ -31,4 +32,5 @@ export class PluginsComponent {
   @Output() tuyaPluginChange = new EventEmitter<boolean>();
   @Output() tasmotaPluginChange = new EventEmitter<boolean>();
   @Output() tasmotaMqttPluginChange = new EventEmitter<boolean>();
+  @Output() wemoPluginChange = new EventEmitter<boolean>();
 }

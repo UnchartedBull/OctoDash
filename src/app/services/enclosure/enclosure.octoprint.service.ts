@@ -16,6 +16,7 @@ import {
   TasmotaMqttCommand,
   TPLinkCommand,
   TuyaCommand,
+  WemoCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { EnclosureService } from './enclosure.service';
@@ -161,6 +162,8 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStateTasmotaMqtt(state);
     } else if (this.configService.useTuya()) {
       this.setPSUStateTuya(state);
+    } else if (this.configService.useWemo()) {
+      this.setPSUStateWemo(state);
     } else {
       this.notificationService.setNotification({
         heading: $localize`:@@error-psu-state:Can't change PSU State!`,
@@ -318,6 +321,28 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(this.configService.getApiURL('plugin/tuyasmartplug'), tuyaPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-psu-command:Can't send plug command!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
+  private setPSUStateWemo(state: PSUState) {
+    const wemoPayload: WemoCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      ip: this.configService.getWemoIP(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/wemoswitch'), wemoPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({

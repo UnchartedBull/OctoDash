@@ -61,6 +61,7 @@ interface Plugins {
   tasmota: TasmotaPlugin;
   tasmotaMqtt: TasmotaMqttPlugin;
   tuya: TuyaPlugin;
+  wemo: WemoPlugin;
 }
 
 interface Plugin {
@@ -95,6 +96,11 @@ interface TasmotaMqttPlugin extends Plugin {
 
 interface TuyaPlugin extends Plugin {
   label: string;
+}
+
+interface WemoPlugin extends Plugin {
+  ip: string;
+  port: number;
 }
 
 interface OctoDash {

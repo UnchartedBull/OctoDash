@@ -16,3 +16,4 @@ export * from './plugins/tp-link.model';
 export * from './plugins/tasmota.model';
 export * from './plugins/tasmota-mqtt.model';
 export * from './plugins/tuya.model';
+export * from './plugins/wemo.model';

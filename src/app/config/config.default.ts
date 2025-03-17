@@ -74,6 +74,11 @@ export const defaultConfig: Config = {
       enabled: false,
       label: 'label',
     },
+    wemo: {
+      enabled: false,
+      ip: '127.0.0.1',
+      port: 49152,
+    },
   },
   octodash: {
     customActions: [

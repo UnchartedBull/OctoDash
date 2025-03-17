@@ -122,6 +122,7 @@ const configSchema = {
         'tuya',
         'tasmota',
         'tasmotaMqtt',
+        'wemo',
       ],
       properties: {
         displayLayerProgress: {
@@ -274,6 +275,25 @@ const configSchema = {
             relayNumber: {
               $id: '#/properties/plugins/properties/tasmotaMqtt/properties/relayNumber',
               type: ['number', 'null'],
+            },
+          },
+        },
+        wemo: {
+          $id: '#/properties/plugins/properties/wemo',
+          type: 'object',
+          required: ['enabled', 'ip'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/ip/properties/enabled',
+              type: 'boolean',
+            },
+            ip: {
+              $id: '#/properties/plugins/properties/wemo/properties/ip',
+              type: 'string',
+            },
+            port: {
+              $id: '#/properties/plugins/properties/wemo/properties/port',
+              type: 'number',
             },
           },
         },
