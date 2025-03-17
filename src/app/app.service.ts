@@ -72,7 +72,7 @@ export class AppService {
       return;
     }
 
-    this.http.get('https://api.github.com/repos/queengooborg/OctoDash/releases/latest').subscribe({
+    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
         this.latestVersion = data.tag_name.replace('v', '');
         this.latestVersionAssetsURL = data.assets_url;

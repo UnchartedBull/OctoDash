@@ -1,16 +1,14 @@
 <p align="center">
     <img width="300" height="300" src="./src/assets/icon/icon-main-dark-title.svg">
     <br><br>
-    <img src="https://img.shields.io/github/actions/workflow/status/queengooborg/OctoDash/build.yaml?style=for-the-badge">
-    <img src="https://img.shields.io/codefactor/grade/github/queengooborg/OctoDash/main?style=for-the-badge">
-    <img src="https://img.shields.io/github/v/release/queengooborg/OctoDash?style=for-the-badge&label=Latest">
-    <img src="https://img.shields.io/github/downloads/queengooborg/OctoDash/latest/total?color=lightgrey&style=for-the-badge">
+    <img src="https://img.shields.io/github/actions/workflow/status/UnchartedBull/OctoDash/build.yaml?style=for-the-badge">
+    <img src="https://img.shields.io/codefactor/grade/github/UnchartedBull/OctoDash/main?style=for-the-badge">
+    <img src="https://img.shields.io/github/v/release/UnchartedBull/OctoDash?style=for-the-badge&label=Latest">
+    <img src="https://img.shields.io/github/downloads/UnchartedBull/OctoDash/latest/total?color=lightgrey&style=for-the-badge">
     <br>
     <b>OctoDash is a simple, but beautiful dashboard for OctoPrint. Please read the instructions carefully!</b><br />
     OctoDash is a User Interface for OctoPrint, it utilizes the OctoPrint API but tries to use modern design principles in order to fully enable the power of your Raspberry Pi attached to your 3D Printer. OctoDash works best with a Touchscreen and will support almost all functions that OctoPrint offers just in a nicer format. Give it a try!
 </p>
-
-<p align="center"><b>This page is for queengooborg's fork. <a href="https://github.com/UnchartedBull/OctoDash/">Click here for the original version.</a></b></p>
 
 ## Table of Contents
 
@@ -29,14 +27,14 @@
 ## Installation
 
 ```
-bash <(wget -qO- https://www.queengoob.org/octodash)
+bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
 ```
 
 _Execute this command as the user that logs in on the display (usually `pi`) and not as `root` or with `sudo`._ For more options and information have a look at the [wiki](https://github.com/UnchartedBull/OctoDash/wiki/Installation).
 
 No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Setup-&-Settings#setup-without-keyboard).
 
-Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/queengooborg/OctoDash/wiki/Troubleshooting) first.
+Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
 ## Tips and Tricks
 
@@ -72,7 +70,7 @@ If you want to see OctoDash in action, here is an awesome video from Nick on [Yo
     <img src="https://raw.githubusercontent.com/TimonGaebelein/OctoprintDash/main/screenshots/settings.png" width="49.5%" alt-text="Settings">
 </p>
 
-More Screenshots can be found [here](https://github.com/queengooborg/OctoDash/tree/main/screenshots).
+More Screenshots can be found [here](https://github.com/UnchartedBull/OctoDash/tree/main/screenshots).
 
 ## Get in contact
 
@@ -88,8 +86,8 @@ If you find a bug, please open an issue, so I can have a look at it. Please also
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/queengooborg/OctoDash/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/UnchartedBull/OctoDash/blob/main/CONTRIBUTING.md).
 
 ## License
 
-The project is licensed under the Apache 2.0 License. [More Information](https://github.com/queengooborg/OctoDash/blob/main/LICENSE.md).
+The project is licensed under the Apache 2.0 License. [More Information](https://github.com/UnchartedBull/OctoDash/blob/main/LICENSE.md).

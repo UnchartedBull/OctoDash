@@ -1,9 +1,5 @@
 # Changelog
 
-## v2.4.0-goofork (and newer)
-
-View changelog in [releases](https://github.com/queengooborg/OctoDash/releases)
-
 ## [v2.3.1](https://github.com/UnchartedBull/OctoDash/tree/v2.3.1) (2022-03-02)
 
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.3.0...v2.3.1)
