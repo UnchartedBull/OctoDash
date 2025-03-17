@@ -49,6 +49,7 @@ interface Filament {
 }
 
 interface Plugins {
+  companion: Plugin;
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
