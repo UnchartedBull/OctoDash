@@ -71,11 +71,21 @@ export class AppService {
 
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace('v', '')) {
+        this.latestVersion = data.tag_name.replace('v', '');
+        this.latestVersionAssetsURL = data.assets_url;
+        if (this.version != this.latestVersion) {
+          if (!this.updateAvailable) {
+            // Display notification first time that update is detected
+            this.notificationService.setNotification({
+              heading: $localize`:@@update-available:Update available!`,
+              text: $localize`:@@update-available-long:Version ${this.latestVersion} is available. Go to Settings > About to update.`,
+              type: NotificationType.INFO,
+              time: new Date(),
+            });
+          }
+
           this.updateAvailable = true;
         }
-        this.latestVersion = data.name.replace('v', '');
-        this.latestVersionAssetsURL = data.assets_url;
       },
       complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
     });
