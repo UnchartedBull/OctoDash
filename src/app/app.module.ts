@@ -45,6 +45,7 @@ import { NotificationService } from './notification/notification.service';
 import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { PrinterStatusComponent } from './printer-status/printer-status.component';
+import { ResetComponent } from './reset/reset.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
@@ -61,6 +62,7 @@ import { SocketService } from './services/socket/socket.service';
 import { SystemOctoprintService } from './services/system/system.octoprint.service';
 import { SystemService } from './services/system/system.service';
 import { SettingsComponent } from './settings/settings.component';
+import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
@@ -91,8 +93,10 @@ import { URLSafePipe } from './url.pipe';
     PrintControlComponent,
     PrinterStatusComponent,
     SettingsComponent,
+    SettingsIconComponent,
     StandbyComponent,
     UpdateComponent,
+    ResetComponent,
     URLSafePipe,
     WelcomeComponent,
     HeatNozzleComponent,

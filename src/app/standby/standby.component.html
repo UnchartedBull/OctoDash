@@ -3,9 +3,7 @@
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
     <ng-container *ngIf="!connecting">
       <span class="standby__text-big" i18n="@@octoprint-sleeping">Shhh! OctoDash is sleeping.</span>
-      <span class="standby__text-small" i18n="@@octoprint-sleeping-message"
-        >Press on the screen to wake me up again.</span
-      >
+      <span class="standby__text-small" i18n="@@octoprint-sleeping-message">Tap the screen to wake me up again.</span>
     </ng-container>
     <ng-container *ngIf="connecting">
       <span class="standby__text-big loading-dots" i18n="@@connecting">connecting</span>
@@ -15,3 +13,5 @@
     </ng-container>
   </div>
 </div>
+
+<app-settings-icon></app-settings-icon>

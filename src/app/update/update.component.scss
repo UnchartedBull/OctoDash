@@ -24,7 +24,7 @@
 
     &-no-percentage {
       width: 10vw;
-      transition: margin-left 2s ease-in-out;
+      animation: bounce-bar 2s ease-in-out infinite;
       margin-left: 0;
     }
 
@@ -97,5 +97,16 @@
         text-align: center;
       }
     }
+  }
+}
+
+@keyframes bounce-bar {
+  0%,
+  100% {
+    margin-left: 0;
+  }
+
+  50% {
+    margin-left: 40vw;
   }
 }

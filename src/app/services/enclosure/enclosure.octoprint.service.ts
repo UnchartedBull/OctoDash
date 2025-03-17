@@ -15,6 +15,7 @@ import {
   TasmotaCommand,
   TasmotaMqttCommand,
   TPLinkCommand,
+  TuyaCommand,
   WemoCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
@@ -159,6 +160,8 @@ export class EnclosureOctoprintService implements EnclosureService {
       this.setPSUStateTasmota(state);
     } else if (this.configService.useTasmotaMqtt()) {
       this.setPSUStateTasmotaMqtt(state);
+    } else if (this.configService.useTuya()) {
+      this.setPSUStateTuya(state);
     } else if (this.configService.useWemo()) {
       this.setPSUStateWemo(state);
     } else {
@@ -310,6 +313,28 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
+  private setPSUStateTuya(state: PSUState) {
+    const tuyaPayload: TuyaCommand = {
+      command: state === PSUState.ON ? 'turnOn' : 'turnOff',
+      label: this.configService.getTuyaLabel(),
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/tuyasmartplug'), tuyaPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-send-psu-command:Can't send plug command!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
   private setPSUStateWemo(state: PSUState) {
     const wemoPayload: WemoCommand = {
       command: state === PSUState.ON ? 'turnOn' : 'turnOff',
@@ -321,7 +346,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .pipe(
         catchError(error => {
           this.notificationService.setNotification({
-            heading: $localize`:@@error-send-wemo-plug:Can't update Wemo!`,
+            heading: $localize`:@@error-send-psu-command:Can't send plug command!`,
             text: error.message,
             type: NotificationType.ERROR,
             time: new Date(),

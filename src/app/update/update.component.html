@@ -12,13 +12,13 @@
     </div>
     <span class="update-size__total">{{ updateProgress.total }}<ng-container i18n="@@update-mb">MB</ng-container></span>
     <span class="update-time__remaining"
-      >{{ updateProgress.eta }}<ng-container i18n="@@update-minutes-left">minutes left</ng-container></span
+      >{{ updateProgress.eta }} <ng-container i18n="@@update-minutes-left">minutes left</ng-container></span
     >
   </div>
   <div *ngIf="page === 2">
     <span class="update-heading" i18n="@@installing-update">installing update</span>
     <div class="update-progress-bar__wrapper">
-      <div class="update-progress-bar update-progress-bar-no-percentage" id="installUpdateProgress"></div>
+      <div class="update-progress-bar update-progress-bar-no-percentage"></div>
     </div>
     <span class="update-notice" i18n="@@update-wait">this might take a while</span>
   </div>

@@ -11,6 +11,7 @@
   (touchmove)="onTouchMove($event)"
   (touchend)="onTouchEnd($event)">
   <div *ngIf="!activated">
+    <app-settings-icon></app-settings-icon>
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
     <span
       class="splash-screen__text"
