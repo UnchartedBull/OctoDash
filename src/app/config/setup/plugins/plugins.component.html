@@ -64,10 +64,7 @@
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="tuyaPlugin"
-      (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)"
-    ></app-toggle-switch>
+    <app-toggle-switch [value]="tuyaPlugin" (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)"></app-toggle-switch>
     <ng-container i18n="@@plugin-tuya"> Tuya SmartPlug </ng-container>
   </span>
 
