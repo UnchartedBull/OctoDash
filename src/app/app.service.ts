@@ -16,6 +16,7 @@ export class AppService {
   private latestVersion: string;
 
   public updateAvailable = false;
+  public dev = !!process.env.APP_DEV;
 
   public constructor(
     private configService: ConfigService,
