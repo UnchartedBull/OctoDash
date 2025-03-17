@@ -5,7 +5,7 @@ const exec = require('child_process').exec;
 const sendCustomStyles = require('./styles');
 const { downloadUpdate, sendVersionInfo } = require('./update');
 const { startDiscovery, stopDiscovery } = require('./discover');
-const { readConfig, saveConfig, checkConfig } = require('./config');
+const { readConfig, resetConfig, saveConfig, checkConfig } = require('./config');
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => exec(screenCommand.command));
@@ -36,6 +36,7 @@ function activateDiscoverListener(ipcMain, window) {
 
 function activateConfigListener(ipcMain, window) {
   ipcMain.on('readConfig', () => readConfig(window));
+  ipcMain.on('resetConfig', () => resetConfig(window));
   ipcMain.on('saveConfig', (_, config) => saveConfig(window, config));
   ipcMain.on('checkConfig', (_, config) => checkConfig(window, config));
 }
