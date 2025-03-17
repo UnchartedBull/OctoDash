@@ -1,6 +1,17 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# System Files
+.DS_Store
+Thumbs.db
+
+# Generated files
 yarn.lock
+.angular
+npm-debug.log
+yarn-error.log
+testem.log
+**/config.testing.json
+src/locale/backups
 
 # compiled output
 /dist
@@ -27,6 +38,7 @@ speed-measure-plugin.json
 *.sublime-workspace
 
 # IDE - VSCode
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -39,19 +51,8 @@ speed-measure-plugin.json
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
 /typings
 
-# System Files
-.DS_Store
-Thumbs.db
-
-.vscode
-
-**/config.testing.json
 
 docs/images/compilation.psd
 scripts/clean-github.sh
-.angular

@@ -66,7 +66,7 @@
     "locale:update:all": "node -e 'require(`./helper/locale.js`).updateLocales()'",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "ng": "ng",
-    "pack:mac": "npm run ng:build && electron-builder build -m",
+    "pack:mac": "npm run build:prod && electron-builder build -m",
     "pack": "npm run build:prod && npm run electron:pack",
     "serve": "ng serve",
     "start:big": "npm-run-all -p serve electron:serve:big",
@@ -101,9 +101,8 @@
     "progress-stream": "~2.0.0",
     "rxjs": "~7.8.1",
     "tslib": "~2.8.1",
-    "v8-compile-cache": "~2.4.0",
-    "zone.js": "~0.14.10",
-    "xliff": "~6.2.1"
+    "xliff": "~6.2.1",
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.13",
