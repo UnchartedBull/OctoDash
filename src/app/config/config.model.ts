@@ -117,6 +117,7 @@ interface OctoDash {
   screenWakeupCommand: string;
   showExtruderControl: boolean;
   showNotificationCenterIcon: boolean;
+  defaultDirectory: string;
 }
 
 export interface CustomAction {

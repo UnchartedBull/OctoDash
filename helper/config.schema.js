@@ -316,6 +316,7 @@ const configSchema = {
         'screenWakeupCommand',
         'showExtruderControl',
         'showNotificationCenterIcon',
+        'defaultDirectory',
       ],
       properties: {
         customActions: {
@@ -429,6 +430,11 @@ const configSchema = {
         showNotificationCenterIcon: {
           $id: '#/properties/octodash/properties/showNotificationCenterIcon',
           type: 'boolean',
+        },
+        defaultDirectory: {
+          $id: '#/properties/octodash/properties/defaultDirectory',
+          type: 'string',
+          pattern: '^/(.*)$',
         },
       },
     },
