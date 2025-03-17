@@ -14,7 +14,6 @@ import { SystemService } from '../services/system/system.service';
 export class UpdateComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>(true);
 
-  private installationAnimationInterval: ReturnType<typeof setInterval>;
   public updateProgress: UpdateDownloadProgress = {
     percentage: 0,
     transferred: 0,
@@ -70,13 +69,6 @@ export class UpdateComponent implements OnInit {
     this.electronService.on('updateDownloadFinished', (): void => {
       this.zone.run(() => {
         this.page = 2;
-        setTimeout(() => {
-          const updateProgressBar = document.getElementById('installUpdateProgress');
-          updateProgressBar.style.marginLeft = '40vw';
-          this.installationAnimationInterval = setInterval(() => {
-            updateProgressBar.style.marginLeft = updateProgressBar.style.marginLeft === '0vw' ? '40vw' : '0vw';
-          }, 2050);
-        }, 250);
       });
     });
 
@@ -89,7 +81,6 @@ export class UpdateComponent implements OnInit {
 
   public closeUpdateWindow(): void {
     this.page = 1;
-    clearInterval(this.installationAnimationInterval);
     this.closeFunction.emit();
   }
 
