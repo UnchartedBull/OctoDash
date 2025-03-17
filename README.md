@@ -13,6 +13,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Update](#update)
 - [Tips and Tricks](#tips-and-tricks)
@@ -23,6 +24,15 @@
 - [Bugs and more](#bugs-and-more)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Requirements
+
+- OctoPrint 1.9.0 or higher
+- A Debian-based Linux installation
+  - OctoPi recommended
+  - OctoDash may be installed on the same device OctoPrint is running from
+- A 16:9, 16:10 or 4:3 screen in landscape orientation
+  - Touchscreen recommended
 
 ## Installation
 

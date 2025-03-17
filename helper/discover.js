@@ -4,7 +4,7 @@
 const { compare } = require('compare-versions');
 const exec = require('child_process').exec;
 
-const minimumVersion = '1.3.5';
+const minimumVersion = '1.9.0';
 let browser;
 let nodes = [];
 
