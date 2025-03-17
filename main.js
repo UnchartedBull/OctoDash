@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
 
-require('v8-compile-cache');
-
 const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
