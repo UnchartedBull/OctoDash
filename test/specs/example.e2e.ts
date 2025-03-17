@@ -1,15 +1,11 @@
-import LoginPage from  '../pageobjects/login.page';
-import SecurePage from '../pageobjects/secure.page';
-
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
-        await LoginPage.open();
-
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!');
-        await expect(SecurePage.flashAlert).toBeExisting();
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
-            'You logged into a secure area!');
-    });
+describe('Home Page', () => {
+  it('should have the header elment', () => {
+    const header = $('app-main-menu span span');
+    expect(header).toBeExisting();
+  });
+  it('should have the settings elment', () => {
+    const settings = $('.main-menuu__settings-icon-asdfasdf');
+    console.log(settings);
+    expect(settings).toBeExisting();
+  });
 });
-
-
