@@ -61,6 +61,7 @@ import { SocketService } from './services/socket/socket.service';
 import { SystemOctoprintService } from './services/system/system.octoprint.service';
 import { SystemService } from './services/system/system.service';
 import { SettingsComponent } from './settings/settings.component';
+import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
@@ -91,6 +92,7 @@ import { URLSafePipe } from './url.pipe';
     PrintControlComponent,
     PrinterStatusComponent,
     SettingsComponent,
+    SettingsIconComponent,
     StandbyComponent,
     UpdateComponent,
     URLSafePipe,
