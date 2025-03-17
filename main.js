@@ -32,17 +32,17 @@ app.commandLine.appendSwitch('touch-events', 'enabled');
 function createWindow() {
   const _store = new Store();
 
-  if (!dev) {
-    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-      callback({
-        responseHeaders: {
-          ...details.responseHeaders,
-          // TODO: re-enable
-          // "Content-Security-Policy": ["script-src 'self'"],
-        },
-      });
-    });
-  }
+  // TODO: re-enable
+  // if (!dev) {
+  //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+  //     callback({
+  //       responseHeaders: {
+  //         ...details.responseHeaders,
+  //         "Content-Security-Policy": ["script-src 'self'"],
+  //       },
+  //     });
+  //   });
+  // }
 
   const mainScreen = screen.getPrimaryDisplay();
 

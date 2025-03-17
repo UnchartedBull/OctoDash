@@ -5,7 +5,7 @@
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
-    "module": "ES6",
+    "module": "ESNext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,7 +13,7 @@
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "types": [],
-    "lib": ["ES2020", "dom"],
+    "lib": ["ES2022", "dom"],
     "esModuleInterop": true
   },
   "exclude": ["**/node_modules/**"]
