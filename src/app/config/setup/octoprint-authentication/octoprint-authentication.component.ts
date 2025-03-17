@@ -19,7 +19,10 @@ export class OctoprintAuthenticationComponent {
   @Output() increasePage = new EventEmitter<void>();
   @Output() accessTokenChange = new EventEmitter<string>();
 
-  constructor(private authService: OctoprintAuthenticationService, private notificationService: NotificationService) {}
+  constructor(
+    private authService: OctoprintAuthenticationService,
+    private notificationService: NotificationService,
+  ) {}
 
   public loginWithOctoprintUI(): void {
     this.authService.probeAuthSupport(this.octoprintURL).subscribe({

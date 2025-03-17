@@ -16,13 +16,14 @@ export class ControlComponent {
   public printerProfile: OctoprintPrinterProfile;
 
   public jogDistance = 10;
-  public showExtruder = this.configService.getShowExtruderControl();
+  public showExtruder = false;
 
   public constructor(
     private printerService: PrinterService,
     private configService: ConfigService,
     private notificationService: NotificationService,
   ) {
+    this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {

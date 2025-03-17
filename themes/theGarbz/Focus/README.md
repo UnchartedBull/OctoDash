@@ -1,15 +1,17 @@
 # Focus theme v0.4
 
 This theme is based on the classy [NOX theme](../../NOX/) by NoxHirsch and has been modified to Focus on highlighting the most important information for a user. The goal was to create a theme that could easily be read from a distance. Some of the features are listed below:
-* High contrast display of relevant information (e.g. print time, temperature)
-* Low contrast display of all other info (e.g. units, time elapsed)
-* Large horizontal and vertical progress bars readable from a distance.
-* Large print time remaining indicators
-* Pre-printing screen highlighting buttons.
-* Full screen menus and adjustments with coloured backgrounds for context.
-* Red highlighting of error messages
+
+- High contrast display of relevant information (e.g. print time, temperature)
+- Low contrast display of all other info (e.g. units, time elapsed)
+- Large horizontal and vertical progress bars readable from a distance.
+- Large print time remaining indicators
+- Pre-printing screen highlighting buttons.
+- Full screen menus and adjustments with coloured backgrounds for context.
+- Red highlighting of error messages
 
 To install copy the custom-styles.css file into the octodash config folder:
+
 ```
 ~/.config/octodash/custom-styles.css
 ```
@@ -28,42 +30,46 @@ Please note: This theme like the theme it was based on makes use of more CSS eff
 
    ![Round Progressbar](screenshots/screenshot_print2.png)
 
-4. File Selection:
+3. File Selection:
 
    ![File Selection](screenshots/screenshot_fileselect.png)
 
-5. Pre-print screen:
+4. Pre-print screen:
 
    ![Pre-print screen](screenshots/screenshot_filequeue.png)
 
-6. Adjustments mid print:
+5. Adjustments mid print:
 
    ![Adjustments](screenshots/screenshot_adjust.png)
 
-7. Errors:
+6. Errors:
 
    ![Errors](screenshots/screenshot_error.png)
 
-8. Main Screen:
+7. Main Screen:
 
    ![Main Screen](screenshots/screenshot_main.png)
 
-9. Settings:
+8. Settings:
 
    ![Settings](screenshots/screenshot_menu.png)
 
 ### Version History:
 
-__v0.4:__
-* Fix for Layer display code - Reenables the icon in place of text.
-* Fixed settings items running off the edge of the screen.
-* Fxied settings scroll bars so they no longer run off the bottom of the screen.
+**v0.4:**
 
-__v0.3:__
-* Temporary change in Layer display code to suit new Layer-Progress Component.
+- Fix for Layer display code - Reenables the icon in place of text.
+- Fixed settings items running off the edge of the screen.
+- Fxied settings scroll bars so they no longer run off the bottom of the screen.
 
-__v0.2:__
-* Fixed bug which prevented the filament weight from being shown in the filament selector.
+**v0.3:**
 
-__v0.1:__
-* Initial Issue
+- Temporary change in Layer display code to suit new Layer-Progress Component.
+
+**v0.2:**
+
+- Fixed bug which prevented the filament weight from being shown in the filament selector.
+
+**v0.1:**
+
+- Initial Issue

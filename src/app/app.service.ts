@@ -148,7 +148,7 @@ interface VersionInformation {
 
 interface GitHubReleaseInformation {
   name: string;
-  // eslint-disable-next-line camelcase
+
   assets_url: string;
   [key: string]: string;
 }

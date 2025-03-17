@@ -16,7 +16,10 @@ export class NotificationComponent implements OnDestroy {
   public notificationCloseTimeout: ReturnType<typeof setTimeout>;
   public show = false;
 
-  public constructor(private notificationService: NotificationService, private zone: NgZone) {
+  public constructor(
+    private notificationService: NotificationService,
+    private zone: NgZone,
+  ) {
     this.subscriptions.add(
       this.notificationService
         .getObservable()

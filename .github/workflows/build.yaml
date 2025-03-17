@@ -14,9 +14,9 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: node-modules
         with:
@@ -25,9 +25,9 @@ jobs:
           restore-keys: |
             octodash-build-${{ env.cache-name }}-
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '22'
       - name: Install latest npm
         run: sudo npm install -g npm@latest
       - name: Installing Dependencies
@@ -40,9 +40,9 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: node-modules
         with:
@@ -51,9 +51,9 @@ jobs:
           restore-keys: |
             octodash-build-${{ env.cache-name }}-
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '22'
       - name: Install latest npm
         run: sudo npm install -g npm@latest
       - name: Installing Dependencies
@@ -62,3 +62,5 @@ jobs:
         run: npm run build:prod
       - name: Packaging Application
         run: npm run electron:pack
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
