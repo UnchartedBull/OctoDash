@@ -5,8 +5,7 @@
       [ngClass]="{ 'printer-status__no-set-value': printerStatus.tool0.set === 0 }"
       (click)="showQuickControlHotend()"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       <img src="assets/nozzle.svg" />
       <span class="printer-status__actual-value">
         {{ printerStatus.tool0.current }}<span class="printer-status__unit">°C</span>
@@ -21,8 +20,7 @@
       [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }"
       (click)="showQuickControlHeatbed()"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       <img src="assets/heat-bed.svg" />
       <span class="printer-status__actual-value">
         {{ printerStatus.bed.current }}<span class="printer-status__unit">°C</span>
@@ -36,8 +34,7 @@
       class="printer-status__value printer-status__value-3 printer-status__no-set-value"
       (click)="showQuickControlFan()"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       <img src="assets/fan.svg" />
       <span class="printer-status__actual-value">
         {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit">%</span>
@@ -59,11 +56,10 @@
             (view === QuickControlView.HOTEND
               ? 'nozzle.svg'
               : view === QuickControlView.HEATBED
-              ? 'heat-bed.svg'
-              : 'fan.svg')
+                ? 'heat-bed.svg'
+                : 'fan.svg')
           "
-          class="top-bar__center-icon"
-        />
+          class="top-bar__center-icon" />
       </td>
       <td class="top-bar__next"></td>
     </tr>
@@ -75,16 +71,14 @@
         class="quick-control__controller-increase"
         (click)="quickControlChangeValue(1)"
         matRipple
-        [matRippleUnbounded]="false"
-      >
+        [matRippleUnbounded]="false">
         +1
       </div>
       <div
         class="quick-control__controller-increase"
         (click)="quickControlChangeValue(10)"
         matRipple
-        [matRippleUnbounded]="false"
-      >
+        [matRippleUnbounded]="false">
         +10
       </div>
     </div>
@@ -95,8 +89,7 @@
       *ngIf="view === QuickControlView.HOTEND"
       (click)="quickControlChangeValue(-1000)"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       {{ this.hotendTarget }}<span class="quick-control__controller-value-unit">°C</span>
     </div>
     <div
@@ -105,8 +98,7 @@
       *ngIf="view === QuickControlView.HEATBED"
       (click)="quickControlChangeValue(-1000)"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       {{ this.heatbedTarget }}<span class="quick-control__controller-value-unit">°C</span>
     </div>
     <div
@@ -115,8 +107,7 @@
       *ngIf="view === QuickControlView.FAN"
       (click)="quickControlChangeValue(-1000)"
       matRipple
-      [matRippleUnbounded]="false"
-    >
+      [matRippleUnbounded]="false">
       {{ this.fanTarget }}
       <span class="quick-control__controller-value-unit">%</span>
     </div>
@@ -126,16 +117,14 @@
         class="quick-control__controller-decrease"
         (click)="quickControlChangeValue(-1)"
         matRipple
-        [matRippleUnbounded]="false"
-      >
+        [matRippleUnbounded]="false">
         -1
       </div>
       <div
         class="quick-control__controller-decrease"
         (click)="quickControlChangeValue(-10)"
         matRipple
-        [matRippleUnbounded]="false"
-      >
+        [matRippleUnbounded]="false">
         -10
       </div>
     </div>
@@ -146,8 +135,7 @@
         colspan="2"
         (click)="quickControlSetValue()"
         matRipple
-        [matRippleUnbounded]="false"
-      >
+        [matRippleUnbounded]="false">
         <span class="quick-control__controller-set-span">set</span>
       </div>
     </div>

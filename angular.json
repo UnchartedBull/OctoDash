@@ -110,14 +110,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "OctoDash:build"
+            "buildTarget": "OctoDash:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "OctoDash:build:production"
+              "buildTarget": "OctoDash:build:production"
             },
             "development": {
-              "browserTarget": "OctoDash:build:development"
+              "buildTarget": "OctoDash:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -125,7 +125,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OctoDash:build:production"
+            "buildTarget": "OctoDash:build:production"
           }
         },
         "test": {
@@ -162,7 +162,6 @@
       }
     }
   },
-  "defaultProject": "OctoDash",
   "cli": {
     "analytics": "e1569209-2b82-4195-9c15-0669a78feccb"
   }

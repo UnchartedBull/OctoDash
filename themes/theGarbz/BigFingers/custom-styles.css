@@ -1,85 +1,84 @@
-
 /**** Override scrollbars ****/
 
 ::-webkit-scrollbar {
-    width: 6vw!important;
+  width: 6vw !important;
 }
 
 .scroll__thumb-inactive {
-    width: 6vw!important;
+  width: 6vw !important;
 }
 
 /**** Resize file list ****/
 
 app-files .scroll__thumb-inactive {
-    top: 27vh!important;
+  top: 27vh !important;
 }
 
 .files {
-    height: 73vh!important;
-    margin-top: 2vh!important;
+  height: 73vh !important;
+  margin-top: 2vh !important;
 }
 
 .files__object {
-    width: 86.5vw!important;
-    height: 13vh!important;
-    line-height: 12vh!important;
+  width: 86.5vw !important;
+  height: 13vh !important;
+  line-height: 12vh !important;
 }
 
 .files__info {
-    height: 12vh!important;
-    padding: 0.8vw 0!important;
+  height: 12vh !important;
+  padding: 0.8vw 0 !important;
 }
 
 .files__icon {
-    margin: 2.4vh 1vw 0!important;
+  margin: 2.4vh 1vw 0 !important;
 }
 
 .files__name {
-    height: 13vh;
-    line-height: 13vh;
+  height: 13vh;
+  line-height: 13vh;
 }
 
 /**** Resize filament list ****/
 
 app-filament .scroll__thumb-inactive {
-    top: 35.5vh!important;
+  top: 35.5vh !important;
 }
 
-.filament tr{
-    width: 86vw!important;
-    height: 13vh!important;
-    line-height: 13vh!important;
+.filament tr {
+  width: 86vw !important;
+  height: 13vh !important;
+  line-height: 13vh !important;
 }
 
 .filament-filaments {
-    line-height: 13vh!important;
-    margin-top: 4vh!important;
+  line-height: 13vh !important;
+  margin-top: 4vh !important;
 }
 
-.filament-filaments td{
-    line-height: 12vh!important;
+.filament-filaments td {
+  line-height: 12vh !important;
 }
 
 .filament-filaments__name {
-    width: 58vw!important;
+  width: 58vw !important;
 }
 
 /**** Make settings button easier to hit ****/
 
 .main-menu__settings-icon {
-    padding: 5vh 5vw 4vh!important;
+  padding: 5vh 5vw 4vh !important;
 }
 
 /**** Update Settings ****/
 
 .settings-container {
-    height: 86vh!important;
-    top: 8vh!important;
-    width: 66vw!important;
-    left: 17vw!important;
+  height: 86vh !important;
+  top: 8vh !important;
+  width: 66vw !important;
+  left: 17vw !important;
 }
 
 .settings__content {
-    width: 59vw!important;
+  width: 59vw !important;
 }

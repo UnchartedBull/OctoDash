@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 export interface EnclosurePluginAPI {
   controlled_io: string;
   temp_sensor_address: string;

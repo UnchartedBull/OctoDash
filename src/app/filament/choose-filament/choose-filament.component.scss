@@ -81,13 +81,19 @@
     &:active::before {
       border-top-color: #4bae50;
       border-right-color: #4bae50;
-      transition: border-color 0s ease-out 0.7s, width 1s ease-out 0.7s, height 0.1s ease-out 1.7s;
+      transition:
+        border-color 0s ease-out 0.7s,
+        width 1s ease-out 0.7s,
+        height 0.1s ease-out 1.7s;
     }
 
     &:active::after {
       border-bottom-color: #4bae50;
       border-left-color: #4bae50;
-      transition: border-color 0s ease-out 1.8s, width 1s ease-out 1.8s, height 0.1s ease-out 2.9s;
+      transition:
+        border-color 0s ease-out 1.8s,
+        width 1s ease-out 1.8s,
+        height 0.1s ease-out 2.9s;
     }
   }
 

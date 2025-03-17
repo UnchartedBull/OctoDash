@@ -22,7 +22,11 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   public octoprintNodes: OctoprintNodes;
   public urlSplit: URLSplit;
 
-  constructor(private configService: ConfigService, private electronService: ElectronService, private zone: NgZone) {}
+  constructor(
+    private configService: ConfigService,
+    private electronService: ElectronService,
+    private zone: NgZone,
+  ) {}
 
   ngOnInit(): void {
     this.electronService.on('discoveredNodes', (_, nodes: OctoprintNodes) => {

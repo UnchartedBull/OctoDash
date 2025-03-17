@@ -4,9 +4,11 @@ This variation on the standard theme increases the width of the scroll bars to m
 No special requirements exist for this theme, however it is intended for small low resolution displays.
 
 To install copy the custom-styles.css file into the octodash config folder:
+
 ```
 ~/.config/octodash/custom-styles.css
 ```
+
 ###### Theme by theGarbz.
 
 ### Screenshots:
@@ -23,15 +25,17 @@ To install copy the custom-styles.css file into the octodash config folder:
 
    ![Settings](screenshots/screenshot_settings.png)
 
-
 ### Version History:
 
-__v0.3:__
-* Extra text removed from settings menu which ran off the screen.
+**v0.3:**
 
-__v0.2:__
-* Hitbox of settings button increased.
+- Extra text removed from settings menu which ran off the screen.
 
-__v0.1:__
-* Initial Issue
-* Larger vertical scrollbar width.
+**v0.2:**
+
+- Hitbox of settings button increased.
+
+**v0.1:**
+
+- Initial Issue
+- Larger vertical scrollbar width.
