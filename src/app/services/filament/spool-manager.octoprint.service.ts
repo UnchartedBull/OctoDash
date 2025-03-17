@@ -60,6 +60,9 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
   }
 
   private convertFilamentManagerSpool(spool: SpoolManagerSpool): FilamentSpool {
+    if (!spool) {
+      return null;
+    }
     return {
       color: spool.color ?? '#f5f6fa',
       density: spool.density,

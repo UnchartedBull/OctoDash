@@ -120,6 +120,7 @@ const configSchema = {
         'psuControl',
         'ophom',
         'tpLinkSmartPlug',
+        'tuya',
         'tasmota',
         'tasmotaMqtt',
       ],

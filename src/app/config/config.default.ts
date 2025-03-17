@@ -73,6 +73,10 @@ export const defaultConfig: Config = {
       topic: 'topic',
       relayNumber: null,
     },
+    tuya: {
+      enabled: false,
+      label: 'label',
+    },
   },
   octodash: {
     customActions: [

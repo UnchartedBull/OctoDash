@@ -27,12 +27,12 @@
           (click)="changePage(4, 0, 'forward')"
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
           i18n="@@update-available">
-          update available!
+          Update available!
         </span>
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
           made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
-          by /u/UnchartedBull
+          by UnchartedBull + contributors
         </span>
       </div>
       <div class="settings__content settings__content-inactive" #settingsGeneral>
@@ -317,6 +317,7 @@
                 config.plugins.psuControl.enabled ||
                 config.plugins.ophom.enabled ||
                 config.plugins.tpLinkSmartPlug.enabled ||
+                config.plugins.tuya.enabled ||
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled
               ),
@@ -330,6 +331,7 @@
                     config.plugins.psuControl.enabled ||
                     config.plugins.ophom.enabled ||
                     config.plugins.tpLinkSmartPlug.enabled ||
+                    config.plugins.tuya.enabled ||
                     config.plugins.tasmota.enabled ||
                     config.plugins.tasmotaMqtt.enabled
                   ),
@@ -588,6 +590,25 @@
             [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
             required
             [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
+          <span class="settings__heading-2" i18n="@@settings-tuya">Tuya Smart Plug</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.tuya.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@settings-tuya-enabled">enabled</span>
+          </div>
+          <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
+          <input
+            type="text"
+            id="tuya-label"
+            class="settings__input"
+            name="tuya-label"
+            style="width: 44.94vw"
+            [(ngModel)]="config.plugins.tuya.label"
+            required
+            [disabled]="!config.plugins.tuya.enabled" />
           <span class="settings__heading-2">Tasmota</span>
           <div
             class="settings__checkbox-container"
@@ -658,7 +679,7 @@
             class="settings__about-update settings__about-update-not-available"
             *ngIf="!service.updateAvailable"
             i18n="@@about-no-update">
-            no update available
+            up to date
           </button>
           <button
             class="settings__about-update settings__about-update-available"
@@ -721,9 +742,15 @@
             Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
           </p>
           <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
+          <hr />
+          <p class="settings_reset-button" (click)="showReset()">
+            <span i18n="@@reset-config">Reset Config</span>
+            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 <app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>
+<app-reset *ngIf="reset" (closeFunction)="hideReset()"></app-reset>
