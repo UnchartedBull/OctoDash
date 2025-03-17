@@ -14,7 +14,6 @@
 
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
-  - [Nightly Builds](#nightly-builds)
 - [Update](#update)
 - [Tips and Tricks](#tips-and-tricks)
 - [Demo](#demo)
@@ -36,10 +35,6 @@ _Execute this command as the user that logs in on the display (usually `pi`) and
 No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Setup-&-Settings#setup-without-keyboard).
 
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
-
-### Nightly Builds
-
-Thanks to M1dn1ghtN1nj4 nightly builds are available here: https://sites.google.com/view/m1dn1ght-3d/downloads/unofficial-octodash-builds?authuser=0. They should be stable, still not recommended for production.
 
 ## Tips and Tricks
 
