@@ -12,14 +12,6 @@
     font-family: 'Arvo';
   }
 
-  &__settings-icon {
-    width: 7vw;
-    float: right;
-    padding: 5vh 5vw;
-    margin: 0 -3vw -5vh 0;
-    margin-top: -15.5vh;
-  }
-
   &__options {
     margin-top: 3vw;
     margin-left: 5vw;
@@ -51,15 +43,5 @@
       width: 10.5vw;
       margin-bottom: 1.6vw;
     }
-  }
-
-  &__update-notifier {
-    width: 2.2vw;
-    height: 2.2vw;
-    border-radius: 4vw;
-    background-color: #e84118;
-    position: absolute;
-    right: 1.9vw;
-    top: 13vh;
   }
 }
