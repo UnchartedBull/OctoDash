@@ -110,6 +110,7 @@ const configSchema = {
       $id: '#/properties/plugins',
       type: 'object',
       required: [
+        'companion',
         'displayLayerProgress',
         'enclosure',
         'filamentManager',
@@ -123,6 +124,17 @@ const configSchema = {
         'tasmotaMqtt',
       ],
       properties: {
+        companion: {
+          $id: '#/properties/plugins/properties/companion',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/companion/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
         displayLayerProgress: {
           $id: '#/properties/plugins/properties/displayLayerProgress',
           type: 'object',

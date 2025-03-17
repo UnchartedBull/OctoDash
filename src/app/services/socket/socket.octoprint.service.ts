@@ -18,6 +18,7 @@ import {
   SocketAuth,
 } from '../../model';
 import {
+  CompanionData,
   DisplayLayerProgressData,
   OctoprintFilament,
   OctoprintPluginMessage,
@@ -81,7 +82,8 @@ export class OctoPrintSocketService implements SocketService {
         set: 0,
         unit: '°C',
       },
-      fanSpeed: this.configService.isDisplayLayerProgressEnabled() ? 0 : -1,
+      fanSpeed:
+        this.configService.isDisplayLayerProgressEnabled() || this.configService.isCompanionPluginEnabled() ? 0 : -1,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
@@ -168,6 +170,10 @@ export class OctoPrintSocketService implements SocketService {
         check: (plugin: string) => ['action_command_prompt', 'action_command_notification'].includes(plugin),
         handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
       },
+      {
+        check: (plugin: string) => plugin === 'octodash' && this.configService.isCompanionPluginEnabled(),
+        handler: (message: unknown) => this.extractFanSpeed(message as CompanionData),
+      },
     ];
 
     plugins.forEach(plugin => plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data));
@@ -227,6 +233,11 @@ export class OctoPrintSocketService implements SocketService {
         set: Math.round(message?.current?.temps[0]?.bed?.target),
         unit: '°C',
       };
+      this.printerStatus.chamber = {
+        current: Math.round(message?.current?.temps[0]?.chamber?.actual),
+        set: Math.round(message?.current?.temps[0]?.chamber?.target),
+        unit: '°C',
+      };
       this.printerStatus.tool0 = {
         current: Math.round(message?.current?.temps[0]?.tool0?.actual),
         set: Math.round(message?.current?.temps[0]?.tool0?.target),
@@ -254,9 +265,17 @@ export class OctoPrintSocketService implements SocketService {
     this.printerStatusSubject.next(this.printerStatus);
   }
 
-  public extractFanSpeed(message: DisplayLayerProgressData): void {
-    this.printerStatus.fanSpeed =
-      message.fanspeed === 'Off' ? 0 : message.fanspeed === '-' ? 0 : Number(message.fanspeed.replace('%', '').trim());
+  public extractFanSpeed(message: DisplayLayerProgressData | CompanionData): void {
+    if (typeof message.fanspeed === 'object') {
+      this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed['1']));
+    } else {
+      this.printerStatus.fanSpeed =
+        message.fanspeed === 'Off'
+          ? 0
+          : message.fanspeed === '-'
+            ? 0
+            : Number(message.fanspeed.replace('%', '').trim());
+    }
   }
 
   //==== Job Status ====//
