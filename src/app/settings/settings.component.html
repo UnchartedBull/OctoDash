@@ -699,7 +699,13 @@
           <span class="settings__about-version">v{{ service.getVersion() }}</span>
           <button
             class="settings__about-update settings__about-update-not-available"
-            *ngIf="!service.updateAvailable"
+            *ngIf="service.dev"
+            i18n="@@about-developer-mode">
+            updates disabled (dev mode)
+          </button>
+          <button
+            class="settings__about-update settings__about-update-not-available"
+            *ngIf="!(service.updateAvailable || service.dev)"
             i18n="@@about-no-update">
             up to date
           </button>
