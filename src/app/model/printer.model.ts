@@ -1,9 +1,9 @@
 export interface PrinterStatus {
   status: PrinterState;
   bed: Temperature;
-  tool0: Temperature;
   chamber: Temperature;
   fanSpeed: number;
+  tools: Temperature[];
 }
 
 interface Temperature {

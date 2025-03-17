@@ -1,5 +1,4 @@
 .control {
-  margin-top: 5vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -109,9 +108,9 @@
     }
   }
 
-  &__distance {
-    width: 50vw;
-    margin-top: 4.5vh;
+  &__distance,
+  &__tool {
+    margin-top: 1.25vh;
     display: inline-block;
     border-collapse: separate;
 

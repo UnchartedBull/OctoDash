@@ -14,6 +14,7 @@ import {
   OctoprintPrinterProfiles,
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
+  ToolCommand,
 } from '../../model/octoprint';
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
@@ -111,11 +112,32 @@ export class PrinterOctoprintService implements PrinterService {
       .subscribe();
   }
 
-  public setTemperatureHotend(temperature: number): void {
+  public setTool(tool: number): void {
+    const toolPayload: ToolCommand = {
+      command: 'select',
+      tool: `tool${tool}`,
+    };
+    this.http
+      .post(this.configService.getApiURL('printer/tool'), toolPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error => {
+          this.notificationService.setNotification({
+            heading: $localize`:@@error-printer-set-tool:Can't set active tool!`,
+            text: error.message,
+            type: NotificationType.ERROR,
+            time: new Date(),
+          });
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
+  public setTemperatureHotend(temperature: number, tool?: number): void {
     const temperatureHotendCommand: TemperatureHotendCommand = {
       command: 'target',
       targets: {
-        tool0: temperature,
+        [`tool${tool || 0}`]: temperature,
       },
     };
     this.http
@@ -217,7 +239,7 @@ export class PrinterOctoprintService implements PrinterService {
       .subscribe();
   }
 
-  public extrude(amount: number, speed: number): void {
+  public extrude(amount: number, speed: number, tool?: number): void {
     let multiplier = 1;
     let toBeExtruded: number;
     if (amount < 0) {
@@ -225,6 +247,27 @@ export class PrinterOctoprintService implements PrinterService {
       toBeExtruded = amount * -1;
     } else {
       toBeExtruded = amount;
+    }
+
+    if (tool) {
+      const selectionPayload = {
+        command: 'select',
+        tool: `tool${tool}`,
+      };
+      this.http
+        .post(this.configService.getApiURL('printer/tool'), selectionPayload, this.configService.getHTTPHeaders())
+        .pipe(
+          catchError(error => {
+            this.notificationService.setNotification({
+              heading: $localize`:@@error-printer-extrude:Can't extrude Filament!`,
+              text: error.message,
+              type: NotificationType.ERROR,
+              time: new Date(),
+            });
+            return of(null);
+          }),
+        )
+        .subscribe();
     }
 
     while (toBeExtruded > 0) {

@@ -1,74 +1,67 @@
 .printer-status {
-  width: 100%;
-  margin-top: 3vh;
-  height: 23vh;
-  display: block;
-  table-layout: fixed;
-  overflow: visible;
+  width: 95vw;
+  margin: auto 3vh;
+  height: 27vh;
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: 1fr 2fr;
+  column-gap: 2vw;
+  row-gap: 1vw;
+  align-items: center;
+  align-content: center;
+  justify-items: start;
 
-  & tr {
-    vertical-align: middle;
+  &.printer-status__multi-hotend {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+
+    .printer-status__row {
+      grid-column: 1 / -1;
+    }
   }
 
-  &__value {
-    text-align: right;
-    height: 23vh;
-    vertical-align: middle;
+  .printer-status__row {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    column-gap: 2vw;
+    align-items: center;
+    align-content: center;
+    justify-items: start;
 
-    & img {
-      width: 9vw;
-      float: left;
-      padding-top: 1.7vh;
-      padding-right: 2vw;
-      padding-bottom: 2vh;
+    &:last-child {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    &-1 {
-      width: 29vw;
-      padding-left: 0.4vw;
-      padding-right: 7.5vw;
+    .printer-status__item {
+      width: 100%;
 
-      & img {
-        padding-left: 1.6vw;
-        padding-right: 1vw;
+      .printer-status__icon {
+        vertical-align: middle;
+        display: inline-block;
+        width: 6vw;
       }
-    }
 
-    &-2 {
-      width: 26vw;
-      padding-right: 6vw;
-    }
+      .printer-status__value {
+        display: inline-block;
+        width: calc(100% - 6vw);
+        text-align: right;
+        vertical-align: middle;
+        font-size: 6vw;
 
-    &-3 {
-      padding-right: 3vw;
-      width: 27.2vw;
-    }
-  }
+        &.printer-status__small-text span {
+          font-size: 2.5vw;
+        }
 
-  &__unit {
-    font-size: 60%;
-  }
+        .printer-status__unit {
+          font-size: 60%;
+        }
 
-  &__actual-value {
-    font-size: 6vw;
-    font-weight: 500;
-    display: inline-block;
-  }
-
-  &__set-value {
-    display: block;
-    text-align: right;
-  }
-
-  &__no-set-value {
-    overflow: visible;
-
-    & span {
-      margin-bottom: -4vh;
-    }
-
-    & img {
-      margin-top: -4vh;
+        .printer-status__actual-value {
+          font-size: 5vw;
+          font-weight: 500;
+        }
+      }
     }
   }
 }

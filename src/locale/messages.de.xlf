@@ -51,11 +51,11 @@
         <target>manuell eingeben</target>
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
-        <source>Port 5000 for vanilla OctoPrint, Port 80 for OctoPi</source>
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
         <target>Port 5000 für Standardinstallation, Port 80 für OctoPi</target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source>search again</source>
+        <source> search again </source>
         <target>erneut suchen</target>
       </trans-unit>
       <trans-unit id="connect-localhost" datatype="html">
@@ -131,7 +131,7 @@
         <target>Bitte bestätige die Anfrage über das Popup im OctoPrint WebUI.</target>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you. </source>
+        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
         <target>Erzählen mir jetzt etwas mehr über dein System, damit ich OctoDash für dich anpassen kann. </target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
@@ -291,7 +291,9 @@
         <target>möchtest Du den folgenden Befehl ausführen?</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
-        <source>load new filament</source>
+        <source>load new filament into tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
         <target>neues Filament laden</target>
       </trans-unit>
       <trans-unit id="load-new-filament-message" datatype="html">
@@ -334,6 +336,14 @@
         <source>loading spools</source>
         <target>laden Filamente</target>
       </trans-unit>
+      <trans-unit id="choose-tool" datatype="html">
+        <source>select tool</source>
+      </trans-unit>
+      <trans-unit id="tool-selection" datatype="html">
+        <source>Tool 
+          <x id="INTERPOLATION" equiv-text="{{ i }}"/>
+        </source>
+      </trans-unit>
       <trans-unit id="filament-back" datatype="html">
         <source> back </source>
         <target>zurück</target>
@@ -343,7 +353,9 @@
         <target>überspringen</target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
-        <source>heating the nozzle</source>
+        <source>heating the nozzle for tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
         <target>Nozzle aufheizen</target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait" datatype="html">
@@ -762,6 +774,9 @@
         <source>Can't extrude Filament!</source>
         <target>Filament kann nicht extrudiert werden!</target>
       </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can't set active tool!</source>
+      </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
         <target>Hotend Temperatur kann nicht gesetzt werden!</target>
@@ -1118,6 +1133,9 @@
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
         </source>
         <target>installiere v</target>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>

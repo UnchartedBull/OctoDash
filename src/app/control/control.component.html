@@ -91,6 +91,20 @@
       </div>
     </div>
 
+    <div class="control__tool-wrapper" *ngIf="printerStatus.tools.length > 1">
+      <table class="control__tool">
+        <tr>
+          <td
+            class="control__tool-field"
+            *ngFor="let tool of printerStatus.tools; index as i"
+            [ngClass]="{ 'control__tool-field-active': selectedTool === i }"
+            (click)="setTool(i)">
+            T{{ i }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
     <div class="control__distance-wrapper">
       <table class="control__distance">
         <tr>
