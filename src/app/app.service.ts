@@ -61,6 +61,11 @@ export class AppService {
   }
 
   private checkUpdate(): void {
+    if (this.dev) {
+      // Disable updates in developer mode
+      return;
+    }
+
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
         if (this.version !== data.name.replace('v', '')) {

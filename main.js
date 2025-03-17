@@ -7,15 +7,13 @@ const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('elec
 const path = require('path');
 const Store = require('electron-store');
 
-const args = process.argv.slice(1);
-const big = args.some(val => val === '--big');
-const dev = args.some(val => val === '--serve');
-
 const activateListeners = require('./helper/listener');
 
 let window;
 let locale;
 let url;
+
+const dev = !!process.env.APP_DEV;
 
 if (!dev) {
   const createProtocol = require('./helper/protocol');
@@ -47,8 +45,8 @@ function createWindow() {
   const mainScreen = screen.getPrimaryDisplay();
 
   window = new BrowserWindow({
-    width: dev ? (big ? 1500 : 1200) : mainScreen.size.width,
-    height: dev ? (big ? 600 : 450) : mainScreen.size.height,
+    width: dev ? 1100 : mainScreen.size.width,
+    height: dev ? 600 : mainScreen.size.height,
     frame: dev,
     backgroundColor: '#353b48',
     webPreferences: {
@@ -61,7 +59,9 @@ function createWindow() {
 
   if (dev) {
     url = 'http://localhost:4200';
-    window.webContents.openDevTools();
+    let devtools = new BrowserWindow();
+    window.webContents.setDevToolsWebContents(devtools.webContents);
+    window.webContents.openDevTools({ mode: 'detach' });
   } else {
     url = `file://${__dirname}/dist/${locale}/index.html`;
     window.setFullScreen(true);
