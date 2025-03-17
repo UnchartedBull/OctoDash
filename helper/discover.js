@@ -1,12 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-commonjs */
 
-const compareVersions = require('compare-versions');
+const { compare } = require('compare-versions');
 const exec = require('child_process').exec;
 
 const minimumVersion = '1.3.5';
 let browser;
 let nodes = [];
+
+function compareVersions(left, right, direction) {
+  function fixVersion(v) {
+    return v.replace('rc', '-rc').replace('--rc', '-rc');
+  }
+  return compare(fixVersion(left), fixVersion(right), direction);
+}
 
 function startDiscovery(window) {
   exec('hostname', (err, stdout) => {
@@ -29,7 +36,7 @@ function discoverNodes(window, localDomain) {
       version: service.txt.version,
       url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
       local: service.host === localDomain,
-      disable: compareVersions(minimumVersion, service.txt.version) === -1,
+      disabled: compareVersions(minimumVersion, service.txt.version, '>'),
     });
     sendNodes(window);
   });

@@ -21,6 +21,12 @@
     margin-bottom: 2vh;
     padding: 2vh 2vw;
 
+    &-disabled {
+      pointer-events: none;
+      opacity: 50%;
+      font-style: italic;
+    }
+
     &-name {
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -32,6 +38,11 @@
     &-details {
       font-size: 0.55rem;
       opacity: 0.7;
+    }
+
+    &-upgrade {
+      font-size: 0.55rem;
+      font-weight: bold;
     }
 
     &-connect-icon {

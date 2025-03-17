@@ -3,10 +3,19 @@
 </span>
 <div *ngIf="!manualURL">
   <div class="discover-octoprint__wrapper">
-    <span *ngFor="let node of octoprintNodes" class="discover-octoprint__node" (click)="setOctoprintInstance(node)">
+    <span
+      *ngFor="let node of octoprintNodes"
+      class="discover-octoprint__node"
+      [ngClass]="{
+        'discover-octoprint__node-disabled': node.disabled,
+      }"
+      (click)="setOctoprintInstance(node)">
       <div class="discover-octoprint__node-name">
         {{ node.name }}
         <br />
+        <span class="discover-octoprint__node-upgrade" i18n="@@octoprint-upgrade-required" *ngIf="node.disabled">
+          Upgrade Required /
+        </span>
         <span class="discover-octoprint__node-details" i18n="@@version-url">
           Version {{ node.version }}, URL: {{ node.url }}
         </span>
