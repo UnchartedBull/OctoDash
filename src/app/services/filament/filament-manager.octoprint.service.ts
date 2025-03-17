@@ -17,7 +17,10 @@ const colorRegexp = /\((.*)\)$/g;
 
 @Injectable()
 export class FilamentManagerOctoprintService implements FilamentPluginService {
-  public constructor(private configService: ConfigService, private http: HttpClient) {}
+  public constructor(
+    private configService: ConfigService,
+    private http: HttpClient,
+  ) {}
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http

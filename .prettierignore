@@ -1,0 +1,10 @@
+LICENSE.md
+*.min.*
+build
+dist
+
+docs/css/icomoon.css
+docs/css/theme.css
+src/assets/animations/
+docs/fonts/ionicons
+docs/js/jquery*

@@ -6,8 +6,7 @@
       [stroke]="25"
       [rounded]="true"
       [responsive]="true"
-      [color]="'#4bae50'"
-    ></round-progress>
+      [color]="'#4bae50'"></round-progress>
     <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
   </div>
 
@@ -26,8 +25,7 @@
         [stroke]="25"
         [rounded]="true"
         [responsive]="true"
-        [color]="'#4bae50'"
-      ></round-progress>
+        [color]="'#4bae50'"></round-progress>
 
       <div class="job-info__progress-percentage job-info__progress-preview-image-container">
         <img class="job-info__progress-preview-image" [src]="thumbnail" />
@@ -71,8 +69,7 @@
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
     class="job-info__actions-item-heat"
-    *ngIf="isPreheatEnabled()"
-  >
+    *ngIf="isPreheatEnabled()">
     <img src="assets/heat.svg" class="job-info__actions-item-heat-icon" />
   </span>
   <br />
@@ -82,8 +79,7 @@
     matRipple
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
-    class="job-info__actions-item-print"
-  >
+    class="job-info__actions-item-print">
     <img src="assets/print.svg" class="job-info__actions-item-print-icon" />
   </span>
   <br />
@@ -113,8 +109,7 @@
 <div
   class="job-info__no-job loading-dots"
   *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
-  i18n="@@loading-info"
->
+  i18n="@@loading-info">
   loading info
 </div>
 
