@@ -713,7 +713,7 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT', 'Ophom (Phillips HUE)')
+  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT' 'Ophom (Phillips HUE)' 'Wemo')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
   echo "Installing Plugins..."
 
@@ -755,6 +755,9 @@ if [ $DIRECTORY != "-" ]; then
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Ophom (Phillips HUE)" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/Salamafet/ophom/archive/refs/heads/master.zip"
+  fi;
+  if [[ " ${selected_plugins[@]} " =~ "Wemo" ]]; then
+      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PSUControl-Wemo/archive/refs/heads/master.zip"
   fi;
 fi;
 
