@@ -225,6 +225,14 @@ export class ConfigService {
     return this.config.plugins.tasmotaMqtt.relayNumber;
   }
 
+  public useWemo(): boolean {
+    return this.config.plugins.wemo.enabled;
+  }
+
+  public getWemoIP(): string {
+    return `${this.config.plugins.wemo.ip}:${this.config.plugins.wemo.port}`;
+  }
+
   public getFilamentThickness(): number {
     return this.config.filament.thickness;
   }
@@ -349,5 +357,9 @@ export class ConfigService {
 
   public showNotificationCenterIcon(): boolean {
     return this.config.octodash.showNotificationCenterIcon;
+  }
+
+  public getDefaultDirectory(): string {
+    return this.config.octodash.defaultDirectory;
   }
 }

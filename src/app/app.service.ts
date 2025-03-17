@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import _ from 'lodash-es';
 
+import { defaultConfig } from './config/config.default';
 import { Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { ElectronService } from './electron.service';
@@ -16,6 +17,7 @@ export class AppService {
   private latestVersion: string;
 
   public updateAvailable = false;
+  public dev = !!process.env.APP_DEV;
 
   public constructor(
     private configService: ConfigService,
@@ -37,6 +39,8 @@ export class AppService {
         (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
       "/plugins must have required property 'tasmotaMqtt'": config =>
         (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
+      "/plugins must have required property 'wemo'": config =>
+        (config.plugins.wemo = { enabled: false, ip: '127.0.0.1', port: 49152 }),
       "/octodash must have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
       "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
@@ -58,17 +62,34 @@ export class AppService {
       "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
       "/octodash must have required property 'showNotificationCenterIcon'": config =>
         (config.octodash.showNotificationCenterIcon = true),
+      "/octodash must have required property 'defaultDirectory'": config =>
+        (config.octodash.defaultDirectory = defaultConfig.octodash.defaultDirectory),
     };
   }
 
   private checkUpdate(): void {
+    if (this.dev) {
+      // Disable updates in developer mode
+      return;
+    }
+
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
-        if (this.version !== data.name.replace('v', '')) {
+        this.latestVersion = data.tag_name.replace('v', '');
+        this.latestVersionAssetsURL = data.assets_url;
+        if (this.version != this.latestVersion) {
+          if (!this.updateAvailable) {
+            // Display notification first time that update is detected
+            this.notificationService.setNotification({
+              heading: $localize`:@@update-available:Update available!`,
+              text: $localize`:@@update-available-long:Version ${this.latestVersion} is available. Go to Settings > About to update.`,
+              type: NotificationType.INFO,
+              time: new Date(),
+            });
+          }
+
           this.updateAvailable = true;
         }
-        this.latestVersion = data.name.replace('v', '');
-        this.latestVersionAssetsURL = data.assets_url;
       },
       complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
     });

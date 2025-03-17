@@ -91,5 +91,5 @@ interface OctoprintNodes {
   version: string;
   url: string;
   local: boolean;
-  disable: boolean;
+  disabled: boolean;
 }

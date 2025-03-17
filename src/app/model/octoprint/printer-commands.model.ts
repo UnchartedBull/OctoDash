@@ -21,11 +21,15 @@ export interface FeedrateCommand {
   factor: number;
 }
 
+export interface ToolCommand {
+  command: string;
+  tool: string;
+}
+
 export interface TemperatureHotendCommand {
   command: string;
   targets: {
-    tool0: number;
-    tool1?: number;
+    [K in string as K extends string ? `tool${K}` : never]: number;
   };
 }
 

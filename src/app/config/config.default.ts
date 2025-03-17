@@ -77,6 +77,11 @@ export const defaultConfig: Config = {
       enabled: false,
       label: 'label',
     },
+    wemo: {
+      enabled: false,
+      ip: '127.0.0.1',
+      port: 49152,
+    },
   },
   octodash: {
     customActions: [
@@ -142,5 +147,6 @@ export const defaultConfig: Config = {
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
     showExtruderControl: true,
     showNotificationCenterIcon: true,
+    defaultDirectory: '/',
   },
 };

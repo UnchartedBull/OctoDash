@@ -123,6 +123,7 @@ const configSchema = {
         'tuya',
         'tasmota',
         'tasmotaMqtt',
+        'wemo',
       ],
       properties: {
         companion: {
@@ -289,6 +290,25 @@ const configSchema = {
             },
           },
         },
+        wemo: {
+          $id: '#/properties/plugins/properties/wemo',
+          type: 'object',
+          required: ['enabled', 'ip'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/ip/properties/enabled',
+              type: 'boolean',
+            },
+            ip: {
+              $id: '#/properties/plugins/properties/wemo/properties/ip',
+              type: 'string',
+            },
+            port: {
+              $id: '#/properties/plugins/properties/wemo/properties/port',
+              type: 'number',
+            },
+          },
+        },
       },
     },
     octodash: {
@@ -308,6 +328,7 @@ const configSchema = {
         'screenWakeupCommand',
         'showExtruderControl',
         'showNotificationCenterIcon',
+        'defaultDirectory',
       ],
       properties: {
         customActions: {
@@ -421,6 +442,11 @@ const configSchema = {
         showNotificationCenterIcon: {
           $id: '#/properties/octodash/properties/showNotificationCenterIcon',
           type: 'boolean',
+        },
+        defaultDirectory: {
+          $id: '#/properties/octodash/properties/defaultDirectory',
+          type: 'string',
+          pattern: '^/(.*)$',
         },
       },
     },

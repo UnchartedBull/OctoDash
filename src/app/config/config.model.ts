@@ -62,6 +62,7 @@ interface Plugins {
   tasmota: TasmotaPlugin;
   tasmotaMqtt: TasmotaMqttPlugin;
   tuya: TuyaPlugin;
+  wemo: WemoPlugin;
 }
 
 interface Plugin {
@@ -98,6 +99,11 @@ interface TuyaPlugin extends Plugin {
   label: string;
 }
 
+interface WemoPlugin extends Plugin {
+  ip: string;
+  port: number;
+}
+
 interface OctoDash {
   customActions: CustomAction[];
   fileSorting: FileSorting;
@@ -112,6 +118,7 @@ interface OctoDash {
   screenWakeupCommand: string;
   showExtruderControl: boolean;
   showNotificationCenterIcon: boolean;
+  defaultDirectory: string;
 }
 
 export interface CustomAction {
