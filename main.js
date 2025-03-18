@@ -26,6 +26,9 @@ if (!dev) {
   locale = getLocale();
 }
 
+// Fixes rendering glitches on Raspberry Pi + Electron v27+
+app.disableHardwareAcceleration();
+
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 function createWindow() {
