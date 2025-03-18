@@ -769,18 +769,14 @@ if [ $DIRECTORY != "-" ]; then
   fi;
 fi;
 
-if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
-yes_no=( 'yes' 'no' )
 
-list_input "Should I enable CORS ? FYI, this is required by OctoDash v3 and OctoPrint 1.6.0, and may have security implications" yes_no cors
-
-echo $cors
-if [ $cors == 'yes' ]; then
-        echo "Enabling CORS ..."
-        "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
+if [ $DIRECTORY == "-" ]; then
+  if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
+    echo "Enabling CORS in OctoPrint..."
+    "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
+  fi
 else
-  echo "${red}CORS has ${bold}NOT${normal} been enabled. OctoDash most likely won't work if CORS is disabled. You can always enable it in the API settings in OctoPrint"
-fi
+  echo "Note: please make sure to enable CORS in OctoPrint (Settings > API > CORS > Allow CORS)."
 fi;
 
 echo "Installing OctoDash "${version[7]}, $arch" ..."
