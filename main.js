@@ -1,26 +1,29 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
-const path = require('path');
-const Store = require('electron-store');
+import electron from 'electron';
+import Store from 'electron-store';
 
-const activateListeners = require('./helper/listener');
+import activateListeners from './helper/listener.js';
+import createProtocol from './helper/protocol.js';
+import { getLocale } from './helper/locale.js';
+
+const { app, BrowserWindow, ipcMain, protocol, screen, session } = electron;
 
 let window;
 let locale;
 let url;
 
 const dev = !!process.env.APP_DEV;
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 if (!dev) {
-  const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
   createProtocol(scheme, path.join(__dirname, 'dist'));
 
-  locale = require('./helper/locale.js').getLocale();
+  locale = getLocale();
 }
 
 app.commandLine.appendSwitch('touch-events', 'enabled');
