@@ -27,6 +27,9 @@ export const defaultConfig: Config = {
     useM600: false,
   },
   plugins: {
+    companion: {
+      enabled: false,
+    },
     displayLayerProgress: {
       enabled: true,
     },

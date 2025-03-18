@@ -31,6 +31,7 @@ export class AppService {
 
     // list of all error following an upgrade
     this.updateError = {
+      "/plugins must have required property 'companion'": config => (config.plugins.companion = { enabled: false }),
       "/printer must have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
       "/plugins must have required property 'tpLinkSmartPlug'": config =>
         (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),

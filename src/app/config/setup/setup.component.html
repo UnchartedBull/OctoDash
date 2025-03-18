@@ -50,6 +50,7 @@
 
   <app-config-setup-plugins
     *ngIf="page === 5"
+    [(companionPlugin)]="config.plugins.companion.enabled"
     [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
     [(enclosurePlugin)]="config.plugins.enclosure.enabled"
     [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"

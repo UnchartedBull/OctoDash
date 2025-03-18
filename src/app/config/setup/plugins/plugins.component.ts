@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./plugins.component.scss', '../setup.component.scss'],
 })
 export class PluginsComponent {
+  @Input() companionPlugin: boolean;
   @Input() displayLayerProgressPlugin: boolean;
   @Input() enclosurePlugin: boolean;
   @Input() filamentManagerPlugin: boolean;
@@ -20,6 +21,7 @@ export class PluginsComponent {
   @Input() tasmotaMqttPlugin: boolean;
   @Input() wemoPlugin: boolean;
 
+  @Output() companionPluginChange = new EventEmitter<boolean>();
   @Output() displayLayerProgressPluginChange = new EventEmitter<boolean>();
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
   @Output() filamentManagerPluginChange = new EventEmitter<boolean>();
