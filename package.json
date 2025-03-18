@@ -81,7 +81,7 @@
     "@angular/localize": "^17.3.12",
     "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.3.12",
-    "@angular/platform-browser-dynamic": "^17.3.12",
+    "@angular/platform-browser-dynamic": "^18.2.13",
     "@angular/router": "^17.3.12",
     "@fortawesome/angular-fontawesome": "~0.10.2",
     "@fortawesome/fontawesome-svg-core": "~1.2.36",
