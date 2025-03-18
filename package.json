@@ -67,6 +67,7 @@
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "ng": "ng",
     "pack:mac": "npm run build:prod && electron-builder build -m",
+    "pack:deb": "npm run build:prod && electron-builder build -l",
     "pack": "npm run build:prod && npm run electron:pack",
     "serve": "ng serve",
     "start": "APP_DEV=true npm-run-all -p serve electron:serve",

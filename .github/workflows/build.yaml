@@ -68,6 +68,8 @@ jobs:
         run: sudo npm install -g npm@latest
       - name: Installing Dependencies
         run: npm ci
+      - name: Building Application
+        run: npm run pack:deb
       - name: Testing Application
         run: npm run test:e2e
 
