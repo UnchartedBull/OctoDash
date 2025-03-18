@@ -69,7 +69,9 @@ jobs:
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
-        run: npm run pack:deb
+        run: npm run build:prod
+      - name: Packaging Application
+        run: npx electron-builder build
       - name: Testing Application
         run: npm run test:e2e
 
