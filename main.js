@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
-
-const { app, BrowserWindow, ipcMain, protocol, screen, session } = require('electron');
+const { app, BrowserWindow, ipcMain, protocol, screen } = require('electron');
 const path = require('path');
-const Store = require('electron-store');
 
 const activateListeners = require('./helper/listener');
 
@@ -26,8 +22,6 @@ if (!dev) {
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 function createWindow() {
-  const _store = new Store();
-
   // TODO: re-enable
   // if (!dev) {
   //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {

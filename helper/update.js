@@ -1,7 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-sync */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
 
 const fs = require('fs');
 const { got } = require('got-cjs');
