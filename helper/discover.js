@@ -1,7 +1,9 @@
 import { exec } from 'node:child_process';
 
 import { compare } from 'compare-versions';
-import bonjour from 'bonjour';
+import { Bonjour } from 'bonjour-service';
+
+const bonjour = new Bonjour();
 
 const minimumVersion = '1.3.5';
 let browser;
@@ -25,7 +27,6 @@ export function startDiscovery(window) {
 }
 
 function discoverNodes(window, localDomain) {
-  const bonjour = bonjour();
   nodes = [];
   browser = bonjour.find({ type: 'octoprint' });
   browser.on('up', service => {
