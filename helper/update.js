@@ -1,18 +1,14 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-sync */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
+import { exec } from 'node:child_process';
+import fs from 'node:fs';
+import stream from 'node:stream';
+import { promisify } from 'node:util';
 
-const fs = require('fs');
-const { got } = require('got-cjs');
-const stream = require('stream');
-const { promisify } = require('util');
-const progress = require('progress-stream');
+import { got } from 'got';
+import progress from 'progress-stream';
 
-const exec = require('child_process').exec;
-
-function downloadUpdate(updateInfo, window) {
+export function downloadUpdate(updateInfo, window) {
   const downloadPath = '/tmp/octodash.deb';
+  /* eslint-disable camelcase */
   const archMapping = {
     armv7l: 'armv7l',
     aarch64: 'arm64',
@@ -31,10 +27,10 @@ function downloadUpdate(updateInfo, window) {
         const averageETA = [];
         let downloadURL;
         let packageSize;
-        for (const package of JSON.parse(releaseFiles.body)) {
-          if (package.name.includes(archMapping[stdout.trim()])) {
-            downloadURL = package.browser_download_url;
-            packageSize = package.size;
+        for (const packageData of JSON.parse(releaseFiles.body)) {
+          if (packageData.name.includes(archMapping[stdout.trim()])) {
+            downloadURL = packageData.browser_download_url;
+            packageSize = packageData.size;
           }
         }
         if (downloadURL) {
@@ -100,10 +96,8 @@ function downloadUpdate(updateInfo, window) {
   });
 }
 
-function sendVersionInfo(window, app) {
+export function sendVersionInfo(window, app) {
   window.webContents.send('versionInformation', {
     version: app.getVersion(),
   });
 }
-
-module.exports = { downloadUpdate, sendVersionInfo };

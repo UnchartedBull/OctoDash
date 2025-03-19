@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
-const exec = require('child_process').exec;
+import { exec } from 'node:child_process';
 
-const sendCustomStyles = require('./styles');
-const { downloadUpdate, sendVersionInfo } = require('./update');
-const { startDiscovery, stopDiscovery } = require('./discover');
-const { readConfig, resetConfig, saveConfig, checkConfig } = require('./config');
+import { checkConfig, readConfig, resetConfig, saveConfig } from './config.js';
+import { startDiscovery, stopDiscovery } from './discover.js';
+import sendCustomStyles from './styles.js';
+import { downloadUpdate, sendVersionInfo } from './update.js';
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => exec(screenCommand.command));
@@ -50,4 +48,4 @@ function activateListeners(ipcMain, window, app, url) {
   activateDiscoverListener(ipcMain, window);
 }
 
-module.exports = activateListeners;
+export default activateListeners;

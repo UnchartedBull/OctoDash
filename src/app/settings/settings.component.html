@@ -26,9 +26,9 @@
           class="settings__update-available"
           (click)="changePage(4, 0, 'forward')"
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
-          i18n="@@update-available">
-          Update available!
-        </span>
+          i18n="@@update-available"
+          >Update available!</span
+        >
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
           made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
@@ -364,6 +364,19 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@always-circular">Always use circular progress bar</span>
           </div>
+          <form class="settings__form">
+            <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory"
+              >Default directory for file browser</label
+            >
+            <input
+              type="text"
+              id="defaultDirectory"
+              class="settings__input"
+              name="defaultDirectory"
+              style="width: 44.94vw"
+              [(ngModel)]="config.octodash.defaultDirectory"
+              required />
+          </form>
           <br />
           <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>
           <div
@@ -474,6 +487,15 @@
           <span i18n="@@settings-plugins">plugins</span>
         </span>
         <div class="settings__scroll">
+          <span class="settings__heading-2" i18n="@@settings-octodash-companion">OctoDash Companion</span>
+          <div
+            class="settings__checkbox-container"
+            (click)="config.plugins.companion.enabled = !config.plugins.companion.enabled">
+            <span class="settings__checkbox">
+              <span class="settings__checkbox-checked" *ngIf="config.plugins.companion.enabled"></span>
+            </span>
+            <span class="settings__checkbox-descriptor" i18n="@@settings-octodash-companion-enabled">enabled</span>
+          </div>
           <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
           <div
             class="settings__checkbox-container"

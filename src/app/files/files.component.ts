@@ -37,7 +37,7 @@ export class FilesComponent {
   ) {
     this.showLoader();
     this.directory = { files: [], folders: [] };
-    this.currentFolder = '/';
+    this.currentFolder = this.configService.getDefaultDirectory();
 
     this.sortingAttribute = this.configService.getDefaultSortingAttribute();
     this.sortingOrder = this.configService.getDefaultSortingOrder();

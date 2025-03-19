@@ -49,6 +49,7 @@ interface Filament {
 }
 
 interface Plugins {
+  companion: Plugin;
   displayLayerProgress: Plugin;
   enclosure: EnclosurePlugin;
   filamentManager: Plugin;
@@ -117,6 +118,7 @@ interface OctoDash {
   screenWakeupCommand: string;
   showExtruderControl: boolean;
   showNotificationCenterIcon: boolean;
+  defaultDirectory: string;
 }
 
 export interface CustomAction {

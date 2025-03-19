@@ -1,7 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+import fs from 'node:fs';
 
-function getLocale() {
-  const i18n = require('../angular.json').projects.OctoDash.i18n;
+import { jsToXliff12, xliff12ToJs } from 'xliff';
+
+export function getLocale() {
+  const angularConfig = JSON.parse(fs.readFileSync(new URL('../angular.json', import.meta.url), 'utf-8'));
+  const i18n = angularConfig.projects.OctoDash.i18n;
   let lang;
   try {
     // Detect if environment LANG is set
@@ -25,10 +28,7 @@ function getLocale() {
 }
 
 // updates all supported locales consuming an updated messages.xlf
-function updateLocales() {
-  const fs = require('fs');
-  const xliff = require('xliff');
-
+export function updateLocales() {
   // list all existing locales
   let translatedXLFs = [];
   const filenames = fs.readdirSync('./src/locale');
@@ -42,7 +42,7 @@ function updateLocales() {
 
   // get extracted messages
   const extractedXLF = fs.readFileSync('./src/locale/messages.xlf').toString();
-  xliff.xliff12ToJs(extractedXLF, (err, extracted) => {
+  xliff12ToJs(extractedXLF, (err, extracted) => {
     if (err) throw new Error(err.message);
 
     // for each supported locale
@@ -50,7 +50,7 @@ function updateLocales() {
       const translatedXLF = fs.readFileSync(`./src/locale/${translatedXLFRef.filename}`).toString();
 
       // load this locale
-      xliff.xliff12ToJs(translatedXLF, (err, translated) => {
+      xliff12ToJs(translatedXLF, (err, translated) => {
         if (err) throw new Error(err.message);
 
         // hard copy of messages.xlf
@@ -66,7 +66,7 @@ function updateLocales() {
           }
         }
         // backup the previous version of the locale and write the new locale
-        xliff.jsToXliff12(newTranslation, (err, result) => {
+        jsToXliff12(newTranslation, (err, result) => {
           if (err) throw new Error(err.message);
           const now = new Date();
           if (!fs.existsSync('./src/locale/backups')) {
@@ -83,5 +83,3 @@ function updateLocales() {
     }
   });
 }
-
-module.exports = { getLocale, updateLocales };

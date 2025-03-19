@@ -27,6 +27,9 @@ export const defaultConfig: Config = {
     useM600: false,
   },
   plugins: {
+    companion: {
+      enabled: false,
+    },
     displayLayerProgress: {
       enabled: true,
     },
@@ -144,5 +147,6 @@ export const defaultConfig: Config = {
     screenWakeupCommand: 'xset s off && xset -dpms && xset s noblank',
     showExtruderControl: true,
     showNotificationCenterIcon: true,
+    defaultDirectory: '/',
   },
 };

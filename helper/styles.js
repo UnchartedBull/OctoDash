@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
+import fs from 'node:fs';
+import path from 'node:path';
 
-const fs = require('fs');
-const path = require('path');
-const { app } = require('electron');
+import electron from 'electron';
+
+const { app } = electron;
 
 function sendCustomStyles(window) {
   fs.readFile(path.join(app.getPath('userData'), 'custom-styles.css'), 'utf-8', (err, data) => {
@@ -25,4 +25,4 @@ function sendCustomStyles(window) {
   });
 }
 
-module.exports = sendCustomStyles;
+export default sendCustomStyles;

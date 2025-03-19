@@ -110,6 +110,7 @@ const configSchema = {
       $id: '#/properties/plugins',
       type: 'object',
       required: [
+        'companion',
         'displayLayerProgress',
         'enclosure',
         'filamentManager',
@@ -125,6 +126,17 @@ const configSchema = {
         'wemo',
       ],
       properties: {
+        companion: {
+          $id: '#/properties/plugins/properties/companion',
+          type: 'object',
+          required: ['enabled'],
+          properties: {
+            enabled: {
+              $id: '#/properties/plugins/properties/companion/properties/enabled',
+              type: 'boolean',
+            },
+          },
+        },
         displayLayerProgress: {
           $id: '#/properties/plugins/properties/displayLayerProgress',
           type: 'object',
@@ -316,6 +328,7 @@ const configSchema = {
         'screenWakeupCommand',
         'showExtruderControl',
         'showNotificationCenterIcon',
+        'defaultDirectory',
       ],
       properties: {
         customActions: {
@@ -430,9 +443,14 @@ const configSchema = {
           $id: '#/properties/octodash/properties/showNotificationCenterIcon',
           type: 'boolean',
         },
+        defaultDirectory: {
+          $id: '#/properties/octodash/properties/defaultDirectory',
+          type: 'string',
+          pattern: '^/(.*)$',
+        },
       },
     },
   },
 };
 
-module.exports = configSchema;
+export default configSchema;

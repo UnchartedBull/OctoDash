@@ -265,6 +265,10 @@ export class ConfigService {
     return this.config.plugins.displayLayerProgress.enabled;
   }
 
+  public isCompanionPluginEnabled(): boolean {
+    return this.config.plugins.companion.enabled;
+  }
+
   public isPreheatPluginEnabled(): boolean {
     return this.config.plugins.preheatButton.enabled;
   }
@@ -353,5 +357,9 @@ export class ConfigService {
 
   public showNotificationCenterIcon(): boolean {
     return this.config.octodash.showNotificationCenterIcon;
+  }
+
+  public getDefaultDirectory(): string {
+    return this.config.octodash.defaultDirectory;
   }
 }
