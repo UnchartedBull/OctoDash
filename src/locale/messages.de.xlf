@@ -798,11 +798,15 @@
         <source>Can't preheat printer!</source>
         <target>Drucker kann nicht vorgeheizt werden!</target>
       </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
+        <source>OctoPrint outdated!</source>
+      </trans-unit>
       <trans-unit id="octoprint-upgrade-required-long" datatype="html">
         <source>OctoPrint must be running at least 
           <x id="PH" equiv-text="minimumVersion"/>; currently running 
           <x id="PH_1" equiv-text="info.server"/>.
         </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="printer-error-gcode" datatype="html">
         <source>Can't send GCode!</source>

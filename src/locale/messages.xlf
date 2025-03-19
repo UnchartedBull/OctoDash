@@ -83,10 +83,6 @@
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
           <context context-type="linenumber">16,18</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
         <source> Version <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/> </source>
@@ -1401,6 +1397,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/job/job.octoprint.service.ts</context>
           <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
+        <source>OctoPrint outdated!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-long" datatype="html">

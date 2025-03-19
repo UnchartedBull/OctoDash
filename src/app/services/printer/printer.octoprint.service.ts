@@ -41,7 +41,7 @@ export class PrinterOctoprintService implements PrinterService {
         map(info => {
           if (!isOctoprintVersionGood(info.server)) {
             this.notificationService.setNotification({
-              heading: $localize`:@@octoprint-upgrade-required:OctoPrint outdated!`,
+              heading: $localize`:@@octoprint-upgrade-required-title:OctoPrint outdated!`,
               text: $localize`:@@octoprint-upgrade-required-long:OctoPrint must be running at least ${minimumVersion}; currently running ${info.server}.`,
               type: NotificationType.ERROR,
               time: new Date(),
