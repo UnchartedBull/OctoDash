@@ -13,6 +13,16 @@
         <source>initializing</source>
         <target>initialisation</target>
       </trans-unit>
+      <trans-unit id="update-available" datatype="html">
+        <source>Update available!</source>
+        <target> mise à jour disponible ! </target>
+      </trans-unit>
+      <trans-unit id="update-available-long" datatype="html">
+        <source>Version 
+          <x id="PH" equiv-text="this.latestVersion"/> is available. Go to Settings &gt; About to update.
+        </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
         <target>Impossible de charger les styles personnalisés !</target>
@@ -36,6 +46,10 @@
       <trans-unit id="select-instance" datatype="html">
         <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
         <target> Tout d'abord: veuillez selectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required" datatype="html">
+        <source> Upgrade Required / </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
         <source> Version 
@@ -152,6 +166,10 @@
         <source>What plugins are you running?</source>
         <target>Quels plugins utilisez-vous ?</target>
       </trans-unit>
+      <trans-unit id="plugin-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <target> Display Layer Progress   </target>
@@ -187,6 +205,10 @@
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source> TPLink SmartPlug </source>
         <target> TPLink SmartPlug </target>
+      </trans-unit>
+      <trans-unit id="plugin-tuya" datatype="html">
+        <source> Tuya SmartPlug </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
@@ -253,7 +275,7 @@
         <target> Si vous rencontrez des problèmes, veuillez consulter le guide de dépannage dans le wiki GitHub. </target>
       </trans-unit>
       <trans-unit id="welcome-4" datatype="html">
-        <source> Thanks for choosing OctoDash </source>
+        <source> Note: you will need to connect a keyboard for the setup process </source>
         <target> Merci d'avoir choisi OctoDash </target>
       </trans-unit>
       <trans-unit id="welcome-5" datatype="html">
@@ -654,6 +676,18 @@
         <source>mm</source>
         <target>mm</target>
       </trans-unit>
+      <trans-unit id="reset-confirmation" datatype="html">
+        <source>Are you sure you want to reset the configuration?</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="reset-no" datatype="html">
+        <source>no</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="reset-yes" datatype="html">
+        <source>yes</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
         <target>Impossible de définir la couleur des LED !</target>
@@ -694,8 +728,8 @@
         <source>Can't update Tasmota MQTT!</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="error-send-wemo-plug" datatype="html">
-        <source>Can't update Wemo!</source>
+      <trans-unit id="error-send-psu-command" datatype="html">
+        <source>Can't send plug command!</source>
         <target></target>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
@@ -870,10 +904,6 @@
         <source>about</source>
         <target>à propos</target>
       </trans-unit>
-      <trans-unit id="update-available" datatype="html">
-        <source> update available! </source>
-        <target> mise à jour disponible ! </target>
-      </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
         <target>général</target>
@@ -1001,6 +1031,10 @@
         <source>Always use circular progress bar</source>
         <target>Toujours utiliser la barre de progression circulaire</target>
       </trans-unit>
+      <trans-unit id="default-directory" datatype="html">
+        <source>Default directory for file browser</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
@@ -1028,6 +1062,14 @@
       <trans-unit id="action-home" datatype="html">
         <source>Return to Home</source>
         <target>Retourner à la position initiale</target>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+        <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -1115,6 +1157,18 @@
         <source>SmartPlug IP</source>
         <target>SmartPlug IP</target>
       </trans-unit>
+      <trans-unit id="settings-tuya" datatype="html">
+        <source>Tuya Smart Plug</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-tuya-enabled" datatype="html">
+        <source>enabled</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-tuya-label" datatype="html">
+        <source>Label</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
         <target></target>
@@ -1129,13 +1183,18 @@
       </trans-unit>
       <trans-unit id="settings-wemo-port" datatype="html">
         <source>Wemo Port</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <target>à propos</target>
       </trans-unit>
+      <trans-unit id="about-developer-mode" datatype="html">
+        <source> updates disabled (dev mode) </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
-        <source> no update available </source>
+        <source> up to date </source>
         <target> pas de mise à jour disponible </target>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
@@ -1148,6 +1207,7 @@
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
@@ -1160,6 +1220,10 @@
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <target> Un merci spécial à /u/Slateclean pour la fourniture d'écrans tactiles, afin que le développement puisse se poursuivre ! </target>
+      </trans-unit>
+      <trans-unit id="reset-config" datatype="html">
+        <source>Reset Config</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
@@ -1202,7 +1266,7 @@
         <target>Chut ! OctoDash dort.</target>
       </trans-unit>
       <trans-unit id="octoprint-sleeping-message" datatype="html">
-        <source>Press on the screen to wake me up again.</source>
+        <source>Tap the screen to wake me up again.</source>
         <target>Appuyez sur l'écran pour me réveiller à nouveau.</target>
       </trans-unit>
       <trans-unit id="connecting" datatype="html">
