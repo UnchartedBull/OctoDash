@@ -24,7 +24,7 @@ import { PrinterService } from './printer.service';
 export const minimumVersion = '1.3.5';
 
 export function isOctoprintVersionGood(version) {
-  version = version.replace('rc', '-rc').replace('--rc', '-rc');
+  version = version.replace(/(?<!-)rc/, '-rc').replace('.dev', '-dev');
   return compare(minimumVersion, version, '<=');
 }
 
