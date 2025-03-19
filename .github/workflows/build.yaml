@@ -35,6 +35,13 @@ jobs:
         run: npm ci
       - name: Linting Application
         run: npm run lint
+      - name: Checking if locale is updated
+        run: |-
+          npm run locale:extract
+          if [ "$(git diff --name-only)" ]; then
+            echo "Locale file update detected!  Please run 'npm run locale:update'."
+            exit 1
+          fi
 
   build:
     runs-on: ubuntu-latest
