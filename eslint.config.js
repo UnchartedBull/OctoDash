@@ -94,18 +94,12 @@ export default [
     },
   },
   {
-    files: ['**/*.js', '**/*.mjs'],
+    files: ['**/*.js'],
 
     languageOptions: {
       globals: {
         ...globals.node,
       },
-    },
-  },
-  {
-    files: ['**/main.js', '**/helper/**.js'],
-    rules: {
-      '@typescript-eslint/no-require-imports': 'off',
     },
   },
   {

@@ -9,6 +9,7 @@
     "email": "timon.gaebelein@icloud.com"
   },
   "main": "main.js",
+  "type": "module",
   "browserslist": [
     "chrome > 87"
   ],
@@ -62,7 +63,7 @@
     "lint:fix": "eslint . --fix && prettier --write .",
     "lint": "eslint . --max-warnings=0 && prettier --check .",
     "locale:extract": "ng extract-i18n --output-path src/locale",
-    "locale:update:all": "node -e 'require(`./helper/locale.js`).updateLocales()'",
+    "locale:update:all": "node -e 'const {updateLocales} = await import(`./helper/locale.js`); updateLocales()'",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "ng": "ng",
     "pack:mac": "npm run build:prod && electron-builder build -m",
@@ -90,8 +91,8 @@
     "angular-svg-round-progressbar": "~12.0.0",
     "bonjour-service": "^1.3.0",
     "compare-versions": "~6.1.1",
-    "electron-store": "~8.2.0",
-    "got-cjs": "~12.5.4",
+    "electron-store": "~10.0.1",
+    "got": "^14.4.6",
     "lodash-es": "~4.17.21",
     "lottie-web": "~5.12.2",
     "ngx-lottie": "~11.0.2",

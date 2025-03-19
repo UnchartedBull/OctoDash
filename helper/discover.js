@@ -1,6 +1,7 @@
-const { compare } = require('compare-versions');
-const exec = require('child_process').exec;
-const { Bonjour } = require('bonjour-service');
+import { exec } from 'node:child_process';
+
+import { Bonjour } from 'bonjour-service';
+import { compare } from 'compare-versions';
 
 const bonjour = new Bonjour();
 
@@ -15,7 +16,7 @@ function compareVersions(left, right, direction) {
   return compare(fixVersion(left), fixVersion(right), direction);
 }
 
-function startDiscovery(window) {
+export function startDiscovery(window) {
   exec('hostname', (err, stdout) => {
     if (err) {
       discoverNodes(window, null);
@@ -48,12 +49,10 @@ function discoverNodes(window, localDomain) {
   browser.start();
 }
 
-function stopDiscovery() {
+export function stopDiscovery() {
   browser.stop();
 }
 
 function sendNodes(window) {
   window.webContents.send('discoveredNodes', nodes);
 }
-
-module.exports = { startDiscovery, stopDiscovery };

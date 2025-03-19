@@ -1,22 +1,28 @@
-const { app, BrowserWindow, ipcMain, protocol, screen } = require('electron');
-const path = require('path');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const activateListeners = require('./helper/listener');
+import electron from 'electron';
+
+import activateListeners from './helper/listener.js';
+import { getLocale } from './helper/locale.js';
+import createProtocol from './helper/protocol.js';
+
+const { app, BrowserWindow, ipcMain, protocol, screen } = electron;
 
 let window;
 let locale;
 let url;
 
 const dev = !!process.env.APP_DEV;
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 if (!dev) {
-  const createProtocol = require('./helper/protocol');
   const scheme = 'app';
 
   protocol.registerSchemesAsPrivileged([{ scheme: scheme, privileges: { standard: true } }]);
   createProtocol(scheme, path.join(__dirname, 'dist'));
 
-  locale = require('./helper/locale.js').getLocale();
+  locale = getLocale();
 }
 
 // Fixes rendering glitches on Raspberry Pi + Electron v27+

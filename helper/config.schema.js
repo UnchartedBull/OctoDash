@@ -453,4 +453,4 @@ const configSchema = {
   },
 };
 
-module.exports = configSchema;
+export default configSchema;
