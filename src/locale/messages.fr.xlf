@@ -800,6 +800,12 @@
         <source>Can't preheat printer!</source>
         <target>Impossible de préchauffer l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-long" datatype="html">
+        <source>OctoPrint must be running at least 
+          <x id="PH" equiv-text="minimumVersion"/>; currently running 
+          <x id="PH_1" equiv-text="info.server"/>.
+        </source>
+      </trans-unit>
       <trans-unit id="printer-error-gcode" datatype="html">
         <source>Can't send GCode!</source>
         <target>Impossible d'envoyer le GCode !</target>
