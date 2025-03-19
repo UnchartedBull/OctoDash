@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
-
 const { compare } = require('compare-versions');
 const exec = require('child_process').exec;
 

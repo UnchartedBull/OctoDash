@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
-
 const { app, protocol } = require('electron');
 const fs = require('fs');
 const path = require('path');
@@ -25,6 +22,7 @@ function createProtocol(scheme, basePath) {
 
 const mimeType = filename => mimeType[extname(`${filename || ''}`).toLowerCase()];
 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 (mimeType[''] = 'text/plain'),
   (mimeType['.js'] = mimeType['.ts'] = mimeType['.mjs'] = 'text/javascript'),
   (mimeType['.html'] = mimeType['.htm'] = 'text/html'),

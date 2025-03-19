@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
-
 const fs = require('fs');
 const path = require('path');
 const { app } = require('electron');
