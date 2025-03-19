@@ -39,7 +39,9 @@ jobs:
         run: |-
           npm run locale:extract
           if [ "$(git diff --name-only)" ]; then
-            echo "Locale file update detected!  Please run 'npm run locale:update'."
+            echo ""
+            echo "ERROR! Locale file update detected!  Please run 'npm run locale:update'."
+            echo ""
             exit 1
           fi
 
