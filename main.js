@@ -3,9 +3,9 @@ import { fileURLToPath } from 'node:url';
 
 import electron from 'electron';
 
-import activateListeners from './helper/listener.js';
-import { getLocale } from './helper/locale.js';
-import createProtocol from './helper/protocol.js';
+import activateListeners from './src/helper/listener.js';
+import { getLocale } from './src/helper/locale.js';
+import createProtocol from './src/helper/protocol.js';
 
 const { app, BrowserWindow, ipcMain, protocol, screen } = electron;
 
