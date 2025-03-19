@@ -3,6 +3,9 @@
 
 const { compare } = require('compare-versions');
 const exec = require('child_process').exec;
+const { Bonjour } = require('bonjour-service');
+
+const bonjour = new Bonjour();
 
 const minimumVersion = '1.3.5';
 let browser;
@@ -26,7 +29,6 @@ function startDiscovery(window) {
 }
 
 function discoverNodes(window, localDomain) {
-  const bonjour = require('bonjour')();
   nodes = [];
   browser = bonjour.find({ type: 'octoprint' });
   browser.on('up', service => {
