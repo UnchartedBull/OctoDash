@@ -26,9 +26,9 @@
           class="settings__update-available"
           (click)="changePage(4, 0, 'forward')"
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
-          i18n="@@update-available">
-          Update available!
-        </span>
+          i18n="@@update-available"
+          >Update available!</span
+        >
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
           made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
