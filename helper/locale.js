@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 function getLocale() {
   const i18n = require('../angular.json').projects.OctoDash.i18n;
   let lang;

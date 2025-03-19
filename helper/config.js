@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const Store = require('electron-store');
 const Ajv = require('ajv');
 const configSchema = require('./config.schema');

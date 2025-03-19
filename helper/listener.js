@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-commonjs */
 const exec = require('child_process').exec;
 
 const sendCustomStyles = require('./styles');
