@@ -137,7 +137,7 @@
         <source>no instances found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
@@ -1399,71 +1399,85 @@
           <context context-type="linenumber">137</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
+        <source>OctoPrint outdated!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-long" datatype="html">
+        <source>OctoPrint must be running at least <x id="PH" equiv-text="minimumVersion"/>; currently running <x id="PH_1" equiv-text="info.server"/>.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="printer-error-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-head" datatype="html">
         <source>Can&apos;t move Printhead!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-extrude" datatype="html">
         <source>Can&apos;t extrude Filament!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">129</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">262</context>
+          <context context-type="linenumber">287</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-set-tool" datatype="html">
         <source>Can&apos;t set active tool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can&apos;t set Hotend Temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">173</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-bed" datatype="html">
         <source>Can&apos;t set Bed Temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">194</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-feedrate" datatype="html">
         <source>Can&apos;t set Feedrate!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">215</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-flowrate" datatype="html">
         <source>Can&apos;t set Flowrate!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-disconnect" datatype="html">
         <source>Can&apos;t disconnect Printer!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/printer/printer.octoprint.service.ts</context>
-          <context context-type="linenumber">231</context>
+          <context context-type="linenumber">256</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">

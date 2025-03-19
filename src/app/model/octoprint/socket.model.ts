@@ -100,3 +100,9 @@ interface OctoprintSocketTemperature {
   actual: number;
   target: number;
 }
+
+export interface OctoprintVersionInfo {
+  api: string;
+  server: string;
+  text: string;
+}

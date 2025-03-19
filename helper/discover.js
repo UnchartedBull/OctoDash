@@ -1,20 +1,11 @@
 import { exec } from 'node:child_process';
 
 import { Bonjour } from 'bonjour-service';
-import { compare } from 'compare-versions';
 
 const bonjour = new Bonjour();
 
-const minimumVersion = '1.3.5';
 let browser;
 let nodes = [];
-
-function compareVersions(left, right, direction) {
-  function fixVersion(v) {
-    return v.replace('rc', '-rc').replace('--rc', '-rc');
-  }
-  return compare(fixVersion(left), fixVersion(right), direction);
-}
 
 export function startDiscovery(window) {
   exec('hostname', (err, stdout) => {
@@ -36,7 +27,6 @@ function discoverNodes(window, localDomain) {
       version: service.txt.version,
       url: `http://${service.host.replace(/\.$/, '')}:${service.port}${service.txt.path}`,
       local: service.host === localDomain,
-      disabled: compareVersions(minimumVersion, service.txt.version, '>'),
     });
     sendNodes(window);
   });

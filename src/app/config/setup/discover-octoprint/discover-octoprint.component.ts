@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { ElectronService } from '../../../electron.service';
+import { isOctoprintVersionGood } from '../../../services/printer/printer.octoprint.service';
 import { URLSplit } from '../../config.model';
 import { ConfigService } from '../../config.service';
 
@@ -19,7 +20,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   @Output() octoprintPortChange = new EventEmitter<number>();
 
   public manualURL = false;
-  public octoprintNodes: OctoprintNodes;
+  public octoprintNodes: OctoprintNode[];
   public urlSplit: URLSplit;
 
   constructor(
@@ -29,9 +30,12 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.electronService.on('discoveredNodes', (_, nodes: OctoprintNodes) => {
+    this.electronService.on('discoveredNodes', (_, nodes: OctoprintNode[]) => {
       this.zone.run(() => {
-        this.octoprintNodes = nodes;
+        this.octoprintNodes = nodes.map(n => ({
+          ...n,
+          disabled: !isOctoprintVersionGood(n.version),
+        }));
       });
     });
 
@@ -54,7 +58,7 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
     }, 10000);
   }
 
-  public setOctoprintInstance(node: OctoprintNodes): void {
+  public setOctoprintInstance(node: OctoprintNode): void {
     const urlSplit = this.configService.splitOctoprintURL(node.url);
     if (node.local) {
       this.urlSplit = urlSplit;
@@ -85,11 +89,11 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   }
 }
 
-interface OctoprintNodes {
+interface OctoprintNode {
   id: number;
   name: string;
   version: string;
   url: string;
   local: boolean;
-  disabled: boolean;
+  disabled?: boolean;
 }
