@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-import xliff from 'xliff';
+import { jsToXliff12, xliff12ToJs } from 'xliff';
 
 export function getLocale() {
   const angularConfig = JSON.parse(fs.readFileSync(new URL('../angular.json', import.meta.url), 'utf-8'));
@@ -42,7 +42,7 @@ export function updateLocales() {
 
   // get extracted messages
   const extractedXLF = fs.readFileSync('./src/locale/messages.xlf').toString();
-  xliff.xliff12ToJs(extractedXLF, (err, extracted) => {
+  xliff12ToJs(extractedXLF, (err, extracted) => {
     if (err) throw new Error(err.message);
 
     // for each supported locale
@@ -50,7 +50,7 @@ export function updateLocales() {
       const translatedXLF = fs.readFileSync(`./src/locale/${translatedXLFRef.filename}`).toString();
 
       // load this locale
-      xliff.xliff12ToJs(translatedXLF, (err, translated) => {
+      xliff12ToJs(translatedXLF, (err, translated) => {
         if (err) throw new Error(err.message);
 
         // hard copy of messages.xlf
@@ -66,7 +66,7 @@ export function updateLocales() {
           }
         }
         // backup the previous version of the locale and write the new locale
-        xliff.jsToXliff12(newTranslation, (err, result) => {
+        jsToXliff12(newTranslation, (err, result) => {
           if (err) throw new Error(err.message);
           const now = new Date();
           if (!fs.existsSync('./src/locale/backups')) {

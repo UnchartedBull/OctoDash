@@ -1,13 +1,14 @@
+import { exec } from 'node:child_process';
 import fs from 'node:fs';
 import stream from 'node:stream';
 import { promisify } from 'node:util';
-import { exec } from 'node:child_process';
 
 import { got } from 'got';
 import progress from 'progress-stream';
 
 export function downloadUpdate(updateInfo, window) {
   const downloadPath = '/tmp/octodash.deb';
+  /* eslint-disable camelcase */
   const archMapping = {
     armv7l: 'armv7l',
     aarch64: 'arm64',

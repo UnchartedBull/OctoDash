@@ -1,17 +1,18 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import _import from 'eslint-plugin-import';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import prettier from 'eslint-plugin-prettier';
-import tsParser from '@typescript-eslint/parser';
-import globals from 'globals';
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { fixupConfigRules, fixupPluginRules, includeIgnoreFile } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import _import from 'eslint-plugin-import';
+import prettier from 'eslint-plugin-prettier';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import globals from 'globals';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
+
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
@@ -19,6 +20,10 @@ const compat = new FlatCompat({
 });
 
 export default [
+  includeIgnoreFile(gitignorePath),
+  {
+    ignores: ['**/docs/js/lib/'],
+  },
   ...fixupConfigRules(
     compat.extends(
       'eslint:recommended',
@@ -47,7 +52,12 @@ export default [
       '@typescript-eslint/no-parameter-properties': 'off',
       '@typescript-eslint/no-use-before-define': 'off',
       'import/no-unresolved': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          caughtErrors: 'none',
+        },
+      ],
       camelcase: 'warn',
       'simple-import-sort/imports': 'warn',
       'sort-imports': 'off',
@@ -89,6 +99,16 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
+      },
+    },
+  },
+  {
+    files: ['**/docs/js/*.js'],
+
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jquery,
       },
     },
   },

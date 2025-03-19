@@ -1,5 +1,5 @@
-import Store from 'electron-store';
 import { Ajv } from 'ajv';
+import Store from 'electron-store';
 
 import configSchema from './config.schema.js';
 

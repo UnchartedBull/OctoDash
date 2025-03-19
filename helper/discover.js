@@ -1,7 +1,7 @@
 import { exec } from 'node:child_process';
 
-import { compare } from 'compare-versions';
 import { Bonjour } from 'bonjour-service';
+import { compare } from 'compare-versions';
 
 const bonjour = new Bonjour();
 

@@ -2,13 +2,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import electron from 'electron';
-import Store from 'electron-store';
 
 import activateListeners from './helper/listener.js';
-import createProtocol from './helper/protocol.js';
 import { getLocale } from './helper/locale.js';
+import createProtocol from './helper/protocol.js';
 
-const { app, BrowserWindow, ipcMain, protocol, screen, session } = electron;
+const { app, BrowserWindow, ipcMain, protocol, screen } = electron;
 
 let window;
 let locale;
@@ -32,8 +31,6 @@ app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 function createWindow() {
-  const _store = new Store();
-
   // TODO: re-enable
   // if (!dev) {
   //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {

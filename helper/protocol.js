@@ -24,6 +24,7 @@ function createProtocol(scheme, basePath) {
 
 const mimeType = filename => mimeType[extname(`${filename || ''}`).toLowerCase()];
 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 (mimeType[''] = 'text/plain'),
   (mimeType['.js'] = mimeType['.ts'] = mimeType['.mjs'] = 'text/javascript'),
   (mimeType['.html'] = mimeType['.htm'] = 'text/html'),
