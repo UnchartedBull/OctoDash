@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { compare } from 'compare-versions';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -11,6 +12,7 @@ import {
   FeedrateCommand,
   GCodeCommand,
   JogCommand,
+  OctoprintVersionInfo,
   OctoprintPrinterProfiles,
   TemperatureHeatbedCommand,
   TemperatureHotendCommand,
@@ -19,13 +21,36 @@ import {
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
 
+export const minimumVersion = '1.3.5';
+
+export function isOctoprintVersionGood(version) {
+  version = version.replace('rc', '-rc').replace('--rc', '-rc');
+  return compare(minimumVersion, version, '<=');
+}
+
 @Injectable()
 export class PrinterOctoprintService implements PrinterService {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
-  ) {}
+  ) {
+    this.http
+      .get<OctoprintVersionInfo>(this.configService.getApiURL('version'), this.configService.getHTTPHeaders())
+      .pipe(
+        map(info => {
+          if (!isOctoprintVersionGood(info.server)) {
+            this.notificationService.setNotification({
+              heading: $localize`:@@octoprint-upgrade-required:OctoPrint outdated!`,
+              text: $localize`:@@octoprint-upgrade-required-long:OctoPrint must be running at least ${minimumVersion}; currently running ${info.server}.`,
+              type: NotificationType.ERROR,
+              time: new Date(),
+            });
+          }
+        }),
+      )
+      .subscribe();
+  }
 
   public getActiveProfile(): Observable<PrinterProfile> {
     return this.http
