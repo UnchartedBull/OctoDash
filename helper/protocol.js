@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path, { extname } from 'node:path';
+import path from 'node:path';
 
 import electron from 'electron';
 import mime from 'mime-types';
