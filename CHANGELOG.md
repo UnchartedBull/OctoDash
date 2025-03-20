@@ -1,5 +1,58 @@
 # Changelog
 
+## [v2.4.0](https://github.com/UnchartedBull/OctoDash/tree/v2.4.0) (2025-03-19)
+
+> [!IMPORTANT]
+> OctoDash v2.4.0 requires OctoPrint v1.9.0 or higher.
+
+Hello everyone! After three years, a new update to OctoDash is now available. This release includes various updates such as:
+
+- Support for multiple extruders/tools
+- Support for new plugins
+- Support for Debian Bullseye / OctoPi 1.0.0
+- Various quality-of-life improvements
+- Upgraded dependencies for performance, stability and security
+
+## Update Log
+
+- Support for multiple extruders/tools (#3256)
+  - OctoDash now has support for printers with multiple extruders/tools
+  - Temperatures will be displayed and can be configured for any toolhead
+  - Extrusion in the control panel may be performed for any tool
+  - The UI is designed to scale for up to five toolheads to support the Prusa XL
+- Add support for Wemo (#3184) and Tuya (#4788) plugins
+  - Both Wemo and Tuya smart plugs are supported in OctoDash via companion plugins
+- Add support for OctoDash Companion plugin (#4789)
+  - The fan speed can now be obtained via the OctoDash Companion plugin
+  - Previously, users had to use the DisplayLayerProgress plugin to get the fan speed
+- Get chamber temperature without plugins (#3654)
+  - The Enclosure plugin is no longer needed as OctoPrint has built-in support for obtaining chamber temperature
+- Send a notification when an update is available (#4783)
+  - A notification will be displayed along with the existing badge when an OctoDash update is ready
+- Display settings icon on all main screens (#4786)
+  - The settings are now accessible when OctoDash is initializing or attempting to connect to the printer, which will allow the user to fix any configuration issues preventing printer connection
+- Add an option to reset the configuration (#4782)
+  - Users may now easily "factory reset" OctoDash by going to Settings > About
+- Better support for long filenames on SD card (#2958)
+  - The display name will be used for files on the SD card
+- Allow customizing of the default directory used in the file browser (#4778)
+  - This allows users to set any directory as the default to be displayed, in case the user always stores files on the SD card / locally, or otherwise has a preferred folder
+- Support for enclosure shell scripts (#3053)
+  - Users may now create custom actions to run enclosure shell scripts
+- Display local IP address on the About screen (#4633)
+  - The IP address of the OctoDash instance is now displayed on the About screen for debugging
+- Improved install and update scripts (#4784, #4812, #4823)
+  - The install and update scripts have been updated for better usability
+  - Debian Bullseye / OctoPi 1.0.0 is now officially supported by the install script
+  - CORS will always be enabled on OctoDash if it needs to be
+- Support for RC and dev OctoPrint versions (#4785, #4831)
+  - If a user was doing a first-time setup with an RC or dev version, OctoDash would crash as OctoPrint is not using proper semantic versioning for RC or dev releases
+- Send a notification if OctoPrint is outdated (#4823)
+  - Previously, OctoDash would only check if OctoPrint needed to be updated during first-time setup
+  - Now, a notification will be sent if OctoPrint is an older version than OctoDash requires, in case the user updates OctoDash or changes the URL to an incompatible OctoPrint instance
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.3.1...v2.4.0)
+
 ## [v2.3.1](https://github.com/UnchartedBull/OctoDash/tree/v2.3.1) (2022-03-02)
 
 [Full Changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.3.0...v2.3.1)
