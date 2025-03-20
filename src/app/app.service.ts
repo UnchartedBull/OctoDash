@@ -45,6 +45,7 @@ export class AppService {
         (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
       "/plugins must have required property 'tasmotaMqtt'": config =>
         (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
+      "/plugins must have required property 'tuya'": config => (config.plugins.tuya = defaultConfig.plugins.tuya),
       "/plugins must have required property 'wemo'": config =>
         (config.plugins.wemo = { enabled: false, ip: '127.0.0.1', port: 49152 }),
       "/octodash must have required property 'previewProgressCircle'": config =>
@@ -61,7 +62,6 @@ export class AppService {
         (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
       "/printer must have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
-      "/plugins must have required property 'tuya'": config => (config.plugins.tuya = defaultConfig.plugins.tuya),
       "/octodash must have required property 'showExtruderControl'": config =>
         (config.octodash.showExtruderControl = true),
       "/plugins must have required property 'spoolManager'": config =>
