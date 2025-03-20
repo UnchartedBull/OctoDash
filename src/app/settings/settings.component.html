@@ -736,7 +736,7 @@
             *ngIf="service.updateAvailable"
             (click)="showUpdate()"
             i18n="@@about-install-v">
-            install v{{ service.latestVersion }}
+            install v{{ service.latestVersion.title }}
           </button>
           <span class="settings__about-copyright">
             &#169; 2019-2024 UnchartedBull + various contributors<br />

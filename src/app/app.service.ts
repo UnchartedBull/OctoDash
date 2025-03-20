@@ -14,7 +14,13 @@ export class AppService {
   private updateError: Record<string, (config: Config) => void>;
   private latestVersionAssetsURL: string;
   private version: string;
-  private latestVersion: string;
+  private latestVersion: {
+    version: string;
+    title: string;
+  } = {
+    version: '',
+    title: '',
+  };
 
   public updateAvailable = false;
   public dev = !!process.env.APP_DEV;
@@ -75,14 +81,14 @@ export class AppService {
 
     this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
       next: (data: GitHubReleaseInformation): void => {
-        this.latestVersion = data.tag_name.replace('v', '');
+        this.latestVersion = { version: data.tag_name.replace('v', ''), title: data.name };
         this.latestVersionAssetsURL = data.assets_url;
-        if (this.version != this.latestVersion) {
+        if (this.version != this.latestVersion.version) {
           if (!this.updateAvailable) {
             // Display notification first time that update is detected
             this.notificationService.setNotification({
               heading: $localize`:@@update-available:Update available!`,
-              text: $localize`:@@update-available-long:Version ${this.latestVersion} is available. Go to Settings > About to update.`,
+              text: $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
               type: NotificationType.INFO,
               time: new Date(),
             });
@@ -145,7 +151,7 @@ export class AppService {
     return this.version;
   }
 
-  public getLatestVersion(): string {
+  public getLatestVersion(): { version: string; title: string } {
     return this.latestVersion;
   }
 
