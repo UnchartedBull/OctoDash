@@ -61,6 +61,7 @@ export class AppService {
         (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
       "/printer must have required property 'disableExtruderGCode'": config =>
         (config.printer.disableExtruderGCode = 'M18 E'),
+      "/plugins must have required property 'tuya'": config => (config.plugins.tuya = defaultConfig.plugins.tuya),
       "/octodash must have required property 'showExtruderControl'": config =>
         (config.octodash.showExtruderControl = true),
       "/plugins must have required property 'spoolManager'": config =>
