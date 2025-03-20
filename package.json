@@ -21,7 +21,7 @@
     },
     "files": [
       "main.js",
-      "helper",
+      "src/helper",
       "dist",
       "angular.json",
       "node_modules",
