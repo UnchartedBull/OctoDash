@@ -21,7 +21,7 @@ import {
 import { NotificationService } from '../../notification/notification.service';
 import { PrinterService } from './printer.service';
 
-export const minimumVersion = '1.3.5';
+export const minimumVersion = '1.9.0';
 
 export function isOctoprintVersionGood(version) {
   version = version.replace(/(?<!-)rc/, '-rc').replace('.dev', '-dev');
