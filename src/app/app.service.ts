@@ -151,7 +151,7 @@ export class AppService {
     return this.version;
   }
 
-  public getLatestVersion(): string {
+  public getLatestVersion(): { version: string; title: string } {
     return this.latestVersion;
   }
 
