@@ -48,8 +48,10 @@ export class FilamentComponent implements OnInit, OnDestroy {
     if (this.hotendPreviousTemperature.length === 1) {
       if (!this.configService.isFilamentManagerUsed()) {
         this.setPage(2);
+        return;
       }
       this.setPage(1);
+      return;
     }
     this.setPage(0);
   }
