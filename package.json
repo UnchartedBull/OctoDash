@@ -80,7 +80,7 @@
     "@angular/core": "^17.3.12",
     "@angular/forms": "^17.3.12",
     "@angular/localize": "^17.3.12",
-    "@angular/material": "^17.3.10",
+    "@angular/material": "^19.2.4",
     "@angular/platform-browser": "^17.3.12",
     "@angular/platform-browser-dynamic": "^17.3.12",
     "@angular/router": "^17.3.12",
