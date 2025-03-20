@@ -17,7 +17,7 @@
       </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
         <source>Version 
-          <x id="PH" equiv-text="this.latestVersion"/> is available. Go to Settings &gt; About to update.
+          <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
         <target></target>
       </trans-unit>
@@ -800,6 +800,7 @@
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-title" datatype="html">
         <source>OctoPrint outdated!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-long" datatype="html">
         <source>OctoPrint must be running at least 
@@ -1202,7 +1203,7 @@
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </source>
         <target>installiere v</target>
       </trans-unit>
