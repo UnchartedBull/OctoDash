@@ -246,7 +246,7 @@
         },
         "psuControl": {
           "type": "object",
-          "required": ["enabled", "turnOnPSUWhenExitingSleep"],
+          "required": ["enabled"],
           "properties": {
             "enabled": {
               "type": "boolean",
