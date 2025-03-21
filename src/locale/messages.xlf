@@ -885,21 +885,21 @@
       <trans-unit id="height-mm" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="heing-layer" datatype="html">
         <source> Layer </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="height-of" datatype="html">
         <source> of </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
@@ -963,21 +963,21 @@
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-filament" datatype="html">
         <source>filament</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-control" datatype="html">
         <source>control</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
