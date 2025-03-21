@@ -37,11 +37,7 @@ export class EventService implements OnDestroy {
       this.router.navigate(['/standby']);
     } else if (event === PrinterEvent.CONNECTED) {
       setTimeout(() => {
-        if (this.configService.isTouchscreen()) {
-          this.router.navigate(['/main-screen']);
-        } else {
-          this.router.navigate(['/main-screen-no-touch']);
-        }
+        this.router.navigate(['/main-screen']);
       }, 500);
     }
   }

@@ -40,7 +40,6 @@ import { JobStatusComponent } from './job-status/job-status.component';
 import { LongPress } from './long-press.directive';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 import { NotificationCenterComponent } from './notification-center/notification-center.component';
@@ -87,7 +86,6 @@ import { URLSafePipe } from './url.pipe';
     LongPress,
     MainMenuComponent,
     MainScreenComponent,
-    MainScreenNoTouchComponent,
     NotificationComponent,
     OctoprintAuthenticationComponent,
     PersonalizationComponent,

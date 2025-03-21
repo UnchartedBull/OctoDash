@@ -82,11 +82,7 @@ export class AppComponent implements OnInit {
     this.socketService
       .connect()
       .then(() => {
-        if (this.configService.isTouchscreen()) {
-          this.router.navigate(['/main-screen']);
-        } else {
-          this.router.navigate(['/main-screen-no-touch']);
-        }
+        this.router.navigate(['/main-screen']);
         this.initialized = true;
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));

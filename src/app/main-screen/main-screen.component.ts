@@ -30,4 +30,8 @@ export class MainScreenComponent {
   public isFileLoaded(): boolean {
     return this.fileService.getLoadedFile();
   }
+
+  public isTouchscreen(): boolean {
+    return this.configService.isTouchscreen();
+  }
 }
