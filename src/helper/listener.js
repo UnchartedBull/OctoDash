@@ -3,7 +3,7 @@ import { exec } from 'node:child_process';
 import { checkConfig, readConfig, resetConfig, saveConfig } from './config.js';
 import { startDiscovery, stopDiscovery } from './discover.js';
 import sendCustomStyles from './styles.js';
-import { downloadUpdate, sendVersionInfo, restartOctoDash } from './update.js';
+import { downloadUpdate, restartOctoDash, sendVersionInfo } from './update.js';
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => exec(screenCommand.command));
