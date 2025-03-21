@@ -1,9 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
-
-export interface HttpHeader {
-  headers: HttpHeaders;
-}
-
 export interface Config {
   octoprint: Octoprint;
   printer: Printer;

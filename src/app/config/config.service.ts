@@ -5,7 +5,7 @@ import _ from 'lodash-es';
 import { ElectronService } from '../electron.service';
 import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
+import { Config, CustomAction, URLSplit } from './config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,9 @@ export class ConfigService {
   private update = false;
   private initialized = false;
 
-  private httpHeaders: HttpHeader;
+  private httpHeaders: {
+    headers: HttpHeaders;
+  };
 
   public constructor(
     private notificationService: NotificationService,
