@@ -1,5 +1,21 @@
 # Changelog
 
+## [v2.4.1](https://github.com/UnchartedBull/OctoDash/tree/v2.4.1) (2025-03-20)
+
+> [!IMPORTANT]
+> OctoDash v2.4.1 requires OctoPrint v1.9.0 or higher.
+
+This release includes a hotfix for the Tuya plugin integration.
+
+## Update Log
+
+- Migrate Tuya plugin config ([#4848](https://github.com/UnchartedBull/OctoDash/pull/4848))
+  - This fixes a configuration migration issue
+- Display release title ([#4835](https://github.com/UnchartedBull/OctoDash/pull/4835))
+  - The release title is displayed in the update panel, rather than the version number
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.4.0...v2.4.1)
+
 ## [v2.4.0](https://github.com/UnchartedBull/OctoDash/tree/v2.4.0) (2025-03-19)
 
 > [!IMPORTANT]
@@ -15,39 +31,39 @@ Hello everyone! After three years, a new update to OctoDash is now available. Th
 
 ## Update Log
 
-- Support for multiple extruders/tools (#3256)
+- Support for multiple extruders/tools ([#3256](https://github.com/UnchartedBull/OctoDash/pull/3256))
   - OctoDash now has support for printers with multiple extruders/tools
   - Temperatures will be displayed and can be configured for any toolhead
   - Extrusion in the control panel may be performed for any tool
   - The UI is designed to scale for up to five toolheads to support the Prusa XL
-- Add support for Wemo (#3184) and Tuya (#4788) plugins
+- Add support for Wemo ([#3184](https://github.com/UnchartedBull/OctoDash/pull/3184)) and Tuya ([#4788](https://github.com/UnchartedBull/OctoDash/pull/4788)) plugins
   - Both Wemo and Tuya smart plugs are supported in OctoDash via companion plugins
-- Add support for OctoDash Companion plugin (#4789)
+- Add support for OctoDash Companion plugin ([#4789](https://github.com/UnchartedBull/OctoDash/pull/4789))
   - The fan speed can now be obtained via the OctoDash Companion plugin
   - Previously, users had to use the DisplayLayerProgress plugin to get the fan speed
-- Get chamber temperature without plugins (#3654)
+- Get chamber temperature without plugins ([#3654](https://github.com/UnchartedBull/OctoDash/pull/3654))
   - The Enclosure plugin is no longer needed as OctoPrint has built-in support for obtaining chamber temperature
-- Send a notification when an update is available (#4783)
+- Send a notification when an update is available ([#4783](https://github.com/UnchartedBull/OctoDash/pull/4783))
   - A notification will be displayed along with the existing badge when an OctoDash update is ready
-- Display settings icon on all main screens (#4786)
+- Display settings icon on all main screens ([#4786](https://github.com/UnchartedBull/OctoDash/pull/4786))
   - The settings are now accessible when OctoDash is initializing or attempting to connect to the printer, which will allow the user to fix any configuration issues preventing printer connection
-- Add an option to reset the configuration (#4782)
+- Add an option to reset the configuration ([#4782](https://github.com/UnchartedBull/OctoDash/pull/4782))
   - Users may now easily "factory reset" OctoDash by going to Settings > About
-- Better support for long filenames on SD card (#2958)
+- Better support for long filenames on SD card ([#2958](https://github.com/UnchartedBull/OctoDash/pull/2958))
   - The display name will be used for files on the SD card
-- Allow customizing of the default directory used in the file browser (#4778)
+- Allow customizing of the default directory used in the file browser ([#4778](https://github.com/UnchartedBull/OctoDash/pull/4778))
   - This allows users to set any directory as the default to be displayed, in case the user always stores files on the SD card / locally, or otherwise has a preferred folder
-- Support for enclosure shell scripts (#3053)
+- Support for enclosure shell scripts ([#3053](https://github.com/UnchartedBull/OctoDash/pull/3053))
   - Users may now create custom actions to run enclosure shell scripts
-- Display local IP address on the About screen (#4633)
+- Display local IP address on the About screen ([#4633](https://github.com/UnchartedBull/OctoDash/pull/4633))
   - The IP address of the OctoDash instance is now displayed on the About screen for debugging
-- Improved install and update scripts (#4784, #4812, #4823)
+- Improved install and update scripts ([#4784](https://github.com/UnchartedBull/OctoDash/pull/4784), [#4812](https://github.com/UnchartedBull/OctoDash/pull/4812), [#4823](https://github.com/UnchartedBull/OctoDash/pull/4823))
   - The install and update scripts have been updated for better usability
   - Debian Bullseye / OctoPi 1.0.0 is now officially supported by the install script
   - CORS will always be enabled on OctoDash if it needs to be
-- Support for RC and dev OctoPrint versions (#4785, #4831)
+- Support for RC and dev OctoPrint versions ([#4785](https://github.com/UnchartedBull/OctoDash/pull/4785), [#4831](https://github.com/UnchartedBull/OctoDash/pull/4831))
   - If a user was doing a first-time setup with an RC or dev version, OctoDash would crash as OctoPrint is not using proper semantic versioning for RC or dev releases
-- Send a notification if OctoPrint is outdated (#4823)
+- Send a notification if OctoPrint is outdated ([#4823](https://github.com/UnchartedBull/OctoDash/pull/4823))
   - Previously, OctoDash would only check if OctoPrint needed to be updated during first-time setup
   - Now, a notification will be sent if OctoPrint is an older version than OctoDash requires, in case the user updates OctoDash or changes the URL to an incompatible OctoPrint instance
 
