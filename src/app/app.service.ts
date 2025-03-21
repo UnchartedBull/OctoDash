@@ -52,8 +52,10 @@ export class AppService {
       "/octodash must have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = defaultConfig.octodash.previewProgressCircle),
       "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
         config.octodash.turnOnPrinterWhenExitingSleep =
           (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep ?? false;
+        /* eslint-disable @typescript-eslint/no-explicit-any */
         delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
       },
       "/octodash must have required property 'screenSleepCommand'": config =>
