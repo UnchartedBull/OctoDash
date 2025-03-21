@@ -33,8 +33,8 @@
       type="text"
       id="octoprintURLName"
       class="setup__input"
-      [ngModel]="octoprintHost"
-      (ngModelChange)="octoprintHostChange.emit($event)"
+      [ngModel]="urlSplit.host"
+      (ngModelChange)="changeHost($event)"
       name="octoprintURLName"
       required
       style="width: 42.5vw" />
@@ -43,8 +43,8 @@
       type="text"
       id="octoprintURLPort"
       class="setup__input"
-      [ngModel]="octoprintPort"
-      (ngModelChange)="octoprintPortChange.emit($event)"
+      [ngModel]="urlSplit.port"
+      (ngModelChange)="changePort($event)"
       name="octoprintURLPort"
       required
       style="width: 14vw" />
@@ -54,16 +54,5 @@
   </form>
   <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
     search again
-  </div>
-</div>
-
-<div class="confirm__wrapper" *ngIf="urlSplit">
-  <div class="confirm">
-    <h1 i18n="@@connect-localhost">connect to localhost?</h1>
-    <p class="confirm__sub-heading" i18n="@@prompt-same-machine">
-      are you trying to connect to OctoPrint that is running on the same machine as OctoDash?
-    </p>
-    <img class="confirm__icon" src="assets/confirm-small.svg" (click)="emitLocalOctoprintInstance(urlSplit)" />
-    <img class="confirm__icon" src="assets/cancel-small.svg" (click)="emitOctoprintInstance(urlSplit)" />
   </div>
 </div>

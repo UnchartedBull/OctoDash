@@ -23,7 +23,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   public configValid = false;
   public configSaved = $localize`:@@saving-config:saving config`;
   public configErrors: string[];
-  public octoprintURL: URLSplit;
 
   public manualURL = false;
 
@@ -42,7 +41,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
       /* eslint-disable @typescript-eslint/no-explicit-any */
       this.config = defaultConfig as any as Config;
     }
-    this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {
@@ -56,10 +54,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public changeURLEntryMethod(manual: boolean): void {
     this.manualURL = manual;
-  }
-
-  public getOctoprintURL(): string {
-    return this.configService.mergeOctoprintURL(this.octoprintURL);
   }
 
   public createConfig(): void {
@@ -139,9 +133,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public decreasePage(): void {
-    if (this.page === this.totalPages) {
-      this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
-    }
     this.changePage(-1);
   }
 

@@ -10,13 +10,11 @@ import { ConfigService, URLSplit } from '../../config.service';
   styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
 })
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
-  @Input() octoprintHost: number;
-  @Input() octoprintPort: number;
+  @Input() octoprintURL: string;
 
   @Output() increasePage = new EventEmitter<void>();
   @Output() changeURLEntryMethod = new EventEmitter<boolean>();
-  @Output() octoprintHostChange = new EventEmitter<string>();
-  @Output() octoprintPortChange = new EventEmitter<number>();
+  @Output() octoprintURLChange = new EventEmitter<string>();
 
   public manualURL = false;
   public octoprintNodes: OctoprintNode[];
@@ -26,7 +24,9 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private electronService: ElectronService,
     private zone: NgZone,
-  ) {}
+  ) {
+    this.urlSplit = { host: 'localhost', port: 5000 };
+  }
 
   ngOnInit(): void {
     this.electronService.on('discoveredNodes', (_, nodes: OctoprintNode[]) => {
@@ -59,22 +59,24 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
 
   public setOctoprintInstance(node: OctoprintNode): void {
     const urlSplit = this.configService.splitOctoprintURL(node.url);
-    if (node.local) {
-      this.urlSplit = urlSplit;
-    } else {
-      this.emitOctoprintInstance(urlSplit);
+    this.urlSplit = urlSplit;
+    if (!node.local) {
+      this.emitOctoprintInstance();
     }
   }
 
-  public emitLocalOctoprintInstance(urlSplit: URLSplit): void {
-    this.emitOctoprintInstance({ host: 'localhost', port: urlSplit.port } as URLSplit);
+  public changeHost(host: string) {
+    this.urlSplit.host = host;
+    this.octoprintURLChange.emit(this.configService.mergeOctoprintURL(this.urlSplit));
   }
 
-  public emitOctoprintInstance(urlSplit: URLSplit): void {
-    this.octoprintHostChange.emit(urlSplit.host);
-    this.octoprintPortChange.emit(urlSplit.port);
-    this.urlSplit = undefined;
-    this.increasePage.emit();
+  public changePort(port: number) {
+    this.urlSplit.port = port;
+    this.octoprintURLChange.emit(this.configService.mergeOctoprintURL(this.urlSplit));
+  }
+
+  public emitOctoprintInstance(): void {
+    this.octoprintURLChange.emit(this.configService.mergeOctoprintURL(this.urlSplit));
   }
 
   public searchForInstance(): void {

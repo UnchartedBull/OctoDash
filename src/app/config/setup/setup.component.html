@@ -26,18 +26,17 @@
   <app-config-setup-discover-octoprint
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)"
-    [(octoprintHost)]="octoprintURL.host"
-    [(octoprintPort)]="octoprintURL.port"
+    [(octoprintURL)]="config.octoprint.url"
     *ngIf="page === 1"></app-config-setup-discover-octoprint>
 
   <app-config-setup-octoprint-authentication
-    [octoprintURL]="getOctoprintURL().replace('api/', '')"
+    [octoprintURL]="config.octoprint.url.replace('api/', '')"
     (increasePage)="increasePage()"
     [(accessToken)]="config.octoprint.accessToken"
     *ngIf="page === 2"></app-config-setup-octoprint-authentication>
 
   <app-config-setup-personalization
-    [octoprintURL]="getOctoprintURL()"
+    [octoprintURL]="config.octoprint.url"
     [apiKey]="config.octoprint.accessToken"
     [(printerName)]="config.printer.name"
     [(useTouchscreen)]="config.octodash.touchscreen"
