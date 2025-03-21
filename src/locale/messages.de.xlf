@@ -1309,17 +1309,14 @@
         </source>
         <target>v installieret</target>
       </trans-unit>
-      <trans-unit id="update-reboot" datatype="html">
-        <source>would you like to reboot now to activate the latest version?</source>
-        <target>willst du einen Neustart ausführen um die neuste Version zu nutzen?</target>
+      <trans-unit id="update-restart" datatype="html">
+        <source>would you like to restart OctoDash now?</source>
       </trans-unit>
-      <trans-unit id="reboot-no" datatype="html">
+      <trans-unit id="restart-no" datatype="html">
         <source> no </source>
-        <target>nein</target>
       </trans-unit>
-      <trans-unit id="reboot-yes" datatype="html">
+      <trans-unit id="restart-yes" datatype="html">
         <source> yes </source>
-        <target>ja</target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
         <source>Can't initiate update!</source>

@@ -2048,49 +2048,49 @@
         <source> up to date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">731,733</context>
+          <context context-type="linenumber">732,734</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">738,740</context>
+          <context context-type="linenumber">739,741</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">745</context>
+          <context context-type="linenumber">746</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">749</context>
+          <context context-type="linenumber">750</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">790</context>
+          <context context-type="linenumber">791</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">791,793</context>
+          <context context-type="linenumber">792,794</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-config" datatype="html">
         <source>Reset Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
-          <context context-type="linenumber">797</context>
+          <context context-type="linenumber">798</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
@@ -2233,25 +2233,25 @@
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="update-reboot" datatype="html">
-        <source>would you like to reboot now to activate the latest version?</source>
+      <trans-unit id="update-restart" datatype="html">
+        <source>would you like to restart OctoDash now?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="reboot-no" datatype="html">
+      <trans-unit id="restart-no" datatype="html">
         <source> no </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">31,33</context>
+          <context context-type="linenumber">29,31</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="reboot-yes" datatype="html">
+      <trans-unit id="restart-yes" datatype="html">
         <source> yes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/update/update.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">32,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">

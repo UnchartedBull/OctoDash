@@ -46,6 +46,16 @@ No Keyboard? [No Problem](https://github.com/UnchartedBull/OctoDash/wiki/Setup-&
 
 Having issues during the installation? Please have a look at the [Troubleshooting Guide](https://github.com/UnchartedBull/OctoDash/wiki/Troubleshooting) first.
 
+## Update
+
+Updates can be made through the OctoDash UI, by clicking Settings > About > Install \[CurrentVersion\]!
+
+Updates can also be made via the command line:
+
+```
+bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/update.sh)
+```
+
 ## Tips and Tricks
 
 - OctoDash supports printing from your Raspberry and from the printers SD card, if configured in OctoPrint (v1.5.0 and up)

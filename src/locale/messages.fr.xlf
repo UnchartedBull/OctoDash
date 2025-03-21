@@ -1320,17 +1320,14 @@
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installée
         </target>
       </trans-unit>
-      <trans-unit id="update-reboot" datatype="html">
-        <source>would you like to reboot now to activate the latest version?</source>
-        <target>Souhaitez-vous redémarrer maintenant pour activer la dernière version ?</target>
+      <trans-unit id="update-restart" datatype="html">
+        <source>would you like to restart OctoDash now?</source>
       </trans-unit>
-      <trans-unit id="reboot-no" datatype="html">
+      <trans-unit id="restart-no" datatype="html">
         <source> no </source>
-        <target>non</target>
       </trans-unit>
-      <trans-unit id="reboot-yes" datatype="html">
+      <trans-unit id="restart-yes" datatype="html">
         <source> yes </source>
-        <target>oui</target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
         <source>Can't initiate update!</source>

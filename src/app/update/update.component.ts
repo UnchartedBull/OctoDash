@@ -90,7 +90,7 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  public reboot(): void {
-    this.systemService.sendCommand('reboot');
+  public restart(): void {
+    this.electronService.send('restart');
   }
 }

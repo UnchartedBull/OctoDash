@@ -24,14 +24,12 @@
   </div>
   <div *ngIf="page === 3">
     <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion }} installed</span>
-    <span class="update-restart" i18n="@@update-reboot"
-      >would you like to reboot now to activate the latest version?</span
-    >
+    <span class="update-restart" i18n="@@update-restart">would you like to restart OctoDash now?</span>
     <div class="update-restart-button__wrapper">
-      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@reboot-no">
+      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@restart-no">
         no
       </button>
-      <button class="update-restart-button update-restart-button__yes" (click)="reboot()" i18n="@@reboot-yes">
+      <button class="update-restart-button update-restart-button__yes" (click)="restart()" i18n="@@restart-yes">
         yes
       </button>
     </div>

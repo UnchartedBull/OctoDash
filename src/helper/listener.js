@@ -3,7 +3,7 @@ import { exec } from 'node:child_process';
 import { checkConfig, readConfig, resetConfig, saveConfig } from './config.js';
 import { startDiscovery, stopDiscovery } from './discover.js';
 import sendCustomStyles from './styles.js';
-import { downloadUpdate, sendVersionInfo } from './update.js';
+import { downloadUpdate, sendVersionInfo, restartOctoDash } from './update.js';
 
 function activateScreenSleepListener(ipcMain) {
   ipcMain.on('screenControl', (_, screenCommand) => exec(screenCommand.command));
@@ -26,6 +26,10 @@ function activateUpdateListener(ipcMain, window) {
   ipcMain.on('update', (_, updateInfo) => downloadUpdate(updateInfo, window));
 }
 
+function activateRestartListener(ipcMain, app) {
+  ipcMain.on('restart', () => restartOctoDash(app));
+}
+
 function activateDiscoverListener(ipcMain, window) {
   ipcMain.on('discover', () => startDiscovery(window));
 
@@ -44,6 +48,7 @@ function activateListeners(ipcMain, window, app, url) {
   activateAppInfoListener(ipcMain, window, app);
   activateScreenSleepListener(ipcMain);
   activateReloadListener(ipcMain, window, url);
+  activateRestartListener(ipcMain, app);
   activateUpdateListener(ipcMain, window);
   activateDiscoverListener(ipcMain, window);
 }
