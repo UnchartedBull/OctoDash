@@ -16,7 +16,7 @@ export interface AxisDetails {
   inverted: boolean;
 }
 
-interface PrinterExtruders {
+export interface PrinterExtruders {
   count: number;
   offsets: PrinterExtruderOffset[];
   sharedNozzle: boolean;
