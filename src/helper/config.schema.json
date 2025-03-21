@@ -1,0 +1,571 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "required": ["octoprint", "printer", "filament", "plugins", "octodash"],
+  "properties": {
+    "octoprint": {
+      "$id": "#/properties/octoprint",
+      "type": "object",
+      "required": ["accessToken", "url"],
+      "properties": {
+        "accessToken": {
+          "$id": "#/properties/octoprint/properties/accessToken",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": ""
+        },
+        "url": {
+          "$id": "#/properties/octoprint/properties/url",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": "http://localhost:5000/"
+        }
+      }
+    },
+    "printer": {
+      "$id": "#/properties/printer",
+      "type": "object",
+      "required": ["name", "xySpeed", "zSpeed", "disableExtruderGCode", "zBabystepGCode", "defaultTemperatureFanSpeed"],
+      "properties": {
+        "name": {
+          "$id": "#/properties/printer/properties/name",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": ""
+        },
+        "xySpeed": {
+          "$id": "#/properties/printer/properties/xySpeed",
+          "type": "integer",
+          "default": 150
+        },
+        "zSpeed": {
+          "$id": "#/properties/printer/properties/zSpeed",
+          "type": "integer",
+          "default": 5
+        },
+        "disableExtruderGCode": {
+          "$id": "#/properties/printer/properties/disableExtruderGCode",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": "M18 E"
+        },
+        "zBabystepGCode": {
+          "$id": "#/properties/printer/properties/zBabystepGCode",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": "M290 Z"
+        },
+        "defaultTemperatureFanSpeed": {
+          "$id": "#/properties/printer/properties/defaultTemperatureFanSpeed",
+          "type": "object",
+          "required": ["hotend", "heatbed", "fan"],
+          "properties": {
+            "hotend": {
+              "$id": "#/properties/printer/properties/defaultTemperatureFanSpeed/hotend",
+              "type": "integer",
+              "default": 200
+            },
+            "heatbed": {
+              "$id": "#/properties/printer/properties/defaultTemperatureFanSpeed/heatbed",
+              "type": "integer",
+              "default": 60
+            },
+            "fan": {
+              "$id": "#/properties/printer/properties/defaultTemperatureFanSpeed/fan",
+              "type": "integer",
+              "default": 100
+            }
+          }
+        }
+      }
+    },
+    "filament": {
+      "$id": "#/properties/filament",
+      "type": "object",
+      "required": ["density", "thickness", "feedLength", "feedSpeed", "feedSpeedSlow", "purgeDistance", "useM600"],
+      "properties": {
+        "density": {
+          "$id": "#/properties/filament/properties/density",
+          "type": "number",
+          "default": 1.25
+        },
+        "thickness": {
+          "$id": "#/properties/filament/properties/thickness",
+          "type": "number",
+          "default": 1.75
+        },
+        "feedLength": {
+          "$id": "#/properties/filament/properties/feedLength",
+          "type": "integer",
+          "default": 0
+        },
+        "feedSpeed": {
+          "$id": "#/properties/filament/properties/feedSpeed",
+          "type": "number",
+          "default": 20
+        },
+        "feedSpeedSlow": {
+          "$id": "#/properties/filament/properties/feedSpeedSlow",
+          "type": "number",
+          "default": 3
+        },
+        "purgeDistance": {
+          "$id": "#/properties/filament/properties/purgeDistance",
+          "type": "integer",
+          "default": 30
+        },
+        "useM600": {
+          "$id": "#/properties/filament/properties/useM600",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "plugins": {
+      "$id": "#/properties/plugins",
+      "type": "object",
+      "required": [
+        "companion",
+        "displayLayerProgress",
+        "enclosure",
+        "filamentManager",
+        "spoolManager",
+        "preheatButton",
+        "printTimeGenius",
+        "psuControl",
+        "ophom",
+        "tpLinkSmartPlug",
+        "tuya",
+        "tasmota",
+        "tasmotaMqtt",
+        "wemo"
+      ],
+      "properties": {
+        "companion": {
+          "$id": "#/properties/plugins/properties/companion",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/companion/properties/enabled",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "displayLayerProgress": {
+          "$id": "#/properties/plugins/properties/displayLayerProgress",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/displayLayerProgress/properties/enabled",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "enclosure": {
+          "$id": "#/properties/plugins/properties/enclosure",
+          "type": "object",
+          "required": ["enabled", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/enclosure/properties/enabled",
+              "type": "boolean",
+              "default": true
+            },
+            "ambientSensorID": {
+              "$id": "#/properties/plugins/properties/enclosure/properties/ambientSensorID",
+              "type": ["number", "null"],
+              "default": null
+            },
+            "filament1SensorID": {
+              "$id": "#/properties/plugins/properties/enclosure/properties/filament1SensorID",
+              "type": ["number", "null"],
+              "default": null
+            },
+            "filament2SensorID": {
+              "$id": "#/properties/plugins/properties/enclosure/properties/filament2SensorID",
+              "type": ["number", "null"],
+              "default": null
+            }
+          }
+        },
+        "filamentManager": {
+          "$id": "#/properties/plugins/properties/filamentManager",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/filamentManager/properties/enabled",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "spoolManager": {
+          "$id": "#/properties/plugins/properties/spoolManager",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/spoolManager/properties/enabled",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "preheatButton": {
+          "$id": "#/properties/plugins/properties/preheatButton",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/preheatButton/properties/enabled",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "printTimeGenius": {
+          "$id": "#/properties/plugins/properties/printTimeGenius",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/printTimeGenius/properties/enabled",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "psuControl": {
+          "$id": "#/properties/plugins/properties/psuControl",
+          "type": "object",
+          "required": ["enabled", "turnOnPSUWhenExitingSleep"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/psuControl/properties/enabled",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "ophom": {
+          "$id": "#/properties/plugins/properties/ophom",
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/ophom/properties/enabled",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "tpLinkSmartPlug": {
+          "$id": "#/properties/plugins/properties/tpLinkSmartPlug",
+          "type": "object",
+          "required": ["enabled", "smartPlugIP"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/tpLinkSmartPlug/properties/enabled",
+              "type": "boolean",
+              "default": false
+            },
+            "smartPlugIP": {
+              "$id": "#/properties/plugins/properties/tpLinkSmartPlug/properties/smartPlugIP",
+              "type": "string",
+              "default": "127.0.0.1"
+            }
+          }
+        },
+        "tasmota": {
+          "$id": "#/properties/plugins/properties/tasmota",
+          "type": "object",
+          "required": ["enabled", "ip", "index"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/tasmota/properties/enabled",
+              "type": "boolean",
+              "default": false
+            },
+            "ip": {
+              "$id": "#/properties/plugins/properties/tasmota/properties/ip",
+              "type": "string",
+              "default": "127.0.0.1"
+            },
+            "index": {
+              "$id": "#/properties/plugins/properties/tasmota/properties/index",
+              "type": ["number", "null"],
+              "default": null
+            }
+          }
+        },
+        "tasmotaMqtt": {
+          "$id": "#/properties/plugins/properties/tasmotaMqtt",
+          "type": "object",
+          "required": ["enabled", "topic", "relayNumber"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/tasmotaMqtt/properties/enabled",
+              "type": "boolean",
+              "default": false
+            },
+            "topic": {
+              "$id": "#/properties/plugins/properties/tasmotaMqtt/properties/topic",
+              "type": "string",
+              "default": "topic"
+            },
+            "relayNumber": {
+              "$id": "#/properties/plugins/properties/tasmotaMqtt/properties/relayNumber",
+              "type": ["number", "null"],
+              "default": null
+            }
+          }
+        },
+        "tuya": {
+          "$id": "#/properties/plugins/properties/tuya",
+          "type": "object",
+          "required": ["enabled", "label"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/tuya/properties/enabled",
+              "type": "boolean",
+              "default": false
+            },
+            "label": {
+              "$id": "#/properties/plugins/properties/tuya/properties/label",
+              "type": "string",
+              "default": "label"
+            }
+          }
+        },
+        "wemo": {
+          "$id": "#/properties/plugins/properties/wemo",
+          "type": "object",
+          "required": ["enabled", "ip"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/wemo/properties/enabled",
+              "type": "boolean",
+              "default": false
+            },
+            "ip": {
+              "$id": "#/properties/plugins/properties/wemo/properties/ip",
+              "type": "string",
+              "default": "127.0.0.1"
+            },
+            "port": {
+              "$id": "#/properties/plugins/properties/wemo/properties/port",
+              "type": "number",
+              "default": 49152
+            }
+          }
+        }
+      }
+    },
+    "octodash": {
+      "$id": "#/properties/octodash",
+      "type": "object",
+      "required": [
+        "customActions",
+        "fileSorting",
+        "invertAxisControl",
+        "pollingInterval",
+        "touchscreen",
+        "turnScreenOffWhileSleeping",
+        "turnOnPrinterWhenExitingSleep",
+        "preferPreviewWhilePrinting",
+        "previewProgressCircle",
+        "screenSleepCommand",
+        "screenWakeupCommand",
+        "showExtruderControl",
+        "showNotificationCenterIcon",
+        "defaultDirectory"
+      ],
+      "properties": {
+        "customActions": {
+          "$id": "#/properties/octodash/properties/customActions",
+          "type": "array",
+          "default": [
+            {
+              "icon": "home",
+              "command": "G28",
+              "color": "#dcdde1",
+              "confirm": false,
+              "exit": true
+            },
+            {
+              "icon": "ruler-vertical",
+              "command": "G29",
+              "color": "#4bae50",
+              "confirm": false,
+              "exit": true
+            },
+            {
+              "icon": "fire-alt",
+              "command": "M140 S50; M104 S185",
+              "color": "#e1b12c",
+              "confirm": false,
+              "exit": true
+            },
+            {
+              "icon": "snowflake",
+              "command": "M140 S0; M104 S0",
+              "color": "#0097e6",
+              "confirm": false,
+              "exit": true
+            },
+            {
+              "icon": "redo-alt",
+              "command": "[!RELOAD]",
+              "color": "#7f8fa6",
+              "confirm": true,
+              "exit": false
+            },
+            {
+              "icon": "power-off",
+              "command": "[!SHUTDOWN]",
+              "color": "#e84118",
+              "confirm": true,
+              "exit": false
+            }
+          ],
+          "items": {
+            "$id": "#/properties/octodash/properties/customActions/items",
+            "type": "object",
+            "required": ["icon", "command", "color", "confirm", "exit"],
+            "properties": {
+              "icon": {
+                "$id": "#/properties/octodash/properties/customActions/items/properties/icon",
+                "type": "string",
+                "pattern": "^(.*)$"
+              },
+              "command": {
+                "$id": "#/properties/octodash/properties/customActions/items/properties/command",
+                "type": "string",
+                "pattern": "^(.*)$"
+              },
+              "color": {
+                "$id": "#/properties/octodash/properties/customActions/items/properties/color",
+                "type": "string",
+                "pattern": "^(.*)$"
+              },
+              "confirm": {
+                "$id": "#/properties/octodash/properties/customActions/items/properties/confirm",
+                "type": "boolean"
+              },
+              "exit": {
+                "$id": "#/properties/octodash/properties/customActions/items/properties/exit",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "fileSorting": {
+          "$id": "#/properties/octodash/properties/fileSorting",
+          "type": "object",
+          "required": ["attribute", "order"],
+          "properties": {
+            "attribute": {
+              "$id": "#/properties/octodash/properties/fileSorting/properties/attribute",
+              "type": "string",
+              "pattern": "^(name|date|size)$",
+              "default": "name"
+            },
+            "order": {
+              "$id": "#/properties/octodash/properties/fileSorting/properties/order",
+              "type": "string",
+              "pattern": "^(asc|dsc)$",
+              "default": "asc"
+            }
+          }
+        },
+        "invertAxisControl": {
+          "$id": "#/properties/octodash/properties/invertAxisControl",
+          "type": "object",
+          "required": ["x", "y", "z"],
+          "properties": {
+            "x": {
+              "$id": "#/properties/octodash/properties/invertAxisControl/properties/x",
+              "type": "boolean",
+              "default": false
+            },
+            "y": {
+              "$id": "#/properties/octodash/properties/invertAxisControl/properties/y",
+              "type": "boolean",
+              "default": false
+            },
+            "z": {
+              "$id": "#/properties/octodash/properties/invertAxisControl/properties/z",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "pollingInterval": {
+          "$id": "#/properties/octodash/properties/pollingInterval",
+          "type": "integer",
+          "default": 2000
+        },
+        "touchscreen": {
+          "$id": "#/properties/octodash/properties/touchscreen",
+          "type": "boolean",
+          "default": true
+        },
+        "turnScreenOffWhileSleeping": {
+          "$id": "#/properties/octodash/properties/turnScreenOffWhileSleeping",
+          "type": "boolean",
+          "default": false
+        },
+        "turnOnPrinterWhenExitingSleep": {
+          "$id": "#/properties/octodash/properties/turnOnPrinterWhenExitingSleep",
+          "type": "boolean",
+          "default": false
+        },
+        "preferPreviewWhilePrinting": {
+          "$id": "#/properties/octodash/properties/preferPreviewWhilePrinting",
+          "type": "boolean",
+          "default": false
+        },
+        "previewProgressCircle": {
+          "$id": "#/properties/octodash/properties/previewProgressCircle",
+          "type": "boolean",
+          "default": false
+        },
+        "screenSleepCommand": {
+          "$id": "#/properties/octodash/properties/screenSleepCommand",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": "xset dpms force standby"
+        },
+        "screenWakeupCommand": {
+          "$id": "#/properties/octodash/properties/screenWakeupCommand",
+          "type": "string",
+          "pattern": "^(.*)$",
+          "default": "xset s off && xset -dpms && xset s noblank"
+        },
+        "showExtruderControl": {
+          "$id": "#/properties/octodash/properties/showExtruderControl",
+          "type": "boolean",
+          "default": true
+        },
+        "showNotificationCenterIcon": {
+          "$id": "#/properties/octodash/properties/showNotificationCenterIcon",
+          "type": "boolean",
+          "default": true
+        },
+        "defaultDirectory": {
+          "$id": "#/properties/octodash/properties/defaultDirectory",
+          "type": "string",
+          "pattern": "^/(.*)$",
+          "default": "/"
+        }
+      }
+    }
+  }
+}
