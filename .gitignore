@@ -56,3 +56,4 @@ speed-measure-plugin.json
 
 docs/images/compilation.psd
 scripts/clean-github.sh
+src/app/config/config.model.ts

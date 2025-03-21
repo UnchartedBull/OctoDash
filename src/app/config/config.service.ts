@@ -5,7 +5,16 @@ import _ from 'lodash-es';
 import { ElectronService } from '../electron.service';
 import { NotificationType } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { Config, CustomAction, URLSplit } from './config.model';
+import { ConfigSchema as Config, CustomAction } from './config.model';
+
+interface HttpHeader {
+  headers: HttpHeaders;
+}
+
+export interface URLSplit {
+  host: string;
+  port: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +26,7 @@ export class ConfigService {
   private update = false;
   private initialized = false;
 
-  private httpHeaders: {
-    headers: HttpHeaders;
-  };
+  private httpHeaders: HttpHeader;
 
   public constructor(
     private notificationService: NotificationService,
@@ -108,10 +115,7 @@ export class ConfigService {
   }
 
   public createConfigFromInput(config: Config): Config {
-    const configOut = _.cloneDeep(config);
-    configOut.octoprint.url = this.mergeOctoprintURL(config.octoprint.urlSplit);
-    delete configOut.octoprint.urlSplit;
-    return configOut;
+    return _.cloneDeep(config);
   }
 
   public isLoaded(): boolean {

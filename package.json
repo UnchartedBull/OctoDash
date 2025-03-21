@@ -54,6 +54,7 @@
     }
   },
   "scripts": {
+    "prepare": "json2ts ./src/helper/config.schema.json > ./src/app/config/config.model.ts",
     "build:prod": "ng build --configuration production",
     "build": "ng build",
     "electron:dev": "APP_DEV=true electron .",

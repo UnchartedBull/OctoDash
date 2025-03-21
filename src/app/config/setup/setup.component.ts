@@ -3,8 +3,8 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 
-import { Config } from '../config.model';
-import { ConfigService } from '../config.service';
+import { ConfigSchema as Config } from '../config.model';
+import { ConfigService, URLSplit } from '../config.service';
 
 @Component({
   selector: 'app-config-setup',
@@ -22,6 +22,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   public configValid = false;
   public configSaved = $localize`:@@saving-config:saving config`;
   public configErrors: string[];
+  public octoprintURL: URLSplit;
 
   public manualURL = false;
 
@@ -38,9 +39,9 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     } else {
       // XXX Get default config from schema
       this.electronService.send('defaultConfig');
-      this.config = {};
+      this.config = configService.getCurrentConfig();
     }
-    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {
@@ -57,7 +58,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public getOctoprintURL(): string {
-    return this.configService.mergeOctoprintURL(this.config.octoprint.urlSplit);
+    return this.configService.mergeOctoprintURL(this.octoprintURL);
   }
 
   public createConfig(): void {
@@ -138,7 +139,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public decreasePage(): void {
     if (this.page === this.totalPages) {
-      this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+      this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
     }
     this.changePage(-1);
   }

@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } fro
 
 import { ElectronService } from '../../../electron.service';
 import { isOctoprintVersionGood } from '../../../services/printer/printer.octoprint.service';
-import { URLSplit } from '../../config.model';
-import { ConfigService } from '../../config.service';
+import { URLSplit, ConfigService } from '../../config.service';
 
 @Component({
   selector: 'app-config-setup-discover-octoprint',

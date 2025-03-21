@@ -434,12 +434,12 @@
           "properties": {
             "attribute": {
               "type": "string",
-              "pattern": "^(name|date|size)$",
+              "enum": ["name", "date", "size"],
               "default": "name"
             },
             "order": {
               "type": "string",
-              "pattern": "^(asc|dsc)$",
+              "enum": ["asc", "dsc"],
               "default": "asc"
             }
           },

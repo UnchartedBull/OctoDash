@@ -4,7 +4,14 @@ import Store from 'electron-store';
 import configSchema from './config.schema.json' with { type: 'json' };
 
 let store;
+
 const ajv = new Ajv({ useDefaults: true, allErrors: true });
+
+// Define keywords for schema->TS converter
+ajv.addKeyword('tsEnumNames');
+ajv.addKeyword('tsName');
+ajv.addKeyword('tsType');
+
 const validate = ajv.compile(configSchema);
 
 export function readConfig(window) {

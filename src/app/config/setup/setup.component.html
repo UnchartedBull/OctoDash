@@ -26,8 +26,8 @@
   <app-config-setup-discover-octoprint
     (increasePage)="increasePage()"
     (changeURLEntryMethod)="changeURLEntryMethod($event)"
-    [(octoprintHost)]="config.octoprint.urlSplit.host"
-    [(octoprintPort)]="config.octoprint.urlSplit.port"
+    [(octoprintHost)]="octoprintURL.host"
+    [(octoprintPort)]="octoprintURL.port"
     *ngIf="page === 1"></app-config-setup-discover-octoprint>
 
   <app-config-setup-octoprint-authentication
