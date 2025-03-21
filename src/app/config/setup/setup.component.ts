@@ -5,7 +5,7 @@ import { ElectronService } from 'src/app/electron.service';
 
 import defaultConfig from '../config.default.json';
 import { ConfigSchema as Config } from '../config.model';
-import { ConfigService, URLSplit } from '../config.service';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-config-setup',

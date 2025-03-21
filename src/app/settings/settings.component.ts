@@ -2,9 +2,9 @@ import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChi
 
 import { AppService } from '../app.service';
 import { ConfigSchema as Config } from '../config/config.model';
-import { ConfigService, URLSplit } from '../config/config.service';
+import { ConfigService } from '../config/config.service';
 import { ElectronService } from '../electron.service';
-import { NotificationType } from '../model';
+import { NotificationType, URLSplit } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
 
