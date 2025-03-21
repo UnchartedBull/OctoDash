@@ -55,7 +55,7 @@ function createWindow() {
       enableRemoteModule: true,
       contextIsolation: false,
     },
-    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
+    icon: fileURLToPath(new URL(`./${dev ? 'src' : 'dist'}/assets/icon/icon.png`, import.meta.url)),
   });
 
   if (dev) {
