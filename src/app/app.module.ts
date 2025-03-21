@@ -35,17 +35,16 @@ import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.componen
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesComponent } from './files/files.component';
-import { HeightProgressComponent } from './height-progress/height-progress.component';
+import { HeightProgressComponent } from './job-status/height-progress/height-progress.component';
 import { JobStatusComponent } from './job-status/job-status.component';
 import { LongPress } from './long-press.directive';
-import { MainMenuComponent } from './main-menu/main-menu.component';
+import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { MainScreenNoTouchComponent } from './main-screen/no-touch/main-screen-no-touch.component';
+import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './notification/notification.service';
 import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
-import { PrinterStatusComponent } from './printer-status/printer-status.component';
 import { ResetComponent } from './reset/reset.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './services/enclosure/enclosure.service';
@@ -87,7 +86,6 @@ import { URLSafePipe } from './url.pipe';
     LongPress,
     MainMenuComponent,
     MainScreenComponent,
-    MainScreenNoTouchComponent,
     NotificationComponent,
     OctoprintAuthenticationComponent,
     PersonalizationComponent,

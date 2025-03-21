@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from '../config/config.service';
-import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../model';
-import { PrinterService } from '../services/printer/printer.service';
-import { SocketService } from '../services/socket/socket.service';
+import { ConfigService } from '../../config/config.service';
+import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../model';
+import { PrinterService } from '../../services/printer/printer.service';
+import { SocketService } from '../../services/socket/socket.service';
 
 @Component({
   selector: 'app-printer-status',

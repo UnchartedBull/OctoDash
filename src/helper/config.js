@@ -1,7 +1,7 @@
 import { Ajv } from 'ajv';
 import Store from 'electron-store';
 
-import configSchema from './config.schema.js';
+import configSchema from './config.schema.json' with { type: 'json' };
 
 let store;
 const ajv = new Ajv({ allErrors: true });

@@ -20,7 +20,7 @@
         <source>Update available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">95</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
@@ -31,14 +31,14 @@
         <source>Version <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
@@ -885,21 +885,21 @@
       <trans-unit id="height-mm" datatype="html">
         <source>mm</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="heing-layer" datatype="html">
         <source> Layer </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="height-of" datatype="html">
         <source> of </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/height-progress/height-progress.component.html</context>
+          <context context-type="sourcefile">src/app/job-status/height-progress/height-progress.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
@@ -963,21 +963,21 @@
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-filament" datatype="html">
         <source>filament</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="menu-control" datatype="html">
         <source>control</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main-menu/main-menu.component.html</context>
+          <context context-type="sourcefile">src/app/main-screen/main-menu/main-menu.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
