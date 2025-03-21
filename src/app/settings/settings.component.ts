@@ -107,6 +107,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public updateConfig(): void {
+    this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
     this.electronService.on('configSaved', this.onConfigSaved.bind(this));
