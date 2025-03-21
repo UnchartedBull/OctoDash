@@ -28,19 +28,19 @@ export const defaultConfig: Config = {
   },
   plugins: {
     companion: {
-      enabled: false,
+      enabled: true,
     },
     displayLayerProgress: {
       enabled: true,
     },
     enclosure: {
-      enabled: false,
+      enabled: true,
       ambientSensorID: null,
       filament1SensorID: null,
       filament2SensorID: null,
     },
     filamentManager: {
-      enabled: true,
+      enabled: false,
     },
     spoolManager: {
       enabled: false,
