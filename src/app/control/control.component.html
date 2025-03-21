@@ -53,14 +53,14 @@
       <div class="control__jog-arrows--vertical">
         <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
-            [icon]="['fas', 'angle-up']"
+            [icon]="['fas', 'caret-up']"
             class="control__icon control__icon-5"
             (click)="moveAxis('z', '+')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'angle-down']"
+            [icon]="['fas', 'caret-down']"
             class="control__icon control__icon-6"
             (click)="moveAxis('z', '-')"
             matRipple
@@ -73,16 +73,16 @@
       <div class="control__jog-arrows--vertical" *ngIf="showExtruder">
         <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
-            [icon]="['fas', 'redo-alt']"
+            [icon]="['fas', 'chevron-circle-up']"
             class="control__icon control__icon-7"
-            (click)="extrude('+')"
+            (click)="extrude('-')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'undo-alt']"
+            [icon]="['fas', 'chevron-circle-down']"
             class="control__icon control__icon-8"
-            (click)="extrude('-')"
+            (click)="extrude('+')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
