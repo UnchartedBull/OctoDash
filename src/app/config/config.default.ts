@@ -53,11 +53,9 @@ export const defaultConfig: Config = {
     },
     psuControl: {
       enabled: false,
-      turnOnPSUWhenExitingSleep: false,
     },
     ophom: {
       enabled: false,
-      turnOnPSUWhenExitingSleep: false,
     },
     tpLinkSmartPlug: {
       enabled: false,

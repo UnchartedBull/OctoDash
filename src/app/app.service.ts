@@ -51,8 +51,9 @@ export class AppService {
       "/octodash must have required property 'previewProgressCircle'": config =>
         (config.octodash.previewProgressCircle = false),
       "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
-        config.octodash.turnOnPrinterWhenExitingSleep = config.plugins.psuControl.turnOnPSUWhenExitingSleep ?? false;
-        delete config.plugins.psuControl.turnOnPSUWhenExitingSleep;
+        config.octodash.turnOnPrinterWhenExitingSleep =
+          (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep ?? false;
+        delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
       },
       "/octodash must have required property 'screenSleepCommand'": config =>
         (config.octodash.screenSleepCommand = 'xset dpms force standby'),
