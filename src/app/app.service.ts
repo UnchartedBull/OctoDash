@@ -37,39 +37,40 @@ export class AppService {
 
     // list of all error following an upgrade
     this.updateError = {
-      "/plugins must have required property 'companion'": config => (config.plugins.companion = { enabled: false }),
-      "/printer must have required property 'zBabystepGCode'": config => (config.printer.zBabystepGCode = 'M290 Z'),
+      "/plugins must have required property 'companion'": config =>
+        (config.plugins.companion = defaultConfig.plugins.companion),
+      "/printer must have required property 'zBabystepGCode'": config =>
+        (config.printer.zBabystepGCode = defaultConfig.printer.zBabystepGCode),
       "/plugins must have required property 'tpLinkSmartPlug'": config =>
-        (config.plugins.tpLinkSmartPlug = { enabled: false, smartPlugIP: '127.0.0.1' }),
+        (config.plugins.tpLinkSmartPlug = defaultConfig.plugins.tpLinkSmartPlug),
       "/plugins must have required property 'tasmota'": config =>
-        (config.plugins.tasmota = { enabled: false, ip: '127.0.0.1', index: null }),
+        (config.plugins.tasmota = defaultConfig.plugins.tasmota),
       "/plugins must have required property 'tasmotaMqtt'": config =>
-        (config.plugins.tasmotaMqtt = { enabled: false, topic: 'topic', relayNumber: null }),
+        (config.plugins.tasmotaMqtt = defaultConfig.plugins.tasmotaMqtt),
       "/plugins must have required property 'tuya'": config => (config.plugins.tuya = defaultConfig.plugins.tuya),
-      "/plugins must have required property 'wemo'": config =>
-        (config.plugins.wemo = { enabled: false, ip: '127.0.0.1', port: 49152 }),
+      "/plugins must have required property 'wemo'": config => (config.plugins.wemo = defaultConfig.plugins.wemo),
       "/octodash must have required property 'previewProgressCircle'": config =>
-        (config.octodash.previewProgressCircle = false),
+        (config.octodash.previewProgressCircle = defaultConfig.octodash.previewProgressCircle),
       "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
         config.octodash.turnOnPrinterWhenExitingSleep =
           (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep ?? false;
         delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
       },
       "/octodash must have required property 'screenSleepCommand'": config =>
-        (config.octodash.screenSleepCommand = 'xset dpms force standby'),
+        (config.octodash.screenSleepCommand = defaultConfig.octodash.screenSleepCommand),
       "/octodash must have required property 'screenWakeupCommand'": config =>
-        (config.octodash.screenWakeupCommand = 'xset s off && xset -dpms && xset s noblank'),
+        (config.octodash.screenWakeupCommand = defaultConfig.octodash.screenWakeupCommand),
       "/octodash must have required property 'invertAxisControl'": config =>
-        (config.octodash.invertAxisControl = { x: false, y: false, z: false }),
+        (config.octodash.invertAxisControl = defaultConfig.octodash.invertAxisControl),
       "/printer must have required property 'disableExtruderGCode'": config =>
-        (config.printer.disableExtruderGCode = 'M18 E'),
+        (config.printer.disableExtruderGCode = defaultConfig.printer.disableExtruderGCode),
       "/octodash must have required property 'showExtruderControl'": config =>
-        (config.octodash.showExtruderControl = true),
+        (config.octodash.showExtruderControl = defaultConfig.octodash.showExtruderControl),
       "/plugins must have required property 'spoolManager'": config =>
-        (config.plugins.spoolManager = { enabled: false }),
-      "/plugins must have required property 'ophom'": config => (config.plugins.ophom = { enabled: false }),
+        (config.plugins.spoolManager = defaultConfig.plugins.spoolManager),
+      "/plugins must have required property 'ophom'": config => (config.plugins.ophom = defaultConfig.plugins.ophom),
       "/octodash must have required property 'showNotificationCenterIcon'": config =>
-        (config.octodash.showNotificationCenterIcon = true),
+        (config.octodash.showNotificationCenterIcon = defaultConfig.octodash.showNotificationCenterIcon),
       "/octodash must have required property 'defaultDirectory'": config =>
         (config.octodash.defaultDirectory = defaultConfig.octodash.defaultDirectory),
     };
