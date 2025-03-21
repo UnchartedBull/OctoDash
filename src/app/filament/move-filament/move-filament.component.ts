@@ -12,6 +12,7 @@ import { PrinterService } from '../../services/printer/printer.service';
 export class MoveFilamentComponent implements OnInit, OnDestroy {
   @Input() currentSpool: FilamentSpool;
   @Input() selectedSpool: FilamentSpool;
+  @Input() selectedTool: number;
   @Input() action: 'load' | 'unload';
 
   @Output() increasePage = new EventEmitter<void>();
@@ -57,7 +58,7 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
   }
 
   private unloadSpool(): void {
-    this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed());
+    this.printerService.extrude(this.getFeedLength() * -1, this.configService.getFeedSpeed(), this.selectedTool);
     setTimeout((): void => {
       const unloadingProgressBar = document.getElementById('filamentMoveBar');
       const unloadTime = this.getFeedLength() / this.configService.getFeedSpeed() + 0.5;
@@ -79,7 +80,7 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
     const loadTimeFast = (this.getFeedLength() * 0.75) / this.configService.getFeedSpeed();
     const loadTimeSlow = (this.getFeedLength() * 0.17) / this.configService.getFeedSpeedSlow();
     const loadTime = loadTimeFast + loadTimeSlow + 0.5;
-    this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed());
+    this.printerService.extrude(this.getFeedLength() * 0.75, this.configService.getFeedSpeed(), this.selectedTool);
     setTimeout((): void => {
       const loadingProgressBar = document.getElementById('filamentMoveBar');
       loadingProgressBar.style.backgroundColor = this.selectedSpool ? this.selectedSpool.color : '#4bae50';
@@ -88,7 +89,11 @@ export class MoveFilamentComponent implements OnInit, OnDestroy {
         loadingProgressBar.style.width = '50vw';
         this.fastMoveTimeout = setTimeout(
           (): void => {
-            this.printerService.extrude(this.getFeedLength() * 0.17, this.configService.getFeedSpeedSlow());
+            this.printerService.extrude(
+              this.getFeedLength() * 0.17,
+              this.configService.getFeedSpeedSlow(),
+              this.selectedTool,
+            );
             this.feedSpeed = this.configService.getFeedSpeedSlow();
             this.slowMoveTimeout = setTimeout(
               (): void => {
