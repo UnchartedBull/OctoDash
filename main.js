@@ -31,7 +31,6 @@ app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 function createWindow() {
-  // TODO: re-enable
   // if (!dev) {
   //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
   //     callback({
