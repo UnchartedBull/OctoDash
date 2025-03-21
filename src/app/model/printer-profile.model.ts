@@ -3,6 +3,7 @@ export interface PrinterProfile {
   name: string;
   model: string;
   axes: PrinterAxis;
+  extruder: PrinterExtruders;
 }
 
 export interface PrinterAxis {
@@ -13,4 +14,15 @@ export interface PrinterAxis {
 
 export interface AxisDetails {
   inverted: boolean;
+}
+
+interface PrinterExtruders {
+  count: number;
+  offsets: PrinterExtruderOffset[];
+  sharedNozzle: boolean;
+}
+
+interface PrinterExtruderOffset {
+  x: number;
+  y: number;
 }
