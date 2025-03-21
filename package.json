@@ -54,7 +54,7 @@
     }
   },
   "scripts": {
-    "prepare": "json2ts ./src/helper/config.schema.json > ./src/app/config/config.model.ts",
+    "prepare": "json2ts ./src/helper/config.schema.json > ./src/app/config/config.model.ts; node -e 'const {writeDefaultConfig} = await import(`./src/helper/config.js`); writeDefaultConfig()'",
     "build:prod": "ng build --configuration production",
     "build": "ng build",
     "electron:dev": "APP_DEV=true electron .",

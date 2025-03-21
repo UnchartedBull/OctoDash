@@ -3,6 +3,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 
+import defaultConfig from '../config.default.json';
 import { ConfigSchema as Config } from '../config.model';
 import { ConfigService, URLSplit } from '../config.service';
 
@@ -37,9 +38,9 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     if (this.configUpdate) {
       this.config = configService.getCurrentConfig();
     } else {
-      // XXX Get default config from schema
-      this.electronService.send('defaultConfig');
-      this.config = configService.getCurrentConfig();
+      // Mitigates a TypeScript bug
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      this.config = defaultConfig as any as Config;
     }
     this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }

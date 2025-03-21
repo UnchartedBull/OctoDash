@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+
 import { Ajv } from 'ajv';
 import Store from 'electron-store';
 
@@ -64,33 +66,31 @@ function getConfigErrors() {
   return errors;
 }
 
-function extractDefaults(schema) {
-  if (schema.hasOwnProperty('default')) {
-    return schema.default;
+function extractDefaults(data) {
+  if ('default' in data) {
+    return data.default;
   }
 
-  if (schema.type === 'object' && schema.properties) {
+  if (data.type === 'object' && data.properties) {
     const obj = {};
-    for (const [key, propSchema] of Object.entries(schema.properties)) {
-      obj[key] = extractDefaults(propSchema);
+    for (const [key, propdata] of Object.entries(data.properties)) {
+      obj[key] = extractDefaults(propdata);
     }
     return obj;
   }
 
-  if (schema.type === 'array' && schema.default) {
-    return schema.default;
+  if (data.type === 'array' && data.default) {
+    return data.default;
   }
 
   return undefined;
 }
 
-export function getDefaultConfig(window) {
+export function writeDefaultConfig() {
   try {
     const defaultConfig = extractDefaults(configSchema);
-    console.log(defaultConfig);
-    window.webContents.send('configDefaults', defaultConfig);
+    fs.writeFileSync(new URL('../app/config/config.default.json', import.meta.url), JSON.stringify(defaultConfig));
   } catch (e) {
     console.log(e);
-    window.webContents.send('configError', "Can't get defaults.");
   }
 }
