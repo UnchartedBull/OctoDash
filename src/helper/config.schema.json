@@ -293,10 +293,10 @@
         "tuya": {
           "$id": "#/properties/plugins/properties/tuya",
           "type": "object",
-          "required": ["enabled", "ip"],
+          "required": ["enabled", "label"],
           "properties": {
             "enabled": {
-              "$id": "#/properties/plugins/properties/ip/properties/enabled",
+              "$id": "#/properties/plugins/properties/tuya/properties/enabled",
               "type": "boolean"
             },
             "label": {
@@ -308,10 +308,10 @@
         "wemo": {
           "$id": "#/properties/plugins/properties/wemo",
           "type": "object",
-          "required": ["enabled", "ip"],
+          "required": ["enabled", "ip", "port"],
           "properties": {
             "enabled": {
-              "$id": "#/properties/plugins/properties/ip/properties/enabled",
+              "$id": "#/properties/plugins/properties/wemo/properties/enabled",
               "type": "boolean"
             },
             "ip": {
