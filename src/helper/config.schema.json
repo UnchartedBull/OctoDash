@@ -1,5 +1,31 @@
 {
-  "definitions": {},
+  "definitions": {
+    "customAction": {
+      "type": "object",
+      "required": ["icon", "command", "color", "confirm", "exit"],
+      "properties": {
+        "icon": {
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "command": {
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^(.*)$"
+        },
+        "confirm": {
+          "type": "boolean"
+        },
+        "exit": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
@@ -22,7 +48,8 @@
           "pattern": "^(.*)$",
           "default": "http://localhost:5000/"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "printer": {
       "$id": "#/printer",
@@ -77,9 +104,11 @@
               "type": "integer",
               "default": 100
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "filament": {
       "$id": "#/filament",
@@ -121,7 +150,8 @@
           "type": "boolean",
           "default": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "plugins": {
       "$id": "#/plugins",
@@ -153,7 +183,8 @@
               "type": "boolean",
               "default": true
             }
-          }
+          },
+          "additionalProperties": false
         },
         "displayLayerProgress": {
           "$id": "#/plugins/displayLayerProgress",
@@ -165,7 +196,8 @@
               "type": "boolean",
               "default": true
             }
-          }
+          },
+          "additionalProperties": false
         },
         "enclosure": {
           "$id": "#/plugins/enclosure",
@@ -192,7 +224,8 @@
               "type": ["number", "null"],
               "default": null
             }
-          }
+          },
+          "additionalProperties": false
         },
         "filamentManager": {
           "$id": "#/plugins/filamentManager",
@@ -204,7 +237,8 @@
               "type": "boolean",
               "default": false
             }
-          }
+          },
+          "additionalProperties": false
         },
         "spoolManager": {
           "$id": "#/plugins/spoolManager",
@@ -216,7 +250,8 @@
               "type": "boolean",
               "default": false
             }
-          }
+          },
+          "additionalProperties": false
         },
         "preheatButton": {
           "$id": "#/plugins/preheatButton",
@@ -228,7 +263,8 @@
               "type": "boolean",
               "default": true
             }
-          }
+          },
+          "additionalProperties": false
         },
         "printTimeGenius": {
           "$id": "#/plugins/printTimeGenius",
@@ -240,7 +276,8 @@
               "type": "boolean",
               "default": true
             }
-          }
+          },
+          "additionalProperties": false
         },
         "psuControl": {
           "$id": "#/plugins/psuControl",
@@ -252,7 +289,8 @@
               "type": "boolean",
               "default": false
             }
-          }
+          },
+          "additionalProperties": false
         },
         "ophom": {
           "$id": "#/plugins/ophom",
@@ -264,7 +302,8 @@
               "type": "boolean",
               "default": false
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tpLinkSmartPlug": {
           "$id": "#/plugins/tpLinkSmartPlug",
@@ -281,7 +320,8 @@
               "type": "string",
               "default": "127.0.0.1"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tasmota": {
           "$id": "#/plugins/tasmota",
@@ -303,7 +343,8 @@
               "type": ["number", "null"],
               "default": null
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tasmotaMqtt": {
           "$id": "#/plugins/tasmotaMqtt",
@@ -325,7 +366,8 @@
               "type": ["number", "null"],
               "default": null
             }
-          }
+          },
+          "additionalProperties": false
         },
         "tuya": {
           "$id": "#/plugins/tuya",
@@ -342,7 +384,8 @@
               "type": "string",
               "default": "label"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "wemo": {
           "$id": "#/plugins/wemo",
@@ -364,9 +407,11 @@
               "type": "number",
               "default": 49152
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     },
     "octodash": {
       "$id": "#/octodash",
@@ -436,34 +481,7 @@
             }
           ],
           "items": {
-            "$id": "#/octodash/customActions/items",
-            "type": "object",
-            "required": ["icon", "command", "color", "confirm", "exit"],
-            "properties": {
-              "icon": {
-                "$id": "#/octodash/customActions/items/icon",
-                "type": "string",
-                "pattern": "^(.*)$"
-              },
-              "command": {
-                "$id": "#/octodash/customActions/items/command",
-                "type": "string",
-                "pattern": "^(.*)$"
-              },
-              "color": {
-                "$id": "#/octodash/customActions/items/color",
-                "type": "string",
-                "pattern": "^(.*)$"
-              },
-              "confirm": {
-                "$id": "#/octodash/customActions/items/confirm",
-                "type": "boolean"
-              },
-              "exit": {
-                "$id": "#/octodash/customActions/items/exit",
-                "type": "boolean"
-              }
-            }
+            "$ref": "#/definitions/customAction"
           }
         },
         "fileSorting": {
@@ -483,7 +501,8 @@
               "pattern": "^(asc|dsc)$",
               "default": "asc"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "invertAxisControl": {
           "$id": "#/octodash/invertAxisControl",
@@ -505,7 +524,8 @@
               "type": "boolean",
               "default": false
             }
-          }
+          },
+          "additionalProperties": false
         },
         "pollingInterval": {
           "$id": "#/octodash/pollingInterval",
@@ -565,7 +585,9 @@
           "pattern": "^/(.*)$",
           "default": "/"
         }
-      }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "additionalProperties": false
 }
