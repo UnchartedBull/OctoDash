@@ -27,7 +27,6 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/root.json",
   "type": "object",
   "required": ["octoprint", "printer", "filament", "plugins", "octodash"],
   "properties": {
@@ -37,13 +36,11 @@
       "required": ["accessToken", "url"],
       "properties": {
         "accessToken": {
-          "$id": "#/octoprint/accessToken",
           "type": "string",
           "pattern": "^(.*)$",
           "default": ""
         },
         "url": {
-          "$id": "#/octoprint/url",
           "type": "string",
           "pattern": "^(.*)$",
           "default": "http://localhost:5000/"
@@ -57,29 +54,24 @@
       "required": ["name", "xySpeed", "zSpeed", "disableExtruderGCode", "zBabystepGCode", "defaultTemperatureFanSpeed"],
       "properties": {
         "name": {
-          "$id": "#/printer/name",
           "type": "string",
           "pattern": "^(.*)$",
           "default": ""
         },
         "xySpeed": {
-          "$id": "#/printer/xySpeed",
           "type": "integer",
           "default": 150
         },
         "zSpeed": {
-          "$id": "#/printer/zSpeed",
           "type": "integer",
           "default": 5
         },
         "disableExtruderGCode": {
-          "$id": "#/printer/disableExtruderGCode",
           "type": "string",
           "pattern": "^(.*)$",
           "default": "M18 E"
         },
         "zBabystepGCode": {
-          "$id": "#/printer/zBabystepGCode",
           "type": "string",
           "pattern": "^(.*)$",
           "default": "M290 Z"
@@ -90,17 +82,14 @@
           "required": ["hotend", "heatbed", "fan"],
           "properties": {
             "hotend": {
-              "$id": "#/printer/defaultTemperatureFanSpeed/hotend",
               "type": "integer",
               "default": 200
             },
             "heatbed": {
-              "$id": "#/printer/defaultTemperatureFanSpeed/heatbed",
               "type": "integer",
               "default": 60
             },
             "fan": {
-              "$id": "#/printer/defaultTemperatureFanSpeed/fan",
               "type": "integer",
               "default": 100
             }
@@ -116,37 +105,30 @@
       "required": ["density", "thickness", "feedLength", "feedSpeed", "feedSpeedSlow", "purgeDistance", "useM600"],
       "properties": {
         "density": {
-          "$id": "#/filament/density",
           "type": "number",
           "default": 1.25
         },
         "thickness": {
-          "$id": "#/filament/thickness",
           "type": "number",
           "default": 1.75
         },
         "feedLength": {
-          "$id": "#/filament/feedLength",
           "type": "integer",
           "default": 0
         },
         "feedSpeed": {
-          "$id": "#/filament/feedSpeed",
           "type": "number",
           "default": 20
         },
         "feedSpeedSlow": {
-          "$id": "#/filament/feedSpeedSlow",
           "type": "number",
           "default": 3
         },
         "purgeDistance": {
-          "$id": "#/filament/purgeDistance",
           "type": "integer",
           "default": 30
         },
         "useM600": {
-          "$id": "#/filament/useM600",
           "type": "boolean",
           "default": false
         }
@@ -174,12 +156,10 @@
       ],
       "properties": {
         "companion": {
-          "$id": "#/plugins/companion",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/companion/enabled",
               "type": "boolean",
               "default": true
             }
@@ -187,12 +167,10 @@
           "additionalProperties": false
         },
         "displayLayerProgress": {
-          "$id": "#/plugins/displayLayerProgress",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/displayLayerProgress/enabled",
               "type": "boolean",
               "default": true
             }
@@ -200,27 +178,22 @@
           "additionalProperties": false
         },
         "enclosure": {
-          "$id": "#/plugins/enclosure",
           "type": "object",
           "required": ["enabled", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/enclosure/enabled",
               "type": "boolean",
               "default": true
             },
             "ambientSensorID": {
-              "$id": "#/plugins/enclosure/ambientSensorID",
               "type": ["number", "null"],
               "default": null
             },
             "filament1SensorID": {
-              "$id": "#/plugins/enclosure/filament1SensorID",
               "type": ["number", "null"],
               "default": null
             },
             "filament2SensorID": {
-              "$id": "#/plugins/enclosure/filament2SensorID",
               "type": ["number", "null"],
               "default": null
             }
@@ -228,12 +201,10 @@
           "additionalProperties": false
         },
         "filamentManager": {
-          "$id": "#/plugins/filamentManager",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/filamentManager/enabled",
               "type": "boolean",
               "default": false
             }
@@ -241,12 +212,10 @@
           "additionalProperties": false
         },
         "spoolManager": {
-          "$id": "#/plugins/spoolManager",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/spoolManager/enabled",
               "type": "boolean",
               "default": false
             }
@@ -254,12 +223,10 @@
           "additionalProperties": false
         },
         "preheatButton": {
-          "$id": "#/plugins/preheatButton",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/preheatButton/enabled",
               "type": "boolean",
               "default": true
             }
@@ -267,12 +234,10 @@
           "additionalProperties": false
         },
         "printTimeGenius": {
-          "$id": "#/plugins/printTimeGenius",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/printTimeGenius/enabled",
               "type": "boolean",
               "default": true
             }
@@ -280,12 +245,10 @@
           "additionalProperties": false
         },
         "psuControl": {
-          "$id": "#/plugins/psuControl",
           "type": "object",
           "required": ["enabled", "turnOnPSUWhenExitingSleep"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/psuControl/enabled",
               "type": "boolean",
               "default": false
             }
@@ -293,12 +256,10 @@
           "additionalProperties": false
         },
         "ophom": {
-          "$id": "#/plugins/ophom",
           "type": "object",
           "required": ["enabled"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/ophom/enabled",
               "type": "boolean",
               "default": false
             }
@@ -306,17 +267,14 @@
           "additionalProperties": false
         },
         "tpLinkSmartPlug": {
-          "$id": "#/plugins/tpLinkSmartPlug",
           "type": "object",
           "required": ["enabled", "smartPlugIP"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/tpLinkSmartPlug/enabled",
               "type": "boolean",
               "default": false
             },
             "smartPlugIP": {
-              "$id": "#/plugins/tpLinkSmartPlug/smartPlugIP",
               "type": "string",
               "default": "127.0.0.1"
             }
@@ -324,22 +282,18 @@
           "additionalProperties": false
         },
         "tasmota": {
-          "$id": "#/plugins/tasmota",
           "type": "object",
           "required": ["enabled", "ip", "index"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/tasmota/enabled",
               "type": "boolean",
               "default": false
             },
             "ip": {
-              "$id": "#/plugins/tasmota/ip",
               "type": "string",
               "default": "127.0.0.1"
             },
             "index": {
-              "$id": "#/plugins/tasmota/index",
               "type": ["number", "null"],
               "default": null
             }
@@ -347,22 +301,18 @@
           "additionalProperties": false
         },
         "tasmotaMqtt": {
-          "$id": "#/plugins/tasmotaMqtt",
           "type": "object",
           "required": ["enabled", "topic", "relayNumber"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/tasmotaMqtt/enabled",
               "type": "boolean",
               "default": false
             },
             "topic": {
-              "$id": "#/plugins/tasmotaMqtt/topic",
               "type": "string",
               "default": "topic"
             },
             "relayNumber": {
-              "$id": "#/plugins/tasmotaMqtt/relayNumber",
               "type": ["number", "null"],
               "default": null
             }
@@ -370,17 +320,14 @@
           "additionalProperties": false
         },
         "tuya": {
-          "$id": "#/plugins/tuya",
           "type": "object",
           "required": ["enabled", "label"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/tuya/enabled",
               "type": "boolean",
               "default": false
             },
             "label": {
-              "$id": "#/plugins/tuya/label",
               "type": "string",
               "default": "label"
             }
@@ -388,22 +335,18 @@
           "additionalProperties": false
         },
         "wemo": {
-          "$id": "#/plugins/wemo",
           "type": "object",
           "required": ["enabled", "ip"],
           "properties": {
             "enabled": {
-              "$id": "#/plugins/wemo/enabled",
               "type": "boolean",
               "default": false
             },
             "ip": {
-              "$id": "#/plugins/wemo/ip",
               "type": "string",
               "default": "127.0.0.1"
             },
             "port": {
-              "$id": "#/plugins/wemo/port",
               "type": "number",
               "default": 49152
             }
@@ -490,13 +433,11 @@
           "required": ["attribute", "order"],
           "properties": {
             "attribute": {
-              "$id": "#/octodash/fileSorting/attribute",
               "type": "string",
               "pattern": "^(name|date|size)$",
               "default": "name"
             },
             "order": {
-              "$id": "#/octodash/fileSorting/order",
               "type": "string",
               "pattern": "^(asc|dsc)$",
               "default": "asc"
@@ -510,17 +451,14 @@
           "required": ["x", "y", "z"],
           "properties": {
             "x": {
-              "$id": "#/octodash/invertAxisControl/x",
               "type": "boolean",
               "default": false
             },
             "y": {
-              "$id": "#/octodash/invertAxisControl/y",
               "type": "boolean",
               "default": false
             },
             "z": {
-              "$id": "#/octodash/invertAxisControl/z",
               "type": "boolean",
               "default": false
             }
@@ -528,59 +466,48 @@
           "additionalProperties": false
         },
         "pollingInterval": {
-          "$id": "#/octodash/pollingInterval",
           "type": "integer",
           "default": 2000
         },
         "touchscreen": {
-          "$id": "#/octodash/touchscreen",
           "type": "boolean",
           "default": true
         },
         "turnScreenOffWhileSleeping": {
-          "$id": "#/octodash/turnScreenOffWhileSleeping",
           "type": "boolean",
           "default": false
         },
         "turnOnPrinterWhenExitingSleep": {
-          "$id": "#/octodash/turnOnPrinterWhenExitingSleep",
           "type": "boolean",
           "default": false
         },
         "preferPreviewWhilePrinting": {
-          "$id": "#/octodash/preferPreviewWhilePrinting",
           "type": "boolean",
           "default": false
         },
         "previewProgressCircle": {
-          "$id": "#/octodash/previewProgressCircle",
           "type": "boolean",
           "default": false
         },
         "screenSleepCommand": {
-          "$id": "#/octodash/screenSleepCommand",
           "type": "string",
           "pattern": "^(.*)$",
           "default": "xset dpms force standby"
         },
         "screenWakeupCommand": {
-          "$id": "#/octodash/screenWakeupCommand",
           "type": "string",
           "pattern": "^(.*)$",
           "default": "xset s off && xset -dpms && xset s noblank"
         },
         "showExtruderControl": {
-          "$id": "#/octodash/showExtruderControl",
           "type": "boolean",
           "default": true
         },
         "showNotificationCenterIcon": {
-          "$id": "#/octodash/showNotificationCenterIcon",
           "type": "boolean",
           "default": true
         },
         "defaultDirectory": {
-          "$id": "#/octodash/defaultDirectory",
           "type": "string",
           "pattern": "^/(.*)$",
           "default": "/"
