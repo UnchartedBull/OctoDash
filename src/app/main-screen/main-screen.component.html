@@ -1,11 +1,11 @@
-<div *ngIf="isPrinting() || isFileLoaded()">
-  <app-print-control *ngIf="isPrinting()"></app-print-control>
+<div *ngIf="isPrinting() || isFileLoaded() || !isTouchscreen()">
+  <app-print-control *ngIf="isPrinting() && isTouchscreen()"></app-print-control>
   <app-job-status></app-job-status>
   <app-printer-status></app-printer-status>
   <app-height-progress></app-height-progress>
   <app-bottom-bar></app-bottom-bar>
 </div>
-<div *ngIf="!isPrinting() && !isFileLoaded()">
+<div *ngIf="isTouchscreen() && !isPrinting() && !isFileLoaded()">
   <app-main-menu></app-main-menu>
   <app-printer-status></app-printer-status>
   <app-bottom-bar></app-bottom-bar>
