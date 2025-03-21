@@ -50,7 +50,8 @@
           ]
         }
       ],
-      "category": "Utility"
+      "category": "Utility",
+      "icon": "./src/assets/icon/icon.png"
     }
   },
   "scripts": {

@@ -31,7 +31,6 @@ app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('touch-events', 'enabled');
 
 function createWindow() {
-  // TODO: re-enable
   // if (!dev) {
   //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
   //     callback({
@@ -55,7 +54,7 @@ function createWindow() {
       enableRemoteModule: true,
       contextIsolation: false,
     },
-    icon: path.join(__dirname, 'dist', 'assets', 'icon', 'icon.png'),
+    icon: fileURLToPath(new URL(`./${dev ? 'src' : 'dist'}/assets/icon/icon.png`, import.meta.url)),
   });
 
   if (dev) {

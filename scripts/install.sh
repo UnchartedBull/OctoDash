@@ -718,7 +718,7 @@ elif [ ! -d $DIRECTORY ]; then
 fi;
 
 if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Filament Manager' 'Spool Manager' 'Preheat Button' 'Enclosure' 'Print Time Genius' 'Ultimaker Format Package' 'PrusaSlicer Thumbnails' 'TPLinkSmartPlug' 'Tasmota' 'TasmotaMQTT' 'Ophom (Phillips HUE)' 'Tuya' 'Wemo')
+  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Preheat Button' 'Enclosure' 'Print Time Genius')
   checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
   echo "Installing Plugins..."
 
@@ -728,12 +728,6 @@ if [ $DIRECTORY != "-" ]; then
   if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
   fi;
-  if [[ " ${selected_plugins[@]} " =~ "Filament Manager" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Spool Manager" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-SpoolManager/releases/latest/download/master.zip"
-  fi;
   if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
   fi;
@@ -742,30 +736,6 @@ if [ $DIRECTORY != "-" ]; then
   fi;
   if [[ " ${selected_plugins[@]} " =~ "Print Time Genius" ]]; then
       "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Ultimaker Format Package" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-UltimakerFormatPackage/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "PrusaSlicer Thumbnails" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "TPLinkSmartplug" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TPLinkSmartplug/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Tasmota" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-Tasmota/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "TasmotaMQTT" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-TasmotaMQTT/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Ophom (Phillips HUE)" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/Salamafet/ophom/archive/refs/heads/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Tuya" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/ziirish/OctoPrint-TuyaSmartplug/ophom/archive/refs/heads/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Wemo" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-PSUControl-Wemo/archive/refs/heads/master.zip"
   fi;
 fi;
 
