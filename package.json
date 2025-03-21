@@ -106,7 +106,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.13",
-    "@angular/cli": "^17.3.13",
+    "@angular/cli": "^18.2.15",
     "@angular/compiler-cli": "^17.3.12",
     "@angular/language-service": "^19.2.2",
     "@eslint/compat": "^1.2.7",
