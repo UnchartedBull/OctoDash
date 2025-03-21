@@ -290,6 +290,21 @@
             }
           }
         },
+        "tuya": {
+          "$id": "#/properties/plugins/properties/tuya",
+          "type": "object",
+          "required": ["enabled", "ip"],
+          "properties": {
+            "enabled": {
+              "$id": "#/properties/plugins/properties/ip/properties/enabled",
+              "type": "boolean"
+            },
+            "label": {
+              "$id": "#/properties/plugins/properties/tuya/properties/label",
+              "type": "string"
+            }
+          }
+        },
         "wemo": {
           "$id": "#/properties/plugins/properties/wemo",
           "type": "object",
