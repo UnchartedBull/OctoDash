@@ -3,7 +3,7 @@
 ## [v2.4.1](https://github.com/UnchartedBull/OctoDash/tree/v2.4.1) (2025-03-20)
 
 > [!IMPORTANT]
-> OctoDash v2.4.0 requires OctoPrint v1.9.0 or higher.
+> OctoDash v2.4.1 requires OctoPrint v1.9.0 or higher.
 
 This release includes a hotfix for the Tuya plugin integration.
 
