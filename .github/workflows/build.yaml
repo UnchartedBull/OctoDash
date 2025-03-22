@@ -74,3 +74,11 @@ jobs:
         run: npm run electron:pack
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: |
+            package/*.deb
+            package/*.yaml
+            package/*.yml
