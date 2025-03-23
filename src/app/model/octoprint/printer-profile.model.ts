@@ -25,6 +25,7 @@ interface OctoprintAxisDetails {
 interface OctoprintPrinterExtruders {
   count: number;
   offsets: OctoprintPrinterExtruderOffset[];
+  sharedNozzle: boolean;
 }
 
 interface OctoprintPrinterExtruderOffset {

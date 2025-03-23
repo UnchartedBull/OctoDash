@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ConfigService } from '../../config/config.service';
-import { PrinterStatus } from '../../model';
+import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../model';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';
 
@@ -14,6 +14,11 @@ import { SocketService } from '../../services/socket/socket.service';
 export class PrinterStatusComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
+  public extruderInfo: PrinterExtruders = {
+    count: 1,
+    offsets: [],
+    sharedNozzle: false,
+  };
   public fanSpeed: number;
   public status: string;
 
@@ -21,6 +26,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public selectedHotend: number;
   public heatbedTarget: number;
   public fanTarget: number;
+  public sharedNozzle: boolean;
 
   public QuickControlView = QuickControlView;
   public view = QuickControlView.NONE;
@@ -36,6 +42,11 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.subscriptions.add(
+      this.printerService.getActiveProfile().subscribe({
+        next: (printerProfile: PrinterProfile) => (this.extruderInfo = printerProfile.extruder),
+      }),
+    );
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((status: PrinterStatus): void => {
         this.printerStatus = status;

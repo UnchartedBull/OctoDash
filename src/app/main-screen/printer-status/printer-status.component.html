@@ -2,12 +2,12 @@
   class="printer-status"
   *ngIf="printerStatus"
   [ngClass]="{
-    'printer-status__multi-hotend': printerStatus.tools.length > 1,
+    'printer-status__multi-hotend': extruderInfo.count > 1 && !extruderInfo.sharedNozzle,
   }">
   <div class="printer-status__row">
     <div
       class="printer-status__item"
-      *ngFor="let tool of printerStatus.tools; index as i"
+      *ngFor="let tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools; index as i"
       (click)="showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
@@ -15,10 +15,12 @@
       <div
         class="printer-status__value"
         [ngClass]="{
-          'printer-status__small-text': printerStatus.tools.length > 2,
+          'printer-status__small-text': extruderInfo.count > 2,
           'printer-status__no-set-value': tool.set === 0,
         }">
-        <span class="printer-status__tool-number" *ngIf="printerStatus.tools.length > 1">T{{ i }}:</span>
+        <span class="printer-status__tool-number" *ngIf="extruderInfo.count > 1 && !extruderInfo.sharedNozzle"
+          >T{{ i }}:</span
+        >
         <span class="printer-status__actual-value">
           {{ tool.current }}<span class="printer-status__unit">°C</span>
         </span>
