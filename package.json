@@ -121,7 +121,7 @@
     "@typescript-eslint/parser": "~8.27.0",
     "codelyzer": "~6.0.2",
     "electron": "~35.0.2",
-    "electron-builder": "~25.1.8",
+    "electron-builder": "~26.0.12",
     "eslint": "9.22.0",
     "eslint-plugin-import": "~2.31.0",
     "eslint-plugin-prettier": "~5.2.4",
