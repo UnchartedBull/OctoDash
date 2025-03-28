@@ -2,6 +2,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 
 @Directive({
   selector: '[long-press]',
+  standalone: false,
 })
 export class LongPress {
   pressing: boolean;

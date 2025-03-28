@@ -9,6 +9,7 @@ import { ConfigService } from '../../config.service';
   selector: 'app-config-setup-discover-octoprint',
   templateUrl: './discover-octoprint.component.html',
   styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   @Input() octoprintHost: number;

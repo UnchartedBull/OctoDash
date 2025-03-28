@@ -11,6 +11,7 @@ import { OctoprintAuthenticationService } from './octoprint-authentication.servi
   selector: 'app-config-setup-octoprint-authentication',
   templateUrl: './octoprint-authentication.component.html',
   styleUrls: ['./octoprint-authentication.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class OctoprintAuthenticationComponent {
   @Input() octoprintURL: string;

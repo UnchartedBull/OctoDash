@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-config-setup-plugins',
   templateUrl: './plugins.component.html',
   styleUrls: ['./plugins.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class PluginsComponent {
   @Input() companionPlugin: boolean;

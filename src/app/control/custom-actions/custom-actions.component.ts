@@ -12,6 +12,7 @@ import { SystemService } from '../../services/system/system.service';
   selector: 'app-custom-actions',
   templateUrl: './custom-actions.component.html',
   styleUrls: ['./custom-actions.component.scss'],
+  standalone: false,
 })
 export class CustomActionsComponent {
   @Input() redirectActive = true;

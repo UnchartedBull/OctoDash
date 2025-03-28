@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import _ from 'lodash-es';
+import * as _ from 'lodash-es';
 
 import { defaultConfig } from './config/config.default';
 import { Config } from './config/config.model';

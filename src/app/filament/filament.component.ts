@@ -15,6 +15,7 @@ import { SocketService } from '../services/socket/socket.service';
   templateUrl: './filament.component.html',
   styleUrls: ['./filament.component.scss'],
   providers: [FilamentService],
+  standalone: false,
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 6;
