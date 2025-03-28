@@ -20,7 +20,7 @@
         <source>Update available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.html</context>
@@ -31,14 +31,14 @@
         <source>Version <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.service.ts</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
@@ -52,7 +52,7 @@
         <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/config.service.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="invalid-config" datatype="html">
@@ -116,21 +116,7 @@
         <source> search again </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">56,61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="connect-localhost" datatype="html">
-        <source>connect to localhost?</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">62,64</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="prompt-same-machine" datatype="html">
-        <source> are you trying to connect to OctoPrint that is running on the same machine as OctoDash? </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/config/setup/discover-octoprint/discover-octoprint.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">56,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
@@ -399,35 +385,35 @@
         <source>Great! I&apos;ll check everything.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">69,71</context>
+          <context context-type="linenumber">68,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
         <source> OctoPrint Connection </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">75,78</context>
+          <context context-type="linenumber">74,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source> Validating Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">81,85</context>
+          <context context-type="linenumber">80,84</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source> Saving Config </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">88,90</context>
+          <context context-type="linenumber">87,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.html</context>
-          <context context-type="linenumber">93,97</context>
+          <context context-type="linenumber">92,96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saving-config" datatype="html">
@@ -441,14 +427,14 @@
         <source>403 Forbidden - This most likely means that your API Key isn&apos;t working.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.ts</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-unknown" datatype="html">
         <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren&apos;t correct.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/setup.component.ts</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-1" datatype="html">
@@ -2083,63 +2069,63 @@
         <source>Top Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-right" datatype="html">
         <source>Top Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-left" datatype="html">
         <source>Middle Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-right" datatype="html">
         <source>Middle Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-left" datatype="html">
         <source>Bottom Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-right" datatype="html">
         <source>Bottom Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved" datatype="html">
         <source>Configuration not saved!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved-message" datatype="html">
         <source>You haven&apos;t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can&apos;t save invalid config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/settings.component.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">

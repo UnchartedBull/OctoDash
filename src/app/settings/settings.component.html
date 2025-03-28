@@ -53,7 +53,7 @@
               class="settings__input"
               name="octoprintURLName"
               style="width: 23.2vw"
-              [(ngModel)]="this.config.octoprint.urlSplit.host"
+              [(ngModel)]="this.octoprintURL.host"
               required /><span class="settings__input-divider">:</span>
             <input
               type="text"
@@ -61,7 +61,7 @@
               class="settings__input"
               name="octoprintURLPort"
               style="width: 8vw"
-              [(ngModel)]="this.config.octoprint.urlSplit.port"
+              [(ngModel)]="this.octoprintURL.port"
               required />
             <br />
           </form>

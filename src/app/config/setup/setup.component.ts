@@ -3,8 +3,8 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 
-import { defaultConfig } from '../config.default';
-import { Config } from '../config.model';
+import defaultConfig from '../config.default.json';
+import { ConfigSchema as Config } from '../config.model';
 import { ConfigService } from '../config.service';
 
 @Component({
@@ -38,9 +38,10 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     if (this.configUpdate) {
       this.config = configService.getCurrentConfig();
     } else {
-      this.config = defaultConfig;
+      // Mitigates a TypeScript bug
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      this.config = defaultConfig as any as Config;
     }
-    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
   }
 
   public ngOnInit(): void {
@@ -54,10 +55,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public changeURLEntryMethod(manual: boolean): void {
     this.manualURL = manual;
-  }
-
-  public getOctoprintURL(): string {
-    return this.configService.mergeOctoprintURL(this.config.octoprint.urlSplit);
   }
 
   public createConfig(): void {
@@ -137,9 +134,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   public decreasePage(): void {
-    if (this.page === this.totalPages) {
-      this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
-    }
     this.changePage(-1);
   }
 

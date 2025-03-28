@@ -3,9 +3,13 @@ import { Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
 
 import { ElectronService } from '../electron.service';
-import { NotificationType } from '../model';
+import { NotificationType, URLSplit } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { Config, CustomAction, HttpHeader, URLSplit } from './config.model';
+import { ConfigSchema as Config, CustomAction } from './config.model';
+
+interface HttpHeader {
+  headers: HttpHeaders;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -106,10 +110,7 @@ export class ConfigService {
   }
 
   public createConfigFromInput(config: Config): Config {
-    const configOut = _.cloneDeep(config);
-    configOut.octoprint.url = this.mergeOctoprintURL(config.octoprint.urlSplit);
-    delete configOut.octoprint.urlSplit;
-    return configOut;
+    return _.cloneDeep(config);
   }
 
   public isLoaded(): boolean {

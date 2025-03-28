@@ -1,10 +1,10 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 import { AppService } from '../app.service';
-import { Config } from '../config/config.model';
+import { ConfigSchema as Config } from '../config/config.model';
 import { ConfigService } from '../config/config.service';
 import { ElectronService } from '../electron.service';
-import { NotificationType } from '../model';
+import { NotificationType, URLSplit } from '../model';
 import { NotificationService } from '../notification/notification.service';
 import { SystemService } from '../services/system/system.service';
 
@@ -24,6 +24,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public fadeOutAnimation = false;
   public config: Config;
+  public octoprintURL: URLSplit;
   public customActionsPosition = [
     $localize`:@@top-left:Top Left`,
     $localize`:@@top-right:Top Right`,
@@ -47,7 +48,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
-    this.config.octoprint.urlSplit = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
     this.localIpAddress$ = this.systemService.getLocalIpAddress();
   }
 
@@ -117,6 +118,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public updateConfig(): void {
+    this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
     this.electronService.on('configSaved', this.onConfigSaved.bind(this));

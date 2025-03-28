@@ -32,3 +32,8 @@ export interface UpdateDownloadProgress {
   delta: number;
   speed: number | string;
 }
+
+export interface URLSplit {
+  host: string;
+  port: number;
+}

@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 
-import { defaultConfig } from './config/config.default';
-import { Config } from './config/config.model';
+import { ConfigSchema as Config } from './config/config.model';
 import { ConfigService } from './config/config.service';
 import { ElectronService } from './electron.service';
 import { NotificationType } from './model';
@@ -37,44 +36,7 @@ export class AppService {
 
     // list of all error following an upgrade
     this.updateError = {
-      "/plugins must have required property 'companion'": config =>
-        (config.plugins.companion = defaultConfig.plugins.companion),
-      "/printer must have required property 'zBabystepGCode'": config =>
-        (config.printer.zBabystepGCode = defaultConfig.printer.zBabystepGCode),
-      "/plugins must have required property 'tpLinkSmartPlug'": config =>
-        (config.plugins.tpLinkSmartPlug = defaultConfig.plugins.tpLinkSmartPlug),
-      "/plugins must have required property 'tasmota'": config =>
-        (config.plugins.tasmota = defaultConfig.plugins.tasmota),
-      "/plugins must have required property 'tasmotaMqtt'": config =>
-        (config.plugins.tasmotaMqtt = defaultConfig.plugins.tasmotaMqtt),
-      "/plugins must have required property 'tuya'": config => (config.plugins.tuya = defaultConfig.plugins.tuya),
-      "/plugins must have required property 'wemo'": config => (config.plugins.wemo = defaultConfig.plugins.wemo),
-      "/octodash must have required property 'previewProgressCircle'": config =>
-        (config.octodash.previewProgressCircle = defaultConfig.octodash.previewProgressCircle),
-      "/octodash must have required property 'turnOnPrinterWhenExitingSleep'": config => {
-        /* eslint-disable @typescript-eslint/no-explicit-any */
-        config.octodash.turnOnPrinterWhenExitingSleep =
-          (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep ?? false;
-        /* eslint-disable @typescript-eslint/no-explicit-any */
-        delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
-      },
-      "/octodash must have required property 'screenSleepCommand'": config =>
-        (config.octodash.screenSleepCommand = defaultConfig.octodash.screenSleepCommand),
-      "/octodash must have required property 'screenWakeupCommand'": config =>
-        (config.octodash.screenWakeupCommand = defaultConfig.octodash.screenWakeupCommand),
-      "/octodash must have required property 'invertAxisControl'": config =>
-        (config.octodash.invertAxisControl = defaultConfig.octodash.invertAxisControl),
-      "/printer must have required property 'disableExtruderGCode'": config =>
-        (config.printer.disableExtruderGCode = defaultConfig.printer.disableExtruderGCode),
-      "/octodash must have required property 'showExtruderControl'": config =>
-        (config.octodash.showExtruderControl = defaultConfig.octodash.showExtruderControl),
-      "/plugins must have required property 'spoolManager'": config =>
-        (config.plugins.spoolManager = defaultConfig.plugins.spoolManager),
-      "/plugins must have required property 'ophom'": config => (config.plugins.ophom = defaultConfig.plugins.ophom),
-      "/octodash must have required property 'showNotificationCenterIcon'": config =>
-        (config.octodash.showNotificationCenterIcon = defaultConfig.octodash.showNotificationCenterIcon),
-      "/octodash must have required property 'defaultDirectory'": config =>
-        (config.octodash.defaultDirectory = defaultConfig.octodash.defaultDirectory),
+      // "/plugins must have required property 'companion'": config => (config.plugins.companion = { enabled: false }),
     };
   }
 

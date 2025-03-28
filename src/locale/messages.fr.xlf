@@ -74,14 +74,6 @@
         <source> search again </source>
         <target>chercher à nouveau</target>
       </trans-unit>
-      <trans-unit id="connect-localhost" datatype="html">
-        <source>connect to localhost?</source>
-        <target>se connecter à localhost ?</target>
-      </trans-unit>
-      <trans-unit id="prompt-same-machine" datatype="html">
-        <source> are you trying to connect to OctoPrint that is running on the same machine as OctoDash? </source>
-        <target> essayez-vous de vous connecter à OctoPrint qui s'exécute sur la même machine qu'OctoDash ? </target>
-      </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
         <source>no instances found.</source>
         <target>aucune instance trouvée.</target>

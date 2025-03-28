@@ -19,6 +19,9 @@ To setup a local environment, perform the following steps:
 - Install dependencies: `npm install`
 - Run the build `npm run build` (only required once to copy assets)
 
+> [!NOTE]
+> If you modify `/src/helper/config.schema.json`, run `npm run prepare` to regenerate the dependent files.
+
 ## Testing
 
 To test locally in a dev environment, simply run `npm start`. The app will automatically reload when changes are made.
