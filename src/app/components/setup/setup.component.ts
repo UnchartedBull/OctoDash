@@ -3,7 +3,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ElectronService } from '../../services/electron.service';
-import defaultConfig from '../../config.default.json';
+import defaultConfig from '../../../helper/config.default.json';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { ConfigService } from '../../services/config.service';
 
