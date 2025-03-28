@@ -21,7 +21,8 @@ export class AppService {
   };
 
   public updateAvailable = false;
-  public dev = !!process.env.APP_DEV;
+  // public dev = !!process.env.APP_DEV;
+  public dev = true; // TODO: remove this line before release
 
   public constructor(
     private configService: ConfigService,

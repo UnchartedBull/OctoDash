@@ -1,9 +1,10 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { map } from 'rxjs';
 
-import { ConfigSchema as Config, CustomAction, NotificationType, URLSplit } from '../model';
-import { ElectronService } from './electron.service';
+import defaultConfig from '../helper/config.default.json';
+import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { NotificationService } from './notification.service';
 
 interface HttpHeader {
@@ -22,45 +23,67 @@ export class ConfigService {
 
   private httpHeaders: HttpHeader;
 
+  private http: HttpClient = inject(HttpClient);
+
   public constructor(
     private notificationService: NotificationService,
-    private electronService: ElectronService,
+    // private electronService: ElectronService,
     private zone: NgZone,
   ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.setNotification({
-        heading: error,
-        text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-        type: NotificationType.ERROR,
-        time: new Date(),
-        sticky: true,
-      });
-    });
+    this.getConfig();
+    // this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
+    // this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
+    // this.electronService.on('configError', (_, error: string) => {
+    //   this.notificationService.setNotification({
+    //     heading: error,
+    //     text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
+    //     type: NotificationType.ERROR,
+    //     time: new Date(),
+    //     sticky: true,
+    //   });
+    // });
 
-    this.electronService.on('configPass', () => {
-      this.zone.run(() => {
-        this.valid = true;
-        this.generateHttpHeaders();
-        this.initialized = true;
-      });
-    });
-    this.electronService.on('configFail', (_, errors) => {
-      this.zone.run(() => {
-        this.valid = false;
-        this.errors = errors;
-        console.error(errors);
-        this.initialized = true;
-      });
-    });
+    // this.electronService.on('configPass', () => {
+    //   this.zone.run(() => {
+    //     this.valid = true;
+    //     this.generateHttpHeaders();
+    //     this.initialized = true;
+    //   });
+    // });
+    // this.electronService.on('configFail', (_, errors) => {
+    //   this.zone.run(() => {
+    //     this.valid = false;
+    //     this.errors = errors;
+    //     console.error(errors);
+    //     this.initialized = true;
+    //   });
+    // });
 
-    this.electronService.send('readConfig');
+    // this.electronService.send('readConfig');
+  }
+
+  private getConfig() {
+    this.http
+      .get('http://localhost:8080/api/settings')
+      .pipe(
+        map((response: any) => {
+          return response.plugins.octodash;
+        }),
+      )
+      .subscribe((config: Config) => {
+        this.initialize({ ...defaultConfig, ...config });
+        this.zone.run(() => {
+          this.initialized = true;
+          this.generateHttpHeaders();
+          this.valid = true;
+          console.log(this.config);
+        });
+      });
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.electronService.send('checkConfig', config);
+    // this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -83,11 +106,12 @@ export class ConfigService {
   }
 
   public getErrors(): string[] {
+    return [];
     return this.errors;
   }
 
   public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
+    // this.electronService.send('saveConfig', config);
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
