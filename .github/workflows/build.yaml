@@ -69,7 +69,7 @@ jobs:
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
-        run: npm run build:prod
+        run: npm run build
       - name: Packaging Application
         run: npm run electron:pack
         env:
