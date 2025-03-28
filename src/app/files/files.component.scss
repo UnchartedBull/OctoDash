@@ -1,13 +1,6 @@
-.top-bar {
-  &__next-icon {
-    width: 6.5vw;
-    vertical-align: -3.2vh;
-  }
-
-  &__center-icon {
-    width: 10vw;
-    margin-bottom: -6.5vh;
-  }
+.top-bar__center-icon {
+  width: 10vw;
+  margin-bottom: -6.5vh;
 }
 
 .breadcrumbs {
@@ -57,7 +50,7 @@
     height: 77vh;
     position: fixed;
     left: 2vw;
-    top: 23vh;
+    top: 20vh;
     z-index: 2;
     pointer-events: none;
     background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
