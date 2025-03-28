@@ -1,0 +1,6 @@
+*.min.*
+docs/css/icomoon.css
+docs/css/theme.css
+src/reset.css
+docs/fonts/ionicons/
+dist/
