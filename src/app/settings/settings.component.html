@@ -1,7 +1,6 @@
 <div class="settings">
   <div class="settings-wrapper" [ngClass]="{ 'settings-wrapper-fadeout': fadeOutAnimation }" (click)="hideSettings()">
     <div class="settings-container" (click)="stopPropagation($event)">
-      <img src="assets/error.svg" class="settings__close" (click)="hideSettings()" />
       <div class="settings__content" #settingsMain>
         <span class="settings__heading" i18n="@@settings">settings</span>
         <ul class="settings__list">

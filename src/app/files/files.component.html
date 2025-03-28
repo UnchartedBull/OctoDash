@@ -95,7 +95,6 @@
 
 <div class="file" id="fileDetailView" (click)="closeDetails()">
   <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'" (click)="stopPropagation($event)">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
     <span class="file__name">{{ fileDetail.name }}</span>
     <span class="file__directory">{{ fileDetail.path }}</span>
     <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
@@ -132,18 +131,13 @@
     </table>
   </div>
   <div class="file__wrapper file__loading" *ngIf="!fileDetail">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
     <span class="loading-dots" i18n="@@files-loading">loading details</span>
   </div>
-  <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
-    can't load file.
-  </div>
+  <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">can't load file.</div>
 </div>
 
 <div class="sorting" id="sortingView" *ngIf="showSorting" (click)="closeSorting()">
   <div class="sorting-wrapper" (click)="stopPropagation($event)">
-    <img src="assets/error.svg" class="sorting-close" (click)="closeSorting()" />
     <span class="sorting-heading" i18n="@@files-sort">sort files</span>
     <table class="sorting-selection">
       <tr>
