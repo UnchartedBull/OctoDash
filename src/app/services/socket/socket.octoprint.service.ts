@@ -8,6 +8,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { ConfigService } from '../../config/config.service';
 import { ConversionService } from '../../conversion.service';
 import {
+  Duration,
   JobStatus,
   Notification,
   NotificationType,
@@ -231,42 +232,42 @@ export class OctoPrintSocketService implements SocketService {
   public extractPrinterStatus(message: OctoprintSocketCurrent): void {
     const temps = message.current.temps[0];
     if (temps) {
-      this.printerStatus.bed = {
-        current: Math.round(temps?.bed?.actual),
-        set: Math.round(temps?.bed?.target),
-        unit: '°C',
-      };
-      this.printerStatus.chamber = {
-        current: Math.round(message?.current?.temps[0]?.chamber?.actual),
-        set: Math.round(message?.current?.temps[0]?.chamber?.target),
-        unit: '°C',
-      };
-
-      for (const [k, temp] of Object.entries(temps)) {
-        if (k.startsWith('tool')) {
-          if (typeof temp === 'number') continue;
-
-          this.printerStatus.tools[Number(k.replace('tool', ''))] = {
-            current: Math.round(temp?.actual),
-            set: Math.round(temp?.target),
+      ['bed', 'chamber'].forEach(key => {
+        if (temps[key]) {
+          this.printerStatus[key] = {
+            current: Math.round(temps[key]?.actual),
+            set: Math.round(temps[key]?.target),
             unit: '°C',
           };
         }
-      }
+      });
+
+      Object.entries(temps)
+        .filter(([key]) => key.startsWith('tool'))
+        .forEach(([key, temp]) => {
+          if (typeof temp !== 'number') {
+            this.printerStatus.tools[Number(key.replace('tool', ''))] = {
+              current: Math.round(temp?.actual),
+              set: Math.round(temp?.target),
+              unit: '°C',
+            };
+          }
+        });
     }
+
     this.printerStatus.status = PrinterState[message.current.state.text.toLowerCase()];
 
-    if (this.printerStatus.status === PrinterState.printing && this.lastState !== PrinterEvent.PRINTING) {
+    const eventType =
+      this.printerStatus.status === PrinterState.printing
+        ? 'PrintStarted'
+        : this.printerStatus.status === PrinterState.paused
+          ? 'PrintPaused'
+          : null;
+
+    if (eventType && this.lastState !== PrinterEvent[eventType.toUpperCase() as keyof typeof PrinterEvent]) {
       this.extractPrinterEvent({
         event: {
-          type: 'PrintStarted',
-          payload: null,
-        },
-      } as OctoprintSocketEvent);
-    } else if (this.printerStatus.status === PrinterState.paused && this.lastState !== PrinterEvent.PAUSED) {
-      this.extractPrinterEvent({
-        event: {
-          type: 'PrintPaused',
+          type: eventType,
           payload: null,
         },
       } as OctoprintSocketEvent);
@@ -299,28 +300,19 @@ export class OctoPrintSocketService implements SocketService {
     this.jobStatus.file = file;
     this.jobStatus.fullPath = '/' + message?.current?.job?.file?.origin + '/' + message?.current?.job?.file?.path;
     this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
-    this.jobStatus.timePrinted = {
-      value: this.conversionService.convertSecondsToHours(message.current.progress.printTime),
-      unit: $localize`:@@unit-h-1:h`,
-    };
+    this.jobStatus.timePrinted = this.mapSecondsToDuration(message.current.progress.printTime);
 
     if (message.current.job.filament) {
       this.jobStatus.filamentAmount = this.getTotalFilamentWeight(message.current.job.filament);
     }
 
     if (message.current.progress.printTimeLeft) {
-      this.jobStatus.timeLeft = {
-        value: this.conversionService.convertSecondsToHours(message.current.progress.printTimeLeft),
-        unit: $localize`:@@unit-h-2:h`,
-      };
+      this.jobStatus.timeLeft = this.mapSecondsToDuration(message.current.progress.printTimeLeft);
       this.jobStatus.estimatedEndTime = this.calculateEndTime(message.current.progress.printTimeLeft);
     }
 
     if (message.current.job.estimatedPrintTime) {
-      this.jobStatus.estimatedPrintTime = {
-        value: this.conversionService.convertSecondsToHours(message.current.job.estimatedPrintTime),
-        unit: $localize`:@@unit-h-3:h`,
-      };
+      this.jobStatus.estimatedPrintTime = this.mapSecondsToDuration(message.current.job.estimatedPrintTime);
     }
 
     if (!this.configService.isDisplayLayerProgressEnabled() && message.current.currentZ) {
@@ -328,6 +320,13 @@ export class OctoPrintSocketService implements SocketService {
     }
 
     this.jobStatusSubject.next(this.jobStatus);
+  }
+
+  private mapSecondsToDuration(seconds: number): Duration {
+    return {
+      value: this.conversionService.convertSecondsToHours(seconds),
+      unit: $localize`:@@unit-hours-short:h`,
+    };
   }
 
   private getTotalFilamentWeight(filament: OctoprintFilament) {

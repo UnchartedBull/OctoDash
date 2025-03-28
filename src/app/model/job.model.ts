@@ -10,7 +10,7 @@ export interface JobStatus {
   estimatedEndTime?: string;
 }
 
-interface Duration {
+export interface Duration {
   value: string;
   unit: string;
 }
