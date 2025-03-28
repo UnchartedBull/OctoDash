@@ -104,10 +104,8 @@ button {
     font-weight: 500;
 
     &-icon {
-      width: 6vw;
-      vertical-align: -5vh;
       margin-right: 1.4vw;
-      display: inline-block;
+      margin-left: 1vw;
     }
   }
 
@@ -117,8 +115,6 @@ button {
     font-weight: 500;
 
     &-icon {
-      width: 6vw;
-      vertical-align: -5vh;
       margin-left: 1.4vw;
       margin-right: 1vw;
     }
