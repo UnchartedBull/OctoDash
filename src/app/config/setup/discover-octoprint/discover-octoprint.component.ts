@@ -62,9 +62,8 @@ export class DiscoverOctoprintComponent implements OnInit, OnDestroy {
   public setOctoprintInstance(node: OctoprintNode): void {
     const urlSplit = this.configService.splitOctoprintURL(node.url);
     this.urlSplit = urlSplit;
-    if (!node.local) {
-      this.emitOctoprintInstance();
-    }
+    this.emitOctoprintInstance();
+    this.increasePage.emit();
   }
 
   public changeHost(host: string) {
