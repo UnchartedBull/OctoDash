@@ -57,3 +57,48 @@
     }
   }
 }
+
+.confirm {
+  position: fixed;
+  top: 22vh;
+  width: 64vw;
+  margin-left: calc(15vw - 5px);
+  background-color: #353b48;
+  border: 5px solid rgb(255 255 255 / 40%);
+  border-radius: 2vw;
+  padding: 3vh 3vw;
+  z-index: 10;
+
+  &__sub-heading {
+    font-size: 2.4vw;
+    padding-top: 2vh;
+  }
+
+  &__gcode {
+    font-size: 2.2vw;
+    padding: 2vh 1.5vw;
+    font-family: Cousine, monospace;
+  }
+
+  &__icon {
+    font-size: 15vh;
+    height: 15vh;
+    margin-top: 7vh;
+    margin-left: 15vw;
+
+    &-yes {
+      color: #4bae50;
+    }
+
+    &-no {
+      color: #c23616;
+    }
+  }
+
+  &__wrapper {
+    position: fixed;
+    z-index: 2;
+    background-color: rgb(0 0 0 / 85%);
+    inset: 0;
+  }
+}
