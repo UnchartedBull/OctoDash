@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { PSUState } from '../../model';
 import { AppService } from '../../services/app.service';
 import { ConfigService } from '../../services/config.service';
-import { PSUState } from '../../model';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { SystemService } from '../../services/system/system.service';
 

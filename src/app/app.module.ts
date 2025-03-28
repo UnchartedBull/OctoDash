@@ -9,12 +9,12 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import lottiePlayer from 'lottie-web';
 import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
 
+import { AppRoutingModule } from './app.routing.module';
 import components from './components';
 import { AppComponent } from './components/app.component';
 import directives from './directives';
 import pipes from './pipes';
 import services from './services';
-import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],

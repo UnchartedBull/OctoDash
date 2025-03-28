@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 
+import { ConfigSchema as Config, NotificationType } from '../model';
 import { ConfigService } from './config.service';
 import { ElectronService } from './electron.service';
-import { NotificationType, ConfigSchema as Config } from '../model';
 import { NotificationService } from './notification.service';
 
 @Injectable()

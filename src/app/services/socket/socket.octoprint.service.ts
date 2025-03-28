@@ -5,8 +5,6 @@ import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { catchError, pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
-import { ConfigService } from '../../services/config.service';
-import { ConversionService } from '../../services/conversion.service';
 import {
   Duration,
   JobStatus,
@@ -26,6 +24,8 @@ import {
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
 } from '../../model/octoprint';
+import { ConfigService } from '../../services/config.service';
+import { ConversionService } from '../../services/conversion.service';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';

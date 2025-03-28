@@ -2,8 +2,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
 
+import { ConfigSchema as Config, CustomAction, NotificationType, URLSplit } from '../model';
 import { ElectronService } from './electron.service';
-import { NotificationType, URLSplit, ConfigSchema as Config, CustomAction } from '../model';
 import { NotificationService } from './notification.service';
 
 interface HttpHeader {

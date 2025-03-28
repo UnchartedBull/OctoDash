@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ElectronService } from '../../../services/electron.service';
 import { ConfigService } from '../../../services/config.service';
+import { ElectronService } from '../../../services/electron.service';
 
 @Component({
   selector: 'app-config-invalid',

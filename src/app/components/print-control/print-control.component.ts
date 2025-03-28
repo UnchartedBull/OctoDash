@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { ConfigService } from '../../services/config.service';
 import { PrinterState, PrinterStatus } from '../../model';
+import { ConfigService } from '../../services/config.service';
 import { JobService } from '../../services/job/job.service';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';

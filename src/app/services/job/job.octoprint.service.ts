@@ -4,8 +4,8 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NotificationType } from 'src/app/model';
 
-import { ConfigService } from '../../services/config.service';
 import { JobCommand } from '../../model/octoprint';
+import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { JobService } from './job.service';
 

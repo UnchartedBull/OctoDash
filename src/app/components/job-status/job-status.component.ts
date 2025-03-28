@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { JobStatus } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { EventService } from '../../services/event.service';
-import { JobStatus } from '../../model';
 import { FilesService } from '../../services/files/files.service';
 import { JobService } from '../../services/job/job.service';
 import { SocketService } from '../../services/socket/socket.service';

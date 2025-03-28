@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from '../../../services/config.service';
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
+import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 

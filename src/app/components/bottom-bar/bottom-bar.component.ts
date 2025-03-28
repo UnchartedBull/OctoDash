@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
-import { ConfigService } from '../../services/config.service';
 import { NotificationType, PrinterState, PrinterStatus, TemperatureReading } from '../../model';
-import { NotificationService } from '../../services/notification.service';
+import { ConfigService } from '../../services/config.service';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
+import { NotificationService } from '../../services/notification.service';
 import { SocketService } from '../../services/socket/socket.service';
 
 @Component({

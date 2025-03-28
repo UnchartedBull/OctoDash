@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ConfigService } from '../../services/config.service';
 import { FilamentSpool } from '../../model';
 import {
   FilamentManagerSelectionPatch,
@@ -11,6 +10,7 @@ import {
   FilamentManagerSpool,
   FilamentManagerSpoolList,
 } from '../../model/octoprint';
+import { ConfigService } from '../../services/config.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
 const colorRegexp = /\((.*)\)$/g;

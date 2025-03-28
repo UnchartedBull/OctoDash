@@ -1,13 +1,5 @@
 import { AppComponent } from './app.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
-import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
-import { DiscoverOctoprintComponent } from './setup/discover-octoprint/discover-octoprint.component';
-import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
-import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
-import { PersonalizationComponent } from './setup/personalization/personalization.component';
-import { PluginsComponent } from './setup/plugins/plugins.component';
-import { ConfigSetupComponent } from './setup/setup.component';
-import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -29,43 +21,51 @@ import { PrintControlComponent } from './print-control/print-control.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
+import { DiscoverOctoprintComponent } from './setup/discover-octoprint/discover-octoprint.component';
+import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
+import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
+import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
+import { PersonalizationComponent } from './setup/personalization/personalization.component';
+import { PluginsComponent } from './setup/plugins/plugins.component';
+import { ConfigSetupComponent } from './setup/setup.component';
+import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 
 export default [
-	AppComponent,
-	BottomBarComponent,
-	ChooseFilamentComponent,
-	ChooseToolComponent,
-	ConfigInvalidComponent,
-	ConfigSetupComponent,
-	ControlComponent,
-	DiscoverOctoprintComponent,
-	ExtruderInformationComponent,
-	FilamentComponent,
-	FilesComponent,
-	JobStatusComponent,
-	HeightProgressComponent,
-	MainMenuComponent,
-	MainScreenComponent,
-	NotificationComponent,
-	OctoprintAuthenticationComponent,
-	PersonalizationComponent,
-	PluginsComponent,
-	PrintControlComponent,
-	PrinterStatusComponent,
-	SettingsComponent,
-	SettingsIconComponent,
-	StandbyComponent,
-	UpdateComponent,
-	ResetComponent,
-	WelcomeComponent,
-	HeatNozzleComponent,
-	MoveFilamentComponent,
-	ChangeFilamentComponent,
-	PurgeFilamentComponent,
-	CustomActionsComponent,
-	ToggleSwitchComponent,
-	NotificationCenterComponent,
+  AppComponent,
+  BottomBarComponent,
+  ChooseFilamentComponent,
+  ChooseToolComponent,
+  ConfigInvalidComponent,
+  ConfigSetupComponent,
+  ControlComponent,
+  DiscoverOctoprintComponent,
+  ExtruderInformationComponent,
+  FilamentComponent,
+  FilesComponent,
+  JobStatusComponent,
+  HeightProgressComponent,
+  MainMenuComponent,
+  MainScreenComponent,
+  NotificationComponent,
+  OctoprintAuthenticationComponent,
+  PersonalizationComponent,
+  PluginsComponent,
+  PrintControlComponent,
+  PrinterStatusComponent,
+  SettingsComponent,
+  SettingsIconComponent,
+  StandbyComponent,
+  UpdateComponent,
+  ResetComponent,
+  WelcomeComponent,
+  HeatNozzleComponent,
+  MoveFilamentComponent,
+  ChangeFilamentComponent,
+  PurgeFilamentComponent,
+  CustomActionsComponent,
+  ToggleSwitchComponent,
+  NotificationCenterComponent,
 ];

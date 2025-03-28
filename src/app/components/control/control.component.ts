@@ -2,9 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from '../../services/config.service';
 import { NotificationType, PrinterStatus } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
+import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { PrinterService } from '../../services/printer/printer.service';
 import { SocketService } from '../../services/socket/socket.service';

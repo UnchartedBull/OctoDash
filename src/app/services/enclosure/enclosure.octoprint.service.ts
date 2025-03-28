@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { ConfigService } from '../../services/config.service';
 import { NotificationType, PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
@@ -18,6 +17,7 @@ import {
   TuyaCommand,
   WemoCommand,
 } from '../../model/octoprint';
+import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { EnclosureService } from './enclosure.service';
 
