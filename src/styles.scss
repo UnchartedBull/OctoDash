@@ -249,9 +249,18 @@ button {
   }
 
   &__icon {
+    font-size: 15vh;
     height: 15vh;
     margin-top: 7vh;
     margin-left: 15vw;
+
+    &-yes {
+      color: #4bae50;
+    }
+
+    &-no {
+      color: #c23616;
+    }
   }
 
   &__wrapper {

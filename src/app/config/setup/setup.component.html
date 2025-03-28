@@ -68,23 +68,28 @@
     <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
     <div class="setup__validation-check-wrapper">
       <span class="setup__validation-check">
-        <img
-          [src]="octoprintConnection ? 'assets/checkmark.svg' : 'assets/error.svg'"
-          class="setup__validation-check-icon" />
-        <ng-container i18n="@@checking-octoprint-connection"> OctoPrint Connection </ng-container>
+        <fa-icon
+          [icon]="octoprintConnection ? 'circle-check' : 'circle-xmark'"
+          class="setup__validation-check-icon"
+          [style.color]="octoprintConnection ? '#4bae50' : '#c23616'" />
+        <ng-container i18n="@@checking-octoprint-connection">OctoPrint Connection</ng-container>
       </span>
       <div *ngIf="octoprintConnection">
         <span class="setup__validation-check">
-          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configValid" />
-          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="!configValid" />
-          <ng-container i18n="@@checking-config"> Validating Config </ng-container>
+          <fa-icon
+            [icon]="configValid ? 'circle-check' : 'circle-xmark'"
+            class="setup__validation-check-icon"
+            [style.color]="configValid ? '#4bae50' : '#c23616'" />
+          <ng-container i18n="@@checking-config">Validating Config</ng-container>
         </span>
       </div>
       <div *ngIf="configValid">
         <span class="setup__validation-check">
-          <img src="assets/checkmark.svg" class="setup__validation-check-icon" *ngIf="configSaved === null" />
-          <img src="assets/error.svg" class="setup__validation-check-icon" *ngIf="configSaved !== null" />
-          <ng-container i18n="@@checking-save"> Saving Config </ng-container>
+          <fa-icon
+            [icon]="configSaved === null ? 'circle-check' : 'circle-xmark'"
+            class="setup__validation-check-icon"
+            [style.color]="configSaved === null ? '#4bae50' : '#c23616'" />
+          <ng-container i18n="@@checking-save">Saving Config</ng-container>
         </span>
         <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
       </div>
