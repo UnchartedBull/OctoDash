@@ -18,7 +18,8 @@ export class CustomActionsComponent {
   @Input() redirectActive = true;
 
   public customActions = [];
-  public iFrameURL: SafeResourceUrl = 'about:blank';
+  public iframeURL: SafeResourceUrl = 'about:blank';
+  public iframeOpen = false;
   public actionToConfirm: ActionToConfirm;
 
   constructor(
@@ -81,7 +82,7 @@ export class CustomActionsComponent {
         break;
       default: {
         if (command.includes('[!WEB]')) {
-          this.openIFrame(command.replace('[!WEB]', ''));
+          this.openIframe(command.replace('[!WEB]', ''));
         } else if (command.includes('[!NEOPIXEL]')) {
           const values = command.replace('[!NEOPIXEL]', '').split(',');
           this.setLEDColor(values[0], values[1], values[2], values[3]);
@@ -134,22 +135,13 @@ export class CustomActionsComponent {
   }
 
   // [!WEB]
-  private openIFrame(url: string): void {
-    this.iFrameURL = url;
-    const iFrameDOM = document.getElementById('iFrame');
-    iFrameDOM.style.display = 'block';
-    setTimeout((): void => {
-      iFrameDOM.style.opacity = '1';
-    }, 50);
+  private openIframe(url: string): void {
+    this.iframeURL = url;
+    this.iframeOpen = true;
   }
 
-  public hideIFrame(): void {
-    const iFrameDOM = document.getElementById('iFrame');
-    iFrameDOM.style.opacity = '0';
-    setTimeout((): void => {
-      iFrameDOM.style.display = 'none';
-      this.iFrameURL = 'about:blank';
-    }, 500);
+  public hideIframe(): void {
+    this.iframeOpen = false;
   }
 
   private setLEDColor(identifier: string, red: string, green: string, blue: string): void {

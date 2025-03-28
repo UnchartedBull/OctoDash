@@ -1,14 +1,14 @@
-<div class="i-frame" id="iFrame">
+<div class="iframe" id="iframe" *ngIf="iframeOpen">
   <span i18n="@@website-loading">loading website ...</span>
   <iframe
-    class="i-frame__content"
-    [src]="iFrameURL | url"
+    class="iframe__content"
+    [src]="iframeURL | url"
     onerror="doActionConfirm()"
     allow="fullscreen; camera;"
     i18n="@@should-not-happen">
     That shouldn't happen ...
   </iframe>
-  <fa-icon icon="xmark" class="i-frame__close" (click)="hideIFrame()" />
+  <fa-icon icon="xmark" class="iframe__close" (click)="hideIframe()" />
 </div>
 
 <div class="custom-actions">
