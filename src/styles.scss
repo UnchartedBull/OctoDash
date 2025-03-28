@@ -190,18 +190,21 @@ button {
     box-shadow: none;
     outline: none;
 
-    &-piece {
-      /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
-      &:end {
-        background: transparent;
-        margin-bottom: 6vh;
-      }
+    &:vertical {
+      margin: 4vh 0;
+    }
 
-      /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+    &:horizontal {
+      margin: 0 4vw;
+    }
+
+    &-piece {
+      /* stylelint-disable selector-pseudo-class-no-unknown */
+      &:end,
       &:start {
         background: transparent;
-        margin-top: 4vh;
       }
+      /* stylelint-enable */
     }
   }
 
@@ -211,19 +214,6 @@ button {
     box-shadow: none;
     outline: none;
   }
-}
-
-.scroll__thumb-inactive {
-  display: block;
-  background-color: rgb(127 143 166 / 30%);
-  width: 3vw;
-  height: 66.6vh;
-  position: fixed;
-  right: 2.5vw;
-  top: 26.7vh;
-  border-radius: 0.89vw;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .confirm {
