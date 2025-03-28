@@ -179,6 +179,7 @@ button {
   animation: dots 1s steps(7, end) infinite;
 }
 
+/* stylelint-disable selector-pseudo-class-no-unknown */
 ::-webkit-scrollbar {
   width: 3vw;
   box-shadow: none;
@@ -199,12 +200,10 @@ button {
     }
 
     &-piece {
-      /* stylelint-disable selector-pseudo-class-no-unknown */
       &:end,
       &:start {
         background: transparent;
       }
-      /* stylelint-enable */
     }
   }
 
@@ -215,6 +214,7 @@ button {
     outline: none;
   }
 }
+/* stylelint-enable */
 
 .confirm {
   position: fixed;
