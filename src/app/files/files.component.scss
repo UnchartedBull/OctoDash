@@ -223,6 +223,11 @@
     width: 90%;
     margin-left: 5%;
     margin-top: 1vh;
+    font-size: 10vh;
+
+    &-icon-large {
+      font-size: 14vh;
+    }
 
     & td {
       width: 33.3%;
@@ -235,35 +240,25 @@
 
       &:first-of-type {
         text-align: left;
+        color: #0097e6;
 
         & span {
           margin-top: 4vh;
           position: absolute;
           margin-left: 0;
         }
-
-        & img {
-          height: 10vh;
-        }
       }
 
       &:last-of-type {
         text-align: right;
+        color: #c23616;
 
         & span {
           margin-top: 4.5vh;
           position: absolute;
           margin-left: -5vw;
         }
-
-        & img {
-          height: 10vh;
-        }
       }
-    }
-
-    & img {
-      height: 17vh;
     }
   }
 }

@@ -113,19 +113,31 @@
     <table class="file__actions">
       <tr>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="upload"
+            class="file__actions-icon"
+            (click)="loadFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="print"
+            class="file__actions-icon file__actions-icon-large"
+            (click)="printFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/delete.svg" class="file__actions-icon" (click)="deleteFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="trash-can"
+            class="file__actions-icon"
+            (click)="deleteFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
       </tr>
     </table>
