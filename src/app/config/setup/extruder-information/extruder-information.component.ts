@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-config-setup-extruder-information',
   templateUrl: './extruder-information.component.html',
   styleUrls: ['./extruder-information.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class ExtruderInformationComponent {
   @Input() feedLength: number;

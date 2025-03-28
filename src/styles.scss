@@ -1,7 +1,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // TODO: needed for ripple effect, need to check why
 $OctoDash-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
@@ -18,7 +19,8 @@ $OctoDash-theme: mat.m2-define-dark-theme(
     density: 0,
   )
 );
-@include mat.core-theme($OctoDash-theme);
+@include mat.elevation-classes();
+@include mat.app-background();
 
 @font-face {
   font-family: Arvo;

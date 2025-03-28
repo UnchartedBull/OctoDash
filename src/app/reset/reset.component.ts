@@ -8,6 +8,7 @@ import { SystemService } from '../services/system/system.service';
   selector: 'app-reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
+  standalone: false,
 })
 export class ResetComponent {
   @Output() closeFunction = new EventEmitter<void>(true);

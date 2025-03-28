@@ -12,6 +12,7 @@ import { SocketService } from '../services/socket/socket.service';
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss'],
+  standalone: false,
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();

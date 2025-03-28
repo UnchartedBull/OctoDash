@@ -12,6 +12,7 @@ import { PrinterService } from '../../services/printer/printer.service';
     '../filament.component.scss',
     '../heat-nozzle/heat-nozzle.component.scss',
   ],
+  standalone: false,
 })
 export class ChangeFilamentComponent implements OnInit {
   @Input() selectedSpool: FilamentSpool;
