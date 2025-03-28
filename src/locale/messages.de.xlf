@@ -212,11 +212,11 @@
         <source> Wemo </source>
         <target></target>
       </trans-unit>
-      <trans-unit id="setup-back" datatype="html">
+      <trans-unit id="ui-back" datatype="html">
         <source>back</source>
         <target>zurück</target>
       </trans-unit>
-      <trans-unit id="setup-next" datatype="html">
+      <trans-unit id="ui-next" datatype="html">
         <source>next</source>
         <target>nächster Schritt</target>
       </trans-unit>
@@ -225,15 +225,15 @@
         <target>Sehr gut! Ich überprüfe alles.</target>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
-        <source> OctoPrint Connection </source>
+        <source>OctoPrint Connection</source>
         <target>OctoPrint Verbindung</target>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
-        <source> Validating Config </source>
+        <source>Validating Config</source>
         <target>Konfiguration validieren</target>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
-        <source> Saving Config </source>
+        <source>Saving Config</source>
         <target>Konfiguration speichern</target>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
@@ -279,10 +279,6 @@
       <trans-unit id="welcome-7" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <target>Danke, dass du dich für OctoDash entschieden hast</target>
-      </trans-unit>
-      <trans-unit id="control-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
@@ -360,12 +356,8 @@
         </source>
         <target></target>
       </trans-unit>
-      <trans-unit id="filament-back" datatype="html">
-        <source> back </source>
-        <target>zurück</target>
-      </trans-unit>
-      <trans-unit id="filament-skip" datatype="html">
-        <source> skip </source>
+      <trans-unit id="ui-skip" datatype="html">
+        <source>skip</source>
         <target>überspringen</target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
@@ -422,11 +414,7 @@
         <source>done</source>
         <target>fertig</target>
       </trans-unit>
-      <trans-unit id="files-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
-      </trans-unit>
-      <trans-unit id="files-top-sort" datatype="html">
+      <trans-unit id="ui-sort" datatype="html">
         <source>sort</source>
         <target>sortieren</target>
       </trans-unit>
@@ -590,10 +578,6 @@
         <source>no</source>
         <target>nein</target>
       </trans-unit>
-      <trans-unit id="pause-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
-      </trans-unit>
       <trans-unit id="print-pause" datatype="html">
         <source>print paused</source>
         <target>Druck pausiert</target>
@@ -609,10 +593,6 @@
       <trans-unit id="print-filament" datatype="html">
         <source>filament</source>
         <target>filament</target>
-      </trans-unit>
-      <trans-unit id="adjust-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
       </trans-unit>
       <trans-unit id="adjust-hotend" datatype="html">
         <source>Hotend</source>
@@ -637,10 +617,6 @@
       <trans-unit id="offset-save" datatype="html">
         <source> save </source>
         <target>speichern</target>
-      </trans-unit>
-      <trans-unit id="babystep-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
       </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
