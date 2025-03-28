@@ -450,10 +450,6 @@ app-files .la-pacman div:last-of-type {
   background-color: var(--accent) !important;
 }
 
-app-files ngx-spinner > div {
-  background-color: transparent !important;
-}
-
 app-files .files__error {
   color: var(--red) !important;
 }
