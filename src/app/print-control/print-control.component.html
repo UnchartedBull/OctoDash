@@ -6,8 +6,8 @@
     <table class="top-bar" (click)="hideControlOverlay($event)">
       <tr>
         <td class="top-bar__back">
-          <img src="assets/back.svg" class="top-bar__back-icon" />
-          <ng-container i18n="@@control-back">back</ng-container>
+          <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+          <ng-container i18n="@@ui-back">back</ng-container>
         </td>
       </tr>
     </table>
@@ -36,8 +36,8 @@
     <table class="top-bar" (click)="backToControlScreen($event)">
       <tr>
         <td class="top-bar__back">
-          <img src="assets/back.svg" class="top-bar__back-icon" />
-          <ng-container i18n="@@pause-back">back</ng-container>
+          <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+          <ng-container i18n="@@ui-back">back</ng-container>
         </td>
       </tr>
     </table>
@@ -56,8 +56,8 @@
     <table class="top-bar">
       <tr>
         <td class="top-bar__back" (click)="backToControlScreen($event)" matRipple [matRippleUnbounded]="false">
-          <img src="assets/back.svg" class="top-bar__back-icon" />
-          <ng-container i18n="@@adjust-back">back</ng-container>
+          <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+          <ng-container i18n="@@ui-back">back</ng-container>
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>
@@ -180,8 +180,8 @@
     <table class="top-bar">
       <tr>
         <td class="top-bar__back" (click)="adjust($event)" matRipple [matRippleUnbounded]="false">
-          <img src="assets/back.svg" class="top-bar__back-icon" />
-          <ng-container i18n="@@babystep-back">back</ng-container>
+          <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+          <ng-container i18n="@@ui-back">back</ng-container>
         </td>
         <td class="top-bar__center"></td>
         <td class="top-bar__next"></td>

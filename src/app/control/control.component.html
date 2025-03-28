@@ -2,8 +2,8 @@
   <tr>
     <td class="top-bar__back" routerLink="/main-screen">
       <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-        <img src="assets/back.svg" class="top-bar__back-icon" />
-        <span i18n="@@control-back" class="top-bar__back">back</span>
+        <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+        <ng-container i18n="@@ui-back">back</ng-container>
       </span>
     </td>
     <td class="top-bar__center">
@@ -19,28 +19,28 @@
       <div class="control__jog-arrows__XY">
         <div class="control__jog-arrows__XY__wrapper">
           <fa-icon
-            [icon]="['fas', 'angle-up']"
+            icon="angle-up"
             class="control__icon control__icon-1"
             (click)="moveAxis('y', '-')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'angle-left']"
+            icon="angle-left"
             class="control__icon control__icon-2"
             (click)="moveAxis('x', '-')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'angle-right']"
+            icon="angle-right"
             class="control__icon control__icon-3"
             (click)="moveAxis('x', '+')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'angle-down']"
+            icon="angle-down"
             class="control__icon control__icon-4"
             (click)="moveAxis('y', '+')"
             matRipple
@@ -53,14 +53,14 @@
       <div class="control__jog-arrows--vertical">
         <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
-            [icon]="['fas', 'caret-up']"
+            icon="caret-up"
             class="control__icon control__icon-5"
             (click)="moveAxis('z', '+')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'caret-down']"
+            icon="caret-down"
             class="control__icon control__icon-6"
             (click)="moveAxis('z', '-')"
             matRipple
@@ -73,14 +73,14 @@
       <div class="control__jog-arrows--vertical" *ngIf="showExtruder">
         <div class="control__jog-arrows--vertical__wrapper">
           <fa-icon
-            [icon]="['fas', 'circle-chevron-up']"
+            icon="circle-chevron-up"
             class="control__icon control__icon-7"
             (click)="extrude('-')"
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
           <fa-icon
-            [icon]="['fas', 'circle-chevron-down']"
+            icon="circle-chevron-down"
             class="control__icon control__icon-8"
             (click)="extrude('+')"
             matRipple

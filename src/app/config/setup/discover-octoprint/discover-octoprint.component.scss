@@ -19,6 +19,9 @@
     border-radius: 1vw;
     margin-bottom: 2vh;
     padding: 2vh 2vw;
+    background-image: url('../../../../assets/connect.svg');
+    background-repeat: no-repeat;
+    background-position: right;
 
     &-disabled {
       pointer-events: none;
@@ -30,8 +33,6 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       font-size: 0.8rem;
-      float: left;
-      width: 90%;
     }
 
     &-details {
@@ -42,12 +43,6 @@
     &-upgrade {
       font-size: 0.55rem;
       font-weight: bold;
-    }
-
-    &-connect-icon {
-      height: 10vh;
-      float: right;
-      margin-top: 1.8vh;
     }
   }
 

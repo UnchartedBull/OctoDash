@@ -1,15 +1,15 @@
 <table class="top-bar">
   <tr>
     <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
-      <img src="assets/back.svg" class="top-bar__back-icon" />
-      <ng-container i18n="@@files-back">back</ng-container>
+      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+      <ng-container i18n="@@ui-back">back</ng-container>
     </td>
     <td class="top-bar__center">
       <img src="assets/folder.svg" class="top-bar__center-icon" />
     </td>
     <td class="top-bar__next" (click)="openSorting()" matRipple [matRippleUnbounded]="false" *ngIf="directory">
-      <ng-container i18n="@@files-top-sort">sort</ng-container>
-      <img src="assets/sort.svg" class="top-bar__next-icon" />
+      <ng-container i18n="@@ui-sort">sort</ng-container>
+      <fa-icon icon="arrow-up-short-wide" class="top-bar__next-icon" />
     </td>
     <td class="top-bar__next" *ngIf="!directory"></td>
   </tr>
@@ -95,7 +95,6 @@
 
 <div class="file" id="fileDetailView" (click)="closeDetails()">
   <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'" (click)="stopPropagation($event)">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
     <span class="file__name">{{ fileDetail.name }}</span>
     <span class="file__directory">{{ fileDetail.path }}</span>
     <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
@@ -114,36 +113,43 @@
     <table class="file__actions">
       <tr>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/upload.svg" class="file__actions-icon" (click)="loadFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="upload"
+            class="file__actions-icon"
+            (click)="loadFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/print.svg" class="file__actions-icon" (click)="printFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="print"
+            class="file__actions-icon file__actions-icon-large"
+            (click)="printFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
         <td>
-          <span matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
-            <img src="assets/delete.svg" class="file__actions-icon" (click)="deleteFile(fileDetail.path)" />
-          </span>
+          <fa-icon
+            icon="trash-can"
+            class="file__actions-icon"
+            (click)="deleteFile(fileDetail.path)"
+            matRipple
+            [matRippleUnbounded]="true"
+            [matRippleCentered]="true" />
         </td>
       </tr>
     </table>
   </div>
   <div class="file__wrapper file__loading" *ngIf="!fileDetail">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
     <span class="loading-dots" i18n="@@files-loading">loading details</span>
   </div>
-  <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">
-    <img src="assets/error.svg" class="file__close" (click)="closeDetails()" />
-    can't load file.
-  </div>
+  <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">can't load file.</div>
 </div>
 
 <div class="sorting" id="sortingView" *ngIf="showSorting" (click)="closeSorting()">
   <div class="sorting-wrapper" (click)="stopPropagation($event)">
-    <img src="assets/error.svg" class="sorting-close" (click)="closeSorting()" />
     <span class="sorting-heading" i18n="@@files-sort">sort files</span>
     <table class="sorting-selection">
       <tr>

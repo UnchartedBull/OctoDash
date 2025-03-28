@@ -80,13 +80,13 @@
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
     class="job-info__actions-item-print">
-    <img src="assets/print.svg" class="job-info__actions-item-print-icon" />
+    <fa-icon icon="print" class="job-info__actions-item-print-icon" />
   </span>
   <br />
 
   <div class="job-info__print-details">
     <span *ngIf="hasProperty(jobStatus, 'estimatedPrintTime') && hasProperty(jobStatus, 'estimatedEndTime')">
-      <fa-icon [icon]="['fas', 'clock']" class="job-info__print-details-icon"></fa-icon>
+      <fa-icon icon="clock" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">
         {{ jobStatus.estimatedPrintTime.value }}{{ jobStatus.estimatedPrintTime.unit }}
       </span>
@@ -96,7 +96,7 @@
     </span>
 
     <span *ngIf="hasProperty(jobStatus, 'filamentAmount')">
-      <fa-icon [icon]="['fas', 'dharmachakra']" class="job-info__print-details-icon"></fa-icon>
+      <fa-icon icon="dharmachakra" class="job-info__print-details-icon"></fa-icon>
       <span class="job-info__print-details-value">
         {{ jobStatus.filamentAmount }}
         <ng-container i18n="@@job-g">g</ng-container>

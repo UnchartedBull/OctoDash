@@ -1,25 +1,24 @@
 <div class="settings">
   <div class="settings-wrapper" [ngClass]="{ 'settings-wrapper-fadeout': fadeOutAnimation }" (click)="hideSettings()">
     <div class="settings-container" (click)="stopPropagation($event)">
-      <img src="assets/error.svg" class="settings__close" (click)="hideSettings()" />
       <div class="settings__content" #settingsMain>
         <span class="settings__heading" i18n="@@settings">settings</span>
         <ul class="settings__list">
           <li (click)="changePage(1, 0, 'forward')">
             <span i18n="@@settings-general" class="settings__section-heading">general</span>
-            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            <fa-icon icon="chevron-right"></fa-icon>
           </li>
           <li (click)="changePage(2, 0, 'forward')">
             <span i18n="@@settings-octodash" class="settings__section-heading">octodash</span>
-            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            <fa-icon icon="chevron-right"></fa-icon>
           </li>
           <li (click)="changePage(3, 0, 'forward')">
             <span i18n="@@settings-plugins" class="settings__section-heading">plugins</span>
-            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            <fa-icon icon="chevron-right"></fa-icon>
           </li>
           <li (click)="changePage(4, 0, 'forward')">
             <span i18n="@@settings-about" class="settings__section-heading">about</span>
-            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            <fa-icon icon="chevron-right"></fa-icon>
           </li>
         </ul>
         <span
@@ -31,13 +30,13 @@
         >
         <span class="settings__save" (click)="updateConfig()">save</span>
         <span class="settings__made">
-          made with <fa-icon [icon]="['fas', 'heart']" class="settings__made-heart"></fa-icon>
+          made with <fa-icon icon="heart" class="settings__made-heart"></fa-icon>
           by UnchartedBull + contributors
         </span>
       </div>
       <div class="settings__content settings__content-inactive" #settingsGeneral>
         <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
-          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
           <span i18n="@@settings-general-menu">general</span>
         </span>
         <div class="settings__scroll">
@@ -278,7 +277,7 @@
       </div>
       <div class="settings__content settings__content-inactive" #settingsOctoDash>
         <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
-          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
           octodash
         </span>
         <div class="settings__scroll">
@@ -442,7 +441,7 @@
                 </td>
                 <td>
                   <fa-icon
-                    [icon]="['fas', config.octodash.customActions[number].icon]"
+                    [icon]="config.octodash.customActions[number].icon"
                     class="settings__custom-action-icon"
                     [style.color]="config.octodash.customActions[number].color"></fa-icon>
                 </td>
@@ -483,7 +482,7 @@
       </div>
       <div class="settings__content settings__content-inactive" #settingsPlugins>
         <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
-          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
           <span i18n="@@settings-plugins">plugins</span>
         </span>
         <div class="settings__scroll">
@@ -713,7 +712,7 @@
       </div>
       <div class="settings__content settings__content-inactive" #settingsCredits>
         <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
-          <fa-icon [icon]="['fas', 'chevron-left']" class="settings__heading-back"></fa-icon>
+          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
           <span i18n="@@about">about</span>
         </span>
         <div class="settings__scroll">
@@ -796,7 +795,7 @@
           <hr />
           <p class="settings_reset-button" (click)="showReset()">
             <span i18n="@@reset-config">Reset Config</span>
-            <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+            <fa-icon icon="chevron-right"></fa-icon>
           </p>
         </div>
       </div>

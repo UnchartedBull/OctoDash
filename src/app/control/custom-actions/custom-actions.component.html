@@ -8,7 +8,7 @@
     i18n="@@should-not-happen">
     That shouldn't happen ...
   </iframe>
-  <img src="assets/error.svg" class="i-frame__close" (click)="hideIFrame()" />
+  <fa-icon icon="xmark" class="i-frame__close" (click)="hideIFrame()" />
 </div>
 
 <div class="custom-actions">
@@ -20,7 +20,7 @@
     matRipple
     [matRippleUnbounded]="false">
     <fa-icon
-      [icon]="['fas', customAction.icon]"
+      [icon]="customAction.icon"
       class="custom-actions__action-icon"
       [style.color]="customAction.color"></fa-icon>
   </div>
@@ -31,10 +31,10 @@
     <h1 i18n="@@are-you-sure">are you sure?</h1>
     <p class="confirm__sub-heading" i18n="@@confirm-exec">do you want to execute the following command?</p>
     <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
-    <img
-      class="confirm__icon"
-      src="assets/confirm-small.svg"
+    <fa-icon
+      icon="circle-check"
+      class="confirm__icon confirm__icon-yes"
       (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)" />
-    <img class="confirm__icon" src="assets/cancel-small.svg" (click)="hideConfirm()" />
+    <fa-icon icon="circle-xmark" class="confirm__icon confirm__icon-no" (click)="hideConfirm()" />
   </div>
 </div>

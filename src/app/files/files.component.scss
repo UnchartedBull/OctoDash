@@ -1,13 +1,6 @@
-.top-bar {
-  &__next-icon {
-    width: 6.5vw;
-    vertical-align: -3.2vh;
-  }
-
-  &__center-icon {
-    width: 10vw;
-    margin-bottom: -6.5vh;
-  }
+.top-bar__center-icon {
+  width: 10vw;
+  margin-bottom: -6.5vh;
 }
 
 .breadcrumbs {
@@ -57,7 +50,7 @@
     height: 77vh;
     position: fixed;
     left: 2vw;
-    top: 23vh;
+    top: 20vh;
     z-index: 2;
     pointer-events: none;
     background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
@@ -230,6 +223,11 @@
     width: 90%;
     margin-left: 5%;
     margin-top: 1vh;
+    font-size: 10vh;
+
+    &-icon-large {
+      font-size: 14vh;
+    }
 
     & td {
       width: 33.3%;
@@ -242,35 +240,25 @@
 
       &:first-of-type {
         text-align: left;
+        color: #0097e6;
 
         & span {
           margin-top: 4vh;
           position: absolute;
           margin-left: 0;
         }
-
-        & img {
-          height: 10vh;
-        }
       }
 
       &:last-of-type {
         text-align: right;
+        color: #c23616;
 
         & span {
           margin-top: 4.5vh;
           position: absolute;
           margin-left: -5vw;
         }
-
-        & img {
-          height: 10vh;
-        }
       }
-    }
-
-    & img {
-      height: 17vh;
     }
   }
 }
