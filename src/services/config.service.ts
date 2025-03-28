@@ -1,13 +1,19 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { map } from 'rxjs';
 
+import defaultConfig from '../helper/config.default.json';
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
-import { ElectronService } from './electron.service';
-import { NotificationService } from './notification.service';
 
 interface HttpHeader {
   headers: HttpHeaders;
+}
+
+interface OctoPrintSettings {
+  plugins: {
+    octodash: Config;
+  };
 }
 
 @Injectable({
@@ -16,49 +22,38 @@ interface HttpHeader {
 export class ConfigService {
   private config: Config;
   private valid: boolean;
-  private errors: string[];
   private update = false;
   private initialized = false;
 
   private httpHeaders: HttpHeader;
 
-  public constructor(
-    private notificationService: NotificationService,
-    private electronService: ElectronService,
-    private zone: NgZone,
-  ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.error(
-        error,
-        $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-        true,
-      );
-    });
+  private http: HttpClient = inject(HttpClient);
 
-    this.electronService.on('configPass', () => {
-      this.zone.run(() => {
-        this.valid = true;
-        this.generateHttpHeaders();
-        this.initialized = true;
-      });
-    });
-    this.electronService.on('configFail', (_, errors) => {
-      this.zone.run(() => {
-        this.valid = false;
-        this.errors = errors;
-        console.error(errors);
-        this.initialized = true;
-      });
-    });
+  public constructor(private zone: NgZone) {
+    this.getConfig();
+  }
 
-    this.electronService.send('readConfig');
+  private getConfig() {
+    this.http
+      .get<OctoPrintSettings>('http://localhost:8080/api/settings')
+      .pipe(
+        map(response => {
+          return response.plugins.octodash;
+        }),
+      )
+      .subscribe((config: Config) => {
+        this.initialize({ ...defaultConfig, ...config });
+        this.zone.run(() => {
+          this.initialized = true;
+          this.generateHttpHeaders();
+          this.valid = true;
+          console.log(this.config);
+        });
+      });
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -81,12 +76,11 @@ export class ConfigService {
   }
 
   public getErrors(): string[] {
-    return this.errors;
+    return [];
   }
 
-  public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public saveConfig(config: Config): void {}
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
