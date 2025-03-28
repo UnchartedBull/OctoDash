@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IpcRenderer } from 'electron';
 
-import { NotificationType } from './model';
-import { NotificationService } from './notification/notification.service';
+import { NotificationType } from '../model';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',

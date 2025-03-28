@@ -2,9 +2,9 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from './services/config.service';
-import { PrinterEvent } from './model/event.model';
-import { SocketService } from './services/socket/socket.service';
+import { ConfigService } from './config.service';
+import { PrinterEvent } from '../model/event.model';
+import { SocketService } from './socket/socket.service';
 
 @Injectable()
 export class EventService implements OnDestroy {

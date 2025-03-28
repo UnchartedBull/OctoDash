@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { AppService } from '../app.service';
-import { ElectronService } from '../electron.service';
+import { AppService } from '../services/app.service';
+import { ElectronService } from '../services/electron.service';
 import { SystemService } from '../services/system/system.service';
 
 @Component({

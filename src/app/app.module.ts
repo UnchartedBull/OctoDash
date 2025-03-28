@@ -11,7 +11,7 @@ import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions 
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { AppService } from './app.service';
+import { AppService } from './services/app.service';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ConfigService } from './services/config.service';
 import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
@@ -24,8 +24,8 @@ import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
-import { ConversionService } from './conversion.service';
-import { EventService } from './event.service';
+import { ConversionService } from './services/conversion.service';
+import { EventService } from './services/event.service';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { ChooseToolComponent } from './filament/choose-tool/choose-tool.component';
@@ -41,7 +41,7 @@ import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
-import { NotificationService } from './notification/notification.service';
+import { NotificationService } from './services/notification.service';
 import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { ResetComponent } from './reset/reset.component';

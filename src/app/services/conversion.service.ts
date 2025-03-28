@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ConfigService } from './services/config.service';
+import { ConfigService } from './config.service';
 
 @Injectable()
 export class ConversionService {

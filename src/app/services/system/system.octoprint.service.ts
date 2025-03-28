@@ -6,7 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 import { ConfigService } from '../../services/config.service';
 import { NotificationType, SocketAuth, TestAddress } from '../../model';
 import { ConnectCommand, OctoprintLogin } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { SystemService } from './system.service';
 
 @Injectable()

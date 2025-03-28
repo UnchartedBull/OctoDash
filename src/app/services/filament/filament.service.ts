@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { ConfigService } from '../../services/config.service';
 import { FilamentSpool, NotificationType } from '../../model';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()

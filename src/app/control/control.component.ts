@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { NotificationType, PrinterStatus } from '../model';
 import { OctoprintPrinterProfile } from '../model/octoprint';
-import { NotificationService } from '../notification/notification.service';
+import { NotificationService } from '../services/notification.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
 

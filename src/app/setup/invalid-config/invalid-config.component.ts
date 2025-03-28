@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ElectronService } from '../../electron.service';
+import { ElectronService } from '../../services/electron.service';
 import { ConfigService } from '../../services/config.service';
 
 @Component({

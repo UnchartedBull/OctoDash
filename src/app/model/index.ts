@@ -1,4 +1,5 @@
 export * from './auth.model';
+export * from './config.model';
 export * from './enclosure.model';
 export * from './event.model';
 export * from './filament.model';

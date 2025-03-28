@@ -5,10 +5,10 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { ConfigService } from '../../services/config.service';
-import { ConversionService } from '../../conversion.service';
+import { ConversionService } from '../../services/conversion.service';
 import { Directory, File, Folder, NotificationType } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { FilesService } from './files.service';
 
 @Injectable({

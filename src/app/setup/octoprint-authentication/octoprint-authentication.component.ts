@@ -4,7 +4,7 @@ import { interval } from 'rxjs';
 import { NotificationType } from 'src/app/model';
 
 import { TokenSuccess } from '../../model/octoprint/auth.model';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { OctoprintAuthenticationService } from './octoprint-authentication.service';
 
 @Component({

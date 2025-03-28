@@ -6,7 +6,7 @@ import { catchError, pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { ConfigService } from '../../services/config.service';
-import { ConversionService } from '../../conversion.service';
+import { ConversionService } from '../../services/conversion.service';
 import {
   Duration,
   JobStatus,
@@ -26,7 +26,7 @@ import {
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
 } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../system/system.service';
 import { SocketService } from './socket.service';
 

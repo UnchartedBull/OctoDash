@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../services/config.service';
-import { EventService } from '../event.service';
+import { EventService } from '../services/event.service';
 import { FilesService } from '../services/files/files.service';
 
 @Component({

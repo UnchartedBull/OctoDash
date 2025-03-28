@@ -18,7 +18,7 @@ import {
   TemperatureHotendCommand,
   ToolCommand,
 } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { PrinterService } from './printer.service';
 
 export const minimumVersion = '1.9.0';

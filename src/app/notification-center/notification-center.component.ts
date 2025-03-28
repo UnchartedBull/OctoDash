@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Notification } from '../model';
-import { NotificationService } from '../notification/notification.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-notification-center',

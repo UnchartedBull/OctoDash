@@ -6,7 +6,7 @@ import { NotificationType } from 'src/app/model';
 
 import { ConfigService } from '../../services/config.service';
 import { JobCommand } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { JobService } from './job.service';
 
 @Injectable()

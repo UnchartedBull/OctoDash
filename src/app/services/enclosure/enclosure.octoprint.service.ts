@@ -18,7 +18,7 @@ import {
   TuyaCommand,
   WemoCommand,
 } from '../../model/octoprint';
-import { NotificationService } from '../../notification/notification.service';
+import { NotificationService } from '../../services/notification.service';
 import { EnclosureService } from './enclosure.service';
 
 @Injectable()
