@@ -11,13 +11,13 @@ import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions 
 
 import components from './components';
 import { AppComponent } from './components/app.component';
+import directives from './directives';
+import pipes from './pipes';
 import services from './services';
 import { AppRoutingModule } from './app.routing.module';
-import { LongPress } from './long-press.directive';
-import { URLSafePipe } from './url.pipe';
 
 @NgModule({
-  declarations: [...components, LongPress, URLSafePipe],
+  declarations: [...components, ...directives, ...pipes],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
