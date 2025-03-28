@@ -1484,63 +1484,49 @@
         <source>HTTP Error 403 - FORBIDDEN</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-text" datatype="html">
         <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">123</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-unknown-heading" datatype="html">
         <source>Unknown HTTP Error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">130</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="unit-h-1" datatype="html">
+      <trans-unit id="unit-hours-short" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">304</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="unit-h-2" datatype="html">
-        <source>h</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">314</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="unit-h-3" datatype="html">
-        <source>h</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">322</context>
+          <context context-type="linenumber">337</context>
         </context-group>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">390</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">408</context>
+          <context context-type="linenumber">416</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-answer-prompt" datatype="html">
         <source>Can&apos;t answer prompt!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">433</context>
+          <context context-type="linenumber">441</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
