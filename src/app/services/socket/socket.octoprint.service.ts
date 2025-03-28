@@ -304,11 +304,22 @@ export class OctoPrintSocketService implements SocketService {
     this.jobStatus.file = file;
     this.jobStatus.fullPath = '/' + message.current.job?.file?.origin + '/' + message.current.job?.file?.path;
     this.jobStatus.progress = Math.round(message.current.progress?.completion);
-    this.jobStatus.timePrinted = this.mapSecondsToDuration(message.current.progress.printTime);
+
+    this.extractJobStatusTime(message);
 
     if (message.current.job.filament) {
       this.jobStatus.filamentAmount = this.getTotalFilamentWeight(message.current.job.filament);
     }
+
+    if (!this.configService.isDisplayLayerProgressEnabled() && message.current.currentZ) {
+      this.jobStatus.zHeight = message.current.currentZ;
+    }
+
+    this.jobStatusSubject.next(this.jobStatus);
+  }
+
+  private extractJobStatusTime(message: OctoprintSocketCurrent): void {
+    this.jobStatus.timePrinted = this.mapSecondsToDuration(message.current.progress.printTime);
 
     if (message.current.progress.printTimeLeft) {
       this.jobStatus.timeLeft = this.mapSecondsToDuration(message.current.progress.printTimeLeft);
@@ -318,12 +329,6 @@ export class OctoPrintSocketService implements SocketService {
     if (message.current.job.estimatedPrintTime) {
       this.jobStatus.estimatedPrintTime = this.mapSecondsToDuration(message.current.job.estimatedPrintTime);
     }
-
-    if (!this.configService.isDisplayLayerProgressEnabled() && message.current.currentZ) {
-      this.jobStatus.zHeight = message.current.currentZ;
-    }
-
-    this.jobStatusSubject.next(this.jobStatus);
   }
 
   private mapSecondsToDuration(seconds: number): Duration {
