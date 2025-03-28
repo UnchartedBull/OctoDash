@@ -1,13 +1,10 @@
-.i-frame {
-  display: none;
+.iframe {
   width: 100%;
   height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 50;
-  transition: opacity ease-in-out 0.5s;
-  opacity: 0;
   background: #2a2f39;
   font-weight: 500;
   font-size: 5vw;
