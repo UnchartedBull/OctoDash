@@ -9,42 +9,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import lottiePlayer from 'lottie-web';
 import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions } from 'ngx-lottie';
 
-import { AppComponent } from './app.component';
+import components from './components';
+import { AppComponent } from './components/app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { AppService } from './services/app.service';
-import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ConfigService } from './services/config.service';
-import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
-import { DiscoverOctoprintComponent } from './setup/discover-octoprint/discover-octoprint.component';
-import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
-import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
-import { PersonalizationComponent } from './setup/personalization/personalization.component';
-import { PluginsComponent } from './setup/plugins/plugins.component';
-import { ConfigSetupComponent } from './setup/setup.component';
-import { WelcomeComponent } from './setup/welcome/welcome.component';
-import { ControlComponent } from './control/control.component';
-import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 import { ConversionService } from './services/conversion.service';
 import { EventService } from './services/event.service';
-import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
-import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
-import { ChooseToolComponent } from './filament/choose-tool/choose-tool.component';
-import { FilamentComponent } from './filament/filament.component';
-import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.component';
-import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
-import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
-import { FilesComponent } from './files/files.component';
-import { HeightProgressComponent } from './job-status/height-progress/height-progress.component';
-import { JobStatusComponent } from './job-status/job-status.component';
 import { LongPress } from './long-press.directive';
-import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
-import { MainScreenComponent } from './main-screen/main-screen.component';
-import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
-import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './services/notification.service';
-import { NotificationCenterComponent } from './notification-center/notification-center.component';
-import { PrintControlComponent } from './print-control/print-control.component';
-import { ResetComponent } from './reset/reset.component';
 import { EnclosureOctoprintService } from './services/enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './services/enclosure/enclosure.service';
 import { FilamentManagerOctoprintService } from './services/filament/filament-manager.octoprint.service';
@@ -60,52 +33,10 @@ import { OctoPrintSocketService } from './services/socket/socket.octoprint.servi
 import { SocketService } from './services/socket/socket.service';
 import { SystemOctoprintService } from './services/system/system.octoprint.service';
 import { SystemService } from './services/system/system.service';
-import { SettingsComponent } from './settings/settings.component';
-import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
-import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
-import { StandbyComponent } from './standby/standby.component';
-import { UpdateComponent } from './update/update.component';
 import { URLSafePipe } from './url.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BottomBarComponent,
-    ChooseFilamentComponent,
-    ChooseToolComponent,
-    ConfigInvalidComponent,
-    ConfigSetupComponent,
-    ControlComponent,
-    DiscoverOctoprintComponent,
-    ExtruderInformationComponent,
-    FilamentComponent,
-    FilesComponent,
-    JobStatusComponent,
-    HeightProgressComponent,
-    LongPress,
-    MainMenuComponent,
-    MainScreenComponent,
-    NotificationComponent,
-    OctoprintAuthenticationComponent,
-    PersonalizationComponent,
-    PluginsComponent,
-    PrintControlComponent,
-    PrinterStatusComponent,
-    SettingsComponent,
-    SettingsIconComponent,
-    StandbyComponent,
-    UpdateComponent,
-    ResetComponent,
-    URLSafePipe,
-    WelcomeComponent,
-    HeatNozzleComponent,
-    MoveFilamentComponent,
-    ChangeFilamentComponent,
-    PurgeFilamentComponent,
-    CustomActionsComponent,
-    ToggleSwitchComponent,
-    NotificationCenterComponent,
-  ],
+  declarations: [...components, LongPress, URLSafePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
