@@ -849,17 +849,9 @@
         <source>Unknown HTTP Error</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="unit-h-1" datatype="html">
+      <trans-unit id="unit-hours-short" datatype="html">
         <source>h</source>
-        <target>h</target>
-      </trans-unit>
-      <trans-unit id="unit-h-2" datatype="html">
-        <source>h</source>
-        <target>h</target>
-      </trans-unit>
-      <trans-unit id="unit-h-3" datatype="html">
-        <source>h</source>
-        <target>h</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
@@ -1301,17 +1293,17 @@
         </source>
         <target>v installieret</target>
       </trans-unit>
-      <trans-unit id="update-reboot" datatype="html">
-        <source>would you like to reboot now to activate the latest version?</source>
-        <target>willst du einen Neustart ausführen um die neuste Version zu nutzen?</target>
+      <trans-unit id="update-restart" datatype="html">
+        <source>would you like to restart OctoDash now?</source>
+        <target></target>
       </trans-unit>
-      <trans-unit id="reboot-no" datatype="html">
+      <trans-unit id="restart-no" datatype="html">
         <source> no </source>
-        <target>nein</target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="reboot-yes" datatype="html">
+      <trans-unit id="restart-yes" datatype="html">
         <source> yes </source>
-        <target>ja</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
         <source>Can't initiate update!</source>

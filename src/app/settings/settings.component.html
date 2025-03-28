@@ -728,6 +728,7 @@
           <button
             class="settings__about-update settings__about-update-not-available"
             *ngIf="!(service.updateAvailable || service.dev)"
+            (click)="showUpdate()"
             i18n="@@about-no-update">
             up to date
           </button>

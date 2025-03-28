@@ -6,6 +6,7 @@ import { PersonalizationService } from './personalization.service';
   selector: 'app-config-setup-personalization',
   templateUrl: './personalization.component.html',
   styleUrls: ['./personalization.component.scss', '../setup.component.scss'],
+  standalone: false,
 })
 export class PersonalizationComponent implements OnInit {
   @Input() printerName: string;

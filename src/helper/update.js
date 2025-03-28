@@ -101,3 +101,8 @@ export function sendVersionInfo(window, app) {
     version: app.getVersion(),
   });
 }
+
+export function restartOctoDash(app) {
+  app.relaunch();
+  app.exit();
+}

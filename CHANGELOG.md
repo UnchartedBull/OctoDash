@@ -1,5 +1,30 @@
 # Changelog
 
+## [v2.4.2](https://github.com/UnchartedBull/OctoDash/tree/v2.4.2) (2025-03-26)
+
+> [!IMPORTANT]
+> OctoDash v2.4.2 requires OctoPrint v1.9.0 or higher.
+
+This release improves the user experience when the printer has a shared nozzle.
+
+## Update Log
+
+- Add support for shared nozzle ([#4853](https://github.com/UnchartedBull/OctoDash/pull/4853))
+  - OctoDash will no longer display the same temperature for all tools when the printer uses a shared nozzle
+- Ensure filament changing always uses the selected tool ([#4854](https://github.com/UnchartedBull/OctoDash/pull/4854))
+  - In some cases, filament changing would only change filament for Tool 0, even when selecting a different tool
+- Improve update flow ([#4861](https://github.com/UnchartedBull/OctoDash/pull/4861))
+  - The updater now restarts _OctoDash,_ and not the host system running OctoPrint
+  - Users may now "update" OctoDash even if no update is available (to improve the experience for beta testers)
+- Fix config for &lt; 6 custom actions ([#4874](https://github.com/UnchartedBull/OctoDash/pull/4874))
+  - The config screen can now load if less than six custom actions are configured (possible via OctoDash Companion)
+- Use different icons for control page ([#4852](https://github.com/UnchartedBull/OctoDash/pull/4852))
+  - The control page now has better clarity about what each icon means (especially for extrusion and retraction)
+- Change the default plugins ([#4862](https://github.com/UnchartedBull/OctoDash/pull/4862))
+  - To better reflect which plugins users actually use, the plugins enabled by default have been updated
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.4.1...v2.4.2)
+
 ## [v2.4.1](https://github.com/UnchartedBull/OctoDash/tree/v2.4.1) (2025-03-20)
 
 > [!IMPORTANT]

@@ -7,6 +7,7 @@ import { ConfigService } from '../../config/config.service';
   selector: 'app-settings-icon',
   templateUrl: './settings-icon.component.html',
   styleUrls: ['./settings-icon.component.scss'],
+  standalone: false,
 })
 export class SettingsIconComponent {
   public constructor(

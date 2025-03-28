@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import _ from 'lodash-es';
+import * as _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { ConfigService } from '../config/config.service';
@@ -13,6 +13,7 @@ import { FilesService } from '../services/files/files.service';
   selector: 'app-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.scss'],
+  standalone: false,
 })
 export class FilesComponent {
   public currentFolder: string;

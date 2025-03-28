@@ -12,6 +12,7 @@ import { SocketService } from '../services/socket/socket.service';
   selector: 'app-bottom-bar',
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss'],
+  standalone: false,
 })
 export class BottomBarComponent implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
@@ -45,7 +46,7 @@ export class BottomBarComponent implements OnDestroy {
     } else {
       this.subscriptions.add(
         this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-          if (printerStatus.chamber.current > 0) {
+          if (printerStatus.chamber?.current > 0) {
             const chamberReading: TemperatureReading = {
               temperature: printerStatus.chamber.current,
               humidity: 0,

@@ -8,6 +8,7 @@ import { SocketService } from '../../services/socket/socket.service';
   selector: 'app-height-progress',
   templateUrl: './height-progress.component.html',
   styleUrls: ['./height-progress.component.scss'],
+  standalone: false,
 })
 export class HeightProgressComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();

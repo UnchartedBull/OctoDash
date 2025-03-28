@@ -12,6 +12,7 @@ import { SystemService } from '../services/system/system.service';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  standalone: false,
 })
 export class SettingsComponent implements OnInit, OnDestroy {
   @Output() closeFunction = new EventEmitter<void>();
@@ -52,6 +53,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    const currentCommands = this.config.octodash.customActions.length;
+    for (let i = currentCommands; i < 6; i++) {
+      this.config.octodash.customActions.push({
+        icon: 'mdi mdi-plus',
+        command: '',
+        color: '#ffffff',
+        confirm: false,
+        exit: false,
+      });
+    }
     setTimeout((): void => {
       this.pages = [
         this.settingsMain.nativeElement,

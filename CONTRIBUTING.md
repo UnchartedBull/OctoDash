@@ -26,7 +26,7 @@ To setup a local environment, perform the following steps:
 
 To test locally in a dev environment, simply run `npm start`. The app will automatically reload when changes are made.
 
-If you want to package OctoDash so you can install it on your target device, run `npm run pack`. This will generate `.deb` files in the `package/` folder, which you can upload to your target device for installation and testing in a production environment.
+If you want to package OctoDash so you can install it on your target device, run `npm run build:pack`. This will generate `.deb` files in the `package/` folder, which you can upload to your target device for installation and testing in a production environment.
 
 ## Localization
 

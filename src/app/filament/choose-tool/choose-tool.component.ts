@@ -9,6 +9,7 @@ import { SocketService } from '../../services/socket/socket.service';
   selector: 'app-filament-choose-tool',
   templateUrl: './choose-tool.component.html',
   styleUrls: ['./choose-tool.component.scss', '../filament.component.scss'],
+  standalone: false,
 })
 export class ChooseToolComponent {
   public toolCount = 1;

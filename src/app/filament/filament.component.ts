@@ -5,7 +5,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { take } from 'rxjs/operators';
 
 import { ConfigService } from '../config/config.service';
-import { FilamentSpool, PrinterStatus } from '../model';
+import { FilamentSpool, PrinterExtruders, PrinterProfile, PrinterStatus } from '../model';
 import { FilamentService } from '../services/filament/filament.service';
 import { PrinterService } from '../services/printer/printer.service';
 import { SocketService } from '../services/socket/socket.service';
@@ -15,6 +15,7 @@ import { SocketService } from '../services/socket/socket.service';
   templateUrl: './filament.component.html',
   styleUrls: ['./filament.component.scss'],
   providers: [FilamentService],
+  standalone: false,
 })
 export class FilamentComponent implements OnInit, OnDestroy {
   private totalPages = 6;
@@ -22,6 +23,7 @@ export class FilamentComponent implements OnInit, OnDestroy {
 
   public page: number;
   public showCheckmark = false;
+  public extruderInfo: PrinterExtruders;
   public selectedTool = 0;
   public selectedSpool: FilamentSpool;
   public checkmarkOptions: AnimationOptions = {
@@ -45,15 +47,21 @@ export class FilamentComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    if (this.hotendPreviousTemperature.length === 1) {
-      if (!this.configService.isFilamentManagerUsed()) {
-        this.setPage(2);
-        return;
-      }
-      this.setPage(1);
-      return;
-    }
-    this.setPage(0);
+    this.printerService.getActiveProfile().subscribe({
+      next: (printerProfile: PrinterProfile) => {
+        this.extruderInfo = printerProfile.extruder;
+
+        if (this.extruderInfo.count === 1) {
+          if (!this.configService.isFilamentManagerUsed()) {
+            this.setPage(2);
+            return;
+          }
+          this.setPage(1);
+          return;
+        }
+        this.setPage(0);
+      },
+    });
   }
 
   public ngOnDestroy(): void {
