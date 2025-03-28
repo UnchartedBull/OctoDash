@@ -247,15 +247,6 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature {
   width: 59.5vw !important;
 }
 
-app-filament .scroll__thumb-inactive {
-  background-color: rgb(127 143 166 / 30%);
-  width: 3.7vw;
-  height: 61.7vh !important;
-  position: fixed;
-  right: 2.5vw !important;
-  top: 35.8vh !important;
-}
-
 /**************************************** FILE ****************************************/
 
 .file {
@@ -347,15 +338,6 @@ app-filament .scroll__thumb-inactive {
   padding-top: 4vh !important;
   width: 100vw !important;
   text-overflow: ellipsis;
-}
-
-app-files .scroll__thumb-inactive {
-  background-color: rgb(127 143 166 / 30%);
-  width: 3.7vw;
-  height: 71.4vh !important;
-  position: fixed;
-  right: 2.5vw !important;
-  top: 27.8vh !important;
 }
 
 /**************************************** PRINTER STATUS ****************************************/

@@ -4,15 +4,7 @@
   width: 6vw !important;
 }
 
-.scroll__thumb-inactive {
-  width: 6vw !important;
-}
-
 /**** Resize file list ****/
-
-app-files .scroll__thumb-inactive {
-  top: 27vh !important;
-}
 
 .files {
   height: 73vh !important;
@@ -40,10 +32,6 @@ app-files .scroll__thumb-inactive {
 }
 
 /**** Resize filament list ****/
-
-app-filament .scroll__thumb-inactive {
-  top: 35.5vh !important;
-}
 
 .filament tr {
   width: 86vw !important;

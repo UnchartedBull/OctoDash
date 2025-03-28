@@ -273,98 +273,98 @@
         <source>OctoDash Companion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">8,13</context>
+          <context context-type="linenumber">7,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">16,20</context>
+          <context context-type="linenumber">15,19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-enclosure" datatype="html">
         <source>Enclosure</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">22,27</context>
+          <context context-type="linenumber">21,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-filament-manager" datatype="html">
         <source>Filament Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">29,35</context>
+          <context context-type="linenumber">28,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager (Beta)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">36,42</context>
+          <context context-type="linenumber">35,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">44,50</context>
+          <context context-type="linenumber">43,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">51,55</context>
+          <context context-type="linenumber">50,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">57,61</context>
+          <context context-type="linenumber">56,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-opom" datatype="html">
         <source>Ophom (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">62,67</context>
+          <context context-type="linenumber">61,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source> TPLink SmartPlug </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">69,73</context>
+          <context context-type="linenumber">68,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
         <source> Tuya SmartPlug </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">74,78</context>
+          <context context-type="linenumber">73,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source> Tasmota </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">80,84</context>
+          <context context-type="linenumber">79,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source> Tasmota MQTT </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">86,90</context>
+          <context context-type="linenumber">85,89</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source> Wemo </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/config/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">91,94</context>
+          <context context-type="linenumber">90,93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-back" datatype="html">
@@ -609,21 +609,21 @@
         <source>g left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">26,31</context>
+          <context context-type="linenumber">26,33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-spools" datatype="html">
         <source>no filament spools found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">35,39</context>
+          <context context-type="linenumber">34,38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="loading-spools" datatype="html">
         <source>loading spools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">39,41</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
@@ -777,84 +777,84 @@
         <source>mb</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">104,106</context>
+          <context context-type="linenumber">103,105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-h-2" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">107,108</context>
+          <context context-type="linenumber">106,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-g-2" datatype="html">
         <source>g</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">110,114</context>
+          <context context-type="linenumber">109,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-loading" datatype="html">
         <source>loading details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">146,148</context>
+          <context context-type="linenumber">145,147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-sort" datatype="html">
         <source>sort files</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">153,157</context>
+          <context context-type="linenumber">152,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-sort-by" datatype="html">
         <source>sort by</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">157,159</context>
+          <context context-type="linenumber">156,158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-name" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">163,166</context>
+          <context context-type="linenumber">162,165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-date" datatype="html">
         <source>Date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">170,173</context>
+          <context context-type="linenumber">169,172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-size" datatype="html">
         <source>Size</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">177,182</context>
+          <context context-type="linenumber">176,181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-order" datatype="html">
         <source>order</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">182,184</context>
+          <context context-type="linenumber">181,183</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-ascending" datatype="html">
         <source>Ascending</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">188,191</context>
+          <context context-type="linenumber">187,190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-descending" datatype="html">
         <source>Descending</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/files/files.component.html</context>
-          <context context-type="linenumber">195,202</context>
+          <context context-type="linenumber">194,201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-file-folder" datatype="html">
