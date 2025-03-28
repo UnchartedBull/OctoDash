@@ -381,7 +381,7 @@
           "type": "array",
           "default": [
             {
-              "icon": "home",
+              "icon": "house",
               "command": "G28",
               "color": "#dcdde1",
               "confirm": false,
@@ -395,7 +395,7 @@
               "exit": true
             },
             {
-              "icon": "fire-alt",
+              "icon": "fire-flame-curved",
               "command": "M140 S50; M104 S185",
               "color": "#e1b12c",
               "confirm": false,
@@ -409,7 +409,7 @@
               "exit": true
             },
             {
-              "icon": "redo-alt",
+              "icon": "rotate-right",
               "command": "[!RELOAD]",
               "color": "#7f8fa6",
               "confirm": true,
