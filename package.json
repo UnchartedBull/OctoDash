@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "license": "Apache 2.0",
   "homepage": "https://github.com/UnchartedBull/OctoDash",
   "author": {
@@ -112,17 +112,15 @@
     "@angular/language-service": "^19.2.2",
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^9.23.0",
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.12",
     "@types/mime-types": "^2.1.4",
     "@types/node": "22.13.14",
-    "@typescript-eslint/eslint-plugin": "~8.27.0",
-    "@typescript-eslint/parser": "~8.27.0",
     "codelyzer": "~6.0.2",
-    "electron": "~35.0.2",
+    "electron": "~35.1.2",
     "electron-builder": "~26.0.12",
-    "eslint": "9.22.0",
+    "eslint": "9.23.0",
     "eslint-plugin-import": "~2.31.0",
     "eslint-plugin-prettier": "~5.2.5",
     "eslint-plugin-simple-import-sort": "~12.1.1",
@@ -131,6 +129,7 @@
     "prettier": "~3.5.3",
     "ts-node": "~10.9.2",
     "typescript": "5.4.5",
+    "typescript-eslint": "^8.28.0",
     "wait-on": "~8.0.2"
   }
 }
