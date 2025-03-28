@@ -1,4 +1,4 @@
-@media screen and (max-width: 720px) and (max-height: 720px) {
+@media screen and (width <= 720px) and (height <= 720px) {
   .main-menu__settings-icon {
     width: 7vw !important;
     float: unset !important;
@@ -108,7 +108,7 @@
 
   .file__actions {
     width: 100% !important;
-    margin: 2vh auto 0 auto !important;
+    margin: 2vh auto 0 !important;
     text-align: center !important;
   }
 
@@ -128,7 +128,7 @@
   }
 
   .file__render {
-    margin: 5vh auto 0 auto !important;
+    margin: 5vh auto 0 !important;
   }
 
   .file__directory {
@@ -225,7 +225,7 @@
 
   .main-menu__options {
     text-transform: capitalize !important;
-    margin: 19vh auto 0 auto !important;
+    margin: 19vh auto 0 !important;
   }
 
   .printer-status__no-set-value img {
@@ -264,10 +264,6 @@
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-  }
-
-  .top-bar td {
-    line-height: 9vh;
   }
 
   .settings__content::first-letter {

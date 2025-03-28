@@ -42,9 +42,9 @@ app-job-status ~ app-printer-status .printer-status__set-value {
   width: 92vw !important;
   height: 8vh !important;
   border-radius: 2vw !important;
-  background-color: rgba(38, 44, 53, 1);
+  background-color: rgb(38 44 53 / 100%);
   border-style: solid !important;
-  border-color: rgb(121, 121, 121);
+  border-color: rgb(121 121 121);
   border-width: 2px !important;
 }
 

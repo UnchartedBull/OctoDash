@@ -33,7 +33,7 @@
     display: inline-block;
     padding: 1.4vh 2vw;
     border-radius: 1vw;
-    box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
   }
 
   &__input {
@@ -137,7 +137,7 @@
       border-radius: 0.7vw;
 
       &-disabled {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgb(255 255 255 / 50%);
       }
     }
   }
@@ -177,7 +177,7 @@
 
     &-errors {
       font-size: 3.6vw;
-      font-family: 'Cousine', monospace;
+      font-family: Cousine, monospace;
       display: block;
       margin-bottom: 4vh;
     }

@@ -6,7 +6,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgb(0 0 0 / 85%);
+
     // backdrop-filter: blur(8px);
     z-index: 20;
 
@@ -171,7 +172,7 @@
       border-radius: 0.4vw;
 
       &-disabled {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgb(255 255 255 / 50%);
       }
     }
 
@@ -307,7 +308,7 @@
       display: block;
       padding: 1.4vh 2vw;
       border-radius: 1vw;
-      box-shadow: 0 10px 19px -8px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
       font-size: 0.7rem;
       outline: 0;
       border: 0;

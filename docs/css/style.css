@@ -4,7 +4,7 @@
   margin-top: 30%;
 }
 
-.icon-github:before {
+.icon-github::before {
   line-height: 190%;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .navbar-brand {
-  font-family: 'Arvo', sans-serif;
+  font-family: Arvo, sans-serif;
   font-weight: 600;
 }
 
@@ -42,7 +42,7 @@ h5 {
 .install-script {
   text-align: center;
   font-size: 120%;
-  font-family: 'Cousine', monospace;
+  font-family: Cousine, monospace;
   background-color: #252932;
   padding: 2vh;
   border-radius: 8px;

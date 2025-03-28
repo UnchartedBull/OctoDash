@@ -6,9 +6,10 @@
   src:
     local('Product Sans'),
     local('ProductSans-Regular'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVE9eOcEg.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVE9eOcEg.woff2') format('woff2');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
+
 /* greek */
 @font-face {
   font-family: 'Product Sans';
@@ -18,9 +19,10 @@
   src:
     local('Product Sans'),
     local('ProductSans-Regular'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVFNeOcEg.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVFNeOcEg.woff2') format('woff2');
   unicode-range: U+0370-03FF;
 }
+
 /* latin-ext */
 @font-face {
   font-family: 'Product Sans';
@@ -30,9 +32,10 @@
   src:
     local('Product Sans'),
     local('ProductSans-Regular'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVGdeOcEg.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVGdeOcEg.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+
 /* latin */
 @font-face {
   font-family: 'Product Sans';
@@ -42,11 +45,12 @@
   src:
     local('Product Sans'),
     local('ProductSans-Regular'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2') format('woff2');
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 /* cyrillic */
 @font-face {
   font-family: 'Product Sans';
@@ -56,9 +60,10 @@
   src:
     local('Product Sans Medium'),
     local('ProductSans-Medium'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbS2lBkm8.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbS2lBkm8.woff2') format('woff2');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
+
 /* greek */
 @font-face {
   font-family: 'Product Sans';
@@ -68,9 +73,10 @@
   src:
     local('Product Sans Medium'),
     local('ProductSans-Medium'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbTGlBkm8.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbTGlBkm8.woff2') format('woff2');
   unicode-range: U+0370-03FF;
 }
+
 /* latin-ext */
 @font-face {
   font-family: 'Product Sans';
@@ -80,9 +86,10 @@
   src:
     local('Product Sans Medium'),
     local('ProductSans-Medium'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbQWlBkm8.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbQWlBkm8.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+
 /* latin */
 @font-face {
   font-family: 'Product Sans';
@@ -92,7 +99,7 @@
   src:
     local('Product Sans Medium'),
     local('ProductSans-Medium'),
-    url(https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbT2lB.woff2) format('woff2');
+    url('https://fonts.gstatic.com/s/productsans/v12/pxicypQkot1TnFhsFMOfGShd5PSbT2lB.woff2') format('woff2');
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -104,19 +111,19 @@
   display: block !important;
 }
 
-*:not(path):not(svg) {
+*:not(path, svg) {
   font-family: 'Product Sans', sans-serif;
 }
 
 app-root {
-  background-color: #000000;
+  background-color: #000;
 }
 
 :root {
-  --dark-text: rgba(128, 128, 128, 1);
-  --light-text: rgb(245, 246, 250, 1);
-  --green: rgb(65, 170, 27);
-  --dark-green: rgb(65, 170, 27, 0.75);
+  --dark-text: rgb(128 128 128 / 100%);
+  --light-text: rgb(245 246 250 / 100%);
+  --green: rgb(65 170 27);
+  --dark-green: rgb(65 170 27 / 75%);
 }
 
 ::-webkit-scrollbar {
@@ -132,7 +139,7 @@ app-root {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgb(255 255 255 / 50%);
 }
 
 /**************************************** HOME PAGE *****************************************/
@@ -155,6 +162,7 @@ app-job-status ~ app-bottom-bar .bottom-bar {
 app-job-status ~ app-bottom-bar .bottom-bar td {
   font-size: 3vw !important;
 }
+
 app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature-icon {
   width: 2vw !important;
   display: inline-block;
@@ -170,7 +178,7 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature {
 /**************************************** NOTIFICATION ****************************************/
 
 .notification {
-  background-color: rgba(60, 0, 0, 0.85) !important;
+  background-color: rgb(60 0 0 / 85%) !important;
   backdrop-filter: blur(8px) !important;
   border-radius: 1vw;
   transition: top 0.2s ease-in-out !important;
@@ -179,12 +187,12 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature {
 /**************************************** FILES ****************************************/
 
 ngx-spinner .overlay {
-  background: rgba(255, 255, 255, 0) !important;
+  background: rgb(255 255 255 / 0%) !important;
   backdrop-filter: blur(5px);
 }
 
 .files__object {
-  background-color: #555555 !important;
+  background-color: #555 !important;
   width: 89vw !important;
 }
 
@@ -210,7 +218,7 @@ ngx-spinner .overlay {
 
 .sorting {
   backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 40, 0.8) !important;
+  background-color: rgb(0 0 40 / 80%) !important;
   transition: opacity ease-in-out 0.2s !important;
 }
 
@@ -232,7 +240,7 @@ ngx-spinner .overlay {
 }
 
 .filament tr {
-  background-color: #555555 !important;
+  background-color: #555 !important;
   width: 87.5vw !important;
 }
 
@@ -245,7 +253,7 @@ ngx-spinner .overlay {
 }
 
 app-filament .scroll__thumb-inactive {
-  background-color: rgba(127, 143, 166, 0.3);
+  background-color: rgb(127 143 166 / 30%);
   width: 3.7vw;
   height: 61.7vh !important;
   position: fixed;
@@ -257,21 +265,15 @@ app-filament .scroll__thumb-inactive {
 
 .file {
   backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 40, 0.8) !important;
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
+  background-color: rgb(0 0 40 / 80%) !important;
+  inset: 0 !important;
   width: auto !important;
   height: auto !important;
   transition: opacity ease-in-out 0.2s !important;
 }
 
 .file__wrapper {
-  left: 0 !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
+  inset: 0 !important;
   width: auto !important;
   height: auto !important;
   padding: 6vh 5vw !important;
@@ -353,7 +355,7 @@ app-filament .scroll__thumb-inactive {
 }
 
 app-files .scroll__thumb-inactive {
-  background-color: rgba(127, 143, 166, 0.3);
+  background-color: rgb(127 143 166 / 30%);
   width: 3.7vw;
   height: 71.4vh !important;
   position: fixed;
@@ -365,13 +367,15 @@ app-files .scroll__thumb-inactive {
 
 .quick-control {
   backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 40, 0.8) !important;
+  background-color: rgb(0 0 40 / 80%) !important;
   transition: opacity ease-in-out 0.2s !important;
 }
+
 .quick-control__controller {
   border: solid 0.2vw !important;
   border-radius: 1vw !important;
 }
+
 .quick-control__controller-set {
   border-top: solid 0.2vw !important;
 }
@@ -459,8 +463,8 @@ app-files .scroll__thumb-inactive {
 
 app-job-status ~ app-printer-status .printer-status {
   position: absolute;
-  top: 0vh !important;
-  left: 0vw !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__set-value {
@@ -504,6 +508,7 @@ app-job-status ~ app-printer-status .printer-status__value-1 {
   top: 37vh;
   left: 38vw;
 }
+
 app-job-status ~ app-printer-status .printer-status__value-1 img {
   margin-top: -3vh !important;
 }
@@ -516,6 +521,7 @@ app-job-status ~ app-printer-status .printer-status__value-2 {
   top: 37vh;
   left: 69vw;
 }
+
 app-job-status ~ app-printer-status .printer-status__value-2 img {
   margin-top: -3vh !important;
 }
@@ -528,6 +534,7 @@ app-job-status ~ app-printer-status .printer-status__value-3 {
   top: 53vh;
   left: 38vw;
 }
+
 app-job-status ~ app-printer-status .printer-status__value-3 img {
   margin-top: -1.6vh !important;
 }
@@ -598,11 +605,12 @@ round-progress svg path {
   transform-origin: center;
   stroke: var(--green) !important;
 }
+
 round-progress svg circle {
   stroke-width: 50 !important;
   transform: scale(0.9);
   transform-origin: center;
-  stroke: rgba(255, 255, 255, 0.2) !important;
+  stroke: rgb(255 255 255 / 20%) !important;
 }
 
 .job-info__progress-preview {
@@ -626,7 +634,7 @@ round-progress svg circle {
 
 #progress-preview-bar + .job-info__progress-percentage {
   margin-top: -1.4vh !important;
-  margin-left: 0vw !important;
+  margin-left: 0 !important;
   font-size: 8.7vh !important;
   font-weight: 500 !important;
   display: block !important;
@@ -656,7 +664,7 @@ round-progress svg circle {
   width: 92vw !important;
   height: 8vh !important;
   border-radius: 2vw !important;
-  background-color: rgb(127, 143, 166, 0.25);
+  background-color: rgb(127 143 166 / 25%);
   border-style: solid !important;
 }
 
@@ -677,6 +685,7 @@ round-progress svg circle {
   color: var(--light-text) !important;
   font-size: 8vw !important;
 }
+
 .job-info__time-left::after {
   content: ' ';
 }
@@ -689,20 +698,22 @@ round-progress svg circle {
 
 .print-control__container {
   backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 40, 0.8) !important;
+  background-color: rgb(0 0 40 / 80%) !important;
   transition: opacity ease-in-out 0.2s !important;
 }
+
 .print-control__adjust__controller {
   border: solid 0.2vw !important;
   border-radius: 1vw !important;
 }
+
 .print-control__adjust__save {
   border: 0.2vw solid !important;
   border-radius: 1vw !important;
 }
 
 .print-control__cancel__action:first-child {
-  background-color: rgba(194, 54, 22, 0.85);
+  background-color: rgb(194 54 22 / 85%);
   text-align: center;
   padding: 2vh 7vw !important;
   margin: 9vh 6vw !important;
@@ -725,14 +736,11 @@ round-progress svg circle {
 
 .settings-wrapper {
   backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 40, 0.8) !important;
+  background-color: rgb(0 0 40 / 80%) !important;
 }
 
 .settings-container {
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
+  inset: 0 !important;
   width: auto !important;
   height: auto !important;
   background: none !important;
@@ -748,7 +756,7 @@ round-progress svg circle {
 }
 
 .settings__save {
-  background-color: rgba(194, 54, 22, 0.85);
+  background-color: rgb(194 54 22 / 85%);
   width: 30vw;
   text-align: center;
   padding: 1vh 0;
