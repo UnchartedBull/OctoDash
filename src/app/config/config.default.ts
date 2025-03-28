@@ -84,7 +84,7 @@ export const defaultConfig: Config = {
   octodash: {
     customActions: [
       {
-        icon: 'home',
+        icon: 'house',
         command: 'G28',
         color: '#dcdde1',
         confirm: false,
@@ -98,7 +98,7 @@ export const defaultConfig: Config = {
         exit: true,
       },
       {
-        icon: 'fire-alt',
+        icon: 'fire-flame-curved',
         command: 'M140 S50; M104 S185',
         color: '#e1b12c',
         confirm: false,
@@ -112,7 +112,7 @@ export const defaultConfig: Config = {
         exit: true,
       },
       {
-        icon: 'redo-alt',
+        icon: 'rotate-right',
         command: '[!RELOAD]',
         color: '#7f8fa6',
         confirm: true,
