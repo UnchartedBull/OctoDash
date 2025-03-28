@@ -63,8 +63,13 @@ export class ConfigService {
   }
 
   private getConfig() {
+    const apiKey = localStorage.getItem('octodash_apikey');
+    // set the x-api-key header
+    const headers = new HttpHeaders({
+      // 'x-api-key': apiKey,
+    });
     this.http
-      .get('http://localhost:8080/api/settings')
+      .get('http://localhost:8080/api/settings', { headers })
       .pipe(
         map((response: any) => {
           return response.plugins.octodash;
@@ -89,7 +94,7 @@ export class ConfigService {
   public generateHttpHeaders(): void {
     this.httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        // 'x-api-key': this.config.octoprint.accessToken,
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',
