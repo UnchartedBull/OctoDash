@@ -186,11 +186,6 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature {
 
 /**************************************** FILES ****************************************/
 
-ngx-spinner .overlay {
-  background: rgb(255 255 255 / 0%) !important;
-  backdrop-filter: blur(5px);
-}
-
 .files__object {
   background-color: #555 !important;
   width: 89vw !important;
