@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { defaultIfEmpty, map } from 'rxjs/operators';
 
-import { OctoprintPrinterProfiles } from '../../../model/octoprint';
+import { OctoprintPrinterProfiles } from '../../model/octoprint';
 
 @Injectable({
   providedIn: 'root',

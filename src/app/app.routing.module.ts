@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ConfigInvalidComponent } from './config/invalid/invalid.component';
-import { ConfigSetupComponent } from './config/setup/setup.component';
+import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
+import { ConfigSetupComponent } from './setup/setup.component';
 import { ControlComponent } from './control/control.component';
 import { FilamentComponent } from './filament/filament.component';
 import { FilesComponent } from './files/files.component';

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 import { NotificationType, PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,

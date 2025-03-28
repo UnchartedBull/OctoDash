@@ -4,7 +4,7 @@ import { compare } from 'compare-versions';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 import { NotificationType, PrinterProfile } from '../../model';
 import {
   DisconnectCommand,

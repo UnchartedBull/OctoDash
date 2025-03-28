@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { AppService } from './app.service';
-import { ConfigService } from './config/config.service';
+import { ConfigService } from './services/config.service';
 import { SocketService } from './services/socket/socket.service';
 
 @Component({

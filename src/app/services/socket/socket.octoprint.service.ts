@@ -5,7 +5,7 @@ import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { catchError, pluck, startWith } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 import { ConversionService } from '../../conversion.service';
 import {
   Duration,

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 import { FilamentSpool } from '../../model';
 import { PrinterService } from '../../services/printer/printer.service';
 

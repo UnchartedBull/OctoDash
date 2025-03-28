@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 import { PSUState } from '../../model';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { PrinterService } from '../../services/printer/printer.service';

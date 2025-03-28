@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { ConfigService } from './config/config.service';
+import { ConfigService } from './services/config.service';
 import { PrinterEvent } from './model/event.model';
 import { SocketService } from './services/socket/socket.service';
 

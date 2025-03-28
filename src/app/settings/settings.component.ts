@@ -1,8 +1,8 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 import { AppService } from '../app.service';
-import { ConfigSchema as Config } from '../config/config.model';
-import { ConfigService } from '../config/config.service';
+import { ConfigSchema as Config } from '../model/config.model';
+import { ConfigService } from '../services/config.service';
 import { ElectronService } from '../electron.service';
 import { NotificationType, URLSplit } from '../model';
 import { NotificationService } from '../notification/notification.service';

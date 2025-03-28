@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AppService } from '../../app.service';
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-settings-icon',

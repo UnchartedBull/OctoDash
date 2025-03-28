@@ -5,7 +5,7 @@ import * as _ from 'lodash-es';
 import { ElectronService } from '../electron.service';
 import { NotificationType, URLSplit } from '../model';
 import { NotificationService } from '../notification/notification.service';
-import { ConfigSchema as Config, CustomAction } from './config.model';
+import { ConfigSchema as Config, CustomAction } from '../model/config.model';
 
 interface HttpHeader {
   headers: HttpHeaders;

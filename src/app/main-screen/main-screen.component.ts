@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../services/config.service';
 import { EventService } from '../event.service';
 import { FilesService } from '../services/files/files.service';
 

@@ -4,7 +4,7 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { take } from 'rxjs/operators';
 
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../services/config.service';
 import { FilamentSpool, PrinterExtruders, PrinterProfile, PrinterStatus } from '../model';
 import { FilamentService } from '../services/filament/filament.service';
 import { PrinterService } from '../services/printer/printer.service';

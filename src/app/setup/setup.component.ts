@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { ElectronService } from 'src/app/electron.service';
 
 import defaultConfig from '../config.default.json';
-import { ConfigSchema as Config } from '../config.model';
-import { ConfigService } from '../config.service';
+import { ConfigSchema as Config } from '../model/config.model';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-config-setup',
