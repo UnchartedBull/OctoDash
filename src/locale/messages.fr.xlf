@@ -861,6 +861,7 @@
       </trans-unit>
       <trans-unit id="unit-hours-short" datatype="html">
         <source>h</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
