@@ -292,14 +292,18 @@ export class OctoPrintSocketService implements SocketService {
   //==== Job Status ====//
 
   public extractJobStatus(message: OctoprintSocketCurrent): void {
-    const file = message?.current?.job?.file?.display?.replace('.gcode', '').replace('.ufp', '');
+    if (!message.current) {
+      return;
+    }
+
+    const file = message.current.job?.file?.display?.replace('.gcode', '').replace('.ufp', '');
     if (this.jobStatus.file !== file) {
       this.initJobStatus();
     }
 
     this.jobStatus.file = file;
-    this.jobStatus.fullPath = '/' + message?.current?.job?.file?.origin + '/' + message?.current?.job?.file?.path;
-    this.jobStatus.progress = Math.round(message?.current?.progress?.completion);
+    this.jobStatus.fullPath = '/' + message.current.job?.file?.origin + '/' + message.current.job?.file?.path;
+    this.jobStatus.progress = Math.round(message.current.progress?.completion);
     this.jobStatus.timePrinted = this.mapSecondsToDuration(message.current.progress.printTime);
 
     if (message.current.job.filament) {
