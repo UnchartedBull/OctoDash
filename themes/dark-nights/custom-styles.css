@@ -12,7 +12,7 @@
   --red: #f44336;
   --red-shadow: #f4433666;
   --green: #4caf50;
-  --quiteWhite-shadow: #f7f7f766;
+  --quite-white-shadow: #f7f7f766;
   --grey: #999;
   --black-transparent: #111111ea;
 }
@@ -424,7 +424,7 @@ app-notification .notification {
   border-right: none !important;
   border-radius: 0 !important;
   transition: box-shadow 0.2s ease-in-out !important;
-  box-shadow: 0 0 8px 4px var(--quiteWhite-shadow) !important;
+  box-shadow: 0 0 8px 4px var(--quite-white-shadow) !important;
 }
 
 app-notification .notification__border-warn {

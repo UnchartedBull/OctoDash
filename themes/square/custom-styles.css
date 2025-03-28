@@ -266,10 +266,6 @@
     padding: 0 !important;
   }
 
-  .top-bar td {
-    line-height: 9vh;
-  }
-
   .settings__content::first-letter {
     text-transform: capitalize !important;
   }
