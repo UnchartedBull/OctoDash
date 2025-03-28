@@ -3,12 +3,11 @@ import { fileURLToPath } from 'node:url';
 import { fixupConfigRules, fixupPluginRules, includeIgnoreFile } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
 import _import from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
+import ts from 'typescript-eslint';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
@@ -36,14 +35,14 @@ export default [
   ),
   {
     plugins: {
-      '@typescript-eslint': fixupPluginRules(typescriptEslint),
+      '@typescript-eslint': fixupPluginRules(ts.plugin),
       import: fixupPluginRules(_import),
       'simple-import-sort': simpleImportSort,
       prettier,
     },
 
     languageOptions: {
-      parser: tsParser,
+      parser: ts.parser,
       ecmaVersion: 2020,
       sourceType: 'module',
     },
