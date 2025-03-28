@@ -3,8 +3,7 @@
     height: 40vh;
     padding: 4vh 3vw;
     margin-right: 2vw;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
   }
 
   &__searching {
@@ -23,7 +22,7 @@
 
     &-disabled {
       pointer-events: none;
-      opacity: 50%;
+      opacity: 0.5;
       font-style: italic;
     }
 

@@ -1,8 +1,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-@include mat.elevation-classes();
-@include mat.app-background();
+@include mat.elevation-classes;
+@include mat.app-background;
 
 // TODO: needed for ripple effect, need to check why
 $OctoDash-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
@@ -19,33 +19,34 @@ $OctoDash-theme: mat.m2-define-dark-theme(
     density: 0,
   )
 );
-@include mat.elevation-classes();
-@include mat.app-background();
+
+@include mat.elevation-classes;
+@include mat.app-background;
 
 @font-face {
   font-family: Arvo;
-  src: url(assets/fonts/Arvo-Bold.ttf) format('truetype');
+  src: url("assets/fonts/Arvo-Bold.ttf") format('truetype');
 }
 
 @font-face {
   font-family: Cousine;
-  src: url(assets/fonts/Cousine-Regular.ttf) format('truetype');
+  src: url("assets/fonts/Cousine-Regular.ttf") format('truetype');
 }
 
 @font-face {
   font-family: Montserrat;
   font-weight: 400;
-  src: url(assets/fonts/Montserrat-Regular.ttf) format('truetype');
+  src: url("assets/fonts/Montserrat-Regular.ttf") format('truetype');
 }
 
 @font-face {
   font-family: Montserrat;
   font-weight: 500;
-  src: url(assets/fonts/Montserrat-Medium.ttf) format('truetype');
+  src: url("assets/fonts/Montserrat-Medium.ttf") format('truetype');
 }
 
-*:not(path):not(svg) {
-  font-family: 'Montserrat', sans-serif;
+*:not(path, svg) {
+  font-family: Montserrat, sans-serif;
   color: #f5f6fa;
   font-size: 4.3vw;
   margin: 0;
@@ -56,7 +57,7 @@ $OctoDash-theme: mat.m2-define-dark-theme(
 *,
 *::after,
 *::before {
-  -webkit-user-select: none;
+  user-select: none;
   -webkit-user-drag: none;
   -webkit-app-region: no-drag;
   -webkit-tap-highlight-color: transparent;
@@ -172,7 +173,7 @@ app-root {
   }
 }
 
-.loading-dots:after {
+.loading-dots::after {
   content: ' .';
   animation: dots 1s steps(7, end) infinite;
 }
@@ -202,7 +203,7 @@ app-root {
   }
 
   &-thumb {
-    background: rgba(127, 143, 166, 0.8);
+    background: rgb(127 143 166 / 80%);
     border-radius: 0.85vw;
     box-shadow: none;
     outline: none;
@@ -211,7 +212,7 @@ app-root {
 
 .scroll__thumb-inactive {
   display: block;
-  background-color: rgba(127, 143, 166, 0.3);
+  background-color: rgb(127 143 166 / 30%);
   width: 3vw;
   height: 66.6vh;
   position: fixed;
@@ -228,7 +229,7 @@ app-root {
   width: 64vw;
   margin-left: calc(15vw - 5px);
   background-color: #353b48;
-  border: 5px solid rgba(255, 255, 255, 0.4);
+  border: 5px solid rgb(255 255 255 / 40%);
   border-radius: 2vw;
   padding: 3vh 3vw;
   z-index: 10;
@@ -241,7 +242,7 @@ app-root {
   &__gcode {
     font-size: 2.2vw;
     padding: 2vh 1.5vw;
-    font-family: 'Cousine', monospace;
+    font-family: Cousine, monospace;
   }
 
   &__icon {
@@ -253,11 +254,8 @@ app-root {
   &__wrapper {
     position: fixed;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.85);
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    background-color: rgb(0 0 0 / 85%);
+    inset: 0;
   }
 }
 
@@ -268,44 +266,50 @@ app-root {
 @keyframes dots {
   0%,
   10% {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgb(255 255 255 / 20%);
     text-shadow:
-      0.25em 0 0 rgba(255, 255, 255, 0.2),
-      0.5em 0 0 rgba(255, 255, 255, 0.2);
+      0.25em 0 0 rgb(255 255 255 / 20%),
+      0.5em 0 0 rgb(255 255 255 / 20%);
   }
+
   20% {
     color: #f5f6fa;
     text-shadow:
-      0.25em 0 0 rgba(255, 255, 255, 0.2),
-      0.5em 0 0 rgba(255, 255, 255, 0.2);
+      0.25em 0 0 rgb(255 255 255 / 20%),
+      0.5em 0 0 rgb(255 255 255 / 20%);
   }
+
   30% {
     text-shadow:
       0.25em 0 0 #f5f6fa,
-      0.5em 0 0 rgba(255, 255, 255, 0.2);
+      0.5em 0 0 rgb(255 255 255 / 20%);
   }
+
   52%,
   60% {
     text-shadow:
       0.25em 0 0 #f5f6fa,
       0.5em 0 0 #f5f6fa;
   }
+
   70% {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgb(255 255 255 / 20%);
     text-shadow:
       0.25em 0 0 #f5f6fa,
       0.5em 0 0 #f5f6fa;
   }
+
   80% {
     text-shadow:
-      0.25em 0 0 rgba(255, 255, 255, 0.2),
+      0.25em 0 0 rgb(255 255 255 / 20%),
       0.5em 0 0 #f5f6fa;
   }
+
   90%,
   100% {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgb(255 255 255 / 20%);
     text-shadow:
-      0.25em 0 0 rgba(255, 255, 255, 0.2),
-      0.5em 0 0 rgba(255, 255, 255, 0.2);
+      0.25em 0 0 rgb(255 255 255 / 20%),
+      0.5em 0 0 rgb(255 255 255 / 20%);
   }
 }

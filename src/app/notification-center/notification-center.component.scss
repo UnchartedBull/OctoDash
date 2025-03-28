@@ -4,7 +4,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.67);
+  background-color: rgb(0 0 0 / 67%);
   backdrop-filter: blur(8px);
 }
 
@@ -58,7 +58,7 @@
   width: 64vw;
   background-color: #5a6675;
   border-radius: 1.3vw;
-  box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 4px 10px -3px rgb(0 0 0 / 75%);
   border-right: 1vw solid #5a6675;
   margin-bottom: 3vh;
   position: relative;

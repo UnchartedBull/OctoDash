@@ -143,7 +143,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgb(0 0 0 / 85%);
   transition: opacity 0.4s ease-in-out;
   z-index: 5;
 
@@ -164,7 +164,7 @@
     z-index: 10;
     border-radius: 2vw;
     padding: 2vh 1.5vw;
-    box-shadow: 8px 4px 18px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
   }
 
   &__loading {
@@ -278,7 +278,8 @@
 .sorting {
   display: block;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgb(0 0 0 / 85%);
+
   // backdrop-filter: blur(8px);
   transition: opacity 0.4s ease-in-out;
   left: 0;
@@ -305,7 +306,7 @@
     z-index: 10;
     border-radius: 2vw;
     padding: 2vh 1.5vw;
-    box-shadow: 8px 4px 18px 0 rgba(0, 0, 0, 0.75);
+    box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
   }
 
   &-heading {
@@ -355,7 +356,7 @@
       border-radius: 0.4vw;
 
       &-disabled {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgb(255 255 255 / 50%);
       }
     }
 
