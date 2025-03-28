@@ -15,7 +15,7 @@
       <div
         class="printer-status__value"
         [ngClass]="{
-          'printer-status__small-text': extruderInfo.count > 2,
+          'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
           'printer-status__no-set-value': tool.set === 0,
         }">
         <span class="printer-status__tool-number" *ngIf="extruderInfo.count > 1 && !extruderInfo.sharedNozzle"
