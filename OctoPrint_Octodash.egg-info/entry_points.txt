@@ -1,0 +1,2 @@
+[octoprint.plugin]
+octodash = octoprint_octodash
