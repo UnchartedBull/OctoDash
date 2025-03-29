@@ -1,0 +1,13 @@
+<table class="top-bar">
+  <tr>
+    <td class="top-bar__back" matRipple [matRippleUnbounded]="false">
+      <ng-content select="back-button"></ng-content>
+    </td>
+    <td class="top-bar__center">
+      <ng-content></ng-content>
+    </td>
+    <td class="top-bar__next" matRipple [matRippleUnbounded]="false">
+      <ng-content select="next-button"></ng-content>
+    </td>
+  </tr>
+</table>

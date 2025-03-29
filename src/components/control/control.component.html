@@ -1,15 +1,10 @@
-<table class="top-bar">
-  <tr>
-    <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
-      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-      <ng-container i18n="@@ui-back">back</ng-container>
-    </td>
-    <td class="top-bar__center">
-      <img src="assets/control.svg" class="top-bar__center-icon" />
-    </td>
-    <td class="top-bar__next"></td>
-  </tr>
-</table>
+<app-top-bar>
+  <back-button routerLink="/main-screen">
+    <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+    <ng-container i18n="@@ui-back">back</ng-container>
+  </back-button>
+  <img src="assets/control.svg" class="top-bar__center-icon" />
+</app-top-bar>
 
 <div class="control">
   <div class="control__jog">

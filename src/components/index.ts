@@ -32,6 +32,7 @@ import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
+import { TopBarComponent } from './shared/top-bar/top-bar.component';
 
 export default [
   AppComponent,
@@ -68,4 +69,5 @@ export default [
   CustomActionsComponent,
   ToggleSwitchComponent,
   NotificationCenterComponent,
+  TopBarComponent,
 ];

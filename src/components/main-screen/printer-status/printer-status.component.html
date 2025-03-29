@@ -56,26 +56,21 @@
 </div>
 
 <div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl" (click)="hideQuickControl()">
-  <table class="top-bar">
-    <tr>
-      <td class="top-bar__back">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
-      </td>
-      <td class="top-bar__center">
-        <img
-          [src]="
-            'assets/' +
-            (view === QuickControlView.HOTEND
-              ? 'nozzle.svg'
-              : view === QuickControlView.HEATBED
-                ? 'heat-bed.svg'
-                : 'fan.svg')
-          "
-          class="top-bar__center-icon" />
-      </td>
-      <td class="top-bar__next"></td>
-    </tr>
-  </table>
+  <app-top-bar>
+    <back-button routerLink="/main-screen">
+      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+    </back-button>
+    <img
+      [src]="
+        'assets/' +
+        (view === QuickControlView.HOTEND
+          ? 'nozzle.svg'
+          : view === QuickControlView.HEATBED
+            ? 'heat-bed.svg'
+            : 'fan.svg')
+      "
+      class="top-bar__center-icon" />
+  </app-top-bar>
 
   <ngTemplate #quickController>
     <div class="quick-control__controller" (click)="stopPropagation($event)">

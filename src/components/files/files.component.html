@@ -1,19 +1,14 @@
-<table class="top-bar">
-  <tr>
-    <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
-      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-      <ng-container i18n="@@ui-back">back</ng-container>
-    </td>
-    <td class="top-bar__center">
-      <img src="assets/folder.svg" class="top-bar__center-icon" />
-    </td>
-    <td class="top-bar__next" (click)="openSorting()" matRipple [matRippleUnbounded]="false" *ngIf="directory">
-      <ng-container i18n="@@ui-sort">sort</ng-container>
-      <fa-icon icon="arrow-up-short-wide" class="top-bar__next-icon" />
-    </td>
-    <td class="top-bar__next" *ngIf="!directory"></td>
-  </tr>
-</table>
+<app-top-bar>
+  <back-button routerLink="/main-screen">
+    <fa-icon icon="chevron-left" class="top-bar__back-icon" />
+    <ng-container i18n="@@ui-back">back</ng-container>
+  </back-button>
+  <img src="assets/folder.svg" class="top-bar__center-icon" />
+  <next-button (click)="openSorting()" *ngIf="directory">
+    <ng-container i18n="@@ui-sort">sort</ng-container>
+    <fa-icon icon="arrow-up-short-wide" class="top-bar__next-icon" />
+  </next-button>
+</app-top-bar>
 
 <div class="breadcrumbs">
   <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')">

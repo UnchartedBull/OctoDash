@@ -1,15 +1,7 @@
 <div class="main-menu">
-  <table class="top-bar">
-    <tr>
-      <td class="top-bar__back"></td>
-      <td class="top-bar__center">
-        <span class="main-menu__heading top-bar__center-icon">
-          OctoDash<span class="main-menu__heading__dot">.</span></span
-        >
-      </td>
-      <td class="top-bar__next"></td>
-    </tr>
-  </table>
+  <app-top-bar>
+    <span class="main-menu__heading">OctoDash<span class="main-menu__heading__dot">.</span></span>
+  </app-top-bar>
   <table class="main-menu__options">
     <tr>
       <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
