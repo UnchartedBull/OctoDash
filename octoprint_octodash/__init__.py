@@ -47,7 +47,7 @@ class OctodashPlugin(
     def get_settings_defaults(self):
         return {
             "octoprint": {
-                "accessToken": "1t9H6i51hQLMm2eZXGAPbvRLv4iJr2Yao_LoxhE_66E",
+                "accessToken": "",
                 "url": "http://localhost:8080/",
             },
             "printer": {

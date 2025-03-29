@@ -23,6 +23,7 @@ interface OctoPrintConfig {
 })
 export class ConfigService {
   private config: Config;
+  private apiKey: string;
   private valid: boolean;
   private errors: string[];
   private update = false;
@@ -40,10 +41,10 @@ export class ConfigService {
   }
 
   private getConfig() {
-    const apiKey = localStorage.getItem('octodash_apikey');
+    this.apiKey = localStorage.getItem('octodash_apikey');
     // set the x-api-key header
     const headers = new HttpHeaders({
-      'x-api-key': apiKey ?? '',
+      'x-api-key': this.apiKey ?? '',
     });
     this.http
       .get<OctoPrintConfig>('/api/settings', { headers })
@@ -71,7 +72,7 @@ export class ConfigService {
   public generateHttpHeaders(): void {
     this.httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        'x-api-key': this.apiKey,
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',
