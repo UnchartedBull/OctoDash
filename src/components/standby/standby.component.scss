@@ -2,13 +2,23 @@
   height: 100%;
 
   &__main-window {
-    margin: 0 8vw;
+    width: 60vw;
+    margin: 0 4vw;
+    margin-top: 15vh;
+    display: inline-block;
+  }
+
+  &__custom-actions {
+    display: inline-block;
+    position: absolute;
+    top: 20vh;
   }
 
   &__icon {
     height: 45vh;
     display: block;
-    margin: 11vh auto;
+    margin: auto;
+    margin-bottom: 11vh;
   }
 
   &__text {

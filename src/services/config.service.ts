@@ -355,10 +355,6 @@ export class ConfigService {
     this.saveConfig(this.config);
   }
 
-  public showNotificationCenterIcon(): boolean {
-    return this.config.octodash.showNotificationCenterIcon;
-  }
-
   public getDefaultDirectory(): string {
     return this.config.octodash.defaultDirectory;
   }
