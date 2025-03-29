@@ -178,7 +178,7 @@
 
     &-descriptor {
       font-size: 2.5vw;
-      vertical-align: 1vh;
+      vertical-align: top;
     }
   }
 
@@ -191,6 +191,10 @@
     margin-bottom: 2vh;
     margin-left: -2vw;
     overflow: visible;
+
+    ::ng-deep .label {
+      vertical-align: baseline;
+    }
 
     &-descriptor {
       font-size: 2vw;
