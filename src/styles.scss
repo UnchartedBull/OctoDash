@@ -2,8 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 @use './_theme-colors' as theme;
-
-@include mat.core();
+@include mat.core;
 
 @font-face {
   font-family: Arvo;
@@ -41,14 +40,11 @@
 :root {
   --primary: #44bd32;
   --secondary: #1ec02c;
-
   --text: #f5f6fa;
   --border: #dcdde1;
-
   --background: #353b48;
   --background-2: #5a6675;
   --background-3: #718093;
-
   --success: #4bae50;
   --warn: #b5b33f;
   --error: #c23616;

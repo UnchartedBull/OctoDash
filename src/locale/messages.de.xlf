@@ -668,10 +668,6 @@
         <source>Wemo IP</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-wemo-port" datatype="html">
-        <source>Wemo Port</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <target>Info</target>
