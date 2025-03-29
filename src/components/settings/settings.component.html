@@ -317,6 +317,14 @@
               >Preview by default while printing</span
             >
           </app-toggle-switch>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.previewProgressCircle"
+            (valueChange)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle">
+            <span class="settings__toggle-switch-descriptor" i18n="@@default-preview"
+              >Always use circular progress bar</span
+            >
+          </app-toggle-switch>
           <br />
           <form class="settings__form">
             <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory"
