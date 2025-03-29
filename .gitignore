@@ -57,6 +57,9 @@ speed-measure-plugin.json
 # python
 __pycache__/
 *.py[cod]
+*.egg*
+
+build/
 
 
 docs/images/compilation.psd
