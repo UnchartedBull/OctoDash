@@ -1,13 +1,9 @@
-<app-top-bar>
-  <back-button routerLink="/main-screen">
-    <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-    <ng-container i18n="@@ui-back">back</ng-container>
-  </back-button>
+<app-top-bar
+  [backButton]="true"
+  [nextButton]="{ text: 'sort', icon: 'arrow-up-short-wide' }"
+  (onBack)="goToMainScreen()"
+  (onNext)="openSorting()">
   <img src="assets/folder.svg" class="top-bar__center-icon" />
-  <next-button (click)="openSorting()" *ngIf="directory">
-    <ng-container i18n="@@ui-sort">sort</ng-container>
-    <fa-icon icon="arrow-up-short-wide" class="top-bar__next-icon" />
-  </next-button>
 </app-top-bar>
 
 <div class="breadcrumbs">

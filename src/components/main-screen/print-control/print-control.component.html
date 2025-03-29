@@ -3,12 +3,7 @@
   (click)="showControlOverlay($event)"
   [ngClass]="{ 'print-control__hide': !showControls }">
   <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
-    <app-top-bar>
-      <back-button (click)="hideControlOverlay($event)">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-        <ng-container i18n="@@ui-back">back</ng-container>
-      </back-button>
-    </app-top-bar>
+    <app-top-bar [backButton]="true" (onBack)="hideControlOverlay($event)"></app-top-bar>
     <div class="print-control__action" (click)="cancel($event)">
       <img src="assets/cancel.svg" />
       <ng-container i18n="@@control-cancel">cancel</ng-container>
@@ -31,12 +26,7 @@
     </div>
   </div>
   <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
-    <app-top-bar>
-      <back-button (click)="backToControlScreen($event)">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-        <ng-container i18n="@@ui-back">back</ng-container>
-      </back-button>
-    </app-top-bar>
+    <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
     <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
     <span class="print-control__confirm" i18n="@@print-pause">print paused</span>
     <div class="print-control__pause__resume">
@@ -49,12 +39,7 @@
     </div>
   </div>
   <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
-    <app-top-bar>
-      <back-button (click)="backToControlScreen($event)">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-        <ng-container i18n="@@ui-back">back</ng-container>
-      </back-button>
-    </app-top-bar>
+    <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
     <img src="assets/adjust.svg" class="print-control__center-icon-small" />
     <table class="print-control__adjust__wrapper">
       <tr>
@@ -168,12 +153,7 @@
     </div>
   </div>
   <div *ngIf="view === controlView.BABYSTEP" (click)="stopPropagation($event)">
-    <app-top-bar>
-      <back-button (click)="adjust($event)">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-        <ng-container i18n="@@ui-back">back</ng-container>
-      </back-button>
-    </app-top-bar>
+    <app-top-bar [backButton]="true" (onBack)="adjust($event)"></app-top-bar>
     <img src="assets/height.svg" class="print-control__center-icon-small" />
     <span class="print-control__confirm" i18n="@@babystep-z">Babystep Z</span>
     <div>

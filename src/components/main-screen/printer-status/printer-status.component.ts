@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
@@ -36,6 +37,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     private printerService: PrinterService,
     private configService: ConfigService,
     private socketService: SocketService,
+    private router: Router,
   ) {
     this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.heatbedTarget = this.configService.getDefaultHeatbedTemperature();
@@ -168,6 +170,10 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   private setFanSpeed(): void {
     this.printerService.setFanSpeed(this.fanTarget);
     this.hideQuickControl();
+  }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
   }
 }
 

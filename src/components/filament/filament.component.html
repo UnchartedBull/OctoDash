@@ -1,17 +1,9 @@
-<app-top-bar>
-  <back-button (click)="decreasePage()">
-    <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-    <ng-container i18n="@@ui-back">back</ng-container>
-  </back-button>
+<app-top-bar [backButton]="true" [nextButton]="{ text: 'skip' }" (onBack)="decreasePage()" (onNext)="increasePage()">
   <img src="assets/nozzle.svg" class="top-bar__center-icon" *ngIf="page === 0" />
   <img src="assets/filament.svg" class="top-bar__center-icon" *ngIf="page === 1" />
   <div class="filament__progress-bar-wrapper" *ngIf="page > 1">
     <div class="filament__progress-bar" id="progressBar"></div>
   </div>
-  <next-button (click)="increasePage()">
-    <ng-container i18n="@@ui-skip">skip</ng-container>
-    <fa-icon icon="chevron-right" class="top-bar__next-icon" />
-  </next-button>
 </app-top-bar>
 
 <div class="filament">

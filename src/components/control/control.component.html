@@ -1,8 +1,4 @@
-<app-top-bar>
-  <back-button routerLink="/main-screen">
-    <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-    <ng-container i18n="@@ui-back">back</ng-container>
-  </back-button>
+<app-top-bar [backButton]="true" (onBack)="goToMainScreen()">
   <img src="assets/control.svg" class="top-bar__center-icon" />
 </app-top-bar>
 

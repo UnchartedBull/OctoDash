@@ -56,10 +56,7 @@
 </div>
 
 <div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl" (click)="hideQuickControl()">
-  <app-top-bar>
-    <back-button routerLink="/main-screen">
-      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-    </back-button>
+  <app-top-bar [backButton]="true" (onBack)="goToMainScreen()">
     <img
       [src]="
         'assets/' +

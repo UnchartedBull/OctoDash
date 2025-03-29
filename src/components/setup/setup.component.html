@@ -1,18 +1,12 @@
 <div class="setup">
-  <app-top-bar>
-    <back-button *ngIf="page > 0" (click)="decreasePage()">
-      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-      <ng-container i18n="@@ui-back">back</ng-container>
-    </back-button>
+  <app-top-bar
+    [backButton]="page > 0"
+    (onBack)="decreasePage()"
+    [nextButton]="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))"
+    (onNext)="increasePage()">
     <div class="setup__progress-bar-wrapper">
       <div class="setup__progress-bar" id="progressBar"></div>
     </div>
-    <next-button
-      *ngIf="!(this.page === this.totalPages || (this.page === 1 && !this.manualURL))"
-      (click)="increasePage()">
-      <ng-container i18n="@@ui-next">next</ng-container>
-      <fa-icon icon="chevron-right" class="top-bar__next-icon" />
-    </next-button>
   </app-top-bar>
 
   <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>

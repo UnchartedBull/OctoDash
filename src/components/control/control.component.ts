@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { NotificationType, PrinterStatus } from '../../model';
@@ -30,6 +31,7 @@ export class ControlComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private socketService: SocketService,
+    private router: Router,
   ) {
     this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
@@ -82,5 +84,9 @@ export class ControlComponent implements OnInit, OnDestroy {
     const distance = Number(direction + this.jogDistance);
 
     this.printerService.jog(axis === 'x' ? distance : 0, axis === 'y' ? distance : 0, axis === 'z' ? distance : 0);
+  }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
   }
 }

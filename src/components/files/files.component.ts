@@ -182,4 +182,8 @@ export class FilesComponent {
   private showLoader(): void {
     this.loading = Date.now();
   }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
+  }
 }
