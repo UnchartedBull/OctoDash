@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-main-menu',
@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-menu.component.scss'],
   standalone: false,
 })
-export class MainMenuComponent {
-  public constructor() {}
+export class MainMenuComponent implements OnDestroy {
+  public now = Date.now();
+  public interval;
+
+  public constructor() {
+    this.interval = setInterval(() => (this.now = Date.now()), 1);
+  }
+
+  public ngOnDestroy(): void {
+    clearInterval(this.interval);
+  }
 }

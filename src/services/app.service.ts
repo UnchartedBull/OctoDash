@@ -35,7 +35,8 @@ export class AppService {
 
     // list of all error following an upgrade
     this.updateError = {
-      // "/plugins must have required property 'companion'": config => (config.plugins.companion = { enabled: false }),
+      '/octodash must NOT have additional properties': config =>
+        delete (config.octodash as any).showNotificationCenterIcon,
     };
   }
 

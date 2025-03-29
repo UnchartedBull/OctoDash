@@ -372,7 +372,6 @@
         "screenSleepCommand",
         "screenWakeupCommand",
         "showExtruderControl",
-        "showNotificationCenterIcon",
         "defaultDirectory"
       ],
       "properties": {
@@ -500,10 +499,6 @@
           "default": "xset s off && xset -dpms && xset s noblank"
         },
         "showExtruderControl": {
-          "type": "boolean",
-          "default": true
-        },
-        "showNotificationCenterIcon": {
           "type": "boolean",
           "default": true
         },

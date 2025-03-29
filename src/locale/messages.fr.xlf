@@ -296,10 +296,6 @@
         <source>control</source>
         <target>contrôles</target>
       </trans-unit>
-      <trans-unit id="no-new-notifications" datatype="html">
-        <source> no new notifications. </source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="tap-close" datatype="html">
         <source>tap this card to close it</source>
         <target>touchez cette carte pour la fermer</target>
