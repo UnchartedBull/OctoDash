@@ -38,20 +38,19 @@
 
   <span class="job-info__filename">{{ jobStatus.file }}</span>
   <br />
-  <span class="job-info__filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')">
-    {{ jobStatus.filamentAmount }}
-    <ng-container i18n="@@job-filament-g"> g Filament </ng-container>
-  </span>
+  <span class="job-info__filament" i18n="@@job-filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')"
+    >{{ jobStatus.filamentAmount }}g Filament</span
+  >
   <br />
 
   <span class="job-info__time">
-    <span *ngIf="hasProperty(jobStatus, 'timeLeft')">
+    <span i18n="@@job-info__time-left" *ngIf="hasProperty(jobStatus, 'timeLeft')">
       <span class="job-info__time-left">{{ jobStatus.timeLeft.value }}</span>
-      {{ jobStatus.timeLeft.unit }}
-      <ng-container i18n="@@job-info__time-left"> left, </ng-container>
+      {{ jobStatus.timeLeft.unit }} left,
     </span>
-    <ng-container i18n="@@job-elapsed">elapsed:</ng-container>
-    {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}
+    <ng-container i18n="@@job-elapsed"
+      >elapsed: {{ jobStatus.timePrinted.value }}{{ jobStatus.timePrinted.unit }}</ng-container
+    >
   </span>
 </div>
 
@@ -109,10 +108,10 @@
 <div
   class="job-info__no-job loading-dots"
   *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
-  i18n="@@loading-info">
+  i18n="@@ui-loading-info">
   loading info
 </div>
 
-<div class="job-info__no-job" *ngIf="!isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running ...</div>
+<div class="job-info__no-job" *ngIf="!isFileLoaded() && !isPrinting()" i18n="@@no-job">no job running...</div>
 
 <span id="jobTogglePreview" (click)="togglePreview()"></span>

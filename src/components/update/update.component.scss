@@ -74,7 +74,7 @@
     margin-top: 10vh;
     margin-bottom: 8vw;
 
-    &-button {
+    button {
       padding: 1.4vh 2vw;
       border-radius: 1vw;
       box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
@@ -83,16 +83,16 @@
       border: 0;
       margin: 7vh 2vw;
 
-      &__no {
+      .button__no {
         background-color: #718093;
         opacity: 0.8;
       }
 
-      &__yes {
+      .button__yes {
         background-color: #4bae50;
       }
 
-      &__wrapper {
+      .button__wrapper {
         display: block;
         text-align: center;
       }

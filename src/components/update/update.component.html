@@ -26,12 +26,8 @@
     <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion }} installed</span>
     <span class="update-restart" i18n="@@update-restart">would you like to restart OctoDash now?</span>
     <div class="update-restart-button__wrapper">
-      <button class="update-restart-button update-restart-button__no" (click)="closeUpdateWindow()" i18n="@@restart-no">
-        no
-      </button>
-      <button class="update-restart-button update-restart-button__yes" (click)="restart()" i18n="@@restart-yes">
-        yes
-      </button>
+      <button class="button__no" (click)="closeUpdateWindow()" i18n="@@ui-no">no</button>
+      <button class="button__yes" (click)="restart()" i18n="@@ui-yes">yes</button>
     </div>
   </div>
 </div>

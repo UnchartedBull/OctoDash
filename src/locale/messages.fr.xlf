@@ -2,8 +2,8 @@
   <file original="ng2.template" datatype="plaintext" source-language="en" target-language="fr">
     <body>
       <trans-unit id="long-init" datatype="html">
-        <source> Initializing is taking longer than usual. 
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API. 
+        <source>Initializing is taking longer than usual...
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
         </source>
         <target> L'initialisation prend plus de temps que d'habitude. 
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Veuillez vous assurer qu'OctoPrint est opérationnel. 
@@ -26,12 +26,8 @@
         <target>Impossible de récupérer le profil de l'imprimante !</target>
       </trans-unit>
       <trans-unit id="website-loading" datatype="html">
-        <source>loading website ...</source>
+        <source>loading website...</source>
         <target>chargement du site Web ...</target>
-      </trans-unit>
-      <trans-unit id="should-not-happen" datatype="html">
-        <source> That shouldn't happen ... </source>
-        <target> Cela ne devrait pas arriver ... </target>
       </trans-unit>
       <trans-unit id="are-you-sure" datatype="html">
         <source>are you sure?</source>
@@ -55,20 +51,20 @@
         <source>g left</source>
         <target>g restants</target>
       </trans-unit>
-      <trans-unit id="filament-done" datatype="html">
-        <source> done </source>
-        <target> terminé </target>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target></target>
       </trans-unit>
-      <trans-unit id="filament-waiting" datatype="html">
+      <trans-unit id="ui-waiting-for-user" datatype="html">
         <source>I'll wait for you.</source>
-        <target>Je vous attendrai.</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 envoyé</target>
       </trans-unit>
       <trans-unit id="follow-printer-screen" datatype="html">
-        <source>follow the instructions on your printers' display</source>
+        <source>follow the instructions on your printer's display</source>
         <target>suivez les instructions sur l'affichage de votre imprimante</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
@@ -231,28 +227,41 @@
         <source>Can't load file!</source>
         <target>Impossible de charger le fichier !</target>
       </trans-unit>
-      <trans-unit id="height-mm" datatype="html">
+      <trans-unit id="unit-millimeters-short" datatype="html">
         <source>mm</source>
-        <target>mm</target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="heing-layer" datatype="html">
-        <source> Layer </source>
-        <target> Couche </target>
+      <trans-unit id="height-layer-status" datatype="html">
+        <source>Layer 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target></target>
       </trans-unit>
-      <trans-unit id="height-of" datatype="html">
-        <source> of </source>
-        <target> sur </target>
-      </trans-unit>
-      <trans-unit id="job-filament-g" datatype="html">
-        <source> g Filament </source>
-        <target> g de filament </target>
+      <trans-unit id="job-filament" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
+        </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
-        <source> left, </source>
+        <source>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
+        </source>
         <target> restant, </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
-        <source>elapsed:</source>
+        <source>elapsed: 
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </source>
         <target>écoulé :</target>
       </trans-unit>
       <trans-unit id="will-finish" datatype="html">
@@ -267,12 +276,12 @@
         <source>filament will be used</source>
         <target>de filament sera utilisé</target>
       </trans-unit>
-      <trans-unit id="loading-info" datatype="html">
+      <trans-unit id="ui-loading-info" datatype="html">
         <source> loading info</source>
-        <target> chargement des informations</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
-        <source>no job running ...</source>
+        <source>no job running...</source>
         <target>pas d'impression en cours ...</target>
       </trans-unit>
       <trans-unit id="menu-files" datatype="html">
@@ -311,13 +320,13 @@
         <source>cancel print?</source>
         <target>annuler l'impression ?</target>
       </trans-unit>
-      <trans-unit id="cancel-yes" datatype="html">
+      <trans-unit id="ui-yes" datatype="html">
         <source>yes</source>
-        <target>oui</target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="cancel-no" datatype="html">
+      <trans-unit id="ui-no" datatype="html">
         <source>no</source>
-        <target>non</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="print-pause" datatype="html">
         <source>print paused</source>
@@ -351,48 +360,12 @@
         <source>Speed</source>
         <target>Vitesse</target>
       </trans-unit>
-      <trans-unit id="offset-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="offset-save" datatype="html">
-        <source> save </source>
-        <target> sauvegarder </target>
-      </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
         <target>Babystep Z</target>
       </trans-unit>
-      <trans-unit id="babystep-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="babystep-mm-2" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm-2" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm-3" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="reset-no" datatype="html">
-        <source>no</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="reset-yes" datatype="html">
-        <source>yes</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings" datatype="html">
@@ -418,6 +391,10 @@
       <trans-unit id="update-available" datatype="html">
         <source>Update available!</source>
         <target> mise à jour disponible ! </target>
+      </trans-unit>
+      <trans-unit id="ui-save" datatype="html">
+        <source>save</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
@@ -880,7 +857,7 @@
         <target>Veuillez confirmer la demande via la fenêtre contextuelle de l'interface Web OctoPrint.</target>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
+        <source>Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
         <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
@@ -888,7 +865,7 @@
         <target>Nom de l'imprimante :</target>
       </trans-unit>
       <trans-unit id="use-touchscreen" datatype="html">
-        <source> Use Touchscreen </source>
+        <source>Use Touchscreen</source>
         <target> Utiliser l'écran tactile </target>
       </trans-unit>
       <trans-unit id="change-settings-info" datatype="html">
@@ -1069,14 +1046,6 @@
       </trans-unit>
       <trans-unit id="update-restart" datatype="html">
         <source>would you like to restart OctoDash now?</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="restart-no" datatype="html">
-        <source> no </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="restart-yes" datatype="html">
-        <source> yes </source>
         <target></target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">

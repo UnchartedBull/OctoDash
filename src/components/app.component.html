@@ -18,10 +18,10 @@
       [ngClass]="{ 'loading-dots': status === 'connecting' || status === 'initializing' }"
       >{{ status }}</span
     >
-    <span class="splash-screen__hint" *ngIf="showConnectionHint" i18n="@@long-init">
-      Initializing is taking longer than usual. <br />
-      Please make sure that OctoPrint is running and that CORS is enabled for the API.
-    </span>
+    <span class="splash-screen__hint" *ngIf="showConnectionHint" i18n="@@long-init"
+      >Initializing is taking longer than usual...<br />
+      Please make sure that OctoPrint is running and that CORS is enabled for the API.</span
+    >
   </div>
 
   <fa-icon

@@ -4,17 +4,20 @@
     <span class="height-indication__current-height">
       {{ height }}
     </span>
-    <ng-container i18n="@@height-mm">mm</ng-container>
+    <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
   </span>
 </ng-container>
 
 <ng-template #zHeightLayer>
-  <span class="height-indication" *ngIf="height && !(height.current === 0 && height.total === 0)">
-    <ng-container i18n="@@heing-layer"> Layer </ng-container>
+  <span
+    class="height-indication"
+    i18n="@@height-layer-status"
+    *ngIf="height && !(height.current === 0 && height.total === 0)"
+    >Layer
     <span class="height-indication__current-height">
       {{ height.current }}
     </span>
-    <ng-container i18n="@@height-of"> of </ng-container>
+    of
     <span class="height-indication__total-height">
       {{ height.total >= 0 ? height.total : '---' }}
     </span>

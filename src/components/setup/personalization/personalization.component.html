@@ -1,6 +1,6 @@
-<span class="setup__text" i18n="@@prompt-customization-details">
-  Now tell me some facts about your setup so I can personalize OctoDash for you.
-</span>
+<span class="setup__text" i18n="@@prompt-customization-details"
+  >Now tell me some facts about your setup so I can personalize OctoDash for you.</span
+>
 <form class="setup__form">
   <label for="printerName" class="setup__input-label" i18n="@@prompt-printer-name">Printer Name:</label>
   <input
@@ -14,7 +14,7 @@
     required />
   <app-toggle-switch [value]="useTouchscreen" (valueChange)="useTouchscreenChange.emit(!useTouchscreen)">
   </app-toggle-switch>
-  <ng-container i18n="@@use-touchscreen"> Use Touchscreen </ng-container>
+  <ng-container i18n="@@use-touchscreen">Use Touchscreen</ng-container>
 </form>
 <div class="setup__explanation" i18n="@@change-settings-info">
   You can change all settings (and even more) in the settings menu anytime. There is also a description of each

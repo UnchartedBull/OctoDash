@@ -28,8 +28,8 @@
     <img src="assets/cancel.svg" class="print-control__center-icon" />
     <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
     <div style="text-align: center">
-      <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@cancel-yes">yes</span>
-      <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@cancel-no">no</span>
+      <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@ui-yes">yes</span>
+      <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@ui-no">no</span>
     </div>
   </div>
   <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
@@ -164,14 +164,13 @@
       <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)">
         <span class="print-control__adjust-babystep-axis">Z</span>
         {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}
-        <ng-container i18n="@@offset-mm">mm</ng-container>
+        <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
       </span>
       <div
         class="print-control__adjust__save"
         (click)="setAdjustParameters($event)"
         matRipple
-        [matRippleUnbounded]="false"
-        i18n="@@offset-save">
+        [matRippleUnbounded]="false">
         save
       </div>
     </div>
@@ -197,7 +196,7 @@
           [matRippleUnbounded]="false"
           (click)="babystepZ(0.02)">
           + 0.02
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
         </span>
         <span
           class="print-control__adjust-babystep__change-value"
@@ -205,14 +204,14 @@
           [matRippleUnbounded]="false"
           (click)="babystepZ(0.01)">
           + 0.01
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@babystep-mm-2">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
         </span>
       </div>
       <div class="print-control__adjust-babystep__change">
         <span class="print-control__adjust-babystep__change-current">
           {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }}
           <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
-          <ng-container i18n="@@zoffset-mm">mm</ng-container>
+          <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
         </span>
       </div>
       <div class="print-control__adjust-babystep__change">
@@ -222,7 +221,7 @@
           [matRippleUnbounded]="false"
           (click)="babystepZ(-0.02)">
           - 0.02
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-2">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
         </span>
         <span
           class="print-control__adjust-babystep__change-value"
@@ -230,7 +229,7 @@
           [matRippleUnbounded]="false"
           (click)="babystepZ(-0.01)">
           - 0.01
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@zoffset-mm-3">mm</span>
+          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
         </span>
       </div>
     </div>
