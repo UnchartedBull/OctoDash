@@ -2,7 +2,13 @@
   height: 100%;
 
   &__main-window {
-    margin: 0 8vw;
+    width: 60vw;
+    margin: 0 4vw;
+    display: inline-block;
+  }
+
+  &__custom-actions {
+    display: inline-block;
   }
 
   &__icon {

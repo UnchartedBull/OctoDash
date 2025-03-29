@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { PSUState } from '../../../model';
+import { PSUState, NotificationType } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
 import { EnclosureService } from '../../../services/enclosure/enclosure.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SystemService } from '../../../services/system/system.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-custom-actions',
@@ -16,6 +17,7 @@ import { SystemService } from '../../../services/system/system.service';
 })
 export class CustomActionsComponent {
   @Input() redirectActive = true;
+  @Input() disablePrinterCommands = false;
 
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
@@ -27,6 +29,7 @@ export class CustomActionsComponent {
     private systemService: SystemService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
+    private notificationService: NotificationService,
     private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
@@ -96,7 +99,16 @@ export class CustomActionsComponent {
           const values = command.replace('[!ENC_SHELL]', '').split(',');
           this.runEnclosureShell(values[0]);
         } else {
-          this.printerService.executeGCode(command);
+          if (this.disablePrinterCommands) {
+            this.notificationService.setNotification({
+              heading: $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
+              text: $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
+              type: NotificationType.ERROR,
+              time: new Date(),
+            });
+          } else {
+            this.printerService.executeGCode(command);
+          }
         }
         break;
       }
