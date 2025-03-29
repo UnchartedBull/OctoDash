@@ -4,18 +4,3 @@
   display: block;
   position: relative;
 }
-
-fa-icon {
-  position: fixed;
-  left: calc(50% - 10px);
-  top: -8px;
-  opacity: 0.4;
-}
-
-.animateNotificationCenter {
-  transition: top 0.3s ease-in-out;
-}
-
-.show-notification-center__button {
-  padding: 0 2vw 2.5vh;
-}

@@ -1,5 +1,15 @@
 <div class="main-menu">
-  <span class="main-menu__heading"> OctoDash<span class="main-menu__heading__dot">.</span> </span>
+  <table class="top-bar">
+    <tr>
+      <td class="top-bar__back">
+        {{ now | date: 'HH:mm' }}
+      </td>
+      <td class="top-bar__center">
+        <span class="main-menu__heading">OctoDash<span class="main-menu__heading__dot">.</span></span>
+      </td>
+      <td class="top-bar__next"></td>
+    </tr>
+  </table>
   <table class="main-menu__options">
     <tr>
       <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
