@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
 import { ControlComponent } from './control/control.component';
 import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -10,13 +10,13 @@ import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.componen
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesComponent } from './files/files.component';
-import { HeightProgressComponent } from './job-status/height-progress/height-progress.component';
-import { JobStatusComponent } from './job-status/job-status.component';
+import { HeightProgressComponent } from './main-screen/job-status/height-progress/height-progress.component';
+import { JobStatusComponent } from './main-screen/job-status/job-status.component';
 import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
-import { PrintControlComponent } from './print-control/print-control.component';
+import { PrintControlComponent } from './main-screen/print-control/print-control.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
