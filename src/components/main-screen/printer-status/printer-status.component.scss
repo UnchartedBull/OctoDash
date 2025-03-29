@@ -44,6 +44,7 @@
         width: calc(100% - 6vw);
         text-align: right;
         vertical-align: middle;
+        line-height: 6vh;
 
         &.printer-status__small-text span {
           font-size: 2.5vw;

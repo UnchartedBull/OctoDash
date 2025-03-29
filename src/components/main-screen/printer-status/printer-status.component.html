@@ -11,16 +11,15 @@
       (click)="showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
-      <img class="printer-status__icon" src="assets/nozzle.svg" />
+      <app-hotend-icon
+        class="printer-status__icon"
+        [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
       <div
         class="printer-status__value"
         [ngClass]="{
           'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
           'printer-status__no-set-value': tool.set === 0,
         }">
-        <span class="printer-status__tool-number" *ngIf="extruderInfo.count > 1 && !extruderInfo.sharedNozzle"
-          >T{{ i }}:</span
-        >
         <span class="printer-status__actual-value">
           {{ tool.current }}<span class="printer-status__unit">°C</span>
         </span>
