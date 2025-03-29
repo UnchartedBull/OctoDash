@@ -76,7 +76,7 @@ export class ConfigService {
         }),
       )
       .subscribe((config: Config) => {
-        this.initialize({ ...defaultConfig, ...config });
+        this.initialize({ ...config });
         this.zone.run(() => {
           this.initialized = true;
           this.generateHttpHeaders();
@@ -115,8 +115,8 @@ export class ConfigService {
     return this.errors;
   }
 
-  public saveConfig(config: Config): void {
-    // this.electronService.send('saveConfig', config);
+  public saveConfig(config: Config) {
+    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {

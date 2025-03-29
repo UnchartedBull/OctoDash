@@ -121,10 +121,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
-    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
-
-    this.configService.saveConfig(config);
+    this.configService
+      .saveConfig(config)
+      .subscribe({ complete: this.onConfigSaved.bind(this), error: this.onConfigSaveFail.bind(this) });
   }
 
   private onConfigSaveFail(_, errors: string[]) {
@@ -138,7 +137,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private onConfigSaved() {
     this.hideSettings();
-    this.electronService.send('reload');
+    window.location.reload();
   }
 
   public showUpdate(): void {
