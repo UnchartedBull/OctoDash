@@ -687,23 +687,22 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-wemo-enabled">enabled</span>
           </div>
-          <label for="wemo-ip" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
+          <label for="wemoIP" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
           <input
             type="text"
-            id="wemo-ip"
+            id="wemoIP"
             class="settings__input"
-            name="wemo-ip"
-            style="width: 44.94vw"
+            name="wemoIP"
+            style="width: 30vw"
             [(ngModel)]="config.plugins.wemo.ip"
             required
-            [disabled]="!config.plugins.wemo.enabled" />
-          <label for="wemo-port" class="settings__input-label" i18n="@@settings-wemo-port">Wemo Port</label>
+            [disabled]="!config.plugins.wemo.enabled" /><span class="settings__input-divider">:</span>
           <input
-            type="number"
-            id="wemo-port"
+            type="text"
+            id="wemoPort"
             class="settings__input"
-            name="wemo-port"
-            style="width: 44.94vw"
+            name="wemoPort"
+            style="width: 8vw"
             [(ngModel)]="config.plugins.wemo.port"
             required
             [disabled]="!config.plugins.wemo.enabled" />
