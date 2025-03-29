@@ -104,7 +104,6 @@ export class CustomActionsComponent {
               heading: $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
               text: $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
               type: NotificationType.ERROR,
-              time: new Date(),
             });
           } else {
             this.printerService.executeGCode(command);

@@ -39,7 +39,6 @@ export class ControlComponent implements OnInit, OnDestroy {
           heading: $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
           text: error.message,
           type: NotificationType.ERROR,
-          time: new Date(),
           sticky: true,
         });
       },

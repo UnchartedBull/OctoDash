@@ -38,7 +38,6 @@ export class OctoprintAuthenticationComponent {
             heading: $localize`:@@octoprint-connection-failed:Can't connect to OctoPrint!`,
             text: $localize`:@@octoprint-connection-failed-message:Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.`,
             type: NotificationType.ERROR,
-            time: new Date(),
           });
         } else this.setAutologinWarning();
       },
@@ -50,7 +49,6 @@ export class OctoprintAuthenticationComponent {
       heading: $localize`:@@unsupported-autologin:Automatic login not supported!`,
       text: $localize`:@@manually-create-api-key:Please create the API Key manually and paste it in the bottom field.`,
       type: NotificationType.WARN,
-      time: new Date(),
     });
   }
 
@@ -61,7 +59,6 @@ export class OctoprintAuthenticationComponent {
           heading: $localize`:@@login-request-sent:Login request send!`,
           text: $localize`:@@login-request-sent-message:Please confirm the request via the popup in the OctoPrint WebUI.`,
           type: NotificationType.INFO,
-          time: new Date(),
         });
         setTimeout(() => {
           this.notificationService.closeNotification();

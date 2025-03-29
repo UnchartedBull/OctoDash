@@ -57,7 +57,6 @@ export class AppService {
               heading: $localize`:@@update-available:Update available!`,
               text: $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
               type: NotificationType.INFO,
-              time: new Date(),
             });
           }
 
@@ -109,7 +108,6 @@ export class AppService {
         heading: $localize`:@@error-load-style:Can't load custom styles!`,
         text: customCSSError,
         type: NotificationType.ERROR,
-        time: new Date(),
       });
     });
   }

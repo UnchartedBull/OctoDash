@@ -37,7 +37,6 @@ export class BottomBarComponent implements OnDestroy {
                 heading: $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
                 text: error.message,
                 type: NotificationType.ERROR,
-                time: new Date(),
               });
             },
           });

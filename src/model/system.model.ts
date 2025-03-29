@@ -2,7 +2,7 @@ export interface Notification {
   heading: string;
   text: string;
   type: NotificationType;
-  time: Date;
+  time?: Date;
   choices?: Array<string>;
   callback?: (index: number) => void;
   sticky?: boolean;
