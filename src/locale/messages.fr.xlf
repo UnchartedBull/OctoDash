@@ -557,6 +557,7 @@
       </trans-unit>
       <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
