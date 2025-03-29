@@ -37,6 +37,20 @@
         <source>do you want to execute the following command?</source>
         <target>voulez-vous exécuter la commande suivante ?</target>
       </trans-unit>
+      <trans-unit id="error-custom-action-invalid" datatype="html">
+        <source>Unknown special command!</source>
+      </trans-unit>
+      <trans-unit id="error-custom-action-invalid-desc" datatype="html">
+        <source>The special command you have entered is unknown.</source>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled" datatype="html">
+        <source>Printer commands are not available!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled-desc" datatype="html">
+        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament into tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
