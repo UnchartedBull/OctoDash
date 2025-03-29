@@ -11,6 +11,13 @@ interface HttpHeader {
   headers: HttpHeaders;
 }
 
+// This contains a bunch of other properties that are not used in the app
+interface OctoPrintConfig {
+  plugins: {
+    octodash: Config;
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -27,39 +34,9 @@ export class ConfigService {
 
   public constructor(
     private notificationService: NotificationService,
-    // private electronService: ElectronService,
     private zone: NgZone,
   ) {
     this.getConfig();
-    // this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    // this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    // this.electronService.on('configError', (_, error: string) => {
-    //   this.notificationService.setNotification({
-    //     heading: error,
-    //     text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-    //     type: NotificationType.ERROR,
-    //     time: new Date(),
-    //     sticky: true,
-    //   });
-    // });
-
-    // this.electronService.on('configPass', () => {
-    //   this.zone.run(() => {
-    //     this.valid = true;
-    //     this.generateHttpHeaders();
-    //     this.initialized = true;
-    //   });
-    // });
-    // this.electronService.on('configFail', (_, errors) => {
-    //   this.zone.run(() => {
-    //     this.valid = false;
-    //     this.errors = errors;
-    //     console.error(errors);
-    //     this.initialized = true;
-    //   });
-    // });
-
-    // this.electronService.send('readConfig');
   }
 
   private getConfig() {
@@ -69,9 +46,9 @@ export class ConfigService {
       'x-api-key': apiKey,
     });
     this.http
-      .get('http://localhost:8080/api/settings', { headers })
+      .get<OctoPrintConfig>('http://localhost:8080/api/settings', { headers })
       .pipe(
-        map((response: any) => {
+        map(response => {
           return response.plugins.octodash;
         }),
       )
