@@ -22,7 +22,7 @@ export class ToggleSwitchComponent {
   public animationCreated(animation: AnimationItem): void {
     this.animation = animation;
     this.animation.autoplay = false;
-    this.animation.setSpeed(2);
+    this.animation.setSpeed(4);
     if (this.value) {
       this.animation.goToAndStop(46, true);
     } else {
