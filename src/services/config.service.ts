@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, throwError } from 'rxjs';
 
 import defaultConfig from '../helper/config.default.json';
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
@@ -27,7 +27,7 @@ export class ConfigService {
   private valid: boolean;
   private errors: string[];
   private update = false;
-  private initialized = false;
+  private initialized = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
@@ -36,37 +36,38 @@ export class ConfigService {
   public constructor(
     private notificationService: NotificationService,
     private zone: NgZone,
-  ) {
-    this.getConfig();
-  }
+  ) {}
 
-  private getConfig() {
+  public getConfig() {
     this.apiKey = localStorage.getItem('octodash_apikey');
     // set the x-api-key header
+    if (!this.apiKey) {
+      return throwError(() => 'No API Key Found');
+    }
     const headers = new HttpHeaders({
       'x-api-key': this.apiKey ?? '',
     });
-    this.http
+    return this.http
       .get<OctoPrintConfig>('/api/settings', { headers })
       .pipe(
         map(response => {
           return response.plugins.octodash;
         }),
       )
-      .subscribe((config: Config) => {
-        this.initialize({ ...config });
-        this.zone.run(() => {
-          this.initialized = true;
-          this.generateHttpHeaders();
-          this.valid = true;
-          console.log(this.config);
-        });
-      });
+      .pipe(
+        map((config: Config) => {
+          this.initialize({ ...config });
+          this.zone.run(() => {
+            this.initialized.next(true);
+            this.generateHttpHeaders();
+            this.valid = true;
+          });
+        }),
+      );
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    // this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
@@ -80,6 +81,16 @@ export class ConfigService {
     };
   }
 
+  public getAccessToken(): string {
+    return this.apiKey;
+  }
+
+  public setAccessToken(token: string): void {
+    this.apiKey = token;
+    localStorage.setItem('octodash_apikey', token);
+    this.generateHttpHeaders();
+  }
+
   public getCurrentConfig(): Config {
     return _.cloneDeep(this.config);
   }
@@ -90,7 +101,6 @@ export class ConfigService {
 
   public getErrors(): string[] {
     return [];
-    return this.errors;
   }
 
   public saveConfig(config: Config) {
@@ -157,6 +167,10 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
+    return this.initialized.getValue();
+  }
+
+  public isInitializedObservable() {
     return this.initialized;
   }
 
