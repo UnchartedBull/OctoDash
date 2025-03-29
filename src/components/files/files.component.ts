@@ -73,7 +73,6 @@ export class FilesComponent {
             heading: $localize`:@@error-load-file-folder:Can't load file/folder!`,
             text: error.message,
             type: NotificationType.ERROR,
-            time: new Date(),
           });
           this.currentFolder = folderPath;
         },
@@ -108,7 +107,6 @@ export class FilesComponent {
           heading: $localize`:@@error-load-file:Can't load file!`,
           text: error.message,
           type: NotificationType.ERROR,
-          time: new Date(),
         });
       },
     });
@@ -183,5 +181,9 @@ export class FilesComponent {
 
   private showLoader(): void {
     this.loading = Date.now();
+  }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
   }
 }

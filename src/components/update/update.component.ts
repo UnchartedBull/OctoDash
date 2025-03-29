@@ -41,7 +41,6 @@ export class UpdateComponent implements OnInit {
         heading: $localize`:@@error-update:Can't initiate update!`,
         text: $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
         type: NotificationType.ERROR,
-        time: new Date(),
       });
       this.closeUpdateWindow();
     } else {
@@ -56,7 +55,6 @@ export class UpdateComponent implements OnInit {
         heading: $localize`:@@error-install-update:Can't install update!`,
         text: updateError.error.message,
         type: NotificationType.ERROR,
-        time: new Date(),
       });
       this.closeUpdateWindow();
     });

@@ -178,7 +178,26 @@
 
     &-descriptor {
       font-size: 2.5vw;
-      vertical-align: 2vh;
+      vertical-align: top;
+    }
+  }
+
+  &__toggle-switch {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+    height: 10vh;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    margin-left: -2vw;
+    overflow: visible;
+
+    ::ng-deep .label {
+      vertical-align: baseline;
+    }
+
+    &-descriptor {
+      font-size: 2vw;
     }
   }
 

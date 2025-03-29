@@ -28,6 +28,9 @@ export class NotificationService {
   }
 
   public setNotification(notification: Notification): void {
+    if (!notification.time) {
+      notification.time = new Date();
+    }
     if (this.observer) {
       this.observer.next(notification);
       this.notificationStack.push(notification);

@@ -95,7 +95,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         // eslint-disable-next-line max-len
         text: $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
         type: NotificationType.WARN,
-        time: new Date(),
       });
       this.overwriteNoSave = true;
     }
@@ -132,7 +131,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       heading: $localize`:@@error-invalid-config:Can't save invalid config`,
       text: String(errors),
       type: NotificationType.WARN,
-      time: new Date(),
     });
   }
 

@@ -11,16 +11,15 @@
       (click)="showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
-      <img class="printer-status__icon" src="assets/nozzle.svg" />
+      <app-hotend-icon
+        class="printer-status__icon"
+        [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
       <div
         class="printer-status__value"
         [ngClass]="{
           'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
           'printer-status__no-set-value': tool.set === 0,
         }">
-        <span class="printer-status__tool-number" *ngIf="extruderInfo.count > 1 && !extruderInfo.sharedNozzle"
-          >T{{ i }}:</span
-        >
         <span class="printer-status__actual-value">
           {{ tool.current }}<span class="printer-status__unit">°C</span>
         </span>
@@ -56,26 +55,18 @@
 </div>
 
 <div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl" (click)="hideQuickControl()">
-  <table class="top-bar">
-    <tr>
-      <td class="top-bar__back">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
-      </td>
-      <td class="top-bar__center">
-        <img
-          [src]="
-            'assets/' +
-            (view === QuickControlView.HOTEND
-              ? 'nozzle.svg'
-              : view === QuickControlView.HEATBED
-                ? 'heat-bed.svg'
-                : 'fan.svg')
-          "
-          class="top-bar__center-icon" />
-      </td>
-      <td class="top-bar__next"></td>
-    </tr>
-  </table>
+  <app-top-bar [backButton]="true" (onBack)="hideQuickControl()">
+    <img
+      [src]="
+        'assets/' +
+        (view === QuickControlView.HOTEND
+          ? 'nozzle.svg'
+          : view === QuickControlView.HEATBED
+            ? 'heat-bed.svg'
+            : 'fan.svg')
+      "
+      class="top-bar__center-icon" />
+  </app-top-bar>
 
   <ngTemplate #quickController>
     <div class="quick-control__controller" (click)="stopPropagation($event)">

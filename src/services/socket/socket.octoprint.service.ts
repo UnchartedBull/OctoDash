@@ -123,7 +123,6 @@ export class OctoPrintSocketService implements SocketService {
                 heading: $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
                 text: $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
                 type: NotificationType.ERROR,
-                time: new Date(),
                 sticky: true,
               } as Notification);
             } else {
@@ -131,7 +130,6 @@ export class OctoPrintSocketService implements SocketService {
                 heading: $localize`:@@http-unknown-heading:Unknown HTTP Error`,
                 text: err.message,
                 type: NotificationType.ERROR,
-                time: new Date(),
                 sticky: true,
               } as Notification);
             }
@@ -390,7 +388,6 @@ export class OctoPrintSocketService implements SocketService {
             heading: $localize`:@@printer-error:Printer error`,
             text: state.event.payload.error,
             type: NotificationType.ERROR,
-            time: new Date(),
             sticky: true,
           } as Notification);
         }
@@ -416,7 +413,6 @@ export class OctoPrintSocketService implements SocketService {
           heading: $localize`:@@action-required:Action required`,
           text: notification.text ?? notification.message,
           type: NotificationType.PROMPT,
-          time: new Date(),
           choices: notification.choices,
           callback: this.callbackFunction.bind(this),
           sticky: true,
@@ -441,7 +437,6 @@ export class OctoPrintSocketService implements SocketService {
             heading: $localize`:@@error-answer-prompt:Can't answer prompt!`,
             text: error.message,
             type: NotificationType.ERROR,
-            time: new Date(),
           });
           return of(null);
         }),

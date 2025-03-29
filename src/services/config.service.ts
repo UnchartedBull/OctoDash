@@ -34,7 +34,6 @@ export class ConfigService {
         heading: error,
         text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
         type: NotificationType.ERROR,
-        time: new Date(),
         sticky: true,
       });
     });

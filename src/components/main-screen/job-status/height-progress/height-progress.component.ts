@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ZHeightLayer } from '../../../model';
-import { SocketService } from '../../../services/socket/socket.service';
+import { ZHeightLayer } from '../../../../model';
+import { SocketService } from '../../../../services/socket/socket.service';
 
 @Component({
   selector: 'app-height-progress',

@@ -3,6 +3,12 @@
   "rules": {
     "selector-class-pattern": null,
     "selector-id-pattern": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ]
   }
 }
