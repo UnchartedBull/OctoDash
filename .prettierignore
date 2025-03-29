@@ -5,7 +5,6 @@ dist
 
 docs/css/icomoon.css
 docs/css/theme.css
-src/_theme-colors.scss
 src/reset.css
 src/assets/animations/
 docs/fonts/ionicons

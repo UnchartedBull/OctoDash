@@ -3,5 +3,4 @@ dist/
 docs/css/icomoon.css
 docs/css/theme.css
 docs/fonts/ionicons/
-src/_theme-colors.scss
 src/reset.css
