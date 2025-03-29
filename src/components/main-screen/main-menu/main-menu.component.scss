@@ -10,6 +10,13 @@
     font-weight: 500;
     margin-top: 4vh;
     font-family: Arvo, sans-serif;
+
+    &__dot {
+      color: var(--primary);
+      opacity: 1;
+
+      animation: breathe 5s ease-in-out infinite alternate;
+    }
   }
 
   &__options {
@@ -43,5 +50,15 @@
       width: 10.5vw;
       margin-bottom: 1.6vw;
     }
+  }
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
   }
 }

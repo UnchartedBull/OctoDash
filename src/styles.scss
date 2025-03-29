@@ -38,6 +38,23 @@
   cursor: default;
 }
 
+:root {
+  --primary: #44bd32;
+  --secondary: #1ec02c;
+
+  --text: #f5f6fa;
+  --border: #dcdde1;
+
+  --background: #353b48;
+  --background-2: #5a6675;
+  --background-3: #718093;
+
+  --success: #4bae50;
+  --warn: #b5b33f;
+  --error: #c23616;
+  --info: #2196f3;
+}
+
 html {
   @include mat.theme(
     (
@@ -59,7 +76,7 @@ body,
   height: 100%;
   padding: 0;
   font-family: Montserrat, sans-serif;
-  color: #f5f6fa;
+  color: var(--text);
   font-size: 4.3vw;
 }
 
@@ -71,7 +88,7 @@ body {
 
 app-root {
   display: block;
-  background-color: #353b48;
+  background-color: var(--background);
   padding: 0.9vh 0.9vw;
   overflow: hidden;
 }
@@ -226,7 +243,7 @@ button {
   }
 
   20% {
-    color: #f5f6fa;
+    color: var(--text);
     text-shadow:
       0.25em 0 0 rgb(255 255 255 / 20%),
       0.5em 0 0 rgb(255 255 255 / 20%);
@@ -234,28 +251,28 @@ button {
 
   30% {
     text-shadow:
-      0.25em 0 0 #f5f6fa,
+      0.25em 0 0 var(--text),
       0.5em 0 0 rgb(255 255 255 / 20%);
   }
 
   52%,
   60% {
     text-shadow:
-      0.25em 0 0 #f5f6fa,
-      0.5em 0 0 #f5f6fa;
+      0.25em 0 0 var(--text),
+      0.5em 0 0 var(--text);
   }
 
   70% {
     color: rgb(255 255 255 / 20%);
     text-shadow:
-      0.25em 0 0 #f5f6fa,
-      0.5em 0 0 #f5f6fa;
+      0.25em 0 0 var(--text),
+      0.5em 0 0 var(--text);
   }
 
   80% {
     text-shadow:
       0.25em 0 0 rgb(255 255 255 / 20%),
-      0.5em 0 0 #f5f6fa;
+      0.5em 0 0 var(--text);
   }
 
   90%,

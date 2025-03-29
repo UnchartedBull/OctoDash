@@ -7,7 +7,7 @@
     height: 56vh;
     width: 60vw;
     padding-top: 25vh;
-    background-color: #353b48;
+    background-color: var(--background);
     border-radius: 2vw;
     text-align: center;
   }
@@ -22,12 +22,12 @@
     margin: 7vh 2vw;
 
     &__no {
-      background-color: #718093;
+      background-color: var(--background-3);
       opacity: 0.8;
     }
 
     &__yes {
-      background-color: #4bae50;
+      background-color: var(--success);
     }
 
     &__wrapper {

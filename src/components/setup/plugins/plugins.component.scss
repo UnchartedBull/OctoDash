@@ -13,7 +13,7 @@
     top: 25vh;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+    background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));
   }
 
   span {

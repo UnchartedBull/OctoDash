@@ -2,12 +2,12 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #4bae50;
+    background-color: var(--success);
     width: 0;
     transition: width 0.7s ease-in-out;
 
     &-wrapper {
-      background-color: #718093;
+      background-color: var(--background-3);
       height: 4vh;
       width: 20vw;
       display: inline-block;
@@ -29,7 +29,7 @@
   }
 
   &__button {
-    background-color: #4bae50;
+    background-color: var(--success);
     display: inline-block;
     padding: 1.4vh 2vw;
     border-radius: 1vw;
@@ -40,7 +40,7 @@
     background: transparent;
     margin-top: 7vh;
     padding: 3vh 2.5vw;
-    border: 2px solid #dcdde1;
+    border: 2px solid var(--border);
     border-radius: 2.5vw;
     width: 55vw;
     line-height: 125%;
@@ -56,7 +56,7 @@
       &-adjust {
         display: inline-flex;
         padding: 3vh 3vw;
-        border: 2px solid #dcdde1;
+        border: 2px solid var(--border);
         border-radius: 2.5vw 0 0 2.5vw;
         margin-right: -2px;
         font-size: 4.3vw;
@@ -69,14 +69,14 @@
       }
 
       &:focus {
-        border: 2px solid #dcdde1 !important;
-        border-bottom: 2px solid #4bae50 !important;
+        border: 2px solid var(--border) !important;
+        border-bottom: 2px solid var(--primary) !important;
       }
     }
 
     &:focus {
       outline: 0;
-      border: 2px solid #4bae50;
+      border: 2px solid var(--primary);
     }
 
     &-small {
@@ -113,7 +113,7 @@
     height: 4vw;
     width: 4vw;
     background-color: transparent;
-    border: 2px solid #dcdde1;
+    border: 2px solid var(--border);
     border-radius: 1vw;
 
     &-container {
@@ -128,7 +128,7 @@
     }
 
     &-checked {
-      background-color: #2196f3;
+      background-color: var(--primary);
       width: 2.4vw;
       height: 2.4vw;
       display: block;

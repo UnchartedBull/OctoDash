@@ -4,12 +4,12 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #4bae50;
+    background-color: var(--success);
     width: 0;
     transition: width 0.7s ease-in-out;
 
     &-wrapper {
-      background-color: #718093;
+      background-color: var(--background-3);
       height: 4vh;
       width: 20vw;
       display: inline-block;
@@ -21,7 +21,7 @@
         display: block;
         height: 7vh;
         background-color: transparent;
-        border: 3px solid #f5f6fa;
+        border: 3px solid var(--border);
         border-radius: 3vh;
 
         > div {
@@ -48,7 +48,7 @@
 
   &__done {
     display: inline-block;
-    background-color: #4bae50;
+    background-color: var(--success);
     padding: 2vh 2vw;
     border-radius: 8px;
   }

@@ -27,7 +27,7 @@
     top: 3vh;
     right: 3.5vw;
     z-index: 51;
-    color: #c23616;
+    color: var(--error);
   }
 }
 
@@ -45,7 +45,7 @@
     float: left;
     width: 10vw;
     height: 10vw;
-    border: 0.8vw solid #f5f6fa;
+    border: 0.8vw solid var(--border);
     border-radius: 1.5vw;
     text-align: center;
     opacity: 0.9;
@@ -63,7 +63,7 @@
   top: 22vh;
   width: 64vw;
   margin-left: calc(15vw - 5px);
-  background-color: #353b48;
+  background-color: var(--background);
   border: 5px solid rgb(255 255 255 / 40%);
   border-radius: 2vw;
   padding: 3vh 3vw;
@@ -87,11 +87,11 @@
     margin-left: 15vw;
 
     &-yes {
-      color: #4bae50;
+      color: var(--success);
     }
 
     &-no {
-      color: #c23616;
+      color: var(--error);
     }
   }
 

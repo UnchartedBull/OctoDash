@@ -6,14 +6,14 @@
     left: 20vw;
     height: 81vh;
     width: 60vw;
-    background-color: #353b48;
+    background-color: var(--background);
     border-radius: 2vw;
   }
 
   &-progress-bar {
     height: 5.5vh;
     border-radius: 2vh;
-    background-color: #4bae50;
+    background-color: var(--success);
     width: 25vw;
     transition: width 0.7s ease-in-out;
     font-size: 0.5rem;
@@ -34,7 +34,7 @@
       display: block;
       height: 7vh;
       background-color: transparent;
-      border: 3px solid #f5f6fa;
+      border: 3px solid var(--border);
       border-radius: 3vh;
     }
   }
@@ -84,12 +84,12 @@
       margin: 7vh 2vw;
 
       .button__no {
-        background-color: #718093;
+        background-color: var(--background-3);
         opacity: 0.8;
       }
 
       .button__yes {
-        background-color: #4bae50;
+        background-color: var(--success);
       }
 
       .button__wrapper {

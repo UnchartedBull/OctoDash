@@ -9,7 +9,7 @@
 
   &__cancel {
     display: inline-block;
-    background-color: #c23616;
+    background-color: var(--error);
     padding: 2vh 2vw;
     border-radius: 8px;
   }
@@ -17,7 +17,7 @@
   &__progress-bar {
     height: 4vh;
     border-radius: 2vh;
-    background-color: #4bae50;
+    background-color: var(--success);
     width: 0;
     transition: width 0.7s ease-in-out;
 
@@ -27,7 +27,7 @@
       display: block;
       height: 7vh;
       background-color: transparent;
-      border: 3px solid #f5f6fa;
+      border: 3px solid var(--border);
       border-radius: 3vh;
 
       > div {

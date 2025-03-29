@@ -71,7 +71,7 @@
         <fa-icon
           [icon]="octoprintConnection ? 'circle-check' : 'circle-xmark'"
           class="setup__validation-check-icon"
-          [style.color]="octoprintConnection ? '#4bae50' : '#c23616'" />
+          [style.color]="octoprintConnection ? 'var(--success)' : 'var(--error)'" />
         <ng-container i18n="@@checking-octoprint-connection">OctoPrint Connection</ng-container>
       </span>
       <div *ngIf="octoprintConnection">
@@ -79,7 +79,7 @@
           <fa-icon
             [icon]="configValid ? 'circle-check' : 'circle-xmark'"
             class="setup__validation-check-icon"
-            [style.color]="configValid ? '#4bae50' : '#c23616'" />
+            [style.color]="configValid ? 'var(--success)' : 'var(--error)'" />
           <ng-container i18n="@@checking-config">Validating Config</ng-container>
         </span>
       </div>
@@ -88,7 +88,7 @@
           <fa-icon
             [icon]="configSaved === null ? 'circle-check' : 'circle-xmark'"
             class="setup__validation-check-icon"
-            [style.color]="configSaved === null ? '#4bae50' : '#c23616'" />
+            [style.color]="configSaved === null ? 'var(--success)' : 'var(--error)'" />
           <ng-container i18n="@@checking-save">Saving Config</ng-container>
         </span>
         <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>

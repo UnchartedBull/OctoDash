@@ -16,7 +16,7 @@
     top: 27.5vh;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+    background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));
   }
 
   td {
@@ -37,7 +37,7 @@
   }
 
   tr {
-    background-color: #718093;
+    background-color: var(--background-3);
     border-radius: 1vw;
     padding: 0 1vw;
     display: block;
@@ -87,8 +87,8 @@
     }
 
     &:active::before {
-      border-top-color: #4bae50;
-      border-right-color: #4bae50;
+      border-top-color: var(--primary);
+      border-right-color: var(--primary);
       transition:
         border-color 0s ease-out 0.7s,
         width 1s ease-out 0.7s,
@@ -96,8 +96,8 @@
     }
 
     &:active::after {
-      border-bottom-color: #4bae50;
-      border-left-color: #4bae50;
+      border-bottom-color: var(--primary);
+      border-left-color: var(--primary);
       transition:
         border-color 0s ease-out 1.8s,
         width 1s ease-out 1.8s,

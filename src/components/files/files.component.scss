@@ -53,7 +53,7 @@
     top: 20vh;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(#353b48, transparent 6%, transparent 94%, #353b48);
+    background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));
   }
 
   &__error {
@@ -63,7 +63,7 @@
 
   &__object {
     width: 90vw;
-    background-color: #718093;
+    background-color: var(--background-3);
     border-radius: 1vw;
     height: 11vh;
     line-height: 11vh;
@@ -79,15 +79,15 @@
     }
 
     &--success {
-      border-left-color: #44bd32;
+      border-left-color: var(--success);
     }
 
     &--failed {
-      border-left-color: #e84118;
+      border-left-color: var(--error);
     }
 
     &--unknown {
-      border-left-color: #f5f6fa;
+      border-left-color: var(--info);
     }
   }
 
@@ -153,7 +153,7 @@
     top: 8vh;
     width: 50vw;
     height: 80vh;
-    background-color: #353b48;
+    background-color: var(--background);
     z-index: 10;
     border-radius: 2vw;
     padding: 2vh 1.5vw;
@@ -240,7 +240,7 @@
 
       &:first-of-type {
         text-align: left;
-        color: #0097e6;
+        color: var(--info);
 
         & span {
           margin-top: 4vh;
@@ -251,7 +251,7 @@
 
       &:last-of-type {
         text-align: right;
-        color: #c23616;
+        color: var(--error);
 
         & span {
           margin-top: 4.5vh;
@@ -290,7 +290,7 @@
     top: 24vh;
     width: 50vw;
     height: 47vh;
-    background-color: #353b48;
+    background-color: var(--background);
     z-index: 10;
     border-radius: 2vw;
     padding: 2vh 1.5vw;
@@ -320,7 +320,7 @@
     height: 3vw;
     width: 3vw;
     background-color: transparent;
-    border: 2px solid #dcdde1;
+    border: 2px solid var(--border);
     border-radius: 1vw;
 
     &-container {
@@ -335,7 +335,7 @@
     }
 
     &-checked {
-      background-color: #2196f3;
+      background-color: var(--primary);
       width: 1.8vw;
       height: 1.8vw;
       display: block;

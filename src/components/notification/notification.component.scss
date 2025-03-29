@@ -2,14 +2,14 @@
   display: block;
   position: fixed;
   width: 80vw;
-  background-color: #5a6675;
+  background-color: var(--background-2);
   border-radius: 1.3vw;
   left: 10vw;
   top: -75vh;
   transition: top 0.7s ease-in-out;
   box-shadow: 0 4px 10px -3px rgb(0 0 0 / 75%);
   z-index: 100;
-  border-right: 1vw solid #5a6675;
+  border-right: 1vw solid var(--background-2);
 
   &-prompt {
     &__choices {
@@ -21,7 +21,7 @@
     &__choice {
       display: block;
       font-size: 2.7vw;
-      background-color: #2196f3;
+      background-color: var(--primary);
       text-align: center;
       padding: 3vh;
       border-radius: 0.8vw;
@@ -29,7 +29,7 @@
       flex-grow: 100;
 
       &-first {
-        background-color: #44bd32;
+        background-color: var(--primary);
       }
     }
   }

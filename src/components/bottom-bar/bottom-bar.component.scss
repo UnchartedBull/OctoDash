@@ -29,7 +29,7 @@
   }
 
   &__error {
-    color: #c23616;
+    color: var(--error);
     animation: blinker 2s linear infinite;
   }
 }

@@ -124,9 +124,9 @@
       font-size: 2.8vw;
       width: 10vw;
       text-align: center;
-      border: 0.25vw solid #f5f6fa;
-      border-right: 0.175vw solid #f5f6fa;
-      border-left: 0.175vw solid #f5f6fa;
+      border: 0.25vw solid var(--border);
+      border-right: 0.175vw solid var(--border);
+      border-left: 0.175vw solid var(--border);
       padding: 1vh 0.7vw;
       opacity: 0.5;
       background-color: transparent;
@@ -142,13 +142,13 @@
     &-field:first-child {
       border-top-left-radius: 1vw;
       border-bottom-left-radius: 1vw;
-      border-left: 0.25vw solid #f5f6fa;
+      border-left: 0.25vw solid var(--border);
     }
 
     &-field:last-child {
       border-top-right-radius: 1vw;
       border-bottom-right-radius: 1vw;
-      border-right: 0.25vw solid #f5f6fa;
+      border-right: 0.25vw solid var(--border);
     }
   }
 }
