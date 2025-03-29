@@ -2,12 +2,13 @@ import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { NotificationType, PSUState } from '../../../model';
+import { NotificationType, PSUState, PrinterState, PrinterStatus } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
 import { EnclosureService } from '../../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../../services/notification.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SystemService } from '../../../services/system/system.service';
+import { SocketService } from '../../../services/socket/socket.service';
 
 const SpecialCommandRegex = /\[!([\w_]+)\]/;
 
@@ -19,12 +20,12 @@ const SpecialCommandRegex = /\[!([\w_]+)\]/;
 })
 export class CustomActionsComponent {
   @Input() redirectActive = true;
-  @Input() disablePrinterCommands = false;
 
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
   public iframeOpen = false;
   public actionToConfirm: ActionToConfirm;
+  public printerConnected = false;
 
   private commands = {
     DISCONNECT: () => this.disconnectPrinter(),
@@ -46,12 +47,23 @@ export class CustomActionsComponent {
   constructor(
     private printerService: PrinterService,
     private systemService: SystemService,
+    private socketService: SocketService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
     private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
+
+    this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus) => {
+      this.printerConnected = [
+        PrinterState.operational,
+        PrinterState.pausing,
+        PrinterState.paused,
+        PrinterState.printing,
+        PrinterState.cancelling,
+      ].includes(printerStatus?.status);
+    });
   }
 
   public doAction(command: string, exit: boolean, confirm: boolean): void {
@@ -92,7 +104,7 @@ export class CustomActionsComponent {
       return;
     }
 
-    if (this.disablePrinterCommands) {
+    if (!this.printerConnected) {
       this.notificationService.setNotification({
         heading: $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
         text: $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,

@@ -12,7 +12,7 @@
   <div
     class="custom-actions__action"
     *ngFor="let customAction of customActions"
-    [attr.disabled]="disablePrinterCommands && !customAction.command.startsWith('[!')"
+    [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
     [style.border-color]="customAction.color"
     (click)="doAction(customAction.command, customAction.exit, customAction.confirm)"
     matRipple

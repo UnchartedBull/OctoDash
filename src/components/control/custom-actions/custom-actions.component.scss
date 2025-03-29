@@ -49,6 +49,7 @@
     border-radius: 1.5vw;
     text-align: center;
     opacity: 0.9;
+    transition: opacity 0.2s;
     margin: 0 1.4vw 3vh;
 
     &[disabled='true'] {
