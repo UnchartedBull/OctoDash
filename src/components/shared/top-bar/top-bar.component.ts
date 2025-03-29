@@ -26,12 +26,18 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.backButton) {
+      if (this.backButton === true) {
+        this.backButton = {};
+      }
       this.back = {
         text: this.backButton?.text || $localize`:@@ui-back:back`,
         icon: this.backButton?.icon || 'chevron-left',
       };
     }
     if (this.nextButton) {
+      if (this.nextButton === true) {
+        this.nextButton = {};
+      }
       this.next = {
         text: this.nextButton?.text || $localize`:@@ui-next:next`,
         icon: this.nextButton?.icon || 'chevron-right',

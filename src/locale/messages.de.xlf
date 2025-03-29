@@ -11,14 +11,6 @@
         <source>initializing</source>
         <target>initialisieren</target>
       </trans-unit>
-      <trans-unit id="error-enclosure-temp" datatype="html">
-        <source>Can't retrieve enclosure temperature!</source>
-        <target>Kann Gehäuse Temperature nicht laden!</target>
-      </trans-unit>
-      <trans-unit id="ui-back" datatype="html">
-        <source>back</source>
-        <target>zurück</target>
-      </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
         <target>Druckerprofil kann nicht abgerufen werden!</target>
@@ -37,9 +29,11 @@
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
@@ -105,10 +99,6 @@
         </source>
         <target></target>
       </trans-unit>
-      <trans-unit id="ui-skip" datatype="html">
-        <source>skip</source>
-        <target>überspringen</target>
-      </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
         <source>heating the nozzle for tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
@@ -162,10 +152,6 @@
       <trans-unit id="purging-done" datatype="html">
         <source>done</source>
         <target>fertig</target>
-      </trans-unit>
-      <trans-unit id="ui-sort" datatype="html">
-        <source>sort</source>
-        <target>sortieren</target>
       </trans-unit>
       <trans-unit id="files-mb-1" datatype="html">
         <source>mb</source>
@@ -239,6 +225,10 @@
         <source>Can't load file!</source>
         <target>Datei kann nicht gefunden werden!</target>
       </trans-unit>
+      <trans-unit id="error-enclosure-temp" datatype="html">
+        <source>Can't retrieve enclosure temperature!</source>
+        <target>Kann Gehäuse Temperature nicht laden!</target>
+      </trans-unit>
       <trans-unit id="unit-millimeters-short" datatype="html">
         <source>mm</source>
         <target></target>
@@ -308,10 +298,6 @@
         <source>control</source>
         <target>Steuerung</target>
       </trans-unit>
-      <trans-unit id="tap-close" datatype="html">
-        <source>tap this card to close it</source>
-        <target>Tippe auf diese Karte um sie zu schließen</target>
-      </trans-unit>
       <trans-unit id="control-cancel" datatype="html">
         <source>cancel</source>
         <target>Abbrechen</target>
@@ -371,6 +357,10 @@
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
         <target>Babysteo Z</target>
+      </trans-unit>
+      <trans-unit id="tap-close" datatype="html">
+        <source>tap this card to close it</source>
+        <target>Tippe auf diese Karte um sie zu schließen</target>
       </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
@@ -527,10 +517,6 @@
         <source>Preview by default while printing</source>
         <target>Vorschau als Standard</target>
       </trans-unit>
-      <trans-unit id="always-circular" datatype="html">
-        <source>Always use circular progress bar</source>
-        <target>Immer runde Fortschrittsanzeige verwenden</target>
-      </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
         <target></target>
@@ -567,25 +553,16 @@
         <source>OctoDash Companion</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+      <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
-        <target></target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
         <target>Display Layer Progress</target>
       </trans-unit>
-      <trans-unit id="settings-display-layer-progress-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
-      </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
         <source>Enclosure</source>
         <target>Enclosure</target>
-      </trans-unit>
-      <trans-unit id="settings-enclosure-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
         <source> Ambient Sensor 
@@ -598,57 +575,29 @@
         <source>Filament Manager</source>
         <target>Filament Manager</target>
       </trans-unit>
-      <trans-unit id="settings-filament-manager-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
-      </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
-        <source>Spool Manager (Beta)</source>
+        <source>Spool Manager</source>
         <target>Spool Manager (Beta)</target>
-      </trans-unit>
-      <trans-unit id="settings-spool-manager-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Preheat Button</target>
       </trans-unit>
-      <trans-unit id="settings-preheat-button-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
-      </trans-unit>
       <trans-unit id="settings-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <target>Print Time Genius</target>
-      </trans-unit>
-      <trans-unit id="settings-print-time-genius-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <target>PSU Control</target>
       </trans-unit>
-      <trans-unit id="settings-psu-control-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
-      </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
         <target>Opon Control (Phillips HUE)</target>
       </trans-unit>
-      <trans-unit id="settings-ophom-control-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
-      </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
         <target>TPLink-SmartPlug</target>
-      </trans-unit>
-      <trans-unit id="settings-tplink-smartplug-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiviert</target>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
@@ -658,20 +607,12 @@
         <source>Tuya Smart Plug</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-tuya-enabled" datatype="html">
-        <source>enabled</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-wemo-enabled" datatype="html">
-        <source>enabled</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
@@ -892,7 +833,7 @@
         <target>Filament Manager</target>
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
-        <source>Spool Manager (Beta)</source>
+        <source>Spool Manager</source>
         <target>Spool Manager (Beta)</target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
@@ -912,28 +853,24 @@
         <target>Ophom (Phillips HUE)</target>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
-        <source> TPLink SmartPlug </source>
+        <source>TPLink SmartPlug</source>
         <target>TPLink SmartPlug </target>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
-        <source> Tuya SmartPlug </source>
+        <source>Tuya SmartPlug</source>
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
-        <source> Tasmota </source>
+        <source>Tasmota</source>
         <target>Tasmota</target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
-        <source> Tasmota MQTT </source>
+        <source>Tasmota MQTT</source>
         <target>Tasmota MQTT </target>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
-        <source> Wemo </source>
+        <source>Wemo</source>
         <target></target>
-      </trans-unit>
-      <trans-unit id="ui-next" datatype="html">
-        <source>next</source>
-        <target>nächster Schritt</target>
       </trans-unit>
       <trans-unit id="checking" datatype="html">
         <source>Great! I'll check everything.</source>
@@ -994,6 +931,14 @@
       <trans-unit id="welcome-7" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <target>Danke, dass du dich für OctoDash entschieden hast</target>
+      </trans-unit>
+      <trans-unit id="ui-back" datatype="html">
+        <source>back</source>
+        <target>zurück</target>
+      </trans-unit>
+      <trans-unit id="ui-next" datatype="html">
+        <source>next</source>
+        <target>nächster Schritt</target>
       </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">
         <source>Shhh! OctoDash is sleeping.</source>
