@@ -25,6 +25,8 @@ export class ControlComponent implements OnInit, OnDestroy {
   public jogDistance = 10;
   public selectedTool = 0;
   public showExtruder = false;
+  public quickControlShown = false;
+  public hotendTarget: number;
 
   public constructor(
     private printerService: PrinterService,
@@ -33,6 +35,7 @@ export class ControlComponent implements OnInit, OnDestroy {
     private socketService: SocketService,
     private router: Router,
   ) {
+    this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
@@ -88,5 +91,37 @@ export class ControlComponent implements OnInit, OnDestroy {
 
   public goToMainScreen(): void {
     this.router.navigate(['/main-screen']);
+  }
+
+  private showQuickControl(): void {
+    this.quickControlShown = true;
+    setTimeout((): void => {
+      const controlViewDOM = document.getElementById('quickControl');
+      controlViewDOM.style.opacity = '1';
+    }, 50);
+  }
+
+  public hideQuickControl(): void {
+    const controlViewDOM = document.getElementById('quickControl');
+    controlViewDOM.style.opacity = '0';
+    setTimeout((): void => {
+      this.quickControlShown = false;
+    }, 500);
+  }
+
+  private quickControlChangeValue(value: number): void {
+    this.hotendTarget += value;
+    if (this.hotendTarget < -999) {
+      this.hotendTarget = this.configService.getDefaultHotendTemperature();
+    } else if (this.hotendTarget < 0) {
+      this.hotendTarget = 0;
+    } else if (this.hotendTarget > 999) {
+      this.hotendTarget = 999;
+    }
+  }
+
+  private quickControlSetValue(): void {
+    this.printerService.setTemperatureHotend(this.hotendTarget, this.selectedTool);
+    this.hideQuickControl();
   }
 }

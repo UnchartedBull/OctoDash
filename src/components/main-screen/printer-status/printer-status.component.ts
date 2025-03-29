@@ -171,10 +171,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.printerService.setFanSpeed(this.fanTarget);
     this.hideQuickControl();
   }
-
-  public goToMainScreen(): void {
-    this.router.navigate(['/main-screen']);
-  }
 }
 
 enum QuickControlView {
