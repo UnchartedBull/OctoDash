@@ -92,8 +92,9 @@ export class ConfigService {
     return [];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public saveConfig(config: Config): void {}
+  public saveConfig(config: Config) {
+    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
+  }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
