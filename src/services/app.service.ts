@@ -34,10 +34,12 @@ export class AppService {
     this.electronService.send('appInfo');
 
     // list of all error following an upgrade
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     this.updateError = {
       '/octodash must NOT have additional properties': config =>
         delete (config.octodash as any).showNotificationCenterIcon,
     };
+    /* eslint-enable @typescript-eslint/no-explicit-any */
   }
 
   private checkUpdate(): void {

@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { PSUState, NotificationType } from '../../../model';
+import { NotificationType, PSUState } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
 import { EnclosureService } from '../../../services/enclosure/enclosure.service';
+import { NotificationService } from '../../../services/notification.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SystemService } from '../../../services/system/system.service';
-import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-custom-actions',
