@@ -54,6 +54,10 @@ speed-measure-plugin.json
 /libpeerconnection.log
 /typings
 
+# python
+__pycache__/
+*.py[cod]
+
 
 docs/images/compilation.psd
 scripts/clean-github.sh
