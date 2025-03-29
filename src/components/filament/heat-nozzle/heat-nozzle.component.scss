@@ -1,0 +1,150 @@
+.heating {
+  &__center {
+    text-align: center;
+  }
+
+  &__information {
+    display: inline-block;
+    width: 27vw;
+    font-size: 0.65rem;
+    text-align: left;
+    margin-left: 7vw;
+    line-height: 1rem;
+    overflow: visible;
+    vertical-align: top;
+    margin-top: 3.5vh;
+    margin-right: -5vw;
+
+    &-type {
+      padding-top: 5vh;
+      text-align: center;
+      height: 13.5vh;
+
+      &-box {
+        font-size: 4vw;
+        border: 4px solid;
+        padding: 1.3vh 1.5vw;
+        border-radius: 0.15rem;
+        font-weight: 500;
+      }
+    }
+
+    &-name {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      display: block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-vendor {
+      text-align: center;
+      opacity: 0.7;
+      display: block;
+      font-size: 0.6rem;
+      margin-top: -0.2rem;
+    }
+
+    &-tool {
+      text-align: center;
+      opacity: 0.7;
+      display: block;
+      font-size: 0.5rem;
+      margin-top: -0.2rem;
+      margin-bottom: -0.8rem;
+    }
+
+    &-offset {
+      &-wrapper {
+        text-align: center;
+        margin-top: 2vh;
+        line-height: 2rem;
+      }
+
+      &-indicator {
+        opacity: 0.7;
+        vertical-align: 0.8rem;
+      }
+
+      &-value {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__controller {
+    display: inline-block;
+    width: 35vw;
+    border: solid 0.4vw;
+    border-radius: 2vw;
+    margin-top: 6vh;
+
+    &-row {
+      display: flex;
+    }
+
+    &-value {
+      padding: 3vh 6vw;
+      font-size: 6vw;
+      font-weight: 500;
+      text-align: center;
+      border-top: solid 0.4vw rgb(255 255 255 / 50%);
+      border-bottom: solid 0.4vw rgb(255 255 255 / 50%);
+
+      &-unit {
+        text-align: center;
+        font-size: 4vw;
+        font-weight: 400;
+      }
+    }
+
+    &-current {
+      display: block;
+      margin-top: 1vh;
+      font-size: 4vw;
+
+      > span {
+        font-size: 2.8vw;
+      }
+    }
+
+    &-control {
+      padding: 2vh 6vw;
+      font-size: 0.9rem;
+      flex: 1;
+
+      &:first-of-type {
+        border-right: solid 0.4vw rgb(255 255 255 / 50%);
+      }
+    }
+  }
+
+  &__start {
+    &-wrapper {
+      text-align: center;
+      margin-top: 2vh;
+
+      > span {
+        font-size: 50%;
+        display: inline-block;
+        margin-left: -1vw;
+        margin-right: 1vw;
+        vertical-align: 1.2vw;
+
+        > span {
+          font-size: 120%;
+        }
+      }
+    }
+
+    &-heating {
+      display: inline-block;
+      background-color: var(--success);
+      padding: 1vh 2vw;
+      border-radius: 1vw;
+      font-size: 0.8rem;
+      box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
+    }
+  }
+}

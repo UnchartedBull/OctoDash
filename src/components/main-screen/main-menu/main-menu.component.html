@@ -1,0 +1,20 @@
+<div class="main-menu">
+  <span class="main-menu__heading"> OctoDash<span class="main-menu__heading__dot">.</span> </span>
+  <table class="main-menu__options">
+    <tr>
+      <td routerLink="/files" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/folder.svg" class="main-menu__option-icon main-menu__option-icon__1" />
+        <ng-container i18n="@@menu-files">files</ng-container>
+      </td>
+      <td routerLink="/filament" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/filament.svg" class="main-menu__option-icon main-menu__option-icon__2" />
+        <ng-container i18n="@@menu-filament">filament</ng-container>
+      </td>
+      <td routerLink="/control" matRipple [matRippleUnbounded]="false" [matRippleCentered]="true">
+        <img src="assets/control.svg" class="main-menu__option-icon main-menu__option-icon__3" />
+        <ng-container i18n="@@menu-control">control</ng-container>
+      </td>
+    </tr>
+  </table>
+</div>
+<app-settings-icon></app-settings-icon>

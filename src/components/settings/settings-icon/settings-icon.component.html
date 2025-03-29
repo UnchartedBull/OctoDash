@@ -1,0 +1,10 @@
+<div
+  class="settings-icon"
+  *ngIf="configService.isLoaded()"
+  matRipple
+  [matRippleUnbounded]="true"
+  [matRippleCentered]="true">
+  <fa-icon icon="gear" (click)="showSettings()" />
+  <div class="settings-icon__update-notifier" *ngIf="service.updateAvailable"></div>
+</div>
+<app-settings *ngIf="settingsVisible" (closeFunction)="hideSettings()"></app-settings>

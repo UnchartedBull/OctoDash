@@ -1,0 +1,164 @@
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: visible;
+
+  &__jog {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+
+    &-arrows {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      overflow: visible;
+
+      &__XY {
+        display: block;
+        height: 60vh;
+        text-align: center;
+        float: left;
+        overflow: visible;
+
+        &__wrapper {
+          position: relative;
+          width: 35vw;
+          height: 50vh;
+          font-size: 20vh;
+          overflow: visible;
+        }
+      }
+
+      &--vertical {
+        display: block;
+        height: 60vh;
+        text-align: center;
+        float: left;
+        overflow: visible;
+
+        &__wrapper {
+          position: relative;
+          width: 10vw;
+          height: 50vh;
+          font-size: 20vh;
+          overflow: visible;
+        }
+      }
+    }
+  }
+
+  &__heading {
+    display: block;
+    margin-top: 4vh;
+    font-size: 3vw;
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  &__icon {
+    font-size: 15vw;
+    position: absolute;
+    padding: 0 1.7vw;
+    opacity: 0.9;
+
+    &-1 {
+      top: -8.5vh;
+      left: 11.3vw;
+    }
+
+    &-2 {
+      top: 10vh;
+      left: 0.5vw;
+    }
+
+    &-3 {
+      top: 10vh;
+      right: -2vw;
+    }
+
+    &-4 {
+      top: 30vh;
+      left: 11.3vw;
+    }
+
+    &-5 {
+      top: -8vh;
+      left: -1.8vw;
+    }
+
+    &-6 {
+      top: 30vh;
+      left: -1.8vw;
+    }
+
+    &-7 {
+      font-size: 8vw;
+      top: -0.5vh;
+      left: -0.8vw;
+    }
+
+    &-8 {
+      font-size: 8vw;
+      top: 36.5vh;
+      left: -0.8vw;
+    }
+  }
+
+  &__distance,
+  &__tool {
+    margin-top: 1.25vh;
+    display: inline-block;
+    border-collapse: separate;
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-field {
+      font-size: 2.8vw;
+      width: 10vw;
+      text-align: center;
+      border: 0.25vw solid var(--border);
+      border-right: 0.175vw solid var(--border);
+      border-left: 0.175vw solid var(--border);
+      padding: 1vh 0.7vw;
+      opacity: 0.5;
+      background-color: transparent;
+      transition: all 0.3s ease-in-out;
+      transition-property: opacity, background;
+
+      &-active {
+        opacity: 0.9;
+        background-color: rgb(245 246 250 / 20%);
+      }
+    }
+
+    &-field:first-child {
+      border-top-left-radius: 1vw;
+      border-bottom-left-radius: 1vw;
+      border-left: 0.25vw solid var(--border);
+    }
+
+    &-field:last-child {
+      border-top-right-radius: 1vw;
+      border-bottom-right-radius: 1vw;
+      border-right: 0.25vw solid var(--border);
+    }
+  }
+}
+
+app-custom-actions {
+  float: right;
+  height: 75vh;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

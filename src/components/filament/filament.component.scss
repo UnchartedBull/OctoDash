@@ -1,0 +1,61 @@
+.filament {
+  padding: 2vh 2vw 0;
+
+  &__progress-bar {
+    height: 4vh;
+    border-radius: 2vh;
+    background-color: var(--success);
+    width: 0;
+    transition: width 0.7s ease-in-out;
+
+    &-wrapper {
+      background-color: var(--background-3);
+      height: 4vh;
+      width: 20vw;
+      display: inline-block;
+      border-radius: 2vh;
+
+      &-wide {
+        width: 50vw;
+        margin: 14vh auto 3vh;
+        display: block;
+        height: 7vh;
+        background-color: transparent;
+        border: 3px solid var(--border);
+        border-radius: 3vh;
+
+        > div {
+          height: 7vh;
+          width: 50vw;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  &-heading {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  &__wrapper-button {
+    text-align: center;
+    position: absolute;
+    width: 96vw;
+    bottom: 5vh;
+  }
+
+  &__done {
+    display: inline-block;
+    background-color: var(--success);
+    padding: 2vh 2vw;
+    border-radius: 8px;
+  }
+}
+
+.checkmark {
+  margin-top: 10vh;
+  height: 80vh;
+  display: block;
+}

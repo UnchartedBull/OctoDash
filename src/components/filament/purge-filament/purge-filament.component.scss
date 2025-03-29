@@ -1,0 +1,23 @@
+.purge-filament {
+  &__amount {
+    text-align: center;
+    margin-top: 12vh;
+    font-size: 250%;
+  }
+
+  &__more,
+  &__done {
+    display: inline-block;
+    padding: 2vh 2vw;
+    border-radius: 8px;
+  }
+
+  &__more {
+    background-color: #7f8fa6;
+    margin-right: 10vw;
+  }
+
+  &__done {
+    background-color: var(--success);
+  }
+}

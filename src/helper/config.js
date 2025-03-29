@@ -89,7 +89,7 @@ function extractDefaults(data) {
 export function writeDefaultConfig() {
   try {
     const defaultConfig = extractDefaults(configSchema);
-    fs.writeFileSync(new URL('../app/config/config.default.json', import.meta.url), JSON.stringify(defaultConfig));
+    fs.writeFileSync(new URL('./config.default.json', import.meta.url), JSON.stringify(defaultConfig));
   } catch (e) {
     console.log(e);
   }

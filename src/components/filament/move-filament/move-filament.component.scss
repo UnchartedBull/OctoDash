@@ -1,0 +1,40 @@
+.move-filament {
+  &__speed {
+    font-size: 60%;
+    opacity: 0.8;
+    font-style: italic;
+    display: block;
+    text-align: center;
+  }
+
+  &__cancel {
+    display: inline-block;
+    background-color: var(--error);
+    padding: 2vh 2vw;
+    border-radius: 8px;
+  }
+
+  &__progress-bar {
+    height: 4vh;
+    border-radius: 2vh;
+    background-color: var(--success);
+    width: 0;
+    transition: width 0.7s ease-in-out;
+
+    &-wrapper {
+      width: 50vw;
+      margin: 14vh auto 3vh;
+      display: block;
+      height: 7vh;
+      background-color: transparent;
+      border: 3px solid var(--border);
+      border-radius: 3vh;
+
+      > div {
+        height: 7vh;
+        width: 50vw;
+        background-color: transparent;
+      }
+    }
+  }
+}

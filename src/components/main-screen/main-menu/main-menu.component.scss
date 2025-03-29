@@ -1,0 +1,63 @@
+.main-menu {
+  display: block;
+  width: 100%;
+  height: 58vh;
+
+  &__heading {
+    display: block;
+    text-align: center;
+    font-size: 5vw;
+    font-weight: 500;
+    margin-top: 4vh;
+    font-family: Arvo, sans-serif;
+
+    &__dot {
+      color: var(--primary);
+      opacity: 1;
+      animation: breathe 5s ease-in-out infinite alternate;
+    }
+  }
+
+  &__options {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    width: 90vw;
+
+    & td {
+      width: 29.66vw;
+      display: inline-block;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
+
+  &__option-icon {
+    display: block;
+    padding-bottom: 4vh;
+    margin: auto;
+
+    &__1 {
+      width: 15.5vw;
+      margin-bottom: -1.3vw;
+    }
+
+    &__2 {
+      width: 13.5vw;
+    }
+
+    &__3 {
+      width: 10.5vw;
+      margin-bottom: 1.6vw;
+    }
+  }
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}

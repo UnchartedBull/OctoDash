@@ -1,0 +1,38 @@
+.reset {
+  &-container {
+    position: absolute;
+    z-index: 20;
+    top: 10vh;
+    left: 20vw;
+    height: 56vh;
+    width: 60vw;
+    padding-top: 25vh;
+    background-color: var(--background);
+    border-radius: 2vw;
+    text-align: center;
+  }
+
+  &-button {
+    padding: 1.4vh 2vw;
+    border-radius: 1vw;
+    box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
+    font-size: 0.7rem;
+    outline: 0;
+    border: 0;
+    margin: 7vh 2vw;
+
+    &__no {
+      background-color: var(--background-3);
+      opacity: 0.8;
+    }
+
+    &__yes {
+      background-color: var(--success);
+    }
+
+    &__wrapper {
+      display: block;
+      margin: auto;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.tools {
+  margin-top: 2vh;
+  height: auto;
+  display: block;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  padding-right: 1.5vw;
+
+  tr td {
+    background-color: var(--background-3);
+    border-radius: 1vw;
+    padding: 0 1vw;
+    display: block;
+    margin-bottom: 2vh;
+    width: 96vw;
+    transition: color 0.25s;
+    box-sizing: border-box;
+    border: 0;
+    position: relative;
+    text-align: center;
+    font-size: 6vw;
+    font-weight: 500;
+
+    &:first-of-type {
+      margin-top: 3.5vh;
+    }
+
+    &:last-of-type {
+      margin-bottom: 3.5vh;
+    }
+  }
+}

@@ -2,8 +2,8 @@
   <file original="ng2.template" datatype="plaintext" source-language="en" target-language="fr">
     <body>
       <trans-unit id="long-init" datatype="html">
-        <source> Initializing is taking longer than usual. 
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API. 
+        <source>Initializing is taking longer than usual...
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
         </source>
         <target> L'initialisation prend plus de temps que d'habitude. 
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Veuillez vous assurer qu'OctoPrint est opérationnel. 
@@ -13,286 +13,21 @@
         <source>initializing</source>
         <target>initialisation</target>
       </trans-unit>
-      <trans-unit id="update-available" datatype="html">
-        <source>Update available!</source>
-        <target> mise à jour disponible ! </target>
-      </trans-unit>
-      <trans-unit id="update-available-long" datatype="html">
-        <source>Version 
-          <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
-        </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-load-style" datatype="html">
-        <source>Can't load custom styles!</source>
-        <target>Impossible de charger les styles personnalisés !</target>
-      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Impossible de récupérer la température de l'enceinte !</target>
       </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
-      </trans-unit>
-      <trans-unit id="invalid-config" datatype="html">
-        <source>Your config is invalid!</source>
-        <target>Votre configuration est invalide !</target>
-      </trans-unit>
-      <trans-unit id="correct-errors" datatype="html">
-        <source>Please correct the errors listed below!</source>
-        <target>Veuillez corriger les erreurs répertoriées ci-dessous !</target>
-      </trans-unit>
-      <trans-unit id="select-instance" datatype="html">
-        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target> Tout d'abord: veuillez selectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required" datatype="html">
-        <source> Upgrade Required / </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </source>
-        <target> Version </target>
-      </trans-unit>
-      <trans-unit id="searching" datatype="html">
-        <source>searching</source>
-        <target>recherche</target>
-      </trans-unit>
-      <trans-unit id="enter-manually" datatype="html">
-        <source>enter manually</source>
-        <target>entrer manuellement</target>
-      </trans-unit>
-      <trans-unit id="port-recommendation" datatype="html">
-        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target>Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi</target>
-      </trans-unit>
-      <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
-        <target>chercher à nouveau</target>
-      </trans-unit>
-      <trans-unit id="no-instance-found" datatype="html">
-        <source>no instances found.</source>
-        <target>aucune instance trouvée.</target>
-      </trans-unit>
-      <trans-unit id="prompt-extruder-info" datatype="html">
-        <source>I also need some information about your extruder.</source>
-        <target>J'ai également besoin d'informations sur votre extrudeur.</target>
-      </trans-unit>
-      <trans-unit id="prompt-feed-length" datatype="html">
-        <source>Feed Length:</source>
-        <target>Longueur d'alimentation :</target>
-      </trans-unit>
-      <trans-unit id="prompt-info-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="prompt-feed-speed" datatype="html">
-        <source>Feed Speed:</source>
-        <target>Vitesse d'alimentation :</target>
-      </trans-unit>
-      <trans-unit id="prompt-info-mms" datatype="html">
-        <source>mm/s</source>
-        <target>mm/s</target>
-      </trans-unit>
-      <trans-unit id="filament-changing-warning" datatype="html">
-        <source> These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and feed speed configured correctly. </source>
-        <target> Ces valeurs sont utilisées pour le changement de filament. Assurez-vous que la longueur d'alimentation (distance entre l'extrudeur et la buse) et la vitesse d'alimentation sont configurées correctement. </target>
-      </trans-unit>
-      <trans-unit id="prompt-auth" datatype="html">
-        <source> Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint webinterface or enter an API Key manually.</source>
-        <target> Veuillez m'authentifier maintenant. Vous pouvez soit cliquer sur le bouton ci-dessous et confirmer la demande dans votre interface Web OctoPrint, soit entrer une clé API manuellement.</target>
-      </trans-unit>
-      <trans-unit id="send-request" datatype="html">
-        <source>send request</source>
-        <target>envoyer la demande</target>
-      </trans-unit>
-      <trans-unit id="api-key" datatype="html">
-        <source>API Key:</source>
-        <target>Clé API :</target>
-      </trans-unit>
-      <trans-unit id="octoprint-connection-failed" datatype="html">
-        <source>Can't connect to OctoPrint!</source>
-        <target>Impossible de se connecter à OctoPrint !</target>
-      </trans-unit>
-      <trans-unit id="octoprint-connection-failed-message" datatype="html">
-        <source>Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.</source>
-        <target>Vérifiez l'URL / IP et assurez-vous que votre instance OctoPrint est accessible à partir de cet appareil.</target>
-      </trans-unit>
-      <trans-unit id="unsupported-autologin" datatype="html">
-        <source>Automatic login not supported!</source>
-        <target>Connexion automatique non prise en charge !</target>
-      </trans-unit>
-      <trans-unit id="manually-create-api-key" datatype="html">
-        <source>Please create the API Key manually and paste it in the bottom field.</source>
-        <target>Veuillez créer la clé API manuellement et la coller dans le champ du bas.</target>
-      </trans-unit>
-      <trans-unit id="login-request-sent" datatype="html">
-        <source>Login request send!</source>
-        <target>Demande de connexion envoyée !</target>
-      </trans-unit>
-      <trans-unit id="login-request-sent-message" datatype="html">
-        <source>Please confirm the request via the popup in the OctoPrint WebUI.</source>
-        <target>Veuillez confirmer la demande via la fenêtre contextuelle de l'interface Web OctoPrint.</target>
-      </trans-unit>
-      <trans-unit id="prompt-customization-details" datatype="html">
-        <source> Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
-        <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
-      </trans-unit>
-      <trans-unit id="prompt-printer-name" datatype="html">
-        <source>Printer Name:</source>
-        <target>Nom de l'imprimante :</target>
-      </trans-unit>
-      <trans-unit id="use-touchscreen" datatype="html">
-        <source> Use Touchscreen </source>
-        <target> Utiliser l'écran tactile </target>
-      </trans-unit>
-      <trans-unit id="change-settings-info" datatype="html">
-        <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>
-        <target> Vous pouvez modifier tous les paramètres (et même plus) dans le menu des paramètres à tout moment. Il existe également une description de chaque attribut disponible dans le wiki GitHub.</target>
-      </trans-unit>
-      <trans-unit id="prompt-plugins" datatype="html">
-        <source>What plugins are you running?</source>
-        <target>Quels plugins utilisez-vous ?</target>
-      </trans-unit>
-      <trans-unit id="plugin-octodash-companion" datatype="html">
-        <source>OctoDash Companion</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-display-layer-progress" datatype="html">
-        <source>Display Layer Progress</source>
-        <target> Display Layer Progress   </target>
-      </trans-unit>
-      <trans-unit id="plugin-enclosure" datatype="html">
-        <source>Enclosure</source>
-        <target> Enclosure </target>
-      </trans-unit>
-      <trans-unit id="plugin-filament-manager" datatype="html">
-        <source>Filament Manager</source>
-        <target> Filament Manager   </target>
-      </trans-unit>
-      <trans-unit id="plugin-spool-manager" datatype="html">
-        <source>Spool Manager (Beta)</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-preheat-button" datatype="html">
-        <source>Preheat Button</source>
-        <target> Preheat Button </target>
-      </trans-unit>
-      <trans-unit id="plugin-print-time-genius" datatype="html">
-        <source>Print Time Genius</source>
-        <target> Print Time Genius   </target>
-      </trans-unit>
-      <trans-unit id="plugin-psu-control" datatype="html">
-        <source>PSU Control</source>
-        <target> PSU Control </target>
-      </trans-unit>
-      <trans-unit id="plugin-opom" datatype="html">
-        <source>Ophom (Phillips HUE)</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-tplink-smartplug" datatype="html">
-        <source> TPLink SmartPlug </source>
-        <target> TPLink SmartPlug </target>
-      </trans-unit>
-      <trans-unit id="plugin-tuya" datatype="html">
-        <source> Tuya SmartPlug </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-tasmota" datatype="html">
-        <source> Tasmota </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-tasmota-mqtt" datatype="html">
-        <source> Tasmota MQTT </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-wemo" datatype="html">
-        <source> Wemo </source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="ui-back" datatype="html">
         <source>back</source>
         <target>retour</target>
-      </trans-unit>
-      <trans-unit id="ui-next" datatype="html">
-        <source>next</source>
-        <target>suivant</target>
-      </trans-unit>
-      <trans-unit id="checking" datatype="html">
-        <source>Great! I'll check everything.</source>
-        <target>Génial ! Je vais tout vérifier.</target>
-      </trans-unit>
-      <trans-unit id="checking-octoprint-connection" datatype="html">
-        <source>OctoPrint Connection</source>
-        <target> Connexion Octoprint </target>
-      </trans-unit>
-      <trans-unit id="checking-config" datatype="html">
-        <source>Validating Config</source>
-        <target> Validation de la configuration </target>
-      </trans-unit>
-      <trans-unit id="checking-save" datatype="html">
-        <source>Saving Config</source>
-        <target> Enregistrement de la configuration </target>
-      </trans-unit>
-      <trans-unit id="wizard-done" datatype="html">
-        <source>done</source>
-        <target>terminé</target>
-      </trans-unit>
-      <trans-unit id="saving-config" datatype="html">
-        <source>saving config</source>
-        <target>enregistrement de la configuration</target>
-      </trans-unit>
-      <trans-unit id="error-403" datatype="html">
-        <source>403 Forbidden - This most likely means that your API Key isn't working.</source>
-        <target>403 Interdit - Cela signifie très probablement que votre clé API ne fonctionne pas.</target>
-      </trans-unit>
-      <trans-unit id="error-unknown" datatype="html">
-        <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.</source>
-        <target>0 Erreur inconnue - Cela signifie très probablement que votre hôte et votre port OctoPrint ne sont pas corrects.</target>
-      </trans-unit>
-      <trans-unit id="welcome-1" datatype="html">
-        <source> It looks like this is the first start of OctoDash. </source>
-        <target> Il semble que ce soit le premier démarrage d'OctoDash. </target>
-      </trans-unit>
-      <trans-unit id="welcome-2" datatype="html">
-        <source> I'll help you set up your config and get you started. </source>
-        <target> Je vais vous aider à préparer votre configuration et démarrer. </target>
-      </trans-unit>
-      <trans-unit id="welcome-3" datatype="html">
-        <source> If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. </source>
-        <target> Si vous rencontrez des problèmes, veuillez consulter le guide de dépannage dans le wiki GitHub. </target>
-      </trans-unit>
-      <trans-unit id="welcome-4" datatype="html">
-        <source> Note: you will need to connect a keyboard for the setup process </source>
-        <target> Merci d'avoir choisi OctoDash </target>
-      </trans-unit>
-      <trans-unit id="welcome-5" datatype="html">
-        <source> Sorry for bothering you again ... </source>
-        <target> Désolé de vous déranger à nouveau ... </target>
-      </trans-unit>
-      <trans-unit id="welcome-6" datatype="html">
-        <source> We've released an update, so awesome, we needed to change the config. Please review your new config! </source>
-        <target> Nous avons publié une mise à jour, tellement géniale que nous avons dû modifier la configuration. Veuillez vérifier votre nouvelle configuration ! </target>
-      </trans-unit>
-      <trans-unit id="welcome-7" datatype="html">
-        <source> Thanks for choosing OctoDash </source>
-        <target> Merci d'avoir choisi OctoDash </target>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can't retrieve printer profile!</source>
         <target>Impossible de récupérer le profil de l'imprimante !</target>
       </trans-unit>
       <trans-unit id="website-loading" datatype="html">
-        <source>loading website ...</source>
+        <source>loading website...</source>
         <target>chargement du site Web ...</target>
-      </trans-unit>
-      <trans-unit id="should-not-happen" datatype="html">
-        <source> That shouldn't happen ... </source>
-        <target> Cela ne devrait pas arriver ... </target>
       </trans-unit>
       <trans-unit id="are-you-sure" datatype="html">
         <source>are you sure?</source>
@@ -316,20 +51,20 @@
         <source>g left</source>
         <target>g restants</target>
       </trans-unit>
-      <trans-unit id="filament-done" datatype="html">
-        <source> done </source>
-        <target> terminé </target>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target></target>
       </trans-unit>
-      <trans-unit id="filament-waiting" datatype="html">
+      <trans-unit id="ui-waiting-for-user" datatype="html">
         <source>I'll wait for you.</source>
-        <target>Je vous attendrai.</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 envoyé</target>
       </trans-unit>
       <trans-unit id="follow-printer-screen" datatype="html">
-        <source>follow the instructions on your printers' display</source>
+        <source>follow the instructions on your printer's display</source>
         <target>suivez les instructions sur l'affichage de votre imprimante</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
@@ -492,28 +227,41 @@
         <source>Can't load file!</source>
         <target>Impossible de charger le fichier !</target>
       </trans-unit>
-      <trans-unit id="height-mm" datatype="html">
+      <trans-unit id="unit-millimeters-short" datatype="html">
         <source>mm</source>
-        <target>mm</target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="heing-layer" datatype="html">
-        <source> Layer </source>
-        <target> Couche </target>
+      <trans-unit id="height-layer-status" datatype="html">
+        <source>Layer 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target></target>
       </trans-unit>
-      <trans-unit id="height-of" datatype="html">
-        <source> of </source>
-        <target> sur </target>
-      </trans-unit>
-      <trans-unit id="job-filament-g" datatype="html">
-        <source> g Filament </source>
-        <target> g de filament </target>
+      <trans-unit id="job-filament" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
+        </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
-        <source> left, </source>
+        <source>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
+        </source>
         <target> restant, </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
-        <source>elapsed:</source>
+        <source>elapsed: 
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </source>
         <target>écoulé :</target>
       </trans-unit>
       <trans-unit id="will-finish" datatype="html">
@@ -528,12 +276,12 @@
         <source>filament will be used</source>
         <target>de filament sera utilisé</target>
       </trans-unit>
-      <trans-unit id="loading-info" datatype="html">
+      <trans-unit id="ui-loading-info" datatype="html">
         <source> loading info</source>
-        <target> chargement des informations</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
-        <source>no job running ...</source>
+        <source>no job running...</source>
         <target>pas d'impression en cours ...</target>
       </trans-unit>
       <trans-unit id="menu-files" datatype="html">
@@ -572,13 +320,13 @@
         <source>cancel print?</source>
         <target>annuler l'impression ?</target>
       </trans-unit>
-      <trans-unit id="cancel-yes" datatype="html">
+      <trans-unit id="ui-yes" datatype="html">
         <source>yes</source>
-        <target>oui</target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="cancel-no" datatype="html">
+      <trans-unit id="ui-no" datatype="html">
         <source>no</source>
-        <target>non</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="print-pause" datatype="html">
         <source>print paused</source>
@@ -612,248 +360,13 @@
         <source>Speed</source>
         <target>Vitesse</target>
       </trans-unit>
-      <trans-unit id="offset-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="offset-save" datatype="html">
-        <source> save </source>
-        <target> sauvegarder </target>
-      </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
         <target>Babystep Z</target>
       </trans-unit>
-      <trans-unit id="babystep-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="babystep-mm-2" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm-2" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="zoffset-mm-3" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
         <target></target>
-      </trans-unit>
-      <trans-unit id="reset-no" datatype="html">
-        <source>no</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="reset-yes" datatype="html">
-        <source>yes</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-set-color" datatype="html">
-        <source>Can't set LED color!</source>
-        <target>Impossible de définir la couleur des LED !</target>
-      </trans-unit>
-      <trans-unit id="error-set-output" datatype="html">
-        <source>Can't set output!</source>
-        <target>Impossible de définir la sortie !</target>
-      </trans-unit>
-      <trans-unit id="error-run-enclosure-shell" datatype="html">
-        <source>Can't run enclosure shell!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-psu-state" datatype="html">
-        <source>Can't change PSU State!</source>
-        <target>Impossible de changer l'état du bloc d'alimentation !</target>
-      </trans-unit>
-      <trans-unit id="error-psu-provider" datatype="html">
-        <source>No provider for PSU Control is configured.</source>
-        <target>Aucun fournisseur pour PSU Control n'est configuré.</target>
-      </trans-unit>
-      <trans-unit id="error-send-psu-gcode" datatype="html">
-        <source>Can't send GCode!</source>
-        <target>Impossible d'envoyer le GCode !</target>
-      </trans-unit>
-      <trans-unit id="error-send-ophom-gcode" datatype="html">
-        <source>Can't update Ophom Plug!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-send-smartplug-gcode" datatype="html">
-        <source>Can't send GCode!</source>
-        <target>Impossible d'envoyer le GCode !</target>
-      </trans-unit>
-      <trans-unit id="error-send-tasmota-plug" datatype="html">
-        <source>Can't update Tasmota!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
-        <source>Can't update Tasmota MQTT!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-send-psu-command" datatype="html">
-        <source>Can't send plug command!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-spools" datatype="html">
-        <source>Can't load filament spools!</source>
-        <target>Impossible de charger les bobines de filament !</target>
-      </trans-unit>
-      <trans-unit id="error-spool" datatype="html">
-        <source>Can't load active spool!</source>
-        <target>Impossible de charger la bobine active!</target>
-      </trans-unit>
-      <trans-unit id="error-spool-id" datatype="html">
-        <source>Spool IDs didn't match</source>
-        <target>Les ID des bobines ne correspondent pas</target>
-      </trans-unit>
-      <trans-unit id="error-change-spool" datatype="html">
-        <source>Can't change spool. Please change spool manually in the OctoPrint UI.</source>
-        <target>Impossible de changer la bobine. Veuillez changer la bobine manuellement dans l'interface utilisateur d'OctoPrint.</target>
-      </trans-unit>
-      <trans-unit id="error-set-new-spool" datatype="html">
-        <source>Can't set new spool!</source>
-        <target>Impossible de définir une nouvelle bobine !</target>
-      </trans-unit>
-      <trans-unit id="error-set-new-spool-2" datatype="html">
-        <source>Can't set new spool!</source>
-        <target>Impossible de définir une nouvelle bobine !</target>
-      </trans-unit>
-      <trans-unit id="local" datatype="html">
-        <source>local</source>
-        <target>local</target>
-      </trans-unit>
-      <trans-unit id="sdcard" datatype="html">
-        <source>sdcard</source>
-        <target>sdcard</target>
-      </trans-unit>
-      <trans-unit id="files-error-file" datatype="html">
-        <source>Can't load file!</source>
-        <target>Impossible de charger le fichier !</target>
-      </trans-unit>
-      <trans-unit id="files-error-print" datatype="html">
-        <source>Can't start print!</source>
-        <target>Impossible de démarrer l’impression !</target>
-      </trans-unit>
-      <trans-unit id="files-error-delete" datatype="html">
-        <source>Can't delete file!</source>
-        <target>Impossible de supprimer le fichier !</target>
-      </trans-unit>
-      <trans-unit id="error-start-job" datatype="html">
-        <source>Can't start job!</source>
-        <target>Impossible de démarrer l'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-pause-job" datatype="html">
-        <source>Can't pause job!</source>
-        <target>Impossible de suspendre l'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-resume-job" datatype="html">
-        <source>Can't resume job!</source>
-        <target>Impossible de reprendre l'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-cancel-job" datatype="html">
-        <source>Can't cancel job!</source>
-        <target>Impossible d'annuler l'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-restart-job" datatype="html">
-        <source>Can't restart job!</source>
-        <target>Impossible de redémarrer l'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-preheat" datatype="html">
-        <source>Can't preheat printer!</source>
-        <target>Impossible de préchauffer l'imprimante !</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
-        <source>OctoPrint outdated!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required-long" datatype="html">
-        <source>OctoPrint must be running at least 
-          <x id="PH" equiv-text="minimumVersion"/>; currently running 
-          <x id="PH_1" equiv-text="info.server"/>.
-        </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="printer-error-gcode" datatype="html">
-        <source>Can't send GCode!</source>
-        <target>Impossible d'envoyer le GCode !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-head" datatype="html">
-        <source>Can't move Printhead!</source>
-        <target>Impossible de déplacer la tête d'impression !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-extrude" datatype="html">
-        <source>Can't extrude Filament!</source>
-        <target>Impossible d'extruder le filament !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-set-tool" datatype="html">
-        <source>Can't set active tool!</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-printer-hotend" datatype="html">
-        <source>Can't set Hotend Temperature!</source>
-        <target>Impossible de régler la température de la buse !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-bed" datatype="html">
-        <source>Can't set Bed Temperature!</source>
-        <target>Impossible de régler la température du lit !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-feedrate" datatype="html">
-        <source>Can't set Feedrate!</source>
-        <target>Impossible de définir la vitesse d'alimentation !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-flowrate" datatype="html">
-        <source>Can't set Flowrate!</source>
-        <target>Impossible de régler le débit !</target>
-      </trans-unit>
-      <trans-unit id="error-printer-disconnect" datatype="html">
-        <source>Can't disconnect Printer!</source>
-        <target>Impossible de déconnecter l'imprimante !</target>
-      </trans-unit>
-      <trans-unit id="http-403-heading" datatype="html">
-        <source>HTTP Error 403 - FORBIDDEN</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="http-403-text" datatype="html">
-        <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="http-unknown-heading" datatype="html">
-        <source>Unknown HTTP Error</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="unit-hours-short" datatype="html">
-        <source>h</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="printer-error" datatype="html">
-        <source>Printer error</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="action-required" datatype="html">
-        <source>Action required</source>
-        <target>Action requise</target>
-      </trans-unit>
-      <trans-unit id="error-answer-prompt" datatype="html">
-        <source>Can't answer prompt!</source>
-        <target>Impossible de répondre à la demande!</target>
-      </trans-unit>
-      <trans-unit id="error-execute" datatype="html">
-        <source>Can't execute 
-          <x id="PH" equiv-text="command"/> command!
-        </source>
-        <target>Impossible d'exécuter la commande 
-          <x id="PH" equiv-text="command"/>!
-        </target>
-      </trans-unit>
-      <trans-unit id="error-connect" datatype="html">
-        <source>Can't connect to printer!</source>
-        <target>Impossible de se connecter à l'imprimante !</target>
       </trans-unit>
       <trans-unit id="settings" datatype="html">
         <source>settings</source>
@@ -874,6 +387,14 @@
       <trans-unit id="settings-about" datatype="html">
         <source>about</source>
         <target>à propos</target>
+      </trans-unit>
+      <trans-unit id="update-available" datatype="html">
+        <source>Update available!</source>
+        <target> mise à jour disponible ! </target>
+      </trans-unit>
+      <trans-unit id="ui-save" datatype="html">
+        <source>save</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
@@ -1152,10 +673,6 @@
         <source>Wemo IP</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-wemo-port" datatype="html">
-        <source>Wemo Port</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <target>à propos</target>
@@ -1232,6 +749,249 @@
         <source>Can't save invalid config</source>
         <target>Impossible d'enregistrer une configuration non valide</target>
       </trans-unit>
+      <trans-unit id="select-instance" datatype="html">
+        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
+        <target> Tout d'abord: veuillez selectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required" datatype="html">
+        <source> Upgrade Required / </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="version-url" datatype="html">
+        <source> Version 
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
+          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
+        </source>
+        <target> Version </target>
+      </trans-unit>
+      <trans-unit id="searching" datatype="html">
+        <source>searching</source>
+        <target>recherche</target>
+      </trans-unit>
+      <trans-unit id="enter-manually" datatype="html">
+        <source>enter manually</source>
+        <target>entrer manuellement</target>
+      </trans-unit>
+      <trans-unit id="port-recommendation" datatype="html">
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
+        <target>Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi</target>
+      </trans-unit>
+      <trans-unit id="search-again" datatype="html">
+        <source> search again </source>
+        <target>chercher à nouveau</target>
+      </trans-unit>
+      <trans-unit id="no-instance-found" datatype="html">
+        <source>no instances found.</source>
+        <target>aucune instance trouvée.</target>
+      </trans-unit>
+      <trans-unit id="prompt-extruder-info" datatype="html">
+        <source>I also need some information about your extruder.</source>
+        <target>J'ai également besoin d'informations sur votre extrudeur.</target>
+      </trans-unit>
+      <trans-unit id="prompt-feed-length" datatype="html">
+        <source>Feed Length:</source>
+        <target>Longueur d'alimentation :</target>
+      </trans-unit>
+      <trans-unit id="prompt-info-mm" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
+      </trans-unit>
+      <trans-unit id="prompt-feed-speed" datatype="html">
+        <source>Feed Speed:</source>
+        <target>Vitesse d'alimentation :</target>
+      </trans-unit>
+      <trans-unit id="prompt-info-mms" datatype="html">
+        <source>mm/s</source>
+        <target>mm/s</target>
+      </trans-unit>
+      <trans-unit id="filament-changing-warning" datatype="html">
+        <source> These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and feed speed configured correctly. </source>
+        <target> Ces valeurs sont utilisées pour le changement de filament. Assurez-vous que la longueur d'alimentation (distance entre l'extrudeur et la buse) et la vitesse d'alimentation sont configurées correctement. </target>
+      </trans-unit>
+      <trans-unit id="invalid-config" datatype="html">
+        <source>Your config is invalid!</source>
+        <target>Votre configuration est invalide !</target>
+      </trans-unit>
+      <trans-unit id="correct-errors" datatype="html">
+        <source>Please correct the errors listed below!</source>
+        <target>Veuillez corriger les erreurs répertoriées ci-dessous !</target>
+      </trans-unit>
+      <trans-unit id="prompt-auth" datatype="html">
+        <source> Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint webinterface or enter an API Key manually.</source>
+        <target> Veuillez m'authentifier maintenant. Vous pouvez soit cliquer sur le bouton ci-dessous et confirmer la demande dans votre interface Web OctoPrint, soit entrer une clé API manuellement.</target>
+      </trans-unit>
+      <trans-unit id="send-request" datatype="html">
+        <source>send request</source>
+        <target>envoyer la demande</target>
+      </trans-unit>
+      <trans-unit id="api-key" datatype="html">
+        <source>API Key:</source>
+        <target>Clé API :</target>
+      </trans-unit>
+      <trans-unit id="octoprint-connection-failed" datatype="html">
+        <source>Can't connect to OctoPrint!</source>
+        <target>Impossible de se connecter à OctoPrint !</target>
+      </trans-unit>
+      <trans-unit id="octoprint-connection-failed-message" datatype="html">
+        <source>Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.</source>
+        <target>Vérifiez l'URL / IP et assurez-vous que votre instance OctoPrint est accessible à partir de cet appareil.</target>
+      </trans-unit>
+      <trans-unit id="unsupported-autologin" datatype="html">
+        <source>Automatic login not supported!</source>
+        <target>Connexion automatique non prise en charge !</target>
+      </trans-unit>
+      <trans-unit id="manually-create-api-key" datatype="html">
+        <source>Please create the API Key manually and paste it in the bottom field.</source>
+        <target>Veuillez créer la clé API manuellement et la coller dans le champ du bas.</target>
+      </trans-unit>
+      <trans-unit id="login-request-sent" datatype="html">
+        <source>Login request send!</source>
+        <target>Demande de connexion envoyée !</target>
+      </trans-unit>
+      <trans-unit id="login-request-sent-message" datatype="html">
+        <source>Please confirm the request via the popup in the OctoPrint WebUI.</source>
+        <target>Veuillez confirmer la demande via la fenêtre contextuelle de l'interface Web OctoPrint.</target>
+      </trans-unit>
+      <trans-unit id="prompt-customization-details" datatype="html">
+        <source>Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
+        <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
+      </trans-unit>
+      <trans-unit id="prompt-printer-name" datatype="html">
+        <source>Printer Name:</source>
+        <target>Nom de l'imprimante :</target>
+      </trans-unit>
+      <trans-unit id="use-touchscreen" datatype="html">
+        <source>Use Touchscreen</source>
+        <target> Utiliser l'écran tactile </target>
+      </trans-unit>
+      <trans-unit id="change-settings-info" datatype="html">
+        <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>
+        <target> Vous pouvez modifier tous les paramètres (et même plus) dans le menu des paramètres à tout moment. Il existe également une description de chaque attribut disponible dans le wiki GitHub.</target>
+      </trans-unit>
+      <trans-unit id="prompt-plugins" datatype="html">
+        <source>What plugins are you running?</source>
+        <target>Quels plugins utilisez-vous ?</target>
+      </trans-unit>
+      <trans-unit id="plugin-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-display-layer-progress" datatype="html">
+        <source>Display Layer Progress</source>
+        <target> Display Layer Progress   </target>
+      </trans-unit>
+      <trans-unit id="plugin-enclosure" datatype="html">
+        <source>Enclosure</source>
+        <target> Enclosure </target>
+      </trans-unit>
+      <trans-unit id="plugin-filament-manager" datatype="html">
+        <source>Filament Manager</source>
+        <target> Filament Manager   </target>
+      </trans-unit>
+      <trans-unit id="plugin-spool-manager" datatype="html">
+        <source>Spool Manager (Beta)</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-preheat-button" datatype="html">
+        <source>Preheat Button</source>
+        <target> Preheat Button </target>
+      </trans-unit>
+      <trans-unit id="plugin-print-time-genius" datatype="html">
+        <source>Print Time Genius</source>
+        <target> Print Time Genius   </target>
+      </trans-unit>
+      <trans-unit id="plugin-psu-control" datatype="html">
+        <source>PSU Control</source>
+        <target> PSU Control </target>
+      </trans-unit>
+      <trans-unit id="plugin-opom" datatype="html">
+        <source>Ophom (Phillips HUE)</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-tplink-smartplug" datatype="html">
+        <source> TPLink SmartPlug </source>
+        <target> TPLink SmartPlug </target>
+      </trans-unit>
+      <trans-unit id="plugin-tuya" datatype="html">
+        <source> Tuya SmartPlug </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-tasmota" datatype="html">
+        <source> Tasmota </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-tasmota-mqtt" datatype="html">
+        <source> Tasmota MQTT </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-wemo" datatype="html">
+        <source> Wemo </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="ui-next" datatype="html">
+        <source>next</source>
+        <target>suivant</target>
+      </trans-unit>
+      <trans-unit id="checking" datatype="html">
+        <source>Great! I'll check everything.</source>
+        <target>Génial ! Je vais tout vérifier.</target>
+      </trans-unit>
+      <trans-unit id="checking-octoprint-connection" datatype="html">
+        <source>OctoPrint Connection</source>
+        <target> Connexion Octoprint </target>
+      </trans-unit>
+      <trans-unit id="checking-config" datatype="html">
+        <source>Validating Config</source>
+        <target> Validation de la configuration </target>
+      </trans-unit>
+      <trans-unit id="checking-save" datatype="html">
+        <source>Saving Config</source>
+        <target> Enregistrement de la configuration </target>
+      </trans-unit>
+      <trans-unit id="wizard-done" datatype="html">
+        <source>done</source>
+        <target>terminé</target>
+      </trans-unit>
+      <trans-unit id="saving-config" datatype="html">
+        <source>saving config</source>
+        <target>enregistrement de la configuration</target>
+      </trans-unit>
+      <trans-unit id="error-403" datatype="html">
+        <source>403 Forbidden - This most likely means that your API Key isn't working.</source>
+        <target>403 Interdit - Cela signifie très probablement que votre clé API ne fonctionne pas.</target>
+      </trans-unit>
+      <trans-unit id="error-unknown" datatype="html">
+        <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.</source>
+        <target>0 Erreur inconnue - Cela signifie très probablement que votre hôte et votre port OctoPrint ne sont pas corrects.</target>
+      </trans-unit>
+      <trans-unit id="welcome-1" datatype="html">
+        <source> It looks like this is the first start of OctoDash. </source>
+        <target> Il semble que ce soit le premier démarrage d'OctoDash. </target>
+      </trans-unit>
+      <trans-unit id="welcome-2" datatype="html">
+        <source> I'll help you set up your config and get you started. </source>
+        <target> Je vais vous aider à préparer votre configuration et démarrer. </target>
+      </trans-unit>
+      <trans-unit id="welcome-3" datatype="html">
+        <source> If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. </source>
+        <target> Si vous rencontrez des problèmes, veuillez consulter le guide de dépannage dans le wiki GitHub. </target>
+      </trans-unit>
+      <trans-unit id="welcome-4" datatype="html">
+        <source> Note: you will need to connect a keyboard for the setup process </source>
+        <target> Merci d'avoir choisi OctoDash </target>
+      </trans-unit>
+      <trans-unit id="welcome-5" datatype="html">
+        <source> Sorry for bothering you again ... </source>
+        <target> Désolé de vous déranger à nouveau ... </target>
+      </trans-unit>
+      <trans-unit id="welcome-6" datatype="html">
+        <source> We've released an update, so awesome, we needed to change the config. Please review your new config! </source>
+        <target> Nous avons publié une mise à jour, tellement géniale que nous avons dû modifier la configuration. Veuillez vérifier votre nouvelle configuration ! </target>
+      </trans-unit>
+      <trans-unit id="welcome-7" datatype="html">
+        <source> Thanks for choosing OctoDash </source>
+        <target> Merci d'avoir choisi OctoDash </target>
+      </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">
         <source>Shhh! OctoDash is sleeping.</source>
         <target>Chut ! OctoDash dort.</target>
@@ -1284,14 +1044,6 @@
         <source>would you like to restart OctoDash now?</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="restart-no" datatype="html">
-        <source> no </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="restart-yes" datatype="html">
-        <source> yes </source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="error-update" datatype="html">
         <source>Can't initiate update!</source>
         <target>Impossible de lancer la mise à jour !</target>
@@ -1303,6 +1055,219 @@
       <trans-unit id="error-install-update" datatype="html">
         <source>Can't install update!</source>
         <target>Impossible d'installer la mise à jour !</target>
+      </trans-unit>
+      <trans-unit id="update-available-long" datatype="html">
+        <source>Version 
+          <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
+        </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-load-style" datatype="html">
+        <source>Can't load custom styles!</source>
+        <target>Impossible de charger les styles personnalisés !</target>
+      </trans-unit>
+      <trans-unit id="error-restart" datatype="html">
+        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
+        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
+      </trans-unit>
+      <trans-unit id="error-set-color" datatype="html">
+        <source>Can't set LED color!</source>
+        <target>Impossible de définir la couleur des LED !</target>
+      </trans-unit>
+      <trans-unit id="error-set-output" datatype="html">
+        <source>Can't set output!</source>
+        <target>Impossible de définir la sortie !</target>
+      </trans-unit>
+      <trans-unit id="error-run-enclosure-shell" datatype="html">
+        <source>Can't run enclosure shell!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-psu-state" datatype="html">
+        <source>Can't change PSU State!</source>
+        <target>Impossible de changer l'état du bloc d'alimentation !</target>
+      </trans-unit>
+      <trans-unit id="error-psu-provider" datatype="html">
+        <source>No provider for PSU Control is configured.</source>
+        <target>Aucun fournisseur pour PSU Control n'est configuré.</target>
+      </trans-unit>
+      <trans-unit id="error-send-psu-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Impossible d'envoyer le GCode !</target>
+      </trans-unit>
+      <trans-unit id="error-send-ophom-gcode" datatype="html">
+        <source>Can't update Ophom Plug!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-send-smartplug-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Impossible d'envoyer le GCode !</target>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug" datatype="html">
+        <source>Can't update Tasmota!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
+        <source>Can't update Tasmota MQTT!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-send-psu-command" datatype="html">
+        <source>Can't send plug command!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-spools" datatype="html">
+        <source>Can't load filament spools!</source>
+        <target>Impossible de charger les bobines de filament !</target>
+      </trans-unit>
+      <trans-unit id="error-spool" datatype="html">
+        <source>Can't load active spool!</source>
+        <target>Impossible de charger la bobine active!</target>
+      </trans-unit>
+      <trans-unit id="error-spool-id" datatype="html">
+        <source>Spool IDs didn't match</source>
+        <target>Les ID des bobines ne correspondent pas</target>
+      </trans-unit>
+      <trans-unit id="error-change-spool" datatype="html">
+        <source>Can't change spool. Please change spool manually in the OctoPrint UI.</source>
+        <target>Impossible de changer la bobine. Veuillez changer la bobine manuellement dans l'interface utilisateur d'OctoPrint.</target>
+      </trans-unit>
+      <trans-unit id="error-set-new-spool" datatype="html">
+        <source>Can't set new spool!</source>
+        <target>Impossible de définir une nouvelle bobine !</target>
+      </trans-unit>
+      <trans-unit id="error-set-new-spool-2" datatype="html">
+        <source>Can't set new spool!</source>
+        <target>Impossible de définir une nouvelle bobine !</target>
+      </trans-unit>
+      <trans-unit id="local" datatype="html">
+        <source>local</source>
+        <target>local</target>
+      </trans-unit>
+      <trans-unit id="sdcard" datatype="html">
+        <source>sdcard</source>
+        <target>sdcard</target>
+      </trans-unit>
+      <trans-unit id="files-error-file" datatype="html">
+        <source>Can't load file!</source>
+        <target>Impossible de charger le fichier !</target>
+      </trans-unit>
+      <trans-unit id="files-error-print" datatype="html">
+        <source>Can't start print!</source>
+        <target>Impossible de démarrer l’impression !</target>
+      </trans-unit>
+      <trans-unit id="files-error-delete" datatype="html">
+        <source>Can't delete file!</source>
+        <target>Impossible de supprimer le fichier !</target>
+      </trans-unit>
+      <trans-unit id="error-start-job" datatype="html">
+        <source>Can't start job!</source>
+        <target>Impossible de démarrer l'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-pause-job" datatype="html">
+        <source>Can't pause job!</source>
+        <target>Impossible de suspendre l'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-resume-job" datatype="html">
+        <source>Can't resume job!</source>
+        <target>Impossible de reprendre l'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-cancel-job" datatype="html">
+        <source>Can't cancel job!</source>
+        <target>Impossible d'annuler l'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-restart-job" datatype="html">
+        <source>Can't restart job!</source>
+        <target>Impossible de redémarrer l'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-preheat" datatype="html">
+        <source>Can't preheat printer!</source>
+        <target>Impossible de préchauffer l'imprimante !</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
+        <source>OctoPrint outdated!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-long" datatype="html">
+        <source>OctoPrint must be running at least 
+          <x id="PH" equiv-text="minimumVersion"/>; currently running 
+          <x id="PH_1" equiv-text="info.server"/>.
+        </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="printer-error-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Impossible d'envoyer le GCode !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-head" datatype="html">
+        <source>Can't move Printhead!</source>
+        <target>Impossible de déplacer la tête d'impression !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-extrude" datatype="html">
+        <source>Can't extrude Filament!</source>
+        <target>Impossible d'extruder le filament !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can't set active tool!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-printer-hotend" datatype="html">
+        <source>Can't set Hotend Temperature!</source>
+        <target>Impossible de régler la température de la buse !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-bed" datatype="html">
+        <source>Can't set Bed Temperature!</source>
+        <target>Impossible de régler la température du lit !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-feedrate" datatype="html">
+        <source>Can't set Feedrate!</source>
+        <target>Impossible de définir la vitesse d'alimentation !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-flowrate" datatype="html">
+        <source>Can't set Flowrate!</source>
+        <target>Impossible de régler le débit !</target>
+      </trans-unit>
+      <trans-unit id="error-printer-disconnect" datatype="html">
+        <source>Can't disconnect Printer!</source>
+        <target>Impossible de déconnecter l'imprimante !</target>
+      </trans-unit>
+      <trans-unit id="http-403-heading" datatype="html">
+        <source>HTTP Error 403 - FORBIDDEN</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="http-403-text" datatype="html">
+        <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="http-unknown-heading" datatype="html">
+        <source>Unknown HTTP Error</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="unit-hours-short" datatype="html">
+        <source>h</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="printer-error" datatype="html">
+        <source>Printer error</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="action-required" datatype="html">
+        <source>Action required</source>
+        <target>Action requise</target>
+      </trans-unit>
+      <trans-unit id="error-answer-prompt" datatype="html">
+        <source>Can't answer prompt!</source>
+        <target>Impossible de répondre à la demande!</target>
+      </trans-unit>
+      <trans-unit id="error-execute" datatype="html">
+        <source>Can't execute 
+          <x id="PH" equiv-text="command"/> command!
+        </source>
+        <target>Impossible d'exécuter la commande 
+          <x id="PH" equiv-text="command"/>!
+        </target>
+      </trans-unit>
+      <trans-unit id="error-connect" datatype="html">
+        <source>Can't connect to printer!</source>
+        <target>Impossible de se connecter à l'imprimante !</target>
       </trans-unit>
     </body>
   </file>
