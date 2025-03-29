@@ -10,6 +10,7 @@ import { AnimationOptions } from 'ngx-lottie';
 })
 export class ToggleSwitchComponent {
   @Input() value: boolean;
+  @Input() disabled: boolean;
   @Output() valueChange = new EventEmitter<boolean>();
 
   public toggleSwitchOptions: AnimationOptions = {
@@ -31,6 +32,10 @@ export class ToggleSwitchComponent {
   }
 
   public toggleValue(): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.value = !this.value;
     this.valueChange.emit(this.value);
     if (this.value) {

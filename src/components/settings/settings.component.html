@@ -158,19 +158,14 @@
           </form>
           <span class="settings__heading-2" i18n="@@general-filament">Filament</span>
           <form class="settings__form">
+            <app-toggle-switch
+              class="settings__toggle-switch"
+              [value]="config.filament.useM600"
+              (valueChange)="config.filament.useM600 = !config.filament.useM600">
+              <span class="settings__toggle-switch-descriptor" i18n="@@general-m600">Use M600 to change Filament</span>
+            </app-toggle-switch>
+            <br />
             <table>
-              <tr>
-                <td colspan="2" style="text-align: center">
-                  <div
-                    class="settings__checkbox-container"
-                    (click)="config.filament.useM600 = !config.filament.useM600">
-                    <span class="settings__checkbox">
-                      <span class="settings__checkbox-checked" *ngIf="config.filament.useM600"></span>
-                    </span>
-                    <span class="settings__checkbox-descriptor" i18n="@@general-m600">Use M600 to change Filament</span>
-                  </div>
-                </td>
-              </tr>
               <tr>
                 <td style="width: 25.6vw; display: block">
                   <label for="filament-feed-length" class="settings__input-label" i18n="@@general-feedlength">
@@ -281,28 +276,26 @@
         </span>
         <div class="settings__scroll">
           <span class="settings__heading-2" i18n="@@octodash-general">General</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.showExtruderControl"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">Show extruder controls</span>
-          </div>
-          <br />
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.turnScreenOffWhileSleeping"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
-          </div>
-          <br />
-          <div
-            class="settings__checkbox-container"
-            [ngClass]="{
-              'settings__checkbox-container-disabled': !(
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.showExtruderControl"
+            (valueChange)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
+            <span class="settings__toggle-switch-descriptor">Show extruder controls</span>
+          </app-toggle-switch>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.turnScreenOffWhileSleeping"
+            (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
+            <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
+          </app-toggle-switch>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.turnOnPrinterWhenExitingSleep"
+            (valueChange)="
+              config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep
+            "
+            [disabled]="
+              !(
                 config.plugins.psuControl.enabled ||
                 config.plugins.ophom.enabled ||
                 config.plugins.tpLinkSmartPlug.enabled ||
@@ -310,49 +303,21 @@
                 config.plugins.tasmota.enabled ||
                 config.plugins.tasmotaMqtt.enabled ||
                 config.plugins.wemo.enabled
-              ),
-            }"
-            (click)="config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep">
-            <span class="settings__checkbox">
-              <span
-                class="settings__checkbox-checked"
-                [ngClass]="{
-                  'settings__checkbox-checked-disabled': !(
-                    config.plugins.psuControl.enabled ||
-                    config.plugins.ophom.enabled ||
-                    config.plugins.tpLinkSmartPlug.enabled ||
-                    config.plugins.tuya.enabled ||
-                    config.plugins.tasmota.enabled ||
-                    config.plugins.tasmotaMqtt.enabled ||
-                    config.plugins.wemo.enabled
-                  ),
-                }"
-                *ngIf="config.octodash.turnOnPrinterWhenExitingSleep"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@turn-on-after-sleep"
+              )
+            ">
+            <span class="settings__toggle-switch-descriptor" i18n="@@turn-on-after-sleep"
               >Turn on printer when exiting sleep</span
             >
-          </div>
-          <br />
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.preferPreviewWhilePrinting"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@default-preview"
+          </app-toggle-switch>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.preferPreviewWhilePrinting"
+            (valueChange)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
+            <span class="settings__toggle-switch-descriptor" i18n="@@default-preview"
               >Preview by default while printing</span
             >
-          </div>
+          </app-toggle-switch>
           <br />
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.previewProgressCircle"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@always-circular">Always use circular progress bar</span>
-          </div>
           <form class="settings__form">
             <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory"
               >Default directory for file browser</label
@@ -477,32 +442,26 @@
         </span>
         <div class="settings__scroll">
           <span class="settings__heading-2" i18n="@@settings-octodash-companion">OctoDash Companion</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.companion.enabled = !config.plugins.companion.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.companion.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-octodash-companion-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.companion.enabled"
+            (valueChange)="config.plugins.companion.enabled = !config.plugins.companion.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.displayLayerProgress.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-display-layer-progress-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.displayLayerProgress.enabled"
+            (valueChange)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-enclosure">Enclosure</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.enclosure.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-enclosure-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.enclosure.enabled"
+            (valueChange)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="enclosure-ambient-id" class="settings__input-label" i18n="@@settings-ambiant-sensor">
             Ambient Sensor
             <span>(ID)</span>
@@ -518,70 +477,55 @@
             [disabled]="!config.plugins.enclosure.enabled" />
 
           <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-filament-manager-enabled">enabled</span>
-          </div>
-
-          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager (Beta)</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.spoolManager.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-spool-manager-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.filamentManager.enabled"
+            (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
+          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.spoolManager.enabled"
+            (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.preheatButton.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-preheat-button-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.preheatButton.enabled"
+            (valueChange)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-print-time-genius">Print Time Genius</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.printTimeGenius.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-print-time-genius-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.printTimeGenius.enabled"
+            (valueChange)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-psu-control">PSU Control</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.psuControl.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-psu-control-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.psuControl.enabled"
+            (valueChange)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.ophom.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-ophom-control-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.ophom.enabled"
+            (valueChange)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.tpLinkSmartPlug.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-tplink-smartplug-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.tpLinkSmartPlug.enabled"
+            (valueChange)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
             >SmartPlug IP</label
           >
@@ -595,14 +539,12 @@
             required
             [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
           <span class="settings__heading-2" i18n="@@settings-tuya">Tuya Smart Plug</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.tuya.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-tuya-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.tuya.enabled"
+            (valueChange)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
           <input
             type="text"
@@ -614,14 +556,12 @@
             required
             [disabled]="!config.plugins.tuya.enabled" />
           <span class="settings__heading-2">Tasmota</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.tasmota.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.tasmota.enabled"
+            (valueChange)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="tasmota-ip" class="settings__input-label">IP</label>
           <input
             type="text"
@@ -642,14 +582,12 @@
             [(ngModel)]="config.plugins.tasmota.index"
             [disabled]="!config.plugins.tasmota.enabled" />
           <span class="settings__heading-2">Tasmota MQTT</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.tasmotaMqtt.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.tasmotaMqtt.enabled"
+            (valueChange)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="tasmotaMqtt-topic" class="settings__input-label">Topic</label>
           <input
             type="text"
@@ -670,14 +608,12 @@
             [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
             [disabled]="!config.plugins.tasmotaMqtt.enabled" />
           <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.wemo.enabled = !config.plugins.wemo.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.wemo.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-wemo-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.wemo.enabled"
+            (valueChange)="config.plugins.wemo.enabled = !config.plugins.wemo.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
           <label for="wemoIP" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
           <input
             type="text"
