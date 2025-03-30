@@ -177,7 +177,7 @@ class OctodashPlugin(
         whether the UI build was dev or production.
         """
         
-        return os.path.join(self._basefolder, "static", "en", "index.html")
+        return os.path.join(self._basefolder, "static", "index.html")
 
     def get_ui_permissions(self):
         return []
