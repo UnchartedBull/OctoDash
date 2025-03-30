@@ -38,7 +38,7 @@ import services from './services';
     ...services,
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
-    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: APP_BASE_HREF, useValue: '/plugin/octodash' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()),
   ],
