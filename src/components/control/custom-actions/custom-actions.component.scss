@@ -51,6 +51,10 @@
     opacity: 0.9;
     margin: 0 1.4vw 3vh;
 
+    &[disabled='true'] {
+      opacity: 0.25;
+    }
+
     &-icon {
       font-size: 5.5vw;
       vertical-align: -3vw;

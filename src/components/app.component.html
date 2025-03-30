@@ -1,15 +1,5 @@
 <app-notification></app-notification>
-<app-notification-center
-  *ngIf="initialized"
-  [ngStyle]="{ top: notificationCenterTop }"
-  (setNotificationCenterAnimation)="setNotificationCenterAnimation($event)"
-  (setNotificationCenterPosition)="setNotificationCenterPosition($event)"
-  [ngClass]="{ animateNotificationCenter: animateNotificationCenter }"></app-notification-center>
-<div
-  class="container"
-  (touchstart)="onTouchStart($event)"
-  (touchmove)="onTouchMove($event)"
-  (touchend)="onTouchEnd($event)">
+<div class="container">
   <div *ngIf="!activated">
     <app-settings-icon></app-settings-icon>
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
@@ -24,14 +14,6 @@
     >
   </div>
 
-  <fa-icon
-    class="show-notification-center__button"
-    *ngIf="initialized && showNotificationCenterIcon()"
-    icon="caret-down"
-    (click)="showNotificationCenter()"
-    matRipple
-    [matRippleUnbounded]="true"
-    [matRippleCentered]="true"></fa-icon>
   <router-outlet (activate)="activated = true"></router-outlet>
 </div>
 

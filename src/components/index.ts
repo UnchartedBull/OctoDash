@@ -16,7 +16,6 @@ import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
-import { NotificationCenterComponent } from './notification-center/notification-center.component';
 import { PrintControlComponent } from './print-control/print-control.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -67,5 +66,4 @@ export default [
   PurgeFilamentComponent,
   CustomActionsComponent,
   ToggleSwitchComponent,
-  NotificationCenterComponent,
 ];

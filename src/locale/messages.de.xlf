@@ -35,6 +35,22 @@
         <source>do you want to execute the following command?</source>
         <target>möchtest Du den folgenden Befehl ausführen?</target>
       </trans-unit>
+      <trans-unit id="error-custom-action-invalid" datatype="html">
+        <source>Unknown special command!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-invalid-desc" datatype="html">
+        <source>The special command you have entered is unknown.</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled" datatype="html">
+        <source>Printer commands are not available!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled-desc" datatype="html">
+        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament into tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
@@ -294,10 +310,6 @@
         <source>control</source>
         <target>Steuerung</target>
       </trans-unit>
-      <trans-unit id="no-new-notifications" datatype="html">
-        <source> no new notifications. </source>
-        <target>Keine neuen Benachrichtigungen</target>
-      </trans-unit>
       <trans-unit id="tap-close" datatype="html">
         <source>tap this card to close it</source>
         <target>Tippe auf diese Karte um sie zu schließen</target>
@@ -535,6 +547,7 @@
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
