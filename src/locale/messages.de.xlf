@@ -529,6 +529,10 @@
         <source>Custom Actions</source>
         <target>Custom Actions</target>
       </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
         <target>GCode / Aktion</target>
