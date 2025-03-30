@@ -154,12 +154,8 @@ class OctodashPlugin(
         # Define your plugin's asset files to automatically include in the
         # core UI here.
         return {
-            "js": [
-                "runtime.409cea6e2e64252f.js",
-                "polyfills.9051428c3a252b62.js",
-                "main.93879358aec29d77.js",
-            ],
-            "css": ["css/octodash.css"],
+            "js": [],
+            "css": [],
             "less": [],
         }
 
