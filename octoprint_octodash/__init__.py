@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 
 from flask import make_response
+from flask import redirect
 import os.path
 
 
@@ -16,6 +17,7 @@ class OctodashPlugin(
     octoprint.plugin.UiPlugin,
     octoprint.plugin.TemplatePlugin,
     octoprint.plugin.StartupPlugin,
+    octoprint.plugin.BlueprintPlugin,
 ):
 
     def on_after_startup(self):
@@ -171,13 +173,28 @@ class OctodashPlugin(
 
 
     def on_ui_render(self, now, request, render_kwargs):
-        #TODO: Consider doing this once on startup, at least in prod
+        return redirect("/plugin/octodash/", code=307)
+    
+    @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
+    def get_ui_root(self):
+        response = make_response(self._get_index_html())
+        response.headers["Content-Type"] = "text/html"
+        return response
+
+    def is_blueprint_csrf_protected(self):
+        return False
+
+    def is_blueprint_protected(self):
+        return False
+
+    def get_blueprint_api_prefixes(self):
+        return []
+
+    def _get_index_html(self):
         file_path = os.path.join(self._get_index_path())
         with open(file_path, "r") as file:
             file_contents = file.read()
-        response = make_response(file_contents)
-        response.headers["Content-Type"] = "text/html"
-        return response
+        return file_contents
 
     def _get_index_path(self):
         """Return the path on the filesystem to the index.html file to be used for
@@ -185,7 +202,7 @@ class OctodashPlugin(
         whether the UI build was dev or production.
         """
         
-        return os.path.join(self._basefolder, "static", "index.html")
+        return os.path.join(self._basefolder, "static", "en", "index.html")
 
     def get_ui_permissions(self):
         return []
