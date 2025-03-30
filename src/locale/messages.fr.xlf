@@ -39,9 +39,11 @@
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
@@ -544,6 +546,10 @@
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
         <target>Actions personnalisées</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
