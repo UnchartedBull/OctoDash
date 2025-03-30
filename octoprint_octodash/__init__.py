@@ -9,7 +9,7 @@ from __future__ import absolute_import
 
 import shutil
 
-from flask import send_file, Response
+from flask import send_file, make_response, Response
 import os.path
 
 
@@ -20,11 +20,14 @@ from octoprint.events import Events
 
 
 
+
 class OctodashPlugin(
-    octoprint.plugin.SettingsPlugin,
-    octoprint.plugin.EventHandlerPlugin,
+    octoprint.plugin.UiPlugin,
     octoprint.plugin.BlueprintPlugin,
+    octoprint.plugin.StartupPlugin,
 ):
+
+
 
     ##~~ SettingsPlugin mixin
 
@@ -187,6 +190,30 @@ class OctodashPlugin(
 
     def is_blueprint_protected(self):
         return False
+# could set a cookie that's read by `will_handle_ui` to determine if the user is using Octodash
+# or consider hosting on a separate path using a blueprint route
+# maybe need to include the assets, maybe not?
+
+
+    def on_ui_render(self, now, request, render_kwargs):
+        #TODO: Consider doing this once on startup, at least in prod
+        file_path = os.path.join(self._get_index_path())
+        with open(file_path, "r") as file:
+            file_contents = file.read()
+        response = make_response(file_contents)
+        response.headers["Content-Type"] = "text/html"
+        return response
+
+    def _get_index_path(self):
+        """Return the path on the filesystem to the index.html file to be used for
+        index.html. This needs to take into account the configured language and 
+        whether the UI build was dev or production.
+        """
+        
+        return os.path.join(self._basefolder, "static", "index.html")
+
+    def get_ui_permissions(self):
+        return []
 
     ##~~ Softwareupdate hook
 

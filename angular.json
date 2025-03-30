@@ -16,7 +16,7 @@
       "i18n": {
         "sourceLocale": {
           "code": "en",
-          "baseHref": ""
+          "baseHref": "en/"
         },
         "locales": {
           "fr": {
@@ -39,7 +39,7 @@
           "options": {
             "allowedCommonJsDependencies": ["lottie-web"],
             "aot": true,
-            "baseHref": "/plugin/octodash/static/index.html",
+            "baseHref": "/plugin/octodash/static/",
             "outputPath": {
               "base": "octoprint_octodash/static",
               "browser": ""

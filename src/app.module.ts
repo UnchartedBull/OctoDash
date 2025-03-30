@@ -1,4 +1,5 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -37,6 +38,8 @@ import services from './services';
     ...services,
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })
