@@ -24,6 +24,6 @@ export class LoginScreenComponent {
   }
   public submit() {
     this.configService.setAccessToken(this.accessToken);
-    window.location.reload();
+    window.location.href = '/?octodash=1';
   }
 }

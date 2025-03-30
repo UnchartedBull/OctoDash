@@ -14,7 +14,7 @@ plugin_package = "octoprint_octodash"
 plugin_name = "OctoPrint-Octodash"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.0"
+plugin_version = "3.0.0"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
@@ -27,10 +27,10 @@ plugin_author = "Hilton Shumway"
 plugin_author_email = "hillshum@gmail.com"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/hillshum/OctoPrint-Octodash"
+plugin_url = "https://github.com/UnchartedBull/OctoDash"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
-plugin_license = "AGPLv3"
+plugin_license = "Apache 2.0"
 
 # Any additional requirements besides OctoPrint should be listed here
 plugin_requires = []
@@ -66,6 +66,36 @@ additional_setup_parameters = {"python_requires": ">=3,<4"}
 ########################################################################################################################
 
 from setuptools import setup
+from setuptools.command.build_py import build_py
+import subprocess
+
+class NpmBuild(build_py):
+# Run npm install and npm run build
+
+    user_options = build_py.user_options + [
+        ("build-ui", None, "Build UI using npm"),
+    ]
+
+    def initialize_options(self):
+        super().initialize_options()
+        self.build_ui = False
+
+    def finalize_options(self):
+        super().finalize_options()
+
+    def run(self):
+        if self.build_ui:
+            print("Building UI...")
+            self.run_npm_build()
+
+        super().run()
+
+    def run_npm_build(self):
+        try:
+            subprocess.check_call(["npm", "ci"])
+            subprocess.check_call(["npm", "run", "build"])
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(f"Error during npm build: {e}")
 
 try:
     import octoprint_setuptools
@@ -92,6 +122,7 @@ setup_parameters = octoprint_setuptools.create_plugin_setup_parameters(
     additional_packages=plugin_additional_packages,
     ignored_packages=plugin_ignored_packages,
     additional_data=plugin_additional_data,
+    cmdclass={"build_py": NpmBuild}
 )
 
 if len(additional_setup_parameters):

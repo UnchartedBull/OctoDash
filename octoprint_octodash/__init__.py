@@ -2,37 +2,12 @@
 from __future__ import absolute_import
 
 from flask import make_response
+import os.path
 
-### (Don't forget to remove me)
-# This is a basic skeleton for your plugin's __init__.py. You probably want to adjust the class name of your plugin
-# as well as the plugin mixins it's subclassing from. This is really just a basic skeleton to get you started,
-# defining your plugin as a template plugin, settings and asset plugin. Feel free to add or remove mixins
-# as necessary.
-#
-# Take a look at the documentation on what other plugin mixins are available.
 
 import octoprint.plugin
 
 
-html = """
-<!doctype html>
-<html lang="en" dir="ltr" data-critters-container>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OctoDash</title>
-    <base href="./">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <style>html{--mat-ripple-color:rgba(255, 255, 255, .1)}html{--mat-option-selected-state-label-text-color:#3f51b5;--mat-option-label-text-color:white;--mat-option-hover-state-layer-color:rgba(255, 255, 255, .08);--mat-option-focus-state-layer-color:rgba(255, 255, 255, .08);--mat-option-selected-state-layer-color:rgba(255, 255, 255, .08)}html{--mat-optgroup-label-text-color:white}html{--mat-full-pseudo-checkbox-selected-icon-color:#ff4081;--mat-full-pseudo-checkbox-selected-checkmark-color:#303030;--mat-full-pseudo-checkbox-unselected-icon-color:rgba(255, 255, 255, .7);--mat-full-pseudo-checkbox-disabled-selected-checkmark-color:#303030;--mat-full-pseudo-checkbox-disabled-unselected-icon-color:#686868;--mat-full-pseudo-checkbox-disabled-selected-icon-color:#686868;--mat-minimal-pseudo-checkbox-selected-checkmark-color:#ff4081;--mat-minimal-pseudo-checkbox-disabled-selected-checkmark-color:#686868}html{--mat-app-background-color:#303030;--mat-app-text-color:white}html{--mat-option-label-text-font:Roboto, sans-serif;--mat-option-label-text-line-height:24px;--mat-option-label-text-size:16px;--mat-option-label-text-tracking:.03125em;--mat-option-label-text-weight:400}html{--mat-optgroup-label-text-font:Roboto, sans-serif;--mat-optgroup-label-text-line-height:24px;--mat-optgroup-label-text-size:16px;--mat-optgroup-label-text-tracking:.03125em;--mat-optgroup-label-text-weight:400}@font-face{font-family:Montserrat;font-weight:400;src:url(Montserrat-Regular.09cae4fd24e6bfa5.ttf) format("truetype")}@font-face{font-family:Montserrat;font-weight:500;src:url(Montserrat-Medium.50ba2624ff93733b.ttf) format("truetype")}*:not(path):not(svg){font-family:Montserrat,sans-serif;color:#f5f6fa;font-size:4.3vw;margin:0;padding:0;overflow:hidden}*,*:after,*:before{-webkit-user-select:none;-webkit-user-drag:none;-webkit-app-region:no-drag;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none;cursor:default}html,body,.app-root{width:100%;height:100%;padding:0}body{display:block;margin-left:0;margin-top:0}app-root{display:block;background-color:#353b48;padding:.9vh .9vw;overflow:hidden}.splash-screen__icon{height:50vh;margin-top:20vh;margin-left:auto;margin-right:auto;display:block}.splash-screen__credits{display:block;font-size:1.8vw;text-align:center;opacity:.8;margin-top:6vh}html,body,span,img{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}body{line-height:1.2}span:focus,img:focus{outline:0}</style><link rel="stylesheet" href="styles.394a2f02f43a91b2.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/plugin/octodash/static/styles.394a2f02f43a91b2.css"></noscript></head>
-
-  <body lang="en-US">
-    <app-root class="app-root">
-      <img src="/plugin/octodash/static/assets/icon/icon-main-title.svg" class="splash-screen__icon">
-      <span class="splash-screen__credits">by UnchartedBull</span>
-    </app-root>
-  <script src="/plugin/octodash/static/runtime.409cea6e2e64252f.js" type="module"></script><script src="/plugin/octodash/static/polyfills.9051428c3a252b62.js" type="module"></script><script src="/plugin/octodash/static/main.93879358aec29d77.js" type="module"></script></body>
-</html>
-"""
 
 
 class OctodashPlugin(
@@ -40,7 +15,21 @@ class OctodashPlugin(
     octoprint.plugin.AssetPlugin,
     octoprint.plugin.UiPlugin,
     octoprint.plugin.TemplatePlugin,
+    octoprint.plugin.StartupPlugin,
 ):
+
+    def on_after_startup(self):
+        #TODO: Get this working
+        pass
+        # file_path = os.path.join(self._basefolder , "static","index.html")
+        # if os.path.exists(file_path):
+        #     with open(file_path, "r") as file:
+        #         self._file_contents = file.read()
+        # else:
+        #     raise FileNotFoundError(f"File {file_path} not found.")
+        
+        # return super().on_after_startup()
+
 
     ##~~ SettingsPlugin mixin
 
@@ -176,10 +165,27 @@ class OctodashPlugin(
         if request.args.get("octodash") == "1":
             return True
 
+# could set a cookie that's read by `will_handle_ui` to determine if the user is using Octodash
+# or consider hosting on a separate path using a blueprint route
+# maybe need to include the assets, maybe not?
+
+
     def on_ui_render(self, now, request, render_kwargs):
-        response = make_response(html)
+        #TODO: Consider doing this once on startup, at least in prod
+        file_path = os.path.join(self._get_index_path())
+        with open(file_path, "r") as file:
+            file_contents = file.read()
+        response = make_response(file_contents)
         response.headers["Content-Type"] = "text/html"
         return response
+
+    def _get_index_path(self):
+        """Return the path on the filesystem to the index.html file to be used for
+        index.html. This needs to take into account the configured language and 
+        whether the UI build was dev or production.
+        """
+        
+        return os.path.join(self._basefolder, "static", "index.html")
 
     def get_ui_permissions(self):
         return []
