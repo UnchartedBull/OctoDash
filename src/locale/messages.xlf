@@ -951,7 +951,7 @@
         <source>GCode / Action</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">399,402</context>
+          <context context-type="linenumber">402,405</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-icon" datatype="html">
@@ -1007,7 +1007,7 @@
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">495,497</context>
+          <context context-type="linenumber">498,500</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
