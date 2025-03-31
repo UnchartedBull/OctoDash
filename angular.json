@@ -26,6 +26,10 @@
           "de": {
             "translation": "src/locale/messages.de.xlf",
             "baseHref": ""
+          },
+          "da": {
+            "translation": "src/locale/messages.da.xlf",
+            "baseHref": ""
           }
         }
       },

@@ -1,0 +1,1379 @@
+<xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="ng2.template" datatype="plaintext" source-language="en" target-language="da">
+    <body>
+      <trans-unit id="long-init" datatype="html">
+        <source>Initializing is taking longer than usual...
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
+        </source>
+        <target>
+          Initialisering tager længere tid end normalt. 
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>
+           Sørg for, at OctoPrint kører, og at CORS er aktiveret for API. 
+        </target>
+      </trans-unit>
+      <trans-unit id="initializing" datatype="html">
+        <source>initializing</source>
+        <target>initialiserer</target>
+      </trans-unit>
+      <trans-unit id="error-enclosure-temp" datatype="html">
+        <source>Can't retrieve enclosure temperature!</source>
+        <target>Kan ikke hente skabets temperatur!</target>
+      </trans-unit>
+      <trans-unit id="ui-back" datatype="html">
+        <source>back</source>
+        <target>tilbage</target>
+      </trans-unit>
+      <trans-unit id="error-printer-profile" datatype="html">
+        <source>Can't retrieve printer profile!</source>
+        <target>Kan ikke hente printerprofil!</target>
+      </trans-unit>
+      <trans-unit id="website-loading" datatype="html">
+        <source>loading website...</source>
+        <target>indlæser hjemmeside...</target>
+      </trans-unit>
+      <trans-unit id="are-you-sure" datatype="html">
+        <source>are you sure?</source>
+        <target>er du sikker?</target>
+      </trans-unit>
+      <trans-unit id="confirm-exec" datatype="html">
+        <source>do you want to execute the following command?</source>
+        <target>vil du udføre følgende kommando?</target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-invalid" datatype="html">
+        <source>Unknown special command!</source>
+        <target>Ukendt specialkommando!</target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-invalid-desc" datatype="html">
+        <source>The special command you have entered is unknown.</source>
+        <target>Specialkommandoen du har brugt kendes ikke.</target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled" datatype="html">
+        <source>Printer commands are not available!</source>
+        <target>Printerkommandoer er ikke tilgængelig!</target>
+      </trans-unit>
+      <trans-unit id="error-custom-action-disabled-desc" datatype="html">
+        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <target>Forbind venligst din printer før du bruger en printerkommando.</target>
+      </trans-unit>
+      <trans-unit id="load-new-filament" datatype="html">
+        <source>load new filament into tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
+        <target>anvend ny filament</target>
+      </trans-unit>
+      <trans-unit id="load-new-filament-message" datatype="html">
+        <source>only put a little filament in, I'll pull in the rest.</source>
+        <target>kom kun lidt filament i, så trækker jeg resten ind.</target>
+      </trans-unit>
+      <trans-unit id="filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g venstre</target>
+      </trans-unit>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target>færdig</target>
+      </trans-unit>
+      <trans-unit id="ui-waiting-for-user" datatype="html">
+        <source>I'll wait for you.</source>
+        <target>jeg venter på dig</target>
+      </trans-unit>
+      <trans-unit id="filament-m600" datatype="html">
+        <source>M600 sent</source>
+        <target>M600 sendt</target>
+      </trans-unit>
+      <trans-unit id="follow-printer-screen" datatype="html">
+        <source>follow the instructions on your printer's display</source>
+        <target>følg instruktionerne på din printers skærm</target>
+      </trans-unit>
+      <trans-unit id="choose-filament" datatype="html">
+        <source>select your new filament</source>
+        <target>vælg din nye filament</target>
+      </trans-unit>
+      <trans-unit id="choose-filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g venstre</target>
+      </trans-unit>
+      <trans-unit id="no-spools" datatype="html">
+        <source>no filament spools found</source>
+        <target>ingen filament-spoler fundet</target>
+      </trans-unit>
+      <trans-unit id="loading-spools" datatype="html">
+        <source>loading spools</source>
+        <target>anvender spoler</target>
+      </trans-unit>
+      <trans-unit id="choose-tool" datatype="html">
+        <source>select tool</source>
+        <target>vælg værktøj</target>
+      </trans-unit>
+      <trans-unit id="tool-selection" datatype="html">
+        <source>Tool 
+          <x id="INTERPOLATION" equiv-text="{{ i }}"/>
+        </source>
+        <target>
+          Værktøj 
+          <x id="INTERPOLATION" equiv-text="{{ i }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="ui-skip" datatype="html">
+        <source>skip</source>
+        <target>spring over</target>
+      </trans-unit>
+      <trans-unit id="nozzle-heating" datatype="html">
+        <source>heating the nozzle for tool 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </source>
+        <target>opvarmer nozzle for værktøj</target>
+      </trans-unit>
+      <trans-unit id="nozzle-heating-wait" datatype="html">
+        <source>wait</source>
+        <target>vent</target>
+      </trans-unit>
+      <trans-unit id="nozzle-heating-wait-seconds-or" datatype="html">
+        <source>s or</source>
+        <target>s eller</target>
+      </trans-unit>
+      <trans-unit id="nozzle-heating-start" datatype="html">
+        <source>start</source>
+        <target>start</target>
+      </trans-unit>
+      <trans-unit id="move-filament" datatype="html">
+        <source>filament</source>
+        <target>filament</target>
+      </trans-unit>
+      <trans-unit id="move-filament-speed" datatype="html">
+        <source>mm/s</source>
+        <target>mm/s</target>
+      </trans-unit>
+      <trans-unit id="move-filament-stop" datatype="html">
+        <source>stop</source>
+        <target>stop</target>
+      </trans-unit>
+      <trans-unit id="loading-filament" datatype="html">
+        <source>loading</source>
+        <target>indsætter</target>
+      </trans-unit>
+      <trans-unit id="unloading-filament" datatype="html">
+        <source>unloading</source>
+        <target>fjerner</target>
+      </trans-unit>
+      <trans-unit id="purging-filament" datatype="html">
+        <source>purging filament</source>
+        <target>renser filament</target>
+      </trans-unit>
+      <trans-unit id="purging-mm" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
+      </trans-unit>
+      <trans-unit id="puging-10mm" datatype="html">
+        <source>+10mm</source>
+        <target>+10 mm</target>
+      </trans-unit>
+      <trans-unit id="purging-done" datatype="html">
+        <source>done</source>
+        <target>færdig</target>
+      </trans-unit>
+      <trans-unit id="ui-sort" datatype="html">
+        <source>sort</source>
+        <target>sortér</target>
+      </trans-unit>
+      <trans-unit id="files-mb-1" datatype="html">
+        <source>mb</source>
+        <target>mb</target>
+      </trans-unit>
+      <trans-unit id="files-mb-2" datatype="html">
+        <source>mb</source>
+        <target>mb</target>
+      </trans-unit>
+      <trans-unit id="files-g" datatype="html">
+        <source>g</source>
+        <target>g</target>
+      </trans-unit>
+      <trans-unit id="files-h" datatype="html">
+        <source>h</source>
+        <target>t</target>
+      </trans-unit>
+      <trans-unit id="files-mb-3" datatype="html">
+        <source>mb</source>
+        <target>mb</target>
+      </trans-unit>
+      <trans-unit id="files-h-2" datatype="html">
+        <source>h</source>
+        <target>t</target>
+      </trans-unit>
+      <trans-unit id="files-g-2" datatype="html">
+        <source>g</source>
+        <target>g</target>
+      </trans-unit>
+      <trans-unit id="files-loading" datatype="html">
+        <source>loading details</source>
+        <target>indlæser detaljer</target>
+      </trans-unit>
+      <trans-unit id="files-sort" datatype="html">
+        <source>sort files</source>
+        <target>sorter filer</target>
+      </trans-unit>
+      <trans-unit id="files-sort-by" datatype="html">
+        <source>sort by</source>
+        <target>sorter efter</target>
+      </trans-unit>
+      <trans-unit id="files-name" datatype="html">
+        <source>Name</source>
+        <target>Navn</target>
+      </trans-unit>
+      <trans-unit id="files-date" datatype="html">
+        <source>Date</source>
+        <target>Dato</target>
+      </trans-unit>
+      <trans-unit id="files-size" datatype="html">
+        <source>Size</source>
+        <target>Størrelse</target>
+      </trans-unit>
+      <trans-unit id="files-order" datatype="html">
+        <source>order</source>
+        <target>sorter</target>
+      </trans-unit>
+      <trans-unit id="files-ascending" datatype="html">
+        <source>Ascending</source>
+        <target>Stigende</target>
+      </trans-unit>
+      <trans-unit id="files-descending" datatype="html">
+        <source>Descending</source>
+        <target>Aftagende</target>
+      </trans-unit>
+      <trans-unit id="error-load-file-folder" datatype="html">
+        <source>Can't load file/folder!</source>
+        <target>Kan ikke indlæse fil/mappe!</target>
+      </trans-unit>
+      <trans-unit id="error-load-file" datatype="html">
+        <source>Can't load file!</source>
+        <target>Kan ikke indlæse filen!</target>
+      </trans-unit>
+      <trans-unit id="unit-millimeters-short" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
+      </trans-unit>
+      <trans-unit id="height-layer-status" datatype="html">
+        <source>Layer 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+          Lag 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+           af 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="job-filament" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
+        </source>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>
+          g Filament
+        </target>
+      </trans-unit>
+      <trans-unit id="job-info__time-left" datatype="html">
+        <source>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
+        </source>
+        <target>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="job-elapsed" datatype="html">
+        <source>elapsed: 
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </source>
+        <target>
+          udført:
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="will-finish" datatype="html">
+        <source>- will finish ~</source>
+        <target>- færdig ~</target>
+      </trans-unit>
+      <trans-unit id="job-g" datatype="html">
+        <source>g</source>
+        <target>g</target>
+      </trans-unit>
+      <trans-unit id="filament-used" datatype="html">
+        <source>filament will be used</source>
+        <target>filament vil blive brugt</target>
+      </trans-unit>
+      <trans-unit id="ui-loading-info" datatype="html">
+        <source> loading info</source>
+        <target> henter info</target>
+      </trans-unit>
+      <trans-unit id="no-job" datatype="html">
+        <source>no job running...</source>
+        <target>intet job kører...</target>
+      </trans-unit>
+      <trans-unit id="menu-files" datatype="html">
+        <source>files</source>
+        <target>filer</target>
+      </trans-unit>
+      <trans-unit id="menu-filament" datatype="html">
+        <source>filament</source>
+        <target>filament</target>
+      </trans-unit>
+      <trans-unit id="menu-control" datatype="html">
+        <source>control</source>
+        <target>styring</target>
+      </trans-unit>
+      <trans-unit id="tap-close" datatype="html">
+        <source>tap this card to close it</source>
+        <target>tryk på dette kort for at lukke det</target>
+      </trans-unit>
+      <trans-unit id="control-cancel" datatype="html">
+        <source>cancel</source>
+        <target>afbryd</target>
+      </trans-unit>
+      <trans-unit id="control-pause" datatype="html">
+        <source>pause</source>
+        <target>pause</target>
+      </trans-unit>
+      <trans-unit id="control-adjust" datatype="html">
+        <source>adjust</source>
+        <target>indstil</target>
+      </trans-unit>
+      <trans-unit id="cancel-print" datatype="html">
+        <source>cancel print?</source>
+        <target>afbryd udskrivning?</target>
+      </trans-unit>
+      <trans-unit id="ui-yes" datatype="html">
+        <source>yes</source>
+        <target>ja</target>
+      </trans-unit>
+      <trans-unit id="ui-no" datatype="html">
+        <source>no</source>
+        <target>nej</target>
+      </trans-unit>
+      <trans-unit id="print-pause" datatype="html">
+        <source>print paused</source>
+        <target>print pauset</target>
+      </trans-unit>
+      <trans-unit id="print-restart" datatype="html">
+        <source>restart</source>
+        <target>genstart</target>
+      </trans-unit>
+      <trans-unit id="print-resume" datatype="html">
+        <source>resume</source>
+        <target>genoptag</target>
+      </trans-unit>
+      <trans-unit id="print-filament" datatype="html">
+        <source>filament</source>
+        <target>filament</target>
+      </trans-unit>
+      <trans-unit id="adjust-hotend" datatype="html">
+        <source>Hotend</source>
+        <target>Hotend</target>
+      </trans-unit>
+      <trans-unit id="adjust-heatbed" datatype="html">
+        <source>Heatbed</source>
+        <target>Heatbed</target>
+      </trans-unit>
+      <trans-unit id="adjust-fanspeed" datatype="html">
+        <source>Fan Speed</source>
+        <target>Blæserhastighed</target>
+      </trans-unit>
+      <trans-unit id="adjust-speed" datatype="html">
+        <source>Speed</source>
+        <target>Hastighed</target>
+      </trans-unit>
+      <trans-unit id="babystep-z" datatype="html">
+        <source>Babystep Z</source>
+        <target>Babystep Z</target>
+      </trans-unit>
+      <trans-unit id="reset-confirmation" datatype="html">
+        <source>Are you sure you want to reset the configuration?</source>
+        <target>Er du sikker på at du vil nulstille konfigurationen?</target>
+      </trans-unit>
+      <trans-unit id="settings" datatype="html">
+        <source>settings</source>
+        <target>indstillinger</target>
+      </trans-unit>
+      <trans-unit id="settings-general" datatype="html">
+        <source>general</source>
+        <target>generelt</target>
+      </trans-unit>
+      <trans-unit id="settings-octodash" datatype="html">
+        <source>octodash</source>
+        <target>octodash</target>
+      </trans-unit>
+      <trans-unit id="settings-plugins" datatype="html">
+        <source>plugins</source>
+        <target>plugins</target>
+      </trans-unit>
+      <trans-unit id="settings-about" datatype="html">
+        <source>about</source>
+        <target>om</target>
+      </trans-unit>
+      <trans-unit id="update-available" datatype="html">
+        <source>Update available!</source>
+        <target> opdatering tilgængelig! </target>
+      </trans-unit>
+      <trans-unit id="ui-save" datatype="html">
+        <source>save</source>
+        <target>gem</target>
+      </trans-unit>
+      <trans-unit id="settings-general-menu" datatype="html">
+        <source>general</source>
+        <target>generelt</target>
+      </trans-unit>
+      <trans-unit id="general-octoprint-connection" datatype="html">
+        <source>OctoPrint Connection</source>
+        <target>OctoPrint-forbindelse</target>
+      </trans-unit>
+      <trans-unit id="general-octoprint-url" datatype="html">
+        <source>Octoprint URL</source>
+        <target>OctoPrint URL</target>
+      </trans-unit>
+      <trans-unit id="general-printer" datatype="html">
+        <source>Printer</source>
+        <target>Printer</target>
+      </trans-unit>
+      <trans-unit id="general-name" datatype="html">
+        <source>Name</source>
+        <target>Navn</target>
+      </trans-unit>
+      <trans-unit id="general-xyspeed" datatype="html">
+        <source>XY-Speed (mm/s)</source>
+        <target>XY-hastighed (mm/s)</target>
+      </trans-unit>
+      <trans-unit id="general-zspeed" datatype="html">
+        <source>Z-Speed (mm/s)</source>
+        <target>Z-hastighed (mm/s)</target>
+      </trans-unit>
+      <trans-unit id="general-default" datatype="html">
+        <source> Default Temperatures &amp; Fan Speed </source>
+        <target> Standardtemperaturer og blæserhastighed </target>
+      </trans-unit>
+      <trans-unit id="default-hotend" datatype="html">
+        <source> Hotend 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Hotend 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text=" </span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="default-heatbed" datatype="html">
+        <source> Heatbed 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Heatbed 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="default-fanspeed" datatype="html">
+        <source> Fan Speed 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Blæserhastighed 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (%)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-filament" datatype="html">
+        <source>Filament</source>
+        <target>Filament</target>
+      </trans-unit>
+      <trans-unit id="general-m600" datatype="html">
+        <source>Use M600 to change Filament</source>
+        <target>Brug M600 til at skifte filament</target>
+      </trans-unit>
+      <trans-unit id="general-feedlength" datatype="html">
+        <source> Feed Length 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Feed-længde 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-purge-distance" datatype="html">
+        <source> Purge Distance 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Renselængde
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-feedrate" datatype="html">
+        <source> Feed Speed 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Feed-hastighed
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-feedrate-slow" datatype="html">
+        <source> Feed Speed Slow 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Feed Speed langsom 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-thickness" datatype="html">
+        <source> Thickness 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Tykkelse 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt ;/span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-density" datatype="html">
+        <source> Density 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Massefylde 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (g/cm³)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="general-warning" datatype="html">
+        <source> Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your Feed Speed to high and your Feed Length to long. </source>
+        <target> Indstil venligst disse værdier omhyggeligt, da de muligvis kan ødelægge dele af din printer. Indstil bare ikke din fremføringshastighed til høj og din fremføringslængde til lang. </target>
+      </trans-unit>
+      <trans-unit id="octodash-general" datatype="html">
+        <source>General</source>
+        <target>Generel</target>
+      </trans-unit>
+      <trans-unit id="screen-off" datatype="html">
+        <source>Turn screen off while sleeping</source>
+        <target>Sluk skærmen, mens der slumres</target>
+      </trans-unit>
+      <trans-unit id="turn-on-after-sleep" datatype="html">
+        <source>Turn on printer when exiting sleep</source>
+        <target>Tænd printeren, når slumretilstand forlades</target>
+      </trans-unit>
+      <trans-unit id="default-preview" datatype="html">
+        <source>Preview by default while printing</source>
+        <target>Forhåndsvisning som standard under udskrivning</target>
+      </trans-unit>
+      <trans-unit id="always-circular" datatype="html">
+        <source>Always use circular progress bar</source>
+        <target>Brug altid en cirkulær fremdriftsbar</target>
+      </trans-unit>
+      <trans-unit id="default-directory" datatype="html">
+        <source>Default directory for file browser</source>
+        <target>Standardfolder for filbrowser</target>
+      </trans-unit>
+      <trans-unit id="invert-axis-control" datatype="html">
+        <source>Invert Axis Control</source>
+        <target>Inverter aksekontrol</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom" datatype="html">
+        <source>Custom Actions</source>
+        <target>Brugerdefinerede handlinger</target>
+      </trans-unit>
+      <trans-unit id="octodash-gcode" datatype="html">
+        <source>GCode / Action</source>
+        <target>GCode / Handling</target>
+      </trans-unit>
+      <trans-unit id="action-icon" datatype="html">
+        <source>Icon</source>
+        <target>Ikon</target>
+      </trans-unit>
+      <trans-unit id="action-color" datatype="html">
+        <source>Color</source>
+        <target>Farve</target>
+      </trans-unit>
+      <trans-unit id="action-confirm" datatype="html">
+        <source>Confirm</source>
+        <target>Bekræft</target>
+      </trans-unit>
+      <trans-unit id="action-home" datatype="html">
+        <source>Return to Home</source>
+        <target>Tilbage til start</target>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <target>OctoDash Companion</target>
+      </trans-unit>
+      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-display-layer-progress" datatype="html">
+        <source>Display Layer Progress</source>
+        <target>Vis fremskridt pr. lag</target>
+      </trans-unit>
+      <trans-unit id="settings-display-layer-progress-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-enclosure" datatype="html">
+        <source>Enclosure</source>
+        <target>Skab</target>
+      </trans-unit>
+      <trans-unit id="settings-enclosure-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-ambiant-sensor" datatype="html">
+        <source> Ambient Sensor 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(ID)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+        <target>
+           Omgivelsessensor 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
+          (ID)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text=" </span>"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="settings-filament-manager" datatype="html">
+        <source>Filament Manager</source>
+        <target>Filament Manager</target>
+      </trans-unit>
+      <trans-unit id="settings-filament-manager-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-spool-manager" datatype="html">
+        <source>Spool Manager (Beta)</source>
+        <target>Spool Manager (Beta)</target>
+      </trans-unit>
+      <trans-unit id="settings-spool-manager-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-preheat-button" datatype="html">
+        <source>Preheat Button</source>
+        <target>Forvarmningsknap</target>
+      </trans-unit>
+      <trans-unit id="settings-preheat-button-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-print-time-genius" datatype="html">
+        <source>Print Time Genius</source>
+        <target>Print Time Genius</target>
+      </trans-unit>
+      <trans-unit id="settings-print-time-genius-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-psu-control" datatype="html">
+        <source>PSU Control</source>
+        <target>PSU kontrol</target>
+      </trans-unit>
+      <trans-unit id="settings-psu-control-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-ophom-control" datatype="html">
+        <source>Ophon Control (Phillips HUE)</source>
+        <target>Ophon Control (Phillips HUE)</target>
+      </trans-unit>
+      <trans-unit id="settings-ophom-control-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-tplink-smartplug" datatype="html">
+        <source>TPLink-SmartPlug</source>
+        <target>TPLink-SmartPlug</target>
+      </trans-unit>
+      <trans-unit id="settings-tplink-smartplug-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
+        <source>SmartPlug IP</source>
+        <target>SmartPlug IP</target>
+      </trans-unit>
+      <trans-unit id="settings-tuya" datatype="html">
+        <source>Tuya Smart Plug</source>
+        <target>Tuya Smart Plug</target>
+      </trans-unit>
+      <trans-unit id="settings-tuya-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-tuya-label" datatype="html">
+        <source>Label</source>
+        <target>Etiket</target>
+      </trans-unit>
+      <trans-unit id="settings-wemo" datatype="html">
+        <source>Wemo</source>
+        <target>Wemo</target>
+      </trans-unit>
+      <trans-unit id="settings-wemo-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
+      </trans-unit>
+      <trans-unit id="settings-wemo-ip" datatype="html">
+        <source>Wemo IP</source>
+        <target>Wemo IP</target>
+      </trans-unit>
+      <trans-unit id="about" datatype="html">
+        <source>about</source>
+        <target>om</target>
+      </trans-unit>
+      <trans-unit id="about-developer-mode" datatype="html">
+        <source> updates disabled (dev mode) </source>
+        <target> opdateringer slået fra (dev tilstand) </target>
+      </trans-unit>
+      <trans-unit id="about-no-update" datatype="html">
+        <source> up to date </source>
+        <target> ingen tilgængelig opdatering </target>
+      </trans-unit>
+      <trans-unit id="about-install-v" datatype="html">
+        <source> install v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
+        </source>
+        <target>
+           installer v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="connection" datatype="html">
+        <source>Connection</source>
+        <target>Forbindelse</target>
+      </trans-unit>
+      <trans-unit id="licence" datatype="html">
+        <source>License</source>
+        <target>Licens</target>
+      </trans-unit>
+      <trans-unit id="special-thanks" datatype="html">
+        <source>Special Thanks</source>
+        <target>Specielt tak</target>
+      </trans-unit>
+      <trans-unit id="special-thanks-message" datatype="html">
+        <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
+        <target> Særlig tak til /u/Slateclean for levering af touch-skærme, så udviklingen kan fortsætte! </target>
+      </trans-unit>
+      <trans-unit id="reset-config" datatype="html">
+        <source>Reset Config</source>
+        <target>Nulstil konfiguration</target>
+      </trans-unit>
+      <trans-unit id="top-left" datatype="html">
+        <source>Top Left</source>
+        <target>Øverst til venstre</target>
+      </trans-unit>
+      <trans-unit id="top-right" datatype="html">
+        <source>Top Right</source>
+        <target>Øverst til højre</target>
+      </trans-unit>
+      <trans-unit id="middle-left" datatype="html">
+        <source>Middle Left</source>
+        <target>Midtfor venstre</target>
+      </trans-unit>
+      <trans-unit id="middle-right" datatype="html">
+        <source>Middle Right</source>
+        <target>Midtfor højre</target>
+      </trans-unit>
+      <trans-unit id="bottom-left" datatype="html">
+        <source>Bottom Left</source>
+        <target>Nederst til venstre</target>
+      </trans-unit>
+      <trans-unit id="bottom-right" datatype="html">
+        <source>Bottom Right</source>
+        <target>Nederst til højre</target>
+      </trans-unit>
+      <trans-unit id="conf-unsaved" datatype="html">
+        <source>Configuration not saved!</source>
+        <target>Konfigurationen er ikke gemt!</target>
+      </trans-unit>
+      <trans-unit id="conf-unsaved-message" datatype="html">
+        <source>You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
+        <target>Du har ikke gemt din konfiguration endnu, så dine ændringer vil ikke blive anvendt. Klik på Luk igen, hvis du vil kassere dine ændringer!</target>
+      </trans-unit>
+      <trans-unit id="error-invalid-config" datatype="html">
+        <source>Can't save invalid config</source>
+        <target>Kan ikke gemme ugyldig konfiguration</target>
+      </trans-unit>
+      <trans-unit id="select-instance" datatype="html">
+        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
+        <target> Første ting først: Vælg venligst din OctoPrint-instans fra listen nedenfor, eller indtast IP/URL manuelt.</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required" datatype="html">
+        <source> Upgrade Required / </source>
+        <target> Opgradering krævet / </target>
+      </trans-unit>
+      <trans-unit id="version-url" datatype="html">
+        <source> Version 
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
+          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
+        </source>
+        <target>
+           Version 
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>
+          , URL: 
+          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="searching" datatype="html">
+        <source>searching</source>
+        <target>søger</target>
+      </trans-unit>
+      <trans-unit id="enter-manually" datatype="html">
+        <source>enter manually</source>
+        <target>indtast manuelt</target>
+      </trans-unit>
+      <trans-unit id="port-recommendation" datatype="html">
+        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
+        <target>Port 5000 til vanilla OctoPrint, Port 80 til OctoPi</target>
+      </trans-unit>
+      <trans-unit id="search-again" datatype="html">
+        <source> search again </source>
+        <target>søg igen</target>
+      </trans-unit>
+      <trans-unit id="no-instance-found" datatype="html">
+        <source>no instances found.</source>
+        <target>ingen forekomster fundet.</target>
+      </trans-unit>
+      <trans-unit id="prompt-extruder-info" datatype="html">
+        <source>I also need some information about your extruder.</source>
+        <target>Jeg har også brug for nogle oplysninger om din extruder.</target>
+      </trans-unit>
+      <trans-unit id="prompt-feed-length" datatype="html">
+        <source>Feed Length:</source>
+        <target>Feed-længde:</target>
+      </trans-unit>
+      <trans-unit id="prompt-info-mm" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
+      </trans-unit>
+      <trans-unit id="prompt-feed-speed" datatype="html">
+        <source>Feed Speed:</source>
+        <target>Feed-hastighed:</target>
+      </trans-unit>
+      <trans-unit id="prompt-info-mms" datatype="html">
+        <source>mm/s</source>
+        <target>mm/s</target>
+      </trans-unit>
+      <trans-unit id="filament-changing-warning" datatype="html">
+        <source> These values are used for filament changing. Make sure to have your feed length (distance extruder to hotend) and feed speed configured correctly. </source>
+        <target> Disse værdier bruges til filamentændring. Sørg for at have din fødelængde (afstand ekstruder til hotend) og fremføringshastighed konfigureret korrekt. </target>
+      </trans-unit>
+      <trans-unit id="invalid-config" datatype="html">
+        <source>Your config is invalid!</source>
+        <target>Din konfiguration er ugyldig!</target>
+      </trans-unit>
+      <trans-unit id="correct-errors" datatype="html">
+        <source>Please correct the errors listed below!</source>
+        <target>Ret venligst fejlene nedenfor!</target>
+      </trans-unit>
+      <trans-unit id="prompt-auth" datatype="html">
+        <source> Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint webinterface or enter an API Key manually.</source>
+        <target> Godkend mig venligst nu. Du kan enten klikke på knappen nedenfor og bekræfte anmodningen i din OctoPrint-webgrænseflade eller indtaste en API-nøgle manuelt.</target>
+      </trans-unit>
+      <trans-unit id="send-request" datatype="html">
+        <source>send request</source>
+        <target>Send anmodning</target>
+      </trans-unit>
+      <trans-unit id="api-key" datatype="html">
+        <source>API Key:</source>
+        <target>API-nøgle:</target>
+      </trans-unit>
+      <trans-unit id="octoprint-connection-failed" datatype="html">
+        <source>Can't connect to OctoPrint!</source>
+        <target>Kan ikke oprette forbindelse til OctoPrint!</target>
+      </trans-unit>
+      <trans-unit id="octoprint-connection-failed-message" datatype="html">
+        <source>Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.</source>
+        <target>Tjek URL/IP, og sørg for, at din OctoPrint-instans er tilgængelig fra denne enhed.</target>
+      </trans-unit>
+      <trans-unit id="unsupported-autologin" datatype="html">
+        <source>Automatic login not supported!</source>
+        <target>Automatisk login understøttes ikke!</target>
+      </trans-unit>
+      <trans-unit id="manually-create-api-key" datatype="html">
+        <source>Please create the API Key manually and paste it in the bottom field.</source>
+        <target>Opret API-nøglen manuelt og indsæt den i det nederste felt.</target>
+      </trans-unit>
+      <trans-unit id="login-request-sent" datatype="html">
+        <source>Login request send!</source>
+        <target>Login anmodning sendt!</target>
+      </trans-unit>
+      <trans-unit id="login-request-sent-message" datatype="html">
+        <source>Please confirm the request via the popup in the OctoPrint WebUI.</source>
+        <target>Bekræft venligst anmodningen via pop op-vinduet i OctoPrint WebUI.</target>
+      </trans-unit>
+      <trans-unit id="prompt-customization-details" datatype="html">
+        <source>Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
+        <target> Fortæl mig nu nogle fakta om din opsætning, så jeg kan tilpasse OctoDash til dig. </target>
+      </trans-unit>
+      <trans-unit id="prompt-printer-name" datatype="html">
+        <source>Printer Name:</source>
+        <target>Printerens navn:</target>
+      </trans-unit>
+      <trans-unit id="use-touchscreen" datatype="html">
+        <source>Use Touchscreen</source>
+        <target> Brug touch-skærm</target>
+      </trans-unit>
+      <trans-unit id="change-settings-info" datatype="html">
+        <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>
+        <target> Du kan til enhver tid ændre alle indstillinger (og endnu flere) i indstillingsmenuen. Der er også en beskrivelse af hver egenskab tilgængelig i GitHub Wiki.</target>
+      </trans-unit>
+      <trans-unit id="prompt-plugins" datatype="html">
+        <source>What plugins are you running?</source>
+        <target>Hvilke plugins anvender du?</target>
+      </trans-unit>
+      <trans-unit id="plugin-octodash-companion" datatype="html">
+        <source>OctoDash Companion</source>
+        <target>OctoDash Companion</target>
+      </trans-unit>
+      <trans-unit id="plugin-display-layer-progress" datatype="html">
+        <source>Display Layer Progress</source>
+        <target>Vis fremskridt pr. lag</target>
+      </trans-unit>
+      <trans-unit id="plugin-enclosure" datatype="html">
+        <source>Enclosure</source>
+        <target>Skab</target>
+      </trans-unit>
+      <trans-unit id="plugin-filament-manager" datatype="html">
+        <source>Filament Manager</source>
+        <target>Filament Manager</target>
+      </trans-unit>
+      <trans-unit id="plugin-spool-manager" datatype="html">
+        <source>Spool Manager (Beta)</source>
+        <target>Spool Manager (beta)</target>
+      </trans-unit>
+      <trans-unit id="plugin-preheat-button" datatype="html">
+        <source>Preheat Button</source>
+        <target>Preheat-knap</target>
+      </trans-unit>
+      <trans-unit id="plugin-print-time-genius" datatype="html">
+        <source>Print Time Genius</source>
+        <target>Print Time Genius</target>
+      </trans-unit>
+      <trans-unit id="plugin-psu-control" datatype="html">
+        <source>PSU Control</source>
+        <target>PSU kontrol</target>
+      </trans-unit>
+      <trans-unit id="plugin-opom" datatype="html">
+        <source>Ophom (Phillips HUE)</source>
+        <target>Ophom (Phillips HUE)</target>
+      </trans-unit>
+      <trans-unit id="plugin-tplink-smartplug" datatype="html">
+        <source> TPLink SmartPlug </source>
+        <target> TPLink SmartPlug </target>
+      </trans-unit>
+      <trans-unit id="plugin-tuya" datatype="html">
+        <source> Tuya SmartPlug </source>
+        <target> Tuya SmartPlug </target>
+      </trans-unit>
+      <trans-unit id="plugin-tasmota" datatype="html">
+        <source> Tasmota </source>
+        <target> Tasmota </target>
+      </trans-unit>
+      <trans-unit id="plugin-tasmota-mqtt" datatype="html">
+        <source> Tasmota MQTT </source>
+        <target> Tasmota MQTT </target>
+      </trans-unit>
+      <trans-unit id="plugin-wemo" datatype="html">
+        <source> Wemo </source>
+        <target> Wemo </target>
+      </trans-unit>
+      <trans-unit id="ui-next" datatype="html">
+        <source>next</source>
+        <target>næste</target>
+      </trans-unit>
+      <trans-unit id="checking" datatype="html">
+        <source>Great! I'll check everything.</source>
+        <target>Super! Jeg tjekker alt.</target>
+      </trans-unit>
+      <trans-unit id="checking-octoprint-connection" datatype="html">
+        <source>OctoPrint Connection</source>
+        <target> OctoPrint forbindelse </target>
+      </trans-unit>
+      <trans-unit id="checking-config" datatype="html">
+        <source>Validating Config</source>
+        <target> Validerer Config </target>
+      </trans-unit>
+      <trans-unit id="checking-save" datatype="html">
+        <source>Saving Config</source>
+        <target> Gemmer konfiguration </target>
+      </trans-unit>
+      <trans-unit id="wizard-done" datatype="html">
+        <source>done</source>
+        <target>Færdig</target>
+      </trans-unit>
+      <trans-unit id="saving-config" datatype="html">
+        <source>saving config</source>
+        <target>gemmer konfiguration</target>
+      </trans-unit>
+      <trans-unit id="error-403" datatype="html">
+        <source>403 Forbidden - This most likely means that your API Key isn't working.</source>
+        <target>403 Forbidden - Dette betyder højst sandsynligt, at din API-nøgle ikke virker.</target>
+      </trans-unit>
+      <trans-unit id="error-unknown" datatype="html">
+        <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren't correct.</source>
+        <target>0 Unknown Error - Dette betyder højst sandsynligt, at din OctoPrint-host og -port ikke er korrekte.</target>
+      </trans-unit>
+      <trans-unit id="welcome-1" datatype="html">
+        <source> It looks like this is the first start of OctoDash. </source>
+        <target> Det ser ud til, at dette er den første start af OctoDash. </target>
+      </trans-unit>
+      <trans-unit id="welcome-2" datatype="html">
+        <source> I'll help you set up your config and get you started. </source>
+        <target> Jeg hjælper dig med at opsætte din konfiguration og komme i gang. </target>
+      </trans-unit>
+      <trans-unit id="welcome-3" datatype="html">
+        <source> If you encounter any issues please check the troubleshooting guide in the GitHub Wiki. </source>
+        <target> Hvis du støder på problemer, så tjek venligst fejlfindingsvejledningen i GitHub Wiki. </target>
+      </trans-unit>
+      <trans-unit id="welcome-4" datatype="html">
+        <source> Note: you will need to connect a keyboard for the setup process </source>
+        <target> Tak, fordi du valgte OctoDash </target>
+      </trans-unit>
+      <trans-unit id="welcome-5" datatype="html">
+        <source> Sorry for bothering you again ... </source>
+        <target> Undskyld jeg generer dig igen... </target>
+      </trans-unit>
+      <trans-unit id="welcome-6" datatype="html">
+        <source> We've released an update, so awesome, we needed to change the config. Please review your new config! </source>
+        <target> Vi har udgivet en opdatering, så god, vi var nødt til at ændre konfigurationen. Gennemgå venligst din nye konfiguration! </target>
+      </trans-unit>
+      <trans-unit id="welcome-7" datatype="html">
+        <source> Thanks for choosing OctoDash </source>
+        <target> Tak, fordi du valgte OctoDash </target>
+      </trans-unit>
+      <trans-unit id="octoprint-sleeping" datatype="html">
+        <source>Shhh! OctoDash is sleeping.</source>
+        <target>Shhh! OctoDash sover.</target>
+      </trans-unit>
+      <trans-unit id="octoprint-sleeping-message" datatype="html">
+        <source>Tap the screen to wake me up again.</source>
+        <target>Tryk på skærmen for at vække mig igen.</target>
+      </trans-unit>
+      <trans-unit id="connecting" datatype="html">
+        <source>connecting</source>
+        <target>forbinder</target>
+      </trans-unit>
+      <trans-unit id="connection-failed" datatype="html">
+        <source> Connection can't be established. Press screen to try again. </source>
+        <target> Forbindelsen kan ikke etableres. Tryk på skærmen for at prøve igen. </target>
+      </trans-unit>
+      <trans-unit id="downloading-update" datatype="html">
+        <source>downloading update</source>
+        <target>downloader opdatering</target>
+      </trans-unit>
+      <trans-unit id="mbs" datatype="html">
+        <source> MB/s  </source>
+        <target> MB/s </target>
+      </trans-unit>
+      <trans-unit id="update-mb" datatype="html">
+        <source>MB</source>
+        <target>MB</target>
+      </trans-unit>
+      <trans-unit id="update-minutes-left" datatype="html">
+        <source>minutes left</source>
+        <target>minutter tilbage</target>
+      </trans-unit>
+      <trans-unit id="installing-update" datatype="html">
+        <source>installing update</source>
+        <target>installerer opdatering</target>
+      </trans-unit>
+      <trans-unit id="update-wait" datatype="html">
+        <source>this might take a while</source>
+        <target>dette kan tage et stykke tid</target>
+      </trans-unit>
+      <trans-unit id="update-confirmation" datatype="html">
+        <source>v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed
+        </source>
+        <target>
+          v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
+           installeret
+        </target>
+      </trans-unit>
+      <trans-unit id="update-restart" datatype="html">
+        <source>would you like to restart OctoDash now?</source>
+        <target>vil du genstarte OctoDash nu?</target>
+      </trans-unit>
+      <trans-unit id="error-update" datatype="html">
+        <source>Can't initiate update!</source>
+        <target>Kan ikke starte opdatering!</target>
+      </trans-unit>
+      <trans-unit id="error-update-message" datatype="html">
+        <source>Some information is missing, please try again in an hour or update manually.</source>
+        <target>Nogle oplysninger mangler. Prøv venligst igen om en time, eller opdater manuelt.</target>
+      </trans-unit>
+      <trans-unit id="error-install-update" datatype="html">
+        <source>Can't install update!</source>
+        <target>Kan ikke installere opdatering!</target>
+      </trans-unit>
+      <trans-unit id="update-available-long" datatype="html">
+        <source>Version 
+          <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
+        </source>
+        <target>
+          Version 
+          <x id="PH" equiv-text="this.latestVersion.title"/>
+           er tilgængelig. Gå til Indstillinger &gt; Om, for at opdatere.
+        </target>
+      </trans-unit>
+      <trans-unit id="error-load-style" datatype="html">
+        <source>Can't load custom styles!</source>
+        <target>Kan ikke indlæse brugerdefinerede stilarter!</target>
+      </trans-unit>
+      <trans-unit id="error-restart" datatype="html">
+        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
+        <target>Genstart venligst dit system. Hvis problemet fortsætter, skal du lave et issue på GitHub.</target>
+      </trans-unit>
+      <trans-unit id="error-set-color" datatype="html">
+        <source>Can't set LED color!</source>
+        <target>Kan ikke indstille LED-farve!</target>
+      </trans-unit>
+      <trans-unit id="error-set-output" datatype="html">
+        <source>Can't set output!</source>
+        <target>Kan ikke indstille output!</target>
+      </trans-unit>
+      <trans-unit id="error-run-enclosure-shell" datatype="html">
+        <source>Can't run enclosure shell!</source>
+        <target>Kan ikke køre 'enclosure shell'!</target>
+      </trans-unit>
+      <trans-unit id="error-psu-state" datatype="html">
+        <source>Can't change PSU State!</source>
+        <target>Kan ikke ændre PSU-tilstand!</target>
+      </trans-unit>
+      <trans-unit id="error-psu-provider" datatype="html">
+        <source>No provider for PSU Control is configured.</source>
+        <target>Der er ikke konfigureret nogen udbyder til PSU-kontrol.</target>
+      </trans-unit>
+      <trans-unit id="error-send-psu-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Kan ikke sende GCode!</target>
+      </trans-unit>
+      <trans-unit id="error-send-ophom-gcode" datatype="html">
+        <source>Can't update Ophom Plug!</source>
+        <target>Kan ikke opdatere Ophom Plug!</target>
+      </trans-unit>
+      <trans-unit id="error-send-smartplug-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Kan ikke sende GCode!</target>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug" datatype="html">
+        <source>Can't update Tasmota!</source>
+        <target>Kan ikke opdatere Tasmota!</target>
+      </trans-unit>
+      <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
+        <source>Can't update Tasmota MQTT!</source>
+        <target>Kan ikke opdatere Tasmota MQTT!</target>
+      </trans-unit>
+      <trans-unit id="error-send-psu-command" datatype="html">
+        <source>Can't send plug command!</source>
+        <target>Kan ikke send 'plug' kommando!</target>
+      </trans-unit>
+      <trans-unit id="error-spools" datatype="html">
+        <source>Can't load filament spools!</source>
+        <target>Kan ikke indlæse filamentspoler!</target>
+      </trans-unit>
+      <trans-unit id="error-spool" datatype="html">
+        <source>Can't load active spool!</source>
+        <target>Kan ikke indlæse aktiv spole!</target>
+      </trans-unit>
+      <trans-unit id="error-spool-id" datatype="html">
+        <source>Spool IDs didn't match</source>
+        <target>Spool-ID'er matchede ikke</target>
+      </trans-unit>
+      <trans-unit id="error-change-spool" datatype="html">
+        <source>Can't change spool. Please change spool manually in the OctoPrint UI.</source>
+        <target>Kan ikke skifte spole. Skift spole manuelt i OctoPrint UI.</target>
+      </trans-unit>
+      <trans-unit id="error-set-new-spool" datatype="html">
+        <source>Can't set new spool!</source>
+        <target>Kan ikke anvende ny spole!</target>
+      </trans-unit>
+      <trans-unit id="error-set-new-spool-2" datatype="html">
+        <source>Can't set new spool!</source>
+        <target>Kan ikke anvende ny spole!</target>
+      </trans-unit>
+      <trans-unit id="local" datatype="html">
+        <source>local</source>
+        <target>lokal</target>
+      </trans-unit>
+      <trans-unit id="sdcard" datatype="html">
+        <source>sdcard</source>
+        <target>SD-kort</target>
+      </trans-unit>
+      <trans-unit id="files-error-file" datatype="html">
+        <source>Can't load file!</source>
+        <target>Kan ikke indlæse filen!</target>
+      </trans-unit>
+      <trans-unit id="files-error-print" datatype="html">
+        <source>Can't start print!</source>
+        <target>Kan ikke starte print!</target>
+      </trans-unit>
+      <trans-unit id="files-error-delete" datatype="html">
+        <source>Can't delete file!</source>
+        <target>Filen kan ikke slettes!</target>
+      </trans-unit>
+      <trans-unit id="error-start-job" datatype="html">
+        <source>Can't start job!</source>
+        <target>Kan ikke starte jobbet!</target>
+      </trans-unit>
+      <trans-unit id="error-pause-job" datatype="html">
+        <source>Can't pause job!</source>
+        <target>Kan ikke sætte jobbet på pause!</target>
+      </trans-unit>
+      <trans-unit id="error-resume-job" datatype="html">
+        <source>Can't resume job!</source>
+        <target>Kan ikke genoptage jobbet!</target>
+      </trans-unit>
+      <trans-unit id="error-cancel-job" datatype="html">
+        <source>Can't cancel job!</source>
+        <target>Jobbet kan ikke annulleres!</target>
+      </trans-unit>
+      <trans-unit id="error-restart-job" datatype="html">
+        <source>Can't restart job!</source>
+        <target>Jobbet kan ikke genstartes!</target>
+      </trans-unit>
+      <trans-unit id="error-preheat" datatype="html">
+        <source>Can't preheat printer!</source>
+        <target>Kan ikke forvarme printeren!</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-title" datatype="html">
+        <source>OctoPrint outdated!</source>
+        <target>OctoPrint er for gammel!</target>
+      </trans-unit>
+      <trans-unit id="octoprint-upgrade-required-long" datatype="html">
+        <source>OctoPrint must be running at least 
+          <x id="PH" equiv-text="minimumVersion"/>; currently running 
+          <x id="PH_1" equiv-text="info.server"/>.
+        </source>
+        <target>
+          OctoPrint skal være på mindst 
+          <x id="PH" equiv-text="minimumVersion"/>
+          ; lige nu er den 
+          <x id="PH_1" equiv-text="info.server"/>
+          .
+        </target>
+      </trans-unit>
+      <trans-unit id="printer-error-gcode" datatype="html">
+        <source>Can't send GCode!</source>
+        <target>Kan ikke sende GCode!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-head" datatype="html">
+        <source>Can't move Printhead!</source>
+        <target>Kan ikke flytte printhovedet!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-extrude" datatype="html">
+        <source>Can't extrude Filament!</source>
+        <target>Kan ikke extrude filament!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-set-tool" datatype="html">
+        <source>Can't set active tool!</source>
+        <target>Kan ikke skifte aktivt værktøj!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-hotend" datatype="html">
+        <source>Can't set Hotend Temperature!</source>
+        <target>Kan ikke indstille Hotend-temperaturen!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-bed" datatype="html">
+        <source>Can't set Bed Temperature!</source>
+        <target>Bed-temperaturen kan ikke indstilles!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-feedrate" datatype="html">
+        <source>Can't set Feedrate!</source>
+        <target>Kan ikke indstille feedrate!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-flowrate" datatype="html">
+        <source>Can't set Flowrate!</source>
+        <target>Kan ikke indstille flowhastighed!</target>
+      </trans-unit>
+      <trans-unit id="error-printer-disconnect" datatype="html">
+        <source>Can't disconnect Printer!</source>
+        <target>Kan ikke afbryde printeren!</target>
+      </trans-unit>
+      <trans-unit id="http-403-heading" datatype="html">
+        <source>HTTP Error 403 - FORBIDDEN</source>
+        <target>HTTP Error 403 - FORBIDDEN</target>
+      </trans-unit>
+      <trans-unit id="http-403-text" datatype="html">
+        <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
+        <target>Dette betyder højst sandsynligt, at din API-nøgle er ugyldig. Opdater venligst API-nøglen og genstart dit system.</target>
+      </trans-unit>
+      <trans-unit id="http-unknown-heading" datatype="html">
+        <source>Unknown HTTP Error</source>
+        <target>Ukendt HTTP-fejl</target>
+      </trans-unit>
+      <trans-unit id="unit-hours-short" datatype="html">
+        <source>h</source>
+        <target>t</target>
+      </trans-unit>
+      <trans-unit id="printer-error" datatype="html">
+        <source>Printer error</source>
+        <target>Printerfejl</target>
+      </trans-unit>
+      <trans-unit id="action-required" datatype="html">
+        <source>Action required</source>
+        <target>Handling påkrævet</target>
+      </trans-unit>
+      <trans-unit id="error-answer-prompt" datatype="html">
+        <source>Can't answer prompt!</source>
+        <target>Kan ikke svare prompt!</target>
+      </trans-unit>
+      <trans-unit id="error-execute" datatype="html">
+        <source>Can't execute 
+          <x id="PH" equiv-text="command"/> command!
+        </source>
+        <target>
+          Kan ikke udføre kommandoen 
+          <x id="PH" equiv-text="command"/>
+          !
+        </target>
+      </trans-unit>
+      <trans-unit id="error-connect" datatype="html">
+        <source>Can't connect to printer!</source>
+        <target>Kan ikke oprette forbindelse til printeren!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
