@@ -17,6 +17,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { PrintControlComponent } from './main-screen/print-control/print-control.component';
 import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
+import { PrusaMMUComponent } from './plugins/prusa-mmu/prusa-mmu.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
@@ -72,4 +73,5 @@ export default [
   StandbyComponent,
   UpdateComponent,
   QuickControlComponent,
+  PrusaMMUComponent,
 ];

@@ -10,3 +10,4 @@
   <app-printer-status></app-printer-status>
   <app-bottom-bar></app-bottom-bar>
 </div>
+<app-prusa-mmu *ngIf="usePrusaMMU && prusaMMUService.filamentPickerIsVisible"></app-prusa-mmu>

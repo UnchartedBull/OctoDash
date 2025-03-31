@@ -12,6 +12,7 @@ export class PluginsComponent {
   @Input() enclosurePlugin: boolean;
   @Input() filamentManagerPlugin: boolean;
   @Input() spoolManagerPlugin: boolean;
+  @Input() prusammuPlugin: boolean;
   @Input() preheatButtonPlugin: boolean;
   @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
@@ -27,6 +28,7 @@ export class PluginsComponent {
   @Output() enclosurePluginChange = new EventEmitter<boolean>();
   @Output() filamentManagerPluginChange = new EventEmitter<boolean>();
   @Output() spoolManagerPluginChange = new EventEmitter<boolean>();
+  @Output() prusammuPluginChange = new EventEmitter<boolean>();
   @Output() preheatButtonPluginChange = new EventEmitter<boolean>();
   @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();

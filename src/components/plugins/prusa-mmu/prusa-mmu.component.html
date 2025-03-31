@@ -1,0 +1,21 @@
+<div class="prusammu">
+  <div class="prusammu-wrapper">
+    <div class="prusammu-container" (click)="$event.stopPropagation()">
+      <div class="prusammu__content">
+        <div class="prusammu__heading" i18n="@@select-filament-for-mmu">select filament for MMU</div>
+        <div *ngIf="filamentsReady">
+          <div class="prusammu__sub-heading" i18n="@@select-filament-from-source">from: {{prusaMMUService.source}}</div>
+          <ul class="prusammu__list files">
+            <li matRipple class="files__object" (click)="setFilament(filament)" *ngFor="let filament of prusaMMUService.filaments | enabledFilamentOnly">
+              <fa-icon [icon]="['fas', 'paint-brush']" [style.color]="filament.color"></fa-icon>
+              <span class="prusammu__section-heading">{{ filament.id }}: {{ filament.name }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="files" *ngIf="!filamentsReady">
+          <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

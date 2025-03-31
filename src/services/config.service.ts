@@ -279,6 +279,10 @@ export class ConfigService {
     return this.config.plugins.spoolManager.enabled;
   }
 
+  public isPrusaMMUPluginEnabled(): boolean {
+    return this.config.plugins.prusammu.enabled;
+  }
+
   public getFeedLength(): number {
     return this.config.filament.feedLength;
   }

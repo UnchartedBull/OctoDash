@@ -29,7 +29,9 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     return this.callSpoolManagerAPI('hideInactiveSpools', 0, 3000, 'lastUse', 'desc').pipe(
       map((spools: SpoolManagerSpoolList): FilamentSpool[] => {
         if (spools.selectedSpools[0]) {
-          return spools.selectedSpools.map(s => this.convertFilamentManagerSpool(s));
+          return spools.selectedSpools.map((selectedSpool, index) =>
+            this.convertFilamentManagerSpool(selectedSpool, index + 1),
+          );
         } else {
           return null;
         }
@@ -71,7 +73,7 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     );
   }
 
-  private convertFilamentManagerSpool(spool: SpoolManagerSpool): FilamentSpool {
+  private convertFilamentManagerSpool(spool: SpoolManagerSpool, toolIndex?: number): FilamentSpool {
     if (!spool) {
       return null;
     }
@@ -87,6 +89,7 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
       used: Number(spool.usedWeight),
       vendor: spool.vendor,
       weight: spool.totalWeight,
+      tool: toolIndex,
     };
   }
 
