@@ -15,7 +15,7 @@ src/locale/backups
 
 # compiled output
 /dist
-/octoprint_octodash/static
+/octoprint_octodash/static/ui
 /package
 /tmp
 /out-tsc
