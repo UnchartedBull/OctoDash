@@ -55,7 +55,8 @@
     }
   },
   "scripts": {
-    "prepare": "json2ts ./src/helper/config.schema.json > ./src/model/config.model.ts; node -e 'const {writeDefaultConfig} = await import(`./src/helper/config.js`); writeDefaultConfig()'",
+    "prepare": "json2ts --input=src/helper/config.schema.json --output=src/model/config.model.ts",
+    "postprepare": "node -e \"const {writeDefaultConfig} = await import(`./src/helper/config.js`); writeDefaultConfig()\"",
     "build": "ng build --configuration production",
     "build:pack": "npm run build && npm run electron:pack",
     "electron:dev": "APP_DEV=true electron .",
@@ -72,7 +73,7 @@
     "lint:style": "prettier --check .",
     "lint:style:fix": "prettier --write .",
     "locale:extract": "ng extract-i18n --output-path src/locale",
-    "locale:update:all": "node -e 'const {updateLocales} = await import(`./src/helper/locale.js`); updateLocales()'",
+    "locale:update:all": "node -e \"const {updateLocales} = await import(`./src/helper/locale.js`); updateLocales()\"",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "serve": "ng serve",
     "start": "APP_DEV=true npm-run-all -p serve electron:serve"
