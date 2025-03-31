@@ -567,7 +567,7 @@
            Tykkelse 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>
           (mm)
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt ;/span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-density" datatype="html">
@@ -617,6 +617,9 @@
       <trans-unit id="octodash-custom" datatype="html">
         <source>Custom Actions</source>
         <target>Brugerdefinerede handlinger</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
