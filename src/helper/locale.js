@@ -68,13 +68,13 @@ export function updateLocales() {
         // backup the previous version of the locale and write the new locale
         jsToXliff12(newTranslation, (err, result) => {
           if (err) throw new Error(err.message);
-          const now = new Date();
+          const now = new Date().toISOString().replace(/:/g, '-');
           if (!fs.existsSync('./src/locale/backups')) {
             fs.mkdirSync('./src/locale/backups');
           }
           fs.renameSync(
             `./src/locale/${translatedXLFRef.filename}`,
-            `./src/locale/backups/messages.${translatedXLFRef.lang}-${now.toISOString()}.xlf`,
+            `./src/locale/backups/messages.${translatedXLFRef.lang}-${now}.xlf`,
           );
           console.info(`updating ${translatedXLFRef.filename}...`);
           fs.writeFileSync(`./src/locale/${translatedXLFRef.filename}`, result);
