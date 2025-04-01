@@ -11,12 +11,12 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   @Input() closeEvent: Observable<void>;
   private eventsSubscription: Subscription;
 
-  public active = false;
+  public visible = false;
 
   constructor() {}
 
   ngOnInit() {
-    this.eventsSubscription = this.closeEvent.subscribe(() => (this.active = false));
+    this.eventsSubscription = this.closeEvent.subscribe(() => (this.visible = false));
   }
 
   ngOnDestroy() {

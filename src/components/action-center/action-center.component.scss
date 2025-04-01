@@ -3,7 +3,7 @@
   padding: 5vh 0;
   height: 100%;
   padding-right: 2vw;
-  padding-left: 2vw;
+  padding-left: 4vw;
   position: fixed;
   right: 0;
   transform: translateX(100%);
@@ -13,26 +13,21 @@
   backdrop-filter: blur(8px);
   transition: transform 0.2s ease-out;
 
-  &.active {
+  &.visible {
     transform: translateX(0);
   }
 }
 
-.show__icon {
+.toggle__icon {
   position: fixed;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 1vw;
+  top: calc(50% - 5vh);
+  rotate: 0deg;
   opacity: 0.4;
-  padding: 2.5vh 2vw 0;
-  z-index: 50;
-}
+  z-index: 101;
+  transition: rotate 0.2s ease-out;
 
-.hide__icon {
-  position: absolute;
-  right: -8px;
-  top: calc(50% - 4vh);
-  transform: translateY(-50%);
-  opacity: 0.4;
-  padding: 2.5vh 2vw 0;
+  &.visible {
+    rotate: 180deg;
+  }
 }

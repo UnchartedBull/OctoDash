@@ -1,18 +1,12 @@
-<div class="wrapper" [ngClass]="{ active: active }">
-  <fa-icon
-    icon="caret-right"
-    (click)="active = false"
-    matRipple
-    [matRippleUnbounded]="true"
-    [matRippleCentered]="true"
-    class="hide__icon"></fa-icon>
+<div class="wrapper" [ngClass]="{ visible: visible }">
   <app-custom-actions class="actions" [redirectActive]="false"></app-custom-actions>
 </div>
 
 <fa-icon
   icon="caret-left"
-  (click)="active = true"
+  (click)="visible = !visible"
   matRipple
   [matRippleUnbounded]="true"
   [matRippleCentered]="true"
-  class="show__icon"></fa-icon>
+  class="toggle__icon"
+  [ngClass]="{ visible: visible }"></fa-icon>
