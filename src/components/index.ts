@@ -1,6 +1,7 @@
 import { AppComponent } from './app.component';
+import { ActionCenterComponent } from './action-center/action-center.component';
 import { ControlComponent } from './control/control.component';
-import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
+import { CustomActionsComponent } from './action-center/custom-actions/custom-actions.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { ChooseToolComponent } from './filament/choose-tool/choose-tool.component';
@@ -36,6 +37,7 @@ import { UpdateComponent } from './update/update.component';
 
 export default [
   AppComponent,
+  ActionCenterComponent,
   ControlComponent,
   CustomActionsComponent,
   ChangeFilamentComponent,

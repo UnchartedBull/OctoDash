@@ -354,6 +354,10 @@ export class ConfigService {
     this.saveConfig(this.config);
   }
 
+  public showActionCenterIcon(): boolean {
+    return this.config.octodash.showActionCenterIcon;
+  }
+
   public getDefaultDirectory(): string {
     return this.config.octodash.defaultDirectory;
   }

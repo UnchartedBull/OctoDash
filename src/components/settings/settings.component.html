@@ -280,13 +280,23 @@
             class="settings__toggle-switch"
             [value]="config.octodash.showExtruderControl"
             (valueChange)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
-            <span class="settings__toggle-switch-descriptor">Show extruder controls</span>
+            <span class="settings__toggle-switch-descriptor" i18n="@@show-extruder-controls"
+              >Show extruder controls</span
+            >
           </app-toggle-switch>
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.octodash.turnScreenOffWhileSleeping"
             (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
             <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
+          </app-toggle-switch>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.octodash.showActionCenterIcon"
+            (valueChange)="config.octodash.showActionCenterIcon = !config.octodash.showActionCenterIcon">
+            <span class="settings__toggle-switch-descriptor" i18n="@@show-action-center-icon"
+              >Show icon for Action Center</span
+            >
           </app-toggle-switch>
           <app-toggle-switch
             class="settings__toggle-switch"

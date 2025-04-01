@@ -36,8 +36,12 @@ export class AppService {
     // list of all error following an upgrade
     /* eslint-disable @typescript-eslint/no-explicit-any */
     this.updateError = {
-      '/octodash must NOT have additional properties': config =>
-        delete (config.octodash as any).showNotificationCenterIcon,
+      '/octodash must NOT have additional properties': config => {
+        if ('showNotificationCenterIcon' in (config.octodash as any)) {
+          config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
+          delete (config.octodash as any).showNotificationCenterIcon;
+        }
+      },
     };
     /* eslint-enable @typescript-eslint/no-explicit-any */
   }
