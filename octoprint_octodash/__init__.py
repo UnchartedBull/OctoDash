@@ -1,10 +1,10 @@
 # coding=utf-8
 from __future__ import absolute_import
 
-from flask import make_response, send_file
-from flask import redirect
+from flask import make_response, send_file, redirect, request
 import os.path
 
+import json
 
 import octoprint.plugin
 
@@ -18,16 +18,13 @@ class OctodashPlugin(
     octoprint.plugin.TemplatePlugin,
     octoprint.plugin.StartupPlugin,
     octoprint.plugin.BlueprintPlugin,
+    octoprint.plugin.WizardPlugin,
 ):
 
     ##~~ SettingsPlugin mixin
 
     def get_settings_defaults(self):
         return {
-            "octoprint": {
-                "accessToken": "",
-                "url": "http://localhost:8080/",
-            },
             "printer": {
                 "name": "",
                 "xySpeed": 150,
@@ -141,7 +138,7 @@ class OctodashPlugin(
         # Define your plugin's asset files to automatically include in the
         # core UI here.
         return {
-            "js": [],
+            "js": ['js/octodash.js'],
             "css": [],
             "less": [],
         }
@@ -150,17 +147,30 @@ class OctodashPlugin(
         if request.args.get("octodash") == "1":
             return True
 
-# could set a cookie that's read by `will_handle_ui` to determine if the user is using Octodash
-# or consider hosting on a separate path using a blueprint route
-# maybe need to include the assets, maybe not?
-
-
     def on_ui_render(self, now, request, render_kwargs):
         return redirect("/plugin/octodash/", code=307)
     
     @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
     def get_ui_root(self):
         return send_file(self._get_index_path())
+
+    #TODO: Auth and CSRF stuff
+    @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
+    def migrate_legacy_config(self):
+        #TODO: Don't blindly use the path from the request
+        data = request.json
+        if not data or "path" not in data:
+            return make_response(json.dumps({"error": "Path not provided"}), 400)
+
+        path = data["path"]
+        if not os.path.exists(path):
+            return make_response(json.dumps({"error": "File does not exist"}), 404)
+
+        try:
+            legacy_config = self._migrate_legacy_config(path)
+            return make_response(json.dumps({"success": True, "config": legacy_config}), 200)
+        except Exception as e:
+            return make_response(json.dumps({"error": str(e)}), 500)
 
     def is_blueprint_csrf_protected(self):
         return False
@@ -169,7 +179,7 @@ class OctodashPlugin(
         return False
 
     def get_blueprint_api_prefixes(self):
-        return []
+        return ['api']
 
     def _get_index_path(self):
         """Return the path on the filesystem to the index.html file to be used for
@@ -181,6 +191,14 @@ class OctodashPlugin(
 
     def get_ui_permissions(self):
         return []
+
+    def is_wizard_required(self):
+        return True
+
+    def get_wizard_details(self):
+        details = {"legacyConfigs": self._find_legacy_config()}
+        self._logger.info(f"Returning wizard details: {details}")
+        return details
 
     ##~~ Softwareupdate hook
 
@@ -201,6 +219,31 @@ class OctodashPlugin(
                 "pip": "https://github.com/hillshum/OctoPrint-Octodash/archive/{target_version}.zip",
             }
         }
+
+    def _find_legacy_config(self):
+        paths = [
+            '~/.config/octodash/config.json',
+            '/home/pi/.config/octodash/config.json',
+            '~/Library/Application Support/octodash/config.json'
+        ]
+        expanded = [os.path.expanduser(p) for p in paths]
+
+        return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
+
+
+
+    def _migrate_legacy_config(self, path):
+        with open(path, 'r') as f:
+            conf = json.load(f)["config"]
+            # merge with the existing settings
+            settings = self._settings
+            for key in ['printer', 'filament', 'plugins', 'octodash']:
+                settings.set([key], conf[key])
+            settings.save()
+
+
+
+
 
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
