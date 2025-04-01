@@ -56,7 +56,7 @@
   },
   "scripts": {
     "prepare": "json2ts --input=src/helper/config.schema.json --output=src/model/config.model.ts",
-    "postprepare": "node -e \"const {writeDefaultConfig} = await import(`./src/helper/config.js`); writeDefaultConfig()\"",
+    "postprepare": "node -e \"import('./src/helper/config.js').then(({writeDefaultConfig})=>writeDefaultConfig()).catch(err=>console.error(err))\"",
     "build": "ng build --configuration production",
     "build:pack": "npm run build && npm run electron:pack",
     "electron:dev": "APP_DEV=true electron .",
