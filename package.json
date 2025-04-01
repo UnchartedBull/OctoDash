@@ -73,7 +73,7 @@
     "lint:style": "prettier --check .",
     "lint:style:fix": "prettier --write .",
     "locale:extract": "ng extract-i18n --output-path src/locale",
-    "locale:update:all": "node -e \"const {updateLocales} = await import(`./src/helper/locale.js`); updateLocales()\"",
+    "locale:update:all": "node -e \"import('./src/helper/locale.js').then(({updateLocales})=>updateLocales()).catch(err=>console.error(err))\"",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "serve": "ng serve",
     "start": "APP_DEV=true npm-run-all -p serve electron:serve"
