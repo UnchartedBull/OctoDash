@@ -3,7 +3,7 @@
   (click)="showControlOverlay($event)"
   [ngClass]="{ 'print-control__hide': !showControls }">
   <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
-    <app-top-bar [backButton]="true" (onBack)="hideControlOverlay($event)"></app-top-bar>
+    <app-top-bar [backButton]="true" (onBack)="hideControlOverlay()"></app-top-bar>
     <div class="print-control__action" (click)="cancel($event)">
       <img src="assets/cancel.svg" />
       <ng-container i18n="@@control-cancel">cancel</ng-container>

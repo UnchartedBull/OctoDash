@@ -128,7 +128,9 @@ export class PrintControlComponent implements OnInit, OnDestroy {
   }
 
   public hideControlOverlay(event: MouseEvent): void {
-    this.stopPropagation(event);
+    if (event) {
+      this.stopPropagation(event);
+    }
     this.showControls = false;
   }
 
