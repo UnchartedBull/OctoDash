@@ -620,6 +620,7 @@
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target> Ikoner kommer fra FontAwesomes gratis Classic Solid pack</target>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
