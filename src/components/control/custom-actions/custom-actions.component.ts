@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { NotificationType, PSUState, PrinterState, PrinterStatus } from '../../../model';
+import { NotificationType, PrinterState, PrinterStatus, PSUState } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
 import { EnclosureService } from '../../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../../services/notification.service';
 import { PrinterService } from '../../../services/printer/printer.service';
-import { SystemService } from '../../../services/system/system.service';
 import { SocketService } from '../../../services/socket/socket.service';
+import { SystemService } from '../../../services/system/system.service';
 
 const SpecialCommandRegex = /\[!([\w_]+)\]/;
 
