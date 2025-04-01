@@ -7,13 +7,14 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
 """
 from __future__ import absolute_import
 
-import shutil
-
-from flask import redirect, send_file, make_response, Response
+from flask import make_response, send_file, request
+from flask import redirect, Response
 import os.path
 
+import json
 
 import octoprint.plugin
+from octoprint.access.permissions import Permissions
 from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
@@ -26,6 +27,8 @@ class OctodashPlugin(
     octoprint.plugin.SettingsPlugin,
     octoprint.plugin.EventHandlerPlugin,
     octoprint.plugin.BlueprintPlugin,
+    octoprint.plugin.WizardPlugin,
+    octoprint.plugin.TemplatePlugin,
 ):
 
 
@@ -173,6 +176,17 @@ class OctodashPlugin(
             )
         )
 
+    ##~~ AssetPlugin mixin
+    def get_assets(self):
+        # Define your plugin's asset files to automatically include in the
+        # core UI here.
+        return {
+            "js": ['js/octodash.js'],
+            "css": [],
+            "less": [],
+        }
+
+    
     # ~~ BlueprintPlugin
 
     @octoprint.plugin.BlueprintPlugin.route("/custom-styles.css")
@@ -192,6 +206,24 @@ class OctodashPlugin(
     def get_ui_root(self, path):
         return send_file(self._get_index_path())
 
+    @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
+    @Permissions.ADMIN.require(403)
+    def migrate_legacy_config(self):
+        #TODO: Don't blindly use the path from the request
+        data = request.json
+        if not data or "path" not in data:
+            return make_response(json.dumps({"error": "Path not provided"}), 400)
+
+        path = data["path"]
+        if not os.path.exists(path):
+            return make_response(json.dumps({"error": "File does not exist"}), 404)
+
+        try:
+            legacy_config = self._migrate_legacy_config(path)
+            return make_response(json.dumps({"success": True, "config": legacy_config}), 200)
+        except Exception as e:
+            return make_response(json.dumps({"error": str(e)}), 500)
+
     def is_blueprint_csrf_protected(self):
         return False
 
@@ -199,7 +231,7 @@ class OctodashPlugin(
         return False
 
     def get_blueprint_api_prefixes(self):
-        return []
+        return ['api']
 
     def _get_index_path(self):
         """Return the path on the filesystem to the index.html file to be used for
@@ -228,6 +260,14 @@ class OctodashPlugin(
     def get_ui_permissions(self):
         return []
 
+    def is_wizard_required(self):
+        return True
+
+    def get_wizard_details(self):
+        details = {"legacyConfigs": self._find_legacy_config()}
+        self._logger.info(f"Returning wizard details: {details}")
+        return details
+
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
@@ -247,6 +287,28 @@ class OctodashPlugin(
                 "pip": "https://github.com/UnchartedBull/Octodash/archive/{target_version}.zip",
             }
         }
+
+    def _find_legacy_config(self):
+        paths = [
+            '~/.config/octodash/config.json',
+            '/home/pi/.config/octodash/config.json',
+            '~/Library/Application Support/octodash/config.json'
+        ]
+        expanded = [os.path.expanduser(p) for p in paths]
+
+        return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
+
+
+
+    def _migrate_legacy_config(self, path):
+        with open(path, 'r') as f:
+            conf = json.load(f)["config"]
+            # merge with the existing settings
+            settings = self._settings
+            for key in ['printer', 'filament', 'plugins', 'octodash']:
+                settings.set([key], conf[key])
+            settings.save()
+
 
 
 __plugin_name__ = "Octodash Plugin"
