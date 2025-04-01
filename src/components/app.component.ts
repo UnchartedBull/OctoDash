@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AnimationOptions } from 'ngx-lottie';
+import { Subject } from 'rxjs';
 
 import { AppService } from '../services/app.service';
 import { ConfigService } from '../services/config.service';

@@ -1,20 +1,6 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="ng2.template" datatype="plaintext" source-language="en">
     <body>
-      <trans-unit id="long-init" datatype="html">
-        <source>Initializing is taking longer than usual...
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
-        </source>
-        <target>Initialisieren dauert länger als erwartet. Bitte stelle sicher das OctoPrint läuft und CORS für die API aktiviert ist.</target>
-      </trans-unit>
-      <trans-unit id="initializing" datatype="html">
-        <source>initializing</source>
-        <target>initialisieren</target>
-      </trans-unit>
-      <trans-unit id="error-printer-profile" datatype="html">
-        <source>Can't retrieve printer profile!</source>
-        <target>Druckerprofil kann nicht abgerufen werden!</target>
-      </trans-unit>
       <trans-unit id="website-loading" datatype="html">
         <source>loading website...</source>
         <target>lade website ...</target>
@@ -42,6 +28,20 @@
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
         <source>Please connect to your printer first before attempting to use a printer command.</source>
         <target></target>
+      </trans-unit>
+      <trans-unit id="long-init" datatype="html">
+        <source>Initializing is taking longer than usual...
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
+        </source>
+        <target>Initialisieren dauert länger als erwartet. Bitte stelle sicher das OctoPrint läuft und CORS für die API aktiviert ist.</target>
+      </trans-unit>
+      <trans-unit id="initializing" datatype="html">
+        <source>initializing</source>
+        <target>initialisieren</target>
+      </trans-unit>
+      <trans-unit id="error-printer-profile" datatype="html">
+        <source>Can't retrieve printer profile!</source>
+        <target>Druckerprofil kann nicht abgerufen werden!</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament into tool 
@@ -505,9 +505,17 @@
         <source>General</source>
         <target>Generell</target>
       </trans-unit>
+      <trans-unit id="show-extruder-controls" datatype="html">
+        <source>Show extruder controls</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
         <target>Display im Standby ausschalten</target>
+      </trans-unit>
+      <trans-unit id="show-action-center-icon" datatype="html">
+        <source>Show icon for Action Center</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="turn-on-after-sleep" datatype="html">
         <source>Turn on printer when exiting sleep</source>
@@ -516,6 +524,9 @@
       <trans-unit id="default-preview" datatype="html">
         <source>Preview by default while printing</source>
         <target>Vorschau als Standard</target>
+      </trans-unit>
+      <trans-unit id="preview-progress-circle" datatype="html">
+        <source>Always use circular progress bar</source>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
