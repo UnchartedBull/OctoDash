@@ -113,7 +113,7 @@
     "@angular/cli": "^19.2.5",
     "@angular/compiler-cli": "^19.2.4",
     "@angular/language-service": "^19.2.4",
-    "@eslint/compat": "^1.2.7",
+    "@eslint/compat": "^1.2.8",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
     "@types/got": "~9.6.12",
