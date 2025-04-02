@@ -29,11 +29,11 @@ import { PluginsComponent } from './setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
+import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
-import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 
 export default [
   AppComponent,

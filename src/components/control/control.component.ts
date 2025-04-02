@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { NotificationType, PrinterStatus } from '../../model';
+import { PrinterStatus } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';

@@ -4,7 +4,7 @@ import * as _ from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { Directory, File, Folder, NotificationType } from '../../model';
+import { Directory, File, Folder } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { ConversionService } from '../../services/conversion.service';

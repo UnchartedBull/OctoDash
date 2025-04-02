@@ -4,7 +4,7 @@ import { compare } from 'compare-versions';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { NotificationType, PrinterProfile } from '../../model';
+import { PrinterProfile } from '../../model';
 import {
   DisconnectCommand,
   ExtrudeCommand,

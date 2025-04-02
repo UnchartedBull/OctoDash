@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { FilamentSpool, NotificationType } from '../../model';
+import { FilamentSpool } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { FilamentPluginService } from './filament-plugin.service';

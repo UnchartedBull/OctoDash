@@ -1,6 +1,6 @@
 import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 
-import { NotificationType, UpdateDownloadProgress, UpdateError } from '../../model';
+import { UpdateDownloadProgress, UpdateError } from '../../model';
 import { AppService } from '../../services/app.service';
 import { ElectronService } from '../../services/electron.service';
 import { NotificationService } from '../../services/notification.service';

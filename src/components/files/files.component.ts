@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
-import { Directory, File, NotificationType } from '../../model';
+import { Directory, File } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { FilesService } from '../../services/files/files.service';
 import { NotificationService } from '../../services/notification.service';

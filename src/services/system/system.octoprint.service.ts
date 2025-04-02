@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { NotificationType, SocketAuth, TestAddress } from '../../model';
+import { SocketAuth, TestAddress } from '../../model';
 import { ConnectCommand, OctoprintLogin } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';

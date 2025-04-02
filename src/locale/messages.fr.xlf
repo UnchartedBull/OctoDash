@@ -529,6 +529,7 @@
       </trans-unit>
       <trans-unit id="preview-progress-circle" datatype="html">
         <source>Always use circular progress bar</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>

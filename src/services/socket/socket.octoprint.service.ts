@@ -8,8 +8,6 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import {
   Duration,
   JobStatus,
-  Notification,
-  NotificationType,
   PrinterEvent,
   PrinterNotification,
   PrinterState,

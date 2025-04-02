@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
 
-import { NotificationType, PrinterState, PrinterStatus, TemperatureReading } from '../../../model';
+import { PrinterState, PrinterStatus, TemperatureReading } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
 import { EnclosureService } from '../../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../../services/notification.service';

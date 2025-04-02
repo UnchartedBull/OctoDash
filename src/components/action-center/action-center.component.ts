@@ -3,7 +3,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
-import { NotificationType, PrinterState, PrinterStatus, PSUState } from '../../model';
+import { PrinterState, PrinterStatus, PSUState } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../services/notification.service';

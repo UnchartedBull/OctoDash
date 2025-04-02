@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
-import { NotificationType, URLSplit } from '../../model';
+import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { AppService } from '../../services/app.service';
 import { ConfigService } from '../../services/config.service';
@@ -92,7 +92,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     } else {
       this.notificationService.warn(
         $localize`:@@conf-unsaved:Configuration not saved!`,
-        // eslint-disable-next-line max-len
+
         $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
       );
       this.overwriteNoSave = true;
