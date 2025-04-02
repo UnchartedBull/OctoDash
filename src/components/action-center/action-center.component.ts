@@ -25,8 +25,6 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
 
   public visible = false;
 
-  @Input() redirectActive = true;
-
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
   public iframeOpen = false;
@@ -88,7 +86,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
       };
     } else {
       command.split('; ').forEach(this.executeGCode.bind(this));
-      if (exit && this.redirectActive) {
+      if (exit) {
         this.router.navigate(['/main-screen']);
       }
       this.hideConfirm();
