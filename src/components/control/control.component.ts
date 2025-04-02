@@ -26,7 +26,10 @@ export class ControlComponent implements OnInit, OnDestroy {
   public selectedTool = 0;
   public showExtruder = false;
   public quickControlShown = false;
-  public hotendTarget: number;
+  public selectedHotend = 0;
+
+  public QuickControlView = QuickControlView;
+  public view = QuickControlView.NONE;
 
   public constructor(
     private printerService: PrinterService,
@@ -35,7 +38,6 @@ export class ControlComponent implements OnInit, OnDestroy {
     private socketService: SocketService,
     private router: Router,
   ) {
-    this.hotendTarget = this.configService.getDefaultHotendTemperature();
     this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
@@ -92,35 +94,43 @@ export class ControlComponent implements OnInit, OnDestroy {
     this.router.navigate(['/main-screen']);
   }
 
-  private showQuickControl(): void {
-    this.quickControlShown = true;
-    setTimeout((): void => {
-      const controlViewDOM = document.getElementById('quickControl');
-      controlViewDOM.style.opacity = '1';
-    }, 50);
+  public showQuickControlHotend(tool: number): void {
+    this.view = QuickControlView.HOTEND;
+    this.selectedHotend = tool;
+  }
+
+  public showQuickControlHeatbed(): void {
+    this.view = QuickControlView.HEATBED;
+  }
+
+  public showQuickControlFan(): void {
+    this.view = QuickControlView.FAN;
   }
 
   public hideQuickControl(): void {
-    const controlViewDOM = document.getElementById('quickControl');
-    controlViewDOM.style.opacity = '0';
-    setTimeout((): void => {
-      this.quickControlShown = false;
-    }, 500);
+    this.view = QuickControlView.NONE;
   }
 
-  private quickControlChangeValue(value: number): void {
-    this.hotendTarget += value;
-    if (this.hotendTarget < -999) {
-      this.hotendTarget = this.configService.getDefaultHotendTemperature();
-    } else if (this.hotendTarget < 0) {
-      this.hotendTarget = 0;
-    } else if (this.hotendTarget > 999) {
-      this.hotendTarget = 999;
+  public quickControlSetValue(value: number): void {
+    switch (this.view) {
+      case QuickControlView.HOTEND:
+        this.printerService.setTemperatureHotend(value, this.selectedHotend);
+        break;
+      case QuickControlView.HEATBED:
+        this.printerService.setTemperatureBed(value);
+        break;
+      case QuickControlView.FAN:
+        this.printerService.setFanSpeed(value);
+        break;
     }
-  }
 
-  private quickControlSetValue(): void {
-    this.printerService.setTemperatureHotend(this.hotendTarget, this.selectedTool);
     this.hideQuickControl();
   }
+}
+
+enum QuickControlView {
+  NONE,
+  HOTEND,
+  HEATBED,
+  FAN,
 }

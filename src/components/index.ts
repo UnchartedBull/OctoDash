@@ -33,6 +33,7 @@ import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.comp
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
+import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 
 export default [
   AppComponent,
@@ -70,4 +71,5 @@ export default [
   TopBarComponent,
   StandbyComponent,
   UpdateComponent,
+  QuickControlComponent,
 ];

@@ -1,0 +1,45 @@
+<div class="quick-control">
+  <app-top-bar [backButton]="true" (onBack)="onBack.emit()">
+    <img [src]="icon" class="top-bar__center-icon" />
+  </app-top-bar>
+
+  <div class="quick-control__controller">
+    <div class="quick-control__controller-row">
+      <div class="quick-control__controller-increase" (click)="changeValue(1)" matRipple [matRippleUnbounded]="false">
+        +1
+      </div>
+      <div class="quick-control__controller-increase" (click)="changeValue(10)" matRipple [matRippleUnbounded]="false">
+        +10
+      </div>
+    </div>
+
+    <div
+      class="quick-control__controller-value"
+      colspan="2"
+      (click)="changeValue(-1000)"
+      matRipple
+      [matRippleUnbounded]="false">
+      {{ value }}<span class="quick-control__controller-value-unit">{{ unit }}</span>
+    </div>
+
+    <div class="quick-control__controller-row">
+      <div class="quick-control__controller-decrease" (click)="changeValue(-1)" matRipple [matRippleUnbounded]="false">
+        -1
+      </div>
+      <div class="quick-control__controller-decrease" (click)="changeValue(-10)" matRipple [matRippleUnbounded]="false">
+        -10
+      </div>
+    </div>
+
+    <div class="quick-control__controller-row">
+      <div
+        class="quick-control__controller-set"
+        colspan="2"
+        (click)="setValue()"
+        matRipple
+        [matRippleUnbounded]="false">
+        <span class="quick-control__controller-set-span">set</span>
+      </div>
+    </div>
+  </div>
+</div>
