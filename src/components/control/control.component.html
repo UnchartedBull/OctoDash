@@ -119,49 +119,92 @@
   </div>
 
   <div class="control__tools">
-    <div
-      class="control__tools__item"
-      *ngFor="
-        let tool of printerProfile.extruder.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
-        index as i
-      "
-      [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
-      (click)="selectedTool === i ? showQuickControlHotend(selectedTool) : setTool(i)"
-      matRipple
-      [matRippleUnbounded]="false">
-      <app-hotend-icon
-        class="control__tools__icon"
-        [tool]="printerProfile.extruder.count > 1 && !printerProfile.extruder.sharedNozzle ? i : -1" />
+    <ngContainer *ngIf="!printerProfile.extruder.sharedNozzle">
       <div
-        class="control__tools__value"
-        [ngClass]="{
-          'control__tools__no-set-value': tool.set === 0,
-        }">
-        <span class="control__tools__actual-value">
-          {{ tool.current }}<span class="control__tools__unit">°C</span>
-        </span>
-        <span class="control__tools__set-value" *ngIf="tool.set">
-          / {{ tool.set }}<span class="control__tools__unit">°C</span>
-        </span>
+        class="control__tools__item"
+        *ngFor="let tool of printerStatus.tools; index as i"
+        [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
+        (click)="selectedTool === i ? showQuickControlHotend(selectedTool) : setTool(i)"
+        matRipple
+        [matRippleUnbounded]="false">
+        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile.extruder.count > 1 && i" />
+        <div
+          class="control__tools__item-value"
+          [ngClass]="{
+            'control__tools__item-no-value-set': tool.set === 0,
+          }">
+          <span class="control__tools__item-value-actual">
+            {{ tool.current }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+          <span class="control__tools__item-value-set" *ngIf="tool.set">
+            / {{ tool.set }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+        </div>
       </div>
-    </div>
 
-    <div
-      class="control__tools__item control__tools__item-bed-temp"
-      (click)="showQuickControlHeatbed()"
-      matRipple
-      [matRippleUnbounded]="false">
-      <!-- XXX: Add functionality (split quick control out into its own component) -->
-      <img class="control__tools__icon" src="assets/heat-bed.svg" />
-      <div class="control__tools__value" [ngClass]="{ 'control__tools__no-set-value': printerStatus.bed.set === 0 }">
-        <span class="control__tools__actual-value">
-          {{ printerStatus.bed.current }}<span class="control__tools__unit">°C</span>
-        </span>
-        <span class="control__tools__set-value" *ngIf="printerStatus.bed.set">
-          / {{ printerStatus.bed.set }}<span class="control__tools__unit">°C</span>
-        </span>
+      <div class="control__tools__bottom">
+        <div class="control__tools__item" (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+          <!-- XXX: Add functionality (split quick control out into its own component) -->
+          <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
+          <div
+            class="control__tools__item-value"
+            [ngClass]="{ 'control__tools__item-no-value-set': printerStatus.bed.set === 0 }">
+            <span class="control__tools__item-value-actual">
+              {{ printerStatus.bed.current }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+            <span class="control__tools__item-value-set" *ngIf="printerStatus.bed.set">
+              / {{ printerStatus.bed.set }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </ngContainer>
+    <ngContainer *ngIf="printerProfile.extruder.sharedNozzle">
+      <div class="control__tools__item" (click)="showQuickControlHotend(0)" matRipple [matRippleUnbounded]="false">
+        <app-hotend-icon class="control__tools__item-icon" [tool]="-1" />
+        <div
+          class="control__tools__item-value"
+          [ngClass]="{
+            'control__tools__item-no-value-set': printerStatus.tools[0].set === 0,
+          }">
+          <span class="control__tools__item-value-actual">
+            {{ printerStatus.tools[0].current }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+          <span class="control__tools__item-value-set" *ngIf="printerStatus.tools[0].set">
+            / {{ printerStatus.tools[0].set }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="control__tools__item control__tools__item-tool-changer">
+        <div
+          class="control__tools__item-tool-changer__item"
+          *ngFor="let tool of printerStatus.tools; index as i"
+          [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
+          (click)="setTool(i)"
+          matRipple
+          [matRippleUnbounded]="false">
+          <app-hotend-icon [tool]="printerProfile.extruder.count > 1 && i" />
+        </div>
+      </div>
+
+      <div class="control__tools__bottom">
+        <div class="control__tools__item" (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+          <!-- XXX: Add functionality (split quick control out into its own component) -->
+          <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
+          <div
+            class="control__tools__item-value"
+            [ngClass]="{ 'control__tools__item-no-value-set': printerStatus.bed.set === 0 }">
+            <span class="control__tools__item-value-actual">
+              {{ printerStatus.bed.current }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+            <span class="control__tools__item-value-set" *ngIf="printerStatus.bed.set">
+              / {{ printerStatus.bed.set }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ngContainer>
   </div>
 </div>
 
