@@ -159,15 +159,8 @@
       margin-top: 1vh;
     }
   }
-}
 
-app-custom-actions {
-  float: right;
-  height: 75vh;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
+  &__tools {
   }
 }
 

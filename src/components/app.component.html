@@ -1,6 +1,6 @@
 <app-notification></app-notification>
 <app-action-center
-  *ngIf="initialized && showActionCenterIcon() && getRouterURL() != '/control'"
+  *ngIf="initialized && showActionCenterIcon()"
   [closeEvent]="hideActionCenterEvent.asObservable()"></app-action-center>
 <div class="container" (click)="hideActionCenter()">
   <div *ngIf="!activated">

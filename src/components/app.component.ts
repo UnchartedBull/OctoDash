@@ -89,10 +89,6 @@ export class AppComponent implements OnInit {
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 
-  public getRouterURL(): string {
-    return this.router.url;
-  }
-
   public loadingAnimationCacheDone(): void {
     this.loadingAnimationCached = true;
   }

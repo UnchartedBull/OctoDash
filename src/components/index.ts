@@ -1,5 +1,4 @@
 import { ActionCenterComponent } from './action-center/action-center.component';
-import { CustomActionsComponent } from './action-center/custom-actions/custom-actions.component';
 import { AppComponent } from './app.component';
 import { ControlComponent } from './control/control.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
@@ -39,7 +38,6 @@ export default [
   AppComponent,
   ActionCenterComponent,
   ControlComponent,
-  CustomActionsComponent,
   ChangeFilamentComponent,
   ChooseFilamentComponent,
   ChooseToolComponent,
