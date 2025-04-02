@@ -80,23 +80,6 @@
       </div>
     </div>
 
-    <div class="control__tool-wrapper">
-      <table class="control__tool">
-        <tr>
-          <td
-            class="control__tool-field"
-            *ngFor="let tool of printerStatus.tools; index as i"
-            [ngClass]="{ 'control__tool-field-active': selectedTool === i }"
-            (click)="selectedTool === i ? showQuickControl() : setTool(i)">
-            T{{ i }}
-            <span
-              >{{ tool.current }}ºC <ng-container *ngIf="tool.set"> / {{ tool.set }}ºC</ng-container></span
-            >
-          </td>
-        </tr>
-      </table>
-    </div>
-
     <div class="control__distance-wrapper">
       <table class="control__distance">
         <tr>
@@ -136,8 +119,45 @@
   </div>
 
   <div class="control__tools">
-    <p>Temperature</p>
-    <!-- TODO: Place tool switching and bed temperature control here -->
+    <div
+      class="control__tools__item"
+      *ngFor="
+        let tool of printerProfile.extruder.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
+        index as i
+      "
+      [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
+      (click)="selectedTool === i ? showQuickControl() : setTool(i)"
+      matRipple
+      [matRippleUnbounded]="false">
+      <app-hotend-icon
+        class="control__tools__icon"
+        [tool]="printerProfile.extruder.count > 1 && !printerProfile.extruder.sharedNozzle ? i : -1" />
+      <div
+        class="control__tools__value"
+        [ngClass]="{
+          'control__tools__no-set-value': tool.set === 0,
+        }">
+        <span class="control__tools__actual-value">
+          {{ tool.current }}<span class="control__tools__unit">°C</span>
+        </span>
+        <span class="control__tools__set-value" *ngIf="tool.set">
+          / {{ tool.set }}<span class="control__tools__unit">°C</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="control__tools__item control__tools__item-bed-temp" matRipple [matRippleUnbounded]="false">
+      <!-- XXX: Add functionality (split quick control out into its own component) -->
+      <img class="control__tools__icon" src="assets/heat-bed.svg" />
+      <div class="control__tools__value" [ngClass]="{ 'control__tools__no-set-value': printerStatus.bed.set === 0 }">
+        <span class="control__tools__actual-value">
+          {{ printerStatus.bed.current }}<span class="control__tools__unit">°C</span>
+        </span>
+        <span class="control__tools__set-value" *ngIf="printerStatus.bed.set">
+          / {{ printerStatus.bed.set }}<span class="control__tools__unit">°C</span>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 

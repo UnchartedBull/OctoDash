@@ -1,4 +1,5 @@
 .control {
+  margin-top: 4vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,9 +109,8 @@
     }
   }
 
-  &__distance,
-  &__tool {
-    margin-top: 1.25vh;
+  &__distance {
+    margin-top: 6vh;
     display: inline-block;
     border-collapse: separate;
 
@@ -161,6 +161,48 @@
   }
 
   &__tools {
+    &__item {
+      width: 22vw;
+      padding: 1.5vh 2vw;
+      margin-right: 2vw;
+      font-size: 3vw;
+      transition: filter 0.2s;
+
+      &.control__tools__item-bed-temp {
+        position: absolute;
+        bottom: 4vh;
+      }
+
+      &.control__tools__field-active {
+        filter: drop-shadow(0 0 0.5vw rgb(255 255 255 / 0.5));
+      }
+
+      .control__tools__icon {
+        vertical-align: middle;
+        display: inline-block;
+        width: 6vw;
+      }
+
+      .control__tools__value {
+        display: inline-block;
+        width: calc(100% - 6vw);
+        text-align: right;
+        vertical-align: middle;
+        line-height: 6vh;
+
+        .control__tools__unit {
+          font-size: 60%;
+        }
+
+        .control__tools__actual-value {
+          font-weight: 500;
+        }
+
+        .control__tools__set-value {
+          font-size: 2vw;
+        }
+      }
+    }
   }
 }
 
