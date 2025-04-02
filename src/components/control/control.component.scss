@@ -1,11 +1,11 @@
 .control {
-  margin-top: 4vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: visible;
 
   &__jog {
+    margin-top: 4vh;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
