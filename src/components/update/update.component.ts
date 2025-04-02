@@ -37,11 +37,10 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.service.getLatestVersion() || !this.service.getLatestVersionAssetsURL()) {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-update:Can't initiate update!`,
-        text: $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
-        type: NotificationType.ERROR,
-      });
+      this.notificationService.error(
+        $localize`:@@error-update:Can't initiate update!`,
+        $localize`:@@error-update-message:Some information is missing, please try again in an hour or update manually.`,
+      );
       this.closeUpdateWindow();
     } else {
       this.setupListeners();
@@ -51,11 +50,10 @@ export class UpdateComponent implements OnInit {
 
   private setupListeners(): void {
     this.electronService.on('updateError', (_, updateError: UpdateError): void => {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-install-update:Can't install update!`,
-        text: updateError.error.message,
-        type: NotificationType.ERROR,
-      });
+      this.notificationService.error(
+        $localize`:@@error-install-update:Can't install update!`,
+        updateError.error.message,
+      );
       this.closeUpdateWindow();
     });
 

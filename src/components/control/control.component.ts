@@ -40,12 +40,11 @@ export class ControlComponent implements OnInit, OnDestroy {
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
-          text: error.message,
-          type: NotificationType.ERROR,
-          sticky: true,
-        });
+        this.notificationService.warn(
+          $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
+          error.message,
+          true,
+        );
       },
     });
   }

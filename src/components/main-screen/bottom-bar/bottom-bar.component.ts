@@ -33,11 +33,10 @@ export class BottomBarComponent implements OnDestroy {
           this.enclosureService.getEnclosureTemperature().subscribe({
             next: (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
             error: (error: HttpErrorResponse) => {
-              this.notificationService.setNotification({
-                heading: $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
-                text: error.message,
-                type: NotificationType.ERROR,
-              });
+              this.notificationService.error(
+                $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
+                error.message,
+              );
             },
           });
         }),

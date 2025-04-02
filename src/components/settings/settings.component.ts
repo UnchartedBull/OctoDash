@@ -90,12 +90,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.fadeOutAnimation = false;
       }, 5000);
     } else {
-      this.notificationService.setNotification({
-        heading: $localize`:@@conf-unsaved:Configuration not saved!`,
+      this.notificationService.warn(
+        $localize`:@@conf-unsaved:Configuration not saved!`,
         // eslint-disable-next-line max-len
-        text: $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
-        type: NotificationType.WARN,
-      });
+        $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
+      );
       this.overwriteNoSave = true;
     }
   }
@@ -127,11 +126,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setNotification({
-      heading: $localize`:@@error-invalid-config:Can't save invalid config`,
-      text: String(errors),
-      type: NotificationType.WARN,
-    });
+    this.notificationService.warn($localize`:@@error-invalid-config:Can't save invalid config`, String(errors));
   }
 
   private onConfigSaved() {

@@ -14,12 +14,11 @@ export class ElectronService {
     if (window.require) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
     } else {
-      this.notificationService.setNotification({
-        heading: "Can't load electron library",
-        text: 'Please restart your system and open a new issue on GitHub if this issue persists.',
-        type: NotificationType.ERROR,
-        sticky: true,
-      });
+      this.notificationService.error(
+        "Can't load electron library",
+        'Please restart your system and open a new issue on GitHub if this issue persists.',
+        true,
+      );
     }
   }
 

@@ -39,11 +39,7 @@ export class SystemOctoprintService implements SystemService {
       .post(this.configService.getApiURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-execute:Can't execute ${command} command!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-          });
+          this.notificationService.error($localize`:@@error-execute:Can't execute ${command} command!`, error.message);
           return of(error);
         }),
       )
@@ -60,12 +56,7 @@ export class SystemOctoprintService implements SystemService {
       .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-connect:Can't connect to printer!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            sticky: true,
-          });
+          this.notificationService.warn($localize`:@@error-connect:Can't connect to printer!`, error.message, true);
           return of(error);
         }),
       )

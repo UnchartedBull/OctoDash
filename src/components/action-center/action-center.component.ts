@@ -105,12 +105,10 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
       const values = command.replace(SpecialCommandRegex, '').split(',');
 
       if (!(specialCommand in this.commands)) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-custom-action-invalid:Unknown special command!`,
-          text: $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
-          type: NotificationType.ERROR,
-          time: new Date(),
-        });
+        this.notificationService.error(
+          $localize`:@@error-custom-action-invalid:Unknown special command!`,
+          $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
+        );
         return;
       }
 
@@ -119,12 +117,10 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     }
 
     if (!this.printerConnected) {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
-        text: $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
-        type: NotificationType.ERROR,
-        time: new Date(),
-      });
+      this.notificationService.error(
+        $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
+        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
+      );
     } else {
       this.printerService.executeGCode(command);
     }

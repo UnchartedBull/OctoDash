@@ -69,11 +69,7 @@ export class FilesComponent {
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
         error: (error: HttpErrorResponse) => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-load-file-folder:Can't load file/folder!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-          });
+          this.notificationService.error($localize`:@@error-load-file-folder:Can't load file/folder!`, error.message);
           this.currentFolder = folderPath;
         },
         complete: () => {
@@ -103,11 +99,7 @@ export class FilesComponent {
       next: (fileData: File) => (this.fileDetail = fileData),
       error: (error: HttpErrorResponse) => {
         this.fileDetail = { name: 'error' } as unknown as File;
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-load-file:Can't load file!`,
-          text: error.message,
-          type: NotificationType.ERROR,
-        });
+        this.notificationService.error($localize`:@@error-load-file:Can't load file!`, error.message);
       },
     });
     const fileDOMElement = document.getElementById('fileDetailView');

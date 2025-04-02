@@ -34,32 +34,29 @@ export class OctoprintAuthenticationComponent {
       },
       error: (error: HttpErrorResponse) => {
         if (error.status === 0) {
-          this.notificationService.setNotification({
-            heading: $localize`:@@octoprint-connection-failed:Can't connect to OctoPrint!`,
-            text: $localize`:@@octoprint-connection-failed-message:Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.`,
-            type: NotificationType.ERROR,
-          });
+          this.notificationService.error(
+            $localize`:@@octoprint-connection-failed:Can't connect to OctoPrint!`,
+            $localize`:@@octoprint-connection-failed-message:Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.`,
+          );
         } else this.setAutologinWarning();
       },
     });
   }
 
   private setAutologinWarning(): void {
-    this.notificationService.setNotification({
-      heading: $localize`:@@unsupported-autologin:Automatic login not supported!`,
-      text: $localize`:@@manually-create-api-key:Please create the API Key manually and paste it in the bottom field.`,
-      type: NotificationType.WARN,
-    });
+    this.notificationService.warn(
+      $localize`:@@unsupported-autologin:Automatic login not supported!`,
+      $localize`:@@manually-create-api-key:Please create the API Key manually and paste it in the bottom field.`,
+    );
   }
 
   private sendLoginRequest(): void {
     this.authService.startAuthProcess(this.octoprintURL).subscribe({
       next: (token: string) => {
-        this.notificationService.setNotification({
-          heading: $localize`:@@login-request-sent:Login request send!`,
-          text: $localize`:@@login-request-sent-message:Please confirm the request via the popup in the OctoPrint WebUI.`,
-          type: NotificationType.INFO,
-        });
+        this.notificationService.info(
+          $localize`:@@login-request-sent:Login request send!`,
+          $localize`:@@login-request-sent-message:Please confirm the request via the popup in the OctoPrint WebUI.`,
+        );
         setTimeout(() => {
           this.notificationService.closeNotification();
         }, 10 * 1000);

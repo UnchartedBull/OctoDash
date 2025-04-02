@@ -59,11 +59,10 @@ export class AppService {
         if (this.version != this.latestVersion.version) {
           if (!this.updateAvailable) {
             // Display notification first time that update is detected
-            this.notificationService.setNotification({
-              heading: $localize`:@@update-available:Update available!`,
-              text: $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
-              type: NotificationType.INFO,
-            });
+            this.notificationService.info(
+              $localize`:@@update-available:Update available!`,
+              $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
+            );
           }
 
           this.updateAvailable = true;
@@ -110,11 +109,7 @@ export class AppService {
     });
 
     this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-load-style:Can't load custom styles!`,
-        text: customCSSError,
-        type: NotificationType.ERROR,
-      });
+      this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
 
