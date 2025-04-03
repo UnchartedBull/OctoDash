@@ -43,19 +43,14 @@ export class AppComponent implements OnInit {
   }
 
   private initialize(): void {
-    if (this.configService && this.configService.isInitialized()) {
-      if (this.configService.isLoaded()) {
-        if (this.configService.isValid()) {
-          this.connectWebsocket();
-        } else {
-          this.checkInvalidConfig();
-        }
-      } else {
-        this.router.navigate(['/no-config']);
-      }
-    } else {
-      setTimeout(this.initialize.bind(this), 1000);
-    }
+    // if no API key found or invalid API key
+    // go to login flow
+    this.configService.getConfig().subscribe({
+      complete: () => {
+        this.connectWebsocket();
+      },
+      error: () => this.router.navigate(['/login']),
+    });
   }
 
   private checkInvalidConfig() {

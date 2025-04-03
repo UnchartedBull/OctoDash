@@ -1,10 +1,9 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
-import { NotificationType, URLSplit } from '../../model';
-import { ConfigSchema as Config } from '../../model/config.model';
 import { AppService } from '../../services/app.service';
+import { ConfigSchema as Config } from '../../model/config.model';
 import { ConfigService } from '../../services/config.service';
-import { ElectronService } from '../../services/electron.service';
+import { NotificationType, URLSplit } from '../../model';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../../services/system/system.service';
 
@@ -14,7 +13,7 @@ import { SystemService } from '../../services/system/system.service';
   styleUrls: ['./settings.component.scss'],
   standalone: false,
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>();
   @ViewChild('settingsMain') private settingsMain: ElementRef;
   @ViewChild('settingsGeneral') private settingsGeneral: ElementRef;
@@ -43,7 +42,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private electronService: ElectronService,
     private systemService: SystemService,
     public service: AppService,
   ) {
@@ -72,11 +70,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
-  }
-
-  public ngOnDestroy(): void {
-    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public hideSettings(): void {
@@ -121,10 +114,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
-    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
-
-    this.configService.saveConfig(config);
+    this.configService
+      .saveConfig(config)
+      .subscribe({ complete: this.onConfigSaved.bind(this), error: this.onConfigSaveFail.bind(this) });
   }
 
   private onConfigSaveFail(_, errors: string[]) {
@@ -138,7 +130,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private onConfigSaved() {
     this.hideSettings();
-    this.electronService.send('reload');
+    window.location.reload();
   }
 
   public showUpdate(): void {

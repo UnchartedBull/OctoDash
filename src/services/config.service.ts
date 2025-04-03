@@ -1,13 +1,21 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { BehaviorSubject, map, throwError } from 'rxjs';
 
-import { ConfigSchema as Config, CustomAction, NotificationType, URLSplit } from '../model';
-import { ElectronService } from './electron.service';
+import defaultConfig from '../helper/config.default.json';
+import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { NotificationService } from './notification.service';
 
 interface HttpHeader {
   headers: HttpHeaders;
+}
+
+// This contains a bunch of other properties that are not used in the app
+interface OctoPrintConfig {
+  plugins: {
+    octodash: Config;
+  };
 }
 
 @Injectable({
@@ -15,63 +23,72 @@ interface HttpHeader {
 })
 export class ConfigService {
   private config: Config;
+  private apiKey: string;
   private valid: boolean;
   private errors: string[];
   private update = false;
-  private initialized = false;
+  private initialized = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
+  private http: HttpClient = inject(HttpClient);
+
   public constructor(
     private notificationService: NotificationService,
-    private electronService: ElectronService,
     private zone: NgZone,
-  ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.setNotification({
-        heading: error,
-        text: $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-        type: NotificationType.ERROR,
-        time: new Date(),
-        sticky: true,
-      });
-    });
+  ) {}
 
-    this.electronService.on('configPass', () => {
-      this.zone.run(() => {
-        this.valid = true;
-        this.generateHttpHeaders();
-        this.initialized = true;
-      });
+  public getConfig() {
+    this.apiKey = localStorage.getItem('octodash_apikey');
+    // set the x-api-key header
+    if (!this.apiKey) {
+      return throwError(() => 'No API Key Found');
+    }
+    const headers = new HttpHeaders({
+      'x-api-key': this.apiKey ?? '',
     });
-    this.electronService.on('configFail', (_, errors) => {
-      this.zone.run(() => {
-        this.valid = false;
-        this.errors = errors;
-        console.error(errors);
-        this.initialized = true;
-      });
-    });
-
-    this.electronService.send('readConfig');
+    return this.http
+      .get<OctoPrintConfig>('/api/settings', { headers })
+      .pipe(
+        map(response => {
+          return response.plugins.octodash;
+        }),
+      )
+      .pipe(
+        map((config: Config) => {
+          this.initialize({ ...config });
+          this.zone.run(() => {
+            this.initialized.next(true);
+            this.generateHttpHeaders();
+            this.valid = true;
+          });
+        }),
+      );
   }
 
   private initialize(config: Config): void {
     this.config = config;
-    this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
     this.httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        'x-api-key': this.apiKey,
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',
       }),
     };
+  }
+
+  public getAccessToken(): string {
+    return this.apiKey;
+  }
+
+  public setAccessToken(token: string): void {
+    this.apiKey = token;
+    localStorage.setItem('octodash_apikey', token);
+    this.generateHttpHeaders();
   }
 
   public getCurrentConfig(): Config {
@@ -83,11 +100,11 @@ export class ConfigService {
   }
 
   public getErrors(): string[] {
-    return this.errors;
+    return [];
   }
 
-  public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
+  public saveConfig(config: Config) {
+    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -125,8 +142,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    if (includeApi) return `/api/${path}`;
+    else return `/${path}`;
   }
 
   public getAPIPollingInterval(): number {
@@ -150,6 +167,10 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
+    return this.initialized.getValue();
+  }
+
+  public isInitializedObservable() {
     return this.initialized;
   }
 
