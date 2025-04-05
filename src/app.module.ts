@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -25,6 +26,7 @@ import services from './services';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    DragDropModule,
     FontAwesomeModule,
     FormsModule,
     MatRippleModule,

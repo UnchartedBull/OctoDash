@@ -1,9 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable, Subscription } from 'rxjs';
 
-import { PrinterState, PrinterStatus, PSUState } from '../../model';
+import { PrinterState, PrinterStatus, PSUState, CustomAction } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../services/notification.service';
@@ -24,6 +25,8 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   private eventsSubscription: Subscription;
 
   public visible = false;
+  public editing = false;
+  public editingAction = -1;
 
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
@@ -71,12 +74,45 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.eventsSubscription = this.closeEvent.subscribe(() => (this.visible = false));
+    this.eventsSubscription = this.closeEvent.subscribe(() => {
+      this.visible = false;
+      this.editing = false;
+      this.editingAction = -1;
+    });
   }
 
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
+
+  private updateActionsInConfig() {
+    const config = this.configService.getCurrentConfig();
+    config.octodash.customActions = this.customActions;
+    this.configService.saveConfig(config);
+  }
+
+  public reorderAction(event: CdkDragDrop<CustomAction[]>) {
+    moveItemInArray(this.customActions, event.previousIndex, event.currentIndex);
+    this.updateActionsInConfig();
+  }
+
+  public addAction() {
+    this.customActions.push({
+      icon: 'plus',
+      command: '',
+      color: '#ffffff',
+      confirm: false,
+      exit: false,
+    });
+    this.editingAction = this.customActions.length - 1;
+  }
+
+  public deleteAction(index: number) {
+    this.customActions.splice(index, 1);
+    this.updateActionsInConfig();
+  }
+
+  // -=- ACTIONS -=-
 
   public doAction(command: string, exit: boolean, confirm: boolean): void {
     if (confirm) {
