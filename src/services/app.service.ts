@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 
-import { ConfigSchema as Config, NotificationType } from '../model';
+import { ConfigSchema as Config } from '../model';
 import { ConfigService } from './config.service';
 import { ElectronService } from './electron.service';
 import { NotificationService } from './notification.service';
@@ -36,8 +36,12 @@ export class AppService {
     // list of all error following an upgrade
     /* eslint-disable @typescript-eslint/no-explicit-any */
     this.updateError = {
-      '/octodash must NOT have additional properties': config =>
-        delete (config.octodash as any).showNotificationCenterIcon,
+      '/octodash must NOT have additional properties': config => {
+        if ('showNotificationCenterIcon' in (config.octodash as any)) {
+          config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
+          delete (config.octodash as any).showNotificationCenterIcon;
+        }
+      },
     };
     /* eslint-enable @typescript-eslint/no-explicit-any */
   }
@@ -55,12 +59,10 @@ export class AppService {
         if (this.version != this.latestVersion.version) {
           if (!this.updateAvailable) {
             // Display notification first time that update is detected
-            this.notificationService.setNotification({
-              heading: $localize`:@@update-available:Update available!`,
-              text: $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
-              type: NotificationType.INFO,
-              time: new Date(),
-            });
+            this.notificationService.info(
+              $localize`:@@update-available:Update available!`,
+              $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
+            );
           }
 
           this.updateAvailable = true;
@@ -107,12 +109,7 @@ export class AppService {
     });
 
     this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-load-style:Can't load custom styles!`,
-        text: customCSSError,
-        type: NotificationType.ERROR,
-        time: new Date(),
-      });
+      this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
 

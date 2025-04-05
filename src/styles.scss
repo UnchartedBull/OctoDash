@@ -103,45 +103,6 @@ button {
   display: none;
 }
 
-.top-bar {
-  width: 100%;
-  height: 10vh;
-
-  & td {
-    width: 33.3%;
-  }
-
-  &__back {
-    padding: 4vh 2vw 2vh;
-    font-weight: 500;
-
-    &-icon {
-      margin-right: 1.4vw;
-      margin-left: 1vw;
-    }
-  }
-
-  &__next {
-    padding: 4vh 2vw 2vh;
-    text-align: right;
-    font-weight: 500;
-
-    &-icon {
-      margin-left: 1.4vw;
-      margin-right: 1vw;
-    }
-  }
-
-  &__center {
-    text-align: center;
-
-    &-icon {
-      width: 7vw;
-      margin-bottom: -3vh;
-    }
-  }
-}
-
 .splash-screen {
   &__icon {
     height: 50vh;

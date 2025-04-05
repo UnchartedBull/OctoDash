@@ -1,7 +1,11 @@
-<div class="checkbox__wrapper">
-  <ng-lottie
-    id="checkmarkAnimation"
-    [options]="toggleSwitchOptions"
-    (animationCreated)="animationCreated($event)"
-    (click)="toggleValue()"></ng-lottie>
+<div class="wrapper" [attr.disabled]="disabled" (click)="toggleValue()">
+  <div class="checkbox__wrapper">
+    <ng-lottie
+      id="checkmarkAnimation"
+      [options]="toggleSwitchOptions"
+      (animationCreated)="animationCreated($event)"></ng-lottie>
+  </div>
+  <div class="label">
+    <ng-content></ng-content>
+  </div>
 </div>

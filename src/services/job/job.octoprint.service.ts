@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NotificationType } from '../../model';
 import { JobCommand } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
@@ -26,12 +25,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-start-job:Can't start job!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-start-job:Can't start job!`, error.message);
           return of(null);
         }),
       )
@@ -48,12 +42,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-pause-job:Can't pause job!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-pause-job:Can't pause job!`, error.message);
           return of(null);
         }),
       )
@@ -70,12 +59,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-resume-job:Can't resume job!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-resume-job:Can't resume job!`, error.message);
           return of(null);
         }),
       )
@@ -91,12 +75,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-cancel-job:Can't cancel job!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-cancel-job:Can't cancel job!`, error.message);
           return of(null);
         }),
       )
@@ -112,12 +91,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-restart-job:Can't restart job!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-restart-job:Can't restart job!`, error.message);
           return of(null);
         }),
       )
@@ -133,12 +107,7 @@ export class JobOctoprintService implements JobService {
       .post(this.configService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-preheat:Can't preheat printer!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-preheat:Can't preheat printer!`, error.message);
           return of(null);
         }),
       )

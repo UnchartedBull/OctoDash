@@ -3,90 +3,95 @@
 <div class="setup__plugin-list">
   <span>
     <app-toggle-switch [value]="companionPlugin" (valueChange)="companionPluginChange.emit(!companionPlugin)">
+      <ng-container i18n="@@plugin-octodash-companion">OctoDash Companion</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-octodash-companion">OctoDash Companion</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="displayLayerProgressPlugin"
       (valueChange)="displayLayerProgressPluginChange.emit(!displayLayerProgressPlugin)">
+      <ng-container i18n="@@plugin-display-layer-progress">Display Layer Progress</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-display-layer-progress">Display Layer Progress</ng-container>
   </span>
 
   <span>
     <app-toggle-switch [value]="enclosurePlugin" (valueChange)="enclosurePluginChange.emit(!enclosurePlugin)">
+      <ng-container i18n="@@plugin-enclosure">Enclosure</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-enclosure">Enclosure</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="filamentManagerPlugin"
-      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)"></app-toggle-switch>
-    <ng-container i18n="@@plugin-filament-manager">Filament Manager</ng-container>
+      (valueChange)="filamentManagerPluginChange.emit(!filamentManagerPlugin)">
+      <ng-container i18n="@@plugin-filament-manager">Filament Manager</ng-container>
+    </app-toggle-switch>
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="spoolManagerPlugin"
-      (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)"></app-toggle-switch>
-    <ng-container i18n="@@plugin-spool-manager">Spool Manager (Beta)</ng-container>
+    <app-toggle-switch [value]="spoolManagerPlugin" (valueChange)="spoolManagerPluginChange.emit(!spoolManagerPlugin)">
+      <ng-container i18n="@@plugin-spool-manager">Spool Manager</ng-container>
+    </app-toggle-switch>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="preheatButtonPlugin"
       (valueChange)="preheatButtonPluginChange.emit(!preheatButtonPlugin)">
+      <ng-container i18n="@@plugin-preheat-button">Preheat Button</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-preheat-button">Preheat Button</ng-container>
   </span>
 
   <span>
     <app-toggle-switch
       [value]="printTimeGeniusPlugin"
-      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)"></app-toggle-switch>
-    <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
+      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)">
+      <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
+    </app-toggle-switch>
   </span>
 
   <span>
     <app-toggle-switch [value]="psuControlPlugin" (valueChange)="psuControlPluginChange.emit(!psuControlPlugin)">
+      <ng-container i18n="@@plugin-psu-control">PSU Control</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-psu-control">PSU Control</ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="ophomPlugin" (valueChange)="ophomPluginChange.emit(!ophomPlugin)"> </app-toggle-switch>
-    <ng-container i18n="@@plugin-opom">Ophom (Phillips HUE)</ng-container>
+    <app-toggle-switch [value]="ophomPlugin" (valueChange)="ophomPluginChange.emit(!ophomPlugin)"
+      ><ng-container i18n="@@plugin-opom">Ophom (Phillips HUE)</ng-container></app-toggle-switch
+    >
   </span>
 
   <span>
     <app-toggle-switch
       [value]="tpLinkSmartPlugPlugin"
-      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)"></app-toggle-switch>
-    <ng-container i18n="@@plugin-tplink-smartplug"> TPLink SmartPlug </ng-container>
+      (valueChange)="tpLinkSmartPlugPluginChange.emit(!tpLinkSmartPlugPlugin)">
+      <ng-container i18n="@@plugin-tplink-smartplug">TPLink SmartPlug</ng-container>
+    </app-toggle-switch>
   </span>
 
   <span>
-    <app-toggle-switch [value]="tuyaPlugin" (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)"></app-toggle-switch>
-    <ng-container i18n="@@plugin-tuya"> Tuya SmartPlug </ng-container>
+    <app-toggle-switch [value]="tuyaPlugin" (valueChange)="tuyaPluginChange.emit(!tuyaPlugin)">
+      <ng-container i18n="@@plugin-tuya">Tuya SmartPlug</ng-container>
+    </app-toggle-switch>
   </span>
 
   <span>
     <app-toggle-switch [value]="tasmotaPlugin" (valueChange)="tasmotaPluginChange.emit(!tasmotaPlugin)">
+      <ng-container i18n="@@plugin-tasmota">Tasmota</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-tasmota"> Tasmota </ng-container>
   </span>
 
   <span>
     <app-toggle-switch [value]="tasmotaMqttPlugin" (valueChange)="tasmotaMqttPluginChange.emit(!tasmotaMqttPlugin)">
+      <ng-container i18n="@@plugin-tasmota-mqtt">Tasmota MQTT</ng-container>
     </app-toggle-switch>
-    <ng-container i18n="@@plugin-tasmota-mqtt"> Tasmota MQTT </ng-container>
   </span>
 
   <span>
-    <app-toggle-switch [value]="wemoPlugin" (valueChange)="wemoPluginChange.emit(!wemoPlugin)"> </app-toggle-switch>
-    <ng-container i18n="@@plugin-wemo"> Wemo </ng-container>
+    <app-toggle-switch [value]="wemoPlugin" (valueChange)="wemoPluginChange.emit(!wemoPlugin)"
+      ><ng-container i18n="@@plugin-wemo">Wemo</ng-container></app-toggle-switch
+    >
   </span>
 </div>

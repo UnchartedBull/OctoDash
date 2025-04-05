@@ -372,6 +372,7 @@
         "screenSleepCommand",
         "screenWakeupCommand",
         "showExtruderControl",
+        "showActionCenterIcon",
         "defaultDirectory"
       ],
       "properties": {
@@ -499,6 +500,10 @@
           "default": "xset s off && xset -dpms && xset s noblank"
         },
         "showExtruderControl": {
+          "type": "boolean",
+          "default": true
+        },
+        "showActionCenterIcon": {
           "type": "boolean",
           "default": true
         },

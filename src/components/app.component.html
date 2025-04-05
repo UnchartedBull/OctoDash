@@ -1,5 +1,8 @@
 <app-notification></app-notification>
-<div class="container">
+<app-action-center
+  *ngIf="initialized && showActionCenterIcon()"
+  [closeEvent]="hideActionCenterEvent.asObservable()"></app-action-center>
+<div class="container" (click)="hideActionCenter()">
   <div *ngIf="!activated">
     <app-settings-icon></app-settings-icon>
     <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
