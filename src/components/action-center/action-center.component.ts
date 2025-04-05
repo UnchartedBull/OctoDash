@@ -25,8 +25,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   private eventsSubscription: Subscription;
 
   public visible = false;
-  public editing = false;
-  public editingAction = -1;
+  public editing = -1;
 
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
@@ -76,8 +75,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.eventsSubscription = this.closeEvent.subscribe(() => {
       this.visible = false;
-      this.editing = false;
-      this.editingAction = -1;
+      this.editing = -1;
     });
   }
 
@@ -104,7 +102,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
       confirm: false,
       exit: false,
     });
-    this.editingAction = this.customActions.length - 1;
+    this.editing = this.customActions.length - 1;
   }
 
   public deleteAction(index: number) {

@@ -1,38 +1,30 @@
-<div class="wrapper" [ngClass]="{ visible: visible, editing: editing }">
+<div class="wrapper" [ngClass]="{ visible: visible }">
   <div class="custom-actions" cdkDropList (cdkDropListDropped)="reorderAction($event)">
     <div
       class="custom-actions__action"
       *ngFor="let customAction of customActions; index as i"
       [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
       [style.border-color]="customAction.color"
-      (click)="editing ? (editingAction = i) : doAction(customAction.command, customAction.exit, customAction.confirm)"
+      long-press
+      (onShortPress)="doAction(customAction.command, customAction.exit, customAction.confirm)"
+      (onLongPress)="editing = i"
       matRipple
       [matRippleUnbounded]="false"
-      cdkDrag
-      [cdkDragDisabled]="!editing">
+      cdkDrag>
       <fa-icon
         [icon]="customAction.icon"
         class="custom-actions__action-icon"
         [style.color]="customAction.color"></fa-icon>
     </div>
-
-    <div
-      class="custom-actions__action custom-actions__action-add"
-      *ngIf="editing"
-      (click)="addAction()"
-      matRipple
-      [matRippleUnbounded]="false">
-      <fa-icon icon="plus" class="custom-actions__action-icon"></fa-icon>
-    </div>
   </div>
 
   <fa-icon
-    icon="pencil"
+    icon="plus"
     matRipple
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
-    class="edit__icon"
-    (click)="editing = !editing; editingAction = -1"></fa-icon>
+    class="add__icon"
+    (click)="addAction()"></fa-icon>
 </div>
 
 <div class="iframe" id="iframe" *ngIf="iframeOpen">
@@ -58,7 +50,7 @@
   </div>
 </div>
 
-<div class="edit-panel" *ngIf="editingAction > -1">
+<div class="edit-panel" *ngIf="editing > -1">
   <div class="edit-panel__container">
     <label for="action-command" class="edit-panel__input-label" i18n="@@octodash-gcode">GCode / Action</label>
     <input
@@ -67,7 +59,7 @@
       class="edit-panel__input"
       name="action-command"
       style="width: 44.94vw; margin-bottom: -2vh"
-      [(ngModel)]="customActions[editingAction].command"
+      [(ngModel)]="customActions[editing].command"
       required />
     <table>
       <tr>
@@ -79,7 +71,7 @@
             class="edit-panel__input"
             name="action-icon"
             style="width: 14vw"
-            [(ngModel)]="customActions[editingAction].icon"
+            [(ngModel)]="customActions[editing].icon"
             required />
         </td>
         <td style="padding-left: 3vw">
@@ -90,23 +82,23 @@
             class="edit-panel__input"
             name="action-color"
             style="width: 14vw"
-            [(ngModel)]="customActions[editingAction].color"
+            [(ngModel)]="customActions[editing].color"
             required />
         </td>
         <td>
           <fa-icon
-            [icon]="customActions[editingAction].icon"
+            [icon]="customActions[editing].icon"
             class="edit-panel__custom-action-icon"
-            [style.color]="customActions[editingAction].color"></fa-icon>
+            [style.color]="customActions[editing].color"></fa-icon>
         </td>
       </tr>
       <tr>
         <td>
           <div
             class="edit-panel__checkbox-container"
-            (click)="customActions[editingAction].confirm = !customActions[editingAction].confirm">
+            (click)="customActions[editing].confirm = !customActions[editing].confirm">
             <span class="edit-panel__checkbox">
-              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editingAction].confirm"></span>
+              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editing].confirm"></span>
             </span>
             <span class="edit-panel__checkbox-descriptor" i18n="@@action-confirm">Confirm</span>
           </div>
@@ -115,9 +107,9 @@
         <td style="padding-left: 3vw" colspan="2">
           <div
             class="edit-panel__checkbox-container"
-            (click)="customActions[editingAction].exit = !customActions[editingAction].exit">
+            (click)="customActions[editing].exit = !customActions[editing].exit">
             <span class="edit-panel__checkbox">
-              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editingAction].exit"></span>
+              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editing].exit"></span>
             </span>
             <span class="edit-panel__checkbox-descriptor" i18n="@@action-home">Return to Home</span>
           </div>
@@ -130,16 +122,14 @@
     </p>
 
     <br />
-    <p class="edit-panel__delete" (click)="deleteAction(editingAction); editingAction = -1" i18n="@@ui-delete">
-      delete
-    </p>
-    <p class="edit-panel__close" (click)="updateActionsInConfig(); editingAction = -1" i18n="@@ui-close">close</p>
+    <p class="edit-panel__delete" (click)="deleteAction(editing); editing = -1" i18n="@@ui-delete">delete</p>
+    <p class="edit-panel__close" (click)="updateActionsInConfig(); editing = -1" i18n="@@ui-close">close</p>
   </div>
 </div>
 
 <fa-icon
   icon="caret-left"
-  (click)="visible = !visible; editing = false; editingAction = -1"
+  (click)="visible = !visible; editing = -1"
   matRipple
   [matRippleUnbounded]="true"
   [matRippleCentered]="true"

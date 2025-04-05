@@ -20,23 +20,6 @@
     transform: translateX(0);
   }
 
-  &.editing {
-    filter: saturate(5) contrast(1.5);
-
-    .edit__icon {
-      color: red;
-    }
-
-    .custom-actions__action {
-      // animation: tilt-n-move-shaking 0.2s infinite;
-
-      &-delete {
-        opacity: 1;
-        pointer-events: initial;
-      }
-    }
-  }
-
   .custom-actions {
     width: 26vw;
     max-height: 100%;
@@ -70,11 +53,6 @@
         font-size: 5.5vw;
         vertical-align: -3vw;
       }
-
-      &-add {
-        border: none;
-        margin-left: 0.8vw;
-      }
     }
 
     &.cdk-drop-list-dragging &:not(.cdk-drag-placeholder) {
@@ -82,7 +60,7 @@
     }
   }
 
-  .edit__icon {
+  .add__icon {
     position: absolute;
     right: 2vw;
     bottom: 2vh;
@@ -165,7 +143,6 @@
   border: 5px solid rgb(255 255 255 / 40%);
   border-radius: 2vw;
   padding: 3vh 3vw;
-  z-index: 20;
 
   &__sub-heading {
     font-size: 2.4vw;
@@ -195,7 +172,7 @@
 
   &__wrapper {
     position: fixed;
-    z-index: 2;
+    z-index: 50;
     background-color: rgb(0 0 0 / 85%);
     inset: 0;
   }
