@@ -83,7 +83,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     this.eventsSubscription.unsubscribe();
   }
 
-  private updateActionsInConfig() {
+  public updateActionsInConfig() {
     const config = this.configService.getCurrentConfig();
     config.octodash.customActions = this.customActions;
     this.configService.saveConfig(config);
