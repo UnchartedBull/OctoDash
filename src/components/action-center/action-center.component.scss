@@ -25,8 +25,7 @@
     max-height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 1.5vw;
-    row-gap: 3vh;
+    gap: 3vh 1.5vw;
     margin: auto;
     overflow: scroll;
 
@@ -324,15 +323,19 @@
   0% {
     transform: translate(0, 0) rotate(0deg);
   }
+
   25% {
     transform: translate(2px, 2px) rotate(1deg);
   }
+
   50% {
-    transform: translate(0, 0) rotate(0eg);
+    transform: translate(0, 0) rotate(0deg);
   }
+
   75% {
     transform: translate(-2px, 2px) rotate(-1deg);
   }
+
   100% {
     transform: translate(0, 0) rotate(0deg);
   }

@@ -1,10 +1,10 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Observable, Subscription } from 'rxjs';
 
-import { PrinterState, PrinterStatus, PSUState, CustomAction } from '../../model';
+import { CustomAction, PrinterState, PrinterStatus, PSUState } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { EnclosureService } from '../../services/enclosure/enclosure.service';
 import { NotificationService } from '../../services/notification.service';
