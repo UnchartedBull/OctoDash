@@ -13,6 +13,36 @@
         <source>do you want to execute the following command?</source>
         <target>voulez-vous exécuter la commande suivante ?</target>
       </trans-unit>
+      <trans-unit id="octodash-gcode" datatype="html">
+        <source>GCode / Action</source>
+        <target>GCode / Action</target>
+      </trans-unit>
+      <trans-unit id="action-icon" datatype="html">
+        <source>Icon</source>
+        <target>Icône</target>
+      </trans-unit>
+      <trans-unit id="action-color" datatype="html">
+        <source>Color</source>
+        <target>Couleur</target>
+      </trans-unit>
+      <trans-unit id="action-confirm" datatype="html">
+        <source>Confirm</source>
+        <target>Confirmer</target>
+      </trans-unit>
+      <trans-unit id="action-home" datatype="html">
+        <source>Return to Home</source>
+        <target>Retourner à la position initiale</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="ui-delete" datatype="html">
+        <source>delete</source>
+      </trans-unit>
+      <trans-unit id="ui-close" datatype="html">
+        <source>close</source>
+      </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
         <target></target>
@@ -538,34 +568,6 @@
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
-      </trans-unit>
-      <trans-unit id="octodash-custom" datatype="html">
-        <source>Custom Actions</source>
-        <target>Actions personnalisées</target>
-      </trans-unit>
-      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
-        <source> Icons come from FontAwesome's free Classic Solid pack </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="octodash-gcode" datatype="html">
-        <source>GCode / Action</source>
-        <target>GCode / Action</target>
-      </trans-unit>
-      <trans-unit id="action-icon" datatype="html">
-        <source>Icon</source>
-        <target>Icône</target>
-      </trans-unit>
-      <trans-unit id="action-color" datatype="html">
-        <source>Color</source>
-        <target>Couleur</target>
-      </trans-unit>
-      <trans-unit id="action-confirm" datatype="html">
-        <source>Confirm</source>
-        <target>Confirmer</target>
-      </trans-unit>
-      <trans-unit id="action-home" datatype="html">
-        <source>Return to Home</source>
-        <target>Retourner à la position initiale</target>
       </trans-unit>
       <trans-unit id="settings-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>

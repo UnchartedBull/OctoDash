@@ -13,6 +13,36 @@
         <source>do you want to execute the following command?</source>
         <target>vil du udføre følgende kommando?</target>
       </trans-unit>
+      <trans-unit id="octodash-gcode" datatype="html">
+        <source>GCode / Action</source>
+        <target>GCode / Handling</target>
+      </trans-unit>
+      <trans-unit id="action-icon" datatype="html">
+        <source>Icon</source>
+        <target>Ikon</target>
+      </trans-unit>
+      <trans-unit id="action-color" datatype="html">
+        <source>Color</source>
+        <target>Farve</target>
+      </trans-unit>
+      <trans-unit id="action-confirm" datatype="html">
+        <source>Confirm</source>
+        <target>Bekræft</target>
+      </trans-unit>
+      <trans-unit id="action-home" datatype="html">
+        <source>Return to Home</source>
+        <target>Tilbage til start</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target> Ikoner kommer fra FontAwesomes gratis Classic Solid pack</target>
+      </trans-unit>
+      <trans-unit id="ui-delete" datatype="html">
+        <source>delete</source>
+      </trans-unit>
+      <trans-unit id="ui-close" datatype="html">
+        <source>close</source>
+      </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
         <target>Ukendt specialkommando!</target>
@@ -580,6 +610,7 @@
       </trans-unit>
       <trans-unit id="show-extruder-controls" datatype="html">
         <source>Show extruder controls</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -587,6 +618,7 @@
       </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
         <source>Show icon for Action Center</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="turn-on-after-sleep" datatype="html">
         <source>Turn on printer when exiting sleep</source>
@@ -598,6 +630,7 @@
       </trans-unit>
       <trans-unit id="preview-progress-circle" datatype="html">
         <source>Always use circular progress bar</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
@@ -607,40 +640,13 @@
         <source>Invert Axis Control</source>
         <target>Inverter aksekontrol</target>
       </trans-unit>
-      <trans-unit id="octodash-custom" datatype="html">
-        <source>Custom Actions</source>
-        <target>Brugerdefinerede handlinger</target>
-      </trans-unit>
-      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
-        <source> Icons come from FontAwesome's free Classic Solid pack </source>
-        <target> Ikoner kommer fra FontAwesomes gratis Classic Solid pack</target>
-      </trans-unit>
-      <trans-unit id="octodash-gcode" datatype="html">
-        <source>GCode / Action</source>
-        <target>GCode / Handling</target>
-      </trans-unit>
-      <trans-unit id="action-icon" datatype="html">
-        <source>Icon</source>
-        <target>Ikon</target>
-      </trans-unit>
-      <trans-unit id="action-color" datatype="html">
-        <source>Color</source>
-        <target>Farve</target>
-      </trans-unit>
-      <trans-unit id="action-confirm" datatype="html">
-        <source>Confirm</source>
-        <target>Bekræft</target>
-      </trans-unit>
-      <trans-unit id="action-home" datatype="html">
-        <source>Return to Home</source>
-        <target>Tilbage til start</target>
-      </trans-unit>
       <trans-unit id="settings-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
         <target>OctoDash Companion</target>
       </trans-unit>
       <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
