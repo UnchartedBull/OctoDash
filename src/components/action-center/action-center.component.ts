@@ -133,7 +133,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
 
   private executeGCode(command: string): void {
     if (command.startsWith('[!')) {
-      const specialCommand = command.match(SpecialCommandRegex)[0];
+      const specialCommand = command.match(SpecialCommandRegex)[1];
       const values = command.replace(SpecialCommandRegex, '').split(',');
 
       if (!(specialCommand in this.commands)) {
