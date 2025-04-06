@@ -1,16 +1,15 @@
 .custom-actions {
   display: block;
-  padding-top: 8vh;
-  padding-bottom: 5vh;
+  padding: 6vh 0;
   position: fixed;
-  top: 0;
-  transform: translateY(-100%);
+  bottom: 0;
+  transform: translateY(100%);
   width: 100vw;
   height: 12vw;
   overflow-x: scroll;
   z-index: 10;
-  background: linear-gradient(to top, rgb(0 0 0 / 45%), rgb(0 0 0 / 80%));
-  mask-image: linear-gradient(to top, transparent 0%, white 10%);
+  background: linear-gradient(to bottom, rgb(0 0 0 / 45%), rgb(0 0 0 / 80%));
+  mask-image: linear-gradient(to bottom, transparent 0%, white 10%);
   backdrop-filter: blur(8px);
   transition: transform 0.2s ease-out;
 
@@ -62,7 +61,7 @@
 
   .add__icon {
     position: fixed;
-    top: 1vh;
+    bottom: 0;
     right: 1vw;
     font-size: 70%;
     color: white;
@@ -88,8 +87,8 @@
 
 .toggle__icon {
   position: fixed;
-  top: 0;
-  left: calc(50% + 2vw);
+  bottom: 0;
+  left: 50vw;
   rotate: 0deg;
   opacity: 0.4;
   z-index: 11;
