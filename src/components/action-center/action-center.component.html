@@ -1,20 +1,26 @@
-<div class="wrapper" [ngClass]="{ visible: visible }">
-  <div class="custom-actions" cdkDropList (cdkDropListDropped)="reorderAction($event)">
+<div class="custom-actions" [ngClass]="{ visible: visible }">
+  <div class="custom-actions__wrapper">
     <div
-      class="custom-actions__action"
-      *ngFor="let customAction of customActions; index as i"
-      [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
-      [style.border-color]="customAction.color"
-      long-press
-      (onShortPress)="doAction(customAction.command, customAction.exit, customAction.confirm)"
-      (onLongPress)="editing = i"
-      matRipple
-      [matRippleUnbounded]="false"
-      cdkDrag>
-      <fa-icon
-        [icon]="customAction.icon"
-        class="custom-actions__action-icon"
-        [style.color]="customAction.color"></fa-icon>
+      class="custom-actions__action-list"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="reorderAction($event)">
+      <div
+        class="custom-actions__action"
+        *ngFor="let customAction of customActions; index as i"
+        [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
+        [style.border-color]="customAction.color"
+        long-press
+        (onShortPress)="doAction(customAction.command, customAction.exit, customAction.confirm)"
+        (onLongPress)="editing = i"
+        matRipple
+        [matRippleUnbounded]="false"
+        cdkDrag>
+        <fa-icon
+          [icon]="customAction.icon"
+          class="custom-actions__action-icon"
+          [style.color]="customAction.color"></fa-icon>
+      </div>
     </div>
   </div>
 
@@ -128,7 +134,7 @@
 </div>
 
 <fa-icon
-  icon="caret-left"
+  icon="caret-down"
   (click)="visible = !visible; editing = -1"
   matRipple
   [matRippleUnbounded]="true"
