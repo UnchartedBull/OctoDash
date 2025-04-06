@@ -96,7 +96,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
 
   public addAction() {
     this.customActions.push({
-      icon: 'plus',
+      icon: '',
       command: '',
       color: '#ffffff',
       confirm: false,
