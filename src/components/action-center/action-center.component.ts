@@ -1,30 +1,37 @@
-import { Component, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
-import { NotificationType, PSUState } from '../../../model';
-import { ConfigService } from '../../../services/config.service';
-import { EnclosureService } from '../../../services/enclosure/enclosure.service';
-import { NotificationService } from '../../../services/notification.service';
-import { PrinterService } from '../../../services/printer/printer.service';
-import { SystemService } from '../../../services/system/system.service';
+import { CustomAction, PrinterState, PrinterStatus, PSUState } from '../../model';
+import { ConfigService } from '../../services/config.service';
+import { EnclosureService } from '../../services/enclosure/enclosure.service';
+import { NotificationService } from '../../services/notification.service';
+import { PrinterService } from '../../services/printer/printer.service';
+import { SocketService } from '../../services/socket/socket.service';
+import { SystemService } from '../../services/system/system.service';
 
 const SpecialCommandRegex = /\[!([\w_]+)\]/;
 
 @Component({
-  selector: 'app-custom-actions',
-  templateUrl: './custom-actions.component.html',
-  styleUrls: ['./custom-actions.component.scss'],
+  selector: 'app-action-center',
+  templateUrl: './action-center.component.html',
+  styleUrls: ['./action-center.component.scss'],
   standalone: false,
 })
-export class CustomActionsComponent {
-  @Input() redirectActive = true;
-  @Input() disablePrinterCommands = false;
+export class ActionCenterComponent implements OnInit, OnDestroy {
+  @Input() closeEvent: Observable<void>;
+  private eventsSubscription: Subscription;
+
+  public visible = false;
+  public editing = -1;
 
   public customActions = [];
   public iframeURL: SafeResourceUrl = 'about:blank';
   public iframeOpen = false;
   public actionToConfirm: ActionToConfirm;
+  public printerConnected = false;
 
   private commands = {
     DISCONNECT: () => this.disconnectPrinter(),
@@ -46,13 +53,64 @@ export class CustomActionsComponent {
   constructor(
     private printerService: PrinterService,
     private systemService: SystemService,
+    private socketService: SocketService,
     private configService: ConfigService,
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
     private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
+
+    this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus) => {
+      this.printerConnected = [
+        PrinterState.operational,
+        PrinterState.pausing,
+        PrinterState.paused,
+        PrinterState.printing,
+        PrinterState.cancelling,
+      ].includes(printerStatus?.status);
+    });
   }
+
+  ngOnInit() {
+    this.eventsSubscription = this.closeEvent.subscribe(() => {
+      this.visible = false;
+      this.editing = -1;
+    });
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
+  public updateActionsInConfig() {
+    const config = this.configService.getCurrentConfig();
+    config.octodash.customActions = this.customActions;
+    this.configService.saveConfig(config);
+  }
+
+  public reorderAction(event: CdkDragDrop<CustomAction[]>) {
+    moveItemInArray(this.customActions, event.previousIndex, event.currentIndex);
+    this.updateActionsInConfig();
+  }
+
+  public addAction() {
+    this.customActions.push({
+      icon: '',
+      command: '',
+      color: '#ffffff',
+      confirm: false,
+      exit: false,
+    });
+    this.editing = this.customActions.length - 1;
+  }
+
+  public deleteAction(index: number) {
+    this.customActions.splice(index, 1);
+    this.updateActionsInConfig();
+  }
+
+  // -=- ACTIONS -=-
 
   public doAction(command: string, exit: boolean, confirm: boolean): void {
     if (confirm) {
@@ -62,7 +120,7 @@ export class CustomActionsComponent {
       };
     } else {
       command.split('; ').forEach(this.executeGCode.bind(this));
-      if (exit && this.redirectActive) {
+      if (exit) {
         this.router.navigate(['/main-screen']);
       }
       this.hideConfirm();
@@ -75,16 +133,14 @@ export class CustomActionsComponent {
 
   private executeGCode(command: string): void {
     if (command.startsWith('[!')) {
-      const specialCommand = command.match(SpecialCommandRegex)[0];
+      const specialCommand = command.match(SpecialCommandRegex)[1];
       const values = command.replace(SpecialCommandRegex, '').split(',');
 
       if (!(specialCommand in this.commands)) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-custom-action-invalid:Unknown special command!`,
-          text: $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
-          type: NotificationType.ERROR,
-          time: new Date(),
-        });
+        this.notificationService.error(
+          $localize`:@@error-custom-action-invalid:Unknown special command!`,
+          $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
+        );
         return;
       }
 
@@ -92,13 +148,11 @@ export class CustomActionsComponent {
       return;
     }
 
-    if (this.disablePrinterCommands) {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
-        text: $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
-        type: NotificationType.ERROR,
-        time: new Date(),
-      });
+    if (!this.printerConnected) {
+      this.notificationService.error(
+        $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
+        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
+      );
     } else {
       this.printerService.executeGCode(command);
     }

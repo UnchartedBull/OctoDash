@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { NotificationType, PrinterStatus } from '../../model';
+import { PrinterStatus } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
@@ -24,24 +25,28 @@ export class ControlComponent implements OnInit, OnDestroy {
   public jogDistance = 10;
   public selectedTool = 0;
   public showExtruder = false;
+  public quickControlShown = false;
+  public selectedHotend = 0;
+
+  public QuickControlView = QuickControlView;
+  public view = QuickControlView.NONE;
 
   public constructor(
     private printerService: PrinterService,
     private configService: ConfigService,
     private notificationService: NotificationService,
     private socketService: SocketService,
+    private router: Router,
   ) {
     this.showExtruder = this.configService.getShowExtruderControl();
     this.printerService.getActiveProfile().subscribe({
       next: (printerProfile: OctoprintPrinterProfile) => (this.printerProfile = printerProfile),
       error: (error: HttpErrorResponse) => {
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
-          text: error.message,
-          type: NotificationType.ERROR,
-          time: new Date(),
-          sticky: true,
-        });
+        this.notificationService.warn(
+          $localize`:@@error-printer-profile:Can't retrieve printer profile!`,
+          error.message,
+          true,
+        );
       },
     });
   }
@@ -84,4 +89,48 @@ export class ControlComponent implements OnInit, OnDestroy {
 
     this.printerService.jog(axis === 'x' ? distance : 0, axis === 'y' ? distance : 0, axis === 'z' ? distance : 0);
   }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
+  }
+
+  public showQuickControlHotend(tool: number): void {
+    this.view = QuickControlView.HOTEND;
+    this.selectedHotend = tool;
+  }
+
+  public showQuickControlHeatbed(): void {
+    this.view = QuickControlView.HEATBED;
+  }
+
+  public showQuickControlFan(): void {
+    this.view = QuickControlView.FAN;
+  }
+
+  public hideQuickControl(): void {
+    this.view = QuickControlView.NONE;
+  }
+
+  public quickControlSetValue(value: number): void {
+    switch (this.view) {
+      case QuickControlView.HOTEND:
+        this.printerService.setTemperatureHotend(value, this.selectedHotend);
+        break;
+      case QuickControlView.HEATBED:
+        this.printerService.setTemperatureBed(value);
+        break;
+      case QuickControlView.FAN:
+        this.printerService.setFanSpeed(value);
+        break;
+    }
+
+    this.hideQuickControl();
+  }
+}
+
+enum QuickControlView {
+  NONE,
+  HOTEND,
+  HEATBED,
+  FAN,
 }

@@ -1,0 +1,18 @@
+.hotend-icon {
+  position: relative;
+
+  &__image {
+    vertical-align: middle;
+    display: inline-block;
+    width: 6vw;
+  }
+
+  &__number {
+    position: absolute;
+    width: 6vw;
+    text-align: center;
+    top: 1.5vw;
+    font-size: 1.5vw;
+    text-shadow: 0 0 0.5vw red;
+  }
+}

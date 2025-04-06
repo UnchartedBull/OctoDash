@@ -1,6 +1,17 @@
+.wrapper[disabled='true'] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .checkbox__wrapper {
   height: 2rem;
   width: 3rem;
   display: inline-block;
   vertical-align: middle;
+  margin: -0.5rem 0;
+}
+
+.label {
+  display: inline-block;
+  vertical-align: text-bottom;
 }

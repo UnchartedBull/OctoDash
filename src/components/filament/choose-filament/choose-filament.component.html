@@ -12,11 +12,11 @@
         [frequency]="2000"
         (onShortPress)="setSpool(spool)"
         (onLongPressing)="setSpoolSkipChange(spool)">
+        <td class="filaments__in-use-icon">
+          <app-hotend-icon *ngIf="currentSpools.includes(spool.id)" [tool]="currentSpools.indexOf(spool.id)" />
+        </td>
         <td class="filaments__type">
           <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
-        </td>
-        <td class="filaments__in-use-icon" *ngIf="currentSpools.includes(spool.id)">
-          T{{ currentSpools.indexOf(spool.id) }}
         </td>
         <td class="filaments__name">
           {{ spool.displayName }}

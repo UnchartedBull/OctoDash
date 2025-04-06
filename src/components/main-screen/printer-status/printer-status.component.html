@@ -11,16 +11,15 @@
       (click)="showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
-      <img class="printer-status__icon" src="assets/nozzle.svg" />
+      <app-hotend-icon
+        class="printer-status__icon"
+        [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
       <div
         class="printer-status__value"
         [ngClass]="{
           'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
           'printer-status__no-set-value': tool.set === 0,
         }">
-        <span class="printer-status__tool-number" *ngIf="extruderInfo.count > 1 && !extruderInfo.sharedNozzle"
-          >T{{ i }}:</span
-        >
         <span class="printer-status__actual-value">
           {{ tool.current }}<span class="printer-status__unit">°C</span>
         </span>
@@ -55,103 +54,20 @@
   </div>
 </div>
 
-<div class="quick-control" *ngIf="view !== QuickControlView.NONE" id="quickControl" (click)="hideQuickControl()">
-  <table class="top-bar">
-    <tr>
-      <td class="top-bar__back">
-        <fa-icon icon="chevron-left" class="top-bar__back-icon" matRipple [matRippleUnbounded]="false" />
-      </td>
-      <td class="top-bar__center">
-        <img
-          [src]="
-            'assets/' +
-            (view === QuickControlView.HOTEND
-              ? 'nozzle.svg'
-              : view === QuickControlView.HEATBED
-                ? 'heat-bed.svg'
-                : 'fan.svg')
-          "
-          class="top-bar__center-icon" />
-      </td>
-      <td class="top-bar__next"></td>
-    </tr>
-  </table>
-
-  <ngTemplate #quickController>
-    <div class="quick-control__controller" (click)="stopPropagation($event)">
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-increase"
-          (click)="quickControlChangeValue(1)"
-          matRipple
-          [matRippleUnbounded]="false">
-          +1
-        </div>
-        <div
-          class="quick-control__controller-increase"
-          (click)="quickControlChangeValue(10)"
-          matRipple
-          [matRippleUnbounded]="false">
-          +10
-        </div>
-      </div>
-
-      <div
-        class="quick-control__controller-value"
-        colspan="2"
-        *ngIf="view === QuickControlView.HOTEND"
-        (click)="quickControlChangeValue(-1000)"
-        matRipple
-        [matRippleUnbounded]="false">
-        {{ this.hotendTarget }}<span class="quick-control__controller-value-unit">°C</span>
-      </div>
-      <div
-        class="quick-control__controller-value"
-        colspan="2"
-        *ngIf="view === QuickControlView.HEATBED"
-        (click)="quickControlChangeValue(-1000)"
-        matRipple
-        [matRippleUnbounded]="false">
-        {{ this.heatbedTarget }}<span class="quick-control__controller-value-unit">°C</span>
-      </div>
-      <div
-        class="quick-control__controller-value"
-        colspan="2"
-        *ngIf="view === QuickControlView.FAN"
-        (click)="quickControlChangeValue(-1000)"
-        matRipple
-        [matRippleUnbounded]="false">
-        {{ this.fanTarget }}
-        <span class="quick-control__controller-value-unit">%</span>
-      </div>
-
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-decrease"
-          (click)="quickControlChangeValue(-1)"
-          matRipple
-          [matRippleUnbounded]="false">
-          -1
-        </div>
-        <div
-          class="quick-control__controller-decrease"
-          (click)="quickControlChangeValue(-10)"
-          matRipple
-          [matRippleUnbounded]="false">
-          -10
-        </div>
-      </div>
-
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-set"
-          colspan="2"
-          (click)="quickControlSetValue()"
-          matRipple
-          [matRippleUnbounded]="false">
-          <span class="quick-control__controller-set-span">set</span>
-        </div>
-      </div>
-    </div>
-  </ngTemplate>
-</div>
+<app-quick-control
+  id="quickControl"
+  *ngIf="view !== QuickControlView.NONE"
+  [icon]="
+    'assets/' +
+    (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
+  "
+  [unit]="view === QuickControlView.FAN ? '%' : '°C'"
+  [defaultValue]="
+    view === QuickControlView.HOTEND
+      ? this.configService.getDefaultHotendTemperature()
+      : view === QuickControlView.HEATBED
+        ? this.configService.getDefaultHeatbedTemperature()
+        : this.configService.getDefaultFanSpeed()
+  "
+  (onBack)="hideQuickControl()"
+  (onSet)="quickControlSetValue($event)"></app-quick-control>

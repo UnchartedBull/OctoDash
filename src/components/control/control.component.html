@@ -1,15 +1,6 @@
-<table class="top-bar">
-  <tr>
-    <td class="top-bar__back" routerLink="/main-screen" matRipple [matRippleUnbounded]="false">
-      <fa-icon icon="chevron-left" class="top-bar__back-icon" />
-      <ng-container i18n="@@ui-back">back</ng-container>
-    </td>
-    <td class="top-bar__center">
-      <img src="assets/control.svg" class="top-bar__center-icon" />
-    </td>
-    <td class="top-bar__next"></td>
-  </tr>
-</table>
+<app-top-bar [backButton]="true" (onBack)="goToMainScreen()">
+  <img src="assets/control.svg" class="top-bar__center-icon" />
+</app-top-bar>
 
 <div class="control">
   <div class="control__jog">
@@ -89,20 +80,6 @@
       </div>
     </div>
 
-    <div class="control__tool-wrapper" *ngIf="printerStatus.tools.length > 1">
-      <table class="control__tool">
-        <tr>
-          <td
-            class="control__tool-field"
-            *ngFor="let tool of printerStatus.tools; index as i"
-            [ngClass]="{ 'control__tool-field-active': selectedTool === i }"
-            (click)="setTool(i)">
-            T{{ i }}
-          </td>
-        </tr>
-      </table>
-    </div>
-
     <div class="control__distance-wrapper">
       <table class="control__distance">
         <tr>
@@ -141,5 +118,110 @@
     </div>
   </div>
 
-  <app-custom-actions [redirectActive]="true"></app-custom-actions>
+  <div class="control__tools">
+    <ngContainer *ngIf="!printerProfile.extruder.sharedNozzle">
+      <div
+        class="control__tools__item"
+        *ngFor="let tool of printerStatus.tools; index as i"
+        [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
+        (click)="selectedTool === i ? showQuickControlHotend(selectedTool) : setTool(i)"
+        matRipple
+        [matRippleUnbounded]="false">
+        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile.extruder.count > 1 && i" />
+        <div
+          class="control__tools__item-value"
+          [ngClass]="{
+            'control__tools__item-no-value-set': tool.set === 0,
+          }">
+          <span class="control__tools__item-value-actual">
+            {{ tool.current }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+          <span class="control__tools__item-value-set" *ngIf="tool.set">
+            / {{ tool.set }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="control__tools__bottom">
+        <div class="control__tools__item" (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+          <!-- XXX: Add functionality (split quick control out into its own component) -->
+          <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
+          <div
+            class="control__tools__item-value"
+            [ngClass]="{ 'control__tools__item-no-value-set': printerStatus.bed.set === 0 }">
+            <span class="control__tools__item-value-actual">
+              {{ printerStatus.bed.current }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+            <span class="control__tools__item-value-set" *ngIf="printerStatus.bed.set">
+              / {{ printerStatus.bed.set }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ngContainer>
+    <ngContainer *ngIf="printerProfile.extruder.sharedNozzle">
+      <div class="control__tools__item" (click)="showQuickControlHotend(0)" matRipple [matRippleUnbounded]="false">
+        <app-hotend-icon class="control__tools__item-icon" [tool]="-1" />
+        <div
+          class="control__tools__item-value"
+          [ngClass]="{
+            'control__tools__item-no-value-set': printerStatus.tools[0].set === 0,
+          }">
+          <span class="control__tools__item-value-actual">
+            {{ printerStatus.tools[0].current }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+          <span class="control__tools__item-value-set" *ngIf="printerStatus.tools[0].set">
+            / {{ printerStatus.tools[0].set }}<span class="control__tools__item-value-unit">°C</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="control__tools__item control__tools__item-tool-changer">
+        <div
+          class="control__tools__item-tool-changer__item"
+          *ngFor="let tool of printerStatus.tools; index as i"
+          [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
+          (click)="setTool(i)"
+          matRipple
+          [matRippleUnbounded]="false">
+          <app-hotend-icon [tool]="printerProfile.extruder.count > 1 && i" />
+        </div>
+      </div>
+
+      <div class="control__tools__bottom">
+        <div class="control__tools__item" (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+          <!-- XXX: Add functionality (split quick control out into its own component) -->
+          <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
+          <div
+            class="control__tools__item-value"
+            [ngClass]="{ 'control__tools__item-no-value-set': printerStatus.bed.set === 0 }">
+            <span class="control__tools__item-value-actual">
+              {{ printerStatus.bed.current }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+            <span class="control__tools__item-value-set" *ngIf="printerStatus.bed.set">
+              / {{ printerStatus.bed.set }}<span class="control__tools__item-value-unit">°C</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ngContainer>
+  </div>
 </div>
+
+<app-quick-control
+  id="quickControl"
+  *ngIf="view !== QuickControlView.NONE"
+  [icon]="
+    'assets/' +
+    (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
+  "
+  [unit]="view === QuickControlView.FAN ? '%' : '°C'"
+  [defaultValue]="
+    view === QuickControlView.HOTEND
+      ? this.configService.getDefaultHotendTemperature()
+      : view === QuickControlView.HEATBED
+        ? this.configService.getDefaultHeatbedTemperature()
+        : this.configService.getDefaultFanSpeed()
+  "
+  (onBack)="hideQuickControl()"
+  (onSet)="quickControlSetValue($event)"></app-quick-control>

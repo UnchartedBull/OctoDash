@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
 
-import { Directory, File, NotificationType } from '../../model';
+import { Directory, File } from '../../model';
 import { ConfigService } from '../../services/config.service';
 import { FilesService } from '../../services/files/files.service';
 import { NotificationService } from '../../services/notification.service';
@@ -69,12 +69,7 @@ export class FilesComponent {
           this.sortFolder(this.sortingAttribute, this.sortingOrder);
         },
         error: (error: HttpErrorResponse) => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-load-file-folder:Can't load file/folder!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-load-file-folder:Can't load file/folder!`, error.message);
           this.currentFolder = folderPath;
         },
         complete: () => {
@@ -104,12 +99,7 @@ export class FilesComponent {
       next: (fileData: File) => (this.fileDetail = fileData),
       error: (error: HttpErrorResponse) => {
         this.fileDetail = { name: 'error' } as unknown as File;
-        this.notificationService.setNotification({
-          heading: $localize`:@@error-load-file:Can't load file!`,
-          text: error.message,
-          type: NotificationType.ERROR,
-          time: new Date(),
-        });
+        this.notificationService.error($localize`:@@error-load-file:Can't load file!`, error.message);
       },
     });
     const fileDOMElement = document.getElementById('fileDetailView');
@@ -183,5 +173,9 @@ export class FilesComponent {
 
   private showLoader(): void {
     this.loading = Date.now();
+  }
+
+  public goToMainScreen(): void {
+    this.router.navigate(['/main-screen']);
   }
 }

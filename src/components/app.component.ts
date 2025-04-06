@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
+import { Subject } from 'rxjs';
 
 import { AppService } from '../services/app.service';
 import { ConfigService } from '../services/config.service';
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit {
   public loadingAnimationCached = false;
   public checkmarkAnimationCached = false;
   public toggleSwitchAnimationCached = false;
+
+  public hideActionCenterEvent = new Subject<void>();
 
   public constructor(
     private service: AppService,
@@ -92,5 +95,13 @@ export class AppComponent implements OnInit {
 
   public checkmarkAnimationCacheDone(): void {
     this.checkmarkAnimationCached = true;
+  }
+
+  public showActionCenterIcon(): boolean {
+    return this.configService.showActionCenterIcon();
+  }
+
+  public hideActionCenter(): void {
+    this.hideActionCenterEvent.next();
   }
 }
