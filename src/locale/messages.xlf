@@ -6,77 +6,77 @@
         <source>loading website...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">31,35</context>
+          <context context-type="linenumber">37,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="are-you-sure" datatype="html">
         <source>are you sure?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">42,43</context>
+          <context context-type="linenumber">48,49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirm-exec" datatype="html">
         <source>do you want to execute the following command?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">43,46</context>
+          <context context-type="linenumber">49,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">55,59</context>
+          <context context-type="linenumber">61,65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-icon" datatype="html">
         <source>Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">67,71</context>
+          <context context-type="linenumber">73,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-color" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">78,82</context>
+          <context context-type="linenumber">84,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-confirm" datatype="html">
         <source>Confirm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">103,107</context>
+          <context context-type="linenumber">109,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-home" datatype="html">
         <source>Return to Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">114,120</context>
+          <context context-type="linenumber">120,126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome&apos;s free Classic Solid pack </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">121,125</context>
+          <context context-type="linenumber">127,131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-delete" datatype="html">
         <source>delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">125,126</context>
+          <context context-type="linenumber">131,132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-close" datatype="html">
         <source>close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">126,132</context>
+          <context context-type="linenumber">132,138</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">

@@ -39,9 +39,11 @@
       </trans-unit>
       <trans-unit id="ui-delete" datatype="html">
         <source>delete</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="ui-close" datatype="html">
         <source>close</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
