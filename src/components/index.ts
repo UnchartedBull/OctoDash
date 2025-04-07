@@ -1,7 +1,6 @@
+import { ActionCenterComponent } from './action-center/action-center.component';
 import { AppComponent } from './app.component';
-import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 import { ControlComponent } from './control/control.component';
-import { CustomActionsComponent } from './control/custom-actions/custom-actions.component';
 import { ChangeFilamentComponent } from './filament/change-filament/change-filament.component';
 import { ChooseFilamentComponent } from './filament/choose-filament/choose-filament.component';
 import { ChooseToolComponent } from './filament/choose-tool/choose-tool.component';
@@ -10,14 +9,15 @@ import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.componen
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesComponent } from './files/files.component';
-import { HeightProgressComponent } from './job-status/height-progress/height-progress.component';
-import { JobStatusComponent } from './job-status/job-status.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
+import { HeightProgressComponent } from './main-screen/job-status/height-progress/height-progress.component';
+import { JobStatusComponent } from './main-screen/job-status/job-status.component';
 import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
+import { PrintControlComponent } from './main-screen/print-control/print-control.component';
 import { PrinterStatusComponent } from './main-screen/printer-status/printer-status.component';
 import { NotificationComponent } from './notification/notification.component';
-import { PrintControlComponent } from './print-control/print-control.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
@@ -29,43 +29,49 @@ import { PersonalizationComponent } from './setup/personalization/personalizatio
 import { PluginsComponent } from './setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
+import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
+import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
+import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 
 export default [
   AppComponent,
-  BottomBarComponent,
+  ActionCenterComponent,
+  ControlComponent,
+  ChangeFilamentComponent,
   ChooseFilamentComponent,
   ChooseToolComponent,
-  ConfigInvalidComponent,
-  ConfigSetupComponent,
-  ControlComponent,
-  DiscoverOctoprintComponent,
-  ExtruderInformationComponent,
   FilamentComponent,
+  HeatNozzleComponent,
+  MoveFilamentComponent,
+  PurgeFilamentComponent,
   FilesComponent,
-  JobStatusComponent,
+  BottomBarComponent,
   HeightProgressComponent,
   LoginScreenComponent,
+  JobStatusComponent,
   MainMenuComponent,
   MainScreenComponent,
+  PrintControlComponent,
+  PrinterStatusComponent,
   NotificationComponent,
+  ResetComponent,
+  SettingsComponent,
+  SettingsIconComponent,
+  DiscoverOctoprintComponent,
+  ExtruderInformationComponent,
+  ConfigInvalidComponent,
   OctoprintAuthenticationComponent,
   PersonalizationComponent,
   PluginsComponent,
-  PrintControlComponent,
-  PrinterStatusComponent,
-  SettingsComponent,
-  SettingsIconComponent,
+  ConfigSetupComponent,
+  WelcomeComponent,
+  HotendIconComponent,
+  ToggleSwitchComponent,
+  TopBarComponent,
   StandbyComponent,
   UpdateComponent,
-  ResetComponent,
-  WelcomeComponent,
-  HeatNozzleComponent,
-  MoveFilamentComponent,
-  ChangeFilamentComponent,
-  PurgeFilamentComponent,
-  CustomActionsComponent,
-  ToggleSwitchComponent,
+  QuickControlComponent,
 ];

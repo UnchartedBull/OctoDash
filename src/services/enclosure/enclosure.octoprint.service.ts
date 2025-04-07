@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { NotificationType, PSUState, TemperatureReading } from '../../model';
+import { PSUState, TemperatureReading } from '../../model';
 import {
   EnclosureColorBody,
   EnclosureOutputBody,
@@ -64,12 +64,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-set-color:Can't set LED color!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-set-color:Can't set LED color!`, error.message);
           return of(null);
         }),
       )
@@ -90,12 +85,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-set-output:Can't set output!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-set-output:Can't set output!`, error.message);
           return of(null);
         }),
       )
@@ -117,12 +107,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-set-output:Can't set output!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-set-output:Can't set output!`, error.message);
           return of(null);
         }),
       )
@@ -137,12 +122,10 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-run-enclosure-shell:Can't run enclosure shell!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error(
+            $localize`:@@error-run-enclosure-shell:Can't run enclosure shell!`,
+            error.message,
+          );
           return of(null);
         }),
       )
@@ -165,12 +148,10 @@ export class EnclosureOctoprintService implements EnclosureService {
     } else if (this.configService.useWemo()) {
       this.setPSUStateWemo(state);
     } else {
-      this.notificationService.setNotification({
-        heading: $localize`:@@error-psu-state:Can't change PSU State!`,
-        text: $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
-        type: NotificationType.WARN,
-        time: new Date(),
-      });
+      this.notificationService.warn(
+        $localize`:@@error-psu-state:Can't change PSU State!`,
+        $localize`:@@error-psu-provider:No provider for PSU Control is configured.`,
+      );
     }
     this.currentPSUState = state;
   }
@@ -184,12 +165,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
           return of(null);
         }),
       )
@@ -201,12 +177,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .get(this.configService.getApiURL('plugin/ophom?action=checkplugstatus'), this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-ophom-gcode:Can't update Ophom Plug!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-ophom-gcode:Can't update Ophom Plug!`, error.message);
           return of(null);
         }),
         map((data: OphomPlugStatus) => {
@@ -229,12 +200,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .get(this.configService.getApiURL('plugin/ophom?action=toggle'), this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-psu-gcode:Can't send GCode!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
           return of(null);
         }),
       )
@@ -251,12 +217,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .post(this.configService.getApiURL('plugin/tplinksmartplug'), tpLinkPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-smartplug-gcode:Can't send GCode!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-smartplug-gcode:Can't send GCode!`, error.message);
           return of(null);
         }),
       )
@@ -274,12 +235,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .post(this.configService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-tasmota-plug:Can't update Tasmota!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-tasmota-plug:Can't update Tasmota!`, error.message);
           return of(null);
         }),
       )
@@ -301,12 +257,10 @@ export class EnclosureOctoprintService implements EnclosureService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-tasmota-plug-mqtt:Can't update Tasmota MQTT!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error(
+            $localize`:@@error-send-tasmota-plug-mqtt:Can't update Tasmota MQTT!`,
+            error.message,
+          );
           return of(null);
         }),
       )
@@ -323,12 +277,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .post(this.configService.getApiURL('plugin/tuyasmartplug'), tuyaPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-psu-command:Can't send plug command!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-psu-command:Can't send plug command!`, error.message);
           return of(null);
         }),
       )
@@ -345,12 +294,7 @@ export class EnclosureOctoprintService implements EnclosureService {
       .post(this.configService.getApiURL('plugin/wemoswitch'), wemoPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-send-psu-command:Can't send plug command!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-send-psu-command:Can't send plug command!`, error.message);
           return of(null);
         }),
       )

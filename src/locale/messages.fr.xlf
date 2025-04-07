@@ -1,30 +1,6 @@
 <xliff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="ng2.template" datatype="plaintext" source-language="en" target-language="fr">
     <body>
-      <trans-unit id="long-init" datatype="html">
-        <source>Initializing is taking longer than usual...
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
-        </source>
-        <target> L'initialisation prend plus de temps que d'habitude. 
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Veuillez vous assurer qu'OctoPrint est opérationnel. 
-        </target>
-      </trans-unit>
-      <trans-unit id="initializing" datatype="html">
-        <source>initializing</source>
-        <target>initialisation</target>
-      </trans-unit>
-      <trans-unit id="error-enclosure-temp" datatype="html">
-        <source>Can't retrieve enclosure temperature!</source>
-        <target>Impossible de récupérer la température de l'enceinte !</target>
-      </trans-unit>
-      <trans-unit id="ui-back" datatype="html">
-        <source>back</source>
-        <target>retour</target>
-      </trans-unit>
-      <trans-unit id="error-printer-profile" datatype="html">
-        <source>Can't retrieve printer profile!</source>
-        <target>Impossible de récupérer le profil de l'imprimante !</target>
-      </trans-unit>
       <trans-unit id="website-loading" datatype="html">
         <source>loading website...</source>
         <target>chargement du site Web ...</target>
@@ -36,6 +12,38 @@
       <trans-unit id="confirm-exec" datatype="html">
         <source>do you want to execute the following command?</source>
         <target>voulez-vous exécuter la commande suivante ?</target>
+      </trans-unit>
+      <trans-unit id="octodash-gcode" datatype="html">
+        <source>GCode / Action</source>
+        <target>GCode / Action</target>
+      </trans-unit>
+      <trans-unit id="action-icon" datatype="html">
+        <source>Icon</source>
+        <target>Icône</target>
+      </trans-unit>
+      <trans-unit id="action-color" datatype="html">
+        <source>Color</source>
+        <target>Couleur</target>
+      </trans-unit>
+      <trans-unit id="action-confirm" datatype="html">
+        <source>Confirm</source>
+        <target>Confirmer</target>
+      </trans-unit>
+      <trans-unit id="action-home" datatype="html">
+        <source>Return to Home</source>
+        <target>Retourner à la position initiale</target>
+      </trans-unit>
+      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
+        <source> Icons come from FontAwesome's free Classic Solid pack </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="ui-delete" datatype="html">
+        <source>delete</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="ui-close" datatype="html">
+        <source>close</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
@@ -52,6 +60,22 @@
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
         <source>Please connect to your printer first before attempting to use a printer command.</source>
         <target></target>
+      </trans-unit>
+      <trans-unit id="long-init" datatype="html">
+        <source>Initializing is taking longer than usual...
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
+        </source>
+        <target> L'initialisation prend plus de temps que d'habitude. 
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Veuillez vous assurer qu'OctoPrint est opérationnel. 
+        </target>
+      </trans-unit>
+      <trans-unit id="initializing" datatype="html">
+        <source>initializing</source>
+        <target>initialisation</target>
+      </trans-unit>
+      <trans-unit id="error-printer-profile" datatype="html">
+        <source>Can't retrieve printer profile!</source>
+        <target>Impossible de récupérer le profil de l'imprimante !</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
         <source>load new filament into tool 
@@ -109,10 +133,6 @@
         </source>
         <target></target>
       </trans-unit>
-      <trans-unit id="ui-skip" datatype="html">
-        <source>skip</source>
-        <target>passer</target>
-      </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
         <source>heating the nozzle for tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
@@ -166,10 +186,6 @@
       <trans-unit id="purging-done" datatype="html">
         <source>done</source>
         <target>terminé</target>
-      </trans-unit>
-      <trans-unit id="ui-sort" datatype="html">
-        <source>sort</source>
-        <target>tri</target>
       </trans-unit>
       <trans-unit id="files-mb-1" datatype="html">
         <source>mb</source>
@@ -243,6 +259,10 @@
         <source>Can't load file!</source>
         <target>Impossible de charger le fichier !</target>
       </trans-unit>
+      <trans-unit id="error-enclosure-temp" datatype="html">
+        <source>Can't retrieve enclosure temperature!</source>
+        <target>Impossible de récupérer la température de l'enceinte !</target>
+      </trans-unit>
       <trans-unit id="unit-millimeters-short" datatype="html">
         <source>mm</source>
         <target></target>
@@ -312,10 +332,6 @@
         <source>control</source>
         <target>contrôles</target>
       </trans-unit>
-      <trans-unit id="tap-close" datatype="html">
-        <source>tap this card to close it</source>
-        <target>touchez cette carte pour la fermer</target>
-      </trans-unit>
       <trans-unit id="control-cancel" datatype="html">
         <source>cancel</source>
         <target>annuler</target>
@@ -375,6 +391,10 @@
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
         <target>Babystep Z</target>
+      </trans-unit>
+      <trans-unit id="tap-close" datatype="html">
+        <source>tap this card to close it</source>
+        <target>touchez cette carte pour la fermer</target>
       </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
@@ -519,9 +539,17 @@
         <source>General</source>
         <target>Général</target>
       </trans-unit>
+      <trans-unit id="show-extruder-controls" datatype="html">
+        <source>Show extruder controls</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
         <target>Éteindre l'écran pendant la veille</target>
+      </trans-unit>
+      <trans-unit id="show-action-center-icon" datatype="html">
+        <source>Show icon for Action Center</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="turn-on-after-sleep" datatype="html">
         <source>Turn on printer when exiting sleep</source>
@@ -531,9 +559,9 @@
         <source>Preview by default while printing</source>
         <target>Aperçu par défaut lors de l'impression</target>
       </trans-unit>
-      <trans-unit id="always-circular" datatype="html">
+      <trans-unit id="preview-progress-circle" datatype="html">
         <source>Always use circular progress bar</source>
-        <target>Toujours utiliser la barre de progression circulaire</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
@@ -543,39 +571,11 @@
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
       </trans-unit>
-      <trans-unit id="octodash-custom" datatype="html">
-        <source>Custom Actions</source>
-        <target>Actions personnalisées</target>
-      </trans-unit>
-      <trans-unit id="octodash-custom-icon-attribution" datatype="html">
-        <source> Icons come from FontAwesome's free Classic Solid pack </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="octodash-gcode" datatype="html">
-        <source>GCode / Action</source>
-        <target>GCode / Action</target>
-      </trans-unit>
-      <trans-unit id="action-icon" datatype="html">
-        <source>Icon</source>
-        <target>Icône</target>
-      </trans-unit>
-      <trans-unit id="action-color" datatype="html">
-        <source>Color</source>
-        <target>Couleur</target>
-      </trans-unit>
-      <trans-unit id="action-confirm" datatype="html">
-        <source>Confirm</source>
-        <target>Confirmer</target>
-      </trans-unit>
-      <trans-unit id="action-home" datatype="html">
-        <source>Return to Home</source>
-        <target>Retourner à la position initiale</target>
-      </trans-unit>
       <trans-unit id="settings-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-octodash-companion-enabled" datatype="html">
+      <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
         <target></target>
       </trans-unit>
@@ -583,17 +583,9 @@
         <source>Display Layer Progress</source>
         <target>Afficher la progression de la couche</target>
       </trans-unit>
-      <trans-unit id="settings-display-layer-progress-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
-      </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
         <source>Enclosure</source>
         <target>Enceinte</target>
-      </trans-unit>
-      <trans-unit id="settings-enclosure-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
         <source> Ambient Sensor 
@@ -609,57 +601,29 @@
         <source>Filament Manager</source>
         <target>Gestionnaire de filament</target>
       </trans-unit>
-      <trans-unit id="settings-filament-manager-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
-      </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
-        <source>Spool Manager (Beta)</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-spool-manager-enabled" datatype="html">
-        <source>enabled</source>
+        <source>Spool Manager</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Bouton de préchauffage</target>
       </trans-unit>
-      <trans-unit id="settings-preheat-button-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
-      </trans-unit>
       <trans-unit id="settings-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <target>Print Time Genius</target>
-      </trans-unit>
-      <trans-unit id="settings-print-time-genius-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <target>Contrôle PSU</target>
       </trans-unit>
-      <trans-unit id="settings-psu-control-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
-      </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
         <target>Contrôle (Phillips HUE)</target>
       </trans-unit>
-      <trans-unit id="settings-ophom-control-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
-      </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
         <target>TPLink-SmartPlug</target>
-      </trans-unit>
-      <trans-unit id="settings-tplink-smartplug-enabled" datatype="html">
-        <source>enabled</source>
-        <target>activé</target>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
@@ -669,20 +633,12 @@
         <source>Tuya Smart Plug</source>
         <target></target>
       </trans-unit>
-      <trans-unit id="settings-tuya-enabled" datatype="html">
-        <source>enabled</source>
-        <target></target>
-      </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-wemo-enabled" datatype="html">
-        <source>enabled</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
@@ -905,7 +861,7 @@
         <target> Filament Manager   </target>
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
-        <source>Spool Manager (Beta)</source>
+        <source>Spool Manager</source>
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
@@ -925,28 +881,24 @@
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
-        <source> TPLink SmartPlug </source>
+        <source>TPLink SmartPlug</source>
         <target> TPLink SmartPlug </target>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
-        <source> Tuya SmartPlug </source>
+        <source>Tuya SmartPlug</source>
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
-        <source> Tasmota </source>
+        <source>Tasmota</source>
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
-        <source> Tasmota MQTT </source>
+        <source>Tasmota MQTT</source>
         <target></target>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
-        <source> Wemo </source>
+        <source>Wemo</source>
         <target></target>
-      </trans-unit>
-      <trans-unit id="ui-next" datatype="html">
-        <source>next</source>
-        <target>suivant</target>
       </trans-unit>
       <trans-unit id="checking" datatype="html">
         <source>Great! I'll check everything.</source>
@@ -1007,6 +959,14 @@
       <trans-unit id="welcome-7" datatype="html">
         <source> Thanks for choosing OctoDash </source>
         <target> Merci d'avoir choisi OctoDash </target>
+      </trans-unit>
+      <trans-unit id="ui-back" datatype="html">
+        <source>back</source>
+        <target>retour</target>
+      </trans-unit>
+      <trans-unit id="ui-next" datatype="html">
+        <source>next</source>
+        <target>suivant</target>
       </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">
         <source>Shhh! OctoDash is sleeping.</source>

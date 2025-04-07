@@ -23,7 +23,10 @@ export class LongPress {
   onLongPressing = new EventEmitter();
 
   @HostListener('pointerdown', ['$event'])
-  onMouseDown(event: EventSource): void {
+  onMouseDown(event: PointerEvent): void {
+    // Right clicks count as instant long presses
+    const duration = event.button == 2 ? 0 : this.duration;
+
     this.pressing = true;
     this.longPressing = false;
 
@@ -34,11 +37,11 @@ export class LongPress {
       this.interval = setInterval(() => {
         this.onLongPressing.emit(event);
       }, this.frequency);
-    }, this.duration);
+    }, duration);
   }
 
   @HostListener('pointerup', ['$event'])
-  endPress(event: EventSource): void {
+  endPress(event: PointerEvent): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
 

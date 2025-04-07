@@ -39,10 +39,10 @@
   tr {
     background-color: var(--background-3);
     border-radius: 1vw;
-    padding: 0 1vw;
+    padding: 1vw;
     display: block;
     margin-bottom: 2vh;
-    height: 11vh;
+    height: 8vw;
     transition: color 0.25s;
     box-sizing: border-box;
     border: 0;
@@ -121,20 +121,15 @@
   }
 
   &__name {
-    width: 62vw;
-  }
-
-  &__in-use .filaments__name {
     width: 56vw;
   }
 
   &__in-use-icon {
     width: 6vw;
-    text-align: center;
-    background-image: url('../../../assets/nozzle.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 4.3vw 4.3vw;
+
+    ::ng-deep app-hotend-icon p {
+      top: 0;
+    }
   }
 
   &__weight-left {

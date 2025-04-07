@@ -8,8 +8,6 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import {
   Duration,
   JobStatus,
-  Notification,
-  NotificationType,
   PrinterEvent,
   PrinterNotification,
   PrinterState,
@@ -119,21 +117,13 @@ export class OctoPrintSocketService implements SocketService {
           },
           error: (err: HttpErrorResponse) => {
             if (err.status === 403) {
-              this.notificationService.setNotification({
-                heading: $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
-                text: $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
-                type: NotificationType.ERROR,
-                time: new Date(),
-                sticky: true,
-              } as Notification);
+              this.notificationService.warn(
+                $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
+                $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
+                true,
+              );
             } else {
-              this.notificationService.setNotification({
-                heading: $localize`:@@http-unknown-heading:Unknown HTTP Error`,
-                text: err.message,
-                type: NotificationType.ERROR,
-                time: new Date(),
-                sticky: true,
-              } as Notification);
+              this.notificationService.warn($localize`:@@http-unknown-heading:Unknown HTTP Error`, err.message, true);
             }
           },
         });
@@ -386,13 +376,7 @@ export class OctoPrintSocketService implements SocketService {
       case 'Error':
         newState = PrinterEvent.CLOSED;
         if (state.event.payload) {
-          this.notificationService.setNotification({
-            heading: $localize`:@@printer-error:Printer error`,
-            text: state.event.payload.error,
-            type: NotificationType.ERROR,
-            time: new Date(),
-            sticky: true,
-          } as Notification);
+          this.notificationService.error($localize`:@@printer-error:Printer error`, state.event.payload.error, true);
         }
         break;
       default:
@@ -412,15 +396,12 @@ export class OctoPrintSocketService implements SocketService {
       if (notification.action === 'close') {
         this.notificationService.closeNotification();
       } else if (notification.choices?.length > 0) {
-        this.notificationService.setNotification({
-          heading: $localize`:@@action-required:Action required`,
-          text: notification.text ?? notification.message,
-          type: NotificationType.PROMPT,
-          time: new Date(),
-          choices: notification.choices,
-          callback: this.callbackFunction.bind(this),
-          sticky: true,
-        } as Notification);
+        this.notificationService.prompt(
+          $localize`:@@action-required:Action required`,
+          notification.text ?? notification.message,
+          notification.choices,
+          this.callbackFunction.bind(this),
+        );
       } else if (notification.text || notification.message) {
         console.log(notification.text ?? notification.message);
         this.statusTextSubject.next(notification.text ?? notification.message);
@@ -437,12 +418,7 @@ export class OctoPrintSocketService implements SocketService {
       )
       .pipe(
         catchError(error => {
-          this.notificationService.setNotification({
-            heading: $localize`:@@error-answer-prompt:Can't answer prompt!`,
-            text: error.message,
-            type: NotificationType.ERROR,
-            time: new Date(),
-          });
+          this.notificationService.error($localize`:@@error-answer-prompt:Can't answer prompt!`, error.message);
           return of(null);
         }),
       )

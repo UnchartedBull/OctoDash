@@ -1,9 +1,9 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
-import { AppService } from '../../services/app.service';
+import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
+import { AppService } from '../../services/app.service';
 import { ConfigService } from '../../services/config.service';
-import { NotificationType, URLSplit } from '../../model';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../../services/system/system.service';
 
@@ -83,13 +83,11 @@ export class SettingsComponent implements OnInit {
         this.fadeOutAnimation = false;
       }, 5000);
     } else {
-      this.notificationService.setNotification({
-        heading: $localize`:@@conf-unsaved:Configuration not saved!`,
-        // eslint-disable-next-line max-len
-        text: $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
-        type: NotificationType.WARN,
-        time: new Date(),
-      });
+      this.notificationService.warn(
+        $localize`:@@conf-unsaved:Configuration not saved!`,
+
+        $localize`:@@conf-unsaved-message:You haven't saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!`,
+      );
       this.overwriteNoSave = true;
     }
   }
@@ -120,12 +118,7 @@ export class SettingsComponent implements OnInit {
   }
 
   private onConfigSaveFail(_, errors: string[]) {
-    this.notificationService.setNotification({
-      heading: $localize`:@@error-invalid-config:Can't save invalid config`,
-      text: String(errors),
-      type: NotificationType.WARN,
-      time: new Date(),
-    });
+    this.notificationService.warn($localize`:@@error-invalid-config:Can't save invalid config`, String(errors));
   }
 
   private onConfigSaved() {

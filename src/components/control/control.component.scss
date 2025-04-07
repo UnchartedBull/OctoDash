@@ -5,6 +5,7 @@
   overflow: visible;
 
   &__jog {
+    margin-top: 4vh;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -67,22 +68,22 @@
 
     &-1 {
       top: -8.5vh;
-      left: 11.3vw;
+      left: 9.3vw;
     }
 
     &-2 {
       top: 10vh;
-      left: 0.5vw;
+      left: 0;
     }
 
     &-3 {
       top: 10vh;
-      right: -2vw;
+      right: 0;
     }
 
     &-4 {
       top: 30vh;
-      left: 11.3vw;
+      left: 9.3vw;
     }
 
     &-5 {
@@ -108,9 +109,7 @@
     }
   }
 
-  &__distance,
-  &__tool {
-    margin-top: 1.25vh;
+  &__distance {
     display: inline-block;
     border-collapse: separate;
 
@@ -118,6 +117,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 4vh;
     }
 
     &-field {
@@ -151,14 +151,130 @@
       border-right: 0.25vw solid var(--border);
     }
   }
+
+  &__tool {
+    &-field span {
+      display: block;
+      font-size: 50%;
+      margin-top: 1vh;
+    }
+  }
+
+  &__tools {
+    &__bottom {
+      position: absolute;
+      bottom: 4vh;
+    }
+
+    &__field-active {
+      filter: drop-shadow(0 0 0.5vw rgb(255 255 255 / 50%));
+    }
+
+    &__item {
+      width: 22vw;
+      padding: 1.5vh 2vw;
+      margin-right: 2vw;
+      font-size: 3vw;
+      transition: filter 0.2s;
+
+      &-icon {
+        vertical-align: middle;
+        display: inline-block;
+        width: 6vw;
+      }
+
+      &-value {
+        display: inline-block;
+        width: calc(100% - 6vw);
+        text-align: right;
+        vertical-align: middle;
+        line-height: 6vh;
+
+        &-unit {
+          font-size: 60%;
+        }
+
+        &-actual {
+          font-weight: 500;
+        }
+
+        &-set {
+          font-size: 2vw;
+        }
+      }
+
+      &-tool-changer {
+        &__item {
+          margin: 1vh 0;
+
+          &:first-child {
+            margin-top: -1vh;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
-app-custom-actions {
-  float: right;
-  height: 75vh;
-  overflow-y: scroll;
+.quick-control {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 85%);
+  transition: opacity 0.4s ease-in-out;
+  z-index: 10;
+  opacity: 0;
 
-  &::-webkit-scrollbar {
-    display: none;
+  &__controller {
+    width: 35vw;
+    margin: 0 auto;
+    border: solid 0.6vw;
+    border-radius: 3vw;
+    margin-top: 1.5vh;
+
+    &-row {
+      display: flex;
+    }
+
+    &-value {
+      padding: 3vh 6vw;
+      font-size: 8vw;
+      font-weight: 500;
+      text-align: center;
+
+      &-unit {
+        text-align: center;
+        font-size: 4vw;
+        font-weight: 400;
+      }
+    }
+
+    &-increase {
+      padding: 3vh 6vw;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    &-decrease {
+      padding: 3vh 6vw;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    &-set {
+      height: 10vw;
+      border-top: solid 0.6vw;
+      flex: 1;
+      align-items: center;
+      display: flex;
+
+      &-span {
+        text-align: center;
+        flex: 1;
+      }
+    }
   }
 }

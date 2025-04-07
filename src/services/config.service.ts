@@ -3,7 +3,6 @@ import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
 import { BehaviorSubject, map, throwError } from 'rxjs';
 
-import defaultConfig from '../helper/config.default.json';
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { NotificationService } from './notification.service';
 
@@ -374,6 +373,10 @@ export class ConfigService {
   public setSortingOrder(order: 'asc' | 'dsc'): void {
     this.config.octodash.fileSorting.order = order;
     this.saveConfig(this.config);
+  }
+
+  public showActionCenterIcon(): boolean {
+    return this.config.octodash.showActionCenterIcon;
   }
 
   public getDefaultDirectory(): string {
