@@ -1,0 +1,9 @@
+<h3>OctoDash Setup</h3>
+
+<p>Welcome to OctoDash v3! Some things are new here</p>
+
+<p>Found config at</p>
+<ul data-bind="foreach: configPaths">
+<li><span data-bind="text: $data" ></span><button data-bind="click: $parent.migrate">Migrate</button></li>
+</ul>
+<p data-bind="if: migrated">Config migrated!</p>
