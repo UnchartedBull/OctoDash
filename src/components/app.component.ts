@@ -89,6 +89,10 @@ export class AppComponent implements OnInit {
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }
 
+  public toggleSwitchAnimationCacheDone(): void {
+    this.toggleSwitchAnimationCached = true;
+  }
+
   public loadingAnimationCacheDone(): void {
     this.loadingAnimationCached = true;
   }
