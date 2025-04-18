@@ -150,9 +150,6 @@ class OctodashPlugin(
     def on_ui_render(self, now, request, render_kwargs):
         return redirect("/plugin/octodash/", code=307)
     
-    @octoprint.plugin.BlueprintPlugin.route("/", methods=["GET"])
-    def get_ui_root(self):
-        return send_file(self._get_index_path())
 
     #TODO: Auth and CSRF stuff
     @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
@@ -172,6 +169,11 @@ class OctodashPlugin(
         except Exception as e:
             return make_response(json.dumps({"error": str(e)}), 500)
 
+    @octoprint.plugin.BlueprintPlugin.route("/", defaults={"path": ""}, methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
+    def get_ui_root(self, path):
+        return send_file(self._get_index_path())
+
     def is_blueprint_csrf_protected(self):
         return False
 
@@ -187,7 +189,7 @@ class OctodashPlugin(
         whether the UI build was dev or production.
         """
         
-        return os.path.join(self._basefolder, "static", "ui", "index.html")
+        return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
 
     def get_ui_permissions(self):
         return []
