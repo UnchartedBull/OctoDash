@@ -673,7 +673,7 @@ if [ ! -f "/etc/debian_version" ]; then
    echo ""
 fi
 
-dependencies="xserver-xorg xinit firefox-esr"
+dependencies="xserver-xorg xinit chromium-browser"
 IFS='/' read -ra version <<< "$releaseURL"
 
 echo "Installing OctoDash "${version[7]}, $arch""
@@ -724,7 +724,7 @@ xset s off
 xset s noblank
 xset -dpms
 
-firefox -kiosk http://localhost:5000 &
+chromium-browser http://localhost:5000  --kiosk
 EOF
 
     cat <<EOF >> ~/.bashrc
