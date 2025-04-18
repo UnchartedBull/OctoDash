@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit {
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
-    this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    // this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
     this.localIpAddress$ = this.systemService.getLocalIpAddress();
   }
 
@@ -109,7 +109,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public updateConfig(): void {
-    this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
+    // this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
     this.configService

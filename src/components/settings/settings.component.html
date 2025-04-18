@@ -39,30 +39,6 @@
           <span i18n="@@settings-general-menu">general</span>
         </span>
         <div class="settings__scroll">
-          <span class="settings__heading-2" i18n="@@general-octoprint-connection">OctoPrint Connection</span>
-          <form class="settings__form">
-            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url"
-              >Octoprint URL</label
-            >
-            <span class="settings__input-prefix">http://</span>
-            <input
-              type="text"
-              id="octoprintURLName"
-              class="settings__input"
-              name="octoprintURLName"
-              style="width: 23.2vw"
-              [(ngModel)]="this.octoprintURL.host"
-              required /><span class="settings__input-divider">:</span>
-            <input
-              type="text"
-              id="octoprintURLPort"
-              class="settings__input"
-              name="octoprintURLPort"
-              style="width: 8vw"
-              [(ngModel)]="this.octoprintURL.port"
-              required />
-            <br />
-          </form>
           <span class="settings__heading-2" i18n="@@general-printer">Printer</span>
           <form class="settings__form">
             <label for="printerName" class="settings__input-label" i18n="@@general-name">Name</label>
