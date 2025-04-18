@@ -218,7 +218,14 @@ class OctodashPlugin(
         index.html. This needs to take into account the configured language and 
         whether the UI build was dev or production.
         """
+
+        # Check if the UI is in dev mode
+        devpath = os.path.join(self._basefolder, "static", "ui", "index.html")
+        if os.path.exists(devpath):
+            # Dev mode
+            return devpath
         
+        #TODO: Read the language from config
         return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
 
     def get_ui_permissions(self):
