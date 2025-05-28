@@ -136,7 +136,7 @@
     "stylelint-config-standard-scss": "^15.0.1",
     "ts-node": "~10.9.2",
     "typescript": "5.8.2",
-    "typescript-eslint": "^8.32.1",
+    "typescript-eslint": "^8.33.0",
     "wait-on": "~8.0.2"
   }
 }
