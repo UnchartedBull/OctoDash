@@ -35,37 +35,37 @@
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome's free Classic Solid pack </source>
-        <target></target>
+        <target> Les icônes proviennent du pack gratuit Classic Solid de FontAwesome </target>
       </trans-unit>
       <trans-unit id="ui-delete" datatype="html">
         <source>delete</source>
-        <target></target>
+        <target>supprimer</target>
       </trans-unit>
       <trans-unit id="ui-close" datatype="html">
         <source>close</source>
-        <target></target>
+        <target>fermer</target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
-        <target></target>
+        <target>Commande spéciale inconnue !</target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
-        <target></target>
+        <target>La commande spéciale que vous avez saisie est inconnue.</target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
-        <target></target>
+        <target>Les commandes de l'imprimante ne sont pas disponibles !</target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
         <source>Please connect to your printer first before attempting to use a printer command.</source>
-        <target></target>
+        <target>Veuillez d'abord vous connecter à votre imprimante avant d'essayer d'utiliser une commande d'imprimante.</target>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
         <source>Initializing is taking longer than usual...
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
         </source>
-        <target> L'initialisation prend plus de temps que d'habitude. 
+        <target>L'initialisation prend plus de temps que d'habitude. 
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Veuillez vous assurer qu'OctoPrint est opérationnel. 
         </target>
       </trans-unit>
@@ -81,7 +81,9 @@
         <source>load new filament into tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>charger un nouveau filament</target>
+        <target>charger un nouveau filament 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="load-new-filament-message" datatype="html">
         <source>only put a little filament in, I'll pull in the rest.</source>
@@ -93,11 +95,11 @@
       </trans-unit>
       <trans-unit id="ui-done" datatype="html">
         <source>done</source>
-        <target></target>
+        <target>terminé</target>
       </trans-unit>
       <trans-unit id="ui-waiting-for-user" datatype="html">
         <source>I'll wait for you.</source>
-        <target></target>
+        <target>Je vous attends.</target>
       </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
@@ -125,19 +127,23 @@
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
         <source>select tool</source>
-        <target></target>
+        <target>sélectionner l'outil</target>
       </trans-unit>
       <trans-unit id="tool-selection" datatype="html">
         <source>Tool 
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </source>
-        <target></target>
+        <target>Outil
+          <x id="INTERPOLATION" equiv-text="{{ i }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
         <source>heating the nozzle for tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>préchauffage de la buse</target>
+        <target>préchauffage de la buse 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait" datatype="html">
         <source>wait</source>
@@ -149,7 +155,7 @@
       </trans-unit>
       <trans-unit id="nozzle-heating-start" datatype="html">
         <source>start</source>
-        <target> lancer </target>
+        <target>lancer</target>
       </trans-unit>
       <trans-unit id="move-filament" datatype="html">
         <source>filament</source>
@@ -161,11 +167,11 @@
       </trans-unit>
       <trans-unit id="move-filament-stop" datatype="html">
         <source>stop</source>
-        <target> arrêter </target>
+        <target>arrêter</target>
       </trans-unit>
       <trans-unit id="loading-filament" datatype="html">
         <source>loading</source>
-        <target>Chargement</target>
+        <target>chargement</target>
       </trans-unit>
       <trans-unit id="unloading-filament" datatype="html">
         <source>unloading</source>
@@ -237,7 +243,7 @@
       </trans-unit>
       <trans-unit id="files-size" datatype="html">
         <source>Size</source>
-        <target>taille</target>
+        <target>Taille</target>
       </trans-unit>
       <trans-unit id="files-order" datatype="html">
         <source>order</source>
@@ -265,7 +271,7 @@
       </trans-unit>
       <trans-unit id="unit-millimeters-short" datatype="html">
         <source>mm</source>
-        <target></target>
+        <target>mm</target>
       </trans-unit>
       <trans-unit id="height-layer-status" datatype="html">
         <source>Layer 
@@ -276,13 +282,23 @@
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target></target>
+        <target>Couche 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> 
+           de 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          {{ height.total &gt;= 0 ? height.total : '---' }}
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="job-filament" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
         </source>
-        <target></target>
+        <target>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
+        </target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
         <source>
@@ -298,7 +314,10 @@
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </source>
-        <target>écoulé :</target>
+        <target>écoulé : 
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="will-finish" datatype="html">
         <source>- will finish ~</source>
@@ -314,7 +333,7 @@
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
         <source> loading info</source>
-        <target></target>
+        <target> informations sur le chargement</target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
         <source>no job running...</source>
@@ -350,11 +369,11 @@
       </trans-unit>
       <trans-unit id="ui-yes" datatype="html">
         <source>yes</source>
-        <target></target>
+        <target>oui</target>
       </trans-unit>
       <trans-unit id="ui-no" datatype="html">
         <source>no</source>
-        <target></target>
+        <target>non</target>
       </trans-unit>
       <trans-unit id="print-pause" datatype="html">
         <source>print paused</source>
@@ -398,7 +417,7 @@
       </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
-        <target></target>
+        <target>Êtes-vous sûr de vouloir réinitialiser la configuration ?</target>
       </trans-unit>
       <trans-unit id="settings" datatype="html">
         <source>settings</source>
@@ -422,11 +441,11 @@
       </trans-unit>
       <trans-unit id="update-available" datatype="html">
         <source>Update available!</source>
-        <target> mise à jour disponible ! </target>
+        <target>Mise à jour disponible !</target>
       </trans-unit>
       <trans-unit id="ui-save" datatype="html">
         <source>save</source>
-        <target></target>
+        <target>enregistrer</target>
       </trans-unit>
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
@@ -458,28 +477,37 @@
       </trans-unit>
       <trans-unit id="general-default" datatype="html">
         <source> Default Temperatures &amp; Fan Speed </source>
-        <target>Températures et vitesse par défaut du ventilateur</target>
+        <target> Températures et vitesse par défaut du ventilateur </target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
         <source> Hotend 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Buse </target>
+        <target> Buse 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="default-heatbed" datatype="html">
         <source> Heatbed 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Lit chauffant </target>
+        <target> Lit chauffant 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="default-fanspeed" datatype="html">
         <source> Fan Speed 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Vitesse du ventilateur </target>
+        <target> Vitesse du ventilateur 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-filament" datatype="html">
         <source>Filament</source>
@@ -494,42 +522,60 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Longueur d'alimentation </target>
+        <target> Longueur d'alimentation 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-purge-distance" datatype="html">
         <source> Purge Distance 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Distance de purge </target>
+        <target> Distance de purge 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-feedrate" datatype="html">
         <source> Feed Speed 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Vitesse d'alimentation </target>
+        <target> Vitesse d'alimentation 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-feedrate-slow" datatype="html">
         <source> Feed Speed Slow 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Vitesse d'alimentation lente </target>
+        <target> Vitesse d'alimentation Lente 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-thickness" datatype="html">
         <source> Thickness 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Épaisseur </target>
+        <target> Épaisseur 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-density" datatype="html">
         <source> Density 
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Densité </target>
+        <target> Densité 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </target>
       </trans-unit>
       <trans-unit id="general-warning" datatype="html">
         <source> Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your Feed Speed to high and your Feed Length to long. </source>
@@ -541,7 +587,7 @@
       </trans-unit>
       <trans-unit id="show-extruder-controls" datatype="html">
         <source>Show extruder controls</source>
-        <target></target>
+        <target>Afficher les commandes de l'extrudeuse</target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -549,7 +595,7 @@
       </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
         <source>Show icon for Action Center</source>
-        <target></target>
+        <target>Afficher l'icône du Centre d'action</target>
       </trans-unit>
       <trans-unit id="turn-on-after-sleep" datatype="html">
         <source>Turn on printer when exiting sleep</source>
@@ -561,11 +607,11 @@
       </trans-unit>
       <trans-unit id="preview-progress-circle" datatype="html">
         <source>Always use circular progress bar</source>
-        <target></target>
+        <target>Toujours utiliser une barre de progression circulaire</target>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
-        <target></target>
+        <target>Répertoire par défaut du navigateur de fichiers</target>
       </trans-unit>
       <trans-unit id="invert-axis-control" datatype="html">
         <source>Invert Axis Control</source>
@@ -573,11 +619,11 @@
       </trans-unit>
       <trans-unit id="settings-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
-        <target></target>
+        <target>OctoDash Companion</target>
       </trans-unit>
       <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
-        <target></target>
+        <target>activé</target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -599,15 +645,15 @@
       </trans-unit>
       <trans-unit id="settings-filament-manager" datatype="html">
         <source>Filament Manager</source>
-        <target>Gestionnaire de filament</target>
+        <target>Filament Manager</target>
       </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager</source>
-        <target></target>
+        <target>Spool Manager</target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
-        <target>Bouton de préchauffage</target>
+        <target>Preheat Button</target>
       </trans-unit>
       <trans-unit id="settings-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
@@ -615,11 +661,11 @@
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
-        <target>Contrôle PSU</target>
+        <target>PSU Control</target>
       </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
-        <target>Contrôle (Phillips HUE)</target>
+        <target>Ophon (Phillips HUE)</target>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
@@ -631,19 +677,19 @@
       </trans-unit>
       <trans-unit id="settings-tuya" datatype="html">
         <source>Tuya Smart Plug</source>
-        <target></target>
+        <target>Tuya Smart Plug</target>
       </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
-        <target></target>
+        <target>Label</target>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
-        <target></target>
+        <target>Wemo</target>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
         <source>Wemo IP</source>
-        <target></target>
+        <target>Wemo IP</target>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
@@ -651,7 +697,7 @@
       </trans-unit>
       <trans-unit id="about-developer-mode" datatype="html">
         <source> updates disabled (dev mode) </source>
-        <target></target>
+        <target> mises à jour désactivées (mode dev) </target>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> up to date </source>
@@ -661,13 +707,13 @@
         <source> install v
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </source>
-        <target>installer v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
+        <target> installer v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </target>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
-        <target></target>
+        <target>Connexion</target>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
@@ -683,7 +729,7 @@
       </trans-unit>
       <trans-unit id="reset-config" datatype="html">
         <source>Reset Config</source>
-        <target></target>
+        <target>Réinitialiser la config</target>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
@@ -727,14 +773,17 @@
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required" datatype="html">
         <source> Upgrade Required / </source>
-        <target></target>
+        <target> Mise à niveau requise / </target>
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
         <source> Version 
           <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
           <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
         </source>
-        <target> Version </target>
+        <target> Version 
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
+          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="searching" datatype="html">
         <source>searching</source>
@@ -746,11 +795,11 @@
       </trans-unit>
       <trans-unit id="port-recommendation" datatype="html">
         <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target>Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi</target>
+        <target> Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi </target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
         <source> search again </source>
-        <target>chercher à nouveau</target>
+        <target> chercher à nouveau </target>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
         <source>no instances found.</source>
@@ -826,7 +875,7 @@
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
         <source>Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
-        <target> Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous. </target>
+        <target>Maintenant, donnez-moi quelques informations sur votre configuration afin que je puisse personnaliser OctoDash pour vous.</target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
         <source>Printer Name:</source>
@@ -834,7 +883,7 @@
       </trans-unit>
       <trans-unit id="use-touchscreen" datatype="html">
         <source>Use Touchscreen</source>
-        <target> Utiliser l'écran tactile </target>
+        <target>Utiliser l'écran tactile</target>
       </trans-unit>
       <trans-unit id="change-settings-info" datatype="html">
         <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>
@@ -846,59 +895,59 @@
       </trans-unit>
       <trans-unit id="plugin-octodash-companion" datatype="html">
         <source>OctoDash Companion</source>
-        <target></target>
+        <target>OctoDash Companion</target>
       </trans-unit>
       <trans-unit id="plugin-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
-        <target> Display Layer Progress   </target>
+        <target>Display Layer Progress</target>
       </trans-unit>
       <trans-unit id="plugin-enclosure" datatype="html">
         <source>Enclosure</source>
-        <target> Enclosure </target>
+        <target>Enclosure</target>
       </trans-unit>
       <trans-unit id="plugin-filament-manager" datatype="html">
         <source>Filament Manager</source>
-        <target> Filament Manager   </target>
+        <target>Filament Manager</target>
       </trans-unit>
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager</source>
-        <target></target>
+        <target>Spool Manager</target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
-        <target> Preheat Button </target>
+        <target>Preheat Button</target>
       </trans-unit>
       <trans-unit id="plugin-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
-        <target> Print Time Genius   </target>
+        <target>Print Time Genius</target>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
         <source>PSU Control</source>
-        <target> PSU Control </target>
+        <target>PSU Control</target>
       </trans-unit>
       <trans-unit id="plugin-opom" datatype="html">
         <source>Ophom (Phillips HUE)</source>
-        <target></target>
+        <target>Ophom (Phillips HUE)</target>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source>TPLink SmartPlug</source>
-        <target> TPLink SmartPlug </target>
+        <target>TPLink SmartPlug</target>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
         <source>Tuya SmartPlug</source>
-        <target></target>
+        <target>Tuya SmartPlug</target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source>Tasmota</source>
-        <target></target>
+        <target>Tasmota</target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source>Tasmota MQTT</source>
-        <target></target>
+        <target>Tasmota MQTT</target>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source>Wemo</source>
-        <target></target>
+        <target>Wemo</target>
       </trans-unit>
       <trans-unit id="checking" datatype="html">
         <source>Great! I'll check everything.</source>
@@ -906,15 +955,15 @@
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
         <source>OctoPrint Connection</source>
-        <target> Connexion Octoprint </target>
+        <target>Connexion OctoPrint</target>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source>Validating Config</source>
-        <target> Validation de la configuration </target>
+        <target>Validation de la configuration</target>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source>Saving Config</source>
-        <target> Enregistrement de la configuration </target>
+        <target>Enregistrement de la configuration</target>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
@@ -1018,7 +1067,7 @@
       </trans-unit>
       <trans-unit id="update-restart" datatype="html">
         <source>would you like to restart OctoDash now?</source>
-        <target></target>
+        <target>voulez-vous redémarrer OctoDash maintenant ?</target>
       </trans-unit>
       <trans-unit id="error-update" datatype="html">
         <source>Can't initiate update!</source>
@@ -1036,7 +1085,9 @@
         <source>Version 
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
-        <target></target>
+        <target>Version
+          <x id="PH" equiv-text="this.latestVersion.title"/> est disponible. Allez dans Paramètres &amp;gt ; À propos de pour mettre à jour.
+        </target>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
@@ -1056,7 +1107,7 @@
       </trans-unit>
       <trans-unit id="error-run-enclosure-shell" datatype="html">
         <source>Can't run enclosure shell!</source>
-        <target></target>
+        <target>Impossible d'exécuter le shell de clôture !</target>
       </trans-unit>
       <trans-unit id="error-psu-state" datatype="html">
         <source>Can't change PSU State!</source>
@@ -1072,7 +1123,7 @@
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can't update Ophom Plug!</source>
-        <target></target>
+        <target>Impossible de mettre à jour Ophom Plug !</target>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can't send GCode!</source>
@@ -1080,15 +1131,15 @@
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can't update Tasmota!</source>
-        <target></target>
+        <target>Impossible de mettre à jour Tasmota !</target>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can't update Tasmota MQTT!</source>
-        <target></target>
+        <target>Impossible de mettre à jour Tasmota MQTT !</target>
       </trans-unit>
       <trans-unit id="error-send-psu-command" datatype="html">
         <source>Can't send plug command!</source>
-        <target></target>
+        <target>Impossible d'envoyer une commande de fiche !</target>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
         <source>Can't load filament spools!</source>
@@ -1160,14 +1211,17 @@
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-title" datatype="html">
         <source>OctoPrint outdated!</source>
-        <target></target>
+        <target>OctoPrint dépassé !</target>
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-long" datatype="html">
         <source>OctoPrint must be running at least 
           <x id="PH" equiv-text="minimumVersion"/>; currently running 
           <x id="PH_1" equiv-text="info.server"/>.
         </source>
-        <target></target>
+        <target>OctoPrint doit fonctionner au minimum
+          <x id="PH" equiv-text="minimumVersion"/> ; actuellement en cours d'exécution
+          <x id="PH_1" equiv-text="info.server"/>.
+        </target>
       </trans-unit>
       <trans-unit id="printer-error-gcode" datatype="html">
         <source>Can't send GCode!</source>
@@ -1183,7 +1237,7 @@
       </trans-unit>
       <trans-unit id="error-printer-set-tool" datatype="html">
         <source>Can't set active tool!</source>
-        <target></target>
+        <target>Impossible de régler l'outil actif !</target>
       </trans-unit>
       <trans-unit id="error-printer-hotend" datatype="html">
         <source>Can't set Hotend Temperature!</source>
@@ -1207,23 +1261,23 @@
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
-        <target></target>
+        <target>Erreur HTTP 403 - INTERDIT</target>
       </trans-unit>
       <trans-unit id="http-403-text" datatype="html">
         <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
-        <target></target>
+        <target>Cela signifie probablement que votre clé API n'est pas valide. Veuillez mettre à jour la clé API et redémarrer votre système.</target>
       </trans-unit>
       <trans-unit id="http-unknown-heading" datatype="html">
         <source>Unknown HTTP Error</source>
-        <target></target>
+        <target>Erreur HTTP inconnue</target>
       </trans-unit>
       <trans-unit id="unit-hours-short" datatype="html">
         <source>h</source>
-        <target></target>
+        <target>h</target>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
-        <target></target>
+        <target>Erreur d'imprimante</target>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
