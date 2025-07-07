@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { jsToXliff12, xliff12ToJs } from 'xliff';
 
 export function getLocale() {
-  const angularConfig = JSON.parse(fs.readFileSync(new URL('../angular.json', import.meta.url), 'utf-8'));
+  const angularConfig = JSON.parse(fs.readFileSync(new URL('../../angular.json', import.meta.url), 'utf-8'));
   const i18n = angularConfig.projects.OctoDash.i18n;
   let lang;
   try {
