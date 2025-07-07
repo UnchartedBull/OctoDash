@@ -704,10 +704,10 @@
         <target> pas de mise à jour disponible </target>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
-        <source> install v
+        <source> install 
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </source>
-        <target> installer v
+        <target> installer 
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </target>
       </trans-unit>
@@ -1059,10 +1059,10 @@
       </trans-unit>
       <trans-unit id="update-confirmation" datatype="html">
         <source>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installed
         </source>
         <target>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installée
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installée
         </target>
       </trans-unit>
       <trans-unit id="update-restart" datatype="html">

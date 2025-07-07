@@ -23,7 +23,7 @@
     <span class="update-notice" i18n="@@update-wait">this might take a while</span>
   </div>
   <div *ngIf="page === 3">
-    <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion }} installed</span>
+    <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion.version }} installed</span>
     <span class="update-restart" i18n="@@update-restart">would you like to restart OctoDash now?</span>
     <div class="update-restart-button__wrapper">
       <button class="button__no" (click)="closeUpdateWindow()" i18n="@@ui-no">no</button>
