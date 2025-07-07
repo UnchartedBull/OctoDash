@@ -788,6 +788,9 @@ EOF
     echo "Setting up Console Autologin ..."
     sudo systemctl set-default multi-user.target
     sudo ln -fs /lib/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+    if [ -d /etc/systemd/system/getty@tty1.service.d ]
+      then sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+    fi
     sudo bash -c 'cat > /etc/systemd/system/getty@tty1.service.d/autologin.conf' << EOF
 [Service]
 ExecStart=
