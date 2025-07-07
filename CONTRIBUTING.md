@@ -50,9 +50,7 @@ To add a language to the list of supported languages, follow these steps or foll
 - Duplicate the `<source>` tags for each element, replace `source` with `target` and put your translation in that tag
 - You can also use any XLIFF translation tool (i.e. [Brightex XLIFF](http://xliff.brightec.co.uk/)) to speed up the process
 - Add your language reference in `angular.json`
-
   - `Projects.OctoDash.i18n.locales`
-
     - Add:
 
       ```
@@ -63,7 +61,6 @@ To add a language to the list of supported languages, follow these steps or foll
       ```
 
   - `Projects.OctoDash.architect.build.configurations.production.localize`.
-
     - Add:
 
       ```
@@ -71,7 +68,6 @@ To add a language to the list of supported languages, follow these steps or foll
       ```
 
   - `Projects.OctoDash.architect.build.configurations`.
-
     - Add:
 
       ```
@@ -81,7 +77,6 @@ To add a language to the list of supported languages, follow these steps or foll
       ```
 
   - `Projects.OctoDash.architect.serve.configurations`.
-
     - Add:
 
       ```
