@@ -83,19 +83,19 @@
       border: 0;
       margin: 7vh 2vw;
 
-      .button__no {
+      &.button__no {
         background-color: var(--background-3);
         opacity: 0.8;
       }
 
-      .button__yes {
+      &.button__yes {
         background-color: var(--success);
       }
+    }
 
-      .button__wrapper {
-        display: block;
-        text-align: center;
-      }
+    &-button__wrapper {
+      display: block;
+      text-align: center;
     }
   }
 }
