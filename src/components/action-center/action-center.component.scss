@@ -5,8 +5,7 @@
   bottom: 0;
   transform: translateY(100%);
   width: 100vw;
-  height: 12vw;
-  overflow-x: scroll;
+  height: 14vw;
   z-index: 10;
   background: linear-gradient(to bottom, rgb(0 0 0 / 45%), rgb(0 0 0 / 80%));
   mask-image: linear-gradient(to bottom, transparent 0%, white 10%);
@@ -21,10 +20,6 @@
     width: 96vw;
     padding: 0 2vw;
     overflow-x: scroll;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 
   &__action-list {
