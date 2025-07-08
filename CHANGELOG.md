@@ -1,5 +1,23 @@
 # Changelog
 
+## [v2.5.1](https://github.com/UnchartedBull/OctoDash/tree/v2.5.1) (2025-07-07)
+
+> [!IMPORTANT]
+> OctoDash v2.5.1 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fixes a few bugs introduced in the last release.
+
+## Update Log
+
+- Fix a crash when an action in the Action Center has no icon ([#5096](https://github.com/UnchartedBull/OctoDash/pull/5096))
+- Display a scrollbar on the Action Center ([#5096](https://github.com/UnchartedBull/OctoDash/pull/5096))
+- Fix configuration migration for PSU based plugins ([#5095](https://github.com/UnchartedBull/OctoDash/pull/5095))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.0...v2.5.1)
+
 ## [v2.5.0](https://github.com/UnchartedBull/OctoDash/tree/v2.5.0) (2025-07-07)
 
 > [!IMPORTANT]
