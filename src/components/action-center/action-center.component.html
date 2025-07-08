@@ -15,7 +15,8 @@
         (onLongPress)="editing = i"
         matRipple
         [matRippleUnbounded]="false"
-        cdkDrag>
+        cdkDrag
+        [cdkDragStartDelay]="300">
         <fa-icon
           [icon]="customAction.icon"
           class="custom-actions__action-icon"
