@@ -475,7 +475,7 @@
         },
         "turnScreenOffWhileSleeping": {
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "turnOnPrinterWhenExitingSleep": {
           "type": "boolean",
