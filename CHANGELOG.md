@@ -1,5 +1,40 @@
 # Changelog
 
+## [v2.5.3](https://github.com/UnchartedBull/OctoDash/tree/v2.5.3) (2025-07-10)
+
+> [!IMPORTANT]
+> OctoDash v2.5.3 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fully fixes the configuration migration bug from v2.5.0.
+
+## Update Log
+
+- Fix configuration migration for plugins ([#5110](https://github.com/UnchartedBull/OctoDash/pull/5110))
+- Fix NOX theme ([#5105](https://github.com/UnchartedBull/OctoDash/pull/5105))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.2...v2.5.3)
+
+## [v2.5.2](https://github.com/UnchartedBull/OctoDash/tree/v2.5.2) (2025-07-08)
+
+> [!IMPORTANT]
+> OctoDash v2.5.2 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fully fixes the scrolling bug with the Action Center, as well as fixes a few styling/UI issues.
+
+## Update Log
+
+- Fix scrolling of Action Center (properly) ([#5102](https://github.com/UnchartedBull/OctoDash/pull/5102))
+- Fix styling on update screen ([#5101](https://github.com/UnchartedBull/OctoDash/pull/5101), [#5103](https://github.com/UnchartedBull/OctoDash/pull/5103))
+- Fix extruder icon saying "false" for a single extruder ([#5100](https://github.com/UnchartedBull/OctoDash/pull/5100))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.1...v2.5.2)
+
 ## [v2.5.1](https://github.com/UnchartedBull/OctoDash/tree/v2.5.1) (2025-07-07)
 
 > [!IMPORTANT]
