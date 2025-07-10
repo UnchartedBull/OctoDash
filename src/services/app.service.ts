@@ -42,12 +42,12 @@ export class AppService {
           delete (config.octodash as any).showNotificationCenterIcon;
         }
       },
-      '/psuControl must NOT have additional properties': config => {
+      '/plugins/psuControl must NOT have additional properties': config => {
         if ('turnOnPSUWhenExitingSleep' in (config.plugins.psuControl as any)) {
           delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
         }
       },
-      '/ophom must NOT have additional properties': config => {
+      '/plugins/ophom must NOT have additional properties': config => {
         if ('turnOnPSUWhenExitingSleep' in (config.plugins.ophom as any)) {
           delete (config.plugins.ophom as any).turnOnPSUWhenExitingSleep;
         }
