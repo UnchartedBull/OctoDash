@@ -93,6 +93,11 @@
   z-index: 1001;
   transition: rotate 0.2s ease-out;
 
+  /* Increases the touch hitbox */
+  padding: 1vh 2vw;
+  margin-bottom: -1vh;
+  margin-left: -2vw;
+
   &.visible {
     rotate: 180deg;
   }
