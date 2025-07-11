@@ -10,10 +10,10 @@
   &::before {
     content: '';
     width: 93vw;
-    height: 68vh;
-    position: fixed;
+    height: 75vh;
+    position: absolute;
     left: 1vw;
-    top: 27.5vh;
+    top: 0;
     z-index: 2;
     pointer-events: none;
     background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));
@@ -39,10 +39,9 @@
   tr {
     background-color: var(--background-3);
     border-radius: 1vw;
-    padding: 1vw;
+    padding: 0 1vw;
     display: block;
     margin-bottom: 2vh;
-    height: 8vw;
     transition: color 0.25s;
     box-sizing: border-box;
     border: 0;
@@ -58,50 +57,6 @@
 
     &:last-of-type {
       margin-bottom: 3.5vh;
-    }
-
-    &::before,
-    &::after {
-      border: 3px solid transparent;
-      width: 0;
-      height: 0;
-      content: '';
-      position: absolute;
-      border-radius: 1vw;
-    }
-
-    &::before {
-      top: 0;
-      left: 0;
-    }
-
-    &::after {
-      bottom: 0;
-      right: 0;
-    }
-
-    &:active::before,
-    &:active::after {
-      width: calc(100% - 6px);
-      height: calc(100% - 6px);
-    }
-
-    &:active::before {
-      border-top-color: var(--primary);
-      border-right-color: var(--primary);
-      transition:
-        border-color 0s ease-out 0.7s,
-        width 1s ease-out 0.7s,
-        height 0.1s ease-out 1.7s;
-    }
-
-    &:active::after {
-      border-bottom-color: var(--primary);
-      border-left-color: var(--primary);
-      transition:
-        border-color 0s ease-out 1.8s,
-        width 1s ease-out 1.8s,
-        height 0.1s ease-out 2.9s;
     }
   }
 
