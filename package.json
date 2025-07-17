@@ -111,7 +111,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.1.0",
-    "@angular/cli": "^20.1.0",
+    "@angular/cli": "^20.1.1",
     "@angular/compiler-cli": "^20.1.0",
     "@angular/language-service": "^20.1.0",
     "@eslint/compat": "^1.2.9",
