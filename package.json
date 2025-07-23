@@ -89,7 +89,7 @@
     "@angular/localize": "^20.1.0",
     "@angular/material": "^20.1.2",
     "@angular/platform-browser": "^20.1.0",
-    "@angular/platform-browser-dynamic": "^20.1.0",
+    "@angular/platform-browser-dynamic": "^20.1.2",
     "@angular/router": "^20.1.0",
     "@fortawesome/angular-fontawesome": "~2.0.1",
     "@fortawesome/free-solid-svg-icons": "~7.0.0",
