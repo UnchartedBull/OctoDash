@@ -91,7 +91,7 @@
     "@angular/platform-browser": "^20.1.0",
     "@angular/platform-browser-dynamic": "^20.1.0",
     "@angular/router": "^20.1.0",
-    "@fortawesome/angular-fontawesome": "~2.0.1",
+    "@fortawesome/angular-fontawesome": "~3.0.0",
     "@fortawesome/free-solid-svg-icons": "~7.0.0",
     "ajv": "~8.17.1",
     "angular-svg-round-progressbar": "^14.0.0",
