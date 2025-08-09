@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 
+import defaultConfig from '../helper/config.default.json';
 import { ConfigSchema as Config } from '../model';
 import { ConfigService } from './config.service';
 import { ElectronService } from './electron.service';
@@ -41,6 +42,15 @@ export class AppService {
           config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
           delete (config.octodash as any).showNotificationCenterIcon;
         }
+      },
+      "/plugins must have required property 'tuya'": config => {
+        config.plugins.tuya = defaultConfig.plugins.tuya;
+      },
+      "/plugins must have required property 'wemo'": config => {
+        config.plugins.wemo = defaultConfig.plugins.wemo;
+      },
+      "/plugins must have required property 'companion'": config => {
+        config.plugins.companion = defaultConfig.plugins.companion;
       },
       '/plugins/psuControl must NOT have additional properties': config => {
         if ('turnOnPSUWhenExitingSleep' in (config.plugins.psuControl as any)) {
