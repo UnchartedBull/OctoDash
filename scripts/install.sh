@@ -673,15 +673,7 @@ if [ ! -f "/etc/debian_version" ]; then
    echo ""
 fi
 
-arch=$(dpkg --print-architecture)
-if  [[ $arch == armhf ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
-elif [[ $arch == arm64 ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*arm64.deb" | cut -d '"' -f 4)
-elif [[ $arch == amd64 ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*amd64.deb" | cut -d '"' -f 4)
-fi
-dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
+dependencies="xserver-xorg xinit chromium-browser bc"
 IFS='/' read -ra version <<< "$releaseURL"
 
 echo "Installing OctoDash "${version[7]}, $arch""
@@ -717,50 +709,12 @@ elif [ ! -d $DIRECTORY ]; then
     exit 1
 fi;
 
-if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Preheat Button' 'Enclosure' 'Print Time Genius')
-  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
-  echo "Installing Plugins..."
-
-  if [[ " ${selected_plugins[@]} " =~ "OctoDash Companion" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-OctoDashCompanion/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Enclosure" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Print Time Genius" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
-  fi;
-fi;
-
-
-if [ $DIRECTORY == "-" ]; then
-  if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
-    echo "Enabling CORS in OctoPrint..."
-    "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
-  fi
-else
-  echo "Note: please make sure to enable CORS in OctoPrint (Settings > API > CORS > Allow CORS)."
-fi;
-
-echo "Installing OctoDash "${version[7]}, $arch" ..."
-cd ~
-wget -O octodash.deb $releaseURL -q --show-progress
-
-sudo dpkg -i octodash.deb
-
-rm octodash.deb
 
 yes_no=( 'yes' 'no' )
 
 list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
 
+#TODO: Get the screen resolution automatically
 echo $auto_start
 if [ $auto_start == 'yes' ]; then
     echo "Setting up Autostart ..."
@@ -771,8 +725,7 @@ xset s off
 xset s noblank
 xset -dpms
 
-ratpoison&
-octodash --no-sandbox
+chromium-browser http://localhost:5000/plugin/octodash/  --kiosk --noerrdialogs --disable-infobars --no-first-run --window-size=1920,1080 --enable-features=OverlayScrollbar --start-maximized
 EOF
 
     cat <<EOF >> ~/.bashrc
@@ -781,9 +734,6 @@ if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
 fi
 EOF
 
-    cat <<EOF >> ~/.ratpoisonrc
-startup_message off
-EOF
 
     echo "Setting up Console Autologin ..."
     sudo systemctl set-default multi-user.target
@@ -804,23 +754,6 @@ EOF
     echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
 fi
 
-list_input "Should I setup the update script? This will allow installing '~/tmp/octodash.deb' without sudo or root access. For more info visit the Update section of the wiki. " yes_no update
-if [ $update == 'yes' ]; then
-    mkdir -p ~/scripts
-    echo "Setting up update script ..."
-    cat <<EOF > ~/scripts/update-octodash
-#!/bin/bash
-
-dpkg -i /tmp/octodash.deb
-rm /tmp/octodash.deb
-EOF
-
-    sudo chmod +x ~/scripts/update-octodash
-
-    sudo bash -c 'cat >> /etc/sudoers.d/update-octodash' <<EOF
-$USER ALL=NOPASSWD: $HOME/scripts/update-octodash
-EOF
-fi
 
 
 list_input "Shall I reboot your Pi now?" yes_no reboot
