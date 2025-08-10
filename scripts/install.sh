@@ -714,6 +714,7 @@ yes_no=( 'yes' 'no' )
 
 list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
 
+#TODO: Get the screen resolution automatically
 echo $auto_start
 if [ $auto_start == 'yes' ]; then
     echo "Setting up Autostart ..."
@@ -724,7 +725,7 @@ xset s off
 xset s noblank
 xset -dpms
 
-chromium-browser http://localhost:5000  --kiosk
+chromium-browser http://localhost:5000/plugin/octodash/  --kiosk --noerrdialogs --disable-infobars --no-first-run --window-size=1920,1080 --enable-features=OverlayScrollbar --start-maximized
 EOF
 
     cat <<EOF >> ~/.bashrc
