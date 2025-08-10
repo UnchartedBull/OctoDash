@@ -673,7 +673,7 @@ if [ ! -f "/etc/debian_version" ]; then
    echo ""
 fi
 
-dependencies="xserver-xorg xinit chromium-browser"
+dependencies="xserver-xorg xinit chromium-browser bc"
 IFS='/' read -ra version <<< "$releaseURL"
 
 echo "Installing OctoDash "${version[7]}, $arch""
