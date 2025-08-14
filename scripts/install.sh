@@ -693,22 +693,6 @@ echo "Installing Dependencies ..."
   exit -1
 }
 
-if [ -d "$HOME/OctoPrint/venv" ]; then
-    DIRECTORY="$HOME/OctoPrint/venv"
-elif [ -d "$HOME/oprint" ]; then
-    DIRECTORY="$HOME/oprint"
-else
-    echo "Neither $HOME/OctoPrint/venv nor $HOME/oprint can be found."
-    echo "If your OctoPrint instance is running on a different machine just type - in the following prompt."
-    text_input "Please specify OctoPrints full virtualenv path manually (no trailing slash)." DIRECTORY
-fi;
-
-if [ $DIRECTORY == "-" ]; then
-    echo "Not installing any plugins for remote installation. Please make sure to have Display Layer Progress installed."
-elif [ ! -d $DIRECTORY ]; then
-    echo "Can't find OctoPrint Installation, please run the script again!"
-    exit 1
-fi;
 
 
 yes_no=( 'yes' 'no' )
