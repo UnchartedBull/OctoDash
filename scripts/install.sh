@@ -669,7 +669,8 @@ text_input() {
 
 if [ ! -f "/etc/debian_version" ]; then
    echo ""
-   echo "OctoDash is only compatible with Debian-based Linux installations!"
+   echo "This script is only compatible with Debian-based Linux installations!"
+   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
    echo ""
 fi
 
