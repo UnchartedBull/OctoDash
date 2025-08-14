@@ -6,8 +6,8 @@
 
 echo "Installing Dependencies..."
 {
-    sudo apt --qq update
-    suod apt --qq install chromium-browser -y
+    sudo apt -qq update
+    sudo apt -qq install chromium-browser -y
 } || {
   echo ""
   echo "Couldn't install dependenices!"
