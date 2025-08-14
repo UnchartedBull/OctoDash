@@ -725,7 +725,7 @@ xset s off
 xset s noblank
 xset -dpms
 
-chromium-browser http://localhost:5000/plugin/octodash/  --kiosk --noerrdialogs --disable-infobars --no-first-run --window-size=1920,1080 --enable-features=OverlayScrollbar --start-maximized
+chromium-browser http://localhost:5000/plugin/octodash/  --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized
 EOF
 
     cat <<EOF >> ~/.bashrc
