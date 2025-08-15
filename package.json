@@ -87,7 +87,7 @@
     "@angular/core": "^20.1.0",
     "@angular/forms": "^20.1.0",
     "@angular/localize": "^20.1.0",
-    "@angular/material": "^20.1.5",
+    "@angular/material": "^20.1.6",
     "@angular/platform-browser": "^20.1.0",
     "@angular/platform-browser-dynamic": "^20.1.0",
     "@angular/router": "^20.1.0",
