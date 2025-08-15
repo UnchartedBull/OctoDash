@@ -40,3 +40,6 @@ include = [
     "octoprint_octodash",
     "octoprint_octodash.*",
 ]
+
+[tool.setuptools.cmdclass]
+    build_py = "octoprint_octodash.distutils_commands.NpmBuild"
