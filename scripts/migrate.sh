@@ -13,16 +13,17 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source $DIR/functions.sh
+source $DIR/constants.sh
 
-text_input "What is the URL of your OctoPrint installation? Be sure in include a trailing slash" octoprint_url "http://localhost:5000/"
+text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
 
 echo "Installing chromium-browser ..."
 install-apt "chromium-browser"
 
-echo "Updating .xinitrc to launch Chromium..."
+echo "Updating .xinitrc to launch Chromium instead of legacy OctoDash..."
 
 XINITRC="$HOME/.xinitrc"
 if grep -q "octodash" "$XINITRC"; then
-    sed -i "s@^octodash.*$@chromium-browser --kiosk $octoprint_url$octoprint_suffix@" "$XINITRC"
+    sed -i "s!^octodash.*\$!$browser_launch_string $octoprint_url$octoprint_suffix!" "$XINITRC"
     echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
 fi
