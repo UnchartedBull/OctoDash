@@ -1,5 +1,12 @@
 # coding=utf-8
+"""
+OctoDash Plugin for OctoPrint
+
+Some bits (noted below) are taken from the OctoDash Companion plugin which is available under the MIT license
+See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
+"""
 from __future__ import absolute_import
+import re
 
 from flask import make_response, send_file, redirect, request
 import os.path
@@ -20,6 +27,11 @@ class OctodashPlugin(
     octoprint.plugin.BlueprintPlugin,
     octoprint.plugin.WizardPlugin,
 ):
+
+    def __init__(self):
+        # These two lines from OctoDash Companion
+        self.use_received_fan_speeds = False
+        self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
     ##~~ SettingsPlugin mixin
 
@@ -131,6 +143,36 @@ class OctodashPlugin(
                 "defaultDirectory": "/",
             },
         }
+
+    # ~~ GCode Received hook
+
+    # From OctoDash Companion
+    def process_received_gcode(self, comm, line, *args, **kwargs):
+        if "M106" not in line:
+            return line
+    
+        self.send_fan_speed(line, "received")
+        return line
+
+    # ~~ GCode Sent hook
+
+    # From OctoDash Companion
+    def process_sent_gcode(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
+        if gcode and gcode == "M106" and self.use_received_fan_speeds is False:
+            self.send_fan_speed(cmd, "sent")
+
+    # From OctoDash Companion
+    def send_fan_speed(self, gcode, direction):
+        fan_match = self.fan_regex.match(gcode)
+        if fan_match:
+            if direction == "received":
+                self.use_received_fan_speeds = True
+            fan, fan_set_speed = fan_match.groups()
+            if fan is None:
+                fan = 1
+            self._plugin_manager.send_plugin_message("octodash", {
+                "fanspeed": {"{}".format(fan): (int("{}".format(fan_set_speed)) / 255 * 100)}})
+
 
     ##~~ AssetPlugin mixin
 
