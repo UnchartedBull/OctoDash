@@ -10,26 +10,30 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source $DIR/functions.sh
+source $DIR/constants.sh
 
 
-
-
-if [ ! -f "/etc/debian_version" ]; then
-   echo ""
-   echo "This script is only compatible with Debian-based Linux installations!"
-   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
-   echo ""
-fi
 
 dependencies="xserver-xorg xinit chromium-browser bc"
 IFS='/' read -ra version <<< "$releaseURL"
 
-echo "Installing OctoDash "${version[7]}, $arch""
+echo "Setting up a kiosk browser for use with OctoDash. This script will install required graphical"
+echo "libraries and the Chromium browser,"
+echo "then configure it to launch in kiosk mode with the OctoDash interface."
+
+echo ""
+
+if [ ! -f "/etc/debian_version" ]; then
+   echo ""
+   echo "This script is only compatible with Debian-based Linux installations."
+   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
+   echo ""
+fi
 
 echo "Installing Dependencies ..."
 install-apt $dependencies
 
-text_input "What is the URL of your OctoPrint installation?" octoprint_url "http://localhost:5000/"
+text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
 
 yes_no=( 'yes' 'no' )
 
@@ -47,7 +51,7 @@ xset s noblank
 xset -dpms
 
 EOF
-    echo "chromium-browser $octoprint_url$octoprint_suffix  --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized" >> ~/.xinitrc
+    echo "$browser_launch_string $octoprint_url$octoprint_suffix" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
 if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
