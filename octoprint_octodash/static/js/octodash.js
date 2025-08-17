@@ -4,12 +4,15 @@ $(function () {
 
     self.configPaths = ko.observableArray([]);
 
+    self.legacyInstalled = ko.observable(false);
+
     self.migrated = ko.observable(false);
 
     self.onWizardDetails = function (data) {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
+      self.legacyInstalled(data.octodash.details.legacyInstalled);
     };
 
     self.migrate = path => {
