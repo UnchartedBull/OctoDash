@@ -247,7 +247,10 @@ class OctodashPlugin(
         return True
 
     def get_wizard_details(self):
-        details = {"legacyConfigs": self._find_legacy_config()}
+        details = {
+            "legacyConfigs": self._find_legacy_config(),
+            "legacyInstalled": self._is_legacy_installed(),
+        }
         self._logger.info(f"Returning wizard details: {details}")
         return details
 
@@ -270,6 +273,13 @@ class OctodashPlugin(
                 "pip": "https://github.com/hillshum/OctoPrint-Octodash/archive/{target_version}.zip",
             }
         }
+
+    def _is_legacy_installed(self):
+        with open(os.path.join("~", ".xinitrc")) as f:
+            for line in f:
+                if "octodash" in line:
+                    return True
+        return False
 
     def _find_legacy_config(self):
         paths = [

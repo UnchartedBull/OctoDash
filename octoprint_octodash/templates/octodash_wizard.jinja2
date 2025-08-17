@@ -2,8 +2,22 @@
 
 <p>Welcome to OctoDash v3! Some things are new here</p>
 
-<p>Found config at</p>
-<ul data-bind="foreach: configPaths">
-<li><span data-bind="text: $data" ></span><button data-bind="click: $parent.migrate">Migrate</button></li>
-</ul>
-<p data-bind="if: migrated">Config migrated!</p>
+<div data-bind="if: configPaths().length">
+	<p>An existing legacy OctoDash config was found. Would you like to migrate it?</p>
+	<ul data-bind="foreach: configPaths">
+	<li><span data-bind="text: $data" ></span><button data-bind="click: $parent.migrate">Migrate</button></li>
+	</ul>
+	<p data-bind="if: migrated">Migration Complete!</p>
+</div>
+
+
+<div data-bind="if: legacyInstalled()">
+	<p>We have detected a legacy OctoDash install on this system. To convert, please run the following command:</p>
+	<p><code>bash <(curl -s https://raw.githubusercontent.com/UnchartedBull/OctoDash/plugin-migration/scripts/migrate.sh)</code></p>
+</div>
+
+
+<div data-bind="if: !legacyInstalled()">
+	<p>If you would like to configure a Raspberry Pi to launch OctoDash, please run the following command:</p>
+	<p><code>bash <(curl -s https://raw.githubusercontent.com/UnchartedBull/OctoDash/plugin-migration/scripts/install.sh)</code></p>
+</div>
