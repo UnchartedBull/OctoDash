@@ -70,15 +70,13 @@ jobs:
         run: npm ci
       - name: Building Application
         run: npm run build
-      - name: Packaging Application
-        run: npm run electron:pack
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Install Python build dependencies
+        run: python -m pip install wheel octoprint --user
+      - name: Building Python
+        run: python setup.py sdist --formats=zip
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: |
-            package/*.deb
-            package/*.yaml
-            package/*.yml
+            dist/*.zip
