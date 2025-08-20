@@ -52,6 +52,7 @@ BRANCH_VERSIONS = """
 # maintenance is currently the branch for preparation of maintenance release 1.12.0
 # so are any fix/... and improve/... branches
 main 3.0.0 0ee580c17131e95e4f87c1fc3c5b48c35c895994
+plugin-migration 3.0.0 0ee580c17131e95e4f87c1fc3c5b48c35c895994
 
 """
 
