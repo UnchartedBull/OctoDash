@@ -185,7 +185,7 @@ class OctodashPlugin(
         return {
             "js": ['js/octodash.js'],
             "css": [],
-            "less": [],
+            "less": ['less/wizard.less'],
         }
 
     
@@ -294,10 +294,10 @@ class OctodashPlugin(
         }
 
     def _is_legacy_installed(self):
-        with open(os.path.join("~", ".xinitrc")) as f:
-            for line in f:
-                if "octodash" in line:
-                    return True
+        # with open(os.path.join("~", ".xinitrc")) as f:
+        #     for line in f:
+        #         if "octodash" in line:
+        #             return True
         return False
 
     def _find_legacy_config(self):
