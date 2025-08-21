@@ -1,5 +1,15 @@
 #!/bin/bash
 
+octodash_url_prompt="What is the URL of your OctoDash installation? Be sure to include a trailing slash. If you don't know, push enter to accept the default."
+octodash_url_default="http://localhost:5000/"
+
+browser_launch_string="chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized" 
+octoprint_suffix="plugin/octodash/"
+
+dependencies="xserver-xorg xinit chromium-browser"
+
+yes_no=( 'yes' 'no' )
+
 
 ################## INQUIRER.SH ##################
 # https://github.com/kahkhang/Inquirer.sh
@@ -688,57 +698,34 @@ install-apt() {
   }
 }
 
-
-octodash_url_prompt="What is the URL of your OctoDash installation? Be sure to include a trailing slash. If you don't know, push enter to accept the default."
-octodash_url_default="http://localhost:5000/"
-
-browser_launch_string="chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized" 
-octoprint_suffix="plugin/octodash/"
-
-dependencies="xserver-xorg xinit chromium-browser"
-
-yes_no=( 'yes' 'no' )
-
-
-IFS='/' read -ra version <<< "$releaseURL"
-
-echo "Welcome to the OctoDash helper!"
-echo ""
-
-
-if [ ! -f "$HOME/.xinitrc" ]; then
-  list_input "Would you like to install OctoDash?" yes_no install_octodash
-  if [ "$install_octodash" != "yes" ]; then
-    echo "Installation aborted. Exiting."
-    exit 0
+prompt_reboot() {
+  list_input "Shall I reboot your Pi now?" yes_no reboot
+  echo "OctoDash has been successfully installed! :)"
+  if [ $reboot == 'yes' ]; then
+    sudo reboot
   fi
-fi
 
+}
 
-text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
+update_xinit() {
 
-echo "Setting up a kiosk browser for use with OctoDash."
-echo "This script will install required graphical libraries and the Chromium browser,"
-echo "then configure it to launch in kiosk mode with the OctoDash interface."
+  text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
 
-echo ""
+  echo "Updating .xinitrc to launch Chromium instead of legacy OctoDash..."
 
-if [ ! -f "/etc/debian_version" ]; then
-   echo ""
-   echo "This script is only compatible with Debian-based Linux installations."
-   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
-   echo ""
-fi
+  XINITRC="$HOME/.xinitrc"
+  if grep -q "octodash" "$XINITRC"; then
+      sed -i "s!^octodash.*\$!$browser_launch_string $octoprint_url$octoprint_suffix!" "$XINITRC"
+      echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
+  fi
+}
 
-echo "Installing Dependencies ..."
-install-apt "$dependencies"
+enable_autostart() {
 
+  list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
 
-
-list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
-
-echo $auto_start
-if [ $auto_start == 'yes' ]; then
+  echo $auto_start
+  if [ $auto_start == 'yes' ]; then
     echo "Setting up Autostart ..."
     cat <<EOF > ~/.xinitrc
 #!/bin/sh
@@ -748,6 +735,7 @@ xset s noblank
 xset -dpms
 
 EOF
+    text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
     echo "$browser_launch_string $octoprint_url$octoprint_suffix" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
@@ -774,14 +762,63 @@ EOF
     sudo chmod ug+s /usr/lib/xorg/Xorg
 
     echo "OctoDash will start automatically on next reboot. Auto-login has been enabled!"
+  fi
+
+}
+
+migrate() {
+
+  echo "Migrating from legacy OctoDash installation to v3..."
+  install-apt "$dependencies"
+  update_xinit
+  reboot
+
+}
+
+install() {
+  echo "Setting up a kiosk browser for use with OctoDash."
+  echo "This script will install required graphical libraries and the Chromium browser,"
+  echo "then configure it to launch in kiosk mode with the OctoDash interface."
+  echo ""
+
+  install-apt "$dependencies"
+
+  enable_autostart
+
+  reboot
+}
+
+
+IFS='/' read -ra version <<< "$releaseURL"
+
+echo "Welcome to the OctoDash helper!"
+echo ""
+
+if [ ! -f "/etc/debian_version" ]; then
+   echo ""
+   echo "This script is only compatible with Debian-based Linux installations."
+   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
+   echo ""
+   exit 1
 fi
 
-
-
-list_input "Shall I reboot your Pi now?" yes_no reboot
-echo "OctoDash has been successfully installed! :)"
-if [ $reboot == 'yes' ]; then
-    sudo reboot
+if [ ! -f "$HOME/.xinitrc" ]; then
+  list_input "Would you like to install OctoDash?" yes_no install_octodash
+  if [ "$install_octodash" != "yes" ]; then
+    echo "Installation aborted. Exiting."
+    exit 0
+  fi
+  install
+elif grep -q "^octodash" "$HOME/.xinitrc"; then
+  list_input "Legacy OctoDash is configured.. Would you like to migrate to OctoDash v3?" yes_no migrate_octodash
+  if [ "$migrate_octodash" != "yes" ]; then
+    echo "Migration/reinstallation aborted. Exiting."
+    exit 0
+  fi
+  migrate
+else
+  echo "OctoDash is already configured!"
+  exit 0
 fi
 
 
