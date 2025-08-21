@@ -11,13 +11,8 @@
 </div>
 
 
-<div data-bind="if: legacyInstalled()">
-	<p>We have detected a legacy OctoDash install on this system. To convert, please run the following command:</p>
-	<p><code>bash <(curl -s https://raw.githubusercontent.com/UnchartedBull/OctoDash/plugin-migration/scripts/migrate.sh)</code></p>
-</div>
-
-
-<div data-bind="if: !legacyInstalled()">
-	<p>If you would like to configure a Raspberry Pi to launch OctoDash, please run the following command:</p>
-	<p><code>bash <(curl -s https://raw.githubusercontent.com/UnchartedBull/OctoDash/plugin-migration/scripts/install.sh)</code></p>
-</div>
+<p>To configure a Raspberry Pi to open OctoDash on boot, please run the following commands:</p>
+<pre>
+<code>wget https://raw.githubusercontent.com/UnchartedBull/OctoDash/plugin-migration/scripts/install.sh
+bash install.sh</code>
+</pre>
