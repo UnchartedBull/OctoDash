@@ -93,7 +93,18 @@ export default [
     },
   },
   {
-    files: ['**/*.js'],
+    files: ['octoprint_octodash/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ko: 'readonly',
+        $: 'readonly',
+        OCTOPRINT_VIEWMODELS: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['src/**/*.js'],
 
     languageOptions: {
       globals: {
