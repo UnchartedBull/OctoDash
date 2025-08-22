@@ -261,6 +261,7 @@
       </trans-unit>
       <trans-unit id="continue" datatype="html">
         <source> Continue </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
