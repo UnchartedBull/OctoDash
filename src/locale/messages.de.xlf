@@ -257,6 +257,9 @@
         <source>Can't load file!</source>
         <target>Datei kann nicht gefunden werden!</target>
       </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source> Continue </source>
+      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Kann Gehäuse Temperature nicht laden!</target>
@@ -429,14 +432,6 @@
       <trans-unit id="settings-general-menu" datatype="html">
         <source>general</source>
         <target>Generell</target>
-      </trans-unit>
-      <trans-unit id="general-octoprint-connection" datatype="html">
-        <source>OctoPrint Connection</source>
-        <target>OctoPrint Verbindung</target>
-      </trans-unit>
-      <trans-unit id="general-octoprint-url" datatype="html">
-        <source>Octoprint URL</source>
-        <target>Octoprint URL</target>
       </trans-unit>
       <trans-unit id="general-printer" datatype="html">
         <source>Printer</source>
@@ -1032,10 +1027,6 @@
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
         <target>Kann angepasste styles nicht laden!</target>
-      </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Bitte System neu starten. Sollte der Fehler bestehen bleiben öffne bitte ein Ticket auf GitHub.</target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
