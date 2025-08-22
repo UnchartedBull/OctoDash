@@ -1,6 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
@@ -15,6 +15,7 @@ import { LottieComponent, provideCacheableAnimationLoader, provideLottieOptions 
 import { AppRoutingModule } from './app.routing.module';
 import components from './components';
 import { AppComponent } from './components/app.component';
+import { csrfInterceptor } from './csrfInterceptor';
 import directives from './directives';
 import pipes from './pipes';
 import services from './services';
@@ -40,7 +41,7 @@ import services from './services';
     [provideCacheableAnimationLoader()],
     { provide: APP_BASE_HREF, useValue: '/plugin/octodash' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([csrfInterceptor])),
   ],
 })
 export class AppModule {
