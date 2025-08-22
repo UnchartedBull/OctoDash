@@ -6,7 +6,8 @@ Some bits (noted below) are taken from the OctoDash Companion plugin which is av
 See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
 """
 from __future__ import absolute_import
-
+import re
+from importlib import resources
 import shutil
 
 from flask import make_response, send_file, request
@@ -208,6 +209,15 @@ class OctodashPlugin(
     def get_ui_root(self, path):
         return send_file(self._get_index_path())
 
+    @octoprint.plugin.BlueprintPlugin.route("/api/copy_script", methods=["POST"])
+    def copy_script(self):
+        try:
+            self._create_management_script()
+            return make_response(json.dumps({"success": True}), 200)
+        except Exception as e:
+            self._logger.exception("Error copying management script")
+            return make_response(json.dumps({"error": str(e)}), 500)
+
     @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
     @Permissions.ADMIN.require(403)
     def migrate_legacy_config(self):
@@ -268,7 +278,6 @@ class OctodashPlugin(
     def get_wizard_details(self):
         details = {
             "legacyConfigs": self._find_legacy_config(),
-            "legacyInstalled": self._is_legacy_installed(),
         }
         self._logger.info(f"Returning wizard details: {details}")
         return details
@@ -293,12 +302,11 @@ class OctodashPlugin(
             }
         }
 
-    def _is_legacy_installed(self):
-        # with open(os.path.join("~", ".xinitrc")) as f:
-        #     for line in f:
-        #         if "octodash" in line:
-        #             return True
-        return False
+    def _create_management_script(self):
+        with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
+            # copy the script to the appropriate location
+            target_path = os.path.expanduser(os.path.join("~", "manage-octodash.sh"))
+            shutil.copy(script_path, target_path)
 
     def _find_legacy_config(self):
         paths = [
