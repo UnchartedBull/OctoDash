@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 
 import { fixupConfigRules, fixupPluginRules, includeIgnoreFile } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
@@ -101,6 +101,9 @@ export default [
         $: 'readonly',
         OCTOPRINT_VIEWMODELS: 'readonly',
       },
+    },
+    rules: {
+      '@typescript-eslint/no-this-alias': 'off',
     },
   },
   {

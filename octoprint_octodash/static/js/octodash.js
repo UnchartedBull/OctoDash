@@ -1,5 +1,5 @@
 $(function () {
-  function OctoDashViewModel(parameters) {
+  function OctoDashViewModel() {
     var self = this;
 
     self.configPaths = ko.observableArray([]);
@@ -21,7 +21,7 @@ $(function () {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ path: path }),
-        success: function (response) {
+        success: function () {
           self.migrated(true);
         },
         error: function (xhr, status, error) {
