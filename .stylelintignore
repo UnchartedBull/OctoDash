@@ -6,3 +6,4 @@ docs/fonts/ionicons/
 src/reset.css
 
 octoprint_octodash/static/ui/
+build/
