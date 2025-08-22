@@ -1,14 +1,14 @@
-
 <app-config-setup-octoprint-authentication
-[octoprintURL]="'/'"
-(increasePage)="submit()"
-[(accessToken)]="accessToken"
-></app-config-setup-octoprint-authentication>
+  [octoprintURL]="'/'"
+  (increasePage)="submit()"
+  [(accessToken)]="accessToken"></app-config-setup-octoprint-authentication>
 <div class="login-screen__footer">
-    <button
+  <button
     mat-button
     class="login-screen__continue-button"
     (click)="submit()"
     [disabled]="!accessToken"
-    i18n="@@continue">Continue</button>
+    i18n="@@continue">
+    Continue
+  </button>
 </div>
