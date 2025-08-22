@@ -8,11 +8,23 @@ $(function () {
 
     self.migrated = ko.observable(false);
 
+    self.copySuccess = ko.observable(false);
+    self.copyError = ko.observable(false);
+
     self.onWizardDetails = function (data) {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
       self.legacyInstalled(data.octodash.details.legacyInstalled);
+    };
+
+    self.copyScript = () => {
+      $.ajax({
+        url: '/plugin/octodash/api/copy_script',
+        type: 'POST',
+      })
+        .then(() => self.copySuccess(true))
+        .catch(() => self.copyError(true));
     };
 
     self.migrate = path => {

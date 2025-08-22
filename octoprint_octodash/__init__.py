@@ -7,6 +7,8 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
 """
 from __future__ import absolute_import
 import re
+from importlib import resources
+import shutil
 
 from flask import make_response, send_file, redirect, request
 import os.path
@@ -192,6 +194,14 @@ class OctodashPlugin(
     def on_ui_render(self, now, request, render_kwargs):
         return redirect("/plugin/octodash/", code=307)
     
+    @octoprint.plugin.BlueprintPlugin.route("/api/copy_script", methods=["POST"])
+    def copy_script(self):
+        try:
+            self._create_management_script()
+            return make_response(json.dumps({"success": True}), 200)
+        except Exception as e:
+            self._logger.exception("Error copying management script")
+            return make_response(json.dumps({"error": str(e)}), 500)
 
     #TODO: Auth and CSRF stuff
     @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
@@ -249,7 +259,6 @@ class OctodashPlugin(
     def get_wizard_details(self):
         details = {
             "legacyConfigs": self._find_legacy_config(),
-            "legacyInstalled": self._is_legacy_installed(),
         }
         self._logger.info(f"Returning wizard details: {details}")
         return details
@@ -274,12 +283,11 @@ class OctodashPlugin(
             }
         }
 
-    def _is_legacy_installed(self):
-        # with open(os.path.join("~", ".xinitrc")) as f:
-        #     for line in f:
-        #         if "octodash" in line:
-        #             return True
-        return False
+    def _create_management_script(self):
+        with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
+            # copy the script to the appropriate location
+            target_path = os.path.expanduser(os.path.join("~", "manage-octodash.sh"))
+            shutil.copy(script_path, target_path)
 
     def _find_legacy_config(self):
         paths = [
