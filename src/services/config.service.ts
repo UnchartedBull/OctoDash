@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
-import { BehaviorSubject, map, throwError } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { NotificationService } from './notification.service';
