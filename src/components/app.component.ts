@@ -53,7 +53,10 @@ export class AppComponent implements OnInit {
       complete: () => {
         this.connectWebsocket();
       },
-      error: () => this.router.navigate(['/login']),
+      error: e => {
+        console.error('Error fetching config:', e);
+        this.router.navigate(['/login']);
+      },
     });
   }
 

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { catchError, pluck, startWith } from 'rxjs/operators';
+import { catchError, pluck, startWith, tap } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import {
@@ -128,7 +128,8 @@ export class OctoPrintSocketService implements SocketService {
           },
         });
       },
-      error: () => {
+      error: e => {
+        console.error(e);
         setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
         this.fastInterval += 1;
       },
