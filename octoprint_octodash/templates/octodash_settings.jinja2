@@ -1,0 +1,206 @@
+<h4>OctoDash Companion Settings <small>{{ _('Version') }} {{ plugin_octodash_plugin_version }}</small></h4>
+<div class="tabbable">
+    <ul class="nav nav-pills" id="bedlevelvisualizer_tabs">
+        <li class="active"><a data-toggle="tab" href="#octodash_general">General</a></li>
+        <li><a data-toggle="tab" href="#octodash_custom_actions">Custom Actions</a></li>
+        <li><a data-toggle="tab" href="#octodash_plugins">Plugins</a></li>
+    </ul>
+    <form class="form" id="settings_plugin_octodash_form">
+        <div class="tab-content">
+            <div id="octodash_general" class="tab-pane active">
+                <div class="row-fluid">
+                    <div class="well">Upload your custom theme's <span class="label">custom-styles.css</span> file via OctoPrint's interface like it was a gcode file. Once uploaded you will have to restart OctoDash for the changes to take effect. The below settings are assuming OctoDash's config.json file is located at <span class="label" data-bind="text: settingsViewModel.settings.plugins.octodash_directory"> </span> and running on the same machine as this OctoPrint instance.</div>
+                    <div class="control-group">
+                        <label class="control-label">{{ _('Printer Name') }}</label>
+                        <div class="controls">
+                            <input type="text" class="input-block-level" data-bind="value: settingsViewModel.settings.plugins.octodash.printer.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="octodash_custom_actions" class="tab-pane">
+                <div class="row-fluid">
+                    <div class="control-group">
+                        <label class="control-label">{{ _('Custom Actions') }} <button class="btn btn-mini btn-primary" data-bind="click: $root.add_custom_action" title="Use this to add a new custom action below."><i class="fas fa-plus" aria-hidden="true"></i> Add</button></label>
+                        <div class="controls">
+                            <div class="span3" data-bind="sortable: { data: settingsViewModel.settings.plugins.octodash.octodash.customActions, options: { cancel: '.unsortable'}}">
+                                <button class="btn btn-large span6" data-bind="click: $root.selected_command, style: {'border-color': color()}, css: {'active': ($root.selected_command() == $rawData), 'disabled': ($root.selected_command() !== $rawData)}">
+                                    <i class="fa fa-2x" data-bind="class: (icon().indexOf('fa-') == -1) ? 'fa-' + icon() : icon(), style: {'color': color()}"  aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="span9">
+                                <div class="row-fluid" data-bind="with: selected_command">
+                                    <div class="btn-group pull-right input-append">
+                                        <button class="btn" data-bind="click: $root.copy_custom_action"><i class="fas fa-copy" aria-hidden="true"></i> {{ _('Copy') }}</button>
+                                        <button class="btn btn-danger" data-bind="click: $root.remove_custom_action"><i class="fas fa-trash" aria-hidden="true"></i> {{ _('Delete') }}</button>
+                                    </div>
+                                    <div class="well">
+                                        <div class="control-group">
+                                            <label class="control-label">{{ _('Icon') }}</label>
+                                            <div class="controls">
+                                                <input type="text" class="iconpicker input-block iconpicker-input" data-bind="value: icon, iconpicker: icon, iconpickerOptions: {hideOnSelect: true, collision: true, inputSearch: true, fullClassFormatter: function(val) {return 'fas fa-' + val;}, icons: $root.octodash_icons}"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">{{ _('Command') }}</label>
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input type="text" class="input-block-level" data-bind="value: command" placeholder="Enter GCODE command or select predefined custom action." title="Enter GCODE command or select predefined custom action on right." />
+                                                    <div class="btn-group dropdown">
+                                                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!STOPDASHBOARD]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!DISCONNECT]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!RELOAD]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SHUTDOWN]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!REBOOT]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!KILL]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWEROFF]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWERON]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWERTOGGLE]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!WEB]http://</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!WEBCAM]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!RESTARTSERVICE]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SLEEP]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!NEOPIXEL]identifier,red,green,blue</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!OUTPUT]identifier,status</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!OUTPUT_PWM]identifier,duty-cycle</a></li>
+                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SWITCH_INSTANCE]</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">{{ _('Color') }}</label>
+                                            <div class="controls">
+                                                <input type="color" class="input-block" data-bind="value: color"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="checkbox">{{ _('Show Confirmation Prompt') }}<input type="checkbox" data-bind="checked: confirm" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <label class="checkbox">{{ _('Return to OctoDash Home Screen') }}<input type="checkbox" data-bind="checked: exit" /></label>
+                                            </div>
+                                        </div>
+                                        <div class="well well-small alert-danger" id="settings_plugin_octodash_warning">{{ _('Make sure to press the Save button below or your changes will be lost, use the Close button to discard your changes. Removing a custom action will delete all exact duplicates of the same custom action being deleted.') }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="octodash_plugins" class="tab-pane">
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Display Layer Progress') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.displayLayerProgress.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Enclosure') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.enclosure.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.enclosure.enabled()">
+                    <label>{{ _('Ambient Sensor ID') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.enclosure.ambientSensorID" />
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.enclosure.enabled()">
+                    <label>{{ _('Filament 1 Sensor ID') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.enclosure.filament1SensorID" />
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.enclosure.enabled()">
+                    <label>{{ _('Filament 2 Sensor ID') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.enclosure.filament2SensorID" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Filament Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.filamentManager.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Spool Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.spoolManager.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Preheat Button') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.preheatButton.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Print Time Genius') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.printTimeGenius.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('PSU Control') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.psuControl.enabled" /></label>
+                    </div>
+                </div>
+                <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug -->
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('TPLinkSmartplug') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.enabled()">
+                    <label>{{ _('Smartplug IP') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.smartPlugIP" />
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tasmota -->
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Tasmota') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tasmota.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmota.enabled()">
+                    <label>{{ _('Tasmota IP') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmota.ip" />
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmota.enabled()">
+                    <label>{{ _('Index') }}</label>
+                    <div class="controls">
+                        <input type="number" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmota.index" />
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt -->
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">{{ _('Tasmota MQTT') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled" /></label>
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled()">
+                    <label>{{ _('Topic') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.topic" />
+                    </div>
+                </div>
+                <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled()">
+                    <label>{{ _('Relay Number') }}</label>
+                    <div class="controls">
+                        <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.relayNumber" />
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </form>
+</div>

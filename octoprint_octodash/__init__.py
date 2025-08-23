@@ -185,9 +185,18 @@ class OctodashPlugin(
         # Define your plugin's asset files to automatically include in the
         # core UI here.
         return {
-            "js": ['js/octodash.js'],
-            "css": [],
-            "less": ['less/wizard.less'],
+            "js": [
+                'js/octodash-icons.js',
+                'js/octodash.js',
+                "js/jquery-ui.min.js",
+                "js/knockout-sortable.1.2.0.js",
+                "js/fontawesome-iconpicker.min.js",
+                "js/ko.iconpicker.js",
+            ],
+            "css": [
+                "css/fontawesome-iconpicker.min.css",
+            ],
+            "less": ['less/wizard.less', 'less/settings.less'],
         }
 
     
