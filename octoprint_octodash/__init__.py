@@ -16,6 +16,7 @@ import os.path
 import json
 
 import octoprint.plugin
+from octoprint.access.permissions import Permissions
 
 
 
@@ -195,6 +196,7 @@ class OctodashPlugin(
         return redirect("/plugin/octodash/", code=307)
     
     @octoprint.plugin.BlueprintPlugin.route("/api/copy_script", methods=["POST"])
+    @Permissions.ADMIN.require(403)
     def copy_script(self):
         try:
             self._create_management_script()
@@ -203,8 +205,8 @@ class OctodashPlugin(
             self._logger.exception("Error copying management script")
             return make_response(json.dumps({"error": str(e)}), 500)
 
-    #TODO: Auth and CSRF stuff
     @octoprint.plugin.BlueprintPlugin.route("/api/migrate", methods=["POST"])
+    @Permissions.ADMIN.require(403)
     def migrate_legacy_config(self):
         #TODO: Don't blindly use the path from the request
         data = request.json
@@ -223,11 +225,12 @@ class OctodashPlugin(
 
     @octoprint.plugin.BlueprintPlugin.route("/", defaults={"path": ""}, methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.csrf_exempt()
     def get_ui_root(self, path):
         return send_file(self._get_index_path())
 
     def is_blueprint_csrf_protected(self):
-        return False
+        return True
 
     def is_blueprint_protected(self):
         return False
