@@ -6,11 +6,6 @@ $(function () {
 
     self.legacyInstalled = ko.observable(false);
 
-    self.migrated = ko.observable(false);
-
-    self.copySuccess = ko.observable(false);
-    self.copyError = ko.observable(false);
-
     self.onWizardDetails = function (data) {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
@@ -23,8 +18,22 @@ $(function () {
         url: '/plugin/octodash/api/copy_script',
         type: 'POST',
       })
-        .then(() => self.copySuccess(true))
-        .catch(() => self.copyError(true));
+        .then(() => {
+          new PNotify({
+            title: 'OctoDash Script Copy Successful!',
+            text: '<div class="row-fluid"><p>The OctoDash startup script has been successfully copied.</p></div>',
+            hide: true,
+            type: 'success',
+          });
+        })
+        .catch(() => {
+          new PNotify({
+            title: 'OctoDash Script Copy Failed',
+            text: '<div class="row-fluid"><p>Failed to copy the OctoDash startup script.</p></div>',
+            hide: false,
+            type: 'error',
+          });
+        });
     };
 
     self.migrate = path => {
@@ -34,12 +43,22 @@ $(function () {
         contentType: 'application/json',
         data: JSON.stringify({ path: path }),
         success: function () {
-          self.migrated(true);
+          new PNotify({
+            title: 'OctoDash Config Migration Successful!',
+            text: `<div class="row-fluid"><p>The config from \`${path}\` has been successfully migrated.</p></div>`,
+            hide: true,
+            type: 'success',
+          });
         },
         error: function (xhr, status, error) {
           // TODO: Better handle this
           console.error('Migration failed:', error);
-          alert('Migration failed: ' + error);
+          new PNotify({
+            title: 'OctoDash Config Migration Failed',
+            text: `<div class="row-fluid"><p>Migration failed with the following error: ${error}</p></div>`,
+            hide: false,
+            type: 'error',
+          });
         },
       });
     };

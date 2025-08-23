@@ -99,6 +99,7 @@ export default [
         ...globals.browser,
         ko: 'readonly',
         $: 'readonly',
+        PNotify: 'readonly',
         OCTOPRINT_VIEWMODELS: 'readonly',
       },
     },
