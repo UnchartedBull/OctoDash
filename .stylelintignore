@@ -5,5 +5,6 @@ docs/css/theme.css
 docs/fonts/ionicons/
 src/reset.css
 
-octoprint_octodash/static/ui
+octoprint_octodash/static/ui/
+octoprint_octodash/static/vendor/
 build/
