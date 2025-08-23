@@ -184,15 +184,15 @@ class OctodashPlugin(
         # core UI here.
         return {
             "js": [
+                "vendor/js/jquery-ui.min.js",
+                "vendor/js/knockout-sortable.1.2.0.js",
+                "vendor/js/fontawesome-iconpicker.min.js",
+                "vendor/js/ko.iconpicker.js",
                 'js/octodash-icons.js',
                 'js/octodash.js',
-                "js/jquery-ui.min.js",
-                "js/knockout-sortable.1.2.0.js",
-                "js/fontawesome-iconpicker.min.js",
-                "js/ko.iconpicker.js",
             ],
             "css": [
-                "css/fontawesome-iconpicker.min.css",
+                "vendor/css/fontawesome-iconpicker.min.css",
             ],
             "less": ['less/wizard.less', 'less/settings.less'],
         }
