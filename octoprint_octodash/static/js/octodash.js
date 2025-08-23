@@ -42,16 +42,16 @@ $(function () {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ path: path }),
-        success: function () {
+      })
+        .then(() => {
           new PNotify({
             title: 'OctoDash Config Migration Successful!',
             text: `<div class="row-fluid"><p>The config from \`${path}\` has been successfully migrated.</p></div>`,
             hide: true,
             type: 'success',
           });
-        },
-        error: function (xhr, status, error) {
-          // TODO: Better handle this
+        })
+        .catch(error => {
           console.error('Migration failed:', error);
           new PNotify({
             title: 'OctoDash Config Migration Failed',
@@ -59,8 +59,7 @@ $(function () {
             hide: false,
             type: 'error',
           });
-        },
-      });
+        });
     };
   }
 
