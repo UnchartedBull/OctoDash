@@ -188,12 +188,19 @@ class OctodashPlugin(
             "less": ['less/wizard.less'],
         }
 
+    ##~ UiPlugin mixin
+
     def will_handle_ui(self, request):
         if request.args.get("octodash") == "1":
             return True
 
     def on_ui_render(self, now, request, render_kwargs):
         return redirect("/plugin/octodash/", code=307)
+
+    def get_ui_permissions(self):
+        return []
+
+    ##~ BlueprintPlugin mixin
     
     @octoprint.plugin.BlueprintPlugin.route("/api/copy_script", methods=["POST"])
     @Permissions.ADMIN.require(403)
@@ -238,26 +245,14 @@ class OctodashPlugin(
     def get_blueprint_api_prefixes(self):
         return ['api']
 
-    def _get_index_path(self):
-        """Return the path on the filesystem to the index.html file to be used for
-        index.html. This needs to take into account the configured language and 
-        whether the UI build was dev or production.
-        """
 
-        # Check if the UI is in dev mode
-        devpath = os.path.join(self._basefolder, "static", "ui", "index.html")
-        if os.path.exists(devpath):
-            # Dev mode
-            return devpath
-        
-        #TODO: Read the language from config
-        return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
-
-    def get_ui_permissions(self):
-        return []
+    ##~ WizardPlugin mixin
 
     def is_wizard_required(self):
         return True
+
+    def get_wizard_version(self):
+        return 1
 
     def get_wizard_details(self):
         details = {
@@ -286,6 +281,8 @@ class OctodashPlugin(
             }
         }
 
+    ##~ Setup/Install helpers
+
     def _create_management_script(self):
         with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
             # copy the script to the appropriate location
@@ -303,7 +300,6 @@ class OctodashPlugin(
         return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
 
 
-
     def _migrate_legacy_config(self, path):
         with open(path, 'r') as f:
             conf = json.load(f)["config"]
@@ -313,6 +309,22 @@ class OctodashPlugin(
                 settings.set([key], conf[key])
             settings.save()
 
+    ##~ General helpers
+
+    def _get_index_path(self):
+        """Return the path on the filesystem to the index.html file to be used for
+        index.html. This needs to take into account the configured language and 
+        whether the UI build was dev or production.
+        """
+
+        # Check if the UI is in dev mode
+        devpath = os.path.join(self._basefolder, "static", "ui", "index.html")
+        if os.path.exists(devpath):
+            # Dev mode
+            return devpath
+        
+        #TODO: Read the language from config
+        return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
 
 
 
