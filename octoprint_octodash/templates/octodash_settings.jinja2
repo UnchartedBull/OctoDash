@@ -1,4 +1,4 @@
-<h4>OctoDash Companion Settings <small>{{ _('Version') }} {{ plugin_octodash_plugin_version }}</small></h4>
+<h4>OctoDash Settings <small>{{ _('Version') }} {{ plugin_octodash_plugin_version }}</small></h4>
 <div class="tabbable">
     <ul class="nav nav-pills" id="bedlevelvisualizer_tabs">
         <li class="active"><a data-toggle="tab" href="#octodash_general">General</a></li>
@@ -21,24 +21,24 @@
             <div id="octodash_custom_actions" class="tab-pane">
                 <div class="row-fluid">
                     <div class="control-group">
-                        <label class="control-label">{{ _('Custom Actions') }} <button class="btn btn-mini btn-primary" data-bind="click: $root.add_custom_action" title="Use this to add a new custom action below."><i class="fas fa-plus" aria-hidden="true"></i> Add</button></label>
+                        <label class="control-label">{{ _('Custom Actions') }} <button class="btn btn-mini btn-primary" data-bind="click: $root.addCustomAction" title="Use this to add a new custom action below."><i class="fas fa-plus" aria-hidden="true"></i> Add</button></label>
                         <div class="controls">
                             <div class="span3" data-bind="sortable: { data: settingsViewModel.settings.plugins.octodash.octodash.customActions, options: { cancel: '.unsortable'}}">
-                                <button class="btn btn-large span6" data-bind="click: $root.selected_command, style: {'border-color': color()}, css: {'active': ($root.selected_command() == $rawData), 'disabled': ($root.selected_command() !== $rawData)}">
+                                <button class="btn btn-large span6" data-bind="click: $root.selectedCommand, style: {'border-color': color()}, css: {'active': ($root.selectedCommand() == $rawData), 'disabled': ($root.selectedCommand() !== $rawData)}">
                                     <i class="fa fa-2x" data-bind="class: (icon().indexOf('fa-') == -1) ? 'fa-' + icon() : icon(), style: {'color': color()}"  aria-hidden="true"></i>
                                 </button>
                             </div>
                             <div class="span9">
-                                <div class="row-fluid" data-bind="with: selected_command">
+                                <div class="row-fluid" data-bind="with: selectedCommand">
                                     <div class="btn-group pull-right input-append">
-                                        <button class="btn" data-bind="click: $root.copy_custom_action"><i class="fas fa-copy" aria-hidden="true"></i> {{ _('Copy') }}</button>
-                                        <button class="btn btn-danger" data-bind="click: $root.remove_custom_action"><i class="fas fa-trash" aria-hidden="true"></i> {{ _('Delete') }}</button>
+                                        <button class="btn" data-bind="click: $root.copyCustomAction"><i class="fas fa-copy" aria-hidden="true"></i> {{ _('Copy') }}</button>
+                                        <button class="btn btn-danger" data-bind="click: $root.removeCustomAction"><i class="fas fa-trash" aria-hidden="true"></i> {{ _('Delete') }}</button>
                                     </div>
                                     <div class="well">
                                         <div class="control-group">
                                             <label class="control-label">{{ _('Icon') }}</label>
                                             <div class="controls">
-                                                <input type="text" class="iconpicker input-block iconpicker-input" data-bind="value: icon, iconpicker: icon, iconpickerOptions: {hideOnSelect: true, collision: true, inputSearch: true, fullClassFormatter: function(val) {return 'fas fa-' + val;}, icons: $root.octodash_icons}"/>
+                                                <input type="text" class="iconpicker input-block iconpicker-input" data-bind="value: icon, iconpicker: icon, iconpickerOptions: {hideOnSelect: true, collision: true, inputSearch: true, fullClassFormatter: function(val) {return 'fas fa-' + val;}, icons: $root.octodashIcons}"/>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -49,23 +49,23 @@
                                                     <div class="btn-group dropdown">
                                                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                                         <ul class="dropdown-menu pull-right">
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!STOPDASHBOARD]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!DISCONNECT]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!RELOAD]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SHUTDOWN]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!REBOOT]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!KILL]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWEROFF]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWERON]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!POWERTOGGLE]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!WEB]http://</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!WEBCAM]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!RESTARTSERVICE]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SLEEP]</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!NEOPIXEL]identifier,red,green,blue</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!OUTPUT]identifier,status</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!OUTPUT_PWM]identifier,duty-cycle</a></li>
-                                                            <li><a href="#" data-bind="click: $root.add_custom_action_token">[!SWITCH_INSTANCE]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!STOPDASHBOARD]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!DISCONNECT]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!RELOAD]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!SHUTDOWN]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!REBOOT]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!KILL]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!POWEROFF]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!POWERON]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!POWERTOGGLE]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!WEB]http://</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!WEBCAM]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!RESTARTSERVICE]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!SLEEP]</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!NEOPIXEL]identifier,red,green,blue</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!OUTPUT]identifier,status</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!OUTPUT_PWM]identifier,duty-cycle</a></li>
+                                                            <li><a href="#" data-bind="click: $root.addCustomActionToken">[!SWITCH_INSTANCE]</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -6,10 +6,9 @@ $(function () {
 
     self.legacyInstalled = ko.observable(false);
     self.settingsViewModel = parameters[0];
-    self.selected_command = ko.observable();
+    self.selectedCommand = ko.observable();
     self.process = ko.observable();
     self.processing = ko.observable(false);
-    self.backup_message = ko.observable('');
 
     self.onWizardDetails = function (data) {
       console.log(data);
@@ -67,90 +66,18 @@ $(function () {
         });
     };
 
-    self.add_custom_action = function () {
-      self.selected_command({
+    self.addCustomAction = function () {
+      self.selectedCommand({
         color: ko.observable('#dcdde1'),
         command: ko.observable(''),
         confirm: ko.observable(false),
         exit: ko.observable(true),
         icon: ko.observable('home'),
       });
-      self.settingsViewModel.settings.plugins.octodashcompanion.config.octodash.customActions.push(
-        self.selected_command(),
-      );
+      self.settingsViewModel.settings.plugins.octodash.octodash.customActions.push(self.selectedCommand());
     };
 
-    // self.perform_backup = function () {
-    //   self.process('backup');
-    //   self.processing(true);
-    //   OctoPrint.simpleApiCommand('octodashcompanion', 'backup_config')
-    //     .done(function (data) {
-    //       if (data.success === true) {
-    //         $('#backup_btn').addClass('btn-success');
-    //         self.backup_message('Success!');
-    //         self.settingsViewModel.settings.plugins.octodashcompanion.last_backup(data.last_backup);
-    //         setTimeout(function () {
-    //           $('#backup_btn').removeClass('btn-success');
-    //           self.backup_message('');
-    //           self.processing(false);
-    //         }, 3000);
-    //       } else {
-    //         $('#backup_btn').addClass('btn-danger');
-    //         setTimeout(function () {
-    //           $('#backup_btn').removeClass('btn-danger');
-    //           self.backup_message('');
-    //           self.processing(false);
-    //         }, 3000);
-    //         self.backup_message('Error: ' + data.error);
-    //       }
-    //     })
-    //     .fail(function (data) {
-    //       $('#backup_btn').addClass('btn-danger');
-    //       self.backup_message('Error: ' + data.responseJSON.error);
-    //       setTimeout(function () {
-    //         $('#backup_btn').removeClass('btn-danger');
-    //         self.backup_message('');
-    //         self.processing(false);
-    //       }, 3000);
-    //     });
-    // };
-
-    // self.perform_restore = function () {
-    //   self.process('restore');
-    //   self.processing(true);
-    //   OctoPrint.simpleApiCommand('octodashcompanion', 'restore_config')
-    //     .done(function (data) {
-    //       if (data.success === true) {
-    //         $('#restore_btn').addClass('btn-success');
-    //         self.backup_message('Success!');
-    //         self.settingsViewModel.settings.plugins.octodashcompanion.last_backup(data.last_backup);
-    //         setTimeout(function () {
-    //           $('#restore_btn').removeClass('btn-success');
-    //           self.backup_message('');
-    //           self.processing(false);
-    //         }, 3000);
-    //       } else {
-    //         $('#restore_btn').addClass('btn-danger');
-    //         setTimeout(function () {
-    //           $('#restore_btn').removeClass('btn-danger');
-    //           self.backup_message('');
-    //           self.processing(false);
-    //         }, 3000);
-    //         self.backup_message('Error: ' + data.error);
-    //       }
-    //     })
-    //     .fail(function (data) {
-    //       $('#restore_btn').addClass('btn-danger');
-    //       self.backup_message('Error: ' + data.responseJSON.error);
-    //       setTimeout(function () {
-    //         $('#restore_btn').removeClass('btn-danger');
-    //         self.backup_message('');
-    //         self.processing(false);
-    //       }, 3000);
-    //     });
-    // };
-
-    self.add_custom_action_token = function (data, event) {
+    self.addCustomActionToken = function (data, event) {
       switch (event.currentTarget.text) {
         case '[!WEBCAM]':
           data.command(
@@ -197,28 +124,27 @@ $(function () {
       }
     };
 
-    self.remove_custom_action = function (data) {
-      self.selected_command(null);
-      self.settingsViewModel.settings.plugins.octodashcompanion.config.octodash.customActions.remove(data);
+    self.removeCustomAction = function (data) {
+      self.selectedCommand(null);
+      self.settingsViewModel.settings.plugins.octodash.octodash.customActions.remove(data);
     };
 
-    self.copy_custom_action = function (data) {
-      self.selected_command({
+    self.copyCustomAction = function (data) {
+      self.selectedCommand({
         color: ko.observable(data.color()),
         command: ko.observable(data.command()),
         confirm: ko.observable(data.confirm()),
         exit: ko.observable(data.exit()),
         icon: ko.observable(data.icon()),
       });
-      self.settingsViewModel.settings.plugins.octodashcompanion.config.octodash.customActions.push(
-        self.selected_command(),
-      );
+      self.settingsViewModel.settings.plugins.octodash.octodash.customActions.push(self.selectedCommand());
     };
 
     self.onSettingsHidden = function () {
-      self.selected_command(null);
+      self.selectedCommand(null);
     };
-    self.octodash_icons = window.OCTODASH_ICONS;
+
+    self.octodashIcons = window.OCTODASH_ICONS;
   }
 
   // Register the view model with OctoPrint
