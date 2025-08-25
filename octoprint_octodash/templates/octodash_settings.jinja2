@@ -252,6 +252,38 @@
           </div>
         </div>
         <!-- /ko -->
+        <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tuya -->
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">{{ _('Tuya') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tuya.enabled" /></label>
+          </div>
+        </div>
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tuya.enabled()">
+          <label>{{ _('Label') }}</label>
+          <div class="controls">
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tuya.label" />
+          </div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.wemo -->
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">{{ _('WeMo') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.wemo.enabled" /></label>
+          </div>
+        </div>
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.wemo.enabled()">
+          <label>{{ _('IP Address') }}</label>
+          <div class="controls">
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.wemo.ip" />
+          </div>
+        </div>
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.wemo.enabled()">
+          <label>{{ _('Port') }}</label>
+          <div class="controls">
+            <input type="number" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.wemo.port" />
+          </div>
+        </div>
+        <!-- /ko -->
       </div>
     </div>
   </form>
