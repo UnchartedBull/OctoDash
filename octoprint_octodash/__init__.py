@@ -10,13 +10,16 @@ import re
 from importlib import resources
 import shutil
 
-from flask import make_response, send_file, redirect, request
+from flask import make_response, send_file, redirect, request, Response
 import os.path
 
 import json
 
 import octoprint.plugin
 from octoprint.access.permissions import Permissions
+from octoprint.filemanager import FileDestinations
+from octoprint.util.paths import normalize
+from octoprint.events import Events
 
 
 
@@ -24,6 +27,7 @@ from octoprint.access.permissions import Permissions
 class OctodashPlugin(
     octoprint.plugin.SettingsPlugin,
     octoprint.plugin.AssetPlugin,
+    octoprint.plugin.EventHandlerPlugin,
     octoprint.plugin.UiPlugin,
     octoprint.plugin.TemplatePlugin,
     octoprint.plugin.StartupPlugin,
@@ -147,6 +151,28 @@ class OctodashPlugin(
             },
         }
 
+    ##~ EventHandler Mixin
+
+    def on_event(self, event, payload):
+        if event == Events.UPLOAD:
+            #TODO: Better error handling and notifications
+            if payload["target"] == "local" and payload["path"] == "custom-styles.css":
+                source_file = self._file_manager.sanitize_path(FileDestinations.LOCAL, payload["path"])
+                destination_file = normalize("{}/custom-styles.css".format(self.get_plugin_data_folder()))
+                self._logger.debug("attempting copy of {} to {}".format(source_file, destination_file))
+                shutil.copyfile(source_file, destination_file)
+                self._logger.debug("attempting removal of {}".format(source_file))
+                self._file_manager.remove_file(FileDestinations.LOCAL, payload["path"])
+    
+    # ~~ extension_tree hook
+
+    def get_extension_tree(self, *args, **kwargs):
+        return dict(
+            machinecode=dict(
+                octodashcompanion=["css", "json"]
+            )
+        )
+
     # ~~ GCode Received hook
 
     # From OctoDash Companion
@@ -238,6 +264,15 @@ class OctodashPlugin(
             return make_response(json.dumps({"success": True, "config": legacy_config}), 200)
         except Exception as e:
             return make_response(json.dumps({"error": str(e)}), 500)
+    
+    @octoprint.plugin.BlueprintPlugin.route("/custom-styles.css")
+    @octoprint.plugin.BlueprintPlugin.csrf_exempt()
+    def get_custom_styles(self):
+        if not os.path.exists(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder()))):
+            #TODO: Better message, maybe reference docs
+            message = "/* Upload a file called `custom-styles.css` and it will get used here by OctoDash */"
+            return Response(message, mimetype="text/css")
+        return send_file(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder())))
 
     @octoprint.plugin.BlueprintPlugin.route("/", defaults={"path": ""}, methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
@@ -359,5 +394,6 @@ def __plugin_load__():
     __plugin_hooks__ = {
         "octoprint.comm.protocol.gcode.received": __plugin_implementation__.process_received_gcode,
         "octoprint.comm.protocol.gcode.sent": __plugin_implementation__.process_sent_gcode,
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+        "octoprint.filemanager.extension_tree": __plugin_implementation__.get_extension_tree,
     }
