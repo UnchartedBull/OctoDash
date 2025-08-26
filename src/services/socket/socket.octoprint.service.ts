@@ -374,6 +374,10 @@ export class OctoPrintSocketService implements SocketService {
       case 'Disconnected':
         newState = PrinterEvent.CLOSED;
         break;
+      case 'SettingsUpdated':
+        console.log('Settings updated');
+        window.location.reload();
+        break;
       case 'Error':
         newState = PrinterEvent.CLOSED;
         if (state.event.payload) {
