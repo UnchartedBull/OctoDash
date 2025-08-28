@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ConfigService } from '../../../services/config.service';
-import { ElectronService } from '../../../services/electron.service';
 
 @Component({
   selector: 'app-config-invalid',
@@ -12,11 +11,8 @@ import { ElectronService } from '../../../services/electron.service';
 export class ConfigInvalidComponent implements OnInit {
   public errors: string[];
 
-  public constructor(
-    private configService: ConfigService,
-    private electronService: ElectronService,
-  ) {
-    this.electronService.send('resetConfig');
+  public constructor(private configService: ConfigService) {
+    // TODO: Reset config
   }
 
   public ngOnInit(): void {

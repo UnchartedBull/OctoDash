@@ -4,7 +4,6 @@ import * as _ from 'lodash-es';
 
 import { ConfigSchema as Config } from '../model';
 import { ConfigService } from './config.service';
-import { ElectronService } from './electron.service';
 import { NotificationService } from './notification.service';
 
 @Injectable()
@@ -28,24 +27,7 @@ export class AppService {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
-    private electronService: ElectronService,
-  ) {
-    this.enableVersionListener();
-    this.enableCustomCSSListener();
-    this.electronService.send('appInfo');
-
-    // list of all error following an upgrade
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    this.updateError = {
-      '/octodash must NOT have additional properties': config => {
-        if ('showNotificationCenterIcon' in (config.octodash as any)) {
-          config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
-          delete (config.octodash as any).showNotificationCenterIcon;
-        }
-      },
-    };
-    /* eslint-enable @typescript-eslint/no-explicit-any */
-  }
+  ) {}
 
   private checkUpdate(): void {
     if (this.dev) {
@@ -73,47 +55,6 @@ export class AppService {
     });
   }
 
-  public hasUpdateError(errors: string[]): boolean {
-    return _.intersection(errors, _.keys(this.updateError)).length > 0;
-  }
-
-  public fixUpdateErrors(errors: string[]): boolean {
-    const config = this.configService.getCurrentConfig();
-
-    config.octoprint.url = config.octoprint.url.replace('api/', '');
-
-    let fullyFixed = true;
-    for (const error of errors) {
-      if (_.hasIn(this.updateError, error)) {
-        this.updateError[error](config);
-      } else {
-        fullyFixed = false;
-      }
-    }
-    this.configService.saveConfig(config);
-
-    return fullyFixed;
-  }
-
-  private enableVersionListener(): void {
-    this.electronService.on('versionInformation', (_, versionInformation: VersionInformation): void => {
-      this.version = versionInformation.version;
-      this.checkUpdate();
-    });
-  }
-
-  private enableCustomCSSListener(): void {
-    this.electronService.on('customStyles', (_, customCSS: string): void => {
-      const css = document.createElement('style');
-      css.appendChild(document.createTextNode(customCSS));
-      document.head.append(css);
-    });
-
-    this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
-    });
-  }
-
   public getVersion(): string {
     return this.version;
   }
@@ -127,11 +68,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.send('screenControl', { command: this.configService.getScreenSleepCommand() });
+    // TODO: Implement turnDisplayOff logic
   }
 
   public turnDisplayOn(): void {
-    this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
+    // TODO: Implement turnDisplayOn logic
   }
 }
 

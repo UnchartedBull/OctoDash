@@ -1,8 +1,7 @@
 import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 
-import { UpdateDownloadProgress, UpdateError } from '../../model';
+import { UpdateDownloadProgress } from '../../model';
 import { AppService } from '../../services/app.service';
-import { ElectronService } from '../../services/electron.service';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../../services/system/system.service';
 
@@ -32,7 +31,6 @@ export class UpdateComponent implements OnInit {
     private notificationService: NotificationService,
     private systemService: SystemService,
     private zone: NgZone,
-    private electronService: ElectronService,
   ) {}
 
   ngOnInit(): void {
@@ -49,31 +47,28 @@ export class UpdateComponent implements OnInit {
   }
 
   private setupListeners(): void {
-    this.electronService.on('updateError', (_, updateError: UpdateError): void => {
-      this.notificationService.error(
-        $localize`:@@error-install-update:Can't install update!`,
-        updateError.error.message,
-      );
-      this.closeUpdateWindow();
-    });
-
-    this.electronService.on('updateDownloadProgress', (_, updateDownloadProgress: UpdateDownloadProgress): void => {
-      this.zone.run(() => {
-        this.updateProgress = updateDownloadProgress;
-      });
-    });
-
-    this.electronService.on('updateDownloadFinished', (): void => {
-      this.zone.run(() => {
-        this.page = 2;
-      });
-    });
-
-    this.electronService.on('updateInstalled', (): void => {
-      this.zone.run(() => {
-        this.page = 3;
-      });
-    });
+    // this.electronService.on('updateError', (_, updateError: UpdateError): void => {
+    //   this.notificationService.error(
+    //     $localize`:@@error-install-update:Can't install update!`,
+    //     updateError.error.message,
+    //   );
+    //   this.closeUpdateWindow();
+    // });
+    // this.electronService.on('updateDownloadProgress', (_, updateDownloadProgress: UpdateDownloadProgress): void => {
+    //   this.zone.run(() => {
+    //     this.updateProgress = updateDownloadProgress;
+    //   });
+    // });
+    // this.electronService.on('updateDownloadFinished', (): void => {
+    //   this.zone.run(() => {
+    //     this.page = 2;
+    //   });
+    // });
+    // this.electronService.on('updateInstalled', (): void => {
+    //   this.zone.run(() => {
+    //     this.page = 3;
+    //   });
+    // });
   }
 
   public closeUpdateWindow(): void {
@@ -82,12 +77,10 @@ export class UpdateComponent implements OnInit {
   }
 
   private update(assetsURL: string): void {
-    this.electronService.send('update', {
-      assetsURL: assetsURL,
-    });
+    // TODO: Implement update logic
   }
 
   public restart(): void {
-    this.electronService.send('restart');
+    window.location.reload();
   }
 }
