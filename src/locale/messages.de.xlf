@@ -710,41 +710,6 @@
         <source>Can't save invalid config</source>
         <target>Invalide Konfiguration!</target>
       </trans-unit>
-      <trans-unit id="select-instance" datatype="html">
-        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target>Das Wichtigste zuerst: Bitte wähle deine OctoPrint-Instanz aus der Liste unten oder gebe die IP/URL manuell ein.</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required" datatype="html">
-        <source> Upgrade Required / </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </source>
-        <target>Version, URL:</target>
-      </trans-unit>
-      <trans-unit id="searching" datatype="html">
-        <source>searching</source>
-        <target>suchen</target>
-      </trans-unit>
-      <trans-unit id="enter-manually" datatype="html">
-        <source>enter manually</source>
-        <target>manuell eingeben</target>
-      </trans-unit>
-      <trans-unit id="port-recommendation" datatype="html">
-        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target>Port 5000 für Standardinstallation, Port 80 für OctoPi</target>
-      </trans-unit>
-      <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
-        <target>erneut suchen</target>
-      </trans-unit>
-      <trans-unit id="no-instance-found" datatype="html">
-        <source>no instances found.</source>
-        <target>keine Instanzen gefunden</target>
-      </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
         <source>I also need some information about your extruder.</source>
         <target>Ich brauche auch einige Informationen über den Extruder.</target>
@@ -1015,19 +980,11 @@
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <target>Es fehlen Informationen, bitte versuche es in einer Stunde nochmal.</target>
       </trans-unit>
-      <trans-unit id="error-install-update" datatype="html">
-        <source>Can't install update!</source>
-        <target>Update kann nicht installiert werden!</target>
-      </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
         <source>Version 
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
         <target></target>
-      </trans-unit>
-      <trans-unit id="error-load-style" datatype="html">
-        <source>Can't load custom styles!</source>
-        <target>Kann angepasste styles nicht laden!</target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
