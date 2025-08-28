@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import defaultConfig from '../../helper/config.default.json';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { ConfigService } from '../../services/config.service';
 import { ElectronService } from '../../services/electron.service';
@@ -33,16 +32,7 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     private router: Router,
     private electronService: ElectronService,
     private zone: NgZone,
-  ) {
-    this.configUpdate = this.configService.isUpdate();
-    if (this.configUpdate) {
-      this.config = configService.getCurrentConfig();
-    } else {
-      // Mitigates a TypeScript bug
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      this.config = defaultConfig as any as Config;
-    }
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.changeProgress();
