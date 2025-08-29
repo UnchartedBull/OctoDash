@@ -28,32 +28,9 @@ export class BottomBarComponent implements OnDestroy {
     private notificationService: NotificationService,
   ) {
     if (this.configService.getAmbientTemperatureSensorName() !== null) {
-      this.subscriptions.add(
-        timer(10000, 15000).subscribe(() => {
-          this.enclosureService.getEnclosureTemperature().subscribe({
-            next: (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
-            error: (error: HttpErrorResponse) => {
-              this.notificationService.error(
-                $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
-                error.message,
-              );
-            },
-          });
-        }),
-      );
+      this.subscribeToEnclosure();
     } else {
-      this.subscriptions.add(
-        this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
-          if (printerStatus.chamber?.current > 0) {
-            const chamberReading: TemperatureReading = {
-              temperature: printerStatus.chamber.current,
-              humidity: 0,
-              unit: printerStatus.chamber.unit,
-            };
-            this.enclosureTemperature = chamberReading;
-          }
-        }),
-      );
+      this.subscribeToPrinter();
     }
 
     this.subscriptions.add(
@@ -65,6 +42,37 @@ export class BottomBarComponent implements OnDestroy {
     this.subscriptions.add(
       this.socketService.getPrinterStatusText().subscribe((statusText: string): void => {
         this.setStatusText(statusText);
+      }),
+    );
+  }
+
+  private subscribeToPrinter() {
+    this.subscriptions.add(
+      this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
+        if (printerStatus?.chamber?.current > 0) {
+          const chamberReading: TemperatureReading = {
+            temperature: printerStatus.chamber.current,
+            humidity: 0,
+            unit: printerStatus.chamber.unit,
+          };
+          this.enclosureTemperature = chamberReading;
+        }
+      }),
+    );
+  }
+
+  private subscribeToEnclosure() {
+    this.subscriptions.add(
+      timer(10000, 15000).subscribe(() => {
+        this.enclosureService.getEnclosureTemperature().subscribe({
+          next: (temperatureReading: TemperatureReading) => (this.enclosureTemperature = temperatureReading),
+          error: (error: HttpErrorResponse) => {
+            this.notificationService.error(
+              $localize`:@@error-enclosure-temp:Can't retrieve enclosure temperature!`,
+              error.message,
+            );
+          },
+        });
       }),
     );
   }

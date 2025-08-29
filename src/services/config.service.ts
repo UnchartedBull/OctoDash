@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable, NgZone } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
-import { BehaviorSubject, map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
-import { NotificationService } from './notification.service';
 
 interface HttpHeader {
   headers: HttpHeaders;
@@ -23,19 +22,13 @@ interface OctoPrintConfig {
 export class ConfigService {
   private config: Config;
   private apiKey: string;
-  private valid: boolean;
-  private errors: string[];
   private update = false;
-  private initialized = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
   private http: HttpClient = inject(HttpClient);
 
-  public constructor(
-    private notificationService: NotificationService,
-    private zone: NgZone,
-  ) {}
+  public constructor() {}
 
   public getConfig() {
     this.apiKey = localStorage.getItem('octodash_apikey');
@@ -54,19 +47,12 @@ export class ConfigService {
         }),
       )
       .pipe(
-        map((config: Config) => {
-          this.initialize({ ...config });
-          this.zone.run(() => {
-            this.initialized.next(true);
-            this.generateHttpHeaders();
-            this.valid = true;
-          });
+        tap((config: Config) => {
+          this.config = { ...config };
+          this.generateHttpHeaders();
         }),
-      );
-  }
-
-  private initialize(config: Config): void {
-    this.config = config;
+      )
+      .pipe(map(() => null));
   }
 
   public generateHttpHeaders(): void {
@@ -157,7 +143,7 @@ export class ConfigService {
   }
 
   public getPrinterName(): string {
-    return this.config.printer.name;
+    return this.config?.printer.name;
   }
 
   public getCustomActions(): CustomAction[] {
@@ -172,16 +158,8 @@ export class ConfigService {
     return this.config.printer.zSpeed;
   }
 
-  public isInitialized(): boolean {
-    return this.initialized.getValue();
-  }
-
-  public isInitializedObservable() {
-    return this.initialized;
-  }
-
-  public isValid(): boolean {
-    return this.valid;
+  public isInitialized() {
+    return this.config !== null;
   }
 
   public isUpdate(): boolean {
@@ -189,11 +167,11 @@ export class ConfigService {
   }
 
   public isTouchscreen(): boolean {
-    return this.config.octodash.touchscreen;
+    return this.config?.octodash.touchscreen;
   }
 
   public getAmbientTemperatureSensorName(): number {
-    return this.config.plugins.enclosure.ambientSensorID;
+    return this.config?.plugins.enclosure.ambientSensorID;
   }
 
   public getAutomaticScreenSleep(): boolean {
@@ -329,11 +307,11 @@ export class ConfigService {
   }
 
   public showThumbnailByDefault(): boolean {
-    return this.config.octodash.preferPreviewWhilePrinting;
+    return this.config?.octodash.preferPreviewWhilePrinting;
   }
 
   public getAccessKey(): string {
-    return this.config.octoprint.accessToken;
+    return this.config?.octoprint.accessToken;
   }
 
   public getDisableExtruderGCode(): string {
