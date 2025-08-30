@@ -71,7 +71,7 @@ export class PrinterOctoprintService implements PrinterService {
 
   public executeGCode(gCode: string): void {
     const gCodePayload: GCodeCommand = {
-      commands: gCode.split('; '),
+      commands: gCode.split(';'),
     };
     this.http
       .post(this.configService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())

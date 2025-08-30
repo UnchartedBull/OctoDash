@@ -14,6 +14,11 @@ import { SystemService } from '../../services/system/system.service';
 
 const SpecialCommandRegex = /\[!([\w_]+)\]/;
 
+interface ParsedAction {
+  special?: string;
+  gcodes?: string[];
+}
+
 @Component({
   selector: 'app-action-center',
   templateUrl: './action-center.component.html',
@@ -119,7 +124,14 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
         exit,
       };
     } else {
-      command.split('; ').forEach(this.executeGCode.bind(this));
+      const parsed = this.parseCommand(command);
+      parsed.forEach(action => {
+        if (action.special) {
+          this.executeSpecialCommand(action.special);
+        } else if (action.gcodes) {
+          this.executeGCode(action.gcodes.join(';'));
+        }
+      });
       if (exit) {
         this.router.navigate(['/main-screen']);
       }
@@ -131,23 +143,48 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     this.actionToConfirm = null;
   }
 
-  private executeGCode(command: string): void {
-    if (command.startsWith('[!')) {
-      const specialCommand = command.match(SpecialCommandRegex)[1];
-      const values = command.replace(SpecialCommandRegex, '').split(',');
+  private parseCommand(command: string): ParsedAction[] {
+    const results: ParsedAction[] = [];
+    const commands = command.split(';');
 
-      if (!(specialCommand in this.commands)) {
-        this.notificationService.error(
-          $localize`:@@error-custom-action-invalid:Unknown special command!`,
-          $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
-        );
-        return;
+    let gcodes: string[] = [];
+
+    commands.forEach(cmd => {
+      if (cmd.startsWith('[!')) {
+        results.push({ special: cmd });
+        if (gcodes.length > 0) {
+          results.push({ gcodes });
+          gcodes = [];
+        }
+      } else {
+        gcodes.push(cmd);
       }
+    });
 
-      this.commands[specialCommand](...values);
+    if (gcodes.length > 0) {
+      results.push({ gcodes });
+    }
+    console.log(results);
+    return results;
+  }
+
+  private executeSpecialCommand(command: string) {
+    const specialCommand = command.match(SpecialCommandRegex)[1];
+    const values = command.replace(SpecialCommandRegex, '').split(',');
+
+    if (!(specialCommand in this.commands)) {
+      this.notificationService.error(
+        $localize`:@@error-custom-action-invalid:Unknown special command!`,
+        $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
+      );
       return;
     }
 
+    this.commands[specialCommand](...values);
+    return;
+  }
+
+  private executeGCode(command: string): void {
     if (!this.printerConnected) {
       this.notificationService.error(
         $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
