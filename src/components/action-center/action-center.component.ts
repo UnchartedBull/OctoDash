@@ -14,11 +14,6 @@ import { SystemService } from '../../services/system/system.service';
 
 const SpecialCommandRegex = /\[!([\w_]+)\]/;
 
-interface ParsedAction {
-  special?: string;
-  gcodes?: string[];
-}
-
 @Component({
   selector: 'app-action-center',
   templateUrl: './action-center.component.html',
@@ -125,13 +120,10 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
       };
     } else {
       const parsed = this.parseCommand(command);
-      parsed.forEach(action => {
-        if (action.special) {
-          this.executeSpecialCommand(action.special);
-        } else if (action.gcodes) {
-          this.executeGCode(action.gcodes.join(';'));
-        }
+      parsed.specials.forEach(action => {
+        this.executeSpecialCommand(action);
       });
+      this.executeGCode(parsed.gcodes.join(';'));
       if (exit) {
         this.router.navigate(['/main-screen']);
       }
@@ -143,29 +135,11 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     this.actionToConfirm = null;
   }
 
-  private parseCommand(command: string): ParsedAction[] {
-    const results: ParsedAction[] = [];
-    const commands = command.split(';');
-
-    let gcodes: string[] = [];
-
-    commands.forEach(cmd => {
-      if (cmd.startsWith('[!')) {
-        results.push({ special: cmd });
-        if (gcodes.length > 0) {
-          results.push({ gcodes });
-          gcodes = [];
-        }
-      } else {
-        gcodes.push(cmd);
-      }
-    });
-
-    if (gcodes.length > 0) {
-      results.push({ gcodes });
-    }
-    console.log(results);
-    return results;
+  private parseCommand(command: string) {
+    const splitted = command.split(';').map(cmd => cmd.trim());
+    const gcodes = splitted.filter(cmd => !cmd.startsWith('[!'));
+    const specials = splitted.filter(cmd => cmd.startsWith('[!'));
+    return { gcodes, specials };
   }
 
   private executeSpecialCommand(command: string) {
