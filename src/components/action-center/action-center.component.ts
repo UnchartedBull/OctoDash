@@ -119,15 +119,22 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
         exit,
       };
     } else {
-      const parsed = this.parseCommand(command);
-      parsed.specials.forEach(action => {
-        this.executeSpecialCommand(action);
-      });
-      this.executeGCode(parsed.gcodes.join(';'));
-      if (exit) {
-        this.router.navigate(['/main-screen']);
+      try {
+        const parsed = this.parseCommand(command);
+        parsed.specials.forEach(action => {
+          this.executeSpecialCommand(action);
+        });
+        this.executeGCode(parsed.gcodes.join(';'));
+        if (exit) {
+          this.router.navigate(['/main-screen']);
+        }
+        this.hideConfirm();
+      } catch {
+        this.notificationService.error(
+          $localize`:@@error-parsing-custom-action:Error parsing custom action!`,
+          $localize`:@@error-parsing-custom-action-desc:Unable to parse the custom action.`,
+        );
       }
-      this.hideConfirm();
     }
   }
 
