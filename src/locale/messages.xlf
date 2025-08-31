@@ -83,28 +83,28 @@
         <source>Unknown special command!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">164</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
         <source>Please connect to your printer first before attempting to use a printer command.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
