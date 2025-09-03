@@ -18,7 +18,6 @@ This release fixes a few small bugs
 
 [Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.3...v2.5.4)
 
-
 ## [v2.5.3](https://github.com/UnchartedBull/OctoDash/tree/v2.5.3) (2025-07-10)
 
 > [!IMPORTANT]
