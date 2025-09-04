@@ -85,7 +85,7 @@
     "@angular/common": "^20.1.0",
     "@angular/compiler": "^20.1.0",
     "@angular/core": "^20.1.0",
-    "@angular/forms": "^20.1.0",
+    "@angular/forms": "^20.2.4",
     "@angular/localize": "^20.1.0",
     "@angular/material": "^20.2.2",
     "@angular/platform-browser": "^20.1.0",
