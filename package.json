@@ -90,7 +90,7 @@
     "@angular/material": "^20.2.2",
     "@angular/platform-browser": "^20.1.0",
     "@angular/platform-browser-dynamic": "^20.1.0",
-    "@angular/router": "^20.1.0",
+    "@angular/router": "^20.2.4",
     "@fortawesome/angular-fontawesome": "~3.0.0",
     "@fortawesome/free-solid-svg-icons": "~7.0.1",
     "ajv": "~8.17.1",
