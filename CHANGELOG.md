@@ -1,5 +1,23 @@
 # Changelog
 
+## [v2.5.4](https://github.com/UnchartedBull/OctoDash/tree/v2.5.4) (2025-09-03)
+
+> [!IMPORTANT]
+> OctoDash v2.5.4 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fixes a few small bugs
+
+## Update Log
+
+- Fix handling of special characters in filenames ([#5282](https://github.com/UnchartedBull/OctoDash/pull/5282))
+- Ensure GCODE in custom actions gets handled sequentially ([#5283](https://github.com/UnchartedBull/OctoDash/pull/5283))
+- Updates of a large number of upstream dependencies
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.3...v2.5.4)
+
 ## [v2.5.3](https://github.com/UnchartedBull/OctoDash/tree/v2.5.3) (2025-07-10)
 
 > [!IMPORTANT]
