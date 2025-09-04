@@ -8,3 +8,8 @@ updates:
     open-pull-requests-limit: 15
     labels:
       - dependencies
+    groups:
+      angular:
+        applies-to: version-updates
+        patterns:
+          - '@angular*'
