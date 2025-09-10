@@ -8,6 +8,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+  release:
 
 jobs:
   lint:
@@ -82,3 +83,13 @@ jobs:
             package/*.deb
             package/*.yaml
             package/*.yml
+
+  release: 
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'release'
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build
