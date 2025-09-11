@@ -66,7 +66,7 @@
         <target>Druckerbefehle sind nicht verfügbar!</target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
-        <source>Please connect to your printer first before   attempting to use a printer command.</source>
+        <source>Please connect to your printer first before  attempting to use a printer command.</source>
         <target>Bitte stellen Sie zunächst eine Verbindung zu Ihrem Drucker her, bevor Sie versuchen, einen Druckerbefehl zu verwenden.</target>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
