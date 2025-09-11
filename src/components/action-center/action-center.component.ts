@@ -166,7 +166,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   }
 
   private executeGCode(command: string): void {
-    if (command !== '') {
+    if (!command) {
       return;
     }
     if (!this.printerConnected) {
