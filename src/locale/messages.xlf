@@ -1868,46 +1868,50 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">184</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
+          <context context-type="linenumber">219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can&apos;t update Ophom Plug!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can&apos;t update Tasmota!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can&apos;t update Tasmota MQTT!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">277</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-psu-command" datatype="html">
         <source>Can&apos;t send plug command!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">280</context>
+          <context context-type="linenumber">296</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">313</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
