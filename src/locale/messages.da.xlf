@@ -47,9 +47,11 @@
       </trans-unit>
       <trans-unit id="error-parsing-custom-action" datatype="html">
         <source>Error parsing custom action!</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-parsing-custom-action-desc" datatype="html">
         <source>Unable to parse the custom action.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
@@ -64,7 +66,7 @@
         <target>Printerkommandoer er ikke tilgængelig!</target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
-        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <source>Please connect to your printer first before  attempting to use a printer command.</source>
         <target>Forbind venligst din printer før du bruger en printerkommando.</target>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">

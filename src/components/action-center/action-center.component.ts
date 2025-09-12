@@ -166,10 +166,13 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   }
 
   private executeGCode(command: string): void {
+    if (!command) {
+      return;
+    }
     if (!this.printerConnected) {
       this.notificationService.error(
         $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
-        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
+        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before  attempting to use a printer command.`,
       );
     } else {
       this.printerService.executeGCode(command);
