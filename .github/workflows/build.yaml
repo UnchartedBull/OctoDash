@@ -89,6 +89,7 @@ jobs:
     runs-on: ubuntu-latest
 
     if: github.event_name == 'release'
+    needs: build
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v5
