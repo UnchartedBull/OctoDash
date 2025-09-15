@@ -9,6 +9,7 @@ on:
       - main
   workflow_dispatch:
   release:
+    types: [published]
 
 jobs:
   lint:
@@ -93,3 +94,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build
+      - name: Upload release
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: gh release upload ${{ github.ref }} package/*.deb package/*.yaml package/*.yml
