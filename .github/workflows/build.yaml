@@ -85,7 +85,7 @@ jobs:
             package/*.yaml
             package/*.yml
 
-  release: 
+  release:
     runs-on: ubuntu-latest
 
     if: github.event_name == 'release'
