@@ -82,7 +82,7 @@ jobs:
     needs: build-code
     strategy:
       matrix:
-        arch: [amd64, arm64, armv7l]
+        arch: [x64, arm64, armv7l]
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
