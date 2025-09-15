@@ -46,8 +46,84 @@ jobs:
             echo ""
             exit 1
           fi
+  
+  build-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: node-modules
+        with:
+          path: '**/node_modules'
+          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            octodash-build-${{ env.cache-name }}-
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install latest npm
+        run: sudo npm install -g npm@latest
+      - name: Installing Dependencies
+        run: npm ci
+      - name: Building Application
+        run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular
+          path: dist/
 
-  build:
+  package:
+    runs-on: ubuntu-latest
+    needs: build-code
+    strategy:
+      matrix:
+        arch: [x64, arm64, armv7l]
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: angular
+          path: dist/
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: node-modules
+        with:
+          path: '**/node_modules'
+          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            octodash-build-${{ env.cache-name }}-
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install latest npm
+        run: sudo npm install -g npm@latest
+      - name: Installing Dependencies
+        run: npm ci
+
+      - name: Packaging Application
+        run: npm run electron:pack --  --${{ matrix.arch }}
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.arch }}
+          path: |
+            package/*.deb
+            package/*.yaml
+
+
+  build-old:
+    if: false
     runs-on: ubuntu-latest
 
     steps:
@@ -88,7 +164,7 @@ jobs:
     runs-on: ubuntu-latest
 
     if: github.event_name == 'release'
-    needs: build
+    needs: package
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
