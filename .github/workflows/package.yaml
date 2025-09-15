@@ -1,0 +1,36 @@
+on: 
+  workflow_call:
+    inputs:
+      version:
+        description: 'Version to package'
+        required: true
+        type: string
+      arch:
+        description: 'Architecture to package for'
+        required: true
+        type: string
+        default: 'amd64'
+
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: angular
+          path: dist/
+
+      - name: Packaging Application
+        run: npm run electron:pack --  --${{ inputs.arch }}
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
