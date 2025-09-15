@@ -42,12 +42,7 @@
     "linux": {
       "target": [
         {
-          "target": "deb",
-          "arch": [
-            "armv7l",
-            "arm64",
-            "x64"
-          ]
+          "target": "deb"
         }
       ],
       "category": "Utility",

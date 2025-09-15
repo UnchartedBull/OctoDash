@@ -16,25 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Cache node modules
-        uses: actions/cache@v4
-        env:
-          cache-name: node-modules
-        with:
-          path: '**/node_modules'
-          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            octodash-build-${{ env.cache-name }}-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install latest npm
-        run: sudo npm install -g npm@latest
-      - name: Installing Dependencies
-        run: npm ci
+      - uses: ./.github/workflows/setup.yaml
       - name: Linting Application
         run: npm run lint
       - name: Checking if locale is updated
@@ -46,8 +28,16 @@ jobs:
             echo ""
             exit 1
           fi
-
+  
   build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [amd64, arm64, armv7l]
+  
+
+  build-old:
+    if: false
     runs-on: ubuntu-latest
 
     steps:
