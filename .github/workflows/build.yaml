@@ -29,12 +29,20 @@ jobs:
             exit 1
           fi
   
+  build-code:
+    runs-on: ubuntu-latest
+    steps:
+      #TODO: Just put this in this file
+      - uses: ./.github/workflows/build-angular.yaml
+
   build:
     runs-on: ubuntu-latest
+    needs: build-code
     strategy:
       matrix:
         arch: [amd64, arm64, armv7l]
-  
+    steps:
+      - uses: ./.github/workflows/build-arch.yaml
 
   build-old:
     if: false
