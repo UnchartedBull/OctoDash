@@ -1,6 +1,16 @@
 # Changelog
 
-## [v2.5.4](https://github.com/UnchartedBull/OctoDash/tree/v2.5.4) (2025-09-03)
+## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.5.4) (2025-09-03)
+
+> [!IMPORTANT]
+> OctoDash v2.5.4 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This version corrects some packaging issues with 2.6.0
+
+## [v2.6.0](https://github.com/UnchartedBull/OctoDash/tree/v2.5.4) (2025-09-03)
 
 > [!IMPORTANT]
 > OctoDash v2.5.4 requires OctoPrint v1.9.0 or higher.
