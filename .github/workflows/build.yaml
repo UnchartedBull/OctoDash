@@ -90,6 +90,8 @@ jobs:
     if: github.event_name == 'release'
     needs: build
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v5
         with:
