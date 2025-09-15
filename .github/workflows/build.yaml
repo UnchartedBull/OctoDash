@@ -33,6 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       #TODO: Just put this in this file
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - uses: ./.github/workflows/build-angular.yaml
 
   build:
@@ -42,6 +44,8 @@ jobs:
       matrix:
         arch: [amd64, arm64, armv7l]
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - uses: ./.github/workflows/build-arch.yaml
 
   build-old:

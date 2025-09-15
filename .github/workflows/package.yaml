@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - uses: ./.github/workflows/setup.yaml
 
       - name: Download build artifacts
