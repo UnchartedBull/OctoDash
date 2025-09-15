@@ -5,6 +5,7 @@
 A couple of small bug fixes.
 
 ## Update Log
+
 - Fix superfluous error message with actions with no gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
 - Use toggle endpoint for PSU control to resolve state mismatch issues ([#5332] ( https://github.com/UnchartedBull/OctoDash/pull/5332))
 
