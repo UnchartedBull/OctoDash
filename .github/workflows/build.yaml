@@ -68,6 +68,9 @@ jobs:
           node-version: '22'
       - name: Install latest npm
         run: sudo npm install -g npm@latest
+      - name: Bump Version
+        if: github.event_name == 'release'
+        run: npm --no-git-tag-version version ${{ github.event.release.tag_name }}
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
@@ -84,19 +87,19 @@ jobs:
             package/*.deb
             package/*.yml
 
-  release:
-    runs-on: ubuntu-latest
+  # release:
+  #   runs-on: ubuntu-latest
 
-    if: github.event_name == 'release'
-    needs: build
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Download artifacts
-        uses: actions/download-artifact@v5
-        with:
-          name: build
-      - name: Upload release
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: gh release upload ${{ github.ref }} *.deb *.yml
+  #   if: github.event_name == 'release'
+  #   needs: build
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v4
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@v5
+  #       with:
+  #         name: build
+  #     - name: Upload release
+  #       env:
+  #         GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+  #       run: gh release upload ${{ github.ref }} *.deb *.yml
