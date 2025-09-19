@@ -40,6 +40,10 @@
       "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
     ],
     "linux": {
+      "publish": {
+        "provider": "github",
+        "releaseType": "release"
+      },
       "target": [
         {
           "target": "deb",

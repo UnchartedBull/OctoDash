@@ -72,6 +72,7 @@ jobs:
         if: github.event_name == 'release'
         run: |
           CLEANED_VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+          EP_PRE_RELEASE=${{ github.event.release.prerelease }}
           npm --no-git-tag-version version $CLEANED_VERSION
       - name: Installing Dependencies
         run: npm ci
