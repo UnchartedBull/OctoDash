@@ -70,7 +70,9 @@ jobs:
         run: sudo npm install -g npm@latest
       - name: Bump Version
         if: github.event_name == 'release'
-        run: npm --no-git-tag-version version ${{ github.event.release.tag_name }}
+        run: |
+          CLEANED_VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+          npm --no-git-tag-version version $CLEANED_VERSION
       - name: Installing Dependencies
         run: npm ci
       - name: Building Application
