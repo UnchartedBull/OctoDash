@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.6.2-rc.4](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2-rc.4) (2025-09-15)
+
+A couple of small bug fixes.
+
+## Update Log
+
+- Fix superfluous error message with actions with no gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
+- Use toggle endpoint for PSU control to resolve state mismatch issues ([#5332] ( https://github.com/UnchartedBull/OctoDash/pull/5332))
+
+...and the usual round of dependency updates.
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.6.1...v2.6.2-rc.4)
+
 ## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.1) (2025-09-04)
 
 > [!IMPORTANT]
@@ -19,8 +32,6 @@ This version corrects some packaging issues with 2.6.0
 > If you use custom styles, you may need to update them.
 
 This release fixes a few small bugs
-
-## Update Log
 
 - Fix handling of special characters in filenames ([#5282](https://github.com/UnchartedBull/OctoDash/pull/5282))
 - Ensure GCODE in custom actions gets handled sequentially ([#5283](https://github.com/UnchartedBull/OctoDash/pull/5283))
