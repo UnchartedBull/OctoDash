@@ -1312,6 +1312,32 @@
         <source>Can't connect to printer!</source>
         <target>Verbindung zum Drucker kann nicht aufgebaut werden!</target>
       </trans-unit>
+      <trans-unit id="select-filament-for-mmu" datatype="html">
+        <source>select filament for MMU</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="select-filament-from-source" datatype="html">
+        <source>from: 
+          <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/>
+        </source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu-enabled" datatype="html">
+        <source>enabled</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="plugin-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-spools-active" datatype="html">
+        <source>Can't load active spools!</source>
+        <target></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
