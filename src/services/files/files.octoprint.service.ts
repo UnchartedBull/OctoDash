@@ -151,7 +151,7 @@ export class FilesOctoprintService implements FilesService {
           return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
         }),
       )
-      .pipe(mergeMap(thumbnailPipe => this.getThumbnailBlobUrl(thumbnailPipe)));
+      .pipe(mergeMap(thumbnailPath => this.getThumbnailBlobUrl(thumbnailPath)));
   }
 
   private getThumbnailBlobUrl(filePath: string): Observable<string> {
