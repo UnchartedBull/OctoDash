@@ -5,6 +5,7 @@
 Various fixes
 
 ### Update Log
+
 - Fix support for Slicer Thumbnails 1.2.0 ([#5361](https://github.com/UnchartedBull/OctoDash/pull/5361))
 - Fix bug with actions without gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
 - Fix bug with PSU Control plugin ([#5332](https://github.com/UnchartedBull/OctoDash/pull/5332))
