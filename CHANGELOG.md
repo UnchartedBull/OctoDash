@@ -1,5 +1,15 @@
 # Changelog
 
+## [v2.6.2-rc.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2-rc.1) (2025-09-27)
+
+Various fixes
+
+### Update Log
+
+- Fix support for Slicer Thumbnails 1.2.0 ([#5361](https://github.com/UnchartedBull/OctoDash/pull/5361))
+- Fix bug with actions without gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
+- Fix bug with PSU Control plugin ([#5332](https://github.com/UnchartedBull/OctoDash/pull/5332))
+
 ## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.1) (2025-09-04)
 
 > [!IMPORTANT]
