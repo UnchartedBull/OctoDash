@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/internal/Observable';
+
 export interface Directory {
   folders: Array<Folder>;
   files: Array<File>;
@@ -15,7 +17,7 @@ export interface File {
   path: string;
   name: string;
   size: string;
-  thumbnail: string;
+  thumbnail$: Observable<string>;
   printTime?: string;
   filamentWeight?: number;
   date?: string;
