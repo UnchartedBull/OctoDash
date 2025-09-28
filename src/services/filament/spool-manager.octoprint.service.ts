@@ -28,10 +28,19 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
     return this.callSpoolManagerAPI('hideInactiveSpools', 0, 3000, 'lastUse', 'desc').pipe(
       map((spools: SpoolManagerSpoolList): FilamentSpool[] => {
-        if (spools.selectedSpools[0]) {
-          return spools.selectedSpools.map((selectedSpool, index) =>
-            this.convertFilamentManagerSpool(selectedSpool, index + 1),
-          );
+        const validSelectedSpools = spools.selectedSpools?.filter(spool => spool !== null) || [];
+        
+        if (validSelectedSpools.length > 0) {
+          const convertedSpools = validSelectedSpools.map((selectedSpool, index) => {
+            return this.convertFilamentManagerSpool(selectedSpool, index + 1);
+          });
+          
+          return convertedSpools;
+        } else if (spools.allSpools && spools.allSpools.length > 0) {
+          const fallbackSpools = spools.allSpools.slice(0, 5).map((spool, index) => {
+            return this.convertFilamentManagerSpool(spool, index + 1);
+          });
+          return fallbackSpools;
         } else {
           return null;
         }
