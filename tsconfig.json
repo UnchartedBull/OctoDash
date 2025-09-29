@@ -2,20 +2,27 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist",
-    "sourceMap": true,
     "declaration": false,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "sourceMap": true,
     "target": "ES2022",
-    "typeRoots": ["node_modules/@types"],
-    "types": [],
-    "lib": ["ES2022", "dom"],
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": []
   },
-  "exclude": ["**/node_modules/**"]
+  "exclude": [
+    "**/node_modules/**"
+  ]
 }

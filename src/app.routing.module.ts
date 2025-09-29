@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ControlComponent } from './components/control/control.component';
-import { FilamentComponent } from './components/filament/filament.component';
+//import { FilamentComponent } from './components/filament/filament.component';
 import { FilesComponent } from './components/files/files.component';
 import { MainScreenComponent } from './components/main-screen/main-screen.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -20,10 +20,10 @@ const routes: Routes = [
     path: 'control',
     component: ControlComponent,
   },
-  {
-    path: 'filament',
-    component: FilamentComponent,
-  },
+//  {
+//    path: 'filament',
+//    component: FilamentComponent,
+// },
   {
     path: 'files',
     component: FilesComponent,

@@ -1,53 +1,54 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
+  "cli": {
+    "analytics": "e1569209-2b82-4195-9c15-0669a78feccb"
+  },
   "newProjectRoot": "projects",
   "projects": {
     "OctoDash": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "i18n": {
-        "sourceLocale": {
-          "code": "en",
-          "baseHref": ""
-        },
-        "locales": {
-          "fr": {
-            "translation": "src/locale/messages.fr.xlf",
-            "baseHref": ""
-          },
-          "de": {
-            "translation": "src/locale/messages.de.xlf",
-            "baseHref": ""
-          },
-          "da": {
-            "translation": "src/locale/messages.da.xlf",
-            "baseHref": ""
-          }
-        }
-      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "allowedCommonJsDependencies": ["lottie-web"],
-            "aot": true,
-            "outputPath": {
-              "base": "dist",
-              "browser": ""
+          "configurations": {
+            "development": {
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true
             },
-            "index": "src/index.html",
-            "i18nMissingTranslation": "warning",
-            "localize": false,
-            "polyfills": ["zone.js", "@angular/localize/init"],
-            "tsConfig": "tsconfig.app.json",
+            "production": {
+              "aot": true,
+              "budgets": [
+                {
+                  "maximumError": "9mb",
+                  "maximumWarning": "8mb",
+                  "type": "initial"
+                },
+                {
+                  "maximumWarning": "8kb",
+                  "type": "anyComponentStyle"
+                }
+              ],
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "localize": true,
+              "namedChunks": false,
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "lottie-web"
+            ],
+            "aot": true,
             "assets": [
               {
                 "glob": "!(config.testing.json)",
@@ -70,60 +71,37 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/reset.css", "src/styles.scss"],
+            "browser": "src/main.ts",
+            "i18nMissingTranslation": "warning",
+            "index": "src/index.html",
+            "localize": false,
+            "outputPath": {
+              "base": "dist",
+              "browser": ""
+            },
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "scripts": [],
-            "browser": "src/main.ts"
-          },
-          "configurations": {
-            "production": {
-              "localize": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": false,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "5mb",
-                  "maximumError": "7mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "development"
+            "styles": [
+              "src/reset.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "tsconfig.app.json"
+          }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "buildTarget": "OctoDash:build"
-          },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
           "configurations": {
             "production": {
-              "buildTarget": "OctoDash:build:production"
-            },
-            "development": {
-              "buildTarget": "OctoDash:build:development"
+              "devServerTarget": "OctoDash:serve:production"
             }
           },
-          "defaultConfiguration": "development"
+          "options": {
+            "devServerTarget": "OctoDash:serve",
+            "protractorConfig": "e2e/protractor.conf.js"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -131,42 +109,86 @@
             "buildTarget": "OctoDash:build:production"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": ["zone.js", "@angular/localize/init"],
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/reset.css", "src/styles.scss"],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ],
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "tsconfig.json"
+            ]
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "OctoDash:serve"
-          },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            "development": {
+              "buildTarget": "OctoDash:build:development"
+            },
             "production": {
-              "devServerTarget": "OctoDash:serve:production"
+              "buildTarget": "OctoDash:build:production"
             }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "OctoDash:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "karmaConfig": "karma.conf.js",
+            "main": "src/test.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
+            "scripts": [],
+            "styles": [
+              "src/reset.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "tsconfig.spec.json"
           }
         }
-      }
+      },
+      "i18n": {
+        "locales": {
+          "da": {
+            "baseHref": "",
+            "translation": "src/locale/messages.da.xlf"
+          },
+          "de": {
+            "baseHref": "",
+            "translation": "src/locale/messages.de.xlf"
+          },
+          "fr": {
+            "baseHref": "",
+            "translation": "src/locale/messages.fr.xlf"
+          }
+        },
+        "sourceLocale": {
+          "baseHref": "",
+          "code": "en"
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "src"
     }
-  },
-  "cli": {
-    "analytics": "e1569209-2b82-4195-9c15-0669a78feccb"
   },
   "schematics": {
     "@schematics/angular:component": {
@@ -174,9 +196,6 @@
     },
     "@schematics/angular:directive": {
       "type": "directive"
-    },
-    "@schematics/angular:service": {
-      "type": "service"
     },
     "@schematics/angular:guard": {
       "typeSeparator": "."
@@ -192,6 +211,10 @@
     },
     "@schematics/angular:resolver": {
       "typeSeparator": "."
+    },
+    "@schematics/angular:service": {
+      "type": "service"
     }
-  }
+  },
+  "version": 1
 }

@@ -1,13 +1,17 @@
 {
-  "extends": ["stylelint-config-standard-scss"],
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
   "rules": {
+    "no-descending-specificity": null,
     "selector-class-pattern": null,
     "selector-id-pattern": null,
-    "no-descending-specificity": null,
     "selector-pseudo-element-no-unknown": [
       true,
       {
-        "ignorePseudoElements": ["ng-deep"]
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
       }
     ]
   }

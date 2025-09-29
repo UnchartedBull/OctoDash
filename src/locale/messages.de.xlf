@@ -86,10 +86,10 @@
         <target>Druckerprofil kann nicht abgerufen werden!</target>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
-        <source>load new filament into tool 
+        <source>load new filament into tool
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>neues Filament laden 
+        <target>neues Filament laden
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </target>
       </trans-unit>
@@ -138,7 +138,7 @@
         <target>Tool wählen</target>
       </trans-unit>
       <trans-unit id="tool-selection" datatype="html">
-        <source>Tool 
+        <source>Tool
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </source>
         <target>Werkzeug
@@ -146,10 +146,10 @@
         </target>
       </trans-unit>
       <trans-unit id="nozzle-heating" datatype="html">
-        <source>heating the nozzle for tool 
+        <source>heating the nozzle for tool
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>Nozzle aufheizen 
+        <target>Nozzle aufheizen
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </target>
       </trans-unit>
@@ -282,19 +282,19 @@
         <target>mm</target>
       </trans-unit>
       <trans-unit id="height-layer-status" datatype="html">
-        <source>Layer 
+        <source>Layer
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
           <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of
           <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target>Ebene 
+        <target>Ebene
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
           <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> 
-           von 
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+           von
           <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
@@ -312,22 +312,22 @@
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left,
         </source>
         <target>
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-          { 
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> übrig, 
+          {
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> übrig,
         </target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
-        <source>elapsed: 
+        <source>elapsed:
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </source>
-        <target>vergangen: 
+        <target>vergangen:
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </target>
@@ -493,31 +493,31 @@
         <target> Standard Temperaturen &amp; Lüftergeschwindigkeit </target>
       </trans-unit>
       <trans-unit id="default-hotend" datatype="html">
-        <source> Hotend 
+        <source> Hotend
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Hotend 
+        <target> Hotend
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="default-heatbed" datatype="html">
-        <source> Heatbed 
+        <source> Heatbed
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Heizbett 
+        <target> Heizbett
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(°C)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="default-fanspeed" datatype="html">
-        <source> Fan Speed 
+        <source> Fan Speed
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Lüftergeschwindigkeit 
+        <target> Lüftergeschwindigkeit
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(%)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
@@ -531,61 +531,61 @@
         <target>Filament mit M600 wechseln</target>
       </trans-unit>
       <trans-unit id="general-feedlength" datatype="html">
-        <source> Feed Length 
+        <source> Feed Length
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Feed Length (mm) 
+        <target> Feed Length (mm)
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-purge-distance" datatype="html">
-        <source> Purge Distance 
+        <source> Purge Distance
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Purge Distance 
+        <target> Purge Distance
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-feedrate" datatype="html">
-        <source> Feed Speed 
+        <source> Feed Speed
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Feed Speed (mm/s) 
+        <target> Feed Speed (mm/s)
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-feedrate-slow" datatype="html">
-        <source> Feed Speed Slow 
+        <source> Feed Speed Slow
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Feed Speed Langsam (mm/s) 
+        <target> Feed Speed Langsam (mm/s)
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm/s)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-thickness" datatype="html">
-        <source> Thickness 
+        <source> Thickness
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Dicke (mm) 
+        <target> Dicke (mm)
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(mm)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
       </trans-unit>
       <trans-unit id="general-density" datatype="html">
-        <source> Density 
+        <source> Density
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Dichte 
+        <target> Dichte
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(g/cm³)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
@@ -647,11 +647,11 @@
         <target>Enclosure</target>
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
-        <source> Ambient Sensor 
+        <source> Ambient Sensor
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(ID)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target> Umgebungssensor 
+        <target> Umgebungssensor
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span>"/>(ID)
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </target>
@@ -717,10 +717,10 @@
         <target> Keine Aktualisierung verfügbar </target>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
-        <source> install 
+        <source> install
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </source>
-        <target> installieren 
+        <target> installieren
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </target>
       </trans-unit>
@@ -789,8 +789,8 @@
         <target> Upgrade erforderlich / </target>
       </trans-unit>
       <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
+        <source> Version
+          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL:
           <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
         </source>
         <target> Version
@@ -1095,7 +1095,7 @@
         <target>Update kann nicht installiert werden!</target>
       </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
-        <source>Version 
+        <source>Version
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
         <target>Die Version
@@ -1227,8 +1227,8 @@
         <target>OctoPrint ist veraltet!</target>
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-long" datatype="html">
-        <source>OctoPrint must be running at least 
-          <x id="PH" equiv-text="minimumVersion"/>; currently running 
+        <source>OctoPrint must be running at least
+          <x id="PH" equiv-text="minimumVersion"/>; currently running
           <x id="PH_1" equiv-text="info.server"/>.
         </source>
         <target>OctoPrint muss mindestens ausgeführt werden
@@ -1301,7 +1301,7 @@
         <target>Kann nicht antworten!</target>
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
-        <source>Can't execute 
+        <source>Can't execute
           <x id="PH" equiv-text="command"/> command!
         </source>
         <target>Kann nicht ausgeführt werden
