@@ -15,11 +15,13 @@
         (onLongPress)="editing = i"
         matRipple
         [matRippleUnbounded]="false"
-        cdkDrag>
+        cdkDrag
+        [cdkDragStartDelay]="300">
         <fa-icon
           [icon]="customAction.icon"
           class="custom-actions__action-icon"
-          [style.color]="customAction.color"></fa-icon>
+          [style.color]="customAction.color"
+          *ngIf="customAction.icon"></fa-icon>
       </div>
     </div>
   </div>

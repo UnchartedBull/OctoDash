@@ -127,7 +127,7 @@
         (click)="selectedTool === i ? showQuickControlHotend(selectedTool) : setTool(i)"
         matRipple
         [matRippleUnbounded]="false">
-        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile.extruder.count > 1 && i" />
+        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile.extruder.count > 1 ? i : -1" />
         <div
           class="control__tools__item-value"
           [ngClass]="{

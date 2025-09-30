@@ -352,10 +352,14 @@ app-job-status ~ app-bottom-bar .bottom-bar__enclosure-temperature-icon {
 
 /**************************************** FILE LOADED - PRINTER STATUS ****************************************/
 
-app-job-status ~ app-printer-status .printer-status {
+app-job-status ~ app-printer-status {
   position: absolute;
-  top: 0 !important;
-  left: 0 !important;
+  right: 0;
+  width: 68%;
+}
+
+app-job-status ~ app-printer-status .printer-status {
+  width: initial !important;
 }
 
 app-job-status ~ app-printer-status .printer-status__set-value,

@@ -42,10 +42,9 @@
   &::before {
     content: '';
     width: 91vw;
-    height: 77vh;
-    position: fixed;
-    left: 2vw;
-    top: 20vh;
+    height: 75vh;
+    position: absolute;
+    top: 0;
     z-index: 2;
     pointer-events: none;
     background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));

@@ -35,14 +35,22 @@
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome's free Classic Solid pack </source>
-        <target> Ikoner kommer fra FontAwesomes gratis Classic Solid pack</target>
+        <target> Ikoner kommer fra FontAwesomes gratis Classic Solid pack </target>
       </trans-unit>
       <trans-unit id="ui-delete" datatype="html">
         <source>delete</source>
-        <target></target>
+        <target>slet</target>
       </trans-unit>
       <trans-unit id="ui-close" datatype="html">
         <source>close</source>
+        <target>luk</target>
+      </trans-unit>
+      <trans-unit id="error-parsing-custom-action" datatype="html">
+        <source>Error parsing custom action!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="error-parsing-custom-action-desc" datatype="html">
+        <source>Unable to parse the custom action.</source>
         <target></target>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
@@ -58,17 +66,15 @@
         <target>Printerkommandoer er ikke tilgængelig!</target>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
-        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <source>Please connect to your printer first before  attempting to use a printer command.</source>
         <target>Forbind venligst din printer før du bruger en printerkommando.</target>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
         <source>Initializing is taking longer than usual...
           <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/> Please make sure that OctoPrint is running and that CORS is enabled for the API.
         </source>
-        <target>
-          Initialisering tager længere tid end normalt.
-          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>
-           Sørg for, at OctoPrint kører, og at CORS er aktiveret for API.
+        <target>Initialisering tager længere tid end normalt.
+          <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/>Sørg for, at OctoPrint kører, og at CORS er aktiveret for API.
         </target>
       </trans-unit>
       <trans-unit id="initializing" datatype="html">
@@ -83,7 +89,9 @@
         <source>load new filament into tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>anvend ny filament</target>
+        <target>anvend ny filament 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="load-new-filament-message" datatype="html">
         <source>only put a little filament in, I'll pull in the rest.</source>
@@ -99,7 +107,7 @@
       </trans-unit>
       <trans-unit id="ui-waiting-for-user" datatype="html">
         <source>I'll wait for you.</source>
-        <target>jeg venter på dig</target>
+        <target>Jeg venter på dig.</target>
       </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
@@ -133,8 +141,7 @@
         <source>Tool 
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </source>
-        <target>
-          Værktøj
+        <target>Værktøj
           <x id="INTERPOLATION" equiv-text="{{ i }}"/>
         </target>
       </trans-unit>
@@ -142,7 +149,9 @@
         <source>heating the nozzle for tool 
           <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
         </source>
-        <target>opvarmer nozzle for værktøj</target>
+        <target>opvarmer nozzle for værktøj 
+          <x id="INTERPOLATION" equiv-text="{{ selectedTool }}"/>
+        </target>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait" datatype="html">
         <source>wait</source>
@@ -285,12 +294,10 @@
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target>
-          Lag
+        <target>Lag
           <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
           <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-           af
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> af 
           <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
@@ -324,8 +331,7 @@
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </source>
-        <target>
-          udført:
+        <target>udført:
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </target>
@@ -452,7 +458,7 @@
       </trans-unit>
       <trans-unit id="update-available" datatype="html">
         <source>Update available!</source>
-        <target> opdatering tilgængelig! </target>
+        <target>Opdatering tilgængelig!</target>
       </trans-unit>
       <trans-unit id="ui-save" datatype="html">
         <source>save</source>
@@ -608,7 +614,7 @@
       </trans-unit>
       <trans-unit id="show-extruder-controls" datatype="html">
         <source>Show extruder controls</source>
-        <target></target>
+        <target>Vis ekstruderens kontrolelementer</target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -616,7 +622,7 @@
       </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
         <source>Show icon for Action Center</source>
-        <target></target>
+        <target>Vis ikon for Action Center</target>
       </trans-unit>
       <trans-unit id="turn-on-after-sleep" datatype="html">
         <source>Turn on printer when exiting sleep</source>
@@ -628,7 +634,7 @@
       </trans-unit>
       <trans-unit id="preview-progress-circle" datatype="html">
         <source>Always use circular progress bar</source>
-        <target></target>
+        <target>Brug altid en cirkulær statuslinje</target>
       </trans-unit>
       <trans-unit id="default-directory" datatype="html">
         <source>Default directory for file browser</source>
@@ -644,7 +650,7 @@
       </trans-unit>
       <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
-        <target></target>
+        <target>aktiveret</target>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
         <source>Display Layer Progress</source>
@@ -727,11 +733,11 @@
         <target> ingen tilgængelig opdatering </target>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
-        <source> install v
+        <source> install 
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/>
         </source>
         <target>
-           installer v
+           installer 
           <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
         </target>
       </trans-unit>
@@ -829,7 +835,7 @@
       </trans-unit>
       <trans-unit id="send-request" datatype="html">
         <source>send request</source>
-        <target>Send anmodning</target>
+        <target>send anmodning</target>
       </trans-unit>
       <trans-unit id="api-key" datatype="html">
         <source>API Key:</source>
@@ -861,7 +867,7 @@
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
         <source>Now tell me some facts about your setup so I can personalize OctoDash for you.</source>
-        <target> Fortæl mig nu nogle fakta om din opsætning, så jeg kan tilpasse OctoDash til dig. </target>
+        <target>Fortæl mig nu nogle fakta om din opsætning, så jeg kan tilpasse OctoDash til dig.</target>
       </trans-unit>
       <trans-unit id="prompt-printer-name" datatype="html">
         <source>Printer Name:</source>
@@ -869,7 +875,7 @@
       </trans-unit>
       <trans-unit id="use-touchscreen" datatype="html">
         <source>Use Touchscreen</source>
-        <target> Brug touch-skærm</target>
+        <target>Brug touch-skærm</target>
       </trans-unit>
       <trans-unit id="change-settings-info" datatype="html">
         <source> You can change all settings (and even more) in the settings menu anytime. There is also a description of each attribute available in the GitHub Wiki.</source>
@@ -917,23 +923,23 @@
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source>TPLink SmartPlug</source>
-        <target> TPLink SmartPlug </target>
+        <target>TPLink SmartPlug</target>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
         <source>Tuya SmartPlug</source>
-        <target> Tuya SmartPlug </target>
+        <target>Tuya SmartPlug</target>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source>Tasmota</source>
-        <target> Tasmota </target>
+        <target>Tasmota</target>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source>Tasmota MQTT</source>
-        <target> Tasmota MQTT </target>
+        <target>Tasmota MQTT</target>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source>Wemo</source>
-        <target> Wemo </target>
+        <target>Wemo</target>
       </trans-unit>
       <trans-unit id="checking" datatype="html">
         <source>Great! I'll check everything.</source>
@@ -941,19 +947,19 @@
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
         <source>OctoPrint Connection</source>
-        <target> OctoPrint forbindelse </target>
+        <target>OctoPrint forbindelse</target>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source>Validating Config</source>
-        <target> Validerer Config </target>
+        <target>Validerer Config</target>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source>Saving Config</source>
-        <target> Gemmer konfiguration </target>
+        <target>Gemmer konfiguration</target>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
-        <target>Færdig</target>
+        <target>færdig</target>
       </trans-unit>
       <trans-unit id="saving-config" datatype="html">
         <source>saving config</source>
@@ -1045,12 +1051,10 @@
       </trans-unit>
       <trans-unit id="update-confirmation" datatype="html">
         <source>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installed
         </source>
-        <target>
-          v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/>
-           installeret
+        <target>v
+          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installeret
         </target>
       </trans-unit>
       <trans-unit id="update-restart" datatype="html">
@@ -1069,10 +1073,8 @@
         <source>Version 
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
-        <target>
-          Version
-          <x id="PH" equiv-text="this.latestVersion.title"/>
-           er tilgængelig. Gå til Indstillinger &gt; Om, for at opdatere.
+        <target>Version
+          <x id="PH" equiv-text="this.latestVersion.title"/> er tilgængelig. Gå til Indstillinger &gt; Om, for at opdatere.
         </target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
@@ -1149,7 +1151,7 @@
       </trans-unit>
       <trans-unit id="sdcard" datatype="html">
         <source>sdcard</source>
-        <target>SD-kort</target>
+        <target>sd-kort</target>
       </trans-unit>
       <trans-unit id="files-error-file" datatype="html">
         <source>Can't load file!</source>
@@ -1196,12 +1198,9 @@
           <x id="PH" equiv-text="minimumVersion"/>; currently running 
           <x id="PH_1" equiv-text="info.server"/>.
         </source>
-        <target>
-          OctoPrint skal være på mindst
-          <x id="PH" equiv-text="minimumVersion"/>
-          ; lige nu er den
-          <x id="PH_1" equiv-text="info.server"/>
-          .
+        <target>OctoPrint skal være på mindst
+          <x id="PH" equiv-text="minimumVersion"/>; lige nu er den
+          <x id="PH_1" equiv-text="info.server"/>.
         </target>
       </trans-unit>
       <trans-unit id="printer-error-gcode" datatype="html">
@@ -1272,10 +1271,8 @@
         <source>Can't execute 
           <x id="PH" equiv-text="command"/> command!
         </source>
-        <target>
-          Kan ikke udføre kommandoen
-          <x id="PH" equiv-text="command"/>
-          !
+        <target>Kan ikke udføre kommandoen 
+          <x id="PH" equiv-text="command"/>!
         </target>
       </trans-unit>
       <trans-unit id="error-connect" datatype="html">

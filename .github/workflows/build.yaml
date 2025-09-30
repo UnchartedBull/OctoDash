@@ -8,6 +8,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   lint:
@@ -82,3 +84,20 @@ jobs:
           name: build
           path: |
             dist/*.zip
+
+  release:
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'release'
+    needs: build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build
+      - name: Upload release
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: gh release upload ${{ github.ref }} *.zip

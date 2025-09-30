@@ -172,6 +172,22 @@ export class EnclosureOctoprintService implements EnclosureService {
       .subscribe();
   }
 
+  private togglePSUStatePSUControl() {
+    const psuControlPayload: PSUControlCommand = {
+      command: 'togglePSU',
+    };
+
+    this.http
+      .post(this.configService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
+      .pipe(
+        catchError(error => {
+          this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
   private setPSUStateOphomControl(state: PSUState) {
     this.http
       .get(this.configService.getApiURL('plugin/ophom?action=checkplugstatus'), this.configService.getHTTPHeaders())
@@ -302,6 +318,10 @@ export class EnclosureOctoprintService implements EnclosureService {
   }
 
   togglePSU(): void {
+    if (this.configService.usePSUControl()) {
+      this.togglePSUStatePSUControl();
+      return;
+    }
     const newState = this.currentPSUState === PSUState.ON ? PSUState.OFF : PSUState.ON;
     this.setPSUState(newState);
   }

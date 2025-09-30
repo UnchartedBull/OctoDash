@@ -1,5 +1,138 @@
 # Changelog
 
+## [v2.6.2](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2) (2025-09-30)
+
+Various fixes
+
+### Update Log
+
+- Fix support for Slicer Thumbnails 1.2.0 ([#5361](https://github.com/UnchartedBull/OctoDash/pull/5361))
+- Fix bug with actions without gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
+- Fix bug with PSU Control plugin ([#5332](https://github.com/UnchartedBull/OctoDash/pull/5332))
+
+## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.1) (2025-09-04)
+
+> [!IMPORTANT]
+> OctoDash v2.6.1 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This version corrects some packaging issues with 2.6.0
+
+## [v2.6.0](https://github.com/UnchartedBull/OctoDash/tree/v2.6.0) (2025-09-03)
+
+> [!IMPORTANT]
+> OctoDash v2.6.0 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fixes a few small bugs
+
+## Update Log
+
+- Fix handling of special characters in filenames ([#5282](https://github.com/UnchartedBull/OctoDash/pull/5282))
+- Ensure GCODE in custom actions gets handled sequentially ([#5283](https://github.com/UnchartedBull/OctoDash/pull/5283))
+- Updates of a large number of upstream dependencies
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.3...v2.5.4)
+
+## [v2.5.3](https://github.com/UnchartedBull/OctoDash/tree/v2.5.3) (2025-07-10)
+
+> [!IMPORTANT]
+> OctoDash v2.5.3 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fully fixes the configuration migration bug from v2.5.0.
+
+## Update Log
+
+- Fix configuration migration for plugins ([#5110](https://github.com/UnchartedBull/OctoDash/pull/5110))
+- Fix NOX theme ([#5105](https://github.com/UnchartedBull/OctoDash/pull/5105))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.2...v2.5.3)
+
+## [v2.5.2](https://github.com/UnchartedBull/OctoDash/tree/v2.5.2) (2025-07-08)
+
+> [!IMPORTANT]
+> OctoDash v2.5.2 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fully fixes the scrolling bug with the Action Center, as well as fixes a few styling/UI issues.
+
+## Update Log
+
+- Fix scrolling of Action Center (properly) ([#5102](https://github.com/UnchartedBull/OctoDash/pull/5102))
+- Fix styling on update screen ([#5101](https://github.com/UnchartedBull/OctoDash/pull/5101), [#5103](https://github.com/UnchartedBull/OctoDash/pull/5103))
+- Fix extruder icon saying "false" for a single extruder ([#5100](https://github.com/UnchartedBull/OctoDash/pull/5100))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.1...v2.5.2)
+
+## [v2.5.1](https://github.com/UnchartedBull/OctoDash/tree/v2.5.1) (2025-07-07)
+
+> [!IMPORTANT]
+> OctoDash v2.5.1 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release fixes a few bugs introduced in the last release.
+
+## Update Log
+
+- Fix a crash when an action in the Action Center has no icon ([#5096](https://github.com/UnchartedBull/OctoDash/pull/5096))
+- Display a scrollbar on the Action Center ([#5096](https://github.com/UnchartedBull/OctoDash/pull/5096))
+- Fix configuration migration for PSU based plugins ([#5095](https://github.com/UnchartedBull/OctoDash/pull/5095))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.5.0...v2.5.1)
+
+## [v2.5.0](https://github.com/UnchartedBull/OctoDash/tree/v2.5.0) (2025-07-07)
+
+> [!IMPORTANT]
+> OctoDash v2.5.0 requires OctoPrint v1.9.0 or higher.
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This release replaces the Notification Center with a brand new Action Center. Just like the Notification Center, the Action Center is a place for all of the customizable quick actions. However, unlike the Notification Center, the Action Center takes up a much smaller amount of space at the bottom of the screen, and allows for complete customization of actions: easy drag-and-drop rearrangement, quick editing, and the ability to add or remove actions.
+
+This release also includes a number of UI tweaks and improvements, backend improvements, and locale support for Danish.
+
+## Update Log
+
+- Replace Notification Center with Action Center ([#4915](https://github.com/UnchartedBull/OctoDash/pull/4915), [#4914](https://github.com/UnchartedBull/OctoDash/pull/4914))
+  - The Action Center allows for full customization of the actions
+  - The clock from the Notification Center has been placed on the main screen
+  - Since all notifications were persistent and blocked the icon to open the Notification Center, there were never any new notifications waiting
+  - The control screen now displays extruder and bed temperatures where the actions originally were, including easy tool changing
+- Add Danish localization ([#4917](https://github.com/UnchartedBull/OctoDash/pull/4917))
+- Fill in the blanks in all localization files ([#5086](https://github.com/UnchartedBull/OctoDash/pull/5086))
+- Fix `[!WEB]` command ([#4908](https://github.com/UnchartedBull/OctoDash/pull/4908))
+  - The `[!WEB]` command originally did not function on the control screen
+- Fix autoboot setup process on Debian 12 / OctoPi 1.1.0 ([#5087](https://github.com/UnchartedBull/OctoDash/pull/5087))
+- Add a view transition ([#4909](https://github.com/UnchartedBull/OctoDash/pull/4909))
+  - Pages now fade between each other
+- Clean up and consolidate UI elements
+  - Consolidate styling for scroll bars ([#4911](https://github.com/UnchartedBull/OctoDash/pull/4911))
+  - Fix text size for shared nozzle ([#4907](https://github.com/UnchartedBull/OctoDash/pull/4907))
+  - Fix styling for input elements ([#4903](https://github.com/UnchartedBull/OctoDash/pull/4903))
+  - Upgrade FontAwesome to v6 ([#4900](https://github.com/UnchartedBull/OctoDash/pull/4900), [#4902](https://github.com/UnchartedBull/OctoDash/pull/4902))
+  - Use FontAwesome icons more often ([#4904](https://github.com/UnchartedBull/OctoDash/pull/4904), [#4916](https://github.com/UnchartedBull/OctoDash/pull/4916))
+  - Remove unneeded icons ([#4904](https://github.com/UnchartedBull/OctoDash/pull/4904))
+  - Fix toggle switch animation cache ([#4937](https://github.com/UnchartedBull/OctoDash/pull/4937))
+- Refactor backend
+  - Upgrade to Angular v20 ([#4899](https://github.com/UnchartedBull/OctoDash/pull/4899), [#5081](https://github.com/UnchartedBull/OctoDash/pull/5081))
+  - Move default config values into Ajv schema ([#4871](https://github.com/UnchartedBull/OctoDash/pull/4871), [#4910](https://github.com/UnchartedBull/OctoDash/pull/4910))
+  - Simplify functions in OctoPrint socket file ([#4897](https://github.com/UnchartedBull/OctoDash/pull/4897))
+  - Refactor code ([#4912](https://github.com/UnchartedBull/OctoDash/pull/4912))
+
+[Full changelog](https://github.com/UnchartedBull/OctoDash/compare/v2.4.2...v2.5.0)
+
 ## [v2.4.2](https://github.com/UnchartedBull/OctoDash/tree/v2.4.2) (2025-03-26)
 
 > [!IMPORTANT]

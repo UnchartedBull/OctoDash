@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import { Directory, File, Folder } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
@@ -66,9 +66,9 @@ export class FilesOctoprintService implements FilesService {
                             ? 'files__object--success'
                             : 'files__object--failed'
                           : 'files__object--unknown',
-                      thumbnail: fileOrFolder.thumbnail
-                        ? this.configService.getApiURL(fileOrFolder.thumbnail, false)
-                        : 'assets/object.svg',
+                      thumbnail$: fileOrFolder.thumbnail
+                        ? this.getThumbnailBlobUrl(this.configService.getApiURL(fileOrFolder.thumbnail, false))
+                        : new BehaviorSubject('assets/object.svg'),
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),
@@ -117,34 +117,50 @@ export class FilesOctoprintService implements FilesService {
   }
 
   public getFile(filePath: string): Observable<File> {
-    return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
-      map((file: OctoprintFile): File => {
-        return {
-          origin: file.origin,
-          path: '/' + file.origin + '/' + file.path,
-          name: file.name,
-          date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
-          size: this.conversionService.convertByteToMegabyte(file.size),
-          thumbnail: file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg',
-          ...(file.gcodeAnalysis
-            ? {
-                printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
-                filamentWeight: this.conversionService.convertFilamentLengthToWeight(
-                  _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
-                ),
-              }
-            : {}),
-        } as File;
-      }),
-    );
+    return this.http
+      .get(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
+      .pipe(
+        map((file: OctoprintFile): File => {
+          return {
+            origin: file.origin,
+            path: '/' + file.origin + '/' + file.path,
+            name: file.name,
+            date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
+            size: this.conversionService.convertByteToMegabyte(file.size),
+            thumbnail$: file.thumbnail
+              ? this.getThumbnailBlobUrl(this.configService.getApiURL(file.thumbnail, false))
+              : new BehaviorSubject('assets/object.svg'),
+            ...(file.gcodeAnalysis
+              ? {
+                  printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
+                  filamentWeight: this.conversionService.convertFilamentLengthToWeight(
+                    _.sumBy(_.values(file.gcodeAnalysis.filament), tool => tool.length),
+                  ),
+                }
+              : {}),
+          } as File;
+        }),
+      );
   }
 
   public getThumbnail(filePath: string): Observable<string> {
-    return this.http.get(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders()).pipe(
-      map((file: OctoprintFile): string => {
-        return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
+    return this.http
+      .get(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
+      .pipe(
+        map((file: OctoprintFile): string => {
+          return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
+        }),
+      )
+      .pipe(mergeMap(thumbnailPath => this.getThumbnailBlobUrl(thumbnailPath)));
+  }
+
+  private getThumbnailBlobUrl(filePath: string): Observable<string> {
+    const blobUrl$ = this.http.get(filePath, { responseType: 'blob', ...this.configService.getHTTPHeaders() }).pipe(
+      map(blob => {
+        return URL.createObjectURL(blob);
       }),
     );
+    return blobUrl$;
   }
 
   public loadFile(filePath: string): void {
@@ -154,7 +170,11 @@ export class FilesOctoprintService implements FilesService {
     };
 
     this.http
-      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
+      .post(
+        this.configService.getApiURL('files' + encodeURIComponent(filePath)),
+        payload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@files-error-file:Can't load file!`, error.message);
@@ -171,7 +191,11 @@ export class FilesOctoprintService implements FilesService {
     };
 
     this.http
-      .post(this.configService.getApiURL('files' + filePath), payload, this.configService.getHTTPHeaders())
+      .post(
+        this.configService.getApiURL('files' + encodeURIComponent(filePath)),
+        payload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@files-error-print:Can't start print!`, error.message);
@@ -183,7 +207,7 @@ export class FilesOctoprintService implements FilesService {
 
   public deleteFile(filePath: string): void {
     this.http
-      .delete(this.configService.getApiURL('files' + filePath), this.configService.getHTTPHeaders())
+      .delete(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@files-error-delete:Can't delete file!`, error.message);

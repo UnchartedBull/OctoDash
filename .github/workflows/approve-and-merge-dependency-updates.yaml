@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Auto Approve
         uses: hmarr/auto-approve-action@v4
-        if: github.actor == 'dependabot[bot]'
+        if: false && github.actor == 'dependabot[bot]'
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:

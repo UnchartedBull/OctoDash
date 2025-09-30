@@ -119,11 +119,22 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
         exit,
       };
     } else {
-      command.split('; ').forEach(this.executeGCode.bind(this));
-      if (exit) {
-        this.router.navigate(['/main-screen']);
+      try {
+        const parsed = this.parseCommand(command);
+        parsed.specials.forEach(action => {
+          this.executeSpecialCommand(action);
+        });
+        this.executeGCode(parsed.gcodes.join(';'));
+        if (exit) {
+          this.router.navigate(['/main-screen']);
+        }
+        this.hideConfirm();
+      } catch {
+        this.notificationService.error(
+          $localize`:@@error-parsing-custom-action:Error parsing custom action!`,
+          $localize`:@@error-parsing-custom-action-desc:Unable to parse the custom action.`,
+        );
       }
-      this.hideConfirm();
     }
   }
 
@@ -131,27 +142,37 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     this.actionToConfirm = null;
   }
 
-  private executeGCode(command: string): void {
-    if (command.startsWith('[!')) {
-      const specialCommand = command.match(SpecialCommandRegex)[1];
-      const values = command.replace(SpecialCommandRegex, '').split(',');
+  private parseCommand(command: string) {
+    const splitted = command.split(';').map(cmd => cmd.trim());
+    const gcodes = splitted.filter(cmd => !cmd.startsWith('[!'));
+    const specials = splitted.filter(cmd => cmd.startsWith('[!'));
+    return { gcodes, specials };
+  }
 
-      if (!(specialCommand in this.commands)) {
-        this.notificationService.error(
-          $localize`:@@error-custom-action-invalid:Unknown special command!`,
-          $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
-        );
-        return;
-      }
+  private executeSpecialCommand(command: string) {
+    const specialCommand = command.match(SpecialCommandRegex)[1];
+    const values = command.replace(SpecialCommandRegex, '').split(',');
 
-      this.commands[specialCommand](...values);
+    if (!(specialCommand in this.commands)) {
+      this.notificationService.error(
+        $localize`:@@error-custom-action-invalid:Unknown special command!`,
+        $localize`:@@error-custom-action-invalid-desc:The special command you have entered is unknown.`,
+      );
       return;
     }
 
+    this.commands[specialCommand](...values);
+    return;
+  }
+
+  private executeGCode(command: string): void {
+    if (!command) {
+      return;
+    }
     if (!this.printerConnected) {
       this.notificationService.error(
         $localize`:@@error-custom-action-disabled:Printer commands are not available!`,
-        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before attempting to use a printer command.`,
+        $localize`:@@error-custom-action-disabled-desc:Please connect to your printer first before  attempting to use a printer command.`,
       );
     } else {
       this.printerService.executeGCode(command);

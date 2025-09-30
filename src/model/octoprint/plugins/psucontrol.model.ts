@@ -1,3 +1,3 @@
 export interface PSUControlCommand {
-  command: 'turnPSUOn' | 'turnPSUOff';
+  command: 'turnPSUOn' | 'turnPSUOff' | 'togglePSU';
 }

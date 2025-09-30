@@ -6,8 +6,7 @@
   transform: translateY(100%);
   width: 100vw;
   height: 12vw;
-  overflow-x: scroll;
-  z-index: 10;
+  z-index: 1000;
   background: linear-gradient(to bottom, rgb(0 0 0 / 45%), rgb(0 0 0 / 80%));
   mask-image: linear-gradient(to bottom, transparent 0%, white 10%);
   backdrop-filter: blur(8px);
@@ -91,8 +90,13 @@
   left: 50vw;
   rotate: 0deg;
   opacity: 0.4;
-  z-index: 11;
+  z-index: 1001;
   transition: rotate 0.2s ease-out;
+
+  /* Increases the touch hitbox */
+  padding: 1vh 2vw;
+  margin-bottom: -1vh;
+  margin-left: -2vw;
 
   &.visible {
     rotate: 180deg;
@@ -105,7 +109,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1500;
   background: #2a2f39;
   font-weight: 500;
   font-size: 5vw;
@@ -127,7 +131,7 @@
     position: fixed;
     top: 3vh;
     right: 3.5vw;
-    z-index: 101;
+    z-index: 1501;
     color: var(--error);
   }
 }
@@ -170,7 +174,7 @@
 
   &__wrapper {
     position: fixed;
-    z-index: 50;
+    z-index: 1100;
     background-color: rgb(0 0 0 / 85%);
     inset: 0;
   }
@@ -185,7 +189,7 @@
   background-color: rgb(0 0 0 / 85%);
 
   // backdrop-filter: blur(8px);
-  z-index: 100;
+  z-index: 1100;
 
   &__container {
     position: absolute;

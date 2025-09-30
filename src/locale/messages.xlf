@@ -6,105 +6,119 @@
         <source>loading website...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">37,41</context>
+          <context context-type="linenumber">39,43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="are-you-sure" datatype="html">
         <source>are you sure?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">48,49</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="confirm-exec" datatype="html">
         <source>do you want to execute the following command?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">49,52</context>
+          <context context-type="linenumber">51,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-gcode" datatype="html">
         <source>GCode / Action</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">61,65</context>
+          <context context-type="linenumber">63,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-icon" datatype="html">
         <source>Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">73,77</context>
+          <context context-type="linenumber">75,79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-color" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">84,88</context>
+          <context context-type="linenumber">86,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-confirm" datatype="html">
         <source>Confirm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">109,113</context>
+          <context context-type="linenumber">111,115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-home" datatype="html">
         <source>Return to Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">120,126</context>
+          <context context-type="linenumber">122,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octodash-custom-icon-attribution" datatype="html">
         <source> Icons come from FontAwesome&apos;s free Classic Solid pack </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">127,131</context>
+          <context context-type="linenumber">129,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-delete" datatype="html">
         <source>delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">131,132</context>
+          <context context-type="linenumber">133,134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-close" datatype="html">
         <source>close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.html</context>
-          <context context-type="linenumber">132,138</context>
+          <context context-type="linenumber">134,140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="error-parsing-custom-action" datatype="html">
+        <source>Error parsing custom action!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="error-parsing-custom-action-desc" datatype="html">
+        <source>Unable to parse the custom action.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">142</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
-        <source>Please connect to your printer first before attempting to use a printer command.</source>
+        <source>Please connect to your printer first before  attempting to use a printer command.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">154</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
@@ -447,7 +461,7 @@
         <source>Can&apos;t retrieve enclosure temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/main-screen/bottom-bar/bottom-bar.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-millimeters-short" datatype="html">
@@ -1140,7 +1154,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
-        <source> install v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
+        <source> install <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
           <context context-type="linenumber">583,584</context>
@@ -1688,7 +1702,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="update-confirmation" datatype="html">
-        <source>v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion }}"/> installed</source>
+        <source>v<x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/update/update.component.html</context>
           <context context-type="linenumber">26,27</context>
@@ -1769,46 +1783,50 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">184</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
+          <context context-type="linenumber">219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-ophom-gcode" datatype="html">
         <source>Can&apos;t update Ophom Plug!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-smartplug-gcode" datatype="html">
         <source>Can&apos;t send GCode!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">220</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug" datatype="html">
         <source>Can&apos;t update Tasmota!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-tasmota-plug-mqtt" datatype="html">
         <source>Can&apos;t update Tasmota MQTT!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">261</context>
+          <context context-type="linenumber">277</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-send-psu-command" datatype="html">
         <source>Can&apos;t send plug command!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">280</context>
+          <context context-type="linenumber">296</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/enclosure/enclosure.octoprint.service.ts</context>
-          <context context-type="linenumber">297</context>
+          <context context-type="linenumber">313</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spools" datatype="html">
@@ -1871,21 +1889,21 @@
         <source>Can&apos;t load file!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/files/files.octoprint.service.ts</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-error-print" datatype="html">
         <source>Can&apos;t start print!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/files/files.octoprint.service.ts</context>
-          <context context-type="linenumber">177</context>
+          <context context-type="linenumber">201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="files-error-delete" datatype="html">
         <source>Can&apos;t delete file!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/files/files.octoprint.service.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-start-job" datatype="html">
