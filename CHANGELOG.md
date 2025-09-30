@@ -1,6 +1,6 @@
 # Changelog
 
-## [v2.6.2-rc.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2-rc.1) (2025-09-27)
+## [v2.6.2](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2) (2025-09-30)
 
 Various fixes
 
