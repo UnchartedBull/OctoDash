@@ -36,7 +36,7 @@ export class ConfigService {
     if (this.apiKey) {
       headers = new HttpHeaders({ 'x-api-key': this.apiKey });
     } else {
-      console.log('API key found, attempting login with cookie');
+      console.log('API key not found, attempting login with cookie');
     }
 
     return this.http
