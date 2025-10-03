@@ -36,9 +36,7 @@
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="prusammuPlugin"
-      (valueChange)="prusammuPluginChange.emit(!prusammuPlugin)">
+    <app-toggle-switch [value]="prusammuPlugin" (valueChange)="prusammuPluginChange.emit(!prusammuPlugin)">
       <ng-container i18n="@@plugin-prusammu">Prusa MMU</ng-container>
     </app-toggle-switch>
   </span>

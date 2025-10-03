@@ -41,10 +41,7 @@ export class FilamentService {
     return this.filamentPluginService.getCurrentSpools().pipe(
       tap({
         error: (error: HttpErrorResponse) =>
-          this.notificationService.error(
-            $localize`:@@error-spools-active:Can't load active spools!`,
-            error.message
-          ),
+          this.notificationService.error($localize`:@@error-spools-active:Can't load active spools!`, error.message),
       }),
     );
   }

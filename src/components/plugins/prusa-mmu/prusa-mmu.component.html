@@ -4,9 +4,15 @@
       <div class="prusammu__content">
         <div class="prusammu__heading" i18n="@@select-filament-for-mmu">select filament for MMU</div>
         <div *ngIf="filamentsReady">
-          <div class="prusammu__sub-heading" i18n="@@select-filament-from-source">from: {{prusaMMUService.source}}</div>
+          <div class="prusammu__sub-heading" i18n="@@select-filament-from-source">
+            from: {{ prusaMMUService.source }}
+          </div>
           <ul class="prusammu__list files">
-            <li matRipple class="files__object" (click)="setFilament(filament)" *ngFor="let filament of prusaMMUService.filaments | enabledFilamentOnly">
+            <li
+              matRipple
+              class="files__object"
+              (click)="setFilament(filament)"
+              *ngFor="let filament of prusaMMUService.filaments | enabledFilamentOnly">
               <fa-icon [icon]="['fas', 'paint-brush']" [style.color]="filament.color"></fa-icon>
               <span class="prusammu__section-heading">{{ filament.id }}: {{ filament.name }}</span>
             </li>
