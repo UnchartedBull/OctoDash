@@ -21,15 +21,15 @@
         "locales": {
           "fr": {
             "translation": "src/locale/messages.fr.xlf",
-            "baseHref": ""
+            "baseHref": "fr/"
           },
           "de": {
             "translation": "src/locale/messages.de.xlf",
-            "baseHref": ""
+            "baseHref": "de/"
           },
           "da": {
             "translation": "src/locale/messages.da.xlf",
-            "baseHref": ""
+            "baseHref": "da/"
           }
         }
       },
