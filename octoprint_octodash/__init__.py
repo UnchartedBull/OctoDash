@@ -149,6 +149,7 @@ class OctodashPlugin(
                 "showExtruderControl": True,
                 "showNotificationCenterIcon": True,
                 "defaultDirectory": "/",
+                "language": None,
             },
         }
 
@@ -380,6 +381,10 @@ class OctodashPlugin(
     ##~ General helpers
 
     def _get_language(self):
+        language = self._settings.get(["octodash", "language"])
+        if language is not None:
+            return language
+
         global_language = self._settings.global_get(["appearance", "defaultLanguage"])
         if global_language in LANGUAGES:
             return global_language
@@ -397,7 +402,6 @@ class OctodashPlugin(
             # Dev mode
             return devpath
         
-        #TODO: Read the language from config
         return os.path.join(self._basefolder, "static", "ui", self._get_language(), "index.html")
 
 
