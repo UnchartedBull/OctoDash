@@ -19,7 +19,7 @@ export interface GcodeFilament {
 export interface PrusaMMU {
   classicColorPicker: boolean;
   debug: boolean;
-  defaultFilament?: any;
+  defaultFilament?: number;
   displayActiveFilament: boolean;
   filament: Filament[];
   filamentSource: string;
