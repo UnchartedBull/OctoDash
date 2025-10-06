@@ -2156,6 +2156,13 @@
           <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="prusammu-filament-selection-failed" datatype="html">
+        <source>Filament selection failed!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/prusammu/prusa-mmu.service.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
         <context-group purpose="location">

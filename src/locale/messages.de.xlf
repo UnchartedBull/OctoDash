@@ -1298,6 +1298,9 @@
         <source>Can't disconnect Printer!</source>
         <target>Verbindung zum Drucker kann nicht aufgelöst weden!</target>
       </trans-unit>
+      <trans-unit id="prusammu-filament-selection-failed" datatype="html">
+        <source>Filament selection failed!</source>
+      </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
         <target>HTTP-Fehler 403 - VERBOTEN</target>
