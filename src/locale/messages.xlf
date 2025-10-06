@@ -701,6 +701,20 @@
           <context context-type="linenumber">8,11</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="select-filament-for-mmu" datatype="html">
+        <source>select filament for MMU</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="select-filament-from-source" datatype="html">
+        <source> from: <x id="INTERPOLATION" equiv-text="{{ prusaMMUService.source }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
         <context-group purpose="location">
@@ -999,39 +1013,39 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">442,444</context>
+          <context context-type="linenumber">450,452</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">449,451</context>
+          <context context-type="linenumber">457,459</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">456,458</context>
+          <context context-type="linenumber">464,466</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">463,465</context>
+          <context context-type="linenumber">471,473</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">470,472</context>
+          <context context-type="linenumber">478,480</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">489,491</context>
+          <context context-type="linenumber">497,499</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">506,508</context>
+          <context context-type="linenumber">514,516</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">532,534</context>
+          <context context-type="linenumber">540,542</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">558,560</context>
+          <context context-type="linenumber">566,568</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-display-layer-progress" datatype="html">
@@ -1069,137 +1083,151 @@
           <context context-type="linenumber">429,432</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="settings-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
+          <context context-type="linenumber">437,440</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings-prusammu-enabled" datatype="html">
+        <source>enabled</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
+          <context context-type="linenumber">442,445</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">437,440</context>
+          <context context-type="linenumber">445,448</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">444,447</context>
+          <context context-type="linenumber">452,455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">451,454</context>
+          <context context-type="linenumber">459,462</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">458,461</context>
+          <context context-type="linenumber">466,469</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">465,468</context>
+          <context context-type="linenumber">473,476</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">473,478</context>
+          <context context-type="linenumber">481,486</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tuya" datatype="html">
         <source>Tuya Smart Plug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">484,487</context>
+          <context context-type="linenumber">492,495</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">491,495</context>
+          <context context-type="linenumber">499,503</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">553,556</context>
+          <context context-type="linenumber">561,564</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
         <source>Wemo IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">560,564</context>
+          <context context-type="linenumber">568,572</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">584,587</context>
+          <context context-type="linenumber">592,595</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-developer-mode" datatype="html">
         <source> updates disabled (dev mode) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">593,596</context>
+          <context context-type="linenumber">601,604</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> up to date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">600,603</context>
+          <context context-type="linenumber">608,611</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">607,608</context>
+          <context context-type="linenumber">615,616</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">613,614</context>
+          <context context-type="linenumber">621,622</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">617,619</context>
+          <context context-type="linenumber">625,627</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">646,648</context>
+          <context context-type="linenumber">654,656</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">648,650</context>
+          <context context-type="linenumber">656,658</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-config" datatype="html">
         <source>Reset Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">653,656</context>
+          <context context-type="linenumber">661,664</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
@@ -1510,105 +1538,112 @@
         <source>Spool Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">34,40</context>
+          <context context-type="linenumber">34,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="plugin-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
+          <context context-type="linenumber">40,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">42,48</context>
+          <context context-type="linenumber">48,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-print-time-genius" datatype="html">
         <source>Print Time Genius</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">50,55</context>
+          <context context-type="linenumber">56,61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">56,61</context>
+          <context context-type="linenumber">62,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-opom" datatype="html">
         <source>Ophom (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">62,68</context>
+          <context context-type="linenumber">68,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tplink-smartplug" datatype="html">
         <source>TPLink SmartPlug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">70,75</context>
+          <context context-type="linenumber">76,81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tuya" datatype="html">
         <source>Tuya SmartPlug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">76,81</context>
+          <context context-type="linenumber">82,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tasmota" datatype="html">
         <source>Tasmota</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">82,87</context>
+          <context context-type="linenumber">88,93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-tasmota-mqtt" datatype="html">
         <source>Tasmota MQTT</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">88,93</context>
+          <context context-type="linenumber">94,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="plugin-wemo" datatype="html">
         <source>Wemo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">94,98</context>
+          <context context-type="linenumber">100,104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking" datatype="html">
         <source>Great! I&apos;ll check everything.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">57,59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-octoprint-connection" datatype="html">
         <source>OctoPrint Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.html</context>
-          <context context-type="linenumber">63,66</context>
+          <context context-type="linenumber">64,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-config" datatype="html">
         <source>Validating Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.html</context>
-          <context context-type="linenumber">71,75</context>
+          <context context-type="linenumber">72,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="checking-save" datatype="html">
         <source>Saving Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.html</context>
-          <context context-type="linenumber">80,82</context>
+          <context context-type="linenumber">81,83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="wizard-done" datatype="html">
         <source>done</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.html</context>
-          <context context-type="linenumber">85,89</context>
+          <context context-type="linenumber">86,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="saving-config" datatype="html">
@@ -1918,42 +1953,49 @@
         <source>Can&apos;t load filament spools!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spool" datatype="html">
         <source>Can&apos;t load active spool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="error-spools-active" datatype="html">
+        <source>Can&apos;t load active spools!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-spool-id" datatype="html">
         <source>Spool IDs didn&apos;t match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-change-spool" datatype="html">
         <source>Can&apos;t change spool. Please change spool manually in the OctoPrint UI.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">75</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-new-spool" datatype="html">
         <source>Can&apos;t set new spool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-new-spool-2" datatype="html">
         <source>Can&apos;t set new spool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="local" datatype="html">
@@ -2118,49 +2160,49 @@
         <source>HTTP Error 403 - FORBIDDEN</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-text" datatype="html">
         <source>This most likely means that your API Key is invalid. Please update the API Key and restart your system.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-unknown-heading" datatype="html">
         <source>Unknown HTTP Error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-hours-short" datatype="html">
         <source>h</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">327</context>
+          <context context-type="linenumber">335</context>
         </context-group>
       </trans-unit>
       <trans-unit id="printer-error" datatype="html">
         <source>Printer error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">379</context>
+          <context context-type="linenumber">387</context>
         </context-group>
       </trans-unit>
       <trans-unit id="action-required" datatype="html">
         <source>Action required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">400</context>
+          <context context-type="linenumber">408</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-answer-prompt" datatype="html">
         <source>Can&apos;t answer prompt!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/socket/socket.octoprint.service.ts</context>
-          <context context-type="linenumber">421</context>
+          <context context-type="linenumber">429</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-execute" datatype="html">
@@ -2175,34 +2217,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/system/system.octoprint.service.ts</context>
           <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="select-filament-for-mmu" datatype="html">
-        <source>select filament for MMU</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
-          <context context-type="linenumber">5,7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="select-filament-from-source" datatype="html">
-        <source>from: <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
-          <context context-type="linenumber">7,8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="settings-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">543,546</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="plugin-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/setup/plugins/plugins.component.html</context>
-          <context context-type="linenumber">42,47</context>
         </context-group>
       </trans-unit>
     </body>

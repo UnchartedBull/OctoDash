@@ -423,6 +423,16 @@
         <source>tap this card to close it</source>
         <target>touchez cette carte pour la fermer</target>
       </trans-unit>
+      <trans-unit id="select-filament-for-mmu" datatype="html">
+        <source>select filament for MMU</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="select-filament-from-source" datatype="html">
+        <source> from: 
+          <x id="INTERPOLATION" equiv-text="{{ prusaMMUService.source }}"/>
+        </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
         <target>Êtes-vous sûr de vouloir réinitialiser la configuration ?</target>
@@ -658,6 +668,14 @@
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager</source>
         <target>Spool Manager</target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu-enabled" datatype="html">
+        <source>enabled</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
@@ -921,6 +939,10 @@
         <source>Spool Manager</source>
         <target>Spool Manager</target>
       </trans-unit>
+      <trans-unit id="plugin-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Preheat Button</target>
@@ -1157,6 +1179,10 @@
         <source>Can't load active spool!</source>
         <target>Impossible de charger la bobine active!</target>
       </trans-unit>
+      <trans-unit id="error-spools-active" datatype="html">
+        <source>Can't load active spools!</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-spool-id" datatype="html">
         <source>Spool IDs didn't match</source>
         <target>Les ID des bobines ne correspondent pas</target>
@@ -1306,32 +1332,6 @@
       <trans-unit id="error-connect" datatype="html">
         <source>Can't connect to printer!</source>
         <target>Impossible de se connecter à l'imprimante !</target>
-      </trans-unit>
-      <trans-unit id="select-filament-for-mmu" datatype="html">
-        <source>select filament for MMU</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="select-filament-from-source" datatype="html">
-        <source>from: 
-          <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/>
-        </source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-prusammu-enabled" datatype="html">
-        <source>enabled</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="plugin-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="error-spools-active" datatype="html">
-        <source>Can't load active spools!</source>
-        <target></target>
       </trans-unit>
     </body>
   </file>

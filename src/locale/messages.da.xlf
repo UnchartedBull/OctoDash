@@ -428,6 +428,18 @@
         <source>tap this card to close it</source>
         <target>tryk på dette kort for at lukke det</target>
       </trans-unit>
+      <trans-unit id="select-filament-for-mmu" datatype="html">
+        <source>select filament for MMU</source>
+        <target>vælg filament til MMU</target>
+      </trans-unit>
+      <trans-unit id="select-filament-from-source" datatype="html">
+        <source> from: 
+          <x id="INTERPOLATION" equiv-text="{{ prusaMMUService.source }}"/>
+        </source>
+        <target>fra:
+          <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/>
+        </target>
+      </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
         <source>Are you sure you want to reset the configuration?</source>
         <target>Er du sikker på at du vil nulstille konfigurationen?</target>
@@ -683,6 +695,14 @@
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager</source>
         <target>Spool Manager (Beta)</target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target>Prusa MMU</target>
+      </trans-unit>
+      <trans-unit id="settings-prusammu-enabled" datatype="html">
+        <source>enabled</source>
+        <target>aktiveret</target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
@@ -949,6 +969,10 @@
         <source>Spool Manager</source>
         <target>Spool Manager (beta)</target>
       </trans-unit>
+      <trans-unit id="plugin-prusammu" datatype="html">
+        <source>Prusa MMU</source>
+        <target>Prusa MMU</target>
+      </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Preheat-knap</target>
@@ -1185,6 +1209,10 @@
         <source>Can't load active spool!</source>
         <target>Kan ikke indlæse aktiv spole!</target>
       </trans-unit>
+      <trans-unit id="error-spools-active" datatype="html">
+        <source>Can't load active spools!</source>
+        <target>Kan ikke finde aktive spole!</target>
+      </trans-unit>
       <trans-unit id="error-spool-id" datatype="html">
         <source>Spool IDs didn't match</source>
         <target>Spool-ID'er matchede ikke</target>
@@ -1334,34 +1362,6 @@
       <trans-unit id="error-connect" datatype="html">
         <source>Can't connect to printer!</source>
         <target>Kan ikke oprette forbindelse til printeren!</target>
-      </trans-unit>
-      <trans-unit id="select-filament-for-mmu" datatype="html">
-        <source>select filament for MMU</source>
-        <target>vælg filament til MMU</target>
-      </trans-unit>
-      <trans-unit id="settings-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <target>Prusa MMU</target>
-      </trans-unit>
-      <trans-unit id="settings-prusammu-enabled" datatype="html">
-        <source>enabled</source>
-        <target>aktiveret</target>
-      </trans-unit>
-      <trans-unit id="select-filament-from-source" datatype="html">
-        <source>from: 
-          <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/>
-        </source>
-        <target>fra:
-          <x id="INTERPOLATION" equiv-text="{{prusaMMUService.source}}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="plugin-prusammu" datatype="html">
-        <source>Prusa MMU</source>
-        <target>Prusa MMU</target>
-      </trans-unit>
-      <trans-unit id="error-spools-active" datatype="html">
-        <source>Can't load active spools!</source>
-        <target>Kan ikke finde aktive spole!</target>
       </trans-unit>
     </body>
   </file>
