@@ -77,9 +77,8 @@ export class PrusaMMUService {
       catchError(error => {
         this.notificationService.error(
           $localize`:@@prusammu-init-failed:Failed to load filament settings`,
-          error.message || 'Unable to fetch PrusaMMU configuration',
+          error.message,
         );
-        console.error('Error initializing PrusaMMU filaments:', error);
         throw error;
       }),
     );
