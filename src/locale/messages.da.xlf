@@ -1325,6 +1325,10 @@
       </trans-unit>
       <trans-unit id="prusammu-filament-selection-failed" datatype="html">
         <source>Filament selection failed!</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="prusammu-init-failed" datatype="html">
+        <source>Failed to load filament settings</source>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>

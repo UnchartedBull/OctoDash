@@ -36,20 +36,21 @@ export class PrusaMMUService {
   setFilament(filament: Filament): Observable<unknown> {
     // Subtract one from id (choice is zero-indexed)
     const payload: PrusaMMUCommand = { choice: filament.id - 1, command: 'select' };
-    return this.http.post(
-      this.configService.getApiURL('plugin/prusammu'),
-      payload,
-      this.configService.getHTTPHeaders(),
-    ).pipe(
-      map(response => {
-        this.filamentPickerIsVisible = false;
-        return response;
-      }),
-      catchError(error => {
-        this.notificationService.error($localize`:@@prusammu-filament-selection-failed:Filament selection failed!`, error.message);
-        throw error;
-      }),
-    );
+    return this.http
+      .post(this.configService.getApiURL('plugin/prusammu'), payload, this.configService.getHTTPHeaders())
+      .pipe(
+        map(response => {
+          this.filamentPickerIsVisible = false;
+          return response;
+        }),
+        catchError(error => {
+          this.notificationService.error(
+            $localize`:@@prusammu-filament-selection-failed:Filament selection failed!`,
+            error.message,
+          );
+          throw error;
+        }),
+      );
   }
 
   public initFilaments(currentSpools?: FilamentSpool[]): Observable<void> {
@@ -76,7 +77,7 @@ export class PrusaMMUService {
       catchError(error => {
         this.notificationService.error(
           $localize`:@@prusammu-init-failed:Failed to load filament settings`,
-          error.message || 'Unable to fetch PrusaMMU configuration'
+          error.message || 'Unable to fetch PrusaMMU configuration',
         );
         console.error('Error initializing PrusaMMU filaments:', error);
         throw error;

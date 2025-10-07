@@ -705,14 +705,14 @@
         <source>select filament for MMU</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
-          <context context-type="linenumber">5,7</context>
+          <context context-type="linenumber">6,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="select-filament-from-source" datatype="html">
         <source> from: <x id="INTERPOLATION" equiv-text="{{ prusaMMUService.source }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/plugins/prusa-mmu/prusa-mmu.component.html</context>
-          <context context-type="linenumber">8,10</context>
+          <context context-type="linenumber">9,11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-confirmation" datatype="html">
@@ -2160,7 +2160,14 @@
         <source>Filament selection failed!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/prusammu/prusa-mmu.service.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="prusammu-init-failed" datatype="html">
+        <source>Failed to load filament settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/prusammu/prusa-mmu.service.ts</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
