@@ -21,6 +21,9 @@
         <div class="files" *ngIf="!filamentsReady">
           <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
         </div>
+        <div>
+          <button mat-button (click)="cancelSelection()">Close</button>
+        </div>
       </div>
     </div>
   </div>
