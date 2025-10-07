@@ -181,6 +181,8 @@
     top: 2vh;
     width: 4vw;
     z-index: 10;
+    color: var(--error);
+    cursor: pointer;
   }
 
   &__list {

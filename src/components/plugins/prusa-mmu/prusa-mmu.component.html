@@ -1,6 +1,7 @@
 <div class="prusammu">
   <div class="prusammu-wrapper">
     <div class="prusammu-container" (click)="$event.stopPropagation()">
+      <fa-icon icon="xmark" class="prusammu__close" (click)="cancelSelection()" />
       <div class="prusammu__content">
         <div class="prusammu__heading" i18n="@@select-filament-for-mmu">select filament for MMU</div>
         <div *ngIf="filamentsReady">
@@ -20,9 +21,6 @@
         </div>
         <div class="files" *ngIf="!filamentsReady">
           <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
-        </div>
-        <div>
-          <button mat-button (click)="cancelSelection()">Close</button>
         </div>
       </div>
     </div>
