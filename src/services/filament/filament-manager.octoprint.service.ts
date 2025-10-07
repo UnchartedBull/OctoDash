@@ -43,7 +43,9 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
       .pipe(
         map((selection: FilamentManagerSelections): Array<FilamentSpool> => {
           if (selection.selections.length > 0) {
-            return selection.selections.map((sel): FilamentSpool => this.convertFilamentManagerSpool(sel.spool));
+            return selection.selections.map(
+              (selected): FilamentSpool => this.convertFilamentManagerSpool(selected.spool, selected.tool + 1),
+            );
           } else {
             return null;
           }
@@ -68,7 +70,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
       );
   }
 
-  private convertFilamentManagerSpool(spool: FilamentManagerSpool): FilamentSpool {
+  private convertFilamentManagerSpool(spool: FilamentManagerSpool, tool?: number): FilamentSpool {
     colorRegexp.lastIndex = 0;
     const match = colorRegexp.exec(spool.name);
     return {
@@ -85,6 +87,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
       used: spool.used,
       vendor: spool.profile.vendor,
       weight: spool.weight,
+      tool: tool,
     };
   }
 
