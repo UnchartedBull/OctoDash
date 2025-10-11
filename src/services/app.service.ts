@@ -122,11 +122,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    // TODO: Implement turnDisplayOff
+    this.http.post('/plugin/octodash/api/screen_sleep', {}, this.configService.getHTTPHeaders()).subscribe();
   }
 
   public turnDisplayOn(): void {
-    // TODO: Implement turnDisplayOn
+    this.http.post('/plugin/octodash/api/screen_wakeup', {}, this.configService.getHTTPHeaders()).subscribe();
   }
 
   public loadCustomStyles(): void {
