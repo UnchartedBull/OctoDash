@@ -289,7 +289,7 @@ class OctodashPlugin(
         return False
 
     def get_blueprint_api_prefixes(self):
-        return ['api']
+        return ['/api']
 
 
     ##~ WizardPlugin mixin
