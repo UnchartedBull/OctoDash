@@ -469,6 +469,11 @@
           "type": "integer",
           "default": 2000
         },
+        "language": {
+          "type": "string",
+          "enum": ["en", "fr", "de", "da"],
+          "default": null
+        },
         "touchscreen": {
           "type": "boolean",
           "default": true

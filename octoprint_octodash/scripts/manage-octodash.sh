@@ -1,5 +1,16 @@
 #!/bin/bash
 
+octodash_url_prompt="What is the URL of your OctoDash installation? Be sure to include a trailing slash. If you don't know, push enter to accept the default."
+octodash_url_default="http://localhost:5000/"
+
+browser_launch_string="chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized" 
+octoprint_suffix="plugin/octodash/"
+
+dependencies="xserver-xorg xinit chromium-browser"
+
+yes_no=( 'yes' 'no' )
+
+
 ################## INQUIRER.SH ##################
 # https://github.com/kahkhang/Inquirer.sh
 
@@ -560,9 +571,12 @@ on_text_input_right() {
 on_text_input_enter() {
   remove_regex_failed
 
-  if [[ "$_text_input" =~ $_text_input_regex && "$(eval $_text_input_validator "$_text_input")" = true ]]; then
+  # Set default value if it has one
+  _text_input=$([ -z "$_text_input" ] && echo $_text_default_value || echo $_text_input)
+  # Only use validator to check, because you can use regexp in your validator
+  if [[ "$(eval $_text_input_validator "$_text_input")" = true ]]; then
     tput cub "$(tput cols)"
-    tput cuf $((${#_read_prompt}-19))
+    tput cuf $((${#_read_prompt}-${#_text_default_tip} - 36))
     printf "${cyan}${_text_input}${normal}"
     tput el
     tput cud1
@@ -641,12 +655,14 @@ text_input_default_validator() {
 text_input() {
   local prompt=$1
   local var_name=$2
-  local _text_input_regex="${3:-"\.+"}"
+  local _text_default_value=$3
+  # If there are default value, then show as a gray tip
+  local _text_default_tip=$([ -z "$_text_default_value" ] && echo "" || echo "(${_text_default_value})")
   local _text_input_regex_failed_msg=${4:-"Input validation failed"}
   local _text_input_validator=${5:-text_input_default_validator}
   local _read_prompt_start=$'\e[32m?\e[39m\e[1m'
   local _read_prompt_end=$'\e[22m'
-  local _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"
+  local _read_prompt="$( echo "$_read_prompt_start ${prompt} ${gray}${_text_default_tip}${normal} $_read_prompt_end")"
   local _current_pos=0
   local _text_input_regex_failed=false
   local _text_input=""
@@ -666,31 +682,12 @@ text_input() {
 
 ################## INQUIRER.SH ##################
 
-
-if [ ! -f "/etc/debian_version" ]; then
-   echo ""
-   echo "OctoDash is only compatible with Debian-based Linux installations!"
-   echo ""
-fi
-
-arch=$(dpkg --print-architecture)
-if  [[ $arch == armhf ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*armv7l.deb" | cut -d '"' -f 4)
-elif [[ $arch == arm64 ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*arm64.deb" | cut -d '"' -f 4)
-elif [[ $arch == amd64 ]]; then
-  releaseURL=$(curl -s "https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest" | grep "browser_download_url.*amd64.deb" | cut -d '"' -f 4)
-fi
-dependencies="libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libappindicator3-1 libsecret-1-0 xserver-xorg ratpoison x11-xserver-utils xinit libgtk-3-0 bc desktop-file-utils libavahi-compat-libdnssd1 libpam0g-dev libx11-dev"
-IFS='/' read -ra version <<< "$releaseURL"
-
-echo "Installing OctoDash "${version[7]}, $arch""
-
-echo "Installing Dependencies ..."
-{
-  sudo apt -qq update
-  sudo apt -qq install $dependencies -y
-} || {
+install-apt() {
+  local deps=$1
+  {
+      sudo apt -qq update
+      sudo apt -qq install $deps -y
+  } || {
   echo ""
   echo "Couldn't install dependenices!"
   echo "Seems like there is something wrong with the package manager 'apt'"
@@ -698,71 +695,37 @@ echo "Installing Dependencies ..."
   echo "If the error is similar to: 'E: Repository 'http://raspbian.raspberrypi.org/raspbian buster InRelease' changed its 'Suite' value from 'stable' to 'oldstable''"
   echo "you can run 'sudo apt update --allow-releaseinfo-change' and then execute the OctoDash installation command again"
   exit -1
+  }
 }
 
-if [ -d "$HOME/OctoPrint/venv" ]; then
-    DIRECTORY="$HOME/OctoPrint/venv"
-elif [ -d "$HOME/oprint" ]; then
-    DIRECTORY="$HOME/oprint"
-else
-    echo "Neither $HOME/OctoPrint/venv nor $HOME/oprint can be found."
-    echo "If your OctoPrint instance is running on a different machine just type - in the following prompt."
-    text_input "Please specify OctoPrints full virtualenv path manually (no trailing slash)." DIRECTORY
-fi;
-
-if [ $DIRECTORY == "-" ]; then
-    echo "Not installing any plugins for remote installation. Please make sure to have Display Layer Progress installed."
-elif [ ! -d $DIRECTORY ]; then
-    echo "Can't find OctoPrint Installation, please run the script again!"
-    exit 1
-fi;
-
-if [ $DIRECTORY != "-" ]; then
-  plugins=( 'OctoDash Companion' 'Display Layer Progress' 'Preheat Button' 'Enclosure' 'Print Time Genius')
-  checkbox_input "Which plugins should I install (you can also install them via the Octoprint UI later)?" plugins selected_plugins
-  echo "Installing Plugins..."
-
-  if [[ " ${selected_plugins[@]} " =~ "OctoDash Companion" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/jneilliii/OctoPrint-OctoDashCompanion/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Display Layer Progress" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/OllisGit/OctoPrint-DisplayLayerProgress/releases/latest/download/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Preheat Button" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/marian42/octoprint-preheat/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Enclosure" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/vitormhenrique/OctoPrint-Enclosure/archive/master.zip"
-  fi;
-  if [[ " ${selected_plugins[@]} " =~ "Print Time Genius" ]]; then
-      "$DIRECTORY"/bin/pip install -q --disable-pip-version-check "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
-  fi;
-fi;
-
-
-if [ $DIRECTORY == "-" ]; then
-  if "$DIRECTORY"/bin/octoprint config get --yaml "api.allowCrossOrigin" | grep -q 'false'; then
-    echo "Enabling CORS in OctoPrint..."
-    "$DIRECTORY"/bin/octoprint config set --bool "api.allowCrossOrigin" true
+prompt_reboot() {
+  list_input "Shall I reboot your Pi now?" yes_no reboot
+  echo "OctoDash has been successfully installed! :)"
+  if [ $reboot == 'yes' ]; then
+    sudo reboot
   fi
-else
-  echo "Note: please make sure to enable CORS in OctoPrint (Settings > API > CORS > Allow CORS)."
-fi;
 
-echo "Installing OctoDash "${version[7]}, $arch" ..."
-cd ~
-wget -O octodash.deb $releaseURL -q --show-progress
+}
 
-sudo dpkg -i octodash.deb
+update_xinit() {
 
-rm octodash.deb
+  text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
 
-yes_no=( 'yes' 'no' )
+  echo "Updating .xinitrc to launch Chromium instead of legacy OctoDash..."
 
-list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
+  XINITRC="$HOME/.xinitrc"
+  if grep -q "octodash" "$XINITRC"; then
+      sed -i "s!^octodash.*\$!$browser_launch_string $octoprint_url$octoprint_suffix!" "$XINITRC"
+      echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
+  fi
+}
 
-echo $auto_start
-if [ $auto_start == 'yes' ]; then
+enable_autostart() {
+
+  list_input "Should I setup OctoDash to automatically start on boot?" yes_no auto_start
+
+  echo $auto_start
+  if [ $auto_start == 'yes' ]; then
     echo "Setting up Autostart ..."
     cat <<EOF > ~/.xinitrc
 #!/bin/sh
@@ -771,9 +734,9 @@ xset s off
 xset s noblank
 xset -dpms
 
-ratpoison&
-octodash --no-sandbox
 EOF
+    text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
+    echo "$browser_launch_string $octoprint_url$octoprint_suffix" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
 if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
@@ -781,9 +744,6 @@ if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
 fi
 EOF
 
-    cat <<EOF >> ~/.ratpoisonrc
-startup_message off
-EOF
 
     echo "Setting up Console Autologin ..."
     sudo systemctl set-default multi-user.target
@@ -801,30 +761,89 @@ EOF
     sudo chmod +x ~/.xinitrc
     sudo chmod ug+s /usr/lib/xorg/Xorg
 
-    echo "OctoDash will start automatically on next reboot. Please ensure that auto-login is enabled!"
+    echo "OctoDash will start automatically on next reboot. Auto-login has been enabled!"
+  fi
+
+}
+
+migrate() {
+
+  echo "Migrating from legacy OctoDash installation to v3..."
+  install-apt "$dependencies"
+  update_xinit
+  reboot
+
+}
+
+install() {
+  echo "Setting up a kiosk browser for use with OctoDash."
+  echo "This script will install required graphical libraries and the Chromium browser,"
+  echo "then configure it to launch in kiosk mode with the OctoDash interface."
+  echo ""
+
+  install-apt "$dependencies"
+
+  enable_autostart
+
+  reboot
+}
+
+
+IFS='/' read -ra version <<< "$releaseURL"
+
+echo "Welcome to the OctoDash helper!"
+echo ""
+
+if [ ! -f "/etc/debian_version" ]; then
+   echo ""
+   echo "This script is only compatible with Debian-based Linux installations."
+   echo "Other distributions are not officially supported, but should work by launching a web browser pointed at http://localhost:5000/plugin/octodash/ (or similar)"
+   echo ""
+   exit 1
 fi
 
-list_input "Should I setup the update script? This will allow installing '~/tmp/octodash.deb' without sudo or root access. For more info visit the Update section of the wiki. " yes_no update
-if [ $update == 'yes' ]; then
-    mkdir -p ~/scripts
-    echo "Setting up update script ..."
-    cat <<EOF > ~/scripts/update-octodash
-#!/bin/bash
-
-dpkg -i /tmp/octodash.deb
-rm /tmp/octodash.deb
-EOF
-
-    sudo chmod +x ~/scripts/update-octodash
-
-    sudo bash -c 'cat >> /etc/sudoers.d/update-octodash' <<EOF
-$USER ALL=NOPASSWD: $HOME/scripts/update-octodash
-EOF
+if [ ! -f "$HOME/.xinitrc" ]; then
+  list_input "Would you like to install OctoDash?" yes_no install_octodash
+  if [ "$install_octodash" != "yes" ]; then
+    echo "Installation aborted. Exiting."
+    exit 0
+  fi
+  install
+elif grep -q "^octodash" "$HOME/.xinitrc"; then
+  list_input "Legacy OctoDash is configured.. Would you like to migrate to OctoDash v3?" yes_no migrate_octodash
+  if [ "$migrate_octodash" != "yes" ]; then
+    echo "Migration/reinstallation aborted. Exiting."
+    exit 0
+  fi
+  migrate
+else
+  echo "OctoDash is already configured!"
+  exit 0
 fi
 
 
-list_input "Shall I reboot your Pi now?" yes_no reboot
-echo "OctoDash has been successfully installed! :)"
-if [ $reboot == 'yes' ]; then
-    sudo reboot
-fi
+
+# Flows
+# 
+# Check to see if xinitrc is present
+# If not present, offer full install
+# If present, check if octodash is in there
+# If octodash is present, offer to migrate it
+
+
+# Install flow:
+
+# Install xinit and chromium
+# Create .xinitrc with chromium launch command
+# Start x from .bashrc
+# Setup autologin for tty1
+
+
+
+# Update flow: 
+# install xinit and chromium
+# Create .xinitrc with chromium launch command
+
+
+# How to deal with bc?
+# Use dc or some other means

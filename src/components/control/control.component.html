@@ -119,7 +119,7 @@
   </div>
 
   <div class="control__tools">
-    <ngContainer *ngIf="!printerProfile.extruder.sharedNozzle">
+    <ngContainer *ngIf="printerProfile && !printerProfile.extruder.sharedNozzle">
       <div
         class="control__tools__item"
         *ngFor="let tool of printerStatus.tools; index as i"
@@ -159,7 +159,7 @@
         </div>
       </div>
     </ngContainer>
-    <ngContainer *ngIf="printerProfile.extruder.sharedNozzle">
+    <ngContainer *ngIf="printerProfile?.extruder.sharedNozzle">
       <div class="control__tools__item" (click)="showQuickControlHotend(0)" matRipple [matRippleUnbounded]="false">
         <app-hotend-icon class="control__tools__item-icon" [tool]="-1" />
         <div
