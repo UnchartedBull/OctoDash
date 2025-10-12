@@ -126,7 +126,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
         });
         this.executeGCode(parsed.gcodes.join(';'));
         if (exit) {
-          this.router.navigate(['/main-screen']);
+          this.visible = false;
         }
         this.hideConfirm();
       } catch {
