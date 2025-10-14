@@ -1,5 +1,15 @@
 # Changelog
 
+## [v2.6.3](https://github.com/UnchartedBull/OctoDash/tree/v2.6.3) (2025-10-14)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the hotend temperature reporting on the print adjust screen ([#5385](https://github.com/UnchartedBull/OctoDash/pull/5385))
+- Properly close the action buttons when a custom action specifies to do so ([#5384](https://github.com/UnchartedBull/OctoDash/pull/5384))
+- The usual round of dependency updates
+
 ## [v2.6.2](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2) (2025-09-30)
 
 Various fixes
