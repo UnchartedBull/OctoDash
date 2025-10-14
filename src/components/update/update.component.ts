@@ -76,6 +76,7 @@ export class UpdateComponent implements OnInit {
     this.closeFunction.emit();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private update(assetsURL: string): void {
     // TODO: Implement update logic
   }
