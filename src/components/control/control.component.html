@@ -179,7 +179,7 @@
       <div class="control__tools__item control__tools__item-tool-changer">
         <div
           class="control__tools__item-tool-changer__item"
-          *ngFor="let tool of printerStatus.tools; index as i"
+          *ngFor="let tool of printerStatus.tools; index as i; trackBy: extruderTrackBy"
           [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
           (click)="setTool(i)"
           matRipple
