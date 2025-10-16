@@ -86,6 +86,12 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
     this.hideQuickControl();
   }
+
+  public extruderTrackBy(index: number) {
+    // In this case the index is sufficient as a unique identifier
+    // The number of tools is not likely to change
+    return index;
+  }
 }
 
 enum QuickControlView {

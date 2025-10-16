@@ -126,6 +126,10 @@ export class ControlComponent implements OnInit, OnDestroy {
 
     this.hideQuickControl();
   }
+
+  public extruderTrackBy(index: number) {
+    return index;
+  }
 }
 
 enum QuickControlView {
