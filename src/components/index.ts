@@ -9,6 +9,7 @@ import { HeatNozzleComponent } from './filament/heat-nozzle/heat-nozzle.componen
 import { MoveFilamentComponent } from './filament/move-filament/move-filament.component';
 import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament.component';
 import { FilesComponent } from './files/files.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
 import { HeightProgressComponent } from './main-screen/job-status/height-progress/height-progress.component';
 import { JobStatusComponent } from './main-screen/job-status/job-status.component';
@@ -20,7 +21,6 @@ import { NotificationComponent } from './notification/notification.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
-import { DiscoverOctoprintComponent } from './setup/discover-octoprint/discover-octoprint.component';
 import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
 import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
 import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
@@ -49,6 +49,7 @@ export default [
   FilesComponent,
   BottomBarComponent,
   HeightProgressComponent,
+  LoginScreenComponent,
   JobStatusComponent,
   MainMenuComponent,
   MainScreenComponent,
@@ -58,7 +59,6 @@ export default [
   ResetComponent,
   SettingsComponent,
   SettingsIconComponent,
-  DiscoverOctoprintComponent,
   ExtruderInformationComponent,
   ConfigInvalidComponent,
   OctoprintAuthenticationComponent,

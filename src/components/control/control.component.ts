@@ -20,7 +20,7 @@ export class ControlComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription = new Subscription();
   public printerStatus: PrinterStatus;
 
-  public printerProfile: OctoprintPrinterProfile;
+  public printerProfile?: OctoprintPrinterProfile;
 
   public jogDistance = 10;
   public selectedTool = 0;

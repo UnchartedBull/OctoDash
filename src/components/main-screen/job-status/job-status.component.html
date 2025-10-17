@@ -1,4 +1,4 @@
-<div class="job-info" *ngIf="jobStatus.file && isPrinting()">
+<div class="job-info" *ngIf="jobStatus?.file && isPrinting()">
   <div class="job-info__progress" *ngIf="!showPreviewWhilePrinting">
     <round-progress
       [current]="jobStatus.progress"
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <span class="job-info__filename">{{ jobStatus.file }}</span>
+  <span class="job-info__filename">{{ jobStatus?.file }}</span>
   <br />
   <span class="job-info__filament" i18n="@@job-filament" *ngIf="hasProperty(jobStatus, 'filamentAmount')"
     >{{ jobStatus.filamentAmount }}g Filament</span
@@ -54,7 +54,7 @@
   </span>
 </div>
 
-<div class="job-info__file-loaded" *ngIf="jobStatus.file && !isPrinting() && isFileLoaded()">
+<div class="job-info__file-loaded" *ngIf="jobStatus?.file && !isPrinting() && isFileLoaded()">
   <div class="job-info__preview">
     <img [src]="thumbnail" class="job-info__preview-image" />
     <span class="job-info__preview-discard" (click)="discardLoadedFile()">discard</span>
@@ -107,7 +107,7 @@
 
 <div
   class="job-info__no-job loading-dots"
-  *ngIf="(!jobStatus.file && isFileLoaded()) || (!jobStatus && isPrinting())"
+  *ngIf="(!jobStatus?.file && isFileLoaded()) || (!jobStatus && isPrinting())"
   i18n="@@ui-loading-info">
   loading info
 </div>
