@@ -7,7 +7,11 @@
   <div class="printer-status__row">
     <div
       class="printer-status__item"
-      *ngFor="let tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools; index as i"
+      *ngFor="
+        let tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
+        index as i;
+        trackBy: extruderTrackBy
+      "
       (click)="showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
