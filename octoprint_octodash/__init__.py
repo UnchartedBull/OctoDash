@@ -311,7 +311,11 @@ class OctodashPlugin(
     @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.csrf_exempt()
     def get_ui_root(self, path):
-        return send_file(self._get_index_path())
+        try:
+            return send_file(self._get_index_path())
+        except FileNotFoundError as e:
+            self._logger.error(f"Error getting OctoDash UI asset {e}")
+            return make_response("Unable to find OctoDash asset", 404)
 
     def is_blueprint_csrf_protected(self):
         return True
