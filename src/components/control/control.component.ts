@@ -126,6 +126,12 @@ export class ControlComponent implements OnInit, OnDestroy {
 
     this.hideQuickControl();
   }
+
+  public extruderTrackBy(index: number) {
+    // Tracking by index is acceptable because array position IS the unique identifier
+    // The number of tools is not likely to change
+    return index;
+  }
 }
 
 enum QuickControlView {
