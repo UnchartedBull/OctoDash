@@ -14,14 +14,8 @@ import { NotificationService } from '../notification.service';
 })
 export class PrusaMMUService {
   public filamentPickerIsVisible = false;
-  public filaments: Filament[] = [
-    { id: 1, name: 'Filament 1', color: '#FFF', enabled: true },
-    { id: 2, name: 'Filament 2', color: '#FFF', enabled: true },
-    { id: 3, name: 'Filament 3', color: '#FFF', enabled: true },
-    { id: 4, name: 'Filament 4', color: '#FFF', enabled: true },
-    { id: 5, name: 'Filament 5', color: '#FFF', enabled: true },
-  ];
-  public source = 'PrusaMMU';
+  public filaments: Filament[] = [];
+  public source = '';
 
   constructor(
     private http: HttpClient,
