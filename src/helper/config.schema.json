@@ -143,6 +143,7 @@
         "displayLayerProgress",
         "enclosure",
         "filamentManager",
+        "prusammu",
         "spoolManager",
         "preheatButton",
         "printTimeGenius",
@@ -221,6 +222,16 @@
             }
           },
           "additionalProperties": false
+        },
+        "prusammu": {
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            }
+          }
         },
         "preheatButton": {
           "type": "object",
