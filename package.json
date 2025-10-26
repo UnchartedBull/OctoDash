@@ -1,7 +1,7 @@
 {
   "name": "octodash",
   "description": "OctoDash is a simple, but beautiful dashboard for Octoprint.",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "license": "Apache 2.0",
   "homepage": "https://github.com/UnchartedBull/OctoDash",
   "author": {

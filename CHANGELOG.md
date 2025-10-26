@@ -1,5 +1,16 @@
 # Changelog
 
+## [v2.6.4](https://github.com/UnchartedBull/OctoDash/tree/v2.6.4) (2025-10-26)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the position of the 'jog right' icon in control screen ([#5396](https://github.com/UnchartedBull/OctoDash/pull/5396))
+- Fix blinking on the hotend icon ([#5395](https://github.com/UnchartedBull/OctoDash/pull/5395))
+- Fix bug with selecting filament when not all tools have filament selected ([#5391](https://github.com/UnchartedBull/OctoDash/pull/5391))
+- The usual round of dependency updates
+
 ## [v2.6.3](https://github.com/UnchartedBull/OctoDash/tree/v2.6.3) (2025-10-14)
 
 Minor bugfixes
