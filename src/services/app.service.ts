@@ -122,7 +122,10 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.http.post('/plugin/octodash/api/screen_sleep', {}, this.configService.getHTTPHeaders()).subscribe();
+    this.http.post('/plugin/octodash/api/screen_sleep', {}, this.configService.getHTTPHeaders()).subscribe({
+      error: error =>
+        this.notificationService.error($localize`:@@screen-sleep-error:Error turning display off`, error.message),
+    });
   }
 
   public turnDisplayOn(): void {
