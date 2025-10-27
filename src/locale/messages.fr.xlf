@@ -1057,6 +1057,12 @@
         </source>
         <target></target>
       </trans-unit>
+      <trans-unit id="screen-sleep-error" datatype="html">
+        <source>Error turning display off</source>
+      </trans-unit>
+      <trans-unit id="custom-styles-error" datatype="html">
+        <source>Error loading custom styles</source>
+      </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
         <target>Impossible de définir la couleur des LED !</target>
