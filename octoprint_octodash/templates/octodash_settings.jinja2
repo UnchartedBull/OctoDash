@@ -57,6 +57,12 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
               <input type="text" class="input-block-level" data-bind="value: settingsViewModel.settings.plugins.octodash.octodash.screenWakeupCommand">
             </div>
           </div>
+          <div class="control-group">
+            <label class="control-label">{{ _('Screen Sleep delay') }}</label>
+            <div class="controls">
+              <input type="number" class="input-block-level" data-bind="value: settingsViewModel.settings.plugins.octodash.octodash.screenSleepDelay">
+            </div>
+          </div>
         </div>
       </div>
       <div id="octodash_filament" class="tab-pane">
