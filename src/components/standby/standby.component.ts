@@ -28,7 +28,10 @@ export class StandbyComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     setTimeout(() => {
       if (this.configService.getAutomaticScreenSleep()) {
-        this.displaySleepTimeout = setTimeout(this.service.turnDisplayOff.bind(this.service), 300000);
+        this.displaySleepTimeout = setTimeout(
+          this.service.turnDisplayOff.bind(this.service),
+          this.configService.getScreenOffDelay() * 1000,
+        );
       }
     });
   }

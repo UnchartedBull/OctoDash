@@ -330,6 +330,10 @@ export class ConfigService {
     return this.config.octodash.screenSleepCommand;
   }
 
+  public getScreenOffDelay(): number {
+    return this.config.octodash.screenSleepDelay;
+  }
+
   public getScreenWakeupCommand(): string {
     return this.config.octodash.screenWakeupCommand;
   }

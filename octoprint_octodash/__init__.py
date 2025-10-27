@@ -142,6 +142,7 @@ class OctodashPlugin(
                 "pollingInterval": 2000,
                 "touchscreen": True,
                 "turnScreenOffWhileSleeping": False,
+                "screenSleepDelay": 300,
                 "turnOnPrinterWhenExitingSleep": False,
                 "preferPreviewWhilePrinting": False,
                 "previewProgressCircle": False,
