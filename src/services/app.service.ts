@@ -76,6 +76,18 @@ export class AppService {
   public turnDisplayOn(): void {
     this.http.post('/plugin/octodash/api/screen_wakeup', {}, this.configService.getHTTPHeaders()).subscribe();
   }
+
+  public loadCustomStyles(): void {
+    this.http.get('/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
+      next: (styles: string) => {
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = styles;
+        document.head.appendChild(styleElement);
+      },
+      error: error =>
+        this.notificationService.error($localize`:@@custom-styles-error:Error loading custom styles`, error.message),
+    });
+  }
 }
 
 // interface VersionInformation {
