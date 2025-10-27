@@ -152,6 +152,18 @@ export class AppService {
   public turnDisplayOn(): void {
     this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
   }
+
+  public loadCustomStyles(): void {
+    this.http.get('/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
+      next: (styles: string) => {
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = styles;
+        document.head.appendChild(styleElement);
+      },
+      error: error =>
+        this.notificationService.error($localize`:@@custom-styles-error:Error loading custom styles`, error.message),
+    });
+  }
 }
 
 interface VersionInformation {
