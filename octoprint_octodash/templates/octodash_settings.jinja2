@@ -11,6 +11,7 @@
       <div id="octodash_general" class="tab-pane active">
         <div class="row-fluid">
           <div class="well">Upload your custom theme's <span class="label">custom-styles.css</span> file via OctoPrint's interface like it was a gcode file. Once uploaded you will have to restart OctoDash for the changes to take effect. The below settings are assuming OctoDash's config.json file is located at <span class="label" data-bind="text: settingsViewModel.settings.plugins.octodash_directory"> </span> and running on the same machine as this OctoPrint instance.</div>
+          <button class="btn btn-primary" data-bind="click: resetStyles">{{ _('Reset Styles') }}</button>
           <div class="control-group">
             <label class="control-label">{{ _('Printer Name') }}</label>
             <div class="controls">

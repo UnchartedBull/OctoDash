@@ -298,6 +298,16 @@ class OctodashPlugin(
 
         return make_response(json.dumps({"success": True}), 200)
 
+    @octoprint.plugin.BlueprintPlugin.route("/api/reset_styles", methods=["POST"])
+    @Permissions.ADMIN.require(403)
+    def reset_styles(self):
+        try:
+            os.remove(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder())))
+            return make_response(json.dumps({"success": True}), 200)
+        except Exception as e:
+            self._logger.error(f"Error resetting custom styles: {e}")
+            return make_response(json.dumps({"error": str(e)}), 500)
+
     @octoprint.plugin.BlueprintPlugin.route("/custom-styles.css")
     @octoprint.plugin.BlueprintPlugin.csrf_exempt()
     def get_custom_styles(self):

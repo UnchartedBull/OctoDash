@@ -17,6 +17,29 @@ $(function () {
       self.legacyInstalled(data.octodash.details.legacyInstalled);
     };
 
+    self.resetStyles = () => {
+      $.ajax({
+        url: '/plugin/octodash/api/reset_styles',
+        type: 'POST',
+      })
+        .then(() => {
+          new PNotify({
+            title: 'OctoDash Styles Reset Successful!',
+            text: '<div class="row-fluid"><p>The OctoDash styles have been successfully reset.</p></div>',
+            hide: true,
+            type: 'success',
+          });
+        })
+        .catch(() => {
+          new PNotify({
+            title: 'OctoDash Styles Reset Failed',
+            text: '<div class="row-fluid"><p>Failed to reset the OctoDash styles.</p></div>',
+            hide: false,
+            type: 'error',
+          });
+        });
+    };
+
     self.copyScript = () => {
       $.ajax({
         url: '/plugin/octodash/api/copy_script',
