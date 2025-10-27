@@ -431,6 +431,18 @@ __plugin_name__ = "Octodash Plugin"
 # OctoPrint 1.4.0 - 1.7.x run under both Python 3 and the end-of-life Python 2.
 # OctoPrint 1.8.0 onwards only supports Python 3.
 __plugin_pythoncompat__ = ">=3,<4"  # Only Python 3
+__plugin_settings_overlay__ = {'system': {'actions': [{'action': 'octodash_start',
+                                                        'command': 'sudo service getty@tty1 start',
+                                                        'name': 'Start OctoDash'},
+                                                        {'action': 'octodash_stop',
+                                                        'command': 'sudo service getty@tty1 stop',
+                                                        'name': 'Stop OctoDash',
+                                                        'confirm': 'You are about to shutdown OctoDash.'},
+                                                        {'action': 'octodash_restart',
+                                                        'command': 'sudo service getty@tty1 restart',
+                                                        'name': 'Restart OctoDash',
+                                                        'confirm': 'You are about to restart OctoDash.'}]}}
+
 
 
 def __plugin_load__():
