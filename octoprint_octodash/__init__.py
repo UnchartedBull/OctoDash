@@ -2,6 +2,7 @@
 """
 OctoDash Plugin for OctoPrint
 
+
 Some bits (noted below) are taken from the OctoDash Companion plugin which is available under the MIT license
 See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
 """
