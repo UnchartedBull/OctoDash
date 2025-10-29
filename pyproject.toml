@@ -1,0 +1,46 @@
+[build-system]
+requires = [
+    "setuptools>=80",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "OctoPrint-Octodash"
+description = "A dashboard for OctoPrint"
+authors = [
+    { name = "Hilton Shumway", email = "hillshum@gmail.com" },
+    { name = "Timon Gaebelein", email = "timon.gaebelein@icloud.com" },
+    { name = "Queen Vinyl Da.i'gyu-Kazotetsu", email = "queengooborg@gmail.com" },
+]
+
+maintainers = [
+    { name = "Hilton Shumway", email = "hillshum@gmail.com" },
+    { name = "Queen Vinyl Da.i'gyu-Kazotetsu", email = "queengooborg@gmail.com" },
+]
+
+requires-python = ">=3,<4"
+dependencies = []
+dynamic = [
+    "version",
+    "license",
+]
+
+[project.entry-points."octoprint.plugin"]
+octodash = "octoprint_octodash"
+
+[project.urls]
+Homepage = "https://github.com/UnchartedBull/OctoDash"
+
+[project.optional-dependencies]
+develop = [
+    "go-task-bin",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+include-package-data = true
+packages = ["octoprint_octodash"]
+
