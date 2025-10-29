@@ -125,33 +125,6 @@ class OctodashPlugin(
             },
         }
 
-    ##~~ AssetPlugin mixin
-
-    def get_assets(self):
-        # Define your plugin's asset files to automatically include in the
-        # core UI here.
-        return {
-            "js": [
-                "runtime.409cea6e2e64252f.js",
-                "polyfills.9051428c3a252b62.js",
-                "main.93879358aec29d77.js",
-            ],
-            "css": ["css/octodash.css"],
-            "less": [],
-        }
-
-    def will_handle_ui(self, request):
-        if request.args.get("octodash") == "1":
-            return True
-
-    def on_ui_render(self, now, request, render_kwargs):
-        response = make_response(html)
-        response.headers["Content-Type"] = "text/html"
-        return response
-
-    def get_ui_permissions(self):
-        return []
-
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
