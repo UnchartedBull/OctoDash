@@ -51,7 +51,8 @@ BRANCH_VERSIONS = """
 
 # maintenance is currently the branch for preparation of maintenance release 1.12.0
 # so are any fix/... and improve/... branches
-main 3.0.0 0ee580c17131e95e4f87c1fc3c5b48c35c895994
+next 3.0.0 40248c0bbc7d91343623d6ec3441d64a4e140680
+plugin/* 3.0.0 40248c0bbc7d91343623d6ec3441d64a4e140680
 
 """
 
