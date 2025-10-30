@@ -273,6 +273,10 @@
         <source>Can't load file!</source>
         <target>Impossible de charger le fichier !</target>
       </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source> Continue </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Impossible de récupérer la température de l'enceinte !</target>
@@ -459,14 +463,6 @@
         <source>general</source>
         <target>général</target>
       </trans-unit>
-      <trans-unit id="general-octoprint-connection" datatype="html">
-        <source>OctoPrint Connection</source>
-        <target>Connexion OctoPrint</target>
-      </trans-unit>
-      <trans-unit id="general-octoprint-url" datatype="html">
-        <source>Octoprint URL</source>
-        <target>URL d'octoprint</target>
-      </trans-unit>
       <trans-unit id="general-printer" datatype="html">
         <source>Printer</source>
         <target>Imprimante</target>
@@ -596,6 +592,14 @@
       <trans-unit id="show-extruder-controls" datatype="html">
         <source>Show extruder controls</source>
         <target>Afficher les commandes de l'extrudeuse</target>
+      </trans-unit>
+      <trans-unit id="general-language" datatype="html">
+        <source>Language</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="use-octoprint-language" datatype="html">
+        <source>Use OctoPrint setting</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -774,44 +778,6 @@
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can't save invalid config</source>
         <target>Impossible d'enregistrer une configuration non valide</target>
-      </trans-unit>
-      <trans-unit id="select-instance" datatype="html">
-        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target> Tout d'abord: veuillez selectionner votre instance OctoPrint dans la liste ci-dessous ou entrez l'adresse IP / URL manuellement.</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required" datatype="html">
-        <source> Upgrade Required / </source>
-        <target> Mise à niveau requise / </target>
-      </trans-unit>
-      <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </source>
-        <target> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="searching" datatype="html">
-        <source>searching</source>
-        <target>recherche</target>
-      </trans-unit>
-      <trans-unit id="enter-manually" datatype="html">
-        <source>enter manually</source>
-        <target>entrer manuellement</target>
-      </trans-unit>
-      <trans-unit id="port-recommendation" datatype="html">
-        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target> Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi </target>
-      </trans-unit>
-      <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
-        <target> chercher à nouveau </target>
-      </trans-unit>
-      <trans-unit id="no-instance-found" datatype="html">
-        <source>no instances found.</source>
-        <target>aucune instance trouvée.</target>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
         <source>I also need some information about your extruder.</source>
@@ -1085,25 +1051,17 @@
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <target>Certaines informations sont manquantes, veuillez réessayer dans une heure ou mettre à jour manuellement.</target>
       </trans-unit>
-      <trans-unit id="error-install-update" datatype="html">
-        <source>Can't install update!</source>
-        <target>Impossible d'installer la mise à jour !</target>
-      </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
         <source>Version 
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
-        <target>Version
-          <x id="PH" equiv-text="this.latestVersion.title"/> est disponible. Allez dans Paramètres &amp;gt ; À propos de pour mettre à jour.
-        </target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="error-load-style" datatype="html">
-        <source>Can't load custom styles!</source>
-        <target>Impossible de charger les styles personnalisés !</target>
+      <trans-unit id="screen-sleep-error" datatype="html">
+        <source>Error turning display off</source>
       </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
+      <trans-unit id="custom-styles-error" datatype="html">
+        <source>Error loading custom styles</source>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>

@@ -1,10 +1,9 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { AppService } from '../../services/app.service';
 import { ConfigService } from '../../services/config.service';
-import { ElectronService } from '../../services/electron.service';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from '../../services/system/system.service';
 
@@ -14,7 +13,7 @@ import { SystemService } from '../../services/system/system.service';
   styleUrls: ['./settings.component.scss'],
   standalone: false,
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit {
   @Output() closeFunction = new EventEmitter<void>();
   @ViewChild('settingsMain') private settingsMain: ElementRef;
   @ViewChild('settingsGeneral') private settingsGeneral: ElementRef;
@@ -43,26 +42,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
-    private electronService: ElectronService,
     private systemService: SystemService,
     public service: AppService,
   ) {
     this.config = this.configService.getCurrentConfig();
-    this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
+    // this.octoprintURL = this.configService.splitOctoprintURL(this.config.octoprint.url);
     this.localIpAddress$ = this.systemService.getLocalIpAddress();
   }
 
   public ngOnInit(): void {
-    const currentCommands = this.config.octodash.customActions.length;
-    for (let i = currentCommands; i < 6; i++) {
-      this.config.octodash.customActions.push({
-        icon: 'mdi mdi-plus',
-        command: '',
-        color: '#ffffff',
-        confirm: false,
-        exit: false,
-      });
-    }
     setTimeout((): void => {
       this.pages = [
         this.settingsMain.nativeElement,
@@ -72,11 +60,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
-  }
-
-  public ngOnDestroy(): void {
-    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public hideSettings(): void {
@@ -116,13 +99,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public updateConfig(): void {
-    this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
+    // this.config.octoprint.url = this.configService.mergeOctoprintURL(this.octoprintURL);
     const config = this.configService.createConfigFromInput(this.config);
 
-    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
-
-    this.configService.saveConfig(config);
+    this.configService
+      .saveConfig(config)
+      .subscribe({ complete: this.onConfigSaved.bind(this), error: this.onConfigSaveFail.bind(this) });
   }
 
   private onConfigSaveFail(_, errors: string[]) {
@@ -131,7 +113,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private onConfigSaved() {
     this.hideSettings();
-    this.electronService.send('reload');
+    window.location.reload();
   }
 
   public showUpdate(): void {

@@ -34,7 +34,7 @@ export class JobStatusComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.add(
       this.socketService.getJobStatusSubscribable().subscribe((jobStatus: JobStatus): void => {
-        if (jobStatus.file !== this.jobStatus?.file) {
+        if (jobStatus?.file !== this.jobStatus?.file) {
           this.fileService.getThumbnail(jobStatus.fullPath).subscribe(thumbnail => {
             this.thumbnail = thumbnail;
           });

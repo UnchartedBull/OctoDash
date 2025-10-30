@@ -43,37 +43,21 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initialize();
+    this.service.loadCustomStyles();
   }
 
   private initialize(): void {
-    if (this.configService && this.configService.isInitialized()) {
-      if (this.configService.isLoaded()) {
-        if (this.configService.isValid()) {
-          this.connectWebsocket();
-        } else {
-          this.checkInvalidConfig();
-        }
-      } else {
-        this.router.navigate(['/no-config']);
-      }
-    } else {
-      setTimeout(this.initialize.bind(this), 1000);
-    }
-  }
-
-  private checkInvalidConfig() {
-    const errors = this.configService.getErrors();
-
-    if (this.service.hasUpdateError(errors)) {
-      if (this.service.fixUpdateErrors(errors)) {
-        setTimeout(this.initialize.bind(this), 1500);
-      } else {
-        this.configService.setUpdate();
-        this.router.navigate(['/no-config']);
-      }
-    } else {
-      this.router.navigate(['/invalid-config']);
-    }
+    // if no API key found or invalid API key
+    // go to login flow
+    this.configService.getConfig().subscribe({
+      complete: () => {
+        this.connectWebsocket();
+      },
+      error: e => {
+        console.error('Error fetching config:', e);
+        this.router.navigate(['/login']);
+      },
+    });
   }
 
   private connectWebsocket() {

@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
 
 import { fixupConfigRules, fixupPluginRules, includeIgnoreFile } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
@@ -21,7 +21,7 @@ const compat = new FlatCompat({
 export default [
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ['**/docs/js/lib/'],
+    ignores: ['**/docs/js/lib/', '**/vendor/**'],
   },
   ...fixupConfigRules(
     compat.extends(
@@ -93,7 +93,22 @@ export default [
     },
   },
   {
-    files: ['**/*.js'],
+    files: ['octoprint_octodash/**/*.js'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ko: 'readonly',
+        $: 'readonly',
+        PNotify: 'readonly',
+        OCTOPRINT_VIEWMODELS: 'readonly',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-this-alias': 'off',
+    },
+  },
+  {
+    files: ['src/**/*.js'],
 
     languageOptions: {
       globals: {

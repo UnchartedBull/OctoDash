@@ -273,6 +273,10 @@
         <source>Can't load file!</source>
         <target>Datei kann nicht gefunden werden!</target>
       </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source> Continue </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Kann Gehäuse Temperature nicht laden!</target>
@@ -464,14 +468,6 @@
         <source>general</source>
         <target>Generell</target>
       </trans-unit>
-      <trans-unit id="general-octoprint-connection" datatype="html">
-        <source>OctoPrint Connection</source>
-        <target>OctoPrint Verbindung</target>
-      </trans-unit>
-      <trans-unit id="general-octoprint-url" datatype="html">
-        <source>Octoprint URL</source>
-        <target>Octoprint URL</target>
-      </trans-unit>
       <trans-unit id="general-printer" datatype="html">
         <source>Printer</source>
         <target>Drucker</target>
@@ -601,6 +597,14 @@
       <trans-unit id="show-extruder-controls" datatype="html">
         <source>Show extruder controls</source>
         <target>Extrudersteuerung anzeigen</target>
+      </trans-unit>
+      <trans-unit id="general-language" datatype="html">
+        <source>Language</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="use-octoprint-language" datatype="html">
+        <source>Use OctoPrint setting</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -778,45 +782,7 @@
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can't save invalid config</source>
-        <target>Ungültige Konfiguration kann nicht gespeichert werden</target>
-      </trans-unit>
-      <trans-unit id="select-instance" datatype="html">
-        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target> Das Wichtigste zuerst: Bitte wähle deine OctoPrint-Instanz aus der Liste unten oder gebe die IP/URL manuell ein.</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required" datatype="html">
-        <source> Upgrade Required / </source>
-        <target> Upgrade erforderlich / </target>
-      </trans-unit>
-      <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </source>
-        <target> Version
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL:
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="searching" datatype="html">
-        <source>searching</source>
-        <target>suchen</target>
-      </trans-unit>
-      <trans-unit id="enter-manually" datatype="html">
-        <source>enter manually</source>
-        <target>manuell eingeben</target>
-      </trans-unit>
-      <trans-unit id="port-recommendation" datatype="html">
-        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target> Port 5000 für Standardinstallation, Port 80 für OctoPi </target>
-      </trans-unit>
-      <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
-        <target> erneut suchen </target>
-      </trans-unit>
-      <trans-unit id="no-instance-found" datatype="html">
-        <source>no instances found.</source>
-        <target>keine Instanzen gefunden.</target>
+        <target>Invalide Konfiguration!</target>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
         <source>I also need some information about your extruder.</source>
@@ -1090,25 +1056,17 @@
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <target>Es fehlen Informationen, bitte versuche es in einer Stunde nochmal.</target>
       </trans-unit>
-      <trans-unit id="error-install-update" datatype="html">
-        <source>Can't install update!</source>
-        <target>Update kann nicht installiert werden!</target>
-      </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
         <source>Version 
           <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.
         </source>
-        <target>Die Version
-          <x id="PH" equiv-text="this.latestVersion.title"/> ist verfügbar. Gehen Sie zu Einstellungen &gt; Über, um zu aktualisieren.
-        </target>
+        <target></target>
       </trans-unit>
-      <trans-unit id="error-load-style" datatype="html">
-        <source>Can't load custom styles!</source>
-        <target>Kann angepasste styles nicht laden!</target>
+      <trans-unit id="screen-sleep-error" datatype="html">
+        <source>Error turning display off</source>
       </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Bitte System neu starten. Sollte der Fehler bestehen bleiben öffne bitte ein Ticket auf GitHub.</target>
+      <trans-unit id="custom-styles-error" datatype="html">
+        <source>Error loading custom styles</source>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>

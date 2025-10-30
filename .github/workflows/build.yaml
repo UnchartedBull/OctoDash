@@ -53,6 +53,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Cache node modules
         uses: actions/cache@v4
         env:
@@ -72,17 +74,16 @@ jobs:
         run: npm ci
       - name: Building Application
         run: npm run build
-      - name: Packaging Application
-        run: npm run electron:pack
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Install Python build dependencies
+        run: python -m pip install wheel octoprint --user
+      - name: Building Python
+        run: python setup.py sdist --formats=zip
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: |
-            package/*.deb
-            package/*.yml
+            dist/*.zip
 
   release:
     runs-on: ubuntu-latest
@@ -99,4 +100,4 @@ jobs:
       - name: Upload release
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: gh release upload ${{ github.ref }} *.deb *.yml
+        run: gh release upload ${{ github.ref }} *.zip

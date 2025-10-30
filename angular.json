@@ -16,20 +16,20 @@
       "i18n": {
         "sourceLocale": {
           "code": "en",
-          "baseHref": ""
+          "baseHref": "en/"
         },
         "locales": {
           "fr": {
             "translation": "src/locale/messages.fr.xlf",
-            "baseHref": ""
+            "baseHref": "fr/"
           },
           "de": {
             "translation": "src/locale/messages.de.xlf",
-            "baseHref": ""
+            "baseHref": "de/"
           },
           "da": {
             "translation": "src/locale/messages.da.xlf",
-            "baseHref": ""
+            "baseHref": "da/"
           }
         }
       },
@@ -39,8 +39,9 @@
           "options": {
             "allowedCommonJsDependencies": ["lottie-web"],
             "aot": true,
+            "baseHref": "/plugin/octodash/static/ui/",
             "outputPath": {
-              "base": "dist",
+              "base": "octoprint_octodash/static/ui",
               "browser": ""
             },
             "index": "src/index.html",

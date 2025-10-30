@@ -469,6 +469,11 @@
           "type": "integer",
           "default": 2000
         },
+        "language": {
+          "type": "string",
+          "enum": ["en", "fr", "de", "da"],
+          "default": null
+        },
         "touchscreen": {
           "type": "boolean",
           "default": true
@@ -476,6 +481,10 @@
         "turnScreenOffWhileSleeping": {
           "type": "boolean",
           "default": true
+        },
+        "screenSleepDelay": {
+          "type": "integer",
+          "default": 300
         },
         "turnOnPrinterWhenExitingSleep": {
           "type": "boolean",

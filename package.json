@@ -56,13 +56,7 @@
   },
   "scripts": {
     "prepare": "json2ts --input=src/helper/config.schema.json --output=src/model/config.model.ts",
-    "postprepare": "node -e \"import('./src/helper/config.js').then(({writeDefaultConfig})=>writeDefaultConfig()).catch(err=>console.error(err))\"",
     "build": "ng build --configuration production",
-    "build:pack": "npm run build && npm run electron:pack",
-    "electron:dev": "APP_DEV=true electron .",
-    "electron:pack": "electron-builder build -l",
-    "electron:serve": "wait-on http-get://localhost:4200/ && electron .",
-    "electron": "electron .",
     "test": "npm run lint",
     "lint": "npm-run-all lint:js lint:css lint:style",
     "lint:fix": "npm-run-all lint:js:fix lint:css:fix lint:style:fix",
@@ -76,7 +70,7 @@
     "locale:update:all": "node -e \"import('./src/helper/locale.js').then(({updateLocales})=>updateLocales()).catch(err=>console.error(err))\"",
     "locale:update": "npm run locale:extract && npm run locale:update:all",
     "serve": "ng serve",
-    "start": "APP_DEV=true npm-run-all -p serve electron:serve"
+    "watch": "ng build --watch"
   },
   "private": true,
   "dependencies": {
@@ -97,7 +91,6 @@
     "angular-svg-round-progressbar": "^15.0.0",
     "bonjour-service": "^1.3.0",
     "compare-versions": "~6.1.1",
-    "electron-store": "~10.1.0",
     "got": "^14.6.1",
     "lodash-es": "~4.17.21",
     "lottie-web": "~5.13.0",
@@ -122,8 +115,6 @@
     "@types/mime-types": "^3.0.1",
     "@types/node": "24.9.2",
     "codelyzer": "~6.0.2",
-    "electron": "~37.2.0",
-    "electron-builder": "~26.0.12",
     "eslint": "9.38.0",
     "eslint-plugin-import": "~2.32.0",
     "eslint-plugin-prettier": "~5.5.4",

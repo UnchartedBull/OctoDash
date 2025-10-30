@@ -1,13 +1,19 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
+import { map, tap } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
-import { ElectronService } from './electron.service';
-import { NotificationService } from './notification.service';
 
 interface HttpHeader {
   headers: HttpHeaders;
+}
+
+// This contains a bunch of other properties that are not used in the app
+interface OctoPrintConfig {
+  plugins: {
+    octodash: Config;
+  };
 }
 
 @Injectable({
@@ -15,61 +21,66 @@ interface HttpHeader {
 })
 export class ConfigService {
   private config: Config;
-  private valid: boolean;
-  private errors: string[];
+  private apiKey: string;
   private update = false;
-  private initialized = false;
 
   private httpHeaders: HttpHeader;
 
-  public constructor(
-    private notificationService: NotificationService,
-    private electronService: ElectronService,
-    private zone: NgZone,
-  ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.error(
-        error,
-        $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-        true,
-      );
-    });
+  private http: HttpClient = inject(HttpClient);
 
-    this.electronService.on('configPass', () => {
-      this.zone.run(() => {
-        this.valid = true;
-        this.generateHttpHeaders();
-        this.initialized = true;
-      });
-    });
-    this.electronService.on('configFail', (_, errors) => {
-      this.zone.run(() => {
-        this.valid = false;
-        this.errors = errors;
-        console.error(errors);
-        this.initialized = true;
-      });
-    });
+  public constructor() {}
 
-    this.electronService.send('readConfig');
-  }
+  public getConfig() {
+    this.apiKey = localStorage.getItem('octodash_apikey');
+    let headers = null;
+    if (this.apiKey) {
+      headers = new HttpHeaders({ 'x-api-key': this.apiKey });
+    } else {
+      console.log('API key not found, attempting login with cookie');
+    }
 
-  private initialize(config: Config): void {
-    this.config = config;
-    this.electronService.send('checkConfig', config);
+    return this.http
+      .get<OctoPrintConfig>('/api/settings', { headers: headers ?? new HttpHeaders() })
+      .pipe(
+        map(response => {
+          return response.plugins.octodash;
+        }),
+      )
+      .pipe(
+        tap((config: Config) => {
+          this.config = { ...config };
+          this.generateHttpHeaders();
+        }),
+      )
+      .pipe(map(() => null));
   }
 
   public generateHttpHeaders(): void {
+    const headers = new HttpHeaders({
+      'Cache-Control': 'no-cache',
+      Pragma: 'no-cache',
+      Expires: '0',
+    });
+    if (this.apiKey) {
+      this.httpHeaders = {
+        headers: headers.append('x-api-key', this.apiKey),
+      };
+      return;
+    }
+
     this.httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0',
-      }),
+      headers,
     };
+  }
+
+  public getAccessToken(): string {
+    return this.apiKey;
+  }
+
+  public setAccessToken(token: string): void {
+    this.apiKey = token;
+    localStorage.setItem('octodash_apikey', token);
+    this.generateHttpHeaders();
   }
 
   public getCurrentConfig(): Config {
@@ -81,11 +92,11 @@ export class ConfigService {
   }
 
   public getErrors(): string[] {
-    return this.errors;
+    return [];
   }
 
-  public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
+  public saveConfig(config: Config) {
+    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -123,8 +134,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    if (includeApi) return `/api/${path}`;
+    else return `/${path}`;
   }
 
   public getAPIPollingInterval(): number {
@@ -132,7 +143,7 @@ export class ConfigService {
   }
 
   public getPrinterName(): string {
-    return this.config.printer.name;
+    return this.config?.printer.name;
   }
 
   public getCustomActions(): CustomAction[] {
@@ -147,12 +158,8 @@ export class ConfigService {
     return this.config.printer.zSpeed;
   }
 
-  public isInitialized(): boolean {
-    return this.initialized;
-  }
-
-  public isValid(): boolean {
-    return this.valid;
+  public isInitialized() {
+    return this.config !== null;
   }
 
   public isUpdate(): boolean {
@@ -160,11 +167,11 @@ export class ConfigService {
   }
 
   public isTouchscreen(): boolean {
-    return this.config.octodash.touchscreen;
+    return this.config?.octodash.touchscreen;
   }
 
   public getAmbientTemperatureSensorName(): number {
-    return this.config.plugins.enclosure.ambientSensorID;
+    return this.config?.plugins.enclosure.ambientSensorID;
   }
 
   public getAutomaticScreenSleep(): boolean {
@@ -300,11 +307,11 @@ export class ConfigService {
   }
 
   public showThumbnailByDefault(): boolean {
-    return this.config.octodash.preferPreviewWhilePrinting;
+    return this.config?.octodash.preferPreviewWhilePrinting;
   }
 
   public getAccessKey(): string {
-    return this.config.octoprint.accessToken;
+    return this.config?.octoprint.accessToken;
   }
 
   public getDisableExtruderGCode(): string {
@@ -321,6 +328,10 @@ export class ConfigService {
 
   public getScreenSleepCommand(): string {
     return this.config.octodash.screenSleepCommand;
+  }
+
+  public getScreenOffDelay(): number {
+    return this.config.octodash.screenSleepDelay;
   }
 
   public getScreenWakeupCommand(): string {

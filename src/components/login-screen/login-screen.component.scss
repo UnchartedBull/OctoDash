@@ -1,0 +1,15 @@
+.login-screen {
+  &__footer {
+    text-align: center;
+  }
+
+  &__continue-button {
+    text-align: center;
+    margin: 8vh 0 0;
+    background-color: #4bae50;
+    display: inline-block;
+    padding: 1.4vh 2vw;
+    border-radius: 1vw;
+    box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
+  }
+}

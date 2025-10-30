@@ -133,6 +133,22 @@
     }
   }
 
+  .settings__select {
+    select {
+      background: transparent;
+      margin-top: 1.5vh;
+      padding: 0.8vw 3vh;
+      border: 2px solid var(--border);
+      border-radius: 1.7vw;
+      appearance: none;
+      outline: none;
+      height: 10vh;
+      width: 100%;
+      font-size: 2.5vw;
+      color: var(--text);
+    }
+  }
+
   &__checkbox {
     position: absolute;
     top: 0;
