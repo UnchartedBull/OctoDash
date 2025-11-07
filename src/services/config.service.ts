@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
-import { BehaviorSubject, map, throwError } from 'rxjs';
+import { map, throwError } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 
@@ -22,7 +22,6 @@ export class ConfigService {
   private config: Config;
   private valid: boolean;
   private update = false;
-  private initialized = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
   private apiKey: string;
@@ -51,7 +50,6 @@ export class ConfigService {
         map((config: Config) => {
           this.config = { ...config };
           this.zone.run(() => {
-            this.initialized.next(true);
             this.generateHttpHeaders();
             this.valid = true;
           });
@@ -156,11 +154,7 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
-    return this.initialized.getValue();
-  }
-
-  public isInitializedObservable() {
-    return this.initialized;
+    return this.config !== null;
   }
 
   public isValid(): boolean {
