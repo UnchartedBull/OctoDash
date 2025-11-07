@@ -27,8 +27,7 @@ export class ConfigService {
   private apiKey: string;
 
   private http: HttpClient = inject(HttpClient);
-
-  public constructor(private zone: NgZone) {}
+  private zone: NgZone = inject(NgZone);
 
   public getConfig() {
     this.apiKey = localStorage.getItem('octodash_apikey');
