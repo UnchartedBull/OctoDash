@@ -11,6 +11,8 @@ import { PurgeFilamentComponent } from './filament/purge-filament/purge-filament
 import { FilesComponent } from './files/files.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
+import { HeightProgressComponent } from './main-screen/job-status/height-progress/height-progress.component';
+import { JobStatusComponent } from './main-screen/job-status/job-status.component';
 import { MainMenuComponent } from './main-screen/main-menu/main-menu.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { PrintControlComponent } from './main-screen/print-control/print-control.component';
@@ -47,6 +49,8 @@ export default [
   PurgeFilamentComponent,
   FilesComponent,
   BottomBarComponent,
+  HeightProgressComponent,
+  JobStatusComponent,
   LoginScreenComponent,
   MainMenuComponent,
   MainScreenComponent,
