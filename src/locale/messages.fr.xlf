@@ -281,6 +281,54 @@
         <source>Can't retrieve enclosure temperature!</source>
         <target>Impossible de récupérer la température de l'enceinte !</target>
       </trans-unit>
+      <trans-unit id="unit-millimeters-short" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
+      </trans-unit>
+      <trans-unit id="height-layer-status" datatype="html">
+        <source>Layer 
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
+          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="job-filament" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
+        </source>
+      </trans-unit>
+      <trans-unit id="job-info__time-left" datatype="html">
+        <source>
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
+        </source>
+      </trans-unit>
+      <trans-unit id="job-elapsed" datatype="html">
+        <source>elapsed: 
+          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
+          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="will-finish" datatype="html">
+        <source>- will finish ~</source>
+      </trans-unit>
+      <trans-unit id="job-g" datatype="html">
+        <source>g</source>
+      </trans-unit>
+      <trans-unit id="filament-used" datatype="html">
+        <source>filament will be used</source>
+      </trans-unit>
+      <trans-unit id="ui-loading-info" datatype="html">
+        <source> loading info</source>
+      </trans-unit>
+      <trans-unit id="no-job" datatype="html">
+        <source>no job running...</source>
+      </trans-unit>
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
         <target>fichiers</target>
@@ -348,10 +396,6 @@
       <trans-unit id="adjust-speed" datatype="html">
         <source>Speed</source>
         <target>Vitesse</target>
-      </trans-unit>
-      <trans-unit id="unit-millimeters-short" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
       </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>

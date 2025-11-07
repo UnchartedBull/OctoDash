@@ -464,6 +464,101 @@
           <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="unit-millimeters-short" datatype="html">
+        <source>mm</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/height-progress/height-progress.component.html</context>
+          <context context-type="linenumber">7,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">144,148</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">167,170</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">175,179</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">182,185</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">192,195</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
+          <context context-type="linenumber">200,206</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="height-layer-status" datatype="html">
+        <source>Layer <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;height-indication__current-height&quot;&gt;"/> <x id="INTERPOLATION" equiv-text="{{ height.current }}"/> <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> of <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span class=&quot;height-indication__total-height&quot;&gt;"/> <x id="INTERPOLATION_1" equiv-text="{{ height.total &gt;= 0 ? height.total : &apos;---&apos; }}"/> <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/height-progress/height-progress.component.html</context>
+          <context context-type="linenumber">17,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="job-filament" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="job-info__time-left" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;job-info__time-left&quot;&gt;"/><x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">48,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="job-elapsed" datatype="html">
+        <source>elapsed: <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/><x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="will-finish" datatype="html">
+        <source>- will finish ~</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">92,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="job-g" datatype="html">
+        <source>g</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">101,103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filament-used" datatype="html">
+        <source>filament will be used</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">103,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ui-loading-info" datatype="html">
+        <source> loading info
+</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">112,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="no-job" datatype="html">
+        <source>no job running...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/main-screen/job-status/job-status.component.html</context>
+          <context context-type="linenumber">115,118</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
         <context-group purpose="location">
@@ -597,33 +692,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
           <context context-type="linenumber">136,141</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="unit-millimeters-short" datatype="html">
-        <source>mm</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">144,148</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">167,170</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">175,179</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">182,185</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">192,195</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/main-screen/print-control/print-control.component.html</context>
-          <context context-type="linenumber">200,206</context>
         </context-group>
       </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
