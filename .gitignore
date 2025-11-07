@@ -15,6 +15,7 @@ src/locale/backups
 
 # compiled output
 /dist
+/octoprint_octodash/static
 /package
 /tmp
 /out-tsc
@@ -52,6 +53,13 @@ speed-measure-plugin.json
 /coverage
 /libpeerconnection.log
 /typings
+
+# python
+__pycache__/
+*.py[cod]
+*.egg*
+
+build/
 
 
 docs/images/compilation.psd
