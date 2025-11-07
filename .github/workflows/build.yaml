@@ -76,6 +76,8 @@ jobs:
         run: npm ci
       - name: Building Application
         run: npm run build
+      - name: Debug branch
+        run: "echo Git status: $(git status)"
       - name: Install Python build dependencies
         run: python -m pip install build wheel octoprint --user
       - name: Building Python
