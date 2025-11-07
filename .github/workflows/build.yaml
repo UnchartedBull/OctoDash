@@ -55,8 +55,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Cache node modules
         uses: actions/cache@v4
         env:
@@ -86,8 +84,6 @@ jobs:
           name: build
           path: |
             dist/*.zip
-            package/*.deb
-            package/*.yml
 
   release:
     runs-on: ubuntu-latest
