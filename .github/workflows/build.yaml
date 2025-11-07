@@ -76,6 +76,13 @@ jobs:
         run: npm ci
       - name: Building Application
         run: npm run build
+
+      - name: 🏗 Set up PR environment
+        if: github.event_name == 'pull_request'
+        run: |
+          # use base ref of PR as branch name for versioning
+          echo "GIT_VERSION_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+
       - name: Debug branch
         run: "echo Git status: $(git status)"
       - name: Install Python build dependencies
