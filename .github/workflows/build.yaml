@@ -55,6 +55,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Cache node modules
         uses: actions/cache@v4
         env:
@@ -74,17 +76,21 @@ jobs:
         run: npm ci
       - name: Building Application
         run: npm run build
-      - name: Packaging Application
-        run: npm run electron:pack
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: 🏗 Set up PR environment
+        if: github.event_name == 'pull_request'
+        run: |
+          # use base ref of PR as branch name for versioning
+          echo "GIT_VERSION_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+      - name: Install Python build dependencies
+        run: python -m pip install build wheel octoprint --user
+      - name: Building Python
+        run: python -m build .
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: |
-            package/*.deb
-            package/*.yml
+            dist/*.zip
 
   release:
     runs-on: ubuntu-latest
