@@ -56,7 +56,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     const currentCommands = this.config.octodash.customActions.length;
     for (let i = currentCommands; i < 6; i++) {
       this.config.octodash.customActions.push({
-        icon: 'mdi mdi-plus',
+        icon: 'print',
         command: '',
         color: '#ffffff',
         confirm: false,
