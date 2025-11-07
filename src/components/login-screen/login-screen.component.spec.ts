@@ -8,9 +8,8 @@ describe('LoginScreenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginScreenComponent]
-    })
-    .compileComponents();
+      imports: [LoginScreenComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoginScreenComponent);
     component = fixture.componentInstance;
