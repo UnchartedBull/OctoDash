@@ -115,7 +115,7 @@ PEP440_REGEX = re.compile(
 )
 # Taken from the sources of packaging.version, https://github.com/pypa/packaging/blob/21.3/packaging/version.py#L225-L254
 
-_verbose = False
+_verbose = True
 
 
 def _git(*args, **kwargs):
