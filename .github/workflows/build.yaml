@@ -79,7 +79,7 @@ jobs:
       - name: Install Python build dependencies
         run: python -m pip install build wheel octoprint --user
       - name: Building Python
-        run: python -m build --formats=zip
+        run: python -m build .
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
