@@ -273,84 +273,12 @@
         <source>Can't load file!</source>
         <target>Kan ikke indlæse filen!</target>
       </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source> Continue </source>
+      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Kan ikke hente skabets temperatur!</target>
-      </trans-unit>
-      <trans-unit id="unit-millimeters-short" datatype="html">
-        <source>mm</source>
-        <target>mm</target>
-      </trans-unit>
-      <trans-unit id="height-layer-status" datatype="html">
-        <source>Layer 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
-          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> of 
-          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-        </source>
-        <target>Lag
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
-          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> af 
-          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="job-filament" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
-        </source>
-        <target>
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>
-          g Filament
-        </target>
-      </trans-unit>
-      <trans-unit id="job-info__time-left" datatype="html">
-        <source>
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
-        </source>
-        <target>
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;job-info__time-left&quot;>"/>
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timeLeft.value }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="job-elapsed" datatype="html">
-        <source>elapsed: 
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
-        </source>
-        <target>udført:
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="will-finish" datatype="html">
-        <source>- will finish ~</source>
-        <target>- færdig ~</target>
-      </trans-unit>
-      <trans-unit id="job-g" datatype="html">
-        <source>g</source>
-        <target>g</target>
-      </trans-unit>
-      <trans-unit id="filament-used" datatype="html">
-        <source>filament will be used</source>
-        <target>filament vil blive brugt</target>
-      </trans-unit>
-      <trans-unit id="ui-loading-info" datatype="html">
-        <source> loading info</source>
-        <target> henter info</target>
-      </trans-unit>
-      <trans-unit id="no-job" datatype="html">
-        <source>no job running...</source>
-        <target>intet job kører...</target>
       </trans-unit>
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
@@ -419,6 +347,10 @@
       <trans-unit id="adjust-speed" datatype="html">
         <source>Speed</source>
         <target>Hastighed</target>
+      </trans-unit>
+      <trans-unit id="unit-millimeters-short" datatype="html">
+        <source>mm</source>
+        <target>mm</target>
       </trans-unit>
       <trans-unit id="babystep-z" datatype="html">
         <source>Babystep Z</source>
@@ -1128,10 +1060,6 @@
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
         <target>Kan ikke indlæse brugerdefinerede stilarter!</target>
-      </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Genstart venligst dit system. Hvis problemet fortsætter, skal du lave et issue på GitHub.</target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
