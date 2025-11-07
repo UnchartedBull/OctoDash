@@ -1,13 +1,18 @@
-import { HttpHeaders } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { map, throwError } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
-import { ElectronService } from './electron.service';
-import { NotificationService } from './notification.service';
 
 interface HttpHeader {
   headers: HttpHeaders;
+}
+
+interface OctoPrintConfig {
+  plugins: {
+    octodash: Config;
+  };
 }
 
 @Injectable({
@@ -16,60 +21,60 @@ interface HttpHeader {
 export class ConfigService {
   private config: Config;
   private valid: boolean;
-  private errors: string[];
   private update = false;
-  private initialized = false;
 
   private httpHeaders: HttpHeader;
+  private apiKey: string;
 
-  public constructor(
-    private notificationService: NotificationService,
-    private electronService: ElectronService,
-    private zone: NgZone,
-  ) {
-    this.electronService.on('configRead', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configSaved', (_, config: Config) => this.initialize(config));
-    this.electronService.on('configError', (_, error: string) => {
-      this.notificationService.error(
-        error,
-        $localize`:@@error-restart:Please restart your system. If the issue persists open an issue on GitHub.`,
-        true,
+  private http: HttpClient = inject(HttpClient);
+  private zone: NgZone = inject(NgZone);
+
+  public getConfig() {
+    this.apiKey = localStorage.getItem('octodash_apikey');
+    // set the x-api-key header
+    if (!this.apiKey) {
+      return throwError(() => 'No API Key Found');
+    }
+    const headers = new HttpHeaders({
+      'x-api-key': this.apiKey ?? '',
+    });
+    return this.http
+      .get<OctoPrintConfig>('http://localhost:8080/api/settings', { headers })
+      .pipe(
+        map(response => {
+          return response.plugins.octodash;
+        }),
+      )
+      .pipe(
+        map((config: Config) => {
+          this.config = { ...config };
+          this.zone.run(() => {
+            this.generateHttpHeaders();
+            this.valid = true;
+          });
+        }),
       );
-    });
-
-    this.electronService.on('configPass', () => {
-      this.zone.run(() => {
-        this.valid = true;
-        this.generateHttpHeaders();
-        this.initialized = true;
-      });
-    });
-    this.electronService.on('configFail', (_, errors) => {
-      this.zone.run(() => {
-        this.valid = false;
-        this.errors = errors;
-        console.error(errors);
-        this.initialized = true;
-      });
-    });
-
-    this.electronService.send('readConfig');
-  }
-
-  private initialize(config: Config): void {
-    this.config = config;
-    this.electronService.send('checkConfig', config);
   }
 
   public generateHttpHeaders(): void {
     this.httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        'x-api-key': this.apiKey ?? '',
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0',
       }),
     };
+  }
+
+  public getAccessToken(): string {
+    return this.apiKey;
+  }
+
+  public setAccessToken(token: string): void {
+    this.apiKey = token;
+    localStorage.setItem('octodash_apikey', token);
+    this.generateHttpHeaders();
   }
 
   public getCurrentConfig(): Config {
@@ -81,11 +86,11 @@ export class ConfigService {
   }
 
   public getErrors(): string[] {
-    return this.errors;
+    return [];
   }
 
-  public saveConfig(config: Config): void {
-    this.electronService.send('saveConfig', config);
+  public saveConfig(config: Config) {
+    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -148,7 +153,7 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
-    return this.initialized;
+    return this.config !== null;
   }
 
   public isValid(): boolean {

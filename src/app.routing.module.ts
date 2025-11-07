@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ControlComponent } from './components/control/control.component';
 import { FilamentComponent } from './components/filament/filament.component';
 import { FilesComponent } from './components/files/files.component';
+import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { MainScreenComponent } from './components/main-screen/main-screen.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ConfigInvalidComponent } from './components/setup/invalid-config/invalid-config.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'standby',
     component: StandbyComponent,
+  },
+  {
+    path: 'login',
+    component: LoginScreenComponent,
   },
 ];
 

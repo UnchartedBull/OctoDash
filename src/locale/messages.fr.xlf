@@ -273,6 +273,10 @@
         <source>Can't load file!</source>
         <target>Impossible de charger le fichier !</target>
       </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source> Continue </source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can't retrieve enclosure temperature!</source>
         <target>Impossible de récupérer la température de l'enceinte !</target>
@@ -290,23 +294,13 @@
           <x id="INTERPOLATION_1" equiv-text="{{ height.total >= 0 ? height.total : '---' }}"/>
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
         </source>
-        <target>Couche 
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="<span class=&quot;height-indication__current-height&quot;>"/>
-          <x id="INTERPOLATION" equiv-text="{{ height.current }}"/>
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/> 
-           de 
-          <x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="<span class=&quot;height-indication__total-height&quot;>"/>
-          {{ height.total &gt;= 0 ? height.total : '---' }}
-          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
-        </target>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-filament" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
         </source>
-        <target>
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.filamentAmount }}"/>g Filament
-        </target>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-info__time-left" datatype="html">
         <source>
@@ -315,37 +309,34 @@
           <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="</span>"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timeLeft.unit }}"/> left, 
         </source>
-        <target> restant, </target>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-elapsed" datatype="html">
         <source>elapsed: 
           <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
           <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
         </source>
-        <target>écoulé : 
-          <x id="INTERPOLATION" equiv-text="{{ jobStatus.timePrinted.value }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ jobStatus.timePrinted.unit }}"/>
-        </target>
+        <target></target>
       </trans-unit>
       <trans-unit id="will-finish" datatype="html">
         <source>- will finish ~</source>
-        <target>- se terminera ~</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="job-g" datatype="html">
         <source>g</source>
-        <target>g</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="filament-used" datatype="html">
         <source>filament will be used</source>
-        <target>de filament sera utilisé</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
         <source> loading info</source>
-        <target> informations sur le chargement</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
         <source>no job running...</source>
-        <target>pas d'impression en cours ...</target>
+        <target></target>
       </trans-unit>
       <trans-unit id="menu-files" datatype="html">
         <source>files</source>
@@ -1100,10 +1091,6 @@
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
         <target>Impossible de charger les styles personnalisés !</target>
-      </trans-unit>
-      <trans-unit id="error-restart" datatype="html">
-        <source>Please restart your system. If the issue persists open an issue on GitHub.</source>
-        <target>Veuillez redémarrer votre système. Si le problème persiste, ouvrez un ticket.</target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
