@@ -77,7 +77,7 @@ jobs:
       - name: Building Application
         run: npm run build
       - name: Install Python build dependencies
-        run: python -m pip install wheel octoprint --user
+        run: python -m pip install build wheel octoprint --user
       - name: Building Python
         run: python -m build --formats=zip
       - name: Upload artifacts
