@@ -31,7 +31,6 @@ export class AppService {
     private electronService: ElectronService,
   ) {
     this.enableVersionListener();
-    this.enableCustomCSSListener();
     this.electronService.send('appInfo');
 
     // list of all error following an upgrade
@@ -118,18 +117,6 @@ export class AppService {
     this.electronService.on('versionInformation', (_, versionInformation: VersionInformation): void => {
       this.version = versionInformation.version;
       this.checkUpdate();
-    });
-  }
-
-  private enableCustomCSSListener(): void {
-    this.electronService.on('customStyles', (_, customCSS: string): void => {
-      const css = document.createElement('style');
-      css.appendChild(document.createTextNode(customCSS));
-      document.head.append(css);
-    });
-
-    this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
     });
   }
 
