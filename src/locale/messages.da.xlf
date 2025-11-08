@@ -787,46 +787,6 @@
         <source>Can't save invalid config</source>
         <target>Kan ikke gemme ugyldig konfiguration</target>
       </trans-unit>
-      <trans-unit id="select-instance" datatype="html">
-        <source> First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.</source>
-        <target> Første ting først: Vælg venligst din OctoPrint-instans fra listen nedenfor, eller indtast IP/URL manuelt.</target>
-      </trans-unit>
-      <trans-unit id="octoprint-upgrade-required" datatype="html">
-        <source> Upgrade Required / </source>
-        <target> Opgradering krævet / </target>
-      </trans-unit>
-      <trans-unit id="version-url" datatype="html">
-        <source> Version 
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>, URL: 
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </source>
-        <target>
-           Version
-          <x id="INTERPOLATION" equiv-text="{{ node.version }}"/>
-          , URL:
-          <x id="INTERPOLATION_1" equiv-text="{{ node.url }}"/>
-        </target>
-      </trans-unit>
-      <trans-unit id="searching" datatype="html">
-        <source>searching</source>
-        <target>søger</target>
-      </trans-unit>
-      <trans-unit id="enter-manually" datatype="html">
-        <source>enter manually</source>
-        <target>indtast manuelt</target>
-      </trans-unit>
-      <trans-unit id="port-recommendation" datatype="html">
-        <source> Port 5000 for vanilla OctoPrint, Port 80 for OctoPi </source>
-        <target> Port 5000 til vanilla OctoPrint, Port 80 til OctoPi </target>
-      </trans-unit>
-      <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
-        <target> søg igen </target>
-      </trans-unit>
-      <trans-unit id="no-instance-found" datatype="html">
-        <source>no instances found.</source>
-        <target>ingen forekomster fundet.</target>
-      </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
         <source>I also need some information about your extruder.</source>
         <target>Jeg har også brug for nogle oplysninger om din extruder.</target>
@@ -1098,10 +1058,6 @@
       <trans-unit id="error-update-message" datatype="html">
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <target>Nogle oplysninger mangler. Prøv venligst igen om en time, eller opdater manuelt.</target>
-      </trans-unit>
-      <trans-unit id="error-install-update" datatype="html">
-        <source>Can't install update!</source>
-        <target>Kan ikke installere opdatering!</target>
       </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
         <source>Version 
