@@ -1088,8 +1088,9 @@
           <x id="PH" equiv-text="this.latestVersion.title"/> ist verfügbar. Gehen Sie zu Einstellungen &gt; Über, um zu aktualisieren.
         </target>
       </trans-unit>
-      <trans-unit id="custom-styles-error" datatype="html">
-        <source>Error loading custom styles</source>
+      <trans-unit id="error-load-style" datatype="html">
+        <source>Can't load custom styles!</source>
+        <target>Kann angepasste styles nicht laden!</target>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
         <source>Can't set LED color!</source>
