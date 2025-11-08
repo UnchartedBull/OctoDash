@@ -148,7 +148,7 @@ export class AppService {
         document.head.appendChild(styleElement);
       },
       error: error =>
-        this.notificationService.error($localize`:@@custom-styles-error:Error loading custom styles`, error.message),
+        this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
     });
   }
 }
