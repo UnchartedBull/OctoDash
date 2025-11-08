@@ -170,7 +170,7 @@ class OctodashPlugin(
         """
         return dict(
             machinecode=dict(
-                octodashcompanion=["css", "json"]
+                octodashcompanion=["css"]
             )
         )
 
