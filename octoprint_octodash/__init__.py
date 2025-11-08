@@ -170,6 +170,9 @@ class OctodashPlugin(
             return Response(message, mimetype="text/css")
         return send_file(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder())))
 
+    def is_blueprint_protected(self):
+        return False
+
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
