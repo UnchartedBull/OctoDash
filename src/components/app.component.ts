@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initialize();
+    this.service.loadCustomStyles();
   }
 
   private initialize(): void {

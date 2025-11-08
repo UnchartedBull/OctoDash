@@ -1,13 +1,29 @@
 # coding=utf-8
+"""
+OctoDash Plugin for OctoPrint
+
+Some bits (noted below) are taken from the OctoDash Companion plugin which is available under the MIT license
+See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
+"""
 from __future__ import absolute_import
 
-from flask import make_response
+import shutil
+
+from flask import send_file, Response
+import os.path
+
 
 import octoprint.plugin
+from octoprint.filemanager import FileDestinations
+from octoprint.util.paths import normalize
+from octoprint.events import Events
+
 
 
 class OctodashPlugin(
     octoprint.plugin.SettingsPlugin,
+    octoprint.plugin.EventHandlerPlugin,
+    octoprint.plugin.BlueprintPlugin,
 ):
 
     ##~~ SettingsPlugin mixin
@@ -125,6 +141,53 @@ class OctodashPlugin(
             },
         }
 
+
+    ##~ EventHandler Mixin
+
+    def on_event(self, event, payload):
+        """
+        Handle upload of custom-styles.css to move it to plugin data folder
+
+        From the OctoDash Companion
+        """
+        if event == Events.UPLOAD:
+            #TODO: Better error handling and notifications
+            if payload["target"] == "local" and payload["path"] == "custom-styles.css":
+                source_file = self._file_manager.sanitize_path(FileDestinations.LOCAL, payload["path"])
+                destination_file = normalize("{}/custom-styles.css".format(self.get_plugin_data_folder()))
+                self._logger.debug("attempting copy of {} to {}".format(source_file, destination_file))
+                shutil.copyfile(source_file, destination_file)
+                self._logger.debug("attempting removal of {}".format(source_file))
+                self._file_manager.remove_file(FileDestinations.LOCAL, payload["path"])
+    
+    # ~~ extension_tree hook
+
+    def get_extension_tree(self, *args, **kwargs):
+        """
+        Indicate that OctoPrint should allow upload of extra file types
+
+        From OctoDash Companion
+        """
+        return dict(
+            machinecode=dict(
+                octodashcompanion=["css"]
+            )
+        )
+
+    # ~~ BlueprintPlugin
+
+    @octoprint.plugin.BlueprintPlugin.route("/custom-styles.css")
+    @octoprint.plugin.BlueprintPlugin.csrf_exempt()
+    def get_custom_styles(self):
+        if not os.path.exists(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder()))):
+            #TODO: Better message, maybe reference docs
+            message = "/* Upload a file called `custom-styles.css` and it will get used here by OctoDash */"
+            return Response(message, mimetype="text/css")
+        return send_file(normalize("{}/custom-styles.css".format(self.get_plugin_data_folder())))
+
+    def is_blueprint_protected(self):
+        return False
+
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
@@ -161,5 +224,6 @@ def __plugin_load__():
 
     global __plugin_hooks__
     __plugin_hooks__ = {
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+        "octoprint.filemanager.extension_tree": __plugin_implementation__.get_extension_tree,
     }

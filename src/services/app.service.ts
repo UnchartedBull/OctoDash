@@ -31,7 +31,6 @@ export class AppService {
     private electronService: ElectronService,
   ) {
     this.enableVersionListener();
-    this.enableCustomCSSListener();
     this.electronService.send('appInfo');
 
     // list of all error following an upgrade
@@ -121,18 +120,6 @@ export class AppService {
     });
   }
 
-  private enableCustomCSSListener(): void {
-    this.electronService.on('customStyles', (_, customCSS: string): void => {
-      const css = document.createElement('style');
-      css.appendChild(document.createTextNode(customCSS));
-      document.head.append(css);
-    });
-
-    this.electronService.on('customStylesError', (_, customCSSError: string): void => {
-      this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, customCSSError);
-    });
-  }
-
   public getVersion(): string {
     return this.version;
   }
@@ -151,6 +138,18 @@ export class AppService {
 
   public turnDisplayOn(): void {
     this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
+  }
+
+  public loadCustomStyles(): void {
+    this.http.get('http://localhost:8080/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
+      next: (styles: string) => {
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = styles;
+        document.head.appendChild(styleElement);
+      },
+      error: error =>
+        this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
+    });
   }
 }
 
