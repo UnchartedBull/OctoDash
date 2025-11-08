@@ -12,7 +12,6 @@ import shutil
 from flask import send_file, Response
 import os.path
 
-import json
 
 import octoprint.plugin
 from octoprint.filemanager import FileDestinations
