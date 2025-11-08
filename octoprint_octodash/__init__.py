@@ -1,4 +1,10 @@
 # coding=utf-8
+"""
+OctoDash Plugin for OctoPrint
+
+Some bits (noted below) are taken from the OctoDash Companion plugin which is available under the MIT license
+See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
+"""
 from __future__ import absolute_import
 
 import shutil
@@ -140,6 +146,11 @@ class OctodashPlugin(
     ##~ EventHandler Mixin
 
     def on_event(self, event, payload):
+        """
+        Handle upload of custom-styles.css to move it to plugin data folder
+
+        From the OctoDash Companion
+        """
         if event == Events.UPLOAD:
             #TODO: Better error handling and notifications
             if payload["target"] == "local" and payload["path"] == "custom-styles.css":
@@ -153,6 +164,11 @@ class OctodashPlugin(
     # ~~ extension_tree hook
 
     def get_extension_tree(self, *args, **kwargs):
+        """
+        Indicate that OctoPrint should allow upload of extra file types
+
+        From OctoDash Companion
+        """
         return dict(
             machinecode=dict(
                 octodashcompanion=["css", "json"]
