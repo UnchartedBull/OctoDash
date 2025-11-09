@@ -191,12 +191,6 @@ class OctodashPlugin(
     def is_blueprint_protected(self):
         return False
 
-
-    def on_ui_render(self, now, request, render_kwargs):
-        return redirect("/plugin/octodash/", code=307)
-    
-
-
     @octoprint.plugin.BlueprintPlugin.route("/", defaults={"path": ""}, methods=["GET"])
     @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
     def get_ui_root(self, path):
@@ -225,6 +219,15 @@ class OctodashPlugin(
         
         #TODO: Read the language from config
         return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
+
+    ##~~ UiPlugin mixin
+
+    def will_handle_ui(self, request):
+        if request.args.get("octodash") == "1":
+            return True
+
+    def on_ui_render(self, now, request, render_kwargs):
+        return redirect("/plugin/octodash/", code=307)
 
     def get_ui_permissions(self):
         return []
