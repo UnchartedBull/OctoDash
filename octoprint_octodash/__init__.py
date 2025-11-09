@@ -9,7 +9,7 @@ from __future__ import absolute_import
 
 import shutil
 
-from flask import send_file, Response
+from flask import redirect, send_file, make_response, Response
 import os.path
 
 
@@ -20,11 +20,14 @@ from octoprint.events import Events
 
 
 
+
 class OctodashPlugin(
+    octoprint.plugin.UiPlugin,
     octoprint.plugin.SettingsPlugin,
     octoprint.plugin.EventHandlerPlugin,
     octoprint.plugin.BlueprintPlugin,
 ):
+
 
     ##~~ SettingsPlugin mixin
 
@@ -187,6 +190,47 @@ class OctodashPlugin(
 
     def is_blueprint_protected(self):
         return False
+
+    @octoprint.plugin.BlueprintPlugin.route("/", defaults={"path": ""}, methods=["GET"])
+    @octoprint.plugin.BlueprintPlugin.route("/<path>", methods=["GET"])
+    def get_ui_root(self, path):
+        return send_file(self._get_index_path())
+
+    def is_blueprint_csrf_protected(self):
+        return False
+
+    def is_blueprint_protected(self):
+        return False
+
+    def get_blueprint_api_prefixes(self):
+        return []
+
+    def _get_index_path(self):
+        """Return the path on the filesystem to the index.html file to be used for
+        index.html. This needs to take into account the configured language and 
+        whether the UI build was dev or production.
+        """
+
+        # Check if the UI is in dev mode
+        devpath = os.path.join(self._basefolder, "static", "ui", "index.html")
+        if os.path.exists(devpath):
+            # Dev mode
+            return devpath
+        
+        #TODO: Read the language from config
+        return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
+
+    ##~~ UiPlugin mixin
+
+    def will_handle_ui(self, request):
+        if request.args.get("octodash") == "1":
+            return True
+
+    def on_ui_render(self, now, request, render_kwargs):
+        return redirect("/plugin/octodash/", code=307)
+
+    def get_ui_permissions(self):
+        return []
 
     ##~~ Softwareupdate hook
 

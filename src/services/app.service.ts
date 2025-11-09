@@ -5,7 +5,6 @@ import * as _ from 'lodash-es';
 import defaultConfig from '../helper/config.default.json';
 import { ConfigSchema as Config } from '../model';
 import { ConfigService } from './config.service';
-import { ElectronService } from './electron.service';
 import { NotificationService } from './notification.service';
 
 @Injectable()
@@ -22,17 +21,13 @@ export class AppService {
   };
 
   public updateAvailable = false;
-  public dev = !!process.env.APP_DEV;
+  public dev = false; // TODO: intelligently determine this
 
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
-    private electronService: ElectronService,
   ) {
-    this.enableVersionListener();
-    this.electronService.send('appInfo');
-
     // list of all error following an upgrade
     /* eslint-disable @typescript-eslint/no-explicit-any */
     this.updateError = {
@@ -113,13 +108,6 @@ export class AppService {
     return fullyFixed;
   }
 
-  private enableVersionListener(): void {
-    this.electronService.on('versionInformation', (_, versionInformation: VersionInformation): void => {
-      this.version = versionInformation.version;
-      this.checkUpdate();
-    });
-  }
-
   public getVersion(): string {
     return this.version;
   }
@@ -133,11 +121,11 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.electronService.send('screenControl', { command: this.configService.getScreenSleepCommand() });
+    // TODO: Implement turnDisplayOff
   }
 
   public turnDisplayOn(): void {
-    this.electronService.send('screenControl', { command: this.configService.getScreenWakeupCommand() });
+    // TODO: Implement turnDisplayOn
   }
 
   public loadCustomStyles(): void {
@@ -153,9 +141,9 @@ export class AppService {
   }
 }
 
-interface VersionInformation {
-  version: string;
-}
+// interface VersionInformation {
+//   version: string;
+// }
 
 interface GitHubReleaseInformation {
   name: string;

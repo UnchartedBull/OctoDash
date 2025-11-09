@@ -1,11 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import defaultConfig from '../../helper/config.default.json';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { ConfigService } from '../../services/config.service';
-import { ElectronService } from '../../services/electron.service';
 
 @Component({
   selector: 'app-config-setup',
@@ -13,7 +12,7 @@ import { ElectronService } from '../../services/electron.service';
   styleUrls: ['./setup.component.scss'],
   standalone: false,
 })
-export class ConfigSetupComponent implements OnInit, OnDestroy {
+export class ConfigSetupComponent implements OnInit {
   public page = 0;
   public totalPages = 6;
 
@@ -31,7 +30,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private http: HttpClient,
     private router: Router,
-    private electronService: ElectronService,
     private zone: NgZone,
   ) {
     this.configUpdate = this.configService.isUpdate();
@@ -46,11 +44,6 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.changeProgress();
-  }
-
-  public ngOnDestroy(): void {
-    this.electronService.removeListener('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.removeListener('configSaveFail', this.onConfigSaveFail.bind(this));
   }
 
   public changeURLEntryMethod(manual: boolean): void {
@@ -108,15 +101,10 @@ export class ConfigSetupComponent implements OnInit, OnDestroy {
   }
 
   private saveConfig(): void {
-    this.electronService.on('configSaved', this.onConfigSaved.bind(this));
-    this.electronService.on('configSaveFail', this.onConfigSaveFail.bind(this));
-
     this.configService.saveConfig(this.config);
   }
 
-  public finishWizard(): void {
-    this.electronService.send('reload');
-  }
+  public finishWizard(): void {}
 
   private changePage(value: number): void {
     if (this.page + value > this.totalPages || this.page + value < 0) {

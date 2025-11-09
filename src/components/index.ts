@@ -21,7 +21,6 @@ import { NotificationComponent } from './notification/notification.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
-import { DiscoverOctoprintComponent } from './setup/discover-octoprint/discover-octoprint.component';
 import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
 import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
 import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
@@ -60,7 +59,6 @@ export default [
   ResetComponent,
   SettingsComponent,
   SettingsIconComponent,
-  DiscoverOctoprintComponent,
   ExtruderInformationComponent,
   ConfigInvalidComponent,
   OctoprintAuthenticationComponent,
