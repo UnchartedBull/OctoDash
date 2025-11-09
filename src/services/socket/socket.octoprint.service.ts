@@ -128,7 +128,8 @@ export class OctoPrintSocketService implements SocketService {
           },
         });
       },
-      error: () => {
+      error: e => {
+        console.error(e);
         setTimeout(this.tryConnect.bind(this), this.fastInterval < 6 ? 5000 : 15000, resolve);
         this.fastInterval += 1;
       },

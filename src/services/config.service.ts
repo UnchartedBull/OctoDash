@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
-import { map, throwError } from 'rxjs';
+import { map } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 
@@ -31,15 +31,15 @@ export class ConfigService {
 
   public getConfig() {
     this.apiKey = localStorage.getItem('octodash_apikey');
-    // set the x-api-key header
-    if (!this.apiKey) {
-      return throwError(() => 'No API Key Found');
+    let headers = null;
+    if (this.apiKey) {
+      headers = new HttpHeaders({ 'x-api-key': this.apiKey });
+    } else {
+      console.log('API key found, attempting login with cookie');
     }
-    const headers = new HttpHeaders({
-      'x-api-key': this.apiKey ?? '',
-    });
+
     return this.http
-      .get<OctoPrintConfig>('/api/settings', { headers })
+      .get<OctoPrintConfig>('/api/settings', { headers: headers ?? new HttpHeaders() })
       .pipe(
         map(response => {
           return response.plugins.octodash;
@@ -57,13 +57,20 @@ export class ConfigService {
   }
 
   public generateHttpHeaders(): void {
+    const headers = new HttpHeaders({
+      'Cache-Control': 'no-cache',
+      Pragma: 'no-cache',
+      Expires: '0',
+    });
+    if (this.apiKey) {
+      this.httpHeaders = {
+        headers: headers.append('x-api-key', this.apiKey),
+      };
+      return;
+    }
+
     this.httpHeaders = {
-      headers: new HttpHeaders({
-        'x-api-key': this.apiKey ?? '',
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0',
-      }),
+      headers,
     };
   }
 
