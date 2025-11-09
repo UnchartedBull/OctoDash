@@ -128,8 +128,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    if (includeApi) return `/api/${path}`;
+    else return `/${path}`;
   }
 
   public getAPIPollingInterval(): number {

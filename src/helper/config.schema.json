@@ -33,17 +33,12 @@
     "octoprint": {
       "$id": "#/octoprint",
       "type": "object",
-      "required": ["accessToken", "url"],
+      "required": ["accessToken"],
       "properties": {
         "accessToken": {
           "type": "string",
           "pattern": "^(.*)$",
           "default": ""
-        },
-        "url": {
-          "type": "string",
-          "pattern": "^(.*)$",
-          "default": "http://localhost:5000/"
         }
       },
       "additionalProperties": false

@@ -35,7 +35,6 @@ class OctodashPlugin(
         return {
             "octoprint": {
                 "accessToken": "1t9H6i51hQLMm2eZXGAPbvRLv4iJr2Yao_LoxhE_66E",
-                "url": "http://localhost:8080/",
             },
             "printer": {
                 "name": "",
