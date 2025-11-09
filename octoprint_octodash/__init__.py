@@ -24,6 +24,7 @@ from octoprint.events import Events
 class OctodashPlugin(
     octoprint.plugin.UiPlugin,
     octoprint.plugin.BlueprintPlugin,
+    octoprint.plugin.SettingsPlugin,
     octoprint.plugin.EventHandlerPlugin,
 ):
 
