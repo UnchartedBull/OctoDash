@@ -454,10 +454,6 @@
         <source>OctoPrint Connection</source>
         <target>OctoPrint Verbindung</target>
       </trans-unit>
-      <trans-unit id="general-octoprint-url" datatype="html">
-        <source>Octoprint URL</source>
-        <target>Octoprint URL</target>
-      </trans-unit>
       <trans-unit id="general-printer" datatype="html">
         <source>Printer</source>
         <target>Drucker</target>

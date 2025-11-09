@@ -93,7 +93,8 @@ export class AppService {
   public fixUpdateErrors(errors: string[]): boolean {
     const config = this.configService.getCurrentConfig();
 
-    config.octoprint.url = config.octoprint.url.replace('api/', '');
+    // TODO: Fix or just remove this hole block
+    // config.octoprint.url = config.octoprint.url.replace('api/', '');
 
     let fullyFixed = true;
     for (const error of errors) {
@@ -129,7 +130,7 @@ export class AppService {
   }
 
   public loadCustomStyles(): void {
-    this.http.get('http://localhost:8080/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
+    this.http.get('/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
       next: (styles: string) => {
         const styleElement = document.createElement('style');
         styleElement.innerHTML = styles;

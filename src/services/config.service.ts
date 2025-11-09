@@ -39,7 +39,7 @@ export class ConfigService {
       'x-api-key': this.apiKey ?? '',
     });
     return this.http
-      .get<OctoPrintConfig>('http://localhost:8080/api/settings', { headers })
+      .get<OctoPrintConfig>('/api/settings', { headers })
       .pipe(
         map(response => {
           return response.plugins.octodash;
@@ -128,8 +128,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    if (includeApi) return `/api/${path}`;
+    else return `/${path}`;
   }
 
   public getAPIPollingInterval(): number {
