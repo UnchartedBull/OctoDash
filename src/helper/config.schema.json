@@ -28,21 +28,8 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": ["octoprint", "printer", "filament", "plugins", "octodash"],
+  "required": ["printer", "filament", "plugins", "octodash"],
   "properties": {
-    "octoprint": {
-      "$id": "#/octoprint",
-      "type": "object",
-      "required": ["accessToken"],
-      "properties": {
-        "accessToken": {
-          "type": "string",
-          "pattern": "^(.*)$",
-          "default": ""
-        }
-      },
-      "additionalProperties": false
-    },
     "printer": {
       "$id": "#/printer",
       "type": "object",

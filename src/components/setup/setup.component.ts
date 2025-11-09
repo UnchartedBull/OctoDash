@@ -59,7 +59,7 @@ export class ConfigSetupComponent implements OnInit {
   private checkOctoPrintConnection(): void {
     const httpHeaders = {
       headers: new HttpHeaders({
-        'x-api-key': this.config.octoprint.accessToken,
+        'x-api-key': this.configService.getAccessToken(),
       }),
     };
 
