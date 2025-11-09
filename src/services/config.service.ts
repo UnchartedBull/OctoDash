@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
-import { map, throwError } from 'rxjs';
+import { map } from 'rxjs';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 
