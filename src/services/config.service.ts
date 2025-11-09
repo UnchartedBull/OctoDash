@@ -315,10 +315,6 @@ export class ConfigService {
     return this.config.octodash.preferPreviewWhilePrinting;
   }
 
-  public getAccessKey(): string {
-    return this.config.octoprint.accessToken;
-  }
-
   public getDisableExtruderGCode(): string {
     return this.config.printer.disableExtruderGCode;
   }
