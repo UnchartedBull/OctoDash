@@ -190,9 +190,6 @@ class OctodashPlugin(
 
     def is_blueprint_protected(self):
         return False
-# could set a cookie that's read by `will_handle_ui` to determine if the user is using Octodash
-# or consider hosting on a separate path using a blueprint route
-# maybe need to include the assets, maybe not?
 
 
     def on_ui_render(self, now, request, render_kwargs):
