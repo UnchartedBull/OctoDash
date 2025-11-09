@@ -39,7 +39,7 @@ export class ConfigService {
       'x-api-key': this.apiKey ?? '',
     });
     return this.http
-      .get<OctoPrintConfig>('http://localhost:8080/api/settings', { headers })
+      .get<OctoPrintConfig>('/api/settings', { headers })
       .pipe(
         map(response => {
           return response.plugins.octodash;

@@ -129,7 +129,7 @@ export class AppService {
   }
 
   public loadCustomStyles(): void {
-    this.http.get('http://localhost:8080/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
+    this.http.get('/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
       next: (styles: string) => {
         const styleElement = document.createElement('style');
         styleElement.innerHTML = styles;
