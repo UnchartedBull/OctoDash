@@ -13,3 +13,16 @@ export interface PrinterNotification {
   text?: string;
   choices?: string[];
 }
+
+export enum PrusaMMUActions {
+  SHOW = 'show',
+  CLOSE = 'close',
+  NAV = 'nav',
+}
+
+export interface PrusaMMUMessage {
+  action?: string;
+  previousTool?: string;
+  state?: string;
+  tool?: number;
+}

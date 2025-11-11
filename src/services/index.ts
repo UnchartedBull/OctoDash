@@ -6,6 +6,7 @@ import { ConversionService } from './conversion.service';
 import { EnclosureOctoprintService } from './enclosure/enclosure.octoprint.service';
 import { EnclosureService } from './enclosure/enclosure.service';
 import { EventService } from './event.service';
+import { FilamentService } from './filament/filament.service';
 import { FilamentManagerOctoprintService } from './filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './filament/filament-plugin.service';
 import { SpoolManagerOctoprintService } from './filament/spool-manager.octoprint.service';
@@ -16,6 +17,7 @@ import { JobService } from './job/job.service';
 import { NotificationService } from './notification.service';
 import { PrinterOctoprintService } from './printer/printer.octoprint.service';
 import { PrinterService } from './printer/printer.service';
+import { PrusaMMUService } from './prusammu/prusa-mmu.service';
 import { OctoPrintSocketService } from './socket/socket.octoprint.service';
 import { SocketService } from './socket/socket.service';
 import { SystemOctoprintService } from './system/system.octoprint.service';
@@ -26,6 +28,8 @@ export default [
   ConfigService,
   ConversionService,
   EventService,
+  PrusaMMUService,
+  FilamentService,
   NotificationService,
   [
     {
@@ -39,12 +43,13 @@ export default [
   [
     {
       provide: SocketService,
-      deps: [ConfigService, SystemService, ConversionService, NotificationService, HttpClient],
+      deps: [ConfigService, SystemService, ConversionService, NotificationService, PrusaMMUService, HttpClient],
       useFactory: (
         configService: ConfigService,
         systemService: SystemService,
         conversionService: ConversionService,
         notificationService: NotificationService,
+        prusaMMUService: PrusaMMUService,
         httpClient: HttpClient,
       ) => {
         return new OctoPrintSocketService(
@@ -52,6 +57,7 @@ export default [
           systemService,
           conversionService,
           notificationService,
+          prusaMMUService,
           httpClient,
         );
       },
