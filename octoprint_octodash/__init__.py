@@ -282,6 +282,9 @@ class OctodashPlugin(
         self._logger.info(f"Returning wizard details: {details}")
         return details
 
+    def get_wizard_version(self):
+        return 1
+
     ##~~ Softwareupdate hook
 
     def get_update_information(self):
