@@ -7,6 +7,8 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
 """
 from __future__ import absolute_import
 
+import shutil
+
 from flask import make_response, send_file, request
 from flask import redirect, Response
 import os.path
