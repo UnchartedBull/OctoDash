@@ -4,12 +4,36 @@ $(function () {
 
     self.configPaths = ko.observableArray([]);
 
-    self.migrated = ko.observable(false);
+    self.legacyInstalled = ko.observable(false);
 
     self.onWizardDetails = function (data) {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
+      self.legacyInstalled(data.octodash.details.legacyInstalled);
+    };
+
+    self.copyScript = () => {
+      $.ajax({
+        url: '/plugin/octodash/api/copy_script',
+        type: 'POST',
+      })
+        .then(() => {
+          new PNotify({
+            title: 'OctoDash Script Copy Successful!',
+            text: '<div class="row-fluid"><p>The OctoDash startup script has been successfully copied.</p></div>',
+            hide: true,
+            type: 'success',
+          });
+        })
+        .catch(() => {
+          new PNotify({
+            title: 'OctoDash Script Copy Failed',
+            text: '<div class="row-fluid"><p>Failed to copy the OctoDash startup script.</p></div>',
+            hide: false,
+            type: 'error',
+          });
+        });
     };
 
     self.migrate = path => {
@@ -18,15 +42,24 @@ $(function () {
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ path: path }),
-        success: function () {
-          self.migrated(true);
-        },
-        error: function (xhr, status, error) {
-          // TODO: Better handle this
+      })
+        .then(() => {
+          new PNotify({
+            title: 'OctoDash Config Migration Successful!',
+            text: `<div class="row-fluid"><p>The config from \`${path}\` has been successfully migrated.</p></div>`,
+            hide: true,
+            type: 'success',
+          });
+        })
+        .catch(error => {
           console.error('Migration failed:', error);
-          alert('Migration failed: ' + error);
-        },
-      });
+          new PNotify({
+            title: 'OctoDash Config Migration Failed',
+            text: `<div class="row-fluid"><p>Migration failed with the following error: ${error}</p></div>`,
+            hide: false,
+            type: 'error',
+          });
+        });
     };
   }
 

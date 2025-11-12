@@ -1,9 +1,26 @@
 <h3>OctoDash Setup</h3>
 
-<p>Welcome to OctoDash v3! Some things are new here</p>
+<h4>Welcome to OctoDash v3!</h4>
 
-<p>Found config at</p>
-<ul data-bind="foreach: configPaths">
-<li><span data-bind="text: $data" ></span><button data-bind="click: $parent.migrate">Migrate</button></li>
-</ul>
-<p data-bind="if: migrated">Config migrated!</p>
+<p>
+  You can view OctoDash <a href="/plugin/octodash/" target="_blank" rel="noopener">here</a>.
+  If you are running OctoPrint on a Raspberry Pi (or other Debian-based system) with a display connected, you can use the OctoDash-provided script to configure
+  it to open OctoDash on boot. To copy the script into your home directory, click the button below.
+  Once copied, connect to your system via either SSH or a keyboard and run the script.
+
+</p>
+<p>
+  If you have an existing installation of legacy OctoDash, the script will detect that and make
+  the necessary changes to launch OctoDash v3 instead.
+</p>
+<button data-bind="click: copyScript" class="btn">Copy script</button>
+<div data-bind="if: configPaths().length">
+  <h4>Config Setup</h4>
+  <p>
+  An existing legacy OctoDash config was found on your system at the following location.
+  Would you like to migrate it?</p>
+  <ul data-bind="foreach: configPaths">
+  <li><code data-bind="text: $data" ></code><button class="btn" data-bind="click: $parent.migrate">Migrate</button></li>
+  </ul>
+</div>
+
