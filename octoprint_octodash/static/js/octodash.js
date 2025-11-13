@@ -79,46 +79,46 @@ $(function () {
 
     self.addCustomActionToken = function (data, event) {
       switch (event.currentTarget.text) {
-        case '[!WEBCAM]':
-          data.command(
-            '[!WEB]' +
-              self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-              'plugin/octodashcompanion/webcam',
-          );
-          data.icon('camera');
-          data.exit(false);
-          break;
-        case '[!RESTARTSERVICE]':
-          data.command(
-            '[!WEB]' +
-              self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-              'plugin/octodashcompanion/restart',
-          );
-          data.icon('recycle');
-          data.color('#FF0000');
-          data.confirm(true);
-          data.exit(false);
-          break;
-        case '[!SLEEP]':
-          data.command(
-            '[!WEB]' +
-              self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-              'plugin/octodashcompanion/sleep',
-          );
-          data.icon('bed');
-          data.color('#0097e6');
-          data.exit(false);
-          break;
-        case '[!SWITCH_INSTANCE]':
-          data.command(
-            '[!WEB]' +
-              self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-              'plugin/octodashcompanion/switch_instance?url=localhost:5000',
-          );
-          data.icon('recycle');
-          data.color('#e1b12c');
-          data.exit(false);
-          break;
+        // case '[!WEBCAM]':
+        //   data.command(
+        //     '[!WEB]' +
+        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
+        //       'plugin/octodashcompanion/webcam',
+        //   );
+        //   data.icon('camera');
+        //   data.exit(false);
+        //   break;
+        // case '[!RESTARTSERVICE]':
+        //   data.command(
+        //     '[!WEB]' +
+        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
+        //       'plugin/octodashcompanion/restart',
+        //   );
+        //   data.icon('recycle');
+        //   data.color('#FF0000');
+        //   data.confirm(true);
+        //   data.exit(false);
+        //   break;
+        // case '[!SLEEP]':
+        //   data.command(
+        //     '[!WEB]' +
+        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
+        //       'plugin/octodashcompanion/sleep',
+        //   );
+        //   data.icon('bed');
+        //   data.color('#0097e6');
+        //   data.exit(false);
+        //   break;
+        // case '[!SWITCH_INSTANCE]':
+        //   data.command(
+        //     '[!WEB]' +
+        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
+        //       'plugin/octodashcompanion/switch_instance?url=localhost:5000',
+        //   );
+        //   data.icon('recycle');
+        //   data.color('#e1b12c');
+        //   data.exit(false);
+        //   break;
         default:
           data.command(event.currentTarget.text);
       }
