@@ -21,7 +21,7 @@ const compat = new FlatCompat({
 export default [
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ['**/docs/js/lib/'],
+    ignores: ['**/docs/js/lib/', '**/vendor/**'],
   },
   ...fixupConfigRules(
     compat.extends(

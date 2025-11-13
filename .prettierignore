@@ -9,3 +9,4 @@ src/reset.css
 src/assets/animations/
 docs/fonts/ionicons
 docs/js/lib/
+octoprint_octodash/static/vendor/
