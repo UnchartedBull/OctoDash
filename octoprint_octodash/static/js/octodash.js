@@ -2,7 +2,7 @@
 //
 // All logic related to the OctoDash settings and configuration
 // is from the OctoDash Companion plugin under the MIT license
-// See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
+// See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/static/js/octodashcompanion.js
 //
 $(function () {
   function OctoDashViewModel(parameters) {
