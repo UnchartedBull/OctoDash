@@ -261,6 +261,16 @@
               >Show extruder controls</span
             >
           </app-toggle-switch>
+          <div class="settings__select">
+            <label for="octodash-language" class="settings__input-label" i18n="@@general-language">Language</label>
+            <select name="octodash-language" [(ngModel)]="config.octodash.language">
+              <option [ngValue]="null" i18n="@@use-octoprint-language">Use OctoPrint setting</option>
+              <option for="language-en" value="en">English</option>
+              <option for="language-fr" value="fr">Français</option>
+              <option for="language-de" value="de">Deutsch</option>
+              <option for="language-da" value="da">Dansk</option>
+            </select>
+          </div>
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.octodash.turnScreenOffWhileSleeping"
