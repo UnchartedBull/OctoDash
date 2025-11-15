@@ -584,6 +584,12 @@
         <source>Show extruder controls</source>
         <target>Extrudersteuerung anzeigen</target>
       </trans-unit>
+      <trans-unit id="general-language" datatype="html">
+        <source>Language</source>
+      </trans-unit>
+      <trans-unit id="use-octoprint-language" datatype="html">
+        <source>Use OctoPrint setting</source>
+      </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
         <target>Display im Standby ausschalten</target>
