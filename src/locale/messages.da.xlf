@@ -604,9 +604,11 @@
       </trans-unit>
       <trans-unit id="general-language" datatype="html">
         <source>Language</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="use-octoprint-language" datatype="html">
         <source>Use OctoPrint setting</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="screen-off" datatype="html">
         <source>Turn screen off while sleeping</source>
@@ -1068,6 +1070,9 @@
         <target>Version
           <x id="PH" equiv-text="this.latestVersion.title"/> er tilgængelig. Gå til Indstillinger &gt; Om, for at opdatere.
         </target>
+      </trans-unit>
+      <trans-unit id="screen-sleep-error" datatype="html">
+        <source>Error turning display off</source>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
