@@ -22,7 +22,8 @@ from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
 
-
+LANGUAGES = ["en", "fr", "de", "da"]
+DEFAULT_LANGUAGE = "en"
 
 
 class OctodashPlugin(
@@ -148,6 +149,7 @@ class OctodashPlugin(
                 "showExtruderControl": True,
                 "showNotificationCenterIcon": True,
                 "defaultDirectory": "/",
+                "language": None,
             },
         }
 
@@ -289,6 +291,16 @@ class OctodashPlugin(
     def get_blueprint_api_prefixes(self):
         return ['api']
 
+    def _get_language(self):
+        language = self._settings.get(["octodash", "language"])
+        if language is not None:
+            return language
+
+        global_language = self._settings.global_get(["appearance", "defaultLanguage"])
+        if global_language in LANGUAGES:
+            return global_language
+        return DEFAULT_LANGUAGE
+
     def _get_index_path(self):
         """Return the path on the filesystem to the index.html file to be used for
         index.html. This needs to take into account the configured language and 
@@ -301,8 +313,7 @@ class OctodashPlugin(
             # Dev mode
             return devpath
         
-        #TODO: Read the language from config
-        return os.path.join(self._basefolder, "static", "ui", "en", "index.html")
+        return os.path.join(self._basefolder, "static", "ui", self._get_language(), "index.html")
 
     ##~~ UiPlugin mixin
 

@@ -21,6 +21,18 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
               <input type="text" class="input-block-level" data-bind="value: settingsViewModel.settings.plugins.octodash.printer.name">
             </div>
           </div>
+          <div class="control-group">
+            <label class="control-label">{{ _('Language') }}</label>
+            <div class="controls">
+              <select class="input-block-level" data-bind="value: settingsViewModel.settings.plugins.octodash.octodash.language">
+                <option data-bind="value: null">Use OctoPrint setting</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="da">Dansk</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div id="octodash_filament" class="tab-pane">
