@@ -147,7 +147,7 @@ class OctodashPlugin(
                 "preferPreviewWhilePrinting": False,
                 "previewProgressCircle": False,
                 "screenSleepCommand": "DISPLAY=:0.0 xset dpms force standby",
-                "screenWakeupCommand": "DISPLAY=:0.0 xset s off && DISPLAY=:0.0 xset -dpms && xset s noblank",
+                "screenWakeupCommand": "DISPLAY=:0.0 xset s off && DISPLAY=:0.0 xset -dpms && DISPLAY=:0.0 xset s noblank",
                 "showExtruderControl": True,
                 "showNotificationCenterIcon": True,
                 "defaultDirectory": "/",
