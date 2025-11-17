@@ -596,6 +596,9 @@
         <source>Turn screen off while sleeping</source>
         <target>Éteindre l'écran pendant la veille</target>
       </trans-unit>
+      <trans-unit id="screen-sleep-delay" datatype="html">
+        <source>Screen sleep delay</source>
+      </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
         <source>Show icon for Action Center</source>
         <target>Afficher l'icône du Centre d'action</target>
@@ -1052,6 +1055,7 @@
       </trans-unit>
       <trans-unit id="screen-sleep-error" datatype="html">
         <source>Error turning display off</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can't load custom styles!</source>
