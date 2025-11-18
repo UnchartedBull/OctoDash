@@ -6,6 +6,7 @@ Some bits (noted below) are taken from the OctoDash Companion plugin which is av
 See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccfa1bd2f459447caec31f29deb4c/octoprint_octodashcompanion/__init__.py
 """
 from __future__ import absolute_import
+import subprocess
 import re
 from importlib import resources
 import shutil
@@ -141,11 +142,12 @@ class OctodashPlugin(
                 "pollingInterval": 2000,
                 "touchscreen": True,
                 "turnScreenOffWhileSleeping": False,
+                "screenSleepDelay": 300,
                 "turnOnPrinterWhenExitingSleep": False,
                 "preferPreviewWhilePrinting": False,
                 "previewProgressCircle": False,
-                "screenSleepCommand": "xset dpms force standby",
-                "screenWakeupCommand": "xset s off && xset -dpms && xset s noblank",
+                "screenSleepCommand": "DISPLAY=:0.0 xset dpms force standby",
+                "screenWakeupCommand": "DISPLAY=:0.0 xset s off && DISPLAY=:0.0 xset -dpms && DISPLAY=:0.0 xset s noblank",
                 "showExtruderControl": True,
                 "showNotificationCenterIcon": True,
                 "defaultDirectory": "/",
@@ -281,6 +283,36 @@ class OctodashPlugin(
             return make_response(json.dumps({"success": True, "config": legacy_config}), 200)
         except Exception as e:
             return make_response(json.dumps({"error": str(e)}), 500)
+
+    @octoprint.plugin.BlueprintPlugin.route("/api/screen_sleep", methods=["POST"])
+    @Permissions.ADMIN.require(403)
+    def set_screen_sleep(self):
+        command = self._settings.get(['octodash', 'screenSleepCommand'])
+        try:
+            subprocess.run(command, shell=True, check=True, timeout=10)
+        except subprocess.TimeoutExpired:
+            self._logger.error("Screen sleep command timed out")
+            return make_response(json.dumps({"error": "Command timed out"}), 500)
+        except Exception as e:
+            self._logger.error(f"Error calling screen sleep command: {e}")
+            return make_response(json.dumps({"error": "Error calling screen sleep command"}), 500)
+        return make_response(json.dumps({"success": True}), 200)
+
+    @octoprint.plugin.BlueprintPlugin.route("/api/screen_wakeup", methods=["POST"])
+    @Permissions.ADMIN.require(403)
+    def set_screen_wakeup(self):
+        command = self._settings.get(['octodash', 'screenWakeupCommand'])
+        try:
+            subprocess.run(command, shell=True, check=True, timeout=10)
+        except subprocess.TimeoutExpired:
+            self._logger.error("Screen wakeup command timed out")
+            return make_response(json.dumps({"error": "Command timed out"}), 500)
+        except Exception as e:
+            self._logger.error(f"Error getting screen wakeup command: {e}")
+            return make_response(json.dumps({"error": "Error getting screen wakeup command"}), 500)
+
+        return make_response(json.dumps({"success": True}), 200)
+
 
     def is_blueprint_csrf_protected(self):
         return False

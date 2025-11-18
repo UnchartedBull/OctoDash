@@ -464,6 +464,10 @@
           "type": "boolean",
           "default": true
         },
+        "screenSleepDelay": {
+          "type": "integer",
+          "default": 300
+        },
         "turnOnPrinterWhenExitingSleep": {
           "type": "boolean",
           "default": false

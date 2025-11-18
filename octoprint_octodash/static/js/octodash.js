@@ -105,16 +105,6 @@ $(function () {
         //   data.confirm(true);
         //   data.exit(false);
         //   break;
-        // case '[!SLEEP]':
-        //   data.command(
-        //     '[!WEB]' +
-        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-        //       'plugin/octodashcompanion/sleep',
-        //   );
-        //   data.icon('bed');
-        //   data.color('#0097e6');
-        //   data.exit(false);
-        //   break;
         // case '[!SWITCH_INSTANCE]':
         //   data.command(
         //     '[!WEB]' +

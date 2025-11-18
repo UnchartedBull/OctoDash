@@ -271,12 +271,25 @@
               <option for="language-da" value="da">Dansk</option>
             </select>
           </div>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.turnScreenOffWhileSleeping"
-            (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
-            <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
-          </app-toggle-switch>
+          <div class="settings__sleep">
+            <app-toggle-switch
+              class="settings__toggle-switch"
+              [value]="config.octodash.turnScreenOffWhileSleeping"
+              (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
+              <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
+            </app-toggle-switch>
+            <label for="octodash-screen-sleep-delay" class="settings__input-label" i18n="@@screen-sleep-delay"
+              >Screen sleep delay (in seconds)</label
+            >
+            <input
+              type="number"
+              id="octodash-screen-sleep-delay"
+              class="settings__input"
+              name="octodash-screen-sleep-delay"
+              style="width: 19vw"
+              [(ngModel)]="config.octodash.screenSleepDelay"
+              required />
+          </div>
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.octodash.showActionCenterIcon"
