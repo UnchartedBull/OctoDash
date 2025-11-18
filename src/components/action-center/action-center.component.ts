@@ -3,6 +3,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { AppService } from 'src/services/app.service';
 
 import { CustomAction, PrinterState, PrinterStatus, PSUState } from '../../model';
 import { ConfigService } from '../../services/config.service';
@@ -40,6 +41,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     REBOOT: () => this.rebootPi(),
     SHUTDOWN: () => this.shutdownPi(),
     KILL: () => this.kill(),
+    SLEEP: () => this.appService.turnDisplayOff(),
     POWEROFF: () => this.enclosureService.setPSUState(PSUState.OFF),
     POWERON: () => this.enclosureService.setPSUState(PSUState.ON),
     POWERTOGGLE: () => this.enclosureService.togglePSU(),
@@ -51,6 +53,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
   };
 
   constructor(
+    private appService: AppService,
     private printerService: PrinterService,
     private systemService: SystemService,
     private socketService: SocketService,
