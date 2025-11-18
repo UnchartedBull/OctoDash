@@ -615,7 +615,7 @@
         <target>Sluk skærmen, mens der slumres</target>
       </trans-unit>
       <trans-unit id="screen-sleep-delay" datatype="html">
-        <source>Screen sleep delay</source>
+        <source>Screen sleep delay (in seconds)</source>
         <target></target>
       </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
