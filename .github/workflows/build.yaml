@@ -90,7 +90,8 @@ jobs:
         with:
           name: build
           path: |
-            dist/*.zip
+            dist/*.whl
+            dist/*.tar.gz
 
   release:
     runs-on: ubuntu-latest
