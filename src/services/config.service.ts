@@ -144,7 +144,7 @@ export class ConfigService {
   }
 
   public getPrinterName(): string {
-    return this.config.printer.name;
+    return this.config?.printer?.name;
   }
 
   public getCustomActions(): CustomAction[] {
@@ -172,11 +172,11 @@ export class ConfigService {
   }
 
   public isTouchscreen(): boolean {
-    return this.config.octodash.touchscreen;
+    return this.config?.octodash?.touchscreen;
   }
 
   public getAmbientTemperatureSensorName(): number {
-    return this.config.plugins.enclosure.ambientSensorID;
+    return this.config?.plugins?.enclosure.ambientSensorID;
   }
 
   public getAutomaticScreenSleep(): boolean {
@@ -312,7 +312,7 @@ export class ConfigService {
   }
 
   public showThumbnailByDefault(): boolean {
-    return this.config.octodash.preferPreviewWhilePrinting;
+    return this.config?.octodash?.preferPreviewWhilePrinting;
   }
 
   public getDisableExtruderGCode(): string {
