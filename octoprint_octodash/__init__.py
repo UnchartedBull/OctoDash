@@ -301,7 +301,6 @@ class OctodashPlugin(
     @octoprint.plugin.BlueprintPlugin.route("/api/screen_wakeup", methods=["POST"])
     @Permissions.ADMIN.require(403)
     def set_screen_wakeup(self):
-        a = 10/0
         command = self._settings.get(['octodash', 'screenWakeupCommand'])
         try:
             subprocess.run(command, shell=True, check=True, timeout=10)
