@@ -616,6 +616,7 @@
       </trans-unit>
       <trans-unit id="screen-sleep-delay" datatype="html">
         <source>Screen sleep delay</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="show-action-center-icon" datatype="html">
         <source>Show icon for Action Center</source>
