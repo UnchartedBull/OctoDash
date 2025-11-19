@@ -4,41 +4,54 @@
   </app-top-bar>
 
   <div class="quick-control__controller">
-    <div class="quick-control__controller-row">
-      <div class="quick-control__controller-increase" (click)="changeValue(1)" matRipple [matRippleUnbounded]="false">
-        +1
+    <div class="quick-control__controller-column">
+      <div class="quick-control__controller-row">
+        <div class="quick-control__controller-increase" (click)="changeValue(1)" matRipple [matRippleUnbounded]="false">
+          +1
+        </div>
+        <div class="quick-control__controller-increase" (click)="changeValue(10)" matRipple [matRippleUnbounded]="false">
+          +10
+        </div>
       </div>
-      <div class="quick-control__controller-increase" (click)="changeValue(10)" matRipple [matRippleUnbounded]="false">
-        +10
-      </div>
-    </div>
 
-    <div
-      class="quick-control__controller-value"
-      colspan="2"
-      (click)="changeValue(-1000)"
-      matRipple
-      [matRippleUnbounded]="false">
-      {{ value }}<span class="quick-control__controller-value-unit">{{ unit }}</span>
-    </div>
-
-    <div class="quick-control__controller-row">
-      <div class="quick-control__controller-decrease" (click)="changeValue(-1)" matRipple [matRippleUnbounded]="false">
-        -1
-      </div>
-      <div class="quick-control__controller-decrease" (click)="changeValue(-10)" matRipple [matRippleUnbounded]="false">
-        -10
-      </div>
-    </div>
-
-    <div class="quick-control__controller-row">
       <div
-        class="quick-control__controller-set"
+        class="quick-control__controller-value"
         colspan="2"
-        (click)="setValue()"
+        (click)="changeValue(-1000)"
         matRipple
         [matRippleUnbounded]="false">
-        <span class="quick-control__controller-set-span">set</span>
+        {{ value }}<span class="quick-control__controller-value-unit">{{ unit }}</span>
+      </div>
+
+      <div class="quick-control__controller-row">
+        <div class="quick-control__controller-decrease" (click)="changeValue(-1)" matRipple [matRippleUnbounded]="false">
+          -1
+        </div>
+        <div class="quick-control__controller-decrease" (click)="changeValue(-10)" matRipple [matRippleUnbounded]="false">
+          -10
+        </div>
+      </div>
+
+      <div class="quick-control__controller-row">
+        <div
+          class="quick-control__controller-set"
+          colspan="2"
+          (click)="setValue()"
+          matRipple
+          [matRippleUnbounded]="false">
+          <span class="quick-control__controller-set-span">set</span>
+        </div>
+      </div>
+    </div>
+    <div class="quick-control__controller-column quick-control__controller-temps">
+      <div class="quick-control__controller-row">
+        0
+      </div>
+      <div class="quick-control__controller-row">
+        180 - PLA
+      </div>
+      <div class="quick-control__controller-row">
+        360 - ABS
       </div>
     </div>
   </div>

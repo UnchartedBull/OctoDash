@@ -6,11 +6,25 @@
   z-index: 10;
 
   &__controller {
-    width: 35vw;
+    width: 65vw;
     margin: 0 auto;
     border: solid 0.6vw;
     border-radius: 3vw;
     margin-top: 1.5vh;
+    display: flex;
+
+    &-temps {
+      border-left: solid 0.6vw;
+      display: flex;
+      flex-direction: column;
+
+      div {
+        padding: 1vh 2vw;
+        margin: 1vh 1vw;
+        border-bottom: solid 0.2vw;
+        text-align: center;
+      }
+    }
 
     &-row {
       display: flex;
