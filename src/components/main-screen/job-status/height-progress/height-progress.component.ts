@@ -19,7 +19,7 @@ export class HeightProgressComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.add(
       this.socketService.getJobStatusSubscribable().subscribe(jobStatus => {
-        this.height = jobStatus.zHeight;
+        this.height = jobStatus?.zHeight;
       }),
     );
   }
