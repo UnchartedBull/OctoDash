@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { TempOption } from '../../../model/temp-options.model';
+
 @Component({
   selector: 'app-quick-control',
   templateUrl: './quick-control.component.html',
@@ -15,6 +17,8 @@ export class QuickControlComponent implements OnInit {
   @Output() onSet = new EventEmitter<number>();
 
   public value: number;
+
+  @Input() public tempOptions: TempOption[];
 
   public ngOnInit() {
     this.value = this.defaultValue;

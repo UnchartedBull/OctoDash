@@ -44,14 +44,8 @@
       </div>
     </div>
     <div class="quick-control__controller-column quick-control__controller-temps">
-      <div class="quick-control__controller-row">
-        0
-      </div>
-      <div class="quick-control__controller-row">
-        180 - PLA
-      </div>
-      <div class="quick-control__controller-row">
-        360 - ABS
+      <div *ngFor="let temp of tempOptions" class="quick-control__controller-row">
+        {{ temp.value }}{{ unit}} - {{ temp.label }}
       </div>
     </div>
   </div>

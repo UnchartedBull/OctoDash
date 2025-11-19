@@ -66,6 +66,13 @@
     (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
   "
   [unit]="view === QuickControlView.FAN ? '%' : '°C'"
+  [tempOptions]="
+    view === QuickControlView.HOTEND
+      ? this.profileService.getHotendProfiles()
+      : view === QuickControlView.HEATBED
+        ? this.profileService.getBedProfiles()
+        : this.profileService.getFanProfiles()
+        "
   [defaultValue]="
     view === QuickControlView.HOTEND
       ? this.configService.getDefaultHotendTemperature()

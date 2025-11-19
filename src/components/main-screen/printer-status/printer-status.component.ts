@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ProfileService } from 'src/services/profile/profile.service';
 
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
@@ -29,6 +30,8 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public QuickControlView = QuickControlView;
   public view = QuickControlView.NONE;
+
+  public profileService: ProfileService = inject(ProfileService);
 
   public constructor(
     private printerService: PrinterService,
