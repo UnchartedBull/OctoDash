@@ -1,7 +1,7 @@
 <app-quick-control
-[icon]="'assets/nozzle.svg'"
+[icon]="'assets/heat-bed.svg'"
 [unit]="'°C'"
-[defaultValue]="this.configService.getDefaultHotendTemperature()"
+[defaultValue]="this.configService.getDefaultHeatbedTemperature()"
 [tempOptions]="options$ | async"
 (onBack)="this.onBack.emit()"
 (onSet)="this.onSet.emit($event)"
