@@ -29,6 +29,7 @@ import { PluginsComponent } from './setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { BedQuickControlComponent } from './shared/bed-quick-control-component/bed-quick-control.component';
+import { FanQuickControlComponent } from './shared/fan-quick-control-component-copy/fan-quick-control.component';
 import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
 import { HotendQuickControlComponent } from './shared/hotend-quick-control/hotend-quick-control.component';
 import { QuickControlComponent } from './shared/quick-control/quick-control.component';
@@ -76,4 +77,5 @@ export default [
   QuickControlComponent,
   HotendQuickControlComponent,
   BedQuickControlComponent,
+  FanQuickControlComponent,
 ];

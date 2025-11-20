@@ -70,27 +70,9 @@
   (onBack)="hideQuickControl()"
   (onSet)="quickControlSetValue($event)"
 ></app-bed-quick-control>
-<!-- <app-quick-control
+<app-fan-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.FAN"
-  [icon]="
-    'assets/' +
-    (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
-  "
-  [unit]="view === QuickControlView.FAN ? '%' : '°C'"
-  [tempOptions]="
-    view === QuickControlView.HOTEND
-      ? this.profileService.getHotendProfiles()
-      : view === QuickControlView.HEATBED
-        ? this.profileService.getBedProfiles()
-        : this.profileService.getFanProfiles()
-        "
-  [defaultValue]="
-    view === QuickControlView.HOTEND
-      ? this.configService.getDefaultHotendTemperature()
-      : view === QuickControlView.HEATBED
-        ? this.configService.getDefaultHeatbedTemperature()
-        : this.configService.getDefaultFanSpeed()
-  "
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"></app-quick-control> -->
+  (onSet)="quickControlSetValue($event)"
+></app-fan-quick-control>
