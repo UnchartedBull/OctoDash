@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ConfigService } from 'src/services/config.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 

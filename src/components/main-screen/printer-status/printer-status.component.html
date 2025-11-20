@@ -58,9 +58,21 @@
   </div>
 </div>
 
-<app-quick-control
+<app-hotend-quick-control
   id="quickControl"
-  *ngIf="view !== QuickControlView.NONE"
+  *ngIf="view === QuickControlView.HOTEND"
+  (onBack)="hideQuickControl()"
+  (onSet)="quickControlSetValue($event)"
+></app-hotend-quick-control>
+<app-bed-quick-control
+  id="quickControl"
+  *ngIf="view === QuickControlView.HEATBED"
+  (onBack)="hideQuickControl()"
+  (onSet)="quickControlSetValue($event)"
+></app-bed-quick-control>
+<!-- <app-quick-control
+  id="quickControl"
+  *ngIf="view === QuickControlView.FAN"
   [icon]="
     'assets/' +
     (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
@@ -81,4 +93,4 @@
         : this.configService.getDefaultFanSpeed()
   "
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"></app-quick-control>
+  (onSet)="quickControlSetValue($event)"></app-quick-control> -->
