@@ -119,7 +119,7 @@
   </div>
 
   <div class="control__tools">
-    <ngContainer *ngIf="!printerProfile.extruder.sharedNozzle">
+    <ngContainer *ngIf="!printerProfile?.extruder.sharedNozzle">
       <div
         class="control__tools__item"
         *ngFor="let tool of printerStatus.tools; index as i; trackBy: extruderTrackBy"
@@ -127,7 +127,7 @@
         (click)="selectedTool === i ? showQuickControlHotend(selectedTool) : setTool(i)"
         matRipple
         [matRippleUnbounded]="false">
-        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile.extruder.count > 1 ? i : -1" />
+        <app-hotend-icon class="control__tools__item-icon" [tool]="printerProfile?.extruder.count > 1 ? i : -1" />
         <div
           class="control__tools__item-value"
           [ngClass]="{
@@ -159,7 +159,7 @@
         </div>
       </div>
     </ngContainer>
-    <ngContainer *ngIf="printerProfile.extruder.sharedNozzle">
+    <ngContainer *ngIf="printerProfile?.extruder.sharedNozzle">
       <div class="control__tools__item" (click)="showQuickControlHotend(0)" matRipple [matRippleUnbounded]="false">
         <app-hotend-icon class="control__tools__item-icon" [tool]="-1" />
         <div
@@ -208,7 +208,13 @@
   </div>
 </div>
 
-<app-quick-control
+<app-hotend-quick-control
+  id="quickControl"
+  *ngIf="view === QuickControlView.HOTEND"
+  (onBack)="hideQuickControl()"
+  (onSet)="quickControlSetValue($event)"
+></app-hotend-quick-control>
+<!-- <app-quick-control
   id="quickControl"
   *ngIf="view !== QuickControlView.NONE"
   [icon]="
@@ -231,4 +237,4 @@
         : this.configService.getDefaultFanSpeed()
   "
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"></app-quick-control>
+  (onSet)="quickControlSetValue($event)"></app-quick-control> -->

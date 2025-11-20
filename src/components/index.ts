@@ -29,6 +29,7 @@ import { PluginsComponent } from './setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
 import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
+import { HotendQuickControlComponent } from './shared/hotend-quick-control/hotend-quick-control.component';
 import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
@@ -72,4 +73,5 @@ export default [
   StandbyComponent,
   UpdateComponent,
   QuickControlComponent,
+  HotendQuickControlComponent,
 ];
