@@ -61,6 +61,7 @@
 <app-hotend-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.HOTEND"
+  [toolIndex]="this.selectedHotend"
   (onBack)="hideQuickControl()"
 ></app-hotend-quick-control>
 <app-bed-quick-control
