@@ -62,17 +62,14 @@
   id="quickControl"
   *ngIf="view === QuickControlView.HOTEND"
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"
 ></app-hotend-quick-control>
 <app-bed-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.HEATBED"
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"
 ></app-bed-quick-control>
 <app-fan-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.FAN"
   (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"
 ></app-fan-quick-control>
