@@ -24,7 +24,7 @@ export class QuickControlComponent implements OnInit {
     this.value = this.defaultValue;
   }
 
-  public changeValue(value: number): void {
+  public changeValueDelta(value: number): void {
     this.value += value;
     if (this.value < -999) {
       this.value = this.defaultValue;
@@ -33,6 +33,10 @@ export class QuickControlComponent implements OnInit {
     } else if (this.value > 999) {
       this.value = 999;
     }
+  }
+
+  public changeValue(value: number): void {
+    this.value = value;
   }
 
   public setValue(): void {

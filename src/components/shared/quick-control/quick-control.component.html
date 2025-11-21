@@ -6,10 +6,10 @@
   <div class="quick-control__controller">
     <div class="quick-control__controller-column">
       <div class="quick-control__controller-row">
-        <div class="quick-control__controller-increase" (click)="changeValue(1)" matRipple [matRippleUnbounded]="false">
+        <div class="quick-control__controller-increase" (click)="changeValueDelta(1)" matRipple [matRippleUnbounded]="false">
           +1
         </div>
-        <div class="quick-control__controller-increase" (click)="changeValue(10)" matRipple [matRippleUnbounded]="false">
+        <div class="quick-control__controller-increase" (click)="changeValueDelta(10)" matRipple [matRippleUnbounded]="false">
           +10
         </div>
       </div>
@@ -24,10 +24,10 @@
       </div>
 
       <div class="quick-control__controller-row">
-        <div class="quick-control__controller-decrease" (click)="changeValue(-1)" matRipple [matRippleUnbounded]="false">
+        <div class="quick-control__controller-decrease" (click)="changeValueDelta(-1)" matRipple [matRippleUnbounded]="false">
           -1
         </div>
-        <div class="quick-control__controller-decrease" (click)="changeValue(-10)" matRipple [matRippleUnbounded]="false">
+        <div class="quick-control__controller-decrease" (click)="changeValueDelta(-10)" matRipple [matRippleUnbounded]="false">
           -10
         </div>
       </div>
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="quick-control__controller-column quick-control__controller-temps">
-      <div *ngFor="let temp of tempOptions" class="quick-control__controller-row">
+      <div *ngFor="let temp of tempOptions" (click)="changeValue(temp.value)" class="quick-control__controller-row">
         {{ temp.value }}{{ unit}} - {{ temp.label }}
       </div>
     </div>
