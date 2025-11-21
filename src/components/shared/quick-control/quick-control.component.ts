@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { TempOption } from '../../../model/temp-options.model';
+export interface Option {
+  value: number;
+  label: string;
+}
 
 @Component({
   selector: 'app-quick-control',
@@ -18,7 +21,7 @@ export class QuickControlComponent implements OnInit {
 
   public value: number;
 
-  @Input() public options: TempOption[];
+  @Input() public options: Option[];
 
   public ngOnInit() {
     this.value = this.defaultValue;

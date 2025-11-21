@@ -1,7 +1,10 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
+
+import { Option } from '../quick-control/quick-control.component';
 
 @Component({
   selector: 'app-hotend-quick-control',
@@ -13,7 +16,20 @@ export class HotendQuickControlComponent {
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
 
-  options$ = this.profileService.getHotendProfiles();
+  options$: Observable<Option[]> = this.profileService.getProfiles().pipe(
+    map(profiles =>
+      profiles.map(profile => ({
+        value: profile.extruder,
+        label: profile.name,
+      })),
+    ),
+    map(options => [
+      ...options,
+      { value: 0, label: 'Off' },
+      { value: this.configService.getDefaultHotendTemperature(), label: 'Default' },
+    ]),
+    map(options => options.sort((a, b) => a.value - b.value)),
+  );
   @Output() onBack: EventEmitter<void> = new EventEmitter<void>();
 
   onSet(value) {
