@@ -2,7 +2,7 @@
 [icon]="'assets/nozzle.svg'"
 [unit]="'°C'"
 [defaultValue]="this.configService.getDefaultHotendTemperature()"
-[tempOptions]="options$ | async"
+[options]="options$ | async"
 (onBack)="this.onBack.emit()"
 (onSet)="this.onSet($event)"
 ></app-quick-control>

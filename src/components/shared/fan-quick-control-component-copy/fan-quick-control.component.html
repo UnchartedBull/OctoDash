@@ -2,7 +2,7 @@
 [icon]="'assets/fan.svg'"
 [unit]="'%'"
 [defaultValue]="100"
-[tempOptions]="options$ | async"
+[options]="options$ | async"
 (onBack)="this.onBack.emit()"
 (onSet)="this.onSet($event)"
 ></app-quick-control>

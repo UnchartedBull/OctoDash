@@ -18,7 +18,7 @@ export class QuickControlComponent implements OnInit {
 
   public value: number;
 
-  @Input() public tempOptions: TempOption[];
+  @Input() public options: TempOption[];
 
   public ngOnInit() {
     this.value = this.defaultValue;

@@ -43,9 +43,9 @@
         </div>
       </div>
     </div>
-    <div class="quick-control__controller-column quick-control__controller-temps">
-      <div *ngFor="let temp of tempOptions" (click)="changeValue(temp.value)" class="quick-control__controller-row">
-        {{ temp.value }}{{ unit}} - {{ temp.label }}
+    <div class="quick-control__controller-column quick-control__controller-options">
+      <div *ngFor="let option of options" (click)="changeValue(option.value)" class="quick-control__controller-row">
+        {{ option.value }}{{ unit}} - {{ option.label }}
       </div>
     </div>
   </div>
