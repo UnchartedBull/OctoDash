@@ -7,6 +7,7 @@
 
   &__controller {
     width: 80vw;
+    height: 70vh;
     margin: 0 auto;
     border: solid 0.6vw;
     border-radius: 3vw;
@@ -17,12 +18,17 @@
       border-left: solid 0.6vw;
       display: flex;
       flex-direction: column;
+      flex: 1;
+      width: 100%;
+      overflow-y: scroll;
 
-      div {
+      > div {
         padding: 1vh 2vw;
         margin: 1vh 1vw;
         border-bottom: solid 0.2vw;
         text-align: center;
+        justify-content: space-between;
+        flex-shrink: 0;
       }
     }
 
