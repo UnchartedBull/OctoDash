@@ -1045,10 +1045,6 @@
         <source> Thanks for choosing OctoDash </source>
         <target> Tak, fordi du valgte OctoDash </target>
       </trans-unit>
-      <trans-unit id="7381239771227821218" datatype="html">
-        <source>Failed to load temp profiles</source>
-        <note>$$error-failed-to-load-profile-temps</note>
-      </trans-unit>
       <trans-unit id="ui-back" datatype="html">
         <source>back</source>
         <target>tilbage</target>
@@ -1298,6 +1294,11 @@
       <trans-unit id="error-printer-disconnect" datatype="html">
         <source>Can't disconnect Printer!</source>
         <target>Kan ikke afbryde printeren!</target>
+      </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <target></target>
+        <note>$$error-failed-to-load-profile-temps</note>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>

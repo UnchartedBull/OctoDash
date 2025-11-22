@@ -1681,18 +1681,6 @@
           <context context-type="linenumber">22,25</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7381239771227821218" datatype="html">
-        <source>Failed to load temp profiles</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/shared/bed-quick-control-component/bed-quick-control.component.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/shared/hotend-quick-control/hotend-quick-control.component.ts</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <note priority="1" from="description">$$error-failed-to-load-profile-temps</note>
-      </trans-unit>
       <trans-unit id="ui-back" datatype="html">
         <source>back</source>
         <context-group purpose="location">
@@ -2125,6 +2113,14 @@
           <context context-type="sourcefile">src/services/printer/printer.octoprint.service.ts</context>
           <context context-type="linenumber">217</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/services/profile/profile.service.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <note priority="1" from="description">$$error-failed-to-load-profile-temps</note>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
