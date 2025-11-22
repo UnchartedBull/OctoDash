@@ -212,15 +212,12 @@
   id="quickControl"
   *ngIf="view === QuickControlView.HOTEND"
   (onBack)="hideQuickControl()"
-  [toolIndex]="this.selectedTool"
-></app-hotend-quick-control>
+  [toolIndex]="this.selectedTool"></app-hotend-quick-control>
 <app-bed-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.HEATBED"
-  (onBack)="hideQuickControl()"
-></app-bed-quick-control>
+  (onBack)="hideQuickControl()"></app-bed-quick-control>
 <app-fan-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.FAN"
-  (onBack)="hideQuickControl()"
-></app-fan-quick-control>
+  (onBack)="hideQuickControl()"></app-fan-quick-control>

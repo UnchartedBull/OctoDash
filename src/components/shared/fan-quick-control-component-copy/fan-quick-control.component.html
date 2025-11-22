@@ -1,8 +1,7 @@
 <app-quick-control
-[icon]="'assets/fan.svg'"
-[unit]="'%'"
-[defaultValue]="100"
-[options]="options"
-(onBack)="this.onBack.emit()"
-(onSet)="this.onSet($event)"
-></app-quick-control>
+  [icon]="'assets/fan.svg'"
+  [unit]="'%'"
+  [defaultValue]="100"
+  [options]="options"
+  (onBack)="this.onBack.emit()"
+  (onSet)="this.onSet($event)"></app-quick-control>

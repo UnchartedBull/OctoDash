@@ -6,10 +6,18 @@
   <div class="quick-control__controller">
     <div class="quick-control__controller-column">
       <div class="quick-control__controller-row">
-        <div class="quick-control__controller-increase" (click)="changeValueDelta(1)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="quick-control__controller-increase"
+          (click)="changeValueDelta(1)"
+          matRipple
+          [matRippleUnbounded]="false">
           +1
         </div>
-        <div class="quick-control__controller-increase" (click)="changeValueDelta(10)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="quick-control__controller-increase"
+          (click)="changeValueDelta(10)"
+          matRipple
+          [matRippleUnbounded]="false">
           +10
         </div>
       </div>
@@ -24,10 +32,18 @@
       </div>
 
       <div class="quick-control__controller-row">
-        <div class="quick-control__controller-decrease" (click)="changeValueDelta(-1)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="quick-control__controller-decrease"
+          (click)="changeValueDelta(-1)"
+          matRipple
+          [matRippleUnbounded]="false">
           -1
         </div>
-        <div class="quick-control__controller-decrease" (click)="changeValueDelta(-10)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="quick-control__controller-decrease"
+          (click)="changeValueDelta(-10)"
+          matRipple
+          [matRippleUnbounded]="false">
           -10
         </div>
       </div>
@@ -45,10 +61,13 @@
     </div>
     <div class="quick-control__controller-column quick-control__controller-options">
       <div *ngIf="options === null">Loading options...</div>
-      <div *ngFor="let option of options"
-      matRipple [matRippleUnbounded]="false"
-       (click)="changeValue(option.value)" class="quick-control__controller-row">
-        <div>{{ option.value }}{{ unit}}</div>
+      <div
+        *ngFor="let option of options"
+        matRipple
+        [matRippleUnbounded]="false"
+        (click)="changeValue(option.value)"
+        class="quick-control__controller-row">
+        <div>{{ option.value }}{{ unit }}</div>
         <div>{{ option.label }}</div>
       </div>
     </div>
