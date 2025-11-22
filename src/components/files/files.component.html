@@ -63,7 +63,7 @@
         [matRippleUnbounded]="false"
         class="files__object"
         [ngClass]="[file.successful]">
-        <img [src]="file.thumbnail" class="files__icon" />
+        <img [src]="file.thumbnail$ | async" class="files__icon" />
         <div class="files__info">
           <span class="files__info-value">
             {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
@@ -88,7 +88,7 @@
     <span class="file__name">{{ fileDetail.name }}</span>
     <span class="file__directory">{{ fileDetail.path }}</span>
     <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
-    <img [src]="fileDetail.thumbnail" class="file__render" />
+    <img [src]="fileDetail.thumbnail$ | async" class="file__render" />
     <table class="file__details">
       <tr>
         <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>

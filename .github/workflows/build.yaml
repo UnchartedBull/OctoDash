@@ -119,7 +119,7 @@ jobs:
           name: build-${{ matrix.arch }}
           path: |
             package/*.deb
-            package/*.yaml
+            package/*.yml
 
   release:
     runs-on: ubuntu-latest
@@ -127,6 +127,8 @@ jobs:
     if: github.event_name == 'release'
     needs: package
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Download artifacts
         uses: actions/download-artifact@v5
         with:
@@ -134,4 +136,4 @@ jobs:
       - name: Upload release
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: gh release upload ${{ github.ref }} *.deb *.yaml *.yml
+        run: gh release upload ${{ github.ref }} *.deb *.yml

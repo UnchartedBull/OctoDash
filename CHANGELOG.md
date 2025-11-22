@@ -1,5 +1,36 @@
 # Changelog
 
+## [v2.6.4](https://github.com/UnchartedBull/OctoDash/tree/v2.6.4) (2025-10-26)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the position of the 'jog right' icon in control screen ([#5396](https://github.com/UnchartedBull/OctoDash/pull/5396))
+- Fix blinking on the hotend icon ([#5395](https://github.com/UnchartedBull/OctoDash/pull/5395))
+- Fix bug with selecting filament when not all tools have filament selected ([#5391](https://github.com/UnchartedBull/OctoDash/pull/5391))
+- The usual round of dependency updates
+
+## [v2.6.3](https://github.com/UnchartedBull/OctoDash/tree/v2.6.3) (2025-10-14)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the hotend temperature reporting on the print adjust screen ([#5385](https://github.com/UnchartedBull/OctoDash/pull/5385))
+- Properly close the action buttons when a custom action specifies to do so ([#5384](https://github.com/UnchartedBull/OctoDash/pull/5384))
+- The usual round of dependency updates
+
+## [v2.6.2](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2) (2025-09-30)
+
+Various fixes
+
+### Update Log
+
+- Fix support for Slicer Thumbnails 1.2.0 ([#5361](https://github.com/UnchartedBull/OctoDash/pull/5361))
+- Fix bug with actions without gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
+- Fix bug with PSU Control plugin ([#5332](https://github.com/UnchartedBull/OctoDash/pull/5332))
+
 ## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.1) (2025-09-04)
 
 > [!IMPORTANT]
