@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
+import { NotificationService } from 'src/services/notification.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 
@@ -15,6 +16,7 @@ export class HotendQuickControlComponent {
   public configService = inject(ConfigService);
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
+  public notificationService = inject(NotificationService);
 
   @Input() toolIndex = 0;
 
@@ -27,6 +29,13 @@ export class HotendQuickControlComponent {
         label: profile.name,
       })),
     ),
+    catchError(error => {
+      this.notificationService.error(
+        $localize`:$$error-failed-to-load-profile-temps:Failed to load temp profiles`,
+        error.message,
+      );
+      return of([]);
+    }),
     map(options => [
       ...options,
       { value: 0, label: 'Off' },

@@ -44,6 +44,7 @@
       </div>
     </div>
     <div class="quick-control__controller-column quick-control__controller-options">
+      <div *ngIf="options === null">Loading options...</div>
       <div *ngFor="let option of options" (click)="changeValue(option.value)" class="quick-control__controller-row">
         <div>{{ option.value }}{{ unit}}</div>
         <div>{{ option.label }}</div>

@@ -21,7 +21,9 @@ export class QuickControlComponent implements OnInit {
 
   public value: number;
 
-  @Input() public options: Option[];
+  // Options for the quick control
+  // If null, a loading state is shown
+  @Input() public options: Option[] | null;
 
   public ngOnInit() {
     this.value = this.defaultValue;
