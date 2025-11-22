@@ -1022,6 +1022,10 @@
         <source> Thanks for choosing OctoDash </source>
         <target> Danke, dass du dich für OctoDash entschieden hast </target>
       </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <note>$$error-failed-to-load-profile-temps</note>
+      </trans-unit>
       <trans-unit id="ui-back" datatype="html">
         <source>back</source>
         <target>zurück</target>

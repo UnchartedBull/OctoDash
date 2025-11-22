@@ -139,7 +139,7 @@
         <source>Can&apos;t retrieve printer profile!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/control/control.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
@@ -1680,6 +1680,18 @@
           <context context-type="sourcefile">src/components/setup/welcome/welcome.component.html</context>
           <context context-type="linenumber">22,25</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/shared/bed-quick-control-component/bed-quick-control.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/shared/hotend-quick-control/hotend-quick-control.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="description">$$error-failed-to-load-profile-temps</note>
       </trans-unit>
       <trans-unit id="ui-back" datatype="html">
         <source>back</source>
