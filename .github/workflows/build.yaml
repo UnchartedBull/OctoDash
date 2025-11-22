@@ -121,11 +121,21 @@ jobs:
             package/*.deb
             package/*.yml
 
+  merge-builds:
+    runs-on: ubuntu-latest
+    needs: package
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build
+          pattern: build-*
+
   release:
     runs-on: ubuntu-latest
 
     if: github.event_name == 'release'
-    needs: package
+    needs: merge-builds
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
