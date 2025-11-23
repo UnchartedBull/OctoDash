@@ -220,18 +220,4 @@
   </div>
 </div>
 
-<app-value-picker-modal
-  *ngIf="quickControlService.view !== QuickControlView.NONE"
-  (onBack)="quickControlService.hideQuickControl()"
-  [icon]="quickControlService.getIconForView(quickControlService.view)">
-  <app-hotend-quick-control
-    id="quickControl"
-    *ngIf="quickControlService.view === QuickControlView.HOTEND"
-    [toolIndex]="this.selectedTool"></app-hotend-quick-control>
-  <app-bed-quick-control
-    id="quickControl"
-    *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
-  <app-fan-quick-control
-    id="quickControl"
-    *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
-</app-value-picker-modal>
+<app-value-picker-modal/>

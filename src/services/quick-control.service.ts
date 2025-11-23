@@ -14,8 +14,8 @@ export class QuickControlService {
   view = QuickControlView.NONE;
   selectedHotend = 0;
 
-  public getIconForView(view: QuickControlView): string {
-    switch (view) {
+  public getIconForView(): string {
+    switch (this.view) {
       case QuickControlView.HOTEND:
         return 'assets/nozzle.svg';
       case QuickControlView.HEATBED:
@@ -25,6 +25,10 @@ export class QuickControlService {
       default:
         return '';
     }
+  }
+
+  public isVisible(): boolean {
+    return this.view !== QuickControlView.NONE;
   }
 
   public showQuickControlHotend(tool: number): void {
