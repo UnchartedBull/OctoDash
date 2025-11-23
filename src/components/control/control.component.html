@@ -143,7 +143,11 @@
       </div>
 
       <div class="control__tools__bottom">
-        <div class="control__tools__item" (click)="quickControlService.showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+        <div
+          class="control__tools__item"
+          (click)="quickControlService.showQuickControlHeatbed()"
+          matRipple
+          [matRippleUnbounded]="false">
           <!-- XXX: Add functionality (split quick control out into its own component) -->
           <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
           <div
@@ -160,7 +164,11 @@
       </div>
     </ngContainer>
     <ngContainer *ngIf="printerProfile?.extruder.sharedNozzle">
-      <div class="control__tools__item" (click)="quickControlService.showQuickControlHotend(0)" matRipple [matRippleUnbounded]="false">
+      <div
+        class="control__tools__item"
+        (click)="quickControlService.showQuickControlHotend(0)"
+        matRipple
+        [matRippleUnbounded]="false">
         <app-hotend-icon class="control__tools__item-icon" [tool]="-1" />
         <div
           class="control__tools__item-value"
@@ -189,7 +197,11 @@
       </div>
 
       <div class="control__tools__bottom">
-        <div class="control__tools__item" (click)="quickControlService.showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+        <div
+          class="control__tools__item"
+          (click)="quickControlService.showQuickControlHeatbed()"
+          matRipple
+          [matRippleUnbounded]="false">
           <!-- XXX: Add functionality (split quick control out into its own component) -->
           <img class="control__tools__item-icon" src="assets/heat-bed.svg" />
           <div
@@ -209,20 +221,17 @@
 </div>
 
 <app-value-picker-modal
-*ngIf="quickControlService.view !== QuickControlView.NONE"
-(onBack)="quickControlService.hideQuickControl()"
-[icon]="quickControlService.getIconForView(quickControlService.view)">
-<app-hotend-quick-control
-  id="quickControl"
-  *ngIf="quickControlService.view === QuickControlView.HOTEND"
-  [toolIndex]="this.selectedTool"></app-hotend-quick-control>
-<app-bed-quick-control
-  id="quickControl"
-  *ngIf="quickControlService.view === QuickControlView.HEATBED"
-  ></app-bed-quick-control>
-<app-fan-quick-control
-  id="quickControl"
-  *ngIf="quickControlService.view === QuickControlView.FAN"
-  ></app-fan-quick-control>
-
+  *ngIf="quickControlService.view !== QuickControlView.NONE"
+  (onBack)="quickControlService.hideQuickControl()"
+  [icon]="quickControlService.getIconForView(quickControlService.view)">
+  <app-hotend-quick-control
+    id="quickControl"
+    *ngIf="quickControlService.view === QuickControlView.HOTEND"
+    [toolIndex]="this.selectedTool"></app-hotend-quick-control>
+  <app-bed-quick-control
+    id="quickControl"
+    *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
+  <app-fan-quick-control
+    id="quickControl"
+    *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
 </app-value-picker-modal>

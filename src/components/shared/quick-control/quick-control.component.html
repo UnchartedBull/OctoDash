@@ -1,55 +1,25 @@
 <div class="quick-control">
   <div class="quick-control-column">
     <div class="quick-control-row">
-      <div
-        class="quick-control-increase"
-        (click)="changeValueDelta(1)"
-        matRipple
-        [matRippleUnbounded]="false">
-        +1
-      </div>
-      <div
-        class="quick-control-increase"
-        (click)="changeValueDelta(10)"
-        matRipple
-        [matRippleUnbounded]="false">
+      <div class="quick-control-increase" (click)="changeValueDelta(1)" matRipple [matRippleUnbounded]="false">+1</div>
+      <div class="quick-control-increase" (click)="changeValueDelta(10)" matRipple [matRippleUnbounded]="false">
         +10
       </div>
     </div>
 
-    <div
-      class="quick-control-value"
-      colspan="2"
-      (click)="changeValue(-1000)"
-      matRipple
-      [matRippleUnbounded]="false">
+    <div class="quick-control-value" colspan="2" (click)="changeValue(-1000)" matRipple [matRippleUnbounded]="false">
       {{ value }}<span class="quick-control-value-unit">{{ unit }}</span>
     </div>
 
     <div class="quick-control-row">
-      <div
-        class="quick-control-decrease"
-        (click)="changeValueDelta(-1)"
-        matRipple
-        [matRippleUnbounded]="false">
-        -1
-      </div>
-      <div
-        class="quick-control-decrease"
-        (click)="changeValueDelta(-10)"
-        matRipple
-        [matRippleUnbounded]="false">
+      <div class="quick-control-decrease" (click)="changeValueDelta(-1)" matRipple [matRippleUnbounded]="false">-1</div>
+      <div class="quick-control-decrease" (click)="changeValueDelta(-10)" matRipple [matRippleUnbounded]="false">
         -10
       </div>
     </div>
 
     <div class="quick-control-row">
-      <div
-        class="quick-control-set"
-        colspan="2"
-        (click)="setValue()"
-        matRipple
-        [matRippleUnbounded]="false">
+      <div class="quick-control-set" colspan="2" (click)="setValue()" matRipple [matRippleUnbounded]="false">
         <span class="quick-control-set-span">set</span>
       </div>
     </div>
