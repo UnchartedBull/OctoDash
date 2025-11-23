@@ -1,7 +1,0 @@
-<app-quick-control
-  [icon]="'assets/heat-bed.svg'"
-  [unit]="'°C'"
-  [defaultValue]="this.configService.getDefaultHeatbedTemperature()"
-  [options]="options$ | async"
-  (onBack)="this.onBack.emit()"
-  (onSet)="onSet($event)"></app-quick-control>

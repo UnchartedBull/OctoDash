@@ -1,23 +1,28 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { of } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 
+import { BaseQuickControlComponent } from '../smart-quick-control-component/base-quick-control.component';
+
 @Component({
   selector: 'app-fan-quick-control',
-  templateUrl: './fan-quick-control.component.html',
+  templateUrl: '../smart-quick-control-component/base-quick-control.component.html',
   standalone: false,
 })
-export class FanQuickControlComponent {
+export class FanQuickControlComponent extends BaseQuickControlComponent {
   public configService = inject(ConfigService);
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
 
-  options = [
+  unit = '%';
+  options$ = of([
     { value: 0, label: 'Off' },
     { value: this.configService.getDefaultFanSpeed(), label: 'On' },
-  ];
-  onSet(value) {
+  ]);
+  defaultValue = this.configService.getDefaultFanSpeed();
+  publishValue(value) {
     this.printerService.setFanSpeed(value);
   }
 

@@ -1,0 +1,6 @@
+<app-quick-control
+  [unit]="unit"
+  [defaultValue]="defaultValue"
+  [options]="options$ | async"
+  (onBack)="this.onBack.emit()"
+  (onSet)="onChange($event)"></app-quick-control>
