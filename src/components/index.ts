@@ -33,9 +33,9 @@ import { FanQuickControlComponent } from './shared/fan-quick-control-component-c
 import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
 import { HotendQuickControlComponent } from './shared/hotend-quick-control/hotend-quick-control.component';
 import { QuickControlComponent } from './shared/quick-control/quick-control.component';
+import { QuickControlModalComponent } from './shared/quick-control-modal-component/quick-control-modal.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
-import { ValuePickerModalComponent } from './shared/value-picker-modal/value-picker-modal.component';
 import { StandbyComponent } from './standby/standby.component';
 import { UpdateComponent } from './update/update.component';
 
@@ -79,5 +79,5 @@ export default [
   HotendQuickControlComponent,
   BedQuickControlComponent,
   FanQuickControlComponent,
-  ValuePickerModalComponent,
+  QuickControlModalComponent,
 ];
