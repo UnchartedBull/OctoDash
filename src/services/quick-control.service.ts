@@ -11,6 +11,9 @@ export enum QuickControlView {
   providedIn: 'root',
 })
 export class QuickControlService {
+  view = QuickControlView.NONE;
+  selectedHotend = 0;
+
   public getIconForView(view: QuickControlView): string {
     switch (view) {
       case QuickControlView.HOTEND:
@@ -22,5 +25,22 @@ export class QuickControlService {
       default:
         return '';
     }
+  }
+
+  public showQuickControlHotend(tool: number): void {
+    this.view = QuickControlView.HOTEND;
+    this.selectedHotend = tool;
+  }
+
+  public showQuickControlHeatbed(): void {
+    this.view = QuickControlView.HEATBED;
+  }
+
+  public showQuickControlFan(): void {
+    this.view = QuickControlView.FAN;
+  }
+
+  public hideQuickControl(): void {
+    this.view = QuickControlView.NONE;
   }
 }

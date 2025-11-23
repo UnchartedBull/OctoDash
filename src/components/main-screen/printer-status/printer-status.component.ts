@@ -28,7 +28,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public sharedNozzle: boolean;
 
   public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+  // public view = QuickControlView.NONE;
 
   public profileService: ProfileService = inject(ProfileService);
   public quickControlService: QuickControlService = inject(QuickControlService);
@@ -53,39 +53,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  public showQuickControlHotend(tool: number): void {
-    this.view = QuickControlView.HOTEND;
-    this.selectedHotend = tool;
-  }
-
-  public showQuickControlHeatbed(): void {
-    this.view = QuickControlView.HEATBED;
-  }
-
-  public showQuickControlFan(): void {
-    this.view = QuickControlView.FAN;
-  }
-
-  public hideQuickControl(): void {
-    this.view = QuickControlView.NONE;
-  }
-
-  public quickControlSetValue(value: number): void {
-    switch (this.view) {
-      case QuickControlView.HOTEND:
-        this.printerService.setTemperatureHotend(value, this.selectedHotend);
-        break;
-      case QuickControlView.HEATBED:
-        this.printerService.setTemperatureBed(value);
-        break;
-      case QuickControlView.FAN:
-        this.printerService.setFanSpeed(value);
-        break;
-    }
-
-    this.hideQuickControl();
   }
 
   public extruderTrackBy(index: number) {
