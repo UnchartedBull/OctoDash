@@ -12,7 +12,6 @@ export interface Option {
   standalone: false,
 })
 export class QuickControlComponent implements OnInit {
-  @Input() icon: string;
   @Input() unit: string;
   @Input() defaultValue: number;
 
