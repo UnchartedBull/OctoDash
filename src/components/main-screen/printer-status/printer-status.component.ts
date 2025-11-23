@@ -1,10 +1,9 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/services/profile/profile.service';
+import { QuickControlService, QuickControlView } from 'src/services/quick-control.service';
 
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
-import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 
@@ -32,12 +31,11 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public view = QuickControlView.NONE;
 
   public profileService: ProfileService = inject(ProfileService);
+  public quickControlService: QuickControlService = inject(QuickControlService);
 
   public constructor(
     private printerService: PrinterService,
-    private configService: ConfigService,
     private socketService: SocketService,
-    private router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -95,11 +93,4 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     // The number of tools is not likely to change
     return index;
   }
-}
-
-enum QuickControlView {
-  NONE,
-  HOTEND,
-  HEATBED,
-  FAN,
 }

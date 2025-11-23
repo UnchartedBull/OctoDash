@@ -210,7 +210,8 @@
 
 <app-value-picker-modal
 *ngIf="view !== QuickControlView.NONE"
-(onBack)="hideQuickControl()">
+(onBack)="hideQuickControl()"
+[icon]="quickControlService.getIconForView(view)">
 <app-hotend-quick-control
   id="quickControl"
   *ngIf="view === QuickControlView.HOTEND"
