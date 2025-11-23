@@ -1,75 +1,69 @@
 <div class="quick-control">
-  <app-top-bar [backButton]="true" (onBack)="onBack.emit()">
-    <img [src]="icon" class="top-bar__center-icon" />
-  </app-top-bar>
-
-  <div class="quick-control__controller">
-    <div class="quick-control__controller-column">
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-increase"
-          (click)="changeValueDelta(1)"
-          matRipple
-          [matRippleUnbounded]="false">
-          +1
-        </div>
-        <div
-          class="quick-control__controller-increase"
-          (click)="changeValueDelta(10)"
-          matRipple
-          [matRippleUnbounded]="false">
-          +10
-        </div>
-      </div>
-
+  <div class="quick-control-column">
+    <div class="quick-control-row">
       <div
-        class="quick-control__controller-value"
-        colspan="2"
-        (click)="changeValue(-1000)"
+        class="quick-control-increase"
+        (click)="changeValueDelta(1)"
         matRipple
         [matRippleUnbounded]="false">
-        {{ value }}<span class="quick-control__controller-value-unit">{{ unit }}</span>
+        +1
       </div>
-
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-decrease"
-          (click)="changeValueDelta(-1)"
-          matRipple
-          [matRippleUnbounded]="false">
-          -1
-        </div>
-        <div
-          class="quick-control__controller-decrease"
-          (click)="changeValueDelta(-10)"
-          matRipple
-          [matRippleUnbounded]="false">
-          -10
-        </div>
-      </div>
-
-      <div class="quick-control__controller-row">
-        <div
-          class="quick-control__controller-set"
-          colspan="2"
-          (click)="setValue()"
-          matRipple
-          [matRippleUnbounded]="false">
-          <span class="quick-control__controller-set-span">set</span>
-        </div>
+      <div
+        class="quick-control-increase"
+        (click)="changeValueDelta(10)"
+        matRipple
+        [matRippleUnbounded]="false">
+        +10
       </div>
     </div>
-    <div class="quick-control__controller-column quick-control__controller-options">
-      <div *ngIf="options === null">Loading options...</div>
+
+    <div
+      class="quick-control-value"
+      colspan="2"
+      (click)="changeValue(-1000)"
+      matRipple
+      [matRippleUnbounded]="false">
+      {{ value }}<span class="quick-control-value-unit">{{ unit }}</span>
+    </div>
+
+    <div class="quick-control-row">
       <div
-        *ngFor="let option of options"
+        class="quick-control-decrease"
+        (click)="changeValueDelta(-1)"
         matRipple
-        [matRippleUnbounded]="false"
-        (click)="changeValue(option.value)"
-        class="quick-control__controller-row">
-        <div>{{ option.value }}{{ unit }}</div>
-        <div>{{ option.label }}</div>
+        [matRippleUnbounded]="false">
+        -1
       </div>
+      <div
+        class="quick-control-decrease"
+        (click)="changeValueDelta(-10)"
+        matRipple
+        [matRippleUnbounded]="false">
+        -10
+      </div>
+    </div>
+
+    <div class="quick-control-row">
+      <div
+        class="quick-control-set"
+        colspan="2"
+        (click)="setValue()"
+        matRipple
+        [matRippleUnbounded]="false">
+        <span class="quick-control-set-span">set</span>
+      </div>
+    </div>
+  </div>
+  <div class="quick-control-column quick-control-options">
+    <div *ngIf="options === null">Loading options...</div>
+    <div
+      *ngFor="let option of options"
+      matRipple
+      [matRippleUnbounded]="false"
+      (click)="changeValue(option.value)"
+      class="quick-control-row">
+      <div>{{ option.value }}{{ unit }}</div>
+      <div>{{ option.label }}</div>
     </div>
   </div>
 </div>

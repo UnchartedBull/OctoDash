@@ -1,0 +1,8 @@
+<div class="value-picker-modal">
+  <app-top-bar [backButton]="true" (onBack)="onBack.emit()">
+    <img [src]="icon" class="top-bar__center-icon" />
+  </app-top-bar>
+
+  <ng-content/>
+
+</div>
