@@ -13,6 +13,6 @@ updates:
         applies-to: version-updates
         update-types:
           - minor
-          - spatch
+          - patch
         patterns:
           - '@angular*'
