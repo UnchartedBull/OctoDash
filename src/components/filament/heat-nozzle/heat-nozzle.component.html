@@ -22,7 +22,7 @@
       </div>
     </div>
   </div> -->
-  <app-hotend-quick-control ></app-hotend-quick-control>
+  <app-hotend-quick-control (onBack)="setNozzleTemperature()" ></app-hotend-quick-control>
   <!-- <div class="heating__information" *ngIf="selectedSpool">
     <div class="heating__information-type">
       <span
