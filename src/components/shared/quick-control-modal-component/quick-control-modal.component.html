@@ -6,14 +6,14 @@
   <app-hotend-quick-control
     id="quickControl"
     *ngIf="quickControlService.view === QuickControlView.HOTEND"
-    (onSet)="onBack()"
+    (onBack)="onBack()"
     [toolIndex]="quickControlService.selectedHotend"></app-hotend-quick-control>
   <app-bed-quick-control
     id="quickControl"
-    (onSet)="onBack()"
+    (onBack)="onBack()"
     *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
   <app-fan-quick-control
     id="quickControl"
-    (onSet)="onBack()"
+    (onBack)="onBack()"
     *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
 </div>

@@ -13,7 +13,7 @@ export abstract class BaseQuickControlComponent {
   abstract defaultValue: number;
   abstract options$: Observable<Option[]>;
 
-  @Output() onBack: EventEmitter<void>;
+  @Output() onBack = new EventEmitter<void>();
 
   abstract publishValue(value: number): void;
 
