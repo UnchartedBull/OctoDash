@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/dependabot.yml'
-      - '.github/workflows/dependabot-validate.yaml'
+      - '.github/workflows/dependabot-validator.yaml'
 jobs:
   validate:
     runs-on: ubuntu-latest
