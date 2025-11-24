@@ -1,6 +1,6 @@
 <span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle for tool {{ selectedTool }}</span>
 <div class="heating__center">
-  <div class="heating__controller">
+  <!-- <div class="heating__controller">
     <div class="heating__controller-row">
       <div class="heating__controller-control" (click)="changeHotendTarget(1)" matRipple [matRippleUnbounded]="false">
         +1
@@ -21,8 +21,9 @@
         -10
       </div>
     </div>
-  </div>
-  <div class="heating__information" *ngIf="selectedSpool">
+  </div> -->
+  <app-hotend-quick-control ></app-hotend-quick-control>
+  <!-- <div class="heating__information" *ngIf="selectedSpool">
     <div class="heating__information-type">
       <span
         class="heating__information-type-box"
@@ -38,7 +39,7 @@
         }}<span class="heating__information-offset-indicator">°C</span>
       </span>
     </div>
-  </div>
+  </div> -->
 </div>
 <div class="heating__start-wrapper" *ngIf="!isHeating">
   <span>

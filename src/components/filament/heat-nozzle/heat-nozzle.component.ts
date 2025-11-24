@@ -38,7 +38,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isHeating = false;
     this.isComplete = false;
-    this.automaticHeatingStartSeconds = 6;
+    this.automaticHeatingStartSeconds = 600;
     this.automaticHeatingStartTimer();
     this.hotendTarget = this.currentSpool
       ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
