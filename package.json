@@ -86,7 +86,7 @@
     "@angular/compiler": "^20.3.12",
     "@angular/core": "^20.3.12",
     "@angular/forms": "^20.3.12",
-    "@angular/localize": "^20.3.12",
+    "@angular/localize": "^21.0.0",
     "@angular/material": "^20.2.13",
     "@angular/platform-browser": "^20.3.12",
     "@angular/platform-browser-dynamic": "^20.3.12",
