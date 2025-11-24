@@ -10,7 +10,7 @@ updates:
       - dependencies
     groups:
       angular:
-        applies-to: version-updates
+        pplies-to: version-updates
         update-types:
           - minor
           - patch
