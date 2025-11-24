@@ -88,7 +88,7 @@
     "@angular/forms": "^20.3.12",
     "@angular/localize": "^20.3.12",
     "@angular/material": "^20.2.13",
-    "@angular/platform-browser": "^20.3.12",
+    "@angular/platform-browser": "^21.0.0",
     "@angular/platform-browser-dynamic": "^20.3.12",
     "@angular/router": "^20.3.12",
     "@fortawesome/angular-fontawesome": "~3.0.0",
