@@ -23,25 +23,25 @@
         </div>
       </div>
     </div>
-    <div class="heating__information" *ngIf="selectedSpool">
-      <div class="heating__information-type">
-        <span
-          class="heating__information-type-box"
-          [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
-          >{{ selectedSpool.material }}</span
-        >
-      </div>
-      <span class="heating__information-name">{{ selectedSpool.name }}</span>
-      <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
-      <div class="heating__information-offset-wrapper">
-        <span class="heating__information-offset-value">
-          {{ getSpoolTemperatureOffsetString(selectedSpool)
-          }}<span class="heating__information-offset-indicator">°C</span>
-        </span>
-      </div>
-    </div>
   </ng-container>
   <app-hotend-quick-control *ngIf="!isHeating" (onBack)="start($event)" ></app-hotend-quick-control>
+  <div class="heating__information" *ngIf="selectedSpool">
+    <div class="heating__information-type">
+      <span
+        class="heating__information-type-box"
+        [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
+        >{{ selectedSpool.material }}</span
+      >
+    </div>
+    <span class="heating__information-name">{{ selectedSpool.name }}</span>
+    <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
+    <div class="heating__information-offset-wrapper">
+      <span class="heating__information-offset-value">
+        {{ getSpoolTemperatureOffsetString(selectedSpool)
+        }}<span class="heating__information-offset-indicator">°C</span>
+      </span>
+    </div>
+  </div>
 </div>
 <div class="heating__start-wrapper" *ngIf="!isHeating">
   <span>

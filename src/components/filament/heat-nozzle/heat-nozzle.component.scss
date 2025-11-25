@@ -1,6 +1,8 @@
 .heating {
   &__center {
     text-align: center;
+    display: flex;
+    justify-content: space-around;
   }
 
   &__information {
@@ -8,12 +10,10 @@
     width: 27vw;
     font-size: 0.65rem;
     text-align: left;
-    margin-left: 7vw;
     line-height: 1rem;
     overflow: visible;
     vertical-align: top;
     margin-top: 3.5vh;
-    margin-right: -5vw;
 
     &-type {
       padding-top: 5vh;
@@ -147,4 +147,8 @@
       box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
     }
   }
+}
+
+app-hotend-quick-control {
+  display: block;
 }

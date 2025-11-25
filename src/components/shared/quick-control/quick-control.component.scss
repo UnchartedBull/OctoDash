@@ -1,5 +1,5 @@
 .quick-control {
-  width: 80vw;
+  width: 65vw;
   height: 70vh;
   margin: 0 auto;
   border: solid 0.6vw;
@@ -30,7 +30,7 @@
   }
 
   &-value {
-    padding: 1vh 6vw;
+    padding: 1vh 3vw;
     font-size: 8vw;
     font-weight: 500;
     text-align: center;
@@ -43,13 +43,13 @@
   }
 
   &-increase {
-    padding: 2vh 6vw;
+    padding: 2vh 3vw;
     font-weight: 500;
     flex: 1;
   }
 
   &-decrease {
-    padding: 2vh 6vw;
+    padding: 2vh 3vw;
     font-weight: 500;
     flex: 1;
   }
