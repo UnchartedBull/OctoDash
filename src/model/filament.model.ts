@@ -14,4 +14,5 @@ export interface FilamentSpool {
   vendor: string;
   diameter: number;
   density: number;
+  tool: number;
 }
