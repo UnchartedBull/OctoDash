@@ -80,6 +80,11 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
     }
   }
 
+  public start(temp: number): void {
+    this.hotendTarget = temp;
+    this.setNozzleTemperature();
+  }
+
   public setNozzleTemperature(): void {
     this.isHeating = true;
     this.clearTimeouts();
