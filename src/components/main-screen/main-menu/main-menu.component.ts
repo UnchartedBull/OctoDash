@@ -11,7 +11,7 @@ export class MainMenuComponent implements OnDestroy {
   public interval;
 
   public constructor() {
-    this.interval = setInterval(() => (this.now = Date.now()), 1);
+    this.interval = setInterval(() => (this.now = Date.now()), 1000);
   }
 
   public ngOnDestroy(): void {
