@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { of } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
@@ -25,6 +25,4 @@ export class FanQuickControlComponent extends BaseQuickControlComponent {
   publishValue(value) {
     this.printerService.setFanSpeed(value);
   }
-
-  @Output() onBack: EventEmitter<void> = new EventEmitter<void>();
 }
