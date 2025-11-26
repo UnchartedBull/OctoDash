@@ -3,17 +3,19 @@
     <img [src]="icon" class="top-bar__center-icon" />
   </app-top-bar>
 
-  <app-hotend-quick-control
-    id="quickControl"
-    *ngIf="quickControlService.view === QuickControlView.HOTEND"
-    (onBack)="onBack()"
-    [toolIndex]="quickControlService.selectedHotend"></app-hotend-quick-control>
-  <app-bed-quick-control
-    id="quickControl"
-    (onBack)="onBack()"
-    *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
-  <app-fan-quick-control
-    id="quickControl"
-    (onBack)="onBack()"
-    *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
+  <div class="control-wrapper">
+    <app-hotend-quick-control
+      id="quickControl"
+      *ngIf="quickControlService.view === QuickControlView.HOTEND"
+      (onBack)="onBack()"
+      [toolIndex]="quickControlService.selectedHotend"></app-hotend-quick-control>
+    <app-bed-quick-control
+      id="quickControl"
+      (onBack)="onBack()"
+      *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
+    <app-fan-quick-control
+      id="quickControl"
+      (onBack)="onBack()"
+      *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
+  </div>
 </div>
