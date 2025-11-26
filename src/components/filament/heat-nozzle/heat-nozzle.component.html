@@ -1,12 +1,16 @@
 <span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle for tool {{ selectedTool }}</span>
 <div class="heating__center">
-  <ng-container *ngIf="isHeating"  >
+  <ng-container *ngIf="isHeating">
     <div class="heating__controller">
       <div class="heating__controller-row">
         <div class="heating__controller-control" (click)="changeHotendTarget(1)" matRipple [matRippleUnbounded]="false">
           +1
         </div>
-        <div class="heating__controller-control" (click)="changeHotendTarget(10)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(10)"
+          matRipple
+          [matRippleUnbounded]="false">
           +10
         </div>
       </div>
@@ -15,16 +19,24 @@
         <span class="heating__controller-current" *ngIf="isHeating"> /{{ hotendTarget }}<span>°C</span> </span>
       </div>
       <div class="heating__controller-row">
-        <div class="heating__controller-control" (click)="changeHotendTarget(-1)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(-1)"
+          matRipple
+          [matRippleUnbounded]="false">
           -1
         </div>
-        <div class="heating__controller-control" (click)="changeHotendTarget(-10)" matRipple [matRippleUnbounded]="false">
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(-10)"
+          matRipple
+          [matRippleUnbounded]="false">
           -10
         </div>
       </div>
     </div>
   </ng-container>
-  <app-hotend-quick-control *ngIf="!isHeating" (onBack)="start($event)" ></app-hotend-quick-control>
+  <app-hotend-quick-control *ngIf="!isHeating" (onBack)="start($event)"></app-hotend-quick-control>
   <div>
     <div class="heating__information" *ngIf="selectedSpool">
       <div class="heating__information-type">

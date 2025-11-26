@@ -1,13 +1,14 @@
 :host {
   display: block;
 }
+
 .quick-control {
   width: 65vw;
   height: 100%;
   margin: 0 auto;
   border: solid 0.6vw;
   border-radius: 3vw;
-  // margin-top: 1.5vh;
+
   display: flex;
 
   &-options {
