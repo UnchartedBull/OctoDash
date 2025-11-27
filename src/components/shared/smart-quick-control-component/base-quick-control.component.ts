@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 import { Option } from '../quick-control/quick-control.component';
 
@@ -13,7 +13,7 @@ export abstract class BaseQuickControlComponent implements OnInit {
   abstract defaultValue: number;
   abstract options$: Observable<Option[]>;
 
-  filteredOptions$: Observable<Option[]>;
+  filteredOptions$: Observable<Option[]> = of([]);
 
   ngOnInit() {
     this.filteredOptions$ = this.options$.pipe(
