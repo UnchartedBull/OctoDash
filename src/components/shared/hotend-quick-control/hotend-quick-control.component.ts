@@ -1,10 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 
-import { Option } from '../quick-control/quick-control.component';
 import { BaseQuickControlComponent } from '../smart-quick-control-component/base-quick-control.component';
 
 @Component({
