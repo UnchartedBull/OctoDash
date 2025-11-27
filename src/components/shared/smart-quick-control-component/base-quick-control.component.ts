@@ -11,11 +11,12 @@ import { Option } from '../quick-control/quick-control.component';
 export abstract class BaseQuickControlComponent implements OnInit {
   abstract unit: string;
   abstract defaultValue: number;
-  // abstract options$: Observable<Option[]>;
+  abstract options$: Observable<Option[]>;
 
   filteredOptions$: Observable<Option[]>;
+
   ngOnInit() {
-    this.filteredOptions$ = this.getOptions().pipe(
+    this.filteredOptions$ = this.options$.pipe(
       map(options =>
         options.filter(option => {
           if (!this.hideOff) {
@@ -32,7 +33,6 @@ export abstract class BaseQuickControlComponent implements OnInit {
 
   @Output() onBack = new EventEmitter<number>();
 
-  abstract getOptions(): Observable<Option[]>;
   abstract publishValue(value: number): void;
 
   onChange(value: number): void {

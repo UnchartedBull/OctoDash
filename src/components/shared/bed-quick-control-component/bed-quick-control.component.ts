@@ -17,6 +17,7 @@ export class BedQuickControlComponent extends BaseQuickControlComponent {
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
 
+  options$ = this.getOptions();
   getOptions(): Observable<Option[]> {
     return this.profileService.getBedProfiles();
   }

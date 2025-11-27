@@ -22,11 +22,9 @@ export class HotendQuickControlComponent extends BaseQuickControlComponent {
   unit = '°C';
   defaultValue = this.configService.getDefaultHotendTemperature();
 
-  getOptions(): Observable<Option[]> {
-    return this.profileService
-      .getHotendProfiles()
-      .pipe(map(profiles => profiles.filter(profile => profile.value !== 0)));
-  }
+  options$ = this.profileService
+    .getHotendProfiles()
+    .pipe(map(profiles => profiles.filter(profile => profile.value !== 0)));
 
   publishValue(value) {
     this.printerService.setTemperatureHotend(value, this.toolIndex);
