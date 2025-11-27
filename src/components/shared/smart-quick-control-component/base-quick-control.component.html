@@ -2,6 +2,6 @@
   [unit]="unit"
   [defaultValue]="defaultValue"
   [hideSet]="hideSet"
-  [options]="options$ | async"
+  [options]="filteredOptions$ | async"
   (onBack)="this.onBack.emit()"
   (onSet)="onChange($event)"></app-quick-control>

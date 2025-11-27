@@ -17,7 +17,9 @@ export class BedQuickControlComponent extends BaseQuickControlComponent {
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
 
-  options$: Observable<Option[]> = this.profileService.getBedProfiles();
+  getOptions(): Observable<Option[]> {
+    return this.profileService.getBedProfiles();
+  }
   defaultValue = this.configService.getDefaultHeatbedTemperature();
   unit = '°C';
 
