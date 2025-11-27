@@ -36,7 +36,11 @@
       </div>
     </div>
   </ng-container>
-  <app-hotend-quick-control *ngIf="!isHeating" [hideOff]="true" [hideSet]="true" (onBack)="start($event)"></app-hotend-quick-control>
+  <app-hotend-quick-control
+    *ngIf="!isHeating"
+    [hideOff]="true"
+    [hideSet]="true"
+    (onBack)="start($event)"></app-hotend-quick-control>
   <div>
     <div class="heating__information" *ngIf="selectedSpool">
       <div class="heating__information-type">
