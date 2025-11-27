@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Option } from '../quick-control/quick-control.component';
@@ -12,6 +12,7 @@ export abstract class BaseQuickControlComponent {
   abstract unit: string;
   abstract defaultValue: number;
   abstract options$: Observable<Option[]>;
+  @Input() hideSet = false;
 
   @Output() onBack = new EventEmitter<number>();
 

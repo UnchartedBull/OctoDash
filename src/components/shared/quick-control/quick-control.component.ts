@@ -14,6 +14,7 @@ export interface Option {
 export class QuickControlComponent implements OnInit {
   @Input() unit: string;
   @Input() defaultValue: number;
+  @Input() hideSet = false;
 
   @Output() onBack = new EventEmitter<void>();
   @Output() onSet = new EventEmitter<number>();

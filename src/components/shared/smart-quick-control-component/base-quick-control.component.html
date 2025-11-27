@@ -1,6 +1,7 @@
 <app-quick-control
   [unit]="unit"
   [defaultValue]="defaultValue"
+  [hideSet]="hideSet"
   [options]="options$ | async"
   (onBack)="this.onBack.emit()"
   (onSet)="onChange($event)"></app-quick-control>

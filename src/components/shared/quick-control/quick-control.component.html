@@ -19,7 +19,7 @@
     </div>
 
     <div class="quick-control-row">
-      <div class="quick-control-set" colspan="2" (click)="setValue()" matRipple [matRippleUnbounded]="false">
+      <div *ngIf="!hideSet" class="quick-control-set" colspan="2" (click)="setValue()" matRipple [matRippleUnbounded]="false">
         <span class="quick-control-set-span">set</span>
       </div>
     </div>
