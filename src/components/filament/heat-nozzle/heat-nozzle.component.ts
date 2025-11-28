@@ -24,6 +24,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   public automaticHeatingStartSeconds: number;
   public isHeating: boolean;
   public isComplete: boolean;
+  public tempOffset: number = 0;
 
   private startHeatingTimeout: ReturnType<typeof setTimeout>;
   private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
@@ -40,9 +41,9 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
     this.isComplete = false;
     this.automaticHeatingStartSeconds = 600;
     this.automaticHeatingStartTimer();
-    this.hotendTarget = this.currentSpool
-      ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
-      : this.configService.getDefaultHotendTemperature();
+    if (this.currentSpool) {
+      this.tempOffset = this.currentSpool.temperatureOffset;
+    }
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {

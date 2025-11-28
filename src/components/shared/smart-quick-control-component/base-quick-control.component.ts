@@ -25,12 +25,19 @@ export abstract class BaseQuickControlComponent implements OnInit {
           return option.value !== 0;
         }),
       ),
+      map(options =>
+        options.map(option => ({
+          ...option,
+          value: option.value + this.tempOffset,
+        })),
+      ),
     );
     this.onChange.emit(this.defaultValue);
   }
 
   @Input() hideSet = false;
   @Input() hideOff = false;
+  @Input() tempOffset = 0;
 
   @Output() onBack = new EventEmitter<number>();
   @Output() onChange = new EventEmitter<number>();
