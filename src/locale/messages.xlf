@@ -244,21 +244,21 @@
         <source>wait</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/heat-nozzle/heat-nozzle.component.html</context>
-          <context context-type="linenumber">64,66</context>
+          <context context-type="linenumber">65,67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="nozzle-heating-wait-seconds-or" datatype="html">
         <source>s or</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/heat-nozzle/heat-nozzle.component.html</context>
-          <context context-type="linenumber">66,71</context>
+          <context context-type="linenumber">67,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="nozzle-heating-start" datatype="html">
         <source>start</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/heat-nozzle/heat-nozzle.component.html</context>
-          <context context-type="linenumber">75,79</context>
+          <context context-type="linenumber">76,80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="move-filament" datatype="html">
