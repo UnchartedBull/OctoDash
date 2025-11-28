@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { QuickControlService, QuickControlView } from 'src/services/quick-control.service';
+import { QuickControlModalService, QuickControlView } from 'src/services/quick-control-modal.service';
 
 @Component({
   selector: 'app-quick-control-modal',
@@ -8,7 +8,7 @@ import { QuickControlService, QuickControlView } from 'src/services/quick-contro
   standalone: false,
 })
 export class QuickControlModalComponent {
-  quickControlService = inject(QuickControlService);
+  quickControlService = inject(QuickControlModalService);
 
   QuickControlView = QuickControlView;
 

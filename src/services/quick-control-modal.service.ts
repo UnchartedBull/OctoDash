@@ -10,7 +10,7 @@ export enum QuickControlView {
 @Injectable({
   providedIn: 'root',
 })
-export class QuickControlService {
+export class QuickControlModalService {
   view = QuickControlView.NONE;
   selectedHotend = 0;
 

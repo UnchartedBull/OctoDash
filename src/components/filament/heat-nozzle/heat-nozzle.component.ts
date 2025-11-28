@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 
 import { FilamentSpool, PrinterStatus } from '../../../model';
-import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 
@@ -33,7 +32,6 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   constructor(
     private printerService: PrinterService,
     private socketService: SocketService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {

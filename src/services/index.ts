@@ -17,7 +17,7 @@ import { NotificationService } from './notification.service';
 import { PrinterOctoprintService } from './printer/printer.octoprint.service';
 import { PrinterService } from './printer/printer.service';
 import { ProfileService } from './profile/profile.service';
-import { QuickControlService } from './quick-control.service';
+import { QuickControlModalService } from './quick-control-modal.service';
 import { OctoPrintSocketService } from './socket/socket.octoprint.service';
 import { SocketService } from './socket/socket.service';
 import { SystemOctoprintService } from './system/system.octoprint.service';
@@ -29,7 +29,7 @@ export default [
   ConversionService,
   EventService,
   ProfileService,
-  QuickControlService,
+  QuickControlModalService,
   NotificationService,
   [
     {
