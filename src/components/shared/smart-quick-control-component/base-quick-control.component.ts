@@ -39,7 +39,7 @@ export abstract class BaseQuickControlComponent implements OnInit {
   @Input() hideOff = false;
   @Input() tempOffset = 0;
 
-  @Output() onBack = new EventEmitter<number>();
+  @Output() onSet = new EventEmitter<number>();
   @Output() onChange = new EventEmitter<number>();
 
   abstract publishValue(value: number): void;
@@ -48,8 +48,8 @@ export abstract class BaseQuickControlComponent implements OnInit {
     this.onChange.emit(value);
   }
 
-  onSet(value: number): void {
+  handleSet(value: number): void {
     this.publishValue(value);
-    this.onBack.emit(value);
+    this.onSet.emit(value);
   }
 }
