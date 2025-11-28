@@ -12,7 +12,7 @@ export class QuickControlModalComponent {
 
   QuickControlView = QuickControlView;
 
-  icon: string = this.quickControlService.getIconForView();
+  icon$ = this.quickControlService.iconPath;
   onBack() {
     this.quickControlService.hideQuickControl();
   }

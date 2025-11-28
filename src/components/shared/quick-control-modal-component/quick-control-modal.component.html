@@ -1,6 +1,6 @@
 <div *ngIf="quickControlService.isVisible()" class="quick-control-modal">
   <app-top-bar [backButton]="true" (onBack)="onBack()">
-    <img [src]="icon" class="top-bar__center-icon" />
+    <img [src]="icon$ | async" class="top-bar__center-icon" />
   </app-top-bar>
 
   <div class="control-wrapper">

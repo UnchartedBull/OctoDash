@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export enum QuickControlView {
   NONE,
@@ -11,8 +12,19 @@ export enum QuickControlView {
   providedIn: 'root',
 })
 export class QuickControlModalService {
-  view = QuickControlView.NONE;
+  _view = QuickControlView.NONE;
   selectedHotend = 0;
+
+  set view(view: QuickControlView) {
+    this._view = view;
+    this.iconPath.next(this.getIconForView());
+  }
+
+  get view(): QuickControlView {
+    return this._view;
+  }
+
+  iconPath = new BehaviorSubject<string>('');
 
   public getIconForView(): string {
     switch (this.view) {
