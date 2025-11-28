@@ -26,19 +26,19 @@ export abstract class BaseQuickControlComponent implements OnInit {
         }),
       ),
     );
+    this.onChange.emit(this.defaultValue);
   }
 
   @Input() hideSet = false;
   @Input() hideOff = false;
 
   @Output() onBack = new EventEmitter<number>();
+  @Output() onChange = new EventEmitter<number>();
 
   abstract publishValue(value: number): void;
 
-  onChange(value: number): void {
-    if (this.hideSet) {
-      this.publishValue(value);
-    }
+  handleChange(value: number): void {
+    this.onChange.emit(value);
   }
 
   onSet(value: number): void {
