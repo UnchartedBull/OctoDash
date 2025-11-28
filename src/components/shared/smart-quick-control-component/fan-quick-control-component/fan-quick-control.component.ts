@@ -4,11 +4,11 @@ import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 
-import { BaseQuickControlComponent } from '../smart-quick-control-component/base-quick-control.component';
+import { BaseQuickControlComponent } from '../base-quick-control.component';
 
 @Component({
   selector: 'app-fan-quick-control',
-  templateUrl: '../smart-quick-control-component/base-quick-control.component.html',
+  templateUrl: '../base-quick-control.component.html',
   standalone: false,
 })
 export class FanQuickControlComponent extends BaseQuickControlComponent {

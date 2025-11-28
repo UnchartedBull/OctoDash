@@ -28,12 +28,12 @@ import { PersonalizationComponent } from './setup/personalization/personalizatio
 import { PluginsComponent } from './setup/plugins/plugins.component';
 import { ConfigSetupComponent } from './setup/setup.component';
 import { WelcomeComponent } from './setup/welcome/welcome.component';
-import { BedQuickControlComponent } from './shared/bed-quick-control-component/bed-quick-control.component';
-import { FanQuickControlComponent } from './shared/fan-quick-control-component-copy/fan-quick-control.component';
 import { HotendIconComponent } from './shared/hotend-icon/hotend-icon.component';
-import { HotendQuickControlComponent } from './shared/hotend-quick-control/hotend-quick-control.component';
 import { QuickControlComponent } from './shared/quick-control/quick-control.component';
 import { QuickControlModalComponent } from './shared/quick-control-modal-component/quick-control-modal.component';
+import { BedQuickControlComponent } from './shared/smart-quick-control-component/bed-quick-control-component/bed-quick-control.component';
+import { FanQuickControlComponent } from './shared/smart-quick-control-component/fan-quick-control-component/fan-quick-control.component';
+import { HotendQuickControlComponent } from './shared/smart-quick-control-component/hotend-quick-control/hotend-quick-control.component';
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { StandbyComponent } from './standby/standby.component';
