@@ -1267,6 +1267,11 @@
         <source>Can't disconnect Printer!</source>
         <target>Impossible de déconnecter l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <target></target>
+        <note>$$error-failed-to-load-profile-temps</note>
+      </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>
         <target>Erreur HTTP 403 - INTERDIT</target>

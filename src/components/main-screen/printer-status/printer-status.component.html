@@ -12,7 +12,7 @@
         index as i;
         trackBy: extruderTrackBy
       "
-      (click)="showQuickControlHotend(i)"
+      (click)="quickControlModalService.showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
       <app-hotend-icon
@@ -35,7 +35,11 @@
   </div>
 
   <div class="printer-status__row">
-    <div class="printer-status__item" (click)="showQuickControlHeatbed()" matRipple [matRippleUnbounded]="false">
+    <div
+      class="printer-status__item"
+      (click)="quickControlModalService.showQuickControlHeatbed()"
+      matRipple
+      [matRippleUnbounded]="false">
       <img class="printer-status__icon" src="assets/heat-bed.svg" />
       <div class="printer-status__value" [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }">
         <span class="printer-status__actual-value">
@@ -47,7 +51,11 @@
       </div>
     </div>
 
-    <div class="printer-status__item" (click)="showQuickControlFan()" matRipple [matRippleUnbounded]="false">
+    <div
+      class="printer-status__item"
+      (click)="quickControlModalService.showQuickControlFan()"
+      matRipple
+      [matRippleUnbounded]="false">
       <img class="printer-status__icon" src="assets/fan.svg" />
       <div class="printer-status__value printer-status__no-set-value">
         <span class="printer-status__actual-value">
@@ -58,20 +66,4 @@
   </div>
 </div>
 
-<app-quick-control
-  id="quickControl"
-  *ngIf="view !== QuickControlView.NONE"
-  [icon]="
-    'assets/' +
-    (view === QuickControlView.HOTEND ? 'nozzle.svg' : view === QuickControlView.HEATBED ? 'heat-bed.svg' : 'fan.svg')
-  "
-  [unit]="view === QuickControlView.FAN ? '%' : '°C'"
-  [defaultValue]="
-    view === QuickControlView.HOTEND
-      ? this.configService.getDefaultHotendTemperature()
-      : view === QuickControlView.HEATBED
-        ? this.configService.getDefaultHeatbedTemperature()
-        : this.configService.getDefaultFanSpeed()
-  "
-  (onBack)="hideQuickControl()"
-  (onSet)="quickControlSetValue($event)"></app-quick-control>
+<app-quick-control-modal />

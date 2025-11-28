@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 
 import { FilamentSpool, PrinterStatus } from '../../../model';
-import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 
@@ -24,6 +23,7 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   public automaticHeatingStartSeconds: number;
   public isHeating: boolean;
   public isComplete: boolean;
+  public tempOffset: number = 0;
 
   private startHeatingTimeout: ReturnType<typeof setTimeout>;
   private checkNozzleTemperatureTimeout: ReturnType<typeof setTimeout>;
@@ -32,7 +32,6 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
   constructor(
     private printerService: PrinterService,
     private socketService: SocketService,
-    private configService: ConfigService,
   ) {}
 
   ngOnInit(): void {
@@ -40,9 +39,9 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
     this.isComplete = false;
     this.automaticHeatingStartSeconds = 6;
     this.automaticHeatingStartTimer();
-    this.hotendTarget = this.currentSpool
-      ? this.configService.getDefaultHotendTemperature() + this.currentSpool.temperatureOffset
-      : this.configService.getDefaultHotendTemperature();
+    if (this.currentSpool) {
+      this.tempOffset = this.currentSpool.temperatureOffset;
+    }
 
     this.subscriptions.add(
       this.socketService.getPrinterStatusSubscribable().subscribe((printerStatus: PrinterStatus): void => {
@@ -78,6 +77,10 @@ export class HeatNozzleComponent implements OnInit, OnDestroy {
     } else {
       this.startHeatingTimeout = setTimeout(this.automaticHeatingStartTimer.bind(this), 1000);
     }
+  }
+
+  public setTarget(value: number): void {
+    this.hotendTarget = value;
   }
 
   public setNozzleTemperature(): void {

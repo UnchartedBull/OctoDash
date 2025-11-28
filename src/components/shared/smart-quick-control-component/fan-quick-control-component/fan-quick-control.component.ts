@@ -1,0 +1,28 @@
+import { Component, inject } from '@angular/core';
+import { of } from 'rxjs';
+import { ConfigService } from 'src/services/config.service';
+import { PrinterService } from 'src/services/printer/printer.service';
+import { ProfileService } from 'src/services/profile/profile.service';
+
+import { BaseQuickControlComponent } from '../base-quick-control.component';
+
+@Component({
+  selector: 'app-fan-quick-control',
+  templateUrl: '../base-quick-control.component.html',
+  standalone: false,
+})
+export class FanQuickControlComponent extends BaseQuickControlComponent {
+  public configService = inject(ConfigService);
+  public profileService = inject(ProfileService);
+  public printerService = inject(PrinterService);
+
+  unit = '%';
+  options$ = of([
+    { value: 0, label: 'Off' },
+    { value: this.configService.getDefaultFanSpeed(), label: 'On' },
+  ]);
+  defaultValue = this.configService.getDefaultFanSpeed();
+  publishValue(value) {
+    this.printerService.setFanSpeed(value);
+  }
+}

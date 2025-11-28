@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
-import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 
@@ -27,14 +26,11 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public selectedHotend: number;
   public sharedNozzle: boolean;
 
-  public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+  public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(
     private printerService: PrinterService,
-    private configService: ConfigService,
     private socketService: SocketService,
-    private router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -54,49 +50,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  public showQuickControlHotend(tool: number): void {
-    this.view = QuickControlView.HOTEND;
-    this.selectedHotend = tool;
-  }
-
-  public showQuickControlHeatbed(): void {
-    this.view = QuickControlView.HEATBED;
-  }
-
-  public showQuickControlFan(): void {
-    this.view = QuickControlView.FAN;
-  }
-
-  public hideQuickControl(): void {
-    this.view = QuickControlView.NONE;
-  }
-
-  public quickControlSetValue(value: number): void {
-    switch (this.view) {
-      case QuickControlView.HOTEND:
-        this.printerService.setTemperatureHotend(value, this.selectedHotend);
-        break;
-      case QuickControlView.HEATBED:
-        this.printerService.setTemperatureBed(value);
-        break;
-      case QuickControlView.FAN:
-        this.printerService.setFanSpeed(value);
-        break;
-    }
-
-    this.hideQuickControl();
-  }
-
   public extruderTrackBy(index: number) {
     // In this case the index is sufficient as a unique identifier
     // The number of tools is not likely to change
     return index;
   }
-}
-
-enum QuickControlView {
-  NONE,
-  HOTEND,
-  HEATBED,
-  FAN,
 }
