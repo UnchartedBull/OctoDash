@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProfileService } from 'src/services/profile/profile.service';
 import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
 import { PrinterStatus } from '../../model';
@@ -30,7 +29,6 @@ export class ControlComponent implements OnInit, OnDestroy {
   public quickControlShown = false;
   public selectedHotend = 0;
 
-  public profileService: ProfileService = inject(ProfileService);
   public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(

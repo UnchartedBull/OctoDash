@@ -1,6 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ProfileService } from 'src/services/profile/profile.service';
 import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
 import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
@@ -27,7 +26,6 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public selectedHotend: number;
   public sharedNozzle: boolean;
 
-  public profileService: ProfileService = inject(ProfileService);
   public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(
