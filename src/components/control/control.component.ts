@@ -3,7 +3,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/services/profile/profile.service';
-import { QuickControlModalService, QuickControlView } from 'src/services/quick-control-modal.service';
+import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
 import { PrinterStatus } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
@@ -29,9 +29,6 @@ export class ControlComponent implements OnInit, OnDestroy {
   public showExtruder = false;
   public quickControlShown = false;
   public selectedHotend = 0;
-
-  public QuickControlView = QuickControlView;
-  // public view = QuickControlView.NONE;
 
   public profileService: ProfileService = inject(ProfileService);
   public quickControlService: QuickControlModalService = inject(QuickControlModalService);
