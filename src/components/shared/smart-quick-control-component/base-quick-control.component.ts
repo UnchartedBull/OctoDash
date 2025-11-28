@@ -36,6 +36,12 @@ export abstract class BaseQuickControlComponent implements OnInit {
   abstract publishValue(value: number): void;
 
   onChange(value: number): void {
+    if (this.hideSet) {
+      this.publishValue(value);
+    }
+  }
+
+  onSet(value: number): void {
     this.publishValue(value);
     this.onBack.emit(value);
   }

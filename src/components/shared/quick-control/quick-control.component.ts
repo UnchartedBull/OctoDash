@@ -16,7 +16,7 @@ export class QuickControlComponent implements OnInit {
   @Input() defaultValue: number;
   @Input() hideSet = false;
 
-  @Output() onBack = new EventEmitter<void>();
+  @Output() onChange = new EventEmitter<number>();
   @Output() onSet = new EventEmitter<number>();
 
   public value: number;
@@ -38,10 +38,12 @@ export class QuickControlComponent implements OnInit {
     } else if (this.value > 999) {
       this.value = 999;
     }
+    this.onChange.emit(this.value);
   }
 
   public changeValue(value: number): void {
     this.value = value;
+    this.onChange.emit(this.value);
   }
 
   public setValue(): void {
