@@ -1,5 +1,4 @@
 import { Component, inject, Input } from '@angular/core';
-import { map } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
@@ -21,9 +20,7 @@ export class HotendQuickControlComponent extends BaseQuickControlComponent {
   unit = '°C';
   defaultValue = this.configService.getDefaultHotendTemperature();
 
-  options$ = this.profileService
-    .getHotendProfiles()
-    .pipe(map(profiles => profiles.filter(profile => profile.value !== 0)));
+  options$ = this.profileService.getHotendProfiles();
 
   publishValue(value) {
     this.printerService.setTemperatureHotend(value, this.toolIndex);
