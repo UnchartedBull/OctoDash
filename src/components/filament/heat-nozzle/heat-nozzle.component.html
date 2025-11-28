@@ -40,8 +40,7 @@
     *ngIf="!isHeating"
     [hideOff]="true"
     [hideSet]="true"
-    (onChange)="setTarget($event)"
-    ></app-hotend-quick-control>
+    (onChange)="setTarget($event)"></app-hotend-quick-control>
   <div>
     <div class="heating__information" *ngIf="selectedSpool">
       <div class="heating__information-type">
