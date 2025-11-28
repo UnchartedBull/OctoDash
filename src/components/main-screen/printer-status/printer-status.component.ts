@@ -28,7 +28,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   public sharedNozzle: boolean;
 
   public profileService: ProfileService = inject(ProfileService);
-  public quickControlService: QuickControlModalService = inject(QuickControlModalService);
+  public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(
     private printerService: PrinterService,

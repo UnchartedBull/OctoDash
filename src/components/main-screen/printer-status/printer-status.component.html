@@ -12,7 +12,7 @@
         index as i;
         trackBy: extruderTrackBy
       "
-      (click)="quickControlService.showQuickControlHotend(i)"
+      (click)="quickControlModalService.showQuickControlHotend(i)"
       matRipple
       [matRippleUnbounded]="false">
       <app-hotend-icon
@@ -37,7 +37,7 @@
   <div class="printer-status__row">
     <div
       class="printer-status__item"
-      (click)="quickControlService.showQuickControlHeatbed()"
+      (click)="quickControlModalService.showQuickControlHeatbed()"
       matRipple
       [matRippleUnbounded]="false">
       <img class="printer-status__icon" src="assets/heat-bed.svg" />
@@ -53,7 +53,7 @@
 
     <div
       class="printer-status__item"
-      (click)="quickControlService.showQuickControlFan()"
+      (click)="quickControlModalService.showQuickControlFan()"
       matRipple
       [matRippleUnbounded]="false">
       <img class="printer-status__icon" src="assets/fan.svg" />

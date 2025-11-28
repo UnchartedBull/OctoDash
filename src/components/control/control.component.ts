@@ -31,7 +31,7 @@ export class ControlComponent implements OnInit, OnDestroy {
   public selectedHotend = 0;
 
   public profileService: ProfileService = inject(ProfileService);
-  public quickControlService: QuickControlModalService = inject(QuickControlModalService);
+  public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(
     private printerService: PrinterService,
