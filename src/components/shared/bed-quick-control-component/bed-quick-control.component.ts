@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
 
-import { Option } from '../quick-control/quick-control.component';
 import { BaseQuickControlComponent } from '../smart-quick-control-component/base-quick-control.component';
 
 @Component({
@@ -17,10 +15,7 @@ export class BedQuickControlComponent extends BaseQuickControlComponent {
   public profileService = inject(ProfileService);
   public printerService = inject(PrinterService);
 
-  options$ = this.getOptions();
-  getOptions(): Observable<Option[]> {
-    return this.profileService.getBedProfiles();
-  }
+  options$ = this.profileService.getBedProfiles();
   defaultValue = this.configService.getDefaultHeatbedTemperature();
   unit = '°C';
 
