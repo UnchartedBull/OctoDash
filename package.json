@@ -115,7 +115,7 @@
     "@angular/compiler-cli": "^20.3.13",
     "@angular/language-service": "^20.3.13",
     "@eslint/compat": "^2.0.0",
-    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.0",
     "@types/got": "~9.6.12",
     "@types/lodash-es": "~4.17.12",
