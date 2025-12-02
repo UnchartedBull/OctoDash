@@ -49,7 +49,29 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
   }
 
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
-    return of([]);
+    const availableSpools = this.getSpools();
+    const currentJobRequirements = this.http.get<SpoolmanCurrentJobRequirements>(
+      this.configService.getApiURL('plugin/Spoolman/self/current-job-requirements', false),
+      this.configService.getHTTPHeaders(),
+    );
+    return forkJoin([availableSpools, currentJobRequirements]).pipe<FilamentSpool[]>(
+      map(results => {
+        const spools = results[0];
+        const requirements = results[1];
+        if (!requirements.data.isFilamentUsageAvailable) {
+          return [];
+        }
+        const selected: FilamentSpool[] = [];
+        for (const toolId in requirements.data.tools) {
+          const tool = requirements.data.tools[toolId];
+          const spool = spools.find(spool => spool.id === tool.spoolId);
+          if (spool) {
+            selected.push(spool);
+          }
+        }
+        return selected;
+      }),
+    );
   }
 
   private convertSpoolmanSpool(spool: SpoolmanSpool): FilamentSpool {
