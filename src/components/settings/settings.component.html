@@ -410,14 +410,20 @@
             [disabled]="!config.plugins.enclosure.enabled" />
 
           <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.filamentManager.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-filament-manager-enabled">enabled</span>
-          </div>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.filamentManager.enabled"
+            (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
+
+          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.spoolManager.enabled"
+            (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-spoolman">Spoolman (Beta)</span>
           <div
@@ -428,29 +434,6 @@
             </span>
             <span class="settings__checkbox-descriptor" i18n="@@settings-spoolman-enabled">enabled</span>
           </div>
-
-          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager (Beta)</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.spoolManager.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-spool-manager-enabled">enabled</span>
-          </div>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.filamentManager.enabled"
-            (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.spoolManager.enabled"
-            (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
           <app-toggle-switch
