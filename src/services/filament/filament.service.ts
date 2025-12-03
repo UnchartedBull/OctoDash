@@ -58,7 +58,7 @@ export class FilamentService {
         next: () => {
           this.filamentPluginService.getCurrentSpool(tool).subscribe({
             next: (spoolRemote: FilamentSpool) => {
-              if (spool.id === spoolRemote.id) resolve();
+              if (spool.id === spoolRemote?.id) resolve();
               else {
                 this.notificationService.error(
                   $localize`:@@error-spool-id:Spool IDs didn't match`,
