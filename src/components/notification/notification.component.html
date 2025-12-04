@@ -5,14 +5,17 @@
   <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
   <span class="notification__heading">{{ notification?.heading }}</span>
   <span class="notification__text">{{ notification?.text }}</span>
-  <span class="notification__close" i18n="@@tap-close" *ngIf="!notification?.choices">tap this card to close it</span>
+  @if (!notification?.choices) {
+    <span class="notification__close" i18n="@@tap-close">tap this card to close it</span>
+  }
   <div class="notification-prompt__choices">
-    <div
-      class="notification-prompt__choice"
-      *ngFor="let choice of notification?.choices; index as i; first as isFirst"
-      [ngClass]="[isFirst ? 'notification-prompt__choice-first' : '']"
-      (click)="chooseAction(i, notification?.callback)">
-      {{ choice }}
-    </div>
+    @for (choice of notification?.choices; track choice; let i = $index; let isFirst = $first) {
+      <div
+        class="notification-prompt__choice"
+        [ngClass]="[isFirst ? 'notification-prompt__choice-first' : '']"
+        (click)="chooseAction(i, notification?.callback)">
+        {{ choice }}
+      </div>
+    }
   </div>
 </div>

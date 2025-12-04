@@ -7,186 +7,223 @@
 </app-top-bar>
 
 <div class="breadcrumbs">
-  <span class="breadcrumbs__item" *ngFor="let folder of currentFolder.split('/')">
-    <span (click)="openFolder(currentFolder.split(folder)[0] + folder)">
-      {{ folder }}
+  @for (folder of currentFolder.split('/'); track folder) {
+    <span class="breadcrumbs__item">
+      <span (click)="openFolder(currentFolder.split(folder)[0] + folder)">
+        {{ folder }}
+      </span>
     </span>
-  </span>
+  }
 </div>
 
-<div class="files" *ngIf="loading !== 0">
-  <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
-</div>
-
-<div class="files" *ngIf="loading === 0">
-  <div
-    *ngIf="!directory || (directory.files?.length === 0 && directory.folders?.length === 0); else fileList"
-    class="files__error">
-    can't load files ...
+@if (loading !== 0) {
+  <div class="files">
+    <ng-lottie id="loadingAnimation" [options]="loadingOptions"></ng-lottie>
   </div>
+}
 
-  <ng-template #fileList>
-    <div>
-      <div *ngIf="currentFolder !== homeFolder && currentFolder !== ''" class="files__object">
-        <div
-          (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
-          matRipple
-          [matRippleUnbounded]="false">
-          <img src="assets/folder.svg" class="files__icon" />
-          <span class="files__name">..</span>
-        </div>
-      </div>
-
+@if (loading === 0) {
+  <div class="files">
+    @if (!directory || (directory.files?.length === 0 && directory.folders?.length === 0)) {
       <div
-        (click)="openFolder(folder.path)"
-        matRipple
-        [matRippleUnbounded]="false"
-        *ngFor="let folder of directory.folders"
-        class="files__object">
-        <img src="assets/folder.svg" class="files__icon" />
-        <div class="files__info">
-          <span class="files__info-value">
-            {{ folder.size }}
-            <span class="files__info-unit" *ngIf="folder.size !== undefined" i18n="@@files-mb-1">mb</span>
-          </span>
-        </div>
-        <span class="files__name">
-          {{ folder.name }}
-        </span>
+        class="files__error">
+        can't load files ...
       </div>
-
-      <div
-        *ngFor="let file of directory.files"
-        (click)="openDetails(file.path)"
-        (press)="loadFile(file.path)"
-        matRipple
-        [matRippleUnbounded]="false"
-        class="files__object"
-        [ngClass]="[file.successful]">
-        <img [src]="file.thumbnail$ | async" class="files__icon" />
-        <div class="files__info">
-          <span class="files__info-value">
-            {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
-          </span>
-          <span class="files__info-value" *ngIf="file.hasOwnProperty('filamentWeight')">
-            {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
-          </span>
-          <span class="files__info-value" *ngIf="file.hasOwnProperty('printTime')">
-            {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
-          </span>
-        </div>
-        <span class="files__name">
-          {{ file.name }}
-        </span>
+    } @else {
+      <div>
+        @if (currentFolder !== homeFolder && currentFolder !== '') {
+          <div class="files__object">
+            <div
+              (click)="openFolder(currentFolder.substr(0, currentFolder.lastIndexOf('/')))"
+              matRipple
+              [matRippleUnbounded]="false">
+              <img src="assets/folder.svg" class="files__icon" />
+              <span class="files__name">..</span>
+            </div>
+          </div>
+        }
+        @for (folder of directory.folders; track folder) {
+          <div
+            (click)="openFolder(folder.path)"
+            matRipple
+            [matRippleUnbounded]="false"
+            class="files__object">
+            <img src="assets/folder.svg" class="files__icon" />
+            <div class="files__info">
+              <span class="files__info-value">
+                {{ folder.size }}
+                @if (folder.size !== undefined) {
+                  <span class="files__info-unit" i18n="@@files-mb-1">mb</span>
+                }
+              </span>
+            </div>
+            <span class="files__name">
+              {{ folder.name }}
+            </span>
+          </div>
+        }
+        @for (file of directory.files; track file) {
+          <div
+            (click)="openDetails(file.path)"
+            (press)="loadFile(file.path)"
+            matRipple
+            [matRippleUnbounded]="false"
+            class="files__object"
+            [ngClass]="[file.successful]">
+            <img [src]="file.thumbnail$ | async" class="files__icon" />
+            <div class="files__info">
+              <span class="files__info-value">
+                {{ file.size }}<span class="files__info-unit" i18n="@@files-mb-2">mb</span>
+              </span>
+              @if (file.hasOwnProperty('filamentWeight')) {
+                <span class="files__info-value">
+                  {{ file.filamentWeight }}<span class="files__info-unit" i18n="@@files-g">g</span>
+                </span>
+              }
+              @if (file.hasOwnProperty('printTime')) {
+                <span class="files__info-value">
+                  {{ file.printTime }}<span class="files__info-unit" i18n="@@files-h">h</span>
+                </span>
+              }
+            </div>
+            <span class="files__name">
+              {{ file.name }}
+            </span>
+          </div>
+        }
       </div>
-    </div>
-  </ng-template>
-</div>
+    }
+  </div>
+}
 
 <div class="file" id="fileDetailView" (click)="closeDetails()">
-  <div class="file__wrapper" *ngIf="fileDetail && fileDetail.name !== 'error'" (click)="stopPropagation($event)">
-    <span class="file__name">{{ fileDetail.name }}</span>
-    <span class="file__directory">{{ fileDetail.path }}</span>
-    <span class="file__creation-date" *ngIf="fileDetail.hasOwnProperty('date')">{{ fileDetail.date }}</span>
-    <img [src]="fileDetail.thumbnail$ | async" class="file__render" />
-    <table class="file__details">
-      <tr>
-        <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>
-        <td *ngIf="fileDetail.hasOwnProperty('printTime')">
-          {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
-        </td>
-        <td *ngIf="fileDetail.hasOwnProperty('filamentWeight')">
-          {{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span>
-        </td>
-      </tr>
-    </table>
-    <table class="file__actions">
-      <tr>
-        <td>
-          <fa-icon
-            icon="upload"
-            class="file__actions-icon"
-            (click)="loadFile(fileDetail.path)"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true" />
-        </td>
-        <td>
-          <fa-icon
-            icon="print"
-            class="file__actions-icon file__actions-icon-large"
-            (click)="printFile(fileDetail.path)"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true" />
-        </td>
-        <td>
-          <fa-icon
-            icon="trash-can"
-            class="file__actions-icon"
-            (click)="deleteFile(fileDetail.path)"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true" />
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div class="file__wrapper file__loading" *ngIf="!fileDetail">
-    <span class="loading-dots" i18n="@@files-loading">loading details</span>
-  </div>
-  <div class="file__wrapper file__loading" *ngIf="fileDetail && fileDetail.name === 'error'">can't load file.</div>
+  @if (fileDetail && fileDetail.name !== 'error') {
+    <div class="file__wrapper" (click)="stopPropagation($event)">
+      <span class="file__name">{{ fileDetail.name }}</span>
+      <span class="file__directory">{{ fileDetail.path }}</span>
+      @if (fileDetail.hasOwnProperty('date')) {
+        <span class="file__creation-date">{{ fileDetail.date }}</span>
+      }
+      <img [src]="fileDetail.thumbnail$ | async" class="file__render" />
+      <table class="file__details">
+        <tr>
+          <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>
+          @if (fileDetail.hasOwnProperty('printTime')) {
+            <td>
+              {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
+            </td>
+          }
+          @if (fileDetail.hasOwnProperty('filamentWeight')) {
+            <td>
+              {{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span>
+            </td>
+          }
+        </tr>
+      </table>
+      <table class="file__actions">
+        <tr>
+          <td>
+            <fa-icon
+              icon="upload"
+              class="file__actions-icon"
+              (click)="loadFile(fileDetail.path)"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true" />
+          </td>
+          <td>
+            <fa-icon
+              icon="print"
+              class="file__actions-icon file__actions-icon-large"
+              (click)="printFile(fileDetail.path)"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true" />
+          </td>
+          <td>
+            <fa-icon
+              icon="trash-can"
+              class="file__actions-icon"
+              (click)="deleteFile(fileDetail.path)"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  }
+  @if (!fileDetail) {
+    <div class="file__wrapper file__loading">
+      <span class="loading-dots" i18n="@@files-loading">loading details</span>
+    </div>
+  }
+  @if (fileDetail && fileDetail.name === 'error') {
+    <div class="file__wrapper file__loading">can't load file.</div>
+  }
 </div>
 
-<div class="sorting" id="sortingView" *ngIf="showSorting" (click)="closeSorting()">
-  <div class="sorting-wrapper" (click)="stopPropagation($event)">
-    <span class="sorting-heading" i18n="@@files-sort">sort files</span>
-    <table class="sorting-selection">
-      <tr>
-        <td>
-          <span style="font-size: 2.9vw" i18n="@@files-sort-by">sort by</span>
-          <br />
-          <div class="sorting__checkbox-container" (click)="setSortAttribute('name')">
-            <span class="sorting__checkbox">
-              <span class="sorting__checkbox-checked" *ngIf="sortingAttribute === 'name'"></span>
-            </span>
-            <span class="sorting__checkbox-descriptor" i18n="@@files-name">Name</span>
-          </div>
-          <br />
-          <div class="sorting__checkbox-container" (click)="setSortAttribute('date')">
-            <span class="sorting__checkbox">
-              <span class="sorting__checkbox-checked" *ngIf="sortingAttribute === 'date'"></span>
-            </span>
-            <span class="sorting__checkbox-descriptor" i18n="@@files-date">Date</span>
-          </div>
-          <br />
-          <div class="sorting__checkbox-container" (click)="setSortAttribute('size')">
-            <span class="sorting__checkbox">
-              <span class="sorting__checkbox-checked" *ngIf="sortingAttribute === 'size'"></span>
-            </span>
-            <span class="sorting__checkbox-descriptor" i18n="@@files-size">Size</span>
-          </div>
-          <br />
-        </td>
-        <td>
-          <span style="font-size: 2.9vw" i18n="@@files-order">order</span>
-          <br />
-          <div class="sorting__checkbox-container" (click)="setSortOrder('asc')">
-            <span class="sorting__checkbox">
-              <span class="sorting__checkbox-checked" *ngIf="sortingOrder === 'asc'"></span>
-            </span>
-            <span class="sorting__checkbox-descriptor" i18n="@@files-ascending">Ascending</span>
-          </div>
-          <br />
-          <div class="sorting__checkbox-container" (click)="setSortOrder('dsc')">
-            <span class="sorting__checkbox">
-              <span class="sorting__checkbox-checked" *ngIf="sortingOrder === 'dsc'"></span>
-            </span>
-            <span class="sorting__checkbox-descriptor" i18n="@@files-descending">Descending</span>
-          </div>
-          <br />
-        </td>
-      </tr>
-    </table>
+@if (showSorting) {
+  <div class="sorting" id="sortingView" (click)="closeSorting()">
+    <div class="sorting-wrapper" (click)="stopPropagation($event)">
+      <span class="sorting-heading" i18n="@@files-sort">sort files</span>
+      <table class="sorting-selection">
+        <tr>
+          <td>
+            <span style="font-size: 2.9vw" i18n="@@files-sort-by">sort by</span>
+            <br />
+            <div class="sorting__checkbox-container" (click)="setSortAttribute('name')">
+              <span class="sorting__checkbox">
+                @if (sortingAttribute === 'name') {
+                  <span class="sorting__checkbox-checked"></span>
+                }
+              </span>
+              <span class="sorting__checkbox-descriptor" i18n="@@files-name">Name</span>
+            </div>
+            <br />
+            <div class="sorting__checkbox-container" (click)="setSortAttribute('date')">
+              <span class="sorting__checkbox">
+                @if (sortingAttribute === 'date') {
+                  <span class="sorting__checkbox-checked"></span>
+                }
+              </span>
+              <span class="sorting__checkbox-descriptor" i18n="@@files-date">Date</span>
+            </div>
+            <br />
+            <div class="sorting__checkbox-container" (click)="setSortAttribute('size')">
+              <span class="sorting__checkbox">
+                @if (sortingAttribute === 'size') {
+                  <span class="sorting__checkbox-checked"></span>
+                }
+              </span>
+              <span class="sorting__checkbox-descriptor" i18n="@@files-size">Size</span>
+            </div>
+            <br />
+          </td>
+          <td>
+            <span style="font-size: 2.9vw" i18n="@@files-order">order</span>
+            <br />
+            <div class="sorting__checkbox-container" (click)="setSortOrder('asc')">
+              <span class="sorting__checkbox">
+                @if (sortingOrder === 'asc') {
+                  <span class="sorting__checkbox-checked"></span>
+                }
+              </span>
+              <span class="sorting__checkbox-descriptor" i18n="@@files-ascending">Ascending</span>
+            </div>
+            <br />
+            <div class="sorting__checkbox-container" (click)="setSortOrder('dsc')">
+              <span class="sorting__checkbox">
+                @if (sortingOrder === 'dsc') {
+                  <span class="sorting__checkbox-checked"></span>
+                }
+              </span>
+              <span class="sorting__checkbox-descriptor" i18n="@@files-descending">Descending</span>
+            </div>
+            <br />
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
+}

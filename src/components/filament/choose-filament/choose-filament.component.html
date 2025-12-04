@@ -1,39 +1,40 @@
 <span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
-<ng-container *ngIf="!filament.getLoading(); else loadingFilament">
-  <ng-container *ngIf="filament.filamentSpools; else noFilaments">
+@if (!filament.getLoading()) {
+  @if (filament.filamentSpools) {
     <table class="filaments">
-      <tr
-        *ngFor="let spool of filament.filamentSpools"
-        [ngClass]="{ 'filaments__in-use': currentSpools.includes(spool.id) }"
-        long-press
-        matRipple
-        [matRippleUnbounded]="false"
-        [duration]="1250"
-        [frequency]="2000"
-        (onShortPress)="setSpool(spool)"
-        (onLongPressing)="setSpoolSkipChange(spool)">
-        <td class="filaments__in-use-icon">
-          <app-hotend-icon *ngIf="currentSpools.includes(spool.id)" [tool]="currentSpools.indexOf(spool.id)" />
-        </td>
-        <td class="filaments__type">
-          <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
-        </td>
-        <td class="filaments__name">
-          {{ spool.displayName }}
-        </td>
-        <td class="filaments__weight-left">
-          {{ getSpoolWeightLeft(spool.weight, spool.used)
-          }}<span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
-        </td>
-      </tr>
+      @for (spool of filament.filamentSpools; track spool) {
+        <tr
+          [ngClass]="{ 'filaments__in-use': currentSpools.includes(spool.id) }"
+          long-press
+          matRipple
+          [matRippleUnbounded]="false"
+          [duration]="1250"
+          [frequency]="2000"
+          (onShortPress)="setSpool(spool)"
+          (onLongPressing)="setSpoolSkipChange(spool)">
+          <td class="filaments__in-use-icon">
+            @if (currentSpools.includes(spool.id)) {
+              <app-hotend-icon [tool]="currentSpools.indexOf(spool.id)" />
+            }
+          </td>
+          <td class="filaments__type">
+            <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
+          </td>
+          <td class="filaments__name">
+            {{ spool.displayName }}
+          </td>
+          <td class="filaments__weight-left">
+            {{ getSpoolWeightLeft(spool.weight, spool.used)
+            }}<span style="font-size: 60%" i18n="@@choose-filament-grams-left">g left</span>
+          </td>
+        </tr>
+      }
     </table>
-  </ng-container>
-</ng-container>
-
-<ng-template #noFilaments>
-  <div class="no-filaments" i18n="@@no-spools">no filament spools found</div>
-</ng-template>
-
-<ng-template #loadingFilament>
+  } @else {
+    <div class="no-filaments" i18n="@@no-spools">no filament spools found</div>
+  }
+} @else {
   <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
-</ng-template>
+}
+
+

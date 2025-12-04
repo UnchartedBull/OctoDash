@@ -1,4 +1,6 @@
 <div class="hotend-icon">
   <img class="hotend-icon__image" src="assets/nozzle.svg" />
-  <p class="hotend-icon__number" *ngIf="tool > -1">{{ tool }}</p>
+  @if (tool > -1) {
+    <p class="hotend-icon__number">{{ tool }}</p>
+  }
 </div>
