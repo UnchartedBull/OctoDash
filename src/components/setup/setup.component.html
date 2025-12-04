@@ -9,80 +9,103 @@
     </div>
   </app-top-bar>
 
-  <app-config-setup-welcome [update]="configUpdate" *ngIf="page === 0"></app-config-setup-welcome>
+  @if (page === 0) {
+    <app-config-setup-welcome [update]="configUpdate"></app-config-setup-welcome>
+  }
 
-  <app-config-setup-discover-octoprint
-    (increasePage)="increasePage()"
-    (changeURLEntryMethod)="changeURLEntryMethod($event)"
-    [(octoprintURL)]="config.octoprint.url"
-    *ngIf="page === 1"></app-config-setup-discover-octoprint>
+  @if (page === 1) {
+    <app-config-setup-discover-octoprint
+      (increasePage)="increasePage()"
+      (changeURLEntryMethod)="changeURLEntryMethod($event)"
+      [(octoprintURL)]="config.octoprint.url"
+    ></app-config-setup-discover-octoprint>
+  }
 
-  <app-config-setup-octoprint-authentication
-    [octoprintURL]="config.octoprint.url.replace('api/', '')"
-    (increasePage)="increasePage()"
-    [(accessToken)]="config.octoprint.accessToken"
-    *ngIf="page === 2"></app-config-setup-octoprint-authentication>
+  @if (page === 2) {
+    <app-config-setup-octoprint-authentication
+      [octoprintURL]="config.octoprint.url.replace('api/', '')"
+      (increasePage)="increasePage()"
+      [(accessToken)]="config.octoprint.accessToken"
+    ></app-config-setup-octoprint-authentication>
+  }
 
-  <app-config-setup-personalization
-    [octoprintURL]="config.octoprint.url"
-    [apiKey]="config.octoprint.accessToken"
-    [(printerName)]="config.printer.name"
-    [(useTouchscreen)]="config.octodash.touchscreen"
-    *ngIf="page === 3"></app-config-setup-personalization>
+  @if (page === 3) {
+    <app-config-setup-personalization
+      [octoprintURL]="config.octoprint.url"
+      [apiKey]="config.octoprint.accessToken"
+      [(printerName)]="config.printer.name"
+      [(useTouchscreen)]="config.octodash.touchscreen"
+    ></app-config-setup-personalization>
+  }
 
-  <app-config-setup-extruder-information
-    [(feedLength)]="config.filament.feedLength"
-    [(feedSpeed)]="config.filament.feedSpeed"
-    *ngIf="page === 4"></app-config-setup-extruder-information>
+  @if (page === 4) {
+    <app-config-setup-extruder-information
+      [(feedLength)]="config.filament.feedLength"
+      [(feedSpeed)]="config.filament.feedSpeed"
+    ></app-config-setup-extruder-information>
+  }
 
-  <app-config-setup-plugins
-    *ngIf="page === 5"
-    [(companionPlugin)]="config.plugins.companion.enabled"
-    [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
-    [(enclosurePlugin)]="config.plugins.enclosure.enabled"
-    [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
-    [(spoolManagerPlugin)]="config.plugins.spoolManager.enabled"
-    [(preheatButtonPlugin)]="config.plugins.preheatButton.enabled"
-    [(printTimeGeniusPlugin)]="config.plugins.printTimeGenius.enabled"
-    [(psuControlPlugin)]="config.plugins.psuControl.enabled"
-    [(ophomPlugin)]="config.plugins.ophom.enabled"
-    [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
-    [(tyuaPlugin)]="config.plugins.tuya.enabled"
-    [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
-    [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"
+  @if (page === 5) {
+    <app-config-setup-plugins
+      [(companionPlugin)]="config.plugins.companion.enabled"
+      [(displayLayerProgressPlugin)]="config.plugins.displayLayerProgress.enabled"
+      [(enclosurePlugin)]="config.plugins.enclosure.enabled"
+      [(filamentManagerPlugin)]="config.plugins.filamentManager.enabled"
+      [(spoolManagerPlugin)]="config.plugins.spoolManager.enabled"
+      [(preheatButtonPlugin)]="config.plugins.preheatButton.enabled"
+      [(printTimeGeniusPlugin)]="config.plugins.printTimeGenius.enabled"
+      [(psuControlPlugin)]="config.plugins.psuControl.enabled"
+      [(ophomPlugin)]="config.plugins.ophom.enabled"
+      [(tpLinkSmartPlugPlugin)]="config.plugins.tpLinkSmartPlug.enabled"
+      [(tyuaPlugin)]="config.plugins.tuya.enabled"
+      [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
+      [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"
     [(wemoPlugin)]="config.plugins.wemo.enabled"></app-config-setup-plugins>
+  }
 
-  <div *ngIf="page === 6">
-    <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
-    <div class="setup__validation-check-wrapper">
-      <span class="setup__validation-check">
-        <fa-icon
-          [icon]="octoprintConnection ? 'circle-check' : 'circle-xmark'"
-          class="setup__validation-check-icon"
-          [style.color]="octoprintConnection ? 'var(--success)' : 'var(--error)'" />
-        <ng-container i18n="@@checking-octoprint-connection">OctoPrint Connection</ng-container>
-      </span>
-      <div *ngIf="octoprintConnection">
+  @if (page === 6) {
+    <div>
+      <span class="setup__text" i18n="@@checking">Great! I'll check everything.</span>
+      <div class="setup__validation-check-wrapper">
         <span class="setup__validation-check">
           <fa-icon
-            [icon]="configValid ? 'circle-check' : 'circle-xmark'"
+            [icon]="octoprintConnection ? 'circle-check' : 'circle-xmark'"
             class="setup__validation-check-icon"
-            [style.color]="configValid ? 'var(--success)' : 'var(--error)'" />
-          <ng-container i18n="@@checking-config">Validating Config</ng-container>
+            [style.color]="octoprintConnection ? 'var(--success)' : 'var(--error)'" />
+          <ng-container i18n="@@checking-octoprint-connection">OctoPrint Connection</ng-container>
         </span>
+        @if (octoprintConnection) {
+          <div>
+            <span class="setup__validation-check">
+              <fa-icon
+                [icon]="configValid ? 'circle-check' : 'circle-xmark'"
+                class="setup__validation-check-icon"
+                [style.color]="configValid ? 'var(--success)' : 'var(--error)'" />
+              <ng-container i18n="@@checking-config">Validating Config</ng-container>
+            </span>
+          </div>
+        }
+        @if (configValid) {
+          <div>
+            <span class="setup__validation-check">
+              <fa-icon
+                [icon]="configSaved === null ? 'circle-check' : 'circle-xmark'"
+                class="setup__validation-check-icon"
+                [style.color]="configSaved === null ? 'var(--success)' : 'var(--error)'" />
+              <ng-container i18n="@@checking-save">Saving Config</ng-container>
+            </span>
+            @if (configSaved) {
+              <span class="setup__validation-errors">{{ configSaved }}</span>
+            }
+          </div>
+        }
+        @for (error of configErrors; track error) {
+          <span class="setup__validation-errors">{{ error }}</span>
+        }
+        @if (configSaved === null) {
+          <span class="setup__button" (click)="finishWizard()" i18n="@@wizard-done">done</span>
+        }
       </div>
-      <div *ngIf="configValid">
-        <span class="setup__validation-check">
-          <fa-icon
-            [icon]="configSaved === null ? 'circle-check' : 'circle-xmark'"
-            class="setup__validation-check-icon"
-            [style.color]="configSaved === null ? 'var(--success)' : 'var(--error)'" />
-          <ng-container i18n="@@checking-save">Saving Config</ng-container>
-        </span>
-        <span class="setup__validation-errors" *ngIf="configSaved">{{ configSaved }}</span>
-      </div>
-      <span class="setup__validation-errors" *ngFor="let error of configErrors">{{ error }}</span>
-      <span *ngIf="configSaved === null" class="setup__button" (click)="finishWizard()" i18n="@@wizard-done">done</span>
     </div>
-  </div>
+  }
 </div>

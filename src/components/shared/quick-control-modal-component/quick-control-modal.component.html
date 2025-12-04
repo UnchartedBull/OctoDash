@@ -1,21 +1,27 @@
-<div *ngIf="quickControlService.isVisible()" class="quick-control-modal">
-  <app-top-bar [backButton]="true" (onBack)="onBack()">
-    <img [src]="icon$ | async" class="top-bar__center-icon" />
-  </app-top-bar>
-
-  <div class="control-wrapper">
-    <app-hotend-quick-control
-      id="quickControl"
-      *ngIf="quickControlService.view === QuickControlView.HOTEND"
-      (onSet)="onBack()"
-      [toolIndex]="quickControlService.selectedHotend"></app-hotend-quick-control>
-    <app-bed-quick-control
-      id="quickControl"
-      (onSet)="onBack()"
-      *ngIf="quickControlService.view === QuickControlView.HEATBED"></app-bed-quick-control>
-    <app-fan-quick-control
-      id="quickControl"
-      (onSet)="onBack()"
-      *ngIf="quickControlService.view === QuickControlView.FAN"></app-fan-quick-control>
+@if (quickControlService.isVisible()) {
+  <div class="quick-control-modal">
+    <app-top-bar [backButton]="true" (onBack)="onBack()">
+      <img [src]="icon$ | async" class="top-bar__center-icon" />
+    </app-top-bar>
+    <div class="control-wrapper">
+      @if (quickControlService.view === QuickControlView.HOTEND) {
+        <app-hotend-quick-control
+          id="quickControl"
+          (onSet)="onBack()"
+        [toolIndex]="quickControlService.selectedHotend"></app-hotend-quick-control>
+      }
+      @if (quickControlService.view === QuickControlView.HEATBED) {
+        <app-bed-quick-control
+          id="quickControl"
+          (onSet)="onBack()"
+        ></app-bed-quick-control>
+      }
+      @if (quickControlService.view === QuickControlView.FAN) {
+        <app-fan-quick-control
+          id="quickControl"
+          (onSet)="onBack()"
+        ></app-fan-quick-control>
+      }
+    </div>
   </div>
-</div>
+}
