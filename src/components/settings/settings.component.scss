@@ -298,17 +298,16 @@
     width: 8vw;
   }
 
-
-  input[type="text"],
-  input[type="number"] {
+  input[type='text'],
+  input[type='number'] {
     width: 44.94vw;
   }
 
   &__half {
     width: 25.6vw;
 
-    input[type="text"],
-    input[type="number"] {
+    input[type='text'],
+    input[type='number'] {
       width: 19vw;
     }
   }
@@ -317,7 +316,6 @@
     input {
       width: 19vw;
     }
-
   }
 
   &__made-in-berlin {
@@ -469,4 +467,3 @@
     left: 60vw;
   }
 }
-
