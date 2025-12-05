@@ -50,7 +50,6 @@
               id="octoprintURLName"
               class="settings__input"
               name="octoprintURLName"
-              style="width: 23.2vw"
               [(ngModel)]="this.octoprintURL.host"
               required /><span class="settings__input-divider">:</span>
             <input
@@ -58,7 +57,6 @@
               id="octoprintURLPort"
               class="settings__input"
               name="octoprintURLPort"
-              style="width: 8vw"
               [(ngModel)]="this.octoprintURL.port"
               required />
             <br />
@@ -71,12 +69,11 @@
               id="printerName"
               class="settings__input"
               name="printerName"
-              style="width: 44.94vw"
               [(ngModel)]="config.printer.name"
               required />
-            <table>
+            <table class="settings__printer">
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="xySpeed" class="settings__input-label">
                     <span i18n="@@general-xyspeed">XY-Speed (mm/s)</span>
                   </label>
@@ -85,11 +82,10 @@
                     id="xySpeed"
                     class="settings__input"
                     name="xySpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.xySpeed"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="zSpeed" class="settings__input-label">
                     <span i18n="@@general-zspeed">Z-Speed (mm/s)</span>
                   </label>
@@ -98,7 +94,6 @@
                     id="zSpeed"
                     class="settings__input"
                     name="zSpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.zSpeed"
                     required />
                 </td>
@@ -109,7 +104,7 @@
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="defaultHotendTemperature" class="settings__input-label" i18n="@@default-hotend">
                     Hotend
                     <span>(°C)</span>
@@ -119,11 +114,10 @@
                     id="defaultHotendTemperature"
                     class="settings__input"
                     name="defaultHotendTemperature"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="defaultHeatbedTemperature" class="settings__input-label" i18n="@@default-heatbed">
                     Heatbed
                     <span>(°C)</span>
@@ -133,13 +127,12 @@
                     id="defaultHeatbedTemperature"
                     class="settings__input"
                     name="defaultHeatbedTemperature"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
                     required />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="defaultFanSpeed" class="settings__input-label" i18n="@@default-fanspeed">
                     Fan Speed
                     <span>(%)</span>
@@ -149,7 +142,6 @@
                     id="defaultFanSpeed"
                     class="settings__input"
                     name="defaultFanSpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
                     required />
                 </td>
@@ -167,7 +159,7 @@
             <br />
             <table>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-feed-length" class="settings__input-label" i18n="@@general-feedlength">
                     Feed Length
                     <span>(mm)</span>
@@ -177,12 +169,11 @@
                     id="filament-feed-length"
                     class="settings__input"
                     name="filament-feed-length"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedLength"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
-                <td style="width: 25.6vw">
+                <td class="settings__half">
                   <label for="filament-purge-distance" class="settings__input-label" i18n="@@general-purge-distance">
                     Purge Distance
                     <span>(mm)</span>
@@ -192,14 +183,13 @@
                     id="filament-purge-distance"
                     class="settings__input"
                     name="filament-purge-distance"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.purgeDistance"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-feed-speed" class="settings__input-label" i18n="@@general-feedrate">
                     Feed Speed
                     <span>(mm/s)</span>
@@ -209,12 +199,11 @@
                     id="filament-feed-speed"
                     class="settings__input"
                     name="filament-feed-speed"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeed"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="filament-feed-speed-slow" class="settings__input-label" i18n="@@general-feedrate-slow">
                     Feed Speed Slow
                     <span>(mm/s)</span>
@@ -224,14 +213,13 @@
                     id="filament-feed-speed-slow"
                     class="settings__input"
                     name="filament-feed-speed-slow"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeedSlow"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-thickness" class="settings__input-label" i18n="@@general-thickness">
                     Thickness
                     <span>(mm)</span>
@@ -241,11 +229,10 @@
                     id="filament-thickness"
                     class="settings__input"
                     name="filament-thickness"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.thickness"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="filament-density" class="settings__input-label" i18n="@@general-density">
                     Density
                     <span>(g/cm³)</span>
@@ -255,7 +242,6 @@
                     id="filament-density"
                     class="settings__input"
                     name="filament-density"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.density"
                     required />
                 </td>
@@ -345,7 +331,6 @@
               id="defaultDirectory"
               class="settings__input"
               name="defaultDirectory"
-              style="width: 44.94vw"
               [(ngModel)]="config.octodash.defaultDirectory"
               required />
           </form>
@@ -414,7 +399,6 @@
             id="enclosure-ambient-id"
             class="settings__input"
             name="enclosure-ambient-id"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.enclosure.ambientSensorID"
             required
             [disabled]="!config.plugins.enclosure.enabled" />
@@ -477,7 +461,6 @@
             id="smart-plug-ip"
             class="settings__input"
             name="smart-plug-ip"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
             required
             [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
@@ -494,7 +477,6 @@
             id="tuya-label"
             class="settings__input"
             name="tuya-label"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tuya.label"
             required
             [disabled]="!config.plugins.tuya.enabled" />
@@ -511,7 +493,6 @@
             id="tasmota-ip"
             class="settings__input"
             name="tasmota-ip"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.ip"
             required
             [disabled]="!config.plugins.tasmota.enabled" />
@@ -521,7 +502,6 @@
             id="tasmota-idx"
             class="settings__input"
             name="tasmota-idx"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.index"
             [disabled]="!config.plugins.tasmota.enabled" />
           <span class="settings__heading-2">Tasmota MQTT</span>
@@ -537,7 +517,6 @@
             id="tasmotaMqtt-topic"
             class="settings__input"
             name="tasmotaMqtt-topic"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.topic"
             required
             [disabled]="!config.plugins.tasmotaMqtt.enabled" />
@@ -547,7 +526,6 @@
             id="tasmotaMqtt-relayNumber"
             class="settings__input"
             name="tasmotaMqtt-relayNumber"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
             [disabled]="!config.plugins.tasmotaMqtt.enabled" />
           <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
@@ -563,7 +541,6 @@
             id="wemoIP"
             class="settings__input"
             name="wemoIP"
-            style="width: 30vw"
             [(ngModel)]="config.plugins.wemo.ip"
             required
             [disabled]="!config.plugins.wemo.enabled" /><span class="settings__input-divider">:</span>
@@ -572,7 +549,6 @@
             id="wemoPort"
             class="settings__input"
             name="wemoPort"
-            style="width: 8vw"
             [(ngModel)]="config.plugins.wemo.port"
             required
             [disabled]="!config.plugins.wemo.enabled" />
