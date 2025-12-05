@@ -298,16 +298,14 @@
     width: 8vw;
   }
 
-  input[type='text'],
-  input[type='number'] {
+  input {
     width: 44.94vw;
   }
 
   &__half {
     width: 25.6vw;
 
-    input[type='text'],
-    input[type='number'] {
+    input {
       width: 19vw;
     }
   }
