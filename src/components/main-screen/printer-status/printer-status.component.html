@@ -1,69 +1,71 @@
-<div
-  class="printer-status"
-  *ngIf="printerStatus"
+@if (printerStatus) {
+  <div
+    class="printer-status"
   [ngClass]="{
     'printer-status__multi-hotend': extruderInfo.count > 1 && !extruderInfo.sharedNozzle,
   }">
-  <div class="printer-status__row">
-    <div
-      class="printer-status__item"
-      *ngFor="
-        let tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
-        index as i;
-        trackBy: extruderTrackBy
-      "
-      (click)="quickControlModalService.showQuickControlHotend(i)"
-      matRipple
-      [matRippleUnbounded]="false">
-      <app-hotend-icon
-        class="printer-status__icon"
-        [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
-      <div
-        class="printer-status__value"
+    <div class="printer-status__row">
+      @for (
+        tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools; track extruderTrackBy(i,
+        tool); let i = $index) {
+        <div
+          class="printer-status__item"
+          (click)="quickControlModalService.showQuickControlHotend(i)"
+          matRipple
+          [matRippleUnbounded]="false">
+          <app-hotend-icon
+            class="printer-status__icon"
+            [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
+          <div
+            class="printer-status__value"
         [ngClass]="{
           'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
           'printer-status__no-set-value': tool.set === 0,
         }">
-        <span class="printer-status__actual-value">
-          {{ tool.current }}<span class="printer-status__unit">°C</span>
-        </span>
-        <span class="printer-status__set-value" *ngIf="tool.set">
-          / {{ tool.set }}<span class="printer-status__unit">°C</span>
-        </span>
+            <span class="printer-status__actual-value">
+              {{ tool.current }}<span class="printer-status__unit">°C</span>
+            </span>
+            @if (tool.set) {
+              <span class="printer-status__set-value">
+                / {{ tool.set }}<span class="printer-status__unit">°C</span>
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <div class="printer-status__row">
+      <div
+        class="printer-status__item"
+        (click)="quickControlModalService.showQuickControlHeatbed()"
+        matRipple
+        [matRippleUnbounded]="false">
+        <img class="printer-status__icon" src="assets/heat-bed.svg" />
+        <div class="printer-status__value" [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }">
+          <span class="printer-status__actual-value">
+            {{ printerStatus.bed.current }}<span class="printer-status__unit">°C</span>
+          </span>
+          @if (printerStatus.bed.set) {
+            <span class="printer-status__set-value">
+              / {{ printerStatus.bed.set }}<span class="printer-status__unit">°C</span>
+            </span>
+          }
+        </div>
+      </div>
+      <div
+        class="printer-status__item"
+        (click)="quickControlModalService.showQuickControlFan()"
+        matRipple
+        [matRippleUnbounded]="false">
+        <img class="printer-status__icon" src="assets/fan.svg" />
+        <div class="printer-status__value printer-status__no-set-value">
+          <span class="printer-status__actual-value">
+            {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit">%</span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="printer-status__row">
-    <div
-      class="printer-status__item"
-      (click)="quickControlModalService.showQuickControlHeatbed()"
-      matRipple
-      [matRippleUnbounded]="false">
-      <img class="printer-status__icon" src="assets/heat-bed.svg" />
-      <div class="printer-status__value" [ngClass]="{ 'printer-status__no-set-value': printerStatus.bed.set === 0 }">
-        <span class="printer-status__actual-value">
-          {{ printerStatus.bed.current }}<span class="printer-status__unit">°C</span>
-        </span>
-        <span class="printer-status__set-value" *ngIf="printerStatus.bed.set">
-          / {{ printerStatus.bed.set }}<span class="printer-status__unit">°C</span>
-        </span>
-      </div>
-    </div>
-
-    <div
-      class="printer-status__item"
-      (click)="quickControlModalService.showQuickControlFan()"
-      matRipple
-      [matRippleUnbounded]="false">
-      <img class="printer-status__icon" src="assets/fan.svg" />
-      <div class="printer-status__value printer-status__no-set-value">
-        <span class="printer-status__actual-value">
-          {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit">%</span>
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
+}
 
 <app-quick-control-modal />

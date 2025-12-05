@@ -5,24 +5,27 @@
       cdkDropList
       cdkDropListOrientation="horizontal"
       (cdkDropListDropped)="reorderAction($event)">
-      <div
-        class="custom-actions__action"
-        *ngFor="let customAction of customActions; index as i"
-        [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
-        [style.border-color]="customAction.color"
-        long-press
-        (onShortPress)="doAction(customAction.command, customAction.exit, customAction.confirm)"
-        (onLongPress)="editing = i"
-        matRipple
-        [matRippleUnbounded]="false"
-        cdkDrag
-        [cdkDragStartDelay]="300">
-        <fa-icon
-          [icon]="customAction.icon"
-          class="custom-actions__action-icon"
-          [style.color]="customAction.color"
-          *ngIf="customAction.icon"></fa-icon>
-      </div>
+      @for (customAction of customActions; track customAction; let i = $index) {
+        <div
+          class="custom-actions__action"
+          [attr.disabled]="!printerConnected && !customAction.command.startsWith('[!')"
+          [style.border-color]="customAction.color"
+          long-press
+          (onShortPress)="doAction(customAction.command, customAction.exit, customAction.confirm)"
+          (onLongPress)="editing = i"
+          matRipple
+          [matRippleUnbounded]="false"
+          cdkDrag
+          [cdkDragStartDelay]="300">
+          @if (customAction.icon) {
+            <fa-icon
+              [icon]="customAction.icon"
+              class="custom-actions__action-icon"
+              [style.color]="customAction.color"
+            ></fa-icon>
+          }
+        </div>
+      }
     </div>
   </div>
 
@@ -32,108 +35,115 @@
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
     class="add__icon"
-    (click)="addAction()"></fa-icon>
+  (click)="addAction()"></fa-icon>
 </div>
 
-<div class="iframe" id="iframe" *ngIf="iframeOpen">
-  <span i18n="@@website-loading">loading website...</span>
-  <iframe
-    class="iframe__content"
-    [src]="iframeURL | url"
-    onerror="doActionConfirm()"
+@if (iframeOpen) {
+  <div class="iframe" id="iframe">
+    <span i18n="@@website-loading">loading website...</span>
+    <iframe
+      class="iframe__content"
+      [src]="iframeURL | url"
+      onerror="doActionConfirm()"
     allow="fullscreen; camera;"></iframe>
-  <fa-icon icon="xmark" class="iframe__close" (click)="hideIframe()" />
-</div>
-
-<div class="confirm__wrapper" *ngIf="actionToConfirm">
-  <div class="confirm">
-    <h1 i18n="@@are-you-sure">are you sure?</h1>
-    <p class="confirm__sub-heading" i18n="@@confirm-exec">do you want to execute the following command?</p>
-    <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
-    <fa-icon
-      icon="circle-check"
-      class="confirm__icon confirm__icon-yes"
-      (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)" />
-    <fa-icon icon="circle-xmark" class="confirm__icon confirm__icon-no" (click)="hideConfirm()" />
+    <fa-icon icon="xmark" class="iframe__close" (click)="hideIframe()" />
   </div>
-</div>
+}
 
-<div class="edit-panel" *ngIf="editing > -1">
-  <div class="edit-panel__container">
-    <label for="action-command" class="edit-panel__input-label" i18n="@@octodash-gcode">GCode / Action</label>
-    <input
-      type="string"
-      id="action-command"
-      class="edit-panel__input"
-      name="action-command"
-      style="width: 44.94vw; margin-bottom: -2vh"
-      [(ngModel)]="customActions[editing].command"
-      required />
-    <table>
-      <tr>
-        <td>
-          <label for="action-icon" class="edit-panel__input-label" i18n="@@action-icon">Icon</label>
-          <input
-            type="text"
-            id="action-icon"
-            class="edit-panel__input"
-            name="action-icon"
-            style="width: 14vw"
-            [(ngModel)]="customActions[editing].icon"
-            required />
-        </td>
-        <td style="padding-left: 3vw">
-          <label for="action-color" class="edit-panel__input-label" i18n="@@action-color">Color</label>
-          <input
-            type="text"
-            id="action-color"
-            class="edit-panel__input"
-            name="action-color"
-            style="width: 14vw"
-            [(ngModel)]="customActions[editing].color"
-            required />
-        </td>
-        <td>
-          <fa-icon
-            [icon]="customActions[editing].icon"
-            class="edit-panel__custom-action-icon"
+@if (actionToConfirm) {
+  <div class="confirm__wrapper">
+    <div class="confirm">
+      <h1 i18n="@@are-you-sure">are you sure?</h1>
+      <p class="confirm__sub-heading" i18n="@@confirm-exec">do you want to execute the following command?</p>
+      <p class="confirm__gcode">{{ actionToConfirm.command }}</p>
+      <fa-icon
+        icon="circle-check"
+        class="confirm__icon confirm__icon-yes"
+        (click)="doAction(actionToConfirm.command, actionToConfirm.exit, false)" />
+      <fa-icon icon="circle-xmark" class="confirm__icon confirm__icon-no" (click)="hideConfirm()" />
+    </div>
+  </div>
+}
+
+@if (editing > -1) {
+  <div class="edit-panel">
+    <div class="edit-panel__container">
+      <label for="action-command" class="edit-panel__input-label" i18n="@@octodash-gcode">GCode / Action</label>
+      <input
+        type="string"
+        id="action-command"
+        class="edit-panel__input"
+        name="action-command"
+        style="width: 44.94vw; margin-bottom: -2vh"
+        [(ngModel)]="customActions[editing].command"
+        required />
+      <table>
+        <tr>
+          <td>
+            <label for="action-icon" class="edit-panel__input-label" i18n="@@action-icon">Icon</label>
+            <input
+              type="text"
+              id="action-icon"
+              class="edit-panel__input"
+              name="action-icon"
+              style="width: 14vw"
+              [(ngModel)]="customActions[editing].icon"
+              required />
+          </td>
+          <td style="padding-left: 3vw">
+            <label for="action-color" class="edit-panel__input-label" i18n="@@action-color">Color</label>
+            <input
+              type="text"
+              id="action-color"
+              class="edit-panel__input"
+              name="action-color"
+              style="width: 14vw"
+              [(ngModel)]="customActions[editing].color"
+              required />
+          </td>
+          <td>
+            <fa-icon
+              [icon]="customActions[editing].icon"
+              class="edit-panel__custom-action-icon"
             [style.color]="customActions[editing].color"></fa-icon>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div
-            class="edit-panel__checkbox-container"
-            (click)="customActions[editing].confirm = !customActions[editing].confirm">
-            <span class="edit-panel__checkbox">
-              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editing].confirm"></span>
-            </span>
-            <span class="edit-panel__checkbox-descriptor" i18n="@@action-confirm">Confirm</span>
-          </div>
-        </td>
-
-        <td style="padding-left: 3vw" colspan="2">
-          <div
-            class="edit-panel__checkbox-container"
-            (click)="customActions[editing].exit = !customActions[editing].exit">
-            <span class="edit-panel__checkbox">
-              <span class="edit-panel__checkbox-checked" *ngIf="customActions[editing].exit"></span>
-            </span>
-            <span class="edit-panel__checkbox-descriptor" i18n="@@action-home">Return to Home</span>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    <p class="edit-panel__attribution" i18n="@@octodash-custom-icon-attribution">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div
+              class="edit-panel__checkbox-container"
+              (click)="customActions[editing].confirm = !customActions[editing].confirm">
+              <span class="edit-panel__checkbox">
+                @if (customActions[editing].confirm) {
+                  <span class="edit-panel__checkbox-checked"></span>
+                }
+              </span>
+              <span class="edit-panel__checkbox-descriptor" i18n="@@action-confirm">Confirm</span>
+            </div>
+          </td>
+          <td style="padding-left: 3vw" colspan="2">
+            <div
+              class="edit-panel__checkbox-container"
+              (click)="customActions[editing].exit = !customActions[editing].exit">
+              <span class="edit-panel__checkbox">
+                @if (customActions[editing].exit) {
+                  <span class="edit-panel__checkbox-checked"></span>
+                }
+              </span>
+              <span class="edit-panel__checkbox-descriptor" i18n="@@action-home">Return to Home</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <p class="edit-panel__attribution" i18n="@@octodash-custom-icon-attribution">
       Icons come from FontAwesome's free Classic Solid pack
     </p>
-
-    <br />
-    <p class="edit-panel__delete" (click)="deleteAction(editing); editing = -1" i18n="@@ui-delete">delete</p>
-    <p class="edit-panel__close" (click)="updateActionsInConfig(); editing = -1" i18n="@@ui-close">close</p>
+      <br />
+      <p class="edit-panel__delete" (click)="deleteAction(editing); editing = -1" i18n="@@ui-delete">delete</p>
+      <p class="edit-panel__close" (click)="updateActionsInConfig(); editing = -1" i18n="@@ui-close">close</p>
+    </div>
   </div>
-</div>
+}
 
 <fa-icon
   icon="caret-up"
@@ -142,4 +152,4 @@
   [matRippleUnbounded]="true"
   [matRippleCentered]="true"
   class="toggle__icon"
-  [ngClass]="{ visible: visible }"></fa-icon>
+[ngClass]="{ visible: visible }"></fa-icon>

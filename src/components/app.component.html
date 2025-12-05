@@ -1,45 +1,50 @@
 <app-notification></app-notification>
-<app-action-center
-  *ngIf="initialized && showActionCenterIcon()"
+@if (initialized && showActionCenterIcon()) {
+  <app-action-center
   [closeEvent]="hideActionCenterEvent.asObservable()"></app-action-center>
+}
 <div class="container" (click)="hideActionCenter()">
-  <div *ngIf="!activated">
-    <app-settings-icon></app-settings-icon>
-    <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
-    <span
-      class="splash-screen__text"
-      [ngClass]="{ 'loading-dots': status === 'connecting' || status === 'initializing' }"
-      >{{ status }}</span
-    >
-    <span class="splash-screen__hint" *ngIf="showConnectionHint" i18n="@@long-init"
-      >Initializing is taking longer than usual...<br />
+  @if (!activated) {
+    <div>
+      <app-settings-icon></app-settings-icon>
+      <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
+      <span
+        class="splash-screen__text"
+        [ngClass]="{ 'loading-dots': status === 'connecting' || status === 'initializing' }"
+        >{{ status }}</span
+        >
+        @if (showConnectionHint) {
+          <span class="splash-screen__hint" i18n="@@long-init"
+            >Initializing is taking longer than usual...<br />
       Please make sure that OctoPrint is running and that CORS is enabled for the API.</span
-    >
-  </div>
+            >
+          }
+        </div>
+      }
 
-  <router-outlet (activate)="activated = true"></router-outlet>
-</div>
+      <router-outlet (activate)="activated = true"></router-outlet>
+    </div>
 
-<ng-container *ngIf="!loadingAnimationCached">
-  <ng-lottie
-    id="loadingAnimationCache"
-    [hidden]="true"
-    [options]="loadingOptionsCache"
-    (dataReady)="loadingAnimationCacheDone()"></ng-lottie>
-</ng-container>
+    @if (!loadingAnimationCached) {
+      <ng-lottie
+        id="loadingAnimationCache"
+        [hidden]="true"
+        [options]="loadingOptionsCache"
+      (dataReady)="loadingAnimationCacheDone()"></ng-lottie>
+    }
 
-<ng-container *ngIf="!checkmarkAnimationCached">
-  <ng-lottie
-    id="checkmarkAnimationCache"
-    [hidden]="true"
-    [options]="checkmarkOptionsCache"
-    (dataReady)="checkmarkAnimationCacheDone()"></ng-lottie>
-</ng-container>
+    @if (!checkmarkAnimationCached) {
+      <ng-lottie
+        id="checkmarkAnimationCache"
+        [hidden]="true"
+        [options]="checkmarkOptionsCache"
+      (dataReady)="checkmarkAnimationCacheDone()"></ng-lottie>
+    }
 
-<ng-container *ngIf="!toggleSwitchAnimationCached">
-  <ng-lottie
-    id="toggleSwitchAnimationCache"
-    [hidden]="true"
-    [options]="toggleSwitchOptionsCache"
-    (dataReady)="toggleSwitchAnimationCacheDone()"></ng-lottie>
-</ng-container>
+    @if (!toggleSwitchAnimationCached) {
+      <ng-lottie
+        id="toggleSwitchAnimationCache"
+        [hidden]="true"
+        [options]="toggleSwitchOptionsCache"
+      (dataReady)="toggleSwitchAnimationCacheDone()"></ng-lottie>
+    }

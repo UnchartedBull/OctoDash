@@ -27,266 +27,266 @@
           [ngStyle]="{ opacity: service.updateAvailable ? '0.7' : '0' }"
           i18n="@@update-available"
           >Update available!</span
-        >
-        <span class="settings__save" i18n="@@ui-save" (click)="updateConfig()">save</span>
-        <span class="settings__made"
-          >made with <fa-icon icon="heart" class="settings__made-heart"></fa-icon> by UnchartedBull + contributors</span
-        >
-      </div>
-      <div class="settings__content settings__content-inactive" #settingsGeneral>
-        <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
-          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
-          <span i18n="@@settings-general-menu">general</span>
-        </span>
-        <div class="settings__scroll">
-          <span class="settings__heading-2" i18n="@@general-octoprint-connection">OctoPrint Connection</span>
-          <form class="settings__form">
-            <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url"
-              >Octoprint URL</label
+          >
+          <span class="settings__save" i18n="@@ui-save" (click)="updateConfig()">save</span>
+          <span class="settings__made"
+            >made with <fa-icon icon="heart" class="settings__made-heart"></fa-icon> by UnchartedBull + contributors</span
             >
-            <span class="settings__input-prefix">http://</span>
-            <input
-              type="text"
-              id="octoprintURLName"
-              class="settings__input"
-              name="octoprintURLName"
-              [(ngModel)]="this.octoprintURL.host"
-              required /><span class="settings__input-divider">:</span>
-            <input
-              type="text"
-              id="octoprintURLPort"
-              class="settings__input"
-              name="octoprintURLPort"
-              [(ngModel)]="this.octoprintURL.port"
-              required />
-            <br />
-          </form>
-          <span class="settings__heading-2" i18n="@@general-printer">Printer</span>
-          <form class="settings__form">
-            <label for="printerName" class="settings__input-label" i18n="@@general-name">Name</label>
-            <input
-              type="text"
-              id="printerName"
-              class="settings__input"
-              name="printerName"
-              [(ngModel)]="config.printer.name"
-              required />
-            <table class="settings__printer">
-              <tr>
-                <td class="settings__half">
-                  <label for="xySpeed" class="settings__input-label">
-                    <span i18n="@@general-xyspeed">XY-Speed (mm/s)</span>
-                  </label>
+          </div>
+          <div class="settings__content settings__content-inactive" #settingsGeneral>
+            <span class="settings__heading" (click)="changePage(0, 1, 'backward')">
+              <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
+              <span i18n="@@settings-general-menu">general</span>
+            </span>
+            <div class="settings__scroll">
+              <span class="settings__heading-2" i18n="@@general-octoprint-connection">OctoPrint Connection</span>
+              <form class="settings__form">
+                <label for="octoprintURLName" class="settings__input-label" i18n="@@general-octoprint-url"
+                  >Octoprint URL</label
+                  >
+                  <span class="settings__input-prefix">http://</span>
                   <input
-                    type="number"
-                    id="xySpeed"
+                    type="text"
+                    id="octoprintURLName"
                     class="settings__input"
-                    name="xySpeed"
-                    [(ngModel)]="config.printer.xySpeed"
-                    required />
-                </td>
-                <td class="settings__half">
-                  <label for="zSpeed" class="settings__input-label">
-                    <span i18n="@@general-zspeed">Z-Speed (mm/s)</span>
-                  </label>
-                  <input
-                    type="number"
-                    id="zSpeed"
-                    class="settings__input"
-                    name="zSpeed"
-                    [(ngModel)]="config.printer.zSpeed"
-                    required />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2" class="settings__sub-heading" i18n="@@general-default">
+                    name="octoprintURLName"
+                    [(ngModel)]="this.octoprintURL.host"
+                    required /><span class="settings__input-divider">:</span>
+                    <input
+                      type="text"
+                      id="octoprintURLPort"
+                      class="settings__input"
+                      name="octoprintURLPort"
+                      [(ngModel)]="this.octoprintURL.port"
+                      required />
+                    <br />
+                  </form>
+                  <span class="settings__heading-2" i18n="@@general-printer">Printer</span>
+                  <form class="settings__form">
+                    <label for="printerName" class="settings__input-label" i18n="@@general-name">Name</label>
+                    <input
+                      type="text"
+                      id="printerName"
+                      class="settings__input"
+                      name="printerName"
+                      [(ngModel)]="config.printer.name"
+                      required />
+                    <table class="settings__printer">
+                      <tr>
+                        <td class="settings__half">
+                          <label for="xySpeed" class="settings__input-label">
+                            <span i18n="@@general-xyspeed">XY-Speed (mm/s)</span>
+                          </label>
+                          <input
+                            type="number"
+                            id="xySpeed"
+                            class="settings__input"
+                            name="xySpeed"
+                            [(ngModel)]="config.printer.xySpeed"
+                            required />
+                        </td>
+                        <td class="settings__half">
+                          <label for="zSpeed" class="settings__input-label">
+                            <span i18n="@@general-zspeed">Z-Speed (mm/s)</span>
+                          </label>
+                          <input
+                            type="number"
+                            id="zSpeed"
+                            class="settings__input"
+                            name="zSpeed"
+                            [(ngModel)]="config.printer.zSpeed"
+                            required />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" class="settings__sub-heading" i18n="@@general-default">
                   Default Temperatures & Fan Speed
                 </td>
-              </tr>
-              <tr>
-                <td class="settings__half">
-                  <label for="defaultHotendTemperature" class="settings__input-label" i18n="@@default-hotend">
+                      </tr>
+                      <tr>
+                        <td class="settings__half">
+                          <label for="defaultHotendTemperature" class="settings__input-label" i18n="@@default-hotend">
                     Hotend
                     <span>(°C)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultHotendTemperature"
-                    class="settings__input"
-                    name="defaultHotendTemperature"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
-                    required />
-                </td>
-                <td class="settings__half">
-                  <label for="defaultHeatbedTemperature" class="settings__input-label" i18n="@@default-heatbed">
+                          <input
+                            type="number"
+                            id="defaultHotendTemperature"
+                            class="settings__input"
+                            name="defaultHotendTemperature"
+                            [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
+                            required />
+                        </td>
+                        <td class="settings__half">
+                          <label for="defaultHeatbedTemperature" class="settings__input-label" i18n="@@default-heatbed">
                     Heatbed
                     <span>(°C)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultHeatbedTemperature"
-                    class="settings__input"
-                    name="defaultHeatbedTemperature"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
-                    required />
-                </td>
-              </tr>
-              <tr>
-                <td class="settings__half">
-                  <label for="defaultFanSpeed" class="settings__input-label" i18n="@@default-fanspeed">
+                          <input
+                            type="number"
+                            id="defaultHeatbedTemperature"
+                            class="settings__input"
+                            name="defaultHeatbedTemperature"
+                            [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
+                            required />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="settings__half">
+                          <label for="defaultFanSpeed" class="settings__input-label" i18n="@@default-fanspeed">
                     Fan Speed
                     <span>(%)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="defaultFanSpeed"
-                    class="settings__input"
-                    name="defaultFanSpeed"
-                    [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
-                    required />
-                </td>
-              </tr>
-            </table>
-          </form>
-          <span class="settings__heading-2" i18n="@@general-filament">Filament</span>
-          <form class="settings__form">
-            <app-toggle-switch
-              class="settings__toggle-switch"
-              [value]="config.filament.useM600"
-              (valueChange)="config.filament.useM600 = !config.filament.useM600">
-              <span class="settings__toggle-switch-descriptor" i18n="@@general-m600">Use M600 to change Filament</span>
-            </app-toggle-switch>
-            <br />
-            <table>
-              <tr>
-                <td class="settings__half">
-                  <label for="filament-feed-length" class="settings__input-label" i18n="@@general-feedlength">
+                          <input
+                            type="number"
+                            id="defaultFanSpeed"
+                            class="settings__input"
+                            name="defaultFanSpeed"
+                            [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
+                            required />
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                  <span class="settings__heading-2" i18n="@@general-filament">Filament</span>
+                  <form class="settings__form">
+                    <app-toggle-switch
+                      class="settings__toggle-switch"
+                      [value]="config.filament.useM600"
+                      (valueChange)="config.filament.useM600 = !config.filament.useM600">
+                      <span class="settings__toggle-switch-descriptor" i18n="@@general-m600">Use M600 to change Filament</span>
+                    </app-toggle-switch>
+                    <br />
+                    <table>
+                      <tr>
+                        <td class="settings__half">
+                          <label for="filament-feed-length" class="settings__input-label" i18n="@@general-feedlength">
                     Feed Length
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-length"
-                    class="settings__input"
-                    name="filament-feed-length"
-                    [(ngModel)]="config.filament.feedLength"
-                    required
-                    [disabled]="config.filament.useM600" />
-                </td>
-                <td class="settings__half">
-                  <label for="filament-purge-distance" class="settings__input-label" i18n="@@general-purge-distance">
+                          <input
+                            type="number"
+                            id="filament-feed-length"
+                            class="settings__input"
+                            name="filament-feed-length"
+                            [(ngModel)]="config.filament.feedLength"
+                            required
+                            [disabled]="config.filament.useM600" />
+                        </td>
+                        <td class="settings__half">
+                          <label for="filament-purge-distance" class="settings__input-label" i18n="@@general-purge-distance">
                     Purge Distance
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-purge-distance"
-                    class="settings__input"
-                    name="filament-purge-distance"
-                    [(ngModel)]="config.filament.purgeDistance"
-                    required
-                    [disabled]="config.filament.useM600" />
-                </td>
-              </tr>
-              <tr>
-                <td class="settings__half">
-                  <label for="filament-feed-speed" class="settings__input-label" i18n="@@general-feedrate">
+                          <input
+                            type="number"
+                            id="filament-purge-distance"
+                            class="settings__input"
+                            name="filament-purge-distance"
+                            [(ngModel)]="config.filament.purgeDistance"
+                            required
+                            [disabled]="config.filament.useM600" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="settings__half">
+                          <label for="filament-feed-speed" class="settings__input-label" i18n="@@general-feedrate">
                     Feed Speed
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-speed"
-                    class="settings__input"
-                    name="filament-feed-speed"
-                    [(ngModel)]="config.filament.feedSpeed"
-                    required
-                    [disabled]="config.filament.useM600" />
-                </td>
-                <td class="settings__half">
-                  <label for="filament-feed-speed-slow" class="settings__input-label" i18n="@@general-feedrate-slow">
+                          <input
+                            type="number"
+                            id="filament-feed-speed"
+                            class="settings__input"
+                            name="filament-feed-speed"
+                            [(ngModel)]="config.filament.feedSpeed"
+                            required
+                            [disabled]="config.filament.useM600" />
+                        </td>
+                        <td class="settings__half">
+                          <label for="filament-feed-speed-slow" class="settings__input-label" i18n="@@general-feedrate-slow">
                     Feed Speed Slow
                     <span>(mm/s)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-feed-speed-slow"
-                    class="settings__input"
-                    name="filament-feed-speed-slow"
-                    [(ngModel)]="config.filament.feedSpeedSlow"
-                    required
-                    [disabled]="config.filament.useM600" />
-                </td>
-              </tr>
-              <tr>
-                <td class="settings__half">
-                  <label for="filament-thickness" class="settings__input-label" i18n="@@general-thickness">
+                          <input
+                            type="number"
+                            id="filament-feed-speed-slow"
+                            class="settings__input"
+                            name="filament-feed-speed-slow"
+                            [(ngModel)]="config.filament.feedSpeedSlow"
+                            required
+                            [disabled]="config.filament.useM600" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="settings__half">
+                          <label for="filament-thickness" class="settings__input-label" i18n="@@general-thickness">
                     Thickness
                     <span>(mm)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-thickness"
-                    class="settings__input"
-                    name="filament-thickness"
-                    [(ngModel)]="config.filament.thickness"
-                    required />
-                </td>
-                <td class="settings__half">
-                  <label for="filament-density" class="settings__input-label" i18n="@@general-density">
+                          <input
+                            type="number"
+                            id="filament-thickness"
+                            class="settings__input"
+                            name="filament-thickness"
+                            [(ngModel)]="config.filament.thickness"
+                            required />
+                        </td>
+                        <td class="settings__half">
+                          <label for="filament-density" class="settings__input-label" i18n="@@general-density">
                     Density
                     <span>(g/cm³)</span>
                   </label>
-                  <input
-                    type="number"
-                    id="filament-density"
-                    class="settings__input"
-                    name="filament-density"
-                    [(ngModel)]="config.filament.density"
-                    required />
-                </td>
-              </tr>
-            </table>
-            <div class="filament-feed-speed-info" i18n="@@general-warning">
+                          <input
+                            type="number"
+                            id="filament-density"
+                            class="settings__input"
+                            name="filament-density"
+                            [(ngModel)]="config.filament.density"
+                            required />
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="filament-feed-speed-info" i18n="@@general-warning">
               Please set these values carefully, as they possibly can destroy parts of your printer, just don't set your
               Feed Speed to high and your Feed Length to long.
             </div>
-          </form>
-          <br />
-        </div>
-      </div>
-      <div class="settings__content settings__content-inactive" #settingsOctoDash>
-        <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
-          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
-          octodash
-        </span>
-        <div class="settings__scroll">
-          <span class="settings__heading-2" i18n="@@octodash-general">General</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.showExtruderControl"
-            (valueChange)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
-            <span class="settings__toggle-switch-descriptor" i18n="@@show-extruder-controls"
-              >Show extruder controls</span
-            >
-          </app-toggle-switch>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.turnScreenOffWhileSleeping"
-            (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
-            <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
-          </app-toggle-switch>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.showActionCenterIcon"
-            (valueChange)="config.octodash.showActionCenterIcon = !config.octodash.showActionCenterIcon">
-            <span class="settings__toggle-switch-descriptor" i18n="@@show-action-center-icon"
-              >Show icon for Action Center</span
-            >
-          </app-toggle-switch>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.turnOnPrinterWhenExitingSleep"
+                  </form>
+                  <br />
+                </div>
+              </div>
+              <div class="settings__content settings__content-inactive" #settingsOctoDash>
+                <span class="settings__heading" (click)="changePage(0, 2, 'backward')">
+                  <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
+                  octodash
+                </span>
+                <div class="settings__scroll">
+                  <span class="settings__heading-2" i18n="@@octodash-general">General</span>
+                  <app-toggle-switch
+                    class="settings__toggle-switch"
+                    [value]="config.octodash.showExtruderControl"
+                    (valueChange)="config.octodash.showExtruderControl = !config.octodash.showExtruderControl">
+                    <span class="settings__toggle-switch-descriptor" i18n="@@show-extruder-controls"
+                      >Show extruder controls</span
+                      >
+                    </app-toggle-switch>
+                    <app-toggle-switch
+                      class="settings__toggle-switch"
+                      [value]="config.octodash.turnScreenOffWhileSleeping"
+                      (valueChange)="config.octodash.turnScreenOffWhileSleeping = !config.octodash.turnScreenOffWhileSleeping">
+                      <span class="settings__toggle-switch-descriptor" i18n="@@screen-off">Turn screen off while sleeping</span>
+                    </app-toggle-switch>
+                    <app-toggle-switch
+                      class="settings__toggle-switch"
+                      [value]="config.octodash.showActionCenterIcon"
+                      (valueChange)="config.octodash.showActionCenterIcon = !config.octodash.showActionCenterIcon">
+                      <span class="settings__toggle-switch-descriptor" i18n="@@show-action-center-icon"
+                        >Show icon for Action Center</span
+                        >
+                      </app-toggle-switch>
+                      <app-toggle-switch
+                        class="settings__toggle-switch"
+                        [value]="config.octodash.turnOnPrinterWhenExitingSleep"
             (valueChange)="
               config.octodash.turnOnPrinterWhenExitingSleep = !config.octodash.turnOnPrinterWhenExitingSleep
             "
@@ -301,338 +301,353 @@
                 config.plugins.wemo.enabled
               )
             ">
-            <span class="settings__toggle-switch-descriptor" i18n="@@turn-on-after-sleep"
-              >Turn on printer when exiting sleep</span
-            >
-          </app-toggle-switch>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.preferPreviewWhilePrinting"
-            (valueChange)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
-            <span class="settings__toggle-switch-descriptor" i18n="@@default-preview"
-              >Preview by default while printing</span
-            >
-          </app-toggle-switch>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.octodash.previewProgressCircle"
-            (valueChange)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle">
-            <span class="settings__toggle-switch-descriptor" i18n="@@preview-progress-circle"
-              >Always use circular progress bar</span
-            >
-          </app-toggle-switch>
-          <br />
-          <form class="settings__form">
-            <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory"
-              >Default directory for file browser</label
-            >
-            <input
-              type="text"
-              id="defaultDirectory"
-              class="settings__input"
-              name="defaultDirectory"
-              [(ngModel)]="config.octodash.defaultDirectory"
-              required />
-          </form>
-          <br />
-          <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>
-          <div
-            class="settings__checkbox-container settings__checkbox-container__space-right"
-            (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.x"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">X</span>
-          </div>
-          <div
-            class="settings__checkbox-container settings__checkbox-container__space-right"
-            (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.y"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">Y</span>
-          </div>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.z"></span>
-            </span>
-            <span class="settings__checkbox-descriptor">Z</span>
-          </div>
-          <br />
-        </div>
-      </div>
-      <div class="settings__content settings__content-inactive" #settingsPlugins>
-        <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
-          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
-          <span i18n="@@settings-plugins">plugins</span>
-        </span>
-        <div class="settings__scroll">
-          <span class="settings__heading-2" i18n="@@settings-octodash-companion">OctoDash Companion</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.companion.enabled"
-            (valueChange)="config.plugins.companion.enabled = !config.plugins.companion.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.displayLayerProgress.enabled"
-            (valueChange)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-enclosure">Enclosure</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.enclosure.enabled"
-            (valueChange)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="enclosure-ambient-id" class="settings__input-label" i18n="@@settings-ambiant-sensor">
+                        <span class="settings__toggle-switch-descriptor" i18n="@@turn-on-after-sleep"
+                          >Turn on printer when exiting sleep</span
+                          >
+                        </app-toggle-switch>
+                        <app-toggle-switch
+                          class="settings__toggle-switch"
+                          [value]="config.octodash.preferPreviewWhilePrinting"
+                          (valueChange)="config.octodash.preferPreviewWhilePrinting = !config.octodash.preferPreviewWhilePrinting">
+                          <span class="settings__toggle-switch-descriptor" i18n="@@default-preview"
+                            >Preview by default while printing</span
+                            >
+                          </app-toggle-switch>
+                          <app-toggle-switch
+                            class="settings__toggle-switch"
+                            [value]="config.octodash.previewProgressCircle"
+                            (valueChange)="config.octodash.previewProgressCircle = !config.octodash.previewProgressCircle">
+                            <span class="settings__toggle-switch-descriptor" i18n="@@preview-progress-circle"
+                              >Always use circular progress bar</span
+                              >
+                            </app-toggle-switch>
+                            <br />
+                            <form class="settings__form">
+                              <label for="defaultDirectory" class="settings__input-label" i18n="@@default-directory"
+                                >Default directory for file browser</label
+                                >
+                                <input
+                                  type="text"
+                                  id="defaultDirectory"
+                                  class="settings__input"
+                                  name="defaultDirectory"
+                                  [(ngModel)]="config.octodash.defaultDirectory"
+                                  required />
+                              </form>
+                              <br />
+                              <span class="settings__heading-2" i18n="@@invert-axis-control">Invert Axis Control</span>
+                              <div
+                                class="settings__checkbox-container settings__checkbox-container__space-right"
+                                (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x">
+                                <span class="settings__checkbox">
+                                  @if (config.octodash.invertAxisControl.x) {
+                                    <span class="settings__checkbox-checked"></span>
+                                  }
+                                </span>
+                                <span class="settings__checkbox-descriptor">X</span>
+                              </div>
+                              <div
+                                class="settings__checkbox-container settings__checkbox-container__space-right"
+                                (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y">
+                                <span class="settings__checkbox">
+                                  @if (config.octodash.invertAxisControl.y) {
+                                    <span class="settings__checkbox-checked"></span>
+                                  }
+                                </span>
+                                <span class="settings__checkbox-descriptor">Y</span>
+                              </div>
+                              <div
+                                class="settings__checkbox-container"
+                                (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z">
+                                <span class="settings__checkbox">
+                                  @if (config.octodash.invertAxisControl.z) {
+                                    <span class="settings__checkbox-checked"></span>
+                                  }
+                                </span>
+                                <span class="settings__checkbox-descriptor">Z</span>
+                              </div>
+                              <br />
+                            </div>
+                          </div>
+                          <div class="settings__content settings__content-inactive" #settingsPlugins>
+                            <span class="settings__heading" (click)="changePage(0, 3, 'backward')">
+                              <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
+                              <span i18n="@@settings-plugins">plugins</span>
+                            </span>
+                            <div class="settings__scroll">
+                              <span class="settings__heading-2" i18n="@@settings-octodash-companion">OctoDash Companion</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.companion.enabled"
+                                (valueChange)="config.plugins.companion.enabled = !config.plugins.companion.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.displayLayerProgress.enabled"
+                                (valueChange)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-enclosure">Enclosure</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.enclosure.enabled"
+                                (valueChange)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <label for="enclosure-ambient-id" class="settings__input-label" i18n="@@settings-ambiant-sensor">
             Ambient Sensor
             <span>(ID)</span>
           </label>
-          <input
-            type="number"
-            id="enclosure-ambient-id"
-            class="settings__input"
-            name="enclosure-ambient-id"
-            [(ngModel)]="config.plugins.enclosure.ambientSensorID"
-            required
-            [disabled]="!config.plugins.enclosure.enabled" />
+                              <input
+                                type="number"
+                                id="enclosure-ambient-id"
+                                class="settings__input"
+                                name="enclosure-ambient-id"
+                                [(ngModel)]="config.plugins.enclosure.ambientSensorID"
+                                required
+                                [disabled]="!config.plugins.enclosure.enabled" />
 
-          <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.filamentManager.enabled"
-            (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.spoolManager.enabled"
-            (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.filamentManager.enabled"
+                                (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.spoolManager.enabled"
+                                (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
 
-          <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.preheatButton.enabled"
-            (valueChange)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-print-time-genius">Print Time Genius</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.printTimeGenius.enabled"
-            (valueChange)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-psu-control">PSU Control</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.psuControl.enabled"
-            (valueChange)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.ophom.enabled"
-            (valueChange)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.tpLinkSmartPlug.enabled"
-            (valueChange)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
-            >SmartPlug IP</label
-          >
-          <input
-            type="text"
-            id="smart-plug-ip"
-            class="settings__input"
-            name="smart-plug-ip"
-            [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
-            required
-            [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
-          <span class="settings__heading-2" i18n="@@settings-tuya">Tuya Smart Plug</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.tuya.enabled"
-            (valueChange)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
-          <input
-            type="text"
-            id="tuya-label"
-            class="settings__input"
-            name="tuya-label"
-            [(ngModel)]="config.plugins.tuya.label"
-            required
-            [disabled]="!config.plugins.tuya.enabled" />
-          <span class="settings__heading-2">Tasmota</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.tasmota.enabled"
-            (valueChange)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="tasmota-ip" class="settings__input-label">IP</label>
-          <input
-            type="text"
-            id="tasmota-ip"
-            class="settings__input"
-            name="tasmota-ip"
-            [(ngModel)]="config.plugins.tasmota.ip"
-            required
-            [disabled]="!config.plugins.tasmota.enabled" />
-          <label for="tasmota-idx" class="settings__input-label">Index</label>
-          <input
-            type="number"
-            id="tasmota-idx"
-            class="settings__input"
-            name="tasmota-idx"
-            [(ngModel)]="config.plugins.tasmota.index"
-            [disabled]="!config.plugins.tasmota.enabled" />
-          <span class="settings__heading-2">Tasmota MQTT</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.tasmotaMqtt.enabled"
-            (valueChange)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="tasmotaMqtt-topic" class="settings__input-label">Topic</label>
-          <input
-            type="text"
-            id="tasmotaMqtt-topic"
-            class="settings__input"
-            name="tasmotaMqtt-topic"
-            [(ngModel)]="config.plugins.tasmotaMqtt.topic"
-            required
-            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
-          <label for="tasmotaMqtt-relayNumber" class="settings__input-label">Relay Number</label>
-          <input
-            type="number"
-            id="tasmotaMqtt-relayNumber"
-            class="settings__input"
-            name="tasmotaMqtt-relayNumber"
-            [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
-            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
-          <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
-          <app-toggle-switch
-            class="settings__toggle-switch"
-            [value]="config.plugins.wemo.enabled"
-            (valueChange)="config.plugins.wemo.enabled = !config.plugins.wemo.enabled">
-            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
-          </app-toggle-switch>
-          <label for="wemoIP" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
-          <input
-            type="text"
-            id="wemoIP"
-            class="settings__input"
-            name="wemoIP"
-            [(ngModel)]="config.plugins.wemo.ip"
-            required
-            [disabled]="!config.plugins.wemo.enabled" /><span class="settings__input-divider">:</span>
-          <input
-            type="text"
-            id="wemoPort"
-            class="settings__input"
-            name="wemoPort"
-            [(ngModel)]="config.plugins.wemo.port"
-            required
-            [disabled]="!config.plugins.wemo.enabled" />
-        </div>
-      </div>
-      <div class="settings__content settings__content-inactive" #settingsCredits>
-        <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
-          <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
-          <span i18n="@@about">about</span>
-        </span>
-        <div class="settings__scroll">
-          <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
-          <span class="settings__about-version">v{{ service.getVersion() }}</span>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="service.dev"
-            i18n="@@about-developer-mode">
+                              <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.preheatButton.enabled"
+                                (valueChange)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-print-time-genius">Print Time Genius</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.printTimeGenius.enabled"
+                                (valueChange)="config.plugins.printTimeGenius.enabled = !config.plugins.printTimeGenius.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-psu-control">PSU Control</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.psuControl.enabled"
+                                (valueChange)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.ophom.enabled"
+                                (valueChange)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
+                              <app-toggle-switch
+                                class="settings__toggle-switch"
+                                [value]="config.plugins.tpLinkSmartPlug.enabled"
+                                (valueChange)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
+                                <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                              </app-toggle-switch>
+                              <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
+                                >SmartPlug IP</label
+                                >
+                                <input
+                                  type="text"
+                                  id="smart-plug-ip"
+                                  class="settings__input"
+                                  name="smart-plug-ip"
+                                  [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
+                                  required
+                                  [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
+                                <span class="settings__heading-2" i18n="@@settings-tuya">Tuya Smart Plug</span>
+                                <app-toggle-switch
+                                  class="settings__toggle-switch"
+                                  [value]="config.plugins.tuya.enabled"
+                                  (valueChange)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
+                                  <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                                </app-toggle-switch>
+                                <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
+                                <input
+                                  type="text"
+                                  id="tuya-label"
+                                  class="settings__input"
+                                  name="tuya-label"
+                                  [(ngModel)]="config.plugins.tuya.label"
+                                  required
+                                  [disabled]="!config.plugins.tuya.enabled" />
+                                <span class="settings__heading-2">Tasmota</span>
+                                <app-toggle-switch
+                                  class="settings__toggle-switch"
+                                  [value]="config.plugins.tasmota.enabled"
+                                  (valueChange)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
+                                  <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                                </app-toggle-switch>
+                                <label for="tasmota-ip" class="settings__input-label">IP</label>
+                                <input
+                                  type="text"
+                                  id="tasmota-ip"
+                                  class="settings__input"
+                                  name="tasmota-ip"
+                                  [(ngModel)]="config.plugins.tasmota.ip"
+                                  required
+                                  [disabled]="!config.plugins.tasmota.enabled" />
+                                <label for="tasmota-idx" class="settings__input-label">Index</label>
+                                <input
+                                  type="number"
+                                  id="tasmota-idx"
+                                  class="settings__input"
+                                  name="tasmota-idx"
+                                  [(ngModel)]="config.plugins.tasmota.index"
+                                  [disabled]="!config.plugins.tasmota.enabled" />
+                                <span class="settings__heading-2">Tasmota MQTT</span>
+                                <app-toggle-switch
+                                  class="settings__toggle-switch"
+                                  [value]="config.plugins.tasmotaMqtt.enabled"
+                                  (valueChange)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
+                                  <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                                </app-toggle-switch>
+                                <label for="tasmotaMqtt-topic" class="settings__input-label">Topic</label>
+                                <input
+                                  type="text"
+                                  id="tasmotaMqtt-topic"
+                                  class="settings__input"
+                                  name="tasmotaMqtt-topic"
+                                  [(ngModel)]="config.plugins.tasmotaMqtt.topic"
+                                  required
+                                  [disabled]="!config.plugins.tasmotaMqtt.enabled" />
+                                <label for="tasmotaMqtt-relayNumber" class="settings__input-label">Relay Number</label>
+                                <input
+                                  type="number"
+                                  id="tasmotaMqtt-relayNumber"
+                                  class="settings__input"
+                                  name="tasmotaMqtt-relayNumber"
+                                  [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
+                                  [disabled]="!config.plugins.tasmotaMqtt.enabled" />
+                                <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
+                                <app-toggle-switch
+                                  class="settings__toggle-switch"
+                                  [value]="config.plugins.wemo.enabled"
+                                  (valueChange)="config.plugins.wemo.enabled = !config.plugins.wemo.enabled">
+                                  <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+                                </app-toggle-switch>
+                                <label for="wemoIP" class="settings__input-label" i18n="@@settings-wemo-ip">Wemo IP</label>
+                                <input
+                                  type="text"
+                                  id="wemoIP"
+                                  class="settings__input"
+                                  name="wemoIP"
+                                  [(ngModel)]="config.plugins.wemo.ip"
+                                  required
+                                  [disabled]="!config.plugins.wemo.enabled" /><span class="settings__input-divider">:</span>
+                                  <input
+                                    type="text"
+                                    id="wemoPort"
+                                    class="settings__input"
+                                    name="wemoPort"
+                                    [(ngModel)]="config.plugins.wemo.port"
+                                    required
+                                    [disabled]="!config.plugins.wemo.enabled" />
+                                </div>
+                              </div>
+                              <div class="settings__content settings__content-inactive" #settingsCredits>
+                                <span class="settings__heading" (click)="changePage(0, 4, 'backward')">
+                                  <fa-icon icon="chevron-left" class="settings__heading-back"></fa-icon>
+                                  <span i18n="@@about">about</span>
+                                </span>
+                                <div class="settings__scroll">
+                                  <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
+                                  <span class="settings__about-version">v{{ service.getVersion() }}</span>
+                                  @if (service.dev) {
+                                    <button
+                                      class="settings__about-update settings__about-update-not-available"
+                                      i18n="@@about-developer-mode">
             updates disabled (dev mode)
           </button>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="!(service.updateAvailable || service.dev)"
-            (click)="showUpdate()"
-            i18n="@@about-no-update">
+                                  }
+                                  @if (!(service.updateAvailable || service.dev)) {
+                                    <button
+                                      class="settings__about-update settings__about-update-not-available"
+                                      (click)="showUpdate()"
+                                      i18n="@@about-no-update">
             up to date
           </button>
-          <button
-            class="settings__about-update settings__about-update-available"
-            *ngIf="service.updateAvailable"
-            (click)="showUpdate()"
-            i18n="@@about-install-v">
+                                  }
+                                  @if (service.updateAvailable) {
+                                    <button
+                                      class="settings__about-update settings__about-update-available"
+                                      (click)="showUpdate()"
+                                      i18n="@@about-install-v">
             install {{ service.latestVersion.title }}
           </button>
-          <span class="settings__about-copyright">
-            &#169; 2019-2025 UnchartedBull + various contributors<br />
-            https://github.com/UnchartedBull/OctoDash
-          </span>
-          <span class="settings__heading-2" i18n="@@connection">Connection</span>
-          <p class="settings__text" *ngIf="{ address: localIpAddress$ | async } as vm">
-            {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
-          </p>
-          <span class="settings__heading-2" i18n="@@licence">License</span>
-          <p class="settings__text">
-            Licensed under the Apache 2.0 License.
-            <br />
-            http://www.apache.org/licenses/LICENSE-2.0
-            <br />
-            <br />
-            Unless required by applicable law or agreed to in writing, software distributed under the License is
-            distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-            See the License for the specific language governing permissions and limitations under the License.
-          </p>
-          <span class="settings__heading-2">Icons</span>
-          <ul class="settings__text">
-            <li>"Hot Surface" by Adrien Coquet from thenounproject.com</li>
-            <li>"Fan" by ArtLumika from thenounproject.com</li>
-            <li>"Printer 3d nozzle outline Icon" from icon-icons.com</li>
-            <li>"Invalid Code" by Arthur Shlain from thenounproject.com</li>
-            <li>"Sliders" by Danny Lelieveld from thenounproject.com</li>
-            <li>"Pause" by Danny Lelieveld from thenounproject.com</li>
-            <li>"Play" by Danny Lelieveld from thenounproject.com</li>
-            <li>"3d printer filament" by Cono Studio Milano from thenounproject.com</li>
-            <li>"Folder" by romzicon from thenounproject.com</li>
-            <li>"joystick" by ProSymbols from thenounproject.com</li>
-            <li>"Heat" by Adrien Coquet from thenounproject.com</li>
-            <li>"cubes" by artworkbean from thenounproject.com</li>
-            <li>"height" by Ralf Schmitzer from thenounproject.com</li>
-            <li>"connect" by Sebastian Belalcazar Lareo from thenounproject.com</li>
-            <li>All other icons from FontAwesome Classic Solid pack</li>
-          </ul>
-          <span class="settings__heading-2" i18n="@@special-thanks">Special Thanks</span>
-          <p class="settings__text" i18n="@@special-thanks-message">
+                                  }
+                                  <span class="settings__about-copyright">
+                                    &#169; 2019-2025 UnchartedBull + various contributors<br />
+                                    https://github.com/UnchartedBull/OctoDash
+                                  </span>
+                                  <span class="settings__heading-2" i18n="@@connection">Connection</span>
+                                  @if ({ address: localIpAddress$ | async }; as vm) {
+                                    <p class="settings__text">
+                                      {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
+                                    </p>
+                                  }
+                                  <span class="settings__heading-2" i18n="@@licence">License</span>
+                                  <p class="settings__text">
+                                    Licensed under the Apache 2.0 License.
+                                    <br />
+                                    http://www.apache.org/licenses/LICENSE-2.0
+                                    <br />
+                                    <br />
+                                    Unless required by applicable law or agreed to in writing, software distributed under the License is
+                                    distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                    See the License for the specific language governing permissions and limitations under the License.
+                                  </p>
+                                  <span class="settings__heading-2">Icons</span>
+                                  <ul class="settings__text">
+                                    <li>"Hot Surface" by Adrien Coquet from thenounproject.com</li>
+                                    <li>"Fan" by ArtLumika from thenounproject.com</li>
+                                    <li>"Printer 3d nozzle outline Icon" from icon-icons.com</li>
+                                    <li>"Invalid Code" by Arthur Shlain from thenounproject.com</li>
+                                    <li>"Sliders" by Danny Lelieveld from thenounproject.com</li>
+                                    <li>"Pause" by Danny Lelieveld from thenounproject.com</li>
+                                    <li>"Play" by Danny Lelieveld from thenounproject.com</li>
+                                    <li>"3d printer filament" by Cono Studio Milano from thenounproject.com</li>
+                                    <li>"Folder" by romzicon from thenounproject.com</li>
+                                    <li>"joystick" by ProSymbols from thenounproject.com</li>
+                                    <li>"Heat" by Adrien Coquet from thenounproject.com</li>
+                                    <li>"cubes" by artworkbean from thenounproject.com</li>
+                                    <li>"height" by Ralf Schmitzer from thenounproject.com</li>
+                                    <li>"connect" by Sebastian Belalcazar Lareo from thenounproject.com</li>
+                                    <li>All other icons from FontAwesome Classic Solid pack</li>
+                                  </ul>
+                                  <span class="settings__heading-2" i18n="@@special-thanks">Special Thanks</span>
+                                  <p class="settings__text" i18n="@@special-thanks-message">
             Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue!
           </p>
-          <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
-          <hr />
-          <p class="settings_reset-button" (click)="showReset()">
-            <span i18n="@@reset-config">Reset Config</span>
-            <fa-icon icon="chevron-right"></fa-icon>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>
-<app-reset *ngIf="reset" (closeFunction)="hideReset()"></app-reset>
+                                  <img src="assets/made-in-berlin.png" class="settings__made-in-berlin" />
+                                  <hr />
+                                  <p class="settings_reset-button" (click)="showReset()">
+                                    <span i18n="@@reset-config">Reset Config</span>
+                                    <fa-icon icon="chevron-right"></fa-icon>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        @if (update) {
+                          <app-update (closeFunction)="hideUpdate()"></app-update>
+                        }
+                        @if (reset) {
+                          <app-reset (closeFunction)="hideReset()"></app-reset>
+                        }

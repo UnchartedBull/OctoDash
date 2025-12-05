@@ -1,57 +1,66 @@
 <span class="setup__text" i18n="@@select-instance">
   First things first: Please select your OctoPrint instance from the list below or enter the IP/URL manually.
 </span>
-<div *ngIf="!manualURL">
-  <div class="discover-octoprint__wrapper">
-    <span
-      *ngFor="let node of octoprintNodes"
-      class="discover-octoprint__node"
+@if (!manualURL) {
+  <div>
+    <div class="discover-octoprint__wrapper">
+      @for (node of octoprintNodes; track node) {
+        <span
+          class="discover-octoprint__node"
       [ngClass]="{
         'discover-octoprint__node-disabled': node.disabled,
       }"
-      (click)="setOctoprintInstance(node)">
-      <div class="discover-octoprint__node-name">
-        {{ node.name }}
-        <br />
-        <span class="discover-octoprint__node-upgrade" i18n="@@octoprint-upgrade-required" *ngIf="node.disabled">
+          (click)="setOctoprintInstance(node)">
+          <div class="discover-octoprint__node-name">
+            {{ node.name }}
+            <br />
+            @if (node.disabled) {
+              <span class="discover-octoprint__node-upgrade" i18n="@@octoprint-upgrade-required">
           Upgrade Required /
         </span>
-        <span class="discover-octoprint__node-details" i18n="@@version-url">
+            }
+            <span class="discover-octoprint__node-details" i18n="@@version-url">
           Version {{ node.version }}, URL: {{ node.url }}
         </span>
-      </div>
-    </span>
-    <span class="discover-octoprint__searching loading-dots" *ngIf="!octoprintNodes" i18n="@@searching">searching</span>
+          </div>
+        </span>
+      }
+      @if (!octoprintNodes) {
+        <span class="discover-octoprint__searching loading-dots" i18n="@@searching">searching</span>
+      }
+    </div>
+    <div class="discover-octoprint__manual" (click)="enterURLManually()" i18n="@@enter-manually">enter manually</div>
   </div>
-  <div class="discover-octoprint__manual" (click)="enterURLManually()" i18n="@@enter-manually">enter manually</div>
-</div>
-<div *ngIf="manualURL">
-  <form class="setup__form" style="margin-top: 5vh">
-    <span class="setup__input-prefix">http://</span>
-    <input
-      type="text"
-      id="octoprintURLName"
-      class="setup__input"
-      [ngModel]="urlSplit.host"
-      (ngModelChange)="changeHost($event)"
-      name="octoprintURLName"
-      required
-      style="width: 42.5vw" />
-    :
-    <input
-      type="text"
-      id="octoprintURLPort"
-      class="setup__input"
-      [ngModel]="urlSplit.port"
-      (ngModelChange)="changePort($event)"
-      name="octoprintURLPort"
-      required
-      style="width: 14vw" />
-    <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
+}
+@if (manualURL) {
+  <div>
+    <form class="setup__form" style="margin-top: 5vh">
+      <span class="setup__input-prefix">http://</span>
+      <input
+        type="text"
+        id="octoprintURLName"
+        class="setup__input"
+        [ngModel]="urlSplit.host"
+        (ngModelChange)="changeHost($event)"
+        name="octoprintURLName"
+        required
+        style="width: 42.5vw" />
+      :
+      <input
+        type="text"
+        id="octoprintURLPort"
+        class="setup__input"
+        [ngModel]="urlSplit.port"
+        (ngModelChange)="changePort($event)"
+        name="octoprintURLPort"
+        required
+        style="width: 14vw" />
+      <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
       Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
     </p>
-  </form>
-  <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
+    </form>
+    <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
     search again
   </div>
-</div>
+  </div>
+}
