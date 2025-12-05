@@ -7,12 +7,12 @@ on:
 
 jobs:
   auto-approve:
+    if: false && github.actor == 'dependabot[bot]'
     name: Approve
     runs-on: ubuntu-latest
     steps:
       - name: Auto Approve
         uses: hmarr/auto-approve-action@v4
-        if: false && github.actor == 'dependabot[bot]'
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
   auto-merge:
