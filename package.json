@@ -91,7 +91,7 @@
     "@angular/platform-browser": "^21.0.3",
     "@angular/platform-browser-dynamic": "^21.0.3",
     "@angular/router": "^21.0.3",
-    "@fortawesome/angular-fontawesome": "~3.0.0",
+    "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/free-solid-svg-icons": "~7.1.0",
     "ajv": "~8.17.1",
     "angular-svg-round-progressbar": "^15.0.0",
@@ -110,7 +110,7 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.3.13",
+    "@angular-devkit/build-angular": "^21.0.2",
     "@angular/cli": "^21.0.2",
     "@angular/compiler-cli": "^21.0.3",
     "@angular/language-service": "^21.0.3",
