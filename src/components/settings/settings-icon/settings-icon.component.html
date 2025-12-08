@@ -1,9 +1,5 @@
 @if (configService.isLoaded()) {
-  <div
-    class="settings-icon"
-    matRipple
-    [matRippleUnbounded]="true"
-    [matRippleCentered]="true">
+  <div class="settings-icon" matRipple [matRippleUnbounded]="true" [matRippleCentered]="true">
     <fa-icon icon="gear" (click)="showSettings()" />
     @if (service.updateAvailable) {
       <div class="settings-icon__update-notifier"></div>

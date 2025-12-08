@@ -1,13 +1,15 @@
 @if (printerStatus) {
   <div
     class="printer-status"
-  [ngClass]="{
-    'printer-status__multi-hotend': extruderInfo.count > 1 && !extruderInfo.sharedNozzle,
-  }">
+    [ngClass]="{
+      'printer-status__multi-hotend': extruderInfo.count > 1 && !extruderInfo.sharedNozzle,
+    }">
     <div class="printer-status__row">
       @for (
-        tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools; track extruderTrackBy(i,
-        tool); let i = $index) {
+        tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
+        track extruderTrackBy(i, tool);
+        let i = $index
+      ) {
         <div
           class="printer-status__item"
           (click)="quickControlModalService.showQuickControlHotend(i)"
@@ -18,10 +20,10 @@
             [tool]="extruderInfo.count > 1 && !extruderInfo.sharedNozzle ? i : -1" />
           <div
             class="printer-status__value"
-        [ngClass]="{
-          'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
-          'printer-status__no-set-value': tool.set === 0,
-        }">
+            [ngClass]="{
+              'printer-status__small-text': extruderInfo.count > 2 && !extruderInfo.sharedNozzle,
+              'printer-status__no-set-value': tool.set === 0,
+            }">
             <span class="printer-status__actual-value">
               {{ tool.current }}<span class="printer-status__unit">°C</span>
             </span>
@@ -60,7 +62,8 @@
         <img class="printer-status__icon" src="assets/fan.svg" />
         <div class="printer-status__value printer-status__no-set-value">
           <span class="printer-status__actual-value">
-            {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- ' }}<span class="printer-status__unit">%</span>
+            {{ printerStatus.fanSpeed >= 0 ? printerStatus.fanSpeed : '-- '
+            }}<span class="printer-status__unit">%</span>
           </span>
         </div>
       </div>

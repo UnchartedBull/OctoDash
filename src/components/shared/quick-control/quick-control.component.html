@@ -20,12 +20,7 @@
 
     <div class="quick-control-row">
       @if (!hideSet) {
-        <div
-          class="quick-control-set"
-          colspan="2"
-          (click)="setValue()"
-          matRipple
-          [matRippleUnbounded]="false">
+        <div class="quick-control-set" colspan="2" (click)="setValue()" matRipple [matRippleUnbounded]="false">
           <span class="quick-control-set-span">set</span>
         </div>
       }
@@ -36,11 +31,7 @@
       <div>Loading options...</div>
     }
     @for (option of options; track option) {
-      <div
-        matRipple
-        [matRippleUnbounded]="false"
-        (click)="changeValue(option.value)"
-        class="quick-control-row">
+      <div matRipple [matRippleUnbounded]="false" (click)="changeValue(option.value)" class="quick-control-row">
         <div>{{ option.value }}{{ unit }}</div>
         <div>{{ option.label }}</div>
       </div>

@@ -2,11 +2,7 @@
 <table class="tools">
   <tr>
     @for (x of numSequence(toolCount); track x; let i = $index) {
-      <td
-        class="tool"
-        matRipple
-        [matRippleUnbounded]="false"
-        (click)="setTool(i)">
+      <td class="tool" matRipple [matRippleUnbounded]="false" (click)="setTool(i)">
         <p i18n="@@tool-selection">Tool {{ i }}</p>
       </td>
     }

@@ -2,39 +2,37 @@
   <span class="filament-heading" i18n="@@load-new-filament">load new filament into tool {{ selectedTool }}</span>
   <span class="change-filament__info" i18n="@@load-new-filament-message"
     >only put a little filament in, I'll pull in the rest.</span
-    >
-  } @else {
-    <span class="filament-heading" i18n="@@filament-m600">M600 sent</span>
-    <span class="change-filament__info" i18n="@@follow-printer-screen"
-      >follow the instructions on your printer's display</span
+  >
+} @else {
+  <span class="filament-heading" i18n="@@filament-m600">M600 sent</span>
+  <span class="change-filament__info" i18n="@@follow-printer-screen"
+    >follow the instructions on your printer's display</span
+  >
+}
+
+@if (selectedSpool) {
+  <div class="change-filament__spool">
+    <div class="heating__information-type">
+      <span
+        class="heating__information-type-box"
+        [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
+        >{{ selectedSpool.material }}</span
       >
-    }
+    </div>
+    <span class="change-filament__filament-name">{{ selectedSpool.displayName }}</span>
+    <span class="change-filament__filament-weight"
+      >{{ getSpoolWeightLeft(selectedSpool.weight, selectedSpool.used)
+      }}<span i18n="@@filament-grams-left">g left</span></span
+    >
+  </div>
+} @else {
+  <div class="change-filament__name-wrapper" style="margin-top: 15vh">
+    <span class="change-filament__filament-name" i18n="@@ui-waiting-for-user">I'll wait for you.</span>
+  </div>
+}
 
-    @if (selectedSpool) {
-      <div class="change-filament__spool">
-        <div class="heating__information-type">
-          <span
-            class="heating__information-type-box"
-            [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
-            >{{ selectedSpool.material }}</span
-            >
-          </div>
-          <span class="change-filament__filament-name">{{ selectedSpool.displayName }}</span>
-          <span class="change-filament__filament-weight"
-            >{{ getSpoolWeightLeft(selectedSpool.weight, selectedSpool.used)
-            }}<span i18n="@@filament-grams-left">g left</span></span
-            >
-          </div>
-        } @else {
-          <div class="change-filament__name-wrapper" style="margin-top: 15vh">
-            <span class="change-filament__filament-name" i18n="@@ui-waiting-for-user">I'll wait for you.</span>
-          </div>
-        }
-
-        <div class="filament__wrapper-button">
-          <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage.emit()" i18n="@@ui-done"
-            >done</a
-            >
-          </div>
-
-
+<div class="filament__wrapper-button">
+  <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage.emit()" i18n="@@ui-done"
+    >done</a
+  >
+</div>

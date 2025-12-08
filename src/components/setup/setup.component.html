@@ -17,16 +17,14 @@
     <app-config-setup-discover-octoprint
       (increasePage)="increasePage()"
       (changeURLEntryMethod)="changeURLEntryMethod($event)"
-      [(octoprintURL)]="config.octoprint.url"
-    ></app-config-setup-discover-octoprint>
+      [(octoprintURL)]="config.octoprint.url"></app-config-setup-discover-octoprint>
   }
 
   @if (page === 2) {
     <app-config-setup-octoprint-authentication
       [octoprintURL]="config.octoprint.url.replace('api/', '')"
       (increasePage)="increasePage()"
-      [(accessToken)]="config.octoprint.accessToken"
-    ></app-config-setup-octoprint-authentication>
+      [(accessToken)]="config.octoprint.accessToken"></app-config-setup-octoprint-authentication>
   }
 
   @if (page === 3) {
@@ -34,15 +32,13 @@
       [octoprintURL]="config.octoprint.url"
       [apiKey]="config.octoprint.accessToken"
       [(printerName)]="config.printer.name"
-      [(useTouchscreen)]="config.octodash.touchscreen"
-    ></app-config-setup-personalization>
+      [(useTouchscreen)]="config.octodash.touchscreen"></app-config-setup-personalization>
   }
 
   @if (page === 4) {
     <app-config-setup-extruder-information
       [(feedLength)]="config.filament.feedLength"
-      [(feedSpeed)]="config.filament.feedSpeed"
-    ></app-config-setup-extruder-information>
+      [(feedSpeed)]="config.filament.feedSpeed"></app-config-setup-extruder-information>
   }
 
   @if (page === 5) {
@@ -60,7 +56,7 @@
       [(tyuaPlugin)]="config.plugins.tuya.enabled"
       [(tasmotaPlugin)]="config.plugins.tasmota.enabled"
       [(tasmotaMqttPlugin)]="config.plugins.tasmotaMqtt.enabled"
-    [(wemoPlugin)]="config.plugins.wemo.enabled"></app-config-setup-plugins>
+      [(wemoPlugin)]="config.plugins.wemo.enabled"></app-config-setup-plugins>
   }
 
   @if (page === 6) {

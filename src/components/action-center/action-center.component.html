@@ -21,8 +21,7 @@
             <fa-icon
               [icon]="customAction.icon"
               class="custom-actions__action-icon"
-              [style.color]="customAction.color"
-            ></fa-icon>
+              [style.color]="customAction.color"></fa-icon>
           }
         </div>
       }
@@ -35,7 +34,7 @@
     [matRippleUnbounded]="true"
     [matRippleCentered]="true"
     class="add__icon"
-  (click)="addAction()"></fa-icon>
+    (click)="addAction()"></fa-icon>
 </div>
 
 @if (iframeOpen) {
@@ -45,7 +44,7 @@
       class="iframe__content"
       [src]="iframeURL | url"
       onerror="doActionConfirm()"
-    allow="fullscreen; camera;"></iframe>
+      allow="fullscreen; camera;"></iframe>
     <fa-icon icon="xmark" class="iframe__close" (click)="hideIframe()" />
   </div>
 }
@@ -102,7 +101,7 @@
             <fa-icon
               [icon]="customActions[editing].icon"
               class="edit-panel__custom-action-icon"
-            [style.color]="customActions[editing].color"></fa-icon>
+              [style.color]="customActions[editing].color"></fa-icon>
           </td>
         </tr>
         <tr>
@@ -133,8 +132,8 @@
         </tr>
       </table>
       <p class="edit-panel__attribution" i18n="@@octodash-custom-icon-attribution">
-      Icons come from FontAwesome's free Classic Solid pack
-    </p>
+        Icons come from FontAwesome's free Classic Solid pack
+      </p>
       <br />
       <p class="edit-panel__delete" (click)="deleteAction(editing); editing = -1" i18n="@@ui-delete">delete</p>
       <p class="edit-panel__close" (click)="updateActionsInConfig(); editing = -1" i18n="@@ui-close">close</p>
@@ -149,4 +148,4 @@
   [matRippleUnbounded]="true"
   [matRippleCentered]="true"
   class="toggle__icon"
-[ngClass]="{ visible: visible }"></fa-icon>
+  [ngClass]="{ visible: visible }"></fa-icon>

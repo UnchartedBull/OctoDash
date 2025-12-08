@@ -25,10 +25,7 @@
 @if (loading === 0) {
   <div class="files">
     @if (!directory || (directory.files?.length === 0 && directory.folders?.length === 0)) {
-      <div
-        class="files__error">
-        can't load files ...
-      </div>
+      <div class="files__error">can't load files ...</div>
     } @else {
       <div>
         @if (currentFolder !== homeFolder && currentFolder !== '') {
@@ -43,11 +40,7 @@
           </div>
         }
         @for (folder of directory.folders; track folder) {
-          <div
-            (click)="openFolder(folder.path)"
-            matRipple
-            [matRippleUnbounded]="false"
-            class="files__object">
+          <div (click)="openFolder(folder.path)" matRipple [matRippleUnbounded]="false" class="files__object">
             <img src="assets/folder.svg" class="files__icon" />
             <div class="files__info">
               <span class="files__info-value">
@@ -109,14 +102,10 @@
         <tr>
           <td>{{ fileDetail.size }}<span class="file__details-name" i18n="@@files-mb-3">mb</span></td>
           @if (fileDetail.hasOwnProperty('printTime')) {
-            <td>
-              {{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span>
-            </td>
+            <td>{{ fileDetail.printTime }}<span class="file__details-name" i18n="@@files-h-2">h</span></td>
           }
           @if (fileDetail.hasOwnProperty('filamentWeight')) {
-            <td>
-              {{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span>
-            </td>
+            <td>{{ fileDetail.filamentWeight }}<span class="file__details-name" i18n="@@files-g-2">g</span></td>
           }
         </tr>
       </table>

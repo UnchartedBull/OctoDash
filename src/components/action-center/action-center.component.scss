@@ -267,7 +267,6 @@
     border: 2px solid var(--border);
     border-radius: 1vw;
 
-
     &-container {
       display: inline-block;
       position: relative;
@@ -327,7 +326,8 @@
   }
 
   #action-command {
-    width: 44.94vw; margin-bottom: -2vh;
+    width: 44.94vw;
+    margin-bottom: -2vh;
   }
 
   #action-icon {

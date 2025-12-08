@@ -8,18 +8,15 @@
   </span>
 } @else {
   @if (height && !(height.current === 0 && height.total === 0)) {
-    <span
-      class="height-indication"
-      i18n="@@height-layer-status"
+    <span class="height-indication" i18n="@@height-layer-status"
       >Layer
-    <span class="height-indication__current-height">
-      {{ height.current }}
+      <span class="height-indication__current-height">
+        {{ height.current }}
+      </span>
+      of
+      <span class="height-indication__total-height">
+        {{ height.total >= 0 ? height.total : '---' }}
+      </span>
     </span>
-    of
-    <span class="height-indication__total-height">
-      {{ height.total >= 0 ? height.total : '---' }}
-    </span>
-  </span>
   }
 }
-

@@ -7,21 +7,21 @@
       @for (node of octoprintNodes; track node) {
         <span
           class="discover-octoprint__node"
-      [ngClass]="{
-        'discover-octoprint__node-disabled': node.disabled,
-      }"
+          [ngClass]="{
+            'discover-octoprint__node-disabled': node.disabled,
+          }"
           (click)="setOctoprintInstance(node)">
           <div class="discover-octoprint__node-name">
             {{ node.name }}
             <br />
             @if (node.disabled) {
               <span class="discover-octoprint__node-upgrade" i18n="@@octoprint-upgrade-required">
-          Upgrade Required /
-        </span>
+                Upgrade Required /
+              </span>
             }
             <span class="discover-octoprint__node-details" i18n="@@version-url">
-          Version {{ node.version }}, URL: {{ node.url }}
-        </span>
+              Version {{ node.version }}, URL: {{ node.url }}
+            </span>
           </div>
         </span>
       }
@@ -43,8 +43,7 @@
         [ngModel]="urlSplit.host"
         (ngModelChange)="changeHost($event)"
         name="octoprintURLName"
-        required
-         />
+        required />
       :
       <input
         type="text"
@@ -53,14 +52,11 @@
         [ngModel]="urlSplit.port"
         (ngModelChange)="changePort($event)"
         name="octoprintURLPort"
-        required
-        />
+        required />
       <p class="setup__input-prefix" i18n="@@port-recommendation">
-      Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
-    </p>
+        Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
+      </p>
     </form>
-    <div class="discover-octoprint__manual" (click)="searchForInstance()" i18n="@@search-again">
-    search again
-  </div>
+    <div class="discover-octoprint__manual" (click)="searchForInstance()" i18n="@@search-again">search again</div>
   </div>
 }

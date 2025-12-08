@@ -14,9 +14,7 @@
 
 <div class="filament">
   @if (page === 0 && !showCheckmark) {
-    <app-filament-choose-tool
-      (toolChange)="setTool($event)"
-    ></app-filament-choose-tool>
+    <app-filament-choose-tool (toolChange)="setTool($event)"></app-filament-choose-tool>
   }
   @if (page === 1) {
     <app-filament-choose-spool (spoolChange)="setSpool($event)"></app-filament-choose-spool>
@@ -26,39 +24,38 @@
       (increasePage)="increasePage()"
       [currentSpool]="currentSpool"
       [selectedSpool]="selectedSpool"
-      [selectedTool]="selectedTool"
-    ></app-filament-heat-nozzle>
+      [selectedTool]="selectedTool"></app-filament-heat-nozzle>
   }
   @if (page === 3) {
     <app-filament-move-filament
       (increasePage)="increasePage()"
       [currentSpool]="currentSpool"
-    [action]="'unload'"></app-filament-move-filament>
+      [action]="'unload'"></app-filament-move-filament>
   }
   @if (page === 4) {
     <app-filament-change-filament
       (increasePage)="increasePage()"
       [selectedSpool]="selectedSpool"
-    [selectedTool]="selectedTool"></app-filament-change-filament>
+      [selectedTool]="selectedTool"></app-filament-change-filament>
   }
   @if (page === 5) {
     <app-filament-move-filament
       (increasePage)="increasePage()"
       [selectedSpool]="selectedSpool"
       [selectedTool]="selectedTool"
-    [action]="'load'"></app-filament-move-filament>
+      [action]="'load'"></app-filament-move-filament>
   }
   @if (page === 6 && !showCheckmark) {
     <app-filament-purge-filament
       [selectedTool]="selectedTool"
-    (purgeDone)="setSpoolSelection()"></app-filament-purge-filament>
+      (purgeDone)="setSpoolSelection()"></app-filament-purge-filament>
   }
   @if (showCheckmark) {
     <div class="checkmark">
       <ng-lottie
         id="checkmarkAnimation"
         [options]="checkmarkOptions"
-      (animationCreated)="setAnimationSpeed($event)"></ng-lottie>
+        (animationCreated)="setAnimationSpeed($event)"></ng-lottie>
     </div>
   }
 </div>
