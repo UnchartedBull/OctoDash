@@ -340,7 +340,9 @@
             class="settings__checkbox-container settings__checkbox-container__space-right"
             (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.x"></span>
+              @if (config.octodash.invertAxisControl.x) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">X</span>
           </div>
@@ -348,7 +350,9 @@
             class="settings__checkbox-container settings__checkbox-container__space-right"
             (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.y"></span>
+              @if (config.octodash.invertAxisControl.y) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">Y</span>
           </div>
@@ -356,7 +360,9 @@
             class="settings__checkbox-container"
             (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.z"></span>
+              @if (config.octodash.invertAxisControl.z) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">Z</span>
           </div>
@@ -562,34 +568,37 @@
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
           <span class="settings__about-version">v{{ service.getVersion() }}</span>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="service.dev"
-            i18n="@@about-developer-mode">
-            updates disabled (dev mode)
-          </button>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="!(service.updateAvailable || service.dev)"
-            (click)="showUpdate()"
-            i18n="@@about-no-update">
-            up to date
-          </button>
-          <button
-            class="settings__about-update settings__about-update-available"
-            *ngIf="service.updateAvailable"
-            (click)="showUpdate()"
-            i18n="@@about-install-v">
-            install {{ service.latestVersion.title }}
-          </button>
+          @if (service.dev) {
+            <button class="settings__about-update settings__about-update-not-available" i18n="@@about-developer-mode">
+              updates disabled (dev mode)
+            </button>
+          }
+          @if (!(service.updateAvailable || service.dev)) {
+            <button
+              class="settings__about-update settings__about-update-not-available"
+              (click)="showUpdate()"
+              i18n="@@about-no-update">
+              up to date
+            </button>
+          }
+          @if (service.updateAvailable) {
+            <button
+              class="settings__about-update settings__about-update-available"
+              (click)="showUpdate()"
+              i18n="@@about-install-v">
+              install {{ service.latestVersion.title }}
+            </button>
+          }
           <span class="settings__about-copyright">
             &#169; 2019-2025 UnchartedBull + various contributors<br />
             https://github.com/UnchartedBull/OctoDash
           </span>
           <span class="settings__heading-2" i18n="@@connection">Connection</span>
-          <p class="settings__text" *ngIf="{ address: localIpAddress$ | async } as vm">
-            {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
-          </p>
+          @if ({ address: localIpAddress$ | async }; as vm) {
+            <p class="settings__text">
+              {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
+            </p>
+          }
           <span class="settings__heading-2" i18n="@@licence">License</span>
           <p class="settings__text">
             Licensed under the Apache 2.0 License.
@@ -634,5 +643,9 @@
     </div>
   </div>
 </div>
-<app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>
-<app-reset *ngIf="reset" (closeFunction)="hideReset()"></app-reset>
+@if (update) {
+  <app-update (closeFunction)="hideUpdate()"></app-update>
+}
+@if (reset) {
+  <app-reset (closeFunction)="hideReset()"></app-reset>
+}

@@ -1,21 +1,29 @@
 <table class="top-bar">
   <tr>
-    <td class="top-bar__back" matRipple [matRippleUnbounded]="false" *ngIf="back" (click)="onBack.emit(true)">
-      <fa-icon [icon]="back.icon" class="top-bar__back-icon" />
-      {{ back.text }}
-    </td>
-    <td class="top-bar__back" *ngIf="!back">
-      <ng-content select="left-text"></ng-content>
-    </td>
+    @if (back) {
+      <td class="top-bar__back" matRipple [matRippleUnbounded]="false" (click)="onBack.emit(true)">
+        <fa-icon [icon]="back.icon" class="top-bar__back-icon" />
+        {{ back.text }}
+      </td>
+    }
+    @if (!back) {
+      <td class="top-bar__back">
+        <ng-content select="left-text"></ng-content>
+      </td>
+    }
     <td class="top-bar__center">
       <ng-content></ng-content>
     </td>
-    <td class="top-bar__next" matRipple [matRippleUnbounded]="false" *ngIf="next" (click)="onNext.emit(true)">
-      {{ next.text }}
-      <fa-icon [icon]="next.icon" class="top-bar__next-icon" />
-    </td>
-    <td class="top-bar__next" *ngIf="!next">
-      <ng-content select="right-text"></ng-content>
-    </td>
+    @if (next) {
+      <td class="top-bar__next" matRipple [matRippleUnbounded]="false" (click)="onNext.emit(true)">
+        {{ next.text }}
+        <fa-icon [icon]="next.icon" class="top-bar__next-icon" />
+      </td>
+    }
+    @if (!next) {
+      <td class="top-bar__next">
+        <ng-content select="right-text"></ng-content>
+      </td>
+    }
   </tr>
 </table>

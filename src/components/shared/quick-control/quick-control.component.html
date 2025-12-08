@@ -19,27 +19,22 @@
     </div>
 
     <div class="quick-control-row">
-      <div
-        *ngIf="!hideSet"
-        class="quick-control-set"
-        colspan="2"
-        (click)="setValue()"
-        matRipple
-        [matRippleUnbounded]="false">
-        <span class="quick-control-set-span">set</span>
-      </div>
+      @if (!hideSet) {
+        <div class="quick-control-set" colspan="2" (click)="setValue()" matRipple [matRippleUnbounded]="false">
+          <span class="quick-control-set-span">set</span>
+        </div>
+      }
     </div>
   </div>
   <div class="quick-control-column quick-control-options">
-    <div *ngIf="options === null">Loading options...</div>
-    <div
-      *ngFor="let option of options"
-      matRipple
-      [matRippleUnbounded]="false"
-      (click)="changeValue(option.value)"
-      class="quick-control-row">
-      <div>{{ option.value }}{{ unit }}</div>
-      <div>{{ option.label }}</div>
-    </div>
+    @if (options === null) {
+      <div>Loading options...</div>
+    }
+    @for (option of options; track option) {
+      <div matRipple [matRippleUnbounded]="false" (click)="changeValue(option.value)" class="quick-control-row">
+        <div>{{ option.value }}{{ unit }}</div>
+        <div>{{ option.label }}</div>
+      </div>
+    }
   </div>
 </div>

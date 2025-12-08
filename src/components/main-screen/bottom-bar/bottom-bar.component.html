@@ -1,10 +1,12 @@
 <table class="bottom-bar">
   <tr>
     <td class="bottom-bar__printer-name">{{ getPrinterName() }}</td>
-    <td class="bottom-bar__enclosure-temperature" *ngIf="enclosureTemperature">
-      <fa-icon icon="temperature-low" class="bottom-bar__enclosure-temperature-icon" />
-      {{ enclosureTemperature.temperature }}{{ enclosureTemperature.unit }}
-    </td>
+    @if (enclosureTemperature) {
+      <td class="bottom-bar__enclosure-temperature">
+        <fa-icon icon="temperature-low" class="bottom-bar__enclosure-temperature-icon" />
+        {{ enclosureTemperature.temperature }}{{ enclosureTemperature.unit }}
+      </td>
+    }
     <td class="bottom-bar__current-status">
       {{ statusText }}
     </td>
