@@ -97,18 +97,6 @@
         <source>only put a little filament in, I'll pull in the rest.</source>
         <target>kom kun lidt filament i, så trækker jeg resten ind.</target>
       </trans-unit>
-      <trans-unit id="filament-grams-left" datatype="html">
-        <source>g left</source>
-        <target>g venstre</target>
-      </trans-unit>
-      <trans-unit id="ui-done" datatype="html">
-        <source>done</source>
-        <target>færdig</target>
-      </trans-unit>
-      <trans-unit id="ui-waiting-for-user" datatype="html">
-        <source>I'll wait for you.</source>
-        <target>Jeg venter på dig.</target>
-      </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 sendt</target>
@@ -116,6 +104,18 @@
       <trans-unit id="follow-printer-screen" datatype="html">
         <source>follow the instructions on your printer's display</source>
         <target>følg instruktionerne på din printers skærm</target>
+      </trans-unit>
+      <trans-unit id="filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g venstre</target>
+      </trans-unit>
+      <trans-unit id="ui-waiting-for-user" datatype="html">
+        <source>I'll wait for you.</source>
+        <target>Jeg venter på dig.</target>
+      </trans-unit>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target>færdig</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -345,7 +345,7 @@
         <target>filament vil blive brugt</target>
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
-        <source> loading info</source>
+        <source>loading info</source>
         <target> henter info</target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
@@ -834,7 +834,7 @@
         <target> Port 5000 til vanilla OctoPrint, Port 80 til OctoPi </target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
+        <source>search again</source>
         <target> søg igen </target>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">

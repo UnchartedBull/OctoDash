@@ -97,18 +97,6 @@
         <source>only put a little filament in, I'll pull in the rest.</source>
         <target>il suffit de mettre un peu de filament, je vais tirer le reste.</target>
       </trans-unit>
-      <trans-unit id="filament-grams-left" datatype="html">
-        <source>g left</source>
-        <target>g restants</target>
-      </trans-unit>
-      <trans-unit id="ui-done" datatype="html">
-        <source>done</source>
-        <target>terminé</target>
-      </trans-unit>
-      <trans-unit id="ui-waiting-for-user" datatype="html">
-        <source>I'll wait for you.</source>
-        <target>Je vous attends.</target>
-      </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 envoyé</target>
@@ -116,6 +104,18 @@
       <trans-unit id="follow-printer-screen" datatype="html">
         <source>follow the instructions on your printer's display</source>
         <target>suivez les instructions sur l'affichage de votre imprimante</target>
+      </trans-unit>
+      <trans-unit id="filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g restants</target>
+      </trans-unit>
+      <trans-unit id="ui-waiting-for-user" datatype="html">
+        <source>I'll wait for you.</source>
+        <target>Je vous attends.</target>
+      </trans-unit>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target>terminé</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -340,7 +340,7 @@
         <target>de filament sera utilisé</target>
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
-        <source> loading info</source>
+        <source>loading info</source>
         <target> informations sur le chargement</target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
@@ -806,7 +806,7 @@
         <target> Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi </target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
+        <source>search again</source>
         <target> chercher à nouveau </target>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">

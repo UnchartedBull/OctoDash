@@ -97,18 +97,6 @@
         <source>only put a little filament in, I'll pull in the rest.</source>
         <target>nur ein wenig Filament einlegen, den Rest ziehe ich ein.</target>
       </trans-unit>
-      <trans-unit id="filament-grams-left" datatype="html">
-        <source>g left</source>
-        <target>g übrig</target>
-      </trans-unit>
-      <trans-unit id="ui-done" datatype="html">
-        <source>done</source>
-        <target>erledigt</target>
-      </trans-unit>
-      <trans-unit id="ui-waiting-for-user" datatype="html">
-        <source>I'll wait for you.</source>
-        <target>Ich werde auf dich warten.</target>
-      </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 gesendet</target>
@@ -116,6 +104,18 @@
       <trans-unit id="follow-printer-screen" datatype="html">
         <source>follow the instructions on your printer's display</source>
         <target>Folge den Anweisung auf dem Display deines Druckers</target>
+      </trans-unit>
+      <trans-unit id="filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g übrig</target>
+      </trans-unit>
+      <trans-unit id="ui-waiting-for-user" datatype="html">
+        <source>I'll wait for you.</source>
+        <target>Ich werde auf dich warten.</target>
+      </trans-unit>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target>erledigt</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -345,7 +345,7 @@
         <target>Filament benötigt</target>
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
-        <source> loading info</source>
+        <source>loading info</source>
         <target> ladeinformationen</target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
@@ -811,7 +811,7 @@
         <target> Port 5000 für Standardinstallation, Port 80 für OctoPi </target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
+        <source>search again</source>
         <target> erneut suchen </target>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
