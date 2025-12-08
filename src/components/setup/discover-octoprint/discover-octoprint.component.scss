@@ -50,5 +50,25 @@
     text-align: center;
     font-size: 0.7rem;
     line-height: 14vh;
+    margin-top: 5.5vh;
+  }
+}
+
+
+:host {
+  .setup__form {
+    margin-top: 5vh;
+
+    #octoprintURLName {
+      width: 42.5vw;
+    }
+
+    #octoprintURLPort {
+      width: 14vw;
+    }
+
+    .setup__input-prefix {
+      margin-top: 8vh;
+    }
   }
 }

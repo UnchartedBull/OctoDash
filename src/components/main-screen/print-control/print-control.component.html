@@ -23,7 +23,7 @@
     <div (click)="stopPropagation($event)">
       <img src="assets/cancel.svg" class="print-control__center-icon" />
       <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
-      <div style="text-align: center">
+      <div>
         <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@ui-yes">yes</span>
         <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@ui-no">no</span>
       </div>

@@ -34,7 +34,7 @@
 }
 @if (manualURL) {
   <div>
-    <form class="setup__form" style="margin-top: 5vh">
+    <form class="setup__form">
       <span class="setup__input-prefix">http://</span>
       <input
         type="text"
@@ -44,7 +44,7 @@
         (ngModelChange)="changeHost($event)"
         name="octoprintURLName"
         required
-        style="width: 42.5vw" />
+         />
       :
       <input
         type="text"
@@ -54,12 +54,12 @@
         (ngModelChange)="changePort($event)"
         name="octoprintURLPort"
         required
-        style="width: 14vw" />
-      <p class="setup__input-prefix" style="margin-top: 8vh" i18n="@@port-recommendation">
+        />
+      <p class="setup__input-prefix" i18n="@@port-recommendation">
       Port 5000 for vanilla OctoPrint, Port 80 for OctoPi
     </p>
     </form>
-    <div class="discover-octoprint__manual" (click)="searchForInstance()" style="margin-top: 5.5vh" i18n="@@search-again">
+    <div class="discover-octoprint__manual" (click)="searchForInstance()" i18n="@@search-again">
     search again
   </div>
   </div>
