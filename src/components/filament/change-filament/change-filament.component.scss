@@ -7,6 +7,10 @@
     text-align: center;
   }
 
+
+  &__name-wrapper {
+    margin-top: 15vh;
+  }
   &__filament {
     &-name {
       text-align: center;
@@ -24,5 +28,9 @@
       display: block;
       text-align: center;
     }
+  }
+
+  &__spool {
+    margin-top: 3vh;
   }
 }

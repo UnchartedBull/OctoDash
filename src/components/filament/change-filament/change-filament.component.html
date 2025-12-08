@@ -11,7 +11,7 @@
     }
 
     @if (selectedSpool) {
-      <div style="margin-top: 3vh">
+      <div class="change-filament__spool">
         <div class="heating__information-type">
           <span
             class="heating__information-type-box"
@@ -26,7 +26,7 @@
             >
           </div>
         } @else {
-          <div style="margin-top: 15vh">
+          <div class="change-filament__name-wrapper" style="margin-top: 15vh">
             <span class="change-filament__filament-name" i18n="@@ui-waiting-for-user">I'll wait for you.</span>
           </div>
         }

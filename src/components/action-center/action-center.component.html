@@ -74,7 +74,6 @@
         id="action-command"
         class="edit-panel__input"
         name="action-command"
-        style="width: 44.94vw; margin-bottom: -2vh"
         [(ngModel)]="customActions[editing].command"
         required />
       <table>
@@ -86,18 +85,16 @@
               id="action-icon"
               class="edit-panel__input"
               name="action-icon"
-              style="width: 14vw"
               [(ngModel)]="customActions[editing].icon"
               required />
           </td>
-          <td style="padding-left: 3vw">
+          <td>
             <label for="action-color" class="edit-panel__input-label" i18n="@@action-color">Color</label>
             <input
               type="text"
               id="action-color"
               class="edit-panel__input"
               name="action-color"
-              style="width: 14vw"
               [(ngModel)]="customActions[editing].color"
               required />
           </td>
@@ -121,7 +118,7 @@
               <span class="edit-panel__checkbox-descriptor" i18n="@@action-confirm">Confirm</span>
             </div>
           </td>
-          <td style="padding-left: 3vw" colspan="2">
+          <td colspan="2">
             <div
               class="edit-panel__checkbox-container"
               (click)="customActions[editing].exit = !customActions[editing].exit">

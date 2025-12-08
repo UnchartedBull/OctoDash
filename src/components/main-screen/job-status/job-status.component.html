@@ -9,13 +9,13 @@
           [rounded]="true"
           [responsive]="true"
         [color]="'#4bae50'"></round-progress>
-        <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span style="font-size: 40%">%</span></div>
+        <div class="job-info__progress-percentage">{{ jobStatus.progress }}<span>%</span></div>
       </div>
     }
     @if (showPreviewWhilePrinting) {
       <div class="job-info__progress">
         @if (!useCircularProgressBar()) {
-          <div style="height: 22vw; padding-top: -1.5vw" id="progress-preview-bar">
+          <div id="progress-preview-bar">
             <img class="job-info__progress-preview" [src]="thumbnail" />
             <div class="job-info__progress-bar__wrapper">
               <div class="job-info__progress-bar" [style.width]="jobStatus.progress + '%'"></div>
@@ -23,7 +23,7 @@
           </div>
         }
         @if (useCircularProgressBar()) {
-          <div style="height: 23.5vw" id="progress-preview-circle">
+          <div id="progress-preview-circle">
             <round-progress
               [current]="jobStatus.progress"
               [max]="100"
@@ -37,7 +37,7 @@
           </div>
         }
         <div class="job-info__progress-percentage" [hidden]="true">
-          {{ jobStatus.progress }}<span style="font-size: 40%">%</span>
+          {{ jobStatus.progress }}<span>%</span>
         </div>
       </div>
     }

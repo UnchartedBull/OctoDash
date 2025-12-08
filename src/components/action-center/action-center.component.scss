@@ -191,6 +191,10 @@
   // backdrop-filter: blur(8px);
   z-index: 1100;
 
+  & td:nth-child(2) {
+    padding-left: 3vw;
+  }
+
   &__container {
     position: absolute;
     top: 16vh;
@@ -263,6 +267,7 @@
     border: 2px solid var(--border);
     border-radius: 1vw;
 
+
     &-container {
       display: inline-block;
       position: relative;
@@ -319,5 +324,17 @@
     display: inline-block;
     width: 50%;
     text-align: center;
+  }
+
+  #action-command {
+    width: 44.94vw; margin-bottom: -2vh;
+  }
+
+  #action-icon {
+    width: 14vw;
+  }
+
+  #action-color {
+    width: 14vw;
   }
 }
