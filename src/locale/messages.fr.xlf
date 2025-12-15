@@ -660,11 +660,7 @@
         <target>Spool Manager</target>
       </trans-unit>
       <trans-unit id="settings-spoolman" datatype="html">
-        <source>Spoolman (Beta)</source>
-        <target></target>
-      </trans-unit>
-      <trans-unit id="settings-spoolman-enabled" datatype="html">
-        <source>enabled</source>
+        <source>Spoolman</source>
         <target></target>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
