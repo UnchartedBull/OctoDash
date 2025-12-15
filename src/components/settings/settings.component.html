@@ -425,15 +425,13 @@
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
 
-          <span class="settings__heading-2" i18n="@@settings-spoolman">Spoolman (Beta)</span>
-          <div
-            class="settings__checkbox-container"
-            (click)="config.plugins.spoolman.enabled = !config.plugins.spoolman.enabled">
-            <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.plugins.spoolman.enabled"></span>
-            </span>
-            <span class="settings__checkbox-descriptor" i18n="@@settings-spoolman-enabled">enabled</span>
-          </div>
+          <span class="settings__heading-2" i18n="@@settings-spoolman">Spoolman</span>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.spoolman.enabled"
+            (valueChange)="config.plugins.spoolman.enabled = !config.plugins.spoolman.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
           <app-toggle-switch
