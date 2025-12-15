@@ -5,8 +5,6 @@ export interface TempProfile {
   name: string;
 }
 
-// export interface SelectedSpoolmanSpool {}
-
 export interface SpoolmanSettings {
   selectedSpoolIds: {
     [index: string]: {
