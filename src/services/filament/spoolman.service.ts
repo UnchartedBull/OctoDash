@@ -4,12 +4,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { FilamentSpool } from '../../model';
-import {
-  OctoPrintSettings,
-  SpoolmanCurrentJobRequirements,
-  SpoolmanSpool,
-  SpoolmanSpoolList,
-} from '../../model/octoprint';
+import { OctoPrintSettings, SpoolmanSpool, SpoolmanSpoolList } from '../../model/octoprint';
 import { ConfigService } from '../config.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
@@ -35,22 +30,7 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
   }
 
   public getCurrentSpool(tool: number): Observable<FilamentSpool> {
-    const availableSpools = this.getSpools();
-    const currentJobRequirements = this.http.get<SpoolmanCurrentJobRequirements>(
-      this.configService.getApiURL('plugin/Spoolman/self/current-job-requirements', false),
-      this.configService.getHTTPHeaders(),
-    );
-    return forkJoin([availableSpools, currentJobRequirements]).pipe<FilamentSpool>(
-      map(results => {
-        const spools = results[0];
-        const requirements = results[1];
-        if (!requirements.data.isFilamentUsageAvailable) {
-          return;
-        }
-        const selected = spools.find(spool => spool.id === requirements.data.tools[tool].spoolId);
-        return selected;
-      }),
-    );
+    return this.getCurrentSpools().pipe(map(spools => spools[tool]));
   }
 
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
