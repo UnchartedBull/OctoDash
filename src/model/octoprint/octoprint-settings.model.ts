@@ -5,8 +5,21 @@ export interface TempProfile {
   name: string;
 }
 
+// export interface SelectedSpoolmanSpool {}
+
+export interface SpoolmanSettings {
+  selectedSpoolIds: {
+    [index: string]: {
+      spoolId: string;
+    };
+  };
+}
+
 export interface OctoPrintSettings {
   temperature: {
     profiles: TempProfile[];
+  };
+  plugins: {
+    Spoolman?: SpoolmanSettings;
   };
 }
