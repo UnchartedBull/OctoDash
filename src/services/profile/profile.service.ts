@@ -4,21 +4,9 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Option } from 'src/components/shared/quick-control/quick-control.component';
 
+import { OctoPrintSettings, TempProfile } from '../../model/octoprint';
 import { ConfigService } from '../config.service';
 import { NotificationService } from '../notification.service';
-
-interface TempProfile {
-  bed: number | null;
-  extruder: number | null;
-  chamer: number | null;
-  name: string;
-}
-
-interface OctoPrintSettings {
-  temperature: {
-    profiles: TempProfile[];
-  };
-}
 
 const sortOptions = (options: Option[]) => options.sort((a, b) => a.value - b.value);
 
