@@ -47,6 +47,13 @@ export interface SpoolmanSpool {
   used_weight: number;
 }
 
+export interface SpoolmanCurrentJobRequirements {
+  data: {
+    isFilamentUsageAvailable: boolean;
+    tools: SpoolmanToolInfo;
+  };
+}
+
 export interface SpoolmanToolInfo {
   [key: string]: SpoolmanTool;
 }
