@@ -7,20 +7,25 @@
     <div class="control__jog-arrows">
       <div class="control__jog-arrows__XY">
         <div class="control__jog-arrows__XY__wrapper">
-          <fa-icon
-            icon="angle-up"
-            class="control__icon control__icon-1"
-            (click)="moveAxis('y', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"></fa-icon>
-          <fa-icon
-            icon="angle-left"
-            class="control__icon control__icon-2"
-            (click)="moveAxis('x', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"></fa-icon>
+          <div class="icon-wrapper up">
+            <fa-icon
+              icon="angle-up"
+              class="control__icon control__icon-1"
+              (click)="moveAxis('y', '-')"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true"></fa-icon>
+          </div>
+          <div class="icon-wrapper left">
+            <fa-icon
+              icon="angle-left"
+              class="control__icon control__icon-2"
+              (click)="moveAxis('x', '-')"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true"></fa-icon>
+          </div>
+          <div class="icon-wrapper right">
           <fa-icon
             icon="angle-right"
             class="control__icon control__icon-3"
@@ -28,13 +33,16 @@
             matRipple
             [matRippleUnbounded]="true"
             [matRippleCentered]="true"></fa-icon>
-          <fa-icon
-            icon="angle-down"
-            class="control__icon control__icon-4"
-            (click)="moveAxis('y', '+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"></fa-icon>
+          </div>
+          <div class="icon-wrapper down">
+            <fa-icon
+              icon="angle-down"
+              class="control__icon control__icon-4"
+              (click)="moveAxis('y', '+')"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true"></fa-icon>
+          </div>
         </div>
         <span class="control__heading">X / Y</span>
       </div>

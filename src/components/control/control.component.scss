@@ -27,8 +27,9 @@
 
         &__wrapper {
           position: relative;
-          width: 35vw;
-          height: 50vh;
+          border: 2px solid green;
+          width: 49vh;
+          height: 49vh;
           font-size: 20vh;
           overflow: visible;
         }
@@ -62,29 +63,37 @@
 
   &__icon {
     font-size: 15vw;
-    position: absolute;
-    padding: 0 1.7vw;
+    // position: absolute;
+    // padding: 0 1.7vw;
     opacity: 0.9;
 
-    &-1 {
-      top: -8.5vh;
-      left: 9.3vw;
-    }
+    // &-1 {
+    //   top: -8.5vh;
+    //   left: 0;
+    //   right: 0;
+    //   margin: 0 auto;
+    // }
 
-    &-2 {
-      top: 10vh;
-      left: 0;
-    }
+    // &-2 {
+    //   top: 0;
+    //   bottom: 0;
+    //   margin: auto 0;
+    //   left: -8.5vh;
+    // }
 
-    &-3 {
-      top: 10vh;
-      left: 18.5vw;
-    }
+    // &-3 {
+    //   top: 0;
+    //   bottom: 0;
+    //   margin: auto 0;
+    //   right: -8.5vh;
+    // }
 
-    &-4 {
-      top: 30vh;
-      left: 9.3vw;
-    }
+    // &-4 {
+    //   bottom: -8.5vh;
+    //   left: 0;
+    //   right: 0;
+    //   margin: 0 auto;
+    // }
 
     &-5 {
       top: -8vh;
@@ -276,5 +285,40 @@
         flex: 1;
       }
     }
+  }
+}
+
+.icon-wrapper {
+  position: absolute;
+  width: 15vw;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --buffer: -4.5vh;
+
+  &.up {
+    top: var(--buffer) ;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  &.down {
+    bottom: var(--buffer);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  &.left {
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: var(--buffer);
+  }
+  &.right {
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    right: var(--buffer);
   }
 }
