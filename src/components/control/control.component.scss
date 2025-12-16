@@ -27,9 +27,9 @@
 
         &__wrapper {
           position: relative;
-          border: 2px solid green;
-          width: 49vh;
-          height: 49vh;
+          --size: 50vh;
+          width: var(--size);
+          height: var(--size);
           font-size: 20vh;
           overflow: visible;
         }
@@ -48,6 +48,10 @@
           height: 50vh;
           font-size: 20vh;
           overflow: visible;
+
+          .control__icon {
+            position: absolute;
+          }
         }
       }
     }
@@ -295,7 +299,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  --buffer: -4.5vh;
+  --buffer: -9.5vh;
 
   &.up {
     top: var(--buffer) ;
