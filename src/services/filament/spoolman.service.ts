@@ -8,8 +8,6 @@ import { OctoPrintSettings, SpoolmanSpool, SpoolmanSpoolList } from '../../model
 import { ConfigService } from '../config.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
-const colorRegexp = /\((.*)\)$/g;
-
 @Injectable()
 export class SpoolmanOctoprintService implements FilamentPluginService {
   public constructor(
@@ -59,7 +57,6 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
   }
 
   private convertSpoolmanSpool(spool: SpoolmanSpool): FilamentSpool {
-    colorRegexp.lastIndex = 0;
     return {
       color: spool.filament.color_hex,
       density: spool.filament.density,
