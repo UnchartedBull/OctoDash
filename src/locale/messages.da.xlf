@@ -684,6 +684,10 @@
         <source>Spool Manager</source>
         <target>Spool Manager (Beta)</target>
       </trans-unit>
+      <trans-unit id="settings-spoolman" datatype="html">
+        <source>Spoolman</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Forvarmningsknap</target>
@@ -948,6 +952,10 @@
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager</source>
         <target>Spool Manager (beta)</target>
+      </trans-unit>
+      <trans-unit id="plugin-spoolman" datatype="html">
+        <source>Spoolman</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>

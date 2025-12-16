@@ -144,6 +144,7 @@
         "enclosure",
         "filamentManager",
         "spoolManager",
+        "spoolman",
         "preheatButton",
         "printTimeGenius",
         "psuControl",
@@ -212,6 +213,17 @@
           "additionalProperties": false
         },
         "spoolManager": {
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "spoolman": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
