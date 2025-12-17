@@ -14,6 +14,7 @@ Hightlights:
 - Show temps from OctoPrint profiles in temp pickers (also fixing [#5467](https://github.com/UnchartedBull/OctoDash/issues/5467): action center button overlapping with heat nozzle button) ([#5465](https://github.com/UnchartedBull/OctoDash/pull/5465))
 
 Other improvements:
+
 - Stop automatically creating up to six custom actions ([#5519](https://github.com/UnchartedBull/OctoDash/pull/5519))
 - Decrease frequency of clock updates (shout out to @jjsat for this contribution) ([#5511](https://github.com/UnchartedBull/OctoDash/pull/5511))
 - Avoid reading undefined settings ([#5461](https://github.com/UnchartedBull/OctoDash/pull/5461))
