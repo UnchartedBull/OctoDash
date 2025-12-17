@@ -49,20 +49,24 @@
 
       <div class="control__jog-arrows--vertical">
         <div class="control__jog-arrows--vertical__wrapper">
-          <fa-icon
-            icon="caret-up"
-            class="control__icon control__icon-5"
-            (click)="moveAxis('z', '+')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"></fa-icon>
-          <fa-icon
-            icon="caret-down"
-            class="control__icon control__icon-6"
-            (click)="moveAxis('z', '-')"
-            matRipple
-            [matRippleUnbounded]="true"
-            [matRippleCentered]="true"></fa-icon>
+          <div class="icon-wrapper up">
+            <fa-icon
+              icon="caret-up"
+              class="control__icon control__icon-5"
+              (click)="moveAxis('z', '+')"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true"></fa-icon>
+          </div>
+          <div class="icon-wrapper down">
+            <fa-icon
+              icon="caret-down"
+              class="control__icon control__icon-6"
+              (click)="moveAxis('z', '-')"
+              matRipple
+              [matRippleUnbounded]="true"
+              [matRippleCentered]="true"></fa-icon>
+            </div>
         </div>
         <span class="control__heading">Z</span>
       </div>
@@ -70,20 +74,24 @@
       @if (showExtruder) {
         <div class="control__jog-arrows--vertical">
           <div class="control__jog-arrows--vertical__wrapper">
-            <fa-icon
-              icon="circle-chevron-up"
-              class="control__icon control__icon-7"
-              (click)="extrude('-')"
-              matRipple
-              [matRippleUnbounded]="true"
-              [matRippleCentered]="true"></fa-icon>
-            <fa-icon
-              icon="circle-chevron-down"
-              class="control__icon control__icon-8"
-              (click)="extrude('+')"
-              matRipple
-              [matRippleUnbounded]="true"
-              [matRippleCentered]="true"></fa-icon>
+            <div class="icon-wrapper extruder-controls up">
+              <fa-icon
+                icon="circle-chevron-up"
+                class="control__icon control__icon-7"
+                (click)="extrude('-')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"></fa-icon>
+            </div>
+            <div class="icon-wrapper extruder-controls down">
+              <fa-icon
+                icon="circle-chevron-down"
+                class="control__icon control__icon-8"
+                (click)="extrude('+')"
+                matRipple
+                [matRippleUnbounded]="true"
+                [matRippleCentered]="true"></fa-icon>
+            </div>
           </div>
           <span class="control__heading">E</span>
         </div>
