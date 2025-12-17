@@ -78,6 +78,7 @@ class OctodashPlugin(
                 },
                 "filamentManager": {"enabled": False},
                 "spoolManager": {"enabled": False},
+                "spoolman": {"enabled": False},
                 "preheatButton": {"enabled": True},
                 "printTimeGenius": {"enabled": True},
                 "psuControl": {"enabled": False},
