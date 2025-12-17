@@ -1,33 +1,41 @@
 <div class="update-container">
-  <div *ngIf="page === 1">
-    <span class="update-heading" i18n="@@downloading-update">downloading update</span>
-    <div class="update-progress-bar__wrapper">
-      <div
-        class="update-progress-bar"
-        [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
-        id="updateDownloadProgress">
-        {{ updateProgress.speed }}
-        <ng-container i18n="@@mbs"> MB/s&nbsp; </ng-container>
+  @if (page === 1) {
+    <div>
+      <span class="update-heading" i18n="@@downloading-update">downloading update</span>
+      <div class="update-progress-bar__wrapper">
+        <div
+          class="update-progress-bar"
+          [ngStyle]="{ width: updateProgress.percentage / 2 + 'vw' }"
+          id="updateDownloadProgress">
+          {{ updateProgress.speed }}
+          <ng-container i18n="@@mbs"> MB/s&nbsp; </ng-container>
+        </div>
+      </div>
+      <span class="update-size__total"
+        >{{ updateProgress.total }}<ng-container i18n="@@update-mb">MB</ng-container></span
+      >
+      <span class="update-time__remaining"
+        >{{ updateProgress.eta }} <ng-container i18n="@@update-minutes-left">minutes left</ng-container></span
+      >
+    </div>
+  }
+  @if (page === 2) {
+    <div>
+      <span class="update-heading" i18n="@@installing-update">installing update</span>
+      <div class="update-progress-bar__wrapper">
+        <div class="update-progress-bar update-progress-bar-no-percentage"></div>
+      </div>
+      <span class="update-notice" i18n="@@update-wait">this might take a while</span>
+    </div>
+  }
+  @if (page === 3) {
+    <div>
+      <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion.version }} installed</span>
+      <span class="update-restart" i18n="@@update-restart">would you like to restart OctoDash now?</span>
+      <div class="update-restart-button__wrapper">
+        <button class="button__no" (click)="closeUpdateWindow()" i18n="@@ui-no">no</button>
+        <button class="button__yes" (click)="restart()" i18n="@@ui-yes">yes</button>
       </div>
     </div>
-    <span class="update-size__total">{{ updateProgress.total }}<ng-container i18n="@@update-mb">MB</ng-container></span>
-    <span class="update-time__remaining"
-      >{{ updateProgress.eta }} <ng-container i18n="@@update-minutes-left">minutes left</ng-container></span
-    >
-  </div>
-  <div *ngIf="page === 2">
-    <span class="update-heading" i18n="@@installing-update">installing update</span>
-    <div class="update-progress-bar__wrapper">
-      <div class="update-progress-bar update-progress-bar-no-percentage"></div>
-    </div>
-    <span class="update-notice" i18n="@@update-wait">this might take a while</span>
-  </div>
-  <div *ngIf="page === 3">
-    <span class="update-heading" i18n="@@update-confirmation">v{{ service.latestVersion.version }} installed</span>
-    <span class="update-restart" i18n="@@update-restart">would you like to restart OctoDash now?</span>
-    <div class="update-restart-button__wrapper">
-      <button class="button__no" (click)="closeUpdateWindow()" i18n="@@ui-no">no</button>
-      <button class="button__yes" (click)="restart()" i18n="@@ui-yes">yes</button>
-    </div>
-  </div>
+  }
 </div>

@@ -1,5 +1,26 @@
 # Changelog
 
+## [v2.7.0-rc.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0-rc.1) (2025-12-17)
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+This is the first (and hopefully only) prerelease for v2.7.0, which brings a number of changes! This prelease is created to assist in testing and likely has more issues than typical releases.
+
+Hightlights:
+
+- Add Support for Spoolman ([#5528](https://github.com/UnchartedBull/OctoDash/pull/5528))
+- Fix squished X/Y icons and other layout issues with the control screen ([#5546](https://github.com/UnchartedBull/OctoDash/pull/5546))
+- Show temps from OctoPrint profiles in temp pickers (also fixing [#5467](https://github.com/UnchartedBull/OctoDash/issues/5467): action center button overlapping with heat nozzle button) ([#5465](https://github.com/UnchartedBull/OctoDash/pull/5465))
+
+Other improvements:
+
+- Stop automatically creating up to six custom actions ([#5519](https://github.com/UnchartedBull/OctoDash/pull/5519))
+- Decrease frequency of clock updates (shout out to @jjsat for this contribution) ([#5511](https://github.com/UnchartedBull/OctoDash/pull/5511))
+- Avoid reading undefined settings ([#5461](https://github.com/UnchartedBull/OctoDash/pull/5461))
+- Update to Angular 21 ([#5523](https://github.com/UnchartedBull/OctoDash/pull/5623))
+- A whole host of other dependency updates as usual
+
 ## [v2.6.4](https://github.com/UnchartedBull/OctoDash/tree/v2.6.4) (2025-10-26)
 
 Minor bugfixes

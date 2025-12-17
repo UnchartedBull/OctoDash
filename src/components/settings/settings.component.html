@@ -48,12 +48,11 @@
               id="printerName"
               class="settings__input"
               name="printerName"
-              style="width: 44.94vw"
               [(ngModel)]="config.printer.name"
               required />
-            <table>
+            <table class="settings__printer">
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="xySpeed" class="settings__input-label">
                     <span i18n="@@general-xyspeed">XY-Speed (mm/s)</span>
                   </label>
@@ -62,11 +61,10 @@
                     id="xySpeed"
                     class="settings__input"
                     name="xySpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.xySpeed"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="zSpeed" class="settings__input-label">
                     <span i18n="@@general-zspeed">Z-Speed (mm/s)</span>
                   </label>
@@ -75,7 +73,6 @@
                     id="zSpeed"
                     class="settings__input"
                     name="zSpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.zSpeed"
                     required />
                 </td>
@@ -86,7 +83,7 @@
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="defaultHotendTemperature" class="settings__input-label" i18n="@@default-hotend">
                     Hotend
                     <span>(°C)</span>
@@ -96,11 +93,10 @@
                     id="defaultHotendTemperature"
                     class="settings__input"
                     name="defaultHotendTemperature"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.hotend"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="defaultHeatbedTemperature" class="settings__input-label" i18n="@@default-heatbed">
                     Heatbed
                     <span>(°C)</span>
@@ -110,13 +106,12 @@
                     id="defaultHeatbedTemperature"
                     class="settings__input"
                     name="defaultHeatbedTemperature"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.heatbed"
                     required />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="defaultFanSpeed" class="settings__input-label" i18n="@@default-fanspeed">
                     Fan Speed
                     <span>(%)</span>
@@ -126,7 +121,6 @@
                     id="defaultFanSpeed"
                     class="settings__input"
                     name="defaultFanSpeed"
-                    style="width: 19vw"
                     [(ngModel)]="config.printer.defaultTemperatureFanSpeed.fan"
                     required />
                 </td>
@@ -144,7 +138,7 @@
             <br />
             <table>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-feed-length" class="settings__input-label" i18n="@@general-feedlength">
                     Feed Length
                     <span>(mm)</span>
@@ -154,12 +148,11 @@
                     id="filament-feed-length"
                     class="settings__input"
                     name="filament-feed-length"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedLength"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
-                <td style="width: 25.6vw">
+                <td class="settings__half">
                   <label for="filament-purge-distance" class="settings__input-label" i18n="@@general-purge-distance">
                     Purge Distance
                     <span>(mm)</span>
@@ -169,14 +162,13 @@
                     id="filament-purge-distance"
                     class="settings__input"
                     name="filament-purge-distance"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.purgeDistance"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-feed-speed" class="settings__input-label" i18n="@@general-feedrate">
                     Feed Speed
                     <span>(mm/s)</span>
@@ -186,12 +178,11 @@
                     id="filament-feed-speed"
                     class="settings__input"
                     name="filament-feed-speed"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeed"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="filament-feed-speed-slow" class="settings__input-label" i18n="@@general-feedrate-slow">
                     Feed Speed Slow
                     <span>(mm/s)</span>
@@ -201,14 +192,13 @@
                     id="filament-feed-speed-slow"
                     class="settings__input"
                     name="filament-feed-speed-slow"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.feedSpeedSlow"
                     required
                     [disabled]="config.filament.useM600" />
                 </td>
               </tr>
               <tr>
-                <td style="width: 25.6vw; display: block">
+                <td class="settings__half">
                   <label for="filament-thickness" class="settings__input-label" i18n="@@general-thickness">
                     Thickness
                     <span>(mm)</span>
@@ -218,11 +208,10 @@
                     id="filament-thickness"
                     class="settings__input"
                     name="filament-thickness"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.thickness"
                     required />
                 </td>
-                <td>
+                <td class="settings__half">
                   <label for="filament-density" class="settings__input-label" i18n="@@general-density">
                     Density
                     <span>(g/cm³)</span>
@@ -232,7 +221,6 @@
                     id="filament-density"
                     class="settings__input"
                     name="filament-density"
-                    style="width: 19vw"
                     [(ngModel)]="config.filament.density"
                     required />
                 </td>
@@ -345,7 +333,6 @@
               id="defaultDirectory"
               class="settings__input"
               name="defaultDirectory"
-              style="width: 44.94vw"
               [(ngModel)]="config.octodash.defaultDirectory"
               required />
           </form>
@@ -355,7 +342,9 @@
             class="settings__checkbox-container settings__checkbox-container__space-right"
             (click)="config.octodash.invertAxisControl.x = !config.octodash.invertAxisControl.x">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.x"></span>
+              @if (config.octodash.invertAxisControl.x) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">X</span>
           </div>
@@ -363,7 +352,9 @@
             class="settings__checkbox-container settings__checkbox-container__space-right"
             (click)="config.octodash.invertAxisControl.y = !config.octodash.invertAxisControl.y">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.y"></span>
+              @if (config.octodash.invertAxisControl.y) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">Y</span>
           </div>
@@ -371,7 +362,9 @@
             class="settings__checkbox-container"
             (click)="config.octodash.invertAxisControl.z = !config.octodash.invertAxisControl.z">
             <span class="settings__checkbox">
-              <span class="settings__checkbox-checked" *ngIf="config.octodash.invertAxisControl.z"></span>
+              @if (config.octodash.invertAxisControl.z) {
+                <span class="settings__checkbox-checked"></span>
+              }
             </span>
             <span class="settings__checkbox-descriptor">Z</span>
           </div>
@@ -414,7 +407,6 @@
             id="enclosure-ambient-id"
             class="settings__input"
             name="enclosure-ambient-id"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.enclosure.ambientSensorID"
             required
             [disabled]="!config.plugins.enclosure.enabled" />
@@ -426,11 +418,20 @@
             (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
+
           <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.spoolManager.enabled"
             (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+            <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
+          </app-toggle-switch>
+
+          <span class="settings__heading-2" i18n="@@settings-spoolman">Spoolman</span>
+          <app-toggle-switch
+            class="settings__toggle-switch"
+            [value]="config.plugins.spoolman.enabled"
+            (valueChange)="config.plugins.spoolman.enabled = !config.plugins.spoolman.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
 
@@ -477,7 +478,6 @@
             id="smart-plug-ip"
             class="settings__input"
             name="smart-plug-ip"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
             required
             [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
@@ -494,7 +494,6 @@
             id="tuya-label"
             class="settings__input"
             name="tuya-label"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tuya.label"
             required
             [disabled]="!config.plugins.tuya.enabled" />
@@ -511,7 +510,6 @@
             id="tasmota-ip"
             class="settings__input"
             name="tasmota-ip"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.ip"
             required
             [disabled]="!config.plugins.tasmota.enabled" />
@@ -521,7 +519,6 @@
             id="tasmota-idx"
             class="settings__input"
             name="tasmota-idx"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmota.index"
             [disabled]="!config.plugins.tasmota.enabled" />
           <span class="settings__heading-2">Tasmota MQTT</span>
@@ -537,7 +534,6 @@
             id="tasmotaMqtt-topic"
             class="settings__input"
             name="tasmotaMqtt-topic"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.topic"
             required
             [disabled]="!config.plugins.tasmotaMqtt.enabled" />
@@ -547,7 +543,6 @@
             id="tasmotaMqtt-relayNumber"
             class="settings__input"
             name="tasmotaMqtt-relayNumber"
-            style="width: 44.94vw"
             [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
             [disabled]="!config.plugins.tasmotaMqtt.enabled" />
           <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
@@ -563,7 +558,6 @@
             id="wemoIP"
             class="settings__input"
             name="wemoIP"
-            style="width: 30vw"
             [(ngModel)]="config.plugins.wemo.ip"
             required
             [disabled]="!config.plugins.wemo.enabled" /><span class="settings__input-divider">:</span>
@@ -572,7 +566,6 @@
             id="wemoPort"
             class="settings__input"
             name="wemoPort"
-            style="width: 8vw"
             [(ngModel)]="config.plugins.wemo.port"
             required
             [disabled]="!config.plugins.wemo.enabled" />
@@ -586,34 +579,37 @@
         <div class="settings__scroll">
           <img src="assets/icon/icon-main-title.svg" class="settings__about-icon" />
           <span class="settings__about-version">v{{ service.getVersion() }}</span>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="service.dev"
-            i18n="@@about-developer-mode">
-            updates disabled (dev mode)
-          </button>
-          <button
-            class="settings__about-update settings__about-update-not-available"
-            *ngIf="!(service.updateAvailable || service.dev)"
-            (click)="showUpdate()"
-            i18n="@@about-no-update">
-            up to date
-          </button>
-          <button
-            class="settings__about-update settings__about-update-available"
-            *ngIf="service.updateAvailable"
-            (click)="showUpdate()"
-            i18n="@@about-install-v">
-            install {{ service.latestVersion.title }}
-          </button>
+          @if (service.dev) {
+            <button class="settings__about-update settings__about-update-not-available" i18n="@@about-developer-mode">
+              updates disabled (dev mode)
+            </button>
+          }
+          @if (!(service.updateAvailable || service.dev)) {
+            <button
+              class="settings__about-update settings__about-update-not-available"
+              (click)="showUpdate()"
+              i18n="@@about-no-update">
+              up to date
+            </button>
+          }
+          @if (service.updateAvailable) {
+            <button
+              class="settings__about-update settings__about-update-available"
+              (click)="showUpdate()"
+              i18n="@@about-install-v">
+              install {{ service.latestVersion.title }}
+            </button>
+          }
           <span class="settings__about-copyright">
             &#169; 2019-2025 UnchartedBull + various contributors<br />
             https://github.com/UnchartedBull/OctoDash
           </span>
           <span class="settings__heading-2" i18n="@@connection">Connection</span>
-          <p class="settings__text" *ngIf="{ address: localIpAddress$ | async } as vm">
-            {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
-          </p>
+          @if ({ address: localIpAddress$ | async }; as vm) {
+            <p class="settings__text">
+              {{ vm.address ? 'IP Address: ' + vm.address : 'Could not detect your IP address' }}
+            </p>
+          }
           <span class="settings__heading-2" i18n="@@licence">License</span>
           <p class="settings__text">
             Licensed under the Apache 2.0 License.
@@ -658,5 +654,9 @@
     </div>
   </div>
 </div>
-<app-update *ngIf="update" (closeFunction)="hideUpdate()"></app-update>
-<app-reset *ngIf="reset" (closeFunction)="hideReset()"></app-reset>
+@if (update) {
+  <app-update (closeFunction)="hideUpdate()"></app-update>
+}
+@if (reset) {
+  <app-reset (closeFunction)="hideReset()"></app-reset>
+}

@@ -2,204 +2,214 @@
   class="print-control__container"
   (click)="showControlOverlay($event)"
   [ngClass]="{ 'print-control__hide': !showControls }">
-  <div *ngIf="view === controlView.MAIN" (click)="stopPropagation($event)">
-    <app-top-bar [backButton]="true" (onBack)="hideControlOverlay()"></app-top-bar>
-    <div class="print-control__action" (click)="cancel($event)">
-      <img src="assets/cancel.svg" />
-      <ng-container i18n="@@control-cancel">cancel</ng-container>
-    </div>
-    <div class="print-control__action" (click)="pause($event)">
-      <img src="assets/pause.svg" />
-      <ng-container i18n="@@control-pause">pause</ng-container>
-    </div>
-    <div class="print-control__action" (click)="adjust($event)">
-      <img src="assets/adjust.svg" />
-      <ng-container i18n="@@control-adjust">adjust</ng-container>
-    </div>
-  </div>
-  <div *ngIf="view === controlView.CANCEL" (click)="stopPropagation($event)">
-    <img src="assets/cancel.svg" class="print-control__center-icon" />
-    <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
-    <div style="text-align: center">
-      <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@ui-yes">yes</span>
-      <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@ui-no">no</span>
-    </div>
-  </div>
-  <div *ngIf="view === controlView.PAUSE" (click)="stopPropagation($event)">
-    <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
-    <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
-    <span class="print-control__confirm" i18n="@@print-pause">print paused</span>
-    <div class="print-control__pause__resume">
-      <div (click)="restart($event)" i18n="@@print-restart">restart</div>
-      <div (click)="resume($event)">
-        <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
-        <ng-container i18n="@@print-resume">resume</ng-container>
+  @if (view === controlView.MAIN) {
+    <div (click)="stopPropagation($event)">
+      <app-top-bar [backButton]="true" (onBack)="hideControlOverlay()"></app-top-bar>
+      <div class="print-control__action" (click)="cancel($event)">
+        <img src="assets/cancel.svg" />
+        <ng-container i18n="@@control-cancel">cancel</ng-container>
       </div>
-      <div (click)="changeFilament($event)" i18n="@@print-filament">filament</div>
-    </div>
-  </div>
-  <div *ngIf="view === controlView.ADJUST" (click)="stopPropagation($event)">
-    <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
-    <img src="assets/adjust.svg" class="print-control__center-icon-small" />
-    <table class="print-control__adjust__wrapper">
-      <tr>
-        <td class="print-control__adjust__change-parameter">
-          <div class="print-control__adjust__controller">
-            <div
-              class="print-control__adjust__controller-increase"
-              (click)="changeTemperatureHotend(1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              +
-            </div>
-            <div class="print-control__adjust__controller-value">
-              {{ temperatureHotends[0] }}
-              <span class="print-control__adjust__controller-value-unit">°C</span>
-            </div>
-            <div
-              class="print-control__adjust__controller-decrease"
-              (click)="changeTemperatureHotend(-1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              -
-            </div>
-          </div>
-          <span class="print-control__adjust__name" i18n="@@adjust-hotend">Hotend</span>
-        </td>
-        <td class="print-control__adjust__change-parameter">
-          <div class="print-control__adjust__controller">
-            <div
-              class="print-control__adjust__controller-increase"
-              (click)="changeTemperatureHeatbed(1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              +
-            </div>
-            <div class="print-control__adjust__controller-value">
-              {{ temperatureHeatbed }}
-              <span class="print-control__adjust__controller-value-unit">°C</span>
-            </div>
-            <div
-              class="print-control__adjust__controller-decrease"
-              (click)="changeTemperatureHeatbed(-1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              -
-            </div>
-          </div>
-          <span class="print-control__adjust__name" i18n="@@adjust-heatbed">Heatbed</span>
-        </td>
-        <td class="print-control__adjust__change-parameter">
-          <div class="print-control__adjust__controller">
-            <div
-              class="print-control__adjust__controller-increase"
-              (click)="changeFanSpeed(1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              +
-            </div>
-            <div class="print-control__adjust__controller-value">
-              {{ fanSpeed }}
-              <span class="print-control__adjust__controller-value-unit">%</span>
-            </div>
-            <div
-              class="print-control__adjust__controller-decrease"
-              (click)="changeFanSpeed(-1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              -
-            </div>
-          </div>
-          <span class="print-control__adjust__name" i18n="@@adjust-fanspeed">Fan Speed</span>
-        </td>
-        <td class="print-control__adjust__change-parameter">
-          <div class="print-control__adjust__controller">
-            <div
-              class="print-control__adjust__controller-increase"
-              (click)="changeFeedrate(1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              +
-            </div>
-            <div class="print-control__adjust__controller-value">
-              {{ feedrate }}
-              <span class="print-control__adjust__controller-value-unit">%</span>
-            </div>
-            <div
-              class="print-control__adjust__controller-decrease"
-              (click)="changeFeedrate(-1)"
-              matRipple
-              [matRippleUnbounded]="false">
-              -
-            </div>
-          </div>
-          <span class="print-control__adjust__name" i18n="@@adjust-speed">Speed</span>
-        </td>
-      </tr>
-    </table>
-    <div>
-      <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)">
-        <span class="print-control__adjust-babystep-axis">Z</span>
-        {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}
-        <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
-      </span>
-      <div
-        class="print-control__adjust__save"
-        (click)="setAdjustParameters($event)"
-        matRipple
-        [matRippleUnbounded]="false">
-        save
+      <div class="print-control__action" (click)="pause($event)">
+        <img src="assets/pause.svg" />
+        <ng-container i18n="@@control-pause">pause</ng-container>
+      </div>
+      <div class="print-control__action" (click)="adjust($event)">
+        <img src="assets/adjust.svg" />
+        <ng-container i18n="@@control-adjust">adjust</ng-container>
       </div>
     </div>
-  </div>
-  <div *ngIf="view === controlView.BABYSTEP" (click)="stopPropagation($event)">
-    <app-top-bar [backButton]="true" (onBack)="adjust($event)"></app-top-bar>
-    <img src="assets/height.svg" class="print-control__center-icon-small" />
-    <span class="print-control__confirm" i18n="@@babystep-z">Babystep Z</span>
-    <div>
-      <div class="print-control__adjust-babystep__change">
-        <span
-          class="print-control__adjust-babystep__change-value"
-          matRipple
-          [matRippleUnbounded]="false"
-          (click)="babystepZ(0.02)">
-          + 0.02
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
-        </span>
-        <span
-          class="print-control__adjust-babystep__change-value"
-          matRipple
-          [matRippleUnbounded]="false"
-          (click)="babystepZ(0.01)">
-          + 0.01
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
-        </span>
+  }
+  @if (view === controlView.CANCEL) {
+    <div (click)="stopPropagation($event)">
+      <img src="assets/cancel.svg" class="print-control__center-icon" />
+      <span class="print-control__confirm" i18n="@@cancel-print">cancel print?</span>
+      <div>
+        <span class="print-control__cancel__action" (click)="cancelPrint($event)" i18n="@@ui-yes">yes</span>
+        <span class="print-control__cancel__action" (click)="backToControlScreen($event)" i18n="@@ui-no">no</span>
       </div>
-      <div class="print-control__adjust-babystep__change">
-        <span class="print-control__adjust-babystep__change-current">
-          {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }}
-          <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
+    </div>
+  }
+  @if (view === controlView.PAUSE) {
+    <div (click)="stopPropagation($event)">
+      <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
+      <img src="assets/pause.svg" class="print-control__center-icon print-control__pause__icon" />
+      <span class="print-control__confirm" i18n="@@print-pause">print paused</span>
+      <div class="print-control__pause__resume">
+        <div (click)="restart($event)" i18n="@@print-restart">restart</div>
+        <div (click)="resume($event)">
+          <img src="assets/resume.svg" class="print-control__pause__resume-icon" />
+          <ng-container i18n="@@print-resume">resume</ng-container>
+        </div>
+        <div (click)="changeFilament($event)" i18n="@@print-filament">filament</div>
+      </div>
+    </div>
+  }
+  @if (view === controlView.ADJUST) {
+    <div (click)="stopPropagation($event)">
+      <app-top-bar [backButton]="true" (onBack)="backToControlScreen($event)"></app-top-bar>
+      <img src="assets/adjust.svg" class="print-control__center-icon-small" />
+      <table class="print-control__adjust__wrapper">
+        <tr>
+          <td class="print-control__adjust__change-parameter">
+            <div class="print-control__adjust__controller">
+              <div
+                class="print-control__adjust__controller-increase"
+                (click)="changeTemperatureHotend(1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                +
+              </div>
+              <div class="print-control__adjust__controller-value">
+                {{ temperatureHotends[0] }}
+                <span class="print-control__adjust__controller-value-unit">°C</span>
+              </div>
+              <div
+                class="print-control__adjust__controller-decrease"
+                (click)="changeTemperatureHotend(-1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                -
+              </div>
+            </div>
+            <span class="print-control__adjust__name" i18n="@@adjust-hotend">Hotend</span>
+          </td>
+          <td class="print-control__adjust__change-parameter">
+            <div class="print-control__adjust__controller">
+              <div
+                class="print-control__adjust__controller-increase"
+                (click)="changeTemperatureHeatbed(1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                +
+              </div>
+              <div class="print-control__adjust__controller-value">
+                {{ temperatureHeatbed }}
+                <span class="print-control__adjust__controller-value-unit">°C</span>
+              </div>
+              <div
+                class="print-control__adjust__controller-decrease"
+                (click)="changeTemperatureHeatbed(-1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                -
+              </div>
+            </div>
+            <span class="print-control__adjust__name" i18n="@@adjust-heatbed">Heatbed</span>
+          </td>
+          <td class="print-control__adjust__change-parameter">
+            <div class="print-control__adjust__controller">
+              <div
+                class="print-control__adjust__controller-increase"
+                (click)="changeFanSpeed(1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                +
+              </div>
+              <div class="print-control__adjust__controller-value">
+                {{ fanSpeed }}
+                <span class="print-control__adjust__controller-value-unit">%</span>
+              </div>
+              <div
+                class="print-control__adjust__controller-decrease"
+                (click)="changeFanSpeed(-1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                -
+              </div>
+            </div>
+            <span class="print-control__adjust__name" i18n="@@adjust-fanspeed">Fan Speed</span>
+          </td>
+          <td class="print-control__adjust__change-parameter">
+            <div class="print-control__adjust__controller">
+              <div
+                class="print-control__adjust__controller-increase"
+                (click)="changeFeedrate(1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                +
+              </div>
+              <div class="print-control__adjust__controller-value">
+                {{ feedrate }}
+                <span class="print-control__adjust__controller-value-unit">%</span>
+              </div>
+              <div
+                class="print-control__adjust__controller-decrease"
+                (click)="changeFeedrate(-1)"
+                matRipple
+                [matRippleUnbounded]="false">
+                -
+              </div>
+            </div>
+            <span class="print-control__adjust__name" i18n="@@adjust-speed">Speed</span>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <span class="print-control__adjust-babystep" matRipple [matRippleUnbounded]="false" (click)="babystep($event)">
+          <span class="print-control__adjust-babystep-axis">Z</span>
+          {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }} {{ getZOffset() }}
           <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
         </span>
-      </div>
-      <div class="print-control__adjust-babystep__change">
-        <span
-          class="print-control__adjust-babystep__change-value"
+        <div
+          class="print-control__adjust__save"
+          (click)="setAdjustParameters($event)"
           matRipple
-          [matRippleUnbounded]="false"
-          (click)="babystepZ(-0.02)">
-          - 0.02
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
-        </span>
-        <span
-          class="print-control__adjust-babystep__change-value"
-          matRipple
-          [matRippleUnbounded]="false"
-          (click)="babystepZ(-0.01)">
-          - 0.01
-          <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
-        </span>
+          [matRippleUnbounded]="false">
+          save
+        </div>
       </div>
     </div>
-  </div>
+  }
+  @if (view === controlView.BABYSTEP) {
+    <div (click)="stopPropagation($event)">
+      <app-top-bar [backButton]="true" (onBack)="adjust($event)"></app-top-bar>
+      <img src="assets/height.svg" class="print-control__center-icon-small" />
+      <span class="print-control__confirm" i18n="@@babystep-z">Babystep Z</span>
+      <div>
+        <div class="print-control__adjust-babystep__change">
+          <span
+            class="print-control__adjust-babystep__change-value"
+            matRipple
+            [matRippleUnbounded]="false"
+            (click)="babystepZ(0.02)">
+            + 0.02
+            <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
+          </span>
+          <span
+            class="print-control__adjust-babystep__change-value"
+            matRipple
+            [matRippleUnbounded]="false"
+            (click)="babystepZ(0.01)">
+            + 0.01
+            <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
+          </span>
+        </div>
+        <div class="print-control__adjust-babystep__change">
+          <span class="print-control__adjust-babystep__change-current">
+            {{ zOffset == 0 ? '±' : zOffset > 0 ? '+' : '-' }}
+            <span class="print-control__adjust-babystep__change-current__value">{{ getZOffset() }}</span>
+            <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
+          </span>
+        </div>
+        <div class="print-control__adjust-babystep__change">
+          <span
+            class="print-control__adjust-babystep__change-value"
+            matRipple
+            [matRippleUnbounded]="false"
+            (click)="babystepZ(-0.02)">
+            - 0.02
+            <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
+          </span>
+          <span
+            class="print-control__adjust-babystep__change-value"
+            matRipple
+            [matRippleUnbounded]="false"
+            (click)="babystepZ(-0.01)">
+            - 0.01
+            <span class="print-control__adjust-babystep__change-value__unit" i18n="@@unit-millimeters-short">mm</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  }
 </div>

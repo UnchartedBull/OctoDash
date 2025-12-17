@@ -9,6 +9,7 @@ import { EventService } from './event.service';
 import { FilamentManagerOctoprintService } from './filament/filament-manager.octoprint.service';
 import { FilamentPluginService } from './filament/filament-plugin.service';
 import { SpoolManagerOctoprintService } from './filament/spool-manager.octoprint.service';
+import { SpoolmanOctoprintService } from './filament/spoolman.octoprint.service';
 import { FilesOctoprintService } from './files/files.octoprint.service';
 import { FilesService } from './files/files.service';
 import { JobOctoprintService } from './job/job.octoprint.service';
@@ -16,6 +17,8 @@ import { JobService } from './job/job.service';
 import { NotificationService } from './notification.service';
 import { PrinterOctoprintService } from './printer/printer.octoprint.service';
 import { PrinterService } from './printer/printer.service';
+import { ProfileService } from './profile/profile.service';
+import { QuickControlModalService } from './quick-control-modal.service';
 import { OctoPrintSocketService } from './socket/socket.octoprint.service';
 import { SocketService } from './socket/socket.service';
 import { SystemOctoprintService } from './system/system.octoprint.service';
@@ -26,6 +29,8 @@ export default [
   ConfigService,
   ConversionService,
   EventService,
+  ProfileService,
+  QuickControlModalService,
   NotificationService,
   [
     {
@@ -96,6 +101,8 @@ export default [
       useFactory: (configService: ConfigService, httpClient: HttpClient) => {
         if (configService.isSpoolManagerPluginEnabled()) {
           return new SpoolManagerOctoprintService(configService, httpClient);
+        } else if (configService.isSpoolmanPluginEnabled()) {
+          return new SpoolmanOctoprintService(configService, httpClient);
         }
         return new FilamentManagerOctoprintService(configService, httpClient);
       },

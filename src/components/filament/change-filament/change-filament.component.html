@@ -1,12 +1,17 @@
-<ng-container *ngIf="!usingM600(); else M600Change">
+@if (!usingM600()) {
   <span class="filament-heading" i18n="@@load-new-filament">load new filament into tool {{ selectedTool }}</span>
   <span class="change-filament__info" i18n="@@load-new-filament-message"
     >only put a little filament in, I'll pull in the rest.</span
   >
-</ng-container>
+} @else {
+  <span class="filament-heading" i18n="@@filament-m600">M600 sent</span>
+  <span class="change-filament__info" i18n="@@follow-printer-screen"
+    >follow the instructions on your printer's display</span
+  >
+}
 
-<ng-container *ngIf="selectedSpool; else noSpoolSelected">
-  <div style="margin-top: 3vh">
+@if (selectedSpool) {
+  <div class="change-filament__spool">
     <div class="heating__information-type">
       <span
         class="heating__information-type-box"
@@ -20,23 +25,14 @@
       }}<span i18n="@@filament-grams-left">g left</span></span
     >
   </div>
-</ng-container>
+} @else {
+  <div class="change-filament__name-wrapper">
+    <span class="change-filament__filament-name" i18n="@@ui-waiting-for-user">I'll wait for you.</span>
+  </div>
+}
 
 <div class="filament__wrapper-button">
   <a class="filament__done" matRipple [matRippleUnbounded]="false" (click)="increasePage.emit()" i18n="@@ui-done"
     >done</a
   >
 </div>
-
-<ng-template #noSpoolSelected>
-  <div style="margin-top: 15vh">
-    <span class="change-filament__filament-name" i18n="@@ui-waiting-for-user">I'll wait for you.</span>
-  </div>
-</ng-template>
-
-<ng-template #M600Change>
-  <span class="filament-heading" i18n="@@filament-m600">M600 sent</span>
-  <span class="change-filament__info" i18n="@@follow-printer-screen"
-    >follow the instructions on your printer's display</span
-  >
-</ng-template>

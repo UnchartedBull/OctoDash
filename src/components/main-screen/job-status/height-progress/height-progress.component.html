@@ -1,4 +1,4 @@
-<ng-container *ngIf="isNumber(height); else zHeightLayer">
+@if (isNumber(height)) {
   <span class="height-indication">
     <span class="height-indication__z">Z</span>
     <span class="height-indication__current-height">
@@ -6,20 +6,17 @@
     </span>
     <ng-container i18n="@@unit-millimeters-short">mm</ng-container>
   </span>
-</ng-container>
-
-<ng-template #zHeightLayer>
-  <span
-    class="height-indication"
-    i18n="@@height-layer-status"
-    *ngIf="height && !(height.current === 0 && height.total === 0)"
-    >Layer
-    <span class="height-indication__current-height">
-      {{ height.current }}
+} @else {
+  @if (height && !(height.current === 0 && height.total === 0)) {
+    <span class="height-indication" i18n="@@height-layer-status"
+      >Layer
+      <span class="height-indication__current-height">
+        {{ height.current }}
+      </span>
+      of
+      <span class="height-indication__total-height">
+        {{ height.total >= 0 ? height.total : '---' }}
+      </span>
     </span>
-    of
-    <span class="height-indication__total-height">
-      {{ height.total >= 0 ? height.total : '---' }}
-    </span>
-  </span>
-</ng-template>
+  }
+}

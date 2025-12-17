@@ -1,16 +1,18 @@
 <div class="standby">
   <div (click)="reconnect()" class="standby__main-window">
     <img src="assets/icon/icon-main.svg" class="standby__icon" />
-    <ng-container *ngIf="!connecting">
+    @if (!connecting) {
       <span class="standby__text-big" i18n="@@octoprint-sleeping">Shhh! OctoDash is sleeping.</span>
       <span class="standby__text-small" i18n="@@octoprint-sleeping-message">Tap the screen to wake me up again.</span>
-    </ng-container>
-    <ng-container *ngIf="connecting">
+    }
+    @if (connecting) {
       <span class="standby__text-big loading-dots" i18n="@@connecting">connecting</span>
-      <span class="standby__text-small" *ngIf="showConnectionError" i18n="@@connection-failed">
-        Connection can't be established. Press screen to try again.
-      </span>
-    </ng-container>
+      @if (showConnectionError) {
+        <span class="standby__text-small" i18n="@@connection-failed">
+          Connection can't be established. Press screen to try again.
+        </span>
+      }
+    }
   </div>
 </div>
 

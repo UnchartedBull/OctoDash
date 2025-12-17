@@ -50,16 +50,6 @@ export class SettingsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const currentCommands = this.config.octodash.customActions.length;
-    for (let i = currentCommands; i < 6; i++) {
-      this.config.octodash.customActions.push({
-        icon: 'print',
-        command: '',
-        color: '#ffffff',
-        confirm: false,
-        exit: false,
-      });
-    }
     setTimeout((): void => {
       this.pages = [
         this.settingsMain.nativeElement,

@@ -1,57 +1,86 @@
 <span class="filament-heading" i18n="@@nozzle-heating">heating the nozzle for tool {{ selectedTool }}</span>
 <div class="heating__center">
-  <div class="heating__controller">
-    <div class="heating__controller-row">
-      <div class="heating__controller-control" (click)="changeHotendTarget(1)" matRipple [matRippleUnbounded]="false">
-        +1
+  @if (isHeating) {
+    <div class="heating__controller">
+      <div class="heating__controller-row">
+        <div class="heating__controller-control" (click)="changeHotendTarget(1)" matRipple [matRippleUnbounded]="false">
+          +1
+        </div>
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(10)"
+          matRipple
+          [matRippleUnbounded]="false">
+          +10
+        </div>
       </div>
-      <div class="heating__controller-control" (click)="changeHotendTarget(10)" matRipple [matRippleUnbounded]="false">
-        +10
+      <div class="heating__controller-value" colspan="2">
+        {{ isHeating ? hotendTemperature : hotendTarget }}<span class="heating__controller-value-unit">°C</span>
+        @if (isHeating) {
+          <span class="heating__controller-current"> /{{ hotendTarget }}<span>°C</span> </span>
+        }
+      </div>
+      <div class="heating__controller-row">
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(-1)"
+          matRipple
+          [matRippleUnbounded]="false">
+          -1
+        </div>
+        <div
+          class="heating__controller-control"
+          (click)="changeHotendTarget(-10)"
+          matRipple
+          [matRippleUnbounded]="false">
+          -10
+        </div>
       </div>
     </div>
-    <div class="heating__controller-value" colspan="2">
-      {{ isHeating ? hotendTemperature : hotendTarget }}<span class="heating__controller-value-unit">°C</span>
-      <span class="heating__controller-current" *ngIf="isHeating"> /{{ hotendTarget }}<span>°C</span> </span>
-    </div>
-    <div class="heating__controller-row">
-      <div class="heating__controller-control" (click)="changeHotendTarget(-1)" matRipple [matRippleUnbounded]="false">
-        -1
+  }
+  @if (!isHeating) {
+    <app-hotend-quick-control
+      [hideOff]="true"
+      [hideSet]="true"
+      [tempOffset]="tempOffset"
+      (onChange)="setTarget($event)"></app-hotend-quick-control>
+  }
+  <div>
+    @if (selectedSpool) {
+      <div class="heating__information">
+        <div class="heating__information-type">
+          <span
+            class="heating__information-type-box"
+            [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
+            >{{ selectedSpool.material }}</span
+          >
+        </div>
+        <span class="heating__information-name">{{ selectedSpool.name }}</span>
+        <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
+        <div class="heating__information-offset-wrapper">
+          <span class="heating__information-offset-value">
+            {{ getSpoolTemperatureOffsetString(selectedSpool)
+            }}<span class="heating__information-offset-indicator">°C</span>
+          </span>
+        </div>
       </div>
-      <div class="heating__controller-control" (click)="changeHotendTarget(-10)" matRipple [matRippleUnbounded]="false">
-        -10
+    }
+    @if (!isHeating) {
+      <div class="heating__start-wrapper">
+        <span>
+          <ng-container i18n="@@nozzle-heating-wait">wait</ng-container>
+          <span> {{ automaticHeatingStartSeconds }}</span>
+          <ng-container i18n="@@nozzle-heating-wait-seconds-or">s or</ng-container>
+        </span>
+        <a
+          class="heating__start-heating"
+          matRipple
+          [matRippleUnbounded]="false"
+          (click)="setNozzleTemperature()"
+          i18n="@@nozzle-heating-start"
+          >start</a
+        >
       </div>
-    </div>
+    }
   </div>
-  <div class="heating__information" *ngIf="selectedSpool">
-    <div class="heating__information-type">
-      <span
-        class="heating__information-type-box"
-        [ngStyle]="{ 'border-color': selectedSpool.color, 'box-shadow': '0 0 3vh ' + selectedSpool.color }"
-        >{{ selectedSpool.material }}</span
-      >
-    </div>
-    <span class="heating__information-name">{{ selectedSpool.name }}</span>
-    <span class="heating__information-vendor">{{ selectedSpool.vendor }}</span>
-    <div class="heating__information-offset-wrapper">
-      <span class="heating__information-offset-value">
-        {{ getSpoolTemperatureOffsetString(selectedSpool)
-        }}<span class="heating__information-offset-indicator">°C</span>
-      </span>
-    </div>
-  </div>
-</div>
-<div class="heating__start-wrapper" *ngIf="!isHeating">
-  <span>
-    <ng-container i18n="@@nozzle-heating-wait">wait</ng-container>
-    <span> {{ automaticHeatingStartSeconds }}</span>
-    <ng-container i18n="@@nozzle-heating-wait-seconds-or">s or</ng-container>
-  </span>
-  <a
-    class="heating__start-heating"
-    matRipple
-    [matRippleUnbounded]="false"
-    (click)="setNozzleTemperature()"
-    i18n="@@nozzle-heating-start"
-    >start</a
-  >
 </div>
