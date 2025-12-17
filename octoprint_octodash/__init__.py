@@ -315,6 +315,7 @@ class OctodashPlugin(
 
         return make_response(json.dumps({"success": True}), 200)
 
+    @Permissions.WEBCAM.require(403)
     @octoprint.plugin.BlueprintPlugin.route("webcam")
     def webcam_route(self):
         webcam_url = self._settings.global_get(["webcam", "stream"])
