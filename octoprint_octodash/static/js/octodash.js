@@ -85,15 +85,6 @@ $(function () {
 
     self.addCustomActionToken = function (data, event) {
       switch (event.currentTarget.text) {
-        // case '[!WEBCAM]':
-        //   data.command(
-        //     '[!WEB]' +
-        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-        //       'plugin/octodashcompanion/webcam',
-        //   );
-        //   data.icon('camera');
-        //   data.exit(false);
-        //   break;
         // case '[!RESTARTSERVICE]':
         //   data.command(
         //     '[!WEB]' +
