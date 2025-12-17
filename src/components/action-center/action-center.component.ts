@@ -46,6 +46,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     POWERON: () => this.enclosureService.setPSUState(PSUState.ON),
     POWERTOGGLE: () => this.enclosureService.togglePSU(),
     WEB: value => this.openIframe(value),
+    WEBCAM: () => this.openIframe('/plugin/octodash/webcam'),
     NEOPIXEL: (...values) => this.setLEDColor(values[0], values[1], values[2], values[3]),
     OUTPUT: (...values) => this.setOutput(values[0], values[1]),
     OUTPUT_PWM: (...values) => this.setOutputPWM(values[0], values[1]),

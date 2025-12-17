@@ -17,6 +17,7 @@ import os.path
 
 import json
 
+import flask
 import octoprint.plugin
 from octoprint.access.permissions import Permissions
 from octoprint.filemanager import FileDestinations
@@ -313,6 +314,41 @@ class OctodashPlugin(
             return make_response(json.dumps({"error": "Error getting screen wakeup command"}), 500)
 
         return make_response(json.dumps({"success": True}), 200)
+
+    @Permissions.WEBCAM.require(403)
+    @octoprint.plugin.BlueprintPlugin.route("webcam")
+    def webcam_route(self):
+        webcam_url = self._settings.global_get(["webcam", "stream"])
+
+        # Anything passed here can be used as {{ variable_name }} in the template
+        render_kwargs = {
+            "webcam_url": webcam_url
+        }
+
+        if self._settings.global_get(["plugins", "multicam"]) and "webcam" in flask.request.values:
+            webcam = self._settings.global_get(["plugins", "multicam", "multicam_profiles"])[
+                int(flask.request.values["webcam"]) - 1]
+            render_kwargs["webcam_url"] = webcam["URL"]
+            if webcam["flipH"]:
+                render_kwargs["webcam_flip_horizontal"] = "flipH"
+            if webcam["flipV"]:
+                render_kwargs["webcam_flip_vertical"] = "flipV"
+            if webcam["rotate90"]:
+                render_kwargs["webcam_rotate_ccw"] = "rotate90"
+        else:
+            if self._settings.global_get_boolean(["webcam", "flipH"]):
+                render_kwargs["webcam_flip_horizontal"] = "flipH"
+            if self._settings.global_get_boolean(["webcam", "flipV"]):
+                render_kwargs["webcam_flip_vertical"] = "flipV"
+            if self._settings.global_get_boolean(["webcam", "rotate90"]):
+                render_kwargs["webcam_rotate_ccw"] = "rotate90"
+            if self._settings.global_get(["plugins", "multicam"]):
+                render_kwargs["webcams"] = self._settings.global_get(["plugins", "multicam", "multicam_profiles"])
+
+        response = flask.make_response(flask.render_template("plugin_octodash/webcam.jinja2", **render_kwargs))
+        response.headers["X-Frame-Options"] = "SAMEORIGIN"
+        return response
+
 
 
     def is_blueprint_csrf_protected(self):
