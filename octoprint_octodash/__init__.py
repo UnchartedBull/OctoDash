@@ -345,7 +345,7 @@ class OctodashPlugin(
             if self._settings.global_get(["plugins", "multicam"]):
                 render_kwargs["webcams"] = self._settings.global_get(["plugins", "multicam", "multicam_profiles"])
 
-        response = flask.make_response(flask.render_template("webcam.jinja2", **render_kwargs))
+        response = flask.make_response(flask.render_template("plugin_octodash/webcam.jinja2", **render_kwargs))
         response.headers["X-Frame-Options"] = "SAMEORIGIN"
         return response
 
