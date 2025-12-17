@@ -20,6 +20,16 @@
       margin-left: 5vw;
       margin-right: -3vw;
 
+      .icon-wrapper {
+        position: absolute;
+        width: 15vw;
+        height: 15vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        --buffer: -5.5vh;
+      }
+
       &__XY {
         display: block;
         height: 60vh;
@@ -75,7 +85,6 @@
           height: 50vh;
           font-size: 20vh;
           overflow: visible;
-          --bufer: 5vh;
 
           .up {
             top: var(--buffer) ;
@@ -279,16 +288,6 @@
   }
 }
 
-.icon-wrapper {
-  position: absolute;
-  width: 15vw;
-  height: 15vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  --buffer: -5.5vh;
-
-}
 
 .extruder-controls {
   fa-icon {
