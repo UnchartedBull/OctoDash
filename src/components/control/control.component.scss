@@ -27,6 +27,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
         --buffer: -5.5vh;
       }
 
@@ -39,30 +40,35 @@
 
         &__wrapper {
           position: relative;
+
           --size: 50vh;
+
           width: var(--size);
           height: var(--size);
           font-size: 20vh;
           overflow: visible;
 
           .up {
-            top: var(--buffer) ;
+            top: var(--buffer);
             left: 0;
             right: 0;
             margin: 0 auto;
           }
+
           .down {
             bottom: var(--buffer);
             left: 0;
             right: 0;
             margin: 0 auto;
           }
+
           .left {
             top: 0;
             bottom: 0;
             margin: auto 0;
             left: var(--buffer);
           }
+
           .right {
             top: 0;
             bottom: 0;
@@ -87,7 +93,7 @@
           overflow: visible;
 
           .up {
-            top: var(--buffer) ;
+            top: var(--buffer);
             left: 0;
             right: 0;
             margin: 0 auto;
@@ -115,7 +121,6 @@
   &__icon {
     font-size: 15vw;
     opacity: 0.9;
-
   }
 
   &__distance {
@@ -287,7 +292,6 @@
     }
   }
 }
-
 
 .extruder-controls {
   fa-icon {
