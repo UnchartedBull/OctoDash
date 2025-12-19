@@ -58,7 +58,7 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
 
   private convertSpoolmanSpool(spool: SpoolmanSpool): FilamentSpool {
     return {
-      color: spool.filament.color_hex,
+      color: `#${spool.filament.color_hex}`,
       density: spool.filament.density,
       diameter: spool.filament.diameter,
       displayName: `${spool.filament.vendor?.name || ''} - ${spool.filament.name || ''}`,
