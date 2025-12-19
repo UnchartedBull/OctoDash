@@ -21,7 +21,7 @@ export class ProfileService {
   settingsService = inject(OctoprintSettingsService);
 
   private getProfiles(): Observable<TempProfile[]> {
-    return this.settingsService.settings$.pipe(map(settings => settings?.temperature.profiles || []));
+    return this.settingsService.getSettings().pipe(map(settings => settings?.temperature.profiles || []));
   }
 
   private handleError(error: Error): Observable<TempProfile[]> {

@@ -12,7 +12,11 @@ export class OctoprintSettingsService {
   private configService = inject(ConfigService);
   private socketService = inject(SocketService);
 
-  settings$ = new BehaviorSubject<OctoPrintSettings | null>(null);
+  private settings$ = new BehaviorSubject<OctoPrintSettings | null>(null);
+
+  getSettings() {
+    return this.settings$.asObservable();
+  }
 
   constructor() {
     this.configService.getInitializedSubscribable().subscribe(initialized => {
