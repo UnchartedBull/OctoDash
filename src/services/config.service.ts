@@ -19,7 +19,7 @@ export class ConfigService {
   private valid: boolean;
   private errors: string[];
   private update = false;
-  public initialized$ = new BehaviorSubject<boolean>(false);
+  private initialized$ = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
@@ -87,6 +87,10 @@ export class ConfigService {
 
   public saveConfig(config: Config): void {
     this.electronService.send('saveConfig', config);
+  }
+
+  public getInitializedSubscribable() {
+    return this.initialized$.asObservable();
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {

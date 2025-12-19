@@ -15,7 +15,7 @@ export class OctoprintSettingsService {
   settings$ = new BehaviorSubject<OctoPrintSettings | null>(null);
 
   constructor() {
-    this.configService.initialized$.subscribe(initialized => {
+    this.configService.getInitializedSubscribable().subscribe(initialized => {
       if (initialized) {
         this.loadSettings();
       }
