@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { ElectronService } from './electron.service';
@@ -18,7 +19,7 @@ export class ConfigService {
   private valid: boolean;
   private errors: string[];
   private update = false;
-  private initialized = false;
+  public initialized$ = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
@@ -41,7 +42,7 @@ export class ConfigService {
       this.zone.run(() => {
         this.valid = true;
         this.generateHttpHeaders();
-        this.initialized = true;
+        this.initialized$.next(true);
       });
     });
     this.electronService.on('configFail', (_, errors) => {
@@ -49,7 +50,7 @@ export class ConfigService {
         this.valid = false;
         this.errors = errors;
         console.error(errors);
-        this.initialized = true;
+        this.initialized$.next(true);
       });
     });
 
@@ -148,7 +149,7 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
-    return this.initialized;
+    return this.initialized$.getValue();
   }
 
   public isValid(): boolean {

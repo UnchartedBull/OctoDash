@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Option } from 'src/components/shared/quick-control/quick-control.component';
 
-import { OctoPrintSettings, TempProfile } from '../../model/octoprint';
+import { TempProfile } from '../../model/octoprint';
 import { ConfigService } from '../config.service';
 import { NotificationService } from '../notification.service';
+import { OctoprintSettingsService } from '../octoprint-settings.service';
 
 const sortOptions = (options: Option[]) => options.sort((a, b) => a.value - b.value);
 
@@ -17,11 +18,10 @@ export class ProfileService {
   httpClient: HttpClient = inject(HttpClient);
   configService: ConfigService = inject(ConfigService);
   notificationService: NotificationService = inject(NotificationService);
+  settingsService = inject(OctoprintSettingsService);
 
   private getProfiles(): Observable<TempProfile[]> {
-    return this.httpClient
-      .get<OctoPrintSettings>(this.configService.getApiURL('/api/settings', false), this.configService.getHTTPHeaders())
-      .pipe(map(response => response.temperature.profiles));
+    return this.settingsService.settings$.pipe(map(settings => settings?.temperature.profiles || []));
   }
 
   private handleError(error: Error): Observable<TempProfile[]> {
