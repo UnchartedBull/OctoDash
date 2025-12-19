@@ -1,6 +1,6 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, inject, NgModule, provideAppInitializer } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +17,7 @@ import { AppComponent } from './components/app.component';
 import directives from './directives';
 import pipes from './pipes';
 import services from './services';
+import { OctoprintSettingsService } from './services/octoprint-settings.service';
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],
@@ -35,8 +36,11 @@ import services from './services';
   ],
   providers: [
     ...services,
-    [provideLottieOptions({ player: () => lottiePlayer })],
-    [provideCacheableAnimationLoader()],
+    provideAppInitializer(() => {
+      inject(OctoprintSettingsService);
+    }),
+    provideLottieOptions({ player: () => lottiePlayer }),
+    provideCacheableAnimationLoader(),
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })
