@@ -1225,6 +1225,9 @@
         <source>Can't preheat printer!</source>
         <target>Impossible de préchauffer l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="7229171609432307996" datatype="html">
+        <source>@@error-octoprint-settings:Failed to load OctoPrint settings.</source>
+      </trans-unit>
       <trans-unit id="octoprint-upgrade-required-title" datatype="html">
         <source>OctoPrint outdated!</source>
         <target>OctoPrint dépassé !</target>
