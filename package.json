@@ -122,7 +122,7 @@
     "@types/mime-types": "^3.0.1",
     "@types/node": "24.10.2",
     "codelyzer": "~6.0.2",
-    "electron": "~37.2.0",
+    "electron": "^39.2.7",
     "electron-builder": "~26.0.12",
     "eslint": "9.39.2",
     "eslint-plugin-import": "~2.32.0",
