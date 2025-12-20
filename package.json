@@ -11,7 +11,7 @@
   "main": "main.js",
   "type": "module",
   "browserslist": [
-    "chrome > 107"
+    "chrome >= 120"
   ],
   "build": {
     "appId": "octodash",
