@@ -232,6 +232,7 @@ class OctodashPlugin(
                 "vendor/js/ko.iconpicker.js",
                 'js/octodash-icons.js',
                 'js/octodash.js',
+                'js/octodash_wizard.js',
             ],
             "css": [
                 "vendor/css/fontawesome-iconpicker.min.css",
