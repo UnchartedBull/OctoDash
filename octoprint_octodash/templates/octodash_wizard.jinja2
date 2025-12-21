@@ -23,4 +23,34 @@
   <li><code data-bind="text: $data" ></code><button class="btn" data-bind="click: $parent.migrate">Migrate</button></li>
   </ul>
 </div>
-
+<!-- ko if:  configPaths.length === 0-->
+<div class="plugins-chosen" data-bind="if: singlePlugins().length">
+  <h4>Plugins Found</h4>
+  <p>The following pluigns were detected and will be used in OctoDash. You can disable this behavior in the plugin settings</p>
+  <ul data-bind="foreach: singlePlugins">
+    <li><code data-bind="text: $data"></code></li>
+  </ul>
+</div>
+<div class="filament-chosen" data-bind="if: filamentPlugins().length === 1">
+ <h4>Filament Chosen</h4>
+ <p>The plugin <code data-bind="text: filamentPlugins()[0]"></code> was detected an enabled in OctoDash. You can disable it in the plugin settings.</p>
+</div>
+<div data-bind="if: filamentPlugins().length" class="filament-choices">
+  <h4>Multiple filament plugins available</h4>
+  <p>The following filament pluigns were detected installed. You can enable one in the plugin settings.</p>
+  <ul data-bind="foreach: filamentPlugins">
+    <li><code data-bind="text: $data"></code></li>
+  </ul>
+</div>
+<div class="power-chosen" data-bind="if: powerPlugins().length === 1">
+ <h4>Power Chosen</h4>
+ <p>The plugin <code data-bind="text: powerPlugins()[0]"></code> was detected and enabled in OctoDash for controling the printer power state. You can disable it in the plugin settings.</p>
+</div>
+<div data-bind="if: powerPlugins().length" class="power-choices">
+  <h4>Multiple power plugins available</h4>
+  <p>The following power management pluigns were detected installed. You can enable one for use with OctoDash in the plugin settings.</p>
+  <ul data-bind="foreach: powerPlugins">
+    <li><code data-bind="text: $data"></code></li>
+  </ul>
+</div>
+<!-- /ko -->

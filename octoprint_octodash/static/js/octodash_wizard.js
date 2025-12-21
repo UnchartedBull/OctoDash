@@ -6,6 +6,9 @@ $(function () {
     var self = this;
 
     self.configPaths = ko.observableArray([]);
+    self.filamentPlugins = ko.observableArray([]);
+    self.singlePlugins = ko.observableArray([]);
+    self.powerPlugins = ko.observableArray([]);
 
     self.legacyInstalled = ko.observable(false);
     self.settingsViewModel = parameters[0];
@@ -18,6 +21,9 @@ $(function () {
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
       self.legacyInstalled(data.octodash.details.legacyInstalled);
+      self.filamentPlugins(data.octodash.details.plugins.filament);
+      self.singlePlugins(data.octodash.details.plugins.singles);
+      self.powerPlugins(data.octodash.details.plugins.power);
     };
 
     self.copyScript = () => {

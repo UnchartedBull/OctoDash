@@ -27,6 +27,13 @@ from octoprint.events import Events
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
 
+POWER_PLUGINS = [
+'psucontrol',
+'ophom',
+]
+SINGLE_PLUGINS = ['displaylayerprogress', 'preheatbutton']
+FILAMENT_PLUGINS = ['Spoolman', 'SpoolManager', 'filamentmanager']
+
 
 class OctodashPlugin(
     octoprint.plugin.AssetPlugin,
@@ -403,6 +410,7 @@ class OctodashPlugin(
     def get_wizard_details(self):
         details = {
             "legacyConfigs": self._find_legacy_config(),
+            "plugins": self._find_available_plugins(),
         }
         self._logger.info(f"Returning wizard details: {details}")
         return details
@@ -429,6 +437,14 @@ class OctodashPlugin(
                 "pip": "https://github.com/UnchartedBull/Octodash/archive/{target_version}.zip",
             }
         }
+
+    def _find_available_plugins(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+        power = installed.intersection(POWER_PLUGINS)
+        singles = installed.intersection(SINGLE_PLUGINS)
+        filament = installed.intersection(FILAMENT_PLUGINS)
+        return dict(power=list(power), singles=list(singles), filament=list(filament))
 
     def _create_management_script(self):
         with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
