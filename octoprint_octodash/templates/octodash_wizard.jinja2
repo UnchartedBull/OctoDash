@@ -13,14 +13,15 @@
   If you have an existing installation of legacy OctoDash, the script will detect that and make
   the necessary changes to launch OctoDash v3 instead.
 </p>
-<button data-bind="click: copyScript" class="btn">Copy script</button>
+<button data-bind="click: copyScript, enable: !copyInProgress()" class="btn">Copy script</button>
 <div data-bind="if: configPaths().length">
   <h4>Config Setup</h4>
   <p>
-  An existing legacy OctoDash config was found on your system at the following location.
-  Would you like to migrate it?</p>
+    An existing legacy OctoDash config was found on your system at the following location.
+    Would you like to migrate it?
+  </p>
   <ul data-bind="foreach: configPaths">
-  <li><code data-bind="text: $data" ></code><button class="btn" data-bind="click: $parent.migrate">Migrate</button></li>
+    <li><code data-bind="text: $data" ></code><button class="btn" data-bind="click: $parent.migrate, enable: !$parent.migrateInProgress()">Migrate</button></li>
   </ul>
 </div>
 <!-- ko if:  configPaths.length === 0-->

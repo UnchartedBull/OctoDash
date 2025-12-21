@@ -13,8 +13,12 @@ $(function () {
     self.legacyInstalled = ko.observable(false);
     self.settingsViewModel = parameters[0];
     self.selectedCommand = ko.observable();
-    self.process = ko.observable();
-    self.processing = ko.observable(false);
+
+    self.copyInProgress = ko.observable(false);
+    self.copyComplete = ko.observable(false);
+
+    self.migrateInProgress = ko.observable(false);
+    self.migrateComplete = ko.observable(false);
 
     self.onWizardDetails = function (data) {
       console.log(data);
@@ -26,53 +30,60 @@ $(function () {
       self.powerPlugins(data.octodash.details.plugins.power);
     };
 
-    self.copyScript = () => {
-      $.ajax({
-        url: '/plugin/octodash/api/copy_script',
-        type: 'POST',
-      })
-        .then(() => {
-          new PNotify({
-            title: 'OctoDash Script Copy Successful!',
-            text: '<div class="row-fluid"><p>The OctoDash startup script has been successfully copied.</p></div>',
-            hide: true,
-            type: 'success',
-          });
-        })
-        .catch(() => {
-          new PNotify({
-            title: 'OctoDash Script Copy Failed',
-            text: '<div class="row-fluid"><p>Failed to copy the OctoDash startup script.</p></div>',
-            hide: false,
-            type: 'error',
-          });
+    self.copyScript = async () => {
+      self.copyInProgress(true);
+      try {
+        await $.ajax({
+          url: '/plugin/octodash/api/copy_script',
+          type: 'POST',
         });
+        self.copyComplete(true);
+
+        new PNotify({
+          title: 'OctoDash Script Copy Successful!',
+          text: '<div class="row-fluid"><p>The OctoDash startup script has been successfully copied.</p></div>',
+          hide: true,
+          type: 'success',
+        });
+      } catch (error) {
+        console.error(error);
+        new PNotify({
+          title: 'OctoDash Script Copy Failed',
+          text: '<div class="row-fluid"><p>Failed to copy the OctoDash startup script.</p></div>',
+          hide: false,
+          type: 'error',
+        });
+      }
+      self.copyInProgress(false);
     };
 
-    self.migrate = path => {
-      $.ajax({
-        url: '/plugin/octodash/api/migrate',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ path: path }),
-      })
-        .then(() => {
-          new PNotify({
-            title: 'OctoDash Config Migration Successful!',
-            text: `<div class="row-fluid"><p>The config from \`${path}\` has been successfully migrated.</p></div>`,
-            hide: true,
-            type: 'success',
-          });
-        })
-        .catch(error => {
-          console.error('Migration failed:', error);
-          new PNotify({
-            title: 'OctoDash Config Migration Failed',
-            text: `<div class="row-fluid"><p>Migration failed with the following error: ${error}</p></div>`,
-            hide: false,
-            type: 'error',
-          });
+    self.migrate = async path => {
+      self.migrateInProgress(true);
+      try {
+        await $.ajax({
+          url: '/plugin/octodash/api/migrate',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ path: path }),
         });
+
+        new PNotify({
+          title: 'OctoDash Config Migration Successful!',
+          text: `<div class="row-fluid"><p>The config from \`${path}\` has been successfully migrated.</p></div>`,
+          hide: true,
+          type: 'success',
+        });
+        self.migrateComplete(true);
+      } catch (error) {
+        console.error('Migration failed:', error);
+        new PNotify({
+          title: 'OctoDash Config Migration Failed',
+          text: `<div class="row-fluid"><p>Migration failed with the following error: ${error}</p></div>`,
+          hide: false,
+          type: 'error',
+        });
+      }
+      self.migrateInProgress(false);
     };
   }
 
