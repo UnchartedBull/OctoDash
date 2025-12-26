@@ -27,17 +27,21 @@ from octoprint.events import Events
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
 
-POWER_PLUGINS = [
-    'psucontrol',
-    'ophom',
-    'tplinksmartplug',
-    'tuyasmartplug',
-    'tasmota',
-    'tasmota_mqtt',
-    'wemo',
-]
+POWER_PLUGINS = {
+    'psucontrol': 'psuControl',
+    'ophom': 'ophom',
+    'tplinksmartplug': 'tpLinkSmartPlug',
+    'tuyasmartplug': 'tuya',
+    'tasmota': 'tasmota',
+    'tasmota_mqtt': 'tasmotaMqtt',
+    'wemo': 'wemo',
+}
 SINGLE_PLUGINS = ['DisplayLayerProgress', 'preheat']
-FILAMENT_PLUGINS = ['Spoolman', 'SpoolManager', 'filamentmanager']
+FILAMENT_PLUGINS = {
+    'Spoolman': 'spoolman',
+    'SpoolManager': 'spoolManager',
+    'filamentmanager': 'filamentManager'
+}
 
 
 class OctodashPlugin(
@@ -443,12 +447,27 @@ class OctodashPlugin(
             }
         }
 
+    def _set_initial_plugins(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+        filament = installed.intersection(FILAMENT_PLUGINS.keys())
+        
+        if len(filament) == 1:
+            settingskey = FILAMENT_PLUGINS[filament.pop()]
+            self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+
+        power = installed.intersection(POWER_PLUGINS.keys())
+
+        if len(power) == 1:
+            settingskey = POWER_PLUGINS[power.pop()]
+            self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+
     def _find_available_plugins(self):
         manager = octoprint.plugin.plugin_manager()
         installed = set(manager.enabled_plugins.keys())
-        power = installed.intersection(POWER_PLUGINS)
+        power = installed.intersection(POWER_PLUGINS.keys())
         singles = installed.intersection(SINGLE_PLUGINS)
-        filament = installed.intersection(FILAMENT_PLUGINS)
+        filament = installed.intersection(FILAMENT_PLUGINS.keys())
         return dict(power=list(power), singles=list(singles), filament=list(filament))
 
     def _create_management_script(self):
