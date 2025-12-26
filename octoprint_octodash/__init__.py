@@ -28,19 +28,64 @@ LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
 
 POWER_PLUGINS = {
-    'psucontrol': 'psuControl',
-    'ophom': 'ophom',
-    'tplinksmartplug': 'tpLinkSmartPlug',
-    'tuyasmartplug': 'tuya',
-    'tasmota': 'tasmota',
-    'tasmota_mqtt': 'tasmotaMqtt',
-    'wemo': 'wemo',
+    'psucontrol': {
+        'settingsKey': 'psuControl',
+        'requiresConfig': False,
+    },
+    'ophom': {
+        'settingsKey': 'ophom',
+        'requiresConfig': False,
+    },
+    'tplinksmartplug': {
+        'settingsKey': 'tpLinkSmartPlug',
+        'requiresConfig': True,
+    },
+    'tuyasmartplug': {
+        'settingsKey': 'tuya',
+        'requiresConfig': False,
+    },
+    'tasmota': {
+        'settingsKey': 'tasmota',
+        'requiresConfig': True,
+    },
+    'tasmota_mqtt': {
+        'settingsKey': 'tasmotaMqtt',
+        'requiresConfig': True,
+    },
+    'wemo': {
+        'settingsKey': 'wemo',
+        'requiresConfig': True,
+    },
 }
-SINGLE_PLUGINS = ['DisplayLayerProgress', 'preheat']
+
+SINGLE_PLUGINS = {
+    'DisplayLayerProgress': {
+        'settingsKey': 'displayLayerProgress',
+        'requiresConfig': False
+    },
+    'preheatButton': {
+        'settingsKey': 'preheat',
+        'requiresConfig': False
+    },
+    'PrintTimeGenius': {
+        'settingsKey': 'printTimeGenius',
+        'requiresConfig': False
+    }
+}
+
 FILAMENT_PLUGINS = {
-    'Spoolman': 'spoolman',
-    'SpoolManager': 'spoolManager',
-    'filamentmanager': 'filamentManager'
+    'Spoolman': {
+        'settingsKey': 'spoolman',
+        'requiresConfig': False,
+    },
+    'SpoolManager': {
+        'settingsKey': 'spoolManager',
+        'requiresConfig': False,
+    },
+    'filamentmanager': {
+        'settingsKey': 'filamentManager',
+        'requiresConfig': False,
+    }
 }
 
 
@@ -453,22 +498,25 @@ class OctodashPlugin(
         filament = installed.intersection(FILAMENT_PLUGINS.keys())
         
         if len(filament) == 1:
-            settingskey = FILAMENT_PLUGINS[filament.pop()]
+            settingskey = FILAMENT_PLUGINS[filament.pop()]["settingsKey"]
             self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
 
         power = installed.intersection(POWER_PLUGINS.keys())
 
         if len(power) == 1:
-            settingskey = POWER_PLUGINS[power.pop()]
-            self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+            plugin_details = POWER_PLUGINS[power.pop()]
+            settingskey = plugin_details['settingsKey']
+            if not plugin_details['requiresConfig']:
+                self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
 
     def _find_available_plugins(self):
-        manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
-        power = installed.intersection(POWER_PLUGINS.keys())
-        singles = installed.intersection(SINGLE_PLUGINS)
-        filament = installed.intersection(FILAMENT_PLUGINS.keys())
-        return dict(power=list(power), singles=list(singles), filament=list(filament))
+        return dict()
+        # manager = octoprint.plugin.plugin_manager()
+        # installed = set(manager.enabled_plugins.keys())
+        # power = installed.intersection(POWER_PLUGINS.keys())
+        # singles = installed.intersection(SINGLE_PLUGINS.keys())
+        # filament = installed.intersection(FILAMENT_PLUGINS.keys())
+        # return dict(power=list(power), singles=list(singles), filament=list(filament))
 
     def _create_management_script(self):
         with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
