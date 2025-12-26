@@ -63,8 +63,8 @@ SINGLE_PLUGINS = {
         'settingsKey': 'displayLayerProgress',
         'requiresConfig': False
     },
-    'preheatButton': {
-        'settingsKey': 'preheat',
+    'preheat': {
+        'settingsKey': 'preheatButton',
         'requiresConfig': False
     },
     'PrintTimeGenius': {
@@ -104,7 +104,64 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
-    ##~~ SettingsPlugin mixin
+
+    def _is_plugin_enabled(self, plugin, plugin_name):
+        manager = octoprint.plugin.plugin_manager()
+        if plugin["enabled"] is False:
+            return plugin
+        enabled =  plugin_name in manager.enabled_plugins
+        plugin["enabled"] = enabled
+        return plugin
+
+
+    def _throw():
+        raise Exception("Intentional Exception for testing")
+
+    #~~ SettingsPlugin mixin
+
+    # def on_settings_load(self):
+    #     manager = octoprint.plugin.plugin_manager()
+    #     installed = set(manager.enabled_plugins.keys())
+
+    #     all_plugins = dict()
+    #     all_plugins.update(POWER_PLUGINS)
+    #     all_plugins.update(SINGLE_PLUGINS)
+    #     all_plugins.update(FILAMENT_PLUGINS)
+    #     data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
+
+    #     for plugin_name, plugin_info in all_plugins.items():
+    #         if not plugin_name in installed:
+    #             data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
+    #         # plugin = data["plugins"].get(plugin_info["settingsKey"], {})
+    #         # enabled = self._is_plugin_enabled(plugin, plugin_name)
+
+    #     return data
+
+    # def get_settings_preprocessors(self):
+    #     manager = octoprint.plugin.plugin_manager()
+    #     installed = set(manager.enabled_plugins.keys())
+
+    #     getters = {}
+    #     setters = {}
+
+
+        # all_plugins = {}
+        # all_plugins.update(POWER_PLUGINS)
+        # all_plugins.update(SINGLE_PLUGINS)
+        # all_plugins.update(FILAMENT_PLUGINS)
+        
+    #     plugin_getters = {
+    #         "displayLayerProgress": lambda plugin: self._is_plugin_enabled(plugin, "DisplayLayerProgress")
+    #     }
+
+
+    #     # for plugin_name, plugin_info in all_plugins.items():
+    #     #     plugin_getters[plugin_info["settingsKey"]] = lambda plugin: self._is_plugin_enabled(plugin, plugin_name)
+
+    #     getters["plugins"] = plugin_getters
+
+
+    #     return {"printer": lambda x: "foo"}, setters
 
     def get_settings_defaults(self):
         return {
