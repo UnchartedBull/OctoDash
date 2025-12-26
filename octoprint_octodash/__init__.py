@@ -28,10 +28,15 @@ LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
 
 POWER_PLUGINS = [
-'psucontrol',
-'ophom',
+    'psucontrol',
+    'ophom',
+    'tplinksmartplug',
+    'tuyasmartplug',
+    'tasmota',
+    'tasmota_mqtt',
+    'wemo',
 ]
-SINGLE_PLUGINS = ['displaylayerprogress', 'preheatbutton']
+SINGLE_PLUGINS = ['DisplayLayerProgress', 'preheat']
 FILAMENT_PLUGINS = ['Spoolman', 'SpoolManager', 'filamentmanager']
 
 
