@@ -70,7 +70,11 @@ SINGLE_PLUGINS = {
     'PrintTimeGenius': {
         'settingsKey': 'printTimeGenius',
         'requiresConfig': False
-    }
+    },
+    'enclosure': {
+        'settingsKey': 'enclosure',
+        'requiresConfig': True,
+    },
 }
 
 FILAMENT_PLUGINS = {
@@ -119,23 +123,23 @@ class OctodashPlugin(
 
     #~~ SettingsPlugin mixin
 
-    # def on_settings_load(self):
-    #     manager = octoprint.plugin.plugin_manager()
-    #     installed = set(manager.enabled_plugins.keys())
+    def on_settings_load(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
 
-    #     all_plugins = dict()
-    #     all_plugins.update(POWER_PLUGINS)
-    #     all_plugins.update(SINGLE_PLUGINS)
-    #     all_plugins.update(FILAMENT_PLUGINS)
-    #     data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
+        all_plugins = dict()
+        all_plugins.update(POWER_PLUGINS)
+        all_plugins.update(SINGLE_PLUGINS)
+        all_plugins.update(FILAMENT_PLUGINS)
+        data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
 
-    #     for plugin_name, plugin_info in all_plugins.items():
-    #         if not plugin_name in installed:
-    #             data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
-    #         # plugin = data["plugins"].get(plugin_info["settingsKey"], {})
-    #         # enabled = self._is_plugin_enabled(plugin, plugin_name)
+        for plugin_name, plugin_info in all_plugins.items():
+            if not plugin_name in installed:
+                data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
+            # plugin = data["plugins"].get(plugin_info["settingsKey"], {})
+            # enabled = self._is_plugin_enabled(plugin, plugin_name)
 
-    #     return data
+        return data
 
     # def get_settings_preprocessors(self):
     #     manager = octoprint.plugin.plugin_manager()
