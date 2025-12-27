@@ -136,8 +136,6 @@ class OctodashPlugin(
         for plugin_name, plugin_info in all_plugins.items():
             if not plugin_name in installed:
                 data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
-            # plugin = data["plugins"].get(plugin_info["settingsKey"], {})
-            # enabled = self._is_plugin_enabled(plugin, plugin_name)
 
         return data
 
@@ -166,6 +164,12 @@ class OctodashPlugin(
 
 
     #     return {"printer": lambda x: "foo"}, setters
+
+    def on_settings_migrate(self, target, current):
+        self._set_initial_plugins()
+
+    def get_settings_version(self):
+        return 1
 
     def get_settings_defaults(self):
         return {
