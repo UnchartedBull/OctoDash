@@ -24,73 +24,10 @@ from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
 
+from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS
+
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
-
-POWER_PLUGINS = {
-    'psucontrol': {
-        'settingsKey': 'psuControl',
-        'requiresConfig': False,
-    },
-    'ophom': {
-        'settingsKey': 'ophom',
-        'requiresConfig': False,
-    },
-    'tplinksmartplug': {
-        'settingsKey': 'tpLinkSmartPlug',
-        'requiresConfig': True,
-    },
-    'tuyasmartplug': {
-        'settingsKey': 'tuya',
-        'requiresConfig': False,
-    },
-    'tasmota': {
-        'settingsKey': 'tasmota',
-        'requiresConfig': True,
-    },
-    'tasmota_mqtt': {
-        'settingsKey': 'tasmotaMqtt',
-        'requiresConfig': True,
-    },
-    'wemo': {
-        'settingsKey': 'wemo',
-        'requiresConfig': True,
-    },
-}
-
-SINGLE_PLUGINS = {
-    'DisplayLayerProgress': {
-        'settingsKey': 'displayLayerProgress',
-        'requiresConfig': False
-    },
-    'preheat': {
-        'settingsKey': 'preheatButton',
-        'requiresConfig': False
-    },
-    'PrintTimeGenius': {
-        'settingsKey': 'printTimeGenius',
-        'requiresConfig': False
-    },
-    'enclosure': {
-        'settingsKey': 'enclosure',
-        'requiresConfig': True,
-    },
-}
-
-FILAMENT_PLUGINS = {
-    'Spoolman': {
-        'settingsKey': 'spoolman',
-        'requiresConfig': False,
-    },
-    'SpoolManager': {
-        'settingsKey': 'spoolManager',
-        'requiresConfig': False,
-    },
-    'filamentmanager': {
-        'settingsKey': 'filamentManager',
-        'requiresConfig': False,
-    }
-}
 
 
 class OctodashPlugin(
