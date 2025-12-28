@@ -6,9 +6,12 @@ $(function () {
     var self = this;
 
     self.configPaths = ko.observableArray([]);
-    self.filamentPlugins = ko.observableArray([]);
-    self.singlePlugins = ko.observableArray([]);
-    self.powerPlugins = ko.observableArray([]);
+    self.enabledFilament = ko.observableArray([]);
+    self.availableFilament = ko.observableArray([]);
+    self.enabledPower = ko.observableArray([]);
+    self.availablePower = ko.observableArray([]);
+    self.enabledSingles = ko.observableArray([]);
+    self.availableSingles = ko.observableArray([]);
 
     self.legacyInstalled = ko.observable(false);
     self.settingsViewModel = parameters[0];
@@ -24,10 +27,13 @@ $(function () {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
-      self.legacyInstalled(data.octodash.details.legacyInstalled);
-      self.filamentPlugins(data.octodash.details.plugins.filament);
-      self.singlePlugins(data.octodash.details.plugins.singles);
-      self.powerPlugins(data.octodash.details.plugins.power);
+      // self.legacyInstalled(data.octodash.details.legacyInstalled);
+      self.enabledFilament(data.octodash.details.plugins.enabled_filament);
+      self.enabledSingles(data.octodash.details.plugins.enabled_singles);
+      self.enabledPower(data.octodash.details.plugins.enabled_power);
+      self.availableFilament(data.octodash.details.plugins.available_filament);
+      self.availableSingles(data.octodash.details.plugins.available_singles);
+      self.availablePower(data.octodash.details.plugins.available_power);
     };
 
     self.copyScript = async () => {
