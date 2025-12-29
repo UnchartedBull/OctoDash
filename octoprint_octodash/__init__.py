@@ -45,11 +45,6 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
-    def _is_enabled(self, enabled, plugin_name):
-        manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
-        return enabled and plugin_name in installed
-
     #~~ SettingsPlugin mixin
 
     def get_settings_preprocessors(self):
@@ -58,8 +53,7 @@ class OctodashPlugin(
         plugin_getters = {}
         for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
             settings_key = plugin_info["settingsKey"]
-            # path = ('plugins', settings_key, 'enabled')
-            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: self._is_enabled(enabled, name))
+            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
 
         return {'plugins': plugin_getters}, {}
 
@@ -492,36 +486,23 @@ class OctodashPlugin(
     def _find_available_plugins(self):
         manager = octoprint.plugin.plugin_manager()
         installed = set(manager.enabled_plugins.keys())
-        ## What's the new logic here?
 
-        # Highlight enabled singles
-        # check those that actually got enabled 
         enabled_singles = [k for k, v in SINGLE_PLUGINS.items() if k if self._settings.get_boolean(['plugins', v['settingsKey'], 'enabled'])]
-        # singles = installed.intersection(single_no_config.keys())
 
-        # Highlight installed but needing config
         single_needs_config = [k for k, v in SINGLE_PLUGINS.items() if v.get("requiresConfig", False)]
-        singles_config = installed.intersection(single_needs_config)
-
-        # Call out filament
-        # filament = installed.intersection(FILAMENT_PLUGINS.keys())
+        available_singles = installed.intersection(single_needs_config)
 
         enabled_filament = [k for k, v in FILAMENT_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
         available_filament = installed.intersection(FILAMENT_PLUGINS.keys()) - set(enabled_filament)
 
 
-        # call out power
         enabled_power = [k for k, v in POWER_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
         available_power = installed.intersection(POWER_PLUGINS.keys()) - set(enabled_power)
-        # if one is installed
-        # any that aren't installed but need 
 
 
-        # power = installed.intersection(POWER_PLUGINS.keys())
-        # filament = installed.intersection(FILAMENT_PLUGINS.keys())
         return dict(
             enabled_singles=list(enabled_singles),
-            available_singles=list(singles_config),
+            available_singles=list(available_singles),
             enabled_filament=list(enabled_filament),
             available_filament=list(available_filament),
             enabled_power=list(enabled_power),
