@@ -45,6 +45,10 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
+    def _is_enabled(self, enabled, plugin_name):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+        return enabled and plugin_name in installed
 
     #~~ SettingsPlugin mixin
 
@@ -55,8 +59,8 @@ class OctodashPlugin(
         for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
             settings_key = plugin_info["settingsKey"]
             # path = ('plugins', settings_key, 'enabled')
-            plugin_getters[settings_key] = dict(enabled = lambda enabled:  enabled and plugin_name in installed)
-        
+            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: self._is_enabled(enabled, name))
+
         return {'plugins': plugin_getters}, {}
 
     def on_settings_load(self):
@@ -503,12 +507,12 @@ class OctodashPlugin(
         # filament = installed.intersection(FILAMENT_PLUGINS.keys())
 
         enabled_filament = [k for k, v in FILAMENT_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
-        available_filament = installed.intersection(FILAMENT_PLUGINS.keys())
+        available_filament = installed.intersection(FILAMENT_PLUGINS.keys()) - set(enabled_filament)
 
 
         # call out power
         enabled_power = [k for k, v in POWER_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
-        available_power = installed.intersection(POWER_PLUGINS.keys())
+        available_power = installed.intersection(POWER_PLUGINS.keys()) - set(enabled_power)
         # if one is installed
         # any that aren't installed but need 
 
