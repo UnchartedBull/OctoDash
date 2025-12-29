@@ -54,10 +54,10 @@ class OctodashPlugin(
         plugin_getters = {}
         for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
             settings_key = plugin_info["settingsKey"]
-            path = ('plugins', settings_key, 'enabled')
-            plugin_getters[path] = lambda enabled:  enabled and plugin_name in installed
+            # path = ('plugins', settings_key, 'enabled')
+            plugin_getters[settings_key] = dict(enabled = lambda enabled:  enabled and plugin_name in installed)
         
-        return plugin_getters, {}
+        return {'plugins': plugin_getters}, {}
 
     def on_settings_load(self):
         manager = octoprint.plugin.plugin_manager()
