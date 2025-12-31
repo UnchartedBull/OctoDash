@@ -45,7 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
-    #~~ SettingsPlugin mixin
+    ##~~ SettingsPlugin mixin
 
     def get_settings_preprocessors(self):
         manager = octoprint.plugin.plugin_manager()
