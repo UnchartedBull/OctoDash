@@ -24,6 +24,8 @@ from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
 
+from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS
+
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
 
@@ -44,6 +46,39 @@ class OctodashPlugin(
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
 
     ##~~ SettingsPlugin mixin
+
+    def get_settings_preprocessors(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+        plugin_getters = {}
+        for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
+            settings_key = plugin_info["settingsKey"]
+            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
+
+        return {'plugins': plugin_getters}, {}
+
+    def on_settings_load(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+
+        all_plugins = dict()
+        all_plugins.update(POWER_PLUGINS)
+        all_plugins.update(SINGLE_PLUGINS)
+        all_plugins.update(FILAMENT_PLUGINS)
+        data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
+
+        for plugin_name, plugin_info in all_plugins.items():
+            if not plugin_name in installed:
+                data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
+
+        return data
+
+
+    def on_settings_migrate(self, target, current):
+        self._set_initial_plugins()
+
+    def get_settings_version(self):
+        return 1
 
     def get_settings_defaults(self):
         return {
@@ -72,7 +107,7 @@ class OctodashPlugin(
                 "companion": {"enabled": True},
                 "displayLayerProgress": {"enabled": True},
                 "enclosure": {
-                    "enabled": True,
+                    "enabled": False,
                     "ambientSensorID": None,
                     "filament1SensorID": None,
                     "filament2SensorID": None,
@@ -232,6 +267,7 @@ class OctodashPlugin(
                 "vendor/js/ko.iconpicker.js",
                 'js/octodash-icons.js',
                 'js/octodash.js',
+                'js/octodash_wizard.js',
             ],
             "css": [
                 "vendor/css/fontawesome-iconpicker.min.css",
@@ -402,6 +438,7 @@ class OctodashPlugin(
     def get_wizard_details(self):
         details = {
             "legacyConfigs": self._find_legacy_config(),
+            "plugins": self._find_available_plugins(),
         }
         self._logger.info(f"Returning wizard details: {details}")
         return details
@@ -428,6 +465,49 @@ class OctodashPlugin(
                 "pip": "https://github.com/UnchartedBull/Octodash/archive/{target_version}.zip",
             }
         }
+
+    def _set_initial_plugins(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+        filament = installed.intersection(FILAMENT_PLUGINS.keys())
+        
+        if len(filament) == 1:
+            settingskey = FILAMENT_PLUGINS[filament.pop()]["settingsKey"]
+            self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+
+        power = installed.intersection(POWER_PLUGINS.keys())
+
+        if len(power) == 1:
+            plugin_details = POWER_PLUGINS[power.pop()]
+            settingskey = plugin_details['settingsKey']
+            if not plugin_details['requiresConfig']:
+                self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+
+    def _find_available_plugins(self):
+        manager = octoprint.plugin.plugin_manager()
+        installed = set(manager.enabled_plugins.keys())
+
+        enabled_singles = [k for k, v in SINGLE_PLUGINS.items() if k if self._settings.get_boolean(['plugins', v['settingsKey'], 'enabled'])]
+
+        single_needs_config = [k for k, v in SINGLE_PLUGINS.items() if v.get("requiresConfig", False)]
+        available_singles = installed.intersection(single_needs_config)
+
+        enabled_filament = [k for k, v in FILAMENT_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
+        available_filament = installed.intersection(FILAMENT_PLUGINS.keys()) - set(enabled_filament)
+
+
+        enabled_power = [k for k, v in POWER_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
+        available_power = installed.intersection(POWER_PLUGINS.keys()) - set(enabled_power)
+
+
+        return dict(
+            enabled_singles=list(enabled_singles),
+            available_singles=list(available_singles),
+            enabled_filament=list(enabled_filament),
+            available_filament=list(available_filament),
+            enabled_power=list(enabled_power),
+            available_power=list(available_power),
+        )
 
     def _create_management_script(self):
         with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
