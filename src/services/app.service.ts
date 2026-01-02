@@ -32,6 +32,7 @@ export class AppService {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     this.updateError = {
       '/octodash must NOT have additional properties': config => {
+        //TODO: Delete companion?
         if ('showNotificationCenterIcon' in (config.octodash as any)) {
           config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
           delete (config.octodash as any).showNotificationCenterIcon;
@@ -42,9 +43,6 @@ export class AppService {
       },
       "/plugins must have required property 'wemo'": config => {
         config.plugins.wemo = defaultConfig.plugins.wemo;
-      },
-      "/plugins must have required property 'companion'": config => {
-        config.plugins.companion = defaultConfig.plugins.companion;
       },
       '/plugins/psuControl must NOT have additional properties': config => {
         if ('turnOnPSUWhenExitingSleep' in (config.plugins.psuControl as any)) {

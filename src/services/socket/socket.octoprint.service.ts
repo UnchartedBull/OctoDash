@@ -83,8 +83,7 @@ export class OctoPrintSocketService implements SocketService {
           unit: '°C',
         },
       ],
-      fanSpeed:
-        this.configService.isDisplayLayerProgressEnabled() || this.configService.isCompanionPluginEnabled() ? 0 : -1,
+      fanSpeed: 0,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
@@ -165,7 +164,7 @@ export class OctoPrintSocketService implements SocketService {
         handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
       },
       {
-        check: (plugin: string) => plugin === 'octodash' && this.configService.isCompanionPluginEnabled(),
+        check: (plugin: string) => plugin === 'octodash',
         handler: (message: unknown) => this.extractFanSpeed(message as CompanionData),
       },
     ];

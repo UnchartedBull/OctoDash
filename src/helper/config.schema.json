@@ -121,7 +121,6 @@
       "$id": "#/plugins",
       "type": "object",
       "required": [
-        "companion",
         "displayLayerProgress",
         "enclosure",
         "filamentManager",
@@ -138,17 +137,6 @@
         "wemo"
       ],
       "properties": {
-        "companion": {
-          "type": "object",
-          "required": ["enabled"],
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            }
-          },
-          "additionalProperties": false
-        },
         "displayLayerProgress": {
           "type": "object",
           "required": ["enabled"],
