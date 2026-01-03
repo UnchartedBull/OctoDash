@@ -7,7 +7,7 @@ export * from './printer-profile.model';
 export * from './socket.model';
 export * from './octoprint-settings.model';
 
-export * from './plugins/companion.model';
+export * from './plugins/octodash.model';
 export * from './plugins/display-layer-progress.model';
 export * from './plugins/enclosure.model';
 export * from './plugins/filament-manager.model';
