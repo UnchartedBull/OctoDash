@@ -1,3 +1,5 @@
 export interface OctoDashPlugin {
-  fanspeed: object;
+  fanspeed: {
+    [index: number]: number;
+  };
 }
