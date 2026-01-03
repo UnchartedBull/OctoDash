@@ -83,7 +83,7 @@ export class OctoPrintSocketService implements SocketService {
           unit: '°C',
         },
       ],
-      fanSpeed: 0,
+      fanSpeed: -1,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
