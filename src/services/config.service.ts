@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
 import { Ajv } from 'ajv';
 import * as _ from 'lodash-es';
-import { map, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 import configSchema from '../helper/config.schema.json' with { type: 'json' };
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
@@ -47,10 +47,22 @@ export class ConfigService {
   private http: HttpClient = inject(HttpClient);
   private zone: NgZone = inject(NgZone);
 
+  private errors$ = new BehaviorSubject<string[]>([]);
+
   private validateConfig(config: Config): boolean {
-    // Perform validation logic here
-    return validate(config);
-    // return true;
+    const result = validate(config);
+    if (!result) {
+      this.errors$.next(
+        validate.errors.map(error => {
+          if (error.keyword === 'type') {
+            return `${error.instancePath} ${error.message}`;
+          } else {
+            return `${error.instancePath === '' ? '/' : error.instancePath} ${error.message}`;
+          }
+        }),
+      );
+    }
+    return result;
   }
 
   public getConfig() {
@@ -125,8 +137,8 @@ export class ConfigService {
     return _.isEqual(this.config, changedConfig);
   }
 
-  public getErrors(): string[] {
-    return [];
+  public getErrors(): Observable<string[]> {
+    return this.errors$.asObservable();
   }
 
   public saveConfig(config: Config) {
