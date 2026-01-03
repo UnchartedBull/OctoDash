@@ -104,7 +104,6 @@ class OctodashPlugin(
                 "useM600": False,
             },
             "plugins": {
-                "companion": {"enabled": True},
                 "displayLayerProgress": {"enabled": True},
                 "enclosure": {
                     "enabled": False,
