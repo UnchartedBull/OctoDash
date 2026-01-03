@@ -624,17 +624,13 @@
         <source>Invert Axis Control</source>
         <target>Inversion des axes</target>
       </trans-unit>
-      <trans-unit id="settings-octodash-companion" datatype="html">
-        <source>OctoDash Companion</source>
-        <target>OctoDash Companion</target>
+      <trans-unit id="settings-display-layer-progress" datatype="html">
+        <source>Display Layer Progress</source>
+        <target>Afficher la progression de la couche</target>
       </trans-unit>
       <trans-unit id="ui-enabled" datatype="html">
         <source>enabled</source>
         <target>activé</target>
-      </trans-unit>
-      <trans-unit id="settings-display-layer-progress" datatype="html">
-        <source>Display Layer Progress</source>
-        <target>Afficher la progression de la couche</target>
       </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
         <source>Enclosure</source>

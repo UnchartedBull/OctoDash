@@ -15,8 +15,8 @@ import {
   SocketAuth,
 } from '../../model';
 import {
-  CompanionData,
   DisplayLayerProgressData,
+  OctoDashPlugin,
   OctoprintFilament,
   OctoprintPluginMessage,
   OctoprintSocketCurrent,
@@ -83,8 +83,7 @@ export class OctoPrintSocketService implements SocketService {
           unit: '°C',
         },
       ],
-      fanSpeed:
-        this.configService.isDisplayLayerProgressEnabled() || this.configService.isCompanionPluginEnabled() ? 0 : -1,
+      fanSpeed: -1,
     } as PrinterStatus;
     this.printerStatusSubject.next(this.printerStatus);
   }
@@ -165,8 +164,8 @@ export class OctoPrintSocketService implements SocketService {
         handler: (message: unknown) => this.handlePrinterNotification(message as PrinterNotification),
       },
       {
-        check: (plugin: string) => plugin === 'octodash' && this.configService.isCompanionPluginEnabled(),
-        handler: (message: unknown) => this.extractFanSpeed(message as CompanionData),
+        check: (plugin: string) => plugin === 'octodash',
+        handler: (message: unknown) => this.extractFanSpeed(message as OctoDashPlugin),
       },
     ];
 
@@ -267,7 +266,7 @@ export class OctoPrintSocketService implements SocketService {
     this.printerStatusSubject.next(this.printerStatus);
   }
 
-  public extractFanSpeed(message: DisplayLayerProgressData | CompanionData): void {
+  public extractFanSpeed(message: DisplayLayerProgressData | OctoDashPlugin): void {
     if (typeof message.fanspeed === 'object') {
       this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed['1']));
     } else {
