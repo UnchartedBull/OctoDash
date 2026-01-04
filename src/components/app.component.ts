@@ -64,21 +64,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // private checkInvalidConfig() {
-  //   const errors = this.configService.getErrors();
-
-  //   if (this.service.hasUpdateError(errors)) {
-  //     if (this.service.fixUpdateErrors(errors)) {
-  //       setTimeout(this.initialize.bind(this), 1500);
-  //     } else {
-  //       this.configService.setUpdate();
-  //       this.router.navigate(['/no-config']);
-  //     }
-  //   } else {
-  //     this.router.navigate(['/invalid-config']);
-  //   }
-  // }
-
   private connectWebsocket() {
     const showPrinterConnectedTimeout = setTimeout(() => {
       this.showConnectionHint = true;
