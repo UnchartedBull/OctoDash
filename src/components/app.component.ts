@@ -4,7 +4,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { Subject } from 'rxjs';
 
 import { AppService } from '../services/app.service';
-import { ConfigService } from '../services/config.service';
+import { ConfigService, ConfigValidationError } from '../services/config.service';
 import { SocketService } from '../services/socket/socket.service';
 
 @Component({
@@ -54,25 +54,14 @@ export class AppComponent implements OnInit {
         this.connectWebsocket();
       },
       error: e => {
-        console.error('Error fetching config:', e);
+        if (e instanceof ConfigValidationError) {
+          console.error('Error fetching config:', e);
+          this.router.navigate(['/invalid-config']);
+          return;
+        }
         this.router.navigate(['/login']);
       },
     });
-  }
-
-  private checkInvalidConfig() {
-    const errors = this.configService.getErrors();
-
-    if (this.service.hasUpdateError(errors)) {
-      if (this.service.fixUpdateErrors(errors)) {
-        setTimeout(this.initialize.bind(this), 1500);
-      } else {
-        this.configService.setUpdate();
-        this.router.navigate(['/no-config']);
-      }
-    } else {
-      this.router.navigate(['/invalid-config']);
-    }
   }
 
   private connectWebsocket() {

@@ -185,7 +185,7 @@ class OctodashPlugin(
                 "screenSleepCommand": "DISPLAY=:0.0 xset dpms force standby",
                 "screenWakeupCommand": "DISPLAY=:0.0 xset s off && DISPLAY=:0.0 xset -dpms && DISPLAY=:0.0 xset s noblank",
                 "showExtruderControl": True,
-                "showNotificationCenterIcon": True,
+                "showActionCenterIcon": True,
                 "defaultDirectory": "/",
                 "language": None,
             },
@@ -530,10 +530,17 @@ class OctodashPlugin(
         with open(path, 'r') as f:
             conf = json.load(f)["config"]
             # merge with the existing settings
-            settings = self._settings
-            for key in ['printer', 'filament', 'plugins', 'octodash']:
-                settings.set([key], conf[key])
-            settings.save()
+        settings = self._settings
+        for key in ['printer', 'filament', 'plugins', 'octodash']:
+            settings.set([key], conf[key])
+        if 'showNotificationCenterIcon' in conf['octodash']:
+            settings.set(['octodash', 'showActionCenterIcon'], conf['octodash']['showNotificationCenterIcon'])
+            settings.remove(['octodash', 'showNotificationCenterIcon'])
+        
+        settings.remove(['octodash', 'plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
+        settings.remove(['octodash', 'plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
+
+        settings.save()
 
 
 

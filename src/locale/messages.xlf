@@ -761,7 +761,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-save" datatype="html">
@@ -1767,21 +1767,21 @@
         <source>Version <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="screen-sleep-error" datatype="html">
         <source>Error turning display off</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
