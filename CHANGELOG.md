@@ -1,5 +1,16 @@
 # Changelog
 
+## [v2.7.0-rc.2](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0-rc.2) (2026-01-08)
+
+When testing RC1 a few issues were found, so here we are.
+
+Changes from RC1:
+- Fix the color thumbnails for Spoolman spools ([#5551](https://github.com/UnchartedBull/OctoDash/pull/5551))
+- Add some caching of the temp profiles for the temp pickers (resolves issues when settings take a long time to load) ([#5552](https://github.com/UnchartedBull/OctoDash/pull/5552))
+- Automatically load temp profiles and other settings each time OctoPrint connection is established ([#5554](https://github.com/UnchartedBull/OctoDash/pull/5554))
+- Upgrade to Electron v39 ([#5556](https://github.com/UnchartedBull/OctoDash/pull/5556))
+- Bump minium supported browser to Chrome 120 ([#5557](https://github.com/UnchartedBull/OctoDash/pull/5557))
+
 ## [v2.7.0-rc.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0-rc.1) (2025-12-17)
 
 > [!WARNING]
