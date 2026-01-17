@@ -1,6 +1,6 @@
 <app-quick-control
   [unit]="unit"
-  [defaultValue]="defaultValue"
+  [defaultValue]="defaultValue + tempOffset"
   [hideSet]="hideSet"
   [options]="filteredOptions$ | async"
   (onChange)="handleChange($event)"
