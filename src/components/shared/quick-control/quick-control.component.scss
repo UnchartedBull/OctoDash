@@ -4,17 +4,19 @@
 
 .quick-control {
   width: 65vw;
-  height: 100%;
   margin: 0 auto;
   border: solid 0.6vw;
   border-radius: 3vw;
   display: flex;
+  height: var(--qc-height);
+  box-sizing: border-box;
 
   &-options {
     border-left: solid 0.6vw;
     display: flex;
     flex-direction: column;
     flex: 1;
+    height: 100%;
     overflow-y: auto;
 
     > div {
