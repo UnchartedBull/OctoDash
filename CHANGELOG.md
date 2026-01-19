@@ -1,31 +1,20 @@
 # Changelog
 
-## [v2.7.0-rc.2](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0-rc.2) (2026-01-08)
-
-When testing RC1 a few issues were found, so here we are.
-
-Changes from RC1:
-
-- Fix the color thumbnails for Spoolman spools ([#5551](https://github.com/UnchartedBull/OctoDash/pull/5551))
-- Add some caching of the temp profiles for the temp pickers (resolves issues when settings take a long time to load) ([#5552](https://github.com/UnchartedBull/OctoDash/pull/5552))
-- Automatically load temp profiles and other settings each time OctoPrint connection is established ([#5554](https://github.com/UnchartedBull/OctoDash/pull/5554))
-- Upgrade to Electron v39 ([#5556](https://github.com/UnchartedBull/OctoDash/pull/5556))
-- Bump minium supported browser to Chrome 120 ([#5557](https://github.com/UnchartedBull/OctoDash/pull/5557))
-
-## [v2.7.0-rc.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0-rc.1) (2025-12-17)
+## [v2.7.0](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0) (2026-01-18)
 
 > [!WARNING]
 > If you use custom styles, you may need to update them.
 
-This is the first (and hopefully only) prerelease for v2.7.0, which brings a number of changes! This prelease is created to assist in testing and likely has more issues than typical releases.
+### Highlights:
 
-Hightlights:
-
-- Add Support for Spoolman ([#5528](https://github.com/UnchartedBull/OctoDash/pull/5528))
+- Show temps from OctoPrint profiles in temp pickers ([#5465](https://github.com/UnchartedBull/OctoDash/pull/5465)), ([#5554](https://github.com/UnchartedBull/OctoDash/pull/5554)), and ([#5552](https://github.com/UnchartedBull/OctoDash/pull/5552)). This change also fixed [#5467](https://github.com/UnchartedBull/OctoDash/issues/5467): action center button overlapping with heat nozzle button
+- Add Support for Spoolman ([#5528](https://github.com/UnchartedBull/OctoDash/pull/5528)), also ([#5551](https://github.com/UnchartedBull/OctoDash/pull/5551))
 - Fix squished X/Y icons and other layout issues with the control screen ([#5546](https://github.com/UnchartedBull/OctoDash/pull/5546))
-- Show temps from OctoPrint profiles in temp pickers (also fixing [#5467](https://github.com/UnchartedBull/OctoDash/issues/5467): action center button overlapping with heat nozzle button) ([#5465](https://github.com/UnchartedBull/OctoDash/pull/5465))
 
-Other improvements:
+### Other improvements:
+
+- Upgrade to Electron v39 ([#5556](https://github.com/UnchartedBull/OctoDash/pull/5556))
+- Bump minium supported browser to Chrome 120 ([#5557](https://github.com/UnchartedBull/OctoDash/pull/5557))
 
 - Stop automatically creating up to six custom actions ([#5519](https://github.com/UnchartedBull/OctoDash/pull/5519))
 - Decrease frequency of clock updates (shout out to @jjsat for this contribution) ([#5511](https://github.com/UnchartedBull/OctoDash/pull/5511))
