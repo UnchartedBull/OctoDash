@@ -139,7 +139,7 @@
   <div class="control__tools">
     @if (!printerProfile?.extruder.sharedNozzle) {
       <ngContainer>
-        @for (tool of printerStatus.tools; track extruderTrackBy(i, tool); let i = $index) {
+        @for (tool of filteredToolsByProfile(); track extruderTrackBy(i, tool); let i = $index) {
           <div
             class="control__tools__item"
             [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
@@ -211,7 +211,7 @@
           </div>
         </div>
         <div class="control__tools__item control__tools__item-tool-changer">
-          @for (tool of printerStatus.tools; track extruderTrackBy(i, tool); let i = $index) {
+          @for (tool of filteredToolsByProfile(); track extruderTrackBy(i, tool); let i = $index) {
             <div
               class="control__tools__item-tool-changer__item"
               [ngClass]="{ 'control__tools__field-active': selectedTool === i }"
