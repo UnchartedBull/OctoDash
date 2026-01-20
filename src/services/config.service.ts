@@ -101,6 +101,10 @@ export class ConfigService {
       );
   }
 
+  public resetConfig() {
+    return this.http.post(this.getApiURL('plugin/octodash/api/settings_reset', false), {}, this.getHTTPHeaders());
+  }
+
   public generateHttpHeaders(): void {
     const headers = new HttpHeaders({
       'Cache-Control': 'no-cache',

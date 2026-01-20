@@ -7,5 +7,6 @@
       <li>{{ error }}</li>
     }
   </ul>
+  <button [disabled]="resetting()" (click)="resetConfig()">Reset</button>
   <button (click)="reloadPage()">Reload</button>
 </div>
