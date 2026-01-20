@@ -1227,6 +1227,7 @@
       </trans-unit>
       <trans-unit id="7229171609432307996" datatype="html">
         <source>@@error-octoprint-settings:Failed to load OctoPrint settings.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="octoprint-upgrade-required-title" datatype="html">
         <source>OctoPrint outdated!</source>
