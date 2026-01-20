@@ -48,6 +48,9 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
   }
 
   public filteredToolsByProfile(): Temperature[] {
+    if (!this.printerStatus || !this.extruderInfo) {
+      return [];
+    }
     return this.printerStatus.tools.concat().splice(0, this.extruderInfo.count);
   }
 
