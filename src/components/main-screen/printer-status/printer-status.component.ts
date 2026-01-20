@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
-import { PrinterExtruders, PrinterProfile, PrinterStatus } from '../../../model';
+import { PrinterExtruders, PrinterProfile, PrinterStatus, Temperature } from '../../../model';
 import { PrinterService } from '../../../services/printer/printer.service';
 import { SocketService } from '../../../services/socket/socket.service';
 
@@ -20,6 +20,7 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
     offsets: [],
     sharedNozzle: false,
   };
+
   public fanSpeed: number;
   public status: string;
 
@@ -44,6 +45,10 @@ export class PrinterStatusComponent implements OnInit, OnDestroy {
         this.printerStatus = status;
       }),
     );
+  }
+
+  public filteredToolsByProfile(): Temperature[] {
+    return this.printerStatus.tools.concat().splice(0, this.extruderInfo.count);
   }
 
   public ngOnDestroy(): void {

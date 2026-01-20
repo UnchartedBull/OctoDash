@@ -6,7 +6,7 @@
     }">
     <div class="printer-status__row">
       @for (
-        tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : printerStatus.tools;
+        tool of extruderInfo.sharedNozzle ? [printerStatus.tools[0]] : filteredToolsByProfile();
         track extruderTrackBy(i, tool);
         let i = $index
       ) {
