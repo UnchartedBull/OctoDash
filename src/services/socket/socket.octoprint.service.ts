@@ -38,6 +38,7 @@ export class OctoPrintSocketService implements SocketService {
   private jobStatusSubject: Subject<JobStatus>;
   private eventSubject: Subject<PrinterEvent>;
   private statusTextSubject: Subject<string>;
+  private settingsUpdatedSubject = new Subject<void>();
 
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
@@ -355,6 +356,9 @@ export class OctoPrintSocketService implements SocketService {
     let newState: PrinterEvent;
 
     switch (state.event.type) {
+      case 'SettingsUpdated':
+        this.settingsUpdatedSubject.next();
+        break;
       case 'PrintStarted':
       case 'PrintResumed':
         newState = PrinterEvent.PRINTING;
@@ -441,5 +445,9 @@ export class OctoPrintSocketService implements SocketService {
 
   public getPrinterStatusText(): Observable<string> {
     return this.statusTextSubject;
+  }
+
+  public getSettingsUpdatedSubscribable(): Observable<void> {
+    return this.settingsUpdatedSubject.asObservable();
   }
 }

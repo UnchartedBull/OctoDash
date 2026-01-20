@@ -1,7 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, inject, NgModule, provideAppInitializer } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +19,7 @@ import { csrfInterceptor } from './csrfInterceptor';
 import directives from './directives';
 import pipes from './pipes';
 import services from './services';
+import { OctoprintSettingsService } from './services/octoprint-settings.service';
 
 @NgModule({
   declarations: [...components, ...directives, ...pipes],
@@ -37,6 +38,9 @@ import services from './services';
   ],
   providers: [
     ...services,
+    provideAppInitializer(() => {
+      inject(OctoprintSettingsService);
+    }),
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
     { provide: APP_BASE_HREF, useValue: '/plugin/octodash' },
