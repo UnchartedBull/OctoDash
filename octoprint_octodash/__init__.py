@@ -321,6 +321,14 @@ class OctodashPlugin(
         except Exception as e:
             return make_response(json.dumps({"error": str(e)}), 500)
 
+    @octoprint.plugin.BlueprintPlugin.route("/api/settings_reset", methods=["POST"])
+    @Permissions.ADMIN.require(403)
+    def reset_settings(self):
+        self._settings.set([], {})
+        self._settings.set([], self.get_settings_defaults())
+        self._settings.save()
+        return make_response(json.dumps({"success": True}), 200)
+
     @octoprint.plugin.BlueprintPlugin.route("/api/screen_sleep", methods=["POST"])
     @Permissions.ADMIN.require(403)
     def set_screen_sleep(self):
