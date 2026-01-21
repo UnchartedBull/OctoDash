@@ -26,14 +26,18 @@ export class ConfigInvalidComponent {
       next: () => {
         this.resetting.set(false);
         this.notificationService.info(
-          `@@config-reloaded-title:Configuration has been reset to default values.`,
-          `@@config-reloaded-body:Please reload the page`,
+          $localize`:@@config-reloaded-title:Configuration has been reset to default values.`,
+          $localize`:@@config-reloaded-body:Please reload the page`,
           true,
         );
       },
       error: error => {
         this.resetting.set(false);
-        this.notificationService.error(`:@@error-resetting-config: Error resetting config`, error.message, true);
+        this.notificationService.error(
+          $localize`:@@error-resetting-config: Error resetting config`,
+          error.message,
+          true,
+        );
       },
     });
   }
