@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
-import { PrinterStatus } from '../../model';
+import { PrinterStatus, Temperature } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
@@ -61,6 +61,13 @@ export class ControlComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  public filteredToolsByProfile(): Temperature[] {
+    if (!this.printerStatus || !this.printerProfile) {
+      return [];
+    }
+    return this.printerStatus.tools.concat().splice(0, this.printerProfile.extruder.count);
   }
 
   public setDistance(distance: number): void {

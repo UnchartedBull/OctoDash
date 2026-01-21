@@ -6,7 +6,7 @@ export interface PrinterStatus {
   tools: Temperature[];
 }
 
-interface Temperature {
+export interface Temperature {
   current: number;
   set: number;
   unit: string;
