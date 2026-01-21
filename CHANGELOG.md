@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.7.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.1) (2026-01-21)
+
+This is a minor bugfix to resolve an issue with the multifilament support on certain printers.
+
+- Respect the extruder count found in the OctoPrint printer profile ([#5587](https://github.com/UnchartedBull/OctoDash/pull/5587))
+
+Also a host of minor dependency updates are included as well.
+
 ## [v2.7.0](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0) (2026-01-18)
 
 > [!WARNING]
