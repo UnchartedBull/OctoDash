@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
+import { NotificationService } from 'src/services/notification.service';
 
 import { ConfigService } from '../../../services/config.service';
-import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-config-invalid',
@@ -26,14 +26,14 @@ export class ConfigInvalidComponent {
       next: () => {
         this.resetting.set(false);
         this.notificationService.info(
-          'Configuration has been reset to default values.',
-          'Please reload the page',
+          `@@config-reloaded-title:Configuration has been reset to default values.`,
+          `@@config-reloaded-body:Please reload the page`,
           true,
         );
       },
       error: error => {
         this.resetting.set(false);
-        this.notificationService.error('Failed to reset configuration.', error.message, true);
+        this.notificationService.error(`:@@error-resetting-config: Error resetting config`, error.message, true);
       },
     });
   }
