@@ -7,6 +7,8 @@
       <li>{{ error }}</li>
     }
   </ul>
-  <button [disabled]="resetting()" (click)="resetConfig()">Reset</button>
-  <button (click)="reloadPage()">Reload</button>
+  <div class="invalid-config__actions">
+    <button class="reset-button" [disabled]="resetting()" (click)="resetConfig()">Reset to Default</button>
+    <button (click)="reloadPage()">Reload OctoDash</button>
+  </div>
 </div>

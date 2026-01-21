@@ -20,7 +20,7 @@
   }
 
   &__error-list {
-    margin-left: 2vw;
+    margin-left: 11vw;
     margin-top: 5vh;
     list-style-type: disc;
 
@@ -34,5 +34,19 @@
         margin-right: 2vw;
       }
     }
+  }
+
+  &__actions {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .reset-button {
+    --primary: red;
+  }
+
+  button {
+    margin: 5px;
   }
 }
