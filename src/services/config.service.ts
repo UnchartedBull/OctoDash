@@ -57,7 +57,7 @@ export class ConfigService {
           if (error.keyword === 'type') {
             return `${error.instancePath} ${error.message}`;
           } else {
-            return `${error.instancePath === '' ? '/' : error.instancePath} ${error.message}`;
+            return `${error.instancePath === '' ? '/' : error.instancePath} ${error.message}: ${JSON.stringify(error.params)}`;
           }
         }),
       );
