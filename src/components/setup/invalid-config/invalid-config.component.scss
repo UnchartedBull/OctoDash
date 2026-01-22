@@ -43,7 +43,7 @@
   }
 
   .reset-button {
-    --primary: red;
+    --primary: var(--error);
   }
 
   button {
