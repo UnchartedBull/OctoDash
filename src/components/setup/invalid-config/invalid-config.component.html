@@ -8,7 +8,9 @@
     }
   </ul>
   <div class="invalid-config__actions">
-    <button class="reset-button" [disabled]="resetting()" (click)="resetConfig()" i18n="@@reset-to-default">Reset to Default</button>
+    <button class="reset-button" [disabled]="resetting()" (click)="resetConfig()" i18n="@@reset-to-default">
+      Reset to Default
+    </button>
     <button (click)="reloadPage()" i18n="@@reload-octodash">Reload OctoDash</button>
   </div>
 </div>
