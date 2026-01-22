@@ -99,7 +99,7 @@
     "compare-versions": "~6.1.1",
     "electron-store": "~10.1.0",
     "got": "^14.6.6",
-    "lodash-es": "~4.17.22",
+    "lodash-es": "~4.17.23",
     "lottie-web": "~5.13.0",
     "mime-types": "^3.0.2",
     "ngx-lottie": "~20.0.0",
