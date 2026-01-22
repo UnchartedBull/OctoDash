@@ -1338,28 +1338,28 @@
         <source>Please correct the errors listed below!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="correct-errors-instructions" datatype="html">
         <source>You can manually edit the OctoPrint config.yaml file or just reset with the button below</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.html</context>
-          <context context-type="linenumber">5,8</context>
+          <context context-type="linenumber">6,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-to-default" datatype="html">
         <source> Reset to Default </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">15,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reload-octodash" datatype="html">
         <source>Reload OctoDash</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.html</context>
-          <context context-type="linenumber">15,18</context>
+          <context context-type="linenumber">17,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="config-reloaded-title" datatype="html">

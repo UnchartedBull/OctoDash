@@ -829,6 +829,7 @@
       </trans-unit>
       <trans-unit id="correct-errors-instructions" datatype="html">
         <source>You can manually edit the OctoPrint config.yaml file or just reset with the button below</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="reset-to-default" datatype="html">
         <source> Reset to Default </source>
