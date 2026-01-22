@@ -2,6 +2,7 @@
   <img src="assets/invalid-config.svg" class="invalid-config__top-icon" />
   <span class="invalid-config__header" i18n="@@invalid-config">Your config is invalid!</span>
   <span class="invalid-config__sub-header" i18n="@@correct-errors">Please correct the errors listed below!</span>
+  <span class="invalid-config__sub-header" i18n="@@correct-errors-instructions">You can manually edit the OctoPrint config.yaml file or just reset with the button below</span>
   <ul class="invalid-config__error-list">
     @for (error of errors | async; track error) {
       <li>{{ error }}</li>

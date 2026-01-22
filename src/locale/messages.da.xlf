@@ -827,8 +827,11 @@
         <source>Please correct the errors listed below!</source>
         <target>Ret venligst fejlene nedenfor!</target>
       </trans-unit>
+      <trans-unit id="correct-errors-instructions" datatype="html">
+        <source>You can manually edit the OctoPrint config.yaml file or just reset with the button below</source>
+      </trans-unit>
       <trans-unit id="reset-to-default" datatype="html">
-        <source>Reset to Default</source>
+        <source> Reset to Default </source>
         <target></target>
       </trans-unit>
       <trans-unit id="reload-octodash" datatype="html">
@@ -837,12 +840,15 @@
       </trans-unit>
       <trans-unit id="config-reloaded-title" datatype="html">
         <source>Configuration has been reset to default values.</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="config-reloaded-body" datatype="html">
         <source>Please reload the page</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="error-resetting-config" datatype="html">
         <source> Error resetting config</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="prompt-auth" datatype="html">
         <source> Please authenticate me now. You can either click the button below and confirm the request in your OctoPrint webinterface or enter an API Key manually.</source>
