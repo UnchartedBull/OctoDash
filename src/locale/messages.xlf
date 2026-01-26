@@ -1366,21 +1366,21 @@
         <source>Configuration has been reset to default values.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="config-reloaded-body" datatype="html">
         <source>Please reload the page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-resetting-config" datatype="html">
         <source> Error resetting config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/invalid-config/invalid-config.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-auth" datatype="html">
