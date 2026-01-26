@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NotificationService } from 'src/services/notification.service';
 
 import { ConfigService } from '../../../services/config.service';
@@ -8,6 +8,7 @@ import { ConfigService } from '../../../services/config.service';
   templateUrl: './invalid-config.component.html',
   styleUrls: ['./invalid-config.component.scss'],
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfigInvalidComponent {
   private configService = inject(ConfigService);
