@@ -106,7 +106,7 @@
     "progress-stream": "~2.0.0",
     "rxjs": "~7.8.1",
     "tslib": "~2.8.1",
-    "xliff": "~6.2.2",
+    "xliff": "~6.3.0",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
