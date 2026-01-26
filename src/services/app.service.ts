@@ -1,15 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash-es';
 
-import defaultConfig from '../helper/config.default.json';
-import { ConfigSchema as Config } from '../model';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 
 @Injectable()
 export class AppService {
-  private updateError: Record<string, (config: Config) => void>;
   private latestVersionAssetsURL: string;
   private version: string;
   private latestVersion: {
@@ -27,39 +23,7 @@ export class AppService {
     private configService: ConfigService,
     private notificationService: NotificationService,
     private http: HttpClient,
-  ) {
-    // list of all error following an upgrade
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    this.updateError = {
-      '/octodash must NOT have additional properties': config => {
-        //TODO: Delete companion?
-        if ('showNotificationCenterIcon' in (config.octodash as any)) {
-          config.octodash.showActionCenterIcon = (config.octodash as any).showNotificationCenterIcon;
-          delete (config.octodash as any).showNotificationCenterIcon;
-        }
-      },
-      "/plugins must have required property 'tuya'": config => {
-        config.plugins.tuya = defaultConfig.plugins.tuya;
-      },
-      "/plugins must have required property 'wemo'": config => {
-        config.plugins.wemo = defaultConfig.plugins.wemo;
-      },
-      '/plugins/psuControl must NOT have additional properties': config => {
-        if ('turnOnPSUWhenExitingSleep' in (config.plugins.psuControl as any)) {
-          delete (config.plugins.psuControl as any).turnOnPSUWhenExitingSleep;
-        }
-      },
-      '/plugins/ophom must NOT have additional properties': config => {
-        if ('turnOnPSUWhenExitingSleep' in (config.plugins.ophom as any)) {
-          delete (config.plugins.ophom as any).turnOnPSUWhenExitingSleep;
-        }
-      },
-      "/plugins must have required property 'spoolman'": config => {
-        config.plugins.spoolman = defaultConfig.plugins.spoolman;
-      },
-    };
-    /* eslint-enable @typescript-eslint/no-explicit-any */
-  }
+  ) {}
 
   private checkUpdate(): void {
     if (this.dev) {
@@ -85,29 +49,6 @@ export class AppService {
       },
       complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
     });
-  }
-
-  public hasUpdateError(errors: string[]): boolean {
-    return _.intersection(errors, _.keys(this.updateError)).length > 0;
-  }
-
-  public fixUpdateErrors(errors: string[]): boolean {
-    const config = this.configService.getCurrentConfig();
-
-    // TODO: Fix or just remove this hole block
-    // config.octoprint.url = config.octoprint.url.replace('api/', '');
-
-    let fullyFixed = true;
-    for (const error of errors) {
-      if (_.hasIn(this.updateError, error)) {
-        this.updateError[error](config);
-      } else {
-        fullyFixed = false;
-      }
-    }
-    this.configService.saveConfig(config);
-
-    return fullyFixed;
   }
 
   public getVersion(): string {

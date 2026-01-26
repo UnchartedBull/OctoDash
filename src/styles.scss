@@ -99,6 +99,19 @@ button {
   font-size: inherit;
 }
 
+button,
+.btn {
+  padding: 1.4vh 2vw;
+  border-radius: 1vw;
+  box-shadow: 0 10px 19px -8px rgb(0 0 0 / 75%);
+  outline: 0;
+  border: 0;
+  margin: 3vh auto;
+  background-color: var(--primary);
+  font-size: inherit;
+  cursor: pointer;
+}
+
 [hidden] {
   display: none;
 }

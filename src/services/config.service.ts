@@ -1,9 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, NgZone } from '@angular/core';
+import { Ajv } from 'ajv';
 import * as _ from 'lodash-es';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
+import configSchema from '../helper/config.schema.json' with { type: 'json' };
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
+
+const ajv = new Ajv({ useDefaults: true, allErrors: true });
+
+// Define keywords for schema->TS converter
+ajv.addKeyword('tsEnumNames');
+ajv.addKeyword('tsName');
+ajv.addKeyword('tsType');
+
+const validate = ajv.compile(configSchema);
+
+export class ConfigValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ConfigValidationError';
+  }
+}
 
 interface HttpHeader {
   headers: HttpHeaders;
@@ -29,6 +47,24 @@ export class ConfigService {
   private http: HttpClient = inject(HttpClient);
   private zone: NgZone = inject(NgZone);
 
+  private errors$ = new BehaviorSubject<string[]>([]);
+
+  private validateConfig(config: Config): boolean {
+    const result = validate(config);
+    if (!result) {
+      this.errors$.next(
+        validate.errors.map(error => {
+          if (error.keyword === 'type') {
+            return `${error.instancePath} ${error.message}`;
+          } else {
+            return `${error.instancePath === '' ? '/' : error.instancePath} ${error.message}: ${JSON.stringify(error.params)}`;
+          }
+        }),
+      );
+    }
+    return result;
+  }
+
   public getConfig() {
     this.apiKey = localStorage.getItem('octodash_apikey');
     let headers = null;
@@ -46,6 +82,15 @@ export class ConfigService {
         }),
       )
       .pipe(
+        tap(config => {
+          if (!this.validateConfig(config)) {
+            throw new ConfigValidationError('Invalid config');
+            // console.error('Invalid config:', config);
+            // this.router.navigate(['/no-config']);
+          }
+        }),
+      )
+      .pipe(
         map((config: Config) => {
           this.config = { ...config };
           this.zone.run(() => {
@@ -54,6 +99,10 @@ export class ConfigService {
           });
         }),
       );
+  }
+
+  public resetConfig() {
+    return this.http.post(this.getApiURL('plugin/octodash/api/settings_reset', false), {}, this.getHTTPHeaders());
   }
 
   public generateHttpHeaders(): void {
@@ -92,8 +141,8 @@ export class ConfigService {
     return _.isEqual(this.config, changedConfig);
   }
 
-  public getErrors(): string[] {
-    return [];
+  public getErrors(): Observable<string[]> {
+    return this.errors$.asObservable();
   }
 
   public saveConfig(config: Config) {

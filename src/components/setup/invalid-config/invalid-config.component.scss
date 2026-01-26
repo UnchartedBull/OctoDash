@@ -1,10 +1,14 @@
 .invalid-config {
+  display: block;
+  overflow-y: scroll;
+  height: 100vh;
+
   &__top-icon {
     width: 16vw;
     display: block;
     margin-left: calc(50% - 8vw);
-    margin-top: -4vh;
-    margin-bottom: -8vh;
+    margin-top: -8vh;
+    margin-bottom: -16vh;
   }
 
   &__header {
@@ -20,7 +24,7 @@
   }
 
   &__error-list {
-    margin-left: 2vw;
+    margin-left: 11vw;
     margin-top: 5vh;
     list-style-type: disc;
 
@@ -34,5 +38,19 @@
         margin-right: 2vw;
       }
     }
+  }
+
+  &__actions {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .reset-button {
+    --primary: var(--error);
+  }
+
+  button {
+    margin: 5px;
   }
 }

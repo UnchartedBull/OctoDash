@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-
-import { AppService } from '../../services/app.service';
-import { SystemService } from '../../services/system/system.service';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ConfigService } from 'src/services/config.service';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-reset',
@@ -12,14 +11,22 @@ import { SystemService } from '../../services/system/system.service';
 export class ResetComponent {
   @Output() closeFunction = new EventEmitter<void>(true);
 
-  constructor(
-    public service: AppService,
-    private systemService: SystemService,
-  ) {}
+  configService = inject(ConfigService);
+  notificationService = inject(NotificationService);
 
   public closeResetWindow(): void {
     this.closeFunction.emit();
   }
 
-  public reset(): void {}
+  public reset(): void {
+    this.configService.resetConfig().subscribe({
+      next: () => {
+        window.location.reload();
+      },
+      error: err => {
+        console.error('Error resetting config:', err);
+        this.notificationService.error(`:@@error-resetting-config: Error resetting config`, err.message);
+      },
+    });
+  }
 }

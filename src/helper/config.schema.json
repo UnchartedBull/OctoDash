@@ -452,8 +452,8 @@
           "default": 2000
         },
         "language": {
-          "type": "string",
-          "enum": ["en", "fr", "de", "da"],
+          "type": ["string", "null"],
+          "enum": ["en", "fr", "de", "da", null],
           "default": null
         },
         "touchscreen": {
