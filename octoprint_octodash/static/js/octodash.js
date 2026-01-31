@@ -9,6 +9,7 @@ $(function () {
     var self = this;
 
     self.settingsViewModel = parameters[0];
+    self.pluginManagerViewModel = parameters[1];
     self.selectedCommand = ko.observable();
 
     self.addCustomAction = function () {
@@ -76,7 +77,7 @@ $(function () {
   // Register the view model with OctoPrint
   OCTOPRINT_VIEWMODELS.push({
     construct: OctoDashViewModel,
-    dependencies: ['settingsViewModel'],
+    dependencies: ['settingsViewModel', 'pluginManagerViewModel'],
     elements: ['#settings_plugin_octodash'], // Bind to the DOM element
   });
 });
