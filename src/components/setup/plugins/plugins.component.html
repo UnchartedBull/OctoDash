@@ -49,14 +49,6 @@
   </span>
 
   <span>
-    <app-toggle-switch
-      [value]="printTimeGeniusPlugin"
-      (valueChange)="printTimeGeniusPluginChange.emit(!printTimeGeniusPlugin)">
-      <ng-container i18n="@@plugin-print-time-genius">Print Time Genius</ng-container>
-    </app-toggle-switch>
-  </span>
-
-  <span>
     <app-toggle-switch [value]="psuControlPlugin" (valueChange)="psuControlPluginChange.emit(!psuControlPlugin)">
       <ng-container i18n="@@plugin-psu-control">PSU Control</ng-container>
     </app-toggle-switch>
