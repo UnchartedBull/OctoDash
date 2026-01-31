@@ -47,19 +47,19 @@ class OctodashPlugin(
 
     ##~~ SettingsPlugin mixin
 
-    def get_settings_preprocessors(self):
-        manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
-        plugin_getters = {}
-        for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
-            settings_key = plugin_info["legacySettingsKey"]
-            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
+    # def get_settings_preprocessors(self):
+    #     manager = octoprint.plugin.plugin_manager()
+    #     installed = set(manager.enabled_plugins.keys())
+    #     plugin_getters = {}
+    #     for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
+    #         settings_key = plugin_info["legacySettingsKey"]
+    #         plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
 
-        return {'plugins': plugin_getters}, {}
+    #     return {'plugins': plugin_getters}, {}
 
     def on_settings_load(self):
         manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
+        installed_plugins = set(manager.enabled_plugins.keys())
 
         all_plugins = dict()
         all_plugins.update(POWER_PLUGINS)
@@ -68,8 +68,9 @@ class OctodashPlugin(
         data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
 
         for plugin_name in all_plugins.keys():
-            if not plugin_name in installed:
-                data["plugins"][plugin_name]["enabled"] = False
+                enabled = data["plugins"][plugin_name]["enabled"]
+                installed = plugin_name in installed_plugins
+                data["plugins"][plugin_name]["usable"] = enabled and installed
 
         return data
 
