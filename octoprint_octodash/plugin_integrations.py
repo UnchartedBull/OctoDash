@@ -42,10 +42,6 @@ SINGLE_PLUGINS = {
         'settingsKey': 'preheatButton',
         'requiresConfig': False
     },
-    'PrintTimeGenius': {
-        'settingsKey': 'printTimeGenius',
-        'requiresConfig': False
-    },
     'enclosure': {
         'settingsKey': 'enclosure',
         'requiresConfig': True,

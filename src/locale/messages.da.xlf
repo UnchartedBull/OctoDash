@@ -682,10 +682,6 @@
         <source>Preheat Button</source>
         <target>Forvarmningsknap</target>
       </trans-unit>
-      <trans-unit id="settings-print-time-genius" datatype="html">
-        <source>Print Time Genius</source>
-        <target>Print Time Genius</target>
-      </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <target>PSU kontrol</target>
@@ -934,10 +930,6 @@
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Preheat-knap</target>
-      </trans-unit>
-      <trans-unit id="plugin-print-time-genius" datatype="html">
-        <source>Print Time Genius</source>
-        <target>Print Time Genius</target>
       </trans-unit>
       <trans-unit id="plugin-psu-control" datatype="html">
         <source>PSU Control</source>

@@ -115,7 +115,6 @@ class OctodashPlugin(
                 "spoolManager": {"enabled": False},
                 "spoolman": {"enabled": False},
                 "preheatButton": {"enabled": True},
-                "printTimeGenius": {"enabled": True},
                 "psuControl": {"enabled": False},
                 "ophom": {"enabled": False},
                 "tpLinkSmartPlug": {"enabled": False, "smartPlugIP": "127.0.0.1"},

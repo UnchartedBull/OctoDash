@@ -14,7 +14,6 @@ export class PluginsComponent {
   @Input() spoolManagerPlugin: boolean;
   @Input() spoolmanPlugin: boolean;
   @Input() preheatButtonPlugin: boolean;
-  @Input() printTimeGeniusPlugin: boolean;
   @Input() psuControlPlugin: boolean;
   @Input() ophomPlugin: boolean;
   @Input() tpLinkSmartPlugPlugin: boolean;
@@ -30,7 +29,6 @@ export class PluginsComponent {
   @Output() spoolManagerPluginChange = new EventEmitter<boolean>();
   @Output() spoolmanPluginChange = new EventEmitter<boolean>();
   @Output() preheatButtonPluginChange = new EventEmitter<boolean>();
-  @Output() printTimeGeniusPluginChange = new EventEmitter<boolean>();
   @Output() psuControlPluginChange = new EventEmitter<boolean>();
   @Output() ophomPluginChange = new EventEmitter<boolean>();
   @Output() tpLinkSmartPlugPluginChange = new EventEmitter<boolean>();
