@@ -138,9 +138,9 @@
       "properties": {
         "DisplayLayerProgress": {
           "type": "object",
-          "required": ["enabled", "usable"],
+          "required": ["enabled", "inUse"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -155,7 +155,7 @@
           "type": "object",
           "required": ["enabled", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -182,7 +182,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -197,7 +197,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -212,7 +212,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -227,7 +227,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -242,7 +242,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -257,7 +257,7 @@
           "type": "object",
           "required": ["enabled"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -272,7 +272,7 @@
           "type": "object",
           "required": ["enabled", "smartPlugIP"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -291,7 +291,7 @@
           "type": "object",
           "required": ["enabled", "ip", "index"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -314,7 +314,7 @@
           "type": "object",
           "required": ["enabled", "topic", "relayNumber"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -337,7 +337,7 @@
           "type": "object",
           "required": ["enabled", "label"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },
@@ -356,7 +356,7 @@
           "type": "object",
           "required": ["enabled", "ip"],
           "properties": {
-            "usable": {
+            "inUse": {
               "type": "boolean",
               "default": false
             },

@@ -70,7 +70,7 @@ class OctodashPlugin(
         for plugin_name in all_plugins.keys():
                 enabled = data["plugins"][plugin_name]["enabled"]
                 installed = plugin_name in installed_plugins
-                data["plugins"][plugin_name]["usable"] = enabled and installed
+                data["plugins"][plugin_name]["inUse"] = enabled and installed
 
         return data
 

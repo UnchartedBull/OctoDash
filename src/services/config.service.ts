@@ -237,15 +237,15 @@ export class ConfigService {
   }
 
   public usePSUControl(): boolean {
-    return this.config.plugins.psucontrol.usable;
+    return this.config.plugins.psucontrol.inUse;
   }
 
   public useOphomControl(): boolean {
-    return this.config.plugins.ophom.usable;
+    return this.config.plugins.ophom.inUse;
   }
 
   public useTuya(): boolean {
-    return this.config.plugins.tuyasmartplug.usable;
+    return this.config.plugins.tuyasmartplug.inUse;
   }
 
   public getTuyaLabel(): string {
@@ -253,7 +253,7 @@ export class ConfigService {
   }
 
   public useTpLinkSmartPlug(): boolean {
-    return this.config.plugins.tplinksmartplug.usable;
+    return this.config.plugins.tplinksmartplug.inUse;
   }
 
   public getSmartPlugIP(): string {
@@ -261,7 +261,7 @@ export class ConfigService {
   }
 
   public useTasmota(): boolean {
-    return this.config.plugins.tasmota.usable;
+    return this.config.plugins.tasmota.inUse;
   }
 
   public getTasmotaIP(): string {
@@ -273,7 +273,7 @@ export class ConfigService {
   }
 
   public useTasmotaMqtt(): boolean {
-    return this.config.plugins.tasmota_mqtt.usable;
+    return this.config.plugins.tasmota_mqtt.inUse;
   }
 
   public getTasmotaMqttTopic(): string {
@@ -285,7 +285,7 @@ export class ConfigService {
   }
 
   public useWemo(): boolean {
-    return this.config.plugins.wemo.usable;
+    return this.config.plugins.wemo.inUse;
   }
 
   public getWemoIP(): string {
@@ -321,11 +321,11 @@ export class ConfigService {
   }
 
   public isDisplayLayerProgressEnabled(): boolean {
-    return this.config.plugins.DisplayLayerProgress.usable;
+    return this.config.plugins.DisplayLayerProgress.inUse;
   }
 
   public isPreheatPluginEnabled(): boolean {
-    return this.config.plugins.preheat.usable;
+    return this.config.plugins.preheat.inUse;
   }
 
   public isFilamentManagerUsed(): boolean {
