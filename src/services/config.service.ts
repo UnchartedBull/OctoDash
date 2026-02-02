@@ -237,7 +237,7 @@ export class ConfigService {
   }
 
   public usePSUControl(): boolean {
-    return this.config.plugins.psuControl.enabled;
+    return this.config.plugins.psucontrol.enabled;
   }
 
   public useOphomControl(): boolean {
@@ -245,19 +245,19 @@ export class ConfigService {
   }
 
   public useTuya(): boolean {
-    return this.config.plugins.tuya.enabled;
+    return this.config.plugins.tuyasmartplug.enabled;
   }
 
   public getTuyaLabel(): string {
-    return this.config.plugins.tuya.label;
+    return this.config.plugins.tuyasmartplug.label;
   }
 
   public useTpLinkSmartPlug(): boolean {
-    return this.config.plugins.tpLinkSmartPlug.enabled;
+    return this.config.plugins.tplinksmartplug.enabled;
   }
 
   public getSmartPlugIP(): string {
-    return this.config.plugins.tpLinkSmartPlug.smartPlugIP;
+    return this.config.plugins.tplinksmartplug.smartPlugIP;
   }
 
   public useTasmota(): boolean {
@@ -273,15 +273,15 @@ export class ConfigService {
   }
 
   public useTasmotaMqtt(): boolean {
-    return this.config.plugins.tasmotaMqtt.enabled;
+    return this.config.plugins.tasmota_mqtt.enabled;
   }
 
   public getTasmotaMqttTopic(): string {
-    return this.config.plugins.tasmotaMqtt.topic;
+    return this.config.plugins.tasmota_mqtt.topic;
   }
 
   public getTasmotaMqttRelayNumber(): number {
-    return this.config.plugins.tasmotaMqtt.relayNumber;
+    return this.config.plugins.tasmota_mqtt.relayNumber;
   }
 
   public useWemo(): boolean {
@@ -321,27 +321,27 @@ export class ConfigService {
   }
 
   public isDisplayLayerProgressEnabled(): boolean {
-    return this.config.plugins.displayLayerProgress.enabled;
+    return this.config.plugins.DisplayLayerProgress.enabled;
   }
 
   public isPreheatPluginEnabled(): boolean {
-    return this.config.plugins.preheatButton.enabled;
+    return this.config.plugins.preheat.enabled;
   }
 
   public isFilamentManagerUsed(): boolean {
     return (
-      this.config.plugins.filamentManager.enabled ||
-      this.config.plugins.spoolManager.enabled ||
-      this.config.plugins.spoolman.enabled
+      this.config.plugins.filamentmanager.enabled ||
+      this.config.plugins.SpoolManager.enabled ||
+      this.config.plugins.Spoolman.enabled
     );
   }
 
   public isSpoolmanPluginEnabled(): boolean {
-    return this.config.plugins.spoolman.enabled;
+    return this.config.plugins.Spoolman.enabled;
   }
 
   public isSpoolManagerPluginEnabled(): boolean {
-    return this.config.plugins.spoolManager.enabled;
+    return this.config.plugins.SpoolManager.enabled;
   }
 
   public getFeedLength(): number {

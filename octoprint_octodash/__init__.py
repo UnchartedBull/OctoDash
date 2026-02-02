@@ -24,7 +24,7 @@ from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
 
-from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS
+from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS, ALL_PLUGINS
 
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
@@ -52,7 +52,7 @@ class OctodashPlugin(
         installed = set(manager.enabled_plugins.keys())
         plugin_getters = {}
         for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
-            settings_key = plugin_info["settingsKey"]
+            settings_key = plugin_info["legacySettingsKey"]
             plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
 
         return {'plugins': plugin_getters}, {}
@@ -67,9 +67,9 @@ class OctodashPlugin(
         all_plugins.update(FILAMENT_PLUGINS)
         data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
 
-        for plugin_name, plugin_info in all_plugins.items():
+        for plugin_name in all_plugins.keys():
             if not plugin_name in installed:
-                data["plugins"][plugin_info["settingsKey"]]["enabled"] = False
+                data["plugins"][plugin_name]["enabled"] = False
 
         return data
 
@@ -104,27 +104,27 @@ class OctodashPlugin(
                 "useM600": False,
             },
             "plugins": {
-                "displayLayerProgress": {"enabled": True},
+                "DisplayLayerProgress": {"enabled": True},
                 "enclosure": {
                     "enabled": False,
                     "ambientSensorID": None,
                     "filament1SensorID": None,
                     "filament2SensorID": None,
                 },
-                "filamentManager": {"enabled": False},
-                "spoolManager": {"enabled": False},
-                "spoolman": {"enabled": False},
-                "preheatButton": {"enabled": True},
-                "psuControl": {"enabled": False},
+                "filamentmanager": {"enabled": False},
+                "SpoolManager": {"enabled": False},
+                "Spoolman": {"enabled": False},
+                "preheat": {"enabled": True},
+                "psucontrol": {"enabled": False},
                 "ophom": {"enabled": False},
-                "tpLinkSmartPlug": {"enabled": False, "smartPlugIP": "127.0.0.1"},
+                "tplinksmartplug": {"enabled": False, "smartPlugIP": "127.0.0.1"},
                 "tasmota": {"enabled": False, "ip": "127.0.0.1", "index": None},
-                "tasmotaMqtt": {
+                "tasmota_mqtt": {
                     "enabled": False,
                     "topic": "topic",
                     "relayNumber": None,
                 },
-                "tuya": {"enabled": False, "label": "label"},
+                "tuyasmartplug": {"enabled": False, "label": "label"},
                 "wemo": {"enabled": False, "ip": "127.0.0.1", "port": 49152},
             },
             "octodash": {
@@ -478,31 +478,31 @@ class OctodashPlugin(
         filament = installed.intersection(FILAMENT_PLUGINS.keys())
         
         if len(filament) == 1:
-            settingskey = FILAMENT_PLUGINS[filament.pop()]["settingsKey"]
-            self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+            plugin_name = filament.pop()
+            self._settings.set_boolean(['plugins', plugin_name, 'enabled'], True)
 
         power = installed.intersection(POWER_PLUGINS.keys())
 
         if len(power) == 1:
-            plugin_details = POWER_PLUGINS[power.pop()]
-            settingskey = plugin_details['settingsKey']
+            plugin_name = power.pop()
+            plugin_details = POWER_PLUGINS[plugin_name]
             if not plugin_details['requiresConfig']:
-                self._settings.set_boolean(['plugins', settingskey, 'enabled'], True)
+                self._settings.set_boolean(['plugins', plugin_name, 'enabled'], True)
 
     def _find_available_plugins(self):
         manager = octoprint.plugin.plugin_manager()
         installed = set(manager.enabled_plugins.keys())
 
-        enabled_singles = [k for k, v in SINGLE_PLUGINS.items() if k if self._settings.get_boolean(['plugins', v['settingsKey'], 'enabled'])]
+        enabled_singles = [k for k in SINGLE_PLUGINS.keys() if k if self._settings.get_boolean(['plugins', k, 'enabled'])]
 
         single_needs_config = [k for k, v in SINGLE_PLUGINS.items() if v.get("requiresConfig", False)]
         available_singles = installed.intersection(single_needs_config)
 
-        enabled_filament = [k for k, v in FILAMENT_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
+        enabled_filament = [k for k in FILAMENT_PLUGINS.keys() if k if self._settings.get(['plugins', k, 'enabled'])]
         available_filament = installed.intersection(FILAMENT_PLUGINS.keys()) - set(enabled_filament)
 
 
-        enabled_power = [k for k, v in POWER_PLUGINS.items() if k if self._settings.get(['plugins', v['settingsKey'], 'enabled'])]
+        enabled_power = [k for k in POWER_PLUGINS.keys() if k if self._settings.get_boolean(['plugins', k, 'enabled'])]
         available_power = installed.intersection(POWER_PLUGINS.keys()) - set(enabled_power)
 
 
@@ -550,6 +550,12 @@ class OctodashPlugin(
         settings.remove(['plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
         settings.remove(['plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
 
+        for plugin_name, plugin_info in ALL_PLUGINS.items():
+            settings_key = plugin_info["legacySettingsKey"]
+            existing_settings = settings.get(['plugins', settings_key])
+            if existing_settings is not None:
+                settings.set(['plugins', plugin_name], existing_settings)
+                settings.remove(['plugins', settings_key])
         settings.save()
 
 

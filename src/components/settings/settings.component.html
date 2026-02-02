@@ -294,12 +294,12 @@
             "
             [disabled]="
               !(
-                config.plugins.psuControl.enabled ||
+                config.plugins.psucontrol.enabled ||
                 config.plugins.ophom.enabled ||
-                config.plugins.tpLinkSmartPlug.enabled ||
-                config.plugins.tuya.enabled ||
+                config.plugins.tplinksmartplug.enabled ||
+                config.plugins.tuyasmartplug.enabled ||
                 config.plugins.tasmota.enabled ||
-                config.plugins.tasmotaMqtt.enabled ||
+                config.plugins.tasmota_mqtt.enabled ||
                 config.plugins.wemo.enabled
               )
             ">
@@ -380,8 +380,8 @@
           <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.displayLayerProgress.enabled"
-            (valueChange)="config.plugins.displayLayerProgress.enabled = !config.plugins.displayLayerProgress.enabled">
+            [value]="config.plugins.DisplayLayerProgress.enabled"
+            (valueChange)="config.plugins.DisplayLayerProgress.enabled = !config.plugins.DisplayLayerProgress.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-enclosure">Enclosure</span>
@@ -407,39 +407,39 @@
           <span class="settings__heading-2" i18n="@@settings-filament-manager">Filament Manager</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.filamentManager.enabled"
-            (valueChange)="config.plugins.filamentManager.enabled = !config.plugins.filamentManager.enabled">
+            [value]="config.plugins.filamentmanager.enabled"
+            (valueChange)="config.plugins.filamentmanager.enabled = !config.plugins.filamentmanager.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-spool-manager">Spool Manager</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.spoolManager.enabled"
-            (valueChange)="config.plugins.spoolManager.enabled = !config.plugins.spoolManager.enabled">
+            [value]="config.plugins.SpoolManager.enabled"
+            (valueChange)="config.plugins.SpoolManager.enabled = !config.plugins.SpoolManager.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-spoolman">Spoolman</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.spoolman.enabled"
-            (valueChange)="config.plugins.spoolman.enabled = !config.plugins.spoolman.enabled">
+            [value]="config.plugins.Spoolman.enabled"
+            (valueChange)="config.plugins.Spoolman.enabled = !config.plugins.Spoolman.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
 
           <span class="settings__heading-2" i18n="@@settings-preheat-button">Preheat Button</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.preheatButton.enabled"
-            (valueChange)="config.plugins.preheatButton.enabled = !config.plugins.preheatButton.enabled">
+            [value]="config.plugins.preheat.enabled"
+            (valueChange)="config.plugins.preheat.enabled = !config.plugins.preheat.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-psu-control">PSU Control</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.psuControl.enabled"
-            (valueChange)="config.plugins.psuControl.enabled = !config.plugins.psuControl.enabled">
+            [value]="config.plugins.psucontrol.enabled"
+            (valueChange)="config.plugins.psucontrol.enabled = !config.plugins.psucontrol.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <span class="settings__heading-2" i18n="@@settings-ophom-control">Ophon Control (Phillips HUE)</span>
@@ -452,8 +452,8 @@
           <span class="settings__heading-2" i18n="@@settings-tplink-smartplug">TPLink-SmartPlug</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.tpLinkSmartPlug.enabled"
-            (valueChange)="config.plugins.tpLinkSmartPlug.enabled = !config.plugins.tpLinkSmartPlug.enabled">
+            [value]="config.plugins.tplinksmartplug.enabled"
+            (valueChange)="config.plugins.tplinksmartplug.enabled = !config.plugins.tplinksmartplug.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <label for="smart-plug-ip" class="settings__input-label" i18n="@@settings-tplink-smartplug-ip"
@@ -464,14 +464,14 @@
             id="smart-plug-ip"
             class="settings__input"
             name="smart-plug-ip"
-            [(ngModel)]="config.plugins.tpLinkSmartPlug.smartPlugIP"
+            [(ngModel)]="config.plugins.tplinksmartplug.smartPlugIP"
             required
-            [disabled]="!config.plugins.tpLinkSmartPlug.enabled" />
+            [disabled]="!config.plugins.tplinksmartplug.enabled" />
           <span class="settings__heading-2" i18n="@@settings-tuya">Tuya Smart Plug</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.tuya.enabled"
-            (valueChange)="config.plugins.tuya.enabled = !config.plugins.tuya.enabled">
+            [value]="config.plugins.tuyasmartplug.enabled"
+            (valueChange)="config.plugins.tuyasmartplug.enabled = !config.plugins.tuyasmartplug.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <label for="tuya-label" class="settings__input-label" i18n="@@settings-tuya-label">Label</label>
@@ -480,9 +480,9 @@
             id="tuya-label"
             class="settings__input"
             name="tuya-label"
-            [(ngModel)]="config.plugins.tuya.label"
+            [(ngModel)]="config.plugins.tuyasmartplug.label"
             required
-            [disabled]="!config.plugins.tuya.enabled" />
+            [disabled]="!config.plugins.tuyasmartplug.enabled" />
           <span class="settings__heading-2">Tasmota</span>
           <app-toggle-switch
             class="settings__toggle-switch"
@@ -510,8 +510,8 @@
           <span class="settings__heading-2">Tasmota MQTT</span>
           <app-toggle-switch
             class="settings__toggle-switch"
-            [value]="config.plugins.tasmotaMqtt.enabled"
-            (valueChange)="config.plugins.tasmotaMqtt.enabled = !config.plugins.tasmotaMqtt.enabled">
+            [value]="config.plugins.tasmota_mqtt.enabled"
+            (valueChange)="config.plugins.tasmota_mqtt.enabled = !config.plugins.tasmota_mqtt.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
           <label for="tasmotaMqtt-topic" class="settings__input-label">Topic</label>
@@ -520,17 +520,17 @@
             id="tasmotaMqtt-topic"
             class="settings__input"
             name="tasmotaMqtt-topic"
-            [(ngModel)]="config.plugins.tasmotaMqtt.topic"
+            [(ngModel)]="config.plugins.tasmota_mqtt.topic"
             required
-            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
+            [disabled]="!config.plugins.tasmota_mqtt.enabled" />
           <label for="tasmotaMqtt-relayNumber" class="settings__input-label">Relay Number</label>
           <input
             type="number"
             id="tasmotaMqtt-relayNumber"
             class="settings__input"
             name="tasmotaMqtt-relayNumber"
-            [(ngModel)]="config.plugins.tasmotaMqtt.relayNumber"
-            [disabled]="!config.plugins.tasmotaMqtt.enabled" />
+            [(ngModel)]="config.plugins.tasmota_mqtt.relayNumber"
+            [disabled]="!config.plugins.tasmota_mqtt.enabled" />
           <span class="settings__heading-2" i18n="@@settings-wemo">Wemo</span>
           <app-toggle-switch
             class="settings__toggle-switch"
