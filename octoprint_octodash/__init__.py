@@ -547,8 +547,8 @@ class OctodashPlugin(
         settings.remove(['plugins', 'printTimeGenius'])
         settings.remove(['plugins', 'companion'])
         
-        settings.remove(['octodash', 'plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
-        settings.remove(['octodash', 'plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
+        settings.remove(['plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
+        settings.remove(['plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
 
         settings.save()
 
