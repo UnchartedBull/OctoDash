@@ -1,10 +1,12 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
 import { AppService } from '../../services/app.service';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
+import { PluginsService } from '../../services/plugins.service';
 import { SystemService } from '../../services/system/system.service';
 
 @Component({
@@ -20,6 +22,10 @@ export class SettingsComponent implements OnInit {
   @ViewChild('settingsOctoDash') private settingsOctoDash: ElementRef;
   @ViewChild('settingsPlugins') private settingsPlugins: ElementRef;
   @ViewChild('settingsCredits') private settingsCredits: ElementRef;
+
+  private pluginsService = inject(PluginsService);
+
+  public enabledPlugins = toSignal(this.pluginsService.getEnabledPlugins(), { initialValue: [] });
 
   public fadeOutAnimation = false;
   public config: Config;
