@@ -197,7 +197,7 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
       <div id="octodash_plugins" class="tab-pane">
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Display Layer Progress') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.displayLayerProgress.enabled" /></label>
+            <label class="checkbox">{{ _('Display Layer Progress') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.DisplayLayerProgress.enabled" /></label>
           </div>
         </div>
         <div class="control-group">
@@ -225,39 +225,39 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
         </div>
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Filament Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.filamentManager.enabled" /></label>
+            <label class="checkbox">{{ _('Filament Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.filamentmanager.enabled" /></label>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Spool Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.spoolManager.enabled" /></label>
+            <label class="checkbox">{{ _('Spool Manager') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.SpoolManager.enabled" /></label>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Spoolman') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.spoolman.enabled" /></label>
+            <label class="checkbox">{{ _('Spoolman') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.Spoolman.enabled" /></label>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Preheat Button') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.preheatButton.enabled" /></label>
+            <label class="checkbox">{{ _('Preheat Button') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.preheat.enabled" /></label>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('PSU Control') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.psuControl.enabled" /></label>
+            <label class="checkbox">{{ _('PSU Control') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.psucontrol.enabled" /></label>
           </div>
         </div>
         <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug -->
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('TPLinkSmartplug') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.enabled" /></label>
+            <label class="checkbox">{{ _('TPLinkSmartplug') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tplinksmartplug.enabled" /></label>
           </div>
         </div>
-        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.enabled()">
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tplinksmartplug.enabled()">
           <label>{{ _('Smartplug IP') }}</label>
           <div class="controls">
-            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tpLinkSmartPlug.smartPlugIP" />
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tplinksmartplug.smartPlugIP" />
           </div>
         </div>
         <!-- /ko -->
@@ -280,35 +280,35 @@ See https://github.com/jneilliii/OctoPrint-OctoDashCompanion/blob/142652a3c2eccf
           </div>
         </div>
         <!-- /ko -->
-        <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt -->
+        <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt -->
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Tasmota MQTT') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled" /></label>
+            <label class="checkbox">{{ _('Tasmota MQTT') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt.enabled" /></label>
           </div>
         </div>
-        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled()">
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt.enabled()">
           <label>{{ _('Topic') }}</label>
           <div class="controls">
-            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.topic" />
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt.topic" />
           </div>
         </div>
-        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.enabled()">
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt.enabled()">
           <label>{{ _('Relay Number') }}</label>
           <div class="controls">
-            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmotaMqtt.relayNumber" />
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tasmota_mqtt.relayNumber" />
           </div>
         </div>
         <!-- /ko -->
         <!-- ko if: settingsViewModel.settings.plugins.octodash.plugins.tuya -->
         <div class="control-group">
           <div class="controls">
-            <label class="checkbox">{{ _('Tuya') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tuya.enabled" /></label>
+            <label class="checkbox">{{ _('Tuya') }}<input type="checkbox" data-bind="checked: settingsViewModel.settings.plugins.octodash.plugins.tuyasmartplug.enabled" /></label>
           </div>
         </div>
-        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tuya.enabled()">
+        <div class="control-group" data-bind="visible: settingsViewModel.settings.plugins.octodash.plugins.tuyasmartplug.enabled()">
           <label>{{ _('Label') }}</label>
           <div class="controls">
-            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tuya.label" />
+            <input type="text" data-bind="value: settingsViewModel.settings.plugins.octodash.plugins.tuyasmartplug.label" />
           </div>
         </div>
         <!-- /ko -->

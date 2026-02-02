@@ -121,22 +121,22 @@
       "$id": "#/plugins",
       "type": "object",
       "required": [
-        "displayLayerProgress",
+        "DisplayLayerProgress",
         "enclosure",
-        "filamentManager",
-        "spoolManager",
-        "spoolman",
-        "preheatButton",
-        "psuControl",
+        "filamentmanager",
+        "SpoolManager",
+        "Spoolman",
+        "preheat",
+        "psucontrol",
         "ophom",
-        "tpLinkSmartPlug",
-        "tuya",
+        "tplinksmartplug",
+        "tuyasmartplug",
         "tasmota",
-        "tasmotaMqtt",
+        "tasmota_mqtt",
         "wemo"
       ],
       "properties": {
-        "displayLayerProgress": {
+        "DisplayLayerProgress": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -170,7 +170,7 @@
           },
           "additionalProperties": false
         },
-        "filamentManager": {
+        "filamentmanager": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -181,7 +181,7 @@
           },
           "additionalProperties": false
         },
-        "spoolManager": {
+        "SpoolManager": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -192,7 +192,7 @@
           },
           "additionalProperties": false
         },
-        "spoolman": {
+        "Spoolman": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -203,7 +203,7 @@
           },
           "additionalProperties": false
         },
-        "preheatButton": {
+        "preheat": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -214,7 +214,7 @@
           },
           "additionalProperties": false
         },
-        "psuControl": {
+        "psucontrol": {
           "type": "object",
           "required": ["enabled"],
           "properties": {
@@ -236,7 +236,7 @@
           },
           "additionalProperties": false
         },
-        "tpLinkSmartPlug": {
+        "tplinksmartplug": {
           "type": "object",
           "required": ["enabled", "smartPlugIP"],
           "properties": {
@@ -270,7 +270,7 @@
           },
           "additionalProperties": false
         },
-        "tasmotaMqtt": {
+        "tasmota_mqtt": {
           "type": "object",
           "required": ["enabled", "topic", "relayNumber"],
           "properties": {
@@ -289,7 +289,7 @@
           },
           "additionalProperties": false
         },
-        "tuya": {
+        "tuyasmartplug": {
           "type": "object",
           "required": ["enabled", "label"],
           "properties": {
