@@ -543,6 +543,9 @@ class OctodashPlugin(
         if 'showNotificationCenterIcon' in conf['octodash']:
             settings.set(['octodash', 'showActionCenterIcon'], conf['octodash']['showNotificationCenterIcon'])
             settings.remove(['octodash', 'showNotificationCenterIcon'])
+
+        settings.remove(['plugins', 'printTimeGenius'])
+        settings.remove(['plugins', 'companion'])
         
         settings.remove(['octodash', 'plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
         settings.remove(['octodash', 'plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
