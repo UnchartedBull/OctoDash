@@ -4,61 +4,61 @@
 
 POWER_PLUGINS = {
     'psucontrol': {
-        'settingsKey': 'psuControl',
+        'legacySettingsKey': 'psuControl',
         'requiresConfig': False,
     },
     'ophom': {
-        'settingsKey': 'ophom',
+        'legacySettingsKey': 'ophom',
         'requiresConfig': False,
     },
     'tplinksmartplug': {
-        'settingsKey': 'tpLinkSmartPlug',
+        'legacySettingsKey': 'tpLinkSmartPlug',
         'requiresConfig': True,
     },
     'tuyasmartplug': {
-        'settingsKey': 'tuya',
+        'legacySettingsKey': 'tuya',
         'requiresConfig': False,
     },
     'tasmota': {
-        'settingsKey': 'tasmota',
+        'legacySettingsKey': 'tasmota',
         'requiresConfig': True,
     },
     'tasmota_mqtt': {
-        'settingsKey': 'tasmotaMqtt',
+        'legacySettingsKey': 'tasmotaMqtt',
         'requiresConfig': True,
     },
     'wemo': {
-        'settingsKey': 'wemo',
+        'legacySettingsKey': 'wemo',
         'requiresConfig': True,
     },
 }
 
 SINGLE_PLUGINS = {
     'DisplayLayerProgress': {
-        'settingsKey': 'displayLayerProgress',
+        'legacySettingsKey': 'displayLayerProgress',
         'requiresConfig': False
     },
     'preheat': {
-        'settingsKey': 'preheatButton',
+        'legacySettingsKey': 'preheatButton',
         'requiresConfig': False
     },
     'enclosure': {
-        'settingsKey': 'enclosure',
+        'legacySettingsKey': 'enclosure',
         'requiresConfig': True,
     },
 }
 
 FILAMENT_PLUGINS = {
     'Spoolman': {
-        'settingsKey': 'spoolman',
+        'legacySettingsKey': 'spoolman',
         'requiresConfig': False,
     },
     'SpoolManager': {
-        'settingsKey': 'spoolManager',
+        'legacySettingsKey': 'spoolManager',
         'requiresConfig': False,
     },
     'filamentmanager': {
-        'settingsKey': 'filamentManager',
+        'legacySettingsKey': 'filamentManager',
         'requiresConfig': False,
     }
 }

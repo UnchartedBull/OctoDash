@@ -52,7 +52,7 @@ class OctodashPlugin(
         installed = set(manager.enabled_plugins.keys())
         plugin_getters = {}
         for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
-            settings_key = plugin_info["settingsKey"]
+            settings_key = plugin_info["legacySettingsKey"]
             plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
 
         return {'plugins': plugin_getters}, {}
@@ -551,7 +551,7 @@ class OctodashPlugin(
         settings.remove(['plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
 
         for plugin_name, plugin_info in ALL_PLUGINS.items():
-            settings_key = plugin_info["settingsKey"]
+            settings_key = plugin_info["legacySettingsKey"]
             existing_settings = settings.get(['plugins', settings_key])
             if existing_settings is not None:
                 settings.set(['plugins', plugin_name], existing_settings)
