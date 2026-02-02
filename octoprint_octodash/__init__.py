@@ -24,7 +24,7 @@ from octoprint.filemanager import FileDestinations
 from octoprint.util.paths import normalize
 from octoprint.events import Events
 
-from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS
+from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS, ALL_PLUGINS
 
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
@@ -550,6 +550,12 @@ class OctodashPlugin(
         settings.remove(['plugins', 'psuControl', 'turnOnPSUWhenExitingSleep'])
         settings.remove(['plugins', 'ophom', 'turnOnPSUWhenExitingSleep'])
 
+        for plugin_name, plugin_info in ALL_PLUGINS.items():
+            settings_key = plugin_info["settingsKey"]
+            existing_settings = settings.get(['plugins', settings_key])
+            if existing_settings is not None:
+                settings.set(['plugins', plugin_name], existing_settings)
+                settings.remove(['plugins', settings_key])
         settings.save()
 
 

@@ -62,3 +62,5 @@ FILAMENT_PLUGINS = {
         'requiresConfig': False,
     }
 }
+
+ALL_PLUGINS = {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}
