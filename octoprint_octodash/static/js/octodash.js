@@ -12,12 +12,6 @@ $(function () {
     self.pluginManagerViewModel = parameters[1];
     self.selectedCommand = ko.observable();
 
-    self.isInstalled = pluginName => {
-      return ko.pureComputed(function () {
-        return self.pluginManagerViewModel.installedPlugins.indexOf(pluginName) !== -1;
-      });
-    };
-
     self.addCustomAction = function () {
       self.selectedCommand({
         color: ko.observable('#dcdde1'),

@@ -221,6 +221,13 @@ class OctodashPlugin(
                 "fanspeed": {"{}".format(fan): (int("{}".format(fan_set_speed)) / 255 * 100)}})
 
 
+    ##~ TemplatePlugin mixin
+
+    def get_template_vars(self):
+        return {
+            "enabled_plugins": octoprint.plugin.plugin_manager().enabled_plugins.keys(),
+        }
+
 
     ##~ EventHandler Mixin
 
