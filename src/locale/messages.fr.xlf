@@ -734,6 +734,9 @@
         <source>Reset Config</source>
         <target>Réinitialiser la config</target>
       </trans-unit>
+      <trans-unit id="error-fetching-plugins" datatype="html">
+        <source>Error fetching enabled plugins</source>
+      </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
         <target>Haut gauche</target>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError } from 'rxjs';
 
 import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
@@ -25,7 +26,15 @@ export class SettingsComponent implements OnInit {
 
   private pluginsService = inject(PluginsService);
 
-  public enabledPlugins = toSignal(this.pluginsService.getEnabledPlugins(), { initialValue: [] });
+  public enabledPlugins = toSignal(
+    this.pluginsService.getEnabledPlugins().pipe(
+      catchError(err => {
+        this.notificationService.warn($localize`:@@error-fetching-plugins:Error fetching enabled plugins`, err.message);
+        return [];
+      }),
+    ),
+    { initialValue: [] },
+  );
 
   public fadeOutAnimation = false;
   public config: Config;
