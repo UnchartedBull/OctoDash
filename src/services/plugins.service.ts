@@ -2,15 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-interface PluginInfo {
-  enabled: boolean;
-  key: string;
-}
-
-interface PluginResponse {
-  plugins: PluginInfo[];
-}
+import { PluginResponse } from 'src/model/octoprint';
 
 @Injectable()
 export class PluginsService {
