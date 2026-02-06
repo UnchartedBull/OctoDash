@@ -6,6 +6,7 @@ export * from './printer-commands.model';
 export * from './printer-profile.model';
 export * from './socket.model';
 export * from './octoprint-settings.model';
+export * from './plugin-status.model';
 
 export * from './plugins/octodash.model';
 export * from './plugins/display-layer-progress.model';

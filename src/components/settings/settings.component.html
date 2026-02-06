@@ -380,6 +380,7 @@
           <span class="settings__heading-2" i18n="@@settings-display-layer-progress">Display Layer Progress</span>
           <app-toggle-switch
             class="settings__toggle-switch"
+            [disabled]="!enabledPlugins().includes('DisplayLayerProgress')"
             [value]="config.plugins.DisplayLayerProgress.enabled"
             (valueChange)="config.plugins.DisplayLayerProgress.enabled = !config.plugins.DisplayLayerProgress.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
@@ -388,6 +389,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.enclosure.enabled"
+            [disabled]="!enabledPlugins().includes('enclosure')"
             (valueChange)="config.plugins.enclosure.enabled = !config.plugins.enclosure.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -408,6 +410,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.filamentmanager.enabled"
+            [disabled]="!enabledPlugins().includes('filamentmanager')"
             (valueChange)="config.plugins.filamentmanager.enabled = !config.plugins.filamentmanager.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -416,6 +419,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.SpoolManager.enabled"
+            [disabled]="!enabledPlugins().includes('SpoolManager')"
             (valueChange)="config.plugins.SpoolManager.enabled = !config.plugins.SpoolManager.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -424,6 +428,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.Spoolman.enabled"
+            [disabled]="!enabledPlugins().includes('Spoolman')"
             (valueChange)="config.plugins.Spoolman.enabled = !config.plugins.Spoolman.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -432,6 +437,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.preheat.enabled"
+            [disabled]="!enabledPlugins().includes('preheat')"
             (valueChange)="config.plugins.preheat.enabled = !config.plugins.preheat.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -439,6 +445,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.psucontrol.enabled"
+            [disabled]="!enabledPlugins().includes('psucontrol')"
             (valueChange)="config.plugins.psucontrol.enabled = !config.plugins.psucontrol.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -446,6 +453,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.ophom.enabled"
+            [disabled]="!enabledPlugins().includes('ophom')"
             (valueChange)="config.plugins.ophom.enabled = !config.plugins.ophom.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -453,6 +461,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.tplinksmartplug.enabled"
+            [disabled]="!enabledPlugins().includes('tplinksmartplug')"
             (valueChange)="config.plugins.tplinksmartplug.enabled = !config.plugins.tplinksmartplug.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -471,6 +480,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.tuyasmartplug.enabled"
+            [disabled]="!enabledPlugins().includes('tuyasmartplug')"
             (valueChange)="config.plugins.tuyasmartplug.enabled = !config.plugins.tuyasmartplug.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -487,6 +497,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.tasmota.enabled"
+            [disabled]="!enabledPlugins().includes('tasmota')"
             (valueChange)="config.plugins.tasmota.enabled = !config.plugins.tasmota.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -511,6 +522,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.tasmota_mqtt.enabled"
+            [disabled]="!enabledPlugins().includes('tasmota_mqtt')"
             (valueChange)="config.plugins.tasmota_mqtt.enabled = !config.plugins.tasmota_mqtt.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>
@@ -535,6 +547,7 @@
           <app-toggle-switch
             class="settings__toggle-switch"
             [value]="config.plugins.wemo.enabled"
+            [disabled]="!enabledPlugins().includes('wemo')"
             (valueChange)="config.plugins.wemo.enabled = !config.plugins.wemo.enabled">
             <span class="settings__toggle-switch-descriptor" i18n="@@ui-enabled">enabled</span>
           </app-toggle-switch>

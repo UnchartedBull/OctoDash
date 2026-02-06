@@ -16,6 +16,7 @@ import { JobOctoprintService } from './job/job.octoprint.service';
 import { JobService } from './job/job.service';
 import { NotificationService } from './notification.service';
 import { OctoprintSettingsService } from './octoprint-settings.service';
+import { PluginsService } from './plugins.service';
 import { PrinterOctoprintService } from './printer/printer.octoprint.service';
 import { PrinterService } from './printer/printer.service';
 import { ProfileService } from './profile/profile.service';
@@ -34,6 +35,7 @@ export default [
   QuickControlModalService,
   NotificationService,
   OctoprintSettingsService,
+  PluginsService,
   [
     {
       provide: SystemService,

@@ -138,8 +138,12 @@
       "properties": {
         "DisplayLayerProgress": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": true
@@ -149,8 +153,12 @@
         },
         "enclosure": {
           "type": "object",
-          "required": ["enabled", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
+          "required": ["enabled", "inUse", "ambientSensorID", "filament1SensorID", "filament2SensorID"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": true
@@ -172,8 +180,12 @@
         },
         "filamentmanager": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -183,8 +195,12 @@
         },
         "SpoolManager": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -194,8 +210,12 @@
         },
         "Spoolman": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -205,8 +225,12 @@
         },
         "preheat": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": true
@@ -216,8 +240,12 @@
         },
         "psucontrol": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -227,8 +255,12 @@
         },
         "ophom": {
           "type": "object",
-          "required": ["enabled"],
+          "required": ["enabled", "inUse"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -238,8 +270,12 @@
         },
         "tplinksmartplug": {
           "type": "object",
-          "required": ["enabled", "smartPlugIP"],
+          "required": ["enabled", "inUse", "smartPlugIP"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -253,8 +289,12 @@
         },
         "tasmota": {
           "type": "object",
-          "required": ["enabled", "ip", "index"],
+          "required": ["enabled", "inUse", "ip", "index"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -272,8 +312,12 @@
         },
         "tasmota_mqtt": {
           "type": "object",
-          "required": ["enabled", "topic", "relayNumber"],
+          "required": ["enabled", "inUse", "topic", "relayNumber"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -291,8 +335,12 @@
         },
         "tuyasmartplug": {
           "type": "object",
-          "required": ["enabled", "label"],
+          "required": ["enabled", "inUse", "label"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false
@@ -306,8 +354,12 @@
         },
         "wemo": {
           "type": "object",
-          "required": ["enabled", "ip"],
+          "required": ["enabled", "inUse", "ip"],
           "properties": {
+            "inUse": {
+              "type": "boolean",
+              "default": false
+            },
             "enabled": {
               "type": "boolean",
               "default": false

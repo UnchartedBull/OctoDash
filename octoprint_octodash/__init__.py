@@ -47,32 +47,25 @@ class OctodashPlugin(
 
     ##~~ SettingsPlugin mixin
 
-    def get_settings_preprocessors(self):
-        manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
-        plugin_getters = {}
-        for plugin_name, plugin_info in {**POWER_PLUGINS, **SINGLE_PLUGINS, **FILAMENT_PLUGINS}.items():
-            settings_key = plugin_info["legacySettingsKey"]
-            plugin_getters[settings_key] = dict(enabled = lambda enabled, name=plugin_name: enabled and name in installed)
-
-        return {'plugins': plugin_getters}, {}
-
     def on_settings_load(self):
         manager = octoprint.plugin.plugin_manager()
-        installed = set(manager.enabled_plugins.keys())
+        installed_plugins = set(manager.enabled_plugins.keys())
 
-        all_plugins = dict()
-        all_plugins.update(POWER_PLUGINS)
-        all_plugins.update(SINGLE_PLUGINS)
-        all_plugins.update(FILAMENT_PLUGINS)
-        data = octoprint.plugin.SettingsPlugin.on_settings_load(self)
+        
+        data = super().on_settings_load(self)
 
-        for plugin_name in all_plugins.keys():
-            if not plugin_name in installed:
-                data["plugins"][plugin_name]["enabled"] = False
+        for plugin_name in ALL_PLUGINS.keys():
+                enabled = data["plugins"][plugin_name]["enabled"]
+                installed = plugin_name in installed_plugins
+                data["plugins"][plugin_name]["inUse"] = enabled and installed
 
         return data
 
+    def on_settings_save(self, data):
+        for plugin_name in ALL_PLUGINS.keys():
+            del data["plugins"][plugin_name]['inUse']
+
+        return super().on_settings_save(self, data)
 
     def on_settings_migrate(self, target, current):
         self._set_initial_plugins()
@@ -219,6 +212,13 @@ class OctodashPlugin(
             self._plugin_manager.send_plugin_message("octodash", {
                 "fanspeed": {"{}".format(fan): (int("{}".format(fan_set_speed)) / 255 * 100)}})
 
+
+    ##~ TemplatePlugin mixin
+
+    def get_template_vars(self):
+        return {
+            "enabled_plugins": octoprint.plugin.plugin_manager().enabled_plugins.keys(),
+        }
 
 
     ##~ EventHandler Mixin

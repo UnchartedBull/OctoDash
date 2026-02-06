@@ -999,31 +999,27 @@
         <source>enabled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">385,387</context>
+          <context context-type="linenumber">386,388</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">392,394</context>
+          <context context-type="linenumber">394,396</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">412,415</context>
+          <context context-type="linenumber">415,418</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">420,423</context>
+          <context context-type="linenumber">424,427</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">428,431</context>
+          <context context-type="linenumber">433,436</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">436,438</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">443,445</context>
+          <context context-type="linenumber">442,444</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
@@ -1031,247 +1027,258 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">457,459</context>
+          <context context-type="linenumber">458,460</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">475,477</context>
+          <context context-type="linenumber">466,468</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">491,493</context>
+          <context context-type="linenumber">485,487</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">515,517</context>
+          <context context-type="linenumber">502,504</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">539,541</context>
+          <context context-type="linenumber">527,529</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
+          <context context-type="linenumber">552,554</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-enclosure" datatype="html">
         <source>Enclosure</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">387,390</context>
+          <context context-type="linenumber">388,391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ambiant-sensor" datatype="html">
         <source> Ambient Sensor <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>(ID)<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">395,397</context>
+          <context context-type="linenumber">397,399</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-filament-manager" datatype="html">
         <source>Filament Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">407,410</context>
+          <context context-type="linenumber">409,412</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-spool-manager" datatype="html">
         <source>Spool Manager</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">415,418</context>
+          <context context-type="linenumber">418,421</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-spoolman" datatype="html">
         <source>Spoolman</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">423,426</context>
+          <context context-type="linenumber">427,430</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">431,434</context>
+          <context context-type="linenumber">436,439</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-psu-control" datatype="html">
         <source>PSU Control</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">438,441</context>
+          <context context-type="linenumber">444,447</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-ophom-control" datatype="html">
         <source>Ophon Control (Phillips HUE)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">445,448</context>
+          <context context-type="linenumber">452,455</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug" datatype="html">
         <source>TPLink-SmartPlug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">452,455</context>
+          <context context-type="linenumber">460,463</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tplink-smartplug-ip" datatype="html">
         <source>SmartPlug IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">460,465</context>
+          <context context-type="linenumber">469,474</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tuya" datatype="html">
         <source>Tuya Smart Plug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">470,473</context>
+          <context context-type="linenumber">479,482</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-tuya-label" datatype="html">
         <source>Label</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">477,481</context>
+          <context context-type="linenumber">487,491</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo" datatype="html">
         <source>Wemo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">534,537</context>
+          <context context-type="linenumber">546,549</context>
         </context-group>
       </trans-unit>
       <trans-unit id="settings-wemo-ip" datatype="html">
         <source>Wemo IP</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">541,545</context>
+          <context context-type="linenumber">554,558</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about" datatype="html">
         <source>about</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">563,566</context>
+          <context context-type="linenumber">576,579</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-developer-mode" datatype="html">
         <source> updates disabled (dev mode) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">570,573</context>
+          <context context-type="linenumber">583,586</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-no-update" datatype="html">
         <source> up to date </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">578,582</context>
+          <context context-type="linenumber">591,595</context>
         </context-group>
       </trans-unit>
       <trans-unit id="about-install-v" datatype="html">
         <source> install <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">586,587</context>
+          <context context-type="linenumber">599,600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">593,595</context>
+          <context context-type="linenumber">606,608</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">599,601</context>
+          <context context-type="linenumber">612,614</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">628,630</context>
+          <context context-type="linenumber">641,643</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">630,632</context>
+          <context context-type="linenumber">643,645</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-config" datatype="html">
         <source>Reset Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">635,638</context>
+          <context context-type="linenumber">648,651</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="error-fetching-plugins" datatype="html">
+        <source>Error fetching enabled plugins</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-right" datatype="html">
         <source>Top Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-left" datatype="html">
         <source>Middle Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-right" datatype="html">
         <source>Middle Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-left" datatype="html">
         <source>Bottom Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-right" datatype="html">
         <source>Bottom Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved" datatype="html">
         <source>Configuration not saved!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">91</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved-message" datatype="html">
         <source>You haven&apos;t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can&apos;t save invalid config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
