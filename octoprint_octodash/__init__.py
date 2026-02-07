@@ -52,7 +52,7 @@ class OctodashPlugin(
         installed_plugins = set(manager.enabled_plugins.keys())
 
         
-        data = super().on_settings_load(self)
+        data = super().on_settings_load()
 
         for plugin_name in ALL_PLUGINS.keys():
                 enabled = data["plugins"][plugin_name]["enabled"]
@@ -65,7 +65,7 @@ class OctodashPlugin(
         for plugin_name in ALL_PLUGINS.keys():
             del data["plugins"][plugin_name]['inUse']
 
-        return super().on_settings_save(self, data)
+        return super().on_settings_save(data)
 
     def on_settings_migrate(self, target, current):
         self._set_initial_plugins()
