@@ -202,12 +202,11 @@ class OctodashPlugin(
             self.send_fan_speed(cmd, "sent")
 
     # From OctoDash Companion
-    def send_fan_speed(self, gcode, direction):
-        fan_match = self.fan_regex.match(gcode)
+    def send_fan_speed(self, fan_match, direction):
         if fan_match:
             if direction == "received":
                 self.use_received_fan_speeds = True
-            fan, fan_set_speed = fan_match.groups()
+            fan, fan_set_speed = fan_match
             if fan is None:
                 fan = 1
             self._plugin_manager.send_plugin_message("octodash", {

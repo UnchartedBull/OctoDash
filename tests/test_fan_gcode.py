@@ -17,9 +17,9 @@ class TestFanGcode(unittest.TestCase):
 
     def test_fan_sending(self):
         cases = [
-            ("M106 S255", "code", {"1": 100.0}),
-            ("M106 S0", "code", {"1": 0.0}),
-            ("M106 S210", "code", {"1": (int("210") / 255 * 100)}),
+            ((None, "255"), "code", {"1": 100.0}),
+            ((None, "0"), "code", {"1": 0.0}),
+            ((None, "210"), "code", {"1": (int("210") / 255 * 100)}),
         ]
         
         for gcode, direction, expected in cases:
