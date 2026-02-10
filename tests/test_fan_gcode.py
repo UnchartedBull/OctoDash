@@ -1,9 +1,26 @@
 import unittest
+from unittest.mock import MagicMock
 from octoprint_octodash import OctodashPlugin
+
+# class MockPluginManager:
+#     messages = []
+
+#     def send_plugin_message(self, plugin_name, message):
+#         self.messages.append((plugin_name, message))
+
 
 class TestFanGcode(unittest.TestCase):
     def setUp(self):
         self.plugin = OctodashPlugin()
+        # self.plugin._plugin_manager = MockPluginManager()
+        self.plugin._plugin_manager= MagicMock()
+
+    def test_fan_sending(self):
+        self.plugin.send_fan_speed("M106 P2 S128", "code")
+        self.plugin._plugin_manager.send_plugin_message.assert_called_once_with("octodash", {
+            "fanspeed": {"2": (int("128") / 255 * 100)}})
+
+
 
     # def test_good(self):
     #     suites = [
