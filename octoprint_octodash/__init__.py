@@ -188,17 +188,21 @@ class OctodashPlugin(
 
     # From OctoDash Companion
     def process_received_gcode(self, comm, line, *args, **kwargs):
-        if "M106" not in line:
-            return line
+        # if "M106" not in line:
+        #     return line
     
-        self.send_fan_speed(line, "received")
+        # self.send_fan_speed(line, "received")
+        groups = self._run_gcode_test(line)
+        if groups:
+            self.send_fan_speed(groups, "received")
         return line
 
     # ~~ GCode Sent hook
 
     # From OctoDash Companion
     def process_sent_gcode(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
-        if gcode and gcode == "M106" and self.use_received_fan_speeds is False:
+        match = self._run_gcode_test(cmd)
+        if match and self.use_received_fan_speeds is False:
             self.send_fan_speed(cmd, "sent")
 
     # From OctoDash Companion
@@ -212,11 +216,15 @@ class OctodashPlugin(
             self._plugin_manager.send_plugin_message("octodash", {
                 "fanspeed": {"{}".format(fan): (int("{}".format(fan_set_speed)) / 255 * 100)}})
 
-    # def _run_gcode_test(self, gcode):
-    #     if "M106" in gcode:
-    #         return self.fan_regex.match(gcode)
-    #     if "M107" in gcode:
-    #         return self.fan_regex_m107.match(gcode)
+    def _run_gcode_test(self, gcode):
+        if "M106" in gcode:
+            match = self.fan_regex.match(gcode)
+            if match:
+                return match.groups()
+            else:
+                return None
+        # if "M107" in gcode:
+        #     return self.fan_regex_m107.match(gcode)
 
     ##~ TemplatePlugin mixin
 

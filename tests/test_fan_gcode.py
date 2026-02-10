@@ -32,21 +32,21 @@ class TestFanGcode(unittest.TestCase):
         )
 
 
-    # def test_good(self):
-    #     suites = [
-    #         # ("M106", (None, None)),
-    #         # ("M106 P1", (1, None)),
-    #         # ("M106 S255", (None, '255')),
-    #         # ("M106 P1 S128", ('1', '128')),
-    #         # ("M106 P2 S64", ('2', '64')),
-    #         # ("M106 P3 S0", ('3', '0')),
-    #         # ("M107", (None, '')),
-    #         # ("M107 P1", ('1', '')),
-    #     ]
-    #     for gcode, expected in suites:
-    #       match = self.plugin._run_gcode_test(gcode)
-    #       self.assertIsNotNone(match, f"Expected to match: {gcode}")
-    #       self.assertEqual(match, expected)
+    def test_good(self):
+        suites = [
+            # ("M106", (None, None)),
+            # ("M106 P1", (1, None)),
+            ("M106 S255", (None, '255')),
+            ("M106 P1 S128", ('1', '128')),
+            ("M106 P2 S64", ('2', '64')),
+            ("M106 P3 S0", ('3', '0')),
+            # ("M107", (None, '')),
+            # ("M107 P1", ('1', '')),
+        ]
+        for gcode, expected in suites:
+          match = self.plugin._run_gcode_test(gcode)
+          self.assertIsNotNone(match, f"Expected to match: {gcode}")
+          self.assertEqual(match, expected)
 
     # def test_bad(self):
     #     bad_gcodes = [
