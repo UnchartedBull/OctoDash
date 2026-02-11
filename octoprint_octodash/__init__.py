@@ -188,10 +188,6 @@ class OctodashPlugin(
 
     # From OctoDash Companion
     def process_received_gcode(self, comm, line, *args, **kwargs):
-        # if "M106" not in line:
-        #     return line
-    
-        # self.send_fan_speed(line, "received")
         groups = self._run_gcode_test(line)
         if groups:
             self.send_fan_speed(groups, "received")
