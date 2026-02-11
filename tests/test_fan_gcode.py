@@ -1,5 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, call
+
+import pytest
 from octoprint_octodash import OctodashPlugin
 
 # class MockPluginManager:
@@ -8,28 +10,28 @@ from octoprint_octodash import OctodashPlugin
 #     def send_plugin_message(self, plugin_name, message):
 #         self.messages.append((plugin_name, message))
 
+@pytest.mark.parametrize("match, expected", [
+    ((None, "255"), {"1": 100.0}),
+    ((None, "0"), {"1": 0.0}),
+    ((None, "210"), {"1": (int("210") / 255 * 100)}),
+])
+def test_fan_sending(match, expected):
+    plugin = OctodashPlugin()
+    plugin._plugin_manager = MagicMock()
+    
+    plugin.send_fan_speed(match, "code")
+
+    plugin._plugin_manager.send_plugin_message.assert_called_once_with(
+        'octodash', {'fanspeed': expected},
+    )
+
+
 
 class TestFanGcode(unittest.TestCase):
     def setUp(self):
         self.plugin = OctodashPlugin()
         # self.plugin._plugin_manager = MockPluginManager()
         self.plugin._plugin_manager= MagicMock()
-
-    def test_fan_sending(self):
-        cases = [
-            ((None, "255"), "code", {"1": 100.0}),
-            ((None, "0"), "code", {"1": 0.0}),
-            ((None, "210"), "code", {"1": (int("210") / 255 * 100)}),
-        ]
-        
-        for gcode, direction, expected in cases:
-            self.plugin.send_fan_speed(gcode, direction)
-            # self.plugin._plugin_manager.send_plugin_message.assert_called_with("octodash", {
-            #     "fanspeed": expected})
-
-        self.plugin._plugin_manager.send_plugin_message.assert_has_calls(
-            [call('octodash', {'fanspeed': expected}) for _, _, expected in cases]
-        )
 
 
     def test_good(self):
