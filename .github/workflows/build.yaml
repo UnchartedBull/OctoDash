@@ -57,6 +57,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Python test dependencies
         run: python -m pip install pytest octoprint --user
+      - name: Install package
+        run: python -m pip install . --user
       - name: Run Python tests
         run: pytest
 
