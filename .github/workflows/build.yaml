@@ -48,7 +48,7 @@ jobs:
             echo ""
             exit 1
           fi
-  
+
   test-python:
     runs-on: ubuntu-latest
 
