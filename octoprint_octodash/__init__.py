@@ -203,7 +203,7 @@ class OctodashPlugin(
     def process_sent_gcode(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
         match = self._run_gcode_test(cmd)
         if match and self.use_received_fan_speeds is False:
-            self.send_fan_speed(cmd, "sent")
+            self.send_fan_speed(match, "sent")
 
     # From OctoDash Companion
     def send_fan_speed(self, fan_match, direction):
