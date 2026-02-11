@@ -3,11 +3,6 @@ import pytest
 
 from octoprint_octodash import OctodashPlugin
 
-# class MockPluginManager:
-#     messages = []
-
-#     def send_plugin_message(self, plugin_name, message):
-#         self.messages.append((plugin_name, message))
 
 @pytest.mark.parametrize("match, expected", [
     ((None, "255"), {"1": 100.0}),
@@ -26,8 +21,6 @@ def test_fan_sending(match, expected):
         'octodash', {'fanspeed': expected},
     )
 
-
-
 @pytest.mark.parametrize("gcode, expected", [
     # ("M106", (None, None)),
     # ("M106 P1", (1, None)),
@@ -40,7 +33,6 @@ def test_fan_sending(match, expected):
 ])
 def test_good(gcode, expected):
     plugin = OctodashPlugin()
-    # self.plugin._plugin_manager = MockPluginManager()
 
     match = plugin._run_gcode_test(gcode)
     assert match is not None, f"Expected to match: {gcode}"
