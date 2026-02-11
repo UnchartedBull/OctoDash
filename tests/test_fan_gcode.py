@@ -13,6 +13,8 @@ from octoprint_octodash import OctodashPlugin
 @pytest.mark.parametrize("match, expected", [
     ((None, "255"), {"1": 100.0}),
     ((None, "0"), {"1": 0.0}),
+    (("1", "255"), {"1": 100.0}),
+    (("2", "0"), {"2": 0.0}),
     ((None, "210"), {"1": (int("210") / 255 * 100)}),
 ])
 def test_fan_sending(match, expected):
