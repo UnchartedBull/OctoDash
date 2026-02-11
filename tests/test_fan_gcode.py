@@ -35,8 +35,8 @@ def test_fan_sending(match, expected):
     ("M106 P1 S128", ('1', '128')),
     ("M106 P2 S64", ('2', '64')),
     ("M106 P3 S0", ('3', '0')),
-    # ("M107", (None, '')),
-    # ("M107 P1", ('1', '')),
+    ("M107", (None, '0')),
+    ("M107 P1", ('1', '0')),
 ])
 def test_good(gcode, expected):
     plugin = OctodashPlugin()

@@ -44,7 +44,7 @@ class OctodashPlugin(
         # These two lines from OctoDash Companion
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
-        # self.fan_regex_m107 = re.compile("M107 +(?:P([0-9]+))()")
+        self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
 
     ##~~ SettingsPlugin mixin
 
@@ -223,8 +223,12 @@ class OctodashPlugin(
                 return match.groups()
             else:
                 return None
-        # if "M107" in gcode:
-        #     return self.fan_regex_m107.match(gcode)
+        if "M107" in gcode:
+            match = self.fan_regex_m107.match(gcode)
+            if match:
+                return match.groups()[0], '0'
+            else:
+                return None
 
     ##~ TemplatePlugin mixin
 
