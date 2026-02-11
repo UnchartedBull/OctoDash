@@ -3,6 +3,41 @@ import pytest
 
 from octoprint_octodash import OctodashPlugin
 
+@pytest.mark.parametrize("gcode, expected", [
+    ("M106 S255", (None, '255')),
+    ("M106 P1 S128", ('1', '128')),
+    ("M106 P2 S64", ('2', '64')),
+    ("M106 P3 S0", ('3', '0')),
+    ("M107", (None, '0')),
+    ("M107 P1", ('1', '0')),
+])
+def test_received_gcode(gcode, expected):
+    plugin = OctodashPlugin()
+    plugin.send_fan_speed = MagicMock()
+    
+    plugin.process_received_gcode(None, gcode)
+
+    plugin.send_fan_speed.assert_called_once_with(
+        expected, "received",
+    )
+
+@pytest.mark.parametrize("gcode, expected", [
+    ("M106 S255", (None, '255')),
+    ("M106 P1 S128", ('1', '128')),
+    ("M106 P2 S64", ('2', '64')),
+    ("M106 P3 S0", ('3', '0')),
+    ("M107", (None, '0')),
+    ("M107 P1", ('1', '0')),
+])
+def test_send_gcode(gcode, expected):
+    plugin = OctodashPlugin()
+    plugin.send_fan_speed = MagicMock()
+    
+    plugin.process_sent_gcode(None, None,  gcode, None, None)
+
+    plugin.send_fan_speed.assert_called_once_with(
+        expected, "sent",
+    )
 
 @pytest.mark.parametrize("match, expected", [
     ((None, "255"), {"1": 100.0}),
