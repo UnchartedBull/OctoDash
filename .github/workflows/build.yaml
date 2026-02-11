@@ -48,6 +48,17 @@ jobs:
             echo ""
             exit 1
           fi
+  
+  test-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Install Python test dependencies
+        run: python -m pip install pytest octoprint --user
+      - name: Run Python tests
+        run: pytest
 
   build:
     runs-on: ubuntu-latest
