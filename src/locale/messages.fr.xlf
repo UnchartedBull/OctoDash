@@ -97,18 +97,6 @@
         <source>only put a little filament in, I'll pull in the rest.</source>
         <target>il suffit de mettre un peu de filament, je vais tirer le reste.</target>
       </trans-unit>
-      <trans-unit id="filament-grams-left" datatype="html">
-        <source>g left</source>
-        <target>g restants</target>
-      </trans-unit>
-      <trans-unit id="ui-done" datatype="html">
-        <source>done</source>
-        <target>terminé</target>
-      </trans-unit>
-      <trans-unit id="ui-waiting-for-user" datatype="html">
-        <source>I'll wait for you.</source>
-        <target>Je vous attends.</target>
-      </trans-unit>
       <trans-unit id="filament-m600" datatype="html">
         <source>M600 sent</source>
         <target>M600 envoyé</target>
@@ -116,6 +104,18 @@
       <trans-unit id="follow-printer-screen" datatype="html">
         <source>follow the instructions on your printer's display</source>
         <target>suivez les instructions sur l'affichage de votre imprimante</target>
+      </trans-unit>
+      <trans-unit id="filament-grams-left" datatype="html">
+        <source>g left</source>
+        <target>g restants</target>
+      </trans-unit>
+      <trans-unit id="ui-waiting-for-user" datatype="html">
+        <source>I'll wait for you.</source>
+        <target>Je vous attends.</target>
+      </trans-unit>
+      <trans-unit id="ui-done" datatype="html">
+        <source>done</source>
+        <target>terminé</target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -340,7 +340,7 @@
         <target>de filament sera utilisé</target>
       </trans-unit>
       <trans-unit id="ui-loading-info" datatype="html">
-        <source> loading info</source>
+        <source>loading info</source>
         <target> informations sur le chargement</target>
       </trans-unit>
       <trans-unit id="no-job" datatype="html">
@@ -659,6 +659,10 @@
         <source>Spool Manager</source>
         <target>Spool Manager</target>
       </trans-unit>
+      <trans-unit id="settings-spoolman" datatype="html">
+        <source>Spoolman</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="settings-preheat-button" datatype="html">
         <source>Preheat Button</source>
         <target>Preheat Button</target>
@@ -806,7 +810,7 @@
         <target> Port 5000 pour OctoPrint d'origine, Port 80 pour OctoPi </target>
       </trans-unit>
       <trans-unit id="search-again" datatype="html">
-        <source> search again </source>
+        <source>search again</source>
         <target> chercher à nouveau </target>
       </trans-unit>
       <trans-unit id="no-instance-found" datatype="html">
@@ -920,6 +924,10 @@
       <trans-unit id="plugin-spool-manager" datatype="html">
         <source>Spool Manager</source>
         <target>Spool Manager</target>
+      </trans-unit>
+      <trans-unit id="plugin-spoolman" datatype="html">
+        <source>Spoolman</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="plugin-preheat-button" datatype="html">
         <source>Preheat Button</source>
@@ -1217,6 +1225,10 @@
         <source>Can't preheat printer!</source>
         <target>Impossible de préchauffer l'imprimante !</target>
       </trans-unit>
+      <trans-unit id="7229171609432307996" datatype="html">
+        <source>@@error-octoprint-settings:Failed to load OctoPrint settings.</source>
+        <target></target>
+      </trans-unit>
       <trans-unit id="octoprint-upgrade-required-title" datatype="html">
         <source>OctoPrint outdated!</source>
         <target>OctoPrint dépassé !</target>
@@ -1266,6 +1278,11 @@
       <trans-unit id="error-printer-disconnect" datatype="html">
         <source>Can't disconnect Printer!</source>
         <target>Impossible de déconnecter l'imprimante !</target>
+      </trans-unit>
+      <trans-unit id="7381239771227821218" datatype="html">
+        <source>Failed to load temp profiles</source>
+        <target></target>
+        <note>$$error-failed-to-load-profile-temps</note>
       </trans-unit>
       <trans-unit id="http-403-heading" datatype="html">
         <source>HTTP Error 403 - FORBIDDEN</source>

@@ -62,6 +62,9 @@ export class AppService {
           delete (config.plugins.ophom as any).turnOnPSUWhenExitingSleep;
         }
       },
+      "/plugins must have required property 'spoolman'": config => {
+        config.plugins.spoolman = defaultConfig.plugins.spoolman;
+      },
     };
     /* eslint-enable @typescript-eslint/no-explicit-any */
   }

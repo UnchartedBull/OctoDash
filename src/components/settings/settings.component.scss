@@ -278,6 +278,44 @@
     }
   }
 
+  #octoprintURLName {
+    width: 23.2vw;
+  }
+
+  #octoprintURLPort {
+    width: 8vw;
+  }
+
+  #printerName {
+    width: 44.94vw;
+  }
+
+  #wemoIP {
+    width: 30vw;
+  }
+
+  #wemoPort {
+    width: 8vw;
+  }
+
+  input {
+    width: 44.94vw;
+  }
+
+  &__half {
+    width: 25.6vw;
+
+    input {
+      width: 19vw;
+    }
+  }
+
+  &__printer {
+    input {
+      width: 19vw;
+    }
+  }
+
   &__made-in-berlin {
     display: block;
     margin: 5vh auto 0;

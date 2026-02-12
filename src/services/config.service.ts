@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import * as _ from 'lodash-es';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
 import { ElectronService } from './electron.service';
@@ -18,7 +19,7 @@ export class ConfigService {
   private valid: boolean;
   private errors: string[];
   private update = false;
-  private initialized = false;
+  private initialized$ = new BehaviorSubject<boolean>(false);
 
   private httpHeaders: HttpHeader;
 
@@ -41,7 +42,7 @@ export class ConfigService {
       this.zone.run(() => {
         this.valid = true;
         this.generateHttpHeaders();
-        this.initialized = true;
+        this.initialized$.next(true);
       });
     });
     this.electronService.on('configFail', (_, errors) => {
@@ -49,7 +50,7 @@ export class ConfigService {
         this.valid = false;
         this.errors = errors;
         console.error(errors);
-        this.initialized = true;
+        this.initialized$.next(true);
       });
     });
 
@@ -88,6 +89,10 @@ export class ConfigService {
     this.electronService.send('saveConfig', config);
   }
 
+  public getInitializedSubscribable() {
+    return this.initialized$.asObservable();
+  }
+
   public splitOctoprintURL(octoprintURL: string): URLSplit {
     const host = octoprintURL.split(':')[1].replace('//', '');
     const port = parseInt(octoprintURL.split(':')[2], 10);
@@ -123,8 +128,11 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.config.octoprint.url}api/${path}`;
-    else return `${this.config.octoprint.url}${path}`;
+    const base = this.config?.octoprint.url;
+    if (!base) return '';
+
+    if (includeApi) return `${base}api/${path}`;
+    else return `${base}${path}`;
   }
 
   public getAPIPollingInterval(): number {
@@ -148,7 +156,7 @@ export class ConfigService {
   }
 
   public isInitialized(): boolean {
-    return this.initialized;
+    return this.initialized$.getValue();
   }
 
   public isValid(): boolean {
@@ -272,7 +280,15 @@ export class ConfigService {
   }
 
   public isFilamentManagerUsed(): boolean {
-    return this.config.plugins.filamentManager.enabled || this.config.plugins.spoolManager.enabled;
+    return (
+      this.config.plugins.filamentManager.enabled ||
+      this.config.plugins.spoolManager.enabled ||
+      this.config.plugins.spoolman.enabled
+    );
+  }
+
+  public isSpoolmanPluginEnabled(): boolean {
+    return this.config.plugins.spoolman.enabled;
   }
 
   public isSpoolManagerPluginEnabled(): boolean {

@@ -1,0 +1,7 @@
+<app-quick-control
+  [unit]="unit"
+  [defaultValue]="defaultValue + tempOffset"
+  [hideSet]="hideSet"
+  [options]="filteredOptions$ | async"
+  (onChange)="handleChange($event)"
+  (onSet)="handleSet($event)"></app-quick-control>

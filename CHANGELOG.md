@@ -1,5 +1,66 @@
 # Changelog
 
+## [v2.7.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.1) (2026-01-21)
+
+This is a minor bugfix to resolve an issue with the multifilament support on certain printers.
+
+- Respect the extruder count found in the OctoPrint printer profile ([#5587](https://github.com/UnchartedBull/OctoDash/pull/5587))
+
+Also a host of minor dependency updates are included as well.
+
+## [v2.7.0](https://github.com/UnchartedBull/OctoDash/tree/v2.7.0) (2026-01-18)
+
+> [!WARNING]
+> If you use custom styles, you may need to update them.
+
+### Highlights:
+
+- Show temps from OctoPrint profiles in temp pickers ([#5465](https://github.com/UnchartedBull/OctoDash/pull/5465)), ([#5554](https://github.com/UnchartedBull/OctoDash/pull/5554)), and ([#5552](https://github.com/UnchartedBull/OctoDash/pull/5552)). This change also fixed [#5467](https://github.com/UnchartedBull/OctoDash/issues/5467): action center button overlapping with heat nozzle button
+- Add Support for Spoolman ([#5528](https://github.com/UnchartedBull/OctoDash/pull/5528)), also ([#5551](https://github.com/UnchartedBull/OctoDash/pull/5551))
+- Fix squished X/Y icons and other layout issues with the control screen ([#5546](https://github.com/UnchartedBull/OctoDash/pull/5546))
+
+### Other improvements:
+
+- Upgrade to Electron v39 ([#5556](https://github.com/UnchartedBull/OctoDash/pull/5556))
+- Bump minium supported browser to Chrome 120 ([#5557](https://github.com/UnchartedBull/OctoDash/pull/5557))
+
+- Stop automatically creating up to six custom actions ([#5519](https://github.com/UnchartedBull/OctoDash/pull/5519))
+- Decrease frequency of clock updates (shout out to @jjsat for this contribution) ([#5511](https://github.com/UnchartedBull/OctoDash/pull/5511))
+- Avoid reading undefined settings ([#5461](https://github.com/UnchartedBull/OctoDash/pull/5461))
+- Update to Angular 21 ([#5523](https://github.com/UnchartedBull/OctoDash/pull/5623))
+- A whole host of other dependency updates as usual
+
+## [v2.6.4](https://github.com/UnchartedBull/OctoDash/tree/v2.6.4) (2025-10-26)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the position of the 'jog right' icon in control screen ([#5396](https://github.com/UnchartedBull/OctoDash/pull/5396))
+- Fix blinking on the hotend icon ([#5395](https://github.com/UnchartedBull/OctoDash/pull/5395))
+- Fix bug with selecting filament when not all tools have filament selected ([#5391](https://github.com/UnchartedBull/OctoDash/pull/5391))
+- The usual round of dependency updates
+
+## [v2.6.3](https://github.com/UnchartedBull/OctoDash/tree/v2.6.3) (2025-10-14)
+
+Minor bugfixes
+
+### Update Log
+
+- Fix the hotend temperature reporting on the print adjust screen ([#5385](https://github.com/UnchartedBull/OctoDash/pull/5385))
+- Properly close the action buttons when a custom action specifies to do so ([#5384](https://github.com/UnchartedBull/OctoDash/pull/5384))
+- The usual round of dependency updates
+
+## [v2.6.2](https://github.com/UnchartedBull/OctoDash/tree/v2.6.2) (2025-09-30)
+
+Various fixes
+
+### Update Log
+
+- Fix support for Slicer Thumbnails 1.2.0 ([#5361](https://github.com/UnchartedBull/OctoDash/pull/5361))
+- Fix bug with actions without gcode ([#5331](https://github.com/UnchartedBull/OctoDash/pull/5331))
+- Fix bug with PSU Control plugin ([#5332](https://github.com/UnchartedBull/OctoDash/pull/5332))
+
 ## [v2.6.1](https://github.com/UnchartedBull/OctoDash/tree/v2.6.1) (2025-09-04)
 
 > [!IMPORTANT]

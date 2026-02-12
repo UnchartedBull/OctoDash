@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+export interface Option {
+  value: number;
+  label: string;
+}
+
 @Component({
   selector: 'app-quick-control',
   templateUrl: './quick-control.component.html',
@@ -7,20 +12,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   standalone: false,
 })
 export class QuickControlComponent implements OnInit {
-  @Input() icon: string;
   @Input() unit: string;
   @Input() defaultValue: number;
+  @Input() hideSet = false;
 
-  @Output() onBack = new EventEmitter<void>();
+  @Output() onChange = new EventEmitter<number>();
   @Output() onSet = new EventEmitter<number>();
 
   public value: number;
+
+  // Options for the quick control
+  // If null, a loading state is shown
+  @Input() public options: Option[] | null;
 
   public ngOnInit() {
     this.value = this.defaultValue;
   }
 
-  public changeValue(value: number): void {
+  public changeValueDelta(value: number): void {
     this.value += value;
     if (this.value < -999) {
       this.value = this.defaultValue;
@@ -29,6 +38,12 @@ export class QuickControlComponent implements OnInit {
     } else if (this.value > 999) {
       this.value = 999;
     }
+    this.onChange.emit(this.value);
+  }
+
+  public changeValue(value: number): void {
+    this.value = value;
+    this.onChange.emit(this.value);
   }
 
   public setValue(): void {

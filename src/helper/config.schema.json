@@ -269,6 +269,7 @@
       },
       "required": [
         "accessToken",
+        "tpLinkSmartPlug",
         "url"
       ],
       "type": "object"
@@ -365,6 +366,17 @@
             "enabled"
           ],
           "type": "object"
+        },
+        "spoolman": {
+          "type": "object",
+          "required": ["enabled"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "additionalProperties": false
         },
         "preheatButton": {
           "additionalProperties": false,

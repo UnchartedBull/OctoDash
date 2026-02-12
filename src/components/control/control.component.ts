@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
-import { PrinterStatus } from '../../model';
+import { PrinterStatus, Temperature } from '../../model';
 import { OctoprintPrinterProfile } from '../../model/octoprint';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
@@ -28,8 +29,7 @@ export class ControlComponent implements OnInit, OnDestroy {
   public quickControlShown = false;
   public selectedHotend = 0;
 
-  public QuickControlView = QuickControlView;
-  public view = QuickControlView.NONE;
+  public quickControlModalService: QuickControlModalService = inject(QuickControlModalService);
 
   public constructor(
     private printerService: PrinterService,
@@ -63,6 +63,13 @@ export class ControlComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  public filteredToolsByProfile(): Temperature[] {
+    if (!this.printerStatus || !this.printerProfile) {
+      return [];
+    }
+    return this.printerStatus.tools.concat().splice(0, this.printerProfile.extruder.count);
+  }
+
   public setDistance(distance: number): void {
     this.jogDistance = distance;
   }
@@ -94,43 +101,9 @@ export class ControlComponent implements OnInit, OnDestroy {
     this.router.navigate(['/main-screen']);
   }
 
-  public showQuickControlHotend(tool: number): void {
-    this.view = QuickControlView.HOTEND;
-    this.selectedHotend = tool;
+  public extruderTrackBy(index: number) {
+    // Tracking by index is acceptable because array position IS the unique identifier
+    // The number of tools is not likely to change
+    return index;
   }
-
-  public showQuickControlHeatbed(): void {
-    this.view = QuickControlView.HEATBED;
-  }
-
-  public showQuickControlFan(): void {
-    this.view = QuickControlView.FAN;
-  }
-
-  public hideQuickControl(): void {
-    this.view = QuickControlView.NONE;
-  }
-
-  public quickControlSetValue(value: number): void {
-    switch (this.view) {
-      case QuickControlView.HOTEND:
-        this.printerService.setTemperatureHotend(value, this.selectedHotend);
-        break;
-      case QuickControlView.HEATBED:
-        this.printerService.setTemperatureBed(value);
-        break;
-      case QuickControlView.FAN:
-        this.printerService.setFanSpeed(value);
-        break;
-    }
-
-    this.hideQuickControl();
-  }
-}
-
-enum QuickControlView {
-  NONE,
-  HOTEND,
-  HEATBED,
-  FAN,
 }

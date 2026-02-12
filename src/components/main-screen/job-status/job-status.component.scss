@@ -26,6 +26,10 @@
       font-size: 8.5vw;
       text-align: center;
       width: 14vw;
+
+      span {
+        font-size: 40%;
+      }
     }
 
     &-preview {
@@ -149,4 +153,13 @@
       font-size: 2.6vw;
     }
   }
+}
+
+#progress-preview-bar {
+  padding-top: -1.5vw;
+  height: 22vw;
+}
+
+#progress-preview-circle {
+  height: 23.5vw;
 }

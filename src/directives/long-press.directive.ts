@@ -52,7 +52,7 @@ export class LongPress {
     this.pressing = false;
   }
 
-  @HostListener('pointerleave', ['$event'])
+  @HostListener('pointerleave', [])
   endPressMove(): void {
     clearTimeout(this.timeout);
     clearInterval(this.interval);
