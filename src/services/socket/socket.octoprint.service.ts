@@ -156,7 +156,6 @@ export class OctoPrintSocketService implements SocketService {
         check: (plugin: string) =>
           plugin === 'DisplayLayerProgress-websocket-payload' && this.configService.isDisplayLayerProgressEnabled(),
         handler: (message: unknown) => {
-          this.extractFanSpeed(message as DisplayLayerProgressData);
           this.extractLayerHeight(message as DisplayLayerProgressData);
         },
       },
@@ -267,17 +266,8 @@ export class OctoPrintSocketService implements SocketService {
     this.printerStatusSubject.next(this.printerStatus);
   }
 
-  public extractFanSpeed(message: DisplayLayerProgressData | OctoDashPlugin): void {
-    if (typeof message.fanspeed === 'object') {
-      this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed['1']));
-    } else {
-      this.printerStatus.fanSpeed =
-        message.fanspeed === 'Off'
-          ? 0
-          : message.fanspeed === '-'
-            ? 0
-            : Number(message.fanspeed.replace('%', '').trim());
-    }
+  public extractFanSpeed(message: OctoDashPlugin): void {
+    this.printerStatus.fanSpeed = Number(Math.round(message.fanspeed['1']));
   }
 
   //==== Job Status ====//
