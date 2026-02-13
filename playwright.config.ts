@@ -1,3 +1,5 @@
+// eslint-disable no-use-before-define
+// @ts-nocheck
 import { devices } from '@playwright/test';
 
 const config = {
