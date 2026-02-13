@@ -1,5 +1,6 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-test('noop', async () => {
-  // no-op test
+test('should have a title', async ({ page }) => {
+  await page.goto('/plugin/octodash/');
+  await expect(page).toHaveTitle(/OctoDash/);
 });

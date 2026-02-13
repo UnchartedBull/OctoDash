@@ -18,7 +18,7 @@ const config = {
   reporter: [['list'], ['html'], ...(process.env.CI ? [['github']] : [])],
   use: {
     actionTimeout: 0,
-    baseURL: process.env.PLAYWRIGHT_BASEURL || 'http://localhost:5000',
+    baseURL: process.env.PLAYWRIGHT_BASEURL || 'http://localhost:8080',
     testIdAttribute: 'data-test-id',
     trace: 'on',
     video: 'on',
@@ -45,8 +45,8 @@ if (!process.env.NO_SERVER) {
   const octoprintServerOpts = process.env.OCTOPRINT_SERVER_BASE ? `-b ${process.env.OCTOPRINT_SERVER_BASE}` : '';
 
   config.webServer = {
-    command: `octoprint ${octoprintServerOpts} serve --host 127.0.0.1 --port 5000`,
-    url: 'http://127.0.0.1:5000/online.txt',
+    command: `octoprint ${octoprintServerOpts} serve --host 127.0.0.1 --port 8080`,
+    url: 'http://127.0.0.1:8080/online.txt',
     reuseExistingServer: !process.env.CI,
   };
 }
