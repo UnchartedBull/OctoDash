@@ -13,6 +13,9 @@ testem.log
 **/config.testing.json
 src/locale/backups
 
+playwright-report/
+test-results/
+
 # compiled output
 /dist
 /octoprint_octodash/static/ui
