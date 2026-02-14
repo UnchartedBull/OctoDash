@@ -134,8 +134,41 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: |
+          PLAYWRIGHT_VERSION=$(npm ls --json @playwright/test | jq --raw-output '.dependencies["@playwright/test"].version')
+          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
+
+      - name: 🧰 Cache Playwright browser binaries
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: "~/.cache/ms-playwright"
+          key: "${{ runner.os }}-playwright-playwright-${{ env.PLAYWRIGHT_VERSION }}"
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: 🏗 Install Playwright browser binaries & OS dependencies
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        working-directory: ./OctoPrint/tests/playwright
+        shell: bash
+        run: |
+          sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
+          echo "::group::Installing Playwright browser binaries & OS dependencies"
+          npx playwright install --with-deps
+          echo "::endgroup::"
+
+      - name: 🏗 Install Playwright OS dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        working-directory: ./OctoPrint/tests/playwright
+        shell: bash
+        run: |
+          sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
+          echo "::group::Installing Playwright OS dependencies"
+          npx playwright install-deps
+          echo "::endgroup::"
 
       - name: Download artifact
         uses: actions/download-artifact@v5
@@ -152,9 +185,9 @@ jobs:
           export OCTODOASH_API_KEY=$(openssl rand -hex 16)
           echo $OCTODOASH_API_KEY >> .env.playwright
           mkdir -p ~/.octoprint/data/appkeys
-          echo "admin:" >> .octoprint/data/appkeys/keys.yaml
-          echo "  - app_id: OctoDash" >> .octoprint/data/appkeys/keys.yaml
-          echo "    api_key: $OCTODOASH_API_KEY" >> .octoprint/data/appkeys/keys.yaml
+          echo "admin:" >> ~/.octoprint/data/appkeys/keys.yaml
+          echo "  - app_id: OctoDash" >> ~/.octoprint/data/appkeys/keys.yaml
+          echo "    api_key: $OCTODOASH_API_KEY" >> ~/.octoprint/data/appkeys/keys.yaml
           cat ~/.octoprint/data/appkeys/keys.yaml
 
       - name: Run Playwright tests
