@@ -145,8 +145,8 @@ jobs:
         uses: actions/cache@v4
         id: playwright-cache
         with:
-          path: "~/.cache/ms-playwright"
-          key: "${{ runner.os }}-playwright-playwright-${{ env.PLAYWRIGHT_VERSION }}"
+          path: '~/.cache/ms-playwright'
+          key: '${{ runner.os }}-playwright-playwright-${{ env.PLAYWRIGHT_VERSION }}'
           restore-keys: |
             ${{ runner.os }}-playwright-
 
