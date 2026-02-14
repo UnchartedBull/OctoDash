@@ -149,7 +149,7 @@ jobs:
 
       - name: Setup OctoPrint key
         run: |
-          export OCTODOASH_API_KEY=$(openssl rand -hex 16)"
+          export OCTODOASH_API_KEY=$(openssl rand -hex 16)
           echo $OCTODOASH_API_KEY >> .env.playwright
           mkdir -p ~/.octoprint/data/appkeys
           echo "admin:" >> .octoprint/data/appkeys/keys.yaml
