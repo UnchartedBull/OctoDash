@@ -150,6 +150,15 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - name: ⬆ Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          # name: playwright-report ${{ inputs.suffix }}
+          name: playwright-report
+          path: playwright-report
+
+
   release:
     runs-on: ubuntu-latest
 
