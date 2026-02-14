@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.playwright', debug: true });
 
-const apiKey = process.env.OCTODOASH_API_KEY || '';
+const apiKey = process.env.OCTODASH_API_KEY || '';
 console.log('Using API key:', apiKey);
 
 test('should have a title', async ({ page }) => {
