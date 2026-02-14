@@ -152,7 +152,7 @@ jobs:
 
       - name: 🏗 Install Playwright browser binaries & OS dependencies
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        working-directory: ./OctoPrint/tests/playwright
+        # working-directory: ./OctoPrint/tests/playwright
         shell: bash
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
@@ -162,7 +162,7 @@ jobs:
 
       - name: 🏗 Install Playwright OS dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-        working-directory: ./OctoPrint/tests/playwright
+        # working-directory: ./OctoPrint/tests/playwright
         shell: bash
         run: |
           sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list
