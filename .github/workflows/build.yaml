@@ -145,7 +145,7 @@ jobs:
       - name: Setup Python environment
         run: |
           python -m pip install pytest octoprint --user
-          python -m pip install build/*.whl --user
+          python -m pip install *.whl --user
         
       - name: Run Playwright tests
         run: npx playwright test
