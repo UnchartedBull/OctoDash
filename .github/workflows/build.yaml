@@ -189,6 +189,7 @@ jobs:
           echo "  - app_id: OctoDash" >> ~/.octoprint/data/appkeys/keys.yaml
           echo "    api_key: $OCTODOASH_API_KEY" >> ~/.octoprint/data/appkeys/keys.yaml
           cat ~/.octoprint/data/appkeys/keys.yaml
+          cat .env.playwright
 
       - name: Run Playwright tests
         run: npx playwright test
