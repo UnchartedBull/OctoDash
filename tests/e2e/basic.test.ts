@@ -1,10 +1,9 @@
 import { expect, test } from '@playwright/test';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.playwright', debug: true });
+dotenv.config({ path: '.env.playwright' });
 
 const apiKey = process.env.OCTODASH_API_KEY || '';
-console.log('Using API key:', apiKey);
 
 test('should have a title', async ({ page }) => {
   await page.goto('/plugin/octodash/');
