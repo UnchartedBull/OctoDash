@@ -198,6 +198,12 @@ jobs:
           name: playwright-report
           path: playwright-report
 
+      - name: ⬆ Upload OctoPrint logs
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: octoprint-logs
+          path: ~/.octoprint/logs
   release:
     runs-on: ubuntu-latest
 
