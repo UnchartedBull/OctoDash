@@ -205,7 +205,7 @@ jobs:
           cat > ~/.octoprint/data/appkeys/keys.yaml <<EOF
           admin:
           - app_id: OctoDash
-            api_key: $OCTODOASH_API_KEY"
+            api_key: $OCTODOASH_API_KEY
           EOF    
           cat ~/.octoprint/data/appkeys/keys.yaml
       - name: Run Playwright tests
