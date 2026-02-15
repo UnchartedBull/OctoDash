@@ -19,6 +19,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Cache node modules
+        id: cache-node-modules
         uses: actions/cache@v4
         env:
           cache-name: node-modules
@@ -34,6 +35,7 @@ jobs:
       - name: Install latest npm
         run: sudo npm install -g npm@latest
       - name: Installing Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
       - name: Linting Application
         run: npm run lint
