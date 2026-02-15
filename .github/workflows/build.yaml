@@ -177,7 +177,7 @@ jobs:
         run: |
           python -m pip install pytest octoprint --user
           python -m pip install *.whl --user
-      
+
       - name: Setup OctoPrint config
         run: |
           mkdir -p ~/.octoprint
@@ -206,7 +206,8 @@ jobs:
           admin:
           - app_id: OctoDash
             api_key: $OCTODOASH_API_KEY
-          EOF    
+          EOF
+
           cat ~/.octoprint/data/appkeys/keys.yaml
       - name: Run Playwright tests
         run: npx playwright test
