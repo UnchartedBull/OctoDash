@@ -21,7 +21,7 @@ const compat = new FlatCompat({
 export default [
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ['**/docs/js/lib/', '**/vendor/**'],
+    ignores: ['**/docs/js/lib/', '**/vendor/**', 'playwright.config.js'],
   },
   ...fixupConfigRules(
     compat.extends(

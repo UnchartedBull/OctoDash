@@ -13,6 +13,9 @@ testem.log
 **/config.testing.json
 src/locale/backups
 
+playwright-report/
+test-results/
+
 # compiled output
 /dist
 /octoprint_octodash/static/ui
@@ -61,6 +64,7 @@ __pycache__/
 
 build/
 
+.env.playwright
 
 docs/images/compilation.psd
 scripts/clean-github.sh
