@@ -202,7 +202,7 @@ jobs:
           export OCTODOASH_API_KEY=$(openssl rand -hex 16)
           echo OCTODASH_API_KEY=$OCTODOASH_API_KEY >> .env.playwright
           mkdir -p ~/.octoprint/data/appkeys
-          cat > ~/.octoprint/data/appkeys/keys.yaml << EOF
+          cat > ~/.octoprint/data/appkeys/keys.yaml <<EOF
           admin:
           - app_id: OctoDash
             api_key: $OCTODOASH_API_KEY"
