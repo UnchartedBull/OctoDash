@@ -37,6 +37,9 @@ jobs:
       - name: Installing Dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
+      - name: NPM Prepare
+        if: steps.cache-node-modules.outputs.cache-hit == 'true'
+        run: npm run prepare
       - name: Linting Application
         run: npm run lint
       - name: Checking if locale is updated
