@@ -32,9 +32,8 @@ jobs:
             exit 1
           fi
 
-  build:
+  build-code:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -42,23 +41,71 @@ jobs:
         uses: ./.github/actions/node-setup
       - name: Building Application
         run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular
+          path: dist/
+
+  package:
+    runs-on: ubuntu-latest
+    needs: build-code
+    strategy:
+      matrix:
+        arch: [x64, arm64, armv7l]
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: angular
+          path: dist/
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        env:
+          cache-name: node-modules
+        with:
+          path: '**/node_modules'
+          key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            octodash-build-${{ env.cache-name }}-
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install latest npm
+        run: sudo npm install -g npm@latest
+      - name: Installing Dependencies
+        run: npm ci
+
       - name: Packaging Application
-        run: npm run electron:pack
+        run: npm run electron:pack --  --${{ matrix.arch }}
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build-${{ matrix.arch }}
           path: |
             package/*.deb
             package/*.yml
+
+  merge-builds:
+    runs-on: ubuntu-latest
+    needs: package
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: build
+          pattern: build-*
 
   release:
     runs-on: ubuntu-latest
 
     if: github.event_name == 'release'
-    needs: build
+    needs: merge-builds
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
