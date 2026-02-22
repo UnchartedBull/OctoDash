@@ -97,6 +97,6 @@ $(function () {
   OCTOPRINT_VIEWMODELS.push({
     construct: OctoDashWizardViewModel,
     dependencies: ['settingsViewModel'],
-    elements: ['#wizard_plugin_octodash', '#wizard_plugin_octodash_2'], // Bind to the DOM element
+    elements: ['#wizard_plugin_octodash_setup', '#wizard_plugin_octodash_plugins'], // Bind to the DOM element
   });
 });

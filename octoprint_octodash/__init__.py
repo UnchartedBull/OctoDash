@@ -236,8 +236,8 @@ class OctodashPlugin(
     def get_template_configs(self):
         return [
             dict(type="settings", name="octodash", template="octodash_settings.jinja2"),
-            dict(type="wizard", name="OctoDash Initial Setup", template="setup_wizard.jinja2", madatory=True),
-            dict(type="wizard", name="OctoDash Plugin Integrations", template="plugins_wizard.jinja2"),
+            dict(type="wizard", name="OctoDash Initial Setup", template="setup_wizard.jinja2", suffix="_setup", madatory=True),
+            dict(type="wizard", name="OctoDash Plugin Integrations", template="plugins_wizard.jinja2", suffix="_plugins"),
         ]
 
 
