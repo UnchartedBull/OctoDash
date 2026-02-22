@@ -1,5 +1,8 @@
 <div class="setup-plugins" data-bind="if: !migrateComplete()">
   <h4>Plugins</h4>
+  <div data-bind="if: !enabledSingles().length && !enabledFilament().length && !enabledPower().length">
+    <p>No plugins usable by OctoDash were found in your current configuration.</p>
+  </div>
   <div class="plugins-chosen" data-bind="if: enabledSingles().length">
     <h5>Plugins Found</h5>
     <p>The following plugins were detected and will be used in OctoDash. You can disable their use in the plugin settings</p>
