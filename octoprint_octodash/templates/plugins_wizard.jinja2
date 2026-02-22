@@ -1,0 +1,40 @@
+<div class="setup-plugins" data-bind="if: !migrateComplete()">
+  <h4>Plugins</h4>
+  <div data-bind="if: !enabledSingles().length && !enabledFilament().length && !enabledPower().length">
+    <p>No plugins usable by OctoDash were found in your current configuration.</p>
+  </div>
+  <div class="plugins-chosen" data-bind="if: enabledSingles().length">
+    <h5>Plugins Found</h5>
+    <p>The following plugins were detected and will be used in OctoDash. You can disable their use in the plugin settings</p>
+    <ul data-bind="foreach: enabledSingles">
+      <li><code data-bind="text: $data"></code></li>
+    </ul>
+  </div>
+  <div class="filament-chosen" data-bind="if: enabledFilament().length === 1">
+  <h5>Filament plugin enabled</h5>
+  <p>The plugin <code data-bind="text: enabledFilament()[0]"></code> was found enabled and support enabled in OctoDash. You can disable it in the plugin settings.</p>
+  </div>
+  <div data-bind="if: availableFilament().length > 1" class="filament-choices">
+    <h5>Multiple filament plugins available</h5>
+    <p>The following filament plugins were detected installed. You can enable one in the plugin settings.</p>
+    <ul data-bind="foreach: availableFilament">
+      <li><code data-bind="text: $data"></code></li>
+    </ul>
+  </div>
+  <div class="power-chosen" data-bind="if: enabledPower().length === 1">
+  <h5>Power management plugin enabled</h5>
+  <p>The plugin <code data-bind="text: enabledPower()[0]"></code> was detected and enabled in OctoDash for controling the printer power state. You can disable it in the plugin settings.</p>
+  </div>
+  <div data-bind="if: availablePower().length" class="power-choices">
+    <h5>Power management plugin available</h5>
+    <p>The following power management plugins were detected installed. You can enable one for use with OctoDash in the plugin settings.</p>
+    <ul data-bind="foreach: availablePower">
+      <li><code data-bind="text: $data"></code></li>
+    </ul>
+  </div>
+</div>
+<div data-bind="if: migrateComplete()" class="migration-complete">
+  <h4>Plugins already selected</h4>
+  <p>Because you chose to migrate your legacy config, this step has nothing of note for you!</p>
+  <p>Click the button below to finish the setup wizard and start using OctoDash v3!</p>
+</div>
