@@ -27,7 +27,6 @@ $(function () {
       console.log(data);
       const paths = data.octodash.details.legacyConfigs.filter(path => path.exists).map(path => path.path);
       self.configPaths(paths);
-      // self.legacyInstalled(data.octodash.details.legacyInstalled);
       self.enabledFilament(data.octodash.details.plugins.enabled_filament);
       self.enabledSingles(data.octodash.details.plugins.enabled_singles);
       self.enabledPower(data.octodash.details.plugins.enabled_power);
