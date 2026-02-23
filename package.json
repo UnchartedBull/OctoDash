@@ -124,7 +124,7 @@
     "codelyzer": "~6.0.2",
     "electron": "^39.2.7",
     "electron-builder": "~26.8.1",
-    "eslint": "9.39.2",
+    "eslint": "10.0.1",
     "eslint-plugin-import": "~2.32.0",
     "eslint-plugin-prettier": "~5.5.5",
     "eslint-plugin-simple-import-sort": "~12.1.1",
