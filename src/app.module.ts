@@ -43,7 +43,7 @@ import { OctoprintSettingsService } from './services/octoprint-settings.service'
     }),
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
-    { provide: APP_BASE_HREF, useValue: '/plugin/octodash' },
+    { provide: APP_BASE_HREF, useValue: window['__baseHref'] + '/plugin/octodash' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     provideHttpClient(withInterceptors([csrfInterceptor])),
   ],

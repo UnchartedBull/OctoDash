@@ -41,6 +41,8 @@ export class ConfigService {
   private valid: boolean;
   private update = false;
 
+  private baseHref = window['__baseHref'] || '';
+
   private httpHeaders: HttpHeader;
   private apiKey: string;
 
@@ -66,6 +68,7 @@ export class ConfigService {
   }
 
   public getConfig() {
+    console.log('Base href:', this.baseHref);
     this.apiKey = localStorage.getItem('octodash_apikey');
     let headers = null;
     if (this.apiKey) {
@@ -75,7 +78,7 @@ export class ConfigService {
     }
 
     return this.http
-      .get<OctoPrintConfig>('/api/settings', { headers: headers ?? new HttpHeaders() })
+      .get<OctoPrintConfig>(`${this.baseHref}/api/settings`, { headers: headers ?? new HttpHeaders() })
       .pipe(
         map(response => {
           return response.plugins.octodash;
@@ -184,8 +187,8 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `/api/${path}`;
-    else return `/${path}`;
+    if (includeApi) return `${this.baseHref}/api/${path}`;
+    else return `${this.baseHref}/${path}`;
   }
 
   public getAPIPollingInterval(): number {
