@@ -63,7 +63,7 @@ export class ConfigSetupComponent implements OnInit {
       }),
     };
 
-    this.http.get(`/api/version`, httpHeaders).subscribe({
+    this.http.get(this.configService.getApiURL(`version`), httpHeaders).subscribe({
       next: () => {
         this.octoprintConnection = true;
         this.saveConfig();
