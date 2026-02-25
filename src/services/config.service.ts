@@ -6,6 +6,7 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 import configSchema from '../helper/config.schema.json' with { type: 'json' };
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
+import { BasePathService } from './base-path.service';
 
 const ajv = new Ajv({ useDefaults: true, allErrors: true });
 
@@ -41,7 +42,7 @@ export class ConfigService {
   private valid: boolean;
   private update = false;
 
-  private baseHref = window['__baseHref'] || '';
+  private basePathService = inject(BasePathService);
 
   private httpHeaders: HttpHeader;
   private apiKey: string;
@@ -68,7 +69,7 @@ export class ConfigService {
   }
 
   public getConfig() {
-    console.log('Base href:', this.baseHref);
+    console.log('Base href:', this.basePathService.getBasePath());
     this.apiKey = localStorage.getItem('octodash_apikey');
     let headers = null;
     if (this.apiKey) {
@@ -78,7 +79,9 @@ export class ConfigService {
     }
 
     return this.http
-      .get<OctoPrintConfig>(`${this.baseHref}/api/settings`, { headers: headers ?? new HttpHeaders() })
+      .get<OctoPrintConfig>(`${this.basePathService.getBasePath()}/api/settings`, {
+        headers: headers ?? new HttpHeaders(),
+      })
       .pipe(
         map(response => {
           return response.plugins.octodash;
@@ -187,8 +190,9 @@ export class ConfigService {
   }
 
   public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `${this.baseHref}/api/${path}`;
-    else return `${this.baseHref}/${path}`;
+    const base = this.basePathService.getBasePath();
+    if (includeApi) return `${base}/api/${path}`;
+    else return `${base}/${path}`;
   }
 
   public getAPIPollingInterval(): number {
