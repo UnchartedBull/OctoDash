@@ -68,7 +68,7 @@ export class AppService {
   public turnDisplayOff(): void {
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/octodash/api/screen_sleep', false),
+        `${this.basePathService.getBasePath()}/plugin/octodash/api/screen_sleep`,
         {},
         this.configService.getHTTPHeaders(),
       )
@@ -81,7 +81,7 @@ export class AppService {
   public turnDisplayOn(): void {
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/octodash/api/screen_wakeup', false),
+        `${this.basePathService.getBasePath()}/plugin/octodash/api/screen_wakeup`,
         {},
         this.configService.getHTTPHeaders(),
       )
@@ -90,7 +90,7 @@ export class AppService {
 
   public loadCustomStyles(): void {
     this.http
-      .get(this.basePathService.getApiURL('plugin/octodash/custom-styles.css', false), { responseType: 'text' })
+      .get(`${this.basePathService.getBasePath()}/plugin/octodash/custom-styles.css`, { responseType: 'text' })
       .subscribe({
         next: (styles: string) => {
           const styleElement = document.createElement('style');

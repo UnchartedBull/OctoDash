@@ -23,7 +23,7 @@ export class SystemOctoprintService implements SystemService {
   public getSessionKey(): Observable<SocketAuth> {
     return this.http
       .post<OctoprintLogin>(
-        this.basePathService.getApiURL('login'),
+        `${this.basePathService.getBasePath()}/api/login`,
         { passive: true },
         this.configService.getHTTPHeaders(),
       )
@@ -40,7 +40,7 @@ export class SystemOctoprintService implements SystemService {
   public sendCommand(command: string): void {
     this.http
       .post(
-        this.basePathService.getApiURL(`system/commands/core/${command}`),
+        `${this.basePathService.getBasePath()}/api/system/commands/core/${command}`,
         null,
         this.configService.getHTTPHeaders(),
       )
@@ -60,7 +60,7 @@ export class SystemOctoprintService implements SystemService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/connection`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.warn($localize`:@@error-connect:Can't connect to printer!`, error.message, true);
@@ -76,7 +76,11 @@ export class SystemOctoprintService implements SystemService {
     };
 
     return this.http
-      .post<TestAddress>(this.basePathService.getApiURL('util/test'), payload, this.configService.getHTTPHeaders())
+      .post<TestAddress>(
+        `${this.basePathService.getBasePath()}/api/util/test`,
+        payload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(map(result => (result?.is_lan_address && result?.address ? result.address : null)));
   }
 }

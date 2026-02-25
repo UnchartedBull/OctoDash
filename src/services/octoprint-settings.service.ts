@@ -64,7 +64,7 @@ export class OctoprintSettingsService {
   }
 
   loadSettings() {
-    const apiUrl = this.basePathService.getApiURL('settings', true);
+    const apiUrl = `${this.basePathService.getBasePath()}/api/settings`;
     if (!apiUrl) {
       console.warn('No API URL found for OctoPrint settings.');
       return;

@@ -38,7 +38,10 @@ export class PrinterOctoprintService implements PrinterService {
     private http: HttpClient,
   ) {
     this.http
-      .get<OctoprintVersionInfo>(this.basePathService.getApiURL('version'), this.configService.getHTTPHeaders())
+      .get<OctoprintVersionInfo>(
+        `${this.basePathService.getBasePath()}/api/version`,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         map(info => {
           if (!isOctoprintVersionGood(info.server)) {
@@ -55,7 +58,7 @@ export class PrinterOctoprintService implements PrinterService {
   public getActiveProfile(): Observable<PrinterProfile> {
     return this.http
       .get<OctoprintPrinterProfiles>(
-        this.basePathService.getApiURL('printerprofiles'),
+        `${this.basePathService.getBasePath()}/api/printerprofiles`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -76,7 +79,11 @@ export class PrinterOctoprintService implements PrinterService {
       commands: gCode.split(';'),
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/command'), gCodePayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/printer/command`,
+        gCodePayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@printer-error-gcode:Can't send GCode!`, error.message);
@@ -95,7 +102,11 @@ export class PrinterOctoprintService implements PrinterService {
       speed: z !== 0 ? this.configService.getZSpeed() * 60 : this.configService.getXYSpeed() * 60,
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/printhead'), jogPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/printer/printhead`,
+        jogPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-printer-head:Can't move Printhead!`, error.message);
@@ -112,7 +123,11 @@ export class PrinterOctoprintService implements PrinterService {
       speed: speed * 60,
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/tool'), extrudePayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/printer/tool`,
+        extrudePayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-printer-extrude:Can't extrude Filament!`, error.message);
@@ -128,7 +143,7 @@ export class PrinterOctoprintService implements PrinterService {
       tool: `tool${tool}`,
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/tool'), toolPayload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/printer/tool`, toolPayload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-printer-set-tool:Can't set active tool!`, error.message);
@@ -147,7 +162,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(
-        this.basePathService.getApiURL('printer/tool'),
+        `${this.basePathService.getBasePath()}/api/printer/tool`,
         temperatureHotendCommand,
         this.configService.getHTTPHeaders(),
       )
@@ -170,7 +185,7 @@ export class PrinterOctoprintService implements PrinterService {
     };
     this.http
       .post(
-        this.basePathService.getApiURL('printer/bed'),
+        `${this.basePathService.getBasePath()}/api/printer/bed`,
         temperatureHeatbedCommand,
         this.configService.getHTTPHeaders(),
       )
@@ -189,7 +204,11 @@ export class PrinterOctoprintService implements PrinterService {
       factor: feedrate,
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/printhead'), feedrateCommand, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/printer/printhead`,
+        feedrateCommand,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-printer-feedrate:Can't set Feedrate!`, error.message);
@@ -205,7 +224,11 @@ export class PrinterOctoprintService implements PrinterService {
       factor: flowrate,
     };
     this.http
-      .post(this.basePathService.getApiURL('printer/tool'), flowrateCommand, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/printer/tool`,
+        flowrateCommand,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-printer-flowrate:Can't set Flowrate!`, error.message);
@@ -220,7 +243,11 @@ export class PrinterOctoprintService implements PrinterService {
       command: 'disconnect',
     };
     this.http
-      .post(this.basePathService.getApiURL('connection'), disconnectPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/connection`,
+        disconnectPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error(
@@ -249,7 +276,11 @@ export class PrinterOctoprintService implements PrinterService {
         tool: `tool${tool}`,
       };
       this.http
-        .post(this.basePathService.getApiURL('printer/tool'), selectionPayload, this.configService.getHTTPHeaders())
+        .post(
+          `${this.basePathService.getBasePath()}/api/printer/tool`,
+          selectionPayload,
+          this.configService.getHTTPHeaders(),
+        )
         .pipe(
           catchError(error => {
             this.notificationService.error($localize`:@@error-printer-extrude:Can't extrude Filament!`, error.message);

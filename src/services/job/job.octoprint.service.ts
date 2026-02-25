@@ -24,7 +24,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-start-job:Can't start job!`, error.message);
@@ -41,7 +41,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-pause-job:Can't pause job!`, error.message);
@@ -58,7 +58,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-resume-job:Can't resume job!`, error.message);
@@ -74,7 +74,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-cancel-job:Can't cancel job!`, error.message);
@@ -90,7 +90,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-restart-job:Can't restart job!`, error.message);
@@ -106,7 +106,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/plugin/preheat`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-preheat:Can't preheat printer!`, error.message);

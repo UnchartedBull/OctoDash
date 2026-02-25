@@ -35,10 +35,7 @@ export class EnclosureOctoprintService implements EnclosureService {
   getEnclosureTemperature(): Observable<TemperatureReading> {
     return this.http
       .get(
-        this.basePathService.getApiURL(
-          'plugin/enclosure/inputs/' + this.configService.getAmbientTemperatureSensorName(),
-          false,
-        ),
+        `${this.basePathService.getBasePath()}/plugin/enclosure/inputs/${this.configService.getAmbientTemperatureSensorName()}`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -60,7 +57,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
     this.http
       .patch(
-        this.basePathService.getApiURL('plugin/enclosure/neopixel/' + identifier, false),
+        `${this.basePathService.getBasePath()}/plugin/enclosure/neopixel/${identifier}`,
         colorBody,
         this.configService.getHTTPHeaders(),
       )
@@ -81,7 +78,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
     this.http
       .patch(
-        this.basePathService.getApiURL('plugin/enclosure/outputs/' + identifier, false),
+        `${this.basePathService.getBasePath()}/plugin/enclosure/outputs/${identifier}`,
         outputBody,
         this.configService.getHTTPHeaders(),
       )
@@ -103,7 +100,7 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
     this.http
       .patch(
-        this.basePathService.getApiURL('plugin/enclosure/pwm/' + identifier, false),
+        `${this.basePathService.getBasePath()}/plugin/enclosure/pwm/${identifier}`,
         pwmBody,
         this.configService.getHTTPHeaders(),
       )
@@ -119,7 +116,7 @@ export class EnclosureOctoprintService implements EnclosureService {
   public runEnclosureShell(identifier: number): void {
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/enclosure/shell/' + identifier, false),
+        `${this.basePathService.getBasePath()}/plugin/enclosure/shell/${identifier}`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -164,7 +161,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/plugin/psucontrol`,
+        psuControlPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
@@ -180,7 +181,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/psucontrol'), psuControlPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/plugin/psucontrol`,
+        psuControlPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
@@ -192,7 +197,10 @@ export class EnclosureOctoprintService implements EnclosureService {
 
   private setPSUStateOphomControl(state: PSUState) {
     this.http
-      .get(this.basePathService.getApiURL('plugin/ophom?action=checkplugstatus'), this.configService.getHTTPHeaders())
+      .get(
+        `${this.basePathService.getBasePath()}/plugin/ophom?action=checkplugstatus`,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-ophom-gcode:Can't update Ophom Plug!`, error.message);
@@ -215,7 +223,7 @@ export class EnclosureOctoprintService implements EnclosureService {
 
   private toggleOphom() {
     this.http
-      .get(this.basePathService.getApiURL('plugin/ophom?action=toggle'), this.configService.getHTTPHeaders())
+      .get(`${this.basePathService.getBasePath()}/plugin/ophom?action=toggle`, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-psu-gcode:Can't send GCode!`, error.message);
@@ -233,7 +241,7 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/tplinksmartplug'),
+        `${this.basePathService.getBasePath()}/api/plugin/tplinksmartplug`,
         tpLinkPayload,
         this.configService.getHTTPHeaders(),
       )
@@ -254,7 +262,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/tasmota'), tasmotaPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/plugin/tasmota`,
+        tasmotaPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-tasmota-plug:Can't update Tasmota!`, error.message);
@@ -273,7 +285,7 @@ export class EnclosureOctoprintService implements EnclosureService {
 
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/tasmota_mqtt'),
+        `${this.basePathService.getBasePath()}/api/plugin/tasmota_mqtt`,
         tasmotaMqttPayload,
         this.configService.getHTTPHeaders(),
       )
@@ -296,7 +308,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/tuyasmartplug'), tuyaPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/plugin/tuyasmartplug`,
+        tuyaPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-psu-command:Can't send plug command!`, error.message);
@@ -313,7 +329,11 @@ export class EnclosureOctoprintService implements EnclosureService {
     };
 
     this.http
-      .post(this.basePathService.getApiURL('plugin/wemoswitch'), wemoPayload, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/plugin/wemoswitch`,
+        wemoPayload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-send-psu-command:Can't send plug command!`, error.message);

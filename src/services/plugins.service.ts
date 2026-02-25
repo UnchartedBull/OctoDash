@@ -12,7 +12,7 @@ export class PluginsService {
   private basePathService = inject(BasePathService);
   public getEnabledPlugins(): Observable<string[]> {
     return this.http
-      .get<PluginResponse>(this.basePathService.getApiURL('plugin/pluginmanager/plugins', false))
+      .get<PluginResponse>(`${this.basePathService.getBasePath()}/plugin/pluginmanager/plugins`)
       .pipe(map(response => response.plugins.filter(plugin => plugin.enabled).map(plugin => plugin.key)));
   }
 }

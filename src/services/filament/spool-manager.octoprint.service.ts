@@ -59,7 +59,7 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     sortOrder: string,
   ): Observable<SpoolManagerSpoolList> {
     return this.http.get<SpoolManagerSpoolList>(
-      this.basePathService.getApiURL('plugin/SpoolManager/loadSpoolsByQuery', false),
+      `${this.basePathService.getBasePath()}/plugin/SpoolManager/loadSpoolsByQuery`,
       {
         ...this.configService.getHTTPHeaders(),
         params: {
@@ -99,7 +99,7 @@ export class SpoolManagerOctoprintService implements FilamentPluginService {
     };
 
     return this.http.put<void>(
-      this.basePathService.getApiURL('plugin/SpoolManager/selectSpool', false),
+      `${this.basePathService.getBasePath()}/plugin/SpoolManager/selectSpool`,
       setSpoolBody,
       this.configService.getHTTPHeaders(),
     );

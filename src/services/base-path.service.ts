@@ -9,10 +9,4 @@ export class BasePathService {
   public getBasePath(): string {
     return getBase();
   }
-
-  public getApiURL(path: string, includeApi = true): string {
-    const base = this.getBasePath();
-    if (includeApi) return `${base}/api/${path}`;
-    else return `${base}/${path}`;
-  }
 }

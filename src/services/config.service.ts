@@ -109,7 +109,7 @@ export class ConfigService {
 
   public resetConfig() {
     return this.http.post(
-      this.basePathService.getApiURL('plugin/octodash/api/settings_reset', false),
+      `${this.basePathService.getBasePath()}/plugin/octodash/api/settings_reset`,
       {},
       this.getHTTPHeaders(),
     );
@@ -157,7 +157,7 @@ export class ConfigService {
 
   public saveConfig(config: Config) {
     return this.http.post(
-      this.basePathService.getApiURL('settings'),
+      `${this.basePathService.getBasePath()}/api/settings`,
       { plugins: { octodash: config } },
       this.getHTTPHeaders(),
     );

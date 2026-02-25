@@ -26,7 +26,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http
-      .get(this.basePathService.getApiURL('plugin/filamentmanager/spools', false), this.configService.getHTTPHeaders())
+      .get(`${this.basePathService.getBasePath()}/plugin/filamentmanager/spools`, this.configService.getHTTPHeaders())
       .pipe(
         map((spools: FilamentManagerSpoolList): Array<FilamentSpool> => {
           return spools.spools.map((spool: FilamentManagerSpool): FilamentSpool => {
@@ -39,7 +39,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
     return this.http
       .get(
-        this.basePathService.getApiURL('plugin/filamentmanager/selections', false),
+        `${this.basePathService.getBasePath()}/plugin/filamentmanager/selections`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -56,7 +56,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
   public getCurrentSpool(tool: number): Observable<FilamentSpool> {
     return this.http
       .get(
-        this.basePathService.getApiURL('plugin/filamentmanager/selections', false),
+        `${this.basePathService.getBasePath()}/plugin/filamentmanager/selections`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -101,7 +101,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
     };
 
     return this.http.patch<void>(
-      this.basePathService.getApiURL('plugin/filamentmanager/selections/0', false),
+      `${this.basePathService.getBasePath()}/plugin/filamentmanager/selections/0`,
       setSpoolBody,
       this.configService.getHTTPHeaders(),
     );

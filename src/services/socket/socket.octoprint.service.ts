@@ -111,24 +111,26 @@ export class OctoPrintSocketService implements SocketService {
   private tryConnect(resolve: () => void): void {
     this.systemService.getSessionKey().subscribe({
       next: (socketAuth: SocketAuth) => {
-        this.http.get(this.basePathService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
-          next: () => {
-            this.connectSocket();
-            this.setupSocket(resolve);
-            this.authenticateSocket(socketAuth);
-          },
-          error: (err: HttpErrorResponse) => {
-            if (err.status === 403) {
-              this.notificationService.warn(
-                $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
-                $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
-                true,
-              );
-            } else {
-              this.notificationService.warn($localize`:@@http-unknown-heading:Unknown HTTP Error`, err.message, true);
-            }
-          },
-        });
+        this.http
+          .get(`${this.basePathService.getBasePath()}/api/connection`, this.configService.getHTTPHeaders())
+          .subscribe({
+            next: () => {
+              this.connectSocket();
+              this.setupSocket(resolve);
+              this.authenticateSocket(socketAuth);
+            },
+            error: (err: HttpErrorResponse) => {
+              if (err.status === 403) {
+                this.notificationService.warn(
+                  $localize`:@@http-403-heading:HTTP Error 403 - FORBIDDEN`,
+                  $localize`:@@http-403-text:This most likely means that your API Key is invalid. Please update the API Key and restart your system.`,
+                  true,
+                );
+              } else {
+                this.notificationService.warn($localize`:@@http-unknown-heading:Unknown HTTP Error`, err.message, true);
+              }
+            },
+          });
       },
       error: e => {
         console.error(e);
@@ -139,7 +141,7 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private connectSocket() {
-    const url = `${this.basePathService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
+    const url = `${this.basePathService.getBasePath()}/sockjs/websocket`.replace(/^http/, 'ws');
     if (!this.socket) {
       this.socket = webSocket(url);
     }
@@ -210,7 +212,7 @@ export class OctoPrintSocketService implements SocketService {
 
   private checkPrinterConnection() {
     this.http
-      .get(this.basePathService.getApiURL('connection'), this.configService.getHTTPHeaders())
+      .get(`${this.basePathService.getBasePath()}/api/connection`, this.configService.getHTTPHeaders())
       .pipe(pluck('current'), pluck('state'))
       .subscribe((state: string) => {
         if (state === 'Closed' || state === 'Error') {
@@ -408,7 +410,7 @@ export class OctoPrintSocketService implements SocketService {
   private callbackFunction(index: number) {
     this.http
       .post(
-        this.basePathService.getApiURL('plugin/action_command_prompt'),
+        `${this.basePathService.getBasePath()}/api/plugin/action_command_prompt`,
         { command: 'select', choice: index },
         this.configService.getHTTPHeaders(),
       )
