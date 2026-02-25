@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { catchError, pluck, startWith } from 'rxjs/operators';
@@ -22,6 +22,7 @@ import {
   OctoprintSocketCurrent,
   OctoprintSocketEvent,
 } from '../../model/octoprint';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 import { ConversionService } from '../../services/conversion.service';
 import { NotificationService } from '../../services/notification.service';
@@ -43,6 +44,7 @@ export class OctoPrintSocketService implements SocketService {
   private printerStatus: PrinterStatus;
   private jobStatus: JobStatus;
   private lastState: PrinterEvent;
+  private basePathService = inject(BasePathService);
 
   public constructor(
     private configService: ConfigService,
@@ -109,7 +111,7 @@ export class OctoPrintSocketService implements SocketService {
   private tryConnect(resolve: () => void): void {
     this.systemService.getSessionKey().subscribe({
       next: (socketAuth: SocketAuth) => {
-        this.http.get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
+        this.http.get(this.basePathService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
           next: () => {
             this.connectSocket();
             this.setupSocket(resolve);
@@ -137,7 +139,7 @@ export class OctoPrintSocketService implements SocketService {
   }
 
   private connectSocket() {
-    const url = `${this.configService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
+    const url = `${this.basePathService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
     if (!this.socket) {
       this.socket = webSocket(url);
     }
@@ -208,7 +210,7 @@ export class OctoPrintSocketService implements SocketService {
 
   private checkPrinterConnection() {
     this.http
-      .get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders())
+      .get(this.basePathService.getApiURL('connection'), this.configService.getHTTPHeaders())
       .pipe(pluck('current'), pluck('state'))
       .subscribe((state: string) => {
         if (state === 'Closed' || state === 'Error') {
@@ -406,7 +408,7 @@ export class OctoPrintSocketService implements SocketService {
   private callbackFunction(index: number) {
     this.http
       .post(
-        this.configService.getApiURL('plugin/action_command_prompt'),
+        this.basePathService.getApiURL('plugin/action_command_prompt'),
         { command: 'select', choice: index },
         this.configService.getHTTPHeaders(),
       )

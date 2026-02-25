@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { FilamentSpool } from '../../model';
 import { OctoPrintSettings, SpoolmanSpool, SpoolmanSpoolList } from '../../model/octoprint';
+import { BasePathService } from '../base-path.service';
 import { ConfigService } from '../config.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()
 export class SpoolmanOctoprintService implements FilamentPluginService {
+  private basePathService = inject(BasePathService);
   public constructor(
     private configService: ConfigService,
     private http: HttpClient,
@@ -17,7 +19,10 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http
-      .get(this.configService.getApiURL('plugin/Spoolman/spoolman/spools', false), this.configService.getHTTPHeaders())
+      .get(
+        this.basePathService.getApiURL('plugin/Spoolman/spoolman/spools', false),
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         map((spools: SpoolmanSpoolList): Array<FilamentSpool> => {
           return spools.data.spools.map((spool: SpoolmanSpool): FilamentSpool => {
@@ -34,7 +39,7 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
     const availableSpools = this.getSpools();
     const selectedSpools = this.http
-      .get<OctoPrintSettings>(this.configService.getApiURL('settings', true), this.configService.getHTTPHeaders())
+      .get<OctoPrintSettings>(this.basePathService.getApiURL('settings', true), this.configService.getHTTPHeaders())
       .pipe(map(settings => settings.plugins.Spoolman?.selectedSpoolIds));
 
     return forkJoin([availableSpools, selectedSpools]).pipe<FilamentSpool[]>(
@@ -79,7 +84,7 @@ export class SpoolmanOctoprintService implements FilamentPluginService {
     };
 
     return this.http.post<void>(
-      this.configService.getApiURL('plugin/Spoolman/self/spool', false),
+      this.basePathService.getApiURL('plugin/Spoolman/self/spool', false),
       setSpoolBody,
       this.configService.getHTTPHeaders(),
     );

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
+import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 
@@ -18,6 +19,7 @@ export class AppService {
 
   public updateAvailable = false;
   public dev = false; // TODO: intelligently determine this
+  private basePathService = inject(BasePathService);
 
   public constructor(
     private configService: ConfigService,
@@ -66,7 +68,7 @@ export class AppService {
   public turnDisplayOff(): void {
     this.http
       .post(
-        this.configService.getApiURL('plugin/octodash/api/screen_sleep', false),
+        this.basePathService.getApiURL('plugin/octodash/api/screen_sleep', false),
         {},
         this.configService.getHTTPHeaders(),
       )
@@ -79,7 +81,7 @@ export class AppService {
   public turnDisplayOn(): void {
     this.http
       .post(
-        this.configService.getApiURL('plugin/octodash/api/screen_wakeup', false),
+        this.basePathService.getApiURL('plugin/octodash/api/screen_wakeup', false),
         {},
         this.configService.getHTTPHeaders(),
       )
@@ -88,7 +90,7 @@ export class AppService {
 
   public loadCustomStyles(): void {
     this.http
-      .get(this.configService.getApiURL('plugin/octodash/custom-styles.css', false), { responseType: 'text' })
+      .get(this.basePathService.getApiURL('plugin/octodash/custom-styles.css', false), { responseType: 'text' })
       .subscribe({
         next: (styles: string) => {
           const styleElement = document.createElement('style');

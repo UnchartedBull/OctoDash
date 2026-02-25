@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,6 +10,7 @@ import {
   FilamentManagerSpool,
   FilamentManagerSpoolList,
 } from '../../model/octoprint';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 import { FilamentPluginService } from './filament-plugin.service';
 
@@ -17,6 +18,7 @@ const colorRegexp = /\((.*)\)$/g;
 
 @Injectable()
 export class FilamentManagerOctoprintService implements FilamentPluginService {
+  private basePathService = inject(BasePathService);
   public constructor(
     private configService: ConfigService,
     private http: HttpClient,
@@ -24,7 +26,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
 
   public getSpools(): Observable<Array<FilamentSpool>> {
     return this.http
-      .get(this.configService.getApiURL('plugin/filamentmanager/spools', false), this.configService.getHTTPHeaders())
+      .get(this.basePathService.getApiURL('plugin/filamentmanager/spools', false), this.configService.getHTTPHeaders())
       .pipe(
         map((spools: FilamentManagerSpoolList): Array<FilamentSpool> => {
           return spools.spools.map((spool: FilamentManagerSpool): FilamentSpool => {
@@ -37,7 +39,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
   public getCurrentSpools(): Observable<Array<FilamentSpool>> {
     return this.http
       .get(
-        this.configService.getApiURL('plugin/filamentmanager/selections', false),
+        this.basePathService.getApiURL('plugin/filamentmanager/selections', false),
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -54,7 +56,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
   public getCurrentSpool(tool: number): Observable<FilamentSpool> {
     return this.http
       .get(
-        this.configService.getApiURL('plugin/filamentmanager/selections', false),
+        this.basePathService.getApiURL('plugin/filamentmanager/selections', false),
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -99,7 +101,7 @@ export class FilamentManagerOctoprintService implements FilamentPluginService {
     };
 
     return this.http.patch<void>(
-      this.configService.getApiURL('plugin/filamentmanager/selections/0', false),
+      this.basePathService.getApiURL('plugin/filamentmanager/selections/0', false),
       setSpoolBody,
       this.configService.getHTTPHeaders(),
     );

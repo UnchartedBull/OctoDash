@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { PrinterState } from 'src/model';
 import { OctoPrintSettings } from 'src/model/octoprint/octoprint-settings.model';
 
+import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 import { SocketService } from './socket/socket.service';
@@ -27,6 +28,7 @@ export class OctoprintSettingsService {
   private configService = inject(ConfigService);
   private socketService = inject(SocketService);
   private notificationService = inject(NotificationService);
+  private basePathService = inject(BasePathService);
 
   private settings$ = new BehaviorSubject<OctoPrintSettings | null>(null);
 
@@ -62,7 +64,7 @@ export class OctoprintSettingsService {
   }
 
   loadSettings() {
-    const apiUrl = this.configService.getApiURL('settings', true);
+    const apiUrl = this.basePathService.getApiURL('settings', true);
     if (!apiUrl) {
       console.warn('No API URL found for OctoPrint settings.');
       return;

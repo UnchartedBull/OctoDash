@@ -108,7 +108,11 @@ export class ConfigService {
   }
 
   public resetConfig() {
-    return this.http.post(this.getApiURL('plugin/octodash/api/settings_reset', false), {}, this.getHTTPHeaders());
+    return this.http.post(
+      this.basePathService.getApiURL('plugin/octodash/api/settings_reset', false),
+      {},
+      this.getHTTPHeaders(),
+    );
   }
 
   public generateHttpHeaders(): void {
@@ -152,7 +156,11 @@ export class ConfigService {
   }
 
   public saveConfig(config: Config) {
-    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
+    return this.http.post(
+      this.basePathService.getApiURL('settings'),
+      { plugins: { octodash: config } },
+      this.getHTTPHeaders(),
+    );
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -187,12 +195,6 @@ export class ConfigService {
 
   public getHTTPHeaders(): HttpHeader {
     return this.httpHeaders;
-  }
-
-  public getApiURL(path: string, includeApi = true): string {
-    const base = this.basePathService.getBasePath();
-    if (includeApi) return `${base}/api/${path}`;
-    else return `${base}/${path}`;
   }
 
   public getAPIPollingInterval(): number {
