@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export const getBase = () => {
-  return window['__baseHref'] || '';
+  return window.location.pathname.split('/plugin/octodash')[0] || '';
 };
 
 @Injectable()
