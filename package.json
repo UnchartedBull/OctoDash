@@ -13,6 +13,10 @@
   "browserslist": [
     "chrome >= 120"
   ],
+  "engines": {
+    "node": "^24.12.0",
+    "npm": "~11.6.2"
+  },
   "build": {
     "appId": "octodash",
     "productName": "OctoDash",
