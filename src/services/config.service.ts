@@ -69,7 +69,6 @@ export class ConfigService {
   }
 
   public getConfig() {
-    console.log('Base href:', this.basePathService.getBasePath());
     this.apiKey = localStorage.getItem('octodash_apikey');
     let headers = null;
     if (this.apiKey) {
