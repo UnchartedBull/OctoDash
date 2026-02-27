@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import { Directory, File, Folder } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 import { ConversionService } from '../../services/conversion.service';
 import { NotificationService } from '../../services/notification.service';
@@ -16,6 +17,7 @@ import { FilesService } from './files.service';
 })
 export class FilesOctoprintService implements FilesService {
   private loadedFile = false;
+  private basePathService = inject(BasePathService);
 
   public constructor(
     private configService: ConfigService,
@@ -27,7 +29,7 @@ export class FilesOctoprintService implements FilesService {
   public getFolderContent(folderPath?: string): Observable<Directory> {
     return this.http
       .get(
-        this.configService.getApiURL('files' + (folderPath === '/' ? '' : folderPath)),
+        `${this.basePathService.getBasePath()}/api/files${folderPath === '/' ? '' : folderPath}`,
         this.configService.getHTTPHeaders(),
       )
       .pipe(
@@ -67,7 +69,7 @@ export class FilesOctoprintService implements FilesService {
                             : 'files__object--failed'
                           : 'files__object--unknown',
                       thumbnail$: fileOrFolder.thumbnail
-                        ? this.getThumbnailBlobUrl(this.configService.getApiURL(fileOrFolder.thumbnail, false))
+                        ? this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}/${fileOrFolder.thumbnail}`)
                         : new BehaviorSubject('assets/object.svg'),
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
@@ -118,7 +120,10 @@ export class FilesOctoprintService implements FilesService {
 
   public getFile(filePath: string): Observable<File> {
     return this.http
-      .get(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
+      .get(
+        `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         map((file: OctoprintFile): File => {
           return {
@@ -128,7 +133,7 @@ export class FilesOctoprintService implements FilesService {
             date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
             size: this.conversionService.convertByteToMegabyte(file.size),
             thumbnail$: file.thumbnail
-              ? this.getThumbnailBlobUrl(this.configService.getApiURL(file.thumbnail, false))
+              ? this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}/${file.thumbnail}`)
               : new BehaviorSubject('assets/object.svg'),
             ...(file.gcodeAnalysis
               ? {
@@ -145,10 +150,13 @@ export class FilesOctoprintService implements FilesService {
 
   public getThumbnail(filePath: string): Observable<string> {
     return this.http
-      .get(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
+      .get(
+        `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         map((file: OctoprintFile): string => {
-          return file.thumbnail ? this.configService.getApiURL(file.thumbnail, false) : 'assets/object.svg';
+          return file.thumbnail ? `${this.basePathService.getBasePath()}/${file.thumbnail}` : 'assets/object.svg';
         }),
       )
       .pipe(mergeMap(thumbnailPath => this.getThumbnailBlobUrl(thumbnailPath)));
@@ -171,7 +179,7 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(
-        this.configService.getApiURL('files' + encodeURIComponent(filePath)),
+        `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
         payload,
         this.configService.getHTTPHeaders(),
       )
@@ -192,7 +200,7 @@ export class FilesOctoprintService implements FilesService {
 
     this.http
       .post(
-        this.configService.getApiURL('files' + encodeURIComponent(filePath)),
+        `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
         payload,
         this.configService.getHTTPHeaders(),
       )
@@ -207,7 +215,10 @@ export class FilesOctoprintService implements FilesService {
 
   public deleteFile(filePath: string): void {
     this.http
-      .delete(this.configService.getApiURL('files' + encodeURIComponent(filePath)), this.configService.getHTTPHeaders())
+      .delete(
+        `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@files-error-delete:Can't delete file!`, error.message);

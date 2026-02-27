@@ -6,6 +6,7 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 import configSchema from '../helper/config.schema.json' with { type: 'json' };
 import { ConfigSchema as Config, CustomAction, URLSplit } from '../model';
+import { BasePathService } from './base-path.service';
 
 const ajv = new Ajv({ useDefaults: true, allErrors: true });
 
@@ -41,6 +42,8 @@ export class ConfigService {
   private valid: boolean;
   private update = false;
 
+  private basePathService = inject(BasePathService);
+
   private httpHeaders: HttpHeader;
   private apiKey: string;
 
@@ -75,7 +78,9 @@ export class ConfigService {
     }
 
     return this.http
-      .get<OctoPrintConfig>('/api/settings', { headers: headers ?? new HttpHeaders() })
+      .get<OctoPrintConfig>(`${this.basePathService.getBasePath()}/api/settings`, {
+        headers: headers ?? new HttpHeaders(),
+      })
       .pipe(
         map(response => {
           return response.plugins.octodash;
@@ -102,7 +107,11 @@ export class ConfigService {
   }
 
   public resetConfig() {
-    return this.http.post(this.getApiURL('plugin/octodash/api/settings_reset', false), {}, this.getHTTPHeaders());
+    return this.http.post(
+      `${this.basePathService.getBasePath()}/plugin/octodash/api/settings_reset`,
+      {},
+      this.getHTTPHeaders(),
+    );
   }
 
   public generateHttpHeaders(): void {
@@ -146,7 +155,11 @@ export class ConfigService {
   }
 
   public saveConfig(config: Config) {
-    return this.http.post(this.getApiURL('settings'), { plugins: { octodash: config } }, this.getHTTPHeaders());
+    return this.http.post(
+      `${this.basePathService.getBasePath()}/api/settings`,
+      { plugins: { octodash: config } },
+      this.getHTTPHeaders(),
+    );
   }
 
   public splitOctoprintURL(octoprintURL: string): URLSplit {
@@ -181,11 +194,6 @@ export class ConfigService {
 
   public getHTTPHeaders(): HttpHeader {
     return this.httpHeaders;
-  }
-
-  public getApiURL(path: string, includeApi = true): string {
-    if (includeApi) return `/api/${path}`;
-    else return `/${path}`;
   }
 
   public getAPIPollingInterval(): number {

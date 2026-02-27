@@ -12,7 +12,8 @@ const getCookies = () => {
 
 const getCsrfToken = () => {
   const cookies = getCookies();
-  const cookie = Object.entries(cookies).find(([name]) => name.startsWith('csrf_token_P'));
+  const port = window.location.port;
+  const cookie = Object.entries(cookies).find(([name]) => name.startsWith(`csrf_token_P${port}`));
   if (cookie) {
     return cookie[1];
   }

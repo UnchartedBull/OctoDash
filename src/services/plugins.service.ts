@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PluginResponse } from 'src/model/octoprint';
 
+import { BasePathService } from './base-path.service';
+
 @Injectable()
 export class PluginsService {
   private http = inject(HttpClient);
+  private basePathService = inject(BasePathService);
   public getEnabledPlugins(): Observable<string[]> {
     return this.http
-      .get<PluginResponse>('/plugin/pluginmanager/plugins')
+      .get<PluginResponse>(`${this.basePathService.getBasePath()}/plugin/pluginmanager/plugins`)
       .pipe(map(response => response.plugins.filter(plugin => plugin.enabled).map(plugin => plugin.key)));
   }
 }

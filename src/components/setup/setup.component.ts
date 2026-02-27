@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import defaultConfig from '../../helper/config.default.json';
 import { ConfigSchema as Config } from '../../model/config.model';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class ConfigSetupComponent implements OnInit {
   public configErrors: string[];
 
   public manualURL = false;
+  private basePathService = inject(BasePathService);
 
   public constructor(
     private configService: ConfigService,
@@ -63,7 +65,7 @@ export class ConfigSetupComponent implements OnInit {
       }),
     };
 
-    this.http.get(`/api/version`, httpHeaders).subscribe({
+    this.http.get(`${this.basePathService.getBasePath()}/api/version`, httpHeaders).subscribe({
       next: () => {
         this.octoprintConnection = true;
         this.saveConfig();

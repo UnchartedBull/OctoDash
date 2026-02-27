@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
+import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 
@@ -18,6 +19,7 @@ export class AppService {
 
   public updateAvailable = false;
   public dev = false; // TODO: intelligently determine this
+  private basePathService = inject(BasePathService);
 
   public constructor(
     private configService: ConfigService,
@@ -64,26 +66,40 @@ export class AppService {
   }
 
   public turnDisplayOff(): void {
-    this.http.post('/plugin/octodash/api/screen_sleep', {}, this.configService.getHTTPHeaders()).subscribe({
-      error: error =>
-        this.notificationService.error($localize`:@@screen-sleep-error:Error turning display off`, error.message),
-    });
+    this.http
+      .post(
+        `${this.basePathService.getBasePath()}/plugin/octodash/api/screen_sleep`,
+        {},
+        this.configService.getHTTPHeaders(),
+      )
+      .subscribe({
+        error: error =>
+          this.notificationService.error($localize`:@@screen-sleep-error:Error turning display off`, error.message),
+      });
   }
 
   public turnDisplayOn(): void {
-    this.http.post('/plugin/octodash/api/screen_wakeup', {}, this.configService.getHTTPHeaders()).subscribe();
+    this.http
+      .post(
+        `${this.basePathService.getBasePath()}/plugin/octodash/api/screen_wakeup`,
+        {},
+        this.configService.getHTTPHeaders(),
+      )
+      .subscribe();
   }
 
   public loadCustomStyles(): void {
-    this.http.get('/plugin/octodash/custom-styles.css', { responseType: 'text' }).subscribe({
-      next: (styles: string) => {
-        const styleElement = document.createElement('style');
-        styleElement.innerHTML = styles;
-        document.head.appendChild(styleElement);
-      },
-      error: error =>
-        this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
-    });
+    this.http
+      .get(`${this.basePathService.getBasePath()}/plugin/octodash/custom-styles.css`, { responseType: 'text' })
+      .subscribe({
+        next: (styles: string) => {
+          const styleElement = document.createElement('style');
+          styleElement.innerHTML = styles;
+          document.head.appendChild(styleElement);
+        },
+        error: error =>
+          this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
+      });
   }
 }
 

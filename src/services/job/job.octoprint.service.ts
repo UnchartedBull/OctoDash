@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { JobCommand } from '../../model/octoprint';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { JobService } from './job.service';
 
 @Injectable()
 export class JobOctoprintService implements JobService {
+  private basePathService = inject(BasePathService);
   public constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
@@ -22,7 +24,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-start-job:Can't start job!`, error.message);
@@ -39,7 +41,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-pause-job:Can't pause job!`, error.message);
@@ -56,7 +58,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-resume-job:Can't resume job!`, error.message);
@@ -72,7 +74,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-cancel-job:Can't cancel job!`, error.message);
@@ -88,7 +90,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('job'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/job`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-restart-job:Can't restart job!`, error.message);
@@ -104,7 +106,7 @@ export class JobOctoprintService implements JobService {
     };
 
     this.http
-      .post(this.configService.getApiURL('plugin/preheat'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/plugin/preheat`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-preheat:Can't preheat printer!`, error.message);

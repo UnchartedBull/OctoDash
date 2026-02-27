@@ -19,6 +19,7 @@ import { csrfInterceptor } from './csrfInterceptor';
 import directives from './directives';
 import pipes from './pipes';
 import services from './services';
+import { getBase } from './services/base-path.service';
 import { OctoprintSettingsService } from './services/octoprint-settings.service';
 
 @NgModule({
@@ -43,7 +44,7 @@ import { OctoprintSettingsService } from './services/octoprint-settings.service'
     }),
     [provideLottieOptions({ player: () => lottiePlayer })],
     [provideCacheableAnimationLoader()],
-    { provide: APP_BASE_HREF, useValue: '/plugin/octodash' },
+    { provide: APP_BASE_HREF, useValue: getBase() + '/plugin/octodash' },
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     provideHttpClient(withInterceptors([csrfInterceptor])),
   ],

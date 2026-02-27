@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { SocketAuth, TestAddress } from '../../model';
 import { ConnectCommand, OctoprintLogin } from '../../model/octoprint';
+import { BasePathService } from '../../services/base-path.service';
 import { ConfigService } from '../../services/config.service';
 import { NotificationService } from '../../services/notification.service';
 import { SystemService } from './system.service';
 
 @Injectable()
 export class SystemOctoprintService implements SystemService {
+  private basePathService = inject(BasePathService);
+
   constructor(
     private configService: ConfigService,
     private notificationService: NotificationService,
@@ -20,7 +23,7 @@ export class SystemOctoprintService implements SystemService {
   public getSessionKey(): Observable<SocketAuth> {
     return this.http
       .post<OctoprintLogin>(
-        this.configService.getApiURL('login'),
+        `${this.basePathService.getBasePath()}/api/login`,
         { passive: true },
         this.configService.getHTTPHeaders(),
       )
@@ -36,7 +39,11 @@ export class SystemOctoprintService implements SystemService {
 
   public sendCommand(command: string): void {
     this.http
-      .post(this.configService.getApiURL(`system/commands/core/${command}`), null, this.configService.getHTTPHeaders())
+      .post(
+        `${this.basePathService.getBasePath()}/api/system/commands/core/${command}`,
+        null,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(
         catchError(error => {
           this.notificationService.error($localize`:@@error-execute:Can't execute ${command} command!`, error.message);
@@ -53,7 +60,7 @@ export class SystemOctoprintService implements SystemService {
     };
 
     this.http
-      .post(this.configService.getApiURL('connection'), payload, this.configService.getHTTPHeaders())
+      .post(`${this.basePathService.getBasePath()}/api/connection`, payload, this.configService.getHTTPHeaders())
       .pipe(
         catchError(error => {
           this.notificationService.warn($localize`:@@error-connect:Can't connect to printer!`, error.message, true);
@@ -69,7 +76,11 @@ export class SystemOctoprintService implements SystemService {
     };
 
     return this.http
-      .post<TestAddress>(this.configService.getApiURL('util/test'), payload, this.configService.getHTTPHeaders())
+      .post<TestAddress>(
+        `${this.basePathService.getBasePath()}/api/util/test`,
+        payload,
+        this.configService.getHTTPHeaders(),
+      )
       .pipe(map(result => (result?.is_lan_address && result?.address ? result.address : null)));
   }
 }

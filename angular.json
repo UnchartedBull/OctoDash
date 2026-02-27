@@ -39,7 +39,7 @@
           "options": {
             "allowedCommonJsDependencies": ["lottie-web"],
             "aot": true,
-            "baseHref": "/plugin/octodash/static/ui/",
+            "baseHref": "./static/ui/",
             "outputPath": {
               "base": "octoprint_octodash/static/ui",
               "browser": ""
