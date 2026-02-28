@@ -13,6 +13,10 @@
   "browserslist": [
     "chrome >= 120"
   ],
+  "engines": {
+    "node": "^24.12.0",
+    "npm": "~11.6.2"
+  },
   "build": {
     "appId": "octodash",
     "productName": "OctoDash",
@@ -100,15 +104,15 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.1.5",
-    "@angular/cli": "^21.1.5",
+    "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.0.3",
     "@angular/language-service": "^21.0.3",
     "@eslint/compat": "^2.0.2",
-    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/eslintrc": "^3.3.4",
     "@eslint/js": "^9.39.2",
     "@playwright/test": "^1.58.2",
     "@types/lodash-es": "~4.17.12",
-    "@types/node": "24.10.2",
+    "@types/node": "24.11.0",
     "codelyzer": "~6.0.2",
     "dotenv": "^17.3.1",
     "eslint": "9.39.2",
@@ -119,11 +123,14 @@
     "json-schema-to-typescript": "^15.0.4",
     "npm-run-all": "~4.1.5",
     "prettier": "^3.8.1",
-    "stylelint": "^17.3.0",
+    "stylelint": "^17.4.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "ts-node": "~10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.0",
+    "typescript-eslint": "^8.56.1",
     "wait-on": "~9.0.4"
+  },
+  "overrides": {
+    "rollup": "^4.59.0"
   }
 }
