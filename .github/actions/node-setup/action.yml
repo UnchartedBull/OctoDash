@@ -14,13 +14,21 @@ runs:
         key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           octodash-build-${{ env.cache-name }}-
+    - name: Get Node.js version from package.json
+      id: get-node-version
+      shell: bash
+      run: echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_ENV
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24.10.x'
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Get npm version
+      id: get-npm-version
+      shell: bash
+      run: echo "NPM_VERSION=$(jq -r '.engines.npm' package.json)" >> $GITHUB_ENV
     - name: Install latest npm
       shell: bash
-      run: sudo npm install -g npm@latest
+      run: sudo npm install -g npm@${NPM_VERSION}
     - name: Installing Dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       shell: bash
