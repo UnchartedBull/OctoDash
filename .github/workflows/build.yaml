@@ -51,7 +51,6 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      # wheel-filename: ${{ steps.get-wheel-filename.outputs.WHEEL_FILENAME }}
       wheel-id: ${{ steps.upload-wheel.outputs.artifact-id }}
     steps:
       - name: Checkout Repository
