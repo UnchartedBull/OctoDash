@@ -45,6 +45,12 @@
         <source>close</source>
         <target>luk</target>
       </trans-unit>
+      <trans-unit id="error-change-instance" datatype="html">
+        <source>Failed to change instance!</source>
+      </trans-unit>
+      <trans-unit id="error-change-instance-desc" datatype="html">
+        <source>An error occurred while trying to change the OctoPrint instance.</source>
+      </trans-unit>
       <trans-unit id="error-parsing-custom-action" datatype="html">
         <source>Error parsing custom action!</source>
         <target></target>
