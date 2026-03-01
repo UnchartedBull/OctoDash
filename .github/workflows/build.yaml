@@ -135,7 +135,7 @@ jobs:
         uses: actions/download-artifact@v8
         id: download-wheel
         with:
-          name: ${{ needs.build.outputs.wheel-id }}
+          artifact-ids: ${{ needs.build.outputs.wheel-id }}
 
       - name: Setup Python environment
         run: |
