@@ -65,7 +65,8 @@ class OctodashPlugin(
 
     def on_settings_save(self, data):
         for plugin_name in ALL_PLUGINS.keys():
-            del data["plugins"][plugin_name]['inUse']
+            if "plugins" in data:
+                del data["plugins"][plugin_name]['inUse']
 
         return super().on_settings_save(data)
 
@@ -379,7 +380,7 @@ class OctodashPlugin(
         return make_response(json.dumps({"success": True}), 200)
 
     @Permissions.ADMIN.require(403)
-    @octoprint.plugin.BlueprintPlugin.route("/api/change_instances", methods=["POST"])
+    @octoprint.plugin.BlueprintPlugin.route("/api/change_instance", methods=["POST"])
     def change_instance_route(self):
         data = request.json
         if not data or "instance" not in data:
