@@ -78,10 +78,6 @@ jobs:
           path: dist/*.whl
           archive: false
 
-      - name: Get wheel filename
-        id: get-wheel-filename
-        run: echo "WHEEL_FILENAME=$(ls dist/*.whl)" >> $GITHUB_OUTPUT
-
       - name: Upload Source Distribution
         uses: actions/upload-artifact@v7
         with:
