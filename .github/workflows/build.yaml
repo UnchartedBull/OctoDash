@@ -69,13 +69,17 @@ jobs:
       - name: Building Python
         run: python -m build .
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Wheel
+        uses: actions/upload-artifact@v7
         with:
-          name: build
-          path: |
-            dist/*.whl
-            dist/*.tar.gz
+          path: dist/*.whl
+          archive: false
+
+      - name: Upload Source Distribution
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/*.tar.gz
+          archive: false
 
   test-e2e:
     runs-on: ubuntu-latest
