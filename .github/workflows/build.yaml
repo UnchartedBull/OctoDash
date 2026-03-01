@@ -50,6 +50,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      wheel-id: ${{ steps.upload-wheel.outputs.artifact-id }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -69,13 +71,18 @@ jobs:
       - name: Building Python
         run: python -m build .
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload Wheel
+        id: upload-wheel
+        uses: actions/upload-artifact@v7
         with:
-          name: build
-          path: |
-            dist/*.whl
-            dist/*.tar.gz
+          path: dist/*.whl
+          archive: false
+
+      - name: Upload Source Distribution
+        uses: actions/upload-artifact@v7
+        with:
+          path: dist/*.tar.gz
+          archive: false
 
   test-e2e:
     runs-on: ubuntu-latest
@@ -85,10 +92,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Node Setup
         uses: ./.github/actions/node-setup
-      - name: Download artifacts
-        uses: actions/download-artifact@v5
-        with:
-          name: build
 
       - name: Get Playwright version
         id: playwright-version
@@ -124,14 +127,15 @@ jobs:
           echo "::endgroup::"
 
       - name: Download artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
+        id: download-wheel
         with:
-          name: build
+          artifact-ids: ${{ needs.build.outputs.wheel-id }}
 
       - name: Setup Python environment
         run: |
           python -m pip install pytest octoprint --user
-          python -m pip install *.whl --user
+          python -m pip install ${{ steps.download-wheel.outputs.download-path}}/*.whl --user
 
       - name: Setup OctoPrint config
         run: |
