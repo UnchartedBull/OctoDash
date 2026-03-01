@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AppService } from './app.service';
 import { BasePathService } from './base-path.service';
+import { ChangeInstanceService } from './change-instance.service';
 import { ConfigService } from './config.service';
 import { ConversionService } from './conversion.service';
 import { EnclosureOctoprintService } from './enclosure/enclosure.octoprint.service';
@@ -38,6 +39,7 @@ export default [
   OctoprintSettingsService,
   PluginsService,
   BasePathService,
+  ChangeInstanceService,
   [
     {
       provide: SystemService,
