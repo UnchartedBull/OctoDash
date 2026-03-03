@@ -160,7 +160,7 @@ jobs:
               enabled: false
             pluginBlocklist:
               enabled: false
-            secretKey: rrdHjvmeGMPSdYWg2NGdiM7mpz9pjekk
+            secretKey: 46b76023b893565f3006722e3fd3adf05f05df6a917b34e7ae3fa78d93e33bbb
             seenWizards:
               backup: null
               corewizard: 3
