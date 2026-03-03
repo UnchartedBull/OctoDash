@@ -41,7 +41,7 @@ test('should login successfully with username/password', async ({ page }) => {
   const loginButton = page.getByRole('button', { name: 'Log in' });
 
   await usernameInput.fill('admin');
-  await passwordInput.fill('test');
+  await passwordInput.fill('password');
   await loginButton.click();
 
   await page.waitForResponse('**/api/login');

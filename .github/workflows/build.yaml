@@ -160,7 +160,7 @@ jobs:
               enabled: false
             pluginBlocklist:
               enabled: false
-            secretKey: rrdHjvmeGMPSdYWg2NGdiM7mpz9pjekk
+            secretKey: 4e7ae3fa78d93e33bbb
             seenWizards:
               backup: null
               corewizard: 3
@@ -168,7 +168,7 @@ jobs:
               octodash: 1
               tracking: null
           EOL
-          cat > ~/.octoprint/users.yaml <<EOL
+          cat > ~/.octoprint/users.yaml <<'EOL'
           _version: 2
           admin:
             active: true
@@ -176,13 +176,14 @@ jobs:
             groups:
             - admins
             - users
-            password: $argon2id$v=19$m=65536,t=3,p=4$XMsZY8y5dw4B4JxzTum9tw$sk228xXwRjgHpKdIFam6vkwkRelSokHqmCZpQSH69NY
+            password: $argon2id$v=19$m=65536,t=3,p=4$fQ8BwDgn5HwvxbgXAqA0Jg$/Dsj9oSSXvdccvwqblqMEYdUt+9mO8cKbGYdv/EGwY4
             permissions: []
             roles:
             - user
             - admin
             settings: {}
           EOL
+          cat ~/.octoprint/users.yaml
 
       - name: Setup OctoPrint key
         run: |
