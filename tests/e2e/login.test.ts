@@ -43,4 +43,10 @@ test('should login successfully with username/password', async ({ page }) => {
   await usernameInput.fill('admin');
   await passwordInput.fill('password');
   await loginButton.click();
+
+  await page.waitForTimeout(2000);
+
+  await page.goto('/plugin/octodash/');
+  const header = page.getByText('OctoDash');
+  await expect(header).toBeVisible();
 });
