@@ -150,6 +150,10 @@ jobs:
               enabled: false
             virtual_printer:
               enabled: true
+          serial:
+            autoconnect: true
+            baudrate: 250000
+            port: VIRTUAL
           server:
             firstRun: false
             onlineCheck:
