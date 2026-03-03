@@ -140,6 +140,30 @@ jobs:
       - name: Setup OctoPrint config
         run: |
           mkdir -p ~/.octoprint
+          cat > ~/.octoprint/config.yaml <<EOL
+          plugins:
+            softwareupdate:
+              checks:
+                octoprint:
+                  disabled: true
+            tracking:
+              enabled: false
+            virtual_printer:
+              enabled: true
+          server:
+            firstRun: false
+            onlineCheck:
+              enabled: false
+            pluginBlocklist:
+              enabled: false
+            secretKey: rrdHjvmeGMPSdYWg2NGdiM7mpz9pjekk
+            seenWizards:
+              backup: null
+              corewizard: 3
+              file_check: 1
+              octodash: 1
+              tracking: null
+          EOL
           cat > ~/.octoprint/users.yaml <<EOL
           _version: 2
           admin:
