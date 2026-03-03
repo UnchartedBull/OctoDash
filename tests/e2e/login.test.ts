@@ -1,6 +1,5 @@
 import { expect, selectors, test } from '@playwright/test';
 import dotenv from 'dotenv';
-import { delay } from 'rxjs';
 
 dotenv.config({ path: '.env.playwright' });
 
