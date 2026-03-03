@@ -160,7 +160,7 @@ jobs:
               enabled: false
             pluginBlocklist:
               enabled: false
-            secretKey: 46b76023b893565f3006722e3fd3adf05f05df6a917b34e7ae3fa78d93e33bbb
+            secretKey: rrdHjvmeGMPSdYWg2NGdiM7mpz9pjekk
             seenWizards:
               backup: null
               corewizard: 3
@@ -176,7 +176,7 @@ jobs:
             groups:
             - admins
             - users
-            password: $argon2id$v=19$m=65536,t=3,p=4$fQ8BwDgn5HwvxbgXAqA0Jg$/Dsj9oSSXvdccvwqblqMEYdUt+9mO8cKbGYdv/EGwY4
+            password: $argon2id$v=19$m=65536,t=3,p=4$XMsZY8y5dw4B4JxzTum9tw$sk228xXwRjgHpKdIFam6vkwkRelSokHqmCZpQSH69NY
             permissions: []
             roles:
             - user
