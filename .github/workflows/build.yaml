@@ -180,7 +180,7 @@ jobs:
         if: failure()
         with:
           name: octoprint-logs
-          path: ~/.octoprint/logs
+          path: ${{ env.OCTOPRINT_CONFIG_DIR }}/logs
   release:
     runs-on: ubuntu-latest
 

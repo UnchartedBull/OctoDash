@@ -9,7 +9,7 @@ const config = {
     timeout: 10_000,
   },
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 2 : undefined,
   reportSlowTests: {
     max: 30_000,
