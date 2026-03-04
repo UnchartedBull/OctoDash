@@ -137,27 +137,10 @@ jobs:
           python -m pip install pytest octoprint --user
           python -m pip install ${{ steps.download-wheel.outputs.download-path}}/*.whl --user
 
-      # - name: Setup OctoPrint config
-      #   run: |
-      #     mkdir -p ~/.octoprint
-      #     cat > ~/.octoprint/config.yaml <<EOL
-      #     EOL
-      #     cat > ~/.octoprint/users.yaml <<'EOL'
-      #     EOL
-      #     cat ~/.octoprint/users.yaml
-
       - name: Get OctoPrint config dir
         id: octoprint-config
         run: |
           echo "OCTOPRINT_CONFIG_DIR=${GITHUB_WORKSPACE}/tests/e2e/fixtures/config" >> $GITHUB_ENV
-
-      - name: Print OctoPrint config for debugging
-        run: |
-          echo "OCTOPRINT_CONFIG_DIR=$OCTOPRINT_CONFIG_DIR"
-          ls -la $OCTOPRINT_CONFIG_DIR
-          cat $OCTOPRINT_CONFIG_DIR/config.yaml
-          cat $OCTOPRINT_CONFIG_DIR/users.yaml
-          cat $OCTOPRINT_CONFIG_DIR/data/appkeys/keys.yaml
 
       - name: Setup OctoPrint key
         run: |
