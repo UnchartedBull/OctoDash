@@ -42,7 +42,7 @@ const config = {
 };
 
 if (!process.env.NO_SERVER) {
-  const octoprintServerOpts = process.env.OCTOPRINT_SERVER_BASE ? `-b ${process.env.OCTOPRINT_SERVER_BASE}` : '';
+  const octoprintServerOpts = process.env.OCTOPRINT_CONFIG_DIR ? `-b ${process.env.OCTOPRINT_CONFIG_DIR}` : '';
 
   config.webServer = {
     command: `octoprint ${octoprintServerOpts} serve --host 127.0.0.1 --port 8080`,

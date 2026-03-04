@@ -137,66 +137,24 @@ jobs:
           python -m pip install pytest octoprint --user
           python -m pip install ${{ steps.download-wheel.outputs.download-path}}/*.whl --user
 
-      - name: Setup OctoPrint config
-        run: |
-          mkdir -p ~/.octoprint
-          cat > ~/.octoprint/config.yaml <<EOL
-          plugins:
-            softwareupdate:
-              checks:
-                octoprint:
-                  disabled: true
-            tracking:
-              enabled: false
-            virtual_printer:
-              enabled: true
-          serial:
-            autoconnect: true
-            baudrate: 250000
-            port: VIRTUAL
-          server:
-            firstRun: false
-            onlineCheck:
-              enabled: false
-            pluginBlocklist:
-              enabled: false
-            secretKey: 4e7ae3fa78d93e33bbb
-            seenWizards:
-              backup: null
-              corewizard: 3
-              file_check: 1
-              octodash: 1
-              tracking: null
-          EOL
-          cat > ~/.octoprint/users.yaml <<'EOL'
-          _version: 2
-          admin:
-            active: true
-            apikey: null
-            groups:
-            - admins
-            - users
-            password: $argon2id$v=19$m=65536,t=3,p=4$fQ8BwDgn5HwvxbgXAqA0Jg$/Dsj9oSSXvdccvwqblqMEYdUt+9mO8cKbGYdv/EGwY4
-            permissions: []
-            roles:
-            - user
-            - admin
-            settings: {}
-          EOL
-          cat ~/.octoprint/users.yaml
+      # - name: Setup OctoPrint config
+      #   run: |
+      #     mkdir -p ~/.octoprint
+      #     cat > ~/.octoprint/config.yaml <<EOL
+      #     EOL
+      #     cat > ~/.octoprint/users.yaml <<'EOL'
+      #     EOL
+      #     cat ~/.octoprint/users.yaml
 
+      - name: Get OctoPrint config dir
+        id: octoprint-config
+        run: echo "OCTOPRINT_CONFIG_DIR=~/tests/e2e/fixtures/config" >> $GITHUB_ENV
+      
       - name: Setup OctoPrint key
         run: |
-          export OCTODOASH_API_KEY=$(openssl rand -hex 16)
-          echo OCTODASH_API_KEY=$OCTODOASH_API_KEY >> .env.playwright
-          mkdir -p ~/.octoprint/data/appkeys
-          cat > ~/.octoprint/data/appkeys/keys.yaml <<EOF
-          admin:
-          - app_id: OctoDash
-            api_key: $OCTODOASH_API_KEY
-          EOF
+          export OCTODOASH_API_KEY=$(yq '.admin[0].api_key' ${{env.OCTOPRINT_CONFIG_DIR}}/data/appkeys/keys.yaml)
+          # echo OCTODASH_API_KEY=$OCTODOASH_API_KEY >> .env.playwright
 
-          cat ~/.octoprint/data/appkeys/keys.yaml
       - name: Run Playwright tests
         run: npx playwright test
 
