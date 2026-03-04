@@ -32,7 +32,6 @@ DEFAULT_LANGUAGE = "en"
 
 class OctodashPlugin(
     octoprint.plugin.AssetPlugin,
-    octoprint.plugin.UiPlugin,
     octoprint.plugin.SettingsPlugin,
     octoprint.plugin.EventHandlerPlugin,
     octoprint.plugin.BlueprintPlugin,
@@ -451,9 +450,6 @@ class OctodashPlugin(
     def will_handle_ui(self, request):
         if request.args.get("octodash") == "1":
             return True
-
-    def on_ui_render(self, now, request, render_kwargs):
-        return redirect("/plugin/octodash/", code=307)
 
     def get_ui_permissions(self):
         return []

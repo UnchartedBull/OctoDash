@@ -9,7 +9,7 @@ const config = {
     timeout: 10_000,
   },
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 2 : undefined,
   reportSlowTests: {
     max: 30_000,
@@ -42,7 +42,7 @@ const config = {
 };
 
 if (!process.env.NO_SERVER) {
-  const octoprintServerOpts = process.env.OCTOPRINT_SERVER_BASE ? `-b ${process.env.OCTOPRINT_SERVER_BASE}` : '';
+  const octoprintServerOpts = process.env.OCTOPRINT_CONFIG_DIR ? `-b ${process.env.OCTOPRINT_CONFIG_DIR}` : '';
 
   config.webServer = {
     command: `octoprint ${octoprintServerOpts} serve --host 127.0.0.1 --port 8080`,

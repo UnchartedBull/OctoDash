@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { BasePathService } from 'src/services/base-path.service';
 
 import { ConfigSchema } from '../../model/config.model';
 import { ConfigService } from '../../services/config.service';
@@ -12,6 +13,7 @@ import { ConfigService } from '../../services/config.service';
 export class LoginScreenComponent {
   public config: ConfigSchema;
   public accessToken: string;
+  private basePathService = inject(BasePathService);
 
   public configService = inject(ConfigService);
 
@@ -24,6 +26,6 @@ export class LoginScreenComponent {
   }
   public submit() {
     this.configService.setAccessToken(this.accessToken);
-    window.location.href = '/?octodash=1';
+    window.location.href = this.basePathService.getBasePath() + '/plugin/octodash/';
   }
 }
