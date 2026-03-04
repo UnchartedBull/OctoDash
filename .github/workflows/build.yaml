@@ -134,8 +134,12 @@ jobs:
 
       - name: Setup Python environment
         run: |
+          echo "::group::Installing OctoPrint and Pytest"
           python -m pip install pytest octoprint --user
+          echo "::endgroup::"
+          echo "::group::Installing OctoPrint plugin from wheel"
           python -m pip install ${{ steps.download-wheel.outputs.download-path}}/*.whl --user
+          echo "::endgroup::"
 
       - name: Get OctoPrint config dir
         id: octoprint-config
