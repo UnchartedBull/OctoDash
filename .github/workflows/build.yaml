@@ -150,7 +150,14 @@ jobs:
         id: octoprint-config
         run: |
           echo "OCTOPRINT_CONFIG_DIR=${GITHUB_WORKSPACE}/tests/e2e/fixtures/config" >> $GITHUB_ENV
-          ls $OCTOPRINT_CONFIG_DIR
+
+      - name: Print OctoPrint config for debugging
+        run: |
+          echo "OCTOPRINT_CONFIG_DIR=$OCTOPRINT_CONFIG_DIR"
+          ls -la $OCTOPRINT_CONFIG_DIR
+          cat $OCTOPRINT_CONFIG_DIR/config.yaml
+          cat $OCTOPRINT_CONFIG_DIR/users.yaml
+          cat $OCTOPRINT_CONFIG_DIR/data/appkeys/keys.yaml
 
       - name: Setup OctoPrint key
         run: |
