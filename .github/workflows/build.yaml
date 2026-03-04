@@ -148,7 +148,10 @@ jobs:
 
       - name: Get OctoPrint config dir
         id: octoprint-config
-        run: echo "OCTOPRINT_CONFIG_DIR=~/tests/e2e/fixtures/config" >> $GITHUB_ENV
+        run: |
+          echo "OCTOPRINT_CONFIG_DIR=${GITHUB_WORKSPACE}/tests/e2e/fixtures/config" >> $GITHUB_ENV
+          ls $OCTOPRINT_CONFIG_DIR
+
       
       - name: Setup OctoPrint key
         run: |
