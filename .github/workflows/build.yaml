@@ -152,7 +152,6 @@ jobs:
           echo "OCTOPRINT_CONFIG_DIR=${GITHUB_WORKSPACE}/tests/e2e/fixtures/config" >> $GITHUB_ENV
           ls $OCTOPRINT_CONFIG_DIR
 
-      
       - name: Setup OctoPrint key
         run: |
           export OCTODOASH_API_KEY=$(yq '.admin[0].api_key' ${{env.OCTOPRINT_CONFIG_DIR}}/data/appkeys/keys.yaml)
