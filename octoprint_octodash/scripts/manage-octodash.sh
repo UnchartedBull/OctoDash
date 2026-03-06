@@ -736,7 +736,17 @@ xset -dpms
 
 EOF
     text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
-    echo "$browser_launch_string $octoprint_url$octoprint_suffix" >> ~/.xinitrc
+    cat <<EOF >> ~/.xinitrc
+OCTOPRINT_URL=$octoprint_url
+
+until curl -s -o /dev/null -w "%{http_code}\n" \$OCTOPRINT_URL/plugin/octodash/ | grep -q '200'
+do
+   echo "Waiting for OctoPrint"
+   sleep 3
+done
+EOF
+
+    echo "$browser_launch_string \$OCTOPRINT_URL$octoprint_suffix" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
 if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
