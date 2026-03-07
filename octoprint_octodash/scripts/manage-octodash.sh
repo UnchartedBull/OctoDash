@@ -3,10 +3,19 @@
 octodash_url_prompt="What is the URL of your OctoDash installation? Be sure to include a trailing slash. If you don't know, push enter to accept the default."
 octodash_url_default="http://localhost:5000"
 
-browser_launch_string="chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized" 
 octoprint_suffix="/plugin/octodash/"
 
 dependencies="xserver-xorg xinit chromium-browser"
+
+read -d '' browser_launch << EOL
+
+until curl -s -o /dev/null -w \"%{http_code}\n\" \$OCTOPRINT_URL$octoprint_suffix | grep -q \"200\"
+do
+   echo "Waiting for OctoPrint"
+   sleep 3
+done
+chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized \$OCTOPRINT_URL$octoprint_suffix
+EOL
 
 yes_no=( 'yes' 'no' )
 
@@ -715,7 +724,9 @@ update_xinit() {
 
   XINITRC="$HOME/.xinitrc"
   if grep -q "octodash" "$XINITRC"; then
-      sed -i "s!^octodash.*\$!$browser_launch_string $octoprint_url$octoprint_suffix!" "$XINITRC"
+      sed -i "s!^octodash.*\$!!" "$XINITRC"
+      echo "OCTOPRINT_URL=$octoprint_url" >> ~/.xinitrc
+      echo "$browser_launch" >> "$XINITRC"
       echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
   fi
 }
@@ -727,26 +738,10 @@ enable_autostart() {
   echo $auto_start
   if [ $auto_start == 'yes' ]; then
     echo "Setting up Autostart ..."
-    cat <<EOF > ~/.xinitrc
-#!/bin/sh
 
-xset s off
-xset s noblank
-xset -dpms
-
-EOF
     text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
-    cat <<EOF >> ~/.xinitrc
-OCTOPRINT_URL=$octoprint_url
-
-until curl -s -o /dev/null -w "%{http_code}\n" \$OCTOPRINT_URL/plugin/octodash/ | grep -q '200'
-do
-   echo "Waiting for OctoPrint"
-   sleep 3
-done
-EOF
-
-    echo "$browser_launch_string \$OCTOPRINT_URL$octoprint_suffix" >> ~/.xinitrc
+    echo "OCTOPRINT_URL=$octoprint_url" >> ~/.xinitrc
+    echo "$browser_launch" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
 if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
