@@ -820,10 +820,13 @@ if [ ! -f "/etc/debian_version" ]; then
    exit 1
 fi
 
-echo "Installing initial dependencies..."
-echo ""
-
-sudo apt -qq update && sudo apt -qq install bc -y
+if ! command -v bc &> /dev/null
+then
+    echo ""
+    echo "The 'bc' utility is required but not installed. Installing it now..."
+    echo ""
+    install-apt "bc"
+fi
 
 if [ ! -f "$HOME/.xinitrc" ]; then
   list_input "Would you like to install OctoDash?" yes_no install_octodash
