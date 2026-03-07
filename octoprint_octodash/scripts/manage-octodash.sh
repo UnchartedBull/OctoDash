@@ -794,6 +794,14 @@ IFS='/' read -ra version <<< "$releaseURL"
 echo "Welcome to the OctoDash helper!"
 echo ""
 
+# ensure not run as root
+if [ "$EUID" -eq 0 ]; then
+  echo ""
+  echo "This script must not be run as root. Exiting."
+  echo ""
+  exit 1
+fi
+
 if [ ! -f "/etc/debian_version" ]; then
    echo ""
    echo "This script is only compatible with Debian-based Linux installations."
