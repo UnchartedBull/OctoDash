@@ -25,6 +25,7 @@ from octoprint.util.paths import normalize
 from octoprint.events import Events
 
 from .plugin_integrations import POWER_PLUGINS, SINGLE_PLUGINS, FILAMENT_PLUGINS, ALL_PLUGINS
+from . import scripts
 
 LANGUAGES = ["en", "fr", "de", "da"]
 DEFAULT_LANGUAGE = "en"
@@ -532,7 +533,8 @@ class OctodashPlugin(
         )
 
     def _create_management_script(self):
-        with resources.path("octoprint_octodash", "scripts", "manage-octodash.sh") as script_path:
+        t = resources.files(scripts) / "manage-octodash.sh"
+        with resources.as_file(t) as script_path:
             # copy the script to the appropriate location
             target_path = os.path.expanduser(os.path.join("~", "manage-octodash.sh"))
             shutil.copy(script_path, target_path)
