@@ -5,13 +5,10 @@ from octoprint_octodash import OctodashPlugin
 
 
 @pytest.mark.parametrize("input, group", [
-    ("#this is a comment \n\nsomeothercommand\nchromium-browser --kiosk http://octopi.local", 'http://octopi.local'),
-    ("chromium-browser --kiosk https://example.com", 'https://example.com'),
-    ("chromium-browser --kiosk http://192.168.2.24:5000", 'http://192.168.2.24:5000'),
-    ("chromium-browser --kiosk http://192.168.2.24:5000/printerb", 'http://192.168.2.24:5000/printerb'),
-    ("chromium-browser --kiosk http://192.168.2.24:5000/printerb --something", 'http://192.168.2.24:5000/printerb'),
-    # ("someothercommand\nchromium-browser --kiosk octopi.local", 'octopi.local'),
-    # ("chromium-browser --kiosk octopi.local", "octopi.local"),
+    ("OCTOPRINT_URL=http://localhost:5000\nchromium-browser --kiosk http://octopi.local", 'http://localhost:5000'),
+    ("something\nOCTOPRINT_URL=http://localhost:5000\nchromium-browser --kiosk http://octopi.local\nsdf", 'http://localhost:5000'),
+    ("OCTOPRINT_URL=https://octopi.example.com", 'https://octopi.example.com'),
+    ('\nls\n\n# a commment\n\nOCTOPRINT_URL=http://localhost\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n', 'http://localhost')
 ])
 def test_change_regex(input, group):
     plugin = OctodashPlugin()
@@ -29,8 +26,9 @@ def test_change_regex_no_match(input):
     assert match is None
 
 @pytest.mark.parametrize("input, expected", [
-    ("chromium-browser --kiosk http://octopi.local someothercommand", "chromium-browser --kiosk http://new.local someothercommand"),
-    # ("someothercommand\nchromium-browser --kiosk http://octopi.local", "someothercommand\nchromium-browser --kiosk http://new.local"),
+    ("OCTOPRINT_URL=http://localhost:8080", "OCTOPRINT_URL=http://new.local"),
+    ("someothercommand\nOCTOPRINT_URL=http://localhost:8080", "someothercommand\nOCTOPRINT_URL=http://new.local"),
+    ('\nls\n\n# a commment\n\nOCTOPRINT_URL=http://localhost\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n', '\nls\n\n# a commment\n\nOCTOPRINT_URL=http://new.local\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n')
 ])
 def test_update_xinit_for_instance(input, expected):
     xinit = input

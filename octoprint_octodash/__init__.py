@@ -45,7 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
         self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
-        self.change_instance = re.compile(r'^chromium-browser.*(http.*?)(?: |$)', re.MULTILINE)
+        self.change_instance = re.compile(r'^OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
 
     ##~~ SettingsPlugin mixin
 
@@ -569,18 +569,21 @@ class OctodashPlugin(
         return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
 
     def _update_xinit_for_instance(self, xinit, path):
-        match = re.match(self.change_instance, xinit)
+        match = self.change_instance.search(xinit)
         new = xinit.replace(match.group(1), path)
 
         return new
 
     def _change_boot_instance(self, instance):
         self._logger.info("Changing boot instance to {}".format(instance))
-        with open("~/.xinitrc", "w") as f:
+        fullpath = os.path.expanduser('~/.xinitrc')
+        self._logger.debug("Full path to xinit: {}".format(fullpath))
+        with open(fullpath, "r+") as f:
             xinit = f.read()
             self._logger.debug("Current xinit: {}".format(xinit))
             new_xinit = self._update_xinit_for_instance(xinit, instance)
             self._logger.debug("New xinit: {}".format(new_xinit))
+            f.seek(0)
             f.write(new_xinit)
 
     def _migrate_legacy_config(self, path):
