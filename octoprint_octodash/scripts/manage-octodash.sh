@@ -776,7 +776,7 @@ migrate() {
   echo "Migrating from legacy OctoDash installation to v3..."
   install-apt "$dependencies"
   update_xinit
-  reboot
+  prompt_reboot
 
 }
 
@@ -790,7 +790,7 @@ install() {
 
   enable_autostart
 
-  reboot
+  prompt_reboot
 }
 
 
