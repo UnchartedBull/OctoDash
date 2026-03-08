@@ -3,6 +3,11 @@ import pytest
 
 from octoprint_octodash import OctodashPlugin
 
+@pytest.fixture
+def plugin():
+    plugin = OctodashPlugin()
+    return plugin
+
 
 @pytest.mark.parametrize("input, group", [
     ("OCTOPRINT_URL=http://localhost:5000\nchromium-browser --kiosk http://octopi.local", 'http://localhost:5000'),
@@ -10,8 +15,7 @@ from octoprint_octodash import OctodashPlugin
     ("OCTOPRINT_URL=https://octopi.example.com", 'https://octopi.example.com'),
     ('\nls\n\n# a commment\n\nOCTOPRINT_URL=http://localhost\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n', 'http://localhost')
 ])
-def test_change_regex(input, group):
-    plugin = OctodashPlugin()
+def test_change_regex(plugin, input, group):
     match = plugin.change_instance.search(input)
     assert match is not None
     assert match.group(1) == group
@@ -20,8 +24,7 @@ def test_change_regex(input, group):
     "someothercommand\nchrsdfomium-browser --kiosk octopi.local",
     "chromium-browasdfser --kiosk octopi.local",
 ])
-def test_change_regex_no_match(input):
-    plugin = OctodashPlugin()
+def test_change_regex_no_match(plugin, input):
     match = plugin.change_instance.search(input)
     assert match is None
 
@@ -30,8 +33,7 @@ def test_change_regex_no_match(input):
     ("someothercommand\nOCTOPRINT_URL=http://localhost:8080", "someothercommand\nOCTOPRINT_URL=http://new.local"),
     ('\nls\n\n# a commment\n\nOCTOPRINT_URL=http://localhost\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n', '\nls\n\n# a commment\n\nOCTOPRINT_URL=http://new.local\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n')
 ])
-def test_update_xinit_for_instance(input, expected):
+def test_update_xinit_for_instance(plugin, input, expected):
     xinit = input
-    plugin = OctodashPlugin()
     new = plugin._update_xinit_for_instance(xinit, "http://new.local")
     assert new == expected
