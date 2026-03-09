@@ -726,9 +726,23 @@ update_xinit() {
   XINITRC="$HOME/.xinitrc"
   if grep -q "octodash" "$XINITRC"; then
       sed -i "s!^octodash.*\$!!" "$XINITRC"
-      echo "OCTOPRINT_URL=$octoprint_url" >> ~/.xinitrc
       echo "$browser_launch" >> "$XINITRC"
       echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
+  fi
+
+  # Update .bashrc to include delay loop for OctoPrint availability
+  if grep -q "xinit" "$HOME/.bashrc"; then
+    # If xinit is already being launched, we assume it's for OctoDash and add the delay loop
+    read -d '' new_content <<EOF
+
+  export OCTOPRINT_URL=$octoprint_url
+  $delay_loop
+EOF
+    tmp=$(mktemp)
+    awk -v insert="$new_content" '
+    /xinit -- -nocursor/ { print insert }
+    { print }
+    ' $HOME/.bashrc > "$tmp" && mv "$tmp" "$HOME/.bashrc"
   fi
 }
 
