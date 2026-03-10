@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Node Setup
         uses: ./.github/actions/node-setup
       - name: Linting Application
@@ -54,7 +54,7 @@ jobs:
       wheel-id: ${{ steps.upload-wheel.outputs.artifact-id }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Node Setup
@@ -89,7 +89,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Node Setup
         uses: ./.github/actions/node-setup
 
@@ -175,7 +175,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Download artifacts
         uses: actions/download-artifact@v5
         with:
