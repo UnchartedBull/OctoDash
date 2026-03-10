@@ -6,7 +6,7 @@ runs:
   steps:
     - name: Cache node modules
       id: cache-node-modules
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       env:
         cache-name: node-modules
       with:
