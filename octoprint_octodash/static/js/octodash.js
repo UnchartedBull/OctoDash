@@ -35,16 +35,6 @@ $(function () {
         //   data.confirm(true);
         //   data.exit(false);
         //   break;
-        // case '[!SWITCH_INSTANCE]':
-        //   data.command(
-        //     '[!WEB]' +
-        //       self.settingsViewModel.settings.plugins.octodashcompanion.config.octoprint.url().replace('/api/', '/') +
-        //       'plugin/octodashcompanion/switch_instance?url=localhost:5000',
-        //   );
-        //   data.icon('recycle');
-        //   data.color('#e1b12c');
-        //   data.exit(false);
-        //   break;
         default:
           data.command(event.currentTarget.text);
       }

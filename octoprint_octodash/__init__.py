@@ -45,6 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
         self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
+        self.change_instance = re.compile(r'^OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
 
     ##~~ SettingsPlugin mixin
 
@@ -64,7 +65,8 @@ class OctodashPlugin(
 
     def on_settings_save(self, data):
         for plugin_name in ALL_PLUGINS.keys():
-            del data["plugins"][plugin_name]['inUse']
+            if "plugins" in data:
+                del data["plugins"][plugin_name]['inUse']
 
         return super().on_settings_save(data)
 
@@ -377,6 +379,23 @@ class OctodashPlugin(
 
         return make_response(json.dumps({"success": True}), 200)
 
+    @Permissions.ADMIN.require(403)
+    @octoprint.plugin.BlueprintPlugin.route("/api/change_instance", methods=["POST"])
+    def change_instance_route(self):
+        data = request.json
+        if not data or "instance" not in data:
+            return make_response(json.dumps({"error": "Instance not provided"}), 400)
+        
+        try:
+            instance = data["instance"]
+            self._change_boot_instance(instance)
+            response = make_response(json.dumps({"success": True}), 200)
+        except Exception as e:
+            self._logger.error(f"Error changing boot instance: {e}")
+            response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
+
+        return response
+
     @Permissions.WEBCAM.require(403)
     @octoprint.plugin.BlueprintPlugin.route("webcam")
     def webcam_route(self):
@@ -549,7 +568,23 @@ class OctodashPlugin(
 
         return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
 
+    def _update_xinit_for_instance(self, xinit, path):
+        match = self.change_instance.search(xinit)
+        new = xinit.replace(match.group(1), path)
 
+        return new
+
+    def _change_boot_instance(self, instance):
+        self._logger.info("Changing boot instance to {}".format(instance))
+        fullpath = os.path.expanduser('~/.xinitrc')
+        self._logger.debug("Full path to xinit: {}".format(fullpath))
+        with open(fullpath, "r+") as f:
+            xinit = f.read()
+            self._logger.debug("Current xinit: {}".format(xinit))
+            new_xinit = self._update_xinit_for_instance(xinit, instance)
+            self._logger.debug("New xinit: {}".format(new_xinit))
+            f.seek(0)
+            f.write(new_xinit)
 
     def _migrate_legacy_config(self, path):
         with open(path, 'r') as f:
