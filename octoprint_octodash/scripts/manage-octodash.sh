@@ -7,15 +7,16 @@ octoprint_suffix="/plugin/octodash/"
 
 dependencies="xserver-xorg xinit chromium-browser"
 
-read -d '' browser_launch << EOL
+read -d '' delay_loop << EOL
 
-until curl -s -o /dev/null -w \"%{http_code}\n\" \$OCTOPRINT_URL$octoprint_suffix | grep -q \"200\"
-do
-   echo "Waiting for OctoPrint"
-   sleep 3
-done
-chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized \$OCTOPRINT_URL$octoprint_suffix
+  until curl -s -o /dev/null -w \"%{http_code}\n\" \$OCTOPRINT_URL$octoprint_suffix | grep -q \"200\"
+  do
+    echo "Waiting for OctoPrint at \$OCTOPRINT_URL$octoprint_suffix to be available..."
+    sleep 3
+  done
 EOL
+
+browser_launch="chromium-browser --kiosk --noerrdialogs --disable-infobars --no-first-run --enable-features=OverlayScrollbar --start-maximized \$OCTOPRINT_URL$octoprint_suffix"
 
 yes_no=( 'yes' 'no' )
 
@@ -725,9 +726,23 @@ update_xinit() {
   XINITRC="$HOME/.xinitrc"
   if grep -q "octodash" "$XINITRC"; then
       sed -i "s!^octodash.*\$!!" "$XINITRC"
-      echo "OCTOPRINT_URL=$octoprint_url" >> ~/.xinitrc
       echo "$browser_launch" >> "$XINITRC"
       echo ".xinitrc updated: replaced 'octodash' with Chromium launch command."
+  fi
+
+  # Update .bashrc to include delay loop for OctoPrint availability
+  if grep -q "xinit" "$HOME/.bashrc"; then
+    # If xinit is already being launched, we assume it's for OctoDash and add the delay loop
+    read -d '' new_content <<EOF
+
+  export OCTOPRINT_URL=$octoprint_url
+  $delay_loop
+EOF
+    tmp=$(mktemp)
+    awk -v insert="$new_content" '
+    /xinit -- -nocursor/ { print insert }
+    { print }
+    ' $HOME/.bashrc > "$tmp" && mv "$tmp" "$HOME/.bashrc"
   fi
 }
 
@@ -740,12 +755,24 @@ enable_autostart() {
     echo "Setting up Autostart ..."
 
     text_input "$octodash_url_prompt" octoprint_url $octodash_url_default
-    echo "OCTOPRINT_URL=$octoprint_url" >> ~/.xinitrc
+
+    cat <<EOF > ~/.xinitrc
+#!/bin/sh
+
+xset s off
+xset s noblank
+xset -dpms
+
+EOF
+
     echo "$browser_launch" >> ~/.xinitrc
 
     cat <<EOF >> ~/.bashrc
+
 if [ -z "\$SSH_CLIENT" ] || [ -z "\$SSH_TTY" ]; then
-    xinit -- -nocursor
+  export OCTOPRINT_URL=$octoprint_url
+  $delay_loop
+  xinit -- -nocursor
 fi
 EOF
 
