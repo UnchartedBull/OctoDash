@@ -12,7 +12,7 @@ def plugin():
 @pytest.mark.parametrize("input, group", [
     ("OCTOPRINT_URL=http://localhost:5000\nchromium-browser --kiosk http://octopi.local", 'http://localhost:5000'),
     ("something\nOCTOPRINT_URL=http://localhost:5000\nchromium-browser --kiosk http://octopi.local\nsdf", 'http://localhost:5000'),
-    ("OCTOPRINT_URL=https://octopi.example.com", 'https://octopi.example.com'),
+    ("   OCTOPRINT_URL=https://octopi.example.com", 'https://octopi.example.com'),
     ('\nls\n\n# a commment\n\nOCTOPRINT_URL=http://localhost\n\nchromium-browser --kiosk $OCTOPRINT_URL/plugin/octodash\n\n', 'http://localhost')
 ])
 def test_change_regex(plugin, input, group):

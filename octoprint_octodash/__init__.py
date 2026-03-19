@@ -45,7 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
         self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
-        self.change_instance = re.compile(r'^OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
+        self.change_instance = re.compile(r'^\s*OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
 
     ##~~ SettingsPlugin mixin
 
@@ -576,7 +576,7 @@ class OctodashPlugin(
 
     def _change_boot_instance(self, instance):
         self._logger.info("Changing boot instance to {}".format(instance))
-        fullpath = os.path.expanduser('~/.xinitrc')
+        fullpath = os.path.expanduser('~/.bashrc')
         self._logger.debug("Full path to xinit: {}".format(fullpath))
         with open(fullpath, "r+") as f:
             xinit = f.read()
