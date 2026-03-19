@@ -577,14 +577,14 @@ class OctodashPlugin(
     def _change_boot_instance(self, instance):
         self._logger.info("Changing boot instance to {}".format(instance))
         fullpath = os.path.expanduser('~/.bashrc')
-        self._logger.debug("Full path to xinit: {}".format(fullpath))
+        self._logger.debug("Full path to bashrc: {}".format(fullpath))
         with open(fullpath, "r+") as f:
-            xinit = f.read()
-            self._logger.debug("Current xinit: {}".format(xinit))
-            new_xinit = self._update_xinit_for_instance(xinit, instance)
-            self._logger.debug("New xinit: {}".format(new_xinit))
+            script = f.read()
+            self._logger.debug("Current bashrc: {}".format(script))
+            new_script = self._update_xinit_for_instance(script, instance)
+            self._logger.debug("New bashrc: {}".format(new_script))
             f.seek(0)
-            f.write(new_xinit)
+            f.write(new_script)
 
     def _migrate_legacy_config(self, path):
         with open(path, 'r') as f:
