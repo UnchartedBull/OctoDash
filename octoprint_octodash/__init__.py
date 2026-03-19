@@ -45,7 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
         self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
-        self.change_instance = re.compile(r'^\s*OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
+        self.change_instance = re.compile(r'^\s*export OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
 
     ##~~ SettingsPlugin mixin
 
