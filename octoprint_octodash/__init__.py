@@ -394,6 +394,27 @@ class OctodashPlugin(
             self._logger.error(f"Error changing boot instance: {e}")
             response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
 
+        if not data.get("restart", False):
+            return response
+
+        try:
+            # get restart command from settings
+            acitons = __plugin_settings_overlay__["system"]["actions"]
+            restart_action = next((a for a in acitons if a["action"] == "octodash_restart"))
+            command = restart_action["command"]
+            self._logger.info(f"Running restart command: {command}")
+            subprocess.run(command, shell=True, check=True, timeout=10)
+        except subprocess.TimeoutExpired:
+            self._logger.error("OctoDash restart command timed out")
+            response = make_response(json.dumps({"error": "Error restarting"}), 500)
+        except subprocess.CalledProcessError as e:
+            self._logger.error(f"Error restarting OctoDash: {e}")
+            response = make_response(json.dumps({"error": "Error restarting OctoDash"})),
+        except StopIteration:
+            self._logger.error("OctoDash restart command not found in settings overlay")
+            response = make_response(json.dumps({"error": "Unable to find restart command"}), 500)
+
+
         return response
 
     @Permissions.WEBCAM.require(403)
