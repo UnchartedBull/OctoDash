@@ -398,9 +398,8 @@ class OctodashPlugin(
             return response
 
         try:
-            # get restart command from settings
-            acitons = __plugin_settings_overlay__["system"]["actions"]
-            restart_action = next((a for a in acitons if a["action"] == "octodash_restart"))
+            actions = self._settings.global_get(["system", "actions"])
+            restart_action = next((a for a in actions if a["action"] == "octodash_restart"))
             command = restart_action["command"]
             self._logger.info(f"Running restart command: {command}")
             subprocess.run(command, shell=True, check=True, timeout=10)
