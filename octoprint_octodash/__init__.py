@@ -606,6 +606,7 @@ class OctodashPlugin(
             self._logger.debug("New bashrc: {}".format(new_script))
             f.seek(0)
             f.write(new_script)
+            f.truncate()
 
     def _migrate_legacy_config(self, path):
         with open(path, 'r') as f:
