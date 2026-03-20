@@ -393,6 +393,7 @@ class OctodashPlugin(
         except Exception as e:
             self._logger.error(f"Error changing boot instance: {e}")
             response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
+            return response
 
         if not data.get("restart", False):
             return response
