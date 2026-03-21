@@ -382,13 +382,27 @@ class OctodashPlugin(
     @Permissions.ADMIN.require(403)
     @octoprint.plugin.BlueprintPlugin.route("/api/change_instance", methods=["POST"])
     def change_instance_route(self):
+        """
+        Change the boot instance.
+
+        Updates the user's bashrc to set the OCTOPRINT_URL to the provided instance.
+        If `restart` is true, will also attempt to restart OctoDash using the system
+        actions defined in the settings overlay.
+
+        Expects a JSON body with the following format:
+        {
+            "instance": "http://new.instance.url", # leading and trailing whitespace will be stripped
+            "restart": true # optional, defaults to false
+        }
+        """
         data = request.json
         if not data or "instance" not in data:
             return make_response(json.dumps({"error": "Instance not provided"}), 400)
         
         try:
-            instance = data["instance"]
-            self._change_boot_instance(instance)
+            instance: str = data["instance"]
+            trimmed = instance.strip()
+            self._change_boot_instance(trimmed)
             response = make_response(json.dumps({"success": True}), 200)
         except Exception as e:
             self._logger.error(f"Error changing boot instance: {e}")
