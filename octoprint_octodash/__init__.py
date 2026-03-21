@@ -409,7 +409,9 @@ class OctodashPlugin(
             response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
             return response
 
-        if not data.get("restart", True):
+        should_restart = data.get("restart", True)
+        if not should_restart:
+            self._logger.info("Not restarting OctoDash on instance change per request")
             return response
 
         try:
