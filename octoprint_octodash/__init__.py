@@ -392,7 +392,7 @@ class OctodashPlugin(
         Expects a JSON body with the following format:
         {
             "instance": "http://new.instance.url", # leading and trailing whitespace will be stripped
-            "restart": true # optional, defaults to false
+            "restart": false # optional, defaults to true
         }
         """
         data = request.json
@@ -409,7 +409,7 @@ class OctodashPlugin(
             response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
             return response
 
-        if not data.get("restart", False):
+        if not data.get("restart", True):
             return response
 
         try:
