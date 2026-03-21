@@ -45,6 +45,7 @@ class OctodashPlugin(
         self.use_received_fan_speeds = False
         self.fan_regex = re.compile("M106 (?:P([0-9]) )?S([0-9]+)")
         self.fan_regex_m107 = re.compile("M107(?: +P([0-9]+))?")
+        self.change_instance = re.compile(r'^\s*export OCTOPRINT_URL=(http.*?)(?: |$)', re.MULTILINE)
 
     ##~~ SettingsPlugin mixin
 
@@ -64,7 +65,8 @@ class OctodashPlugin(
 
     def on_settings_save(self, data):
         for plugin_name in ALL_PLUGINS.keys():
-            del data["plugins"][plugin_name]['inUse']
+            if "plugins" in data:
+                del data["plugins"][plugin_name]['inUse']
 
         return super().on_settings_save(data)
 
@@ -377,6 +379,60 @@ class OctodashPlugin(
 
         return make_response(json.dumps({"success": True}), 200)
 
+    @Permissions.ADMIN.require(403)
+    @octoprint.plugin.BlueprintPlugin.route("/api/change_instance", methods=["POST"])
+    def change_instance_route(self):
+        """
+        Change the boot instance.
+
+        Updates the user's bashrc to set the OCTOPRINT_URL to the provided instance.
+        If `restart` is true, will also attempt to restart OctoDash using the system
+        actions defined in the settings overlay.
+
+        Expects a JSON body with the following format:
+        {
+            "instance": "http://new.instance.url", # leading and trailing whitespace will be stripped
+            "restart": false # optional, defaults to true
+        }
+        """
+        data = request.json
+        if not data or "instance" not in data:
+            return make_response(json.dumps({"error": "Instance not provided"}), 400)
+        
+        try:
+            instance: str = data["instance"]
+            trimmed = instance.strip()
+            self._change_boot_instance(trimmed)
+            response = make_response(json.dumps({"success": True}), 200)
+        except Exception as e:
+            self._logger.error(f"Error changing boot instance: {e}")
+            response = make_response(json.dumps({"error": "Error changing boot instance"}), 500)
+            return response
+
+        should_restart = data.get("restart", True)
+        if not should_restart:
+            self._logger.info("Not restarting OctoDash on instance change per request")
+            return response
+
+        try:
+            actions = self._settings.global_get(["system", "actions"])
+            restart_action = next((a for a in actions if a["action"] == "octodash_restart"))
+            command = restart_action["command"]
+            self._logger.info(f"Running restart command: {command}")
+            subprocess.run(command, shell=True, check=True, timeout=10)
+        except subprocess.TimeoutExpired:
+            self._logger.error("OctoDash restart command timed out")
+            response = make_response(json.dumps({"error": "Error restarting"}), 500)
+        except subprocess.CalledProcessError as e:
+            self._logger.error(f"Error restarting OctoDash: {e}")
+            response = make_response(json.dumps({"error": "Error restarting OctoDash"})),
+        except StopIteration:
+            self._logger.error("OctoDash restart command not found in settings overlay")
+            response = make_response(json.dumps({"error": "Unable to find restart command"}), 500)
+
+
+        return response
+
     @Permissions.WEBCAM.require(403)
     @octoprint.plugin.BlueprintPlugin.route("webcam")
     def webcam_route(self):
@@ -549,7 +605,24 @@ class OctodashPlugin(
 
         return [{"path": p, "exists":  os.path.exists(p)} for p in expanded]
 
+    def _update_xinit_for_instance(self, xinit, path):
+        match = self.change_instance.search(xinit)
+        new = xinit.replace(match.group(1), path)
 
+        return new
+
+    def _change_boot_instance(self, instance):
+        self._logger.info("Changing boot instance to {}".format(instance))
+        fullpath = os.path.expanduser('~/.bashrc')
+        self._logger.debug("Full path to bashrc: {}".format(fullpath))
+        with open(fullpath, "r+") as f:
+            script = f.read()
+            self._logger.debug("Current bashrc: {}".format(script))
+            new_script = self._update_xinit_for_instance(script, instance)
+            self._logger.debug("New bashrc: {}".format(new_script))
+            f.seek(0)
+            f.write(new_script)
+            f.truncate()
 
     def _migrate_legacy_config(self, path):
         with open(path, 'r') as f:
@@ -586,14 +659,14 @@ __plugin_name__ = "Octodash Plugin"
 # OctoPrint 1.8.0 onwards only supports Python 3.
 __plugin_pythoncompat__ = ">=3,<4"  # Only Python 3
 __plugin_settings_overlay__ = {'system': {'actions': [{'action': 'octodash_start',
-                                                        'command': 'sudo service getty@tty1 start',
+                                                        'command': 'sudo -n service getty@tty1 start',
                                                         'name': 'Start OctoDash'},
                                                         {'action': 'octodash_stop',
-                                                        'command': 'sudo service getty@tty1 stop',
+                                                        'command': 'sudo -n service getty@tty1 stop',
                                                         'name': 'Stop OctoDash',
                                                         'confirm': 'You are about to shutdown OctoDash.'},
                                                         {'action': 'octodash_restart',
-                                                        'command': 'sudo service getty@tty1 restart',
+                                                        'command': 'sudo -n service getty@tty1 restart',
                                                         'name': 'Restart OctoDash',
                                                         'confirm': 'You are about to restart OctoDash.'}]}}
 

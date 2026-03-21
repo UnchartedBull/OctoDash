@@ -1,9 +1,9 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AppService } from 'src/services/app.service';
+import { ChangeInstanceService } from 'src/services/change-instance.service';
 
 import { CustomAction, PrinterState, PrinterStatus, PSUState } from '../../model';
 import { ConfigService } from '../../services/config.service';
@@ -24,6 +24,7 @@ const SpecialCommandRegex = /\[!([\w_]+)\]/;
 export class ActionCenterComponent implements OnInit, OnDestroy {
   @Input() closeEvent: Observable<void>;
   private eventsSubscription: Subscription;
+  private changeInstanceService = inject(ChangeInstanceService);
 
   public visible = false;
   public editing = -1;
@@ -46,6 +47,7 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     POWERON: () => this.enclosureService.setPSUState(PSUState.ON),
     POWERTOGGLE: () => this.enclosureService.togglePSU(),
     WEB: value => this.openIframe(value),
+    SWITCH_INSTANCE: value => this.changeInstance(value),
     WEBCAM: () => this.openIframe('/plugin/octodash/webcam'),
     NEOPIXEL: (...values) => this.setLEDColor(values[0], values[1], values[2], values[3]),
     OUTPUT: (...values) => this.setOutput(values[0], values[1]),
@@ -61,7 +63,6 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
     private configService: ConfigService,
     private enclosureService: EnclosureService,
     private notificationService: NotificationService,
-    private router: Router,
   ) {
     this.customActions = this.configService.getCustomActions();
 
@@ -85,6 +86,17 @@ export class ActionCenterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
+  }
+
+  private changeInstance(instance: string) {
+    this.changeInstanceService.changeInstance(instance).subscribe({
+      error: () => {
+        this.notificationService.error(
+          $localize`:@@error-change-instance:Failed to change instance!`,
+          $localize`:@@error-change-instance-desc:An error occurred while trying to change the OctoPrint instance.`,
+        );
+      },
+    });
   }
 
   public updateActionsInConfig() {
