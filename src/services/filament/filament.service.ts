@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { FilamentSpool } from '../../model';
 import { ConfigService } from '../../services/config.service';
@@ -9,7 +10,7 @@ import { FilamentPluginService } from './filament-plugin.service';
 @Injectable()
 export class FilamentService {
   private filamentSpools: Array<FilamentSpool>;
-  private currentSpool: FilamentSpool[];
+  private currentSpool = new BehaviorSubject<Array<FilamentSpool>>([]);
   private loading = true;
 
   constructor(
@@ -30,7 +31,7 @@ export class FilamentService {
       complete: () => (this.loading = false),
     });
     this.filamentPluginService.getCurrentSpools().subscribe({
-      next: (spools: FilamentSpool[]) => (this.currentSpool = spools),
+      next: (spools: FilamentSpool[]) => this.currentSpool.next(spools),
       error: (error: HttpErrorResponse) =>
         this.notificationService.warn($localize`:@@error-spool:Can't load active spool!`, error.message),
     });
@@ -40,8 +41,8 @@ export class FilamentService {
     return this.filamentSpools;
   }
 
-  public getCurrentSpools(): Array<FilamentSpool> {
-    return this.currentSpool;
+  public getCurrentSpools() {
+    return this.currentSpool.asObservable();
   }
 
   public getCurrentSpool(tool: number): FilamentSpool {
