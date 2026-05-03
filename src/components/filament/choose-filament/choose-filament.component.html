@@ -20,6 +20,9 @@
           <td class="filaments__type">
             <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
           </td>
+          <td class="filaments__id">
+            #{{ spool.id}}
+          </td>
           <td class="filaments__name">
             {{ spool.displayName }}
           </td>

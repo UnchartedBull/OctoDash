@@ -61,7 +61,7 @@
   }
 
   &__type {
-    width: 15vw;
+    width: 12vw;
     text-align: center;
     margin-left: -2vw;
 
@@ -75,8 +75,13 @@
     }
   }
 
+  &__id {
+    width: 9vw;
+    text-align: left;
+  }
+
   &__name {
-    width: 56vw;
+    width: 50vw;
   }
 
   &__in-use-icon {
