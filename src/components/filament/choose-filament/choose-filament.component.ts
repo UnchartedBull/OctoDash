@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
+import { Component, EventEmitter, Output, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 
 import { FilamentSpool } from '../../../model';
@@ -13,13 +14,12 @@ import { FilamentService } from '../../../services/filament/filament.service';
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
 
-  private currentSpools: WritableSignal<(number | null)[]> = signal([]);
+  private currentSpools: Signal<(number | null)[]>;
 
   constructor(public filament: FilamentService) {
-    filament
-      .getCurrentSpools()
-      .pipe(map(spools => spools.map(s => s?.id || null)))
-      .subscribe(ids => this.currentSpools.set(ids));
+    this.currentSpools = toSignal(filament.getCurrentSpools().pipe(map(spools => spools.map(s => s?.id || null))), {
+      initialValue: [],
+    });
   }
 
   public getSpoolWeightLeft(weight: number, used: number): number {
