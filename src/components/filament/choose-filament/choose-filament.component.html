@@ -2,7 +2,7 @@
 @if (!filament.getLoading()) {
   @if (filament.filamentSpools) {
     <table class="filaments">
-      @for (spool of filament.filamentSpools; track spool) {
+      @for (spool of filterSpools(filament.filamentSpools); track spool) {
         <tr
           [ngClass]="{ 'filaments__in-use': currentSpools().includes(spool.id) }"
           long-press
