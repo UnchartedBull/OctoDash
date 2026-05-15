@@ -1,5 +1,5 @@
 <span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
-@if (!filament.getLoading()) {
+@if (! (filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
     <button class="filter-button" (click)="showFilters = true" i18n="@@choose-filament-filter">Filter</button>
     <table class="filaments">

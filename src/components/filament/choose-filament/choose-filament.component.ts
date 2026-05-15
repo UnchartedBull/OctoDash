@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Output, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 
 import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
 
-
 @Component({
   selector: 'app-filament-choose-spool',
   templateUrl: './choose-filament.component.html',
   styleUrls: ['./choose-filament.component.scss', '../filament.component.scss'],
   standalone: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
