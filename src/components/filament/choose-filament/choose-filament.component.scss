@@ -107,3 +107,43 @@
   font-size: 0.9rem;
   margin-top: 20vh;
 }
+
+
+.filter-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  .filter-body {
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
+    background-color: var(--background);
+    border-radius: 2vw;
+    padding: 2vh 1.5vw;
+    box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
+    display: block;
+
+    .filter-heading {
+      font-size: 3.5vw;
+      margin-bottom: 1vh;
+      font-weight: 500;
+    }
+
+    .filter-option {
+      display: block;
+      font-size: 2.5vw;
+      margin-top: 3vh;
+
+      & span {
+        font-size: 1.5vw;
+        color: var(--error);
+        margin-left: 1vw; 
+      }
+    }
+  }
+}

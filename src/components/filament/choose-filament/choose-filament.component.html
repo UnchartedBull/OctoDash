@@ -1,6 +1,7 @@
 <span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
 @if (!filament.getLoading()) {
   @if (filament.filamentSpools) {
+    <button class="filter-button" (click)="showFilters = true" i18n="@@choose-filament-filter">Filter</button>
     <table class="filaments">
       @for (spool of filterSpools(filament.filamentSpools); track spool) {
         <tr
@@ -35,4 +36,19 @@
   }
 } @else {
   <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
+}
+
+@if (showFilters) {
+  <div class="filter-wrapper">
+    <div class="filter-body">
+      Material:
+      <select [(ngModel)]="activeFilters.material" >
+        <option [value]="null" i18n="@@choose-filament-all">All</option>
+        @for (material of getMaterials(filament.filamentSpools || []); track material) {
+          <option [value]="material">{{ material ?? "Unknown" }}</option>
+        }
+      </select>
+      <button class="button" (click)="showFilters = false" i18n="@@choose-filament-close-filters">Close Filters</button>
+    </div>
+  </div>
 }
