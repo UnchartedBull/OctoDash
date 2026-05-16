@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, Signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 
@@ -6,10 +14,10 @@ import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
 
 interface SpoolFilters {
-  material: string | null;
-  vendor: string | null;
-  minWeight: number | null;
-  maxWeight: number | null;
+  material: WritableSignal<string | null>;
+  vendor: WritableSignal<string | null>;
+  minWeight: WritableSignal<number | null>;
+  maxWeight: WritableSignal<number | null>;
 }
 
 @Component({
@@ -25,13 +33,13 @@ export class ChooseFilamentComponent {
   private currentSpools: Signal<(number | null)[]>;
 
   private activeFilters: SpoolFilters = {
-    material: null,
-    vendor: null,
-    minWeight: null,
-    maxWeight: null,
+    material: signal<string | null>(null),
+    vendor: signal<string | null>(null),
+    minWeight: signal<number>(0),
+    maxWeight: signal<number>(5000),
   };
 
-  showFilters = false;
+  showFilters = signal(false);
 
   constructor(public filament: FilamentService) {
     this.currentSpools = toSignal(filament.getCurrentSpools().pipe(map(spools => spools.map(s => s?.id || null))), {
@@ -48,23 +56,23 @@ export class ChooseFilamentComponent {
     // empty string -> filter for empty values
     return spools
       .filter(spool => {
-        if (this.activeFilters.material === null) {
+        if (this.activeFilters.material() === null) {
           return true;
         }
-        return this.activeFilters.material === spool.material;
+        return this.activeFilters.material() === spool.material;
       })
       .filter(spool => {
-        if (this.activeFilters.vendor === null) {
+        if (this.activeFilters.vendor() === null) {
           return true;
         }
-        return this.activeFilters.vendor === spool.vendor;
+        return this.activeFilters.vendor() === spool.vendor;
       })
       .filter(spool => {
         const weightLeft = this.getSpoolWeightLeft(spool.weight, spool.used);
-        if (this.activeFilters.minWeight !== null && weightLeft < this.activeFilters.minWeight) {
+        if (this.activeFilters.minWeight() !== null && weightLeft < this.activeFilters.minWeight()) {
           return false;
         }
-        if (this.activeFilters.maxWeight !== null && weightLeft > this.activeFilters.maxWeight) {
+        if (this.activeFilters.maxWeight() !== null && weightLeft > this.activeFilters.maxWeight()) {
           return false;
         }
         return true;
@@ -96,10 +104,10 @@ export class ChooseFilamentComponent {
   }
 
   public setMinWeight(value: string): void {
-    this.activeFilters.minWeight = value ? parseInt(value, 10) : null;
+    this.activeFilters.minWeight.set(value ? parseInt(value, 10) : null);
   }
 
   public setMaxWeight(value: string): void {
-    this.activeFilters.maxWeight = value ? parseInt(value, 10) : null;
+    this.activeFilters.maxWeight.set(value ? parseInt(value, 10) : null);
   }
 }

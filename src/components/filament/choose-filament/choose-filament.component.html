@@ -1,6 +1,6 @@
 <div class="filament-heading">
   <span i18n="@@choose-filament">select your new filament</span>
-  <button class="filter-button" (click)="showFilters = true" i18n="@@choose-filament-filter">Filter</button>
+  <button class="filter-button" (click)="showFilters.set(true)" i18n="@@choose-filament-filter">Filter</button>
 </div>
 @if (! (filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
@@ -40,7 +40,7 @@
   <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
 }
 
-@if (showFilters) {
+@if (showFilters()) {
   <div class="filter-wrapper">
     <div class="filter-body">
       <form>
@@ -72,7 +72,7 @@
                 name="filter-weight-min"
                 min="0"
                 [max]="getMaximumWeight(filament.filamentSpools || [])"
-                [value]="activeFilters.minWeight || 0"
+                [value]="activeFilters.minWeight() || 0"
                 (input)="setMinWeight($event.target.value)"
                 (change)="setMinWeight($event.target.value)"
                 class="range-input range-input-min">
@@ -82,20 +82,20 @@
                 name="filter-weight-max"
                 min="0"
                 [max]="getMaximumWeight(filament.filamentSpools || [])"
-                [value]="activeFilters.maxWeight || getMaximumWeight(filament.filamentSpools || [])"
+                [value]="activeFilters.maxWeight() || getMaximumWeight(filament.filamentSpools || [])"
                 (input)="setMaxWeight($event.target.value)"
                 (change)="setMaxWeight($event.target.value)"
                 class="range-input range-input-max">
               <div class="range-track"></div>
             </div>
             <div class="weight-display">
-              <span class="weight-min">{{ activeFilters.minWeight || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
+              <span class="weight-min">{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
               <span class="weight-separator">-</span>
-              <span class="weight-max">{{ activeFilters.maxWeight || getMaximumWeight(filament.filamentSpools || []) }}<span i18n="@@choose-filament-grams">g</span></span>
+              <span class="weight-max">{{ activeFilters.maxWeight() || getMaximumWeight(filament.filamentSpools || []) }}<span i18n="@@choose-filament-grams">g</span></span>
             </div>
           </div>
         </div>
-        <button class="button" (click)="showFilters = false" i18n="@@choose-filament-close-filters">Close Filters</button>
+        <button class="button" (click)="showFilters.set(false)" i18n="@@choose-filament-close-filters">Close Filters</button>
       </form>
     </div>
   </div>
