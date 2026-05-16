@@ -1,3 +1,16 @@
+.filament-heading {
+  button {
+    float: right;
+    background-color: var(--info);
+    font-size: 2.5vw;
+  }
+}
+button {
+  background-color: var(--primary);
+  border-radius: 2vh;
+  padding: 1vh 2vw;
+}
+
 .filaments {
   margin-top: 2vh;
   width: 96vw;
@@ -113,7 +126,7 @@
     width: 50vw;
     height: 50vh;
     background-color: var(--background);
-    border: 2px solid var(--border);
+    border: 2px solid var(--background-3);
     border-radius: 2vw;
     padding: 3vh 2.5vw;
     box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
@@ -154,9 +167,6 @@
 
     button {
       margin: auto auto 3vh auto;
-      background-color: var(--primary);
-      border-radius: 2vh;
-      padding: 1vh 2vw;
       align-self: flex-end;
     }
 

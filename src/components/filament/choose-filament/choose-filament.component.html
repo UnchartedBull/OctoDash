@@ -1,7 +1,9 @@
-<span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
+<div class="filament-heading">
+  <span i18n="@@choose-filament">select your new filament</span>
+  <button class="filter-button" (click)="showFilters = true" i18n="@@choose-filament-filter">Filter</button>
+</div>
 @if (! (filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
-    <button class="filter-button" (click)="showFilters = true" i18n="@@choose-filament-filter">Filter</button>
     <table class="filaments">
       @for (spool of filterSpools(filament.filamentSpools); track spool) {
         <tr
