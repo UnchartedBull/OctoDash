@@ -182,21 +182,42 @@ button {
       }
     }
 
-    .weight-filter-container {
+    .weight-range-container {
       display: flex;
-      align-items: center;
-      gap: 2vw;
+      flex-direction: column;
+      gap: 1.5vh;
       flex: 1;
     }
 
-    .weight-slider {
-      flex: 1;
+    .range-slider {
+      position: relative;
+      height: 3vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .range-track {
+      position: absolute;
+      width: 100%;
       height: 0.6vh;
+      background-color: var(--background-3);
       border-radius: 0.3vh;
-      background: var(--background-3);
+      pointer-events: none;
+    }
+
+    .range-input {
+      position: absolute;
+      width: 100%;
+      height: 0.6vh;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 0.3vh;
+      background: none;
       outline: none;
       -webkit-appearance: none;
       appearance: none;
+      pointer-events: none;
+      z-index: 5;
 
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -207,6 +228,8 @@ button {
         background: var(--primary);
         cursor: pointer;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        pointer-events: auto;
+        z-index: 5;
       }
 
       &::-moz-range-thumb {
@@ -217,23 +240,48 @@ button {
         cursor: pointer;
         border: none;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        pointer-events: auto;
       }
 
       &::-webkit-slider-runnable-track {
-        background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--value, 0%), var(--background-3) var(--value, 0%), var(--background-3) 100%);
+        background: transparent;
         height: 0.6vh;
         border-radius: 0.3vh;
       }
+
+      &::-moz-range-track {
+        background: transparent;
+        border: none;
+      }
     }
 
-    .weight-value {
+    .range-input-min {
+      z-index: 6;
+    }
+
+    .range-input-max {
+      z-index: 5;
+    }
+
+    .weight-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1vw;
       font-size: 3.5vh;
-      white-space: nowrap;
       font-weight: 500;
 
       span {
+        font-size: 3.5vh;
+      }
+
+      span span {
         font-size: 2.5vh;
         margin-left: 0.5vw;
+      }
+
+      .weight-separator {
+        font-size: 2vh;
       }
     }
   }

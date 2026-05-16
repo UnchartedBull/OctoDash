@@ -8,6 +8,7 @@ import { FilamentService } from '../../../services/filament/filament.service';
 interface SpoolFilters {
   material: string | null;
   vendor: string | null;
+  minWeight: number | null;
   maxWeight: number | null;
 }
 
@@ -26,6 +27,7 @@ export class ChooseFilamentComponent {
   private activeFilters: SpoolFilters = {
     material: null,
     vendor: null,
+    minWeight: null,
     maxWeight: null,
   };
 
@@ -58,11 +60,14 @@ export class ChooseFilamentComponent {
         return this.activeFilters.vendor === spool.vendor;
       })
       .filter(spool => {
-        if (this.activeFilters.maxWeight === null) {
-          return true;
-        }
         const weightLeft = this.getSpoolWeightLeft(spool.weight, spool.used);
-        return weightLeft <= this.activeFilters.maxWeight;
+        if (this.activeFilters.minWeight !== null && weightLeft < this.activeFilters.minWeight) {
+          return false;
+        }
+        if (this.activeFilters.maxWeight !== null && weightLeft > this.activeFilters.maxWeight) {
+          return false;
+        }
+        return true;
       });
   }
 
@@ -90,7 +95,11 @@ export class ChooseFilamentComponent {
     return weights.length > 0 ? Math.max(...weights) : 1000;
   }
 
-  public setWeightFilter(value: string): void {
+  public setMinWeight(value: string): void {
+    this.activeFilters.minWeight = value ? parseInt(value, 10) : null;
+  }
+
+  public setMaxWeight(value: string): void {
     this.activeFilters.maxWeight = value ? parseInt(value, 10) : null;
   }
 }
