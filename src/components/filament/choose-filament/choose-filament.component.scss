@@ -7,17 +7,6 @@
   -webkit-overflow-scrolling: touch;
   padding-right: 1.5vw;
 
-  &::before {
-    content: '';
-    width: 93vw;
-    height: 75vh;
-    position: absolute;
-    left: 1vw;
-    top: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(var(--background), transparent 6%, transparent 94%, var(--background));
-  }
 
   td {
     font-size: 3.2vw;
