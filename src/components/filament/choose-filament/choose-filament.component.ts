@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   EventEmitter,
+  inject,
   Output,
   Signal,
   signal,
@@ -30,7 +32,8 @@ interface SpoolFilters {
 export class ChooseFilamentComponent {
   @Output() spoolChange = new EventEmitter<{ spool: FilamentSpool; skipChange: boolean }>();
 
-  private currentSpools: Signal<(number | null)[]>;
+  public filament: FilamentService = inject(FilamentService);
+  spools = toSignal(this.filament.getFilamentSpools());
 
   private activeFilters: SpoolFilters = {
     material: signal<string | null>(null),
@@ -39,22 +42,31 @@ export class ChooseFilamentComponent {
     maxWeight: signal<number>(5000),
   };
 
+  defaultMax = computed(() => {
+    const spools = this.spools();
+    if (!spools) {
+      return 1000;
+    }
+    return this.maximumWeight();
+  });
+
   showFilters = signal(false);
 
-  constructor(public filament: FilamentService) {
-    this.currentSpools = toSignal(filament.getCurrentSpools().pipe(map(spools => spools.map(s => s?.id || null))), {
+  currentSpools: Signal<(number | null)[]> = toSignal(
+    this.filament.getCurrentSpools().pipe(map(spools => spools.map(s => s?.id || null))),
+    {
       initialValue: [],
-    });
-  }
+    },
+  );
 
   public getSpoolWeightLeft(weight: number, used: number): number {
     return Math.floor(weight - used);
   }
 
-  public filterSpools(spools: FilamentSpool[]): FilamentSpool[] {
+  public filteredSpools = computed(() => {
     // null -> no filtering
     // empty string -> filter for empty values
-    return spools
+    return this.spools()
       .filter(spool => {
         if (this.activeFilters.material() === null) {
           return true;
@@ -77,7 +89,7 @@ export class ChooseFilamentComponent {
         }
         return true;
       });
-  }
+  });
 
   public setSpool(spool: FilamentSpool): void {
     setTimeout(() => {
@@ -91,17 +103,22 @@ export class ChooseFilamentComponent {
     }, 150);
   }
 
-  public getMaterials(spools: FilamentSpool[]): string[] {
-    return Array.from(new Set(spools.map(s => s.material)));
-  }
-  public getManufacturers(spools: FilamentSpool[]): string[] {
-    return Array.from(new Set(spools.map(s => s.vendor)));
-  }
+  public materials = computed(() => {
+    return Array.from(new Set(this.spools().map(s => s.material)));
+  });
 
-  public getMaximumWeight(spools: FilamentSpool[]): number {
+  public manufacturers = computed(() => {
+    return Array.from(new Set(this.spools().map(s => s.vendor)));
+  });
+
+  public maximumWeight = computed(() => {
+    const spools = this.spools();
+    if (!spools) {
+      return 1000;
+    }
     const weights = spools.map(s => this.getSpoolWeightLeft(s.weight, s.used));
     return weights.length > 0 ? Math.max(...weights) : 1000;
-  }
+  });
 
   public setMinWeight(value: string): void {
     this.activeFilters.minWeight.set(value ? parseInt(value, 10) : null);

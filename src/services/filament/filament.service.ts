@@ -9,7 +9,7 @@ import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()
 export class FilamentService {
-  private filamentSpools: Array<FilamentSpool>;
+  private filamentSpools = new BehaviorSubject<Array<FilamentSpool>>([]);
   private currentSpool = new BehaviorSubject<Array<FilamentSpool>>([]);
   private loading = new BehaviorSubject<boolean>(true);
 
@@ -25,7 +25,7 @@ export class FilamentService {
 
   private loadSpools(): void {
     this.filamentPluginService.getSpools().subscribe({
-      next: (spools: Array<FilamentSpool>) => (this.filamentSpools = spools),
+      next: (spools: Array<FilamentSpool>) => this.filamentSpools.next(spools),
       error: (error: HttpErrorResponse) =>
         this.notificationService.warn($localize`:@@error-spools:Can't load filament spools!`, error.message),
       complete: () => this.loading.next(false),
@@ -37,8 +37,8 @@ export class FilamentService {
     });
   }
 
-  public getFilamentSpools(): Array<FilamentSpool> {
-    return this.filamentSpools;
+  public getFilamentSpools(): Observable<Array<FilamentSpool>> {
+    return this.filamentSpools.asObservable();
   }
 
   public getCurrentSpools() {

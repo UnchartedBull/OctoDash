@@ -5,7 +5,7 @@
 @if (! (filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
     <table class="filaments">
-      @for (spool of filterSpools(filament.filamentSpools); track spool) {
+      @for (spool of filteredSpools(); track spool) {
         <tr
           [ngClass]="{ 'filaments__in-use': currentSpools().includes(spool.id) }"
           long-press
@@ -48,7 +48,7 @@
           <label for="filter-material" i18n="@@choose-filament-material">Material:</label>
           <select title="Material" name="filter-material" [(ngModel)]="activeFilters.material" >
             <option  [ngValue]="null" i18n="@@choose-filament-all">All</option>
-            @for (material of getMaterials(filament.filamentSpools || []); track material) {
+            @for (material of materials(); track material) {
               <option [value]="material">{{ material || "Unknown" }}</option>
             }
           </select>
@@ -57,8 +57,8 @@
           <label for="filter-vendor" i18n="@@choose-filament-vendor">Vendor:</label>
           <select name="filter-vendor" title="Vendor"[(ngModel)]="activeFilters.vendor" >
             <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
-            @for (vendor of getManufacturers(filament.filamentSpools || []); track vendor) {
-              <option [value]="vendor">{{ vendor || "Unknown" }}</option>
+            @for (vendor of manufacturers(); track vendor) {
+              <option [ngValue]="vendor">{{ vendor || "Unknown" }}</option>
             }
           </select>
         </div>
@@ -71,7 +71,7 @@
                 id="filter-weight-min"
                 name="filter-weight-min"
                 min="0"
-                [max]="getMaximumWeight(filament.filamentSpools || [])"
+                [max]="maximumWeight()"
                 [value]="activeFilters.minWeight() || 0"
                 (input)="setMinWeight($event.target.value)"
                 (change)="setMinWeight($event.target.value)"
@@ -81,8 +81,8 @@
                 id="filter-weight-max"
                 name="filter-weight-max"
                 min="0"
-                [max]="getMaximumWeight(filament.filamentSpools || [])"
-                [value]="activeFilters.maxWeight() || getMaximumWeight(filament.filamentSpools || [])"
+                [max]="maximumWeight()"
+                [value]="activeFilters.maxWeight() || maximumWeight()"
                 (input)="setMaxWeight($event.target.value)"
                 (change)="setMaxWeight($event.target.value)"
                 class="range-input range-input-max">
@@ -91,7 +91,7 @@
             <div class="weight-display">
               <span class="weight-min">{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
               <span class="weight-separator">-</span>
-              <span class="weight-max">{{ activeFilters.maxWeight() || getMaximumWeight(filament.filamentSpools || []) }}<span i18n="@@choose-filament-grams">g</span></span>
+              <span class="weight-max">{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span>
             </div>
           </div>
         </div>
