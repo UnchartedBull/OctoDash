@@ -181,5 +181,60 @@ button {
         margin-left: 1vw; 
       }
     }
+
+    .weight-filter-container {
+      display: flex;
+      align-items: center;
+      gap: 2vw;
+      flex: 1;
+    }
+
+    .weight-slider {
+      flex: 1;
+      height: 0.6vh;
+      border-radius: 0.3vh;
+      background: var(--background-3);
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 2.5vh;
+        height: 2.5vh;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      &::-moz-range-thumb {
+        width: 2.5vh;
+        height: 2.5vh;
+        border-radius: 50%;
+        background: var(--primary);
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      &::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--value, 0%), var(--background-3) var(--value, 0%), var(--background-3) 100%);
+        height: 0.6vh;
+        border-radius: 0.3vh;
+      }
+    }
+
+    .weight-value {
+      font-size: 3.5vh;
+      white-space: nowrap;
+      font-weight: 500;
+
+      span {
+        font-size: 2.5vh;
+        margin-left: 0.5vw;
+      }
+    }
   }
 }

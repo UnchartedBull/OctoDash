@@ -5,6 +5,12 @@ import { map } from 'rxjs/operators';
 import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
 
+interface SpoolFilters {
+  material: string | null;
+  vendor: string | null;
+  maxWeight: number | null;
+}
+
 @Component({
   selector: 'app-filament-choose-spool',
   templateUrl: './choose-filament.component.html',
@@ -17,9 +23,10 @@ export class ChooseFilamentComponent {
 
   private currentSpools: Signal<(number | null)[]>;
 
-  private activeFilters: { [key: string]: string | null } = {
+  private activeFilters: SpoolFilters = {
     material: null,
     vendor: null,
+    maxWeight: null,
   };
 
   showFilters = false;
@@ -49,6 +56,13 @@ export class ChooseFilamentComponent {
           return true;
         }
         return this.activeFilters.vendor === spool.vendor;
+      })
+      .filter(spool => {
+        if (this.activeFilters.maxWeight === null) {
+          return true;
+        }
+        const weightLeft = this.getSpoolWeightLeft(spool.weight, spool.used);
+        return weightLeft <= this.activeFilters.maxWeight;
       });
   }
 
@@ -69,5 +83,14 @@ export class ChooseFilamentComponent {
   }
   public getManufacturers(spools: FilamentSpool[]): string[] {
     return Array.from(new Set(spools.map(s => s.vendor)));
+  }
+
+  public getMaximumWeight(spools: FilamentSpool[]): number {
+    const weights = spools.map(s => this.getSpoolWeightLeft(s.weight, s.used));
+    return weights.length > 0 ? Math.max(...weights) : 1000;
+  }
+
+  public setWeightFilter(value: string): void {
+    this.activeFilters.maxWeight = value ? parseInt(value, 10) : null;
   }
 }
