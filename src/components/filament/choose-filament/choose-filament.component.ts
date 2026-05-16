@@ -19,6 +19,7 @@ export class ChooseFilamentComponent {
 
   private activeFilters: { [key: string]: string | null } = {
     material: null,
+    vendor: null,
   };
 
   showFilters = false;
@@ -34,9 +35,21 @@ export class ChooseFilamentComponent {
   }
 
   public filterSpools(spools: FilamentSpool[]): FilamentSpool[] {
-    return spools.filter(spool =>
-      this.activeFilters.material ? this.activeFilters.material === spool.material : true,
-    );
+    // null -> no filtering
+    // empty string -> filter for empty values
+    return spools
+      .filter(spool => {
+        if (this.activeFilters.material === null) {
+          return true;
+        }
+        return this.activeFilters.material === spool.material;
+      })
+      .filter(spool => {
+        if (this.activeFilters.vendor === null) {
+          return true;
+        }
+        return this.activeFilters.vendor === spool.vendor;
+      });
   }
 
   public setSpool(spool: FilamentSpool): void {
@@ -53,5 +66,8 @@ export class ChooseFilamentComponent {
 
   public getMaterials(spools: FilamentSpool[]): string[] {
     return Array.from(new Set(spools.map(s => s.material)));
+  }
+  public getManufacturers(spools: FilamentSpool[]): string[] {
+    return Array.from(new Set(spools.map(s => s.vendor)));
   }
 }

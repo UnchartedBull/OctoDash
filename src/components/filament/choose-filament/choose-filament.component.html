@@ -43,9 +43,16 @@
     <div class="filter-body">
       Material:
       <select [(ngModel)]="activeFilters.material" >
-        <option [value]="null" i18n="@@choose-filament-all">All</option>
+        <option  [ngValue]="null" i18n="@@choose-filament-all">All</option>
         @for (material of getMaterials(filament.filamentSpools || []); track material) {
-          <option [value]="material">{{ material ?? "Unknown" }}</option>
+          <option [value]="material">{{ material || "Unknown" }}</option>
+        }
+      </select>
+      Vendor:
+      <select [(ngModel)]="activeFilters.vendor" >
+        <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
+        @for (vendor of getManufacturers(filament.filamentSpools || []); track vendor) {
+          <option [value]="vendor">{{ vendor || "Unknown" }}</option>
         }
       </select>
       <button class="button" (click)="showFilters = false" i18n="@@choose-filament-close-filters">Close Filters</button>
