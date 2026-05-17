@@ -39,16 +39,8 @@ export class ChooseFilamentComponent {
     material: signal<string | null>(null),
     vendor: signal<string | null>(null),
     minWeight: signal<number>(0),
-    maxWeight: signal<number>(5000),
+    maxWeight: signal<number | null>(null),
   };
-
-  defaultMax = computed(() => {
-    const spools = this.spools();
-    if (!spools) {
-      return 1000;
-    }
-    return this.maximumWeight();
-  });
 
   showFilters = signal(false);
 
