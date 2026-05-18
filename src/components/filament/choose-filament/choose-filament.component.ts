@@ -96,11 +96,11 @@ export class ChooseFilamentComponent {
   }
 
   public materials = computed(() => {
-    return Array.from(new Set(this.spools().map(s => s.material)));
+    return Array.from(new Set(this.spools().map(s => s.material))).sort();
   });
 
   public manufacturers = computed(() => {
-    return Array.from(new Set(this.spools().map(s => s.vendor)));
+    return Array.from(new Set(this.spools().map(s => s.vendor))).sort();
   });
 
   public maximumWeight = computed(() => {
