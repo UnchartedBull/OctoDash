@@ -63,7 +63,12 @@
           </select>
         </div>
         <div class="form-group">
-          <label i18n="@@choose-filament-weight-range">Weight Range:</label>
+          <label i18n="@@choose-filament-weight-range">Remaining:</label>
+          <div class="weight-display">
+            <span class="weight-min">{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
+            <span class="weight-separator">-</span>
+            <span class="weight-max">{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span>
+          </div>
           <div class="weight-range-container">
             <div class="range-slider">
               <input
@@ -87,11 +92,6 @@
                 (change)="setMaxWeight($event.target.value)"
                 class="range-input range-input-max">
               <div class="range-track"></div>
-            </div>
-            <div class="weight-display">
-              <span class="weight-min">{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
-              <span class="weight-separator">-</span>
-              <span class="weight-max">{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span>
             </div>
           </div>
         </div>
