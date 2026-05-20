@@ -191,7 +191,7 @@ button {
 
     .range-slider {
       position: relative;
-      height: 3vh;
+      height: 5vh;
       display: flex;
       align-items: center;
     }
@@ -209,7 +209,7 @@ button {
       position: absolute;
       width: 100%;
       height: 0.6vh;
-      top: 50%;
+      top: 25%;
       transform: translateY(-50%);
       border-radius: 0.3vh;
       background: none;
