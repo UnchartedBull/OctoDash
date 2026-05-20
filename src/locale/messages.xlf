@@ -195,28 +195,85 @@
         <source>select your new filament</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">1,4</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-filter" datatype="html">
+        <source>Filter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">3,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="choose-filament-grams-left" datatype="html">
         <source>g left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">28,34</context>
+          <context context-type="linenumber">31,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="no-spools" datatype="html">
         <source>no filament spools found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">34,37</context>
+          <context context-type="linenumber">37,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="loading-spools" datatype="html">
         <source>loading spools</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
-          <context context-type="linenumber">37,39</context>
+          <context context-type="linenumber">40,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-material" datatype="html">
+        <source>Material:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-all" datatype="html">
+        <source>All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">50,52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">59,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-vendor" datatype="html">
+        <source>Vendor:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-weight-range" datatype="html">
+        <source>Remaining:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">66,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-grams" datatype="html">
+        <source>g</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">69,72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">73,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="choose-filament-close-filters" datatype="html">
+        <source> Close Filters </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
+          <context context-type="linenumber">103,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">

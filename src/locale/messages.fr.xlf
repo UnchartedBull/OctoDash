@@ -121,6 +121,9 @@
         <source>select your new filament</source>
         <target>sélectionnez votre nouveau filament</target>
       </trans-unit>
+      <trans-unit id="choose-filament-filter" datatype="html">
+        <source>Filter</source>
+      </trans-unit>
       <trans-unit id="choose-filament-grams-left" datatype="html">
         <source>g left</source>
         <target>g restants</target>
@@ -132,6 +135,24 @@
       <trans-unit id="loading-spools" datatype="html">
         <source>loading spools</source>
         <target>chargement des bobines</target>
+      </trans-unit>
+      <trans-unit id="choose-filament-material" datatype="html">
+        <source>Material:</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-all" datatype="html">
+        <source>All</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-vendor" datatype="html">
+        <source>Vendor:</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-weight-range" datatype="html">
+        <source>Remaining:</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-grams" datatype="html">
+        <source>g</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-close-filters" datatype="html">
+        <source> Close Filters </source>
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
         <source>select tool</source>
