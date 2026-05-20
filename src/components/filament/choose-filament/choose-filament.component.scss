@@ -187,6 +187,7 @@ button {
       flex-direction: column;
       gap: 1.5vh;
       flex: 1;
+      min-width: 0;
     }
 
     .range-slider {
@@ -218,6 +219,8 @@ button {
       appearance: none;
       pointer-events: none;
       z-index: 5;
+      padding: 0 1.25vh;
+      box-sizing: border-box;
 
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
