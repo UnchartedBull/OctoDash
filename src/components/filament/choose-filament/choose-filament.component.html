@@ -2,7 +2,7 @@
   <span i18n="@@choose-filament">select your new filament</span>
   <button class="filter-button" (click)="showFilters.set(true)" i18n="@@choose-filament-filter">Filter</button>
 </div>
-@if (! (filament.getLoading() | async)) {
+@if (!(filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
     <table class="filaments">
       @for (spool of filteredSpools(); track spool) {
@@ -46,28 +46,32 @@
       <form>
         <div class="form-group">
           <label for="filter-material" i18n="@@choose-filament-material">Material:</label>
-          <select title="Material" name="filter-material" [(ngModel)]="activeFilters.material" >
-            <option  [ngValue]="null" i18n="@@choose-filament-all">All</option>
+          <select title="Material" name="filter-material" [(ngModel)]="activeFilters.material">
+            <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
             @for (material of materials(); track material) {
-              <option [value]="material">{{ material || "Unknown" }}</option>
+              <option [value]="material">{{ material || 'Unknown' }}</option>
             }
           </select>
         </div>
         <div class="form-group">
           <label for="filter-vendor" i18n="@@choose-filament-vendor">Vendor:</label>
-          <select name="filter-vendor" title="Vendor"[(ngModel)]="activeFilters.vendor" >
+          <select name="filter-vendor" title="Vendor" [(ngModel)]="activeFilters.vendor">
             <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
             @for (vendor of manufacturers(); track vendor) {
-              <option [ngValue]="vendor">{{ vendor || "Unknown" }}</option>
+              <option [ngValue]="vendor">{{ vendor || 'Unknown' }}</option>
             }
           </select>
         </div>
         <div class="form-group">
           <label i18n="@@choose-filament-weight-range">Remaining:</label>
           <div class="weight-display">
-            <span class="weight-min">{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span>
+            <span class="weight-min"
+              >{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span
+            >
             <span class="weight-separator">-</span>
-            <span class="weight-max">{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span>
+            <span class="weight-max"
+              >{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span
+            >
           </div>
           <div class="weight-range-container">
             <div class="range-slider">
@@ -80,7 +84,7 @@
                 [value]="activeFilters.minWeight() || 0"
                 (input)="setMinWeight($event.target.value)"
                 (change)="setMinWeight($event.target.value)"
-                class="range-input range-input-min">
+                class="range-input range-input-min" />
               <input
                 type="range"
                 id="filter-weight-max"
@@ -90,12 +94,14 @@
                 [value]="activeFilters.maxWeight() || maximumWeight()"
                 (input)="setMaxWeight($event.target.value)"
                 (change)="setMaxWeight($event.target.value)"
-                class="range-input range-input-max">
+                class="range-input range-input-max" />
               <div class="range-track"></div>
             </div>
           </div>
         </div>
-        <button class="button" (click)="showFilters.set(false)" i18n="@@choose-filament-close-filters">Close Filters</button>
+        <button class="button" (click)="showFilters.set(false)" i18n="@@choose-filament-close-filters">
+          Close Filters
+        </button>
       </form>
     </div>
   </div>

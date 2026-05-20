@@ -5,6 +5,7 @@
     font-size: 2.5vw;
   }
 }
+
 button {
   background-color: var(--primary);
   border-radius: 2vh;
@@ -19,7 +20,6 @@ button {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   padding-right: 1.5vw;
-
 
   td {
     font-size: 3.2vw;
@@ -110,7 +110,6 @@ button {
   margin-top: 20vh;
 }
 
-
 .filter-wrapper {
   position: fixed;
   top: 0;
@@ -144,11 +143,11 @@ button {
       display: flex;
       justify-content: space-between;
       border-top: 1px solid var(--border);
+
       &:first-child {
         border-top: none;
       }
     }
-
 
     select {
       font-size: 4.3vh;
@@ -166,7 +165,7 @@ button {
     }
 
     button {
-      margin: auto auto 3vh auto;
+      margin: auto auto 3vh;
       align-self: flex-end;
     }
 
@@ -178,7 +177,7 @@ button {
       & span {
         font-size: 1.5vw;
         color: var(--error);
-        margin-left: 1vw; 
+        margin-left: 1vw;
       }
     }
 
@@ -215,7 +214,7 @@ button {
       border-radius: 0.3vh;
       background: none;
       outline: none;
-      -webkit-appearance: none;
+      appearance: none;
       appearance: none;
       pointer-events: none;
       z-index: 5;
@@ -223,14 +222,14 @@ button {
       box-sizing: border-box;
 
       &::-webkit-slider-thumb {
-        -webkit-appearance: none;
+        appearance: none;
         appearance: none;
         width: 2.5vh;
         height: 2.5vh;
         border-radius: 50%;
         background: var(--primary);
         cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
         pointer-events: auto;
         z-index: 5;
       }
@@ -242,7 +241,7 @@ button {
         background: var(--primary);
         cursor: pointer;
         border: none;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
         pointer-events: auto;
       }
 
@@ -275,7 +274,6 @@ button {
       font-weight: 500;
       width: 14vw;
       padding: 0 1vw;
-
 
       span {
         font-size: 3.5vh;
