@@ -215,14 +215,12 @@ button {
       background: none;
       outline: none;
       appearance: none;
-      appearance: none;
       pointer-events: none;
       z-index: 5;
       padding: 0 1.25vh;
       box-sizing: border-box;
 
       &::-webkit-slider-thumb {
-        appearance: none;
         appearance: none;
         width: 2.5vh;
         height: 2.5vh;
