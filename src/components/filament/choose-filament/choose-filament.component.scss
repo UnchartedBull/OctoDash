@@ -191,7 +191,7 @@ button {
 
     .range-slider {
       position: relative;
-      height: 5vh;
+      height: 8vh;
       display: flex;
       align-items: center;
     }
@@ -209,7 +209,7 @@ button {
       position: absolute;
       width: 100%;
       height: 0.6vh;
-      top: 25%;
+      top: 20%;
       transform: translateY(-50%);
       border-radius: 0.3vh;
       background: none;
@@ -222,8 +222,8 @@ button {
 
       &::-webkit-slider-thumb {
         appearance: none;
-        width: 2.5vh;
-        height: 2.5vh;
+        width: 5vh;
+        height: 5vh;
         border-radius: 50%;
         background: var(--primary);
         cursor: pointer;
@@ -233,8 +233,8 @@ button {
       }
 
       &::-moz-range-thumb {
-        width: 2.5vh;
-        height: 2.5vh;
+        width: 5vh;
+        height: 5vh;
         border-radius: 50%;
         background: var(--primary);
         cursor: pointer;
