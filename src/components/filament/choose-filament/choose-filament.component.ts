@@ -9,8 +9,9 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { combineLatest } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
@@ -44,6 +45,15 @@ export class ChooseFilamentComponent {
 
   showFilters = signal(false);
 
+  private debouncedWeights = toSignal(
+    combineLatest([toObservable(this.activeFilters.minWeight), toObservable(this.activeFilters.maxWeight)]).pipe(
+      debounceTime(300),
+    ),
+    {
+      initialValue: [null, null] as [number | null, number | null],
+    },
+  );
+
   currentSpools: Signal<(number | null)[]> = toSignal(
     this.filament.getCurrentSpools().pipe(map(spools => spools.map(s => s?.id || null))),
     {
@@ -56,6 +66,7 @@ export class ChooseFilamentComponent {
   }
 
   public filteredSpools = computed(() => {
+    const [minWeight, maxWeight] = this.debouncedWeights();
     // null -> no filtering
     // empty string -> filter for empty values
     return this.spools()
@@ -73,10 +84,10 @@ export class ChooseFilamentComponent {
       })
       .filter(spool => {
         const weightLeft = this.getSpoolWeightLeft(spool.weight, spool.used);
-        if (this.activeFilters.minWeight() !== null && weightLeft < this.activeFilters.minWeight()) {
+        if (minWeight !== null && weightLeft < minWeight) {
           return false;
         }
-        if (this.activeFilters.maxWeight() !== null && weightLeft > this.activeFilters.maxWeight()) {
+        if (maxWeight !== null && weightLeft > maxWeight) {
           return false;
         }
         return true;
