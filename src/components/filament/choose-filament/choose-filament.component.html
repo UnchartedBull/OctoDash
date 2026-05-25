@@ -1,4 +1,5 @@
 <div class="filament-heading">
+  <button class="sort-button" (click)="showSorts.set(true)" i18n="@@choose-filament-sort">Sort</button>
   <span i18n="@@choose-filament">select your new filament</span>
   <button class="filter-button" (click)="showFilters.set(true)" i18n="@@choose-filament-filter">Filter</button>
 </div>
@@ -40,9 +41,47 @@
   <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
 }
 
+@if (showSorts()) {
+  <div class="sort-wrapper modal">
+    <div class="sort-body modal-body">
+      <form>
+        <div class="form-group">
+          <label for="sort-by" i18n="@@choose-filament-sort-by">Sort by:</label>
+          <select name="sort-by" title="Sort by" [(ngModel)]="activeSort.key">
+            <option [ngValue]="null" i18n="@@choose-filament-none">None</option>
+            <option [value]="'name'" i18n="@@choose-filament-name">Name</option>
+            <option [value]="'weightLeft'" i18n="@@choose-filament-weight-left">Weight Left</option>
+            <option [value]="'material'" i18n="@@choose-filament-material">Material</option>
+            <option [value]="'vendor'" i18n="@@choose-filament-vendor">Vendor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sort-direction" i18n="@@choose-filament-sort-direction">Direction:</label>
+          <!-- <select name="sort-direction" title="Sort direction" [(ngModel)]="activeSort.direction">
+            <option [value]="'asc'" i18n="@@choose-filament-ascending">Ascending</option>
+            <option [value]="'desc'" i18n="@@choose-filament-descending">Descending</option>
+          </select> -->
+          <div>
+            <input type="radio" id="asc" name="sort-direction" value="asc" [(ngModel)]="activeSort.direction" />
+            <label for="asc" i18n="@@choose-filament-ascending">Ascending</label>
+          </div>
+          <div>
+            <input type="radio" id="desc" name="sort-direction" value="desc" [(ngModel)]="activeSort.direction" />
+            <label for="desc" i18n="@@choose-filament-descending">Descending</label>
+          </div>
+        </div>
+
+      </form>
+      <button class="button" (click)="showSorts.set(false)" i18n="@@choose-filament-close-sorts">
+        Close Sorts
+      </button>
+    </div>
+  </div>
+}
+
 @if (showFilters()) {
-  <div class="filter-wrapper">
-    <div class="filter-body">
+  <div class="filter-wrapper modal">
+    <div class="filter-body modal-body">
       <form>
         <div class="form-group">
           <label for="filter-material" i18n="@@choose-filament-material">Material:</label>

@@ -1,8 +1,13 @@
 .filament-heading {
   button {
-    float: right;
     background-color: var(--info);
     font-size: 2.5vw;
+  }
+  .sort-button {
+    float: left;
+  }
+  .filter-button {
+    float: right;
   }
 }
 
@@ -110,7 +115,7 @@ button {
   margin-top: 20vh;
 }
 
-.filter-wrapper {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -121,7 +126,7 @@ button {
   background-color: rgba(0, 0, 0, 0.85);
   transition: opacity 0.4s ease-in-out;
 
-  .filter-body {
+  .modal-body {
     position: absolute;
     top: 25vh;
     left: 25vw;
@@ -132,6 +137,51 @@ button {
     padding: 3vh 2.5vw;
     box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
     display: block;
+  }
+
+  select {
+    font-size: 4.3vh;
+    border: 2px solid var(--border);
+    background-color: var(--background);
+    color: var(--text);
+    border-radius: 0.5vw;
+    padding: 0.5vh 1vw;
+  }
+
+}
+
+.sort-body {
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-bottom: 3vh;
+    padding-top: 2vh;
+
+    > .form-group {
+      margin: auto 1vh;
+    }
+  }
+  button {
+    margin: auto auto 3vh;
+  }
+
+  input[type='radio'] {
+    margin-right: 1vw;
+  }
+}
+
+.filter-wrapper {
+
+  .filter-body {
 
     form {
       display: flex;
@@ -151,14 +201,6 @@ button {
       }
     }
 
-    select {
-      font-size: 4.3vh;
-      border: 2px solid var(--border);
-      background-color: var(--background);
-      color: var(--text);
-      border-radius: 0.5vw;
-      padding: 0.5vh 1vw;
-    }
 
     .filter-heading {
       font-size: 3.5vw;

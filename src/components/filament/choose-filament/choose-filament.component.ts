@@ -16,6 +16,11 @@ import { debounceTime, map } from 'rxjs/operators';
 import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
 
+enum SortDirection {
+  Asc = 0,
+  Desc = 1,
+}
+
 interface SpoolFilters {
   material: WritableSignal<string | null>;
   vendor: WritableSignal<string | null>;
@@ -43,7 +48,14 @@ export class ChooseFilamentComponent {
     maxWeight: signal<number | null>(null),
   };
 
+  private activeSort = {
+    key: signal<string | null>(null),
+    direction: signal<SortDirection>(SortDirection.Desc),
+  };
+
   showFilters = signal(false);
+
+  showSorts = signal(false);
 
   private debouncedWeights = toSignal(
     combineLatest([toObservable(this.activeFilters.minWeight), toObservable(this.activeFilters.maxWeight)]).pipe(
@@ -91,6 +103,23 @@ export class ChooseFilamentComponent {
           return false;
         }
         return true;
+      })
+      .sort((a, b) => {
+        const key = this.activeSort.key();
+        const direction = this.activeSort.direction();
+        if (!key || !direction) {
+          return 0;
+        }
+
+        const asc = SortDirection.Asc as number;
+
+        if (a[key] < b[key]) {
+          return direction === asc ? -1 : 1;
+        }
+        if (a[key] > b[key]) {
+          return direction === asc ? 1 : -1;
+        }
+        return 0;
       });
   });
 
