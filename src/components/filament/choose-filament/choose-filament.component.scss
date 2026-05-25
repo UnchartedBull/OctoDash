@@ -118,6 +118,9 @@ button {
   height: 100vh;
   font-size: 4.3vh;
 
+  background-color: rgba(0, 0, 0, 0.85);
+  transition: opacity 0.4s ease-in-out;
+
   .filter-body {
     position: absolute;
     top: 25vh;
@@ -125,7 +128,6 @@ button {
     width: 50vw;
     height: 50vh;
     background-color: var(--background);
-    border: 2px solid var(--background-3);
     border-radius: 2vw;
     padding: 3vh 2.5vw;
     box-shadow: 8px 4px 18px 0 rgb(0 0 0 / 75%);
