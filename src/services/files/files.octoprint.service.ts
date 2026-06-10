@@ -66,7 +66,7 @@ export class FilesOctoprintService implements FilesService {
                             ? 'files__object--success'
                             : 'files__object--failed'
                           : 'files__object--unknown',
-                      thumbnail$: this.getThumbnailUrl(fileOrFolder),
+                      thumbnail$: this.getThumbnailUrl(fileOrFolder, { small: true }),
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),
@@ -157,8 +157,10 @@ export class FilesOctoprintService implements FilesService {
     return blobUrl$;
   }
 
-  public getThumbnailUrl(file: OctoprintFile): Observable<string> {
-    if (file.refs.thumbnail) {
+  public getThumbnailUrl(file: OctoprintFile, options: { small?: boolean } = { small: false }): Observable<string> {
+    if (options.small && file.refs.thumbnail_32x32) {
+      return this.getThumbnailBlobUrl(file.refs.thumbnail_32x32);
+    } else if (file.refs.thumbnail) {
       return this.getThumbnailBlobUrl(file.refs.thumbnail);
     } else if (file.thumbnail) {
       return this.getThumbnailBlobUrl(this.configService.getApiURL(file.thumbnail, false));
