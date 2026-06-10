@@ -17,8 +17,8 @@ import { FilamentSpool } from '../../../model';
 import { FilamentService } from '../../../services/filament/filament.service';
 
 enum SortDirection {
-  Asc = 0,
-  Desc = 1,
+  Asc = 'asc',
+  Desc = 'desc',
 }
 
 interface SpoolFilters {
@@ -79,6 +79,8 @@ export class ChooseFilamentComponent {
 
   public filteredSpools = computed(() => {
     const [minWeight, maxWeight] = this.debouncedWeights();
+    const key = this.activeSort.key();
+    const direction = this.activeSort.direction();
     // null -> no filtering
     // empty string -> filter for empty values
     return this.spools()
@@ -105,13 +107,11 @@ export class ChooseFilamentComponent {
         return true;
       })
       .sort((a, b) => {
-        const key = this.activeSort.key();
-        const direction = this.activeSort.direction();
         if (!key || !direction) {
           return 0;
         }
 
-        const asc = SortDirection.Asc as number;
+        const asc = SortDirection.Asc as string;
 
         if (a[key] < b[key]) {
           return direction === asc ? -1 : 1;

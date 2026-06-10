@@ -62,11 +62,11 @@
             <option [value]="'desc'" i18n="@@choose-filament-descending">Descending</option>
           </select> -->
           <div>
-            <input type="radio" id="asc" name="sort-direction" value="asc" [(ngModel)]="activeSort.direction" />
+            <input type="radio" id="asc" name="sort-direction" [ngValue]="SortDirection.Asc" [(ngModel)]="activeSort.direction" />
             <label for="asc" i18n="@@choose-filament-ascending">Ascending</label>
           </div>
           <div>
-            <input type="radio" id="desc" name="sort-direction" value="desc" [(ngModel)]="activeSort.direction" />
+            <input type="radio" id="desc" name="sort-direction" [ngValue]="SortDirection.Desc" [(ngModel)]="activeSort.direction" />
             <label for="desc" i18n="@@choose-filament-descending">Descending</label>
           </div>
         </div>
