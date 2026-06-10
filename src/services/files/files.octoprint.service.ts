@@ -66,7 +66,7 @@ export class FilesOctoprintService implements FilesService {
                             ? 'files__object--success'
                             : 'files__object--failed'
                           : 'files__object--unknown',
-                      thumbnail$: this.getThumbnailUrl(of(fileOrFolder)),
+                      thumbnail$: this.getThumbnailUrl(fileOrFolder),
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),
@@ -125,7 +125,7 @@ export class FilesOctoprintService implements FilesService {
             name: file.name,
             date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
             size: this.conversionService.convertByteToMegabyte(file.size),
-            thumbnail$: this.getThumbnailUrl(of(file)),
+            thumbnail$: this.getThumbnailUrl(file),
             ...(file.gcodeAnalysis
               ? {
                   printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
@@ -145,7 +145,7 @@ export class FilesOctoprintService implements FilesService {
         this.configService.getApiURL('files' + encodeURIComponent(filePath)),
         this.configService.getHTTPHeaders(),
       )
-      .pipe(this.getThumbnailUrl);
+      .pipe(switchMap(file => this.getThumbnailUrl(file)));
   }
 
   private getThumbnailBlobUrl(filePath: string): Observable<string> {
@@ -157,18 +157,14 @@ export class FilesOctoprintService implements FilesService {
     return blobUrl$;
   }
 
-  public getThumbnailUrl(file: Observable<OctoprintFile>): Observable<string> {
-    return file.pipe(
-      switchMap(file => {
-        if (file.refs.thumbnail) {
-          return this.getThumbnailBlobUrl(file.refs.thumbnail);
-        } else if (file.thumbnail) {
-          return this.getThumbnailBlobUrl(this.configService.getApiURL(file.thumbnail, false));
-        } else {
-          return of('assets/object.svg');
-        }
-      }),
-    );
+  public getThumbnailUrl(file: OctoprintFile): Observable<string> {
+    if (file.refs.thumbnail) {
+      return this.getThumbnailBlobUrl(file.refs.thumbnail);
+    } else if (file.thumbnail) {
+      return this.getThumbnailBlobUrl(this.configService.getApiURL(file.thumbnail, false));
+    } else {
+      return of('assets/object.svg');
+    }
   }
 
   public loadFile(filePath: string): void {
