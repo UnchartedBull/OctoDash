@@ -25,7 +25,7 @@ runs:
         node-version: ${{ env.NODE_VERSION }}
     - name: Set npm version
       shell: bash
-      run: echo "NPM_VERSION="24.12.0" >> $GITHUB_ENV
+      run: echo "NPM_VERSION=24.12.0" >> $GITHUB_ENV
     - name: Get npm version
       id: get-npm-version
       shell: bash
