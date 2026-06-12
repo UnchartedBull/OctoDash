@@ -255,7 +255,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="choose-filament-weight-left" datatype="html">
-        <source>Weight Left</source>
+        <source>Remaining Amount</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/choose-filament/choose-filament.component.html</context>
           <context context-type="linenumber">53,55</context>

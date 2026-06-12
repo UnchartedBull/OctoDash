@@ -119,6 +119,7 @@
       </trans-unit>
       <trans-unit id="choose-filament-sort" datatype="html">
         <source>Sort</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
@@ -142,15 +143,19 @@
       </trans-unit>
       <trans-unit id="choose-filament-sort-by" datatype="html">
         <source>Sort by:</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-none" datatype="html">
         <source>None</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-name" datatype="html">
         <source>Name</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-weight-left" datatype="html">
-        <source>Weight Left</source>
+        <source>Remaining Amount</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-material" datatype="html">
         <source>Material</source>
@@ -162,15 +167,19 @@
       </trans-unit>
       <trans-unit id="choose-filament-sort-direction" datatype="html">
         <source>Direction:</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-ascending" datatype="html">
         <source>Ascending</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-descending" datatype="html">
         <source>Descending</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-close-sorts" datatype="html">
         <source>Close Sorts</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-all" datatype="html">
         <source>All</source>
