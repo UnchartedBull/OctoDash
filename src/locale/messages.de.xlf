@@ -117,9 +117,16 @@
         <source>done</source>
         <target>erledigt</target>
       </trans-unit>
+      <trans-unit id="choose-filament-sort" datatype="html">
+        <source>Sort</source>
+      </trans-unit>
       <trans-unit id="choose-filament" datatype="html">
         <source>select your new filament</source>
         <target>Wähle dein neues Filament aus</target>
+      </trans-unit>
+      <trans-unit id="choose-filament-filter" datatype="html">
+        <source>Filter</source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-filament-grams-left" datatype="html">
         <source>g left</source>
@@ -132,6 +139,54 @@
       <trans-unit id="loading-spools" datatype="html">
         <source>loading spools</source>
         <target>laden Filamente</target>
+      </trans-unit>
+      <trans-unit id="choose-filament-sort-by" datatype="html">
+        <source>Sort by:</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-none" datatype="html">
+        <source>None</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-name" datatype="html">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-weight-left" datatype="html">
+        <source>Weight Left</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-material" datatype="html">
+        <source>Material</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="choose-filament-vendor" datatype="html">
+        <source>Vendor</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="choose-filament-sort-direction" datatype="html">
+        <source>Direction:</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-ascending" datatype="html">
+        <source>Ascending</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-descending" datatype="html">
+        <source>Descending</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-close-sorts" datatype="html">
+        <source>Close Sorts</source>
+      </trans-unit>
+      <trans-unit id="choose-filament-all" datatype="html">
+        <source>All</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="choose-filament-weight-range" datatype="html">
+        <source>Remaining:</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="choose-filament-grams" datatype="html">
+        <source>g</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="choose-filament-close-filters" datatype="html">
+        <source> Close Filters </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="choose-tool" datatype="html">
         <source>select tool</source>
