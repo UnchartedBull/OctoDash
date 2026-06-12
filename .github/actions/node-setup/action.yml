@@ -1,6 +1,7 @@
 name: Node Setup
 description: Setup Node.js environment for OctoDash CI workflows
 
+
 runs:
   using: composite
   steps:
@@ -14,14 +15,17 @@ runs:
     #     key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
     #     restore-keys: |
     #       octodash-build-${{ env.cache-name }}-
-    - name: Get Node.js version from package.json
-      id: get-node-version
-      shell: bash
-      run: echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_ENV
+    # - name: Get Node.js version from package.json
+    #   id: get-node-version
+    #   shell: bash
+    #   run: echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_ENV
     - name: Use Node.js
       uses: actions/setup-node@v6
       with:
         node-version: ${{ env.NODE_VERSION }}
+    - name: Set npm version
+      shell: bash
+      run: echo "NPM_VERSION="24.12.0" >> $GITHUB_ENV
     - name: Get npm version
       id: get-npm-version
       shell: bash
