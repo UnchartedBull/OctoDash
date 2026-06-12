@@ -113,10 +113,13 @@ export class ChooseFilamentComponent {
 
         const asc = SortDirection.Asc as string;
 
-        if (a[key] < b[key]) {
+        const aValue = key === 'remaining' ? this.getSpoolWeightLeft(a.weight, a.used) : a[key as keyof FilamentSpool];
+        const bValue = key === 'remaining' ? this.getSpoolWeightLeft(b.weight, b.used) : b[key as keyof FilamentSpool];
+
+        if (aValue < bValue) {
           return direction === asc ? -1 : 1;
         }
-        if (a[key] > b[key]) {
+        if (aValue > bValue) {
           return direction === asc ? 1 : -1;
         }
         return 0;
