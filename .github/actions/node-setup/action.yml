@@ -1,7 +1,6 @@
 name: Node Setup
 description: Setup Node.js environment for OctoDash CI workflows
 
-
 runs:
   using: composite
   steps:
