@@ -90,7 +90,7 @@
     "@angular/compiler": "^21.0.3",
     "@angular/core": "^21.0.3",
     "@angular/forms": "^21.0.3",
-    "@angular/localize": "^21.0.3",
+    "@angular/localize": "^22.0.1",
     "@angular/material": "^21.0.2",
     "@angular/platform-browser": "^21.0.3",
     "@angular/platform-browser-dynamic": "^21.0.3",
