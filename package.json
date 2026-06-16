@@ -87,7 +87,7 @@
     "@angular/animations": "^21.0.3",
     "@angular/cdk": "^21.0.2",
     "@angular/common": "^21.0.3",
-    "@angular/compiler": "^21.0.3",
+    "@angular/compiler": "^21.2.17",
     "@angular/core": "^21.0.3",
     "@angular/forms": "^21.0.3",
     "@angular/localize": "^21.0.3",
