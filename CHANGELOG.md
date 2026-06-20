@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## [v2.8.0](https://github.com/UnchartedBull/OctoDash/tree/v2.8.0) (2026-06-20)
 
 This is a fairly small release with a few minor features and some bug fixes
@@ -13,7 +12,6 @@ This is a fairly small release with a few minor features and some bug fixes
 - Fix sorting by remaing material([#5779](https://github.com/UnchartedBull/OctoDash/pull/5779))
 
 ...and the usual host of tweaks to internal tooling and dependency updates.
-
 
 ## [v2.7.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.1) (2026-01-21)
 
