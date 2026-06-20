@@ -1,5 +1,20 @@
 # Changelog
 
+
+## [v2.8.0](https://github.com/UnchartedBull/OctoDash/tree/v2.8.0) (2026-06-20)
+
+This is a fairly small release with a few minor features and some bug fixes
+
+- Fix bug preventing filament picker from indicating the currently selected spool ([#5712](https://github.com/UnchartedBull/OctoDash/pull/5712))
+- Allow tapping on temp in picker to set to zero ([#5713](https://github.com/UnchartedBull/OctoDash/pull/5713))
+- Add spool ID in filament selection screen ([#5716](https://github.com/UnchartedBull/OctoDash/pull/5716))
+- Use native OctoPrint 2.0 thumbnails ([#5767](https://github.com/UnchartedBull/OctoDash/pull/5767))
+- Allow filtering and sorting on filament select screen ([#5742](https://github.com/UnchartedBull/OctoDash/pull/5742))
+- Fix sorting by remaing material([#5779](https://github.com/UnchartedBull/OctoDash/pull/5779))
+
+...and the usual host of tweaks to internal tooling and dependency updates.
+
+
 ## [v2.7.1](https://github.com/UnchartedBull/OctoDash/tree/v2.7.1) (2026-01-21)
 
 This is a minor bugfix to resolve an issue with the multifilament support on certain printers.
