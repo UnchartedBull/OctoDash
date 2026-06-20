@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { FilamentSpool } from '../../model';
 import { ConfigService } from '../../services/config.service';
@@ -8,9 +9,9 @@ import { FilamentPluginService } from './filament-plugin.service';
 
 @Injectable()
 export class FilamentService {
-  private filamentSpools: Array<FilamentSpool>;
-  private currentSpool: FilamentSpool[];
-  private loading = true;
+  private filamentSpools = new BehaviorSubject<Array<FilamentSpool>>([]);
+  private currentSpool = new BehaviorSubject<Array<FilamentSpool>>([]);
+  private loading = new BehaviorSubject<boolean>(true);
 
   constructor(
     private notificationService: NotificationService,
@@ -24,32 +25,32 @@ export class FilamentService {
 
   private loadSpools(): void {
     this.filamentPluginService.getSpools().subscribe({
-      next: (spools: Array<FilamentSpool>) => (this.filamentSpools = spools),
+      next: (spools: Array<FilamentSpool>) => this.filamentSpools.next(spools),
       error: (error: HttpErrorResponse) =>
         this.notificationService.warn($localize`:@@error-spools:Can't load filament spools!`, error.message),
-      complete: () => (this.loading = false),
+      complete: () => this.loading.next(false),
     });
     this.filamentPluginService.getCurrentSpools().subscribe({
-      next: (spools: FilamentSpool[]) => (this.currentSpool = spools),
+      next: (spools: FilamentSpool[]) => this.currentSpool.next(spools),
       error: (error: HttpErrorResponse) =>
         this.notificationService.warn($localize`:@@error-spool:Can't load active spool!`, error.message),
     });
   }
 
-  public getFilamentSpools(): Array<FilamentSpool> {
-    return this.filamentSpools;
+  public getFilamentSpools(): Observable<Array<FilamentSpool>> {
+    return this.filamentSpools.asObservable();
   }
 
-  public getCurrentSpools(): Array<FilamentSpool> {
-    return this.currentSpool;
+  public getCurrentSpools() {
+    return this.currentSpool.asObservable();
   }
 
   public getCurrentSpool(tool: number): FilamentSpool {
-    return this.currentSpool && this.currentSpool[tool];
+    return this.currentSpool.getValue()[tool];
   }
 
-  public getLoading(): boolean {
-    return this.loading;
+  public getLoading(): Observable<boolean> {
+    return this.loading.asObservable();
   }
 
   public setSpool(spool: FilamentSpool, tool: number): Promise<void> {

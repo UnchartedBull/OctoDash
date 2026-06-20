@@ -67,6 +67,8 @@ interface OctoprintPrints {
 interface OctoprintRefs {
   download?: string;
   resource: string;
+  thumbnail?: string;
+  thumbnail_32x32?: string;
 }
 
 export interface FileCommand {

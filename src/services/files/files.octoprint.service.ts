@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { Directory, File, Folder } from '../../model';
 import { FileCommand, OctoprintFile, OctoprintFolder } from '../../model/octoprint';
@@ -68,9 +68,7 @@ export class FilesOctoprintService implements FilesService {
                             ? 'files__object--success'
                             : 'files__object--failed'
                           : 'files__object--unknown',
-                      thumbnail$: fileOrFolder.thumbnail
-                        ? this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}/${fileOrFolder.thumbnail}`)
-                        : new BehaviorSubject('assets/object.svg'),
+                      thumbnail$: this.getThumbnailUrl(fileOrFolder, { small: true }),
                       printTime: this.conversionService.convertSecondsToHours(
                         fileOrFolder.gcodeAnalysis.estimatedPrintTime,
                       ),
@@ -132,9 +130,7 @@ export class FilesOctoprintService implements FilesService {
             name: file.name,
             date: this.conversionService.convertDateToString(new Date(file.date * 1000)),
             size: this.conversionService.convertByteToMegabyte(file.size),
-            thumbnail$: file.thumbnail
-              ? this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}/${file.thumbnail}`)
-              : new BehaviorSubject('assets/object.svg'),
+            thumbnail$: this.getThumbnailUrl(file),
             ...(file.gcodeAnalysis
               ? {
                   printTime: this.conversionService.convertSecondsToHours(file.gcodeAnalysis.estimatedPrintTime),
@@ -150,16 +146,11 @@ export class FilesOctoprintService implements FilesService {
 
   public getThumbnail(filePath: string): Observable<string> {
     return this.http
-      .get(
+      .get<OctoprintFile>(
         `${this.basePathService.getBasePath()}/api/files${encodeURIComponent(filePath)}`,
         this.configService.getHTTPHeaders(),
       )
-      .pipe(
-        map((file: OctoprintFile): string => {
-          return file.thumbnail ? `${this.basePathService.getBasePath()}/${file.thumbnail}` : 'assets/object.svg';
-        }),
-      )
-      .pipe(mergeMap(thumbnailPath => this.getThumbnailBlobUrl(thumbnailPath)));
+      .pipe(switchMap(file => this.getThumbnailUrl(file)));
   }
 
   private getThumbnailBlobUrl(filePath: string): Observable<string> {
@@ -169,6 +160,18 @@ export class FilesOctoprintService implements FilesService {
       }),
     );
     return blobUrl$;
+  }
+
+  public getThumbnailUrl(file: OctoprintFile, options: { small?: boolean } = { small: false }): Observable<string> {
+    if (options.small && file.refs.thumbnail_32x32) {
+      return this.getThumbnailBlobUrl(file.refs.thumbnail_32x32);
+    } else if (file.refs.thumbnail) {
+      return this.getThumbnailBlobUrl(file.refs.thumbnail);
+    } else if (file.thumbnail) {
+      return this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}${file.thumbnail}`);
+    } else {
+      return of('assets/object.svg');
+    }
   }
 
   public loadFile(filePath: string): void {
