@@ -14,13 +14,14 @@ runs:
     #     key: octodash-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
     #     restore-keys: |
     #       octodash-build-${{ env.cache-name }}-
-    # - name: Get Node.js version from package.json
-    #   id: get-node-version
-    #   shell: bash
-    #   run: echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_ENV
+    - name: Get Node.js version from package.json
+      id: get-node-version
+      shell: bash
+      run: echo "NODE_VERSION=$(jq -r '.engines.node' package.json)" >> $GITHUB_ENV
     - name: Use Node.js
       uses: actions/setup-node@v6
       with:
+        package-manager-cache: false
         node-version: ${{ env.NODE_VERSION }}
     - name: Get npm version
       id: get-npm-version
