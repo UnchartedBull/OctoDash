@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { QuickControlModalService, QuickControlView } from 'src/services/quick-control-modal.service';
 
 @Component({
   selector: 'app-quick-control-modal',
   templateUrl: './quick-control-modal.component.html',
   styleUrls: ['./quick-control-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class QuickControlModalComponent {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
@@ -6,6 +6,7 @@ import { AnimationOptions } from 'ngx-lottie';
   selector: 'app-toggle-switch',
   templateUrl: './toggle-switch.component.html',
   styleUrls: ['./toggle-switch.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ToggleSwitchComponent {

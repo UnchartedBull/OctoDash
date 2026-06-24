@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import defaultConfig from '../../helper/config.default.json';
@@ -11,6 +11,7 @@ import { ElectronService } from '../../services/electron.service';
   selector: 'app-config-setup',
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ConfigSetupComponent implements OnInit, OnDestroy {

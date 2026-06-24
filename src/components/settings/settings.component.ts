@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
@@ -12,6 +21,7 @@ import { SystemService } from '../../services/system/system.service';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsComponent implements OnInit, OnDestroy {

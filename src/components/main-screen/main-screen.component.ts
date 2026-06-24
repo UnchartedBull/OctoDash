@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../../services/config.service';
@@ -8,6 +8,7 @@ import { FilesService } from '../../services/files/files.service';
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MainScreenComponent {

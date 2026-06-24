@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { PersonalizationService } from './personalization.service';
 
@@ -6,6 +6,7 @@ import { PersonalizationService } from './personalization.service';
   selector: 'app-config-setup-personalization',
   templateUrl: './personalization.component.html',
   styleUrls: ['./personalization.component.scss', '../setup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PersonalizationComponent implements OnInit {

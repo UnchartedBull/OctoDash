@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { ConfigService } from '../../../services/config.service';
 import { PrinterService } from '../../../services/printer/printer.service';
@@ -7,6 +7,7 @@ import { PrinterService } from '../../../services/printer/printer.service';
   selector: 'app-filament-purge-filament',
   templateUrl: './purge-filament.component.html',
   styleUrls: ['./purge-filament.component.scss', '../filament.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PurgeFilamentComponent implements OnInit {

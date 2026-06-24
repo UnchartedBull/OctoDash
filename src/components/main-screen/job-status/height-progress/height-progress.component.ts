@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ZHeightLayer } from '../../../../model';
@@ -8,6 +8,7 @@ import { SocketService } from '../../../../services/socket/socket.service';
   selector: 'app-height-progress',
   templateUrl: './height-progress.component.html',
   styleUrls: ['./height-progress.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class HeightProgressComponent implements OnInit, OnDestroy {

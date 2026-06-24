@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { QuickControlModalService } from 'src/services/quick-control-modal.service';
 
@@ -10,6 +10,7 @@ import { SocketService } from '../../../services/socket/socket.service';
   selector: 'app-printer-status',
   templateUrl: './printer-status.component.html',
   styleUrls: ['./printer-status.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PrinterStatusComponent implements OnInit, OnDestroy {

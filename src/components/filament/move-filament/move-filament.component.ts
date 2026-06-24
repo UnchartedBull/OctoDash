@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { FilamentSpool } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
@@ -8,6 +8,7 @@ import { PrinterService } from '../../../services/printer/printer.service';
   selector: 'app-filament-move-filament',
   templateUrl: './move-filament.component.html',
   styleUrls: ['./move-filament.component.scss', '../filament.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class MoveFilamentComponent implements OnInit, OnDestroy {

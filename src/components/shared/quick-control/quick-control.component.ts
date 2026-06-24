@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 
 export interface Option {
   value: number;
@@ -9,6 +9,7 @@ export interface Option {
   selector: 'app-quick-control',
   templateUrl: './quick-control.component.html',
   styleUrls: ['./quick-control.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class QuickControlComponent implements OnInit {

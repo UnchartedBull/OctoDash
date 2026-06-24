@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { URLSplit } from '../../../model';
 import { ConfigService } from '../../../services/config.service';
@@ -9,6 +18,7 @@ import { isOctoprintVersionGood } from '../../../services/printer/printer.octopr
   selector: 'app-config-setup-discover-octoprint',
   templateUrl: './discover-octoprint.component.html',
   styleUrls: ['./discover-octoprint.component.scss', '../setup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class DiscoverOctoprintComponent implements OnInit, OnDestroy {

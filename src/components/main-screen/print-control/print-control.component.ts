@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { SocketService } from '../../../services/socket/socket.service';
   selector: 'app-print-control',
   templateUrl: './print-control.component.html',
   styleUrls: ['./print-control.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class PrintControlComponent implements OnInit, OnDestroy {
