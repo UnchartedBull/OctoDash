@@ -1,4 +1,4 @@
-import { Component, EventEmitter, NgZone, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 
 import { UpdateDownloadProgress, UpdateError } from '../../model';
 import { AppService } from '../../services/app.service';

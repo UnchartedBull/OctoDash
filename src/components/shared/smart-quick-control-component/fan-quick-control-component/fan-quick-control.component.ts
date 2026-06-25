@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { of } from 'rxjs';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';

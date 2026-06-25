@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -6,7 +7,6 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { URLSplit } from '../../../model';

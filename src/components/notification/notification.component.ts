@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Notification } from '../../model';

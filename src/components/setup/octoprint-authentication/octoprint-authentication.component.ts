@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
 
 import { TokenSuccess } from '../../../model/octoprint/auth.model';
