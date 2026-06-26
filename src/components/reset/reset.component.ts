@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { ConfigService } from 'src/services/config.service';
 import { NotificationService } from 'src/services/notification.service';
 
@@ -6,6 +6,7 @@ import { NotificationService } from 'src/services/notification.service';
   selector: 'app-reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResetComponent {

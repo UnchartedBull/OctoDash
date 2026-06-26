@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval } from 'rxjs';
 
 import { TokenSuccess } from '../../../model/octoprint/auth.model';
@@ -10,6 +10,7 @@ import { OctoprintAuthenticationService } from './octoprint-authentication.servi
   selector: 'app-config-setup-octoprint-authentication',
   templateUrl: './octoprint-authentication.component.html',
   styleUrls: ['./octoprint-authentication.component.scss', '../setup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class OctoprintAuthenticationComponent {

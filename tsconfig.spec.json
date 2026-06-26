@@ -5,5 +5,14 @@
     "types": ["node"]
   },
   "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "tests/e2e/**/*.ts", "playwright.config.ts"]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "tests/e2e/**/*.ts", "playwright.config.ts"],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    },
+    "strictTemplates": false
+  }
 }

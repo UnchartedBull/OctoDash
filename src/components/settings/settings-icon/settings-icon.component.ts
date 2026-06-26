@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { AppService } from '../../../services/app.service';
 import { ConfigService } from '../../../services/config.service';
@@ -7,6 +7,7 @@ import { ConfigService } from '../../../services/config.service';
   selector: 'app-settings-icon',
   templateUrl: './settings-icon.component.html',
   styleUrls: ['./settings-icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class SettingsIconComponent {

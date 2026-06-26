@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Observable, Subscription } from 'rxjs';
 import { AppService } from 'src/services/app.service';
@@ -19,6 +19,7 @@ const SpecialCommandRegex = /\[!([\w_]+)\]/;
   selector: 'app-action-center',
   templateUrl: './action-center.component.html',
   styleUrls: ['./action-center.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ActionCenterComponent implements OnInit, OnDestroy {

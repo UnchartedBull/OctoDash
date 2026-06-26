@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { PrinterStatus } from '../../../model';
@@ -9,6 +9,7 @@ import { SocketService } from '../../../services/socket/socket.service';
   selector: 'app-filament-choose-tool',
   templateUrl: './choose-tool.component.html',
   styleUrls: ['./choose-tool.component.scss', '../filament.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ChooseToolComponent {

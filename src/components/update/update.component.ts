@@ -1,4 +1,4 @@
-import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 
 import { UpdateDownloadProgress } from '../../model';
 import { AppService } from '../../services/app.service';
@@ -9,6 +9,7 @@ import { SystemService } from '../../services/system/system.service';
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class UpdateComponent implements OnInit {

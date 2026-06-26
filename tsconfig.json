@@ -1,12 +1,15 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "paths": {
+      "*": ["./*"]
+    },
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "strict": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
