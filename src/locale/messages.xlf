@@ -83,42 +83,42 @@
         <source>Error parsing custom action!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-parsing-custom-action-desc" datatype="html">
         <source>Unable to parse the custom action.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid" datatype="html">
         <source>Unknown special command!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-invalid-desc" datatype="html">
         <source>The special command you have entered is unknown.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled" datatype="html">
         <source>Printer commands are not available!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-custom-action-disabled-desc" datatype="html">
         <source>Please connect to your printer first before  attempting to use a printer command.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/action-center/action-center.component.ts</context>
-          <context context-type="linenumber">175</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="long-init" datatype="html">
@@ -132,14 +132,14 @@
         <source>initializing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/app.component.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-printer-profile" datatype="html">
         <source>Can&apos;t retrieve printer profile!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/control/control.component.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="load-new-filament" datatype="html">
@@ -414,14 +414,14 @@
         <source>loading</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/move-filament/move-filament.component.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unloading-filament" datatype="html">
         <source>unloading</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/filament/move-filament/move-filament.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="purging-filament" datatype="html">
@@ -568,21 +568,21 @@
         <source>Can&apos;t load file/folder!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/files/files.component.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-file" datatype="html">
         <source>Can&apos;t load file!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/files/files.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-enclosure-temp" datatype="html">
         <source>Can&apos;t retrieve enclosure temperature!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/main-screen/bottom-bar/bottom-bar.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unit-millimeters-short" datatype="html">
@@ -1344,63 +1344,63 @@
         <source>Top Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-right" datatype="html">
         <source>Top Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-left" datatype="html">
         <source>Middle Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-right" datatype="html">
         <source>Middle Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-left" datatype="html">
         <source>Bottom Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-right" datatype="html">
         <source>Bottom Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved" datatype="html">
         <source>Configuration not saved!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">84</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved-message" datatype="html">
         <source>You haven&apos;t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can&apos;t save invalid config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="select-instance" datatype="html">
@@ -1457,7 +1457,7 @@
         <source>no instances found.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/discover-octoprint/discover-octoprint.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
@@ -1542,42 +1542,42 @@
         <source>Can&apos;t connect to OctoPrint!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-connection-failed-message" datatype="html">
         <source>Check the URL/IP and make sure that your OctoPrint instance is reachable from this device.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="unsupported-autologin" datatype="html">
         <source>Automatic login not supported!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="manually-create-api-key" datatype="html">
         <source>Please create the API Key manually and paste it in the bottom field.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="login-request-sent" datatype="html">
         <source>Login request send!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="login-request-sent-message" datatype="html">
         <source>Please confirm the request via the popup in the OctoPrint WebUI.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/octoprint-authentication/octoprint-authentication.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-customization-details" datatype="html">
@@ -1760,21 +1760,21 @@
         <source>saving config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>403 Forbidden - This most likely means that your API Key isn&apos;t working.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.ts</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-unknown" datatype="html">
         <source>0 Unknown Error - This most likely means that your OctoPrint host and port aren&apos;t correct.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/setup/setup.component.ts</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="welcome-1" datatype="html">
@@ -1830,14 +1830,14 @@
         <source>back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/shared/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ui-next" datatype="html">
         <source>next</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/shared/top-bar/top-bar.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="octoprint-sleeping" datatype="html">
@@ -1928,21 +1928,21 @@
         <source>Can&apos;t initiate update!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/update/update.component.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-update-message" datatype="html">
         <source>Some information is missing, please try again in an hour or update manually.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/update/update.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-install-update" datatype="html">
         <source>Can&apos;t install update!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/update/update.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="update-available-long" datatype="html">
