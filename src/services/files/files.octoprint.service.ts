@@ -168,7 +168,7 @@ export class FilesOctoprintService implements FilesService {
     } else if (file.refs.thumbnail) {
       return this.getThumbnailBlobUrl(file.refs.thumbnail);
     } else if (file.thumbnail) {
-      return this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}${file.thumbnail}`);
+      return this.getThumbnailBlobUrl(`${this.basePathService.getBasePath()}/${file.thumbnail}`);
     } else {
       return of('assets/object.svg');
     }
