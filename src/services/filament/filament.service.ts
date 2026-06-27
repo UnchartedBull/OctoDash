@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 
 import { FilamentSpool } from '../../model';
 import { ConfigService } from '../../services/config.service';
@@ -53,32 +53,23 @@ export class FilamentService {
     return this.loading.asObservable();
   }
 
-  public setSpool(spool: FilamentSpool, tool: number): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.filamentPluginService.setSpool(spool, tool).subscribe({
-        next: () => {
-          this.filamentPluginService.getCurrentSpool(tool).subscribe({
-            next: (spoolRemote: FilamentSpool) => {
-              if (spool.id === spoolRemote?.id) resolve();
-              else {
-                this.notificationService.error(
-                  $localize`:@@error-spool-id:Spool IDs didn't match`,
-                  $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
-                );
-                reject();
-              }
-            },
-            error: (error: HttpErrorResponse) => {
-              this.notificationService.error($localize`:@@error-set-new-spool:Can't set new spool!`, error.message);
-              reject();
-            },
-          });
-        },
-        error: (error: HttpErrorResponse): void => {
-          this.notificationService.error($localize`:@@error-set-new-spool-2:Can't set new spool!`, error.message);
-          reject();
-        },
-      });
-    });
+  public async setSpool(spool: FilamentSpool, tool: number): Promise<void> {
+    try {
+      await lastValueFrom(this.filamentPluginService.setSpool(spool, tool));
+
+      const currentSpool = await lastValueFrom(this.filamentPluginService.getCurrentSpool(tool));
+      if (spool.id == currentSpool?.id) {
+        return;
+      }
+
+      this.notificationService.error(
+        $localize`:@@error-spool-id:Spool IDs didn't match`,
+        $localize`:@@error-change-spool:Can't change spool. Please change spool manually in the OctoPrint UI.`,
+      );
+      throw new Error('Spool IDs did not match after setting spool');
+    } catch (error) {
+      this.notificationService.error($localize`:@@error-set-new-spool:Can't set new spool!`, error.message);
+      throw error;
+    }
   }
 }
