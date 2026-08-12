@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash-es';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { catchError, pluck, startWith } from 'rxjs/operators';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import SockJS from 'sockjs-client';
 
 import {
   Duration,
@@ -32,7 +32,7 @@ import { SocketService } from './socket.service';
 export class OctoPrintSocketService implements SocketService {
   private fastInterval = 0;
   private socketDeadTimeout: ReturnType<typeof setTimeout>;
-  private socket: WebSocketSubject<unknown>;
+  private socket: WebSocket | undefined;
 
   private printerStatusSubject: Subject<PrinterStatus>;
   private jobStatusSubject: Subject<JobStatus>;
@@ -112,9 +112,7 @@ export class OctoPrintSocketService implements SocketService {
       next: (socketAuth: SocketAuth) => {
         this.http.get(this.configService.getApiURL('connection'), this.configService.getHTTPHeaders()).subscribe({
           next: () => {
-            this.connectSocket();
-            this.setupSocket(resolve);
-            this.authenticateSocket(socketAuth);
+            this.connectSocket(socketAuth, resolve);
           },
           error: (err: HttpErrorResponse) => {
             if (err.status === 403) {
@@ -136,10 +134,11 @@ export class OctoPrintSocketService implements SocketService {
     });
   }
 
-  private connectSocket() {
-    const url = `${this.configService.getApiURL('sockjs/websocket', false).replace(/^http/, 'ws')}`;
+  private connectSocket(socketAuth: SocketAuth, resolve: () => void) {
+    const url = this.configService.getApiURL('sockjs', false);
     if (!this.socket) {
-      this.socket = webSocket(url);
+      this.socket = new SockJS(url, undefined, { timeout: 4000 });
+      this.setupSocket(socketAuth, resolve);
     }
   }
 
@@ -147,7 +146,7 @@ export class OctoPrintSocketService implements SocketService {
     const payload = {
       auth: `${socketAuth.user}:${socketAuth.session}`,
     };
-    this.socket.next(payload);
+    this.socket?.send(JSON.stringify(payload));
   }
 
   private handlePluginMessage(pluginMessage: OctoprintPluginMessage) {
@@ -173,38 +172,44 @@ export class OctoPrintSocketService implements SocketService {
     plugins.forEach(plugin => plugin.check(pluginMessage.plugin.plugin) && plugin.handler(pluginMessage.plugin.data));
   }
 
-  private setupSocket(resolve: () => void) {
-    this.socket.subscribe({
-      next: message => {
-        clearTimeout(this.socketDeadTimeout);
-        this.socketDeadTimeout = setTimeout(() => {
-          this.printerStatus.status = PrinterState.socketDead;
-          this.printerStatusSubject.next(this.printerStatus);
-        }, 30000);
-        if (Object.hasOwnProperty.bind(message)('current')) {
-          this.extractPrinterStatus(message as OctoprintSocketCurrent);
-          this.extractJobStatus(message as OctoprintSocketCurrent);
-        } else if (Object.hasOwnProperty.bind(message)('event')) {
-          this.extractPrinterEvent(message as OctoprintSocketEvent);
-        } else if (Object.hasOwnProperty.bind(message)('plugin')) {
-          this.handlePluginMessage(message as OctoprintPluginMessage);
-        } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
-          this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
-        } else if (Object.hasOwnProperty.bind(message)('connected')) {
-          resolve();
-          this.checkPrinterConnection();
-        }
-      },
-      error: error => {
-        if (error['type'] === 'close') {
-          this.printerStatus.status = PrinterState.reconnecting;
-          this.printerStatusSubject.next(this.printerStatus);
-          this.tryConnect(() => null);
-        } else {
-          console.error(error);
-        }
-      },
-    });
+  private setupSocket(socketAuth: SocketAuth, resolve: () => void) {
+    if (!this.socket) {
+      return;
+    }
+
+    this.socket.onopen = () => this.authenticateSocket(socketAuth);
+    this.socket.onmessage = event => {
+      const message = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+
+      clearTimeout(this.socketDeadTimeout);
+      this.socketDeadTimeout = setTimeout(() => {
+        this.printerStatus.status = PrinterState.socketDead;
+        this.printerStatusSubject.next(this.printerStatus);
+      }, 30000);
+      if (Object.hasOwnProperty.bind(message)('current')) {
+        this.extractPrinterStatus(message as OctoprintSocketCurrent);
+        this.extractJobStatus(message as OctoprintSocketCurrent);
+      } else if (Object.hasOwnProperty.bind(message)('event')) {
+        this.extractPrinterEvent(message as OctoprintSocketEvent);
+      } else if (Object.hasOwnProperty.bind(message)('plugin')) {
+        this.handlePluginMessage(message as OctoprintPluginMessage);
+      } else if (Object.hasOwnProperty.bind(message)('reauthRequired')) {
+        this.systemService.getSessionKey().subscribe(socketAuth => this.authenticateSocket(socketAuth));
+      } else if (Object.hasOwnProperty.bind(message)('connected')) {
+        resolve();
+        this.checkPrinterConnection();
+      }
+    };
+    this.socket.onclose = event => {
+      if (event.code === 1000) {
+        return;
+      }
+
+      this.printerStatus.status = PrinterState.reconnecting;
+      this.printerStatusSubject.next(this.printerStatus);
+      this.socket = undefined;
+      this.tryConnect(() => null);
+    };
   }
 
   private checkPrinterConnection() {
