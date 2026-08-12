@@ -1,8 +1,8 @@
 <div
   class="notification"
-  [ngClass]="['notification__border-' + notification?.type, show ? 'notification__show' : '']"
+  [ngClass]="['notification__border-' + $safeNavigationMigration(notification?.type), show ? 'notification__show' : '']"
   (click)="hideNotification(true, true)">
-  <span class="notification__time">{{ notification?.time | date: 'HH:mm' }}</span>
+  <span class="notification__time">{{ $safeNavigationMigration(notification?.time) | date: 'HH:mm' }}</span>
   <span class="notification__heading">{{ notification?.heading }}</span>
   <span class="notification__text">{{ notification?.text }}</span>
   @if (!notification?.choices) {
@@ -13,7 +13,7 @@
       <div
         class="notification-prompt__choice"
         [ngClass]="[isFirst ? 'notification-prompt__choice-first' : '']"
-        (click)="chooseAction(i, notification?.callback)">
+        (click)="chooseAction(i, $safeNavigationMigration(notification?.callback))">
         {{ choice }}
       </div>
     }

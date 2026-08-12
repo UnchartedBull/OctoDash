@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { FilamentSpool, PrinterStatus } from '../../../model';
@@ -9,6 +9,7 @@ import { SocketService } from '../../../services/socket/socket.service';
   selector: 'app-filament-heat-nozzle',
   templateUrl: './heat-nozzle.component.html',
   styleUrls: ['./heat-nozzle.component.scss', '../filament.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class HeatNozzleComponent implements OnInit, OnDestroy {

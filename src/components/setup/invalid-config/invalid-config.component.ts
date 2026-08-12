@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { ConfigService } from '../../../services/config.service';
 import { ElectronService } from '../../../services/electron.service';
@@ -7,6 +7,7 @@ import { ElectronService } from '../../../services/electron.service';
   selector: 'app-config-invalid',
   templateUrl: './invalid-config.component.html',
   styleUrls: ['./invalid-config.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ConfigInvalidComponent implements OnInit {

@@ -1,10 +1,14 @@
-<span class="filament-heading" i18n="@@choose-filament">select your new filament</span>
-@if (!filament.getLoading()) {
+<div class="filament-heading">
+  <button class="sort-button" (click)="showSorts.set(true)" i18n="@@choose-filament-sort">Sort</button>
+  <span i18n="@@choose-filament">select your new filament</span>
+  <button class="filter-button" (click)="showFilters.set(true)" i18n="@@choose-filament-filter">Filter</button>
+</div>
+@if (!(filament.getLoading() | async)) {
   @if (filament.filamentSpools) {
     <table class="filaments">
-      @for (spool of filament.filamentSpools; track spool) {
+      @for (spool of filteredSpools(); track spool) {
         <tr
-          [ngClass]="{ 'filaments__in-use': currentSpools.includes(spool.id) }"
+          [ngClass]="{ 'filaments__in-use': currentSpools().includes(spool.id) }"
           long-press
           matRipple
           [matRippleUnbounded]="false"
@@ -13,13 +17,14 @@
           (onShortPress)="setSpool(spool)"
           (onLongPressing)="setSpoolSkipChange(spool)">
           <td class="filaments__in-use-icon">
-            @if (currentSpools.includes(spool.id)) {
-              <app-hotend-icon [tool]="currentSpools.indexOf(spool.id)" />
+            @if (currentSpools().includes(spool.id)) {
+              <app-hotend-icon [tool]="currentSpools().indexOf(spool.id)" />
             }
           </td>
           <td class="filaments__type">
             <span class="filaments__type-box" [ngStyle]="{ 'border-color': spool.color }">{{ spool.material }}</span>
           </td>
+          <td class="filaments__id">#{{ spool.id }}</td>
           <td class="filaments__name">
             {{ spool.displayName }}
           </td>
@@ -34,4 +39,98 @@
   }
 } @else {
   <div class="no-filaments loading-dots" i18n="@@loading-spools">loading spools</div>
+}
+
+@if (showSorts()) {
+  <div class="sort-wrapper modal">
+    <div class="sort-body modal-body">
+      <form>
+        <div class="form-group">
+          <label for="sort-by" i18n="@@choose-filament-sort-by">Sort by:</label>
+          <select name="sort-by" title="Sort by" [(ngModel)]="activeSort.key">
+            <option [ngValue]="null" i18n="@@choose-filament-none">None</option>
+            <option [value]="'name'" i18n="@@choose-filament-name">Name</option>
+            <option [value]="'remaining'" i18n="@@choose-filament-weight-left">Remaining Amount</option>
+            <option [value]="'material'" i18n="@@choose-filament-material">Material</option>
+            <option [value]="'vendor'" i18n="@@choose-filament-vendor">Vendor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sort-direction" i18n="@@choose-filament-sort-direction">Direction:</label>
+          <select name="sort-direction" title="Sort direction" [(ngModel)]="activeSort.direction">
+            <option [value]="'asc'" i18n="@@choose-filament-ascending">Ascending</option>
+            <option [value]="'desc'" i18n="@@choose-filament-descending">Descending</option>
+          </select>
+        </div>
+      </form>
+      <button class="button" (click)="showSorts.set(false)" i18n="@@choose-filament-close-sorts">Close Sorts</button>
+    </div>
+  </div>
+}
+
+@if (showFilters()) {
+  <div class="filter-wrapper modal">
+    <div class="filter-body modal-body">
+      <form>
+        <div class="form-group">
+          <label for="filter-material" i18n="@@choose-filament-material">Material:</label>
+          <select title="Material" name="filter-material" [(ngModel)]="activeFilters.material">
+            <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
+            @for (material of materials(); track material) {
+              <option [value]="material">{{ material || 'Unknown' }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-vendor" i18n="@@choose-filament-vendor">Vendor:</label>
+          <select name="filter-vendor" title="Vendor" [(ngModel)]="activeFilters.vendor">
+            <option [ngValue]="null" i18n="@@choose-filament-all">All</option>
+            @for (vendor of manufacturers(); track vendor) {
+              <option [ngValue]="vendor">{{ vendor || 'Unknown' }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label i18n="@@choose-filament-weight-range">Remaining:</label>
+          <div class="weight-display">
+            <span class="weight-min"
+              >{{ activeFilters.minWeight() || 0 }}<span i18n="@@choose-filament-grams">g</span></span
+            >
+            <span class="weight-separator">-</span>
+            <span class="weight-max"
+              >{{ activeFilters.maxWeight() || maximumWeight() }}<span i18n="@@choose-filament-grams">g</span></span
+            >
+          </div>
+          <div class="weight-range-container">
+            <div class="range-slider">
+              <input
+                type="range"
+                id="filter-weight-min"
+                name="filter-weight-min"
+                min="0"
+                [max]="maximumWeight()"
+                [value]="activeFilters.minWeight() || 0"
+                (input)="setMinWeight($event.target.value)"
+                (change)="setMinWeight($event.target.value)"
+                class="range-input range-input-min" />
+              <input
+                type="range"
+                id="filter-weight-max"
+                name="filter-weight-max"
+                min="0"
+                [max]="maximumWeight()"
+                [value]="activeFilters.maxWeight() || maximumWeight()"
+                (input)="setMaxWeight($event.target.value)"
+                (change)="setMaxWeight($event.target.value)"
+                class="range-input range-input-max" />
+              <div class="range-track"></div>
+            </div>
+          </div>
+        </div>
+        <button class="button" (click)="showFilters.set(false)" i18n="@@choose-filament-close-filters">
+          Close Filters
+        </button>
+      </form>
+    </div>
+  </div>
 }

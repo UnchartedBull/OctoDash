@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { ConfigService } from 'src/services/config.service';
 import { PrinterService } from 'src/services/printer/printer.service';
 import { ProfileService } from 'src/services/profile/profile.service';
@@ -8,6 +8,7 @@ import { BaseQuickControlComponent } from '../base-quick-control.component';
 @Component({
   selector: 'app-hotend-quick-control',
   templateUrl: '../base-quick-control.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class HotendQuickControlComponent extends BaseQuickControlComponent {

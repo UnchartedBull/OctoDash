@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { PSUState } from '../../model';
 import { AppService } from '../../services/app.service';
@@ -10,6 +10,7 @@ import { SystemService } from '../../services/system/system.service';
   selector: 'app-standby',
   templateUrl: './standby.component.html',
   styleUrls: ['./standby.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class StandbyComponent implements OnInit, OnDestroy {

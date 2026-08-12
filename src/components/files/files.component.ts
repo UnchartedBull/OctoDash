@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash-es';
 import { AnimationOptions } from 'ngx-lottie';
@@ -13,6 +13,7 @@ import { NotificationService } from '../../services/notification.service';
   selector: 'app-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class FilesComponent {

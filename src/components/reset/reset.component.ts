@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 import { AppService } from '../../services/app.service';
 import { ElectronService } from '../../services/electron.service';
@@ -8,6 +8,7 @@ import { SystemService } from '../../services/system/system.service';
   selector: 'app-reset',
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class ResetComponent {

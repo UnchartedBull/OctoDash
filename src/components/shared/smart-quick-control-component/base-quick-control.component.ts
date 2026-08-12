@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 
 import { Option } from '../quick-control/quick-control.component';
@@ -6,6 +6,7 @@ import { Option } from '../quick-control/quick-control.component';
 @Component({
   selector: 'app-base-quick-control',
   template: '',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export abstract class BaseQuickControlComponent implements OnInit {
