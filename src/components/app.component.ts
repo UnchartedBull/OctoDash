@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/main-screen']);
         this.initialized.set(true);
         this.shouldRenderRouterOutlet.set(true);
-
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }

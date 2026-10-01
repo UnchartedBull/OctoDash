@@ -1222,10 +1222,6 @@
         <source>Can't set new spool!</source>
         <target>Impossible de définir une nouvelle bobine !</target>
       </trans-unit>
-      <trans-unit id="error-set-new-spool-2" datatype="html">
-        <source>Can't set new spool!</source>
-        <target>Impossible de définir une nouvelle bobine !</target>
-      </trans-unit>
       <trans-unit id="local" datatype="html">
         <source>local</source>
         <target>local</target>
