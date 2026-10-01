@@ -1,9 +1,9 @@
 <app-notification></app-notification>
-@if (initialized && showActionCenterIcon()) {
+@if (initialized() && showActionCenterIcon()) {
   <app-action-center [closeEvent]="hideActionCenterEvent.asObservable()"></app-action-center>
 }
 <div class="container" (click)="hideActionCenter()">
-  @if (!activated) {
+  @if (!activated()) {
     <div>
       <app-settings-icon></app-settings-icon>
       <img src="assets/icon/icon-main.svg" class="splash-screen__icon-small" />
@@ -21,7 +21,9 @@
     </div>
   }
 
-  <router-outlet (activate)="activated = true"></router-outlet>
+  @if (shouldRenderRouterOutlet()) {
+    <router-outlet (activate)="activated.set(true)"></router-outlet>
+  }
 </div>
 
 @if (!loadingAnimationCached) {
