@@ -2068,28 +2068,21 @@
         <source>Spool IDs didn&apos;t match</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-change-spool" datatype="html">
         <source>Can&apos;t change spool. Please change spool manually in the OctoPrint UI.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-new-spool" datatype="html">
         <source>Can&apos;t set new spool!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="error-set-new-spool-2" datatype="html">
-        <source>Can&apos;t set new spool!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/services/filament/filament.service.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="local" datatype="html">

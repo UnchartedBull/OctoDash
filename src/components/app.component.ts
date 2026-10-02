@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 import { Subject } from 'rxjs';
@@ -15,8 +15,8 @@ import { SocketService } from '../services/socket/socket.service';
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  public activated = false;
-  public initialized = false;
+  public activated = signal(false);
+  public initialized = signal(false);
   public status = $localize`:@@initializing:initializing`;
   public showConnectionHint = false;
 
@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
   public toggleSwitchAnimationCached = false;
 
   public hideActionCenterEvent = new Subject<void>();
+
+  public shouldRenderRouterOutlet = signal(false);
 
   public constructor(
     private service: AppService,
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit {
           this.router.navigate(['/invalid-config']);
           return;
         }
+        this.shouldRenderRouterOutlet.set(true);
         this.router.navigate(['/login']);
       },
     });
@@ -73,7 +76,8 @@ export class AppComponent implements OnInit {
       .connect()
       .then(() => {
         this.router.navigate(['/main-screen']);
-        this.initialized = true;
+        this.initialized.set(true);
+        this.shouldRenderRouterOutlet.set(true);
       })
       .finally(() => clearTimeout(showPrinterConnectedTimeout));
   }

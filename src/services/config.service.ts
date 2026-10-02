@@ -427,7 +427,7 @@ export class ConfigService {
   }
 
   public showActionCenterIcon(): boolean {
-    return this.config.octodash.showActionCenterIcon;
+    return this.config?.octodash.showActionCenterIcon;
   }
 
   public getDefaultDirectory(): string {
