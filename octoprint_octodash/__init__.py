@@ -68,7 +68,9 @@ class OctodashPlugin(
             if "plugins" in data:
                 del data["plugins"][plugin_name]['inUse']
 
-        return super().on_settings_save(data)
+        diff = super().on_settings_save(data)
+        self._plugin_manager.send_plugin_message("octodash", {"settingsUpdate": True})
+        return diff
 
     def on_settings_migrate(self, target, current):
         self._set_initial_plugins()

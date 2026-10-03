@@ -169,7 +169,7 @@ export class OctoPrintSocketService implements SocketService {
       },
       {
         check: (plugin: string) => plugin === 'octodash',
-        handler: (message: unknown) => this.extractFanSpeed(message as OctoDashPlugin),
+        handler: (message: unknown) => this.handleOctoDashPluginMessage(message as OctoDashPlugin),
       },
     ];
 
@@ -268,6 +268,15 @@ export class OctoPrintSocketService implements SocketService {
     }
 
     this.printerStatusSubject.next(this.printerStatus);
+  }
+
+  private handleOctoDashPluginMessage(message: OctoDashPlugin): void {
+    if (message.fanspeed) {
+      this.extractFanSpeed(message);
+    }
+    if (message.settingsUpdate) {
+      window.location.reload();
+    }
   }
 
   public extractFanSpeed(message: OctoDashPlugin): void {

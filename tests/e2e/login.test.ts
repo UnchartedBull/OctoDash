@@ -5,6 +5,12 @@ dotenv.config({ path: '.env.playwright' });
 
 const apiKey = process.env.OCTODASH_API_KEY || '';
 
+test.use({
+  extraHTTPHeaders: {
+    Authorization: ``,
+  },
+});
+
 test('should redirect to login', async ({ page }) => {
   await page.goto('/plugin/octodash/');
   const text = page.getByText('authenticate');
@@ -46,6 +52,7 @@ test('should login successfully with username/password', async ({ page }) => {
 
   await page.waitForResponse('**/api/login');
 
+  await page.waitForLoadState('networkidle'); // wait for the page to reload
   await page.goto('/plugin/octodash/');
   const header = page.getByText('OctoDash');
   await expect(header).toBeVisible();

@@ -1,5 +1,6 @@
 export interface OctoDashPlugin {
-  fanspeed: {
+  fanspeed?: {
     [index: number]: number;
   };
+  settingsUpdate?: boolean;
 }
