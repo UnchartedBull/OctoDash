@@ -468,6 +468,11 @@ class OctodashPlugin(
         response.headers["X-Frame-Options"] = "SAMEORIGIN"
         return response
 
+    @octoprint.plugin.BlueprintPlugin.route("/api/update_check")
+    def update_check_route(self):
+        current_version = self._plugin_version
+        return make_response(json.dumps({"current_version": current_version}), 200)
+
 
 
     def is_blueprint_csrf_protected(self):
