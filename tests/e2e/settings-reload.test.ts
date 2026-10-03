@@ -36,9 +36,6 @@ const login = async page => {
       };
       const response = await request.post('/api/settings', {
         data: newsettings,
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
       });
 
       if (!response.ok()) {

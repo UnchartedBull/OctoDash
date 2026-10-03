@@ -1,8 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { devices } from '@playwright/test';
+import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/test';
 
-const config = {
+const config: PlaywrightTestConfig = {
   testDir: './tests/e2e',
   timeout: 60_000,
   expect: {
@@ -15,9 +13,11 @@ const config = {
     max: 30_000,
     threshold: 50_000,
   },
-  reporter: [['list'], ['html'], ...(process.env.CI ? [['github']] : [])],
   use: {
     actionTimeout: 0,
+    extraHTTPHeaders: {
+      Authorization: `Bearer ${process.env.OCTODASH_API_KEY || ''}`,
+    },
     baseURL: process.env.PLAYWRIGHT_BASEURL || 'http://localhost:8080',
     testIdAttribute: 'data-test-id',
     trace: 'on',
@@ -41,6 +41,12 @@ const config = {
   ],
 };
 
+if (process.env.CI) {
+  config.reporter = [['list'], ['html'], ['github']];
+} else {
+  config.reporter = [['list'], ['html']];
+}
+
 if (!process.env.NO_SERVER) {
   const octoprintServerOpts = process.env.OCTOPRINT_CONFIG_DIR ? `-b ${process.env.OCTOPRINT_CONFIG_DIR}` : '';
 
@@ -51,4 +57,4 @@ if (!process.env.NO_SERVER) {
   };
 }
 
-export default config;
+export default defineConfig(config);
