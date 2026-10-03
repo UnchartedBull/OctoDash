@@ -6,16 +6,15 @@ dotenv.config({ path: '.env.playwright' });
 const apiKey = process.env.OCTODASH_API_KEY || '';
 
 const login = async (page) => {
-  await page.goto('/plugin/octodash/login');
-  const input = page.getByLabel('API Key:');
-  const button = page.getByRole('button', { name: 'Continue' });
-
-  await input.fill(apiKey);
-  await button.click();
+  await page.goto('/plugin/octodash');
+  await page.evaluate((apiKey) => {
+    window.localStorage.setItem('octodash_apikey', apiKey);
+  }, apiKey);
+  await page.goto('/plugin/octodash/');
   // expect to be on the main screen /main-screen
-  await expect(page).toHaveURL(/\/main-screen$/);
+  await expect(page, "Login failed").toHaveURL(/\/main-screen$/);
   const header = page.getByText('OctoDash');
-  await expect(header).toBeVisible();
+  await expect(header, "Login failed").toBeVisible();
 }
 
 const triggerSettingsUpdate = async (request) => {
