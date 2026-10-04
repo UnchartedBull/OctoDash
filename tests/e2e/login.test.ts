@@ -1,7 +1,7 @@
 import { expect, selectors, test } from '@playwright/test';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.playwright' });
+// dotenv.config({ path: '.env.playwright' });
 
 const apiKey = process.env.OCTODASH_API_KEY || '';
 

@@ -1,7 +1,4 @@
 import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/test';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.playwright' });
 
 const config: PlaywrightTestConfig = {
   testDir: './tests/e2e',
