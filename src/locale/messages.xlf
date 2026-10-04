@@ -895,17 +895,6 @@
           <context context-type="linenumber">20,23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="update-available" datatype="html">
-        <source>Update available!</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">29,31</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ui-save" datatype="html">
         <source>save</source>
         <context-group purpose="location">
@@ -1297,130 +1286,116 @@
           <context context-type="linenumber">576,579</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="about-developer-mode" datatype="html">
-        <source> updates disabled (dev mode) </source>
+      <trans-unit id="settings-about-update-info" datatype="html">
+        <source> Updates are now handled through the OctoPrint plugin system </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">583,586</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="about-no-update" datatype="html">
-        <source> up to date </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">591,595</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="about-install-v" datatype="html">
-        <source> install <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.title }}"/> </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">599,600</context>
+          <context context-type="linenumber">581,583</context>
         </context-group>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">606,608</context>
+          <context context-type="linenumber">586,588</context>
         </context-group>
       </trans-unit>
       <trans-unit id="licence" datatype="html">
         <source>License</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">612,614</context>
+          <context context-type="linenumber">592,594</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks" datatype="html">
         <source>Special Thanks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">641,643</context>
+          <context context-type="linenumber">621,623</context>
         </context-group>
       </trans-unit>
       <trans-unit id="special-thanks-message" datatype="html">
         <source> Special Thanks to /u/Slateclean for supplying touchscreens, so development can continue! </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">643,645</context>
+          <context context-type="linenumber">623,625</context>
         </context-group>
       </trans-unit>
       <trans-unit id="reset-config" datatype="html">
         <source>Reset Config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.html</context>
-          <context context-type="linenumber">648,651</context>
+          <context context-type="linenumber">628,631</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-fetching-plugins" datatype="html">
         <source>Error fetching enabled plugins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-left" datatype="html">
         <source>Top Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="top-right" datatype="html">
         <source>Top Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-left" datatype="html">
         <source>Middle Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="middle-right" datatype="html">
         <source>Middle Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-left" datatype="html">
         <source>Bottom Left</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bottom-right" datatype="html">
         <source>Bottom Right</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved" datatype="html">
         <source>Configuration not saved!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">117</context>
         </context-group>
       </trans-unit>
       <trans-unit id="conf-unsaved-message" datatype="html">
         <source>You haven&apos;t saved your config yet, so your changes will not be applied. Click close again if you want to discard your changes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">119</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-invalid-config" datatype="html">
         <source>Can&apos;t save invalid config</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/components/settings/settings.component.ts</context>
-          <context context-type="linenumber">134</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="prompt-extruder-info" datatype="html">
@@ -1936,25 +1911,18 @@
           <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="update-available-long" datatype="html">
-        <source>Version <x id="PH" equiv-text="this.latestVersion.title"/> is available. Go to Settings &gt; About to update.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="screen-sleep-error" datatype="html">
         <source>Error turning display off</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-load-style" datatype="html">
         <source>Can&apos;t load custom styles!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/services/app.service.ts</context>
-          <context context-type="linenumber">101</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="error-set-color" datatype="html">
