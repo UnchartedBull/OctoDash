@@ -788,6 +788,7 @@
       </trans-unit>
       <trans-unit id="settings-about-update-info" datatype="html">
         <source> Updates are now handled through the OctoPrint plugin system </source>
+        <target></target>
       </trans-unit>
       <trans-unit id="connection" datatype="html">
         <source>Connection</source>
