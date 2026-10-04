@@ -6,10 +6,12 @@ import {
   inject,
   OnInit,
   Output,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { URLSplit } from '../../model';
 import { ConfigSchema as Config } from '../../model/config.model';
@@ -45,6 +47,8 @@ export class SettingsComponent implements OnInit {
     ),
     { initialValue: [] },
   );
+
+  currentVersion = signal('loading...');
 
   public fadeOutAnimation = false;
   public config: Config;
@@ -84,6 +88,18 @@ export class SettingsComponent implements OnInit {
         this.settingsCredits.nativeElement,
       ];
     }, 400);
+
+    this.service
+      .getVersionInfo()
+      .pipe(take(1))
+      .subscribe({
+        next: (data: { current_version: string }) => {
+          this.currentVersion.set(data.current_version);
+        },
+        error: () => {
+          this.currentVersion.set('Error fetching version');
+        },
+      });
   }
 
   public hideSettings(): void {
