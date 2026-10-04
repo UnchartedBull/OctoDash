@@ -1102,50 +1102,6 @@
         <source> Connection can't be established. Press screen to try again. </source>
         <target> Forbindelsen kan ikke etableres. Tryk på skærmen for at prøve igen. </target>
       </trans-unit>
-      <trans-unit id="downloading-update" datatype="html">
-        <source>downloading update</source>
-        <target>downloader opdatering</target>
-      </trans-unit>
-      <trans-unit id="mbs" datatype="html">
-        <source> MB/s  </source>
-        <target> MB/s </target>
-      </trans-unit>
-      <trans-unit id="update-mb" datatype="html">
-        <source>MB</source>
-        <target>MB</target>
-      </trans-unit>
-      <trans-unit id="update-minutes-left" datatype="html">
-        <source>minutes left</source>
-        <target>minutter tilbage</target>
-      </trans-unit>
-      <trans-unit id="installing-update" datatype="html">
-        <source>installing update</source>
-        <target>installerer opdatering</target>
-      </trans-unit>
-      <trans-unit id="update-wait" datatype="html">
-        <source>this might take a while</source>
-        <target>dette kan tage et stykke tid</target>
-      </trans-unit>
-      <trans-unit id="update-confirmation" datatype="html">
-        <source>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installed
-        </source>
-        <target>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installeret
-        </target>
-      </trans-unit>
-      <trans-unit id="update-restart" datatype="html">
-        <source>would you like to restart OctoDash now?</source>
-        <target>vil du genstarte OctoDash nu?</target>
-      </trans-unit>
-      <trans-unit id="error-update" datatype="html">
-        <source>Can't initiate update!</source>
-        <target>Kan ikke starte opdatering!</target>
-      </trans-unit>
-      <trans-unit id="error-update-message" datatype="html">
-        <source>Some information is missing, please try again in an hour or update manually.</source>
-        <target>Nogle oplysninger mangler. Prøv venligst igen om en time, eller opdater manuelt.</target>
-      </trans-unit>
       <trans-unit id="screen-sleep-error" datatype="html">
         <source>Error turning display off</source>
         <target></target>

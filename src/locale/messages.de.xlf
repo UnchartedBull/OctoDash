@@ -1082,50 +1082,6 @@
         <source> Connection can't be established. Press screen to try again. </source>
         <target> Verbindung kann nicht hergestellt werden. Berühre den Bildschirm um es erneut zu versuchen. </target>
       </trans-unit>
-      <trans-unit id="downloading-update" datatype="html">
-        <source>downloading update</source>
-        <target>Update herunterladen</target>
-      </trans-unit>
-      <trans-unit id="mbs" datatype="html">
-        <source> MB/s  </source>
-        <target> MB/s  </target>
-      </trans-unit>
-      <trans-unit id="update-mb" datatype="html">
-        <source>MB</source>
-        <target>MB</target>
-      </trans-unit>
-      <trans-unit id="update-minutes-left" datatype="html">
-        <source>minutes left</source>
-        <target>minuten übrig</target>
-      </trans-unit>
-      <trans-unit id="installing-update" datatype="html">
-        <source>installing update</source>
-        <target>Update installieren</target>
-      </trans-unit>
-      <trans-unit id="update-wait" datatype="html">
-        <source>this might take a while</source>
-        <target>das kann ein paar Minuten dauern</target>
-      </trans-unit>
-      <trans-unit id="update-confirmation" datatype="html">
-        <source>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installed
-        </source>
-        <target>v
-          <x id="INTERPOLATION" equiv-text="{{ service.latestVersion.version }}"/> installiert
-        </target>
-      </trans-unit>
-      <trans-unit id="update-restart" datatype="html">
-        <source>would you like to restart OctoDash now?</source>
-        <target>möchten Sie OctoDash jetzt neu starten?</target>
-      </trans-unit>
-      <trans-unit id="error-update" datatype="html">
-        <source>Can't initiate update!</source>
-        <target>Update kann nicht gestartet werden!</target>
-      </trans-unit>
-      <trans-unit id="error-update-message" datatype="html">
-        <source>Some information is missing, please try again in an hour or update manually.</source>
-        <target>Es fehlen Informationen, bitte versuche es in einer Stunde nochmal.</target>
-      </trans-unit>
       <trans-unit id="screen-sleep-error" datatype="html">
         <source>Error turning display off</source>
         <target></target>

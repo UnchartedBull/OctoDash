@@ -6,18 +6,12 @@ import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 
+export interface VersionInformation {
+  current_version: string;
+}
+
 @Injectable()
 export class AppService {
-  private latestVersionAssetsURL: string;
-  private version: string;
-  private latestVersion: {
-    version: string;
-    title: string;
-  } = {
-    version: '',
-    title: '',
-  };
-
   private basePathService = inject(BasePathService);
 
   public constructor(
@@ -28,18 +22,6 @@ export class AppService {
 
   public getVersionInfo(): Observable<VersionInformation> {
     return this.http.get<VersionInformation>(`${this.basePathService.getBasePath()}/plugin/octodash/api/update_check`);
-  }
-
-  public getVersion(): string {
-    return this.version;
-  }
-
-  public getLatestVersion(): { version: string; title: string } {
-    return this.latestVersion;
-  }
-
-  public getLatestVersionAssetsURL(): string {
-    return this.latestVersionAssetsURL;
   }
 
   public turnDisplayOff(): void {
@@ -78,8 +60,4 @@ export class AppService {
           this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
       });
   }
-}
-
-interface VersionInformation {
-  current_version: string;
 }
