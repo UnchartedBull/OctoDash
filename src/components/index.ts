@@ -21,6 +21,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { ResetComponent } from './reset/reset.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsIconComponent } from './settings/settings-icon/settings-icon.component';
+import { VersionComponent } from './settings/version/version.component';
 import { ExtruderInformationComponent } from './setup/extruder-information/extruder-information.component';
 import { ConfigInvalidComponent } from './setup/invalid-config/invalid-config.component';
 import { OctoprintAuthenticationComponent } from './setup/octoprint-authentication/octoprint-authentication.component';
@@ -69,6 +70,7 @@ export default [
   PersonalizationComponent,
   PluginsComponent,
   ConfigSetupComponent,
+  VersionComponent,
   WelcomeComponent,
   HotendIconComponent,
   ToggleSwitchComponent,

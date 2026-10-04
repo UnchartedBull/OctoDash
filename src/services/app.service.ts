@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
@@ -17,8 +18,8 @@ export class AppService {
     title: '',
   };
 
-  public updateAvailable = false;
-  public dev = false; // TODO: intelligently determine this
+  // public updateAvailable = false;
+  // public dev = false; // TODO: intelligently determine this
   private basePathService = inject(BasePathService);
 
   public constructor(
@@ -27,31 +28,35 @@ export class AppService {
     private http: HttpClient,
   ) {}
 
-  private checkUpdate(): void {
-    if (this.dev) {
-      // Disable updates in developer mode
-      return;
-    }
-
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
-      next: (data: GitHubReleaseInformation): void => {
-        this.latestVersion = { version: data.tag_name.replace('v', ''), title: data.name };
-        this.latestVersionAssetsURL = data.assets_url;
-        if (this.version != this.latestVersion.version) {
-          if (!this.updateAvailable) {
-            // Display notification first time that update is detected
-            this.notificationService.info(
-              $localize`:@@update-available:Update available!`,
-              $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
-            );
-          }
-
-          this.updateAvailable = true;
-        }
-      },
-      complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
-    });
+  public getVersionInfo(): Observable<VersionInformation> {
+    return this.http.get<VersionInformation>(`${this.basePathService.getBasePath()}/plugin/octodash/api/update_check`);
   }
+
+  // private checkUpdate(): void {
+  //   if (this.dev) {
+  //     // Disable updates in developer mode
+  //     return;
+  //   }
+
+  //   this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
+  //     next: (data: GitHubReleaseInformation): void => {
+  //       this.latestVersion = { version: data.tag_name.replace('v', ''), title: data.name };
+  //       this.latestVersionAssetsURL = data.assets_url;
+  //       if (this.version != this.latestVersion.version) {
+  //         if (!this.updateAvailable) {
+  //           // Display notification first time that update is detected
+  //           this.notificationService.info(
+  //             $localize`:@@update-available:Update available!`,
+  //             $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
+  //           );
+  //         }
+
+  //         this.updateAvailable = true;
+  //       }
+  //     },
+  //     complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
+  //   });
+  // }
 
   public getVersion(): string {
     return this.version;
@@ -103,9 +108,9 @@ export class AppService {
   }
 }
 
-// interface VersionInformation {
-//   version: string;
-// }
+interface VersionInformation {
+  current_version: string;
+}
 
 interface GitHubReleaseInformation {
   name: string;
