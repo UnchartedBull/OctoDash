@@ -37,7 +37,6 @@ import { HotendQuickControlComponent } from './shared/smart-quick-control-compon
 import { ToggleSwitchComponent } from './shared/toggle-switch/toggle-switch.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { StandbyComponent } from './standby/standby.component';
-import { UpdateComponent } from './update/update.component';
 
 export default [
   AppComponent,
@@ -74,7 +73,6 @@ export default [
   ToggleSwitchComponent,
   TopBarComponent,
   StandbyComponent,
-  UpdateComponent,
   QuickControlComponent,
   HotendQuickControlComponent,
   BedQuickControlComponent,

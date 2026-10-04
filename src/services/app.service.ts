@@ -1,24 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { BasePathService } from './base-path.service';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 
+export interface VersionInformation {
+  current_version: string;
+}
+
 @Injectable()
 export class AppService {
-  private latestVersionAssetsURL: string;
-  private version: string;
-  private latestVersion: {
-    version: string;
-    title: string;
-  } = {
-    version: '',
-    title: '',
-  };
-
-  public updateAvailable = false;
-  public dev = false; // TODO: intelligently determine this
   private basePathService = inject(BasePathService);
 
   public constructor(
@@ -27,42 +20,8 @@ export class AppService {
     private http: HttpClient,
   ) {}
 
-  private checkUpdate(): void {
-    if (this.dev) {
-      // Disable updates in developer mode
-      return;
-    }
-
-    this.http.get('https://api.github.com/repos/UnchartedBull/OctoDash/releases/latest').subscribe({
-      next: (data: GitHubReleaseInformation): void => {
-        this.latestVersion = { version: data.tag_name.replace('v', ''), title: data.name };
-        this.latestVersionAssetsURL = data.assets_url;
-        if (this.version != this.latestVersion.version) {
-          if (!this.updateAvailable) {
-            // Display notification first time that update is detected
-            this.notificationService.info(
-              $localize`:@@update-available:Update available!`,
-              $localize`:@@update-available-long:Version ${this.latestVersion.title} is available. Go to Settings > About to update.`,
-            );
-          }
-
-          this.updateAvailable = true;
-        }
-      },
-      complete: () => setTimeout(this.checkUpdate.bind(this), 3600000),
-    });
-  }
-
-  public getVersion(): string {
-    return this.version;
-  }
-
-  public getLatestVersion(): { version: string; title: string } {
-    return this.latestVersion;
-  }
-
-  public getLatestVersionAssetsURL(): string {
-    return this.latestVersionAssetsURL;
+  public getVersionInfo(): Observable<VersionInformation> {
+    return this.http.get<VersionInformation>(`${this.basePathService.getBasePath()}/plugin/octodash/api/update_check`);
   }
 
   public turnDisplayOff(): void {
@@ -101,15 +60,4 @@ export class AppService {
           this.notificationService.warn($localize`:@@error-load-style:Can't load custom styles!`, error.message),
       });
   }
-}
-
-// interface VersionInformation {
-//   version: string;
-// }
-
-interface GitHubReleaseInformation {
-  name: string;
-
-  assets_url: string;
-  [key: string]: string;
 }
