@@ -32,4 +32,4 @@ npx playwright test
 | `CI` | No | Set by default by many CI services. Disables use of existing OctoPrint server, enables reportig of test results as GitHub Actions summaries, enables retries, and assorted other settings |
 
 
-These can be placed in a `.env.playwright` file in the root of the project, or you can set them in your shell environment. If using VS Code, you can also set them in `playwright.env` in your workspace settings.
+These can be placed in a `.env.playwright` file in the root of the project, or you can set them in your shell environment. If using the Playwright VS Code extension, you can also set them in `playwright.env` in your workspace settings.
