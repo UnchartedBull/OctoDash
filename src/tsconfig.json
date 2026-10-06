@@ -1,0 +1,7 @@
+// this file exists because VSCode doesn't pick up the tsconfig.app.json that is mostly used for angular compliation.
+{
+  "extends": "../tsconfig.app.json",
+  "compilerOptions": {},
+  "include": ["./**/*.ts"],
+  "exclude": ["./**/*.spec.ts", "./test.ts"]
+}
