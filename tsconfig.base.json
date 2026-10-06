@@ -4,7 +4,6 @@
     "paths": {
       "*": ["./*"]
     },
-    "outDir": "../dist",
     "sourceMap": true,
     "declaration": false,
     "module": "ESNext",
@@ -15,10 +14,8 @@
     "importHelpers": true,
     "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
-    "types": ["@angular/localize" ],
     "lib": ["ES2022", "dom"],
     "esModuleInterop": true,
     "resolveJsonModule": true
-  },
-  "exclude": []
+  }
 }

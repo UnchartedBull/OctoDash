@@ -1,11 +1,11 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": ["node"]
   },
   "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "tests/e2e/**/*.ts", "playwright.config.ts"],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
   "angularCompilerOptions": {
     "extendedDiagnostics": {
       "checks": {

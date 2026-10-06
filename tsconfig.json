@@ -1,24 +1,7 @@
 {
-  "compileOnSave": false,
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "paths": {
-      "*": ["./*"]
-    },
-    "outDir": "./dist",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "strict": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "ES2022",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["node"],
-    "lib": ["ES2022", "dom"],
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "types": ["node"]
   },
   "files": ["playwright.config.ts"]
 }
