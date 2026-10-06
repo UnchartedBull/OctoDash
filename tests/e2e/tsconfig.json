@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    "outDir": "../out-tsc/e2e",
+    "target": "ES2022",
+    "types": ["node"],
+    "strict": true
+  }
+}
