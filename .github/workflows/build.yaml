@@ -151,6 +151,9 @@ jobs:
           export OCTODOASH_API_KEY=$(yq '.admin[0].api_key' ${{env.OCTOPRINT_CONFIG_DIR}}/data/appkeys/keys.yaml)
           echo OCTODASH_API_KEY=$OCTODOASH_API_KEY >> $GITHUB_ENV
 
+      - name: Typecheck Playwright tests
+        run: npm run typecheck:e2e
+
       - name: Run Playwright tests
         run: npx playwright test
 
